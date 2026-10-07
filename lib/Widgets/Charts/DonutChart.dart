@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import 'ChartData.dart';
+import '../../Core/State/State.dart';
 
 class DonutChart extends StatefulWidget {
   final List<ChartDatum> data;
@@ -22,7 +23,7 @@ class DonutChart extends StatefulWidget {
 }
 
 class _DonutChartState extends State<DonutChart> {
-  int? _active;
+  final _active = Live<int?>(null);
 
   double get _total =>
       widget.data.fold(0.0, (s, d) => s + math.max(0, d.value));
@@ -47,11 +48,13 @@ class _DonutChartState extends State<DonutChart> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     final colors = chartPalette(scheme, widget.data.length);
     final total = _total;
-    final active = _active;
+    final active = _active.value;
     final shown = active == null ? null : widget.data[active];
     return LayoutBuilder(
       builder: (context, box) {
@@ -66,13 +69,13 @@ class _DonutChartState extends State<DonutChart> {
                 : SystemMouseCursors.click,
             onHover: (e) {
               final hit = _hit(e.localPosition, size);
-              if (hit != _active) setState(() => _active = hit);
+              if (hit != _active.value) _active.value = hit;
             },
-            onExit: (_) => setState(() => _active = null),
+            onExit: (_) => _active.value = null,
             child: GestureDetector(
               onTapDown: (d) {
                 final hit = _hit(d.localPosition, size);
-                setState(() => _active = hit == _active ? null : hit);
+                _active.value = hit == _active.value ? null : hit;
               },
               child: TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),
@@ -144,15 +147,15 @@ class _DonutChartState extends State<DonutChart> {
   Widget _legendRow(BuildContext context, int i, Color color, double total) {
     final d = widget.data[i];
     final scheme = context.colorScheme;
-    final selected = _active == i;
+    final selected = _active.value == i;
     final percent = total <= 0 ? 0 : d.value / total * 100;
     return MouseRegion(
       cursor: SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _active = i),
-      onExit: (_) => setState(() => _active = null),
+      onEnter: (_) => _active.value = i,
+      onExit: (_) => _active.value = null,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () => setState(() => _active = selected ? null : i),
+        onTap: () => _active.value = selected ? null : i,
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 160),
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),

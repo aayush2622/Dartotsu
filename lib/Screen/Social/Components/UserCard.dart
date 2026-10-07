@@ -8,6 +8,7 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/ProfileCard.dart';
 import '../SocialNavigation.dart';
+import '../../../Core/State/State.dart';
 
 class UserCard extends StatefulWidget {
   final MediaService service;
@@ -29,7 +30,9 @@ class UserCard extends StatefulWidget {
 
 class _UserCardState extends State<UserCard> {
   SocialScreenView get _view => widget.service.socialView!;
-  bool _busy = false;
+  final _busy = false.live;
+
+  final _version = Trigger();
 
   UserBrief get _u => widget.user;
   String get _tag => 'user-${_u.id}';
@@ -37,13 +40,14 @@ class _UserCardState extends State<UserCard> {
       !widget.skeleton && _view.canInteract && _u.id != _view.currentUserId;
 
   Future<void> _toggle() async {
-    setState(() => _busy = true);
+    _busy.value = true;
     unawaited(HapticFeedback.selectionClick());
     final next = await _view.toggleFollow(_u.id);
     if (!mounted) return;
-    setState(() => _busy = false);
+    _busy.value = false;
     if (next == null) return snackString('Could not update follow');
-    setState(() => _u.isFollowing = next);
+    _u.isFollowing = next;
+    _version.fire();
   }
 
   String get _relation {
@@ -54,7 +58,10 @@ class _UserCardState extends State<UserCard> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    _version.track();
     final scheme = context.colorScheme;
     final mutual = _u.isFollowing && _u.isFollower;
     return ProfileCard(
@@ -71,7 +78,7 @@ class _UserCardState extends State<UserCard> {
         user: _u,
         heroTag: _tag,
       ),
-      onLongPress: _canFollow && !_busy ? _toggle : null,
+      onLongPress: _canFollow && !_busy.value ? _toggle : null,
       chip: _relation.isEmpty
           ? null
           : ProfilePill(
@@ -96,7 +103,7 @@ class _UserCardState extends State<UserCard> {
                   minimumSize: const Size(0, 32),
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                 ),
-                onPressed: _busy ? null : _toggle,
+                onPressed: _busy.value ? null : _toggle,
                 child: const Text('Following'),
               )
             : FilledButton(
@@ -106,7 +113,7 @@ class _UserCardState extends State<UserCard> {
                   minimumSize: const Size(0, 32),
                   padding: const EdgeInsets.symmetric(horizontal: 14),
                 ),
-                onPressed: _busy ? null : _toggle,
+                onPressed: _busy.value ? null : _toggle,
                 child: const Text('Follow'),
               ),
       ),

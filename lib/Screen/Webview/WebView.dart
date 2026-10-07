@@ -5,14 +5,13 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:get/get.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Core/State/State.dart';
 
 class WebView extends StatefulWidget {
   final String url;
@@ -26,12 +25,12 @@ class WebView extends StatefulWidget {
 class _WebViewState extends State<WebView> {
   InAppWebViewController? _controller;
 
-  final _url = ''.obs;
-  final _title = ''.obs;
-  final _canGoBack = false.obs;
-  final _canGoForward = false.obs;
-  final _isEditing = false.obs;
-  final _progress = 0.0.obs;
+  final _url = ''.live;
+  final _title = ''.live;
+  final _canGoBack = false.live;
+  final _canGoForward = false.live;
+  final _isEditing = false.live;
+  final _progress = 0.0.live;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _addressFocus = FocusNode();
 
@@ -155,7 +154,7 @@ class _WebViewState extends State<WebView> {
     final scheme = context.colorScheme;
     final uri = Uri.tryParse(_url.value);
     final isHttps = uri?.scheme == 'https';
-    return Obx(() {
+    return Watch(() {
       return AnimatedSwitcher(
         duration: const Duration(milliseconds: 180),
         child: Container(
@@ -242,7 +241,7 @@ class _WebViewState extends State<WebView> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Obx(
+        Watch(
           () => IconButton(
             icon: const Icon(Icons.arrow_back_ios_rounded),
             onPressed: _canGoBack.value
@@ -253,7 +252,7 @@ class _WebViewState extends State<WebView> {
                 : null,
           ),
         ),
-        Obx(
+        Watch(
           () => IconButton(
             icon: const Icon(Icons.arrow_forward_ios_rounded),
             onPressed: _canGoForward.value
@@ -423,7 +422,7 @@ class _WebViewState extends State<WebView> {
           },
           onTitleChanged: (_, title) => _title.value = title ?? '',
         ),
-        Obx(
+        Watch(
           () => _progress.value < 1.0
               ? AnimatedOpacity(
                   opacity: _progress.value < 1.0 ? 1 : 0,

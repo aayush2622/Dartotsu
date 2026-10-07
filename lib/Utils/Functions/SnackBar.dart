@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Widgets/Components/ThemedContainer.dart';
 import '../Animation/WidgetAnimations.dart';
 import '../Extensions/ContextExtensions.dart';
 import 'CopyToClip.dart';
+import '../../Core/State/State.dart';
 
 OverlayEntry? _snackOverlay;
 void snackString(
@@ -15,7 +15,7 @@ void snackString(
   bool simple = false,
   Widget? child,
 }) {
-  final context = c ?? Get.overlayContext ?? Get.context;
+  final context = c ?? appOverlayContext ?? appContext;
   if (context == null || message == null || message.isEmpty) return;
 
   final theme = Theme.of(context);
@@ -120,7 +120,7 @@ void snackString(
   );
 
   final overlayState =
-      Get.key.currentState?.overlay ??
+      appNavigator?.overlay ??
       Navigator.of(context, rootNavigator: true).overlay;
 
   if (overlayState == null) return;

@@ -3,17 +3,16 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/ThemeManager/AppTheme.dart';
 import '../../../Core/ThemeManager/CustomColorPicker.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Core/ThemeManager/Themes/DynamicThemes.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
+import '../../../Core/State/State.dart';
 
 String themeLabel(ThemeController t) {
   if (t.useCustomColor.value) return 'Custom';
@@ -71,7 +70,7 @@ class _ThemePickerSheet extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: Obx(() {
+                child: Watch(() {
                   final current = controller.themeName.value;
                   final isCustom = controller.useCustomColor.value;
                   final customArgb = controller.customColor.value;

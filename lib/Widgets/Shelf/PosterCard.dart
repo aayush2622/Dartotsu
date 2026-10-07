@@ -5,10 +5,10 @@ import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../Components/ThemedContainer.dart';
+import '../../Core/State/State.dart';
 
 enum _ScrimKind { none, short, full }
 
@@ -64,14 +64,16 @@ class PosterCard extends StatefulWidget {
 }
 
 class _PosterCardState extends State<PosterCard> {
-  bool _hover = false;
+  final _hover = false.live;
 
   late CardStyle _style;
 
   ColorScheme get _scheme => context.colorScheme;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final s =
         widget.style ??
         tryFind<CardStyleController>()?.current ??
@@ -87,19 +89,21 @@ class _PosterCardState extends State<PosterCard> {
       cursor: widget.onTap == null
           ? MouseCursor.defer
           : SystemMouseCursors.click,
-      onEnter: (_) => setState(() => _hover = true),
-      onExit: (_) => setState(() => _hover = false),
+      onEnter: (_) => _hover.value = true,
+      onExit: (_) => _hover.value = false,
       child: card,
     );
 
     if (widget.onTap == null && !widget.focusable) {
-      return _scaled(visual, _hover ? 1.02 : 1.0);
+      return Watch(() => _scaled(visual, _hover.value ? 1.02 : 1.0));
     }
     return DpadFocusable(
       onSelect: widget.onTap ?? () {},
       onLongSelect: widget.onLongPress,
-      builder: (context, state, child) =>
-          _scaled(child, (_hover || kDpadFocused(state)) ? 1.03 : 1.0),
+      builder: (context, state, child) => Watch(
+        () =>
+            _scaled(child, (_hover.value || kDpadFocused(state)) ? 1.03 : 1.0),
+      ),
       child: visual,
     );
   }

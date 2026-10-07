@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:collection/collection.dart';
 
 import 'Api/Mutations.dart';
 import 'Api/Queries.dart';

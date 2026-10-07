@@ -3,8 +3,8 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../Core/Backup/ExternalLists/ExternalList.dart';
 import '../../../Core/Services/MediaServiceController.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import 'Services.dart';
+import '../../../Core/State/State.dart';
 
 MediaService extensionService() => find<MediaServiceController>().services
     .firstWhere((s) => s.id == extensionServiceId);

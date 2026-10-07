@@ -1,11 +1,9 @@
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
@@ -13,6 +11,8 @@ import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 import '../../Settings/ExtensionSourceSettingsScreen.dart';
 import '../ExtensionScreen.dart';
+import '../../../Core/State/State.dart';
+import '../../../Utils/Extensions/StringExtensions.dart';
 
 void showExtensionManagerSheet(BuildContext context, ItemType type) {
   final manager = find<ExtensionManager>();
@@ -26,7 +26,7 @@ void showExtensionManagerSheet(BuildContext context, ItemType type) {
       negativeText: getString.addRepository,
       negativeCallback: () => showAddPluginRepositoryDialog(context),
       viewList: [
-        Obx(() {
+        Watch(() {
           final current = manager[type];
           final managers = manager.managers
               .where((e) => e.supports(type))
@@ -138,13 +138,14 @@ Widget? _serviceTrailing(
 void showAddPluginRepositoryDialog(BuildContext context) {
   final manager = find<ExtensionManager>();
   final controller = TextEditingController(text: DownloadablePlugin.indexUrl);
-  final refreshing = false.obs;
+  final refreshing = false.live;
 
   AlertDialogBuilder(context)
     ..setTitle(getString.addPluginRepository)
+    ..setOnDismissListener(controller.dispose)
     ..setCustomView(
-      StatefulBuilder(
-        builder: (dialogContext, setState) {
+      Builder(
+        builder: (dialogContext) {
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -154,7 +155,7 @@ void showAddPluginRepositoryDialog(BuildContext context) {
                   hintText: getString.pluginIndexUrlHint,
                 ),
               ),
-              Obx(
+              Watch(
                 () => refreshing.value
                     ? const Padding(
                         padding: EdgeInsets.only(top: 12),

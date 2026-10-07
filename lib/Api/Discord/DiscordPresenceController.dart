@@ -1,14 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 
 import '../../Core/Preferences/Incognito.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Logger.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'BaseDiscordRPC.dart';
 import 'DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class _Entry {
   DiscordPresence presence;
@@ -17,7 +16,7 @@ class _Entry {
   _Entry(this.presence);
 }
 
-class DiscordPresenceController extends GetxController
+class DiscordPresenceController extends AppController
     with WidgetsBindingObserver {
   final _stack = <Object, _Entry>{};
   Timer? _debounce;
@@ -43,7 +42,7 @@ class DiscordPresenceController extends GetxController
       PrefName.discordHideTitles.rx,
       PrefName.discordActivity.rx,
     ]) {
-      ever(pref, (_) => _schedule());
+      onChange(pref, (_) => _schedule());
     }
     _schedule();
   }

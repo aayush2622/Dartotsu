@@ -3,9 +3,9 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
+import '../State/State.dart';
 
-class NotificationManager extends GetxController {
+class NotificationManager extends AppController {
   static const _channel = AndroidNotificationDetails(
     'default',
     'Default',
@@ -15,8 +15,8 @@ class NotificationManager extends GetxController {
   );
 
   final _plugin = FlutterLocalNotificationsPlugin();
-  final permissionGranted = false.obs;
-  final tapped = Rxn<String>();
+  final permissionGranted = false.live;
+  final tapped = Live<String?>(null);
 
   bool _ready = false;
   int _nextId = 1000;

@@ -2,15 +2,15 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Core/State/State.dart';
 
 class MediaSectionState {
-  var overscrollProgress = 0.0.obs;
-  var isLoadingMore = false.obs;
-  var mediaList = <Media>[].obs;
-  var canLoadMore = true.obs;
+  var overscrollProgress = 0.0.live;
+  var isLoadingMore = false.live;
+  var mediaList = <Media>[].liveList;
+  var canLoadMore = true.live;
   double lastProgress = 0.0;
 
   bool scrollListener(

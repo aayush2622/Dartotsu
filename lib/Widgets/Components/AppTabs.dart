@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import 'ThemedContainer.dart';
+import '../../Core/State/State.dart';
 
 class AppTab extends StatelessWidget {
   final String label;
@@ -140,15 +141,19 @@ class AppTabs extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _AppTabsState extends State<AppTabs> {
-  int? _focused;
+  final _focused = Live<int?>(null);
 
   void _onFocus(bool focused, int index) {
-    final next = focused ? index : (_focused == index ? null : _focused);
-    if (next != _focused) setState(() => _focused = next);
+    final next = focused
+        ? index
+        : (_focused.value == index ? null : _focused.value);
+    if (next != _focused.value) _focused.value = next;
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (_, _) => AppTabBar(
@@ -161,7 +166,7 @@ class _AppTabsState extends State<AppTabs> {
               count: item.count,
               icon: item.icon,
               selected: widget.controller.index == i,
-              focused: kFocused(_focused == i),
+              focused: kFocused(_focused.value == i),
             ),
         ],
       ),

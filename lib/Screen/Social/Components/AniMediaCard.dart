@@ -1,3 +1,4 @@
+import '../../../Utils/Lru.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import '../../../Widgets/Components/AniHtml.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../Feed/FeedNavigation.dart';
+import '../../../Core/State/State.dart';
 
 class AniMediaCard extends StatefulWidget {
   final MediaService service;
@@ -28,15 +30,14 @@ class AniMediaCard extends StatefulWidget {
 }
 
 class _AniMediaCardState extends State<AniMediaCard> {
-  static final _cache = <String, Media>{};
-
-  Media? _media;
+  static final _cache = Lru<String, Media>(120);
+  final _media = Live<Media?>(null);
 
   @override
   void initState() {
     super.initState();
-    _media = _cache['${widget.service.id}/${widget.id}'];
-    if (_media == null) unawaited(_load());
+    _media.value = _cache['${widget.service.id}/${widget.id}'];
+    if (_media.value == null) unawaited(_load());
   }
 
   Future<void> _load() async {
@@ -45,13 +46,15 @@ class _AniMediaCardState extends State<AniMediaCard> {
       final media = map?[widget.id];
       if (media == null || !mounted) return;
       _cache['${widget.service.id}/${widget.id}'] = media;
-      setState(() => _media = media);
+      _media.value = media;
     } catch (_) {}
   }
 
   @override
-  Widget build(BuildContext context) {
-    final media = _media;
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    final media = _media.value;
     if (media == null) return const SizedBox.shrink();
     final scheme = context.colorScheme;
     final tag = 'about:${media.id}:${widget.hashCode}';

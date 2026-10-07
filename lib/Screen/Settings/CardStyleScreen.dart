@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ClickCursor.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
+import '../../Core/State/State.dart';
 
 class CardStyleScreen extends StatefulWidget {
   const CardStyleScreen({super.key});
@@ -25,7 +24,7 @@ class CardStyleScreen extends StatefulWidget {
 
 class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
   CardStyleController get _c => find();
-  late final _draft = _c.current.obs;
+  late final _draft = _c.current.live;
 
   void _set(CardStyle next) {
     _draft.value = next;
@@ -58,7 +57,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen> {
               Dimens.gapXl,
             ),
             sliver: SliverToBoxAdapter(
-              child: Obx(
+              child: Watch(
                 () => Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: _bodyChildren(_draft.value),

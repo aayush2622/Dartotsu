@@ -9,9 +9,9 @@ import 'package:html/parser.dart' as html_parser;
 
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Function.dart';
 import 'Clickable.dart';
+import '../../Core/State/State.dart';
 
 typedef AniLinkCardBuilder =
     Widget? Function(BuildContext context, String url, bool centered);
@@ -68,8 +68,9 @@ class _AniHtmlState extends State<AniHtml> {
   final _revealed = <int>{};
   final _recognizers = <TapGestureRecognizer>[];
   int _spoilers = 0;
-  bool _expanded = false;
-  bool _overflows = false;
+  final _expanded = false.live;
+  final _overflows = false.live;
+  final _revealTick = Trigger();
   final _bodyKey = GlobalKey();
 
   dom.DocumentFragment _parse() =>
@@ -180,13 +181,14 @@ class _AniHtmlState extends State<AniHtml> {
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, box) {
       if (box.maxWidth.isFinite) _maxWidth = box.maxWidth;
-      return _buildBody(context);
+      return Watch(() => _buildBody(context));
     },
   );
 
   Widget _buildBody(BuildContext context) {
     _clearRecognizers();
     _spoilers = 0;
+    _revealTick.track();
     final blocks = _blocks(_tree.nodes, _base, TextAlign.start);
     final body = Column(
       key: _bodyKey,
@@ -199,11 +201,11 @@ class _AniHtmlState extends State<AniHtml> {
       final height = _bodyKey.currentContext?.size?.height;
       if (height != null && mounted) {
         final over = height > limit + 24;
-        if (over != _overflows) setState(() => _overflows = over);
+        if (over != _overflows.value) _overflows.value = over;
       }
     });
     final scheme = context.colorScheme;
-    final collapsed = _overflows && !_expanded;
+    final collapsed = _overflows.value && !_expanded.value;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -245,15 +247,15 @@ class _AniHtmlState extends State<AniHtml> {
                 )
               : body,
         ),
-        if (_overflows)
+        if (_overflows.value)
           TextButton(
             style: TextButton.styleFrom(
               visualDensity: VisualDensity.compact,
               padding: EdgeInsets.zero,
               minimumSize: const Size(0, 36),
             ),
-            onPressed: () => setState(() => _expanded = !_expanded),
-            child: Text(_expanded ? 'Show less' : 'Read more'),
+            onPressed: () => _expanded.value = !_expanded.value,
+            child: Text(_expanded.value ? 'Show less' : 'Read more'),
           ),
       ],
     );
@@ -777,9 +779,10 @@ class _AniHtmlState extends State<AniHtml> {
     final shown = _revealed.contains(index);
     final scheme = context.colorScheme;
     final recognizer = TapGestureRecognizer()
-      ..onTap = () => setState(() {
+      ..onTap = () {
         shown ? _revealed.remove(index) : _revealed.add(index);
-      });
+        _revealTick.fire();
+      };
     _recognizers.add(recognizer);
     final hidden = style.copyWith(
       color: shown ? style.color : Colors.transparent,
@@ -997,10 +1000,12 @@ class _SpoilerBlock extends StatefulWidget {
 }
 
 class _SpoilerBlockState extends State<_SpoilerBlock> {
-  bool _open = false;
+  final _open = false.live;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 6),
@@ -1015,7 +1020,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
           children: [
             Clickable(
               press: false,
-              onTap: () => setState(() => _open = !_open),
+              onTap: () => _open.value = !_open.value,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 14,
@@ -1024,7 +1029,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
                 child: Row(
                   children: [
                     Icon(
-                      _open
+                      _open.value
                           ? Icons.visibility_rounded
                           : Icons.visibility_off_rounded,
                       size: 18,
@@ -1032,7 +1037,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
                     ),
                     const SizedBox(width: 10),
                     Text(
-                      _open ? 'Hide spoiler' : 'Show spoiler',
+                      _open.value ? 'Hide spoiler' : 'Show spoiler',
                       style: TextStyle(
                         color: scheme.primary,
                         fontWeight: FontWeight.w700,
@@ -1040,7 +1045,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
                     ),
                     const Spacer(),
                     AnimatedRotation(
-                      turns: _open ? 0.5 : 0,
+                      turns: _open.value ? 0.5 : 0,
                       duration: const Duration(milliseconds: 200),
                       child: Icon(
                         Icons.expand_more_rounded,
@@ -1055,7 +1060,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
               duration: const Duration(milliseconds: 220),
               curve: Curves.easeOutCubic,
               alignment: Alignment.topCenter,
-              child: _open
+              child: _open.value
                   ? Padding(
                       padding: const EdgeInsets.fromLTRB(14, 0, 14, 12),
                       child: Column(
@@ -1171,6 +1176,7 @@ class _FloatFlowState extends State<_FloatFlow> {
   final _layoutKey = GlobalKey();
   final _splits = <int, int>{};
   var _order = <int>[];
+  final _relayout = Trigger();
   double _width = -1;
   bool _measuring = false;
 
@@ -1291,70 +1297,75 @@ class _FloatFlowState extends State<_FloatFlow> {
     }
     if (changed) {
       _measuring = true;
-      setState(() {});
+      _relayout.fire();
       WidgetsBinding.instance.addPostFrameCallback((_) => _measuring = false);
     }
   }
 
   @override
-  Widget build(BuildContext context) => LayoutBuilder(
-    builder: (context, box) {
-      if (box.maxWidth != _width) {
-        _width = box.maxWidth;
-        _splits.clear();
-      }
-      final children = <Widget>[widget.float];
-      _order = [];
-      for (var i = 0; i < widget.blocks.length; i++) {
-        final block = widget.blocks[i];
-        final at = _splits[i];
-        if (block is _Paragraph && at != null && at >= 0) {
-          final length = _length(block.span);
-          final head = at == 0 ? null : _slice(block.span, 0, 0, at);
-          final tail = at >= length ? null : _slice(block.span, 0, at, length);
-          if (head != null) {
-            children.add(
-              _Paragraph(
-                span: head,
-                align: block.align,
-                padding: EdgeInsets.only(
-                  left: block.padding.left,
-                  right: block.padding.right,
-                  top: block.padding.top,
-                ),
-              ),
-            );
-            _order.add(-1);
-          }
-          if (tail != null) {
-            children.add(
-              _FlowPart(
-                child: _Paragraph(
-                  span: tail,
+  Widget build(BuildContext context) => Watch(() {
+    _relayout.track();
+    return LayoutBuilder(
+      builder: (context, box) {
+        if (box.maxWidth != _width) {
+          _width = box.maxWidth;
+          _splits.clear();
+        }
+        final children = <Widget>[widget.float];
+        _order = [];
+        for (var i = 0; i < widget.blocks.length; i++) {
+          final block = widget.blocks[i];
+          final at = _splits[i];
+          if (block is _Paragraph && at != null && at >= 0) {
+            final length = _length(block.span);
+            final head = at == 0 ? null : _slice(block.span, 0, 0, at);
+            final tail = at >= length
+                ? null
+                : _slice(block.span, 0, at, length);
+            if (head != null) {
+              children.add(
+                _Paragraph(
+                  span: head,
                   align: block.align,
                   padding: EdgeInsets.only(
                     left: block.padding.left,
                     right: block.padding.right,
-                    bottom: block.padding.bottom,
+                    top: block.padding.top,
                   ),
                 ),
-              ),
-            );
-            _order.add(-1);
+              );
+              _order.add(-1);
+            }
+            if (tail != null) {
+              children.add(
+                _FlowPart(
+                  child: _Paragraph(
+                    span: tail,
+                    align: block.align,
+                    padding: EdgeInsets.only(
+                      left: block.padding.left,
+                      right: block.padding.right,
+                      bottom: block.padding.bottom,
+                    ),
+                  ),
+                ),
+              );
+              _order.add(-1);
+            }
+            continue;
           }
-          continue;
+          children.add(block);
+          _order.add(i);
         }
-        children.add(block);
-        _order.add(i);
-      }
-      WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
-      return _FloatFlowLayout(
-        key: _layoutKey,
-        right: widget.right,
-        children: children,
-      );
-    },
-  );
+        WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+        return _FloatFlowLayout(
+          key: _layoutKey,
+          right: widget.right,
+          children: children,
+        );
+      },
+    );
+  });
 }
 
 class _FlowPart extends ParentDataWidget<_FloatParentData> {

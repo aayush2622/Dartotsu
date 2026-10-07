@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../MediaList/MediaListScreen.dart';
@@ -18,6 +16,7 @@ import 'Components/HeaderAvatar.dart';
 import 'Components/HeaderBanner.dart';
 import 'Components/HeaderStatPill.dart';
 import 'Components/IncognitoBadge.dart';
+import '../../Core/State/State.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -26,7 +25,7 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
+    return Watch(() {
       final service = _controller.currentService.value;
       final user = service.auth?.user.value;
       final glass = find<ThemeController>().useGlassMode.value;
@@ -72,7 +71,7 @@ class HomeHeader extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                      Obx(
+                      Watch(
                         () => PrefName.incognito.rx.value
                             ? Padding(
                                 padding: const EdgeInsets.only(top: 4),

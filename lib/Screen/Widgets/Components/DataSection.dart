@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../Detail/Components/StatusChip.dart';
 import '../../../Widgets/Components/AniHtml.dart';
 import '../../../Core/Services/MediaServiceController.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../Social/Components/AniMediaCard.dart';
 import '../../Social/SocialNavigation.dart';
 import 'ExpandableText.dart';
+import '../../../Core/State/State.dart';
 
 const kStatusRowLabel = 'Status';
 
 class DataSection extends StatelessWidget {
   final String? title;
   final ScreenData data;
-  final _expanded = false.obs;
+  final _expanded = false.live;
 
   DataSection({super.key, this.title, required this.data});
 
@@ -107,7 +106,7 @@ class DataSection extends StatelessWidget {
   Widget _chips(BuildContext context) {
     final chips = data.chips;
     final limit = data.chipLimit;
-    return Obx(() {
+    return Watch(() {
       final shown = _expanded.value ? chips : chips.take(limit).toList();
       return Wrap(
         spacing: 8,

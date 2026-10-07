@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import 'ChartData.dart';
+import '../../Core/State/State.dart';
 
 class LineChart extends StatefulWidget {
   final List<ChartDatum> data;
@@ -16,7 +17,7 @@ class LineChart extends StatefulWidget {
 }
 
 class _LineChartState extends State<LineChart> {
-  int? _active;
+  final _active = Live<int?>(null);
 
   int? _index(double dx, double width) {
     final n = widget.data.length;
@@ -27,7 +28,10 @@ class _LineChartState extends State<LineChart> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    final active = _active.value;
     final scheme = context.colorScheme;
     if (widget.data.isEmpty) return const SizedBox.shrink();
     final max = niceMax(widget.data.fold(0.0, (m, d) => math.max(m, d.value)));
@@ -40,15 +44,15 @@ class _LineChartState extends State<LineChart> {
           child: MouseRegion(
             onHover: (e) {
               final i = _index(e.localPosition.dx, width);
-              if (i != _active) setState(() => _active = i);
+              if (i != _active.value) _active.value = i;
             },
-            onExit: (_) => setState(() => _active = null),
+            onExit: (_) => _active.value = null,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTapDown: (d) =>
-                  setState(() => _active = _index(d.localPosition.dx, width)),
+                  _active.value = _index(d.localPosition.dx, width),
               onHorizontalDragUpdate: (d) =>
-                  setState(() => _active = _index(d.localPosition.dx, width)),
+                  _active.value = _index(d.localPosition.dx, width),
               child: TweenAnimationBuilder<double>(
                 key: ValueKey(widget.data.length),
                 tween: Tween(begin: 0, end: 1),
@@ -59,7 +63,7 @@ class _LineChartState extends State<LineChart> {
                     data: widget.data,
                     max: max,
                     progress: t,
-                    active: _active,
+                    active: active,
                     color: scheme.primary,
                     grid: scheme.outlineVariant.withValues(alpha: 0.4),
                     text: scheme.onSurfaceVariant,

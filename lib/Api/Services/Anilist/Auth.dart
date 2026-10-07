@@ -1,21 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
-import 'package:get/get.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/ServiceAuth.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'Client.dart';
 import 'Prefs.dart';
 import 'Mutations.dart';
 import 'Queries.dart';
 import 'Data/User.dart';
+import '../../../Core/State/State.dart';
 
 AnilistAuth get anilistAuth => find<AnilistAuth>();
 
-class AnilistAuth extends GetxController implements ServiceAuth {
+class AnilistAuth extends AppController implements ServiceAuth {
   static const _clientId = '14959';
   static const _callbackScheme = 'dantotsu';
   static const _authUrl =
@@ -26,9 +25,9 @@ class AnilistAuth extends GetxController implements ServiceAuth {
   final token = AnilistPref.token.rx;
 
   @override
-  final user = Rxn<ServiceUser>();
+  final user = Live<ServiceUser?>(null);
 
-  final loading = false.obs;
+  final loading = false.live;
 
   late final AnilistClient client = AnilistClient(() => token.value);
 

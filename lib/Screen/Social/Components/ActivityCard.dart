@@ -26,6 +26,7 @@ import 'AniMediaCard.dart';
 import 'RepliesSheet.dart';
 import '../../../Widgets/Components/UserAvatar.dart';
 import 'UserListSheet.dart';
+import '../../../Core/State/State.dart';
 
 class ActivityCard extends StatefulWidget {
   final MediaService service;
@@ -49,22 +50,22 @@ class _ActivityCardState extends State<ActivityCard> {
   SocialScreenView get _view => widget.service.socialView!;
   Activity get _a => widget.activity;
 
+  final _version = Trigger();
+
   bool get _mine => _a.user?.id == _view.currentUserId;
 
   Future<void> _like() async {
     if (!_view.canInteract) return snackString('Log in to like');
     final was = _a.isLiked;
-    setState(() {
-      _a.isLiked = !was;
-      _a.likeCount += was ? -1 : 1;
-    });
+    _a.isLiked = !was;
+    _a.likeCount += was ? -1 : 1;
+    _version.fire();
     unawaited(HapticFeedback.selectionClick());
     final ok = await _view.toggleLike(_a.id);
     if (!ok && mounted) {
-      setState(() {
-        _a.isLiked = was;
-        _a.likeCount += was ? 1 : -1;
-      });
+      _a.isLiked = was;
+      _a.likeCount += was ? 1 : -1;
+      _version.fire();
       snackString('Failed to like activity');
     }
   }
@@ -111,7 +112,8 @@ class _ActivityCardState extends State<ActivityCard> {
     final ok = await _view.toggleSubscription(_a.id, next);
     if (!mounted) return;
     if (ok) {
-      setState(() => _a.isSubscribed = next);
+      _a.isSubscribed = next;
+      _version.fire();
       snackString(next ? 'Subscribed' : 'Unsubscribed');
     } else {
       snackString('Failed to update subscription');
@@ -138,7 +140,10 @@ class _ActivityCardState extends State<ActivityCard> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    _version.track();
     final scheme = context.colorScheme;
     final author = _a.user;
     final canEdit = _mine && _a.kind != ActivityKind.list;
@@ -280,7 +285,7 @@ class _ActivityCardState extends State<ActivityCard> {
                 label: '${_a.replyCount}',
                 onTap: () async {
                   await showRepliesSheet(context, widget.service, _a);
-                  if (mounted) setState(() {});
+                  if (mounted) _version.fire();
                 },
               ),
               if (_a.isLocked) ...[

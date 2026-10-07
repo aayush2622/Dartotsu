@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 import 'package:rhttp/rhttp.dart';
 
 import '../Preferences/PrefManager.dart';
 import 'CookieManager.dart';
 import 'DnsManager.dart';
 import 'LogInterceptor.dart';
+import '../State/State.dart';
 
 const bool kVerifyTlsCertificates = false;
 
-class NetworkManager extends GetxController {
+class NetworkManager extends AppController {
   late RhttpClient _client;
 
   RhttpClient get client => _client;

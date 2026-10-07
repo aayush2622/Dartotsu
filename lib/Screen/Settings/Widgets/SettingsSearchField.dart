@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
+import '../../../Core/State/State.dart';
 
 class SettingsSearchField extends StatefulWidget {
-  final RxString query;
+  final Live<String> query;
   final String? hint;
 
   const SettingsSearchField({super.key, required this.query, this.hint});
@@ -34,7 +34,7 @@ class _SettingsSearchFieldState extends State<SettingsSearchField> {
     final scheme = context.colorScheme;
     return ThemedContainer(
       padding: EdgeInsets.zero,
-      child: Obx(() {
+      child: Watch(() {
         final hasText = widget.query.value.isNotEmpty;
         return TextField(
           controller: _controller,

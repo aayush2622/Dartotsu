@@ -2,7 +2,6 @@ import 'dart:ui';
 
 import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/ThemeManager/CardStyleController.dart';
@@ -10,11 +9,11 @@ import '../../Model/CardStyle.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../Components/ScrollConfig.dart';
 import 'CardShelfState.dart';
 import 'PosterCard.dart';
 import 'ShelfFrame.dart';
+import '../../Core/State/State.dart';
 
 class CardShelf extends StatefulWidget {
   final String? title;
@@ -170,7 +169,7 @@ class _CardShelfState extends State<CardShelf> {
             parent: AlwaysScrollableScrollPhysics(),
           ),
           children: [
-            Obx(() {
+            Watch(() {
               final list = state.items;
               return SliverList(
                 delegate: SliverChildBuilderDelegate(
@@ -206,7 +205,7 @@ class _CardShelfState extends State<CardShelf> {
 
   Widget _loadMoreTrailer() {
     if (widget.onLoadMore == null) return const SizedBox(width: 17.5);
-    return Obx(() {
+    return Watch(() {
       final canLoadMore = state.canLoadMore.value;
       final isLoadingMore = state.isLoadingMore.value;
       final overscroll = state.overscrollProgress.value;

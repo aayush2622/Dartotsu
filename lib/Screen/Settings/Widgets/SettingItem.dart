@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Core/State/State.dart';
 
 // ─── shared label row ─────────────────────────────────────────────────────────
 
@@ -176,10 +177,12 @@ class SettingSliderItem extends StatefulWidget {
 }
 
 class _SettingSliderItemState extends State<SettingSliderItem> {
-  late double _value = (widget.setting.initialValue ?? 0).toDouble();
+  late final _value = (widget.setting.initialValue ?? 0).toDouble().live;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final s = widget.setting;
     final min = (s.minValue ?? 0).toDouble();
     final max = (s.maxValue ?? 100).toDouble();
@@ -192,7 +195,7 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
           _Label(
             setting: s,
             trailing: Text(
-              '${_value.round()}',
+              '${_value.value.round()}',
               style: context.textTheme.labelLarge,
             ),
             iconContainerColor: widget.iconContainerColor,
@@ -202,8 +205,8 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
             min: min,
             max: max,
             divisions: (max - min).round().clamp(1, 1000),
-            value: _value.clamp(min, max),
-            onChanged: (v) => setState(() => _value = v),
+            value: _value.value.clamp(min, max),
+            onChanged: (v) => _value.value = v,
             onChangeEnd: (v) => s.onSliderChange?.call(v.round()),
           ),
         ],
@@ -231,18 +234,23 @@ class SettingInputBoxItem extends StatefulWidget {
 }
 
 class _SettingInputBoxItemState extends State<SettingInputBoxItem> {
-  late int _value = widget.setting.initialValue ?? 0;
+  late final _value = (widget.setting.initialValue ?? 0).live;
 
   void _step(int delta) {
     final s = widget.setting;
-    final next = (_value + delta).clamp(s.minValue ?? 0, s.maxValue ?? 1 << 30);
-    if (next == _value) return;
-    setState(() => _value = next);
-    s.onInputChange?.call(_value);
+    final next = (_value.value + delta).clamp(
+      s.minValue ?? 0,
+      s.maxValue ?? 1 << 30,
+    );
+    if (next == _value.value) return;
+    _value.value = next;
+    s.onInputChange?.call(_value.value);
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: _Label(

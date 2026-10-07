@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-
 import 'PrefManager.dart';
+import '../State/State.dart';
 
 /// Storage bucket for a preference. Used as a namespace prefix on the stored key
 /// and as a grouping key for backup import/export.
@@ -12,8 +11,8 @@ typedef PrefDecode<T> = T Function(Object? raw);
 /// A single typed, persisted setting.
 ///
 /// One declaration per setting (see [PrefName]). Read/write synchronously via
-/// [value], or bind a shared auto-persisting [Rx] via [rx] — every caller of
-/// `somePref.rx` gets the *same* `Rx`, and assigning to it writes through to
+/// [value], or bind a shared auto-persisting [Live] via [rx] — every caller of
+/// `somePref.rx` gets the *same* `Live`, and assigning to it writes through to
 /// storage automatically.
 class Pref<T> {
   final String key;
@@ -45,7 +44,7 @@ class Pref<T> {
   set value(T v) => PrefManager.setVal(this, v);
 
   /// Shared reactive view. Assigning `pref.rx.value = x` persists automatically.
-  Rx<T> get rx => PrefManager.watch(this);
+  Live<T> get rx => PrefManager.watch(this);
 
   void remove() => PrefManager.removeVal(this);
 }

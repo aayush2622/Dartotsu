@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaServiceController.dart';
@@ -19,6 +18,7 @@ import '../../Social/ProfileScreen.dart';
 import '../../Social/SocialNavigation.dart';
 import 'BellButton.dart';
 import 'HeaderAvatar.dart';
+import '../../../Core/State/State.dart';
 
 void showAccountSheet(BuildContext context, MediaServiceController controller) {
   final service = controller.currentService.value;
@@ -79,7 +79,7 @@ class _Profile extends StatelessWidget {
   @override
   Widget build(BuildContext sheet) {
     final scheme = sheet.colorScheme;
-    return Obx(() {
+    return Watch(() {
       final service = controller.currentService.value;
       final auth = service.auth;
       final user = auth?.user.value;
@@ -189,7 +189,7 @@ class _Toggles extends StatelessWidget {
               color: scheme.primary,
             ),
           ),
-          Obx(
+          Watch(
             () => PrefName.incognito.rx.value
                 ? _SwitchRow(
                     title: 'Also block list edits',
@@ -229,14 +229,14 @@ class _Group extends StatelessWidget {
 
 class _SwitchRow extends StatelessWidget {
   final String title;
-  final Rx<bool> rx;
+  final Live<bool> rx;
   final Widget icon;
 
   const _SwitchRow({required this.title, required this.rx, required this.icon});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
+    return Watch(
       () => SwitchListTile(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
         secondary: icon,
@@ -286,7 +286,7 @@ class _SwitchService extends StatelessWidget {
 
   @override
   Widget build(BuildContext sheet) {
-    return Obx(() {
+    return Watch(() {
       final service = controller.currentService.value;
       return SheetTile(
         leading: loadSvg(

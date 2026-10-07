@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Services/Screens/EntityHost.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -10,6 +9,7 @@ import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/CopyToClip.dart';
 import '../../../Widgets/Components/AppBars.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../../Core/State/State.dart';
 
 const _toolbarHeight = 56.0;
 
@@ -23,7 +23,7 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double top;
   final bool glass;
   final bool canFavourite;
-  final RxBool togglingFavourite;
+  final Live<bool> togglingFavourite;
   final VoidCallback onToggleFavourite;
 
   EntityHeaderDelegate({
@@ -61,7 +61,7 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
     final slideP = (t * 1.6).clamp(0.0, 1.0);
     final labelP = ((t - 0.5) * 2).clamp(0.0, 1.0);
 
-    return Obx(() {
+    return Watch(() {
       final profile = host.profile.value;
       return ClipRect(
         child: Stack(
@@ -295,7 +295,7 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Widget _favouriteButton(BuildContext context, EntityProfile profile) {
-    return Obx(
+    return Watch(
       () => FilledButton.tonalIcon(
         style: FilledButton.styleFrom(
           visualDensity: VisualDensity.compact,

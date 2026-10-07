@@ -5,7 +5,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaService.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Core/State/State.dart';
 
 const extensionServiceId = 'extension';
 

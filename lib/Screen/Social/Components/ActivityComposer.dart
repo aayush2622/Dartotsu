@@ -7,6 +7,7 @@ import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/MarkupText.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../../../Core/State/State.dart';
 
 enum ComposerKind { activity, message, reply }
 
@@ -36,9 +37,9 @@ class ActivityComposer extends StatefulWidget {
 
 class _ActivityComposerState extends State<ActivityComposer> {
   late final _controller = TextEditingController(text: widget.initial);
-  bool _preview = false;
-  bool _busy = false;
-  late bool _private = widget.initialPrivate;
+  final _preview = false.live;
+  final _busy = false.live;
+  late final _private = widget.initialPrivate.live;
 
   @override
   void dispose() {
@@ -74,8 +75,8 @@ class _ActivityComposerState extends State<ActivityComposer> {
 
   Future<void> _submit() async {
     final text = _controller.text.trim();
-    if (text.isEmpty || _busy) return;
-    setState(() => _busy = true);
+    if (text.isEmpty || _busy.value) return;
+    _busy.value = true;
     final view = widget.view;
     final edit = widget.editId;
     final ok = switch (widget.kind) {
@@ -84,7 +85,7 @@ class _ActivityComposerState extends State<ActivityComposer> {
         widget.userId!,
         text,
         edit: edit,
-        isPrivate: _private,
+        isPrivate: _private.value,
       ),
       ComposerKind.reply => await view.postReply(
         widget.activityId!,
@@ -97,20 +98,24 @@ class _ActivityComposerState extends State<ActivityComposer> {
       snackString(edit == null ? 'Posted' : 'Saved');
       popPage(context, true);
     } else {
-      setState(() => _busy = false);
+      _busy.value = false;
       snackString('Could not post');
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     return AppSheet(
       title: _title,
       trailing: IconButton(
-        tooltip: _preview ? 'Edit' : 'Preview',
-        icon: Icon(_preview ? Icons.edit_rounded : Icons.visibility_rounded),
-        onPressed: () => setState(() => _preview = !_preview),
+        tooltip: _preview.value ? 'Edit' : 'Preview',
+        icon: Icon(
+          _preview.value ? Icons.edit_rounded : Icons.visibility_rounded,
+        ),
+        onPressed: () => _preview.value = !_preview.value,
       ),
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -118,7 +123,7 @@ class _ActivityComposerState extends State<ActivityComposer> {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            if (_preview)
+            if (_preview.value)
               Container(
                 constraints: const BoxConstraints(minHeight: 120),
                 padding: const EdgeInsets.all(14),
@@ -174,15 +179,15 @@ class _ActivityComposerState extends State<ActivityComposer> {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 title: const Text('Private message'),
-                value: _private,
-                onChanged: (v) => setState(() => _private = v),
+                value: _private.value,
+                onChanged: (v) => _private.value = v,
               ),
             const SizedBox(height: 12),
             Align(
               alignment: Alignment.centerRight,
               child: FilledButton.icon(
-                onPressed: _busy ? null : _submit,
-                icon: _busy
+                onPressed: _busy.value ? null : _submit,
+                icon: _busy.value
                     ? const SizedBox(
                         width: 16,
                         height: 16,

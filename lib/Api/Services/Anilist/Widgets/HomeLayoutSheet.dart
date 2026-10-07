@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Core/ThemeManager/ThemeController.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../../Utils/Extensions/Responsive.dart';
-import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../../Widgets/Components/ThemedContainer.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
+import '../../../../Core/State/State.dart';
 
 class HomeLayoutSheet extends StatefulWidget {
   final String title;
@@ -27,7 +26,7 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
   late final _entries = widget.pref.value.entries
       .map((e) => MapEntry(e.key, e.value))
       .toList()
-      .obs;
+      .liveList;
 
   void _save() {
     widget.pref.rx.value = {for (final e in _entries) e.key: e.value};
@@ -88,7 +87,7 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet> {
                 ),
               ),
               Flexible(
-                child: Obx(() {
+                child: Watch(() {
                   final glass = find<ThemeController>().useGlassMode.value;
                   final fill = glass
                       ? scheme.surface.withValues(alpha: 0.28)

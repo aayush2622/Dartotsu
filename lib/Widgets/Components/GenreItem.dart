@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../Utils/Extensions/ContextExtensions.dart';
 import 'CachedNetworkImage.dart';
 
 Widget GenreItem(

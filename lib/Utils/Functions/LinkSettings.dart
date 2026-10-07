@@ -3,13 +3,13 @@ import 'dart:io';
 
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 
 import 'SnackBar.dart';
+import '../../Core/State/State.dart';
 
 const _channel = MethodChannel('dartotsu/links');
 
-final linkHandlingEnabled = true.obs;
+final linkHandlingEnabled = true.live;
 
 bool get canOpenLinkSettings =>
     Platform.isAndroid && !linkHandlingEnabled.value;

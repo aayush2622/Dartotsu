@@ -10,7 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:material_ui/material_ui.dart' as mui;
-import 'package:get/get.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:sizer/sizer.dart';
@@ -34,18 +33,22 @@ import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/LinkSettings.dart';
-import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/NavigateToScreen.dart';
 import 'Api/Discord/DiscordPresenceController.dart';
 import 'Core/Services/ActivityAlerts.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
+import 'Core/State/State.dart';
 
 void main(List<String> args) async {
   await runZonedGuarded(
     () async {
       WidgetsFlutterBinding.ensureInitialized();
+      PaintingBinding.instance.imageCache
+        ..maximumSizeBytes =
+            (Platform.isAndroid || Platform.isIOS ? 96 : 192) << 20
+        ..maximumSize = 400;
       FlutterError.onError = (details) {
         Zone.current.handleUncaughtError(
           details.exception,
@@ -61,7 +64,6 @@ void main(List<String> args) async {
         stackTrace: details.stack?.toString() ?? details.toString(),
         softCrash: true,
       );
-      Get.log = (text, {isError = false}) => debugPrint(text);
 
       await init(args);
       runApp(const MyApp());
@@ -80,8 +82,7 @@ void main(List<String> args) async {
 }
 
 Future<void> init(List<String> args) async {
-  await PrefManager.init();
-  await Rhttp.init();
+  await Future.wait([PrefManager.init(), Rhttp.init()]);
   DI.init();
 
   final client = find<NetworkManager>();
@@ -112,7 +113,9 @@ Future<void> init(List<String> args) async {
     ),
   );
 
-  unawaited(_postInit(args));
+  WidgetsBinding.instance.addPostFrameCallback(
+    (_) => unawaited(_postInit(args)),
+  );
 }
 
 /// Work that can safely run after the first frame.
@@ -203,11 +206,9 @@ class _MyAppState extends State<MyApp> {
               lightDynamic?.toFlutterScheme(),
               darkDynamic?.toFlutterScheme(),
             );
-            return Obx(
-              () => GetMaterialApp(
+            return Watch(
+              () => AppRoot(
                 title: 'Dartotsu',
-                debugShowCheckedModeBanner: false,
-                enableLog: true,
                 builder: _appBuilder,
                 scrollBehavior: const AppScrollBehavior(),
                 localizationsDelegates: const [

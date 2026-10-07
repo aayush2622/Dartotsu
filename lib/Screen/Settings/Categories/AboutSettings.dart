@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
@@ -11,8 +10,9 @@ import '../../../Utils/Functions/CopyToClip.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../Developer/DeveloperPage.dart';
 import '../Forks/ForksPage.dart';
+import '../../../Core/State/State.dart';
 
-final settingsAppVersion = ''.obs;
+final settingsAppVersion = ''.live;
 
 List<Setting> aboutSettings(BuildContext context) => [
   Setting.header(getString.sectionAppInfo),

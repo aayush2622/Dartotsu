@@ -88,16 +88,16 @@ the **push commit message** contains a tag: `[build.all]`, `[build]`, `[build.ap
 
 1. `PrefManager.init()` — opens the Isar settings instance
 2. `Rhttp.init()`
-3. **`DI.init()`** — registers every controller in the GetX locator (see below)
+3. **`DI.init()`** — registers every controller in the locator (see below)
 4. `Future.wait([Logger.init(), DartotsuExtensionBridge.init(...), initializeDateFormatting(),
    WindowManager.ensureInitialized() on desktop])`, then `MediaKit.ensureInitialized()` +
    system UI overlay style
 5. `unawaited(_postInit(args))` — `DeepLink.init()`, `find<AppUpdater>().checkForUpdate()`
 
 Then `runApp(MyApp())`. `MyApp` is a `StatefulWidget` wrapping `DynamicColorBuilder`
-(feeds the dynamic `ColorScheme`s into `ThemeController.setDynamicSchemes`) → `Obx` →
-`GetMaterialApp` bound to `_theme.light` / `_theme.dark` / `_theme.themeMode` and
-`_locale.locale` (no app-remount key — locale changes via `Get.updateLocale`). It also
+(feeds the dynamic `ColorScheme`s into `ThemeController.setDynamicSchemes`) → `Watch` →
+`AppRoot` bound to `_theme.light` / `_theme.dark` / `_theme.themeMode` and
+`_locale.locale` (no app-remount key — the locale is watched). It also
 installs a `Listener` for the mouse back-button and a non-focusable `Focus` node feeding
 `appShortcuts`, and wraps with `Dpad.wrap` (D-pad/keyboard TV nav: global
 `DpadTraversalPolicy`, `onBack` (via the shared `guardedBack()` — re-entrant back presses
@@ -111,14 +111,35 @@ in `DpadFocusable` (`onSelect`, auto-scroll-to-focus, focus effects): `MediaSect
 `Navbar` items, `HomeHeader` avatar, `SearchScreen` result cards, `DetailScreen` synopsis,
 onboarding buttons. `AppDropdown` uses `requestFocusOnTap: true` for keyboard open.
 
-### State management — pure GetX (no `provider`)
+### State management — `Core/State` (our own engine)
 
-Everything is a `GetxController` resolved through a GetX service-locator. The thin wrappers live
-in **`lib/Utils/Functions/GetXFunctions.dart`** and are used everywhere instead of `Get.*`:
+Reactivity and DI are home-grown and live entirely in **`lib/Core/State/`**; app code imports only
+`State.dart`. GetX is not used by the app any more — `GetBridge.dart` is the one file that touches it, because
+the extension bridge package still exposes GetX observables and registers its managers in GetX.
 
-- `find<T>()` / `put<T>()` / `lazyPut<T>(T Function() builder)` (genuinely lazy — builder runs
-  on first `find`) / `tryFind<T>()` (null if unregistered) / `getOrPut` / `getOrLazyPut` /
-  `delete<T>()` / `isRegistered<T>()`
+- **`Live<T>`** (+ `LiveList<T>`, `LiveMap<K,V>`; build with `x.live`, `list.liveList`, `map.liveMap`) — the one
+  reactive value type, on the `Reactive` mixin (listener list + dependency tracking; a value only allocates a
+  `Stream` if someone asks for `.stream`). `pref.rx` is a `Live<T>` too. `onChange(live, cb)` /
+  `onAnyChange([...], cb)` / `onFirstChange` return a `Disposer`. `Trigger` (`fire()` / `track()`) re-runs
+  watchers after mutating non-reactive data (models, plain sets).
+- **`Watch(() => widget)`** — records every `Reactive` read while its builder runs, subscribes to exactly those
+  (diffing the set each build, so dropped dependencies are unsubscribed) and rebuilds on change; a change that
+  lands mid-frame is deferred to the next frame. It also tracks GetX observables read inside (extension-bridge
+  values such as `ExtensionManager.installed`). Reads made later, inside lazy callbacks (`itemBuilder`,
+  `LayoutBuilder`, …) are not tracked: read the value into a local first. `BaseScreen` wraps `buildContent` in a
+  `Watch`, so a screen only needs `Live` fields.
+- **`AppController`** — base class for long-lived controllers: `onInit` once when the locator builds it,
+  `onClose` on `delete`.
+- **`find<T>()` / `put` / `lazyPut` / `tryFind` / `getOrPut` / `getOrLazyPut` / `delete` / `isRegistered`**
+  (`Locator.dart`) — a type-keyed registry (optional `tag`, `permanent`, `fenix`); nothing is ever auto-deleted.
+  A type it doesn't know falls back to the GetX registry (bridge managers).
+- **`appContext` / `appOverlayContext` / `appNavigator` / `AppRoot`** (`Host.dart`) — the root `MaterialApp`
+  owns the navigator key behind the context-free accessors; the locale is just a watched `Live` read by `AppRoot`.
+
+**`StateLog`** prints `[STATE] Instance "X" has been created / initialized`, `"X" onClose() called` and `"X" deleted from memory` in debug builds (`StateLog.enabled`); set `StateLog.verbose = true` to also see every `Watch` rebuild.
+
+**No `setState`**: a `State` keeps its mutable fields as `Live`s and builds under a `Watch` (a plain `State`
+renames `build` to `_build` and returns `Watch(() => _build(context))`). `ValueNotifier`s are not used either.
 
 **`lib/DI.dart`** is the single registration point — `DI.init()` in `init()`:
 
@@ -128,14 +149,14 @@ in **`lib/Utils/Functions/GetXFunctions.dart`** and are used everywhere instead 
 | `AnalyticsManager` | `put` (eager) | Firebase Crashlytics |
 | `NotificationManager` | `put(permanent)` + `unawaited(.initialize())` | |
 | `ThemeController` | `lazyPut` | reactive theme state (no locale) |
-| `LocaleController` | `lazyPut` | `PrefName.appLocale.rx` + `Get.updateLocale` |
+| `LocaleController` | `lazyPut` | `PrefName.appLocale.rx`, watched by `AppRoot` |
 | `MediaServiceController` | `lazyPut` | current service + list of services |
 | `RefreshController` | `lazyPut` | pub/sub refresh flags (`getOrPut(key)` → `RxBool`, `.all()`); mutations signal it, screens `ever()`-subscribe. `routeObserver` (same file) is on `GetMaterialApp.navigatorObservers`; `RefreshManager<T>` mixin also exists for route-re-entry refresh |
-| `AppUpdater` | `lazyPut` | GetxController; GitHub-release update check + APK install |
+| `AppUpdater` | `lazyPut` | AppController; GitHub-release update check + APK install |
 | `BaseDiscordRPC` | `lazyPut` | `MobileRPC` on Android/iOS, else `DesktopRPC` |
 
-Local reactive UI uses `.obs` + `Obx`. `Get.context!` / `Get.overlayContext` are used for
-context-free access (`getString`, snackbars).
+Local reactive UI uses `Live` + `Watch`; `appContext` / `appOverlayContext` give context-free access
+(`getString`, snackbars).
 
 ### Theme + `BaseScreen`
 
@@ -148,7 +169,7 @@ context-free access (`getString`, snackbars).
   auto-persisting `PrefName.x.rx` (`useGlassMode`, `isOled`, `themeName`, `useMaterialYou`,
   `useCustomColor`, `customColor`, `cardSize`, `mode`). `light` / `dark` are **memoized**
   `ThemeData` getters (rebuilt only when an input in the cache-key tuple changes; reading the
-  tuple keeps them reactive inside `Obx`). `themeMode` / `isDarkModeActive` derive from `mode`.
+  tuple keeps them reactive inside `Watch`). `themeMode` / `isDarkModeActive` derive from `mode`.
   Guarded combo setters (`setTheme`, `setOled`, `setMaterialYou`, …).
 - **`Core/ThemeManager/ThemeManager.dart`** — pure builders: `buildAppTheme(base, {isOled,
   glass})` applies the (colour-independent, built-once) Poppins `TextTheme` plus the
@@ -163,7 +184,7 @@ context-free access (`getString`, snackbars).
   `ThemeMode`, `Themes/DynamicThemes.dart` (`getCustom*Theme` seed themes, `getImage*Theme`),
   `Themes/material.dart`.
 - **`Widgets/Components/ThemedContainer.dart`** — `ThemedContainer` / `ThemedWidget` are real
-  `StatelessWidget`s (one `Obx`, no `context:` param) — glass-mode-aware card surfaces via
+  `StatelessWidget`s (one `Watch`, no `context:` param) — glass-mode-aware card surfaces via
   `blurbox`. `themeDropdown()` lives here too.
 - **`Widgets/Components/BaseScreen.dart`** — `abstract class BaseScreen<T> extends State<T>`.
   Implement `buildContent(context)` instead of `build`. Provides `SafeArea` + `Scaffold` and,
@@ -193,7 +214,7 @@ area)`.
   delegating to `find<AnilistAuth>().queries`. `AnilistSettingsView` gives a profile link +
   "refresh from AniList".
 - **`Core/Services/MediaServiceController.dart`** — `RxList<MediaService> services`
-  (`[AnilistService(), ExtensionService()]`), `Rx<MediaService> currentService` restored from
+  (`[AnilistService(), ExtensionService()]`), `Live<MediaService> currentService` restored from
   `PrefName.service.value` by `id`.
 - **`Core/Services/ServiceSwitcher.dart`** — `serviceSwitcher(context)` picker bottom sheet.
 
@@ -211,7 +232,7 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
   `mediaDetails`) run `compute(_parseX, rawBody)` so `jsonDecode` + map→`Media` + sort are all
   off the UI thread. `anilistData(body)` is the top-level envelope decoder used inside the
   isolate.
-- `AnilistAuth implements ServiceAuth` (GetxController, `lazyPut`) — `token` =
+- `AnilistAuth implements ServiceAuth` (`AppController`, `lazyPut`) — `token` =
   `PrefName.anilistToken.rx`, `user` = `Rxn<ServiceUser>` holding an `AnilistUser`
   (cached to prefs). `login()` runs `FlutterWebAuth2` implicit grant (`client_id 14959`,
   scheme `dantotsu`); owns `AnilistQueries queries` + `AnilistMutations mutations`.
@@ -334,7 +355,7 @@ Isar-backed typed KV store with a synchronous in-memory cache, a **shared reacti
 **microtask-batched writes** (setters never block on disk).
 
 - **`Core/Preferences/Pref.dart`** — `Pref<T>(key, defaultValue, PrefLocation)`. Read/write
-  `pref.value`; bind `pref.rx` for a **shared** auto-persisting `Rx<T>` (every caller of
+  `pref.value`; bind `pref.rx` for a **shared** auto-persisting `Live<T>` (every caller of
   `SomePref.rx` gets the same instance; assigning to it writes through). `enumPref(...)` /
   `jsonPref(...)` for non-primitive `T`. All keys declared once in `Preferences.dart` under
   `PrefName`. `PrefLocation` = `THEME/COMMON/PLAYER/READER/PROTECTED/OTHER` — namespaced into
@@ -375,7 +396,7 @@ links are handled in `Utils/Functions/DeepLink.dart` via `find<ExtensionManager>
 
 ### Analytics / crash reporting — Firebase
 
-**`Core/Analytics/AnalyticsManager.dart`** (GetxController, eager). `onInit` fires
+**`Core/Analytics/AnalyticsManager.dart`** (`AppController`, eager). `onInit` fires
 `Firebase.initializeApp` + `FirebaseCrashlytics.setCrashlyticsCollectionEnabled(!kDebugMode)`,
 guarded by a `Completer` so `recordError` awaits init and silently no-ops if Firebase failed.
 `Core/Analytics/FirebaseOptions.dart` is the generated `flutterfire` config. `firebase_analytics`
@@ -396,7 +417,7 @@ Account › Discord Rich Presence sub-screen (`Screen/Settings/Categories/Discor
 
 ### Notifications — `NotificationManager`
 
-**`Core/NotificationManager/NotificationManager.dart`** (GetxController, `permanent`,
+**`Core/NotificationManager/NotificationManager.dart`** (`AppController`, `permanent`,
 `.initialize()` from `DI.init`) — deliberately small: `initialize`, `requestPermission`,
 `show(title, body, {id, payload})`, `cancel`, `cancelAll` and a `tapped` payload observable over
 `flutter_local_notifications`. Its only caller is `Core/Services/ActivityAlerts` (unread AniList
@@ -419,10 +440,10 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
 - Source: `assets/translations/app_*.arb` (43 locales; template `app_en.arb`).
 - `l10n.yaml` → `flutter gen-l10n` → `lib/l10n/app_localizations*.dart` (committed).
 - Access anywhere: `getString` in **`Core/ThemeManager/LanguageSwitcher.dart`**
-  (`AppLocalizations.of(Get.context!)!`). Use `getString.someKey`, never hard-coded strings.
+  (`AppLocalizations.of(appContext!)!`). Use `getString.someKey`, never hard-coded strings.
   `languageSwitcher(context)` widget + `Core/ThemeManager/language.dart` for name↔code mapping.
 - The active locale lives in **`Core/ThemeManager/LocaleController.dart`**
-  (`PrefName.appLocale.rx`); `setLocale` persists and calls `Get.updateLocale`.
+  (`PrefName.appLocale.rx`); `setLocale` persists.
 
 ### UI building blocks (`lib/Widgets/`, `lib/Utils/`)
 
@@ -440,9 +461,9 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   (+ `customScale`); `compact` (cover + title only — hides all overlays); `aspect`, `radius`,
   `titleLines`; progress green `pill` / thin `bar` / off; score-badge corner; info line;
   airing dot. `score`/`airing` are plain params. Style comes from
-  `CardStyleController.current` (DI, caches the decoded pref in an `Rx`) unless a `style:`
-  override is passed — `PosterCard` / `MediaSection` / `PeopleShelf` read it **inside an
-  `Obx`**, so a change on the Card-style screen updates every feed live. Character/staff use
+  `CardStyleController.current` (DI, caches the decoded pref in a `Live`) unless a `style:`
+  override is passed — `PosterCard` / `MediaSection` / `PeopleShelf` read it **inside a
+  `Watch`**, so a change on the Card-style screen updates every feed live. Character/staff use
   the same style with only the `people` preset flag forced (`copyWith(preset: 'people')` —
   keeps the role line + its caption height). Presets Poster (default) / Card / Cozy /
   Compact + Custom, edited in **Settings › Appearance › Card style**
@@ -496,6 +517,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   rail-size scale (`gapXs…gapXl`, `pagePad`, `cardPad`, `radius*`, `railItemW/railImageH/
   railItemH/railGap`, `detailPoster*`), all layout-class aware. **Use `Dimens.*` for padding /
   gaps / card sizes, not raw pixel constants.**
+- Memory: `main.dart` caps Flutter's `ImageCache` (96 MB mobile / 192 MB desktop, 400 images); `cachedNetworkImage` decodes at `width × devicePixelRatio` (1440 px max when unsized, width only so aspect is kept); `DetailCache` and the `AniMediaCard` cache are `Utils/Lru` maps.
 - `Utils/Function.dart` — `openLinkInBrowser`, `shareLink`, `shareFile`, `loadEnv`, Kotlin-std
   `let`/`also` extensions.
 
@@ -509,7 +531,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   `constant_identifier_names`, `deprecated_member_use`, `library_prefixes` are downgraded to
   `ignore` (the app rides bleeding-edge/forked packages). `prefer_relative_imports: true` and
   `unawaited_futures: true` are enforced — use relative imports within `lib/`.
-- Resolve controllers with the `find<T>()` / `put<T>()` helpers, not `Get.find` directly. Add
+- Never import `package:get` outside `Core/State` (only `GetBridge.dart` may); no `setState`. Resolve controllers with the `find<T>()` / `put<T>()` helpers. Add
   new long-lived controllers to `DI.init()`.
 - Screens: extend `BaseScreen<T>` and implement `buildContent`, don't override `build`.
 - Always run `build_runner` after model/Isar changes; commit the regenerated `*.g.dart`.
@@ -518,7 +540,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
 - `media_kit` (3 packages) and `flutter_discord_rpc_fork` are git deps; `flutter_web_auth_2`
   is a personal fork. `dependency_overrides` only pins `collection`. Treat `pubspec.yaml`
   changes as high-risk.
-- No test suite.
+- No test suite (`test/widget_test.dart` is the Flutter template).
 
 ## The `main` branch (current app — reference for porting)
 
@@ -568,7 +590,7 @@ whenever you need the real implementation of a screen/flow that's still a stub h
 
 | | `main` | `rewrite-re` |
 |---|---|---|
-| State mgmt | Provider + GetX | pure GetX + `lib/DI.dart` locator |
+| State mgmt | Provider + GetX | own `Live` / `Watch` engine + locator in `Core/State`, `lib/DI.dart` registrations |
 | `lib/` layout | flat-ish (`Api`, `Screens`, `Services`, `DataClass`, `Functions`, `Theme`, …) | `Core/`, `Model/`, `Screen/`, `Utils/`, `Widgets/`, `Api/Services/` |
 | Prefs | `Pref<T>` + manual `.obs` mirroring per controller | reactive `Pref.rx` (shared, auto-persist), batched writes |
 | Theme registry | list duplicated in resolver + dropdown + `Themes/` | single `AppTheme` enum |

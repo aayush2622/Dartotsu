@@ -9,7 +9,6 @@ import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Core/ThemeManager/ThemeMode.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../CardStyleScreen.dart';
@@ -17,6 +16,7 @@ import '../Widgets/FontPickerSheet.dart';
 import '../Widgets/GlassBackgroundSheet.dart';
 import '../Widgets/SegmentedSetting.dart';
 import '../Widgets/ThemeDropdown.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> appearanceSettings(BuildContext context) {
   final t = find<ThemeController>();

@@ -15,6 +15,7 @@ import '../../../Widgets/Components/ScrollConfig.dart';
 import '../../../Widgets/Components/SectionCard.dart';
 import 'ActivityCard.dart';
 import 'ActivityComposer.dart';
+import '../../../Core/State/State.dart';
 
 class ActivityList extends StatefulWidget {
   final MediaService service;
@@ -43,14 +44,13 @@ class ActivityList extends StatefulWidget {
 class _ActivityListState extends State<ActivityList>
     with AutomaticKeepAliveClientMixin {
   SocialScreenView get _view => widget.service.socialView!;
-
-  final _items = <Activity>[];
+  final _items = <Activity>[].liveList;
   var _page = 1;
-  var _hasNext = true;
-  var _loading = false;
-  var _failed = false;
-  var _first = true;
-  var _filter = ActivityFilter.all;
+  final _hasNext = true.live;
+  final _loading = false.live;
+  final _failed = false.live;
+  final _first = true.live;
+  final _filter = ActivityFilter.all.live;
 
   @override
   bool get wantKeepAlive => true;
@@ -61,7 +61,7 @@ class _ActivityListState extends State<ActivityList>
     unawaited(_load());
   }
 
-  bool _matches(Activity a) => switch (_filter) {
+  bool _matches(Activity a) => switch (_filter.value) {
     ActivityFilter.all => true,
     ActivityFilter.animeProgress =>
       a.kind == ActivityKind.list && a.mediaType == 'ANIME',
@@ -76,15 +76,15 @@ class _ActivityListState extends State<ActivityList>
   ];
 
   Future<void> _load({bool reset = false}) async {
-    if (_loading) return;
+    if (_loading.value) return;
     if (reset) {
       _items.clear();
       _page = 1;
-      _hasNext = true;
-      _failed = false;
+      _hasNext.value = true;
+      _failed.value = false;
     }
-    if (!_hasNext) return;
-    setState(() => _loading = true);
+    if (!_hasNext.value) return;
+    _loading.value = true;
     try {
       var pages = 0;
       final before = _visible.length;
@@ -97,31 +97,29 @@ class _ActivityListState extends State<ActivityList>
         );
         final known = {for (final a in _items) a.id};
         _items.addAll(result.items.where((a) => !known.contains(a.id)));
-        _hasNext = result.hasNext;
-        if (_hasNext) _page++;
+        _hasNext.value = result.hasNext;
+        if (_hasNext.value) _page++;
         pages++;
-      } while (_filter != ActivityFilter.all &&
-          _hasNext &&
+      } while (_filter.value != ActivityFilter.all &&
+          _hasNext.value &&
           pages < 10 &&
           _visible.length == before);
-      _failed = false;
+      _failed.value = false;
     } catch (_) {
-      _failed = true;
+      _failed.value = true;
     }
     if (mounted) {
-      setState(() {
-        _loading = false;
-        _first = false;
-      });
+      _loading.value = false;
+      _first.value = false;
     }
   }
 
   bool _onScroll(ScrollNotification n) {
     if (n.metrics.axis == Axis.vertical &&
         n.metrics.extentAfter < 700 &&
-        _hasNext &&
-        !_loading &&
-        !_failed) {
+        _hasNext.value &&
+        !_loading.value &&
+        !_failed.value) {
       unawaited(_load());
     }
     return false;
@@ -150,8 +148,12 @@ class _ActivityListState extends State<ActivityList>
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    return Watch(() => _build(context));
+  }
+
+  Widget _build(BuildContext context) {
     final visible = _visible;
-    final skeleton = _first && _loading;
+    final skeleton = _first.value && _loading.value;
     return RefreshIndicator(
       onRefresh: () => _load(reset: true),
       child: NotificationListener<ScrollNotification>(
@@ -177,7 +179,7 @@ class _ActivityListState extends State<ActivityList>
                     ],
                   ),
                 )
-              else if (_failed && _items.isEmpty)
+              else if (_failed.value && _items.isEmpty)
                 SizedBox(
                   height: 340,
                   child: EmptyState(
@@ -187,12 +189,12 @@ class _ActivityListState extends State<ActivityList>
                     onAction: () => _load(reset: true),
                   ),
                 )
-              else if (visible.isEmpty && !_loading)
+              else if (visible.isEmpty && !_loading.value)
                 SizedBox(
                   height: 340,
                   child: EmptyState(
                     icon: Icons.forum_outlined,
-                    title: switch (_filter) {
+                    title: switch (_filter.value) {
                       ActivityFilter.all => 'Nothing here',
                       ActivityFilter.animeProgress => 'No anime progress',
                       ActivityFilter.mangaProgress => 'No manga progress',
@@ -208,7 +210,7 @@ class _ActivityListState extends State<ActivityList>
                         ActivityCard(
                           service: widget.service,
                           activity: a,
-                          onDeleted: () => setState(() => _items.remove(a)),
+                          onDeleted: () => _items.remove(a),
                           onEdited: () => _load(reset: true),
                         ).animateFadeUp(
                           begin: 0.06,
@@ -218,12 +220,12 @@ class _ActivityListState extends State<ActivityList>
                           duration: 320,
                         ),
                   ),
-              if (_loading && !skeleton)
+              if (_loading.value && !skeleton)
                 const Padding(
                   padding: EdgeInsets.all(24),
                   child: Center(child: CircularProgressIndicator()),
                 ),
-              if (_failed && _items.isNotEmpty)
+              if (_failed.value && _items.isNotEmpty)
                 TextButton(
                   onPressed: () => _load(),
                   child: const Text('Retry'),
@@ -275,10 +277,10 @@ class _ActivityListState extends State<ActivityList>
   Widget _filters() => Padding(
     padding: EdgeInsets.fromLTRB(Dimens.pagePad, 4, Dimens.pagePad, 8),
     child: AppChoiceChips<ActivityFilter>(
-      value: _filter,
+      value: _filter.value,
       onChanged: (f) {
-        setState(() => _filter = f);
-        if (_visible.isEmpty && _hasNext) unawaited(_load());
+        _filter.value = f;
+        if (_visible.isEmpty && _hasNext.value) unawaited(_load());
       },
       options: const [
         AppSegment(ActivityFilter.all, label: 'All'),

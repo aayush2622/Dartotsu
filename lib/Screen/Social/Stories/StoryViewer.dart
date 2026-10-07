@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -27,6 +26,7 @@ import '../SocialNavigation.dart';
 import 'StorySeen.dart';
 import '../../../Api/Discord/DiscordPresence.dart';
 import '../../../Api/Discord/PresenceScope.dart';
+import '../../../Core/State/State.dart';
 
 class StoryViewer extends StatefulWidget {
   final MediaService service;
@@ -50,10 +50,10 @@ class _StoryViewerState extends State<StoryViewer> {
   late final PageController _pages = PageController(
     initialPage: widget.initialGroup,
   );
-  late int _current = widget.initialGroup;
-  double _drag = 0;
-  bool _dragging = false;
-  final _hold = ValueNotifier<bool>(false);
+  late final _current = widget.initialGroup.live;
+  final _drag = 0.0.live;
+  final _dragging = false.live;
+  final _hold = false.live;
 
   @override
   void initState() {
@@ -67,7 +67,6 @@ class _StoryViewerState extends State<StoryViewer> {
   void dispose() {
     unawaited(SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge));
     _pages.dispose();
-    _hold.dispose();
     super.dispose();
   }
 
@@ -94,9 +93,12 @@ class _StoryViewerState extends State<StoryViewer> {
     child: _buildViewer(context),
   );
 
-  Widget _buildViewer(BuildContext context) {
+  Widget _buildViewer(BuildContext context) => Watch(() => _viewer(context));
+
+  Widget _viewer(BuildContext context) {
+    final current = _current.value;
     final size = MediaQuery.sizeOf(context);
-    final progress = (_drag / (size.height * 0.5)).clamp(0.0, 1.0);
+    final progress = (_drag.value / (size.height * 0.5)).clamp(0.0, 1.0);
     return Scaffold(
       backgroundColor: Colors.black.withValues(alpha: 1 - progress * 0.85),
       body: GestureDetector(
@@ -115,7 +117,7 @@ class _StoryViewerState extends State<StoryViewer> {
         onHorizontalDragEnd: (d) {
           _hold.value = false;
           if (!_pages.hasClients) return;
-          final page = _pages.page ?? _current.toDouble();
+          final page = _pages.page ?? _current.value.toDouble();
           final velocity = d.primaryVelocity ?? 0;
           var target = page.round();
           if (velocity < -350) {
@@ -124,7 +126,9 @@ class _StoryViewerState extends State<StoryViewer> {
             target = page.ceil() - 1;
           }
           target = target.clamp(0, widget.groups.length - 1);
-          if (target != _current) unawaited(HapticFeedback.selectionClick());
+          if (target != _current.value) {
+            unawaited(HapticFeedback.selectionClick());
+          }
           unawaited(
             _pages.animateToPage(
               target,
@@ -133,27 +137,25 @@ class _StoryViewerState extends State<StoryViewer> {
             ),
           );
         },
-        onVerticalDragStart: (_) => setState(() => _dragging = true),
+        onVerticalDragStart: (_) => _dragging.value = true,
         onVerticalDragUpdate: (d) =>
-            setState(() => _drag = math.max(0, _drag + d.delta.dy)),
+            _drag.value = math.max(0, _drag.value + d.delta.dy),
         onVerticalDragEnd: (d) {
           final fling = (d.primaryVelocity ?? 0) > 700;
-          if (fling || _drag > size.height * 0.22) {
+          if (fling || _drag.value > size.height * 0.22) {
             _close();
           } else {
-            setState(() {
-              _drag = 0;
-              _dragging = false;
-            });
+            _drag.value = 0;
+            _dragging.value = false;
           }
         },
         child: AnimatedContainer(
-          duration: _dragging && _drag > 0
+          duration: _dragging.value && _drag.value > 0
               ? Duration.zero
               : const Duration(milliseconds: 260),
           curve: Curves.easeOutCubic,
           transform: Matrix4.identity()
-            ..translateByDouble(0, _drag, 0, 1)
+            ..translateByDouble(0, _drag.value, 0, 1)
             ..scaleByDouble(1 - progress * 0.18, 1 - progress * 0.18, 1, 1),
           transformAlignment: Alignment.center,
           child: ClipRRect(
@@ -163,7 +165,7 @@ class _StoryViewerState extends State<StoryViewer> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.groups.length,
               onPageChanged: (i) {
-                setState(() => _current = i);
+                _current.value = i;
                 widget.onUserChanged?.call(widget.groups[i].user.id);
               },
               itemBuilder: (context, i) => AnimatedBuilder(
@@ -171,8 +173,8 @@ class _StoryViewerState extends State<StoryViewer> {
                 builder: (context, child) {
                   final page =
                       _pages.hasClients && _pages.position.haveDimensions
-                      ? _pages.page ?? _current.toDouble()
-                      : _current.toDouble();
+                      ? _pages.page ?? _current.value.toDouble()
+                      : _current.value.toDouble();
                   final delta = (page - i).clamp(-1.0, 1.0);
                   return Opacity(
                     opacity: 1 - delta.abs() * 0.5,
@@ -191,7 +193,7 @@ class _StoryViewerState extends State<StoryViewer> {
                   key: ValueKey(widget.groups[i].user.id),
                   service: widget.service,
                   group: widget.groups[i],
-                  active: i == _current,
+                  active: i == current,
                   hold: _hold,
                   onFinished: () => _goTo(i + 1),
                   onBack: () => _goTo(i - 1),
@@ -210,7 +212,7 @@ class _StoryGroupPage extends StatefulWidget {
   final MediaService service;
   final StoryGroup group;
   final bool active;
-  final ValueListenable<bool> hold;
+  final Live<bool> hold;
   final VoidCallback onFinished;
   final VoidCallback onBack;
   final VoidCallback onClose;
@@ -238,25 +240,26 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
     vsync: this,
     duration: _duration,
   )..addStatusListener(_onStatus);
-
-  int _index = 0;
-  bool _forward = true;
+  final _index = 0.live;
+  final _forward = true.live;
   int _holds = 0;
 
   SocialScreenView get _view => widget.service.socialView!;
   List<Activity> get _items => widget.group.activities;
-  Activity get _story => _items[_index];
+  Activity get _story => _items[_index.value];
 
   @override
   void initState() {
     super.initState();
     final seen = StorySeen.read(widget.service);
     final first = _items.indexWhere((a) => !seen.contains(a.id));
-    _index = first < 0 ? 0 : first;
-    widget.hold.addListener(_onSwipeHold);
+    _index.value = first < 0 ? 0 : first;
+    _holdSub = onChange(widget.hold, (_) => _onSwipeHold());
     if (widget.active) _start();
   }
 
+  final _version = Trigger();
+  Disposer? _holdSub;
   bool _swipeHeld = false;
 
   void _onSwipeHold() {
@@ -278,7 +281,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
 
   @override
   void dispose() {
-    widget.hold.removeListener(_onSwipeHold);
+    _holdSub?.dispose();
     _timer.dispose();
     super.dispose();
   }
@@ -309,11 +312,9 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
 
   void _next() {
     if (!mounted) return;
-    if (_index < _items.length - 1) {
-      setState(() {
-        _forward = true;
-        _index++;
-      });
+    if (_index.value < _items.length - 1) {
+      _forward.value = true;
+      _index.value++;
       _start();
     } else {
       widget.onFinished();
@@ -321,11 +322,9 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
   }
 
   void _previous() {
-    if (_index > 0) {
-      setState(() {
-        _forward = false;
-        _index--;
-      });
+    if (_index.value > 0) {
+      _forward.value = false;
+      _index.value--;
       _start();
     } else {
       widget.onBack();
@@ -337,17 +336,15 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
     if (!_view.canInteract) return snackString('Log in to like');
     final a = _story;
     final was = a.isLiked;
-    setState(() {
-      a.isLiked = !was;
-      a.likeCount += was ? -1 : 1;
-    });
+    a.isLiked = !was;
+    a.likeCount += was ? -1 : 1;
+    _version.fire();
     unawaited(HapticFeedback.selectionClick());
     final ok = await _view.toggleLike(a.id);
     if (!ok && mounted) {
-      setState(() {
-        a.isLiked = was;
-        a.likeCount += was ? 1 : -1;
-      });
+      a.isLiked = was;
+      a.likeCount += was ? 1 : -1;
+      _version.fire();
       snackString('Failed to like');
     }
   }
@@ -358,15 +355,18 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
       return await action();
     } finally {
       if (mounted) {
-        setState(() {});
+        _version.fire();
         _release();
       }
     }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final width = MediaQuery.sizeOf(context).width;
+    _version.track();
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTapUp: (d) => d.localPosition.dx < width / 3 ? _previous() : _next(),
@@ -453,7 +453,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
           opacity: animation,
           child: SlideTransition(
             position: Tween<Offset>(
-              begin: Offset(_forward ? 0.12 : -0.12, 0),
+              begin: Offset(_forward.value ? 0.12 : -0.12, 0),
               end: Offset.zero,
             ).animate(animation),
             child: ScaleTransition(
@@ -490,7 +490,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                       borderRadius: BorderRadius.circular(4),
                       child: SizedBox(
                         height: 4,
-                        child: i == _index
+                        child: i == _index.value
                             ? AnimatedBuilder(
                                 animation: _timer,
                                 builder: (_, _) => LinearProgressIndicator(
@@ -500,7 +500,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                                 ),
                               )
                             : LinearProgressIndicator(
-                                value: i < _index ? 1 : 0,
+                                value: i < _index.value ? 1 : 0,
                                 backgroundColor: Colors.white24,
                                 color: Colors.white,
                               ),

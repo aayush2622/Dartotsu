@@ -1,20 +1,20 @@
+import 'package:collection/collection.dart';
 import 'dart:async';
 import 'dart:io';
 
 import 'package:app_links/app_links.dart';
 import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../Extensions/StringExtensions.dart';
 import 'DeepLinkHandlers.dart';
-import 'GetXFunctions.dart';
 import 'SnackBar.dart';
 import 'WindowProtocol.dart';
 
 export 'DeepLinkHandlers.dart';
+import '../../Core/State/State.dart';
 
 class DeepLink {
   static final handlers = <DeepLinkHandler>[
@@ -100,10 +100,10 @@ class DeepLink {
   }
 
   static Future<void> _dispatch(Uri uri) async {
-    for (var i = 0; i < 50 && Get.context == null; i++) {
+    for (var i = 0; i < 50 && appContext == null; i++) {
       await Future<void>.delayed(const Duration(milliseconds: 100));
     }
-    final context = Get.context;
+    final context = appContext;
     if (context == null || !context.mounted) return;
     final handler = handlers.firstWhereOrNull((h) => h.matches(uri));
     if (handler == null) return snackString('This link can\'t be opened: $uri');

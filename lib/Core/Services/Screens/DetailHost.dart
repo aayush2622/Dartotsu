@@ -1,13 +1,12 @@
-import 'package:get/get.dart';
-
 import '../Model/Media.dart';
+import '../../State/State.dart';
 
 class DetailHost {
-  final Rx<Media> media;
+  final Live<Media> media;
   final String? heroTag;
   final void Function(Media media, String? heroTag) open;
   final Future<void> Function() refresh;
-  final RxBool loading;
+  final Live<bool> loading;
   final void Function(String query) search;
   bool cached;
 
@@ -19,7 +18,7 @@ class DetailHost {
     required this.search,
     this.cached = false,
     required this.refresh,
-  }) : media = media.obs;
+  }) : media = media.live;
 
   void update(Media next) {
     media.value = next;

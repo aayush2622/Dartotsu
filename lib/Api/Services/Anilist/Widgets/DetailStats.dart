@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Screens/DetailHost.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../../Utils/Extensions/IntExtensions.dart';
 import '../../../../Utils/Extensions/Responsive.dart';
+import '../../../../Core/State/State.dart';
 
 class AnilistDetailStats extends StatelessWidget {
   final DetailHost host;
@@ -43,7 +43,7 @@ class AnilistDetailStats extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => Obx(() {
+  Widget build(BuildContext context) => Watch(() {
     final m = host.media.value;
     final items = _items(m);
     final airing = _airingIn(m);

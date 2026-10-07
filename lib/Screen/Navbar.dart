@@ -1,15 +1,14 @@
 import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../Core/Services/MediaServiceController.dart';
 import '../Core/Services/ServiceSwitcher.dart';
 import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
-import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/LoadSvg.dart';
 import '../Widgets/Components/ThemedContainer.dart';
 import 'Home/Components/AccountSheet.dart';
+import '../Core/State/State.dart';
 
 class FloatingBottomNavBar extends StatefulWidget {
   final int selectedIndex;
@@ -34,7 +33,7 @@ class FloatingBottomNavBar extends StatefulWidget {
 class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   MediaServiceController get _services => find();
 
-  final hoveredIndex = (-1).obs;
+  final hoveredIndex = (-1).live;
 
   List<NavItem> get _items {
     final service = _services.currentService.value;
@@ -46,7 +45,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
+    return Watch(() {
       final service = _services.currentService.value;
 
       if (ContextExtensions(context).isPhone) {
@@ -89,7 +88,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               ..._items.map(
                 (item) => Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Obx(() {
+                  child: Watch(() {
                     final hovered = hoveredIndex.value == item.index;
                     final selected = widget.selectedIndex == item.index;
 
@@ -163,7 +162,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: _items.map((item) {
                     return Expanded(
-                      child: Obx(() {
+                      child: Watch(() {
                         final selected = widget.selectedIndex == item.index;
                         final hovered = hoveredIndex.value == item.index;
 

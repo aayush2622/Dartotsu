@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -21,13 +20,13 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../Widgets/ScreenWidgetView.dart';
 import '../../Widgets/Components/NotImplemented.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Shelf/ShelfFrame.dart';
 import '../Widgets/Components/DataSection.dart';
 import 'Components/DetailHeader.dart';
 import '../Feed/FeedNavigation.dart';
 import 'ListEditorSheet.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
@@ -50,17 +49,17 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends BaseScreen<DetailScreen> {
   late final DetailHost _host = DetailHost(
     media: widget.media,
-    loading: true.obs,
+    loading: true.live,
     heroTag: widget.heroTag,
     open: _open,
     search: _search,
     refresh: () => _load(force: true),
   );
-  Worker? _coverWorker;
-  final _widgets = <ScreenWidget>[].obs;
-  final _ready = false.obs;
-  final _tab = 0.obs;
-  final _error = RxnString();
+  Disposer? _coverSub;
+  final _widgets = <ScreenWidget>[].liveList;
+  final _ready = false.live;
+  final _tab = 0.live;
+  final _error = Live<String?>(null);
   bool _focusedOnce = false;
   final _scroll = ScrollController();
   Timer? _snapTimer;
@@ -114,7 +113,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
     _scroll.addListener(_scheduleSnap);
     final theme = find<ThemeController>();
     theme.cover.set(this, _host.media.value.cover);
-    _coverWorker = ever(
+    _coverSub = onChange(
       _host.media,
       (media) => theme.cover.set(this, media.cover),
     );
@@ -123,7 +122,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
 
   @override
   void dispose() {
-    _coverWorker?.dispose();
+    _coverSub?.dispose();
     find<ThemeController>().cover.clear(this);
     FocusManager.instance.removeListener(_keepFocusVisible);
     _snapTimer?.cancel();
@@ -238,7 +237,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   Widget buildContent(BuildContext context) {
     final content = RefreshIndicator(
       onRefresh: () => _load(force: true),
-      child: Obx(
+      child: Watch(
         () => CustomScrollConfig(
           context,
           physics: const AlwaysScrollableScrollPhysics(),
@@ -275,7 +274,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
       ),
     );
 
-    final nav = Obx(
+    final nav = Watch(
       () => FloatingBottomNavBar(
         standalone: true,
         laneKey: _navLane,
@@ -327,7 +326,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
         ),
       ),
       child: ShelfFlat(
-        child: Obx(
+        child: Watch(
           () => Padding(
             padding: EdgeInsets.only(
               top: Dimens.gapLg,

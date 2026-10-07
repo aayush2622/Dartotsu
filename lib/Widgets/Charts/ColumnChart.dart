@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import 'ChartData.dart';
+import '../../Core/State/State.dart';
 
 class ColumnChart extends StatefulWidget {
   final List<ChartDatum> data;
@@ -22,15 +23,17 @@ class ColumnChart extends StatefulWidget {
 }
 
 class _ColumnChartState extends State<ColumnChart> {
-  int? _active;
+  final _active = Live<int?>(null);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     final data = widget.data;
     if (data.isEmpty) return const SizedBox.shrink();
     final max = niceMax(data.fold(0.0, (m, d) => math.max(m, d.value)));
-    final active = _active;
+    final active = _active.value;
     return LayoutBuilder(
       builder: (context, box) {
         final width = math.max(box.maxWidth, data.length * widget.minBarWidth);
@@ -45,18 +48,17 @@ class _ColumnChartState extends State<ColumnChart> {
             onHover: (e) {
               final i = (e.localPosition.dx / slot).floor();
               final next = i >= 0 && i < data.length ? i : null;
-              if (next != _active) setState(() => _active = next);
+              if (next != _active.value) _active.value = next;
             },
-            onExit: (_) => setState(() => _active = null),
+            onExit: (_) => _active.value = null,
             child: GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTapDown: (d) {
                 final i = (d.localPosition.dx / slot).floor();
-                setState(
-                  () => _active = (i == _active || i < 0 || i >= data.length)
-                      ? null
-                      : i,
-                );
+                _active.value =
+                    (i == _active.value || i < 0 || i >= data.length)
+                    ? null
+                    : i;
               },
               child: TweenAnimationBuilder<double>(
                 key: ValueKey(data.length),

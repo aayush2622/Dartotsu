@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:collection/collection.dart';
 
 import '../../Api/Services/Anilist/AnilistService.dart';
 import '../../Api/Services/Extension/ExtensionService.dart';
@@ -7,11 +7,12 @@ import '../Preferences/PrefManager.dart';
 import 'MediaService.dart';
 
 export 'MediaService.dart';
+import '../State/State.dart';
 
-class MediaServiceController extends GetxController {
-  final services = <MediaService>[].obs;
+class MediaServiceController extends AppController {
+  final services = <MediaService>[].liveList;
 
-  late final Rx<MediaService> currentService;
+  late final Live<MediaService> currentService;
 
   String? get currentBanner => currentService.value.auth?.user.value?.banner;
 
@@ -27,7 +28,7 @@ class MediaServiceController extends GetxController {
 
     services.assignAll([AnilistService(), ExtensionService()]);
 
-    currentService = Rx<MediaService>(
+    currentService = Live<MediaService>(
       _byId(PrefName.service.value) ?? services.first,
     );
   }

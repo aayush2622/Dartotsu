@@ -9,13 +9,13 @@ import '../../../Core/ThemeManager/LocaleController.dart';
 import '../../../Core/ThemeManager/language.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/LinkSettings.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../Widgets/Backup/BackupSheet.dart';
 import '../Widgets/SegmentedSetting.dart';
 import 'NetworkSettings.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> generalSettings(BuildContext context) => [
   Setting.normal(

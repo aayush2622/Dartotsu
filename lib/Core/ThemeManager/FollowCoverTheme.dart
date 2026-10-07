@@ -1,21 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../Preferences/PrefManager.dart';
 import '../Services/MediaServiceController.dart';
 import 'GlassBackgroundSource.dart';
 import 'Themes/DynamicThemes.dart';
+import '../State/State.dart';
 
 class FollowCoverTheme {
   final enabled = PrefName.followCover.rx;
-  final tick = 0.obs;
+  final tick = 0.live;
 
   final _glassBackgroundUrl = PrefName.glassBackgroundUrl.rx;
-  final _coverUrl = RxnString();
-  final _workers = <Worker>[];
+  final _coverUrl = Live<String?>(null);
+  final _subs = <Disposer>[];
   Object? _coverOwner;
   String? _imageUrl;
   ColorScheme? _light;
@@ -26,19 +25,17 @@ class FollowCoverTheme {
       enabled.value ? (brightness == Brightness.dark ? _dark : _light) : null;
 
   void init() {
-    _workers.add(
-      everAll([enabled, _glassBackgroundUrl, _coverUrl], (_) => _sync()),
-    );
+    _subs.add(onAnyChange([enabled, _glassBackgroundUrl, _coverUrl], _sync));
     final services = tryFind<MediaServiceController>();
     if (services != null) {
-      _workers.add(ever(services.currentService, (_) => _bindUser()));
+      _subs.add(onChange(services.currentService, (_) => _bindUser()));
       _bindUser();
     }
     unawaited(_sync());
   }
 
   void dispose() {
-    for (final worker in _workers) {
+    for (final worker in _subs) {
       worker.dispose();
     }
     _userSub?.cancel();

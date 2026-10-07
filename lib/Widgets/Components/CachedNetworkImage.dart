@@ -1,11 +1,14 @@
 import 'dart:io';
+import 'dart:ui' show PlatformDispatcher;
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:precached_network_image/precached_network_image.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
+import '../../Core/State/State.dart';
+
+const _maxDecode = 1440;
 
 Widget cachedNetworkImage({
   required String? imageUrl,
@@ -21,7 +24,7 @@ Widget cachedNetworkImage({
       return SizedBox(
         width: width,
         height: height,
-        child: placeholder.call(Get.context!, imageUrl ?? ""),
+        child: placeholder.call(appContext!, imageUrl ?? ""),
       );
     }
     return SizedBox(width: width, height: height);
@@ -49,17 +52,26 @@ Widget cachedNetworkImage({
           errorWidget ?? (context, url, error) => const SizedBox.shrink(),
     );
   }
+  final ratio = PlatformDispatcher.instance.views.isEmpty
+      ? 2.0
+      : PlatformDispatcher.instance.views.first.devicePixelRatio.clamp(
+          1.0,
+          3.0,
+        );
+  final decodeWidth =
+      cacheWidth ??
+      ((width != null && width.isFinite)
+          ? (width * ratio).ceil()
+          : (height != null && height.isFinite ? null : _maxDecode));
   return CachedNetworkImage(
     filterQuality: FilterQuality.low,
     imageUrl: imageUrl,
     fit: fit,
     width: width,
     height: height,
-    memCacheWidth:
-        cacheWidth ??
-        ((width != null && width.isFinite) ? (width * 2).toInt() : null),
-    memCacheHeight: (height != null && height.isFinite)
-        ? (height * 2).toInt()
+    memCacheWidth: decodeWidth,
+    memCacheHeight: decodeWidth == null && height != null && height.isFinite
+        ? (height * ratio).ceil()
         : null,
     placeholder: placeholder ?? (context, url) => const SizedBox.shrink(),
     errorWidget:

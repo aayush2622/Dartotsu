@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Date.dart';
 import '../../Core/Services/ScoreFormat.dart';
@@ -10,6 +9,7 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import 'AppControls.dart';
 import 'SectionCard.dart';
+import '../../Core/State/State.dart';
 
 class ListEditorPad extends StatelessWidget {
   final Widget child;
@@ -40,7 +40,7 @@ class ListStatusField extends StatelessWidget {
   Widget build(BuildContext context) => ListEditorPad(
     child: LabeledField(
       label: 'Status',
-      child: Obx(
+      child: Watch(
         () => AppChoiceChips<String>(
           options: [
             for (final e in statuses.entries) AppSegment(e.key, label: e.value),
@@ -67,19 +67,19 @@ class _ListProgressFieldState extends State<ListProgressField> {
   late final _controller = TextEditingController(
     text: widget.draft.progress.value.toString(),
   );
-  Worker? _worker;
+  Disposer? _sub;
 
   @override
   void initState() {
     super.initState();
-    _worker = ever(widget.draft.progress, (v) {
+    _sub = onChange(widget.draft.progress, (v) {
       if (_controller.text != '$v') _controller.text = '$v';
     });
   }
 
   @override
   void dispose() {
-    _worker?.dispose();
+    _sub?.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -158,7 +158,7 @@ class _ListScoreFieldState extends State<ListScoreField> {
     final format = ScoreFormat.current;
     if (!format.typed) {
       return ListEditorPad(
-        child: Obx(
+        child: Watch(
           () => LabeledField(
             label: 'Score',
             child: AppSegmented<int>(
@@ -215,7 +215,7 @@ class ListDatesField extends StatelessWidget {
 
 class _DateTile extends StatelessWidget {
   final String label;
-  final Rxn<Date> date;
+  final Live<Date?> date;
 
   const _DateTile({required this.label, required this.date});
 
@@ -239,7 +239,7 @@ class _DateTile extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => Obx(() {
+  Widget build(BuildContext context) => Watch(() {
     final text = date.value?.getFormattedDate() ?? '';
     return DpadTap(
       borderRadius: BorderRadius.circular(16),
@@ -269,7 +269,7 @@ class ListPrivateField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ListEditorPad(
-    child: Obx(
+    child: Watch(
       () => Column(
         children: [
           SwitchListTile(
@@ -326,7 +326,7 @@ class ListOtherSection extends StatelessWidget {
             ),
             onChanged: (v) => draft.notes.value = v,
           ),
-          Obx(() {
+          Watch(() {
             if (draft.customLists.isEmpty) return const SizedBox.shrink();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,

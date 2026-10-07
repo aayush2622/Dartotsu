@@ -1,10 +1,10 @@
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../Preferences/Incognito.dart';
 import '../Api/Progress.dart';
 import '../MediaService.dart';
 import '../Model/Media.dart';
+import '../../State/State.dart';
 
 class LocalMutations extends Mutations {
   final MediaService service;

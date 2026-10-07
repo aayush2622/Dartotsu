@@ -5,12 +5,12 @@ import '../../../Core/Services/MediaServiceController.dart';
 import '../../../Core/Services/ServiceSwitcher.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
 import '../SubSettingsScreen.dart';
 import 'DiscordSettings.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> accountSettings(BuildContext context) {
   final service = find<MediaServiceController>().currentService.value;

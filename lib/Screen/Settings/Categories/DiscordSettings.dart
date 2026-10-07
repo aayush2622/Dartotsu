@@ -7,11 +7,11 @@ import '../../../Api/Discord/Mobile/MobileRPC.dart';
 import '../../../Api/Discord/Mobile/TokenManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Model/Setting.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../Widgets/SegmentedSetting.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
+import '../../../Core/State/State.dart';
 
 bool get _needsToken => Platform.isAndroid || Platform.isIOS;
 
@@ -110,6 +110,7 @@ void _askToken(BuildContext context) {
   final controller = TextEditingController();
   AlertDialogBuilder(context)
     ..setTitle('Discord token')
+    ..setOnDismissListener(controller.dispose)
     ..setMessage(
       'Paste the token of the Discord account to show the presence on. It '
       'stays on this device.',

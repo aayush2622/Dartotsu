@@ -1,11 +1,11 @@
+import 'package:collection/collection.dart';
 import 'package:dartotsu_extension_bridge/ExtensionManager.dart';
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Screen/Social/SocialNavigation.dart';
-import 'GetXFunctions.dart';
 import 'SnackBar.dart';
+import '../../Core/State/State.dart';
 
 const appSchemes = {'dartotsu'};
 

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Api/Services/Extension/Widgets/SourceBadge.dart';
@@ -14,7 +13,6 @@ import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
@@ -23,6 +21,7 @@ import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Widgets/Components/EmptyState.dart';
+import '../../Core/State/State.dart';
 
 enum SourceFeed { saved, popular, latest }
 
@@ -42,11 +41,11 @@ class SourceBrowseScreen extends StatefulWidget {
 
 class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
   final _controller = TextEditingController();
-  final _items = <Media>[].obs;
-  final _loading = false.obs;
-  late final _feed = _defaultFeed().obs;
-  final _error = RxnString();
-  final _searching = false.obs;
+  final _items = <Media>[].liveList;
+  final _loading = false.live;
+  late final _feed = _defaultFeed().live;
+  final _error = Live<String?>(null);
+  final _searching = false.live;
 
   Timer? _debounce;
   int _page = 1;
@@ -185,7 +184,7 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
               Dimens.pagePad,
               Dimens.gap,
             ),
-            child: Obx(
+            child: Watch(
               () => SearchBar(
                 controller: _controller,
                 hintText: 'Search ${widget.source.name}',
@@ -213,7 +212,7 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
               ),
             ),
           ),
-          Obx(
+          Watch(
             () => _searching.value
                 ? const SizedBox.shrink()
                 : Padding(
@@ -249,13 +248,13 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen> {
                     ),
                   ),
           ),
-          Obx(
+          Watch(
             () => _loading.value && _items.isNotEmpty
                 ? const LinearProgressIndicator(minHeight: 2)
                 : const SizedBox(height: 2),
           ),
           Expanded(
-            child: Obx(() {
+            child: Watch(() {
               if (_loading.value && _items.isEmpty) {
                 return _grid(_skeletons(), skeleton: true);
               }

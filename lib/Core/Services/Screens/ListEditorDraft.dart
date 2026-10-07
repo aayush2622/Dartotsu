@@ -1,19 +1,18 @@
-import 'package:get/get.dart' hide ContextExtensionss;
-
 import '../Model/Date.dart';
 import '../Model/Media.dart';
+import '../../State/State.dart';
 
 class ListEditorDraft {
-  final status = ''.obs;
-  final progress = 0.obs;
-  final score = 0.obs;
-  final isPrivate = false.obs;
-  final hiddenFromStatusLists = false.obs;
-  final repeat = 0.obs;
-  final notes = ''.obs;
-  final startedAt = Rxn<Date>();
-  final completedAt = Rxn<Date>();
-  final customLists = <String, bool>{}.obs;
+  final status = ''.live;
+  final progress = 0.live;
+  final score = 0.live;
+  final isPrivate = false.live;
+  final hiddenFromStatusLists = false.live;
+  final repeat = 0.live;
+  final notes = ''.live;
+  final startedAt = Live<Date?>(null);
+  final completedAt = Live<Date?>(null);
+  final customLists = <String, bool>{}.liveMap;
 
   ListEditorDraft(Media media, {Map<String, bool> customLists = const {}}) {
     status.value = media.userStatus ?? 'PLANNING';

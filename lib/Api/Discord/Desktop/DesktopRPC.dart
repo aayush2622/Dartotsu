@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter_discord_rpc_fork/flutter_discord_rpc.dart';
-import 'package:get/get.dart';
 
 import '../../../Logger.dart';
 import '../BaseDiscordRPC.dart';
 import '../DiscordPresence.dart';
+import '../../../Core/State/State.dart';
 
-class DesktopRPC extends GetxController implements BaseDiscordRPC {
+class DesktopRPC extends AppController implements BaseDiscordRPC {
   static const _appId = '1453704458012856401';
   static const _retryAfter = Duration(seconds: 10);
 

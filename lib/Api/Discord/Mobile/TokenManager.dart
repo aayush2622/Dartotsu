@@ -4,9 +4,9 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:rhttp/rhttp.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Core/State/State.dart';
 
 class MobileTokenManager {
   static const clientId = "503557087041683458";

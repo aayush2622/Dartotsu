@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:intl/intl.dart';
 
 import '../../../../Core/Preferences/PrefBackup.dart';
@@ -7,12 +6,12 @@ import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Widgets/Components/AppControls.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import 'BackupPanel.dart';
 import 'BackupTab.dart';
 import 'RestoreTab.dart';
+import '../../../../Core/State/State.dart';
 
 void showBackupSheet(BuildContext context) {
   showCustomBottomDialog(context, const _BackupSheet());
@@ -26,7 +25,7 @@ class _BackupSheet extends StatefulWidget {
 }
 
 class _BackupSheetState extends State<_BackupSheet> {
-  final _restoreTab = false.obs;
+  final _restoreTab = false.live;
   final _keys = PrefBackup.currentKeys();
 
   @override
@@ -41,7 +40,7 @@ class _BackupSheetState extends State<_BackupSheet> {
             children: [
               _summary(context),
               const SizedBox(height: 12),
-              Obx(
+              Watch(
                 () => AppSegmented<bool>(
                   value: _restoreTab.value,
                   onChanged: (v) => _restoreTab.value = v,
@@ -60,7 +59,7 @@ class _BackupSheetState extends State<_BackupSheet> {
                 ),
               ),
               const SizedBox(height: 12),
-              Obx(
+              Watch(
                 () => _restoreTab.value
                     ? const RestoreTab()
                     : BackupTab(keys: _keys),

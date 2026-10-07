@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
 import '../Feed/FeedNavigation.dart';
@@ -8,6 +7,7 @@ import '../Social/Stories/StoriesRow.dart';
 import 'Components/LoginPrompt.dart';
 import 'HomeHeader.dart';
 import '../Detail/ListEditorSheet.dart';
+import '../../Core/State/State.dart';
 
 class HomeFeed extends StatelessWidget {
   final MediaService service;
@@ -17,7 +17,7 @@ class HomeFeed extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (service.auth == null) return _feed(context, signedIn: false);
-    return Obx(() => _feed(context, signedIn: service.isLoggedIn));
+    return Watch(() => _feed(context, signedIn: service.isLoggedIn));
   }
 
   Widget _feed(BuildContext context, {required bool signedIn}) {

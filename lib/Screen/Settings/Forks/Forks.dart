@@ -1,5 +1,5 @@
 import '../../../Core/NetworkManager/NetworkManager.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Core/State/State.dart';
 
 class AppFork {
   final String ownerName;

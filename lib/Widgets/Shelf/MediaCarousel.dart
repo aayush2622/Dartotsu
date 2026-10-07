@@ -6,12 +6,12 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../Components/ScrollConfig.dart';
 import 'MediaSection.dart';
+import '../../Core/State/State.dart';
 
 class MediaCarousel extends StatefulWidget {
   final MediaSectionData data;
@@ -26,7 +26,7 @@ class _MediaCarouselState extends State<MediaCarousel> {
   static const _seed = 100000;
 
   final _controller = PageController(initialPage: _seed);
-  final _page = ValueNotifier<int>(0);
+  final _page = 0.live;
   Timer? _timer;
   DateTime _pausedUntil = DateTime.fromMillisecondsSinceEpoch(0);
 
@@ -55,7 +55,6 @@ class _MediaCarouselState extends State<MediaCarousel> {
   void dispose() {
     _timer?.cancel();
     _controller.dispose();
-    _page.dispose();
     super.dispose();
   }
 
@@ -134,9 +133,9 @@ class _MediaCarouselState extends State<MediaCarousel> {
                 Positioned(
                   right: Dimens.cardPad,
                   bottom: 12,
-                  child: ValueListenableBuilder<int>(
-                    valueListenable: _page,
-                    builder: (context, current, _) => Row(
+                  child: Watch(() {
+                    final current = _page.value;
+                    return Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         for (var i = 0; i < items.length; i++)
@@ -153,8 +152,8 @@ class _MediaCarouselState extends State<MediaCarousel> {
                             ),
                           ),
                       ],
-                    ),
-                  ),
+                    );
+                  }),
                 ),
             ],
           ),

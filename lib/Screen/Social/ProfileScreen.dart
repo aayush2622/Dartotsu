@@ -1,12 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/AppTabs.dart';
@@ -21,6 +19,7 @@ import 'Components/ProfileInfoTab.dart';
 import 'Components/ProfileStatsTab.dart';
 import 'SocialNavigation.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class ProfileScreen extends StatefulWidget {
   final MediaService service;
@@ -51,9 +50,9 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
     vsync: this,
     initialIndex: widget.initialTab,
   );
-  final _user = Rxn<SocialUser>();
-  final _followBusy = false.obs;
-  bool _failed = false;
+  final _user = Live<SocialUser?>(null);
+  final _followBusy = false.live;
+  final _failed = false.live;
   final _scroll = ScrollController();
   Timer? _snapTimer;
 
@@ -118,7 +117,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   Future<SocialProfile?>? _cachedBundle;
 
   Future<void> _load() async {
-    setState(() => _failed = false);
+    _failed.value = false;
     try {
       final pending = _view.profileBundle(
         id: widget.id ?? (_seed.id.isEmpty ? null : _seed.id),
@@ -130,13 +129,13 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
       final bundle = await pending;
       if (!mounted) return;
       if (bundle == null) {
-        setState(() => _failed = true);
+        _failed.value = true;
         snackString('User not found');
         return;
       }
       _user.value = bundle.user;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
@@ -179,7 +178,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
 
   @override
   Widget buildContent(BuildContext context) {
-    if (_failed && _user.value == null) {
+    if (_failed.value && _user.value == null) {
       return Scaffold(
         backgroundColor: Colors.transparent,
         appBar: const AppScreenBar(),
@@ -194,7 +193,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
     final top = MediaQuery.paddingOf(context).top;
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Obx(() {
+      body: Watch(() {
         final glass = find<ThemeController>().useGlassMode.value;
         final userId = _user.value?.id ?? widget.id ?? _seed.id;
         return ScrollConfig(

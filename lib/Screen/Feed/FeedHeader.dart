@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../Home/Components/AccountSheet.dart';
+import '../../Core/State/State.dart';
 
 class FeedHeader extends StatelessWidget {
   final String title;
@@ -23,7 +22,7 @@ class FeedHeader extends StatelessWidget {
       child: Row(
         children: [
           if (phone)
-            Obx(
+            Watch(
               () => IconButton(
                 tooltip: services.currentService.value.name,
                 icon: loadSvg(

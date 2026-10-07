@@ -1,18 +1,18 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../Core/Analytics/AnalyticsManager.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/NumExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'Widgets/AppButton.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Core/State/State.dart';
 
 class ErrorScreen extends StatefulWidget {
   final String error;
@@ -99,8 +99,8 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 size: 18,
               ),
               onPressed: () {
-                if (Get.key.currentState?.canPop() ?? false) {
-                  Get.back();
+                if (appNavigator?.canPop() ?? false) {
+                  appNavigator?.pop();
                 }
               },
             ),
@@ -252,7 +252,7 @@ void handleError(
   logger('$error: \n$stack', logLevel: LogLevel.error);
   tryFind<AnalyticsManager>()?.recordError(error, stack, fatal: !softCrash);
 
-  final nav = Get.key.currentState;
+  final nav = appNavigator;
   if (nav != null) {
     if (_errorScreenOpen) return;
     _errorScreenOpen = true;

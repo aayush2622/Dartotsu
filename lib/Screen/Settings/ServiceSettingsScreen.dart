@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import 'Components/ServiceSettingsBody.dart';
 import '../../Widgets/Components/AppTabs.dart';
+import '../../Core/State/State.dart';
 
 class ServiceSettingsScreen extends StatefulWidget {
   final MediaService initial;

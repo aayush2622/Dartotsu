@@ -18,6 +18,7 @@ import '../../../Widgets/Components/UserAvatar.dart';
 import '../SocialNavigation.dart';
 import 'StorySeen.dart';
 import 'StoryViewer.dart';
+import '../../../Core/State/State.dart';
 
 class StoriesRow extends StatefulWidget {
   final MediaService service;
@@ -30,10 +31,10 @@ class StoriesRow extends StatefulWidget {
 
 class _StoriesRowState extends State<StoriesRow> {
   SocialScreenView get _view => widget.service.socialView!;
-
-  List<StoryGroup>? _groups;
-  StoryGroup? _own;
-  bool _failed = false;
+  final _groups = Live<List<StoryGroup>?>(null);
+  final _own = Live<StoryGroup?>(null);
+  final _failed = false.live;
+  final _seenTick = Trigger();
   final _scroll = ScrollController();
   static const _stride = 84.0;
 
@@ -45,7 +46,7 @@ class _StoriesRowState extends State<StoriesRow> {
 
   void _reveal(String userId) {
     if (!_scroll.hasClients) return;
-    final items = [?_own, ..._ordered(StorySeen.read(widget.service))];
+    final items = [?_own.value, ..._ordered(StorySeen.read(widget.service))];
     final index = items.indexWhere((g) => g.user.id == userId);
     if (index < 0) return;
     final position = _scroll.position;
@@ -75,8 +76,8 @@ class _StoriesRowState extends State<StoriesRow> {
     super.initState();
     final cached = _cache[_cacheKey];
     if (cached != null) {
-      _groups = cached.groups;
-      _own = cached.own;
+      _groups.value = cached.groups;
+      _own.value = cached.own;
       if (DateTime.now().difference(cached.at) < _fresh) return;
     }
     unawaited(_load());
@@ -109,13 +110,11 @@ class _StoriesRowState extends State<StoriesRow> {
       }
       _cache[_cacheKey] = (groups: others, own: own, at: DateTime.now());
       if (!mounted) return;
-      setState(() {
-        _groups = others;
-        _own = own;
-        _failed = false;
-      });
+      _groups.value = others;
+      _own.value = own;
+      _failed.value = false;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
@@ -130,7 +129,7 @@ class _StoriesRowState extends State<StoriesRow> {
 
   Future<void> _open(StoryGroup group) async {
     final playable = [
-      if (_own != null && _own!.activities.isNotEmpty) _own!,
+      if (_own.value != null && _own.value!.activities.isNotEmpty) _own.value!,
       ..._ordered(StorySeen.read(widget.service)),
     ];
     final index = playable.indexWhere((g) => g.user.id == group.user.id);
@@ -146,7 +145,7 @@ class _StoriesRowState extends State<StoriesRow> {
       ),
       hero: true,
     );
-    if (mounted) setState(() {});
+    if (mounted) _seenTick.fire();
   }
 
   static final _placeholder = StoryGroup(
@@ -157,7 +156,7 @@ class _StoriesRowState extends State<StoriesRow> {
   List<StoryGroup> _ordered(Set<String> seen) {
     bool unseen(StoryGroup g) => g.activities.any((a) => !seen.contains(a.id));
     final groups = [
-      for (final g in _groups!)
+      for (final g in _groups.value!)
         if (!_isMe(g)) g,
     ];
     groups.sort((a, b) {
@@ -168,14 +167,20 @@ class _StoriesRowState extends State<StoriesRow> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (_failed || (_groups != null && _groups!.isEmpty && _own == null)) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    _seenTick.track();
+    if (_failed.value ||
+        (_groups.value != null &&
+            _groups.value!.isEmpty &&
+            _own.value == null)) {
       return const SizedBox.shrink();
     }
-    final loading = _groups == null;
+    final loading = _groups.value == null;
     final seen = StorySeen.read(widget.service);
     final items = <StoryGroup>[
-      ?_own,
+      ?_own.value,
       if (!loading) ..._ordered(seen) else ...List.filled(6, _placeholder),
     ];
     return SizedBox(
@@ -232,7 +237,7 @@ class _StoriesRowState extends State<StoriesRow> {
   }
 
   Widget _circle(StoryGroup g, Set<String> seen, bool loading) {
-    final isOwn = _own != null && g.user.id == _own!.user.id;
+    final isOwn = _own.value != null && g.user.id == _own.value!.user.id;
     final scheme = context.colorScheme;
     final fresh = g.activities.any((a) => !seen.contains(a.id));
     return DpadFocusable(

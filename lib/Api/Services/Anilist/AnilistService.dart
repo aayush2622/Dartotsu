@@ -1,5 +1,4 @@
 import '../../../Core/Services/MediaService.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import 'Auth.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Entity.dart';
@@ -9,6 +8,7 @@ import 'Screens/Notifications.dart';
 import 'Screens/Search.dart';
 import 'Screens/Settings.dart';
 import 'Screens/Social.dart';
+import '../../../Core/State/State.dart';
 
 const anilistServiceId = 'anilist';
 

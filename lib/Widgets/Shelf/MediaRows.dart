@@ -8,9 +8,9 @@ import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
+import '../../Core/State/State.dart';
 
 class MediaRowFacts {
   final Media media;

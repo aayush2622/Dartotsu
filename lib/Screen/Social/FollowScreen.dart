@@ -14,6 +14,7 @@ import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/ProfileCard.dart';
 import 'Components/UserCard.dart';
+import '../../Core/State/State.dart';
 
 class FollowScreen extends StatefulWidget {
   final MediaService service;
@@ -34,10 +35,11 @@ class FollowScreen extends StatefulWidget {
 }
 
 class _FollowScreenState extends BaseScreen<FollowScreen> {
-  List<UserBrief>? _users;
-  bool _failed = false;
-  String _query = '';
-  bool _wide = PrefManager.getCustomVal<bool>('followWide') ?? false;
+  final _users = Live<List<UserBrief>?>(null);
+  final _failed = false.live;
+  final _query = ''.live;
+  late final _wide =
+      (PrefManager.getCustomVal<bool>('followWide') ?? false).live;
 
   @override
   void initState() {
@@ -46,34 +48,30 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
   }
 
   int _page = 1;
-  bool _hasNext = true;
-  bool _loadingMore = false;
+  final _hasNext = true.live;
+  final _loadingMore = false.live;
 
   Future<void> _load() async {
-    setState(() {
-      _failed = false;
-      _page = 1;
-      _hasNext = true;
-    });
+    _failed.value = false;
+    _page = 1;
+    _hasNext.value = true;
     try {
       final result = await widget.service.socialView!.follows(
         widget.userId,
         followers: widget.followers,
       );
       if (!mounted) return;
-      setState(() {
-        _users = [...result.items];
-        _hasNext = result.hasNext;
-        _page = 2;
-      });
+      _users.value = [...result.items];
+      _hasNext.value = result.hasNext;
+      _page = 2;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
   Future<void> _more() async {
-    if (_loadingMore || !_hasNext || _users == null) return;
-    setState(() => _loadingMore = true);
+    if (_loadingMore.value || !_hasNext.value || _users.value == null) return;
+    _loadingMore.value = true;
     try {
       final result = await widget.service.socialView!.follows(
         widget.userId,
@@ -81,18 +79,19 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
         page: _page,
       );
       if (!mounted) return;
-      final known = {for (final u in _users!) u.id};
-      setState(() {
-        _users!.addAll(result.items.where((u) => !known.contains(u.id)));
-        _hasNext = result.hasNext;
-        _page++;
-      });
+      final known = {for (final u in _users.value!) u.id};
+      _users.value!.addAll(result.items.where((u) => !known.contains(u.id)));
+      _users.refresh();
+      _hasNext.value = result.hasNext;
+      _page++;
     } catch (_) {
-      if (mounted) setState(() => _hasNext = false);
+      if (mounted) _hasNext.value = false;
     } finally {
-      if (mounted) setState(() => _loadingMore = false);
+      if (mounted) _loadingMore.value = false;
     }
-    if (mounted && _query.trim().isNotEmpty && _hasNext) unawaited(_more());
+    if (mounted && _query.value.trim().isNotEmpty && _hasNext.value) {
+      unawaited(_more());
+    }
   }
 
   bool _onScroll(ScrollNotification n) {
@@ -124,9 +123,9 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
   @override
   Widget buildContent(BuildContext context) {
     final title = widget.followers ? 'Followers' : 'Following';
-    final loading = _users == null && !_failed;
-    final all = _users ?? List.generate(8, (_) => _placeholder);
-    final q = _query.trim().toLowerCase();
+    final loading = _users.value == null && !_failed.value;
+    final all = _users.value ?? List.generate(8, (_) => _placeholder);
+    final q = _query.value.trim().toLowerCase();
     final users = q.isEmpty
         ? all
         : [
@@ -139,18 +138,18 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
         title: widget.userName == null ? title : '${widget.userName} · $title',
         actions: [
           IconButton(
-            tooltip: _wide ? 'Grid view' : 'Full width',
+            tooltip: _wide.value ? 'Grid view' : 'Full width',
             icon: Icon(
-              _wide ? Icons.grid_view_rounded : Icons.view_agenda_rounded,
+              _wide.value ? Icons.grid_view_rounded : Icons.view_agenda_rounded,
             ),
             onPressed: () {
-              setState(() => _wide = !_wide);
-              PrefManager.setCustomVal<bool>('followWide', _wide);
+              _wide.value = !_wide.value;
+              PrefManager.setCustomVal<bool>('followWide', _wide.value);
             },
           ),
         ],
       ),
-      body: _failed
+      body: _failed.value
           ? EmptyState(
               icon: Icons.cloud_off_rounded,
               failed: true,
@@ -168,7 +167,7 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
                   ),
                   child: TextField(
                     onChanged: (v) {
-                      setState(() => _query = v);
+                      _query.value = v;
                       if (v.trim().isNotEmpty) unawaited(_more());
                     },
                     decoration: InputDecoration(
@@ -189,7 +188,7 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
                             context,
                             child: Skeletonizer(
                               enabled: loading,
-                              child: _wide
+                              child: _wide.value
                                   ? ListView.separated(
                                       padding: EdgeInsets.fromLTRB(
                                         Dimens.pagePad,
@@ -223,7 +222,8 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
                           ),
                         ),
                 ),
-                if (_loadingMore) const LinearProgressIndicator(minHeight: 3),
+                if (_loadingMore.value)
+                  const LinearProgressIndicator(minHeight: 3),
               ],
             ),
     );

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     hide isar;
-import 'package:get/get.dart';
 import 'package:isar_community/isar.dart';
 
 import '../../Logger.dart';
@@ -13,6 +12,7 @@ import 'Pref.dart';
 import 'StorageManager.dart';
 
 export 'Pref.dart' show Pref, PrefLocation, enumPref, jsonPref;
+import '../State/State.dart';
 
 part 'Preferences.dart';
 
@@ -64,7 +64,7 @@ class PrefManager {
   static const _schemaVersionKey = 'OTHER/__prefSchemaVersion';
 
   static final Map<String, Object?> _cache = {};
-  static final Map<String, Rx<dynamic>> _rx = {};
+  static final Map<String, Live<dynamic>> _rx = {};
   static final Map<String, _Pending> _pending = {};
   static bool _flushScheduled = false;
   static Future<void> init() async {
@@ -158,7 +158,7 @@ class PrefManager {
     _writeRaw(pref.storageKey, raw);
 
     final rx = _rx[pref.storageKey];
-    if (rx is Rx<T> && rx.value != value) rx.value = value;
+    if (rx is Live<T> && rx.value != value) rx.value = value;
   }
 
   static void removeVal<T>(Pref<T> pref) {
@@ -166,17 +166,17 @@ class PrefManager {
     _enqueue(pref.storageKey, null, delete: true);
 
     final rx = _rx[pref.storageKey];
-    if (rx is Rx<T>) rx.value = pref.defaultValue;
+    if (rx is Live<T>) rx.value = pref.defaultValue;
   }
 
-  /// Shared [Rx] for [pref]. Assigning to it persists automatically.
-  static Rx<T> watch<T>(Pref<T> pref) {
+  /// Shared [Live] for [pref]. Assigning to it persists automatically.
+  static Live<T> watch<T>(Pref<T> pref) {
     final existing = _rx[pref.storageKey];
-    if (existing is Rx<T>) return existing;
+    if (existing is Live<T>) return existing;
 
-    final rx = getVal(pref).obs;
+    final rx = getVal(pref).live;
     _rx[pref.storageKey] = rx;
-    ever<T>(rx, (v) => setVal(pref, v));
+    onChange(rx, (v) => setVal(pref, v));
     return rx;
   }
 

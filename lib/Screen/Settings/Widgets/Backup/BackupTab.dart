@@ -1,18 +1,17 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Core/Preferences/PrefBackup.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
 import 'BackupActionButton.dart';
 import 'BackupCategoryTile.dart';
 import 'BackupSelection.dart';
 import 'PasswordField.dart';
+import '../../../../Core/State/State.dart';
 
 class BackupTab extends StatefulWidget {
   final Map<PrefLocation, List<String>> keys;
@@ -24,10 +23,10 @@ class BackupTab extends StatefulWidget {
 }
 
 class _BackupTabState extends State<BackupTab> {
-  final _busy = false.obs;
-  final _selected = <PrefLocation, bool>{}.obs;
+  final _busy = false.live;
+  final _selected = <PrefLocation, bool>{}.liveMap;
   final _password = TextEditingController();
-  final _hidden = true.obs;
+  final _hidden = true.live;
 
   @override
   void initState() {
@@ -77,7 +76,7 @@ class _BackupTabState extends State<BackupTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Obx(() => SelectAllButton(selection: _selected)),
+        Watch(() => SelectAllButton(selection: _selected)),
         for (final entry in widget.keys.entries)
           BackupCategoryTile(
             location: entry.key,
@@ -90,7 +89,7 @@ class _BackupTabState extends State<BackupTab> {
           hidden: _hidden,
           hint: getString.backupPasswordHint,
         ),
-        Obx(
+        Watch(
           () => (_selected[PrefLocation.PROTECTED] ?? false)
               ? Padding(
                   padding: const EdgeInsets.only(top: 8),

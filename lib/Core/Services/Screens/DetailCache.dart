@@ -1,7 +1,8 @@
+import '../../../Utils/Lru.dart';
 import '../Model/Media.dart';
 
 class DetailCache {
-  static final _store = <String, Media>{};
+  static final _store = Lru<String, Media>(40);
 
   static Media? get(String key) => _store[key];
 

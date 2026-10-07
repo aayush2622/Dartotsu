@@ -1,5 +1,5 @@
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'MediaServiceController.dart';
+import '../State/State.dart';
 
 enum ScoreFormat {
   point100('POINT_100', '100 Point', '55/100'),

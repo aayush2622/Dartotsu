@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../Widgets/Components/AppBars.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Model/Setting.dart';
@@ -9,6 +8,7 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import 'Widgets/SettingsAdaptor.dart';
 import 'Widgets/SettingsSearchField.dart';
+import '../../Core/State/State.dart';
 
 class SettingsListView extends StatefulWidget {
   final List<Setting> Function(BuildContext) searchable;
@@ -37,7 +37,7 @@ class SettingsListView extends StatefulWidget {
 }
 
 class _SettingsListViewState extends State<SettingsListView> {
-  final _query = ''.obs;
+  final _query = ''.live;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class _SettingsListViewState extends State<SettingsListView> {
             delegate: SliverChildListDelegate([
               SettingsSearchField(query: _query, hint: widget.hint),
               SizedBox(height: Dimens.gap),
-              Obx(() {
+              Watch(() {
                 final q = _query.value;
                 if (q.isEmpty) {
                   return widget.emptyBuilder?.call(context) ??

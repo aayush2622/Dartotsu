@@ -1,6 +1,5 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -9,6 +8,7 @@ import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Settings/SettingsListView.dart';
+import '../../Core/State/State.dart';
 
 class SourcePreferenceScreen extends StatefulWidget {
   final Source source;
@@ -20,7 +20,7 @@ class SourcePreferenceScreen extends StatefulWidget {
 }
 
 class _SourcePreferenceScreenState extends BaseScreen<SourcePreferenceScreen> {
-  final _prefs = Rxn<List<SourcePreference>>();
+  final _prefs = Live<List<SourcePreference>?>(null);
 
   @override
   void initState() {
@@ -45,7 +45,7 @@ class _SourcePreferenceScreenState extends BaseScreen<SourcePreferenceScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: Obx(() {
+      body: Watch(() {
         final prefs = _prefs.value;
         if (prefs == null) {
           return Skeletonizer(

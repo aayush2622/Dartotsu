@@ -1,17 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/ServiceSwitcher.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/LoadSvg.dart';
+import '../../Core/State/State.dart';
 
 String _cleanToken(String raw) {
   final text = raw.trim();
@@ -29,6 +28,7 @@ void showTokenLogin(
   if (url != null) unawaited(openLinkInBrowser(url));
   AlertDialogBuilder(context)
     ..setTitle(getString.loginWithToken)
+    ..setOnDismissListener(controller.dispose)
     ..setCustomView(
       TextField(
         controller: controller,
@@ -61,7 +61,7 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  final _busy = false.obs;
+  final _busy = false.live;
 
   MediaServiceController get _services => find();
 
@@ -84,7 +84,7 @@ class _LoginViewState extends State<LoginView> {
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 380),
-          child: Obx(() {
+          child: Watch(() {
             final service = _services.currentService.value;
             final auth = service.auth;
             final guest = !widget.embedded;

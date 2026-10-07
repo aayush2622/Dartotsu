@@ -11,6 +11,7 @@ import '../Widgets/AppDropdown.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../../../Core/State/State.dart';
 
 /// Edits [current] against [spec] in a bottom sheet; [onApply] gets the new
 /// query (page reset to 1). Every control is driven by the service's spec.
@@ -45,31 +46,37 @@ class _FilterBody extends StatefulWidget {
 }
 
 class _FilterBodyState extends State<_FilterBody> {
-  late String? _sort = widget.start.sort;
-  late String? _format = widget.start.format;
-  late String? _status = widget.start.status;
-  late String? _source = widget.start.source;
-  late String? _country = widget.start.countryOfOrigin;
-  late String? _season = widget.start.season;
-  late int? _year = widget.start.seasonYear ?? widget.start.startYear;
+  late final _sort = Live<String?>(widget.start.sort);
+  late final _format = Live<String?>(widget.start.format);
+  late final _status = Live<String?>(widget.start.status);
+  late final _source = Live<String?>(widget.start.source);
+  late final _country = Live<String?>(widget.start.countryOfOrigin);
+  late final _season = Live<String?>(widget.start.season);
+  late final _year = Live<int?>(
+    widget.start.seasonYear ?? widget.start.startYear,
+  );
   late final Set<String> _genres = {...?widget.start.genres};
   late final Set<String> _noGenres = {...?widget.start.excludedGenres};
   late final Set<String> _tags = {...?widget.start.tags};
   late final Set<String> _noTags = {...?widget.start.excludedTags};
-  bool _allTags = false;
+  final _allTags = false.live;
+
+  final _selection = Trigger();
 
   SearchFilterSpec get s => widget.spec;
 
   void _apply() {
     final q = widget.start
-      ..sort = _sort
-      ..format = _format
-      ..status = _status
-      ..source = _source
-      ..countryOfOrigin = _country?.isEmpty == true ? null : _country
-      ..season = _season
-      ..seasonYear = s.season ? _year : null
-      ..startYear = s.season ? null : _year
+      ..sort = _sort.value
+      ..format = _format.value
+      ..status = _status.value
+      ..source = _source.value
+      ..countryOfOrigin = _country.value?.isEmpty == true
+          ? null
+          : _country.value
+      ..season = _season.value
+      ..seasonYear = s.season ? _year.value : null
+      ..startYear = s.season ? null : _year.value
       ..genres = _genres.isEmpty ? null : _genres.toList()
       ..tags = _tags.isEmpty ? null : _tags.toList()
       ..excludedGenres = _noGenres.isEmpty ? null : _noGenres.toList()
@@ -79,17 +86,26 @@ class _FilterBodyState extends State<_FilterBody> {
     popPage(context);
   }
 
-  void _clear() => setState(() {
-    _sort = _format = _status = _source = _country = _season = null;
-    _year = null;
+  void _clear() {
+    _sort.value = null;
+    _format.value = null;
+    _status.value = null;
+    _source.value = null;
+    _country.value = null;
+    _season.value = null;
+    _year.value = null;
     _genres.clear();
     _noGenres.clear();
     _tags.clear();
     _noTags.clear();
-  });
+    _selection.fire();
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    _selection.track();
     final years = [for (var y = DateTime.now().year + 1; y >= 1970; y--) '$y'];
     return ConstrainedBox(
       constraints: BoxConstraints(
@@ -113,16 +129,16 @@ class _FilterBodyState extends State<_FilterBody> {
                         'Source',
                         Icons.menu_book_rounded,
                         s.sources,
-                        _source,
-                        (v) => _source = v,
+                        _source.value,
+                        (v) => _source.value = v,
                       ),
                     if (s.formats.isNotEmpty)
                       _drop(
                         'Format',
                         Icons.movie_filter_rounded,
                         s.formats,
-                        _format,
-                        (v) => _format = v,
+                        _format.value,
+                        (v) => _format.value = v,
                       ),
                   ]),
                   _dropRow([
@@ -131,24 +147,24 @@ class _FilterBodyState extends State<_FilterBody> {
                         'Status',
                         Icons.podcasts_rounded,
                         s.statuses,
-                        _status,
-                        (v) => _status = v,
+                        _status.value,
+                        (v) => _status.value = v,
                       ),
                     if (s.season)
                       _drop(
                         'Season',
                         Icons.wb_sunny_rounded,
                         const ['WINTER', 'SPRING', 'SUMMER', 'FALL'],
-                        _season,
-                        (v) => _season = v,
+                        _season.value,
+                        (v) => _season.value = v,
                       ),
                     if (s.year)
                       _drop(
                         'Year',
                         Icons.calendar_month_rounded,
                         years,
-                        _year?.toString(),
-                        (v) => _year = v == null ? null : int.parse(v),
+                        _year.value?.toString(),
+                        (v) => _year.value = v == null ? null : int.parse(v),
                       ),
                   ]),
                   if (s.genres.isNotEmpty) ...[
@@ -158,7 +174,7 @@ class _FilterBodyState extends State<_FilterBody> {
                   if (s.tags.isNotEmpty) ...[
                     _title('Tags'),
                     _chipWrap(
-                      _allTags ? s.tags : s.tags.take(30).toList(),
+                      _allTags.value ? s.tags : s.tags.take(30).toList(),
                       _tags,
                       exclude: _noTags,
                     ),
@@ -166,8 +182,10 @@ class _FilterBodyState extends State<_FilterBody> {
                       Align(
                         alignment: Alignment.centerLeft,
                         child: TextButton(
-                          onPressed: () => setState(() => _allTags = !_allTags),
-                          child: Text(_allTags ? 'Show less' : 'Show all'),
+                          onPressed: () => _allTags.value = !_allTags.value,
+                          child: Text(
+                            _allTags.value ? 'Show less' : 'Show all',
+                          ),
                         ),
                       ),
                   ],
@@ -231,12 +249,11 @@ class _FilterBodyState extends State<_FilterBody> {
               icon: Icon(
                 Icons.public_rounded,
                 size: 28,
-                color: (_country?.isNotEmpty ?? false)
+                color: (_country.value?.isNotEmpty ?? false)
                     ? context.colorScheme.primary
                     : null,
               ),
-              onSelected: (v) =>
-                  setState(() => _country = v.isEmpty ? null : v),
+              onSelected: (v) => _country.value = v.isEmpty ? null : v,
               itemBuilder: (_) => [
                 for (final e in s.countries.entries)
                   PopupMenuItem(value: e.key, child: Text(e.value)),
@@ -248,9 +265,9 @@ class _FilterBodyState extends State<_FilterBody> {
               icon: Icon(
                 Icons.filter_list_rounded,
                 size: 28,
-                color: _sort != null ? context.colorScheme.primary : null,
+                color: _sort.value != null ? context.colorScheme.primary : null,
               ),
-              onSelected: (v) => setState(() => _sort = v.isEmpty ? null : v),
+              onSelected: (v) => _sort.value = v.isEmpty ? null : v,
               itemBuilder: (_) => [
                 const PopupMenuItem(value: '', child: Text('Default')),
                 for (final e in s.sorts.entries)
@@ -303,8 +320,7 @@ class _FilterBodyState extends State<_FilterBody> {
       prefixIcon: icon,
       value: value == null || value.isEmpty ? _any : value,
       options: [_any, ...options],
-      onChanged: (v) =>
-          setState(() => onChanged(v == null || v == _any ? null : v)),
+      onChanged: (v) => onChanged(v == null || v == _any ? null : v),
     );
   }
 
@@ -332,7 +348,7 @@ class _FilterBodyState extends State<_FilterBody> {
                 selected: on || excluded,
                 selectedColor: excluded ? scheme.errorContainer : null,
                 showCheckmark: false,
-                onSelected: (_) => setState(() {
+                onSelected: (_) {
                   if (on) {
                     selected.remove(o);
                     if (exclude != null) exclude.add(o);
@@ -341,7 +357,8 @@ class _FilterBodyState extends State<_FilterBody> {
                   } else {
                     selected.add(o);
                   }
-                }),
+                  _selection.fire();
+                },
               );
             },
           ),

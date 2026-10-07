@@ -51,7 +51,7 @@ All in `Widgets/Components/AppBars.dart`:
 - Back button anywhere → `AppBackButton`. Collapsing header in a `CustomScrollView` →
   `AppSliverBar(title:)`. Title text → `AppScreenTitle`.
 - Tabs → `AppTabs` (label / count / icon-builder items; follows the controller and shows the
-  D-pad focus colour). Use `AppTabBar` + `AppTab` only when each tab needs its own `Obx`.
+  D-pad focus colour). Use `AppTabBar` + `AppTab` only when each tab needs its own `Watch`.
   Never a stock `TabBar` + `Tab`.
 - Tab icons are builders (`(color) => widget`) so SVGs get tinted; an SVG ignores `IconTheme`.
 

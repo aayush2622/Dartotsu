@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:path/path.dart' as p;
 
 import '../../../Core/ThemeManager/CustomFontLoader.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
+import '../../../Core/State/State.dart';
 
 Future<void> showGoogleFontsPicker(BuildContext context) =>
     showCustomBottomDialog<void>(
@@ -31,8 +30,8 @@ class _GoogleFontsSheet extends StatefulWidget {
 
 class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
   late final List<String> _all = CustomFontLoader.googleFontFamilies();
-  final _query = ''.obs;
-  final _downloading = ''.obs;
+  final _query = ''.live;
+  final _downloading = ''.live;
 
   ThemeController get _t => find();
 
@@ -91,7 +90,7 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
                 ),
               ),
               Expanded(
-                child: Obx(() {
+                child: Watch(() {
                   final q = _query.value;
                   final filtered = q.isEmpty
                       ? _all

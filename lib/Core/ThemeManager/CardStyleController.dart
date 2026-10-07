@@ -1,11 +1,10 @@
-import 'package:get/get.dart';
-
 import '../../Model/CardStyle.dart';
 import '../Preferences/PrefManager.dart';
+import '../State/State.dart';
 
-class CardStyleController extends GetxController {
-  late final Rx<CardStyle> style = PrefName.cardStyle.value.obs;
-  final epoch = 0.obs;
+class CardStyleController extends AppController {
+  late final Live<CardStyle> style = PrefName.cardStyle.value.live;
+  final epoch = 0.live;
 
   CardStyle get current => style.value;
 

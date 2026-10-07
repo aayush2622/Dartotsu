@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../Core/State/State.dart';
 
 class Clickable extends StatefulWidget {
   final VoidCallback? onTap;
@@ -21,21 +22,23 @@ class Clickable extends StatefulWidget {
 }
 
 class _ClickableState extends State<Clickable> {
-  bool _down = false;
+  final _down = false.live;
 
   void _set(bool v) {
-    if (widget.press && _down != v) setState(() => _down = v);
+    if (widget.press && _down.value != v) _down.value = v;
   }
 
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onTap != null || widget.onLongPress != null;
     final child = widget.press
-        ? AnimatedScale(
-            scale: _down ? 0.96 : 1,
-            duration: Durations.short3,
-            curve: Curves.easeOutCubic,
-            child: widget.child,
+        ? Watch(
+            () => AnimatedScale(
+              scale: _down.value ? 0.96 : 1,
+              duration: Durations.short3,
+              curve: Curves.easeOutCubic,
+              child: widget.child,
+            ),
           )
         : widget.child;
     return MouseRegion(

@@ -11,6 +11,7 @@ import '../../../Widgets/Components/ProfileCard.dart';
 import 'Components/DeveloperCard.dart';
 import 'Developer.dart';
 import '../../../Widgets/Components/EmptyState.dart';
+import '../../../Core/State/State.dart';
 
 const _skeletonDeveloper = Developer(
   name: 'Loading name',
@@ -30,7 +31,8 @@ class DeveloperPage extends StatefulWidget {
 
 class _DeveloperPageState extends BaseScreen<DeveloperPage> {
   late final _future = loadDevelopers();
-  bool _wide = PrefManager.getCustomVal<bool>('followWide') ?? false;
+  late final _wide =
+      (PrefManager.getCustomVal<bool>('followWide') ?? false).live;
 
   @override
   Widget buildContent(BuildContext context) {
@@ -52,15 +54,15 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
                 title: getString.contributors,
                 actions: [
                   IconButton(
-                    tooltip: _wide ? 'Grid view' : 'Full width',
+                    tooltip: _wide.value ? 'Grid view' : 'Full width',
                     icon: Icon(
-                      _wide
+                      _wide.value
                           ? Icons.grid_view_rounded
                           : Icons.view_agenda_rounded,
                     ),
                     onPressed: () {
-                      setState(() => _wide = !_wide);
-                      PrefManager.setCustomVal<bool>('followWide', _wide);
+                      _wide.value = !_wide.value;
+                      PrefManager.setCustomVal<bool>('followWide', _wide.value);
                     },
                   ),
                 ],
@@ -75,7 +77,7 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
                     Dimens.pagePad,
                     Dimens.gapXl,
                   ),
-                  sliver: _wide
+                  sliver: _wide.value
                       ? SliverList.separated(
                           itemCount: items.length,
                           separatorBuilder: (_, _) =>

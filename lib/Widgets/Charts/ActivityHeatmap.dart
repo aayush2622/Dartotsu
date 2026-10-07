@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Social.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
+import '../../Core/State/State.dart';
 
 class ActivityHeatmap extends StatefulWidget {
   final List<ActivityDay> days;
@@ -36,7 +37,7 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
   ];
 
   final _scroll = ScrollController();
-  DateTime? _hover;
+  final _hover = Live<DateTime?>(null);
   bool _jumped = false;
 
   @override
@@ -110,7 +111,9 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     final summary = _summary();
     final width = _left + _weeks * _step + 8;
@@ -122,7 +125,7 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
         }
       });
     }
-    final hover = _hover;
+    final hover = _hover.value;
     final hoverDay = hover == null ? null : _byDay[hover];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,13 +147,13 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
           child: MouseRegion(
             onHover: (e) {
               final d = _at(e.localPosition);
-              if (d != _hover) setState(() => _hover = d);
+              if (d != _hover.value) _hover.value = d;
             },
-            onExit: (_) => setState(() => _hover = null),
+            onExit: (_) => _hover.value = null,
             child: GestureDetector(
               onTapDown: (d) {
                 final day = _at(d.localPosition);
-                setState(() => _hover = day == _hover ? null : day);
+                _hover.value = day == _hover.value ? null : day;
               },
               child: TweenAnimationBuilder<double>(
                 tween: Tween(begin: 0, end: 1),

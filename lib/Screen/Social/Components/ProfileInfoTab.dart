@@ -15,6 +15,7 @@ import '../../Feed/FeedNavigation.dart';
 import '../../Widgets/ScreenWidgetView.dart';
 import '../SocialNavigation.dart';
 import 'AniMediaCard.dart';
+import '../../../Core/State/State.dart';
 
 class ProfileInfoTab extends StatefulWidget {
   final MediaService service;
@@ -36,8 +37,8 @@ class ProfileInfoTab extends StatefulWidget {
 
 class _ProfileInfoTabState extends State<ProfileInfoTab>
     with AutomaticKeepAliveClientMixin {
-  SocialFavourites? _favourites;
-  bool _failed = false;
+  final _favourites = Live<SocialFavourites?>(null);
+  final _failed = false.live;
 
   @override
   bool get wantKeepAlive => true;
@@ -53,17 +54,21 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
       final result =
           (await widget.bundle)?.favourites ??
           await widget.service.socialView!.favourites(widget.userId);
-      if (mounted) setState(() => _favourites = result);
+      if (mounted) _favourites.value = result;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    return Watch(() => _build(context));
+  }
+
+  Widget _build(BuildContext context) {
     final user = widget.user;
-    final favourites = _favourites;
+    final favourites = _favourites.value;
     final service = widget.service;
     return ScrollConfig(
       context,
@@ -82,16 +87,16 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
               ),
             ),
           if (user != null) _stats(context, user),
-          if (favourites == null && !_failed)
+          if (favourites == null && !_failed.value)
             const MediaSection(data: MediaSectionData.loading()),
           if (favourites != null) ..._favouriteSections(context, favourites),
-          if (_failed)
+          if (_failed.value)
             Padding(
               padding: const EdgeInsets.all(24),
               child: Center(
                 child: TextButton.icon(
                   onPressed: () {
-                    setState(() => _failed = false);
+                    _failed.value = false;
                     unawaited(_load());
                   },
                   icon: const Icon(Icons.refresh_rounded),

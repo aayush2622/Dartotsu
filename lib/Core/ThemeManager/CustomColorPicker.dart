@@ -1,10 +1,10 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:material_ui/material_ui.dart' as mui;
 
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import 'LanguageSwitcher.dart';
+import '../State/State.dart';
 
 Future<Color?> showColorPickerDialog(
   BuildContext context,
@@ -12,9 +12,9 @@ Future<Color?> showColorPickerDialog(
   bool showTransparent = true,
 }) {
   Color selectedColor = initialColor;
-  // `Get.overlayContext` so the dialog always has a live MaterialLocalizations
+  // `appOverlayContext` so the dialog always has a live MaterialLocalizations
   // ancestor regardless of which screen triggered it.
-  final dialogContext = Get.overlayContext ?? context;
+  final dialogContext = appOverlayContext ?? context;
 
   return AlertDialogBuilder(dialogContext)
       .popOnFinish(false)

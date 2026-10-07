@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> addonSettings(BuildContext context) {
   final manager = tryFind<AddonManager>();

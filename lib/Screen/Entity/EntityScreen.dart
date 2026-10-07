@@ -1,14 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaService.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
@@ -22,6 +20,7 @@ import '../Widgets/Components/DataSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
 import 'Components/EntityHeader.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class EntityScreen extends StatefulWidget {
   final EntityScreenView view;
@@ -45,11 +44,11 @@ class EntityScreen extends StatefulWidget {
 
 class _EntityScreenState extends BaseScreen<EntityScreen> {
   late final EntityHost _host;
-  final _widgets = <ScreenWidget>[].obs;
-  final _ready = false.obs;
-  final _error = RxnString();
-  final _toggling = false.obs;
-  final _spoilerNames = false.obs;
+  final _widgets = <ScreenWidget>[].liveList;
+  final _ready = false.live;
+  final _error = Live<String?>(null);
+  final _toggling = false.live;
+  final _spoilerNames = false.live;
   final _scroll = ScrollController();
   Timer? _snapTimer;
 
@@ -69,7 +68,7 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
         name: widget.name ?? '',
         image: widget.image,
       ),
-      loading: true.obs,
+      loading: true.live,
       openMedia: (m) => openDetail(context, _service, m),
       openCharacter: (id, {name, image}) => openEntity(
         context,
@@ -182,7 +181,7 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
         onRefresh: _load,
         child: ScrollConfig(
           context,
-          child: Obx(
+          child: Watch(
             () => CustomScrollView(
               controller: _scroll,
               physics: const AlwaysScrollableScrollPhysics(),
@@ -198,7 +197,7 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
                     onToggleFavourite: _toggleFavourite,
                   ),
                 ),
-                SliverToBoxAdapter(child: Obx(() => _body(context))),
+                SliverToBoxAdapter(child: Watch(() => _body(context))),
                 const SliverToBoxAdapter(child: SizedBox(height: 48)),
               ],
             ),
@@ -327,7 +326,7 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
         if (profile.spoilerAlternatives.isNotEmpty)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-            child: Obx(
+            child: Watch(
               () => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

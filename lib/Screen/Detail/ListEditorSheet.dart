@@ -11,6 +11,7 @@ import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../Widgets/ScreenWidgetView.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Core/State/State.dart';
 
 CustomBottomDialog _editorDialog(
   BuildContext context, {
@@ -106,13 +107,13 @@ class _QuickListEditor extends StatefulWidget {
 class _QuickListEditorState extends State<_QuickListEditor> {
   late final String _key = '${widget.service.id}/${widget.media.id}';
   late final ListEditorScreenView _view = widget.service.detailView.listEditor;
-  Media? _full;
+  final _full = Live<Media?>(null);
 
   @override
   void initState() {
     super.initState();
-    _full = DetailCache.get(_key);
-    if (_full == null) unawaited(_load());
+    _full.value = DetailCache.get(_key);
+    if (_full.value == null) unawaited(_load());
   }
 
   Future<void> _load() async {
@@ -121,12 +122,14 @@ class _QuickListEditorState extends State<_QuickListEditor> {
       loaded = await widget.service.getQueries?.mediaDetails(widget.media);
       if (loaded != null) DetailCache.put(_key, loaded);
     } catch (_) {}
-    if (mounted) setState(() => _full = loaded ?? widget.media);
+    if (mounted) _full.value = loaded ?? widget.media;
   }
 
   @override
-  Widget build(BuildContext context) {
-    final full = _full;
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    final full = _full.value;
     if (full != null) {
       return _editorDialog(
         context,

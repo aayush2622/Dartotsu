@@ -1,13 +1,11 @@
-import 'package:get/get.dart';
-
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Logger.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../BaseDiscordRPC.dart';
 import '../DiscordPresence.dart';
 import 'TokenManager.dart';
+import '../../../Core/State/State.dart';
 
-class MobileRPC extends GetxController implements BaseDiscordRPC {
+class MobileRPC extends AppController implements BaseDiscordRPC {
   final NetworkManager network = find();
   final MobileTokenManager tokenManager = MobileTokenManager();
   String? _sessionToken;

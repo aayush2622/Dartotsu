@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'dart:async';
 import 'dart:io';
 
@@ -5,7 +6,6 @@ import 'package:archive/archive_io.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:install_plugin/install_plugin.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/heading.dart';
@@ -19,11 +19,11 @@ import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
+import '../../Core/State/State.dart';
 
-class AppUpdater extends GetxController {
+class AppUpdater extends AppController {
   static const _mainRepo = 'aayush2622/Dartotsu';
   static const _alphaRepo = 'grayankit/Dartotsu-Downloader';
 
@@ -118,11 +118,11 @@ class AppUpdater extends GetxController {
   }
 
   Future<void> _showUpdateBottomSheet(dynamic data) async {
-    final context = Get.context!;
+    final context = appContext!;
     final scheme = context.colorScheme;
     final textStyle = Theme.of(context).textTheme.labelMedium;
 
-    final skipUpdate = false.obs;
+    final skipUpdate = false.live;
 
     unawaited(
       showCustomBottomDialog(
@@ -162,7 +162,7 @@ class AppUpdater extends GetxController {
                       color: context.cardColor.withValues(alpha: .4),
                       borderRadius: BorderRadius.circular(14),
                     ),
-                    child: Obx(() {
+                    child: Watch(() {
                       if (_downloadProgress.value >= 0) {
                         return Column(
                           mainAxisSize: MainAxisSize.min,
@@ -213,7 +213,7 @@ class AppUpdater extends GetxController {
               ),
             ),
             const SizedBox(height: 16),
-            Obx(() {
+            Watch(() {
               if (_downloadProgress.value >= 0) {
                 return const SizedBox.shrink();
               }
@@ -251,7 +251,7 @@ class AppUpdater extends GetxController {
                 tag,
               ];
             }
-            Get.back();
+            appNavigator?.pop();
           },
           positiveCallback: () async {
             if (Platform.isAndroid) {
@@ -361,9 +361,9 @@ class AppUpdater extends GetxController {
     return preferred.firstWhereOrNull((abi) => abis.contains(abi));
   }
 
-  final RxDouble _downloadProgress = (-1.0).obs;
-  final RxInt _downloadedBytes = 0.obs;
-  final RxInt _totalBytes = 0.obs;
+  final Live<double> _downloadProgress = (-1.0).live;
+  final Live<int> _downloadedBytes = 0.live;
+  final Live<int> _totalBytes = 0.live;
   CancelToken? _cancelToken;
   Future<void> _downloadAndInstallApk(String apkUrl) async {
     try {

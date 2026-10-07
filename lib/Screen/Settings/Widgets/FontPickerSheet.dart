@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:path/path.dart' as p;
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Core/ThemeManager/ThemeController.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 import 'GoogleFontsSheet.dart';
+import '../../../Core/State/State.dart';
 
 Future<void> showFontPicker(BuildContext context) =>
     showCustomBottomDialog<void>(
@@ -27,8 +26,8 @@ class _FontPickerSheet extends StatefulWidget {
 }
 
 class _FontPickerSheetState extends State<_FontPickerSheet> {
-  final _saved = <String>[].obs;
-  final _loading = true.obs;
+  final _saved = <String>[].liveList;
+  final _loading = true.live;
 
   ThemeController get _t => find();
 
@@ -85,14 +84,14 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
                 ),
               ),
               Expanded(
-                child: Obx(() {
+                child: Watch(() {
                   if (_loading.value) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   return ListView(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     children: [
-                      Obx(
+                      Watch(
                         () => _tile(
                           context,
                           icon: Icons.text_fields_rounded,
@@ -119,7 +118,7 @@ class _FontPickerSheetState extends State<_FontPickerSheet> {
                         ),
                         const SizedBox(height: 4),
                         for (final path in _saved)
-                          Obx(
+                          Watch(
                             () => _tile(
                               context,
                               icon: Icons.font_download_outlined,

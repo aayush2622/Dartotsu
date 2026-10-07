@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/language.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
@@ -22,6 +20,8 @@ import 'ExtensionList.dart';
 import 'Widgets/ExtensionManagerSheet.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
+import '../../Utils/Extensions/StringExtensions.dart';
 
 class ExtensionScreen extends StatefulWidget {
   const ExtensionScreen({super.key});
@@ -36,11 +36,11 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
   final manager = find<ExtensionManager>();
 
-  final _searchQuery = ''.obs;
+  final _searchQuery = ''.live;
 
   final _textEditingController = TextEditingController();
-  final _currentIndex = 0.obs;
-  final _focusedTabIndex = Rxn<int>();
+  final _currentIndex = 0.live;
+  final _focusedTabIndex = Live<int?>(null);
   final _appBarLaneKey = GlobalKey<DpadRegionState>();
   final _tabsLaneKey = GlobalKey<DpadRegionState>();
   final _searchLaneKey = GlobalKey<DpadRegionState>();
@@ -111,7 +111,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                 DpadLane.focusFirst(_searchLaneKey);
               }
             },
-            child: Obx(
+            child: Watch(
               () => AppTabBar(
                 controller: _tabBarController,
                 onFocusChange: (focused, index) =>
@@ -138,7 +138,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
             },
             child: _searchBar(),
           ),
-          Obx(
+          Watch(
             () => Expanded(
               child: TabBarView(
                 controller: _tabBarController,
@@ -193,7 +193,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
       builder: (_, _) {
         final type = _currentType;
 
-        return Obx(() {
+        return Watch(() {
           final currentManager = manager[type];
 
           return IconButton(
@@ -267,7 +267,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
               // plugin-install card in showInstallDialog below, so this
               // reads as the same "downloading" affordance everywhere in
               // the app rather than a one-off widget.
-              Obx(() {
+              Watch(() {
                 final extension = manager[type];
                 final loading = extension.state(type).loadingRepo.value;
                 final progress = extension.state(type).repoLoadProgress.value;
@@ -346,7 +346,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
                         ),
                 );
               }),
-              Obx(() {
+              Watch(() {
                 final extension = manager[type];
                 final repos = extension.state(type).repos.value;
                 final active = extension.state(type).activeRepo.value;
@@ -499,7 +499,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
       final installedIndex = index++;
       tabs.add(
-        Obx(() {
+        Watch(() {
           final count = manager.installed.value.where((source) {
             final matchesSearch =
                 source.name?.toLowerCase().contains(_searchQuery.value) ??
@@ -523,7 +523,7 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
 
       final availableIndex = index++;
       tabs.add(
-        Obx(() {
+        Watch(() {
           final count = manager.available.value.where((source) {
             final matchesSearch =
                 source.name?.toLowerCase().contains(_searchQuery.value) ??
@@ -688,7 +688,7 @@ Future<void> showInstallDialog(
                   color: scheme.outline.withValues(alpha: 0.2),
                 ),
               ),
-              child: Obx(() {
+              child: Watch(() {
                 final downloading = plugin.downloading.value;
                 final progress = plugin.progress.value;
 

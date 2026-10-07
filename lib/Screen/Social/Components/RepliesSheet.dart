@@ -21,6 +21,7 @@ import 'ActivityComposer.dart';
 import 'AniMediaCard.dart';
 import '../../../Widgets/Components/UserAvatar.dart';
 import 'UserListSheet.dart';
+import '../../../Core/State/State.dart';
 
 class RepliesSheet extends StatefulWidget {
   final MediaService service;
@@ -38,9 +39,8 @@ class RepliesSheet extends StatefulWidget {
 
 class _RepliesSheetState extends State<RepliesSheet> {
   SocialScreenView get _view => widget.service.socialView!;
-
-  List<ActivityReply>? _replies;
-  bool _failed = false;
+  final _replies = Live<List<ActivityReply>?>(null);
+  final _failed = false.live;
 
   @override
   void initState() {
@@ -48,43 +48,41 @@ class _RepliesSheetState extends State<RepliesSheet> {
     unawaited(_load());
   }
 
+  final _version = Trigger();
   int _page = 1;
-  bool _hasNext = false;
-  bool _loadingMore = false;
+  final _hasNext = false.live;
+  final _loadingMore = false.live;
 
   Future<void> _load() async {
     try {
       final result = await _view.replies(widget.activity.id);
       if (!mounted) return;
-      setState(() {
-        _replies = [...result.items];
-        _hasNext = result.hasNext;
-        _page = 2;
-        _failed = false;
-      });
-      widget.activity.replyCount = _replies!.length;
+      _replies.value = [...result.items];
+      _hasNext.value = result.hasNext;
+      _page = 2;
+      _failed.value = false;
+      widget.activity.replyCount = _replies.value!.length;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
   Future<void> _more() async {
-    if (_loadingMore || !_hasNext || _replies == null) return;
-    setState(() => _loadingMore = true);
+    if (_loadingMore.value || !_hasNext.value || _replies.value == null) return;
+    _loadingMore.value = true;
     try {
       final result = await _view.replies(widget.activity.id, page: _page);
       if (!mounted) return;
-      final known = {for (final r in _replies!) r.id};
-      setState(() {
-        _replies!.addAll(result.items.where((r) => !known.contains(r.id)));
-        _hasNext = result.hasNext;
-        _page++;
-      });
-      widget.activity.replyCount = _replies!.length;
+      final known = {for (final r in _replies.value!) r.id};
+      _replies.value!.addAll(result.items.where((r) => !known.contains(r.id)));
+      _replies.refresh();
+      _hasNext.value = result.hasNext;
+      _page++;
+      widget.activity.replyCount = _replies.value!.length;
     } catch (_) {
-      if (mounted) setState(() => _hasNext = false);
+      if (mounted) _hasNext.value = false;
     } finally {
-      if (mounted) setState(() => _loadingMore = false);
+      if (mounted) _loadingMore.value = false;
     }
   }
 
@@ -111,31 +109,33 @@ class _RepliesSheetState extends State<RepliesSheet> {
     final ok = await _view.deleteReply(reply.id);
     if (!mounted) return;
     if (!ok) return snackString('Failed to delete');
-    setState(() => _replies?.remove(reply));
-    widget.activity.replyCount = _replies?.length ?? 0;
+    _replies.value?.remove(reply);
+    _replies.refresh();
+    widget.activity.replyCount = _replies.value?.length ?? 0;
   }
 
   Future<void> _like(ActivityReply reply) async {
     final was = reply.isLiked;
-    setState(() {
-      reply.isLiked = !was;
-      reply.likeCount += was ? -1 : 1;
-    });
+    reply.isLiked = !was;
+    reply.likeCount += was ? -1 : 1;
+    _version.fire();
     unawaited(HapticFeedback.selectionClick());
     final ok = await _view.toggleLike(reply.id, reply: true);
     if (!ok && mounted) {
-      setState(() {
-        reply.isLiked = was;
-        reply.likeCount += was ? 1 : -1;
-      });
+      reply.isLiked = was;
+      reply.likeCount += was ? 1 : -1;
+      _version.fire();
       snackString('Failed to like');
     }
   }
 
   @override
-  Widget build(BuildContext context) {
-    final loading = _replies == null && !_failed;
-    final replies = _replies ?? List.generate(3, (_) => _placeholder);
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    _version.track();
+    final loading = _replies.value == null && !_failed.value;
+    final replies = _replies.value ?? List.generate(3, (_) => _placeholder);
     return AppSheet(
       title: 'Replies',
       heightFactor: 0.8,
@@ -146,7 +146,7 @@ class _RepliesSheetState extends State<RepliesSheet> {
               label: const Text('Reply'),
             )
           : null,
-      child: _failed
+      child: _failed.value
           ? EmptyState(
               icon: Icons.cloud_off_rounded,
               failed: true,
@@ -164,7 +164,7 @@ class _RepliesSheetState extends State<RepliesSheet> {
                 onNotification: _onScroll,
                 child: ListView.separated(
                   padding: const EdgeInsets.fromLTRB(20, 4, 20, 24),
-                  itemCount: replies.length + (_loadingMore ? 1 : 0),
+                  itemCount: replies.length + (_loadingMore.value ? 1 : 0),
                   separatorBuilder: (_, _) => const Divider(height: 24),
                   itemBuilder: (_, i) => i >= replies.length
                       ? const Padding(

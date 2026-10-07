@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../Core/Services/MediaServiceController.dart';
 import '../Core/ThemeManager/CardStyleController.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
-import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
 import 'Feed/FeedTabs.dart';
 import 'Navbar.dart';
 import '../Api/Discord/DiscordPresence.dart';
+import '../Core/State/State.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -20,10 +19,10 @@ class MainScreen extends StatefulWidget {
 class MainScreenState extends BaseScreen<MainScreen> {
   MediaServiceController get _services => find();
 
-  late final _tab = homeTabIndex(_services.currentService.value).obs;
+  late final _tab = homeTabIndex(_services.currentService.value).live;
   final _built = <int>{};
-  Worker? _serviceWorker;
-  Worker? _tabWorker;
+  Disposer? _serviceSub;
+  Disposer? _tabSub;
 
   @override
   DiscordPresence? get presence {
@@ -40,8 +39,8 @@ class MainScreenState extends BaseScreen<MainScreen> {
   void initState() {
     super.initState();
     _built.add(_tab.value);
-    _tabWorker = ever(_tab, (_) => refreshPresence());
-    _serviceWorker = ever(_services.currentService, (_) {
+    _tabSub = onChange(_tab, (_) => refreshPresence());
+    _serviceSub = onChange(_services.currentService, (_) {
       _built
         ..clear()
         ..add(homeTabIndex(_services.currentService.value));
@@ -51,12 +50,12 @@ class MainScreenState extends BaseScreen<MainScreen> {
 
   @override
   void dispose() {
-    _serviceWorker?.dispose();
-    _tabWorker?.dispose();
+    _serviceSub?.dispose();
+    _tabSub?.dispose();
     super.dispose();
   }
 
-  Widget get _navbar => Obx(() {
+  Widget get _navbar => Watch(() {
     final service = _services.currentService.value;
     final tabs = feedTabsFor(service);
     return FloatingBottomNavBar(
@@ -74,7 +73,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
 
   @override
   Widget buildContent(BuildContext context) {
-    final body = Obx(() {
+    final body = Watch(() {
       final service = _services.currentService.value;
       final tabs = feedTabsFor(service);
       final index = _tab.value.clamp(0, tabs.length - 1);
@@ -85,7 +84,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
             _built.contains(i)
                 ? KeyedSubtree(
                     key: ValueKey('${service.id}-$i-${t.type?.name}'),
-                    child: Obx(() {
+                    child: Watch(() {
                       if (i == index) find<CardStyleController>().epoch.value;
                       return t.build(service);
                     }),

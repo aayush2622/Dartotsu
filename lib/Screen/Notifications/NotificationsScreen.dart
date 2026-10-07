@@ -2,14 +2,12 @@ import '../../Utils/Nav/DpadNav.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
@@ -20,6 +18,7 @@ import '../Social/SocialNavigation.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final NotificationScreenView view;
@@ -30,8 +29,8 @@ class NotificationsScreen extends StatefulWidget {
 }
 
 class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
-  final _items = <ServiceNotification>[].obs;
-  final _loading = true.obs;
+  final _items = <ServiceNotification>[].liveList;
+  final _loading = true.live;
 
   @override
   void initState() {
@@ -41,7 +40,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
 
   var _page = 1;
   var _hasMore = true;
-  final _loadingMore = false.obs;
+  final _loadingMore = false.live;
 
   Future<void> _more() async {
     if (_loadingMore.value || _loading.value || !_hasMore) return;
@@ -95,7 +94,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
       appBar: const AppScreenBar(title: 'Notifications'),
       body: RefreshIndicator(
         onRefresh: _load,
-        child: Obx(() {
+        child: Watch(() {
           if (_loading.value && _items.isEmpty) return _skeleton();
           if (_items.isEmpty) {
             return const EmptyState(

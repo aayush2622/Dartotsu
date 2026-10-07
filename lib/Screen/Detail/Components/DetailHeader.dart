@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/Services/Screens/DetailHost.dart';
@@ -11,6 +10,7 @@ import '../../../Utils/Nav/DpadNav.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import 'StatusChip.dart';
+import '../../../Core/State/State.dart';
 
 const _toolbarHeight = 56.0;
 const _actionsHeight = 60.0;
@@ -90,7 +90,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
     final slideP = (t * 1.6).clamp(0.0, 1.0);
     final labelP = ((t - 0.5) * 2).clamp(0.0, 1.0);
 
-    return Obx(() {
+    return Watch(() {
       final m = host.media.value;
       return DetailHeaderScope(
         child: ClipRect(
@@ -318,7 +318,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   Widget _actions(BuildContext context, Media m) {
     final onList = m.userStatus != null;
-    return Obx(
+    return Watch(
       () => Row(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -345,7 +345,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
     );
   }
 
-  Widget _reloadButton(BuildContext context) => Obx(
+  Widget _reloadButton(BuildContext context) => Watch(
     () => _iconButton(
       context,
       Icons.refresh_rounded,

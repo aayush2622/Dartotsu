@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../../Core/State/State.dart';
 
 class PasswordField extends StatelessWidget {
   final TextEditingController controller;
-  final RxBool hidden;
+  final Live<bool> hidden;
   final String? hint;
   final VoidCallback? onSubmitted;
 
@@ -19,7 +19,7 @@ class PasswordField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(
+    return Watch(
       () => TextField(
         controller: controller,
         obscureText: hidden.value,

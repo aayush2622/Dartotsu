@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ClickCursor.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
@@ -21,7 +20,6 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Function.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AppBars.dart';
@@ -38,6 +36,7 @@ import 'Components/SearchFilterSheet.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 enum _ResultView { grid, list, banner }
 
@@ -62,22 +61,22 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends BaseScreen<SearchScreen> {
   final _controller = TextEditingController();
   final _scroll = ScrollController();
-  final _items = <Object>[].obs;
-  final _loading = false.obs;
-  final _showTop = false.obs;
-  final _historyTick = 0.obs;
-  late final _type = widget.type.searchType.obs;
+  final _items = <Object>[].liveList;
+  final _loading = false.live;
+  final _showTop = false.live;
+  final _historyTick = 0.live;
+  late final _type = widget.type.searchType.live;
   late final _mode = _ResultView.values
       .firstWhere(
         (v) => v.name == _viewPref.rx.value,
         orElse: () => _ResultView.grid,
       )
-      .obs;
+      .live;
 
   late final _query = SearchResults(
     type: widget.type.searchType,
     perPage: 30,
-  ).obs;
+  ).live;
 
   Timer? _debounce;
   bool _hasMore = true;
@@ -295,7 +294,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         children: [
           const AppBackButton(),
           Expanded(
-            child: Obx(() {
+            child: Watch(() {
               final hint = _label(_type.value);
               return TextField(
                 controller: _controller,
@@ -355,7 +354,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
       height: 48,
       child: ScrollConfig(
         context,
-        child: Obx(() {
+        child: Watch(() {
           final selected = _type.value;
           return ListView.separated(
             scrollDirection: Axis.horizontal,
@@ -396,7 +395,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
         ),
       );
 
-  Widget _mediaHeader() => Obx(() {
+  Widget _mediaHeader() => Watch(() {
     if (!_isMedia) return const SizedBox.shrink();
     final spec = _spec;
     final q = _query.value;
@@ -464,7 +463,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     );
   });
 
-  Widget _resultsHeader() => Obx(() {
+  Widget _resultsHeader() => Watch(() {
     if (!_hasCriteria) return const SizedBox.shrink();
     final scheme = context.colorScheme;
     return Padding(
@@ -506,7 +505,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
 
   // --- body ---------------------------------------------------------------
 
-  Widget _historyView() => Obx(() {
+  Widget _historyView() => Watch(() {
     _historyTick.value;
     final items = _history;
     if (items.isEmpty) return _empty();
@@ -572,7 +571,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
     );
   });
 
-  Widget _body() => Obx(() {
+  Widget _body() => Watch(() {
     if (!_hasCriteria) return _historyView();
     if (_loading.value && _items.isEmpty) {
       return _grid(_skeletons(), skeleton: true);
@@ -829,7 +828,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      floatingActionButton: Obx(
+      floatingActionButton: Watch(
         () => _showTop.value
             ? FloatingActionButton.small(
                 onPressed: () => _scroll.animateTo(

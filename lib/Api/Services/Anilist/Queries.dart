@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
@@ -24,6 +23,7 @@ import 'Data/Notification.dart';
 import 'Data/Social.dart';
 import 'Prefs.dart';
 import 'AnilistService.dart';
+import 'package:collection/collection.dart';
 
 part 'Queries/GetAnimeMangaListData.dart';
 part 'Queries/GetBannerImages.dart';

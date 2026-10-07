@@ -1,4 +1,7 @@
 extension StringExtensions on String {
+  String get capitalizeFirst =>
+      isEmpty ? this : this[0].toUpperCase() + substring(1);
+
   /// `SLICE_OF_LIFE` / `slice_of_life` -> `Slice Of Life`.
   String get titleCase => toLowerCase()
       .replaceAll('_', ' ')

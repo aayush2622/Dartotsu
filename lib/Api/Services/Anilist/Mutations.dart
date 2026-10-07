@@ -3,11 +3,11 @@ import '../../../Core/Services/Api/Mutations.dart';
 import '../../../Core/Services/Api/Progress.dart';
 import '../../../Core/Services/Model/Date.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import 'Client.dart';
 import 'AnilistService.dart';
+import '../../../Core/State/State.dart';
 
 part 'Mutations/DeleteFromList.dart';
 part 'Mutations/EditList.dart';

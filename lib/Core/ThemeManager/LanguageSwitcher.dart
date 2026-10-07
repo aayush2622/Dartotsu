@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/SheetTile.dart';
 import '../../l10n/app_localizations.dart';
 import 'LocaleController.dart';
 import 'language.dart';
+import '../State/State.dart';
 
 class LanguageSheet extends StatefulWidget {
   const LanguageSheet({super.key});
@@ -19,7 +18,7 @@ class LanguageSheet extends StatefulWidget {
 }
 
 class _LanguageSheetState extends State<LanguageSheet> {
-  var _query = '';
+  final _query = ''.live;
 
   late final _options =
       AppLocalizations.supportedLocales
@@ -28,12 +27,14 @@ class _LanguageSheetState extends State<LanguageSheet> {
           .toList()
         ..sort();
 
-  List<String> get _filtered => _query.isEmpty
+  List<String> get _filtered => _query.value.isEmpty
       ? _options
-      : _options.where((l) => l.toLowerCase().contains(_query)).toList();
+      : _options.where((l) => l.toLowerCase().contains(_query.value)).toList();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final locale = find<LocaleController>();
     final scheme = context.colorScheme;
     final currentName = completeLanguageName(locale.code.value.toUpperCase());
@@ -44,7 +45,7 @@ class _LanguageSheetState extends State<LanguageSheet> {
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
           child: TextField(
-            onChanged: (v) => setState(() => _query = v.trim().toLowerCase()),
+            onChanged: (v) => _query.value = v.trim().toLowerCase(),
             decoration: InputDecoration(
               hintText: 'Search language',
               prefixIcon: Icon(
@@ -78,4 +79,4 @@ class _LanguageSheetState extends State<LanguageSheet> {
   }
 }
 
-AppLocalizations get getString => AppLocalizations.of(Get.context!)!;
+AppLocalizations get getString => AppLocalizations.of(appContext!)!;

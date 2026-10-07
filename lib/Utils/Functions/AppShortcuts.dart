@@ -2,9 +2,9 @@ import 'package:flutter/services.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../Core/ThemeManager/ThemeController.dart';
-import 'GetXFunctions.dart';
 import 'NavigateToScreen.dart';
 import 'SnackBar.dart';
+import '../../Core/State/State.dart';
 
 var usingKeyboard = false;
 bool appShortcuts(KeyEvent event) {

@@ -1,10 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:get/get.dart';
+import '../../Core/State/State.dart';
 
-import 'GetXFunctions.dart';
-
-class RefreshController extends GetxController {
-  var activity = <String, RxBool>{};
+class RefreshController extends AppController {
+  var activity = <String, Live<bool>>{};
 
   void all() => activity.forEach((k, v) => v.value = true);
 
@@ -20,8 +18,8 @@ class RefreshController extends GetxController {
     });
   }
 
-  RxBool getOrPut(String key, bool initialValue) {
-    return activity.putIfAbsent(key, () => RxBool(initialValue));
+  Live<bool> getOrPut(String key, bool initialValue) {
+    return activity.putIfAbsent(key, () => Live<bool>(initialValue));
   }
 }
 
@@ -38,8 +36,8 @@ abstract class RefreshManager<T extends StatefulWidget> extends State<T>
   bool _isLoading = false;
   bool _pendingRefresh = false;
 
-  late final RxBool _refreshFlag;
-  late final Worker _worker;
+  late final Live<bool> _refreshFlag;
+  late final Disposer _sub;
 
   @override
   void didChangeDependencies() {
@@ -49,7 +47,7 @@ abstract class RefreshManager<T extends StatefulWidget> extends State<T>
     final controller = find<RefreshController>();
     _refreshFlag = controller.getOrPut(refreshId, false);
 
-    _worker = ever<bool>(_refreshFlag, (value) async {
+    _sub = onChange(_refreshFlag, (value) async {
       if (!value) return;
 
       if (_isLoading) {
@@ -102,7 +100,7 @@ abstract class RefreshManager<T extends StatefulWidget> extends State<T>
 
   @override
   void dispose() {
-    _worker.dispose();
+    _sub.dispose();
     routeObserver.unsubscribe(this);
     super.dispose();
   }

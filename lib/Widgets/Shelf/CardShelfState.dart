@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import '../../Core/State/State.dart';
 
 class ShelfCardItem {
   final String id;
@@ -45,10 +45,10 @@ class ShelfCardItem {
 }
 
 class CardShelfState {
-  var overscrollProgress = 0.0.obs;
-  var isLoadingMore = false.obs;
-  var items = <ShelfCardItem>[].obs;
-  var canLoadMore = true.obs;
+  var overscrollProgress = 0.0.live;
+  var isLoadingMore = false.live;
+  var items = <ShelfCardItem>[].liveList;
+  var canLoadMore = true.live;
   double lastProgress = 0.0;
 
   bool scrollListener(

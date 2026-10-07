@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'CardShelf.dart';
 import 'CardShelfState.dart';
+import '../../Core/State/State.dart';
 
 class ShelfPerson {
   final String? image;

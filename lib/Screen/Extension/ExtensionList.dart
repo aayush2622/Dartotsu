@@ -1,7 +1,6 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -10,12 +9,12 @@ import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import 'SourcePreferenceScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Core/State/State.dart';
 
 class ExtensionList extends StatefulWidget {
   final ItemType itemType;
@@ -98,7 +97,7 @@ class _ExtensionListState extends State<ExtensionList> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).colorScheme;
-    return Obx(
+    return Watch(
       () => RefreshIndicator(
         backgroundColor: theme.primary,
         color: theme.onPrimary,
@@ -248,7 +247,7 @@ class _ExtensionListState extends State<ExtensionList> {
             // outer Obx never sees this read, so it never reacts to progress
             // updates. Wrapping just the trailing widget lets it track
             // installProgress (and hasUpdate) on its own.
-            trailing: Obx(() => _buildTrailing(source, index)),
+            trailing: Watch(() => _buildTrailing(source, index)),
           ),
         ],
       ),
@@ -562,12 +561,14 @@ class _SourceCardShell extends StatefulWidget {
 }
 
 class _SourceCardShellState extends State<_SourceCardShell> {
-  bool _focused = false;
+  final _focused = false.live;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = Theme.of(context).colorScheme;
-    final highlighted = _focused && usingKeyboard;
+    final highlighted = _focused.value && usingKeyboard;
 
     return ClipRRect(
       borderRadius: BorderRadius.vertical(
@@ -590,9 +591,9 @@ class _SourceCardShellState extends State<_SourceCardShell> {
                 }
               },
         onFocusChange: (focused) {
-          if (mounted) setState(() => _focused = focused);
+          if (mounted) _focused.value = focused;
         },
-        child: Obx(
+        child: Watch(
           () => Container(
             color: highlighted
                 ? scheme.secondaryContainer

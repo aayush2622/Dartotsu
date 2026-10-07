@@ -4,9 +4,9 @@ import '../../../Api/Updater/AppUpdater.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../Widgets/SegmentedSetting.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> updateSettings(BuildContext context) => [
   Setting.header(getString.channel),

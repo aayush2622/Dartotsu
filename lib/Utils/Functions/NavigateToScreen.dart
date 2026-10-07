@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
 
 import '../Animation/WidgetAnimations.dart';
 import '../Extensions/NumExtensions.dart';
+import '../../Core/State/State.dart';
 
 Future<T?> navigateToPage<T>(
   BuildContext context,
@@ -40,7 +40,7 @@ bool _backBusy = false;
 
 bool guardedBack() {
   if (_backBusy) return true;
-  final nav = Get.key.currentState;
+  final nav = appNavigator;
   if (nav == null || !nav.canPop()) return false;
   _backBusy = true;
   nav.maybePop().whenComplete(() => _backBusy = false);

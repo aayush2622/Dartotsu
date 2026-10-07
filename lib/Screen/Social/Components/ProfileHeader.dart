@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Services/MediaService.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -14,6 +13,7 @@ import '../../../Widgets/Components/AppBars.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/UserAvatar.dart';
+import '../../../Core/State/State.dart';
 
 const _toolbarHeight = 56.0;
 
@@ -24,12 +24,12 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
   final MediaService service;
   final Object? heroTag;
   final UserBrief seed;
-  final Rxn<SocialUser> user;
+  final Live<SocialUser?> user;
   final double top;
   final bool glass;
   final bool isSelf;
   final bool canFollow;
-  final RxBool followBusy;
+  final Live<bool> followBusy;
   final VoidCallback onFollow;
   final VoidCallback onFollowers;
   final VoidCallback onFollowing;
@@ -80,7 +80,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
     final slideP = (t * 1.6).clamp(0.0, 1.0);
     final labelP = ((t - 0.5) * 2).clamp(0.0, 1.0);
 
-    return Obx(() {
+    return Watch(() {
       final u = user.value;
       final name = u?.name ?? seed.name;
       final avatar = u?.avatar ?? seed.avatar;
@@ -278,7 +278,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   Widget _followButton(SocialUser? u) {
-    return Obx(() {
+    return Watch(() {
       final following = u?.isFollowing ?? false;
       final busy = followBusy.value || u == null;
       return following

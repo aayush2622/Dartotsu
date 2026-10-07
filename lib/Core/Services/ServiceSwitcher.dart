@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../Screen/Settings/ServiceSettingsScreen.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'MediaServiceController.dart';
+import '../State/State.dart';
 
 void serviceSwitcher(BuildContext context) {
   final mediaServices = find<MediaServiceController>();

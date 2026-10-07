@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 import 'BackupCategory.dart';
+import '../../../../Core/State/State.dart';
 
 class BackupCategoryTile extends StatelessWidget {
   static const _shown = 60;
 
   final PrefLocation location;
   final List<String> keys;
-  final RxMap<PrefLocation, bool> selected;
+  final LiveMap<PrefLocation, bool> selected;
 
   const BackupCategoryTile({
     super.key,
@@ -37,7 +37,7 @@ class BackupCategoryTile extends StatelessWidget {
             tilePadding: const EdgeInsets.fromLTRB(8, 0, 14, 0),
             childrenPadding: const EdgeInsets.fromLTRB(16, 0, 16, 14),
             expandedCrossAxisAlignment: CrossAxisAlignment.start,
-            leading: Obx(
+            leading: Watch(
               () => Checkbox(
                 value: selected[location] ?? false,
                 onChanged: (v) => selected[location] = v ?? false,

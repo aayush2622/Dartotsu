@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
 
 import '../../Logger.dart';
 import 'FirebaseOptions.dart';
+import '../State/State.dart';
 
 /// Firebase Crashlytics wrapper. [recordError] is safe to call before init
 /// completes (it awaits) and silently no-ops if Firebase failed to start.
-class AnalyticsManager extends GetxController {
+class AnalyticsManager extends AppController {
   final Completer<void> _ready = Completer<void>();
   bool _disabled = false;
 

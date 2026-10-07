@@ -1,9 +1,8 @@
 import 'package:blurbox/blurbox.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
+import '../../Core/State/State.dart';
 
 class ThemedContainer extends StatelessWidget {
   final Widget child;
@@ -36,7 +35,7 @@ class ThemedContainer extends StatelessWidget {
     final radius = borderRadius ?? BorderRadius.circular(28);
     final pad = padding ?? const EdgeInsets.all(8);
 
-    return Obx(() {
+    return Watch(() {
       if (controller.useGlassMode.value && !blur) {
         return Container(
           margin: margin,
@@ -123,7 +122,7 @@ class ThemedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = find<ThemeController>();
-    return Obx(
+    return Watch(
       () => controller.useGlassMode.value
           ? (glassWidget ?? materialWidget)
           : materialWidget,

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import 'ChartData.dart';
+import '../../Core/State/State.dart';
 
 class RadarChart extends StatefulWidget {
   final List<ChartDatum> data;
@@ -16,10 +17,13 @@ class RadarChart extends StatefulWidget {
 }
 
 class _RadarChartState extends State<RadarChart> {
-  int? _active;
+  final _active = Live<int?>(null);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
+    final active = _active.value;
     final scheme = context.colorScheme;
     final data = widget.data;
     if (data.length < 3) return const SizedBox.shrink();
@@ -43,12 +47,11 @@ class _RadarChartState extends State<RadarChart> {
             child: MouseRegion(
               onHover: (e) {
                 final i = hit(e.localPosition);
-                if (i != _active) setState(() => _active = i);
+                if (i != _active.value) _active.value = i;
               },
-              onExit: (_) => setState(() => _active = null),
+              onExit: (_) => _active.value = null,
               child: GestureDetector(
-                onTapDown: (d) =>
-                    setState(() => _active = hit(d.localPosition)),
+                onTapDown: (d) => _active.value = hit(d.localPosition),
                 child: TweenAnimationBuilder<double>(
                   key: ValueKey(data.length),
                   tween: Tween(begin: 0, end: 1),
@@ -59,7 +62,7 @@ class _RadarChartState extends State<RadarChart> {
                       data: data,
                       max: max,
                       progress: t.clamp(0.0, 1.2),
-                      active: _active,
+                      active: active,
                       color: scheme.primary,
                       grid: scheme.outlineVariant.withValues(alpha: 0.5),
                       text: scheme.onSurfaceVariant,

@@ -1,9 +1,9 @@
+import 'package:collection/collection.dart';
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/Screens/ServiceScreens.dart';
@@ -13,7 +13,6 @@ import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/IntExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Utils/Functions/RefreshController.dart'
     show RefreshController, routeObserver;
 import '../../Widgets/Components/AppControls.dart';
@@ -22,6 +21,7 @@ import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Shelf/MediaSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
+import '../../Core/State/State.dart';
 
 class ScreenWidgetList extends StatefulWidget {
   final Stream<List<ScreenWidget>> Function() loader;
@@ -55,14 +55,14 @@ class ScreenWidgetList extends StatefulWidget {
 
 class _ScreenWidgetListState extends State<ScreenWidgetList>
     with AutomaticKeepAliveClientMixin, RouteAware {
-  final _current = <ScreenWidget>[].obs;
-  final _error = RxnString();
+  final _current = <ScreenWidget>[].liveList;
+  final _error = Live<String?>(null);
   final _scroll = ScrollController();
-  final _showTop = false.obs;
-  final _chip = RxnString();
-  final _chipMedia = Rxn<List<Media>>();
-  final _chipLoading = false.obs;
-  final _showHidden = false.obs;
+  final _showTop = false.live;
+  final _chip = Live<String?>(null);
+  final _chipMedia = Live<List<Media>?>(null);
+  final _chipLoading = false.live;
+  final _showHidden = false.live;
   String? _firstTitle;
 
   final _seen = <String>{};
@@ -82,10 +82,10 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       : SectionCache(widget.cacheId!);
 
   StreamSubscription<Object?>? _reloadSub;
-  Worker? _signalWorker;
+  Disposer? _signalSub;
   bool _refreshing = false;
   bool _queued = false;
-  final _loaded = false.obs;
+  final _loaded = false.live;
 
   @override
   bool get wantKeepAlive => true;
@@ -100,7 +100,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     final key = widget.cacheId;
     if (key != null) {
       final flag = find<RefreshController>().getOrPut(key, false);
-      _signalWorker = ever<bool>(flag, (v) {
+      _signalSub = onChange(flag, (v) {
         if (!v) return;
         flag.value = false;
         if (_visibleNow) {
@@ -163,7 +163,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     _composeTimer?.cancel();
     _cacheTimer?.cancel();
     _reloadSub?.cancel();
-    _signalWorker?.dispose();
+    _signalSub?.dispose();
     _scroll.dispose();
     _tickers?.removeListener(_flushDirty);
     routeObserver.unsubscribe(this);
@@ -332,7 +332,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
       bottom: context.isPhone ? 72.0 + 32.bottomBar() : 64,
       left: 0,
       right: 0,
-      child: Obx(
+      child: Watch(
         () => _showTop.value
             ? Center(
                 child: ThemedContainer(
@@ -356,7 +356,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   Widget _list(BuildContext context) {
     return RefreshIndicator(
       onRefresh: _refresh,
-      child: Obx(() {
+      child: Watch(() {
         final list = _current;
         final empty = list.isEmpty;
         final showError = _error.value != null && empty;
@@ -555,7 +555,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     if (widget.chips.isEmpty || widget.onChip == null) {
       return const SizedBox.shrink();
     }
-    return Obx(
+    return Watch(
       () => Padding(
         padding: EdgeInsets.fromLTRB(
           Dimens.pagePad,

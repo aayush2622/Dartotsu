@@ -3,17 +3,17 @@ import 'dart:io';
 
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../Preferences/PrefManager.dart';
 import 'CustomFontLoader.dart';
 import 'CustomJsonTheme.dart';
 import 'FollowCoverTheme.dart';
 import 'ThemeManager.dart';
+import '../State/State.dart';
 
 /// Reactive theme state. Every field is a shared auto-persisting [Pref.rx];
 /// [light] / [dark] are memoized and only rebuilt when an input changes.
-class ThemeController extends GetxController {
+class ThemeController extends AppController {
   final useGlassMode = PrefName.useGlassMode.rx;
   final isOled = PrefName.isOled.rx;
   final themeName = PrefName.theme.rx;
@@ -30,7 +30,7 @@ class ThemeController extends GetxController {
   final cover = FollowCoverTheme();
 
   String? _loadedFontFamily;
-  final _fontLoadTick = 0.obs;
+  final _fontLoadTick = 0.live;
 
   ColorScheme? _dynamicLight;
   ColorScheme? _dynamicDark;
@@ -38,7 +38,7 @@ class ThemeController extends GetxController {
   ColorScheme? _jsonLight;
   ColorScheme? _jsonDark;
   StreamSubscription<void>? _jsonWatchSub;
-  final _jsonThemeTick = 0.obs;
+  final _jsonThemeTick = 0.live;
 
   @override
   void onInit() {

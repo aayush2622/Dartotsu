@@ -18,6 +18,7 @@ import '../../../Widgets/Charts/DonutChart.dart';
 import '../../../Widgets/Charts/LineChart.dart';
 import '../../../Widgets/Charts/RadarChart.dart';
 import '../../Feed/FeedNavigation.dart';
+import '../../../Core/State/State.dart';
 
 enum _Metric { count, time, score }
 
@@ -39,12 +40,12 @@ class ProfileStatsTab extends StatefulWidget {
 
 class _ProfileStatsTabState extends State<ProfileStatsTab>
     with AutomaticKeepAliveClientMixin {
-  UserStats? _stats;
-  List<ActivityDay> _history = const [];
-  bool _failed = false;
-  bool _anime = true;
-  _Metric _metric = _Metric.count;
-  final _expanded = <String>{};
+  final _stats = Live<UserStats?>(null);
+  final _history = const <ActivityDay>[].live;
+  final _failed = false.live;
+  final _anime = true.live;
+  final _metric = _Metric.count.live;
+  final _expanded = <String>{}.live;
 
   @override
   bool get wantKeepAlive => true;
@@ -56,7 +57,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
   }
 
   Future<void> _load() async {
-    setState(() => _failed = false);
+    _failed.value = false;
     try {
       final view = widget.service.socialView!;
       final bundled = await widget.bundle;
@@ -73,13 +74,11 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
       ]);
       final stats = results[0] as UserStats?;
       if (!mounted) return;
-      setState(() {
-        _history = results[1] as List<ActivityDay>;
-        _stats = stats;
-        _failed = stats == null;
-      });
+      _history.value = results[1] as List<ActivityDay>;
+      _stats.value = stats;
+      _failed.value = stats == null;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
@@ -92,14 +91,15 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     'startYears',
   };
 
-  double _value(StatEntry e) => switch (_metric) {
+  double _value(StatEntry e) => switch (_metric.value) {
     _Metric.count => e.count.toDouble(),
-    _Metric.time => _anime ? e.minutesWatched / 60 : e.chaptersRead.toDouble(),
+    _Metric.time =>
+      _anime.value ? e.minutesWatched / 60 : e.chaptersRead.toDouble(),
     _Metric.score => e.meanScore,
   };
 
   String _format(double v) {
-    if (_metric == _Metric.score) return v.toStringAsFixed(1);
+    if (_metric.value == _Metric.score) return v.toStringAsFixed(1);
     if (v >= 1000) return '${(v / 1000).toStringAsFixed(1)}K';
     return v == v.roundToDouble() ? '${v.round()}' : v.toStringAsFixed(1);
   }
@@ -107,8 +107,12 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final stats = _stats;
-    if (_failed) {
+    return Watch(() => _build(context));
+  }
+
+  Widget _build(BuildContext context) {
+    final stats = _stats.value;
+    if (_failed.value) {
       return EmptyState(
         icon: Icons.cloud_off_rounded,
         failed: true,
@@ -119,7 +123,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     if (stats == null) {
       return const Center(child: CircularProgressIndicator());
     }
-    final set = _anime ? stats.anime : stats.manga;
+    final set = _anime.value ? stats.anime : stats.manga;
     return ScrollConfig(
       context,
       child: ListView(
@@ -128,8 +132,8 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
             child: AppSegmented<bool>(
-              value: _anime,
-              onChanged: (v) => setState(() => _anime = v),
+              value: _anime.value,
+              onChanged: (v) => _anime.value = v,
               segments: const [
                 AppSegment(true, label: 'Anime'),
                 AppSegment(false, label: 'Manga'),
@@ -137,14 +141,14 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
             ),
           ),
           SizedBox(height: Dimens.gapSm),
-          if (_history.isNotEmpty)
+          if (_history.value.isNotEmpty)
             SectionCard(
               title: 'Activity',
               margin: EdgeInsets.symmetric(
                 horizontal: Dimens.pagePad,
                 vertical: Dimens.gapSm / 2,
               ),
-              child: ActivityHeatmap(days: _history),
+              child: ActivityHeatmap(days: _history.value),
             ),
           SizedBox(height: Dimens.gapSm),
           _overview(context, set),
@@ -154,13 +158,13 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
               vertical: Dimens.gapSm,
             ),
             child: AppChoiceChips<_Metric>(
-              value: _metric,
-              onChanged: (m) => setState(() => _metric = m),
+              value: _metric.value,
+              onChanged: (m) => _metric.value = m,
               options: [
                 const AppSegment(_Metric.count, label: 'Count'),
                 AppSegment(
                   _Metric.time,
-                  label: _anime ? 'Hours watched' : 'Chapters read',
+                  label: _anime.value ? 'Hours watched' : 'Chapters read',
                 ),
                 const AppSegment(_Metric.score, label: 'Mean score'),
               ],
@@ -184,7 +188,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     final scheme = context.colorScheme;
     final tiles = <(String, String)>[
       ('Total entries', '${s.count}'),
-      if (_anime) ...[
+      if (_anime.value) ...[
         ('Episodes watched', '${s.episodesWatched}'),
         ('Days watched', (s.minutesWatched / 1440).toStringAsFixed(1)),
       ] else ...[
@@ -244,7 +248,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     } else {
       entries.sort((a, b) => _value(b).compareTo(_value(a)));
     }
-    final open = _expanded.contains(category.key);
+    final open = _expanded.value.contains(category.key);
     final limit = _natural.contains(category.key) ? 40 : (open ? 40 : 10);
     final shown = entries.take(limit).toList();
     final maxValue = shown.fold<double>(
@@ -260,11 +264,9 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
       ),
       trailing: chart.showMoreToggle && entries.length > 10
           ? TextButton(
-              onPressed: () => setState(
-                () => open
-                    ? _expanded.remove(category.key)
-                    : _expanded.add(category.key),
-              ),
+              onPressed: () => _expanded.value = open
+                  ? ({..._expanded.value}..remove(category.key))
+                  : {..._expanded.value, category.key},
               child: Text(open ? 'Show less' : 'Show more'),
             )
           : null,
@@ -293,10 +295,10 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
         for (final e in shown) _bar(context, category, e, maxValue, scheme),
       ],
     );
-    final score = _metric == _Metric.score;
-    final unit = switch (_metric) {
+    final score = _metric.value == _Metric.score;
+    final unit = switch (_metric.value) {
       _Metric.count => 'Entries',
-      _Metric.time => _anime ? 'Hours' : 'Chapters',
+      _Metric.time => _anime.value ? 'Hours' : 'Chapters',
       _Metric.score => 'Mean score',
     };
     switch (category.key) {

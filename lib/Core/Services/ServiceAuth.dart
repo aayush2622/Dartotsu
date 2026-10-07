@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-
 import 'ScoreFormat.dart';
+import '../State/State.dart';
 
 abstract class ServiceUser {
   int get id;
@@ -18,9 +17,9 @@ abstract class ServiceUser {
 /// (e.g. the on-device extension aggregator).
 abstract class ServiceAuth {
   /// Holds the signed-in user (`null` when logged out). Stored as
-  /// `Rxn<ServiceUser>` so concrete services can upcast their own user type
+  /// `Live<ServiceUser?>` so concrete services can upcast their own user type
   /// into it.
-  Rxn<ServiceUser> get user;
+  Live<ServiceUser?> get user;
 
   bool get isLoggedIn;
 

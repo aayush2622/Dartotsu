@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
-
 import '../NotificationManager/NotificationManager.dart';
 import '../Preferences/PrefManager.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'MediaServiceController.dart';
+import '../State/State.dart';
 
-class ActivityAlerts extends GetxController {
+class ActivityAlerts extends AppController {
   static const _interval = Duration(minutes: 4);
 
   Timer? _timer;
@@ -16,7 +14,7 @@ class ActivityAlerts extends GetxController {
   void start() {
     _timer?.cancel();
     _timer = Timer.periodic(_interval, (_) => unawaited(poll()));
-    ever(PrefName.activityAlerts.rx, (on) {
+    onChange(PrefName.activityAlerts.rx, (on) {
       if (on) unawaited(poll());
     });
     unawaited(Future<void>.delayed(const Duration(seconds: 20), poll));

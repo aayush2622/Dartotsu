@@ -1,6 +1,5 @@
-import 'package:get/get.dart';
-
 import '../Model/Media.dart';
+import '../../State/State.dart';
 
 enum EntityKind { character, staff, studio }
 
@@ -54,8 +53,8 @@ class EntityProfile {
 
 class EntityHost {
   final EntityKind kind;
-  final Rx<EntityProfile> profile;
-  final RxBool loading;
+  final Live<EntityProfile> profile;
+  final Live<bool> loading;
   final void Function(Media media) openMedia;
   final void Function(String id, {String? name, String? image}) openCharacter;
   final void Function(String id, {String? name, String? image}) openStaff;
@@ -69,7 +68,7 @@ class EntityHost {
     required this.openCharacter,
     required this.openStaff,
     required this.search,
-  }) : profile = profile.obs;
+  }) : profile = profile.live;
 
   void update(EntityProfile next) => profile.value = next;
 }

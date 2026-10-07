@@ -1,6 +1,5 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Api/Services/Extension/Services.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -11,6 +10,7 @@ import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import '../../../Widgets/Shelf/ShelfFrame.dart';
 import '../SourceBrowseScreen.dart';
+import '../../../Core/State/State.dart';
 
 class ExtensionSourcesRail extends StatefulWidget {
   const ExtensionSourcesRail({super.key});
@@ -39,7 +39,7 @@ class _ExtensionSourcesRailState extends State<ExtensionSourcesRail> {
   }
 
   Widget _rail(BuildContext context, ItemType type, String title) {
-    return Obx(() {
+    return Watch(() {
       final sources = loadedSources(type);
       if (sources.isEmpty) return const SizedBox.shrink();
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -8,6 +7,7 @@ import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/LoadSvg.dart';
 import '../../../Widgets/Components/SectionCard.dart';
 import '../../Login/LoginView.dart';
+import '../../../Core/State/State.dart';
 
 class LoginPrompt extends StatefulWidget {
   final MediaService service;
@@ -19,7 +19,7 @@ class LoginPrompt extends StatefulWidget {
 }
 
 class _LoginPromptState extends State<LoginPrompt> {
-  final _busy = false.obs;
+  final _busy = false.live;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +57,7 @@ class _LoginPromptState extends State<LoginPrompt> {
               ),
             ),
             SizedBox(width: Dimens.gapSm),
-            Obx(
+            Watch(
               () => _busy.value
                   ? const SizedBox(
                       width: 20,

@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/SnackBar.dart';
+import '../../../Core/State/State.dart';
 
 class AnilistException implements Exception {
   final String message;

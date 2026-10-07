@@ -107,7 +107,7 @@ extension WidgetAnimations on Widget {
     int duration = 400,
     Curve curve = Curves.easeOutCubic,
   }) {
-    if (_disabled) return this;
+    if (_disabled || duration <= 0) return this;
 
     return _fade(target: target, delay: delay, duration: duration).slideY(
       begin: begin,
@@ -125,7 +125,7 @@ extension WidgetAnimations on Widget {
     int duration = 400,
     Curve curve = Curves.easeOutCubic,
   }) {
-    if (_disabled) return this;
+    if (_disabled || duration <= 0) return this;
 
     return _fade(target: target, delay: delay, duration: duration).slideX(
       begin: begin,

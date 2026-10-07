@@ -15,8 +15,8 @@ import 'Core/Services/MediaServiceController.dart';
 import 'Core/ThemeManager/CardStyleController.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
-import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/RefreshController.dart';
+import 'Core/State/State.dart';
 
 /// Single registration point for every long-lived controller.
 ///

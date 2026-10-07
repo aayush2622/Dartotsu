@@ -9,13 +9,13 @@ import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/CardShelfState.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
+import '../../Core/State/State.dart';
 
 class ShelfScreen extends StatefulWidget {
   final String title;
@@ -37,15 +37,15 @@ class ShelfScreen extends StatefulWidget {
 }
 
 class _ShelfScreenState extends BaseScreen<ShelfScreen> {
-  late final List<Media> _items = [...widget.media];
+  late final _items = [...widget.media].liveList;
   late final Set<String> _known = {for (final m in _items) m.id};
-  bool _loading = false;
-  late bool _more = widget.loadMore != null;
+  final _loading = false.live;
+  late final _more = (widget.loadMore != null).live;
 
   Future<void> _next() async {
     final loader = widget.loadMore;
-    if (loader == null || _loading || !_more) return;
-    setState(() => _loading = true);
+    if (loader == null || _loading.value || !_more.value) return;
+    _loading.value = true;
     try {
       final batch = await loader();
       if (!mounted) return;
@@ -53,16 +53,14 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen> {
         for (final m in batch ?? const <Media>[])
           if (_known.add(m.id)) m,
       ];
-      setState(() {
-        _items.addAll(fresh);
-        _more = fresh.isNotEmpty;
-      });
+      _items.addAll(fresh);
+      _more.value = fresh.isNotEmpty;
     } catch (_) {
-      if (mounted) setState(() => _more = false);
+      if (mounted) _more.value = false;
     } finally {
-      if (mounted) setState(() => _loading = false);
+      if (mounted) _loading.value = false;
     }
-    if (mounted && _more && _items.length < 24) unawaited(_next());
+    if (mounted && _more.value && _items.length < 24) unawaited(_next());
   }
 
   bool _onScroll(ScrollNotification n) {
@@ -75,7 +73,7 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen> {
   @override
   void initState() {
     super.initState();
-    if (_more && _items.length < 24) {
+    if (_more.value && _items.length < 24) {
       WidgetsBinding.instance.addPostFrameCallback((_) => unawaited(_next()));
     }
   }
@@ -96,7 +94,7 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen> {
 
   Widget _grid(BuildContext context) {
     final style = tryFind<CardStyleController>()?.current ?? const CardStyle();
-    final tail = _more ? 8 : 0;
+    final tail = _more.value ? 8 : 0;
     return NotificationListener<ScrollNotification>(
       onNotification: _onScroll,
       child: ScrollConfig(
@@ -114,7 +112,7 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen> {
             crossAxisSpacing: Dimens.cardGap,
             mainAxisSpacing: Dimens.gap,
           ),
-          itemCount: _items.length + (_loading ? tail : 0),
+          itemCount: _items.length + (_loading.value ? tail : 0),
           itemBuilder: (context, i) {
             if (i >= _items.length) {
               return Skeletonizer(

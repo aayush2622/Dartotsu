@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
+import '../../Core/State/State.dart';
 
 class MarkupText extends StatefulWidget {
   final String text;
@@ -35,8 +36,9 @@ class _MarkupTextState extends State<MarkupText> {
   static final _italic = RegExp(r'(?<![\w])(_|\*)(?!\s)(.+?)(?<!\s)\1(?![\w])');
 
   final _revealed = <int>{};
+  final _revealTick = Trigger();
   final _recognizers = <TapGestureRecognizer>[];
-  bool _expanded = false;
+  final _expanded = false.live;
 
   @override
   void dispose() {
@@ -188,9 +190,10 @@ class _MarkupTextState extends State<MarkupText> {
     final scheme = context.colorScheme;
     final shown = _revealed.contains(index);
     final recognizer = TapGestureRecognizer()
-      ..onTap = () => setState(() {
+      ..onTap = () {
         shown ? _revealed.remove(index) : _revealed.add(index);
-      });
+        _revealTick.fire();
+      };
     _recognizers.add(recognizer);
     return TextSpan(
       children: _inline(
@@ -224,7 +227,10 @@ class _MarkupTextState extends State<MarkupText> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _content(context));
+
+  Widget _content(BuildContext context) {
+    _revealTick.track();
     _disposeRecognizers();
     final text = _clean(widget.text);
     final long = widget.collapsible && text.length > widget.collapseAbove;
@@ -240,8 +246,8 @@ class _MarkupTextState extends State<MarkupText> {
           alignment: Alignment.topCenter,
           child: Text.rich(
             TextSpan(children: _build(text, base)),
-            maxLines: _expanded || !long ? null : widget.collapsedLines,
-            overflow: _expanded || !long
+            maxLines: _expanded.value || !long ? null : widget.collapsedLines,
+            overflow: _expanded.value || !long
                 ? TextOverflow.clip
                 : TextOverflow.ellipsis,
           ),
@@ -253,8 +259,8 @@ class _MarkupTextState extends State<MarkupText> {
               padding: EdgeInsets.zero,
               minimumSize: const Size(0, 36),
             ),
-            onPressed: () => setState(() => _expanded = !_expanded),
-            child: Text(_expanded ? 'Show less' : 'Read more'),
+            onPressed: () => _expanded.value = !_expanded.value,
+            child: Text(_expanded.value ? 'Show less' : 'Read more'),
           ),
       ],
     );

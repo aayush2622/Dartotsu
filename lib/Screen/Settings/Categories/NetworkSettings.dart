@@ -9,11 +9,11 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
+import '../../../Core/State/State.dart';
 
 List<Setting> networkSettings(BuildContext context) {
   final network = find<NetworkManager>();
@@ -174,20 +174,20 @@ _ParsedProxy _parseProxyUrl(String raw) {
 }
 
 class _ProxySheetState extends State<_ProxySheet> {
-  late String _protocol;
+  final _protocol = 'http'.live;
   late final TextEditingController _host;
   late final TextEditingController _port;
   late final TextEditingController _user;
   late final TextEditingController _pass;
-  bool _obscurePass = true;
-  _NetTestState _testState = _NetTestState.idle;
-  String _testMsg = '';
+  final _obscurePass = true.live;
+  final _testState = _NetTestState.idle.live;
+  final _testMsg = ''.live;
 
   @override
   void initState() {
     super.initState();
     final parsed = _parseProxyUrl(PrefName.proxyUrl.value);
-    _protocol = parsed.protocol;
+    _protocol.value = parsed.protocol;
     _host = TextEditingController(text: parsed.host);
     _port = TextEditingController(text: parsed.port);
     _user = TextEditingController(text: parsed.user);
@@ -207,16 +207,12 @@ class _ProxySheetState extends State<_ProxySheet> {
   Future<void> _test() async {
     final proxy = _composedUrl;
     if (proxy.isEmpty) return;
-    setState(() {
-      _testState = _NetTestState.loading;
-      _testMsg = getString.testing;
-    });
+    _testState.value = _NetTestState.loading;
+    _testMsg.value = getString.testing;
     final result = await _testProxyConnection(proxy);
     if (!mounted) return;
-    setState(() {
-      _testState = result.$1 ? _NetTestState.ok : _NetTestState.fail;
-      _testMsg = result.$2;
-    });
+    _testState.value = result.$1 ? _NetTestState.ok : _NetTestState.fail;
+    _testMsg.value = result.$2;
   }
 
   void _save() {
@@ -225,7 +221,7 @@ class _ProxySheetState extends State<_ProxySheet> {
     popPage(context);
   }
 
-  void _resetTest() => setState(() => _testState = _NetTestState.idle);
+  void _resetTest() => _testState.value = _NetTestState.idle;
 
   @override
   void dispose() {
@@ -255,7 +251,9 @@ class _ProxySheetState extends State<_ProxySheet> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     return CustomBottomDialog(
       title: getString.proxy,
       negativeText: getString.cancel,
@@ -273,12 +271,12 @@ class _ProxySheetState extends State<_ProxySheet> {
                 child: LabeledField(
                   label: getString.proxyProtocol,
                   child: DropdownButtonFormField<String>(
-                    initialValue: _protocol,
+                    initialValue: _protocol.value,
                     isExpanded: true,
-                    onChanged: (v) => setState(() {
-                      _protocol = v!;
+                    onChanged: (v) {
+                      _protocol.value = v!;
                       _resetTest();
-                    }),
+                    },
                     decoration: _decoration(context, ''),
                     items: const [
                       DropdownMenuItem(value: 'http', child: Text('HTTP')),
@@ -336,18 +334,18 @@ class _ProxySheetState extends State<_ProxySheet> {
                   label: getString.proxyPassword,
                   child: TextField(
                     controller: _pass,
-                    obscureText: _obscurePass,
+                    obscureText: _obscurePass.value,
                     decoration: _decoration(
                       context,
                       getString.optional,
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _obscurePass
+                          _obscurePass.value
                               ? Icons.visibility_outlined
                               : Icons.visibility_off_outlined,
                         ),
                         onPressed: () =>
-                            setState(() => _obscurePass = !_obscurePass),
+                            _obscurePass.value = !_obscurePass.value,
                       ),
                     ),
                     onChanged: (_) => _resetTest(),
@@ -365,11 +363,13 @@ class _ProxySheetState extends State<_ProxySheet> {
             runSpacing: 8,
             children: [
               FilledButton.tonalIcon(
-                onPressed: _testState == _NetTestState.loading ? null : _test,
+                onPressed: _testState.value == _NetTestState.loading
+                    ? null
+                    : _test,
                 icon: const Icon(Icons.wifi_find_rounded, size: 18),
                 label: Text(getString.test),
               ),
-              _TestChip(state: _testState, message: _testMsg),
+              _TestChip(state: _testState.value, message: _testMsg.value),
             ],
           ),
         ),
@@ -436,22 +436,18 @@ class _DnsSheet extends StatefulWidget {
 
 class _DnsSheetState extends State<_DnsSheet> {
   late final _ctrl = TextEditingController(text: PrefName.customDnsUrl.value);
-  _NetTestState _testState = _NetTestState.idle;
-  String _testMsg = '';
+  final _testState = _NetTestState.idle.live;
+  final _testMsg = ''.live;
 
   Future<void> _test() async {
     final url = _ctrl.text.trim();
     if (url.isEmpty) return;
-    setState(() {
-      _testState = _NetTestState.loading;
-      _testMsg = getString.resolving;
-    });
+    _testState.value = _NetTestState.loading;
+    _testMsg.value = getString.resolving;
     final result = await _testDns(url);
     if (!mounted) return;
-    setState(() {
-      _testState = result.$1 ? _NetTestState.ok : _NetTestState.fail;
-      _testMsg = result.$2;
-    });
+    _testState.value = result.$1 ? _NetTestState.ok : _NetTestState.fail;
+    _testMsg.value = result.$2;
   }
 
   void _save() {
@@ -466,7 +462,9 @@ class _DnsSheetState extends State<_DnsSheet> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     return CustomBottomDialog(
       title: getString.dnsOverHttps,
@@ -487,7 +485,7 @@ class _DnsSheetState extends State<_DnsSheet> {
                 icon: const Icon(Icons.clear_rounded),
                 onPressed: () {
                   _ctrl.clear();
-                  setState(() => _testState = _NetTestState.idle);
+                  _testState.value = _NetTestState.idle;
                 },
               ),
               filled: true,
@@ -497,7 +495,7 @@ class _DnsSheetState extends State<_DnsSheet> {
                 borderSide: BorderSide.none,
               ),
             ),
-            onChanged: (_) => setState(() => _testState = _NetTestState.idle),
+            onChanged: (_) => _testState.value = _NetTestState.idle,
           ),
         ),
         Padding(
@@ -511,10 +509,10 @@ class _DnsSheetState extends State<_DnsSheet> {
                   mouseCursor: kClickCursor,
                   label: Text(p.name),
                   selected: _ctrl.text.trim() == p.url,
-                  onSelected: (_) => setState(() {
+                  onSelected: (_) {
                     _ctrl.text = p.url;
-                    _testState = _NetTestState.idle;
-                  }),
+                    _testState.value = _NetTestState.idle;
+                  },
                 ),
             ],
           ),
@@ -527,11 +525,13 @@ class _DnsSheetState extends State<_DnsSheet> {
             runSpacing: 8,
             children: [
               FilledButton.tonalIcon(
-                onPressed: _testState == _NetTestState.loading ? null : _test,
+                onPressed: _testState.value == _NetTestState.loading
+                    ? null
+                    : _test,
                 icon: const Icon(Icons.manage_search_rounded, size: 18),
                 label: Text(getString.test),
               ),
-              _TestChip(state: _testState, message: _testMsg),
+              _TestChip(state: _testState.value, message: _testMsg.value),
             ],
           ),
         ),

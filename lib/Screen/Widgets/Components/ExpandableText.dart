@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Core/State/State.dart';
 
 class ExpandableText extends StatefulWidget {
   final String text;
@@ -11,10 +12,12 @@ class ExpandableText extends StatefulWidget {
 }
 
 class _ExpandableTextState extends State<ExpandableText> {
-  bool _expanded = false;
+  final _expanded = false.live;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final long = widget.text.length > 260;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -25,8 +28,8 @@ class _ExpandableTextState extends State<ExpandableText> {
           child: SelectionArea(
             child: Text(
               widget.text,
-              maxLines: _expanded ? null : 5,
-              overflow: _expanded ? null : TextOverflow.ellipsis,
+              maxLines: _expanded.value ? null : 5,
+              overflow: _expanded.value ? null : TextOverflow.ellipsis,
               style: context.textTheme.bodyMedium?.copyWith(
                 height: 1.55,
                 color: context.colorScheme.onSurface,
@@ -41,8 +44,8 @@ class _ExpandableTextState extends State<ExpandableText> {
               padding: EdgeInsets.zero,
               minimumSize: const Size(0, 36),
             ),
-            onPressed: () => setState(() => _expanded = !_expanded),
-            child: Text(_expanded ? 'Show less' : 'Read more'),
+            onPressed: () => _expanded.value = !_expanded.value,
+            child: Text(_expanded.value ? 'Show less' : 'Read more'),
           ),
       ],
     );

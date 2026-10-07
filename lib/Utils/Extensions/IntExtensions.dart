@@ -1,19 +1,19 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import '../../Core/State/State.dart';
 
 extension IntExtension on int {
   double statusBar() {
-    var context = Get.context;
+    var context = appContext;
     return this + MediaQuery.paddingOf(context!).top;
   }
 
   double bottomBar() {
-    var context = Get.context;
+    var context = appContext;
     return this + MediaQuery.of(context!).padding.bottom;
   }
 
   double screenWidth() {
-    var context = Get.context;
+    var context = appContext;
     return MediaQuery.of(context!).size.width;
   }
 
@@ -22,7 +22,7 @@ extension IntExtension on int {
   }
 
   double screenHeight() {
-    var context = Get.context;
+    var context = appContext;
     return MediaQuery.of(context!).size.height;
   }
 

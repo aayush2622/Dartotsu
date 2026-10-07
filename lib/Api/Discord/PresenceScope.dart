@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'DiscordPresence.dart';
 import 'DiscordPresenceController.dart';
+import '../../Core/State/State.dart';
 
 class PresenceScope extends StatefulWidget {
   final DiscordPresence presence;

@@ -7,7 +7,6 @@ import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Model/CardStyle.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -18,6 +17,7 @@ import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Api/Discord/DiscordPresence.dart';
+import '../../Core/State/State.dart';
 
 class MediaListScreen extends StatefulWidget {
   final MediaService service;
@@ -40,9 +40,8 @@ class MediaListScreen extends StatefulWidget {
 class _MediaListScreenState extends BaseScreen<MediaListScreen>
     with TickerProviderStateMixin {
   static const _loadingKey = 'Loading';
-
-  Map<String, List<Media>>? _lists;
-  bool _failed = false;
+  final _lists = Live<Map<String, List<Media>>?>(null);
+  final _failed = false.live;
   TabController? _tabs;
 
   static final _skeletonLists = <String, List<Media>>{
@@ -60,7 +59,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     final user = widget.service.auth?.user.value;
     final queries = widget.service.getQueries;
     if (queries == null) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
       return;
     }
     try {
@@ -69,16 +68,14 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
         userId: widget.userId == null ? user?.id : int.tryParse(widget.userId!),
       );
       if (!mounted) return;
-      setState(() {
-        _lists = lists;
-        _failed = false;
-      });
+      _lists.value = lists;
+      _failed.value = false;
     } catch (_) {
-      if (mounted) setState(() => _failed = true);
+      if (mounted) _failed.value = true;
     }
   }
 
-  Map<String, List<Media>> get _shown => _lists ?? _skeletonLists;
+  Map<String, List<Media>> get _shown => _lists.value ?? _skeletonLists;
 
   TabController _controllerFor(int length) {
     final current = _tabs;
@@ -116,8 +113,8 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
   }
 
   Widget _body(BuildContext context) {
-    final loading = _lists == null && !_failed;
-    final lists = _failed ? <String, List<Media>>{} : _shown;
+    final loading = _lists.value == null && !_failed.value;
+    final lists = _failed.value ? <String, List<Media>>{} : _shown;
     if (lists.isEmpty) return _empty(context);
 
     final keys = lists.keys.toList();
@@ -164,9 +161,13 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
           SizedBox(
             height: 360,
             child: EmptyState(
-              icon: _failed ? Icons.cloud_off_rounded : Icons.inbox_rounded,
-              failed: _failed,
-              title: _failed ? 'Could not load the list' : 'Nothing here yet',
+              icon: _failed.value
+                  ? Icons.cloud_off_rounded
+                  : Icons.inbox_rounded,
+              failed: _failed.value,
+              title: _failed.value
+                  ? 'Could not load the list'
+                  : 'Nothing here yet',
             ),
           ),
         ],

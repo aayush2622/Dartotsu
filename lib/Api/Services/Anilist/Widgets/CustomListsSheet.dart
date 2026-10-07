@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Utils/Functions/SnackBar.dart';
 import '../../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../../Widgets/Components/AppSheet.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
+import '../../../../Core/State/State.dart';
 
 class CustomListsSheet extends StatefulWidget {
   final bool anime;
@@ -20,8 +20,9 @@ class _CustomListsSheetState extends State<CustomListsSheet> {
   late final List<String> _saved = _current();
   late final _names = _saved
       .map((n) => TextEditingController(text: n))
-      .toList();
-  final _busy = false.obs;
+      .toList()
+      .liveList;
+  final _busy = false.live;
 
   List<String> _current() {
     final user = anilistAuth.user.value as AnilistUser?;
@@ -56,7 +57,7 @@ class _CustomListsSheetState extends State<CustomListsSheet> {
       await anilistAuth.refreshUser();
     }
     if (!mounted) return;
-    setState(() => _names.removeAt(index).dispose());
+    _names.removeAt(index).dispose();
   }
 
   Future<void> _save() async {
@@ -80,7 +81,9 @@ class _CustomListsSheetState extends State<CustomListsSheet> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final kind = widget.anime ? 'Anime' : 'Manga';
     return AppSheet(
       title: '$kind custom lists',
@@ -114,13 +117,12 @@ class _CustomListsSheetState extends State<CustomListsSheet> {
             Row(
               children: [
                 TextButton.icon(
-                  onPressed: () =>
-                      setState(() => _names.add(TextEditingController())),
+                  onPressed: () => _names.add(TextEditingController()),
                   icon: const Icon(Icons.add_rounded),
                   label: const Text('Add list'),
                 ),
                 const Spacer(),
-                Obx(
+                Watch(
                   () => FilledButton(
                     onPressed: _busy.value ? null : _save,
                     child: const Text('Save'),

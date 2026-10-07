@@ -1,9 +1,7 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../../Utils/Functions/GetXFunctions.dart';
 import '../../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../../Utils/Functions/RefreshController.dart';
 import '../../../../Widgets/Components/CachedNetworkImage.dart';
@@ -12,6 +10,7 @@ import '../../../../Widgets/Components/SheetTile.dart';
 import '../../../../Widgets/Components/ThemedContainer.dart';
 import '../../../../Screen/Settings/ExtensionSourceSettingsScreen.dart';
 import '../Services.dart';
+import '../../../../Core/State/State.dart';
 
 class ExtensionServiceSheet extends StatelessWidget {
   final ItemType type;
@@ -67,7 +66,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                         ),
                       ),
                     for (final service in services)
-                      Obx(
+                      Watch(
                         () => SheetTile(
                           selected: extensionServiceFor(type)?.id == service.id,
                           leading: ClipRRect(
@@ -89,7 +88,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                       ),
                     const SizedBox(height: 8),
                     _label(context, 'Load data from'),
-                    Obx(() {
+                    Watch(() {
                       final sources = installedSources(type);
                       if (sources.isEmpty) {
                         return Padding(
@@ -105,7 +104,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                       return Column(
                         children: [
                           for (final source in sources)
-                            Obx(
+                            Watch(
                               () => SwitchListTile(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(14),

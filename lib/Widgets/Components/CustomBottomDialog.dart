@@ -1,6 +1,5 @@
 import '../../Utils/Nav/DpadNav.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import 'ThemedContainer.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
@@ -8,6 +7,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/AppShortcuts.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import 'ScrollConfig.dart';
+import '../../Core/State/State.dart';
 
 class CustomBottomDialog extends StatefulWidget {
   final List<Widget> viewList;
@@ -38,12 +38,12 @@ class CustomBottomDialog extends StatefulWidget {
 }
 
 class _CustomBottomDialogState extends State<CustomBottomDialog> {
-  late final RxBool isChecked;
+  late final Live<bool> isChecked;
 
   @override
   void initState() {
     super.initState();
-    isChecked = widget.checkChecked.obs;
+    isChecked = widget.checkChecked.live;
   }
 
   @override
@@ -145,7 +145,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: Obx(() {
+                  child: Watch(() {
                     return Row(
                       children: [
                         Checkbox(

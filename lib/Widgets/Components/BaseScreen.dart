@@ -1,47 +1,38 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
 import '../../Api/Discord/PresenceScope.dart';
 import '../../Core/ThemeManager/GlassBackgroundSource.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Utils/Functions/GetXFunctions.dart';
 import 'CachedNetworkImage.dart';
+import '../../Core/State/State.dart';
 
 abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
   Widget buildContent(BuildContext context);
 
   DiscordPresence? get presence => null;
 
-  final _presenceTick = ValueNotifier<int>(0);
+  final _presenceTick = Trigger();
 
-  void refreshPresence() => _presenceTick.value++;
-
-  @override
-  void dispose() {
-    _presenceTick.dispose();
-    super.dispose();
-  }
+  void refreshPresence() => _presenceTick.fire();
 
   String? get glassBackgroundUrl => resolveGlassBackground();
 
   @override
   Widget build(BuildContext context) {
     final theme = find<ThemeController>();
-    final built = buildContent(context);
+    final built = Watch(() => buildContent(context));
     final content = presence == null
         ? built
-        : ValueListenableBuilder<int>(
-            valueListenable: _presenceTick,
-            builder: (_, _, child) =>
-                PresenceScope(presence: presence!, child: child!),
-            child: built,
-          );
+        : Watch(() {
+            _presenceTick.track();
+            return PresenceScope(presence: presence!, child: built);
+          });
 
     return SafeArea(
-      child: Obx(() {
+      child: Watch(() {
         final glass = theme.useGlassMode.value;
         return Stack(
           children: [
