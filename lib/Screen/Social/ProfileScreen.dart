@@ -20,6 +20,8 @@ import 'Components/ProfileHeader.dart';
 import 'Components/ProfileInfoTab.dart';
 import 'Components/ProfileStatsTab.dart';
 import 'SocialNavigation.dart';
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 
 class ProfileScreen extends StatefulWidget {
   final MediaService service;
@@ -168,7 +170,15 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   }
 
   @override
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing(
+      'Viewing a profile',
+      state: _user.value?.name ?? widget.name,
+    ),
+    child: _contentBody(context),
+  );
+
+  Widget _contentBody(BuildContext context) {
     if (_failed && _user.value == null) {
       return Scaffold(
         backgroundColor: Colors.transparent,

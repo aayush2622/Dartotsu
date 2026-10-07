@@ -85,6 +85,29 @@ class PrefName {
     false,
     PrefLocation.COMMON,
   );
+  static const discordRpc = Pref('discordRpc', false, PrefLocation.COMMON);
+  static const discordBrowsing = Pref(
+    'discordBrowsing',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordImages = Pref('discordImages', true, PrefLocation.COMMON);
+  static const discordButtons = Pref(
+    'discordButtons',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordTimer = Pref('discordTimer', true, PrefLocation.COMMON);
+  static const discordHideTitles = Pref(
+    'discordHideTitles',
+    false,
+    PrefLocation.COMMON,
+  );
+  static const discordActivity = Pref(
+    'discordActivity',
+    'auto',
+    PrefLocation.COMMON,
+  );
   static const offlineMode = Pref('offlineMode', false, PrefLocation.COMMON);
 
   static const lastBackupAt = Pref('lastBackupAt', '', PrefLocation.COMMON);

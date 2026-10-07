@@ -1,144 +1,105 @@
 import 'dart:async';
 
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter_discord_rpc_fork/flutter_discord_rpc.dart';
 import 'package:get/get.dart';
 
-import '../../../Core/Preferences/Incognito.dart';
-import '../../../Core/Services/Model/Media.dart';
+import '../../../Logger.dart';
 import '../BaseDiscordRPC.dart';
+import '../DiscordPresence.dart';
 
 class DesktopRPC extends GetxController implements BaseDiscordRPC {
-  final Completer<void> _ready = Completer<void>();
+  static const _appId = '1453704458012856401';
+  static const _retryAfter = Duration(seconds: 10);
+
+  bool _connected = false;
+  bool _initialized = false;
   bool _disposed = false;
+  Future<bool>? _connecting;
+  DateTime? _failedAt;
 
-  bool _initializing = false;
-
-  @override
-  void onInit() {
-    super.onInit();
-    initialize();
+  Future<bool> _ensureConnected() {
+    if (_connected) return Future.value(true);
+    final failed = _failedAt;
+    if (failed != null && DateTime.now().difference(failed) < _retryAfter) {
+      return Future.value(false);
+    }
+    return _connecting ??= _connect().whenComplete(() => _connecting = null);
   }
 
-  Future<void> initialize() async {
-    if (_ready.isCompleted || _disposed || _initializing) return;
-    _initializing = true;
-
+  Future<bool> _connect() async {
     try {
-      await FlutterDiscordRPC.initialize("1453704458012856401");
+      if (!_initialized) {
+        await FlutterDiscordRPC.initialize(_appId);
+        _initialized = true;
+      }
       await FlutterDiscordRPC.instance.connect();
-
-      if (!_disposed && !_ready.isCompleted) {
-        _ready.complete();
-      }
+      _connected = true;
+      _failedAt = null;
     } catch (e) {
-      if (!_ready.isCompleted) {
-        _ready.completeError(e);
-      }
+      _failedAt = DateTime.now();
+      logger('Discord RPC connect failed: ${e.toString().split('\n').first}');
+    }
+    return _connected;
+  }
+
+  RPCActivity _activity(DiscordPresence p) => RPCActivity(
+    activityType: switch (p.type) {
+      PresenceType.playing => ActivityType.playing,
+      PresenceType.listening => ActivityType.listening,
+      PresenceType.watching => ActivityType.watching,
+    },
+    details: p.details,
+    state: p.state,
+    assets: RPCAssets(
+      largeImage: p.largeImage,
+      largeText: p.largeText,
+      smallImage: p.smallImage,
+      smallText: p.smallText,
+    ),
+    buttons: [for (final b in p.buttons) RPCButton(label: b.label, url: b.url)],
+    timestamps: p.start == null
+        ? null
+        : RPCTimestamps(start: p.start, end: p.end),
+  );
+
+  @override
+  Future<bool> show(DiscordPresence presence) async {
+    if (_disposed || !await _ensureConnected()) return false;
+    try {
+      await FlutterDiscordRPC.instance.setActivity(
+        activity: _activity(presence),
+      );
+      return true;
+    } catch (e) {
+      _connected = false;
+      _failedAt = DateTime.now();
+      logger('Discord RPC show failed: $e');
+      return false;
     }
   }
 
-  Future<void> get isReady => _ready.future;
-
   @override
-  Future<void> setRpc(
-    Media mediaData, {
-    DEpisode? episode,
-    int? currentTime,
-    int? endTime,
-  }) async {
-    if (isIncognito) return;
-    await isReady;
-    if (_disposed) return;
-
-    final isAnime = mediaData.anime != null;
-
-    final totalFromSource = isAnime
-        ? mediaData.anime?.episodes?.values.last.episodeNumber
-        : mediaData.manga?.chapters?.last.episodeNumber;
-
-    final totalFromMedia = isAnime
-        ? mediaData.anime?.totalEpisodes
-        : mediaData.manga?.totalChapters;
-
-    final total = (totalFromMedia ?? totalFromSource ?? "??").toString();
-
-    final now = DateTime.now();
-    final safeCurrent = (currentTime ?? 0).clamp(0, endTime ?? 1440);
-
-    final start = now.subtract(Duration(seconds: safeCurrent));
-    final end = now.add(Duration(seconds: (endTime ?? 1440) - safeCurrent));
-
-    _lastActivity = RPCActivity(
-      activityType: ActivityType.watching,
-      details: mediaData.mainName,
-      state:
-          "${isAnime ? "Episode" : "Chapter"}: ${episode?.episodeNumber ?? "?"}/$total",
-      assets: RPCAssets(
-        largeText: mediaData.mainName,
-        smallText: "Dartotsu",
-        largeImage: episode?.thumbnail ?? mediaData.cover,
-        smallImage:
-            "https://cdn.discordapp.com/emojis/1305525420938100787.gif?size=48&animated=true&name=dartotsu",
-      ),
-      buttons: [
-        RPCButton(
-          label: "View ${isAnime ? 'Anime' : 'Manga'}",
-          url: mediaData.shareLink,
-        ),
-        const RPCButton(
-          label: "Open Dartotsu",
-          url: "https://github.com/aayush2622/Dartotsu",
-        ),
-      ],
-      timestamps: RPCTimestamps(
-        start: start.millisecondsSinceEpoch,
-        end: end.millisecondsSinceEpoch,
-      ),
-    );
-
-    await FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
-  }
-
-  RPCActivity? _lastActivity;
-
-  @override
-  Future<void> pauseRpc() async {
-    await isReady;
-    if (_disposed) return;
-
-    await FlutterDiscordRPC.instance.clearActivity();
-  }
-
-  @override
-  Future<void> resumeRpc() async {
-    await isReady;
-    if (_disposed) return;
-    if (_lastActivity == null) return;
-    await FlutterDiscordRPC.instance.setActivity(activity: _lastActivity!);
-  }
-
-  @override
-  Future<void> removeRpc() async {
-    _lastActivity = null;
-    if (_disposed || !_ready.isCompleted) return;
-    await FlutterDiscordRPC.instance.clearActivity();
-  }
-
-  Future<void> _teardown() async {
-    if (_disposed) return;
-    _disposed = true;
-    if (!_ready.isCompleted) return;
+  Future<void> clear() async {
+    if (_disposed || !_connected) return;
     try {
       await FlutterDiscordRPC.instance.clearActivity();
-      await FlutterDiscordRPC.instance.disconnect();
-      await FlutterDiscordRPC.instance.dispose();
-    } catch (_) {}
+    } catch (e) {
+      logger('Discord RPC clear failed: $e');
+    }
   }
 
   @override
   void onClose() {
-    _teardown();
+    _disposed = true;
+    if (_connected) {
+      unawaited(() async {
+        try {
+          await FlutterDiscordRPC.instance.clearActivity();
+          await FlutterDiscordRPC.instance.disconnect();
+          await FlutterDiscordRPC.instance.dispose();
+        } catch (_) {}
+      }());
+    }
     super.onClose();
   }
 }

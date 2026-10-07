@@ -1,75 +1,55 @@
-import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
-import '../../../Core/Preferences/Incognito.dart';
-import '../../../Core/Services/Model/Media.dart';
+import '../../../Logger.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../BaseDiscordRPC.dart';
+import '../DiscordPresence.dart';
 import 'TokenManager.dart';
 
 class MobileRPC extends GetxController implements BaseDiscordRPC {
   final NetworkManager network = find();
   final MobileTokenManager tokenManager = MobileTokenManager();
-  String? _activityToken;
+  String? _sessionToken;
+
+  Map<String, dynamic> _payload(DiscordPresence p) => {
+    'activities': [
+      {
+        'application_id': MobileTokenManager.clientId,
+        'name': p.name,
+        'details': p.details,
+        'state': ?p.state,
+        'type': p.type.code,
+        'platform': 'desktop',
+        if (p.start != null)
+          'timestamps': {'start': p.start, if (p.end != null) 'end': p.end},
+        'assets': {
+          'large_image': p.largeImage,
+          'large_text': p.largeText,
+          'small_image': p.smallImage,
+          'small_text': p.smallText,
+        },
+        'buttons': [
+          for (final b in p.buttons) {'label': b.label, 'url': b.url},
+        ],
+      },
+    ],
+    if (_sessionToken != null) 'token': _sessionToken,
+  };
 
   @override
-  Future<void> setRpc(
-    Media mediaData, {
-    DEpisode? episode,
-    int? currentTime,
-    int? endTime,
-  }) async {
-    if (isIncognito) return;
-    final token = await tokenManager.getToken();
-    final isAnime = mediaData.anime != null;
-
-    final now = DateTime.now().millisecondsSinceEpoch;
-    final start = now - ((currentTime ?? 0) * 1000);
-    final end = endTime != null
-        ? now + ((endTime - (currentTime ?? 0)) * 1000)
-        : null;
-
-    final payload = {
-      "activities": [
-        {
-          "application_id": MobileTokenManager.clientId,
-          "name": mediaData.mainName,
-          "details": mediaData.mainName,
-          "state":
-              "${isAnime ? "Episode" : "Chapter"} ${episode?.episodeNumber ?? "?"}",
-          "type": 3,
-          "timestamps": {"start": start, "end": ?end},
-          "platform": "desktop",
-          "assets": {
-            "large_image": episode?.thumbnail ?? mediaData.cover,
-            'large_text': mediaData.userPreferredName,
-            'small_image':
-                "https://cdn.discordapp.com/emojis/1305525420938100787.gif?size=48&animated=true&name=dartotsu",
-            'small_text': 'Dartotsu',
-          },
-          "buttons": [
-            {"label": "View Anime", "url": mediaData.shareLink},
-            {
-              "label": "Open Dartotsu",
-              "url": "https://github.com/aayush2622/Dartotsu",
-            },
-          ],
-        },
-      ],
-      if (_activityToken != null) "token": _activityToken,
-    };
-
+  Future<bool> show(DiscordPresence presence, {bool retry = true}) async {
+    if (!tokenManager.hasAuthToken) return true;
     try {
+      final token = await tokenManager.getToken();
       final res = await network.post(
-        "https://discord.com/api/v10/users/@me/headless-sessions",
+        'https://discord.com/api/v10/users/@me/headless-sessions',
         headers: {
-          "Authorization": "Bearer $token",
-          "Content-Type": "application/json",
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
         },
-        data: payload,
+        data: _payload(presence),
       );
-
       if (res.statusCode != 200) {
         throw NetworkException(
           statusCode: res.statusCode,
@@ -77,57 +57,46 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
           data: res.data,
         );
       }
-
-      _activityToken = res.data["token"];
+      _sessionToken = res.data['token'] as String?;
+      return true;
     } on NetworkException catch (e) {
-      if (e.statusCode == 401) {
+      if (e.statusCode == 401 && retry) {
         await tokenManager.clear();
-        return setRpc(
-          mediaData,
-          episode: episode,
-          currentTime: currentTime,
-          endTime: endTime,
-        );
+        return show(presence, retry: false);
       }
-      rethrow;
+      logger('Discord RPC show failed: ${e.statusCode}');
+    } catch (e) {
+      logger('Discord RPC show failed: $e');
     }
+    return false;
   }
 
   @override
-  Future<void> pauseRpc() async {
-    if (_activityToken == null) return;
-
-    final token = await tokenManager.getToken();
-
+  Future<void> clear() async {
+    final session = _sessionToken;
+    if (session == null || !tokenManager.hasAuthToken) return;
+    _sessionToken = null;
     try {
+      final token = await tokenManager.getToken();
       await network.post(
-        "https://discord.com/api/v10/users/@me/headless-sessions/delete",
-        headers: {"Authorization": "Bearer $token"},
-        data: {"token": _activityToken},
+        'https://discord.com/api/v10/users/@me/headless-sessions/delete',
+        headers: {'Authorization': 'Bearer $token'},
+        data: {'token': session},
       );
-    } finally {
-      _activityToken = null;
+    } catch (e) {
+      logger('Discord RPC clear failed: $e');
     }
-  }
-
-  @override
-  Future<void> resumeRpc() async {
-    // caller should re-send setRpc()
-  }
-
-  @override
-  Future<void> removeRpc() async {
-    await pauseRpc();
   }
 
   Future<void> logout() async {
-    await pauseRpc();
+    await clear();
     await tokenManager.clear();
+    tokenManager.removeAuthToken();
   }
 
   @override
   void onClose() {
-    removeRpc();
+    clear();
     super.onClose();
   }
 }

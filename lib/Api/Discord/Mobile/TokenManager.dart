@@ -13,14 +13,25 @@ class MobileTokenManager {
   static const redirectUri = "https://login.premid.app";
   static const scopes = ["identify", "activities.write"];
 
-  late final String? authToken;
   final NetworkManager network = find();
 
   String? _accessToken;
   Completer<String>? _refreshCompleter;
 
-  MobileTokenManager() {
-    authToken = loadCustomData<String>('DiscordToken');
+  static const _authKey = 'DiscordToken';
+
+  String? get authToken => loadCustomData<String>(_authKey);
+
+  static bool get saved => (loadCustomData<String>(_authKey) ?? '').isNotEmpty;
+
+  bool get hasAuthToken => saved;
+
+  static void saveAuthToken(String token) =>
+      saveCustomData<String>(_authKey, token.trim());
+
+  void removeAuthToken() {
+    removeCustomData(_authKey);
+    _accessToken = null;
   }
 
   Future<String> getToken() async {

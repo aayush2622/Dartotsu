@@ -13,6 +13,8 @@ import 'SettingsListView.dart';
 import 'SettingsCategories.dart';
 import 'SettingsCategoryScreen.dart';
 import 'Widgets/DonateSheet.dart';
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -36,7 +38,12 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen> {
   }
 
   @override
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing('Tweaking settings'),
+    child: _contentBody(context),
+  );
+
+  Widget _contentBody(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SettingsListView(

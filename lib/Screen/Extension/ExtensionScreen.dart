@@ -21,6 +21,8 @@ import '../../Widgets/Components/ThemedContainer.dart';
 import 'ExtensionList.dart';
 import 'Widgets/ExtensionManagerSheet.dart';
 import '../../Widgets/Components/AppTabs.dart';
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 
 class ExtensionScreen extends StatefulWidget {
   const ExtensionScreen({super.key});
@@ -73,7 +75,12 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   ItemType get _currentType => _tabOrder[_currentIndex.value ~/ 2];
 
   @override
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing('Browsing extensions'),
+    child: _contentBody(context),
+  );
+
+  Widget _contentBody(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: PreferredSize(

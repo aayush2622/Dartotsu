@@ -21,6 +21,8 @@ import '../Social/SocialNavigation.dart';
 import '../Widgets/Components/DataSection.dart';
 import '../Widgets/ScreenWidgetView.dart';
 import 'Components/EntityHeader.dart';
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 
 class EntityScreen extends StatefulWidget {
   final EntityScreenView view;
@@ -168,7 +170,15 @@ class _EntityScreenState extends BaseScreen<EntityScreen> {
   }
 
   @override
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing(
+      'Viewing a ${widget.kind.name}',
+      state: widget.name,
+    ),
+    child: _contentBody(context),
+  );
+
+  Widget _contentBody(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: RefreshIndicator(

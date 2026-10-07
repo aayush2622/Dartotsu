@@ -7,6 +7,8 @@ import '../../Widgets/Components/BaseScreen.dart';
 import 'Components/ActivityComposer.dart';
 import 'Components/ActivityList.dart';
 import 'SocialNavigation.dart';
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 
 class ActivityFeedScreen extends StatefulWidget {
   final MediaService service;
@@ -33,7 +35,12 @@ class _ActivityFeedScreenState extends BaseScreen<ActivityFeedScreen>
   }
 
   @override
-  Widget buildContent(BuildContext context) {
+  Widget buildContent(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing('Reading the activity feed'),
+    child: _contentBody(context),
+  );
+
+  Widget _contentBody(BuildContext context) {
     final service = widget.service;
     if (widget.activityId != null) {
       return Scaffold(

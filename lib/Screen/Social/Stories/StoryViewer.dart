@@ -25,6 +25,8 @@ import '../../../Widgets/Components/UserAvatar.dart';
 import '../Components/UserListSheet.dart';
 import '../SocialNavigation.dart';
 import 'StorySeen.dart';
+import '../../../Api/Discord/DiscordPresence.dart';
+import '../../../Api/Discord/PresenceScope.dart';
 
 class StoryViewer extends StatefulWidget {
   final MediaService service;
@@ -87,7 +89,12 @@ class _StoryViewerState extends State<StoryViewer> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => PresenceScope(
+    presence: DiscordPresence.browsing('Watching stories'),
+    child: _buildViewer(context),
+  );
+
+  Widget _buildViewer(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     final progress = (_drag / (size.height * 0.5)).clamp(0.0, 1.0);
     return Scaffold(

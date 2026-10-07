@@ -8,6 +8,8 @@ import '../Utils/Functions/GetXFunctions.dart';
 import '../Widgets/Components/BaseScreen.dart';
 import 'Feed/FeedTabs.dart';
 import 'Navbar.dart';
+import '../Api/Discord/DiscordPresence.dart';
+import '../Api/Discord/PresenceScope.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -80,7 +82,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
       );
     });
 
-    return Stack(
+    final stack = Stack(
       children: [
         Row(
           children: [
@@ -91,5 +93,17 @@ class MainScreenState extends BaseScreen<MainScreen> {
         if (context.isPhone) _navbar,
       ],
     );
+    return Obx(() {
+      final tabs = feedTabsFor(_services.currentService.value);
+      final label = tabs[_tab.value.clamp(0, tabs.length - 1)].label;
+      return PresenceScope(
+        presence: DiscordPresence.browsing(
+          label.toLowerCase() == 'home'
+              ? 'On the home screen'
+              : 'Browsing ${label.toLowerCase()}',
+        ),
+        child: stack,
+      );
+    });
   }
 }

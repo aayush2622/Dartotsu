@@ -35,6 +35,7 @@ import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/NavigateToScreen.dart';
+import 'Api/Discord/DiscordPresenceController.dart';
 import 'Core/Services/ActivityAlerts.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'Widgets/Components/ScrollConfig.dart';
@@ -121,6 +122,7 @@ Future<void> _postInit(List<String> args) async {
   }
   unawaited(find<AppUpdater>().checkForUpdate());
   find<ActivityAlerts>().start();
+  find<DiscordPresenceController>().start();
 }
 
 class MyApp extends StatefulWidget {

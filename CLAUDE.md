@@ -381,13 +381,25 @@ guarded by a `Completer` so `recordError` awaits init and silently no-ops if Fir
 `Core/Analytics/FirebaseOptions.dart` is the generated `flutterfire` config. `firebase_analytics`
 is a dependency but not yet used. (`main` has no Firebase — it does manual crash logging.)
 
+### Discord Rich Presence — `Api/Discord/`
+
+`DiscordPresence` is the immutable data class (browsing / viewing / consuming factories; `live` presences
+carry timestamps that shift after a pause). `BaseDiscordRPC` is just `show(presence)` / `clear()`
+(`DesktopRPC` over IPC with lazy reconnect, `MobileRPC` over the headless-sessions API with the user's
+Discord token). `DiscordPresenceController` (lazyPut, `start()` in `_postInit`) owns the presence stack,
+debounces updates, clears on app background / `hold()` and re-shows on resume / `release()`, and goes quiet
+for the `discordRpc` pref, `discordBrowsing` pref and incognito. Screens publish what you are doing with
+`PresenceScope(presence:, child:)` (top of the stack wins); the player/reader should push
+`DiscordPresence.consuming(...)` and call `hold()` / `release()` on pause / resume. Settings live in
+Account › Discord Rich Presence sub-screen (`Screen/Settings/Categories/DiscordSettings.dart`: enable, browsing activity, activity type, covers, timer, buttons, hide titles, mobile token; the look prefs are applied by `DiscordPresence.styled`).
+
 ### Notifications — `NotificationManager`
 
 **`Core/NotificationManager/NotificationManager.dart`** (GetxController, `permanent`,
-`.initialize()` from `DI.init`). Wraps `flutter_local_notifications` with a large typed API
-(`show`, `bigText`, `inbox`, `progress`, `media`/`mediaPlayback`, `messaging`, `schedule`/
-`alarm`/`periodically`, groups, channels). `NotificationChannel` enum, `NotificationIds`
-constants, `NotificationOptions` builder. Timezone set up via `flutter_timezone`.
+`.initialize()` from `DI.init`) — deliberately small: `initialize`, `requestPermission`,
+`show(title, body, {id, payload})`, `cancel`, `cancelAll` and a `tapped` payload observable over
+`flutter_local_notifications`. Its only caller is `Core/Services/ActivityAlerts` (unread AniList
+notifications → system notifications). Add helpers only when a feature needs them.
 
 ### Logging
 

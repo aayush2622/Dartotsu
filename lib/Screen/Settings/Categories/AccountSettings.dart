@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaServiceController.dart';
 import '../../../Core/Services/ServiceSwitcher.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -8,6 +9,8 @@ import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
+import '../SubSettingsScreen.dart';
+import 'DiscordSettings.dart';
 
 List<Setting> accountSettings(BuildContext context) {
   final service = find<MediaServiceController>().currentService.value;
@@ -41,6 +44,18 @@ List<Setting> accountSettings(BuildContext context) {
           navigateToPage(context, const LoginScreen());
         }
       },
+    ),
+    Setting.normal(
+      name: 'Discord Rich Presence',
+      description: PrefName.discordRpc.rx.value
+          ? 'On · tap to change how it looks'
+          : 'Show what you are doing on your Discord profile',
+      icon: Icons.sports_esports_rounded,
+      isActivity: true,
+      onClick: () => navigateToPage(
+        context,
+        const SubSettingsScreen(title: 'Discord', settings: discordSettings),
+      ),
     ),
   ];
 }
