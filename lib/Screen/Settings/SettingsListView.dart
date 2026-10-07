@@ -6,7 +6,7 @@ import '../../Model/Setting.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
-import 'Widgets/SettingsAdaptor.dart';
+import 'Widgets/SettingsGroup.dart';
 import 'Widgets/SettingsSearchField.dart';
 import '../../Core/State/State.dart';
 
@@ -19,7 +19,7 @@ class SettingsListView extends StatefulWidget {
   /// the first sliver instead of leaving the caller's own [Scaffold.appBar].
   final String? title;
 
-  /// Replaces the default [SettingsAdaptor] list for the empty-query state
+  /// Replaces the default [SettingsGroup] list for the empty-query state
   /// (e.g. the top-level screen's category picker instead of a flat list).
   final WidgetBuilder? emptyBuilder;
 
@@ -60,7 +60,7 @@ class _SettingsListViewState extends State<SettingsListView> {
                 final q = _query.value;
                 if (q.isEmpty) {
                   return widget.emptyBuilder?.call(context) ??
-                      SettingsAdaptor(
+                      SettingsGroup(
                         settings: (widget.menu ?? widget.searchable)(context),
                       );
                 }
@@ -78,7 +78,7 @@ class _SettingsListViewState extends State<SettingsListView> {
                     ),
                   );
                 }
-                return SettingsAdaptor(settings: filtered);
+                return SettingsGroup(settings: filtered);
               }),
             ]),
           ),

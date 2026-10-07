@@ -7,10 +7,10 @@ import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/ThemedContainer.dart';
 import 'SettingItem.dart';
 
-class SettingsAdaptor extends StatelessWidget {
+class SettingsGroup extends StatelessWidget {
   final List<Setting> settings;
 
-  const SettingsAdaptor({super.key, required this.settings});
+  const SettingsGroup({super.key, required this.settings});
 
   @override
   Widget build(BuildContext context) {

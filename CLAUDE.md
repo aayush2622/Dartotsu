@@ -304,11 +304,11 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
     tags vocab — service-defined, `SearchFilterSpec.none` hides the tune button).
   - `Screen/Notifications/NotificationsScreen.dart` (grouped, `_row` builder).
 - **`Screen/Settings/`** — data-driven, `main`-style. `Model/Setting.dart` (`SettingType`
-  header/normal/switchType/slider/inputBox/custom) → `Widgets/Settings/SettingsAdaptor` (one
+  header/normal/switchType/slider/inputBox/custom) → `Widgets/Settings/SettingsGroup` (one
   card per `Setting`) + `SettingItem` renderers. `SettingsCategories.dart` holds a
   `SettingsCategory` registry + a `List<Setting>` builder per category; `SettingsScreen` is
   the category menu, each row opens `SettingsCategoryScreen`. `Widgets/Settings/SettingsListView`
-  (shared) = a search field over `SettingsAdaptor` — the top screen searches every category at
+  (shared) = a search field over `SettingsGroup` — the top screen searches every category at
   once (flat, headered), a sub-screen just its own.
 
 ### Social (profiles, activity, stories)
@@ -540,7 +540,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
 - `media_kit` (3 packages) and `flutter_discord_rpc_fork` are git deps; `flutter_web_auth_2`
   is a personal fork. `dependency_overrides` only pins `collection`. Treat `pubspec.yaml`
   changes as high-risk.
-- No test suite (`test/widget_test.dart` is the Flutter template).
+- Tests: `flutter test` runs `test/core_state_test.dart` (the `Core/State` engine); there is no UI test suite.
 
 ## The `main` branch (current app — reference for porting)
 

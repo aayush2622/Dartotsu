@@ -679,4 +679,152 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get sectionDnsProxy => 'DNS & Proxy';
+
+  @override
+  String get onboardingBack => 'Back';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingSkip => 'Skip';
+
+  @override
+  String get onboardingPaletteTitle => 'Make it yours';
+
+  @override
+  String get onboardingPaletteBody =>
+      'Pick a palette. Every accent, from cards to the player, follows it.';
+
+  @override
+  String get themeModeAuto => 'Auto';
+
+  @override
+  String get themeModeLight => 'Light';
+
+  @override
+  String get themeModeDark => 'Dark';
+
+  @override
+  String get onboardingSyncTitle => 'Sync your library';
+
+  @override
+  String get onboardingSyncBody =>
+      'Sign in with AniList to bring your lists, progress and scores with you. Or skip and browse as a guest.';
+
+  @override
+  String get onboardingOpenLinks => 'Open AniList and repo links in Dartotsu';
+
+  @override
+  String get linkOpenInApp => 'Open links in Dartotsu';
+
+  @override
+  String get linkOpenInAppDesc => 'Let AniList and repo links open the app';
+
+  @override
+  String get linkOpenAnilist => 'Open AniList links in Dartotsu';
+
+  @override
+  String get linkOpenAnilistDesc =>
+      'Turn on link handling so anilist.co links open the app';
+
+  @override
+  String get linkSettingsFailed => 'Could not open the system settings';
+
+  @override
+  String get discordRichPresence => 'Rich Presence';
+
+  @override
+  String get discordRichPresenceTokenDesc =>
+      'Show what you are doing on your Discord profile. Needs your Discord token.';
+
+  @override
+  String get discordRichPresenceDesktopDesc =>
+      'Show what you are doing on your Discord profile. Needs the Discord desktop app running.';
+
+  @override
+  String get discordBrowsing => 'Show browsing activity';
+
+  @override
+  String get discordBrowsingDesc =>
+      'Also show the tab, page or profile you are looking at, not only what you watch or read.';
+
+  @override
+  String get discordLookHeader => 'Presence look';
+
+  @override
+  String get discordActivityType => 'Activity type';
+
+  @override
+  String get discordActivityTypeDesc =>
+      'How Discord words it: \"Watching …\" or \"Playing …\". Auto uses Watching for anime and Playing for everything else.';
+
+  @override
+  String get discordWatching => 'Watching';
+
+  @override
+  String get discordPlaying => 'Playing';
+
+  @override
+  String get discordCovers => 'Show covers';
+
+  @override
+  String get discordCoversDesc =>
+      'Cover art and the Dartotsu icon on the card.';
+
+  @override
+  String get discordTimer => 'Show timer';
+
+  @override
+  String get discordTimerDesc => 'Elapsed or remaining time under the title.';
+
+  @override
+  String get discordButtons => 'Show buttons';
+
+  @override
+  String get discordButtonsDesc =>
+      '\"View anime / manga\" and \"Open Dartotsu\" buttons.';
+
+  @override
+  String get discordHideTitles => 'Hide titles';
+
+  @override
+  String get discordHideTitlesDesc =>
+      'Replace anime and manga names (and their cover and link) with \"Something private\".';
+
+  @override
+  String get discordConnectionHeader => 'Connection';
+
+  @override
+  String get discordToken => 'Discord token';
+
+  @override
+  String get discordTokenSaved =>
+      'Saved. Tap to replace, long press to remove.';
+
+  @override
+  String get discordTokenNotSet => 'Not set. Tap to add.';
+
+  @override
+  String get discordTokenPrompt =>
+      'Paste the token of the Discord account to show the presence on. It stays on this device.';
+
+  @override
+  String get discordTokenHint => 'Token';
+
+  @override
+  String get discordTokenSavedSnack => 'Discord token saved';
+
+  @override
+  String get discordTokenRemovedSnack => 'Discord token removed';
+
+  @override
+  String get discordRichPresenceRow => 'Discord Rich Presence';
+
+  @override
+  String get discordRichPresenceRowOn => 'On · tap to change how it looks';
+
+  @override
+  String get discordRichPresenceRowOff =>
+      'Show what you are doing on your Discord profile';
 }

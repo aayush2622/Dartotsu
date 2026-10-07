@@ -67,9 +67,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               showNextButton: true,
               showBackButton: true,
               allowImplicitScrolling: true,
-              overrideBack: (c, cb) => _navButton(cb, 'Back'),
-              overrideNext: (c, cb) => _navButton(cb, 'Next', autoFocus: true),
-              overrideSkip: (c, cb) => _navButton(cb, 'Skip'),
+              overrideBack: (c, cb) => _navButton(cb, getString.onboardingBack),
+              overrideNext: (c, cb) =>
+                  _navButton(cb, getString.onboardingNext, autoFocus: true),
+              overrideSkip: (c, cb) => _navButton(cb, getString.onboardingSkip),
               overrideDone: (c, cb) => _navButton(cb, getString.getStarted),
               onDone: _finish,
               onSkip: _finish,
@@ -155,12 +156,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   PageViewModel _page1() => _pageOf(
     index: 1,
     icon: Icons.palette_rounded,
-    title: const Text('Make it yours'),
+    title: Text(getString.onboardingPaletteTitle),
     body: [
-      const Text(
-        'Pick a palette. Every accent, from cards to the player, follows it.',
-        textAlign: TextAlign.center,
-      ),
+      Text(getString.onboardingPaletteBody, textAlign: TextAlign.center),
       const SizedBox(height: 20),
       ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 320),
@@ -199,21 +197,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           () => AppSegmented<ThemeModePref>(
             value: _theme.mode.value,
             onChanged: _theme.setThemeMode,
-            segments: const [
+            segments: [
               AppSegment(
                 ThemeModePref.system,
                 icon: Icons.brightness_auto_rounded,
-                label: 'Auto',
+                label: getString.themeModeAuto,
               ),
               AppSegment(
                 ThemeModePref.light,
                 icon: Icons.light_mode_rounded,
-                label: 'Light',
+                label: getString.themeModeLight,
               ),
               AppSegment(
                 ThemeModePref.dark,
                 icon: Icons.dark_mode_rounded,
-                label: 'Dark',
+                label: getString.themeModeDark,
               ),
             ],
           ),
@@ -224,7 +222,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         constraints: const BoxConstraints(maxWidth: 320),
         child: Watch(
           () => SwitchListTile(
-            title: const Text('Glass mode'),
+            title: Text(getString.glassMode),
             value: _theme.useGlassMode.value,
             onChanged: _theme.setGlassEffect,
           ),
@@ -236,13 +234,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   PageViewModel _page2() => _pageOf(
     index: 2,
     icon: Icons.sync_rounded,
-    title: const Text('Sync your library'),
+    title: Text(getString.onboardingSyncTitle),
     body: [
-      const Text(
-        'Sign in with AniList to bring your lists, progress and scores '
-        'with you. Or skip and browse as a guest.',
-        textAlign: TextAlign.center,
-      ),
+      Text(getString.onboardingSyncBody, textAlign: TextAlign.center),
       Watch(
         () => Column(
           mainAxisSize: MainAxisSize.min,

@@ -315,10 +315,14 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     final fn = _loadMoreFns[title];
     if (fn == null) return null;
     final page = (_pages[title] ?? 1) + 1;
-    final more = await fn(page);
-    if (more == null || more.isEmpty) return null;
     _pages[title] = page;
-    return more;
+    try {
+      final more = await fn(page);
+      return more == null || more.isEmpty ? null : more;
+    } catch (_) {
+      if (_pages[title] == page) _pages[title] = page - 1;
+      rethrow;
+    }
   }
 
   @override

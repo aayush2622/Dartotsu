@@ -1432,6 +1432,276 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'DNS & Proxy'**
   String get sectionDnsProxy;
+
+  /// No description provided for @onboardingBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get onboardingBack;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get onboardingSkip;
+
+  /// No description provided for @onboardingPaletteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Make it yours'**
+  String get onboardingPaletteTitle;
+
+  /// No description provided for @onboardingPaletteBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a palette. Every accent, from cards to the player, follows it.'**
+  String get onboardingPaletteBody;
+
+  /// No description provided for @themeModeAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get themeModeAuto;
+
+  /// No description provided for @themeModeLight.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeModeLight;
+
+  /// No description provided for @themeModeDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeModeDark;
+
+  /// No description provided for @onboardingSyncTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync your library'**
+  String get onboardingSyncTitle;
+
+  /// No description provided for @onboardingSyncBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with AniList to bring your lists, progress and scores with you. Or skip and browse as a guest.'**
+  String get onboardingSyncBody;
+
+  /// No description provided for @onboardingOpenLinks.
+  ///
+  /// In en, this message translates to:
+  /// **'Open AniList and repo links in Dartotsu'**
+  String get onboardingOpenLinks;
+
+  /// No description provided for @linkOpenInApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Open links in Dartotsu'**
+  String get linkOpenInApp;
+
+  /// No description provided for @linkOpenInAppDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Let AniList and repo links open the app'**
+  String get linkOpenInAppDesc;
+
+  /// No description provided for @linkOpenAnilist.
+  ///
+  /// In en, this message translates to:
+  /// **'Open AniList links in Dartotsu'**
+  String get linkOpenAnilist;
+
+  /// No description provided for @linkOpenAnilistDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn on link handling so anilist.co links open the app'**
+  String get linkOpenAnilistDesc;
+
+  /// No description provided for @linkSettingsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not open the system settings'**
+  String get linkSettingsFailed;
+
+  /// No description provided for @discordRichPresence.
+  ///
+  /// In en, this message translates to:
+  /// **'Rich Presence'**
+  String get discordRichPresence;
+
+  /// No description provided for @discordRichPresenceTokenDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show what you are doing on your Discord profile. Needs your Discord token.'**
+  String get discordRichPresenceTokenDesc;
+
+  /// No description provided for @discordRichPresenceDesktopDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show what you are doing on your Discord profile. Needs the Discord desktop app running.'**
+  String get discordRichPresenceDesktopDesc;
+
+  /// No description provided for @discordBrowsing.
+  ///
+  /// In en, this message translates to:
+  /// **'Show browsing activity'**
+  String get discordBrowsing;
+
+  /// No description provided for @discordBrowsingDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Also show the tab, page or profile you are looking at, not only what you watch or read.'**
+  String get discordBrowsingDesc;
+
+  /// No description provided for @discordLookHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Presence look'**
+  String get discordLookHeader;
+
+  /// No description provided for @discordActivityType.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity type'**
+  String get discordActivityType;
+
+  /// No description provided for @discordActivityTypeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'How Discord words it: \"Watching …\" or \"Playing …\". Auto uses Watching for anime and Playing for everything else.'**
+  String get discordActivityTypeDesc;
+
+  /// No description provided for @discordWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching'**
+  String get discordWatching;
+
+  /// No description provided for @discordPlaying.
+  ///
+  /// In en, this message translates to:
+  /// **'Playing'**
+  String get discordPlaying;
+
+  /// No description provided for @discordCovers.
+  ///
+  /// In en, this message translates to:
+  /// **'Show covers'**
+  String get discordCovers;
+
+  /// No description provided for @discordCoversDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover art and the Dartotsu icon on the card.'**
+  String get discordCoversDesc;
+
+  /// No description provided for @discordTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Show timer'**
+  String get discordTimer;
+
+  /// No description provided for @discordTimerDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Elapsed or remaining time under the title.'**
+  String get discordTimerDesc;
+
+  /// No description provided for @discordButtons.
+  ///
+  /// In en, this message translates to:
+  /// **'Show buttons'**
+  String get discordButtons;
+
+  /// No description provided for @discordButtonsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'\"View anime / manga\" and \"Open Dartotsu\" buttons.'**
+  String get discordButtonsDesc;
+
+  /// No description provided for @discordHideTitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide titles'**
+  String get discordHideTitles;
+
+  /// No description provided for @discordHideTitlesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace anime and manga names (and their cover and link) with \"Something private\".'**
+  String get discordHideTitlesDesc;
+
+  /// No description provided for @discordConnectionHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
+  String get discordConnectionHeader;
+
+  /// No description provided for @discordToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord token'**
+  String get discordToken;
+
+  /// No description provided for @discordTokenSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. Tap to replace, long press to remove.'**
+  String get discordTokenSaved;
+
+  /// No description provided for @discordTokenNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set. Tap to add.'**
+  String get discordTokenNotSet;
+
+  /// No description provided for @discordTokenPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste the token of the Discord account to show the presence on. It stays on this device.'**
+  String get discordTokenPrompt;
+
+  /// No description provided for @discordTokenHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Token'**
+  String get discordTokenHint;
+
+  /// No description provided for @discordTokenSavedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord token saved'**
+  String get discordTokenSavedSnack;
+
+  /// No description provided for @discordTokenRemovedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord token removed'**
+  String get discordTokenRemovedSnack;
+
+  /// No description provided for @discordRichPresenceRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord Rich Presence'**
+  String get discordRichPresenceRow;
+
+  /// No description provided for @discordRichPresenceRowOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On · tap to change how it looks'**
+  String get discordRichPresenceRowOn;
+
+  /// No description provided for @discordRichPresenceRowOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Show what you are doing on your Discord profile'**
+  String get discordRichPresenceRowOff;
 }
 
 class _AppLocalizationsDelegate

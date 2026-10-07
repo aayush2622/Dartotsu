@@ -46,10 +46,10 @@ List<Setting> accountSettings(BuildContext context) {
       },
     ),
     Setting.normal(
-      name: 'Discord Rich Presence',
+      name: getString.discordRichPresenceRow,
       description: PrefName.discordRpc.rx.value
-          ? 'On · tap to change how it looks'
-          : 'Show what you are doing on your Discord profile',
+          ? getString.discordRichPresenceRowOn
+          : getString.discordRichPresenceRowOff,
       icon: Icons.sports_esports_rounded,
       isActivity: true,
       onClick: () => navigateToPage(

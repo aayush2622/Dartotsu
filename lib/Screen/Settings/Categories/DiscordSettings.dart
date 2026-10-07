@@ -12,92 +12,82 @@ import '../Widgets/SegmentedSetting.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Core/State/State.dart';
+import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 bool get _needsToken => Platform.isAndroid || Platform.isIOS;
 
 List<Setting> discordSettings(BuildContext context) {
   final on = PrefName.discordRpc.rx.value;
   final all = _discordSettings(context);
-  return [
-    for (final s in all)
-      if (s.name == 'Rich Presence' || on) s,
-  ];
+  return on ? all : [all.first];
 }
 
 List<Setting> _discordSettings(BuildContext context) => [
   Setting.switchType(
-    name: 'Rich Presence',
+    name: getString.discordRichPresence,
     description: _needsToken
-        ? 'Show what you are doing on your Discord profile. Needs your '
-              'Discord token.'
-        : 'Show what you are doing on your Discord profile. Needs the '
-              'Discord desktop app running.',
+        ? getString.discordRichPresenceTokenDesc
+        : getString.discordRichPresenceDesktopDesc,
     icon: Icons.sports_esports_rounded,
     isChecked: PrefName.discordRpc.rx.value,
     onSwitchChange: (v) => PrefName.discordRpc.rx.value = v,
   ),
   Setting.switchType(
-    name: 'Show browsing activity',
-    description:
-        'Also show the tab, page or profile you are looking at, not only '
-        'what you watch or read.',
+    name: getString.discordBrowsing,
+    description: getString.discordBrowsingDesc,
     icon: Icons.explore_rounded,
     isVisible: PrefName.discordRpc.rx.value,
     isChecked: PrefName.discordBrowsing.rx.value,
     onSwitchChange: (v) => PrefName.discordBrowsing.rx.value = v,
   ),
-  const Setting.header('Presence look'),
+  Setting.header(getString.discordLookHeader),
   segmentedSetting<String>(
-    name: 'Activity type',
-    description:
-        'How Discord words it: "Watching …" or "Playing …". Auto uses '
-        'Watching for anime and Playing for everything else.',
+    name: getString.discordActivityType,
+    description: getString.discordActivityTypeDesc,
     icon: Icons.sports_esports_rounded,
-    label: 'Activity type',
+    label: getString.discordActivityType,
     value: PrefName.discordActivity.rx.value,
     onChanged: (v) => PrefName.discordActivity.rx.value = v,
-    segments: const [
-      AppSegment('auto', label: 'Auto'),
-      AppSegment('watching', label: 'Watching'),
-      AppSegment('playing', label: 'Playing'),
+    segments: [
+      AppSegment('auto', label: getString.themeModeAuto),
+      AppSegment('watching', label: getString.discordWatching),
+      AppSegment('playing', label: getString.discordPlaying),
     ],
   ),
   Setting.switchType(
-    name: 'Show covers',
-    description: 'Cover art and the Dartotsu icon on the card.',
+    name: getString.discordCovers,
+    description: getString.discordCoversDesc,
     icon: Icons.image_rounded,
     isChecked: PrefName.discordImages.rx.value,
     onSwitchChange: (v) => PrefName.discordImages.rx.value = v,
   ),
   Setting.switchType(
-    name: 'Show timer',
-    description: 'Elapsed or remaining time under the title.',
+    name: getString.discordTimer,
+    description: getString.discordTimerDesc,
     icon: Icons.timer_outlined,
     isChecked: PrefName.discordTimer.rx.value,
     onSwitchChange: (v) => PrefName.discordTimer.rx.value = v,
   ),
   Setting.switchType(
-    name: 'Show buttons',
-    description: '"View anime / manga" and "Open Dartotsu" buttons.',
+    name: getString.discordButtons,
+    description: getString.discordButtonsDesc,
     icon: Icons.smart_button_rounded,
     isChecked: PrefName.discordButtons.rx.value,
     onSwitchChange: (v) => PrefName.discordButtons.rx.value = v,
   ),
   Setting.switchType(
-    name: 'Hide titles',
-    description:
-        'Replace anime and manga names (and their cover and link) with '
-        '"Something private".',
+    name: getString.discordHideTitles,
+    description: getString.discordHideTitlesDesc,
     icon: Icons.visibility_off_rounded,
     isChecked: PrefName.discordHideTitles.rx.value,
     onSwitchChange: (v) => PrefName.discordHideTitles.rx.value = v,
   ),
-  const Setting.header('Connection'),
+  Setting.header(getString.discordConnectionHeader),
   Setting.normal(
-    name: 'Discord token',
+    name: getString.discordToken,
     description: MobileTokenManager.saved
-        ? 'Saved. Tap to replace, long press to remove.'
-        : 'Not set. Tap to add.',
+        ? getString.discordTokenSaved
+        : getString.discordTokenNotSet,
     icon: Icons.key_rounded,
     isVisible: _needsToken && PrefName.discordRpc.rx.value,
     isActivity: true,
@@ -109,29 +99,26 @@ List<Setting> _discordSettings(BuildContext context) => [
 void _askToken(BuildContext context) {
   final controller = TextEditingController();
   AlertDialogBuilder(context)
-    ..setTitle('Discord token')
+    ..setTitle(getString.discordToken)
     ..setOnDismissListener(controller.dispose)
-    ..setMessage(
-      'Paste the token of the Discord account to show the presence on. It '
-      'stays on this device.',
-    )
+    ..setMessage(getString.discordTokenPrompt)
     ..setCustomView(
       TextField(
         controller: controller,
         obscureText: true,
         autocorrect: false,
         enableSuggestions: false,
-        decoration: const InputDecoration(hintText: 'Token'),
+        decoration: InputDecoration(hintText: getString.discordTokenHint),
       ),
     )
-    ..setPositiveButton('Save', () {
+    ..setPositiveButton(getString.save, () {
       final value = controller.text.trim();
       if (value.isEmpty) return;
       MobileTokenManager.saveAuthToken(value);
       _resetSession();
-      snackString('Discord token saved');
+      snackString(getString.discordTokenSavedSnack);
     })
-    ..setNegativeButton('Cancel', null)
+    ..setNegativeButton(getString.cancel, null)
     ..show();
 }
 
@@ -142,7 +129,7 @@ Future<void> _removeToken() async {
   } else {
     MobileTokenManager().removeAuthToken();
   }
-  snackString('Discord token removed');
+  snackString(getString.discordTokenRemovedSnack);
 }
 
 void _resetSession() {

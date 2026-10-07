@@ -2,7 +2,7 @@ import 'package:flutter/widgets.dart';
 
 enum SettingType { header, normal, switchType, slider, inputBox, custom }
 
-/// A single row of a settings screen, rendered by `SettingsAdaptor`.
+/// A single row of a settings screen, rendered by `SettingsGroup`.
 ///
 /// - [SettingType.header]: a plain section label (not a card, not searchable
 ///   on its own — shown only while a following row in its group matches)

@@ -19,8 +19,8 @@ import '../../../Core/State/State.dart';
 
 List<Setting> generalSettings(BuildContext context) => [
   Setting.normal(
-    name: 'Open links in Dartotsu',
-    description: 'Let AniList and repo links open the app',
+    name: getString.linkOpenInApp,
+    description: getString.linkOpenInAppDesc,
     icon: Icons.link_rounded,
     isVisible: canOpenLinkSettings,
     onClick: openLinkSettings,

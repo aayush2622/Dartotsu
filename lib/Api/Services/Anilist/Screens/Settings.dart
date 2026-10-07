@@ -1,3 +1,4 @@
+import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Functions/LinkSettings.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +57,8 @@ class AnilistSettingsView extends SettingsScreenView {
         onSwitchChange: (v) => PrefName.activityAlerts.rx.value = v,
       ),
       Setting.normal(
-        name: 'Open AniList links in Dartotsu',
-        description: 'Turn on link handling so anilist.co links open the app',
+        name: getString.linkOpenAnilist,
+        description: getString.linkOpenAnilistDesc,
         icon: Icons.link_rounded,
         isActivity: true,
         isVisible: canOpenLinkSettings,
