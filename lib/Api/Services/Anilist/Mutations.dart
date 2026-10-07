@@ -22,11 +22,22 @@ class AnilistMutations extends Mutations {
   AnilistMutations(this.client, {required this.userId});
 
   @override
-  Future<void> editList(Media media, {List<String>? customList}) =>
-      _editList(media, customList: customList);
+  Future<void> editList(Media media, {List<String>? customList}) async {
+    if (incognitoBlocksEdits) {
+      snackString('Incognito: list edits are blocked');
+      return;
+    }
+    await _editList(media, customList: customList);
+  }
 
   @override
-  Future<void> deleteFromList(Media media) => _deleteFromList(media);
+  Future<void> deleteFromList(Media media) async {
+    if (incognitoBlocksEdits) {
+      snackString('Incognito: list edits are blocked');
+      return;
+    }
+    await _deleteFromList(media);
+  }
 
   Future<bool?> toggleFollow(String userId) => _toggleFollow(userId);
 

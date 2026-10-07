@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
@@ -52,7 +53,8 @@ class ProfileCard extends StatelessWidget {
 
   Widget _banner(ColorScheme scheme, {double? cacheWidth}) {
     final fill = ColoredBox(color: scheme.secondaryContainer);
-    if (skeleton || banner == null || banner!.isEmpty) return fill;
+    if (skeleton) return Skeleton.leaf(child: fill);
+    if (banner == null || banner!.isEmpty) return fill;
     return cachedNetworkImage(
       imageUrl: banner,
       fit: BoxFit.cover,
@@ -134,12 +136,14 @@ class ProfileCard extends StatelessWidget {
                     color: scheme.surfaceContainerHigh,
                   ),
                   child: skeleton
-                      ? SizedBox.square(
-                          dimension: _avatarD - 6,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: scheme.surfaceContainerHighest,
+                      ? Skeleton.leaf(
+                          child: SizedBox.square(
+                            dimension: _avatarD - 6,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: scheme.surfaceContainerHighest,
+                              ),
                             ),
                           ),
                         )
@@ -195,12 +199,14 @@ class ProfileCard extends StatelessWidget {
             child: Row(
               children: [
                 skeleton
-                    ? SizedBox.square(
-                        dimension: 58,
-                        child: DecoratedBox(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: scheme.surfaceContainerHighest,
+                    ? Skeleton.leaf(
+                        child: SizedBox.square(
+                          dimension: 58,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: scheme.surfaceContainerHighest,
+                            ),
                           ),
                         ),
                       )

@@ -28,6 +28,14 @@ class AnilistSocialView extends SocialScreenView {
       anilistAuth.queries.socialProfile(id: id, name: name);
 
   @override
+  Future<List<ServiceNotification>> activityAlerts() =>
+      anilistAuth.queries.activityAlerts();
+
+  @override
+  SocialProfile? cachedProfile(String id) =>
+      anilistAuth.queries.cachedSocialBundle(id);
+
+  @override
   Future<SocialProfile?> profileBundle({String? id, String? name}) =>
       anilistAuth.queries.socialBundle(id: id, name: name);
 

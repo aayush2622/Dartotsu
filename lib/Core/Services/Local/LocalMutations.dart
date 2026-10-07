@@ -16,6 +16,10 @@ class LocalMutations extends Mutations {
 
   @override
   Future<void> editList(Media media, {List<String>? customList}) async {
+    if (incognitoBlocksEdits) {
+      snackString('Incognito: list edits are blocked');
+      return;
+    }
     media.userStatus ??= 'CURRENT';
     _store(media).upsert(media);
     _signal();
@@ -23,6 +27,10 @@ class LocalMutations extends Mutations {
 
   @override
   Future<void> deleteFromList(Media media) async {
+    if (incognitoBlocksEdits) {
+      snackString('Incognito: list edits are blocked');
+      return;
+    }
     _store(media).remove(media.id);
     _signal();
   }

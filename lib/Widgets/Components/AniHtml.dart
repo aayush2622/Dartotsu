@@ -299,12 +299,9 @@ class _AniHtmlState extends State<AniHtml> {
       );
       if (hasContent) {
         out.add(
-          SizedBox(
-            width: double.infinity,
-            child: Text.rich(
-              TextSpan(children: _trim(inline), style: style),
-              textAlign: align,
-            ),
+          _Paragraph(
+            span: TextSpan(children: _trim(inline), style: style),
+            align: align,
           ),
         );
       }
@@ -324,7 +321,7 @@ class _AniHtmlState extends State<AniHtml> {
             centered: centered,
           );
           out.add(
-            _FloatFlow(right: side == 'right', float: image, children: rest),
+            _FloatFlow(right: side == 'right', float: image, blocks: rest),
           );
           break;
         }
@@ -429,6 +426,14 @@ class _AniHtmlState extends State<AniHtml> {
           centered: here,
         );
         if (children.isEmpty) return null;
+        if (children.length == 1 && children.first is _Paragraph) {
+          final only = children.first as _Paragraph;
+          return _Paragraph(
+            span: only.span,
+            align: only.align,
+            padding: const EdgeInsets.symmetric(vertical: 4),
+          );
+        }
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 4),
           child: SizedBox(
@@ -1126,14 +1131,256 @@ class _RemoteSvgState extends State<_RemoteSvg> {
   );
 }
 
-class _FloatFlow extends MultiChildRenderObjectWidget {
+class _Paragraph extends StatelessWidget {
+  final TextSpan span;
+  final TextAlign align;
+  final EdgeInsets padding;
+
+  const _Paragraph({
+    required this.span,
+    required this.align,
+    this.padding = EdgeInsets.zero,
+  });
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: padding,
+    child: SizedBox(
+      width: double.infinity,
+      child: Text.rich(span, textAlign: align),
+    ),
+  );
+}
+
+class _FloatFlow extends StatefulWidget {
+  final bool right;
+  final Widget float;
+  final List<Widget> blocks;
+
+  const _FloatFlow({
+    required this.right,
+    required this.float,
+    required this.blocks,
+  });
+
+  @override
+  State<_FloatFlow> createState() => _FloatFlowState();
+}
+
+class _FloatFlowState extends State<_FloatFlow> {
+  final _layoutKey = GlobalKey();
+  final _splits = <int, int>{};
+  var _order = <int>[];
+  double _width = -1;
+  bool _measuring = false;
+
+  static int _signature(List<Widget> blocks) => Object.hashAll([
+    blocks.length,
+    for (final b in blocks)
+      if (b is _Paragraph) b.span.toPlainText(includePlaceholders: true),
+  ]);
+
+  late int _sig = _signature(widget.blocks);
+
+  @override
+  void didUpdateWidget(_FloatFlow old) {
+    super.didUpdateWidget(old);
+    final next = _signature(widget.blocks);
+    if (next != _sig) {
+      _sig = next;
+      _splits.clear();
+    }
+  }
+
+  static bool _plain(InlineSpan span) {
+    var plain = true;
+    span.visitChildren((child) {
+      if (child is! TextSpan) plain = false;
+      return plain;
+    });
+    return plain;
+  }
+
+  static int _length(InlineSpan span) =>
+      span.toPlainText(includePlaceholders: true).length;
+
+  static TextSpan? _slice(TextSpan s, int start, int from, int to) {
+    var pos = start;
+    String? own;
+    final text = s.text ?? '';
+    if (text.isNotEmpty) {
+      final a = (from > pos ? from : pos) - pos;
+      final end = pos + text.length;
+      final b = (to < end ? to : end) - pos;
+      if (b > a) own = text.substring(a, b);
+      pos += text.length;
+    }
+    final kids = <InlineSpan>[];
+    for (final c in s.children ?? const <InlineSpan>[]) {
+      final length = _length(c);
+      if (c is TextSpan && pos + length > from && pos < to) {
+        final k = _slice(c, pos, from, to);
+        if (k != null) kids.add(k);
+      }
+      pos += length;
+    }
+    if (own == null && kids.isEmpty) return null;
+    return TextSpan(
+      text: own,
+      children: kids.isEmpty ? null : kids,
+      style: s.style,
+      recognizer: s.recognizer,
+      mouseCursor: s.mouseCursor,
+      semanticsLabel: s.semanticsLabel,
+    );
+  }
+
+  void _measure() {
+    if (!mounted || _measuring) return;
+    final render = _layoutKey.currentContext?.findRenderObject();
+    if (render is! _RenderFloatFlow || !render.hasSize) return;
+    final floatH = render.floatHeight;
+    final narrow = render.narrowWidth;
+    if (narrow <= 120) return;
+    final scaler = MediaQuery.textScalerOf(context);
+    var changed = false;
+    var index = 0;
+    var child = render.childAfter(render.firstChild!);
+    while (child != null && index < _order.length) {
+      final original = _order[index];
+      final data = child.parentData! as _FloatParentData;
+      final block = original >= 0 ? widget.blocks[original] : null;
+      final y = data.offset.dy;
+      if (block is _Paragraph &&
+          !data.full &&
+          y < floatH &&
+          y + child.size.height > floatH + 0.5 &&
+          _plain(block.span) &&
+          !_splits.containsKey(original)) {
+        final painter = TextPainter(
+          text: block.span,
+          textAlign: block.align,
+          textDirection: TextDirection.ltr,
+          textScaler: scaler,
+        )..layout(maxWidth: narrow);
+        final room = floatH - y - block.padding.top;
+        var used = 0.0;
+        var lines = 0;
+        for (final line in painter.computeLineMetrics()) {
+          if (used + line.height > room + 0.5) break;
+          used += line.height;
+          lines++;
+        }
+        final total = painter.computeLineMetrics().length;
+        if (lines < total) {
+          final at = lines == 0
+              ? 0
+              : painter
+                    .getPositionForOffset(Offset(1, used + 1))
+                    .offset
+                    .clamp(0, _length(block.span));
+          _splits[original] = at;
+          changed = true;
+        } else {
+          _splits[original] = -1;
+        }
+        painter.dispose();
+      }
+      child = render.childAfter(child);
+      index++;
+    }
+    if (changed) {
+      _measuring = true;
+      setState(() {});
+      WidgetsBinding.instance.addPostFrameCallback((_) => _measuring = false);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, box) {
+      if (box.maxWidth != _width) {
+        _width = box.maxWidth;
+        _splits.clear();
+      }
+      final children = <Widget>[widget.float];
+      _order = [];
+      for (var i = 0; i < widget.blocks.length; i++) {
+        final block = widget.blocks[i];
+        final at = _splits[i];
+        if (block is _Paragraph && at != null && at >= 0) {
+          final length = _length(block.span);
+          final head = at == 0 ? null : _slice(block.span, 0, 0, at);
+          final tail = at >= length ? null : _slice(block.span, 0, at, length);
+          if (head != null) {
+            children.add(
+              _Paragraph(
+                span: head,
+                align: block.align,
+                padding: EdgeInsets.only(
+                  left: block.padding.left,
+                  right: block.padding.right,
+                  top: block.padding.top,
+                ),
+              ),
+            );
+            _order.add(-1);
+          }
+          if (tail != null) {
+            children.add(
+              _FlowPart(
+                child: _Paragraph(
+                  span: tail,
+                  align: block.align,
+                  padding: EdgeInsets.only(
+                    left: block.padding.left,
+                    right: block.padding.right,
+                    bottom: block.padding.bottom,
+                  ),
+                ),
+              ),
+            );
+            _order.add(-1);
+          }
+          continue;
+        }
+        children.add(block);
+        _order.add(i);
+      }
+      WidgetsBinding.instance.addPostFrameCallback((_) => _measure());
+      return _FloatFlowLayout(
+        key: _layoutKey,
+        right: widget.right,
+        children: children,
+      );
+    },
+  );
+}
+
+class _FlowPart extends ParentDataWidget<_FloatParentData> {
+  const _FlowPart({required super.child});
+
+  @override
+  void applyParentData(RenderObject renderObject) {
+    final data = renderObject.parentData! as _FloatParentData;
+    if (!data.full) {
+      data.full = true;
+      renderObject.parent?.markNeedsLayout();
+    }
+  }
+
+  @override
+  Type get debugTypicalAncestorWidgetClass => _FloatFlowLayout;
+}
+
+class _FloatFlowLayout extends MultiChildRenderObjectWidget {
   final bool right;
 
-  _FloatFlow({
+  const _FloatFlowLayout({
+    super.key,
     required this.right,
-    required Widget float,
-    required List<Widget> children,
-  }) : super(children: [float, ...children]);
+    required super.children,
+  });
 
   @override
   RenderObject createRenderObject(BuildContext context) =>
@@ -1145,7 +1392,9 @@ class _FloatFlow extends MultiChildRenderObjectWidget {
   }
 }
 
-class _FloatParentData extends ContainerBoxParentData<RenderBox> {}
+class _FloatParentData extends ContainerBoxParentData<RenderBox> {
+  bool full = false;
+}
 
 class _RenderFloatFlow extends RenderBox
     with
@@ -1154,6 +1403,8 @@ class _RenderFloatFlow extends RenderBox
   static const _gap = 12.0;
 
   bool _right;
+  double floatHeight = 0;
+  double narrowWidth = 0;
 
   _RenderFloatFlow(this._right);
 
@@ -1194,6 +1445,8 @@ class _RenderFloatFlow extends RenderBox
     final floatW = float.size.width;
     final floatH = float.size.height;
     final narrow = (width - floatW - _gap).clamp(0.0, width);
+    floatHeight = floatH;
+    narrowWidth = narrow;
     (float.parentData! as _FloatParentData).offset = Offset(
       _right ? width - floatW : 0,
       0,
@@ -1201,7 +1454,10 @@ class _RenderFloatFlow extends RenderBox
     var y = 0.0;
     var child = childAfter(float);
     while (child != null) {
-      final beside = y < floatH && narrow > 120;
+      final beside =
+          !(child.parentData! as _FloatParentData).full &&
+          y < floatH &&
+          narrow > 120;
       final w = beside ? narrow : width;
       child.layout(BoxConstraints(maxWidth: w), parentUsesSize: true);
       (child.parentData! as _FloatParentData).offset = Offset(

@@ -35,6 +35,7 @@ import 'Utils/Functions/AppShortcuts.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/GetXFunctions.dart';
 import 'Utils/Functions/NavigateToScreen.dart';
+import 'Core/Services/ActivityAlerts.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
@@ -119,6 +120,7 @@ Future<void> _postInit(List<String> args) async {
     DeepLink.initVideoIntentListener(args);
   }
   unawaited(find<AppUpdater>().checkForUpdate());
+  find<ActivityAlerts>().start();
 }
 
 class MyApp extends StatefulWidget {

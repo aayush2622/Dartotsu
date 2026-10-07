@@ -6,6 +6,7 @@ import '../../Widgets/Components/AppTabs.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import 'Components/ActivityComposer.dart';
 import 'Components/ActivityList.dart';
+import 'SocialNavigation.dart';
 
 class ActivityFeedScreen extends StatefulWidget {
   final MediaService service;
@@ -49,6 +50,14 @@ class _ActivityFeedScreenState extends BaseScreen<ActivityFeedScreen>
       backgroundColor: Colors.transparent,
       appBar: AppScreenBar(
         title: 'Activity',
+        actions: [
+          if (service.socialView!.currentUserId != null)
+            IconButton(
+              tooltip: 'Messages',
+              icon: const Icon(Icons.mail_outline_rounded),
+              onPressed: () => openInbox(context, service),
+            ),
+        ],
         bottom: _global
             ? AppTabs(
                 controller: _tabs,

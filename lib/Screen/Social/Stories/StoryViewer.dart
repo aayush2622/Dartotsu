@@ -30,12 +30,14 @@ class StoryViewer extends StatefulWidget {
   final MediaService service;
   final List<StoryGroup> groups;
   final int initialGroup;
+  final ValueChanged<String>? onUserChanged;
 
   const StoryViewer({
     super.key,
     required this.service,
     required this.groups,
     this.initialGroup = 0,
+    this.onUserChanged,
   });
 
   @override
@@ -153,7 +155,10 @@ class _StoryViewerState extends State<StoryViewer> {
               controller: _pages,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: widget.groups.length,
-              onPageChanged: (i) => setState(() => _current = i),
+              onPageChanged: (i) {
+                setState(() => _current = i);
+                widget.onUserChanged?.call(widget.groups[i].user.id);
+              },
               itemBuilder: (context, i) => AnimatedBuilder(
                 animation: _pages,
                 builder: (context, child) {

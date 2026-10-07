@@ -5,8 +5,9 @@ extension on AnilistQueries {
     if (userId() == null) return const [];
     final data = await client.query(
       _queryNotifications,
-      variables: {'page': page},
+      variables: {'page': page, 'reset': page == 1},
     );
+    if (page == 1) unawaited(refreshUser());
     final list =
         ((data['Page'] as Map<String, dynamic>?)?['notifications'] as List?) ??
         const [];
@@ -19,9 +20,9 @@ extension on AnilistQueries {
 }
 
 const _queryNotifications = r'''
-query ($page: Int) {
+query ($page: Int, $reset: Boolean) {
   Page(page: $page, perPage: 30) {
-    notifications(resetNotificationCount: true) {
+    notifications(resetNotificationCount: $reset) {
       __typename
       ... on AiringNotification { id type episode createdAt media { id title { userPreferred } coverImage { large } } }
       ... on RelatedMediaAdditionNotification { id type createdAt media { id title { userPreferred } coverImage { large } } }

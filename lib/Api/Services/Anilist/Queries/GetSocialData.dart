@@ -62,6 +62,7 @@ extension on AnilistQueries {
       variables: {'id': userId, 'page': 1},
     );
     if (data['User'] == null) return null;
+    _cacheBundle(userId, data);
     final user = _profileFromData(data);
     SocialFavourites? favourites;
     try {
@@ -75,7 +76,99 @@ extension on AnilistQueries {
       user,
       favourites: favourites,
       history: _historyFromRows(rows),
+      stats: _statsFromUser(data['User'] as Map?),
     );
+  }
+
+  Future<List<ServiceNotification>> _activityAlerts() async {
+    if (userId() == null) return const [];
+    final data = await client.query(_queryUnreadAlerts);
+    final unread =
+        ((data['Viewer'] as Map<String, dynamic>?)?['unreadNotificationCount']
+                as num?)
+            ?.toInt() ??
+        0;
+    if (unread == 0) return const [];
+    final list =
+        ((data['Page'] as Map<String, dynamic>?)?['notifications'] as List?) ??
+        const [];
+    return list
+        .cast<Map<String, dynamic>>()
+        .map(parseAnilistNotification)
+        .whereType<ServiceNotification>()
+        .take(unread)
+        .toList();
+  }
+
+  static const _profileCap = 12;
+
+  String _bundleKey(Object id) => 'profileCache/$id';
+
+  void _cacheBundle(int userId, Map<String, dynamic> data) {
+    try {
+      saveCustomData<Map<String, dynamic>>(
+        _bundleKey(userId),
+        data,
+        location: PrefLocation.CACHE,
+      );
+      final index = [
+        for (final k
+            in loadCustomData<List<dynamic>>(
+                  'profileCache/index',
+                  location: PrefLocation.CACHE,
+                ) ??
+                const <dynamic>[])
+          k.toString(),
+      ]..remove('$userId');
+      index.insert(0, '$userId');
+      for (final stale in index.skip(_profileCap)) {
+        removeCustomData(_bundleKey(stale), location: PrefLocation.CACHE);
+      }
+      saveCustomData<List<String>>(
+        'profileCache/index',
+        index.take(_profileCap).toList(),
+        location: PrefLocation.CACHE,
+      );
+    } catch (_) {}
+  }
+
+  SocialFavourites _cachedFavourites(Map<String, dynamic>? favourites) {
+    bool more(String key) =>
+        ((favourites?[key] as Map?)?['pageInfo'] as Map?)?['hasNextPage'] ==
+        true;
+    final mapped = mapSocialFavourites(favourites);
+    return SocialFavourites(
+      animeHasMore: more('anime'),
+      mangaHasMore: more('manga'),
+      anime: mapped.anime,
+      manga: mapped.manga,
+      characters: mapped.characters,
+      staff: mapped.staff,
+      studios: mapped.studios,
+    );
+  }
+
+  SocialProfile? _cachedBundle(String id) {
+    try {
+      final raw = loadCustomData<Map<String, dynamic>>(
+        _bundleKey(id),
+        location: PrefLocation.CACHE,
+      );
+      if (raw == null || raw['User'] == null) return null;
+      final user = raw['User'] as Map<String, dynamic>;
+      return SocialProfile(
+        _profileFromData(raw),
+        favourites: _cachedFavourites(
+          user['favourites'] as Map<String, dynamic>?,
+        ),
+        history: _historyFromRows(
+          ((user['stats'] as Map?)?['activityHistory'] as List?) ?? const [],
+        ),
+        stats: _statsFromUser(user),
+      );
+    } catch (_) {
+      return null;
+    }
   }
 
   List<ActivityDay> _historyFromRows(List rows) => [
@@ -190,6 +283,9 @@ query (\$id: Int!, \$page: Int) {
     final filter = switch (scope) {
       ActivityScope.single => 'id: ${int.parse(activityId!)},',
       ActivityScope.user => 'userId: ${int.parse(userId!)},',
+      ActivityScope.inbox => 'type: MESSAGE, userId: ${int.parse(userId!)},',
+      ActivityScope.sent =>
+        'type: MESSAGE, messengerId: ${int.parse(userId!)},',
       ActivityScope.global => 'isFollowing: false, hasRepliesOrTypeText: true,',
       ActivityScope.following =>
         'isFollowing: true, type_in: [TEXT, ANIME_LIST, MANGA_LIST, MEDIA_LIST],',
@@ -265,8 +361,11 @@ query (\$id: Int) {
 ${anilistStatFragment()}''',
       variables: {'id': int.parse(id)},
     );
-    final stats =
-        (data['User'] as Map<String, dynamic>?)?['statistics'] as Map?;
+    return _statsFromUser(data['User'] as Map?);
+  }
+
+  UserStats? _statsFromUser(Map? user) {
+    final stats = user?['statistics'] as Map?;
     if (stats == null) return null;
     return UserStats(
       anime: mapStatSet(stats['anime'] as Map<String, dynamic>?),
@@ -360,6 +459,17 @@ __typename
   $anilistActivityLikes
 }''';
 
+final _queryUnreadAlerts = _queryNotifications
+    .replaceFirst(
+      r'query ($page: Int, $reset: Boolean) {',
+      'query {\n  Viewer { unreadNotificationCount }',
+    )
+    .replaceFirst(r'page: $page', 'page: 1')
+    .replaceFirst(
+      r'resetNotificationCount: $reset',
+      'resetNotificationCount: false',
+    );
+
 const _socialProfileFields = '''
     id name about(asHtml: true) bannerImage isFollowing isFollower isBlocked siteUrl
     avatar { medium large }
@@ -413,5 +523,7 @@ $_socialFollowCounts
 $_socialProfileFields
 $_socialFavouriteFields
     stats { activityHistory { date amount level } }
+    statistics { anime { ...UserStat } manga { ...UserStat } }
   }
-}''';
+}
+${anilistStatFragment()}''';

@@ -75,6 +75,16 @@ class PrefName {
   );
 
   static const incognito = Pref('incognito', false, PrefLocation.COMMON);
+  static const incognitoBlockEdits = Pref(
+    'incognitoBlockEdits',
+    false,
+    PrefLocation.COMMON,
+  );
+  static const activityAlerts = Pref(
+    'activityAlerts',
+    false,
+    PrefLocation.COMMON,
+  );
   static const offlineMode = Pref('offlineMode', false, PrefLocation.COMMON);
 
   static const lastBackupAt = Pref('lastBackupAt', '', PrefLocation.COMMON);

@@ -34,6 +34,34 @@ class _StoriesRowState extends State<StoriesRow> {
   List<StoryGroup>? _groups;
   StoryGroup? _own;
   bool _failed = false;
+  final _scroll = ScrollController();
+  static const _stride = 84.0;
+
+  @override
+  void dispose() {
+    _scroll.dispose();
+    super.dispose();
+  }
+
+  void _reveal(String userId) {
+    if (!_scroll.hasClients) return;
+    final items = [?_own, ..._ordered(StorySeen.read(widget.service))];
+    final index = items.indexWhere((g) => g.user.id == userId);
+    if (index < 0) return;
+    final position = _scroll.position;
+    final target =
+        (Dimens.pagePad +
+                index * _stride -
+                (position.viewportDimension - 70) / 2)
+            .clamp(0.0, position.maxScrollExtent);
+    unawaited(
+      _scroll.animateTo(
+        target,
+        duration: const Duration(milliseconds: 260),
+        curve: Curves.easeOutCubic,
+      ),
+    );
+  }
 
   @override
   void initState() {
@@ -100,6 +128,7 @@ class _StoriesRowState extends State<StoriesRow> {
         service: widget.service,
         groups: playable,
         initialGroup: index,
+        onUserChanged: _reveal,
       ),
       hero: true,
     );
@@ -142,6 +171,7 @@ class _StoriesRowState extends State<StoriesRow> {
         child: ScrollConfig(
           context,
           child: ListView.separated(
+            controller: _scroll,
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.symmetric(
               horizontal: Dimens.pagePad,

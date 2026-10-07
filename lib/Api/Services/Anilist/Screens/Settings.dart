@@ -1,3 +1,4 @@
+import '../../../../Core/Preferences/PrefManager.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/Services/MediaService.dart';
@@ -41,6 +42,17 @@ class AnilistSettingsView extends SettingsScreenView {
           AppSegment(QueryLoadMode.stacked, label: 'One big'),
           AppSegment(QueryLoadMode.sequential, label: 'Split'),
         ],
+      ),
+      const Setting.header('Social'),
+      Setting.switchType(
+        name: 'System notifications',
+        description:
+            'Show a notification for each unread AniList notification while '
+            'the app is running. Opening the notifications page marks them '
+            'read.',
+        icon: Icons.notifications_active_rounded,
+        isChecked: PrefName.activityAlerts.rx.value,
+        onSwitchChange: (v) => PrefName.activityAlerts.rx.value = v,
       ),
       const Setting.header('Feed layout'),
       Setting.normal(

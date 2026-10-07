@@ -3,6 +3,9 @@ import 'PrefManager.dart';
 
 bool get isIncognito => PrefName.incognito.value;
 
+bool get incognitoBlocksEdits =>
+    isIncognito && PrefName.incognitoBlockEdits.value;
+
 bool skipForIncognito([String? notice]) {
   if (!isIncognito) return false;
   if (notice != null) snackString(notice);

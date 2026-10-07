@@ -80,8 +80,9 @@ class SocialProfile {
   final SocialUser user;
   final SocialFavourites? favourites;
   final List<ActivityDay>? history;
+  final UserStats? stats;
 
-  const SocialProfile(this.user, {this.favourites, this.history});
+  const SocialProfile(this.user, {this.favourites, this.history, this.stats});
 }
 
 class ActivityDay {
@@ -135,7 +136,7 @@ class SocialFavourites {
 
 enum ActivityKind { text, list, message }
 
-enum ActivityScope { following, global, user, single }
+enum ActivityScope { following, global, user, single, inbox, sent }
 
 enum ActivityFilter { all, animeProgress, mangaProgress, messages }
 

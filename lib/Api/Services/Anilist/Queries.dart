@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -71,6 +72,10 @@ class AnilistQueries extends Queries {
       _socialProfile(id: id, name: name);
 
   Future<SocialFavourites> socialFavourites(String id) => _socialFavourites(id);
+
+  Future<List<ServiceNotification>> activityAlerts() => _activityAlerts();
+
+  SocialProfile? cachedSocialBundle(String id) => _cachedBundle(id);
 
   Future<SocialProfile?> socialBundle({String? id, String? name}) =>
       _socialBundle(id: id, name: name);

@@ -246,6 +246,10 @@ class SocialScreenView {
   Future<SocialFavourites> favourites(String userId) async =>
       const SocialFavourites();
 
+  SocialProfile? cachedProfile(String id) => null;
+
+  Future<List<ServiceNotification>> activityAlerts() async => const [];
+
   Future<SocialProfile?> profileBundle({String? id, String? name}) async {
     final user = await profile(id: id, name: name);
     if (user == null) return null;

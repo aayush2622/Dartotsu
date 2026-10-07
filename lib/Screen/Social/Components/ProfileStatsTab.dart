@@ -59,9 +59,12 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     setState(() => _failed = false);
     try {
       final view = widget.service.socialView!;
-      final preloaded = (await widget.bundle)?.history;
+      final bundled = await widget.bundle;
+      final preloaded = bundled?.history;
       final results = await Future.wait<Object?>([
-        view.stats(widget.userId),
+        bundled?.stats != null
+            ? Future.value(bundled!.stats)
+            : view.stats(widget.userId),
         preloaded != null
             ? Future.value(preloaded)
             : view

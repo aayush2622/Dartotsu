@@ -10,6 +10,7 @@ import '../../Widgets/Components/NotImplemented.dart';
 import '../Feed/FeedNavigation.dart';
 import 'ActivityFeedScreen.dart';
 import 'FollowScreen.dart';
+import 'InboxScreen.dart';
 import 'ProfileScreen.dart';
 
 void navigateToList(BuildContext context, Widget screen) =>
@@ -81,6 +82,11 @@ void openFollows(
       userName: title,
     ),
   );
+}
+
+void openInbox(BuildContext context, MediaService service) {
+  if (service.socialView == null) return;
+  navigateToPage(context, InboxScreen(service: service));
 }
 
 void openActivityFeed(

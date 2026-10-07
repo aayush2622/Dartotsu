@@ -9,6 +9,7 @@ import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/NotificationManager/NotificationManager.dart';
+import 'Core/Services/ActivityAlerts.dart';
 import 'Core/Services/MediaServiceController.dart';
 import 'Core/ThemeManager/CardStyleController.dart';
 import 'Core/ThemeManager/LocaleController.dart';
@@ -34,6 +35,7 @@ class DI {
     lazyPut<MediaServiceController>(MediaServiceController.new);
     lazyPut<AnilistAuth>(AnilistAuth.new);
     lazyPut<RefreshController>(RefreshController.new);
+    lazyPut<ActivityAlerts>(ActivityAlerts.new);
     lazyPut<AppUpdater>(AppUpdater.new);
     lazyPut<BaseDiscordRPC>(
       () => Platform.isAndroid || Platform.isIOS ? MobileRPC() : DesktopRPC(),

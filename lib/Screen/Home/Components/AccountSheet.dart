@@ -179,6 +179,15 @@ class _Toggles extends StatelessWidget {
               color: scheme.primary,
             ),
           ),
+          Obx(
+            () => PrefName.incognito.rx.value
+                ? _SwitchRow(
+                    title: 'Also block list edits',
+                    rx: PrefName.incognitoBlockEdits.rx,
+                    icon: Icon(Icons.edit_off_rounded, color: scheme.primary),
+                  )
+                : const SizedBox.shrink(),
+          ),
           _SwitchRow(
             title: 'Offline mode',
             rx: PrefName.offlineMode.rx,

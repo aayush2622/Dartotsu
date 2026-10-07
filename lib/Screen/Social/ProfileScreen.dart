@@ -72,6 +72,12 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   void initState() {
     super.initState();
     _scroll.addListener(_scheduleSnap);
+    final id = widget.id ?? (_seed.id.isEmpty ? null : _seed.id);
+    final cached = id == null ? null : _view.cachedProfile(id);
+    if (cached != null) {
+      _user.value = cached.user;
+      _cachedBundle = Future.value(cached);
+    }
     unawaited(_load());
   }
 
@@ -105,6 +111,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   }
 
   Future<SocialProfile?> _bundle = Future.value();
+  Future<SocialProfile?>? _cachedBundle;
 
   Future<void> _load() async {
     setState(() => _failed = false);
@@ -113,7 +120,9 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
         id: widget.id ?? (_seed.id.isEmpty ? null : _seed.id),
         name: widget.id == null && _seed.id.isEmpty ? widget.name : null,
       );
-      _bundle = pending.catchError((_) => null);
+      final network = pending.catchError((_) => null);
+      _bundle = _cachedBundle ?? network;
+      _cachedBundle = null;
       final bundle = await pending;
       if (!mounted) return;
       if (bundle == null) {

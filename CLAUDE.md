@@ -301,7 +301,12 @@ Feed / Stats tabs), `ActivityFeedScreen`, `FollowScreen`, `Components/` (`Activi
 `ActivityList`, `ActivityComposer`, `RepliesSheet`, `UserListSheet`) and `Stories/`
 (`StoriesRow` on Home, `StoryViewer`, `StorySeen`). Navigate with `SocialNavigation.dart`
 (`openProfile(heroTag:)`, `openFollows`, `openActivityFeed`, `openAppLink`). People cards (contributors, followers, search) are `Widgets/Components/ProfileCard`; avatars are `Widgets/Components/UserAvatar` (optional `heroTag`). Studios are the third
-`EntityKind` next to character and staff.
+`EntityKind` next to character and staff. `SocialScreenView.cachedProfile` paints a reopened profile
+from the disk cache; `activityAlerts()` feeds `Core/Services/ActivityAlerts` (opt-in polling → local
+notifications); `InboxScreen` lists received / sent messages (`ActivityScope.inbox` / `sent`).
+Incognito (`Core/Preferences/Incognito.dart`: `isIncognito`, `incognitoBlocksEdits`) is checked at every
+implicit save (progress, continue order, seen stories, Rich Presence, optionally list edits); new
+history-style writes must check it too.
 
 **Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services
 (the abstraction is ready — they're just unwritten subclasses), calendar, offline.

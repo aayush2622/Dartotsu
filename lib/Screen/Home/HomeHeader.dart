@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart' hide ContextExtensionss;
 
 import '../../Core/Services/MediaServiceController.dart';
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -17,6 +18,7 @@ import 'Components/BellButton.dart';
 import 'Components/HeaderAvatar.dart';
 import 'Components/HeaderBanner.dart';
 import 'Components/HeaderStatPill.dart';
+import 'Components/IncognitoBadge.dart';
 
 class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
@@ -70,6 +72,17 @@ class HomeHeader extends StatelessWidget {
                         style: context.textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
+                      ),
+                      Obx(
+                        () => PrefName.incognito.rx.value
+                            ? Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: IncognitoBadge(
+                                  onTap: () =>
+                                      showAccountSheet(context, _controller),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
                       ),
                     ],
                   ),
