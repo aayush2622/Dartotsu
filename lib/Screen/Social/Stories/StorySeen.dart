@@ -1,3 +1,4 @@
+import '../../../Core/Preferences/Incognito.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaService.dart';
 
@@ -14,6 +15,7 @@ class StorySeen {
   };
 
   static void mark(MediaService service, String id) {
+    if (isIncognito) return;
     final seen = read(service);
     if (!seen.add(id)) return;
     final ordered = seen.toList()

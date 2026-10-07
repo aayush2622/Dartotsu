@@ -2,6 +2,7 @@ import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:get/get.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
+import '../../../Core/Preferences/Incognito.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../BaseDiscordRPC.dart';
@@ -19,6 +20,7 @@ class MobileRPC extends GetxController implements BaseDiscordRPC {
     int? currentTime,
     int? endTime,
   }) async {
+    if (isIncognito) return;
     final token = await tokenManager.getToken();
     final isAnime = mediaData.anime != null;
 

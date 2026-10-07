@@ -30,9 +30,9 @@ class AnilistSettingsView extends SettingsScreenView {
       segmentedSetting<QueryLoadMode>(
         name: 'Query size',
         description:
-            'One big query loads every row in a single request. Split queries '
-            'send a small request per row: each is quick and rows appear as '
-            'they arrive.',
+            'One big query loads every row (and a whole profile) in a single '
+            'request. Split queries send a small request per row or per '
+            'profile part: each is quick and parts appear as they arrive.',
         icon: Icons.bolt_rounded,
         label: 'Query size',
         value: AnilistPref.queryLoadMode.rx.value,

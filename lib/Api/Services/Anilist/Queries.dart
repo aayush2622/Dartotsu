@@ -72,6 +72,9 @@ class AnilistQueries extends Queries {
 
   Future<SocialFavourites> socialFavourites(String id) => _socialFavourites(id);
 
+  Future<SocialProfile?> socialBundle({String? id, String? name}) =>
+      _socialBundle(id: id, name: name);
+
   Future<UserPage> follows(
     String id, {
     required bool followers,

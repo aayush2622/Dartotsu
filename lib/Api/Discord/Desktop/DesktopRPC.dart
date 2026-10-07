@@ -4,6 +4,7 @@ import 'package:dartotsu_extension_bridge/Models/DEpisode.dart';
 import 'package:flutter_discord_rpc_fork/flutter_discord_rpc.dart';
 import 'package:get/get.dart';
 
+import '../../../Core/Preferences/Incognito.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../BaseDiscordRPC.dart';
 
@@ -46,6 +47,7 @@ class DesktopRPC extends GetxController implements BaseDiscordRPC {
     int? currentTime,
     int? endTime,
   }) async {
+    if (isIncognito) return;
     await isReady;
     if (_disposed) return;
 

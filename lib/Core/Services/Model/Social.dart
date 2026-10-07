@@ -76,6 +76,14 @@ class SocialUser {
   double get daysWatched => minutesWatched / (24 * 60);
 }
 
+class SocialProfile {
+  final SocialUser user;
+  final SocialFavourites? favourites;
+  final List<ActivityDay>? history;
+
+  const SocialProfile(this.user, {this.favourites, this.history});
+}
+
 class ActivityDay {
   final DateTime date;
   final int amount;

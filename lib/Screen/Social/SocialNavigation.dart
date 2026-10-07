@@ -22,8 +22,17 @@ void openProfile(
   String? name,
   UserBrief? user,
   int tab = 0,
+  Object? heroTag,
 }) => unawaited(
-  pushProfile(context, service, id: id, name: name, user: user, tab: tab),
+  pushProfile(
+    context,
+    service,
+    id: id,
+    name: name,
+    user: user,
+    tab: tab,
+    heroTag: heroTag,
+  ),
 );
 
 Future<void> pushProfile(
@@ -33,6 +42,7 @@ Future<void> pushProfile(
   String? name,
   UserBrief? user,
   int tab = 0,
+  Object? heroTag,
 }) {
   if (service.socialView == null) {
     return navigateToPage(
@@ -48,7 +58,9 @@ Future<void> pushProfile(
       name: name ?? user?.name,
       seed: user,
       initialTab: tab,
+      heroTag: heroTag,
     ),
+    hero: heroTag != null,
   );
 }
 

@@ -246,6 +246,28 @@ class SocialScreenView {
   Future<SocialFavourites> favourites(String userId) async =>
       const SocialFavourites();
 
+  Future<SocialProfile?> profileBundle({String? id, String? name}) async {
+    final user = await profile(id: id, name: name);
+    if (user == null) return null;
+    Future<T?> soft<T>(Future<T> Function() run) async {
+      try {
+        return await run();
+      } catch (_) {
+        return null;
+      }
+    }
+
+    final results = await Future.wait<Object?>([
+      soft(() => favourites(user.id)),
+      soft(() => activityHistory(user.id)),
+    ]);
+    return SocialProfile(
+      user,
+      favourites: results[0] as SocialFavourites?,
+      history: results[1] as List<ActivityDay>?,
+    );
+  }
+
   Future<UserPage> follows(
     String userId, {
     required bool followers,

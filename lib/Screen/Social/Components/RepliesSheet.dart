@@ -19,7 +19,7 @@ import '../../../Widgets/Components/MarkupText.dart';
 import '../SocialNavigation.dart';
 import 'ActivityComposer.dart';
 import 'AniMediaCard.dart';
-import 'UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 import 'UserListSheet.dart';
 
 class RepliesSheet extends StatefulWidget {

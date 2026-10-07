@@ -6,6 +6,8 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/BaseScreen.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
+import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Widgets/Components/ProfileCard.dart';
 import 'Components/DeveloperCard.dart';
 import 'Developer.dart';
 import '../../../Widgets/Components/EmptyState.dart';
@@ -28,6 +30,7 @@ class DeveloperPage extends StatefulWidget {
 
 class _DeveloperPageState extends BaseScreen<DeveloperPage> {
   late final _future = loadDevelopers();
+  bool _wide = PrefManager.getCustomVal<bool>('followWide') ?? false;
 
   @override
   Widget buildContent(BuildContext context) {
@@ -45,7 +48,23 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
           final grid = CustomScrollConfig(
             context,
             children: [
-              AppSliverBar(title: getString.contributors),
+              AppSliverBar(
+                title: getString.contributors,
+                actions: [
+                  IconButton(
+                    tooltip: _wide ? 'Grid view' : 'Full width',
+                    icon: Icon(
+                      _wide
+                          ? Icons.grid_view_rounded
+                          : Icons.view_agenda_rounded,
+                    ),
+                    onPressed: () {
+                      setState(() => _wide = !_wide);
+                      PrefManager.setCustomVal<bool>('followWide', _wide);
+                    },
+                  ),
+                ],
+              ),
               if (!loading && items.isEmpty)
                 SliverFillRemaining(child: _empty(context))
               else
@@ -56,19 +75,27 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage> {
                     Dimens.pagePad,
                     Dimens.gapXl,
                   ),
-                  sliver: SliverGrid(
-                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: 360,
-                      mainAxisExtent: 220,
-                      crossAxisSpacing: Dimens.gap,
-                      mainAxisSpacing: Dimens.gap,
-                    ),
-                    delegate: SliverChildBuilderDelegate(
-                      (context, i) =>
-                          DeveloperCard(developer: items[i], skeleton: loading),
-                      childCount: items.length,
-                    ),
-                  ),
+                  sliver: _wide
+                      ? SliverList.separated(
+                          itemCount: items.length,
+                          separatorBuilder: (_, _) =>
+                              SizedBox(height: Dimens.gapSm),
+                          itemBuilder: (context, i) => DeveloperCard(
+                            developer: items[i],
+                            skeleton: loading,
+                            wide: true,
+                          ),
+                        )
+                      : SliverGrid(
+                          gridDelegate: ProfileCard.gridDelegate(),
+                          delegate: SliverChildBuilderDelegate(
+                            (context, i) => DeveloperCard(
+                              developer: items[i],
+                              skeleton: loading,
+                            ),
+                            childCount: items.length,
+                          ),
+                        ),
                 ),
             ],
           );

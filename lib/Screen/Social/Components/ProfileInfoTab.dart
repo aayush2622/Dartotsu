@@ -20,12 +20,14 @@ class ProfileInfoTab extends StatefulWidget {
   final MediaService service;
   final SocialUser? user;
   final String userId;
+  final Future<SocialProfile?> bundle;
 
   const ProfileInfoTab({
     super.key,
     required this.service,
     required this.user,
     required this.userId,
+    required this.bundle,
   });
 
   @override
@@ -48,7 +50,9 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
 
   Future<void> _load() async {
     try {
-      final result = await widget.service.socialView!.favourites(widget.userId);
+      final result =
+          (await widget.bundle)?.favourites ??
+          await widget.service.socialView!.favourites(widget.userId);
       if (mounted) setState(() => _favourites = result);
     } catch (_) {
       if (mounted) setState(() => _failed = true);

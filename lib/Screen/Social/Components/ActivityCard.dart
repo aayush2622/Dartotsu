@@ -24,7 +24,7 @@ import '../SocialNavigation.dart';
 import 'ActivityComposer.dart';
 import 'AniMediaCard.dart';
 import 'RepliesSheet.dart';
-import 'UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 import 'UserListSheet.dart';
 
 class ActivityCard extends StatefulWidget {

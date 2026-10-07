@@ -12,6 +12,7 @@ import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
+import '../../Widgets/Components/ProfileCard.dart';
 import 'Components/UserCard.dart';
 
 class FollowScreen extends StatefulWidget {
@@ -213,13 +214,7 @@ class _FollowScreenState extends BaseScreen<FollowScreen> {
                                         Dimens.pagePad,
                                         Dimens.gapXl,
                                       ),
-                                      gridDelegate:
-                                          SliverGridDelegateWithMaxCrossAxisExtent(
-                                            maxCrossAxisExtent: 280,
-                                            mainAxisExtent: 170,
-                                            crossAxisSpacing: Dimens.gap,
-                                            mainAxisSpacing: Dimens.gap,
-                                          ),
+                                      gridDelegate: ProfileCard.gridDelegate(),
                                       itemCount: users.length,
                                       itemBuilder: (_, i) =>
                                           _card(users[i], i, loading),

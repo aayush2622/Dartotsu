@@ -21,7 +21,7 @@ import '../../Detail/DetailScreen.dart';
 import '../Components/ActivityComposer.dart';
 import '../Components/AniMediaCard.dart';
 import '../Components/RepliesSheet.dart';
-import '../Components/UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 import '../Components/UserListSheet.dart';
 import '../SocialNavigation.dart';
 import 'StorySeen.dart';
@@ -508,6 +508,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                     widget.service,
                     id: user.id,
                     user: user,
+                    heroTag: 'story-${user.id}',
                   ),
                 ),
                 child: _glass(
@@ -515,7 +516,12 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      UserAvatar(url: user.avatar, name: user.name, size: 34),
+                      UserAvatar(
+                        url: user.avatar,
+                        name: user.name,
+                        size: 34,
+                        heroTag: 'story-${user.id}',
+                      ),
                       const SizedBox(width: 10),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,

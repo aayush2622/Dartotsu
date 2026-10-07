@@ -90,8 +90,9 @@ class AppScreenBar extends StatelessWidget implements PreferredSizeWidget {
 
 class AppSliverBar extends StatelessWidget {
   final String title;
+  final List<Widget> actions;
 
-  const AppSliverBar({super.key, required this.title});
+  const AppSliverBar({super.key, required this.title, this.actions = const []});
 
   @override
   Widget build(BuildContext context) {
@@ -102,6 +103,9 @@ class AppSliverBar extends StatelessWidget {
       leadingWidth: 44,
       leading: const Skeleton.keep(child: AppBackButton()),
       title: AppScreenTitle(title),
+      iconTheme: IconThemeData(color: context.colorScheme.primary),
+      actionsIconTheme: IconThemeData(color: context.colorScheme.primary),
+      actions: [for (final a in actions) Skeleton.keep(child: a)],
     );
   }
 }

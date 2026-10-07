@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:html/dom.dart' as dom;
 import 'package:html/parser.dart' as html_parser;
@@ -71,9 +72,77 @@ class _AniHtmlState extends State<AniHtml> {
   bool _overflows = false;
   final _bodyKey = GlobalKey();
 
-  dom.DocumentFragment _parse() => html_parser.parseFragment(
-    widget.html.replaceAll('‎', '').replaceAll('‏', '').replaceAll('​', ''),
+  dom.DocumentFragment _parse() =>
+      html_parser.parseFragment(_normalize(widget.html));
+
+  static final _spoilerOpen = RegExp(
+    r'''<span[^>]*class=['"]?markdown_spoiler['"]?[^>]*>''',
+    caseSensitive: false,
   );
+  static final _spanTag = RegExp(r'<(/?)span\b[^>]*>', caseSensitive: false);
+  static final _anchorOpen = RegExp(r'<a\b', caseSensitive: false);
+  static final _anchorClose = RegExp(r'</a\s*>', caseSensitive: false);
+
+  static final _escapedImg = RegExp(
+    r'&lt;img\b(.*?)&gt;',
+    caseSensitive: false,
+    dotAll: true,
+  );
+  static final _anyTag = RegExp(r'<[^>]*>');
+
+  static String _unescapeImages(String html) =>
+      html.replaceAllMapped(_escapedImg, (m) {
+        final attrs = m
+            .group(1)!
+            .replaceAll(_anyTag, '')
+            .replaceAll('&quot;', '"')
+            .replaceAll('&#39;', "'")
+            .replaceAll('&amp;', '&')
+            .replaceAll(RegExp(r'\s*=\s*'), '=');
+        return '<img $attrs>';
+      });
+
+  static String _normalize(String source) {
+    final html = _unescapeImages(source);
+    final out = StringBuffer();
+    var cursor = 0;
+    while (true) {
+      final open = _spoilerOpen.firstMatch(html.substring(cursor));
+      if (open == null) break;
+      final start = cursor + open.start;
+      final innerStart = cursor + open.end;
+      var depth = 1;
+      var innerEnd = html.length;
+      var after = html.length;
+      for (final m in _spanTag.allMatches(html.substring(innerStart))) {
+        depth += m.group(1) == '/' ? -1 : 1;
+        if (depth == 0) {
+          innerEnd = innerStart + m.start;
+          after = innerStart + m.end;
+          break;
+        }
+      }
+      var inner = html.substring(innerStart, innerEnd);
+      final surplus =
+          _anchorClose.allMatches(inner).length -
+          _anchorOpen.allMatches(inner).length;
+      if (surplus > 0) {
+        var removed = 0;
+        inner = inner.replaceAllMapped(_anchorClose, (m) {
+          return removed++ < surplus ? '' : m.group(0)!;
+        });
+      }
+      out
+        ..write(html.substring(cursor, start))
+        ..write(surplus > 0 ? '</a>' * surplus : '')
+        ..write("<span class='markdown_spoiler'>")
+        ..write(inner)
+        ..write('</span>');
+      cursor = after;
+    }
+    out.write(html.substring(cursor));
+    return out.toString();
+  }
 
   @override
   void didUpdateWidget(AniHtml old) {
@@ -105,8 +174,17 @@ class _AniHtmlState extends State<AniHtml> {
     color: widget.color ?? context.colorScheme.onSurface,
   );
 
+  double _maxWidth = 600;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, box) {
+      if (box.maxWidth.isFinite) _maxWidth = box.maxWidth;
+      return _buildBody(context);
+    },
+  );
+
+  Widget _buildBody(BuildContext context) {
     _clearRecognizers();
     _spoilers = 0;
     final blocks = _blocks(_tree.nodes, _base, TextAlign.start);
@@ -233,7 +311,24 @@ class _AniHtmlState extends State<AniHtml> {
       inline = <InlineSpan>[];
     }
 
-    for (final node in nodes) {
+    for (var index = 0; index < nodes.length; index++) {
+      final node = nodes[index];
+      if (_floatSide(node) case final side?) {
+        final image = _imageWidget(node as dom.Element, null);
+        if (image != null) {
+          flush();
+          final rest = _blocks(
+            nodes.sublist(index + 1),
+            style,
+            align,
+            centered: centered,
+          );
+          out.add(
+            _FloatFlow(right: side == 'right', float: image, children: rest),
+          );
+          break;
+        }
+      }
       if (widget.linkCard != null && _isBareMediaLink(node)) {
         final card = widget.linkCard!(
           context,
@@ -256,6 +351,12 @@ class _AniHtmlState extends State<AniHtml> {
     }
     flush();
     return out;
+  }
+
+  String? _floatSide(dom.Node n) {
+    if (n is! dom.Element || n.localName != 'img') return null;
+    final side = (n.attributes['align'] ?? '').toLowerCase();
+    return side == 'left' || side == 'right' ? side : null;
   }
 
   bool _spanHasText(TextSpan s) {
@@ -403,7 +504,12 @@ class _AniHtmlState extends State<AniHtml> {
                 ),
                 style: headingStyle,
               ),
-              textAlign: align,
+              textAlign:
+                  centered ||
+                      _isCentered(e) ||
+                      e.querySelector('center') != null
+                  ? TextAlign.center
+                  : align,
             ),
           ),
         );
@@ -531,9 +637,16 @@ class _AniHtmlState extends State<AniHtml> {
     bool descend = false,
   }) {
     if (node is dom.Text) {
-      final text = node.text.replaceAll(RegExp(r'\s+'), ' ');
-      if (text.isEmpty) return const [];
-      return _markdownLinks(text, style, href);
+      final parts = node.text.split('\n');
+      final spans = <InlineSpan>[];
+      for (var i = 0; i < parts.length; i++) {
+        final text = parts[i].replaceAll(RegExp(r'[ \t\r\f]+'), ' ');
+        if (i > 0) spans.add(const TextSpan(text: '\n'));
+        if (text.trim().isNotEmpty || (parts.length == 1 && text.isNotEmpty)) {
+          spans.addAll(_markdownLinks(text, style, href));
+        }
+      }
+      return spans;
     }
     if (node is! dom.Element) return const [];
     if (descend) {
@@ -584,7 +697,7 @@ class _AniHtmlState extends State<AniHtml> {
         return _children(
           node,
           link == null
-              ? style
+              ? style.copyWith(color: scheme.primary)
               : style.copyWith(
                   color: scheme.primary,
                   decoration: TextDecoration.underline,
@@ -672,15 +785,37 @@ class _AniHtmlState extends State<AniHtml> {
     return TextSpan(
       recognizer: recognizer,
       mouseCursor: SystemMouseCursors.click,
-      children: [for (final c in e.nodes) ..._inlineSpans(c, hidden, null)],
+      children: shown
+          ? [for (final c in e.nodes) ..._inlineSpans(c, hidden, null)]
+          : [
+              TextSpan(
+                recognizer: recognizer,
+                mouseCursor: SystemMouseCursors.click,
+                text: ' Spoiler, click to view ',
+                style: style.copyWith(
+                  fontSize: (style.fontSize ?? 14) * 0.8,
+                  color: scheme.onSurfaceVariant,
+                  backgroundColor: scheme.onSurfaceVariant.withValues(
+                    alpha: 0.18,
+                  ),
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ],
     );
   }
 
   InlineSpan _imageSpan(dom.Element e, String? href) {
+    final child = _imageWidget(e, href);
+    if (child == null) return const TextSpan();
+    return WidgetSpan(alignment: PlaceholderAlignment.middle, child: child);
+  }
+
+  Widget? _imageWidget(dom.Element e, String? href) {
     final src = e.attributes['src'] ?? '';
     final width = (e.attributes['width'] ?? '').trim();
     final alt = e.attributes['alt'] ?? '';
-    if (src.isEmpty) return const TextSpan();
+    if (src.isEmpty) return null;
     double? px;
     double? fraction;
     if (width.endsWith('%')) {
@@ -690,12 +825,12 @@ class _AniHtmlState extends State<AniHtml> {
     }
     final image = LayoutBuilder(
       builder: (context, box) {
-        final available = box.maxWidth.isFinite ? box.maxWidth : 400.0;
+        final available = box.maxWidth.isFinite ? box.maxWidth : _maxWidth;
         final max = fraction != null
             ? available * fraction
             : (px ?? available).clamp(0.0, available);
         return ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: max, maxHeight: 520),
+          constraints: BoxConstraints(maxWidth: max, maxHeight: 6000),
           child: Image.network(
             src,
             width: px != null || fraction != null ? max : null,
@@ -733,12 +868,9 @@ class _AniHtmlState extends State<AniHtml> {
         );
       },
     );
-    return WidgetSpan(
-      alignment: PlaceholderAlignment.middle,
-      child: href == null
-          ? image
-          : Clickable(press: false, onTap: () => _open(href), child: image),
-    );
+    return href == null
+        ? image
+        : Clickable(press: false, onTap: () => _open(href), child: image);
   }
 }
 
@@ -992,4 +1124,101 @@ class _RemoteSvgState extends State<_RemoteSvg> {
       );
     },
   );
+}
+
+class _FloatFlow extends MultiChildRenderObjectWidget {
+  final bool right;
+
+  _FloatFlow({
+    required this.right,
+    required Widget float,
+    required List<Widget> children,
+  }) : super(children: [float, ...children]);
+
+  @override
+  RenderObject createRenderObject(BuildContext context) =>
+      _RenderFloatFlow(right);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderFloatFlow renderObject) {
+    renderObject.right = right;
+  }
+}
+
+class _FloatParentData extends ContainerBoxParentData<RenderBox> {}
+
+class _RenderFloatFlow extends RenderBox
+    with
+        ContainerRenderObjectMixin<RenderBox, _FloatParentData>,
+        RenderBoxContainerDefaultsMixin<RenderBox, _FloatParentData> {
+  static const _gap = 12.0;
+
+  bool _right;
+
+  _RenderFloatFlow(this._right);
+
+  set right(bool value) {
+    if (_right == value) return;
+    _right = value;
+    markNeedsLayout();
+  }
+
+  @override
+  void setupParentData(RenderBox child) {
+    if (child.parentData is! _FloatParentData) {
+      child.parentData = _FloatParentData();
+    }
+  }
+
+  @override
+  double computeMinIntrinsicWidth(double height) => 0;
+
+  @override
+  double computeMaxIntrinsicWidth(double height) => 0;
+
+  @override
+  double computeMinIntrinsicHeight(double width) => 0;
+
+  @override
+  double computeMaxIntrinsicHeight(double width) => 0;
+
+  @override
+  Size computeDryLayout(BoxConstraints constraints) =>
+      Size(constraints.maxWidth, 0);
+
+  @override
+  void performLayout() {
+    final width = constraints.maxWidth;
+    final float = firstChild!;
+    float.layout(BoxConstraints(maxWidth: width), parentUsesSize: true);
+    final floatW = float.size.width;
+    final floatH = float.size.height;
+    final narrow = (width - floatW - _gap).clamp(0.0, width);
+    (float.parentData! as _FloatParentData).offset = Offset(
+      _right ? width - floatW : 0,
+      0,
+    );
+    var y = 0.0;
+    var child = childAfter(float);
+    while (child != null) {
+      final beside = y < floatH && narrow > 120;
+      final w = beside ? narrow : width;
+      child.layout(BoxConstraints(maxWidth: w), parentUsesSize: true);
+      (child.parentData! as _FloatParentData).offset = Offset(
+        beside && !_right ? floatW + _gap : 0,
+        y,
+      );
+      y += child.size.height;
+      child = childAfter(child);
+    }
+    size = constraints.constrain(Size(width, y > floatH ? y : floatH));
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) =>
+      defaultPaint(context, offset);
+
+  @override
+  bool hitTestChildren(BoxHitTestResult result, {required Offset position}) =>
+      defaultHitTestChildren(result, position: position);
 }

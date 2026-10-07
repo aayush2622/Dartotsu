@@ -13,7 +13,7 @@ import '../../../Utils/Functions/CopyToClip.dart';
 import '../../../Widgets/Components/AppBars.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
-import 'UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 
 const _toolbarHeight = 56.0;
 
@@ -22,6 +22,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
   static const collapseRange = contentHeight;
 
   final MediaService service;
+  final Object? heroTag;
   final UserBrief seed;
   final Rxn<SocialUser> user;
   final double top;
@@ -37,6 +38,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   ProfileHeaderDelegate({
     required this.service,
+    this.heroTag,
     required this.seed,
     required this.user,
     required this.top,
@@ -136,6 +138,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
                                   url: avatar,
                                   name: name,
                                   size: 84,
+                                  heroTag: heroTag,
                                 ),
                               ),
                             ),

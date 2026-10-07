@@ -1,6 +1,7 @@
 import '../../../Utils/Functions/GetXFunctions.dart';
 import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
+import '../../Preferences/Incognito.dart';
 import '../Api/Progress.dart';
 import '../MediaService.dart';
 import '../Model/Media.dart';
@@ -28,6 +29,7 @@ class LocalMutations extends Mutations {
 
   @override
   Future<void> setProgress(Media media, int progress) async {
+    if (skipForIncognito('Incognito: progress not saved')) return;
     if (!applyProgress(media, progress)) return;
     _store(media).touch(media);
     snackString('Progress set to $progress');

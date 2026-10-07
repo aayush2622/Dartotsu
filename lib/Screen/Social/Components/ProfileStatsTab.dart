@@ -24,11 +24,13 @@ enum _Metric { count, time, score }
 class ProfileStatsTab extends StatefulWidget {
   final MediaService service;
   final String userId;
+  final Future<SocialProfile?> bundle;
 
   const ProfileStatsTab({
     super.key,
     required this.service,
     required this.userId,
+    required this.bundle,
   });
 
   @override
@@ -57,9 +59,14 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
     setState(() => _failed = false);
     try {
       final view = widget.service.socialView!;
+      final preloaded = (await widget.bundle)?.history;
       final results = await Future.wait<Object?>([
         view.stats(widget.userId),
-        view.activityHistory(widget.userId).catchError((_) => <ActivityDay>[]),
+        preloaded != null
+            ? Future.value(preloaded)
+            : view
+                  .activityHistory(widget.userId)
+                  .catchError((_) => <ActivityDay>[]),
       ]);
       final stats = results[0] as UserStats?;
       if (!mounted) return;

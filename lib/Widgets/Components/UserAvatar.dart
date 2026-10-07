@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-import '../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../Utils/Extensions/ContextExtensions.dart';
+import 'CachedNetworkImage.dart';
 
 class UserAvatar extends StatelessWidget {
   final String? url;
   final String name;
   final double size;
+  final Object? heroTag;
 
   const UserAvatar({
     super.key,
     required this.url,
     required this.name,
     this.size = 40,
+    this.heroTag,
   });
 
   @override
@@ -31,7 +33,7 @@ class UserAvatar extends StatelessWidget {
         ),
       ),
     );
-    return ClipOval(
+    final avatar = ClipOval(
       child: SizedBox(
         width: size,
         height: size,
@@ -47,5 +49,6 @@ class UserAvatar extends StatelessWidget {
               ),
       ),
     );
+    return heroTag == null ? avatar : Hero(tag: heroTag!, child: avatar);
   }
 }

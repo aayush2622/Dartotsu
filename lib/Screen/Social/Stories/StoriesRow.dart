@@ -14,7 +14,7 @@ import '../../../Utils/Nav/DpadNav.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/ScrollConfig.dart';
 import '../Components/ActivityComposer.dart';
-import '../Components/UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 import '../SocialNavigation.dart';
 import 'StorySeen.dart';
 import 'StoryViewer.dart';
@@ -101,6 +101,7 @@ class _StoriesRowState extends State<StoriesRow> {
         groups: playable,
         initialGroup: index,
       ),
+      hero: true,
     );
     if (mounted) setState(() {});
   }
@@ -223,7 +224,12 @@ class _StoriesRowState extends State<StoriesRow> {
                         ),
                       ),
                     ),
-                    UserAvatar(url: g.user.avatar, name: g.user.name, size: 56),
+                    UserAvatar(
+                      url: g.user.avatar,
+                      name: g.user.name,
+                      size: 56,
+                      heroTag: 'story-${g.user.id}',
+                    ),
                     if (isOwn && g.activities.isEmpty)
                       Positioned(
                         right: 2,

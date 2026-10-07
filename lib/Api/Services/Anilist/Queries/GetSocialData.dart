@@ -9,15 +9,8 @@ extension on AnilistQueries {
     return (data['User'] as Map<String, dynamic>?)?['id'] as int?;
   }
 
-  Future<SocialUser?> _socialProfile({String? id, String? name}) async {
-    final userId = id != null ? int.tryParse(id) : await _userIdByName(name!);
-    if (userId == null) return null;
-    final data = await client.query(
-      _querySocialProfile,
-      variables: {'id': userId},
-    );
-    final user = data['User'] as Map<String, dynamic>?;
-    if (user == null) return null;
+  SocialUser _profileFromData(Map<String, dynamic> data) {
+    final user = data['User'] as Map<String, dynamic>;
     int total(String key) =>
         (((data[key] as Map?)?['pageInfo'] as Map?)?['total'] as num?)
             ?.toInt() ??
@@ -29,17 +22,89 @@ extension on AnilistQueries {
     );
   }
 
-  Future<SocialFavourites> _socialFavourites(String id) async {
+  Future<SocialUser?> _socialProfile({String? id, String? name}) async {
+    final userId = id != null ? int.tryParse(id) : await _userIdByName(name!);
+    if (userId == null) return null;
+    final data = await client.query(
+      _querySocialProfile,
+      variables: {'id': userId},
+    );
+    if (data['User'] == null) return null;
+    return _profileFromData(data);
+  }
+
+  Future<SocialProfile?> _socialBundle({String? id, String? name}) async {
+    final userId = id != null ? int.tryParse(id) : await _userIdByName(name!);
+    if (userId == null) return null;
+    if (AnilistPref.queryLoadMode.value != QueryLoadMode.stacked) {
+      final user = await _socialProfile(id: '$userId');
+      if (user == null) return null;
+      Future<T?> soft<T>(Future<T> Function() run) async {
+        try {
+          return await run();
+        } catch (_) {
+          return null;
+        }
+      }
+
+      final results = await Future.wait<Object?>([
+        soft(() => _socialFavourites(user.id)),
+        soft(() => _activityHistory(user.id)),
+      ]);
+      return SocialProfile(
+        user,
+        favourites: results[0] as SocialFavourites?,
+        history: results[1] as List<ActivityDay>?,
+      );
+    }
+    final data = await client.query(
+      _querySocialBundle,
+      variables: {'id': userId, 'page': 1},
+    );
+    if (data['User'] == null) return null;
+    final user = _profileFromData(data);
+    SocialFavourites? favourites;
+    try {
+      favourites = await _socialFavourites(user.id, firstPage: data);
+    } catch (_) {}
+    final rows =
+        (((data['User'] as Map?)?['stats'] as Map?)?['activityHistory']
+            as List?) ??
+        const [];
+    return SocialProfile(
+      user,
+      favourites: favourites,
+      history: _historyFromRows(rows),
+    );
+  }
+
+  List<ActivityDay> _historyFromRows(List rows) => [
+    for (final r in rows)
+      ActivityDay(
+        DateTime.fromMillisecondsSinceEpoch(
+          ((r['date'] as num?)?.toInt() ?? 0) * 1000,
+        ),
+        (r['amount'] as num?)?.toInt() ?? 0,
+        (r['level'] as num?)?.toInt() ?? 0,
+      ),
+  ];
+
+  Future<SocialFavourites> _socialFavourites(
+    String id, {
+    Map<String, dynamic>? firstPage,
+  }) async {
     final userId = int.parse(id);
     final merged = <String, List<dynamic>>{};
     var animeMore = false;
     var mangaMore = false;
     const people = ['characters', 'staff', 'studios'];
     for (var page = 1; page <= 4; page++) {
-      final data = await client.query(
-        _querySocialFavourites,
-        variables: {'id': userId, 'page': page},
-      );
+      final data = page == 1 && firstPage != null
+          ? firstPage
+          : await client.query(
+              _querySocialFavourites,
+              variables: {'id': userId, 'page': page},
+            );
       final favourites =
           (data['User'] as Map<String, dynamic>?)?['favourites']
               as Map<String, dynamic>?;
@@ -186,16 +251,7 @@ query ($id: Int) {
         (((data['User'] as Map?)?['stats'] as Map?)?['activityHistory']
             as List?) ??
         const [];
-    return [
-      for (final r in rows)
-        ActivityDay(
-          DateTime.fromMillisecondsSinceEpoch(
-            ((r['date'] as num?)?.toInt() ?? 0) * 1000,
-          ),
-          (r['amount'] as num?)?.toInt() ?? 0,
-          (r['level'] as num?)?.toInt() ?? 0,
-        ),
-    ];
+    return _historyFromRows(rows);
   }
 
   Future<UserStats?> _stats(String id) async {
@@ -304,24 +360,29 @@ __typename
   $anilistActivityLikes
 }''';
 
-const _querySocialProfile = '''
-query (\$id: Int!) {
-  followerPage: Page { pageInfo { total } followers(userId: \$id) { id } }
-  followingPage: Page { pageInfo { total } following(userId: \$id) { id } }
-  User(id: \$id) {
+const _socialProfileFields = '''
     id name about(asHtml: true) bannerImage isFollowing isFollower isBlocked siteUrl
     avatar { medium large }
     statistics {
       anime { count meanScore standardDeviation minutesWatched episodesWatched }
       manga { count meanScore chaptersRead volumesRead }
-    }
+    }''';
+
+const _socialFollowCounts = '''
+  followerPage: Page { pageInfo { total } followers(userId: \$id) { id } }
+  followingPage: Page { pageInfo { total } following(userId: \$id) { id } }''';
+
+const _querySocialProfile =
+    '''
+query (\$id: Int!) {
+$_socialFollowCounts
+  User(id: \$id) {
+$_socialProfileFields
   }
 }''';
 
-final _querySocialFavourites =
+final _socialFavouriteFields =
     '''
-query (\$id: Int, \$page: Int) {
-  User(id: \$id) {
     favourites {
       anime(page: \$page, perPage: 25) { pageInfo { hasNextPage } nodes { $anilistMediaFragment } }
       manga(page: \$page, perPage: 25) { pageInfo { hasNextPage } nodes { $anilistMediaFragment } }
@@ -334,6 +395,23 @@ query (\$id: Int, \$page: Int) {
         nodes { id name { userPreferred } image { large medium } }
       }
       studios(page: \$page, perPage: 25) { pageInfo { hasNextPage } nodes { id name } }
-    }
+    }''';
+
+final _querySocialFavourites =
+    '''
+query (\$id: Int, \$page: Int) {
+  User(id: \$id) {
+$_socialFavouriteFields
+  }
+}''';
+
+final _querySocialBundle =
+    '''
+query (\$id: Int!, \$page: Int) {
+$_socialFollowCounts
+  User(id: \$id) {
+$_socialProfileFields
+$_socialFavouriteFields
+    stats { activityHistory { date amount level } }
   }
 }''';

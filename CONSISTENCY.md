@@ -152,3 +152,13 @@ don't reference the current task/PR/issue in a comment (it rots as the code move
 ## Commits
 
 No `Co-Authored-By` / AI-attribution trailers in commit messages for this repo.
+
+## People cards
+
+Any card for a person (contributors, followers, following, user search) → `ProfileCard`
+(`Widgets/Components/ProfileCard.dart`): banner + overlapping avatar in the grid layout,
+banner-backed row in the `wide` (full width) layout, `ProfilePill` for the role / relation chip,
+`ProfileCard.gridDelegate()` for the grid. `DeveloperCard` and `UserCard` are thin wrappers that
+only map their data onto it; don't build a second banner-and-avatar card. The grid / full-width
+toggle shares the `followWide` pref across Developer, Followers and Following.
+

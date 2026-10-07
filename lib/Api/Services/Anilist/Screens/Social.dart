@@ -28,6 +28,10 @@ class AnilistSocialView extends SocialScreenView {
       anilistAuth.queries.socialProfile(id: id, name: name);
 
   @override
+  Future<SocialProfile?> profileBundle({String? id, String? name}) =>
+      anilistAuth.queries.socialBundle(id: id, name: name);
+
+  @override
   Future<SocialFavourites> favourites(String userId) =>
       anilistAuth.queries.socialFavourites(userId);
 

@@ -5,7 +5,6 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/MediaService.dart';
-import '../../../Core/Services/Model/Media.dart';
 import '../../../Utils/Functions/GetXFunctions.dart';
 
 const extensionServiceId = 'extension';
@@ -168,15 +167,4 @@ bool isSourceInstalled(Source source) {
   final type = source.itemType ?? ItemType.anime;
   final id = source.id;
   return id != null && installedSources(type).any((s) => s.id == id);
-}
-
-SectionMap filterUninstalled(SectionMap sections) {
-  final out = <String, List<Media>>{};
-  for (final entry in sections.entries) {
-    final kept = entry.value
-        .where((m) => m.sourceData == null || isSourceInstalled(m.sourceData!))
-        .toList();
-    if (kept.isNotEmpty) out[entry.key] = kept;
-  }
-  return out;
 }

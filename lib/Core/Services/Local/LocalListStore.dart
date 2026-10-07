@@ -1,6 +1,7 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../Logger.dart';
+import '../../Preferences/Incognito.dart';
 import '../../Preferences/PrefManager.dart';
 import '../Model/Media.dart';
 
@@ -99,6 +100,7 @@ class LocalListStore {
   }
 
   void touch(Media media) {
+    if (isIncognito) return;
     ContinueOrder(serviceId).touch(media.id, anime: media.isAnime);
     upsert(media);
   }
@@ -152,6 +154,7 @@ class ContinueOrder {
   }
 
   void touch(String id, {required bool anime}) {
+    if (isIncognito) return;
     final entries = read(anime: anime)
       ..[id] = DateTime.now().millisecondsSinceEpoch;
     final newest = entries.entries.toList()

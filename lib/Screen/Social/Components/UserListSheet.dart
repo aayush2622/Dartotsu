@@ -6,7 +6,7 @@ import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../SocialNavigation.dart';
-import 'UserAvatar.dart';
+import '../../../Widgets/Components/UserAvatar.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 
 String followLabel(UserBrief user) {

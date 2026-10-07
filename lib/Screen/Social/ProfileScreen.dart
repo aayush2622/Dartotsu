@@ -27,6 +27,7 @@ class ProfileScreen extends StatefulWidget {
   final String? name;
   final UserBrief? seed;
   final int initialTab;
+  final Object? heroTag;
 
   const ProfileScreen({
     super.key,
@@ -35,6 +36,7 @@ class ProfileScreen extends StatefulWidget {
     this.name,
     this.seed,
     this.initialTab = 0,
+    this.heroTag,
   });
 
   @override
@@ -102,20 +104,24 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
     super.dispose();
   }
 
+  Future<SocialProfile?> _bundle = Future.value();
+
   Future<void> _load() async {
     setState(() => _failed = false);
     try {
-      final user = await _view.profile(
+      final pending = _view.profileBundle(
         id: widget.id ?? (_seed.id.isEmpty ? null : _seed.id),
         name: widget.id == null && _seed.id.isEmpty ? widget.name : null,
       );
+      _bundle = pending.catchError((_) => null);
+      final bundle = await pending;
       if (!mounted) return;
-      if (user == null) {
+      if (bundle == null) {
         setState(() => _failed = true);
         snackString('User not found');
         return;
       }
-      _user.value = user;
+      _user.value = bundle.user;
     } catch (_) {
       if (mounted) setState(() => _failed = true);
     }
@@ -181,6 +187,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
                 pinned: true,
                 delegate: ProfileHeaderDelegate(
                   service: widget.service,
+                  heroTag: widget.heroTag,
                   seed: _seed,
                   user: _user,
                   top: top,
@@ -229,6 +236,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
                         service: widget.service,
                         user: _user.value,
                         userId: userId,
+                        bundle: _bundle,
                       ),
                       ActivityList(
                         service: widget.service,
@@ -239,7 +247,11 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
                             ? ComposerKind.activity
                             : ComposerKind.message,
                       ),
-                      ProfileStatsTab(service: widget.service, userId: userId),
+                      ProfileStatsTab(
+                        service: widget.service,
+                        userId: userId,
+                        bundle: _bundle,
+                      ),
                     ],
                   ),
           ),

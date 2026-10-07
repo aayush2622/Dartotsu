@@ -296,11 +296,11 @@ Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drive
 `Core/Services/Model/Social.dart`) serves user profiles, favourites, follows, activity feeds,
 replies, likes, posting, stats and stories; `AnilistSocialView` implements it over
 `AnilistQueries`/`AnilistMutations` (`Queries/GetSocialData.dart`, `Mutations/Social.dart`,
-`Data/Social.dart`). UI lives in `Screen/Social/`: `ProfileScreen` (collapsing header + Profile /
+`Data/Social.dart`). UI lives in `Screen/Social/`: `ProfileScreen` (loads through `SocialScreenView.profileBundle` — one stacked AniList request or split ones per the Query size setting; avatar `Hero` via `heroTag`; collapsing header + Profile /
 Feed / Stats tabs), `ActivityFeedScreen`, `FollowScreen`, `Components/` (`ActivityCard`,
 `ActivityList`, `ActivityComposer`, `RepliesSheet`, `UserListSheet`) and `Stories/`
 (`StoriesRow` on Home, `StoryViewer`, `StorySeen`). Navigate with `SocialNavigation.dart`
-(`openProfile`, `openFollows`, `openActivityFeed`, `openAppLink`). Studios are the third
+(`openProfile(heroTag:)`, `openFollows`, `openActivityFeed`, `openAppLink`). People cards (contributors, followers, search) are `Widgets/Components/ProfileCard`; avatars are `Widgets/Components/UserAvatar` (optional `heroTag`). Studios are the third
 `EntityKind` next to character and staff.
 
 **Not built yet:** watch/read (extension sources, player, reader), MAL / Simkl services
