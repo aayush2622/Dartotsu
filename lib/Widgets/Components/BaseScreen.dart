@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../Api/Discord/DiscordPresence.dart';
+import '../../Api/Discord/PresenceScope.dart';
 import '../../Core/ThemeManager/GlassBackgroundSource.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Functions/GetXFunctions.dart';
@@ -11,12 +13,32 @@ import 'CachedNetworkImage.dart';
 abstract class BaseScreen<T extends StatefulWidget> extends State<T> {
   Widget buildContent(BuildContext context);
 
+  DiscordPresence? get presence => null;
+
+  final _presenceTick = ValueNotifier<int>(0);
+
+  void refreshPresence() => _presenceTick.value++;
+
+  @override
+  void dispose() {
+    _presenceTick.dispose();
+    super.dispose();
+  }
+
   String? get glassBackgroundUrl => resolveGlassBackground();
 
   @override
   Widget build(BuildContext context) {
     final theme = find<ThemeController>();
-    final content = buildContent(context);
+    final built = buildContent(context);
+    final content = presence == null
+        ? built
+        : ValueListenableBuilder<int>(
+            valueListenable: _presenceTick,
+            builder: (_, _, child) =>
+                PresenceScope(presence: presence!, child: child!),
+            child: built,
+          );
 
     return SafeArea(
       child: Obx(() {

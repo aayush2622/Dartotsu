@@ -9,7 +9,6 @@ import '../Widgets/Components/BaseScreen.dart';
 import 'Feed/FeedTabs.dart';
 import 'Navbar.dart';
 import '../Api/Discord/DiscordPresence.dart';
-import '../Api/Discord/PresenceScope.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,11 +23,24 @@ class MainScreenState extends BaseScreen<MainScreen> {
   late final _tab = homeTabIndex(_services.currentService.value).obs;
   final _built = <int>{};
   Worker? _serviceWorker;
+  Worker? _tabWorker;
+
+  @override
+  DiscordPresence? get presence {
+    final tabs = feedTabsFor(_services.currentService.value);
+    final label = tabs[_tab.value.clamp(0, tabs.length - 1)].label;
+    return DiscordPresence.browsing(
+      label.toLowerCase() == 'home'
+          ? 'On the home screen'
+          : 'Browsing ${label.toLowerCase()}',
+    );
+  }
 
   @override
   void initState() {
     super.initState();
     _built.add(_tab.value);
+    _tabWorker = ever(_tab, (_) => refreshPresence());
     _serviceWorker = ever(_services.currentService, (_) {
       _built
         ..clear()
@@ -40,6 +52,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
   @override
   void dispose() {
     _serviceWorker?.dispose();
+    _tabWorker?.dispose();
     super.dispose();
   }
 
@@ -82,7 +95,7 @@ class MainScreenState extends BaseScreen<MainScreen> {
       );
     });
 
-    final stack = Stack(
+    return Stack(
       children: [
         Row(
           children: [
@@ -93,17 +106,5 @@ class MainScreenState extends BaseScreen<MainScreen> {
         if (context.isPhone) _navbar,
       ],
     );
-    return Obx(() {
-      final tabs = feedTabsFor(_services.currentService.value);
-      final label = tabs[_tab.value.clamp(0, tabs.length - 1)].label;
-      return PresenceScope(
-        presence: DiscordPresence.browsing(
-          label.toLowerCase() == 'home'
-              ? 'On the home screen'
-              : 'Browsing ${label.toLowerCase()}',
-        ),
-        child: stack,
-      );
-    });
   }
 }

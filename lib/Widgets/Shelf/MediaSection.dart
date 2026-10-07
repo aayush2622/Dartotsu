@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
+import '../../Screen/Feed/ShelfScreen.dart';
 import '../../Utils/Extensions/Responsive.dart';
+import '../../Utils/Functions/NavigateToScreen.dart';
 import 'CardShelf.dart';
 import 'MediaCarousel.dart';
 import 'MediaRows.dart';
@@ -27,6 +31,8 @@ class MediaSectionData {
   final void Function()? onTitleTap;
 
   final void Function()? onTitleLongPress;
+
+  final bool fullPage;
 
   final void Function(
     BuildContext context,
@@ -65,6 +71,7 @@ class MediaSectionData {
     this.onTrailingIconLongPress,
     this.onTitleTap,
     this.onTitleLongPress,
+    this.fullPage = true,
     this.onMediaTap,
     this.onMediaLongPress,
     this.onLoadMore,
@@ -84,6 +91,7 @@ class MediaSectionData {
       onTrailingIconLongPress = null,
       onTitleTap = null,
       onTitleLongPress = null,
+      fullPage = false,
       onMediaTap = null,
       onMediaLongPress = null,
       onLoadMore = null,
@@ -201,17 +209,45 @@ class MediaSection extends StatelessWidget {
         : MediaListTile(media: media, tag: tag, onTap: tap, onLongPress: hold);
   }
 
+  VoidCallback? _openShelf(BuildContext context) {
+    final media = data.mediaList;
+    final title = data.title;
+    if (!data.fullPage ||
+        data.loading ||
+        media == null ||
+        media.isEmpty ||
+        title == null ||
+        title.isEmpty ||
+        data.trailingIcon != null) {
+      return null;
+    }
+    return () => unawaited(
+      navigateToPage(
+        context,
+        ShelfScreen(
+          title: title,
+          media: media,
+          loadMore: data.onLoadMore,
+          itemFor: toItem,
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     if (data.type == 1) return MediaCarousel(data: data);
     if (data.type == 2) return _rows(context, banner: false);
     if (data.type == 3) return _rows(context, banner: true);
+    final open = _openShelf(context);
     return CardShelf(
       title: data.title,
-      trailingIcon: data.trailingIcon,
-      onTrailingIconTap: data.onTrailingIconTap,
+      trailingIcon:
+          data.trailingIcon ??
+          (open == null ? null : Icons.arrow_forward_rounded),
+      onTrailingIconTap: data.onTrailingIconTap ?? open,
       onTrailingIconLongPress: data.onTrailingIconLongPress,
-      onTitleTap: data.onTitleTap,
+      onTitleTap: data.onTitleTap ?? open,
       onTitleLongPress: data.onTitleLongPress,
       items: _items(context),
       dataKey: data.loading ? null : data.mediaList,

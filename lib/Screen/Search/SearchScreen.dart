@@ -38,7 +38,6 @@ import 'Components/SearchFilterSheet.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 enum _ResultView { grid, list, banner }
 
@@ -824,12 +823,10 @@ class _SearchScreenState extends BaseScreen<SearchScreen> {
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.browsing('Searching'),
-    child: _contentBody(context),
-  );
+  DiscordPresence? get presence => DiscordPresence.browsing('Searching');
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       floatingActionButton: Obx(

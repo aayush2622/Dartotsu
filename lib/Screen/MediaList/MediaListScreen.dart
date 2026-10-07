@@ -18,7 +18,6 @@ import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 class MediaListScreen extends StatefulWidget {
   final MediaService service;
@@ -100,14 +99,12 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.browsing(
-      'Browsing a ${widget.anime ? 'anime' : 'manga'} list',
-    ),
-    child: _contentBody(context),
+  DiscordPresence? get presence => DiscordPresence.browsing(
+    'Browsing a ${widget.anime ? 'anime' : 'manga'} list',
   );
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     final owner = widget.userName ?? widget.service.auth?.user.value?.name;
     final kind = widget.anime ? 'Anime' : 'Manga';
     final title = owner == null ? '$kind list' : "$owner's $kind list";

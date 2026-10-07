@@ -28,7 +28,6 @@ import 'Components/DetailHeader.dart';
 import '../Feed/FeedNavigation.dart';
 import 'ListEditorSheet.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 class DetailScreen extends StatefulWidget {
   final Media media;
@@ -233,12 +232,10 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.viewing(widget.media),
-    child: _contentBody(context),
-  );
+  DiscordPresence? get presence => DiscordPresence.viewing(widget.media);
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     final content = RefreshIndicator(
       onRefresh: () => _load(force: true),
       child: Obx(

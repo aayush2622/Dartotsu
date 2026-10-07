@@ -21,7 +21,6 @@ import 'Components/ProfileInfoTab.dart';
 import 'Components/ProfileStatsTab.dart';
 import 'SocialNavigation.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 class ProfileScreen extends StatefulWidget {
   final MediaService service;
@@ -74,6 +73,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   void initState() {
     super.initState();
     _scroll.addListener(_scheduleSnap);
+    _userSub = _user.stream.listen((_) => refreshPresence());
     final id = widget.id ?? (_seed.id.isEmpty ? null : _seed.id);
     final cached = id == null ? null : _view.cachedProfile(id);
     if (cached != null) {
@@ -107,11 +107,13 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   @override
   void dispose() {
     _snapTimer?.cancel();
+    _userSub?.cancel();
     _scroll.dispose();
     _tabs.dispose();
     super.dispose();
   }
 
+  StreamSubscription<SocialUser?>? _userSub;
   Future<SocialProfile?> _bundle = Future.value();
   Future<SocialProfile?>? _cachedBundle;
 
@@ -170,15 +172,13 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.browsing(
-      'Viewing a profile',
-      state: _user.value?.name ?? widget.name,
-    ),
-    child: _contentBody(context),
+  DiscordPresence? get presence => DiscordPresence.browsing(
+    'Viewing a profile',
+    state: _user.value?.name ?? widget.name,
   );
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     if (_failed && _user.value == null) {
       return Scaffold(
         backgroundColor: Colors.transparent,

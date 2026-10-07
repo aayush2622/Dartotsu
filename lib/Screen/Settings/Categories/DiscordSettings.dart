@@ -32,7 +32,7 @@ List<Setting> _discordSettings(BuildContext context) => [
               'Discord token.'
         : 'Show what you are doing on your Discord profile. Needs the '
               'Discord desktop app running.',
-    iconWidget: const Icon(Icons.sports_esports_rounded),
+    icon: Icons.sports_esports_rounded,
     isChecked: PrefName.discordRpc.rx.value,
     onSwitchChange: (v) => PrefName.discordRpc.rx.value = v,
   ),
@@ -41,7 +41,7 @@ List<Setting> _discordSettings(BuildContext context) => [
     description:
         'Also show the tab, page or profile you are looking at, not only '
         'what you watch or read.',
-    iconWidget: const Icon(Icons.explore_rounded),
+    icon: Icons.explore_rounded,
     isVisible: PrefName.discordRpc.rx.value,
     isChecked: PrefName.discordBrowsing.rx.value,
     onSwitchChange: (v) => PrefName.discordBrowsing.rx.value = v,
@@ -65,21 +65,21 @@ List<Setting> _discordSettings(BuildContext context) => [
   Setting.switchType(
     name: 'Show covers',
     description: 'Cover art and the Dartotsu icon on the card.',
-    iconWidget: const Icon(Icons.image_rounded),
+    icon: Icons.image_rounded,
     isChecked: PrefName.discordImages.rx.value,
     onSwitchChange: (v) => PrefName.discordImages.rx.value = v,
   ),
   Setting.switchType(
     name: 'Show timer',
     description: 'Elapsed or remaining time under the title.',
-    iconWidget: const Icon(Icons.timer_outlined),
+    icon: Icons.timer_outlined,
     isChecked: PrefName.discordTimer.rx.value,
     onSwitchChange: (v) => PrefName.discordTimer.rx.value = v,
   ),
   Setting.switchType(
     name: 'Show buttons',
     description: '"View anime / manga" and "Open Dartotsu" buttons.',
-    iconWidget: const Icon(Icons.smart_button_rounded),
+    icon: Icons.smart_button_rounded,
     isChecked: PrefName.discordButtons.rx.value,
     onSwitchChange: (v) => PrefName.discordButtons.rx.value = v,
   ),
@@ -88,7 +88,7 @@ List<Setting> _discordSettings(BuildContext context) => [
     description:
         'Replace anime and manga names (and their cover and link) with '
         '"Something private".',
-    iconWidget: const Icon(Icons.visibility_off_rounded),
+    icon: Icons.visibility_off_rounded,
     isChecked: PrefName.discordHideTitles.rx.value,
     onSwitchChange: (v) => PrefName.discordHideTitles.rx.value = v,
   ),
@@ -98,7 +98,7 @@ List<Setting> _discordSettings(BuildContext context) => [
     description: MobileTokenManager.saved
         ? 'Saved. Tap to replace, long press to remove.'
         : 'Not set. Tap to add.',
-    iconWidget: const Icon(Icons.key_rounded),
+    icon: Icons.key_rounded,
     isVisible: _needsToken && PrefName.discordRpc.rx.value,
     isActivity: true,
     onClick: () => _askToken(context),

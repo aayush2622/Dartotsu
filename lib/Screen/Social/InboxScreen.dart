@@ -7,7 +7,6 @@ import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import 'Components/ActivityList.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 class InboxScreen extends StatefulWidget {
   final MediaService service;
@@ -29,12 +28,10 @@ class _InboxScreenState extends BaseScreen<InboxScreen>
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.browsing('Reading messages'),
-    child: _contentBody(context),
-  );
+  DiscordPresence? get presence => DiscordPresence.browsing('Reading messages');
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     final me = widget.service.socialView!.currentUserId;
     if (me == null) {
       return const Scaffold(

@@ -20,7 +20,6 @@ import '../Social/SocialNavigation.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Discord/PresenceScope.dart';
 
 class NotificationsScreen extends StatefulWidget {
   final NotificationScreenView view;
@@ -86,12 +85,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen> {
   }
 
   @override
-  Widget buildContent(BuildContext context) => PresenceScope(
-    presence: DiscordPresence.browsing('Checking notifications'),
-    child: _contentBody(context),
-  );
+  DiscordPresence? get presence =>
+      DiscordPresence.browsing('Checking notifications');
 
-  Widget _contentBody(BuildContext context) {
+  @override
+  Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: const AppScreenBar(title: 'Notifications'),
