@@ -1,14 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:webview_all/webview_all.dart';
 
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
-import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Function.dart';
 import '../../Core/State/State.dart';
@@ -23,7 +21,7 @@ class WebView extends StatefulWidget {
 }
 
 class _WebViewState extends State<WebView> {
-  InAppWebViewController? _controller;
+  late final WebViewController _controller = WebViewController();
 
   final _url = ''.live;
   final _title = ''.live;
@@ -35,15 +33,12 @@ class _WebViewState extends State<WebView> {
   final FocusNode _addressFocus = FocusNode();
 
   final cookieManager = find<NetworkManager>().cookieManager;
-  PullToRefreshController? _pullToRefreshController;
-
-  bool get _isDark => find<ThemeController>().isDarkModeActive;
 
   Future<void> _captureRealUserAgent() async {
     if (PrefName.fetchedUserAgent.value.isNotEmpty) return;
     try {
-      final ua = await InAppWebViewController.getDefaultUserAgent();
-      if (ua.isEmpty) return;
+      final ua = await _controller.getUserAgent();
+      if (ua == null || ua.isEmpty) return;
       PrefName.fetchedUserAgent.value = ua;
       find<NetworkManager>().reinitialize();
     } catch (_) {}
@@ -54,53 +49,97 @@ class _WebViewState extends State<WebView> {
     super.initState();
     _url.value = widget.url;
     _searchController.text = widget.url;
-    if (Platform.isAndroid || Platform.isIOS) {
-      _pullToRefreshController = PullToRefreshController(
-        onRefresh: () async {
-          await _controller?.reload();
-        },
-      );
-    } else {
-      _pullToRefreshController = null;
-    }
+    unawaited(_setUp());
   }
 
   Timer? _cookieSyncTimer;
   Timer? _cookieSyncRetryTimer;
 
-  Future<void> _syncCookies(WebUri url) async {
+  Future<void> _syncCookies(Uri url) async {
     _cookieSyncTimer?.cancel();
     _cookieSyncRetryTimer?.cancel();
 
     _cookieSyncTimer = Timer(const Duration(milliseconds: 200), () async {
-      await cookieManager.readCookiesFromWebView(url, _controller);
+      await cookieManager.readCookiesFromWebView(url);
 
       // Some native cookie stores haven't flushed a just-set cookie into
       // memory yet even 200ms after the triggering event - a second read
       // catches what the first one raced ahead of.
       _cookieSyncRetryTimer = Timer(const Duration(milliseconds: 500), () {
-        cookieManager.readCookiesFromWebView(url, _controller);
+        cookieManager.readCookiesFromWebView(url);
       });
     });
   }
 
-  Future<void> _updateNavState() async {
+  Future<void> _setUp() async {
     final c = _controller;
-    if (c == null) return;
+    await c.setJavaScriptMode(JavaScriptMode.unrestricted);
+    await c.setBackgroundColor(Colors.transparent);
+    await c.setNavigationDelegate(
+      NavigationDelegate(
+        onNavigationRequest: (_) => NavigationDecision.navigate,
+        onPageStarted: (_) => unawaited(cookieManager.applyCookiesToWebView()),
+        onProgress: (progress) => _progress.value = progress / 100,
+        onPageFinished: (url) async {
+          _progress.value = 1;
+          await _syncCookies(Uri.parse(url));
+          await _updateNavState();
+        },
+        onUrlChange: (change) async {
+          final url = change.url;
+          if (url == null) return;
+          await _syncCookies(Uri.parse(url));
+          await _updateNavState();
+        },
+      ),
+    );
+    unawaited(_captureRealUserAgent());
+    await _injectFont();
+    await cookieManager.applyCookiesToWebView();
+    await c.loadRequest(Uri.parse(widget.url));
+  }
 
+  Future<void> _injectFont() async {
+    try {
+      final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
+      final base64Font = base64Encode(fontData.buffer.asUint8List());
+      await _controller.addUserScript(
+        WebViewUserScript(
+          source:
+              """
+        const style = document.createElement('style');
+        style.innerHTML = `
+          @font-face {
+            font-family: 'AppFont';
+            src: url(data:font/ttf;base64,$base64Font) format('truetype');
+          }
+          * { font-family: 'AppFont', system-ui, -apple-system, sans-serif !important; }
+        `;
+        document.documentElement.appendChild(style);
+      """,
+        ),
+      );
+    } catch (_) {}
+  }
+
+  Future<void> _updateNavState() async {
+    if (!mounted) return;
+    final c = _controller;
     final results = await Future.wait([
       c.canGoBack(),
       c.canGoForward(),
-      c.getUrl(),
+      c.currentUrl(),
+      c.getTitle(),
     ]);
 
     _canGoBack.value = results[0] as bool;
     _canGoForward.value = results[1] as bool;
+    _title.value = (results[3] as String?) ?? '';
 
-    final url = results[2] as WebUri?;
+    final url = results[2] as String?;
     if (url != null && !_isEditing.value) {
-      _url.value = url.toString();
-      _searchController.text = _url.value;
+      _url.value = url;
+      _searchController.text = url;
     }
   }
 
@@ -230,7 +269,7 @@ class _WebViewState extends State<WebView> {
         onSubmitted: (value) async {
           final url = normalizeUrl(value);
           _searchController.text = url;
-          await _controller?.loadUrl(urlRequest: URLRequest(url: WebUri(url)));
+          await _controller.loadRequest(Uri.parse(url));
           FocusManager.instance.primaryFocus?.unfocus();
         },
       ),
@@ -246,7 +285,7 @@ class _WebViewState extends State<WebView> {
             icon: const Icon(Icons.arrow_back_ios_rounded),
             onPressed: _canGoBack.value
                 ? () async {
-                    await _controller?.goBack();
+                    await _controller.goBack();
                     await _updateNavState();
                   }
                 : null,
@@ -257,7 +296,7 @@ class _WebViewState extends State<WebView> {
             icon: const Icon(Icons.arrow_forward_ios_rounded),
             onPressed: _canGoForward.value
                 ? () async {
-                    await _controller?.goForward();
+                    await _controller.goForward();
                     await _updateNavState();
                   }
                 : null,
@@ -274,7 +313,7 @@ class _WebViewState extends State<WebView> {
       onSelected: (value) async {
         switch (value) {
           case 0:
-            await _controller?.reload();
+            await _controller.reload();
             break;
           case 1:
             shareLink(_url.value);
@@ -283,10 +322,10 @@ class _WebViewState extends State<WebView> {
             await openLinkInBrowser(_url.value);
             break;
           case 3:
-            final uri = await _controller?.getUrl();
+            final uri = Uri.tryParse(await _controller.currentUrl() ?? '');
             if (uri != null) {
               await cookieManager.deleteCookiesForDomain(uri.host);
-              await _controller?.reload();
+              await _controller.reload();
             }
             break;
         }
@@ -303,125 +342,7 @@ class _WebViewState extends State<WebView> {
   Widget _buildWebView() {
     return Stack(
       children: [
-        InAppWebView(
-          initialUrlRequest: URLRequest(url: WebUri(widget.url)),
-          initialSettings: InAppWebViewSettings(
-            javaScriptEnabled: true,
-            domStorageEnabled: true,
-            useShouldOverrideUrlLoading: true,
-            mediaPlaybackRequiresUserGesture: false,
-            allowsInlineMediaPlayback: true,
-            darkMode: _isDark,
-            algorithmicDarkeningAllowed: _isDark,
-            thirdPartyCookiesEnabled: true,
-            cacheEnabled: true,
-          ),
-          pullToRefreshController: _pullToRefreshController,
-          onWebViewCreated: (controller) async {
-            _controller = controller;
-            unawaited(_captureRealUserAgent());
-
-            await cookieManager.applyCookiesToWebView(controller);
-
-            await _updateNavState();
-            final fontData = await rootBundle.load('assets/fonts/poppins.ttf');
-            final base64Font = base64Encode(fontData.buffer.asUint8List());
-
-            await controller.addUserScript(
-              userScript: UserScript(
-                injectionTime: UserScriptInjectionTime.AT_DOCUMENT_START,
-                source:
-                    '''
-        (function () {
-          const style = document.createElement('style');
-          style.innerHTML = `
-            @font-face {
-              font-family: 'AppFont';
-              src: url(data:font/ttf;base64,$base64Font) format('truetype');
-              font-weight: normal;
-              font-style: normal;
-            }
-
-            * {
-              font-family: 'AppFont', system-ui, -apple-system, BlinkMacSystemFont, sans-serif !important;
-            }
-          `;
-          document.documentElement.appendChild(style);
-        })();
-      ''',
-              ),
-            );
-          },
-          onLoadResource: (_, _) async {
-            final url = await _controller?.getUrl();
-            if (url != null) {
-              await _syncCookies(url);
-            }
-          },
-          shouldInterceptFetchRequest: (controller, fetchRequest) async {
-            final res = await find<NetworkManager>().get(
-              fetchRequest.url.toString(),
-              headers: {
-                for (final e in (fetchRequest.headers ?? {}).entries)
-                  e.key: e.value,
-              },
-            );
-
-            return FetchRequest(
-              url: fetchRequest.url,
-              method: fetchRequest.method,
-              headers: {
-                for (final e in res.headers.entries) e.key: e.value.join(','),
-              },
-              body: res.rawBytes,
-            );
-          },
-          shouldInterceptRequest: (controller, request) async {
-            final res = await find<NetworkManager>().get(
-              request.url.toString(),
-              headers: request.headers,
-            );
-
-            return WebResourceResponse(
-              data: res.rawBytes,
-              statusCode: res.statusCode,
-              reasonPhrase: res.statusMessage,
-              headers: {
-                for (final e in res.headers.entries) e.key: e.value.join(','),
-              },
-              contentType: res.headers['content-type']?.first,
-            );
-          },
-          onReceivedHttpAuthRequest: (_, _) async {
-            final url = await _controller?.getUrl();
-            if (url != null) {
-              await _syncCookies(url);
-            }
-            return null;
-          },
-          onLoadStart: (_, url) async {
-            if (url != null) {
-              await cookieManager.applyCookiesToWebView(_controller);
-            }
-          },
-          onProgressChanged: (_, progress) => _progress.value = progress / 100,
-          onLoadStop: (_, url) async {
-            if (url != null) {
-              await _syncCookies(url);
-            }
-            await _updateNavState();
-          },
-          shouldOverrideUrlLoading: (_, action) async {
-            return NavigationActionPolicy.ALLOW;
-          },
-          onUpdateVisitedHistory: (_, url, _) async {
-            if (url != null) {
-              await _syncCookies(url);
-            }
-            await _updateNavState();
-          },
-          onTitleChanged: (_, title) => _title.value = title ?? '',
-        ),
+        WebViewWidget(controller: _controller),
         Watch(
           () => _progress.value < 1.0
               ? AnimatedOpacity(
@@ -442,7 +363,6 @@ class _WebViewState extends State<WebView> {
   void dispose() {
     _addressFocus.dispose();
     _searchController.dispose();
-    _controller = null;
     _cookieSyncTimer?.cancel();
     _cookieSyncRetryTimer?.cancel();
     _url.close();

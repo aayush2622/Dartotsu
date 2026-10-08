@@ -2,37 +2,11 @@
   description = "Dartotsu - packages the pre-built Linux release bundle from GitHub";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/eaad089433ca2bb662274377d33df3d0e51ef28b";
-  inputs.nix-wpe-webkit-bin.url = "github:aayush2622/nix-wpe-webkit-bin/60484b22f066b447617b6abfa5b0caa666bc2d29";
-  inputs.nix-wpe-webkit-bin.inputs.nixpkgs.follows = "nixpkgs";
-
-  nixConfig = {
-    extra-substituters = [ "https://wpewebkit-bin.cachix.org" ];
-    extra-trusted-public-keys = [ "wpewebkit-bin.cachix.org-1:/ALEUaA8yEUbLGwgyJ+JT5UXxkCvaDakfve9zVROGf8=" ];
-  };
-
-  outputs = { self, nixpkgs, nix-wpe-webkit-bin }:
+  outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
-      wpewebkitPrebuilt = nix-wpe-webkit-bin.packages.${system}.default;
-
-      wpewebkit =
-        assert pkgs.lib.assertMsg
-          (pkgs.lib.hasInfix "no-cc" wpewebkitPrebuilt.stdenv.name
-            && pkgs.lib.hasSuffix "-x86_64-linux.tar.gz" wpewebkitPrebuilt.src.name)
-          ''
-            nix-wpe-webkit-bin no longer resolves to the prebuilt WPEWebKit tarball:
-              stdenv = ${wpewebkitPrebuilt.stdenv.name} (expected a *-no-cc stdenv)
-              src    = ${wpewebkitPrebuilt.src.name} (expected wpewebkit-*-x86_64-linux.tar.gz)
-            Refusing to continue -- this would compile WebKit from source.
-          '';
-        wpewebkitPrebuilt;
-
       channels = builtins.fromJSON (builtins.readFile ./channels.json);
-
-      channelExtraLibs = {
-        prerelease = [ pkgs.webkitgtk_4_1 ];
-      };
 
       mkDartotsu = channel: { version, url, hash }:
         let
@@ -83,9 +57,7 @@
             libxv
             stdenv.cc.cc.lib
 
-            wpewebkit
-            libwpe
-            libwpe-fdo
+            webkitgtk_4_1
 
             libseccomp
             gst_all_1.gstreamer
@@ -117,16 +89,12 @@
             libvdpau
             libunwind
             libarchive
-          ] ++ (channelExtraLibs.${channel} or [ ]);
+          ];
 
           autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
 
           dontBuild = true;
           dontConfigure = true;
-
-          postPatch = ''
-            rm -f lib/libWPEWebKit-2.0.so.* lib/libwpe-1.0.so.* lib/libWPEBackend-fdo-1.0.so.*
-          '';
 
           installPhase = ''
             runHook preInstall
@@ -232,9 +200,7 @@
             harfbuzz
             (harfbuzz.override { withIcu = true; })
 
-            wpewebkit
-            libwpe
-            libwpe-fdo
+            webkitgtk_4_1
             libsoup_3
             libsecret
             at-spi2-core

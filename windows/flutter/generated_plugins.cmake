@@ -18,6 +18,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   share_plus
   url_launcher_windows
   volume_controller
+  webview_all_windows
   window_manager
   window_to_front
 )

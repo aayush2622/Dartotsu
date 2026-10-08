@@ -492,12 +492,8 @@ check_dependencies() {
 
     # Check libraries using pkg-config
     if command -v pkg-config >/dev/null 2>&1; then
-        # Check for WebKit2GTK with fallback to older version
-        if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null; then
-            if ! pkg-config --exists libwebkit2gtk-4.1-0 2>/dev/null; then
-                missing_deps+=("webkit2gtk")
-            fi
-        fi
+        # webview_all renders with WebKitGTK 4.1 on Linux
+        pkg-config --exists webkit2gtk-4.1 2>/dev/null || missing_deps+=("webkit2gtk")
 
         # Additional library checks for GUI applications
         pkg-config --exists gtk+-3.0 2>/dev/null || missing_deps+=("gtk3")
@@ -560,7 +556,7 @@ install_packages() {
         install_cmd="sudo dnf install -y"
 
         # Map library names to Fedora package names
-        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1-0}")
+        deps=("${deps[@]/webkit2gtk/webkit2gtk4.1}")
         deps=("${deps[@]/gtk3/gtk3-devel}")
         deps=("${deps[@]/pkg-config/pkgconf-devel}")
 
@@ -579,7 +575,7 @@ install_packages() {
         install_cmd="sudo zypper install -y"
 
         # Map library names to openSUSE package names
-        deps=("${deps[@]/webkit2gtk/webkit2gtk3-devel}")
+        deps=("${deps[@]/webkit2gtk/libwebkit2gtk-4_1-0}")
         deps=("${deps[@]/gtk3/gtk3-devel}")
         deps=("${deps[@]/pkg-config/pkg-config}")
 
@@ -667,8 +663,8 @@ verify_installation() {
 
     # Verify library installations
     if command -v pkg-config >/dev/null 2>&1; then
-        if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null && ! pkg-config --exists webkit2gtk-3.0 2>/dev/null; then
-            warn_msg "WebKit2GTK may not be properly installed - some features may not work"
+        if ! pkg-config --exists webkit2gtk-4.1 2>/dev/null; then
+            warn_msg "WebKitGTK 4.1 may not be properly installed - the in-app browser will not work"
         fi
     fi
 

@@ -76,7 +76,6 @@ dependencies:
       path: ./libs/universal/media_kit_libs_video
   window_manager: ^0.5.2
   permission_handler: ^13.0.2
-  flutter_inappwebview: ^6.2.0-beta.3
   flutter_local_notifications: ^22.0.1
   wakelock_plus: ^1.6.1
   volume_controller: ^3.7.1
@@ -98,6 +97,7 @@ dependencies:
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
+  webview_all: ^1.4.4
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:

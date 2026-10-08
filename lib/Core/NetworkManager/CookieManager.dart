@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_inappwebview/flutter_inappwebview.dart' as webview;
+import 'package:webview_all/webview_all.dart' as webview;
 import 'package:rhttp/rhttp.dart';
 
 import '../Preferences/PrefManager.dart';
@@ -190,11 +190,8 @@ class CookieManager extends Interceptor {
     _saveAll(persistent);
     flush();
 
-    final manager = webview.CookieManager.instance();
-
-    await manager.deleteCookies(url: webview.WebUri("https://$domain"));
-
-    await manager.deleteCookies(url: webview.WebUri("http://$domain"));
+    await webview.WebViewCookieManager().clearCookies();
+    await applyCookiesToWebView();
   }
 
   @override
@@ -425,79 +422,49 @@ class CookieManager extends Interceptor {
     );
   }
 
-  Future<void> readCookiesFromWebView(
-    webview.WebUri url,
-    webview.InAppWebViewController? controller,
-  ) async {
-    final manager = webview.CookieManager.instance();
-
-    final cookies = await manager.getCookies(
-      url: url,
-      webViewController: controller,
+  Future<void> readCookiesFromWebView(Uri uri) async {
+    final cookies = await webview.WebViewCookieManager().getCookies(
+      domain: uri,
     );
 
-    final uri = Uri.parse(url.toString());
-
-    final converted = cookies.map((c) {
-      final domain = normalizeDomain(c.domain ?? uri.host);
-
-      return StoredCookie(
-        name: c.name,
-        value: c.value,
-        domain: domain,
-        hostOnly: c.domain == null,
-        path: c.path?.isNotEmpty == true ? c.path! : defaultCookiePath(uri),
-        expires: c.expiresDate == null
-            ? null
-            : DateTime.fromMillisecondsSinceEpoch(c.expiresDate!),
-        secure: c.isSecure ?? false,
-        httpOnly: c.isHttpOnly ?? false,
-        sameSite: null,
-        priority: CookiePriority.medium,
-        partitioned: false,
-        session: c.expiresDate == null,
-        created: DateTime.now(),
-        lastAccessed: DateTime.now(),
+    final converted = <StoredCookie>[];
+    for (final c in cookies) {
+      final domain = normalizeDomain(c.domain.isEmpty ? uri.host : c.domain);
+      final known = getCookie(domain, c.name);
+      if (known != null && known.value == c.value) continue;
+      converted.add(
+        StoredCookie(
+          name: c.name,
+          value: c.value,
+          domain: domain,
+          hostOnly: c.domain.isEmpty,
+          path: c.path.isNotEmpty ? c.path : defaultCookiePath(uri),
+          expires: known?.expires,
+          secure: known?.secure ?? false,
+          httpOnly: known?.httpOnly ?? false,
+          sameSite: known?.sameSite,
+          priority: CookiePriority.medium,
+          partitioned: false,
+          session: known?.session ?? true,
+          created: DateTime.now(),
+          lastAccessed: DateTime.now(),
+        ),
       );
-    });
-
-    setCookies(converted);
+    }
+    if (converted.isNotEmpty) setCookies(converted);
   }
 
-  Future<void> applyCookiesToWebView(
-    webview.InAppWebViewController? controller,
-  ) async {
-    final manager = webview.CookieManager.instance();
-
-    final cookies = allCookies;
-
-    for (final cookie in cookies) {
-      if (cookie.isExpired) {
-        continue;
-      }
-
-      final scheme = cookie.secure ? "https" : "http";
-
-      // A `null` expiresDate makes some native cookie stores (notably
-      // WKHTTPCookieStore on iOS/macOS) treat this as a true session cookie
-      // that's dropped on the next WebView/app restart, even though our own
-      // store is happy to keep serving it - give session cookies a
-      // synthetic far-future expiry here so they survive being pushed back
-      // into the WebView, without changing how this app itself tracks them.
+  Future<void> applyCookiesToWebView() async {
+    final manager = webview.WebViewCookieManager();
+    for (final cookie in allCookies) {
+      if (cookie.isExpired) continue;
       await manager.setCookie(
-        url: webview.WebUri("$scheme://${cookie.domain}"),
-        name: cookie.name,
-        value: cookie.value,
-        domain: cookie.domain,
-        path: cookie.path,
-        expiresDate: cookie.session
-            ? DateTime.now()
-                  .add(const Duration(days: 365))
-                  .millisecondsSinceEpoch
-            : cookie.expires?.millisecondsSinceEpoch,
-        isSecure: cookie.secure,
-        isHttpOnly: cookie.httpOnly,
-        webViewController: controller,
+        webview.WebViewCookie(
+          name: cookie.name,
+          value: cookie.value,
+          domain: cookie.domain,
+          path: cookie.path,
+        ),
       );
     }
   }
@@ -540,7 +507,7 @@ class CookieManager extends Interceptor {
     _dirty = true;
     flush();
 
-    await webview.CookieManager.instance().deleteAllCookies();
+    await webview.WebViewCookieManager().clearCookies();
   }
 }
 
