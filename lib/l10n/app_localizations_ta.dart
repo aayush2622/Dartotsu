@@ -732,6 +732,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get reviewsFailed => 'Couldn\'t load reviews';
 
   @override
+  String get reviewHelpfulQuestion => 'Was this review helpful?';
+
+  @override
+  String get reviewVoteFailed => 'Couldn\'t save your vote';
+
+  @override
   String reviewHelpful(int n, int total) {
     return '$n of $total found this helpful';
   }

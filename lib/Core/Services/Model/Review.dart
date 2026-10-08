@@ -4,6 +4,8 @@ import 'User.dart';
 
 part 'Generated/Review.g.dart';
 
+enum ReviewVote { up, down, none }
+
 @JsonSerializable()
 class Review {
   int id;
@@ -37,6 +39,12 @@ class Review {
     this.updatedAt,
     this.user,
   });
+  ReviewVote get vote => switch (userRating) {
+    'UP_VOTE' => ReviewVote.up,
+    'DOWN_VOTE' => ReviewVote.down,
+    _ => ReviewVote.none,
+  };
+
   factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
   Map<String, dynamic> toJson() => _$ReviewToJson(this);
 }

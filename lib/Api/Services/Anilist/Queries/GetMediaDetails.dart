@@ -90,7 +90,7 @@ String _queryMediaDetails(Media media) =>
     reviews(perPage: 3, sort: SCORE_DESC) {
       nodes {
         id mediaId mediaType summary body(asHtml: true) rating ratingAmount
-        score siteUrl createdAt
+        score siteUrl createdAt userRating
         user { id name bannerImage avatar { large medium } }
       }
     }

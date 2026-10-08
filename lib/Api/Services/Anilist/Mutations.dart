@@ -73,6 +73,9 @@ class AnilistMutations extends Mutations {
   Future<bool> deleteCustomList(String name, {required bool anime}) =>
       _deleteCustomList(name, anime: anime);
 
+  Future<Map<String, dynamic>?> rateReview(int id, String rating) =>
+      _rateReview(id, rating);
+
   @override
   Future<void> setProgress(Media media, int progress) =>
       _setProgress(media, progress);

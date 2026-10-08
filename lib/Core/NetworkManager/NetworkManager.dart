@@ -139,6 +139,38 @@ class NetworkManager extends AppController {
     return _wrap(res, decodeJson: decodeJson);
   }
 
+  Future<NetworkResponse<dynamic>> put(
+    String url, {
+    Object? data,
+    Map<String, String>? query,
+    Map<String, String>? headers,
+    CancelToken? cancelToken,
+  }) async {
+    final res = await client.put(
+      url,
+      query: query,
+      headers: _mapHeaders(headers),
+      body: _mapBody(data),
+      cancelToken: cancelToken,
+    );
+    return _wrap(res);
+  }
+
+  Future<NetworkResponse<dynamic>> delete(
+    String url, {
+    Map<String, String>? query,
+    Map<String, String>? headers,
+    CancelToken? cancelToken,
+  }) async {
+    final res = await client.delete(
+      url,
+      query: query,
+      headers: _mapHeaders(headers),
+      cancelToken: cancelToken,
+    );
+    return _wrap(res);
+  }
+
   Future<NetworkResponse<void>> head(
     String url, {
     Map<String, String>? query,

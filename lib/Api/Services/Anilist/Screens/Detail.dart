@@ -18,6 +18,30 @@ class AnilistDetailView extends DetailScreenView {
   ListEditorScreenView get listEditor => AnilistListEditorView(service);
 
   @override
+  bool get canRateReviews => true;
+
+  @override
+  Future<Review?> rateReview(Review review, ReviewVote vote) async {
+    final data = await anilistAuth.mutations.rateReview(
+      review.id,
+      switch (vote) {
+        ReviewVote.up => 'UP_VOTE',
+        ReviewVote.down => 'DOWN_VOTE',
+        ReviewVote.none => 'NO_VOTE',
+      },
+    );
+    if (data == null) return null;
+    return Review(
+      id: review.id,
+      mediaId: review.mediaId,
+      mediaType: review.mediaType,
+      rating: data['rating'] as int?,
+      ratingAmount: data['ratingAmount'] as int?,
+      userRating: data['userRating'] as String?,
+    );
+  }
+
+  @override
   Stream<List<ScreenWidget>> screenStream(DetailHost host) async* {
     yield _build(host);
     if (host.cached) return;

@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 
-import '../../Core/Services/Model/Review.dart';
+import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/ScoreFormat.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/DpadNav.dart';
+import '../../Widgets/Components/Clickable.dart';
 import '../../Widgets/Components/SectionCard.dart';
 import '../../Widgets/Components/UserAvatar.dart';
+import '../Social/SocialNavigation.dart';
+
+void openReviewer(BuildContext context, MediaService service, Review review) {
+  final user = review.user;
+  if (user == null || user.id == 0) return;
+  openProfile(
+    context,
+    service,
+    id: '${user.id}',
+    user: UserBrief(id: '${user.id}', name: user.name, avatar: user.pfp),
+  );
+}
 
 class ReviewCard extends StatelessWidget {
   final Review review;
   final VoidCallback? onTap;
+  final VoidCallback? onUserTap;
 
-  const ReviewCard({super.key, required this.review, this.onTap});
+  const ReviewCard({
+    super.key,
+    required this.review,
+    this.onTap,
+    this.onUserTap,
+  });
+
+  String get _excerpt => (review.summary?.isNotEmpty ?? false)
+      ? review.summary!
+      : (review.body ?? '').replaceAll(RegExp(r'<[^>]*>'), ' ').trim();
 
   @override
   Widget build(BuildContext context) {
@@ -37,30 +60,40 @@ class ReviewCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    UserAvatar(
-                      url: user?.pfp,
-                      name: user?.name ?? '?',
-                      size: 34,
-                    ),
-                    const SizedBox(width: 10),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            user?.name ?? '',
-                            style: context.textTheme.titleSmall,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          if (review.createdAt != null)
-                            Text(
-                              _date(review.createdAt!),
-                              style: context.textTheme.labelSmall?.copyWith(
-                                color: scheme.onSurfaceVariant,
+                      child: Clickable(
+                        onTap: onUserTap,
+                        child: Row(
+                          children: [
+                            UserAvatar(
+                              url: user?.pfp,
+                              name: user?.name ?? '?',
+                              size: 34,
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    user?.name ?? '',
+                                    style: context.textTheme.titleSmall,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  if (review.createdAt != null)
+                                    Text(
+                                      date(review.createdAt!),
+                                      style: context.textTheme.labelSmall
+                                          ?.copyWith(
+                                            color: scheme.onSurfaceVariant,
+                                          ),
+                                    ),
+                                ],
                               ),
                             ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     if (score.isNotEmpty)
@@ -71,10 +104,10 @@ class ReviewCard extends StatelessWidget {
                       ),
                   ],
                 ),
-                if ((review.summary ?? '').isNotEmpty) ...[
+                if (_excerpt.isNotEmpty) ...[
                   const SizedBox(height: 8),
                   Text(
-                    review.summary!,
+                    _excerpt,
                     style: context.textTheme.bodyMedium,
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
@@ -107,7 +140,7 @@ class ReviewCard extends StatelessWidget {
     );
   }
 
-  static String _date(int seconds) {
+  static String date(int seconds) {
     final d = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
     return '${d.year}-${d.month.toString().padLeft(2, '0')}-${d.day.toString().padLeft(2, '0')}';
   }

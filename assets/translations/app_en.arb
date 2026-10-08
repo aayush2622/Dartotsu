@@ -487,6 +487,8 @@
   "reviewsTitle": "Reviews",
   "reviewsEmpty": "No reviews yet",
   "reviewsFailed": "Couldn't load reviews",
+  "reviewHelpfulQuestion": "Was this review helpful?",
+  "reviewVoteFailed": "Couldn't save your vote",
   "reviewHelpful": "{n} of {total} found this helpful",
   "@reviewHelpful": {
     "placeholders": {

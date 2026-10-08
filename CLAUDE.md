@@ -250,6 +250,10 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
 - `AnilistService` — `getQueries` / `getMutations` / `auth` all just return
   `find<AnilistAuth>()`'s members. No screen code (feed composition lives in `Screen/Feed/`).
 
+### MyAnimeList service (`lib/Api/Services/MyAnimeList/`)
+
+Uses the official MAL API and Tenrai (`api.tenrai.org/v1`, a Jikan-compatible MAL data API, no auth) together. `MalClient` (`api.myanimelist.net/v2`, bearer token or `X-MAL-CLIENT-ID` when logged out) serves login, the user's lists, media details with `my_list_status` and list writes (`MalMutations`, form-encoded PUT/DELETE). `TenraiClient` (serialized ~150 ms apart, 10-minute GET cache, retries on 429/5xx) serves everything public: browse sections (`malSections`), search with filters, schedules (calendar), characters and reviews. `MalAuth` is OAuth with plain PKCE through `FlutterWebAuth2` (scheme `dantotsu`, client id shared with `main`), refreshes the token on 401. Media ids are `anime/<id>` / `manga/<id>` because MAL ids collide between the two (`parseMalMediaId`); scores are stored 0–100 like AniList and shown with `ScoreFormat.point10`; statuses are mapped to the AniList names (`CURRENT`, `PLANNING`, …). `CalendarEntry.episode` is null for MAL (Tenrai has no episode numbers; it has no user endpoints either, so chapters read are summed from the MAL manga list).
+
 ### Feature screens
 
 Entry flow: `OnboardingScreen` (welcome / theme / sync) → `LoginScreen` (drives

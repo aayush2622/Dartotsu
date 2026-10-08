@@ -334,6 +334,7 @@ List<Review> _reviews(Object? raw) {
       ratingAmount: (n['ratingAmount'] as num?)?.toInt(),
       score: (n['score'] as num?)?.toInt(),
       siteUrl: n['siteUrl'] as String?,
+      userRating: n['userRating'] as String?,
       createdAt: (n['createdAt'] as num?)?.toInt(),
       user: user == null
           ? null

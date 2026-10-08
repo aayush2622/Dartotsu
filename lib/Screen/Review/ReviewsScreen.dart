@@ -35,13 +35,13 @@ class _ReviewsScreenState extends BaseScreen<ReviewsScreen> {
   late final _items = widget.initial.liveList;
   final _loadingMore = false.live;
   final _failed = false.live;
-  var _page = 1;
+  var _page = 0;
   var _hasMore = true;
 
   @override
   void initState() {
     super.initState();
-    if (_items.isEmpty) unawaited(_more());
+    unawaited(_more());
   }
 
   Future<void> _more() async {
@@ -112,9 +112,14 @@ class _ReviewsScreenState extends BaseScreen<ReviewsScreen> {
                     )
                   : ReviewCard(
                       review: items[i],
+                      onUserTap: () => openReviewer(context, service, items[i]),
                       onTap: () => navigateToPage(
                         context,
-                        ReviewScreen(review: items[i], service: service),
+                        ReviewScreen(
+                          review: items[i],
+                          service: service,
+                          view: widget.view,
+                        ),
                       ),
                     ),
             ),

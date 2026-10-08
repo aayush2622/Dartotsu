@@ -1529,6 +1529,18 @@ abstract class AppLocalizations {
   /// **'Couldn\'t load reviews'**
   String get reviewsFailed;
 
+  /// No description provided for @reviewHelpfulQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Was this review helpful?'**
+  String get reviewHelpfulQuestion;
+
+  /// No description provided for @reviewVoteFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save your vote'**
+  String get reviewVoteFailed;
+
   /// No description provided for @reviewHelpful.
   ///
   /// In en, this message translates to:

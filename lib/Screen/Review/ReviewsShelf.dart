@@ -11,55 +11,28 @@ import 'ReviewScreen.dart';
 import 'ReviewsScreen.dart';
 import '../../Core/State/State.dart';
 
-class ReviewsShelf extends StatefulWidget {
+class ReviewsShelf extends StatelessWidget {
   final Media media;
   final DetailScreenView view;
 
   const ReviewsShelf({super.key, required this.media, required this.view});
 
-  @override
-  State<ReviewsShelf> createState() => _ReviewsShelfState();
-}
-
-class _ReviewsShelfState extends State<ReviewsShelf> {
-  final _reviews = <Review>[].liveList;
-  final _loaded = false.live;
-
-  @override
-  void initState() {
-    super.initState();
-    _load();
-  }
-
-  Future<void> _load() async {
-    try {
-      _reviews.value = await widget.view.reviews(widget.media);
-    } catch (_) {
-    } finally {
-      _loaded.value = true;
-    }
-  }
-
-  void _openAll() => navigateToPage(
+  void _openAll(BuildContext context) => navigateToPage(
     context,
-    ReviewsScreen(
-      media: widget.media,
-      view: widget.view,
-      initial: [..._reviews],
-    ),
+    ReviewsScreen(media: media, view: view, initial: [...?media.review]),
   );
 
   @override
-  Widget build(BuildContext context) => Watch(() {
-    if (!_loaded.value || _reviews.isEmpty) return const SizedBox.shrink();
+  Widget build(BuildContext context) {
+    final shown = (media.review ?? const <Review>[]).take(3).toList();
+    if (shown.isEmpty) return const SizedBox.shrink();
     final service = find<MediaServiceController>().currentService.value;
-    final shown = _reviews.take(3).toList();
     return ShelfFrame(
       title: getString.reviewsTitle,
-      onTitleTap: _openAll,
+      onTitleTap: () => _openAll(context),
       trailing: IconButton(
         icon: const Icon(Icons.arrow_forward_rounded),
-        onPressed: _openAll,
+        onPressed: () => _openAll(context),
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
@@ -70,9 +43,10 @@ class _ReviewsShelfState extends State<ReviewsShelf> {
                 padding: EdgeInsets.only(bottom: Dimens.gapSm),
                 child: ReviewCard(
                   review: r,
+                  onUserTap: () => openReviewer(context, service, r),
                   onTap: () => navigateToPage(
                     context,
-                    ReviewScreen(review: r, service: service),
+                    ReviewScreen(review: r, service: service, view: view),
                   ),
                 ),
               ),
@@ -80,5 +54,5 @@ class _ReviewsShelfState extends State<ReviewsShelf> {
         ),
       ),
     );
-  });
+  }
 }

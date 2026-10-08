@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 
 import '../../Api/Services/Anilist/AnilistService.dart';
 import '../../Api/Services/Extension/ExtensionService.dart';
+import '../../Api/Services/MyAnimeList/MalService.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../Preferences/PrefManager.dart';
 import 'MediaService.dart';
@@ -26,7 +27,7 @@ class MediaServiceController extends AppController {
   void onInit() {
     super.onInit();
 
-    services.assignAll([AnilistService(), ExtensionService()]);
+    services.assignAll([AnilistService(), MalService(), ExtensionService()]);
 
     currentService = Live<MediaService>(
       _byId(PrefName.service.value) ?? services.first,

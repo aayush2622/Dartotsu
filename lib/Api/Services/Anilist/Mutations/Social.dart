@@ -10,6 +10,22 @@ extension on AnilistMutations {
     }
   }
 
+  Future<Map<String, dynamic>?> _rateReview(int id, String rating) async {
+    try {
+      final data = await client.query(
+        r'''
+mutation ($id: Int, $rating: ReviewRating) {
+  RateReview(reviewId: $id, rating: $rating) { id rating ratingAmount userRating }
+}''',
+        variables: {'id': id, 'rating': rating},
+        showErrors: true,
+      );
+      return data['RateReview'] as Map<String, dynamic>?;
+    } on AnilistException {
+      return null;
+    }
+  }
+
   Future<bool?> _toggleFollow(String userId) async {
     try {
       final data = await client.query(

@@ -176,6 +176,10 @@ class DetailScreenView {
 
   ListEditorScreenView get listEditor => ListEditorScreenView(service);
 
+  bool get canRateReviews => false;
+
+  Future<Review?> rateReview(Review review, ReviewVote vote) async => null;
+
   Future<List<Review>> reviews(Media media, {int page = 1}) async =>
       await service.getQueries?.getReviews(media.id, page: page) ?? const [];
 }

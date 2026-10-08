@@ -189,12 +189,13 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen> {
                           overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 4),
-                        Text(
-                          getString.calendarEpisode(e.episode),
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: scheme.onSurfaceVariant,
+                        if (e.episode != null)
+                          Text(
+                            getString.calendarEpisode(e.episode!),
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: scheme.onSurfaceVariant,
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),

@@ -23,6 +23,7 @@ extension on AnilistQueries {
           ratingAmount: n['ratingAmount'] as int?,
           score: n['score'] as int?,
           siteUrl: n['siteUrl'] as String?,
+          userRating: n['userRating'] as String?,
           createdAt: n['createdAt'] as int?,
           user: _reviewUser(n['user'] as Map<String, dynamic>?),
         ),
@@ -34,17 +35,18 @@ extension on AnilistQueries {
       : User(
           id: u['id'] as int,
           name: u['name'] as String,
-          pfp: (u['avatar'] as Map<String, dynamic>?)?['medium'] as String?,
+          pfp: (u['avatar'] as Map<String, dynamic>?)?['large'] as String?,
+          banner: u['bannerImage'] as String?,
         );
 }
 
 const _queryReviews = r'''
 query ($id: Int, $page: Int) {
   Media(id: $id) {
-    reviews(page: $page, limit: 10, sort: RATING_DESC) {
+    reviews(page: $page, limit: 10, sort: SCORE_DESC) {
       nodes {
-        id summary body(asHtml: true) rating ratingAmount score siteUrl createdAt
-        user { id name avatar { medium } }
+        id summary body(asHtml: true) rating ratingAmount score siteUrl createdAt userRating
+        user { id name bannerImage avatar { large medium } }
       }
     }
   }
