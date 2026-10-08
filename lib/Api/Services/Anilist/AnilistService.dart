@@ -1,5 +1,6 @@
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
+import 'Screens/Calendar.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Entity.dart';
 import 'Screens/Feed.dart';
@@ -58,6 +59,9 @@ class AnilistService extends MediaService {
 
   @override
   SocialScreenView get socialView => AnilistSocialView(this);
+
+  @override
+  CalendarScreenView get calendarView => AnilistCalendarView();
 
   @override
   NotificationScreenView get notificationView => AnilistNotificationView();

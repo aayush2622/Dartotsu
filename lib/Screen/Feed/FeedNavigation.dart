@@ -4,6 +4,7 @@ import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/NotImplemented.dart';
+import '../Calendar/CalendarScreen.dart';
 import '../Detail/DetailScreen.dart';
 import '../Entity/EntityScreen.dart';
 import '../Notifications/NotificationsScreen.dart';
@@ -43,6 +44,16 @@ void openSearch(
             type: type ?? view.types.first,
             query: query,
           ),
+  );
+}
+
+void openCalendar(BuildContext context, MediaService service) {
+  final view = service.calendarView;
+  navigateToPage(
+    context,
+    view == null
+        ? NotImplemented(service: service.name, area: 'Calendar')
+        : CalendarScreen(view: view),
   );
 }
 

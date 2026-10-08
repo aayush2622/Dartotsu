@@ -13,6 +13,8 @@ export 'DetailHost.dart';
 export 'EntityHost.dart';
 export 'ListEditorDraft.dart';
 export 'ScreenWidget.dart';
+export '../Model/Calendar.dart';
+export '../Model/Review.dart';
 export '../Model/Social.dart';
 
 class HomeScreenView {
@@ -173,6 +175,9 @@ class DetailScreenView {
   }
 
   ListEditorScreenView get listEditor => ListEditorScreenView(service);
+
+  Future<List<Review>> reviews(Media media, {int page = 1}) async =>
+      await service.getQueries?.getReviews(media.id, page: page) ?? const [];
 }
 
 /// The list-entry editor as data: the fields it shows for a [Media], bound to a
@@ -210,6 +215,10 @@ class ListEditorScreenView {
     ScreenWidget.extra(ListPrivateField(draft: draft)),
     if (advanced) ScreenWidget.extra(ListOtherSection(draft: draft)),
   ];
+}
+
+abstract class CalendarScreenView {
+  Future<List<CalendarEntry>> schedule();
 }
 
 abstract class NotificationScreenView {

@@ -10,8 +10,14 @@ import '../../Core/State/State.dart';
 class FeedHeader extends StatelessWidget {
   final String title;
   final VoidCallback? onSearch;
+  final VoidCallback? onCalendar;
 
-  const FeedHeader({super.key, required this.title, this.onSearch});
+  const FeedHeader({
+    super.key,
+    required this.title,
+    this.onSearch,
+    this.onCalendar,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,11 @@ class FeedHeader extends StatelessWidget {
               ),
             ),
           ),
+          if (onCalendar != null)
+            IconButton(
+              icon: const Icon(Icons.calendar_month_rounded),
+              onPressed: onCalendar,
+            ),
           if (onSearch != null)
             IconButton(
               icon: const Icon(Icons.search_rounded),

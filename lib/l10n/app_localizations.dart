@@ -1511,6 +1511,72 @@ abstract class AppLocalizations {
   /// **'Let AniList and repo links open the app'**
   String get linkOpenInAppDesc;
 
+  /// No description provided for @reviewsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get reviewsTitle;
+
+  /// No description provided for @reviewsEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews yet'**
+  String get reviewsEmpty;
+
+  /// No description provided for @reviewsFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load reviews'**
+  String get reviewsFailed;
+
+  /// No description provided for @reviewHelpful.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} of {total} found this helpful'**
+  String reviewHelpful(int n, int total);
+
+  /// No description provided for @calendarTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Airing schedule'**
+  String get calendarTitle;
+
+  /// No description provided for @calendarToday.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get calendarToday;
+
+  /// No description provided for @calendarEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing airs this day'**
+  String get calendarEmpty;
+
+  /// No description provided for @calendarFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load the schedule'**
+  String get calendarFailed;
+
+  /// No description provided for @calendarEpisode.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {n}'**
+  String calendarEpisode(int n);
+
+  /// No description provided for @shareAnalytics.
+  ///
+  /// In en, this message translates to:
+  /// **'Share anonymous usage data'**
+  String get shareAnalytics;
+
+  /// No description provided for @shareAnalyticsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Anonymous user counts and crash reports. No account or personal data'**
+  String get shareAnalyticsDesc;
+
   /// No description provided for @linkOpenAnilist.
   ///
   /// In en, this message translates to:

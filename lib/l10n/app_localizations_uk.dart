@@ -723,6 +723,44 @@ class AppLocalizationsUk extends AppLocalizations {
   String get linkOpenInAppDesc => 'Let AniList and repo links open the app';
 
   @override
+  String get reviewsTitle => 'Reviews';
+
+  @override
+  String get reviewsEmpty => 'No reviews yet';
+
+  @override
+  String get reviewsFailed => 'Couldn\'t load reviews';
+
+  @override
+  String reviewHelpful(int n, int total) {
+    return '$n of $total found this helpful';
+  }
+
+  @override
+  String get calendarTitle => 'Airing schedule';
+
+  @override
+  String get calendarToday => 'Today';
+
+  @override
+  String get calendarEmpty => 'Nothing airs this day';
+
+  @override
+  String get calendarFailed => 'Couldn\'t load the schedule';
+
+  @override
+  String calendarEpisode(int n) {
+    return 'Episode $n';
+  }
+
+  @override
+  String get shareAnalytics => 'Share anonymous usage data';
+
+  @override
+  String get shareAnalyticsDesc =>
+      'Anonymous user counts and crash reports. No account or personal data';
+
+  @override
   String get linkOpenAnilist => 'Open AniList links in Dartotsu';
 
   @override

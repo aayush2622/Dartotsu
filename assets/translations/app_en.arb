@@ -484,6 +484,34 @@
   "linkOpenInApp": "Open links in Dartotsu",
   "@linkOpenInApp": {},
   "linkOpenInAppDesc": "Let AniList and repo links open the app",
+  "reviewsTitle": "Reviews",
+  "reviewsEmpty": "No reviews yet",
+  "reviewsFailed": "Couldn't load reviews",
+  "reviewHelpful": "{n} of {total} found this helpful",
+  "@reviewHelpful": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "calendarTitle": "Airing schedule",
+  "calendarToday": "Today",
+  "calendarEmpty": "Nothing airs this day",
+  "calendarFailed": "Couldn't load the schedule",
+  "calendarEpisode": "Episode {n}",
+  "@calendarEpisode": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "shareAnalytics": "Share anonymous usage data",
+  "shareAnalyticsDesc": "Anonymous user counts and crash reports. No account or personal data",
   "@linkOpenInAppDesc": {},
   "linkOpenAnilist": "Open AniList links in Dartotsu",
   "@linkOpenAnilist": {},

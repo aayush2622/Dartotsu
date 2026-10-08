@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
@@ -5,6 +7,7 @@ import '../Auth.dart';
 import '../Data/Media.dart';
 import '../Data/User.dart';
 import '../Widgets/DetailStats.dart';
+import '../../../../Screen/Review/ReviewsShelf.dart';
 import '../Widgets/FollowersShelf.dart';
 import '../Widgets/StudioChip.dart';
 
@@ -50,6 +53,9 @@ class AnilistDetailView extends DetailScreenView {
           ScreenData(chips: m.genres, onChipTap: host.search),
         ),
       ..._tags(m, host),
+      ScreenWidget.extra(
+        ReviewsShelf(key: ValueKey('reviews-${m.id}'), media: m, view: this),
+      ),
       ..._followers(m),
       ..._sequels(m),
       if ((m.characters ?? const []).isNotEmpty)

@@ -1,5 +1,6 @@
 import '../../../Model/SearchResults.dart';
 import '../Model/Media.dart';
+import '../Model/Review.dart';
 import '../ServiceNotification.dart';
 import 'SectionJobs.dart';
 
@@ -27,6 +28,9 @@ abstract class Queries {
   Future<List<String?>> getBannerImages() => Future.value([null, null]);
 
   Future<List<ServiceNotification>> getNotifications({int page = 1}) =>
+      Future.value(const []);
+
+  Future<List<Review>> getReviews(String mediaId, {int page = 1}) =>
       Future.value(const []);
 
   Future<SearchResults?> search(SearchResults? results);

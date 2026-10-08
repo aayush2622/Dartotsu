@@ -10,6 +10,7 @@ import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Character.dart';
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/Services/Model/Review.dart';
 import '../../../Core/Services/Model/Social.dart';
 import '../../../Core/Services/Model/Studio.dart';
 import '../../../Core/Services/Model/User.dart';
@@ -34,6 +35,7 @@ part 'Queries/GetHomePageData.dart';
 part 'Queries/GetMediaData.dart';
 part 'Queries/GetMediaDetails.dart';
 part 'Queries/GetNotifications.dart';
+part 'Queries/GetReviews.dart';
 part 'Queries/GetSocialData.dart';
 part 'Queries/GetUserData.dart';
 part 'Queries/GetUserMediaList.dart';
@@ -144,6 +146,10 @@ class AnilistQueries extends Queries {
 
   @override
   Future<List<String?>> getBannerImages() => _getBannerImages();
+
+  @override
+  Future<List<Review>> getReviews(String mediaId, {int page = 1}) =>
+      _getReviews(mediaId, page);
 
   @override
   Future<List<ServiceNotification>> getNotifications({int page = 1}) =>

@@ -65,6 +65,8 @@ abstract class MediaService {
 
   SocialScreenView? get socialView => null;
 
+  CalendarScreenView? get calendarView => null;
+
   NotificationScreenView? get notificationView => null;
 
   SettingsScreenView? get settingsView => null;
