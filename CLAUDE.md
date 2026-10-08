@@ -70,7 +70,7 @@ and `sdk: '>=3.12.0 <4.0.0'`, but CI pins `FLUTTER_VERSION: 3.38.5` (`dart.yml`)
 
 `.env` is a bundled asset (declared in `pubspec.yaml`) — the build fails without it.
 On this branch it holds `hash` (used by `AppUpdater` and `Core/Preferences/Encryptor.dart`),
-read via `loadEnv(key)` in `lib/Utils/Function.dart`. (On `main` it holds `SIMKL_SECRET`.)
+read via `loadEnv(key)` in `lib/Utils/Function.dart`. (On `main` it held `SIMKL_SECRET`; this branch needs no secrets.)
 
 ### CI build triggers
 
@@ -253,6 +253,12 @@ Per-service code goes under **`lib/Api/Services/<Service>/`**.
 ### MyAnimeList service (`lib/Api/Services/MyAnimeList/`)
 
 Uses the official MAL API and Tenrai (`api.tenrai.org/v1`, a Jikan-compatible MAL data API, no auth) together. `MalClient` (`api.myanimelist.net/v2`, bearer token or `X-MAL-CLIENT-ID` when logged out) serves login, the user's lists, media details with `my_list_status` and list writes (`MalMutations`, form-encoded PUT/DELETE). `TenraiClient` (serialized ~150 ms apart, 10-minute GET cache, retries on 429/5xx) serves everything public: browse sections (`malSections`), search with filters, schedules (calendar), characters and reviews. `MalAuth` is OAuth with plain PKCE through `FlutterWebAuth2` (scheme `dantotsu`, client id shared with `main`), refreshes the token on 401. Media ids are `anime/<id>` / `manga/<id>` because MAL ids collide between the two (`parseMalMediaId`); scores are stored 0–100 like AniList and shown with `ScoreFormat.point10`; statuses are mapped to the AniList names (`CURRENT`, `PLANNING`, …). `CalendarEntry.episode` is null for MAL (Tenrai has no episode numbers; it has no user endpoints either, so chapters read are summed from the MAL manga list).
+
+### Simkl service (`lib/Api/Services/Simkl/`)
+
+Movies, TV and anime (`feedTypes` = anime / movie / series, media ids `anime/<simklId>`, `movies/<id>`, `tv/<id>`). `SimklClient` sends `client_id`, `app-name`, `app-version` and a `User-Agent` on every call and **leaves `Authorization` off the cached catalog and data-file calls** (Simkl asks for that). Browse rows come from the public trending files on `data.simkl.in` (titles must keep "Simkl" next to "Trending" — see `simklSections`), the calendar from the v2 calendar files, details from `/anime|tv|movies/{id}?extended=full`; the user's library is one `/sync/all-items/all/all` call cached 5 minutes (`SimklQueries.library()`, cleared after every write). Writes: `add-to-list` (status), `sync/history` (anime episodes, flat numbers), `sync/ratings` (1–10), `history/remove`. `DetailScreenView.sourceName` ('Simkl') turns the detail menu's "Open in browser" into "View on Simkl", which Simkl's API rules require (link to the item's own page).
+
+`SimklAuth` uses **AUTH V2 only** (OAuth 2.0 + PKCE S256, scopes `media:read media:write`, 7-day access tokens renewed with the refresh token; V2 apps are public clients, so there is no secret). The client id (public, a V2 "Mobile, desktop & browser app" registered at simkl.com/settings/developer) and the redirect URL `dantotsu://simkl` are constants in `Auth.dart`; the redirect must match the registration exactly. Nothing about Simkl lives in `.env` or the CI workflows any more. V2 needs a signed-in user for search; logged out, only the trending/calendar files and catalog lookups work.
 
 ### Feature screens
 

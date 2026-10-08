@@ -34,6 +34,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
   final double top;
   final bool glass;
   final String Function(Media media)? listLabel;
+  final String? sourceName;
   final VoidCallback? onEditList;
   final FocusNode? actionFocus;
   final GlobalKey<DpadRegionState>? toolbarLane;
@@ -46,6 +47,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
     required this.top,
     required this.glass,
     this.listLabel,
+    this.sourceName,
     this.onEditList,
     this.actionFocus,
     this.toolbarLane,
@@ -417,13 +419,15 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
           title: Text('Copy link'),
         ),
       ),
-      const PopupMenuItem(
+      PopupMenuItem(
         value: 'browser',
         child: ListTile(
           dense: true,
           contentPadding: EdgeInsets.zero,
-          leading: Icon(Icons.open_in_new_rounded),
-          title: Text('Open in browser'),
+          leading: const Icon(Icons.open_in_new_rounded),
+          title: Text(
+            sourceName == null ? 'Open in browser' : 'View on $sourceName',
+          ),
         ),
       ),
     ],

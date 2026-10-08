@@ -250,6 +250,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen> {
                 top: MediaQuery.paddingOf(context).top,
                 glass: find<ThemeController>().useGlassMode.value,
                 listLabel: (m) => _statusLabel(m.userStatus),
+                sourceName: widget.view.sourceName,
                 onEditList: widget.mutations == null ? null : _editList,
                 actionFocus: _actionFocus,
                 toolbarLane: _lane(0),

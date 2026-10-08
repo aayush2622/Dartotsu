@@ -7,6 +7,7 @@ import 'Api/Discord/DiscordPresenceController.dart';
 import 'Api/Discord/Mobile/MobileRPC.dart';
 import 'Api/Services/Anilist/Auth.dart';
 import 'Api/Services/MyAnimeList/Auth.dart';
+import 'Api/Services/Simkl/Auth.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Analytics/AnalyticsManager.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
@@ -37,6 +38,7 @@ class DI {
     lazyPut<MediaServiceController>(MediaServiceController.new);
     lazyPut<AnilistAuth>(AnilistAuth.new);
     lazyPut<MalAuth>(MalAuth.new);
+    lazyPut<SimklAuth>(SimklAuth.new);
     lazyPut<RefreshController>(RefreshController.new);
     lazyPut<ActivityAlerts>(ActivityAlerts.new);
     lazyPut<AppUpdater>(AppUpdater.new);

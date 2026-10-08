@@ -53,12 +53,9 @@ jobs:
       - &setup_env
         name: Setup env File
         shell: bash
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         run: |
-          echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
+          echo "hash=$GIT_HASH" > .env
 
       - &setup_cmake
         name: Setup cmake

@@ -176,6 +176,8 @@ class DetailScreenView {
 
   ListEditorScreenView get listEditor => ListEditorScreenView(service);
 
+  String? get sourceName => null;
+
   bool get canRateReviews => false;
 
   Future<Review?> rateReview(Review review, ReviewVote vote) async => null;

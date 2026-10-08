@@ -92,13 +92,10 @@ jobs:
 
       - &setup_env
         name: Setup env File
-        env:
-          SIMKL_SECRET: ${{ secrets.SIMKL_SECRET }}
         shell: bash
         run: |
-          echo "SIMKL_SECRET=$SIMKL_SECRET" > .env
           GIT_HASH=$(git rev-parse --short HEAD)
-          echo "hash=$GIT_HASH" >> .env
+          echo "hash=$GIT_HASH" > .env
 
   build_android:
     runs-on: ubuntu-latest
