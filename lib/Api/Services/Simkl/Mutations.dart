@@ -64,19 +64,42 @@ class SimklMutations extends Mutations {
       final before = (await queries.library())[media.id];
       final old = before?.userProgress ?? 0;
       final progress = media.userProgress ?? 0;
-      if (progress > old) {
-        await _episodes(kind, id, old + 1, progress, add: true);
-      } else if (progress < old) {
+      final status = simklStatusOut(media.userStatus, kind);
+      final score = ((media.userScore ?? 0) / 10).round().clamp(0, 10);
+      final oldScore = ((before?.userScore ?? 0) / 10).round();
+      final rate = score > 0 && score != oldScore;
+
+      if (kind == SimklKind.anime && progress < old) {
         await _episodes(kind, id, progress + 1, old, add: false);
       }
-      final status = simklStatusOut(media.userStatus, kind);
-      if (status != null) {
-        await client.post('/sync/add-to-list', _body(kind, id, {'to': status}));
+      if (kind == SimklKind.anime && progress > old) {
+        await client.post('/sync/history', {
+          kind.syncKey: [
+            _entry(kind, id, {
+              'episodes': [
+                for (var n = old + 1; n <= progress; n++) {'number': n},
+              ],
+              'status': ?status,
+              if (rate) 'rating': score,
+            }),
+          ],
+        });
+      } else {
+        if (status != null &&
+            status != simklStatusOut(before?.userStatus, kind)) {
+          await client.post(
+            '/sync/add-to-list',
+            _body(kind, id, {'to': status}),
+          );
+        }
+        if (rate) {
+          await client.post(
+            '/sync/ratings',
+            _body(kind, id, {'rating': score}),
+          );
+        }
       }
-      final score = ((media.userScore ?? 0) / 10).round().clamp(0, 10);
-      if (score > 0) {
-        await client.post('/sync/ratings', _body(kind, id, {'rating': score}));
-      } else if ((before?.userScore ?? 0) > 0) {
+      if (score == 0 && oldScore > 0) {
         await client.post('/sync/ratings/remove', _body(kind, id));
       }
       _done();
@@ -106,7 +129,7 @@ class SimklMutations extends Mutations {
   }
 
   void _done() {
-    queries.clearLibrary();
+    queries.invalidateLibrary();
     tryFind<RefreshController>()?.all();
   }
 }

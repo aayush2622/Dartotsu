@@ -9,8 +9,9 @@ import 'Data/Mapper.dart';
 
 class MalMutations extends Mutations {
   final MalClient client;
+  final void Function() onChanged;
 
-  MalMutations(this.client);
+  MalMutations(this.client, {required this.onChanged});
 
   @override
   Future<void> editList(Media media, {List<String>? customList}) async {
@@ -42,7 +43,7 @@ class MalMutations extends Mutations {
         '/${anime ? 'anime' : 'manga'}/$id/my_list_status',
         form,
       );
-      _signalRefresh();
+      _done();
     } on MalException catch (e) {
       snackString('MyAnimeList: ${e.message}');
     }
@@ -56,7 +57,7 @@ class MalMutations extends Mutations {
       await client.delete(
         '/${ref.$1 ? 'anime' : 'manga'}/${ref.$2}/my_list_status',
       );
-      _signalRefresh();
+      _done();
     } on MalException catch (e) {
       snackString('MyAnimeList: ${e.message}');
     }
@@ -84,11 +85,14 @@ class MalMutations extends Mutations {
         '/${anime ? 'anime' : 'manga'}/$id/my_list_status',
         form,
       );
-      _signalRefresh();
+      _done();
     } on MalException catch (e) {
       snackString('MyAnimeList: ${e.message}');
     }
   }
-}
 
-void _signalRefresh() => tryFind<RefreshController>()?.all();
+  void _done() {
+    onChanged();
+    tryFind<RefreshController>()?.all();
+  }
+}

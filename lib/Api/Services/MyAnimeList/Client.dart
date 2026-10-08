@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/State/State.dart';
+import '../../../Utils/Lru.dart';
 
 const malClientId = '86b35cf02205a0303da3aaea1c9e33f3';
 const malApi = 'https://api.myanimelist.net/v2';
@@ -30,6 +33,9 @@ Map<String, dynamic> _decode(NetworkResponse<dynamic> res) {
   }
   return body is Map<String, dynamic> ? body : <String, dynamic>{};
 }
+
+Map<String, dynamic> _decodeMap(String body) =>
+    jsonDecode(body) as Map<String, dynamic>;
 
 class MalClient {
   final String? Function() _token;
@@ -68,6 +74,24 @@ class MalClient {
         ),
       ).then(_decode);
 
+  Future<Map<String, dynamic>> getLarge(
+    String path, {
+    Map<String, String>? query,
+  }) async {
+    final res = await _run(
+      (h) => _net.get(
+        path.startsWith('http') ? path : '$malApi$path',
+        query: query,
+        headers: h,
+        decodeJson: false,
+      ),
+    );
+    if (res.statusCode >= 400) {
+      throw MalException('HTTP ${res.statusCode}', res.statusCode);
+    }
+    return compute(_decodeMap, '${res.data}');
+  }
+
   Future<Map<String, dynamic>> put(String path, Map<String, String> form) =>
       _run(
         (h) => _net.put('$malApi$path', data: HttpBody.form(form), headers: h),
@@ -84,9 +108,12 @@ class MalClient {
 class TenraiClient {
   static const _base = 'https://api.tenrai.org/v1';
   static const _gap = Duration(milliseconds: 150);
+  static const _parallel = 3;
 
-  Future<void> _tail = Future.value();
-  final _cache = <String, (DateTime, Map<String, dynamic>)>{};
+  final _cache = Lru<String, (DateTime, Map<String, dynamic>)>(160);
+  final _inflight = <String, Future<Map<String, dynamic>>>{};
+  final _waiting = Queue<Completer<void>>();
+  var _running = 0;
 
   NetworkManager get _net => find();
 
@@ -101,34 +128,55 @@ class TenraiClient {
     if (hit != null && DateTime.now().difference(hit.$1) < cache) {
       return Future.value(hit.$2);
     }
-    final done = Completer<Map<String, dynamic>>();
-    _tail = _tail.then((_) async {
-      try {
-        final data = await _fetch(path, query);
-        _cache[key] = (DateTime.now(), data);
-        done.complete(data);
-      } catch (e, s) {
-        done.completeError(e, s);
-      }
-      await Future<void>.delayed(_gap);
-    });
-    return done.future;
+    return _inflight[key] ??= _fetch(path, query)
+        .then((data) {
+          _cache[key] = (DateTime.now(), data);
+          return data;
+        })
+        .whenComplete(() => _inflight.remove(key));
+  }
+
+  Future<void> _acquire() async {
+    if (_running < _parallel) {
+      _running++;
+      return;
+    }
+    final turn = Completer<void>();
+    _waiting.add(turn);
+    await turn.future;
+  }
+
+  void _release() {
+    if (_waiting.isEmpty) {
+      _running--;
+    } else {
+      _waiting.removeFirst().complete();
+    }
   }
 
   Future<Map<String, dynamic>> _fetch(
     String path,
     Map<String, String>? query,
   ) async {
-    for (var attempt = 0; ; attempt++) {
-      final res = await _net.get('$_base$path', query: query);
-      final retry = res.statusCode == 429 || res.statusCode >= 500;
-      if (retry && attempt < 2) {
-        await Future<void>.delayed(
-          Duration(milliseconds: 1200 * (attempt + 1)),
-        );
-        continue;
+    await _acquire();
+    try {
+      for (var attempt = 0; ; attempt++) {
+        final res = await _net.get('$_base$path', query: query);
+        final retry = res.statusCode == 429 || res.statusCode >= 500;
+        if (retry && attempt < 3) {
+          final after = int.tryParse(res.headers['retry-after']?.first ?? '');
+          await Future<void>.delayed(
+            after != null
+                ? Duration(seconds: after.clamp(1, 10))
+                : Duration(milliseconds: 900 * (attempt + 1)),
+          );
+          continue;
+        }
+        return _decode(res);
       }
-      return _decode(res);
+    } finally {
+      await Future<void>.delayed(_gap);
+      _release();
     }
   }
 }

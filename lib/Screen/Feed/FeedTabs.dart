@@ -7,11 +7,12 @@ import 'BrowseFeed.dart';
 /// One shell tab — a browse [type], or Home when `type` is null.
 class FeedTab {
   final MediaType? type;
-  const FeedTab(this.type);
+  final String? title;
+  const FeedTab(this.type, [this.title]);
 
   bool get isHome => type == null;
 
-  String get label => type?.label ?? 'Home';
+  String get label => title ?? type?.label ?? 'Home';
 
   IconData get icon => switch (type) {
     null => Icons.home_rounded,
@@ -33,9 +34,9 @@ List<FeedTab> feedTabsFor(MediaService service) {
   final types = service.feedTypes;
   final mid = types.length ~/ 2;
   return [
-    for (final t in types.take(mid)) FeedTab(t),
+    for (final t in types.take(mid)) FeedTab(t, service.feedLabel(t)),
     const FeedTab(null),
-    for (final t in types.skip(mid)) FeedTab(t),
+    for (final t in types.skip(mid)) FeedTab(t, service.feedLabel(t)),
   ];
 }
 

@@ -224,7 +224,7 @@ class ListEditorScreenView {
 }
 
 abstract class CalendarScreenView {
-  Future<List<CalendarEntry>> schedule();
+  Stream<List<CalendarEntry>> schedule();
 }
 
 abstract class NotificationScreenView {

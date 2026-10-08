@@ -107,7 +107,7 @@ class SimklDetailView extends DetailScreenView {
 
 class SimklCalendarView implements CalendarScreenView {
   @override
-  Future<List<CalendarEntry>> schedule() => simklAuth.queries.schedule();
+  Stream<List<CalendarEntry>> schedule() => simklAuth.queries.schedule();
 }
 
 class SimklSettingsView extends SettingsScreenView {

@@ -41,7 +41,10 @@ class MalAuth extends AppController implements ServiceAuth {
     },
   );
 
-  late final MalMutations mutations = MalMutations(client);
+  late final MalMutations mutations = MalMutations(
+    client,
+    onChanged: () => queries.invalidateLibrary(),
+  );
 
   Completer<bool>? _refreshing;
 
@@ -196,6 +199,7 @@ class MalAuth extends AppController implements ServiceAuth {
     MalPref.refresh.value = '';
     MalPref.expiresAt.value = 0;
     user.value = null;
+    queries.clearLibrary();
     PrefManager.removeCustomVal(_userCacheKey, location: PrefLocation.CACHE);
   }
 

@@ -3,7 +3,7 @@ import '../Auth.dart';
 
 class AnilistCalendarView implements CalendarScreenView {
   @override
-  Future<List<CalendarEntry>> schedule() async {
+  Stream<List<CalendarEntry>> schedule() async* {
     final media = await anilistAuth.queries.getCalendarData();
     final entries = <CalendarEntry>[];
     for (final m in media) {
@@ -20,6 +20,6 @@ class AnilistCalendarView implements CalendarScreenView {
       );
     }
     entries.sort((a, b) => a.airingAt.compareTo(b.airingAt));
-    return entries;
+    yield entries;
   }
 }

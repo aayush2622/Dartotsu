@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -43,16 +45,35 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen> {
     _load();
   }
 
+  StreamSubscription<List<CalendarEntry>>? _sub;
+
   Future<void> _load() async {
+    await _sub?.cancel();
     _loading.value = true;
     _failed.value = false;
-    try {
-      _entries.value = await widget.view.schedule();
-    } catch (_) {
-      _failed.value = true;
-    } finally {
-      _loading.value = false;
-    }
+    final done = Completer<void>();
+    _sub = widget.view.schedule().listen(
+      (entries) {
+        _entries.value = entries;
+        _loading.value = false;
+      },
+      onError: (_) {
+        _failed.value = _entries.isEmpty;
+        _loading.value = false;
+        if (!done.isCompleted) done.complete();
+      },
+      onDone: () {
+        _loading.value = false;
+        if (!done.isCompleted) done.complete();
+      },
+    );
+    await done.future;
+  }
+
+  @override
+  void dispose() {
+    unawaited(_sub?.cancel());
+    super.dispose();
   }
 
   @override

@@ -109,6 +109,7 @@ class NetworkManager extends AppController {
     Map<String, String>? query,
     Map<String, String>? headers,
     CancelToken? cancelToken,
+    bool decodeJson = true,
   }) async {
     final res = await client.get(
       url,
@@ -117,7 +118,7 @@ class NetworkManager extends AppController {
       cancelToken: cancelToken,
     );
 
-    return _wrap(res);
+    return _wrap(res, decodeJson: decodeJson);
   }
 
   Future<NetworkResponse<dynamic>> post(

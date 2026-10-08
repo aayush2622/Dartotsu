@@ -27,11 +27,11 @@ class SimklService extends MediaService {
   ServiceAuth get auth => _auth;
 
   @override
-  List<MediaType> get feedTypes => const [
-    MediaType.anime,
-    MediaType.movie,
-    MediaType.series,
-  ];
+  List<MediaType> get feedTypes => const [MediaType.anime, MediaType.movie];
+
+  @override
+  String feedLabel(MediaType type) =>
+      type == MediaType.movie ? 'Movies & Series' : type.label;
 
   @override
   HomeScreenView get homeView => SimklHomeView(this);

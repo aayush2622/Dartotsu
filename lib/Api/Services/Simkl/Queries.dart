@@ -1,5 +1,9 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
+import '../../../Core/Services/Api/LibraryCache.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/Model/Calendar.dart';
@@ -23,56 +27,105 @@ SimklKind simklKindOfType(MediaType type) => switch (type) {
 };
 
 List<SimklSection> simklSections(MediaType type) {
-  final folder = simklKindOfType(type).path;
-  return [
-    SimklSection('Trending Now · Powered by Simkl', '$folder/today_100'),
-    SimklSection('Trending This Week on Simkl', '$folder/week_100'),
-    SimklSection('Most Watched This Month on Simkl', '$folder/month_100'),
+  if (type != MediaType.anime) {
+    return const [
+      SimklSection('Trending Movies Today on Simkl', 'movies/today_100'),
+      SimklSection('Trending Shows Today on Simkl', 'tv/today_100'),
+      SimklSection('Trending Movies This Week on Simkl', 'movies/week_100'),
+      SimklSection('Trending Shows This Week on Simkl', 'tv/week_100'),
+      SimklSection(
+        'Most Watched Movies This Month on Simkl',
+        'movies/month_100',
+      ),
+      SimklSection('Most Watched Shows This Month on Simkl', 'tv/month_100'),
+    ];
+  }
+  return const [
+    SimklSection('Trending Now · Powered by Simkl', 'anime/today_100'),
+    SimklSection('Trending This Week on Simkl', 'anime/week_100'),
+    SimklSection('Most Watched This Month on Simkl', 'anime/month_100'),
   ];
+}
+
+class _Activity {
+  final String all;
+  final String removed;
+
+  const _Activity(this.all, this.removed);
+
+  factory _Activity.fromJson(Map<String, dynamic> json) {
+    String removed(String key) =>
+        '${(json[key] as Map?)?['removed_from_list'] ?? ''}';
+    return _Activity(
+      '${json['all'] ?? ''}',
+      [removed('tv_shows'), removed('anime'), removed('movies')].join('|'),
+    );
+  }
 }
 
 class SimklQueries extends Queries {
   final SimklClient client;
   final Future<bool> Function() refreshUser;
+  final void Function(int episodes)? onEpisodes;
 
-  SimklQueries(this.client, {required this.refreshUser});
+  SimklQueries(this.client, {required this.refreshUser, this.onEpisodes});
 
-  Map<String, Media>? _library;
-  DateTime? _libraryAt;
-  Future<Map<String, Media>>? _loading;
+  _Activity? _seen;
+
+  late final _library = LibraryCache<Map<String, Media>>(load: _sync);
 
   void clearLibrary() {
-    _library = null;
-    _libraryAt = null;
-    _loading = null;
+    _seen = null;
+    _library.clear();
   }
 
-  Future<Map<String, Media>> library() {
-    if (!client.hasToken) return Future.value(const {});
-    final fresh =
-        _library != null &&
-        _libraryAt != null &&
-        DateTime.now().difference(_libraryAt!) < const Duration(minutes: 5);
-    if (fresh) return Future.value(_library!);
-    return _loading ??= _loadLibrary().whenComplete(() => _loading = null);
-  }
+  void invalidateLibrary() => _library.expire();
 
-  Future<Map<String, Media>> _loadLibrary() async {
-    final data = await client.get('/sync/all-items/all/all');
-    final out = <String, Media>{};
-    if (data is Map<String, dynamic>) {
-      for (final kind in SimklKind.values) {
-        for (final e in (data[kind.syncKey] as List?) ?? const []) {
-          final media = mapSimklListEntry(
-            (e as Map).cast<String, dynamic>(),
-            kind,
-          );
-          if (media != null) out[media.id] = media;
-        }
+  Future<Map<String, Media>> library() =>
+      client.hasToken ? _library.get() : Future.value(const {});
+
+  Future<_Activity> _activity() async => _Activity.fromJson(
+    (await client.get('/sync/activities')) as Map<String, dynamic>,
+  );
+
+  Future<Map<String, Media>> _sync(Map<String, Media>? previous) async {
+    final now = await _activity();
+    final before = _seen;
+    if (previous != null && before != null) {
+      if (now.all == before.all) return previous;
+      if (now.removed == before.removed) {
+        final delta = await client.get(
+          '/sync/all-items/all/all',
+          query: {'date_from': before.all},
+        );
+        _seen = now;
+        return _publish({...previous, ..._parseLibrary(delta)});
       }
     }
-    _library = out;
-    _libraryAt = DateTime.now();
+    final full = await client.get('/sync/all-items/all/all');
+    _seen = now;
+    return _publish(_parseLibrary(full));
+  }
+
+  Map<String, Media> _publish(Map<String, Media> library) {
+    onEpisodes?.call(
+      library.values.fold<int>(0, (sum, m) => sum + (m.userProgress ?? 0)),
+    );
+    return library;
+  }
+
+  Map<String, Media> _parseLibrary(Object? data) {
+    final out = <String, Media>{};
+    if (data is! Map<String, dynamic>) return out;
+    for (final kind in SimklKind.values) {
+      for (final e in (data[kind.syncKey] as List?) ?? const []) {
+        final media = mapSimklListEntry(
+          (e as Map).cast<String, dynamic>(),
+          kind,
+        );
+        if (media != null) out[media.id] = media;
+      }
+    }
     return out;
   }
 
@@ -81,12 +134,10 @@ class SimklQueries extends Queries {
       '$simklData/discover/trending/${section.file}.json',
       auth: false,
     );
+    final kind = SimklKind.fromName(section.file.split('/').first);
     return [
-      for (final item in (data as List?) ?? const [])
-        ?mapSimklItem(
-          (item as Map).cast<String, dynamic>(),
-          kind: SimklKind.fromName((section.file.split('/').first)),
-        ),
+      for (final item in ((data as List?) ?? const []).take(60))
+        ?mapSimklItem((item as Map).cast<String, dynamic>(), kind: kind),
     ];
   }
 
@@ -101,20 +152,19 @@ class SimklQueries extends Queries {
   @override
   Future<Media?> getMedia(String id) async {
     final ref = parseSimklMediaId(id);
-    if (ref == null) return null;
-    return _detail(ref.$1, ref.$2);
+    return ref == null ? null : _detail(ref.$1, ref.$2);
   }
 
   Future<Media?> _detail(SimklKind kind, int id) async {
-    final data = await client.get(
-      '/${kind.path}/$id',
-      query: {'extended': 'full'},
-      auth: false,
-    );
+    final results = await Future.wait([
+      client.get('/${kind.path}/$id', query: {'extended': 'full'}, auth: false),
+      _safeLibrary(),
+    ]);
+    final data = results[0];
     if (data is! Map<String, dynamic>) return null;
     final media = mapSimklDetail(data, kind);
     if (media == null) return null;
-    final mine = (await _safeLibrary())[media.id];
+    final mine = (results[1] as Map<String, Media>)[media.id];
     if (mine != null) {
       media
         ..userStatus = mine.userStatus
@@ -144,27 +194,20 @@ class SimklQueries extends Queries {
         : (full..cameFromContinue = media.cameFromContinue);
   }
 
+  List<Media> _byStatus(Iterable<Media> all, String status) => [
+    for (final m in all)
+      if (m.userStatus == status) m,
+  ]..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
+
   @override
   List<SectionJob> homeJobs() {
     if (!client.hasToken) return const [];
     return [
-      () async {
-        final all = (await library()).values;
-        final watching =
-            [
-              for (final m in all)
-                if (m.userStatus == 'CURRENT') m,
-            ]..sort(
-              (a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0),
-            );
-        return {'Continue Watching': watching};
+      () async => {
+        'Continue Watching': _byStatus((await library()).values, 'CURRENT'),
       },
-      () async {
-        final planned = [
-          for (final m in (await library()).values)
-            if (m.userStatus == 'PLANNING') m,
-        ];
-        return {'Plan to Watch': planned};
+      () async => {
+        'Plan to Watch': _byStatus((await library()).values, 'PLANNING'),
       },
     ];
   }
@@ -202,42 +245,41 @@ class SimklQueries extends Queries {
     return out;
   }
 
-  Future<List<CalendarEntry>> schedule() async {
-    final files = await Future.wait([
-      client.get('$simklData/calendar/v2/anime.json', auth: false),
-      client.get('$simklData/calendar/v2/tv.json', auth: false),
-    ]);
+  Stream<List<CalendarEntry>> schedule() async* {
     final start = DateTime.now().subtract(const Duration(days: 2));
     final end = DateTime.now().add(const Duration(days: 7));
     final out = <CalendarEntry>[];
-    for (var i = 0; i < files.length; i++) {
-      final file = files[i];
-      if (file is! Map) continue;
-      final kind = i == 0 ? SimklKind.anime : SimklKind.tv;
-      final meta = (file['metadata'] as Map?) ?? const {};
-      final cache = <String, Media?>{};
-      for (final e in (file['calendar'] as List?) ?? const []) {
-        final at = DateTime.tryParse('${(e as Map)['date']}')?.toLocal();
-        if (at == null || at.isBefore(start) || at.isAfter(end)) continue;
-        final id = '${e['simkl_id']}';
-        final node = meta[id];
-        if (node is! Map) continue;
-        final media = cache[id] ??= mapSimklItem(
-          node.cast<String, dynamic>(),
-          kind: kind,
+    for (final kind in [SimklKind.anime, SimklKind.tv]) {
+      try {
+        final body = await client.getText(
+          '$simklData/calendar/v2/${kind.path}.json',
         );
-        if (media == null) continue;
-        out.add(
-          CalendarEntry(
-            media: media,
-            episode: ((e['episode'] as Map?)?['episode'] as num?)?.toInt(),
-            airingAt: at,
-          ),
-        );
+        final rows = await compute(_parseCalendar, {
+          'body': body,
+          'start': start.millisecondsSinceEpoch,
+          'end': end.millisecondsSinceEpoch,
+        });
+        final cache = <int, Media?>{};
+        for (final row in rows) {
+          final id = row['id'] as int;
+          final media = cache[id] ??= mapSimklItem(
+            (row['meta'] as Map).cast<String, dynamic>(),
+            kind: kind,
+          );
+          if (media == null) continue;
+          out.add(
+            CalendarEntry(
+              media: media,
+              episode: row['episode'] as int?,
+              airingAt: DateTime.fromMillisecondsSinceEpoch(row['at'] as int),
+            ),
+          );
+        }
+        yield [...out]..sort((a, b) => a.airingAt.compareTo(b.airingAt));
+      } catch (_) {
+        if (out.isEmpty && kind == SimklKind.tv) rethrow;
       }
     }
-    out.sort((a, b) => a.airingAt.compareTo(b.airingAt));
-    return out;
   }
 
   @override
@@ -263,7 +305,7 @@ class SimklQueries extends Queries {
     }
     final data = await client.get(
       '/search/$type',
-      query: {'q': query, 'limit': '50', 'extended': 'full'},
+      query: {'q': query, 'limit': '50'},
     );
     final kind = SimklKind.fromName(type)!;
     return results
@@ -273,4 +315,27 @@ class SimklQueries extends Queries {
       ]
       ..hasNextPage = false;
   }
+}
+
+List<Map<String, Object?>> _parseCalendar(Map<String, Object?> args) {
+  final file = jsonDecode(args['body'] as String);
+  final start = args['start'] as int;
+  final end = args['end'] as int;
+  final meta = (file['metadata'] as Map?) ?? const {};
+  final rows = <Map<String, Object?>>[];
+  for (final e in (file['calendar'] as List?) ?? const []) {
+    final at = DateTime.tryParse(
+      '${(e as Map)['date']}',
+    )?.millisecondsSinceEpoch;
+    if (at == null || at < start || at > end) continue;
+    final node = meta['${e['simkl_id']}'];
+    if (node is! Map) continue;
+    rows.add({
+      'id': (e['simkl_id'] as num).toInt(),
+      'meta': node,
+      'episode': ((e['episode'] as Map?)?['episode'] as num?)?.toInt(),
+      'at': at,
+    });
+  }
+  return rows;
 }

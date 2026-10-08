@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import '../../../Core/Services/Api/LibraryCache.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/Model/Calendar.dart';
@@ -46,7 +47,7 @@ List<MalSection> malSections({required bool anime}) => anime
       ];
 
 const _listFields =
-    'list_status,num_episodes,num_chapters,mean,media_type,status,genres,nsfw,alternative_titles,start_season';
+    'list_status,num_episodes,num_chapters,mean,media_type,status,nsfw,alternative_titles';
 
 const _detailFields =
     'id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,'
@@ -157,29 +158,54 @@ class MalQueries extends Queries {
   @override
   Future<bool> getUserData() async => refreshUser();
 
+  late final _libraries = {
+    true: LibraryCache<List<Media>>(load: (_) => _loadLibrary(true)),
+    false: LibraryCache<List<Media>>(load: (_) => _loadLibrary(false)),
+  };
+
+  Future<List<Media>> library({required bool anime}) =>
+      client.hasToken ? _libraries[anime]!.get() : Future.value(const []);
+
+  void invalidateLibrary() {
+    for (final cache in _libraries.values) {
+      cache.expire();
+    }
+  }
+
+  void clearLibrary() {
+    for (final cache in _libraries.values) {
+      cache.clear();
+    }
+  }
+
+  Future<List<Media>> _loadLibrary(bool anime) async {
+    final all = <Media>[];
+    String? next;
+    var first = true;
+    while (first || next != null) {
+      first = false;
+      final data = await client.getLarge(
+        next ?? '/users/@me/${anime ? 'animelist' : 'mangalist'}',
+        query: next == null
+            ? {
+                'sort': 'list_updated_at',
+                'limit': '1000',
+                'fields': _listFields,
+                'nsfw': 'true',
+              }
+            : null,
+      );
+      all.addAll(_entries(data, anime));
+      next = (data['paging'] as Map?)?['next'] as String?;
+    }
+    return all;
+  }
+
   Future<int> chaptersRead() async {
     try {
-      var total = 0;
-      String? next;
-      var first = true;
-      while (first || next != null) {
-        first = false;
-        final data = await client.get(
-          next ?? '/users/@me/mangalist',
-          query: next == null
-              ? {'limit': '1000', 'fields': 'list_status', 'nsfw': 'true'}
-              : null,
-        );
-        for (final e in (data['data'] as List?) ?? const []) {
-          total +=
-              (((e as Map)['list_status'] as Map?)?['num_chapters_read']
-                      as num?)
-                  ?.toInt() ??
-              0;
-        }
-        next = (data['paging'] as Map?)?['next'] as String?;
-      }
-      return total;
+      return (await library(
+        anime: false,
+      )).fold<int>(0, (sum, m) => sum + (m.userProgress ?? 0));
     } catch (_) {
       return 0;
     }
@@ -201,20 +227,24 @@ class MalQueries extends Queries {
     final ref = parseMalMediaId(media.id);
     if (ref == null) return media;
     final (anime, id) = ref;
-    final kind = anime ? 'anime' : 'manga';
-    final results = await Future.wait([
-      client.get('/$kind/$id', query: {'fields': _detailFields}),
-      _characters(kind, id),
-      getReviews(media.id),
-      anime ? _staff(id) : Future.value(const <Author>[]),
-    ]);
-    final full = mapMalMedia(results[0] as Map<String, dynamic>, anime: anime);
-    full
-      ..characters = results[1] as List<Character>
-      ..staff = results[3] as List<Author>
-      ..review = (results[2] as List<Review>).take(3).toList()
+    final node = await client.get(
+      '/${anime ? 'anime' : 'manga'}/$id',
+      query: {'fields': _detailFields},
+    );
+    return mapMalMedia(node, anime: anime)
       ..cameFromContinue = media.cameFromContinue;
-    return full;
+  }
+
+  Future<List<Character>> characters(Media media) {
+    final ref = parseMalMediaId(media.id);
+    return ref == null
+        ? Future.value(const [])
+        : _characters(ref.$1 ? 'anime' : 'manga', ref.$2);
+  }
+
+  Future<List<Author>> staff(Media media) {
+    final ref = parseMalMediaId(media.id);
+    return ref == null || !ref.$1 ? Future.value(const []) : _staff(ref.$2);
   }
 
   Future<List<Author>> _staff(int id) async {
@@ -288,44 +318,25 @@ class MalQueries extends Queries {
 
   @override
   List<SectionJob> homeJobs() {
-    if (client.hasToken == false) return const [];
+    if (!client.hasToken) return const [];
+    Future<List<Media>> pick(bool anime, Set<String> statuses) async => [
+      for (final m in await library(anime: anime))
+        if (statuses.contains(m.userStatus)) m,
+    ];
     return [
       () async => {
-        'Continue Watching': await _statusList(anime: true, status: 'watching'),
+        'Continue Watching': await pick(true, {'CURRENT', 'REPEATING'}),
       },
       () async => {
-        'Planned Anime': await _statusList(
-          anime: true,
-          status: 'plan_to_watch',
-        ),
+        'Planned Anime': await pick(true, {'PLANNING'}),
       },
       () async => {
-        'Continue Reading': await _statusList(anime: false, status: 'reading'),
+        'Continue Reading': await pick(false, {'CURRENT', 'REPEATING'}),
       },
       () async => {
-        'Planned Manga': await _statusList(
-          anime: false,
-          status: 'plan_to_read',
-        ),
+        'Planned Manga': await pick(false, {'PLANNING'}),
       },
     ];
-  }
-
-  Future<List<Media>> _statusList({
-    required bool anime,
-    required String status,
-  }) async {
-    final data = await client.get(
-      '/users/@me/${anime ? 'animelist' : 'mangalist'}',
-      query: {
-        'status': status,
-        'sort': 'list_updated_at',
-        'limit': '100',
-        'fields': _listFields,
-        'nsfw': 'true',
-      },
-    );
-    return _entries(data, anime);
   }
 
   List<Media> _entries(Map<String, dynamic> data, bool anime) => [
@@ -349,26 +360,7 @@ class MalQueries extends Queries {
     int? userId,
     String? sortOrder,
   }) async {
-    if (client.hasToken == false) return {};
-    final all = <Media>[];
-    String? next;
-    var first = true;
-    while (first || next != null) {
-      first = false;
-      final data = await client.get(
-        next ?? '/users/@me/${anime ? 'animelist' : 'mangalist'}',
-        query: next == null
-            ? {
-                'sort': 'list_updated_at',
-                'limit': '1000',
-                'fields': _listFields,
-                'nsfw': 'true',
-              }
-            : null,
-      );
-      all.addAll(_entries(data, anime));
-      next = (data['paging'] as Map?)?['next'] as String?;
-    }
+    final all = await library(anime: anime);
     final names = {
       'CURRENT': anime ? 'Watching' : 'Reading',
       'PLANNING': 'Planning',
@@ -389,8 +381,8 @@ class MalQueries extends Queries {
     return out;
   }
 
-  Future<List<CalendarEntry>> schedule() async {
-    final days = [
+  Stream<List<CalendarEntry>> schedule() async* {
+    const days = [
       'monday',
       'tuesday',
       'wednesday',
@@ -400,37 +392,49 @@ class MalQueries extends Queries {
       'sunday',
     ];
     final now = DateTime.now().toUtc();
+    final today = now.add(const Duration(hours: 9)).weekday - 1;
+    final order = [for (var i = 0; i < 7; i++) days[(today + i) % 7]];
+    final pending = [
+      for (final day in order)
+        _scheduleDay(day, now).catchError((_) => <CalendarEntry>[]),
+    ];
     final out = <CalendarEntry>[];
     final seen = <String>{};
-    for (final day in days) {
-      for (var page = 1; page <= 3; page++) {
-        final data = await tenrai.get(
-          '/schedules',
-          query: {
-            'filter': day,
-            'page': '$page',
-            'limit': '25',
-            'sfw': 'true',
-            'kids': 'false',
-          },
-          cache: const Duration(hours: 1),
-        );
-        for (final n in (data['data'] as List?) ?? const []) {
-          final node = (n as Map).cast<String, dynamic>();
-          final at = _airing(node['broadcast'] as Map?, now);
-          if (at == null || !seen.add('${node['mal_id']}')) continue;
-          out.add(
-            CalendarEntry(
-              media: mapTenraiMedia(node, anime: true),
-              airingAt: at.toLocal(),
-            ),
-          );
-        }
-        final more = (data['pagination'] as Map?)?['has_next_page'] == true;
-        if (!more) break;
+    for (final page in pending) {
+      for (final e in await page) {
+        if (seen.add(e.media.id)) out.add(e);
       }
+      yield [...out]..sort((a, b) => a.airingAt.compareTo(b.airingAt));
     }
-    out.sort((a, b) => a.airingAt.compareTo(b.airingAt));
+  }
+
+  Future<List<CalendarEntry>> _scheduleDay(String day, DateTime now) async {
+    final out = <CalendarEntry>[];
+    for (var page = 1; page <= 3; page++) {
+      final data = await tenrai.get(
+        '/schedules',
+        query: {
+          'filter': day,
+          'page': '$page',
+          'limit': '50',
+          'sfw': 'true',
+          'kids': 'false',
+        },
+        cache: const Duration(hours: 1),
+      );
+      for (final n in (data['data'] as List?) ?? const []) {
+        final node = (n as Map).cast<String, dynamic>();
+        final at = _airing(node['broadcast'] as Map?, now);
+        if (at == null) continue;
+        out.add(
+          CalendarEntry(
+            media: mapTenraiMedia(node, anime: true),
+            airingAt: at.toLocal(),
+          ),
+        );
+      }
+      if ((data['pagination'] as Map?)?['has_next_page'] != true) break;
+    }
     return out;
   }
 
@@ -478,6 +482,9 @@ class MalQueries extends Queries {
   @override
   Future<bool> getGenresAndTags() async {
     for (final anime in [true, false]) {
+      if (loadCustomData<Map<String, dynamic>>(_genreKey(anime)) != null) {
+        continue;
+      }
       try {
         final data = await tenrai.get(
           '/genres/${anime ? 'anime' : 'manga'}',

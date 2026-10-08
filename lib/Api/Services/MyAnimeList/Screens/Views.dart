@@ -93,9 +93,25 @@ class MalDetailView extends DetailScreenView {
   Stream<List<ScreenWidget>> screenStream(DetailHost host) async* {
     yield _build(host);
     if (host.cached) return;
-    final full = await malAuth.queries.mediaDetails(host.media.value);
-    if (full == null) return;
-    host.update(full);
+    final queries = malAuth.queries;
+    final base = host.media.value;
+    final characters = queries.characters(base);
+    final reviews = queries.getReviews(base.id);
+    final staff = queries.staff(base);
+    final full = await queries.mediaDetails(base);
+    if (full != null) {
+      host.update(full);
+      yield _build(host);
+    }
+    final media = host.media.value;
+    media.characters = await characters;
+    host.update(media);
+    yield _build(host);
+    media.review = (await reviews).take(3).toList();
+    host.update(media);
+    yield _build(host);
+    media.staff = await staff;
+    host.update(media);
     yield _build(host);
   }
 
@@ -116,6 +132,8 @@ class MalDetailView extends DetailScreenView {
       ),
       if ((m.characters ?? const []).isNotEmpty)
         ScreenWidget.characters('Characters', m.characters),
+      if ((m.staff ?? const []).isNotEmpty)
+        ScreenWidget.staff('Staff', m.staff),
       if ((m.relations ?? const []).isNotEmpty)
         ScreenWidget.media('Relations', m.relations),
       if ((m.recommendations ?? const []).isNotEmpty)
@@ -148,7 +166,7 @@ class MalDetailView extends DetailScreenView {
 
 class MalCalendarView implements CalendarScreenView {
   @override
-  Future<List<CalendarEntry>> schedule() => malAuth.queries.schedule();
+  Stream<List<CalendarEntry>> schedule() => malAuth.queries.schedule();
 }
 
 class MalSettingsView extends SettingsScreenView {

@@ -54,6 +54,8 @@ abstract class MediaService {
   /// Most services offer one or two — anime + manga, novels + movies, …
   List<MediaType> get feedTypes => const [];
 
+  String feedLabel(MediaType type) => type.label;
+
   /// Serves every tab in [feedTypes].
   FeedScreenView? get feedView => null;
 

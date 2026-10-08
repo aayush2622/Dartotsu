@@ -41,6 +41,12 @@ class SimklAuth extends AppController implements ServiceAuth {
       await refreshUser();
       return user.value != null;
     },
+    onEpisodes: (episodes) {
+      final current = user.value;
+      if (current is SimklUser && current.episodesWatched != episodes) {
+        user.value = current.copyWith(episodesWatched: episodes);
+      }
+    },
   );
 
   late final SimklMutations mutations = SimklMutations(client, queries);

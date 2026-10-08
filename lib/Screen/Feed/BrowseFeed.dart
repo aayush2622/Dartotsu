@@ -20,7 +20,7 @@ class BrowseFeed extends StatelessWidget {
     }
     return ScreenWidgetList(
       header: FeedHeader(
-        title: type.label,
+        title: service.feedLabel(type),
         onCalendar: type.isVideo && service.calendarView != null
             ? () => openCalendar(context, service)
             : null,

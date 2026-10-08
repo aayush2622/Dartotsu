@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:rhttp/rhttp.dart';
@@ -59,27 +60,6 @@ class SimklClient {
     if (auth && hasToken) 'Authorization': 'Bearer ${_token()}',
   };
 
-  Future<dynamic> get(
-    String path, {
-    Map<String, String>? query,
-    bool auth = true,
-  }) async {
-    final url = path.startsWith('http') ? path : '$simklApi$path';
-    var res = await _net.get(
-      url,
-      query: await _query(query),
-      headers: _headers(auth: auth),
-    );
-    if (res.statusCode == 401 && auth && hasToken && await _refresh()) {
-      res = await _net.get(
-        url,
-        query: await _query(query),
-        headers: _headers(auth: auth),
-      );
-    }
-    return _decode(res);
-  }
-
   Future<Map<String, dynamic>> token(
     String path,
     Map<String, String> fields, {
@@ -95,7 +75,76 @@ class SimklClient {
     return body is Map<String, dynamic> ? body : <String, dynamic>{};
   }
 
-  Future<dynamic> post(String path, Object body) async {
+  Future<NetworkResponse<dynamic>> _getRaw(
+    String url,
+    Map<String, String> query,
+    bool auth,
+    bool decode,
+  ) async {
+    for (var attempt = 0; ; attempt++) {
+      final res = await _net.get(
+        url,
+        query: query,
+        headers: _headers(auth: auth),
+        decodeJson: decode,
+      );
+      if ((res.statusCode == 429 || res.statusCode >= 500) && attempt < 2) {
+        final after = int.tryParse(res.headers['retry-after']?.first ?? '');
+        await Future<void>.delayed(
+          Duration(seconds: (after ?? (attempt + 1) * 2).clamp(1, 10)),
+        );
+        continue;
+      }
+      return res;
+    }
+  }
+
+  Future<dynamic> get(
+    String path, {
+    Map<String, String>? query,
+    bool auth = true,
+  }) async {
+    final url = path.startsWith('http') ? path : '$simklApi$path';
+    var res = await _getRaw(url, await _query(query), auth, true);
+    if (res.statusCode == 401 && auth && hasToken && await _refresh()) {
+      res = await _getRaw(url, await _query(query), auth, true);
+    }
+    return _decode(res);
+  }
+
+  Future<String> getText(String url) async {
+    final res = await _getRaw(url, await _query(null), false, false);
+    if (res.statusCode >= 400) {
+      throw SimklException('HTTP ${res.statusCode}', res.statusCode);
+    }
+    return '${res.data}';
+  }
+
+  Future<void> _postTurn() async {
+    final wait = _nextPost.difference(DateTime.now());
+    _nextPost = DateTime.now().add(const Duration(milliseconds: 1100));
+    if (!wait.isNegative && wait.inMilliseconds > 0) {
+      await Future<void>.delayed(wait);
+    }
+  }
+
+  DateTime _nextPost = DateTime.fromMillisecondsSinceEpoch(0);
+  Future<void> _postTail = Future.value();
+
+  Future<dynamic> post(String path, Object body) {
+    final done = Completer<dynamic>();
+    _postTail = _postTail.then((_) async {
+      try {
+        await _postTurn();
+        done.complete(await _send(path, body));
+      } catch (e, s) {
+        done.completeError(e, s);
+      }
+    });
+    return done.future;
+  }
+
+  Future<dynamic> _send(String path, Object body) async {
     Future<NetworkResponse<dynamic>> send() async => _net.post(
       '$simklApi$path',
       data: jsonEncode(body),
