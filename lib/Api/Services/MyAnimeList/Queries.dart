@@ -34,6 +34,8 @@ List<MalSection> malSections({required bool anime}) => anime
         }),
         MalSection('Top Movies', '/top/anime', {'type': 'movie'}),
         MalSection('Top Rated Series', '/top/anime', {'type': 'tv'}),
+        MalSection('Top ONA', '/top/anime', {'type': 'ona'}),
+        MalSection('Top OVA', '/top/anime', {'type': 'ova'}),
         MalSection('Most Popular', '/top/anime', {'filter': 'bypopularity'}),
         MalSection('Most Favourite', '/top/anime', {'filter': 'favorite'}),
       ]
@@ -41,7 +43,9 @@ List<MalSection> malSections({required bool anime}) => anime
         MalSection('Trending Now', '/top/manga', {'filter': 'publishing'}),
         MalSection('Top Manga', '/top/manga', {'type': 'manga'}),
         MalSection('Top Manhwa', '/top/manga', {'type': 'manhwa'}),
+        MalSection('Top Manhua', '/top/manga', {'type': 'manhua'}),
         MalSection('Top Novels', '/top/manga', {'type': 'novel'}),
+        MalSection('Top One-shots', '/top/manga', {'type': 'oneshot'}),
         MalSection('Most Popular', '/top/manga', {'filter': 'bypopularity'}),
         MalSection('Most Favourite', '/top/manga', {'filter': 'favorite'}),
       ];
@@ -53,7 +57,9 @@ const _detailFields =
     'id,title,main_picture,alternative_titles,start_date,end_date,synopsis,mean,'
     'popularity,num_list_users,nsfw,genres,my_list_status,num_episodes,status,'
     'start_season,source,average_episode_duration,studios,related_anime,'
-    'related_manga,recommendations,media_type,num_chapters,authors{first_name,last_name}';
+    'related_manga,recommendations,media_type,num_chapters,num_volumes,rank,'
+    'num_scoring_users,broadcast,rating,background,statistics,opening_themes,'
+    'ending_themes,serialization{name},authors{first_name,last_name}';
 
 const _fallbackGenres = {
   'Action': 1,
@@ -129,6 +135,30 @@ class MalQueries extends Queries {
         if (seen.add((n as Map)['mal_id']))
           mapTenraiMedia(n.cast<String, dynamic>(), anime: anime),
     ];
+  }
+
+  Future<List<Media>> seasonPicks(int offset) async {
+    const order = ['winter', 'spring', 'summer', 'fall'];
+    final now = DateTime.now();
+    final index = now.year * 4 + (now.month - 1) ~/ 3 + offset;
+    final data = await tenrai.get(
+      '/seasons/${index ~/ 4}/${order[index % 4]}',
+      query: {
+        'order_by': 'members',
+        'sort': 'desc',
+        'limit': '12',
+        'sfw': 'true',
+      },
+    );
+    return _tenraiMedia(data, true);
+  }
+
+  Future<List<Media>> topPicks(String type) async {
+    final data = await tenrai.get(
+      '/top/manga',
+      query: {'type': type, 'limit': '12', 'sfw': 'true'},
+    );
+    return _tenraiMedia(data, false);
   }
 
   Future<Map<String, dynamic>?> entity(String path) async {
@@ -233,6 +263,28 @@ class MalQueries extends Queries {
     );
     return mapMalMedia(node, anime: anime)
       ..cameFromContinue = media.cameFromContinue;
+  }
+
+  Future<void> enrich(Media media) async {
+    final ref = parseMalMediaId(media.id);
+    if (ref == null) return;
+    try {
+      final data = await tenrai.get(
+        '/${ref.$1 ? 'anime' : 'manga'}/${ref.$2}/full',
+      );
+      final node = data['data'] as Map?;
+      if (node == null) return;
+      media.favourites = (node['favorites'] as num?)?.toInt();
+      final trailer = (node['trailer'] as Map?)?['url'] as String?;
+      if (trailer != null && trailer.isNotEmpty) media.trailer = trailer;
+      final extras = malExtras[media] ??= MalExtras();
+      extras.links = [
+        for (final key in ['streaming', 'external'])
+          for (final e in (node[key] as List?) ?? const [])
+            if ((e as Map)['name'] is String && e['url'] is String)
+              (e['name'] as String, e['url'] as String),
+      ];
+    } catch (_) {}
   }
 
   Future<List<Character>> characters(Media media) {

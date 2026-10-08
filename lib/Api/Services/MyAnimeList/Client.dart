@@ -133,7 +133,9 @@ class TenraiClient {
           _cache[key] = (DateTime.now(), data);
           return data;
         })
-        .whenComplete(() => _inflight.remove(key));
+        .whenComplete(() {
+          _inflight.remove(key);
+        });
   }
 
   Future<void> _acquire() async {

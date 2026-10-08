@@ -10,6 +10,10 @@ import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
+import '../../../Core/Services/Model/Author.dart';
+import '../../../Core/Services/Model/Character.dart';
+import '../../../Core/State/State.dart';
+import '../MyAnimeList/Auth.dart';
 import 'Client.dart';
 import 'Data/Mapper.dart';
 
@@ -29,21 +33,18 @@ SimklKind simklKindOfType(MediaType type) => switch (type) {
 List<SimklSection> simklSections(MediaType type) {
   if (type != MediaType.anime) {
     return const [
-      SimklSection('Trending Movies Today on Simkl', 'movies/today_100'),
-      SimklSection('Trending Shows Today on Simkl', 'tv/today_100'),
-      SimklSection('Trending Movies This Week on Simkl', 'movies/week_100'),
-      SimklSection('Trending Shows This Week on Simkl', 'tv/week_100'),
-      SimklSection(
-        'Most Watched Movies This Month on Simkl',
-        'movies/month_100',
-      ),
-      SimklSection('Most Watched Shows This Month on Simkl', 'tv/month_100'),
+      SimklSection('Trending Movies Today', 'movies/today_100'),
+      SimklSection('Trending Shows Today', 'tv/today_100'),
+      SimklSection('Trending Movies This Week', 'movies/week_100'),
+      SimklSection('Trending Shows This Week', 'tv/week_100'),
+      SimklSection('Most Watched Movies This Month', 'movies/month_100'),
+      SimklSection('Most Watched Shows This Month', 'tv/month_100'),
     ];
   }
   return const [
-    SimklSection('Trending Now · Powered by Simkl', 'anime/today_100'),
-    SimklSection('Trending This Week on Simkl', 'anime/week_100'),
-    SimklSection('Most Watched This Month on Simkl', 'anime/month_100'),
+    SimklSection('Trending Now', 'anime/today_100'),
+    SimklSection('Trending This Week', 'anime/week_100'),
+    SimklSection('Most Watched This Month', 'anime/month_100'),
   ];
 }
 
@@ -129,14 +130,15 @@ class SimklQueries extends Queries {
     return out;
   }
 
-  Future<List<Media>> trending(SimklSection section) async {
+  Future<List<Media>> trending(SimklSection section, {int page = 1}) async {
     final data = await client.get(
       '$simklData/discover/trending/${section.file}.json',
       auth: false,
     );
     final kind = SimklKind.fromName(section.file.split('/').first);
     return [
-      for (final item in ((data as List?) ?? const []).take(60))
+      for (final item
+          in ((data as List?) ?? const []).skip((page - 1) * 30).take(30))
         ?mapSimklItem((item as Map).cast<String, dynamic>(), kind: kind),
     ];
   }
@@ -174,6 +176,32 @@ class SimklQueries extends Queries {
         ..userListId = mine.userListId;
     }
     return media;
+  }
+
+  Future<void> enrich(Media media) async {
+    final ref = parseSimklMediaId(media.id);
+    final extras = simklExtras[media];
+    if (ref == null || extras == null || ref.$1 == SimklKind.movies) return;
+    try {
+      final data = await client.get(
+        '/${ref.$1.path}/episodes/${ref.$2}',
+        query: {'extended': 'full'},
+        auth: false,
+      );
+      extras.episodes = mapSimklEpisodes(data);
+    } catch (_) {}
+  }
+
+  Future<List<Character>> characters(Media media) async {
+    final mal = simklExtras[media]?.malId;
+    if (mal == null || !media.isAnime) return const [];
+    return find<MalAuth>().queries.characters(Media(id: 'anime/$mal', shareLink: ''));
+  }
+
+  Future<List<Author>> staff(Media media) async {
+    final mal = simklExtras[media]?.malId;
+    if (mal == null || !media.isAnime) return const [];
+    return find<MalAuth>().queries.staff(Media(id: 'anime/$mal', shareLink: ''));
   }
 
   Future<Map<String, Media>> _safeLibrary() async {

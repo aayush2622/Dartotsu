@@ -1,7 +1,12 @@
 import '../../../Core/State/State.dart';
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
-import 'Screens/Views.dart';
+import 'Screens/Home.dart';
+import 'Screens/Feed.dart';
+import 'Screens/Search.dart';
+import 'Screens/Detail.dart';
+import 'Screens/Calendar.dart';
+import 'Screens/Settings.dart';
 
 const simklServiceId = 'simkl';
 

@@ -169,9 +169,85 @@ Media? mapSimklItem(Map<String, dynamic> m, {SimklKind? kind}) {
   );
 }
 
+class SimklExtras {
+  List<(String, double, int)> ratings = const [];
+  List<(String, String)> trailers = const [];
+  List<(String, String)> links = const [];
+  int? rank;
+  String? network;
+  String? certification;
+  String? airs;
+  String? director;
+  String? dropRate;
+  String? language;
+  int? malId;
+  int? budget;
+  int? revenue;
+  List<(String, String, String?)> episodes = const [];
+}
+
+final simklExtras = Expando<SimklExtras>('simklExtras');
+
+SimklExtras _extrasOf(Map<String, dynamic> d, SimklKind kind) {
+  final ratings = d['ratings'] as Map?;
+  const names = {'simkl': 'Simkl', 'imdb': 'IMDb', 'mal': 'MyAnimeList'};
+  final ids = (d['ids'] as Map?)?.cast<String, dynamic>() ?? const {};
+  String? id(String key) {
+    final v = ids[key];
+    return v == null || '$v'.isEmpty ? null : '$v';
+  }
+
+  final airs = d['airs'] as Map?;
+  final tmdbKind = kind == SimklKind.movies ? 'movie' : 'tv';
+  final imdb = id('imdb');
+  final tmdb = id('tmdb');
+  final tvdb = id('tvdb');
+  final mal = id('mal');
+  final anidb = id('anidb');
+  return SimklExtras()
+    ..ratings = [
+      for (final e in names.entries)
+        if (ratings?[e.key] is Map &&
+            (((ratings![e.key] as Map)['rating'] as num?) ?? 0) > 0)
+          (
+            e.value,
+            ((ratings[e.key] as Map)['rating'] as num).toDouble(),
+            _int((ratings[e.key] as Map)['votes']) ?? 0,
+          ),
+    ]
+    ..rank = _int((ratings?['simkl'] as Map?)?['rank'] ?? d['rank'])
+    ..network = d['network'] as String?
+    ..certification = d['certification'] as String?
+    ..director = d['director'] as String?
+    ..dropRate = d['droprate'] as String?
+    ..language = d['language'] as String?
+    ..malId = _int(ids['mal'])
+    ..budget = _int(d['budget'])
+    ..revenue = _int(d['revenue'])
+    ..airs = airs == null
+        ? null
+        : [
+            if (airs['day'] != null) '${airs['day']}',
+            if (airs['time'] != null) '${airs['time']}',
+          ].join(' ')
+    ..trailers = [
+      for (final t in (d['trailers'] as List?) ?? const [])
+        if ((t as Map)['youtube'] is String)
+          ('${t['name'] ?? 'Trailer'}', 'https://youtu.be/${t['youtube']}'),
+    ]
+    ..links = [
+      if (imdb != null) ('IMDb', 'https://www.imdb.com/title/$imdb'),
+      if (tmdb != null) ('TMDB', 'https://www.themoviedb.org/$tmdbKind/$tmdb'),
+      if (tvdb != null) ('TVDB', 'https://thetvdb.com/?tab=series&id=$tvdb'),
+      if (mal != null) ('MyAnimeList', 'https://myanimelist.net/anime/$mal'),
+      if (anidb != null) ('AniDB', 'https://anidb.net/anime/$anidb'),
+    ];
+}
+
 Media? mapSimklDetail(Map<String, dynamic> d, SimklKind kind) {
   final media = mapSimklItem(d, kind: kind);
   if (media == null) return null;
+  simklExtras[media] = _extrasOf(d, kind);
   final trailers = (d['trailers'] as List?) ?? const [];
   final youtube = trailers.isEmpty
       ? null
@@ -249,4 +325,25 @@ Media? mapSimklListEntry(Map<String, dynamic> e, SimklKind kind) {
     ..userListId = 1;
   if (total != null && total > 0) media.anime?.totalEpisodes = total;
   return media;
+}
+
+List<(String, String, String?)> mapSimklEpisodes(Object? data) {
+  if (data is! List) return const [];
+  final aired = [
+    for (final e in data)
+      if (e is Map && e['type'] == 'episode' && _int(e['episode']) != null) e,
+  ];
+  final shown = aired.length > 12 ? aired.sublist(aired.length - 12) : aired;
+  return [
+    for (final e in shown)
+      (
+        e['season'] == null || e['season'] == 0
+            ? 'Ep ${e['episode']}'
+            : 'S${e['season']} E${e['episode']}',
+        '${e['title'] ?? 'Episode ${e['episode']}'}',
+        parseSimklDate(
+          '${e['date'] ?? ''}'.split('T').first,
+        )?.getFormattedDate(),
+      ),
+  ];
 }

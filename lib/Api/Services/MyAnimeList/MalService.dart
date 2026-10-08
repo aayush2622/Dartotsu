@@ -2,7 +2,12 @@ import '../../../Core/Services/MediaService.dart';
 import '../../../Core/State/State.dart';
 import 'Auth.dart';
 import 'Screens/Entity.dart';
-import 'Screens/Views.dart';
+import 'Screens/Home.dart';
+import 'Screens/Feed.dart';
+import 'Screens/Search.dart';
+import 'Screens/Detail.dart';
+import 'Screens/Calendar.dart';
+import 'Screens/Settings.dart';
 
 const malServiceId = 'mal';
 

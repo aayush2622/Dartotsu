@@ -96,6 +96,60 @@ int? _positive(Object? v) {
   return n == null || n <= 0 ? null : n;
 }
 
+class MalExtras {
+  int? rank;
+  int? popularityRank;
+  int? scoredBy;
+  int? volumes;
+  String? rating;
+  String? broadcast;
+  String? background;
+  List<String> serialization = const [];
+  List<(String, String)> authors = const [];
+  Map<String, int> stats = const {};
+  List<(String, String)> links = const [];
+}
+
+final malExtras = Expando<MalExtras>('malExtras');
+
+MalExtras _extrasOf(Map<String, dynamic> node) {
+  int? n(Object? v) => (v as num?)?.toInt();
+  String person(Map e) =>
+      '${e['first_name'] ?? ''} ${e['last_name'] ?? ''}'.trim();
+  final broadcast = node['broadcast'] as Map?;
+  final stats = (node['statistics'] as Map?)?['status'] as Map?;
+  final rating = (node['rating'] as String?)?.replaceAll('_', ' ');
+  return MalExtras()
+    ..rank = n(node['rank'])
+    ..popularityRank = n(node['popularity'])
+    ..scoredBy = n(node['num_scoring_users'])
+    ..volumes = _positive(node['num_volumes'])
+    ..rating = rating?.toUpperCase()
+    ..broadcast = broadcast == null
+        ? null
+        : [
+            if (broadcast['day_of_the_week'] != null)
+              '${broadcast['day_of_the_week']}'.toString(),
+            if (broadcast['start_time'] != null)
+              '${broadcast['start_time']} JST',
+          ].join(' ')
+    ..background = node['background'] as String?
+    ..serialization = [
+      for (final e in (node['serialization'] as List?) ?? const [])
+        if (((e as Map)['node'] as Map?)?['name'] != null)
+          '${(e['node'] as Map)['name']}',
+    ]
+    ..authors = [
+      for (final e in (node['authors'] as List?) ?? const [])
+        if (e is Map && e['node'] is Map)
+          (person(e['node'] as Map), '${e['role'] ?? ''}'),
+    ]
+    ..stats = {
+      for (final e in (stats ?? const {}).entries)
+        '${e.key}': int.tryParse('${e.value}') ?? 0,
+    };
+}
+
 Media mapMalMedia(Map<String, dynamic> node, {required bool anime}) {
   final id = node['id'];
   final alt = node['alternative_titles'] as Map<String, dynamic>? ?? const {};
@@ -135,6 +189,8 @@ Media mapMalMedia(Map<String, dynamic> node, {required bool anime}) {
             episodeDuration: _positive(
               ((node['average_episode_duration'] as num?) ?? 0) ~/ 60,
             ),
+            op: _themes(node['opening_themes']),
+            ed: _themes(node['ending_themes']),
             season: (season?['season'] as String?)?.toUpperCase(),
             seasonYear: (season?['year'] as num?)?.toInt(),
             studio: studios.isEmpty
@@ -159,10 +215,19 @@ Media mapMalMedia(Map<String, dynamic> node, {required bool anime}) {
                   ),
           ),
   );
+  if (node['statistics'] != null) malExtras[media] = _extrasOf(node);
   final list = (node['my_list_status'] ?? node['list_status']) as Map?;
   if (list != null) applyMalListStatus(media, list.cast<String, dynamic>());
   _related(media, node, anime);
   return media;
+}
+
+List<String>? _themes(Object? raw) {
+  final out = [
+    for (final e in (raw as List?) ?? const [])
+      if ((e as Map)['text'] is String) e['text'] as String,
+  ];
+  return out.isEmpty ? null : out;
 }
 
 void applyMalListStatus(Media media, Map<String, dynamic> s) {

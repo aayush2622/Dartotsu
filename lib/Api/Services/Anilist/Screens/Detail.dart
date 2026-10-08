@@ -2,11 +2,11 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../Auth.dart';
 import '../Data/Media.dart';
 import '../Data/User.dart';
-import '../Widgets/DetailStats.dart';
 import '../../../../Screen/Review/ReviewsShelf.dart';
 import '../Widgets/FollowersShelf.dart';
 import '../Widgets/StudioChip.dart';
@@ -55,7 +55,7 @@ class AnilistDetailView extends DetailScreenView {
     final m = host.media.value;
     final description = (m.description ?? '').trim();
     return [
-      ScreenWidget.extra(AnilistDetailStats(host)),
+      ScreenWidget.extra(DetailStats(host)),
       if (description.isNotEmpty)
         ScreenWidget.data(
           'Synopsis',

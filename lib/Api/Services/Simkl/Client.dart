@@ -99,11 +99,37 @@ class SimklClient {
     }
   }
 
+  final _catalog = <String, (DateTime, dynamic)>{};
+  final _inflight = <String, Future<dynamic>>{};
+
   Future<dynamic> get(
     String path, {
     Map<String, String>? query,
     bool auth = true,
-  }) async {
+  }) {
+    if (auth) return _fetch(path, query, auth);
+    final key =
+        '$path?${query?.entries.map((e) => '${e.key}=${e.value}').join('&')}';
+    final hit = _catalog[key];
+    if (hit != null &&
+        DateTime.now().difference(hit.$1) < const Duration(minutes: 10)) {
+      return Future.value(hit.$2);
+    }
+    return _inflight[key] ??= _fetch(path, query, auth)
+        .then((data) {
+          _catalog[key] = (DateTime.now(), data);
+          return data;
+        })
+        .whenComplete(() {
+          _inflight.remove(key);
+        });
+  }
+
+  Future<dynamic> _fetch(
+    String path,
+    Map<String, String>? query,
+    bool auth,
+  ) async {
     final url = path.startsWith('http') ? path : '$simklApi$path';
     var res = await _getRaw(url, await _query(query), auth, true);
     if (res.statusCode == 401 && auth && hasToken && await _refresh()) {

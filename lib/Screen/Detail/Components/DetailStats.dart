@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-import '../../../../Core/Services/Model/Media.dart';
-import '../../../../Core/Services/Screens/DetailHost.dart';
-import '../../../../Utils/Extensions/ContextExtensions.dart';
-import '../../../../Utils/Extensions/IntExtensions.dart';
-import '../../../../Utils/Extensions/Responsive.dart';
-import '../../../../Core/State/State.dart';
+import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/Services/Screens/DetailHost.dart';
+import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Extensions/IntExtensions.dart';
+import '../../../Utils/Extensions/Responsive.dart';
+import '../../../Core/State/State.dart';
 
-class AnilistDetailStats extends StatelessWidget {
+class DetailStats extends StatelessWidget {
   final DetailHost host;
+  final List<(String, String)> Function(Media m)? items;
 
-  const AnilistDetailStats(this.host, {super.key});
+  const DetailStats(this.host, {this.items, super.key});
 
-  static String _compact(int n) {
+  static String compact(int n) {
     if (n >= 1000000) return '${(n / 1000000).toStringAsFixed(1)}M';
     if (n >= 1000) return '${(n / 1000).toStringAsFixed(1)}K';
     return '$n';
@@ -27,8 +28,8 @@ class AnilistDetailStats extends StatelessWidget {
   static List<(String, String)> _items(Media m) => [
     if ((m.meanScore ?? 0) > 0)
       ('Score', (m.meanScore! / 10).toStringAsFixed(1)),
-    if ((m.popularity ?? 0) > 0) ('Popularity', _compact(m.popularity!)),
-    if ((m.favourites ?? 0) > 0) ('Favorites', _compact(m.favourites!)),
+    if ((m.popularity ?? 0) > 0) ('Popularity', compact(m.popularity!)),
+    if ((m.favourites ?? 0) > 0) ('Favorites', compact(m.favourites!)),
     if (m.anime?.episodeDuration != null)
       ('Duration', m.anime!.episodeDuration!.durationLabel),
   ];
@@ -45,7 +46,7 @@ class AnilistDetailStats extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Watch(() {
     final m = host.media.value;
-    final items = _items(m);
+    final items = this.items?.call(m) ?? _items(m);
     final airing = _airingIn(m);
     if (items.isEmpty && airing == null) return const SizedBox.shrink();
     final scheme = context.colorScheme;

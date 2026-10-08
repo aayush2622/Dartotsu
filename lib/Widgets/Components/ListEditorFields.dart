@@ -292,6 +292,53 @@ class ListPrivateField extends StatelessWidget {
   );
 }
 
+class ListRepeatField extends StatelessWidget {
+  final ListEditorDraft draft;
+  final String label;
+
+  const ListRepeatField({
+    super.key,
+    required this.draft,
+    this.label = 'Total repeats',
+  });
+
+  @override
+  Widget build(BuildContext context) => ListEditorPad(
+    child: TextFormField(
+      initialValue: draft.repeat.value.toString(),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: const Icon(Icons.redo_rounded),
+      ),
+      onChanged: (v) => draft.repeat.value = int.tryParse(v) ?? 0,
+    ),
+  );
+}
+
+class ListNotesField extends StatelessWidget {
+  final ListEditorDraft draft;
+  final String label;
+
+  const ListNotesField({super.key, required this.draft, this.label = 'Notes'});
+
+  @override
+  Widget build(BuildContext context) => ListEditorPad(
+    child: TextFormField(
+      initialValue: draft.notes.value,
+      minLines: 2,
+      maxLines: null,
+      keyboardType: TextInputType.multiline,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: const Icon(Icons.edit_note_rounded),
+      ),
+      onChanged: (v) => draft.notes.value = v,
+    ),
+  );
+}
+
 class ListOtherSection extends StatelessWidget {
   final ListEditorDraft draft;
 
