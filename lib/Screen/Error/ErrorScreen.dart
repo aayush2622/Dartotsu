@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -248,9 +249,15 @@ void handleError(
   StackTrace? stack, {
   String? other,
   bool softCrash = false,
+  bool report = true,
 }) {
   logger('$error: \n$stack', logLevel: LogLevel.error);
-  tryFind<AnalyticsManager>()?.recordError(error, stack, fatal: !softCrash);
+  if (report) {
+    unawaited(
+      tryFind<AnalyticsManager>()?.recordError(error, stack, fatal: true) ??
+          Future<void>.value(),
+    );
+  }
 
   final nav = appNavigator;
   if (nav != null) {

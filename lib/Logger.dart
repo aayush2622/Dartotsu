@@ -3,12 +3,15 @@ import 'dart:collection';
 import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
 import 'Core/Preferences/StorageManager.dart';
 
-void logger(String message, {LogLevel logLevel = LogLevel.info, String? tag}) =>
-    Logger.log(message, logLevel: logLevel, tag: tag);
+void logger(String message, {LogLevel logLevel = LogLevel.info, String? tag}) {
+  Logger.log(message, logLevel: logLevel, tag: tag);
+  Zone.root.run(() => debugPrint(tag == null ? message : '[$tag] $message'));
+}
 
 class Logger {
   static late File _logFile;

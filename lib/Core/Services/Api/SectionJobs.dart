@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import '../../../Logger.dart';
+import 'package:flutter/foundation.dart';
 import '../Model/Media.dart';
 import '../Screens/ScreenWidget.dart';
 
@@ -27,7 +27,7 @@ Stream<(int, SectionMap)> runSectionJobsIndexed(
     } catch (e, s) {
       failure ??= e;
       failureStack ??= s;
-      logger('Section job failed: $e');
+      debugPrint('Section job failed: $e');
       return const {};
     }
   }

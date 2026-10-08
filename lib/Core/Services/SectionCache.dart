@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import '../../Logger.dart';
 import '../Preferences/PrefManager.dart';
 import 'Model/Media.dart';
 
@@ -27,7 +26,7 @@ class SectionCache {
     try {
       return await compute(_decode, raw);
     } catch (e) {
-      logger('SectionCache($id) read failed: $e');
+      debugPrint('SectionCache($id) read failed: $e');
       return null;
     }
   }
@@ -44,7 +43,7 @@ class SectionCache {
         location: PrefLocation.CACHE,
       );
     } catch (e) {
-      logger('SectionCache($id) write failed: $e');
+      debugPrint('SectionCache($id) write failed: $e');
     }
   }
 }

@@ -74,6 +74,11 @@ class PrefName {
     PrefLocation.COMMON,
   );
 
+  static const shareAnalytics = Pref(
+    'shareAnalytics',
+    true,
+    PrefLocation.COMMON,
+  );
   static const incognito = Pref('incognito', false, PrefLocation.COMMON);
   static const incognitoBlockEdits = Pref(
     'incognitoBlockEdits',

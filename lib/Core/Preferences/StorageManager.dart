@@ -5,7 +5,7 @@ import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-import '../../Logger.dart';
+import 'package:flutter/foundation.dart';
 import 'PrefManager.dart';
 
 class StorageManager {
@@ -50,7 +50,7 @@ class StorageManager {
         }
 
         final emulatedRoot = await getEmulatedRoot();
-        logger('[Storage] emulated root = $emulatedRoot');
+        debugPrint('[Storage] emulated root = $emulatedRoot');
 
         final basePath = customPath.isNotEmpty
             ? withAppRoot(customPath)
@@ -62,7 +62,7 @@ class StorageManager {
       final base = customPath.isNotEmpty ? customPath : appDir.path;
       return await ensureDir(path.join(withAppRoot(base), subPath ?? ''));
     } catch (e) {
-      logger('Error getting directory: $e');
+      debugPrint('Error getting directory: $e');
       return await getApplicationDocumentsDirectory();
     }
   }

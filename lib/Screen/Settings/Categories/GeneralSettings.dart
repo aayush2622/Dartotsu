@@ -51,6 +51,13 @@ List<Setting> generalSettings(BuildContext context) => [
       const AppSegment(1.75, label: '1.75x'),
     ],
   ),
+  Setting.switchType(
+    name: getString.shareAnalytics,
+    description: getString.shareAnalyticsDesc,
+    icon: Icons.insights_rounded,
+    isChecked: PrefName.shareAnalytics.rx.value,
+    onSwitchChange: (v) => PrefName.shareAnalytics.rx.value = v,
+  ),
   Setting.header(getString.sectionStorage),
   Setting.normal(
     name: getString.customPath,

@@ -1,5 +1,5 @@
 import '../../../Core/NetworkManager/NetworkManager.dart';
-import '../../../Logger.dart';
+import 'package:flutter/foundation.dart';
 import '../BaseDiscordRPC.dart';
 import '../DiscordPresence.dart';
 import 'TokenManager.dart';
@@ -62,9 +62,9 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
         await tokenManager.clear();
         return show(presence, retry: false);
       }
-      logger('Discord RPC show failed: ${e.statusCode}');
+      debugPrint('Discord RPC show failed: ${e.statusCode}');
     } catch (e) {
-      logger('Discord RPC show failed: $e');
+      debugPrint('Discord RPC show failed: $e');
     }
     return false;
   }
@@ -82,7 +82,7 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
         data: {'token': session},
       );
     } catch (e) {
-      logger('Discord RPC clear failed: $e');
+      debugPrint('Discord RPC clear failed: $e');
     }
   }
 

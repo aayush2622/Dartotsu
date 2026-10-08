@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 
 import '../../Core/Preferences/Incognito.dart';
 import '../../Core/Preferences/PrefManager.dart';
-import '../../Logger.dart';
 import 'BaseDiscordRPC.dart';
 import 'DiscordPresence.dart';
 import '../../Core/State/State.dart';
@@ -157,7 +156,7 @@ class DiscordPresenceController extends AppController
         _retry();
       }
     } catch (e) {
-      logger('Discord presence sync failed: $e');
+      debugPrint('Discord presence sync failed: $e');
     }
   }
 

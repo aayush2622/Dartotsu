@@ -1,6 +1,6 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
-import '../../../Logger.dart';
+import 'package:flutter/foundation.dart';
 import '../../Preferences/Incognito.dart';
 import '../../Preferences/PrefManager.dart';
 import '../Model/Media.dart';
@@ -24,7 +24,7 @@ class LocalListStore {
     try {
       return [for (final e in items) _decode(Map<String, dynamic>.from(e))];
     } catch (e) {
-      logger('LocalListStore($serviceId) read failed: $e');
+      debugPrint('LocalListStore($serviceId) read failed: $e');
       return [];
     }
   }
@@ -56,7 +56,7 @@ class LocalListStore {
         ],
       });
     } catch (e) {
-      logger('LocalListStore($serviceId) write failed: $e');
+      debugPrint('LocalListStore($serviceId) write failed: $e');
     }
   }
 
