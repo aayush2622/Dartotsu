@@ -1,7 +1,7 @@
 {
   description = "Dartotsu - packages the pre-built Linux release bundle from GitHub";
 
-  inputs.nixpkgs.url = "github:NixOS/nixpkgs/eaad089433ca2bb662274377d33df3d0e51ef28b";
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   outputs = { self, nixpkgs }:
     let
       system = "x86_64-linux";
