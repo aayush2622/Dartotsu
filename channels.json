@@ -5,9 +5,9 @@
     "hash": "sha256-K8+DtFnlemihKq5ilP5S853eZ6IlehdpQs/O0blyogk="
   },
   "prerelease": {
-    "version": "0.0.4",
-    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v0.0.4/Dartotsu_LinuxZip_v0.0.4.zip",
-    "hash": "sha256-5N1TGiQ1gNAjyu6lk6BGzZVMjliEFFerOEAUe5ZnOas="
+    "version": "1.0.0",
+    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.0.0/Dartotsu_LinuxZip_v1.0.0.zip",
+    "hash": "sha256-K8+DtFnlemihKq5ilP5S853eZ6IlehdpQs/O0blyogk="
   },
   "alpha": {
     "version": "0525fd1",
