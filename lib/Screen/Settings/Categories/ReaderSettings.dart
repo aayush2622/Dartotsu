@@ -8,6 +8,7 @@ import '../../../Model/Setting.dart';
 import '../../../Core/ThemeManager/language.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../Widgets/SettingRows.dart';
+import '../Widgets/SettingSections.dart';
 
 typedef ReaderUpdate = void Function(void Function(ReaderSettings s) change);
 
@@ -458,7 +459,18 @@ List<Setting> novelReaderRows(
   ];
 }
 
-List<Setting> readerSettings(BuildContext context) {
+List<Setting> readerSettings(BuildContext context) =>
+    foldSections(context, _globalReaderRows, [
+      SettingSection(getString.readerSectionDisplay, Icons.palette_outlined),
+      SettingSection(getString.readerSectionNovel, Icons.menu_book_rounded),
+      SettingSection(getString.novelSectionTranslate, Icons.translate_rounded),
+      SettingSection(
+        getString.novelSectionSpeech,
+        Icons.record_voice_over_rounded,
+      ),
+    ]);
+
+List<Setting> _globalReaderRows(BuildContext context) {
   final s = ReaderPrefs.global.value;
   void update(void Function(ReaderSettings s) change) =>
       ReaderPrefs.update(change);

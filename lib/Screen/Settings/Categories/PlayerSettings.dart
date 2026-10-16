@@ -16,6 +16,7 @@ import '../Widgets/SegmentedSetting.dart';
 import '../../Player/Engine/AudioDevices.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../Widgets/SettingRows.dart';
+import '../Widgets/SettingSections.dart';
 
 typedef PlayerUpdate = void Function(void Function(PlayerSettings s) change);
 
@@ -130,6 +131,15 @@ List<Setting> playerSettingsRows(
       0,
       15,
       (v) => update((x) => x.autoPlayDelay = v),
+    ),
+    sliderSetting(
+      getString.playerWatchedAt,
+      '${s.watchedAt}%',
+      Icons.check_circle_outline_rounded,
+      s.watchedAt,
+      50,
+      100,
+      (v) => update((x) => x.watchedAt = v),
     ),
     switchSetting(
       getString.playerResume,
@@ -680,8 +690,19 @@ List<Setting> playerSettingsRows(
   ];
 }
 
-List<Setting> playerSettings(BuildContext context) => playerSettingsRows(
+List<Setting> _globalPlayerRows(BuildContext context) => playerSettingsRows(
   context,
   settings: PlayerPrefs.global.value,
   update: PlayerPrefs.update,
 );
+
+List<Setting> playerSettings(BuildContext context) =>
+    foldSections(context, _globalPlayerRows, [
+      SettingSection(getString.playerSectionSubtitles, Icons.subtitles_rounded),
+      SettingSection(
+        getString.playerSectionShaders,
+        Icons.auto_awesome_rounded,
+      ),
+      SettingSection(getString.playerSectionEngine, Icons.memory_rounded),
+      SettingSection(getString.playerSectionMpv, Icons.terminal_rounded),
+    ]);

@@ -51,6 +51,8 @@ class PlayerSettings {
   set autoPip(bool v) => _v['autoPip'] = v;
   int get autoPlayDelay => _get('autoPlayDelay', 5);
   set autoPlayDelay(int v) => _v['autoPlayDelay'] = v;
+  int get watchedAt => _get('watchedAt', 80);
+  set watchedAt(int v) => _v['watchedAt'] = v;
   bool get autoSkipOpening => _get('autoSkipOpening', false);
   set autoSkipOpening(bool v) => _v['autoSkipOpening'] = v;
   bool get autoSkipEnding => _get('autoSkipEnding', false);

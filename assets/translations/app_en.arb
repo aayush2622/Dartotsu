@@ -2656,6 +2656,8 @@
   "@playerTimestamp": {},
   "playerAutoPlayDelay": "Next episode countdown",
   "@playerAutoPlayDelay": {},
+  "playerWatchedAt": "Count as watched at",
+  "@playerWatchedAt": {},
   "playerNextIn": "Next episode in {seconds}s",
   "@playerNextIn": {"placeholders": {"seconds": {"type": "int"}}},
   "playerPlayNow": "Play now",

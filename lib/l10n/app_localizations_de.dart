@@ -5440,6 +5440,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get playerAutoPlayDelay => 'Next episode countdown';
 
   @override
+  String get playerWatchedAt => 'Count as watched at';
+
+  @override
   String playerNextIn(int seconds) {
     return 'Next episode in ${seconds}s';
   }

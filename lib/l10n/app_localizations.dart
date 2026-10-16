@@ -9983,6 +9983,12 @@ abstract class AppLocalizations {
   /// **'Next episode countdown'**
   String get playerAutoPlayDelay;
 
+  /// No description provided for @playerWatchedAt.
+  ///
+  /// In en, this message translates to:
+  /// **'Count as watched at'**
+  String get playerWatchedAt;
+
   /// No description provided for @playerNextIn.
   ///
   /// In en, this message translates to:

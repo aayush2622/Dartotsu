@@ -16,8 +16,15 @@ import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Core/State/State.dart';
+import '../Widgets/SettingSections.dart';
 
-List<Setting> networkSettings(BuildContext context) {
+List<Setting> networkSettings(BuildContext context) =>
+    foldSections(context, _networkRows, [
+      SettingSection(getString.sectionDnsProxy, Icons.dns_rounded),
+      SettingSection(getString.sectionCache, Icons.storage_rounded),
+    ]);
+
+List<Setting> _networkRows(BuildContext context) {
   final network = find<NetworkManager>();
   return [
     Setting.header(getString.sectionRequests),

@@ -379,6 +379,7 @@ class PlayerState extends ScreenState {
     _completedSub?.dispose();
     _playingSub?.dispose();
     _saveProgress(force: true);
+    _commitWatched();
     unawaited(PlayerPip.setAuto(false));
     PlayerPip.detach();
     unawaited(seekPreview.dispose());
@@ -454,6 +455,7 @@ class PlayerState extends ScreenState {
     final generation = ++_generation;
     cancelCountdown();
     _saveProgress(force: true);
+    _commitWatched();
     index.value = next;
     chunk.value = null;
     _tagEpisode(next);
@@ -680,15 +682,6 @@ class PlayerState extends ScreenState {
       if (fraction > 0.6 || remaining < const Duration(minutes: 3)) {
         _preloadNext();
       }
-      if (fraction > 0.8 && !_watchedMarked) {
-        _watchedMarked = true;
-        final svc = request.service;
-        final med = request.media;
-        if (svc != null && med != null) {
-          find<DownloadEngine>().markFinished(svc.id, med.id, item.downloadKey);
-        }
-        unawaited(_trackProgress());
-      }
     }
     if (position.inSeconds >= _lastSave + 5 || position.inSeconds < _lastSave) {
       _saveProgress();
@@ -870,6 +863,21 @@ class PlayerState extends ScreenState {
     );
     _tracking = choice == TrackChoice.service;
     _localSave = choice != TrackChoice.none;
+  }
+
+  void _commitWatched() {
+    if (_watchedMarked) return;
+    final total = engine.duration.value.inSeconds;
+    if (total <= 0) return;
+    final fraction = engine.position.value.inSeconds / total;
+    if (fraction * 100 < settings.watchedAt) return;
+    _watchedMarked = true;
+    final svc = request.service;
+    final med = request.media;
+    if (svc != null && med != null) {
+      find<DownloadEngine>().markFinished(svc.id, med.id, item.downloadKey);
+    }
+    unawaited(_trackProgress());
   }
 
   Future<void> _trackProgress() async {
