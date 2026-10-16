@@ -1,3 +1,4 @@
+import '../../Utils/Extensions/StringExtensions.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -200,7 +201,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
                   children: [
                     for (final o in options)
                       FilterChip(
-                        label: Text(o),
+                        label: Text(o.replaceAll('_', ' ').titleCase),
                         selected: sel.value.contains(o),
                         showCheckmark: false,
                         onSelected: (_) => state.toggle(sel, o),
@@ -214,25 +215,28 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
 
         return SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              group(
-                getString.listFilterFormat,
-                state.formatOptions,
-                state.formats,
-              ),
-              group(
-                getString.listFilterStatus,
-                state.statusOptions,
-                state.statuses,
-              ),
-              group(
-                getString.listFilterGenres,
-                state.genreOptions,
-                state.genres,
-              ),
-            ],
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                group(
+                  getString.listFilterFormat,
+                  state.formatOptions,
+                  state.formats,
+                ),
+                group(
+                  getString.listFilterStatus,
+                  state.statusOptions,
+                  state.statuses,
+                ),
+                group(
+                  getString.listFilterGenres,
+                  state.genreOptions,
+                  state.genres,
+                ),
+              ],
+            ),
           ),
         );
       }),
