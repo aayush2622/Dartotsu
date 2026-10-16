@@ -7,6 +7,7 @@ import '../../../../Screen/Review/ReviewsShelf.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../Auth.dart';
 import 'ListEditor.dart';
+import 'ThemeSongs.dart';
 import '../Data/Mapper.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 
@@ -152,14 +153,6 @@ class MalDetailView extends DetailScreenView {
 
   List<ScreenWidget> _themes(String title, List<String>? songs) {
     if (songs == null || songs.isEmpty) return const [];
-    return [
-      ScreenWidget.data(
-        title,
-        ScreenData(
-          rows: [for (final (i, t) in songs.indexed) ('${i + 1}', t)],
-          columns: 1,
-        ),
-      ),
-    ];
+    return [ScreenWidget.extra(ThemeSongs(title: title, songs: songs))];
   }
 }

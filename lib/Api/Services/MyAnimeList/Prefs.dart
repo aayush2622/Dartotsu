@@ -34,6 +34,7 @@ const kMalMangaSections = <String, bool>{
 class MalPref {
   MalPref._();
 
+  static const hideNsfw = Pref('malHideNsfw', true, PrefLocation.OTHER);
   static const token = Pref('malToken', '', PrefLocation.PROTECTED);
   static const refresh = Pref('malRefreshToken', '', PrefLocation.PROTECTED);
   static const expiresAt = Pref<int>(

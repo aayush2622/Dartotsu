@@ -130,7 +130,12 @@ class MalQueries extends Queries {
   }) async {
     final data = await tenrai.get(
       section.path,
-      query: {...section.query, 'page': '$page', 'limit': '25', 'sfw': 'true'},
+      query: {
+        ...section.query,
+        'page': '$page',
+        'limit': '25',
+        if (MalPref.hideNsfw.value) 'sfw': 'true',
+      },
     );
     return _withList(_tenraiMedia(data, anime), anime);
   }
@@ -169,7 +174,7 @@ class MalQueries extends Queries {
         'order_by': 'members',
         'sort': 'desc',
         'limit': '12',
-        'sfw': 'true',
+        if (MalPref.hideNsfw.value) 'sfw': 'true',
       },
     );
     return _withList(_tenraiMedia(data, true), true);
@@ -178,7 +183,11 @@ class MalQueries extends Queries {
   Future<List<Media>> topPicks(String type) async {
     final data = await tenrai.get(
       '/top/manga',
-      query: {'type': type, 'limit': '12', 'sfw': 'true'},
+      query: {
+        'type': type,
+        'limit': '12',
+        if (MalPref.hideNsfw.value) 'sfw': 'true',
+      },
     );
     return _withList(_tenraiMedia(data, false), false);
   }
@@ -202,7 +211,7 @@ class MalQueries extends Queries {
         'sort': 'desc',
         'page': '$page',
         'limit': '25',
-        'sfw': 'true',
+        if (MalPref.hideNsfw.value) 'sfw': 'true',
       },
     );
     return _tenraiMedia(data, true);
@@ -257,7 +266,7 @@ class MalQueries extends Queries {
                 'sort': 'list_updated_at',
                 'limit': '1000',
                 'fields': fields ?? _listFields,
-                'nsfw': 'true',
+                if (!MalPref.hideNsfw.value) 'nsfw': 'true',
               }
             : null,
       );
@@ -522,7 +531,7 @@ class MalQueries extends Queries {
           'filter': day,
           'page': '$page',
           'limit': '50',
-          'sfw': 'true',
+          if (MalPref.hideNsfw.value) 'sfw': 'true',
           'kids': 'false',
         },
         cache: const Duration(hours: 1),
@@ -650,7 +659,7 @@ class MalQueries extends Queries {
         'status': _searchStatus(results.status!, anime),
       'start_date': ?from,
       'end_date': ?to,
-      if (results.isAdult != true) 'sfw': 'true',
+      if (MalPref.hideNsfw.value && results.isAdult != true) 'sfw': 'true',
     };
     final data = await tenrai.get(
       anime ? '/anime' : '/manga',

@@ -4,6 +4,8 @@ import '../../../../Model/Setting.dart';
 import '../../../../Utils/Function.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
+import '../../../../Core/State/State.dart';
+import '../../../../Utils/Functions/RefreshController.dart';
 import '../../../../Widgets/Components/HomeLayoutSheet.dart';
 import '../Auth.dart';
 import '../Prefs.dart';
@@ -20,6 +22,17 @@ class MalSettingsView extends SettingsScreenView {
   List<Setting> build(BuildContext context) {
     final user = malAuth.user.value;
     return [
+      Setting.header(getString.sectionPrivacy),
+      Setting.switchType(
+        name: getString.hideNsfw,
+        description: getString.hideNsfwDesc,
+        icon: Icons.visibility_off_outlined,
+        isChecked: MalPref.hideNsfw.rx.value,
+        onSwitchChange: (v) {
+          MalPref.hideNsfw.rx.value = v;
+          tryFind<RefreshController>()?.all();
+        },
+      ),
       Setting.header(getString.feedLayout),
       Setting.normal(
         name: getString.homeSections,
