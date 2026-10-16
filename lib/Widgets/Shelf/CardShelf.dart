@@ -52,6 +52,8 @@ class CardShelf extends StatefulWidget {
 
 class _CardShelfState extends State<CardShelf> {
   final state = CardShelfState();
+  int _direction = 1;
+  bool _scrolled = false;
 
   bool get _loading => widget.items == null;
 
@@ -158,8 +160,14 @@ class _CardShelfState extends State<CardShelf> {
       child: SizedBox(
         height: _railH + _pop * 2,
         child: NotificationListener<ScrollNotification>(
-          onNotification: (scroll) =>
-              state.scrollListener(scroll, widget.onLoadMore),
+          onNotification: (scroll) {
+            if (scroll is ScrollUpdateNotification &&
+                (scroll.scrollDelta ?? 0) != 0) {
+              _scrolled = true;
+              _direction = scroll.scrollDelta! > 0 ? 1 : -1;
+            }
+            return state.scrollListener(scroll, widget.onLoadMore);
+          },
           child: CustomScrollConfig(
             context,
             scrollDirection: Axis.horizontal,
@@ -269,7 +277,10 @@ class _CardShelfState extends State<CardShelf> {
       focusable: item.focusable,
     );
     final card = item.cardBuilder?.call(defaultCard) ?? defaultCard;
-    if (index > 7) return card;
-    return card.animateHorizontalEntrance();
+    return card.animateHorizontalEntrance(
+      index: index,
+      direction: _direction,
+      stagger: !_scrolled,
+    );
   }
 }

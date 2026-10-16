@@ -157,12 +157,36 @@ extension WidgetAnimations on Widget {
         );
   }
 
-  Widget animateHorizontalEntrance({bool target = true}) {
+  Widget animateHorizontalEntrance({
+    bool target = true,
+    int index = 0,
+    int direction = 1,
+    bool stagger = true,
+  }) {
     if (_disabled) return this;
-
+    final delay = Duration(milliseconds: stagger && index < 8 ? 45 * index : 0);
     return _animation(target)
         .slide(
-          begin: const Offset(1, 0),
+          begin: Offset(direction.sign.toDouble(), 0),
+          end: Offset.zero,
+          delay: _delay(delay),
+          curve: Curves.easeInOut,
+          duration: _duration(200),
+        )
+        .scale(
+          begin: const Offset(0.1, 0.1),
+          end: const Offset(1, 1),
+          delay: _delay(delay),
+          curve: Curves.easeInOut,
+          duration: _duration(400),
+        );
+  }
+
+  Widget animateVerticalEntrance({bool target = true}) {
+    if (_disabled) return this;
+    return _animation(target)
+        .slide(
+          begin: const Offset(0, -1),
           end: Offset.zero,
           curve: Curves.easeInOut,
           duration: _duration(200),
