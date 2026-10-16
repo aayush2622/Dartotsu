@@ -21,7 +21,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 const _toolbarHeight = 56.0;
 const _actionsHeight = 68.0;
-const _actionsGap = 8.0;
+const _actionsGap = 24.0;
 const _sideExtra = 6.0;
 
 class DetailHeaderScope extends InheritedWidget {
@@ -178,7 +178,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
                                   top: _actionsGap,
                                 ),
                                 child: Align(
-                                  alignment: Alignment.centerLeft,
+                                  alignment: Alignment.topLeft,
                                   child: DpadLane(
                                     laneKey: actionsLane,
                                     verticalEdge: DpadEdgeBehavior.stop,
@@ -388,7 +388,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
           if (onEditList != null)
             FilledButton.icon(
               style: const ButtonStyle(
-                minimumSize: WidgetStatePropertyAll(Size(0, 38)),
+                minimumSize: WidgetStatePropertyAll(Size(0, 44)),
                 padding: WidgetStatePropertyAll(
                   EdgeInsets.symmetric(horizontal: 16),
                 ),
@@ -412,7 +412,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
           if (m.trailer != null)
             OutlinedButton.icon(
               style: const ButtonStyle(
-                minimumSize: WidgetStatePropertyAll(Size(0, 38)),
+                minimumSize: WidgetStatePropertyAll(Size(0, 44)),
                 padding: WidgetStatePropertyAll(
                   EdgeInsets.symmetric(horizontal: 16),
                 ),

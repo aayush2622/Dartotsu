@@ -289,7 +289,7 @@ class _PlayerScreenState extends State<PlayerScreen>
             Dimens.pagePad,
             Dimens.gapLg,
           ),
-          sliver: SliverToBoxAdapter(child: PlayerEpisodes(state: state)),
+          sliver: PlayerEpisodes(state: state),
         ),
       ],
     );

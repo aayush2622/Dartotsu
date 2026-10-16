@@ -310,6 +310,18 @@ class DetailState extends ScreenState {
     );
   }
 
+  String listLabel(Media m) {
+    final label = statusLabel(m.userStatus);
+    final done = m.userProgress ?? 0;
+    if (m.userStatus == null || m.userStatus == 'PLANNING' || done <= 0) {
+      return label;
+    }
+    final total = m.totalUnits;
+    return total == null || total <= 0
+        ? '$label · $done'
+        : '$label · $done/$total';
+  }
+
   String statusLabel(String? status) => switch (status) {
     'CURRENT' => isAnime ? getString.watching : getString.reading,
     'PLANNING' => getString.planned,

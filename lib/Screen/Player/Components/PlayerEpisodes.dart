@@ -32,11 +32,11 @@ class PlayerEpisodes extends StatelessWidget {
     final items = state.items;
     final current = state.index.value;
     if (record == null || items.any((i) => i.unit == null)) {
-      return Column(
-        children: [
-          for (var i = 0; i < items.length; i++)
-            EpisodeTile(state: state, index: i),
-        ],
+      return SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (context, i) => EpisodeTile(state: state, index: i),
+          childCount: items.length,
+        ),
       );
     }
     final settings = record.watch;
@@ -59,21 +59,28 @@ class PlayerEpisodes extends StatelessWidget {
         : chunks[chunk];
     final blur = watchBlurUnwatchedPref.rx.value;
     final description = watchShowDescriptionPref.rx.value;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _header(context, units.length),
-        if (chunks.length > 1) ...[
-          RangeBar(
-            selected: chunk,
-            onChanged: (i) => state.chunk.value = i,
-            labels: [
-              for (final c in chunks) '${c.first.number}-${c.last.number}',
+    return SliverMainAxisGroup(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _header(context, units.length),
+              if (chunks.length > 1) ...[
+                RangeBar(
+                  selected: chunk,
+                  onChanged: (i) => state.chunk.value = i,
+                  labels: [
+                    for (final c in chunks)
+                      '${c.first.number}-${c.last.number}',
+                  ],
+                ),
+                SizedBox(height: Dimens.gap),
+              ],
             ],
           ),
-          SizedBox(height: Dimens.gap),
-        ],
-        UnitLayout(
+        ),
+        UnitSliver(
           units: shown,
           view: view,
           builder: (u) => UnitTile(

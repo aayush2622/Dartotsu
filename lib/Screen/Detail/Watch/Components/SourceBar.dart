@@ -45,73 +45,104 @@ class SourceBar extends StatelessWidget {
                 onTap: selectable ? onPick : null,
                 child: ThemedContainer(
                   blur: false,
-                  color: scheme.surfaceContainerHigh,
-                  borderRadius: Dimens.borderSm,
+                  color: scheme.secondaryContainer,
+                  borderRadius: const BorderRadius.horizontal(
+                    left: Radius.circular(28),
+                    right: Radius.circular(6),
+                  ),
                   padding: EdgeInsets.zero,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Dimens.gap,
-                      vertical: Dimens.gapSm,
-                    ),
-                    child: Row(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: SizedBox(
-                            width: 32,
-                            height: 32,
-                            child: cachedNetworkImage(
-                              imageUrl: source?.iconUrl,
-                              width: 32,
-                              height: 32,
-                              fit: BoxFit.cover,
-                              placeholder: (_, _) => Icon(
-                                Icons.extension_rounded,
-                                color: scheme.onSurfaceVariant,
+                  child: SizedBox(
+                    height: 56,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(12, 0, 16, 0),
+                      child: Row(
+                        children: [
+                          ClipOval(
+                            child: SizedBox(
+                              width: 34,
+                              height: 34,
+                              child: cachedNetworkImage(
+                                imageUrl: source?.iconUrl,
+                                width: 34,
+                                height: 34,
+                                fit: BoxFit.cover,
+                                placeholder: (_, _) => Icon(
+                                  Icons.extension_rounded,
+                                  color: scheme.onSecondaryContainer,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(width: Dimens.gap),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                source?.name ?? getString.watchSource,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                                style: context.textTheme.titleSmall?.copyWith(
+                          SizedBox(width: Dimens.gap),
+                          Expanded(
+                            child: Text(
+                              source?.name ?? getString.watchSource,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: context.textTheme.titleSmall?.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: scheme.onSecondaryContainer,
+                              ),
+                            ),
+                          ),
+                          if ((source?.lang ?? '').isNotEmpty) ...[
+                            SizedBox(width: Dimens.gapSm),
+                            Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: scheme.onSecondaryContainer.withValues(
+                                  alpha: 0.12,
+                                ),
+                                borderRadius: BorderRadius.circular(999),
+                              ),
+                              child: Text(
+                                source!.lang!.toUpperCase(),
+                                style: context.textTheme.labelSmall?.copyWith(
                                   fontWeight: FontWeight.w700,
+                                  color: scheme.onSecondaryContainer,
                                 ),
                               ),
-                              if ((source?.lang ?? '').isNotEmpty)
-                                Text(
-                                  source!.lang!.toUpperCase(),
-                                  style: context.textTheme.labelSmall?.copyWith(
-                                    color: scheme.onSurfaceVariant,
-                                  ),
-                                ),
-                            ],
-                          ),
-                        ),
-                        if (selectable)
-                          Icon(
-                            Icons.unfold_more_rounded,
-                            color: scheme.onSurfaceVariant,
-                          ),
-                      ],
+                            ),
+                          ],
+                          if (selectable) ...[
+                            SizedBox(width: Dimens.gapSm),
+                            Icon(
+                              Icons.expand_more_rounded,
+                              color: scheme.onSecondaryContainer,
+                            ),
+                          ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-            SizedBox(width: Dimens.gapSm),
-            IconButton.filledTonal(
-              tooltip: getString.watchSourceTools,
-              onPressed: onTools,
-              visualDensity: VisualDensity.compact,
-              icon: const Icon(Icons.settings_rounded, size: 20),
+            const SizedBox(width: 2),
+            Tooltip(
+              message: getString.watchSourceTools,
+              child: Material(
+                color: scheme.secondaryContainer,
+                borderRadius: const BorderRadius.horizontal(
+                  left: Radius.circular(6),
+                  right: Radius.circular(28),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: InkWell(
+                  onTap: onTools,
+                  child: SizedBox(
+                    width: 60,
+                    height: 56,
+                    child: Icon(
+                      Icons.settings_rounded,
+                      color: scheme.onSecondaryContainer,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

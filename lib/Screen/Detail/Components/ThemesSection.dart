@@ -43,7 +43,7 @@ class _ThemesSectionState extends State<ThemesSection>
         Dimens.pagePad,
         0,
       ),
-      child: SectionCard(
+      child: _Plain(
         title: getString.themesTitle,
         trailing: IconButton(
           tooltip: getString.themesOpenSite,
@@ -191,4 +191,26 @@ class _ThemesSectionState extends State<ThemesSection>
       ),
     );
   }
+}
+
+class _Plain extends StatelessWidget {
+  final String title;
+  final Widget trailing;
+  final Widget child;
+
+  const _Plain({
+    required this.title,
+    required this.trailing,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) => Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SectionHeader(title: title, trailing: trailing),
+      SizedBox(height: Dimens.gapSm),
+      child,
+    ],
+  );
 }

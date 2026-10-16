@@ -10,8 +10,6 @@ import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../../../../Utils/Nav/DpadNav.dart';
 import '../../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../../Widgets/Components/ScrollConfig.dart';
-import '../../../../Widgets/Shelf/ShelfFrame.dart';
-import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 class FollowersShelf extends StatelessWidget {
   final Media media;
@@ -33,34 +31,31 @@ class FollowersShelf extends StatelessWidget {
       ...users.where((u) => u.name == me),
       ...users.where((u) => u.name != me),
     ];
-    return ShelfFrame(
-      title: getString.following,
-      child: SizedBox(
-        height: 190,
-        child: ScrollConfig(
-          context,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-            itemCount: ordered.length,
-            separatorBuilder: (_, _) => SizedBox(width: Dimens.gapSm),
-            itemBuilder: (_, i) => _Follower(
-              user: ordered[i],
-              media: media,
-              isMe: ordered[i].name == me,
-              onTap: service == null
-                  ? null
-                  : () => openProfile(
-                      context,
-                      service!,
+    return SizedBox(
+      height: 190,
+      child: ScrollConfig(
+        context,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+          itemCount: ordered.length,
+          separatorBuilder: (_, _) => SizedBox(width: Dimens.gapSm),
+          itemBuilder: (_, i) => _Follower(
+            user: ordered[i],
+            media: media,
+            isMe: ordered[i].name == me,
+            onTap: service == null
+                ? null
+                : () => openProfile(
+                    context,
+                    service!,
+                    id: '${ordered[i].id}',
+                    user: UserBrief(
                       id: '${ordered[i].id}',
-                      user: UserBrief(
-                        id: '${ordered[i].id}',
-                        name: ordered[i].name,
-                        avatar: ordered[i].pfp,
-                      ),
+                      name: ordered[i].name,
+                      avatar: ordered[i].pfp,
                     ),
-            ),
+                  ),
           ),
         ),
       ),

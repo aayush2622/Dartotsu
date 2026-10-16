@@ -7,7 +7,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/Clickable.dart';
-import '../../Widgets/Components/SectionCard.dart';
+import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Widgets/Components/UserAvatar.dart';
 import '../Social/SocialNavigation.dart';
 
@@ -44,7 +44,11 @@ class ReviewCard extends StatelessWidget {
     final user = review.user;
     final score = ScoreFormat.current.format(review.score ?? 0);
     final total = review.ratingAmount ?? 0;
-    return SectionCard(
+    return ThemedContainer(
+      blur: false,
+      color: scheme.surfaceContainerHighest,
+      borderRadius: Dimens.border,
+      border: Border.all(color: scheme.outlineVariant),
       padding: EdgeInsets.zero,
       child: Material(
         color: Colors.transparent,

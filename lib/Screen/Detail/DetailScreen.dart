@@ -88,7 +88,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
                 host: state.host,
                 top: MediaQuery.paddingOf(context).top,
                 glass: find<ThemeController>().useGlassMode.value,
-                listLabel: (m) => state.statusLabel(m.userStatus),
+                listLabel: state.listLabel,
                 sourceName: state.view.sourceName,
                 onEditList: state.mutations == null ? null : state.editList,
                 onShareCard: () => unawaited(
@@ -105,17 +105,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
                 horizontalEdge: state.horizontalEdge,
               ),
             ),
-            SliverToBoxAdapter(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(
-                  minHeight:
-                      MediaQuery.sizeOf(context).height -
-                      MediaQuery.paddingOf(context).top -
-                      56,
-                ),
-                child: _sheet(context),
-              ),
-            ),
+            _sheet(context),
           ],
         ),
       ),
@@ -167,101 +157,98 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
   Widget _sheet(BuildContext context) {
     final scheme = context.colorScheme;
     final glass = find<ThemeController>().useGlassMode.value;
-    return DecoratedBox(
+    final current = state.tab.value;
+    final visited = state.visited.toList();
+    Widget keep(int index, Widget sliver) => SliverVisibility(
+      visible: current == index,
+      maintainState: true,
+      sliver: sliver,
+    );
+    return DecoratedSliver(
       decoration: BoxDecoration(
         color: glass ? scheme.surface.withValues(alpha: 0.5) : scheme.surface,
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(Dimens.radius),
         ),
       ),
-      child: Watch(
-        () => Padding(
-          padding: EdgeInsets.only(
-            top: Dimens.gapLg,
-            bottom: context.isPhone ? 120.bottomBar() : Dimens.gapXl * 2,
+      sliver: SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(child: SizedBox(height: Dimens.gapLg)),
+          keep(0, _infoSliver()),
+          if (visited.contains(1))
+            keep(
+              1,
+              WatchSection(
+                key: ValueKey('watch-${state.host.media.value.id}'),
+                service: state.view.service,
+                media: state.host.media,
+                mutations: state.mutations,
+              ),
+            ),
+          if (visited.contains(2))
+            keep(
+              2,
+              SliverToBoxAdapter(
+                child: CommentsSection(
+                  key: ValueKey('comments-${state.host.media.value.id}'),
+                  service: state.view.service,
+                  media: state.host.media,
+                  scroll: state.scroll,
+                  focusId: state.commentId,
+                ),
+              ),
+            ),
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: context.isPhone ? 120.bottomBar() : Dimens.gapXl * 2,
+            ),
           ),
-          child: _body(),
-        ),
+        ],
       ),
     );
   }
 
-  Widget _body() {
-    final current = state.tab.value;
-    final visited = state.visited.toList();
-    Widget keep(int index, Widget Function() build) => Visibility(
-      visible: current == index,
-      maintainState: true,
-      child: build(),
-    );
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        keep(0, _info),
-        if (visited.contains(1))
-          keep(
-            1,
-            () => WatchSection(
-              key: ValueKey('watch-${state.host.media.value.id}'),
-              service: state.view.service,
-              media: state.host.media,
-              mutations: state.mutations,
-            ),
-          ),
-        if (visited.contains(2))
-          keep(
-            2,
-            () => CommentsSection(
-              key: ValueKey('comments-${state.host.media.value.id}'),
-              service: state.view.service,
-              media: state.host.media,
-              scroll: state.scroll,
-              focusId: state.commentId,
-            ),
-          ),
-      ],
-    );
-  }
-
-  Widget _info() {
-    if (!state.ready.value) return _skeleton();
+  Widget _infoSliver() {
+    if (!state.ready.value) return SliverToBoxAdapter(child: _skeleton());
     final tagsAt = state.widgets.lastIndexWhere(_isTags);
     final hasTags = tagsAt >= 0;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (state.error.value != null) ...[
-          _errorCard(),
-          SizedBox(height: Dimens.gapLg),
-        ],
-        for (final (i, item) in state.widgets.indexed) ...[
-          if (i > 0) SizedBox(height: Dimens.gapLg),
-          KeyedSubtree(
-            key: ValueKey('detail-$i-${item.title ?? item.type}'),
-            child: DpadLane(
-              laneKey: state.lane(i + 2),
-              memoryKey: 'detail-${state.host.media.value.id}-$i',
-              verticalEdge: DpadEdgeBehavior.stop,
-              horizontalEdge: state.horizontalEdge,
-              onEdge: (d) => state.laneEdge(i + 2, d),
-              child:
-                  ScreenWidgetView(
-                    item,
-                    heroPrefix: 'detail:${state.host.media.value.id}',
-                    onMediaTap: state.open,
-                    onCharacterTap: state.openCharacter,
-                    onStaffTap: state.openStaff,
-                  ).animateFadeUp(
-                    begin: 0.06,
-                    delay: Duration(milliseconds: 40 * i),
-                    duration: 350,
-                  ),
-            ),
+    final items = <Widget>[
+      if (state.error.value != null) _errorCard(),
+      for (final (i, item) in state.widgets.indexed) ...[
+        KeyedSubtree(
+          key: ValueKey('detail-$i-${item.title ?? item.type}'),
+          child: DpadLane(
+            laneKey: state.lane(i + 2),
+            memoryKey: 'detail-${state.host.media.value.id}-$i',
+            verticalEdge: DpadEdgeBehavior.stop,
+            horizontalEdge: state.horizontalEdge,
+            onEdge: (d) => state.laneEdge(i + 2, d),
+            child:
+                ScreenWidgetView(
+                  item,
+                  heroPrefix: 'detail:${state.host.media.value.id}',
+                  onMediaTap: state.open,
+                  onCharacterTap: state.openCharacter,
+                  onStaffTap: state.openStaff,
+                ).animateFadeUp(
+                  begin: 0.06,
+                  delay: Duration(milliseconds: 40 * (i % 6)),
+                  duration: 350,
+                ),
           ),
-          if (i == tagsAt) _extra(),
-        ],
-        if (!hasTags) _extra(),
+        ),
+        if (i == tagsAt) _extra(),
       ],
+      if (!hasTags) _extra(),
+    ];
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, i) => Padding(
+          padding: EdgeInsets.only(top: i == 0 ? 0 : Dimens.gapLg),
+          child: items[i],
+        ),
+        childCount: items.length,
+      ),
     );
   }
 

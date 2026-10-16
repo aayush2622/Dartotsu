@@ -146,8 +146,15 @@ class DataSection extends StatelessWidget {
           if (chips.length > limit)
             ActionChip(
               mouseCursor: kClickCursor,
-              backgroundColor: Colors.transparent,
-              side: BorderSide(color: context.colorScheme.primary),
+              backgroundColor: context.colorScheme.primaryContainer,
+              side: BorderSide.none,
+              avatar: Icon(
+                _expanded.value
+                    ? Icons.expand_less_rounded
+                    : Icons.expand_more_rounded,
+                size: 18,
+                color: context.colorScheme.onPrimaryContainer,
+              ),
               visualDensity: VisualDensity.compact,
               materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
               onPressed: () => _expanded.value = !_expanded.value,
@@ -157,7 +164,8 @@ class DataSection extends StatelessWidget {
                     : '+${chips.length - limit} more',
               ),
               labelStyle: context.textTheme.labelLarge?.copyWith(
-                color: context.colorScheme.primary,
+                color: context.colorScheme.onPrimaryContainer,
+                fontWeight: FontWeight.w700,
               ),
             ),
         ],

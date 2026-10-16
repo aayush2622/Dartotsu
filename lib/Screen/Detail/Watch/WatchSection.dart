@@ -13,7 +13,6 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import 'Data/EpisodeMetaService.dart';
 import 'Data/EpisodeUnits.dart';
 import 'Data/WatchPrefs.dart';
-import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
@@ -66,70 +65,90 @@ class _WatchSectionState extends State<WatchSection>
 
   Widget _build(BuildContext context) {
     final phase = state.phase.value;
-    return Padding(
+    return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (!find<OfflineMode>().isOffline.value) ...[
-            SourceBar(
-              source: state.source.value,
-              status: state.status.value,
-              busy:
-                  phase == WatchPhase.searching || phase == WatchPhase.loading,
-              canFix: state.source.value != null,
-              selectable: !state.fixedSource,
-              onPick: _pickSource,
-              onWrongTitle: _wrongTitle,
-              onReset: state.resetMatch,
-              onTools: _tools,
+      sliver: SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (!find<OfflineMode>().isOffline.value) ...[
+                  SourceBar(
+                    source: state.source.value,
+                    status: state.status.value,
+                    busy:
+                        phase == WatchPhase.searching ||
+                        phase == WatchPhase.loading,
+                    canFix: state.source.value != null,
+                    selectable: !state.fixedSource,
+                    onPick: _pickSource,
+                    onWrongTitle: _wrongTitle,
+                    onReset: state.resetMatch,
+                    onTools: _tools,
+                  ),
+                  SizedBox(height: Dimens.gap),
+                ],
+                _titleRow(context),
+                SizedBox(height: Dimens.gapSm),
+              ],
             ),
-            SizedBox(height: Dimens.gap),
-          ],
-          _titleRow(context),
-          SizedBox(height: Dimens.gapSm),
-          AppSwitcher(
-            child: KeyedSubtree(
-              key: ValueKey(phase),
-              child: switch (phase) {
-                WatchPhase.sources ||
-                WatchPhase.searching ||
-                WatchPhase.loading => _skeleton(context),
-                WatchPhase.ready => _units(context),
-                WatchPhase.noSource => EmptyState(
-                  icon: Icons.extension_off_rounded,
-                  title: state.fixedSource
-                      ? getString.watchSourceMissing
-                      : getString.watchInstallSource(
-                          state.anime ? getString.watching : getString.reading,
-                        ),
-                ),
-                WatchPhase.empty => EmptyState(
-                  icon: Icons.search_off_rounded,
-                  title: state.match.value == null
-                      ? getString.watchNothingFound
-                      : (state.anime
-                            ? getString.watchNoEpisodes
-                            : getString.watchNoChapters),
-                  actionLabel: state.fixedSource
-                      ? null
-                      : getString.watchWrongTitle,
-                  onAction: state.fixedSource ? null : _wrongTitle,
-                ),
-                WatchPhase.failed => EmptyState(
-                  icon: Icons.cloud_off_rounded,
-                  failed: true,
-                  title: getString.watchLoadFailed,
-                  message: state.failure.value,
-                  actionLabel: getString.retry,
-                  onAction: state.start,
-                ),
-              },
-            ),
+          ),
+          SliverMainAxisGroup(
+            key: ValueKey(phase),
+            slivers: _phase(context, phase),
           ),
         ],
       ),
     );
+  }
+
+  List<Widget> _phase(BuildContext context, WatchPhase phase) {
+    Widget box(Widget child) => SliverToBoxAdapter(child: child);
+    return switch (phase) {
+      WatchPhase.sources ||
+      WatchPhase.searching ||
+      WatchPhase.loading => [box(_skeleton(context))],
+      WatchPhase.ready => _units(context),
+      WatchPhase.noSource => [
+        box(
+          EmptyState(
+            icon: Icons.extension_off_rounded,
+            title: state.fixedSource
+                ? getString.watchSourceMissing
+                : getString.watchInstallSource(
+                    state.anime ? getString.watching : getString.reading,
+                  ),
+          ),
+        ),
+      ],
+      WatchPhase.empty => [
+        box(
+          EmptyState(
+            icon: Icons.search_off_rounded,
+            title: state.match.value == null
+                ? getString.watchNothingFound
+                : (state.anime
+                      ? getString.watchNoEpisodes
+                      : getString.watchNoChapters),
+            actionLabel: state.fixedSource ? null : getString.watchWrongTitle,
+            onAction: state.fixedSource ? null : _wrongTitle,
+          ),
+        ),
+      ],
+      WatchPhase.failed => [
+        box(
+          EmptyState(
+            icon: Icons.cloud_off_rounded,
+            failed: true,
+            title: getString.watchLoadFailed,
+            message: state.failure.value,
+            actionLabel: getString.retry,
+            onAction: state.start,
+          ),
+        ),
+      ],
+    };
   }
 
   Widget _titleRow(BuildContext context) {
@@ -188,15 +207,19 @@ class _WatchSectionState extends State<WatchSection>
     );
   }
 
-  Widget _units(BuildContext context) {
+  List<Widget> _units(BuildContext context) {
     final chunks = state.chunks;
     if (chunks.isEmpty) {
-      return EmptyState(
-        icon: Icons.search_off_rounded,
-        title: state.anime
-            ? getString.watchNoEpisodes
-            : getString.watchNoChapters,
-      );
+      return [
+        SliverToBoxAdapter(
+          child: EmptyState(
+            icon: Icons.search_off_rounded,
+            title: state.anime
+                ? getString.watchNoEpisodes
+                : getString.watchNoChapters,
+          ),
+        ),
+      ];
     }
     final settings = state.settings.value;
     final index = state.chunk.value.clamp(0, chunks.length - 1);
@@ -205,34 +228,42 @@ class _WatchSectionState extends State<WatchSection>
         : chunks[index];
     final next = state.next;
     final progress = state.progress;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (next != null) ...[
-          ContinueCard(
-            unit: next,
-            anime: state.anime,
-            started: progress > 0,
-            media: state.current,
-            progress: progress,
-            playback: state.playbackOf(next),
-            onTap: () => state.anime ? _play(next) : _read(next),
-          ),
-          SizedBox(height: Dimens.gap),
-        ],
-        if (chunks.length > 1) ...[
-          RangeBar(
-            selected: index,
-            onChanged: state.selectChunk,
-            labels: [
-              for (final c in chunks) '${c.first.number}-${c.last.number}',
+    return [
+      SliverToBoxAdapter(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (next != null) ...[
+              ContinueCard(
+                unit: next,
+                anime: state.anime,
+                started: progress > 0,
+                media: state.current,
+                progress: progress,
+                playback: state.playbackOf(next),
+                onTap: () => state.anime ? _play(next) : _read(next),
+              ),
+              SizedBox(height: Dimens.gap),
             ],
-          ),
-          SizedBox(height: Dimens.gap),
-        ],
-        _layout(context, shown, settings.view, progress, next),
-      ],
-    );
+            if (chunks.length > 1) ...[
+              RangeBar(
+                selected: index,
+                onChanged: state.selectChunk,
+                labels: [
+                  for (final c in chunks) '${c.first.number}-${c.last.number}',
+                ],
+              ),
+              SizedBox(height: Dimens.gap),
+            ],
+          ],
+        ),
+      ),
+      UnitSliver(
+        units: shown,
+        view: settings.view,
+        builder: (u) => _tile(u, settings.view, progress, next),
+      ),
+    ];
   }
 
   Widget _tile(WatchUnit u, int view, int progress, WatchUnit? next) =>
@@ -255,18 +286,6 @@ class _WatchSectionState extends State<WatchSection>
                   : state.markWatched(u)
             : null,
       );
-
-  Widget _layout(
-    BuildContext context,
-    List<WatchUnit> shown,
-    int view,
-    int progress,
-    WatchUnit? next,
-  ) => UnitLayout(
-    units: shown,
-    view: view,
-    builder: (u) => _tile(u, view, progress, next),
-  );
 
   void _open(WatchUnit unit) => showCustomBottomDialog<void>(
     context,

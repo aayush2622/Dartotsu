@@ -73,6 +73,7 @@ class AnilistDetailView extends DetailScreenView {
           StudioChip(service: service, studio: m.anime!.studio!),
         ),
       ...nameSections(m),
+      ..._followers(m),
       if (m.genres.isNotEmpty)
         ScreenWidget.data(
           getString.genres,
@@ -85,7 +86,6 @@ class AnilistDetailView extends DetailScreenView {
       ScreenWidget.extra(
         ReviewsShelf(key: ValueKey('reviews-${m.id}'), media: m, view: this),
       ),
-      ..._followers(m),
       ..._sequels(m),
       if ((m.characters ?? const []).isNotEmpty)
         ScreenWidget.characters(getString.characters, m.characters),
