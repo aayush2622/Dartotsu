@@ -58,8 +58,16 @@ void main(List<String> args) async {
         ..maximumSize = 400;
       FlutterError.onError = (details) {
         final stack = details.stack ?? StackTrace.current;
+        final extra = [
+          if (details.library != null) 'library: ${details.library}',
+          if (details.context != null)
+            'while: ${details.context!.toDescription()}',
+          ...?details.informationCollector?.call().map(
+            (n) => n.toStringDeep().trim(),
+          ),
+        ].join('\n');
         logger(
-          'Framework error: ${details.exception}\n$stack',
+          'Framework error: ${details.exception}\n$extra\n$stack',
           logLevel: LogLevel.error,
         );
         handleError(details.exception, stack, softCrash: true, report: false);
