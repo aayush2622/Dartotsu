@@ -243,9 +243,11 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
     ];
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, i) => Padding(
-          padding: EdgeInsets.only(top: i == 0 ? 0 : Dimens.gapLg),
-          child: items[i],
+        (context, i) => _KeepAlive(
+          child: Padding(
+            padding: EdgeInsets.only(top: i == 0 ? 0 : Dimens.gapLg),
+            child: items[i],
+          ),
         ),
         childCount: items.length,
       ),
@@ -359,4 +361,24 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
       ],
     ),
   );
+}
+
+class _KeepAlive extends StatefulWidget {
+  final Widget child;
+  const _KeepAlive({required this.child});
+
+  @override
+  State<_KeepAlive> createState() => _KeepAliveState();
+}
+
+class _KeepAliveState extends State<_KeepAlive>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
+  Widget build(BuildContext context) {
+    super.build(context);
+    return widget.child;
+  }
 }
