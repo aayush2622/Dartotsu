@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/ExtensionBridge.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:rhttp/rhttp.dart';
+import 'package:webview_all/webview_all.dart' show OffscreenWebViewSession;
 
 import '../Preferences/PrefManager.dart';
 import 'CookieManager.dart';
@@ -12,17 +15,52 @@ import 'LogInterceptor.dart';
 import '../State/State.dart';
 import '../../Logger.dart';
 
-class NetworkManager extends AppController {
+class NetworkManager extends AppController implements BridgeNetwork {
   late RhttpClient _client;
 
   RhttpClient get client => _client;
 
-  RhttpCompatibleClient get compatibleClient =>
-      RhttpCompatibleClient.of(_client);
+  RhttpCompatibleClient? _httpClient;
+  RhttpCompatibleClient? _downloadClient;
 
+  @override
+  RhttpCompatibleClient get httpClient =>
+      _httpClient ??= RhttpCompatibleClient.of(_client);
+
+  @override
   RhttpCompatibleClient get downloadClient =>
-      RhttpCompatibleClient.of(streamClient);
+      _downloadClient ??= RhttpCompatibleClient.of(streamClient);
 
+  @override
+  String? get dns => dnsUrl;
+
+  @override
+  String? get proxy => proxyUrl;
+
+  @override
+  Future<String?> getCookies(String url) async {
+    final cookies = cookieManager.getValidCookies(Uri.parse(url));
+    if (cookies.isEmpty) return null;
+    return jsonEncode(cookies.map((c) => c.toJson()).toList());
+  }
+
+  @override
+  Future<void> setCookies(String url, List<String> cookies) async {
+    final uri = Uri.parse(url);
+    cookieManager.setCookies([
+      for (final header in cookies) ?cookieManager.parseSingleCookie(header, uri),
+    ]);
+  }
+
+  @override
+  Future<bool> presentChallenge(Widget page) async {
+    final navigator = appNavigator;
+    if (navigator == null) return false;
+    await navigator.push(MaterialPageRoute<void>(builder: (_) => page));
+    return true;
+  }
+
+  @override
   String get userAgent {
     final custom = PrefName.customUserAgent.value;
     return custom.isNotEmpty ? custom : defaultUserAgent;
@@ -47,13 +85,34 @@ class NetworkManager extends AppController {
   void onInit() {
     cookieManager.clearanceAgent = () => userAgent;
     _initClient();
+    unawaited(_captureWebViewUserAgent());
     super.onInit();
+  }
+
+
+  Future<void> _captureWebViewUserAgent() async {
+    if (PrefName.fetchedUserAgent.value.isNotEmpty) return;
+    OffscreenWebViewSession? session;
+    try {
+      session = await OffscreenWebViewSession.create();
+      final ua = await session.controller.getUserAgent();
+      if (ua == null || ua.isEmpty) return;
+      PrefName.fetchedUserAgent.value = ua;
+      reinitialize();
+    } catch (e, st) {
+      logError('NetworkManager', e, st);
+    } finally {
+      try {
+        await session?.close();
+      } catch (_) {}
+    }
   }
 
   final cookieManager = CookieManager();
 
   void reinitialize() {
     _initClient();
+    unawaited(DartotsuExtensionBridge.networkChanged());
   }
 
   RhttpClient? _streamClient;
@@ -62,6 +121,8 @@ class NetworkManager extends AppController {
 
   RhttpClient _initClient() {
     _streamClient = null;
+    _httpClient = null;
+    _downloadClient = null;
     try {
       return _client = _build(timeout: const Duration(seconds: 30));
     } catch (e, st) {

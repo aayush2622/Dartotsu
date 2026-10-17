@@ -19,7 +19,6 @@ import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Downloads/DownloadEngine.dart';
-import 'Core/NetworkManager/NetworkBridge.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Offline/OfflineMode.dart';
 import 'Core/Preferences/PrefManager.dart';
@@ -190,9 +189,7 @@ Future<void> init(List<String> args) async {
     DartotsuExtensionBridge.init(
       getDirectory: StorageManager.getDirectory,
       isarInstance: PrefManager.dartotsuPreferences,
-      http: client.compatibleClient,
-      downloadHttp: client.downloadClient,
-      network: AppBridgeNetwork(client.cookieManager, client),
+      network: client,
       onLog: (message, show) {
         logger('[Bridge LOGS] $message');
         if (show) snackString(message);

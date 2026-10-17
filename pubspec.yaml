@@ -52,7 +52,7 @@ dependencies:
   dpad: ^3.1.1
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
-  material_ui: ^1.6.0
+  material_ui: ^1.7.0
 
   # UI Enhancements
   html: ^0.15.7
@@ -124,10 +124,8 @@ dependencies:
 
 # Development dependencies
 dev_dependencies:
-  flutter_native_splash: ^2.4.8
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
 
   # Code Generation dart run build_runner build
@@ -183,20 +181,7 @@ flutter:
     - .env
     - assets/images/logo.png
     - assets/svg/
-# Flutter Launcher Icons Configuration
-# dart run flutter_launcher_icons
-flutter_icons:
-  ios: true
-  image_path: "assets/images/logo.png"
-  windows:
-    generate: true
-    image_path: "assets/images/logo.png"
-  web:
-    generate: true
-    image_path: "assets/images/logo.png"
-  macos:
-    generate: true
-    image_path: "assets/images/logo.png"
+
 
 inno_bundle:
   sign_tool:
@@ -209,10 +194,4 @@ inno_bundle:
   languages:
     - english
 
-flutter_native_splash:
-  color: "#FBF8FF"
-  color_dark: "#141218"
-  image: assets/images/logo.png
-  image_dark: assets/images/logo.png
-  android: false
-  web: false
+

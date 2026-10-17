@@ -91,6 +91,8 @@ class WebViewState extends ScreenState {
       ),
     );
     unawaited(_captureRealUserAgent());
+    final custom = PrefName.customUserAgent.value;
+    if (custom.isNotEmpty) await c.setUserAgent(custom);
     await _injectFont();
     await cookieManager.applyCookiesToWebView();
     await c.loadRequest(Uri.parse(initialUrl));
