@@ -9,11 +9,7 @@ import 'PrefManager.dart';
 import '../../Logger.dart';
 
 class StorageManager {
-  /// Gets the application directory based on platform and user preferences.
-  /// - [subPath]: Optional subdirectory to append to the base path.
-  /// - [useCustomPath]: If true, uses the user-defined custom path.
-  /// - [useSystemPath]: If true, uses the system default path. only Android
-  /// Returns the directory or null if an error occurs.
+
   static Future<Directory?> getDirectory({
     String? subPath,
     bool useCustomPath = false,
@@ -67,8 +63,6 @@ class StorageManager {
     }
   }
 
-  /// Gets the temporary directory for the application.
-  /// Returns the temporary directory or null if an error occurs.
   static Future<Directory?> getTmpDirectory() async {
     final defaultDirectory = await getDirectory();
     String dbDir = path.join(defaultDirectory!.path, 'tmp');
@@ -76,7 +70,7 @@ class StorageManager {
     return Directory(dbDir);
   }
 
-  /// Retrieves the emulated root path on Android devices.
+
   static Future<String> getEmulatedRoot() async {
     try {
       final dir = await getExternalStorageDirectory();
@@ -93,7 +87,6 @@ class StorageManager {
     }
   }
 
-  /// Requests storage permissions on Android devices.
   static Future<bool> requestPermission() async {
     if (!Platform.isAndroid) return true;
 
@@ -113,7 +106,7 @@ class StorageManager {
     return manageStorageStatus.isGranted;
   }
 
-  /// Requests storage permissions on Android devices.
+
   static Future<bool> hasStoragePermission() async {
     if (!Platform.isAndroid) return true;
 
