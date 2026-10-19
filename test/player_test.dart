@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:dartotsu/Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import 'package:dartotsu/Screen/Player/Engine/AniSkip.dart';
+import 'package:dartotsu/Screen/Player/Engine/IntroDb.dart';
 import 'package:dartotsu/Screen/Player/Engine/MpvFiles.dart';
 import 'package:dartotsu/Screen/Player/Engine/PlayRequest.dart';
 import 'package:dartotsu/Screen/Player/Engine/PlayerPlaylist.dart';
@@ -191,6 +192,71 @@ vo=gpu-next
     test('a miss gives nothing', () {
       expect(parseAniSkip({'found': false}), isEmpty);
       expect(parseAniSkip(null), isEmpty);
+    });
+  });
+
+  group('IntroDb', () {
+    test('asserts API v4 media endpoint URL', () {
+      expect(IntroDb.theIntroDbBaseUrl, 'https://api.theintrodb.org/v4');
+      expect(IntroDb.theIntroDbUrl, 'https://api.theintrodb.org/v4/media');
+      expect(IntroDb.introDbAppUrl, 'https://api.introdb.app/segments');
+    });
+
+    test('parses TheIntroDB v4 response keyed by tvdb_id with multiple segments', () {
+      final stamps = parseTheIntroDb({
+        'tvdb_id': 81797,
+        'type': 'tv',
+        'season': 1,
+        'episode': 1,
+        'intro': [
+          {'start_ms': null, 'end_ms': 124000},
+        ],
+        'credits': [
+          {'start_ms': 1380000, 'end_ms': 1420000},
+        ],
+        'recap': [
+          {'start_ms': 0, 'end_ms': 0}, // empty/zero-duration should be ignored
+        ],
+        'preview': [
+          {'start_ms': 1459000, 'end_ms': 1500000},
+        ],
+      });
+      expect(stamps.length, 3);
+      expect(stamps[0].kind, SkipKind.opening);
+      expect(stamps[0].start, 0.0);
+      expect(stamps[0].end, 124.0);
+
+      expect(stamps[1].kind, SkipKind.ending);
+      expect(stamps[1].start, 1380.0);
+      expect(stamps[1].end, 1420.0);
+
+      expect(stamps[2].kind, SkipKind.other);
+      expect(stamps[2].name, 'Preview');
+      expect(stamps[2].start, 1459.0);
+      expect(stamps[2].end, 1500.0);
+    });
+
+    test('parses IntroDb App response', () {
+      final stamps = parseIntroDbApp({
+        'imdb_id': 'tt0388629',
+        'intro': {'start_sec': 28.5, 'end_sec': 118.5},
+        'outro': {'start_sec': 1382.0, 'end_sec': 1422.0},
+        'recap': null,
+      });
+      expect(stamps.length, 2);
+      expect(stamps.first.kind, SkipKind.opening);
+      expect(stamps.first.start, 28.5);
+      expect(stamps.first.end, 118.5);
+      expect(stamps.last.kind, SkipKind.ending);
+      expect(stamps.last.start, 1382.0);
+      expect(stamps.last.end, 1422.0);
+    });
+
+    test('empty or invalid responses give nothing', () {
+      expect(parseTheIntroDb(null), isEmpty);
+      expect(parseTheIntroDb({}), isEmpty);
+      expect(parseIntroDbApp(null), isEmpty);
+      expect(parseIntroDbApp({}), isEmpty);
     });
   });
 
