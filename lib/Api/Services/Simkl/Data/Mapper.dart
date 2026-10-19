@@ -171,6 +171,9 @@ Media? mapSimklItem(Map<String, dynamic> m, {SimklKind? kind}) {
 
 class SimklExtras {
   int? malId;
+  int? tvdbId;
+  int? tmdbId;
+  String? imdbId;
   List<(String, double, int)> ratings = const [];
   List<(String, String)> trailers = const [];
   List<(String, String)> links = const [];
@@ -219,6 +222,9 @@ SimklExtras _extrasOf(Map<String, dynamic> d, SimklKind kind) {
     ..certification = d['certification'] as String?
     ..director = d['director'] as String?
     ..malId = _int(ids['mal'])
+    ..tvdbId = _int(ids['tvdb'])
+    ..tmdbId = _int(ids['tmdb'])
+    ..imdbId = imdb
     ..dropRate = d['droprate'] as String?
     ..language = d['language'] as String?
     ..budget = _int(d['budget'])
