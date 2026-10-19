@@ -694,7 +694,7 @@ class PlayerState extends ScreenState {
           malId: ids.mal,
           episode: item.number.floor(),
           durationMs: engine.duration.value.inMilliseconds,
-          isMovie: !media.isAnime && media.format?.toLowerCase() == 'movie',
+          isMovie: media.format?.toUpperCase() == 'MOVIE',
         );
         if (generation != _generation) return;
         if (introStamps.isNotEmpty) stamps.value = introStamps;
