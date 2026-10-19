@@ -8,6 +8,7 @@ import '../../../../Core/Services/Model/Media.dart';
 import '../../../Settings/Sync/Data/SyncIdIndex.dart';
 import '../../../Settings/Sync/Data/SyncModels.dart';
 import 'EpisodeMeta.dart';
+import 'IdMappers.dart';
 import 'TitleMatch.dart';
 
 class MediaIdResolver {
@@ -87,6 +88,25 @@ class MediaIdResolver {
       } catch (e) {
         logger(
           'Watch simkl id failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'WATCH',
+        );
+      }
+    }
+    if ((ids.tvdb == null || ids.imdb == null) && ids.known) {
+      try {
+        final mapped = await IdMappers.resolve(
+          anilistId: ids.anilist,
+          malId: ids.mal,
+        );
+        if (mapped != null) {
+          ids.tvdb ??= mapped.tvdbId;
+          ids.tmdb ??= mapped.tmdbId;
+          ids.imdb ??= mapped.imdbId;
+        }
+      } catch (e) {
+        logger(
+          'Watch id mapper failed: $e',
           logLevel: LogLevel.error,
           tag: 'WATCH',
         );
