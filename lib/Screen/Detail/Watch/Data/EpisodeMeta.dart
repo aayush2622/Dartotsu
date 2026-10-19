@@ -35,17 +35,33 @@ class MetaIds {
   int? mal;
   int? kitsu;
   int? simkl;
+  int? tvdb;
+  int? tmdb;
+  String? imdb;
   final bool anime;
 
-  MetaIds({this.anilist, this.mal, this.kitsu, this.simkl, this.anime = true});
+  MetaIds({
+    this.anilist,
+    this.mal,
+    this.kitsu,
+    this.simkl,
+    this.tvdb,
+    this.tmdb,
+    this.imdb,
+    this.anime = true,
+  });
 
-  bool get known => anilist != null || mal != null;
+  bool get known =>
+      anilist != null || mal != null || tvdb != null || imdb != null;
 
   MetaIds copy() => MetaIds(
     anilist: anilist,
     mal: mal,
     kitsu: kitsu,
     simkl: simkl,
+    tvdb: tvdb,
+    tmdb: tmdb,
+    imdb: imdb,
     anime: anime,
   );
 
@@ -54,6 +70,9 @@ class MetaIds {
     'mal': mal,
     'kitsu': kitsu,
     'simkl': simkl,
+    if (tvdb != null) 'tvdb': tvdb,
+    if (tmdb != null) 'tmdb': tmdb,
+    if (imdb != null) 'imdb': imdb,
   };
 
   factory MetaIds.fromJson(Map<String, dynamic> json, {bool anime = true}) =>
@@ -62,6 +81,9 @@ class MetaIds {
         mal: (json['mal'] as num?)?.toInt(),
         kitsu: (json['kitsu'] as num?)?.toInt(),
         simkl: (json['simkl'] as num?)?.toInt(),
+        tvdb: (json['tvdb'] as num?)?.toInt(),
+        tmdb: (json['tmdb'] as num?)?.toInt(),
+        imdb: json['imdb'] as String?,
         anime: anime,
       );
 }
