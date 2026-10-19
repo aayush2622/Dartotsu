@@ -1,10 +1,12 @@
 import '../../../../Api/Services/Anilist/Auth.dart';
+import '../../../../Api/Services/Simkl/Data/Mapper.dart';
 import '../../../../Api/Services/Simkl/IdLookup.dart';
 import '../../../../Logger.dart';
 import '../../../../Utils/Lru.dart';
 import 'Media/MediaRecord.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../../../Player/Engine/OnlineSubtitles.dart';
 import '../../../Settings/Sync/Data/SyncIdIndex.dart';
 import '../../../Settings/Sync/Data/SyncModels.dart';
 import 'EpisodeMeta.dart';
@@ -42,10 +44,19 @@ class MediaIdResolver {
         Map<String, dynamic>.from(stored),
         anime: anime,
       );
-      if (ids.known || !anime) return _remember(key, ids);
+      if (ids.known) return _remember(key, ids);
     }
     final ids = MetaIds(anime: anime);
-    if (!anime) return _remember(key, ids);
+
+    if (service.id == 'simkl') {
+      final extras = simklExtras[media];
+      if (extras != null) {
+        ids.tvdb ??= extras.tvdbId;
+        ids.tmdb ??= extras.tmdbId;
+        ids.imdb ??= extras.imdbId;
+        ids.mal ??= extras.malId;
+      }
+    }
 
     var map = <String, int>{};
     final adapter = service.syncAdapter;
@@ -111,6 +122,14 @@ class MediaIdResolver {
           tag: 'WATCH',
         );
       }
+    }
+    if (ids.imdb == null && ids.tvdb == null && ids.tmdb == null && media.mainName.isNotEmpty) {
+      try {
+        ids.imdb = await imdbIdFor(
+          media.mainName,
+          movie: media.format == 'MOVIE',
+        );
+      } catch (_) {}
     }
     logger(
       'Watch ids ${service.id}/${media.id} -> ${ids.toJson()}',
