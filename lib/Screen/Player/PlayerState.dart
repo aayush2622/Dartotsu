@@ -20,6 +20,7 @@ import '../Detail/Watch/Data/TrackConfirm.dart';
 import '../Detail/Watch/Data/WatchPrefs.dart';
 import '../Detail/Watch/Data/Media/ResumeStore.dart';
 import 'Engine/AniSkip.dart';
+import 'Engine/IntroDb.dart';
 import 'Engine/LocalPlayback.dart';
 import 'Engine/MpvFiles.dart';
 import 'Engine/Pip.dart';
@@ -677,7 +678,27 @@ class PlayerState extends ScreenState {
         lengthSeconds: engine.duration.value.inSeconds,
       );
       if (generation != _generation) return;
-      stamps.value = stamp;
+      if (stamp.isNotEmpty) stamps.value = stamp;
+    }
+    if (own.isEmpty && stamps.value.isEmpty) {
+      final media = request.media;
+      final service = request.service;
+      if (media != null && service != null) {
+        final ids = await MediaIdResolver.resolve(service, media);
+        if (generation != _generation) return;
+        final introStamps = await IntroDb.fetch(
+          imdbId: ids.imdb,
+          tvdbId: ids.tvdb,
+          tmdbId: ids.tmdb,
+          anilistId: ids.anilist,
+          malId: ids.mal,
+          episode: item.number.floor(),
+          durationMs: engine.duration.value.inMilliseconds,
+          isMovie: !media.isAnime && media.format?.toLowerCase() == 'movie',
+        );
+        if (generation != _generation) return;
+        if (introStamps.isNotEmpty) stamps.value = introStamps;
+      }
     }
   }
 
