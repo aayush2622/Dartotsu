@@ -20,7 +20,26 @@ pub extern "C" fn dartotsu_vips_available() -> i32 {
     }
 }
 
-/// Resizes an encoded image buffer (JPEG, PNG, WebP) using SIMD acceleration.
+#[cfg(feature = "vips")]
+fn scale_with_vips(
+    input_bytes: &[u8],
+    target_width: u32,
+    target_height: u32,
+    output_format: u32,
+) -> Option<Vec<u8>> {
+    let img = VipsImage::from_buffer(input_bytes).ok()?;
+    let tw = if target_width > 0 { target_width } else { img.width() as u32 };
+    let th = if target_height > 0 { target_height } else { img.height() as u32 };
+    let resized = img.thumbnail(tw, th, VipsSize::VIPS_SIZE_BOTH).ok()?;
+    let suffix = if output_format == 1 { ".png" } else { ".jpg[Q=92]" };
+    resized.write_to_buffer(suffix).ok()
+}
+
+/// Resizes an encoded image buffer using SIMD acceleration or libvips.
+///
+/// Supported Input Formats:
+/// - Modern: AVIF, WebP, PNG, JPEG, GIF, BMP, TIFF, ICO, QOI, TGA, HDR
+/// - Extended (via libvips): JXL, HEIC/HEIF, SVG, PSD, PDF, Camera RAW (DNG, CR2, NEF, ARW)
 ///
 /// Algorithm:
 /// - 0: Point / Nearest Neighbor
@@ -50,15 +69,47 @@ pub extern "C" fn dartotsu_image_scale(
 
     let input_bytes = unsafe { slice::from_raw_parts(input_ptr, input_len) };
 
-    // Decode source image
+    // Decode source image using the comprehensive image-rs format decoders
     let reader = match ImageReader::new(Cursor::new(input_bytes)).with_guessed_format() {
         Ok(r) => r,
-        Err(_) => return -2, // Format guess failed
+        Err(_) => {
+            #[cfg(feature = "vips")]
+            {
+                if let Some(mut buf) = scale_with_vips(input_bytes, target_width, target_height, output_format) {
+                    buf.shrink_to_fit();
+                    let len = buf.len();
+                    let ptr = buf.as_mut_ptr();
+                    std::mem::forget(buf);
+                    unsafe {
+                        *out_ptr = ptr;
+                        *out_len = len;
+                    }
+                    return 0;
+                }
+            }
+            return -2; // Format guess failed
+        }
     };
 
     let src_img = match reader.decode() {
         Ok(img) => img,
-        Err(_) => return -3, // Decoding failed
+        Err(_) => {
+            #[cfg(feature = "vips")]
+            {
+                if let Some(mut buf) = scale_with_vips(input_bytes, target_width, target_height, output_format) {
+                    buf.shrink_to_fit();
+                    let len = buf.len();
+                    let ptr = buf.as_mut_ptr();
+                    std::mem::forget(buf);
+                    unsafe {
+                        *out_ptr = ptr;
+                        *out_len = len;
+                    }
+                    return 0;
+                }
+            }
+            return -3; // Decoding failed
+        }
     };
 
     let (src_width, src_height) = src_img.dimensions();
