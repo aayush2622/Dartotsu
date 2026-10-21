@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "ලිස්ට්ස් සින්ක් එකේ තියාගන්න",
     "onboardingFeatureSyncDesc": "ඔයාගේ ලිස්ට් එක සර්විසස් හරහා කොපි කරන්න, නැත්නම් ඉදිරියෙන් ඉන්න එක දිනන්න දෙන්න.",
     "onboardingThemeShape": "පාට",
-    "onboardingServices": "මේ එක්ක වැඩ කරනවා"
+    "onboardingServices": "මේ එක්ක වැඩ කරනවා",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

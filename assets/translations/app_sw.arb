@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "Weka orodha zikiwa zimesawazishwa",
     "onboardingFeatureSyncDesc": "Nakili orodha yako kwenye huduma zote, au acha iliyo mbele ishinde.",
     "onboardingThemeShape": "Rangi",
-    "onboardingServices": "Inafanya kazi na"
+    "onboardingServices": "Inafanya kazi na",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

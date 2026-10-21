@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "ซิงก์รายการให้ตรงกัน",
     "onboardingFeatureSyncDesc": "คัดลอกรายการข้ามบริการ หรือให้อันที่ไปไกลกว่าชนะ",
     "onboardingThemeShape": "สี",
-    "onboardingServices": "ใช้งานร่วมกับ"
+    "onboardingServices": "ใช้งานร่วมกับ",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

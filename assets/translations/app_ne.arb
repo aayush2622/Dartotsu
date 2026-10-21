@@ -338,7 +338,7 @@
     "ratingRegular": "सामान्य (५ तारा)",
     "ratingAdvanced": "उन्नत (१० अङ्क)",
     "contentFilter": "सामग्री फिल्टर",
-    "contentSfw": "सुरक्षित (SFW) मात्र",
+    "contentSfw": "कामका लागि मात्र उपयुक्त",
     "contentSometimes": "खोजमा वयस्क सामग्री",
     "contentEverywhere": "सबै ठाउँमा वयस्क सामग्री",
     "shareToGlobal": "ग्लोबल फिडमा सेयर गर",
@@ -997,7 +997,7 @@
     "commentsTagTitle": "ट्याग {label} (ऐच्छिक)",
     "commentsTagEpisode": "एपिसोड",
     "commentsTagChapter": "च्याप्टर",
-    "commentsTagRange": "1–{total}",
+    "commentsTagRange": "१–{total}",
     "commentsTagNumber": "{label} नम्बर",
     "commentsTagTooHigh": "ट्याग कुल सङ्ख्या ({total}) भन्दा बढी हुन सक्दैन",
     "commentsNoTag": "ट्याग छैन",
@@ -1111,7 +1111,7 @@
     "imageSearchLinkHint": "इमेज लिङ्क पेस्ट गर",
     "imageSearchGo": "खोज",
     "imageSearchEmpty": "केही मिलेन",
-    "imageSearchAdult": "18+",
+    "imageSearchAdult": "१८+",
     "imageSearchEpisode": "एपिसोड {number}",
     "imageSearchAt": "{time} मा",
     "imageSearchPreview": "पूर्वावलोकन क्लिप",
@@ -1142,7 +1142,7 @@
     "groupsPrivacyOpen": "खुला",
     "groupsPrivacyRestricted": "सीमित",
     "groupsPrivacyClosed": "बन्द",
-    "groupsAdult": "18+",
+    "groupsAdult": "१८+",
     "groupsRoleAdmin": "एडमिन",
     "groupsRoleMod": "मोड",
     "groupsCouldntLoad": "यो समूह लोड गर्न सकिएन",
@@ -1713,7 +1713,7 @@
     "playerAudioOutput": "अडियो आउटपुट",
     "fontAppDefault": "एप फन्ट",
     "fontImport": "फन्ट इम्पोर्ट गर",
-    "fontSample": "The quick brown fox jumps over the lazy dog",
+    "fontSample": "छिटो खैरो स्याल अल्छी कुकुरमाथि उफ्रिन्छ",
     "playerSubtitleDelay": "सबटाइटल ढिलाइ",
     "playerAudioDelay": "अडियो ढिलाइ",
     "playerDelayReset": "रिसेट",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "सूची सिङ्कमा राख",
     "onboardingFeatureSyncDesc": "आफ्नो सूची सेवाहरूमा प्रतिलिपि गर, वा जो अगाडि छ त्यसलाई जित्न देऊ।",
     "onboardingThemeShape": "रङ",
-    "onboardingServices": "यिनीहरूसँग काम गर्छ"
+    "onboardingServices": "यिनीहरूसँग काम गर्छ",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

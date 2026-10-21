@@ -352,7 +352,7 @@
     "refreshFromKitsu": "ከKitsu አድስ",
     "simklReadOnly": "Simkl የተነበበ-ብቻ መዳረሻ ሰጥቷል",
     "incognitoEditsBlocked": "ኢንኮግኒቶ፦ የዝርዝር አርትዖቶች ታግደዋል",
-    "serviceError": "{service}፦ {error}",
+    "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ኢንኮግኒቶ፦ እድገት አልተቀመጠም",
     "progressSet": "እድገት ወደ {progress} ተቀምጧል",
     "removedFromList": "{title} ከዝርዝርህ ተወግዷል",
@@ -896,7 +896,7 @@
     "installPluginTitle": "{name} ጫን",
     "sizeLabel": "መጠን፦ {size}",
     "installedState": "ተጭኗል",
-    "errorLabel": "ስህተት፦",
+    "errorLabel": "ስህተት፦:",
     "stackTraceDetails": "ዝርዝሮች (Stack Trace)",
     "shareLogFile": "የሎግ ፋይል አጋራ",
     "copyLogs": "ሎጎችን ቅዳ",
@@ -950,7 +950,7 @@
     "syncOnEdit": "ለውጦችን ወዲያውኑ አመሳስል",
     "syncOnEditDesc": "እያንዳንዱን የእድገት ዝማኔና የዝርዝር አርትዖት ወዲያውኑ ወደ ሌሎች የገባህባቸው አገልግሎቶች ላክ",
     "syncPushed": "ወደ {services} ተመሳስሏል",
-    "syncPushFailed": "{service}፦ {error}",
+    "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "የጥያቄ ገደብ ደርሷል፣ ከትንሽ ቆይታ በኋላ ሞክር",
     "syncAhead": "ወደፊት ያለው",
     "syncAheadDesc": "ሁለት መንገድ፦ ለእያንዳንዱ ርዕስ ከፍተኛ እድገት ያለው ግቤት ያሸንፋል እና ወደ ሌሎች አገልግሎቶችህ ሁሉ ይገለበጣል",
@@ -997,7 +997,7 @@
     "commentsTagTitle": "መለያ {label} (አማራጭ)",
     "commentsTagEpisode": "ክፍል",
     "commentsTagChapter": "ምዕራፍ",
-    "commentsTagRange": "1–{total}",
+    "commentsTagRange": "፩–{total}",
     "commentsTagNumber": "{label} ቁጥር",
     "commentsTagTooHigh": "መለያው ከጠቅላላው ({total}) መብለጥ አይችልም",
     "commentsNoTag": "መለያ የለም",
@@ -1111,7 +1111,7 @@
     "imageSearchLinkHint": "የምስል ሊንክ ለጥፍ",
     "imageSearchGo": "ፈልግ",
     "imageSearchEmpty": "ምንም አልተገኘም",
-    "imageSearchAdult": "18+",
+    "imageSearchAdult": "፲፰+",
     "imageSearchEpisode": "ክፍል {number}",
     "imageSearchAt": "በ{time}",
     "imageSearchPreview": "የቅድመ እይታ ክሊፕ",
@@ -1142,7 +1142,7 @@
     "groupsPrivacyOpen": "ክፍት",
     "groupsPrivacyRestricted": "የተገደበ",
     "groupsPrivacyClosed": "ዝግ",
-    "groupsAdult": "18+",
+    "groupsAdult": "፰+",
     "groupsRoleAdmin": "አድሚን",
     "groupsRoleMod": "ሞድ",
     "groupsCouldntLoad": "ይህን ቡድን መጫን አልተቻለም",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "ዝርዝሮችን አመሳስል",
     "onboardingFeatureSyncDesc": "ዝርዝርህን በአገልግሎቶች መካከል አንጸባርቅ፣ ወይም ወደፊት ያለው ያሸንፍ።",
     "onboardingThemeShape": "ቀለሞች",
-    "onboardingServices": "የሚሠራው ከ"
+    "onboardingServices": "የሚሠራው ከ",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

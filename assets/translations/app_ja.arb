@@ -352,7 +352,7 @@
     "refreshFromKitsu": "Kitsuから更新",
     "simklReadOnly": "Simklの読み取り専用アクセスを許可したよ",
     "incognitoEditsBlocked": "シークレット：リストの編集はブロック中",
-    "serviceError": "{service}：{error}",
+    "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "シークレット：進捗は保存されないよ",
     "progressSet": "進捗を{progress}にしたよ",
     "removedFromList": "{title}をリストから削除したよ",
@@ -771,7 +771,7 @@
     "sortMostPopular": "人気順",
     "sortTrending": "トレンド",
     "sortNewest": "新着",
-    "sortAz": "A〜Z",
+    "sortAz": "A–Z",
     "sortMostFavourited": "お気に入り順",
     "anyCountry": "すべての国",
     "orderScore": "スコア",
@@ -950,7 +950,7 @@
     "syncOnEdit": "変更をすぐに同期",
     "syncOnEditDesc": "進捗の更新やリストの編集を、ほかのログイン済みサービスにすぐ反映するよ",
     "syncPushed": "{services}に同期したよ",
-    "syncPushFailed": "{service}：{error}",
+    "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "レート制限中だよ。少し待ってからもう一度試してね",
     "syncAhead": "進んでるほうを優先",
     "syncAheadDesc": "双方向：作品ごとにいちばん進んでるエントリーが勝って、ほかのすべてのサービスにコピーされるよ",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "リストを同期",
     "onboardingFeatureSyncDesc": "サービス間でリストをミラーリング。進んでるほうを優先することもできるよ。",
     "onboardingThemeShape": "カラー",
-    "onboardingServices": "対応サービス"
+    "onboardingServices": "対応サービス",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

@@ -997,7 +997,7 @@
     "commentsTagTitle": "ടാഗ് {label} (ഓപ്ഷണൽ)",
     "commentsTagEpisode": "എപ്പിസോഡ്",
     "commentsTagChapter": "ചാപ്റ്റർ",
-    "commentsTagRange": "1–{total}",
+    "commentsTagRange": "൧–{total}",
     "commentsTagNumber": "{label} നമ്പർ",
     "commentsTagTooHigh": "ടാഗ് ആകെ എണ്ണത്തിൽ ({total}) കൂടരുത്",
     "commentsNoTag": "ടാഗ് ഇല്ല",
@@ -1111,7 +1111,7 @@
     "imageSearchLinkHint": "ഇമേജ് ലിങ്ക് പേസ്റ്റ് ചെയ്യൂ",
     "imageSearchGo": "തിരയൂ",
     "imageSearchEmpty": "ചേരുന്നത് കണ്ടില്ല",
-    "imageSearchAdult": "18+",
+    "imageSearchAdult": "൧൮+",
     "imageSearchEpisode": "എപ്പിസോഡ് {number}",
     "imageSearchAt": "{time}-ൽ",
     "imageSearchPreview": "പ്രിവ്യൂ ക്ലിപ്പ്",
@@ -1142,7 +1142,7 @@
     "groupsPrivacyOpen": "തുറന്നത്",
     "groupsPrivacyRestricted": "നിയന്ത്രിതം",
     "groupsPrivacyClosed": "അടച്ചത്",
-    "groupsAdult": "18+",
+    "groupsAdult": "൧൮+",
     "groupsRoleAdmin": "അഡ്മിൻ",
     "groupsRoleMod": "മോഡ്",
     "groupsCouldntLoad": "ഈ ഗ്രൂപ്പ് ലോഡ് ചെയ്യാനായില്ല",
@@ -1713,7 +1713,7 @@
     "playerAudioOutput": "ഓഡിയോ ഔട്ട്പുട്ട്",
     "fontAppDefault": "ആപ്പ് ഫോണ്ട്",
     "fontImport": "ഫോണ്ട് ഇമ്പോർട്ട് ചെയ്യൂ",
-    "fontSample": "The quick brown fox jumps over the lazy dog",
+    "fontSample": "വേഗതയേറിയ തവിട്ടുനിറമുള്ള കുറുക്കൻ മടിയനായ നായയുടെ മുകളിലൂടെ ചാടുന്നു",
     "playerSubtitleDelay": "സബ്ടൈറ്റിൽ ഡിലേ",
     "playerAudioDelay": "ഓഡിയോ ഡിലേ",
     "playerDelayReset": "റീസെറ്റ്",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "ലിസ്റ്റുകൾ സിങ്കിൽ നിർത്തൂ",
     "onboardingFeatureSyncDesc": "നിന്റെ ലിസ്റ്റ് സർവീസുകളിലുടനീളം പകർത്തൂ, അല്ലെങ്കിൽ ആരാണോ മുന്നിൽ അത് ജയിക്കട്ടെ.",
     "onboardingThemeShape": "നിറങ്ങൾ",
-    "onboardingServices": "ഇവയുമായി പ്രവർത്തിക്കും"
+    "onboardingServices": "ഇവയുമായി പ്രവർത്തിക്കും",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

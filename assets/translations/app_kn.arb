@@ -997,7 +997,7 @@
     "commentsTagTitle": "ಟ್ಯಾಗ್ {label} (ಐಚ್ಛಿಕ)",
     "commentsTagEpisode": "ಎಪಿಸೋಡ್",
     "commentsTagChapter": "ಅಧ್ಯಾಯ",
-    "commentsTagRange": "1–{total}",
+    "commentsTagRange": "೧–{total}",
     "commentsTagNumber": "{label} ಸಂಖ್ಯೆ",
     "commentsTagTooHigh": "ಟ್ಯಾಗ್ ಒಟ್ಟು ({total}) ಮೀರುವಂತಿಲ್ಲ",
     "commentsNoTag": "ಟ್ಯಾಗ್ ಇಲ್ಲ",
@@ -1084,7 +1084,7 @@
     "trendzMale": "ಗಂಡು ಪಾತ್ರಗಳು",
     "trendzCouple": "ಜೋಡಿಗಳು",
     "trendzCredit": "AniTrendz ನ ವಾರದ ಚಾರ್ಟ್‌ಗಳು",
-    "trendzNew": "NEW",
+    "trendzNew": "ಹೊಸ",
     "trendzSearch": "ಈ ಶೀರ್ಷಿಕೆ ಹುಡುಕು",
     "trendzEmpty": "ಚಾರ್ಟ್ ಖಾಲಿ ಇದೆ",
     "shareCard": "ಕಾರ್ಡ್ ಶೇರ್ ಮಾಡು",
@@ -1111,7 +1111,7 @@
     "imageSearchLinkHint": "ಚಿತ್ರದ ಲಿಂಕ್ ಪೇಸ್ಟ್ ಮಾಡು",
     "imageSearchGo": "ಹುಡುಕು",
     "imageSearchEmpty": "ಹೊಂದಾಣಿಕೆ ಸಿಗಲಿಲ್ಲ",
-    "imageSearchAdult": "18+",
+    "imageSearchAdult": "೧೮+",
     "imageSearchEpisode": "ಎಪಿಸೋಡ್ {number}",
     "imageSearchAt": "{time} ನಲ್ಲಿ",
     "imageSearchPreview": "ಪೂರ್ವವೀಕ್ಷಣೆ ಕ್ಲಿಪ್",
@@ -1142,7 +1142,7 @@
     "groupsPrivacyOpen": "ಮುಕ್ತ",
     "groupsPrivacyRestricted": "ನಿರ್ಬಂಧಿತ",
     "groupsPrivacyClosed": "ಮುಚ್ಚಿದ",
-    "groupsAdult": "18+",
+    "groupsAdult": "೧೮+",
     "groupsRoleAdmin": "ಅಡ್ಮಿನ್",
     "groupsRoleMod": "ಮಾಡ್",
     "groupsCouldntLoad": "ಈ ಗುಂಪು ಲೋಡ್ ಆಗಲಿಲ್ಲ",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "ಪಟ್ಟಿಗಳನ್ನು ಸಿಂಕ್‌ನಲ್ಲಿ ಇಡು",
     "onboardingFeatureSyncDesc": "ನಿನ್ನ ಪಟ್ಟಿಯನ್ನು ಸರ್ವಿಸ್‌ಗಳ ನಡುವೆ ಪ್ರತಿಬಿಂಬಿಸು, ಅಥವಾ ಯಾವುದು ಮುಂದಿದೆಯೋ ಅದು ಗೆಲ್ಲಲಿ.",
     "onboardingThemeShape": "ಬಣ್ಣಗಳು",
-    "onboardingServices": "ಇವುಗಳೊಂದಿಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ"
+    "onboardingServices": "ಇವುಗಳೊಂದಿಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

@@ -771,7 +771,7 @@
     "sortMostPopular": "인기순",
     "sortTrending": "트렌딩",
     "sortNewest": "최신순",
-    "sortAz": "가나다순",
+    "sortAz": "A–Z",
     "sortMostFavourited": "즐겨찾기 많은 순",
     "anyCountry": "모든 국가",
     "orderScore": "점수",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "리스트 동기화 유지",
     "onboardingFeatureSyncDesc": "서비스 간에 리스트를 그대로 반영하거나, 더 앞선 쪽이 우선하게 할 수 있어요.",
     "onboardingThemeShape": "색상",
-    "onboardingServices": "연동 서비스"
+    "onboardingServices": "연동 서비스",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

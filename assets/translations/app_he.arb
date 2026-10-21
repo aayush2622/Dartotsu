@@ -771,7 +771,7 @@
     "sortMostPopular": "הכי פופולריים",
     "sortTrending": "פופולרי עכשיו",
     "sortNewest": "החדשים ביותר",
-    "sortAz": "א–ת",
+    "sortAz": "A–Z",
     "sortMostFavourited": "הכי אהובים",
     "anyCountry": "כל מדינה",
     "orderScore": "ציון",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "שמור על רשימות מסונכרנות",
     "onboardingFeatureSyncDesc": "שכפל את הרשימה שלך בין שירותים, או תן למי שמקדים לנצח.",
     "onboardingThemeShape": "צבעים",
-    "onboardingServices": "עובד עם"
+    "onboardingServices": "עובד עם",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

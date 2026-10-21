@@ -771,7 +771,7 @@
     "sortMostPopular": "الأكثر شعبية",
     "sortTrending": "رائج",
     "sortNewest": "الأحدث",
-    "sortAz": "أ–ي",
+    "sortAz": "A–Z",
     "sortMostFavourited": "الأكثر إضافة للمفضلة",
     "anyCountry": "أي بلد",
     "orderScore": "التقييم",
@@ -997,7 +997,7 @@
     "commentsTagTitle": "وسم {label} (اختياري)",
     "commentsTagEpisode": "حلقة",
     "commentsTagChapter": "فصل",
-    "commentsTagRange": "1–{total}",
+    "commentsTagRange": "١–{total}",
     "commentsTagNumber": "رقم {label}",
     "commentsTagTooHigh": "الوسم لا يمكن أن يتجاوز المجموع ({total})",
     "commentsNoTag": "بدون وسم",
@@ -1111,7 +1111,7 @@
     "imageSearchLinkHint": "الصق رابط صورة",
     "imageSearchGo": "بحث",
     "imageSearchEmpty": "ما في تطابق",
-    "imageSearchAdult": "18+",
+    "imageSearchAdult": "١٨+",
     "imageSearchEpisode": "الحلقة {number}",
     "imageSearchAt": "عند {time}",
     "imageSearchPreview": "مقطع معاينة",
@@ -1142,7 +1142,7 @@
     "groupsPrivacyOpen": "مفتوحة",
     "groupsPrivacyRestricted": "مقيّدة",
     "groupsPrivacyClosed": "مغلقة",
-    "groupsAdult": "18+",
+    "groupsAdult": "١٨+",
     "groupsRoleAdmin": "مدير",
     "groupsRoleMod": "مشرف",
     "groupsCouldntLoad": "ما قدرنا نحمّل هذه المجموعة",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "حافظ على تزامن قوائمك",
     "onboardingFeatureSyncDesc": "انسخ قائمتك بين الخدمات، أو خلّ الأكثر تقدّمًا يفوز.",
     "onboardingThemeShape": "الألوان",
-    "onboardingServices": "يعمل مع"
+    "onboardingServices": "يعمل مع",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

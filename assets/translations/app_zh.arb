@@ -352,7 +352,7 @@
     "refreshFromKitsu": "从 Kitsu 刷新",
     "simklReadOnly": "Simkl 只授予了只读权限",
     "incognitoEditsBlocked": "无痕模式：列表编辑已被禁止",
-    "serviceError": "{service}：{error}",
+    "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "无痕模式：进度未保存",
     "progressSet": "进度已设为 {progress}",
     "removedFromList": "已将 {title} 从你的列表中移除",
@@ -950,7 +950,7 @@
     "syncOnEdit": "即时同步",
     "syncOnEditDesc": "每次进度更新和列表编辑都立刻推送到你其他已登录的服务",
     "syncPushed": "已同步到 {services}",
-    "syncPushFailed": "{service}：{error}",
+    "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "触发限流，稍等一下再试",
     "syncAhead": "谁领先听谁的",
     "syncAheadDesc": "双向：每部作品都以进度最靠前的条目为准，并复制到你所有其他服务",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "保持列表同步",
     "onboardingFeatureSyncDesc": "在各个服务之间镜像你的列表，或者让进度领先的那边说了算。",
     "onboardingThemeShape": "颜色",
-    "onboardingServices": "兼容"
+    "onboardingServices": "兼容",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

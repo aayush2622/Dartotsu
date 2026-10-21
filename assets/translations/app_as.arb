@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "তালিকা ছিংকত ৰাখা",
     "onboardingFeatureSyncDesc": "ছাৰ্ভিচবোৰৰ মাজত তালিকা মিলাই ৰাখা, নহ’লে যিটো আগবাঢ়ি আছে সেইটোৱেই জিকক।",
     "onboardingThemeShape": "ৰং",
-    "onboardingServices": "যিবোৰৰ লগত কাম কৰে"
+    "onboardingServices": "যিবোৰৰ লগত কাম কৰে",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "নেটৱৰ্ক",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka একাউণ্ট বিকল্পসমূহ",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }

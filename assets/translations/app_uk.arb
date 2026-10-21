@@ -771,7 +771,7 @@
     "sortMostPopular": "Найпопулярніше",
     "sortTrending": "У тренді",
     "sortNewest": "Найновіше",
-    "sortAz": "А–Я",
+    "sortAz": "A–Z",
     "sortMostFavourited": "Найбільш улюблене",
     "anyCountry": "Будь-яка країна",
     "orderScore": "Оцінка",
@@ -1874,5 +1874,29 @@
     "onboardingFeatureSync": "Тримай списки синхронними",
     "onboardingFeatureSyncDesc": "Віддзеркалюй список між сервісами або дай перемогти тому, де прогрес більший.",
     "onboardingThemeShape": "Кольори",
-    "onboardingServices": "Працює з"
+    "onboardingServices": "Працює з",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "settingsNetwork": "Network",
+    "anilistExcludeList": "Exclude your list",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "@chapterExpectedIn": {
+        "placeholders": {
+            "chapter": {
+                "type": "int"
+            },
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "miniSeries": "Mini Series",
+    "thaiDramas": "Thai Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "koreanDramas": "Korean Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "turkishDramas": "Turkish Dramas"
 }
