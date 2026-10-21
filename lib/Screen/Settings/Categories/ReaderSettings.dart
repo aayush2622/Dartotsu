@@ -50,6 +50,14 @@ String readerFilterLabel(String id) => switch (id) {
   _ => getString.readerFilterNone,
 };
 
+String readerFilterQualityLabel(String id) => switch (id) {
+  'none' => getString.readerFilterQualityNone,
+  'low' => getString.readerFilterQualityLow,
+  'high' => getString.readerFilterQualityHigh,
+  'lanczos' => getString.readerFilterQualityLanczos,
+  _ => getString.readerFilterQualityMedium,
+};
+
 String readerOrientationLabel(String id) => switch (id) {
   'portrait' => getString.readerOrientationPortrait,
   'landscape' => getString.readerOrientationLandscape,
@@ -207,6 +215,15 @@ List<Setting> mangaReaderRows(
       values: readerFilters,
       label: readerFilterLabel,
       onPick: (v) => update((x) => x.filter = v),
+    ),
+    choiceSetting<String>(
+      context,
+      name: getString.readerFilterQuality,
+      icon: Icons.high_quality_rounded,
+      value: s.filterQuality,
+      values: readerFilterQualities,
+      label: readerFilterQualityLabel,
+      onPick: (v) => update((x) => x.filterQuality = v),
     ),
     sliderSetting(
       getString.readerDim,
