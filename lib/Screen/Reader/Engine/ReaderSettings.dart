@@ -8,6 +8,7 @@ const readerTapZones = ['default', 'lshaped', 'kindle', 'edge', 'off'];
 const readerScales = ['fit', 'width', 'height', 'original', 'smart'];
 const readerBackgrounds = ['black', 'gray', 'white', 'theme'];
 const readerFilters = ['none', 'grayscale', 'invert', 'sepia'];
+const readerFilterQualities = ['none', 'low', 'medium', 'high', 'lanczos'];
 const readerOrientations = ['free', 'portrait', 'landscape'];
 const novelThemes = ['theme', 'light', 'sepia', 'dark', 'black'];
 
@@ -71,6 +72,8 @@ class ReaderSettings {
   set autoNext(bool v) => _v['autoNext'] = v;
   String get filter => _get('filter', 'none');
   set filter(String v) => _v['filter'] = v;
+  String get filterQuality => _get('filterQuality', 'medium');
+  set filterQuality(String v) => _v['filterQuality'] = v;
   int get dim => _get('dim', 0);
   set dim(int v) => _v['dim'] = v;
   int get sidePadding => _get('sidePadding', 0);
