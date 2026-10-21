@@ -27,6 +27,10 @@ dependencies:
   # Networking
   rhttp: ^0.18.0
 
+  # Rust Image Processing & libvips
+  dartotsu_image_rust:
+    path: packages/dartotsu_image_rust
+
   # JSON Serialization
   json_annotation: ^4.9.0
 
@@ -175,5 +179,3 @@ inno_bundle:
   installer_icon: assets/images/lol.ico
   languages:
     - english
-
-
