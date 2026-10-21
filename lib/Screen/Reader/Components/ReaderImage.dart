@@ -1,10 +1,13 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:dartotsu_image_rust/dartotsu_image_rust.dart';
 import 'package:flutter/material.dart';
 
 import '../Engine/BorderCrop.dart';
 import '../Engine/ReaderImageLoader.dart';
+import '../Engine/ReaderSettings.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Logger.dart';
@@ -56,6 +59,8 @@ class _ReaderImageState extends State<ReaderImage> {
   ImageStreamListener? _cropListener;
   bool _shown = false;
   bool _logged = false;
+  Uint8List? _lanczosBytes;
+  bool _lanczosLoading = false;
 
   @override
   void initState() {
@@ -69,7 +74,37 @@ class _ReaderImageState extends State<ReaderImage> {
     _syncCrop();
   }
 
-  ImageProvider _provider(BuildContext context) {
+  void _loadLanczos(int targetW, int targetH) async {
+    if (_lanczosLoading) return;
+    _lanczosLoading = true;
+    final cacheKey = '${widget.page.url}_lanczos_${targetW}x$targetH';
+    final cached = LanczosMemoryCache.get(cacheKey);
+    if (cached != null) {
+      if (mounted) setState(() => _lanczosBytes = cached);
+      _lanczosLoading = false;
+      return;
+    }
+    final rawBytes = await ReaderImageLoader.loadBytes(widget.page);
+    if (rawBytes != null && mounted) {
+      final scaled = await DartotsuImageRust.scale(
+        bytes: rawBytes,
+        targetWidth: targetW,
+        targetHeight: targetH,
+        algorithm: DartotsuScaleAlgorithm.lanczos,
+        cacheKey: cacheKey,
+      );
+      if (mounted && scaled != null) {
+        setState(() => _lanczosBytes = scaled);
+      }
+    }
+    _lanczosLoading = false;
+  }
+
+  ImageProvider _provider(BuildContext context, [String? quality]) {
+    final effectiveQuality = quality ?? ReaderPrefs.global.value.filterQuality;
+    if (effectiveQuality == 'lanczos' && _lanczosBytes != null) {
+      return MemoryImage(_lanczosBytes!);
+    }
     final media = MediaQuery.of(context);
     final decode = widget.fit == BoxFit.fitWidth
         ? (media.size.width * media.devicePixelRatio).round().clamp(320, 2400)
@@ -79,6 +114,14 @@ class _ReaderImageState extends State<ReaderImage> {
         ? base
         : ResizeImage(base, width: decode, policy: ResizeImagePolicy.fit);
   }
+
+  FilterQuality _filterQuality(String quality) => switch (quality) {
+    'none' => FilterQuality.none,
+    'low' => FilterQuality.low,
+    'high' => FilterQuality.high,
+    'lanczos' => FilterQuality.high,
+    _ => FilterQuality.medium,
+  };
 
   void _detachCrop() {
     final listener = _cropListener;
@@ -124,6 +167,8 @@ class _ReaderImageState extends State<ReaderImage> {
     if (old.page.url != widget.page.url) {
       _shown = false;
       _logged = false;
+      _lanczosBytes = null;
+      _lanczosLoading = false;
       _watch();
       _syncCrop();
     }
@@ -146,6 +191,8 @@ class _ReaderImageState extends State<ReaderImage> {
 
   Future<void> _retry() async {
     _shown = false;
+    _lanczosBytes = null;
+    _lanczosLoading = false;
     await ReaderImageLoader.forget(widget.page);
     if (!mounted) return;
     attempt.value++;
@@ -156,17 +203,24 @@ class _ReaderImageState extends State<ReaderImage> {
   Widget build(BuildContext context) => Watch(() => _build(context));
 
   Widget _build(BuildContext context) {
-    final provider = _provider(context);
+    final quality = ReaderPrefs.global.value.filterQuality;
+    if (quality == 'lanczos' && _lanczosBytes == null && DartotsuImageRust.isSupported) {
+      final media = MediaQuery.of(context);
+      final targetW = (media.size.width * media.devicePixelRatio).round().clamp(320, 2880);
+      _loadLanczos(targetW, 0);
+    }
+    final provider = _provider(context, quality);
+    final fQuality = _filterQuality(quality);
     final info = crop.value;
     final rect = info?.rect;
     final image = Image(
-      key: ValueKey('${widget.page.url}#${attempt.value}'),
+      key: ValueKey('${widget.page.url}#${attempt.value}#$quality#${_lanczosBytes != null}'),
       image: provider,
       fit: rect == null ? widget.fit : BoxFit.fill,
       width: rect == null ? widget.width : info!.width,
       height: rect == null ? widget.height : info!.height,
       gaplessPlayback: true,
-      filterQuality: FilterQuality.medium,
+      filterQuality: fQuality,
       frameBuilder: (context, child, frame, sync) {
         if (frame == null) return _box(_loading());
         _shown = true;
