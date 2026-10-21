@@ -9311,6 +9311,48 @@ abstract class AppLocalizations {
   /// **'Sepia'**
   String get readerFilterSepia;
 
+  /// No description provided for @readerFilterQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Image filter quality'**
+  String get readerFilterQuality;
+
+  /// No description provided for @readerFilterQualityNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None (Nearest neighbor)'**
+  String get readerFilterQualityNone;
+
+  /// No description provided for @readerFilterQualityLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Low (Bilinear)'**
+  String get readerFilterQualityLow;
+
+  /// No description provided for @readerFilterQualityMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Medium (Trilinear)'**
+  String get readerFilterQualityMedium;
+
+  /// No description provided for @readerFilterQualityHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'High (Bicubic)'**
+  String get readerFilterQualityHigh;
+
+  /// No description provided for @readerFilterQualityLanczos.
+  ///
+  /// In en, this message translates to:
+  /// **'Lanczos (Rust high quality)'**
+  String get readerFilterQualityLanczos;
+
+  /// No description provided for @readerFilterQualityDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Resampling quality used when scaling manga pages'**
+  String get readerFilterQualityDesc;
+
   /// No description provided for @readerDim.
   ///
   /// In en, this message translates to:
