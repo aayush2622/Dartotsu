@@ -484,15 +484,6 @@ class PlayerEngine {
       }
     } else if (!_isUri(url)) {
       target = Uri.file(url).toString();
-    } else if (url.startsWith('http')) {
-      try {
-        await native?.setProperty(
-          'stream-lavf-o',
-          'reconnect=1,reconnect_at_eof=1,reconnect_streamed=1,reconnect_on_network_error=1,reconnect_delay_max=10',
-        );
-      } catch (e) {
-        logger('mpv stream-lavf-o failed: $e', tag: 'MPV');
-      }
     }
     source = url;
     subtitleDelay.value = 0;
