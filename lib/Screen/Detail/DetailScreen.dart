@@ -199,10 +199,17 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
                 ),
               ),
             ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: context.isPhone ? 120.bottomBar() : Dimens.gapXl * 2,
-            ),
+          SliverLayoutBuilder(
+            builder: (context, constraints) {
+              final base = context.isPhone ? 120.bottomBar() : Dimens.gapXl * 2;
+              final fill =
+                  constraints.viewportMainAxisExtent +
+                  detailHeaderCollapseRange() -
+                  constraints.precedingScrollExtent;
+              return SliverToBoxAdapter(
+                child: SizedBox(height: fill > base ? fill : base),
+              );
+            },
           ),
         ],
       ),

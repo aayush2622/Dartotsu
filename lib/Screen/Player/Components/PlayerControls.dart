@@ -196,12 +196,6 @@ class PlayerControls extends StatelessWidget {
                       ),
                     ),
             ),
-            if (!locked && PlayerPip.supported)
-              _icon(
-                Icons.picture_in_picture_alt_rounded,
-                state.enterPip,
-                tooltip: getString.playerPip,
-              ),
             if (!locked &&
                 compact &&
                 (state.videos.length > 1 || state.request.tracked))
@@ -235,11 +229,46 @@ class PlayerControls extends StatelessWidget {
                 state.toggleLock,
                 tooltip: getString.playerLock,
               ),
+            if (!locked) _qualityTag(context),
           ],
         ),
       ),
     );
   }
+
+  Widget _qualityTag(BuildContext context) {
+    final height = state.engine.videoHeight.value;
+    if (height == null || height <= 0) return const SizedBox.shrink();
+    final several = state.engine.videoVariants.value.length > 1;
+    final tag = Container(
+      margin: const EdgeInsets.only(left: 4, top: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.45),
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.white24),
+      ),
+      child: Text(
+        '${height}p',
+        style: context.textTheme.labelMedium?.copyWith(
+          color: Colors.white,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
+    return several
+        ? GestureDetector(
+            onTap: () => showQualitySheet(context, state),
+            child: tag,
+          )
+        : tag;
+  }
+
+  Widget _pipButton() => _icon(
+    Icons.picture_in_picture_alt_rounded,
+    state.enterPip,
+    tooltip: getString.playerPip,
+  );
 
   Widget _center(BuildContext context) {
     final busy = state.loading.value || state.engine.buffering.value;
@@ -362,6 +391,7 @@ class PlayerControls extends StatelessWidget {
                       stamp?.name ?? '+${state.settings.skipDuration}s',
                     ),
                   ),
+                if (compact && PlayerPip.supported) _pipButton(),
                 if (compact)
                   _icon(
                     Icons.fullscreen_rounded,
@@ -438,6 +468,7 @@ class PlayerControls extends StatelessWidget {
                       tooltip: getString.playerChapters,
                     ),
                   const Spacer(),
+                  if (PlayerPip.supported) _pipButton(),
                   _icon(
                     Icons.fit_screen_rounded,
                     state.cycleFit,

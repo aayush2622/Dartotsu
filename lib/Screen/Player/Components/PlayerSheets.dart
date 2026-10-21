@@ -161,14 +161,25 @@ class _PendingStreamsState extends State<_PendingStreams> {
     widget.pending.then(
       (list) {
         if (!mounted) return;
-        if (list.length == 1) return popPage(context, 0);
-        if (list.isEmpty) return popPage<int?>(context, null);
+        if (list.length == 1) return _close(0);
+        if (list.isEmpty) return _close(null);
         _list.value = list;
       },
       onError: (Object e) {
         if (mounted) _error.value = '$e';
       },
     );
+  }
+
+  void _close(int? result) {
+    final route = ModalRoute.of(context);
+    if (route == null || !route.isActive) return;
+    final nav = Navigator.of(context);
+    if (route.isCurrent) {
+      nav.pop<int?>(result);
+    } else {
+      nav.removeRoute(route, result);
+    }
   }
 
   @override

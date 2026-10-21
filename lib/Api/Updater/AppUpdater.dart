@@ -401,7 +401,13 @@ class AppUpdater extends AppController {
       );
 
       if (result['isSuccess'] != true) {
-        throw result['errorMessage'] ?? 'APK install failed';
+        final message = '${result['errorMessage'] ?? 'APK install failed'}';
+        if (message.toLowerCase().contains('cancel')) {
+          logger('APK install cancelled by the user', tag: 'UPDATER');
+          _resetDownloadState();
+          return;
+        }
+        throw message;
       }
 
       if (await file.exists()) {
