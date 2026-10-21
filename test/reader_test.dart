@@ -201,6 +201,17 @@ void main() {
       expect(s.dim, 0);
       expect(s.novelLineHeight, 2.0);
     });
+
+    test('filterQuality defaults to medium and persists', () {
+      final s = ReaderSettings();
+      expect(s.filterQuality, 'medium');
+      s.filterQuality = 'lanczos';
+      expect(s.filterQuality, 'lanczos');
+      final diff = s.diff(ReaderSettings());
+      expect(diff['filterQuality'], 'lanczos');
+      final merged = ReaderSettings().merged(diff);
+      expect(merged.filterQuality, 'lanczos');
+    });
   });
 
   test('MediaRecord keeps reader overrides', () {
