@@ -29,7 +29,9 @@ dependencies:
 
   # Rust Image Processing & libvips
   dartotsu_image_rust:
-    path: packages/dartotsu_image_rust
+    git:
+      url: https://github.com/itsmechinmoy/dartotsu_image_rust.git
+      ref: main
 
   # JSON Serialization
   json_annotation: ^4.9.0
@@ -179,3 +181,5 @@ inno_bundle:
   installer_icon: assets/images/lol.ico
   languages:
     - english
+
+
