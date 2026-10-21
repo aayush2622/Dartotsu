@@ -77,6 +77,25 @@ class ReaderImageLoader {
     }
   }
 
+  static Future<Uint8List?> loadBytes(PageUrl page) async {
+    try {
+      if (_local(page.url)) {
+        final f = File(page.url);
+        if (await f.exists()) return await f.readAsBytes();
+        return null;
+      }
+      final cached = await manager.getFileFromCache(page.url);
+      if (cached != null && await cached.file.exists()) {
+        return await cached.file.readAsBytes();
+      }
+      final downloaded = await manager.downloadFile(page.url, authHeaders: page.headers);
+      return await downloaded.file.readAsBytes();
+    } catch (e, st) {
+      logError('ReaderImageLoader.loadBytes', e, st);
+      return null;
+    }
+  }
+
   static Future<void> forget(PageUrl page) async {
     _errors.remove(page.url);
     if (_local(page.url)) return;
