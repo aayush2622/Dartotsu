@@ -151,7 +151,11 @@ class _ReaderScreenState extends State<ReaderScreen>
             key: ValueKey('p-${state.generation.value}'),
             state: state,
           );
-    final scoped = ReaderCropScope(enabled: settings.cropBorders, child: view);
+    final scoped = ReaderCropScope(
+      enabled: settings.cropBorders,
+      quality: settings.filterQuality,
+      child: view,
+    );
     return filter == null
         ? scoped
         : ColorFiltered(colorFilter: filter, child: scoped);

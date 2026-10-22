@@ -77,21 +77,22 @@ class ReaderImageLoader {
     }
   }
 
-  static Future<Uint8List?> loadBytes(PageUrl page) async {
+  static Future<File?> fileFor(PageUrl page) async {
     try {
       if (_local(page.url)) {
-        final f = File(page.url);
-        if (await f.exists()) return await f.readAsBytes();
-        return null;
+        final file = File(page.url);
+        return await file.exists() ? file : null;
       }
+      _remember(page);
       final cached = await manager.getFileFromCache(page.url);
-      if (cached != null && await cached.file.exists()) {
-        return await cached.file.readAsBytes();
-      }
-      final downloaded = await manager.downloadFile(page.url, authHeaders: page.headers);
-      return await downloaded.file.readAsBytes();
+      if (cached != null && await cached.file.exists()) return cached.file;
+      final downloaded = await manager.downloadFile(
+        page.url,
+        authHeaders: page.headers,
+      );
+      return downloaded.file;
     } catch (e, st) {
-      logError('ReaderImageLoader.loadBytes', e, st);
+      logError('ReaderImageLoader.fileFor', e, st);
       return null;
     }
   }
