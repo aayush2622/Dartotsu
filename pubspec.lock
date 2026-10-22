@@ -343,9 +343,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: optimize
-      resolved-ref: d4f643fbdc084a7bcb97553616d142235e934240
-      url: "https://github.com/aayush2622/dartotsu_image_rust.git"
+      ref: main
+      resolved-ref: c5d785b1566d17a3f680574d203564ee500faf5b
+      url: "https://github.com/itsmechinmoy/dartotsu_image_rust.git"
     source: git
     version: "0.2.0"
   dartx:

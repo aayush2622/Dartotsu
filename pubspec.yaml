@@ -30,8 +30,8 @@ dependencies:
   # Rust Image Processing & libvips
   dartotsu_image_rust:
     git:
-      url: https://github.com/aayush2622/dartotsu_image_rust.git
-      ref: optimize
+      url: https://github.com/itsmechinmoy/dartotsu_image_rust.git
+      ref: main
 
   # JSON Serialization
   json_annotation: ^4.9.0
