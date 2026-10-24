@@ -11,6 +11,7 @@ class SyncKey {
   static const kitsu = 'kitsu';
   static const simkl = 'simkl';
   static const mangabaka = 'mangabaka';
+  static const mangaupdates = 'mangaupdates';
 }
 
 String syncCanonStatus(String? status) => switch (status) {

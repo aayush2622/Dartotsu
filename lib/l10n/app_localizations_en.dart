@@ -30,6 +30,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mangaBaka => 'MangaBaka';
 
   @override
+  String get mangaUpdates => 'MangaUpdates';
+
+  @override
+  String get mangaUpdatesLoginFailed => 'MangaUpdates login failed. Check your username and password.';
+
+  @override
+  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+
+  @override
+  String get mangaUpdatesProfile => 'MangaUpdates profile';
+
+  @override
+  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+
+  @override
+  String get mangaUpdatesAccountOptions => 'MangaUpdates account options';
+
+  @override
   String get discord => 'Discord';
 
   @override

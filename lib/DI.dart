@@ -11,6 +11,7 @@ import 'Api/Services/MyAnimeList/Auth.dart';
 import 'Api/Services/Simkl/Auth.dart';
 import 'Api/Services/Kitsu/Auth.dart';
 import 'Api/Services/MangaBaka/Auth.dart';
+import 'Api/Services/MangaUpdates/Auth.dart';
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Offline/NetStatus.dart';
 import 'Core/Security/AppLock.dart';
@@ -65,6 +66,7 @@ class DI {
     lazyPut<SimklAuth>(SimklAuth.new);
     lazyPut<KitsuAuth>(KitsuAuth.new);
     lazyPut<MangaBakaAuth>(MangaBakaAuth.new);
+    lazyPut<MangaUpdatesAuth>(MangaUpdatesAuth.new);
     lazyPut<CommentsApi>(() => CommentsApi(find<AnilistAuth>().token));
     lazyPut<CommentAlerts>(CommentAlerts.new);
     lazyPut<RefreshController>(RefreshController.new);

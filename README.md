@@ -4,7 +4,7 @@
     <div>
       <div align="center">
         <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=ar">العربية</a>
-        | <a href="https://openaitx.github.io/#/view?user=aayush2622&project=Dartotsu&lang=as">অসমীয়া</a>
+        | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=as">অসমীয়া</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=de">Deutsch</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=en">English</a>
         | <a href="https://openaitx.github.io/view.html?user=aayush2622&project=Dartotsu&lang=es">Español</a>
@@ -48,7 +48,7 @@
 
 **Dartotsu** is a Flutter rewrite of [Dantotsu](https://git.rebelonion.dev/rebelonion/Dantotsu/): one app to track and manage your anime, manga and novel lists, on Android, iOS, Windows, Linux and macOS.
 
-It tracks with [**AniList**](https://anilist.co/), [**MyAnimeList**](https://myanimelist.net/), [**Simkl**](https://simkl.com/), [**Kitsu**](https://kitsu.app/) and [**MangaBaka**](https://mangabaka.org/).
+It tracks with [**AniList**](https://anilist.co/), [**MyAnimeList**](https://myanimelist.net/), [**Simkl**](https://simkl.com/), [**Kitsu**](https://kitsu.app/), [**MangaBaka**](https://mangabaka.org/) and [**MangaUpdates**](https://www.mangaupdates.com/).
 
 > [!WARNING]
 > **Dartotsu is a tracking and management tool only:** It does not host, provide, distribute, or maintain streaming content or extensions.
@@ -62,7 +62,7 @@ It tracks with [**AniList**](https://anilist.co/), [**MyAnimeList**](https://mya
 ## Features
 
 **Tracking**
-- Five services side by side, each with its own home, browse tabs, search, calendar, notifications and settings.
+- Six services side by side, each with its own home, browse tabs, search, calendar, notifications and settings.
 - List editor, progress, scores and dates; offline edits are queued and sent when the connection returns.
 - List sync between services (one-way, or whichever entry is ahead), with rate-limit aware batching.
 - Profiles, activity feeds, stories, groups and Dantotsu comments on every title.
@@ -140,7 +140,7 @@ Release builds: `flutter build apk --release --split-per-abi`, `flutter build li
 | Path | Contents |
 |---|---|
 | `lib/Core/` | state engine, preferences, theme, networking, downloads, offline, services abstraction |
-| `lib/Api/Services/` | AniList, MyAnimeList, Simkl, Kitsu, MangaBaka, Extensions |
+| `lib/Api/Services/` | AniList, MyAnimeList, Simkl, Kitsu, MangaBaka, MangaUpdates, Extensions |
 | `lib/Screen/` | one folder per feature, each a `Screen` plus a `State` file |
 | `lib/Widgets/`, `lib/Utils/` | shared components, extensions, helpers |
 | `assets/translations/` | `app_*.arb` locale files |
