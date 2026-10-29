@@ -1,4 +1,4 @@
- <div align="right">
+<div align="right">
   <details>
     <summary>🌐</summary>
     <div>
