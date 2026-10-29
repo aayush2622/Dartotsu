@@ -62,6 +62,7 @@ class PrefName {
   static const service = Pref('service', 'anilist', PrefLocation.COMMON);
   static const appLocale = Pref('appLocale', 'en', PrefLocation.COMMON);
   static const customPath = Pref('customPath', '', PrefLocation.COMMON);
+  static const windowState = Pref('windowState', '', PrefLocation.COMMON);
   static const hasCompletedOnboarding = Pref(
     'hasCompletedOnboarding',
     false,
