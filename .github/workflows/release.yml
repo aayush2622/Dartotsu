@@ -171,6 +171,16 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-') }}
           make_latest: ${{ contains(github.ref_name, '-') && 'false' || 'true' }}
 
+  update_nix_channels:
+    needs: [publish_release]
+    if: |
+      needs.publish_release.result == 'success' &&
+      startsWith(github.ref, 'refs/tags/') &&
+      (github.event_name == 'push' || inputs.dry_run != true)
+    permissions:
+      contents: write
+    uses: ./.github/workflows/update-nix-channels.yml
+
   post-release-notes:
     runs-on: ubuntu-latest
     timeout-minutes: 20

@@ -1,0 +1,13 @@
+[
+  "dar"
+  "anymex"
+  "sugoireads"
+  "mangayomi"
+  "dartotsu"
+  "aniyomi"
+  "tachiyomi"
+  "mihon"
+  "ireader"
+  "legado"
+  "yuedu"
+]

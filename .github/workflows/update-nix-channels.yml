@@ -1,10 +1,20 @@
 name: Update Nix channels.json
 on:
-  release:
-    types: [published]
-  schedule:
-    - cron: "0 6 * * *"
+  workflow_call:
   workflow_dispatch:
+    inputs:
+      alpha_version:
+        description: Short commit SHA for the alpha channel
+        required: false
+        type: string
+      alpha_url:
+        description: Linux zip URL for the alpha channel
+        required: false
+        type: string
+      alpha_hash:
+        description: SRI hash of the unpacked alpha zip
+        required: false
+        type: string
 
 jobs:
   update-channels:
@@ -21,6 +31,7 @@ jobs:
 
       - name: Fetch latest release zip per channel
         id: releases
+        if: ${{ !github.event.inputs.alpha_url }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -37,10 +48,13 @@ jobs:
           {
             echo "stable_url=$(fetch_zip_url aayush2622/Dartotsu releases/latest)"
             echo "prerelease_url=$(fetch_zip_url aayush2622/Dartotsu releases)"
-            echo "alpha_url=$(fetch_zip_url grayankit/Dartotsu-Downloader releases/latest)"
           } >> "$GITHUB_OUTPUT"
 
       - name: Update channels.json
+        env:
+          ALPHA_VERSION: ${{ github.event.inputs.alpha_version }}
+          ALPHA_URL: ${{ github.event.inputs.alpha_url }}
+          ALPHA_HASH: ${{ github.event.inputs.alpha_hash }}
         run: |
           set -euo pipefail
 
@@ -70,9 +84,27 @@ jobs:
             mv "$tmp" channels.json
           }
 
-          update_channel stable "${{ steps.releases.outputs.stable_url }}"
-          update_channel prerelease "${{ steps.releases.outputs.prerelease_url }}"
-          update_channel alpha "${{ steps.releases.outputs.alpha_url }}"
+          if [ -n "${ALPHA_URL:-}" ] || [ -n "${ALPHA_VERSION:-}" ] || [ -n "${ALPHA_HASH:-}" ]; then
+            if [ -z "${ALPHA_URL:-}" ] || [ -z "${ALPHA_VERSION:-}" ] || [ -z "${ALPHA_HASH:-}" ]; then
+              echo "alpha update requires version, url, and hash" >&2
+              exit 1
+            fi
+            case "$ALPHA_HASH" in
+              sha256-*) ;;
+              *)
+                echo "alpha hash must be an SRI sha256 hash" >&2
+                exit 1
+                ;;
+            esac
+            tmp="$(mktemp)"
+            jq --arg v "$ALPHA_VERSION" --arg u "$ALPHA_URL" --arg h "$ALPHA_HASH" \
+              '.alpha = {version: $v, url: $u, hash: $h}' \
+              channels.json > "$tmp"
+            mv "$tmp" channels.json
+          else
+            update_channel stable "${{ steps.releases.outputs.stable_url }}"
+            update_channel prerelease "${{ steps.releases.outputs.prerelease_url }}"
+          fi
 
       - name: Verify the flake still builds
         run: nix flake check -L --accept-flake-config
