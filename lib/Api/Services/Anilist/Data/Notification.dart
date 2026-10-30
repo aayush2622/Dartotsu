@@ -1,4 +1,5 @@
 import '../../../../Core/Services/ServiceNotification.dart';
+import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
   final type = json['__typename'] as String?;
@@ -8,7 +9,8 @@ ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
   );
 
   String title(Map<String, dynamic>? media) =>
-      (media?['title'] as Map?)?['userPreferred'] as String? ?? 'a title';
+      (media?['title'] as Map?)?['userPreferred'] as String? ??
+      getString.notificationATitle;
   String? cover(Map<String, dynamic>? media) =>
       (media?['coverImage'] as Map?)?['large'] as String?;
   String? avatar(Map<String, dynamic>? user) =>
@@ -27,25 +29,25 @@ ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
       final episode = (json['episode'] as num?)?.toInt();
       return ServiceNotification(
         id: '$id',
-        text: 'Episode $episode of ${title(media)} aired',
+        text: getString.notificationAired('$episode', title(media)),
         imageUrl: cover(media),
         createdAt: createdAt,
         mediaId: (media?['id'] as num?)?.toInt().toString(),
         kind: NotificationKind.airing,
         title: title(media),
-        detail: 'Episode $episode aired',
+        detail: getString.notificationAiredDetail('$episode'),
         mediaIsAnime: true,
       );
     case 'RelatedMediaAdditionNotification':
       return ServiceNotification(
         id: '$id',
-        text: '${title(media)} was added to AniList',
+        text: getString.notificationAdded(title(media)),
         imageUrl: cover(media),
         createdAt: createdAt,
         mediaId: (media?['id'] as num?)?.toInt().toString(),
         kind: NotificationKind.media,
         title: title(media),
-        detail: 'Was added to AniList',
+        detail: getString.notificationAddedDetail,
         mediaIsAnime: isAnime(media),
       );
     case 'FollowingNotification':
@@ -55,7 +57,7 @@ ServiceNotification? parseAnilistNotification(Map<String, dynamic> json) {
     case 'ActivityReplyNotification':
     case 'ActivityLikeNotification':
     case 'ActivityReplyLikeNotification':
-      final name = user?['name'] as String? ?? 'Someone';
+      final name = user?['name'] as String? ?? getString.notificationSomeone;
       final context = (json['context'] as String? ?? '').trim();
       return ServiceNotification(
         id: '$id',

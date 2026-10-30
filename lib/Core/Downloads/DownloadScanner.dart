@@ -176,7 +176,9 @@ class DownloadScanner {
       if (entity is! File) continue;
       if (isVideoFile(entity.path)) videos.add(entity);
       if (isSubtitleFile(entity.path)) subtitles.add(entity);
-      if (isComicArchive(entity.path) || isBookFile(entity.path)) {
+      if (isComicArchive(entity.path) ||
+          isBookFile(entity.path) ||
+          isPdfFile(entity.path)) {
         reading.add(entity);
       }
     }

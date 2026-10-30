@@ -558,7 +558,7 @@ Future<(bool, String)> _testDns(String url) async {
     sw.stop();
     return addrs.isNotEmpty
         ? (true, '${addrs.first} · ${sw.elapsedMilliseconds} ms')
-        : (false, 'No A records returned');
+        : (false, getString.dnsNoRecords);
   } catch (e) {
     sw.stop();
     final msg = e.toString().split('\n').first;

@@ -8,8 +8,6 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image/image.dart' as img;
 
 import '../../Core/State/State.dart';
-import '../../Utils/Functions/RefreshController.dart' show routeObserver;
-import 'GlassSurface.dart';
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Lru.dart';
@@ -80,53 +78,40 @@ _Raw _blur((Uint8List, double) input) {
   final portrait = source.height > source.width;
   var small = img.copyResize(
     source,
-    width: portrait ? 128 : null,
-    height: portrait ? null : 128,
+    width: portrait ? 96 : null,
+    height: portrait ? null : 96,
     interpolation: img.Interpolation.average,
   );
   small = img.gaussianBlur(small, radius: 4);
   if (saturation != 1) small = img.adjustColor(small, saturation: saturation);
-  final rgba = small.convert(numChannels: 4, alpha: 255);
-  return (rgba.width, rgba.height, rgba.getBytes(order: img.ChannelOrder.rgba));
+  var big = img.copyResize(
+    small,
+    width: portrait ? 384 : null,
+    height: portrait ? null : 384,
+    interpolation: img.Interpolation.cubic,
+  );
+  big = img.gaussianBlur(big, radius: 3);
+  final rgba = big.convert(numChannels: 4, alpha: 255);
+  final out = rgba.getBytes(order: img.ChannelOrder.rgba);
+  var seed = 0x2545F491;
+  for (var i = 0; i < out.length; i += 4) {
+    seed = (seed * 1103515245 + 12345) & 0x7fffffff;
+    final n = ((seed >> 16) & 3) - 1;
+    out[i] = (out[i] + n).clamp(0, 255);
+    out[i + 1] = (out[i + 1] + n).clamp(0, 255);
+    out[i + 2] = (out[i + 2] + n).clamp(0, 255);
+  }
+  return (rgba.width, rgba.height, out);
 }
 
-class _BlurredImageState extends State<BlurredImage> with RouteAware {
+class _BlurredImageState extends State<BlurredImage> {
   final _image = Live<ui.Image?>(null);
-  ModalRoute<dynamic>? _route;
   int _run = 0;
 
   @override
   void initState() {
     super.initState();
     _start();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (route != null && route != _route) {
-      routeObserver.unsubscribe(this);
-      _route = route;
-      routeObserver.subscribe(this, route);
-    }
-  }
-
-  @override
-  void didPopNext() => _publish();
-
-  @override
-  void didPush() => _publish();
-
-  void _publish() {
-    final image = _image.value;
-    if (image != null) GlassField.show(image);
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
   }
 
   @override
@@ -148,7 +133,6 @@ class _BlurredImageState extends State<BlurredImage> with RouteAware {
       }
       if (mounted && run == _run && out != null) {
         _image.value = out;
-        if (_route?.isCurrent ?? true) GlassField.show(out);
       }
     }());
   }

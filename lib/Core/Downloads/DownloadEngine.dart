@@ -21,6 +21,7 @@ import 'Archives.dart';
 import 'BookText.dart';
 import 'ChapterFetcher.dart';
 import 'DownloadPaths.dart';
+import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
 import 'DownloadQueue.dart';
 import 'DownloadScanner.dart';
@@ -239,6 +240,11 @@ class DownloadEngine extends AppController {
         task.kind != DownloadKind.chapter ||
         task.isNovel) {
       return null;
+    }
+    if (isPdfFile(path)) {
+      if (!File(path).existsSync()) return null;
+      final pages = await renderPdf(path, archiveCache(path));
+      return pages.isEmpty ? null : [for (final f in pages) PageUrl(f)];
     }
     if (isComicArchive(path)) {
       if (!File(path).existsSync()) return null;

@@ -83,6 +83,7 @@ dependencies:
       path: ./libs/universal/media_kit_libs_video
 
   window_manager: ^0.5.2
+  screen_retriever: ^0.2.2
   dbus: ^0.7.15
   permission_handler: ^13.0.2
   flutter_local_notifications: ^22.3.3
@@ -99,10 +100,8 @@ dependencies:
   win32: ^6.4.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
-  dart_discord_presence:
-    git:
-      url: https://github.com/aayush2622/dart_discord_presence.git
-      ref: c464428e44fb319166bd9c4d47a58ff7d86749c0
+  dart_discord_presence: ^1.2.2
+
 
   # Miscellaneous
   receive_sharing_intent: ^1.9.0
@@ -131,6 +130,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.4.2
   local_auth: ^3.0.2
+  pdfrx: ^2.11.0
 
 # Development dependencies
 dev_dependencies:

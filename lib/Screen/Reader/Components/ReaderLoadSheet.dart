@@ -1,4 +1,7 @@
+import '../../../Core/Downloads/Archives.dart';
 import '../../../Core/Downloads/DownloadEngine.dart';
+import '../../../Core/Downloads/DownloadPaths.dart';
+import '../../../Core/Downloads/PdfPages.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +38,13 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
     final request = widget.request;
     try {
       final unit = request.units[request.index];
-      final local = request.online
+      final file = request.file;
+      final local = file != null && isPdfFile(file)
+          ? [
+              for (final f in await renderPdf(file, archiveCache(file)))
+                PageUrl(f),
+            ]
+          : request.online
           ? null
           : await find<DownloadEngine>().localPages(
               request.service.id,

@@ -133,10 +133,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appLockDelay => 'Lock when idle';
 
   @override
-  String get appLockDelayDesc =>
-      'How long Dartotsu can stay in the background before asking again';
-
-  @override
   String get appLockDelayAlways => 'Always';
 
   @override
@@ -279,9 +275,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get pickColor => 'Pick a color';
 
   @override
-  String get colorPickerDefault => 'Default';
-
-  @override
   String get colorPickerCustom => 'Custom';
 
   @override
@@ -328,12 +321,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsUpdates => 'Updates';
 
   @override
-  String get settingsUpdatesDesc => 'Release channel and checks';
-
-  @override
-  String get settingsAboutDesc => 'Version, links, support';
-
-  @override
   String get amoledBlack => 'AMOLED black';
 
   @override
@@ -358,10 +345,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsAddons => 'Addons';
-
-  @override
-  String get settingsAddonsDesc =>
-      'Optional components such as the torrent server';
 
   @override
   String get customPath => 'Custom storage path';
@@ -407,9 +390,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sectionStorage => 'Storage';
-
-  @override
-  String get sectionBackup => 'Backup';
 
   @override
   String get sectionManagers => 'Managers';
@@ -674,9 +654,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get newsCouldntLoad => 'Couldn\'t load the news';
-
-  @override
-  String get seeAll => 'See all';
 
   @override
   String get logFileCopied => 'Log path copied';
@@ -971,9 +948,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionAppInfo => 'App Info';
 
   @override
-  String get sectionCache => 'Cache';
-
-  @override
   String get sectionRequests => 'Requests';
 
   @override
@@ -1048,9 +1022,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get permGrant => 'Allow';
-
-  @override
-  String get permGranted => 'Allowed';
 
   @override
   String get linkOpenInApp => 'Open links in Dartotsu';
@@ -1263,13 +1234,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get discordTokenNotSet => 'Not set. Tap to add.';
 
   @override
-  String get discordTokenPrompt =>
-      'Paste the token of the Discord account to show the presence on. It stays on this device.';
-
-  @override
-  String get discordTokenHint => 'Token';
-
-  @override
   String get discordTokenSavedSnack => 'Discord token saved';
 
   @override
@@ -1328,10 +1292,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
 
   @override
-  String get mangaUpdatesLoginFailed =>
-      'MangaUpdates login failed. Check your username and password.';
-
-  @override
   String get mangaUpdatesProfile => 'MangaUpdates profile';
 
   @override
@@ -1344,16 +1304,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
 
   @override
-  String get mangaUpdatesAccountOptions => 'MangaUpdates account options';
-
-  @override
   String get usernameOnly => 'Username';
 
   @override
   String get releases => 'Releases';
-
-  @override
-  String get scanlationGroups => 'Scanlation Groups';
 
   @override
   String get artistsLabel => 'Artists';
@@ -2263,10 +2217,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get accountOptions => 'Account options';
 
   @override
-  String get accountOptionsDesc =>
-      'Names, score format, list order, notifications and more';
-
-  @override
   String get anilistAccountOptions => 'AniList account options';
 
   @override
@@ -2933,11 +2883,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get resumeRemove => 'Remove from resume';
-
-  @override
-  String resumeMissing(String title) {
-    return 'Couldn\'t find $title in this source';
-  }
 
   @override
   String resumeAt(String time) {
@@ -3884,12 +3829,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get themesTitle => 'Openings & endings';
 
   @override
-  String get themesOpening => 'Opening';
-
-  @override
-  String get themesEnding => 'Ending';
-
-  @override
   String get themesPlayVideo => 'Play video';
 
   @override
@@ -3903,27 +3842,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get themesVersions => 'Versions';
-
-  @override
-  String get muTitle => 'MangaUpdates';
-
-  @override
-  String get muReleases => 'Recent releases';
-
-  @override
-  String get muNoReleases => 'No recent releases';
-
-  @override
-  String get muLicensed => 'Licensed';
-
-  @override
-  String get muOpen => 'View on MangaUpdates';
-
-  @override
-  String get muCredit => 'Data from MangaUpdates';
-
-  @override
-  String get muPublishers => 'Publishers';
 
   @override
   String get sauceTitle => 'Find the source';
@@ -3942,9 +3860,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sauceKeyDesc => 'Get a free key at saucenao.com/user.php';
 
   @override
-  String get sauceSearchTitle => 'Search this title';
-
-  @override
   String get sauceOpen => 'Open source';
 
   @override
@@ -3955,9 +3870,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sauceTooltip => 'Find the source of a manga page or artwork';
-
-  @override
-  String get sauceLowMatch => 'Low match';
 
   @override
   String get trendzTitle => 'Anime charts';
@@ -3981,9 +3893,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get trendzNew => 'NEW';
 
   @override
-  String get trendzSearch => 'Search this title';
-
-  @override
   String get trendzEmpty => 'The chart is empty';
 
   @override
@@ -3991,12 +3900,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareCardList => 'Share list card';
-
-  @override
-  String get muNotFound => 'No MangaUpdates match for this title';
-
-  @override
-  String get shareCardWorking => 'Making the card…';
 
   @override
   String get shareCardSaved => 'Card saved';
@@ -4013,16 +3916,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String themesEpisodes(String eps) {
     return 'Episodes $eps';
-  }
-
-  @override
-  String muLatest(String count) {
-    return 'Chapter $count';
-  }
-
-  @override
-  String muRating(String rating, String votes) {
-    return '$rating from $votes votes';
   }
 
   @override
@@ -4048,11 +3941,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String trendzWeeks(String count) {
     return '$count weeks in the top ten';
-  }
-
-  @override
-  String shareCardEntries(String count) {
-    return '$count titles';
   }
 
   @override
@@ -4355,7 +4243,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get settingsWatchDesc =>
-      'Episode lists, source matching and episode details';
+      'Anime, manga and novel options, local play and shared defaults';
 
   @override
   String get watchSettingsLayout => 'Episode list';
@@ -4675,9 +4563,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get watchCookiesCleared => 'Cookies cleared';
 
   @override
-  String get watchResults => 'Results';
-
-  @override
   String get watchMetaSource => 'Episode details from';
 
   @override
@@ -4685,13 +4570,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get watchMetaOff => 'Off';
-
-  @override
-  String get settingsPlayer => 'Player';
-
-  @override
-  String get settingsPlayerDesc =>
-      'Playback, subtitles, shaders, mpv and opening files';
 
   @override
   String get playerSettingsTitle => 'Player settings';
@@ -4716,9 +4594,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get playerSectionMpv => 'mpv';
-
-  @override
-  String get playerSectionOpen => 'Open media';
 
   @override
   String get playerSpeed => 'Playback speed';
@@ -5275,12 +5150,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerFullscreen => 'Fullscreen';
 
   @override
-  String get settingsReader => 'Reader';
-
-  @override
-  String get settingsReaderDesc => 'Manga, manhwa and novel reading';
-
-  @override
   String get readerChapters => 'Chapters';
 
   @override
@@ -5306,7 +5175,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readerOpenBookDesc =>
-      'Read an epub from your files in the novel reader';
+      'Read an epub (novel reader) or a PDF (manga reader) from your files';
 
   @override
   String get readerNoText => 'This chapter has no text';
@@ -5329,9 +5198,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readerSectionNovel => 'Novel';
-
-  @override
-  String get readerSectionReset => 'Reset';
 
   @override
   String get readerMode => 'Reading mode';
@@ -5487,10 +5353,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
-
-  @override
-  String get readerFilterQualityDesc =>
-      'Resampling quality used when scaling manga pages';
 
   @override
   String get readerDim => 'Dim';
@@ -5711,9 +5573,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get trackProgressRemember => 'Remember my choice';
-
-  @override
   String get trackProgressRememberSeries => 'Remember for this series';
 
   @override
@@ -5747,9 +5606,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trackProgressAlways => 'Always';
-
-  @override
-  String get trackProgressNever => 'Never';
 
   @override
   String get dantotsuImport => 'Import from Dantotsu';
@@ -5860,38 +5716,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get togetherName => 'Your name';
 
   @override
-  String get togetherRoom => 'Room';
-
-  @override
-  String get togetherNewRoom => 'New random room';
-
-  @override
-  String get togetherServer => 'Server';
-
-  @override
-  String get togetherPort => 'Port';
-
-  @override
-  String get togetherPassword => 'Server password (optional)';
-
-  @override
-  String get togetherPublicNote =>
-      'Public servers have no password and rooms are open. Use a long room name and share it only with friends.';
-
-  @override
-  String get togetherConnect => 'Connect';
-
-  @override
   String get togetherConnecting => 'Connecting…';
 
   @override
   String get togetherLeave => 'Leave room';
-
-  @override
-  String get togetherLeftRoom => 'You left the room';
-
-  @override
-  String get togetherReady => 'Ready';
 
   @override
   String get togetherYou => 'You';
@@ -5915,9 +5743,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get togetherInviteCopied => 'Server and room copied';
-
-  @override
-  String get togetherFileMismatch => 'Different file or length';
 
   @override
   String get togetherConnectionLost => 'Connection lost';
@@ -5958,61 +5783,20 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String togetherOtherService(String service) {
-    return 'The host is on $service, syncing is off';
-  }
-
-  @override
   String get togetherFollowFailed =>
       'Couldn\'t open the host\'s episode. Open it yourself.';
-
-  @override
-  String get togetherHostRole => 'Host a room';
 
   @override
   String get togetherJoinRole => 'Join a room';
 
   @override
-  String get togetherFollow => 'Follow the host\'s episode';
-
-  @override
-  String get togetherFollowDesc =>
-      'Opens and switches episodes automatically when you use the same service';
-
-  @override
   String get togetherOpenHost => 'Open host\'s episode';
-
-  @override
-  String togetherHostWatching(String title) {
-    return 'Host: $title';
-  }
-
-  @override
-  String get togetherLiveChat => 'Live chat';
 
   @override
   String get togetherShowChat => 'Show live chat';
 
   @override
   String get togetherWaitingHost => 'Waiting for the host to start an episode';
-
-  @override
-  String get togetherDifferentService =>
-      'The host is on another service, syncing is off';
-
-  @override
-  String get togetherNoSource =>
-      'Install an anime extension to follow the host';
-
-  @override
-  String togetherNoMatch(String source) {
-    return '$source has no match for the host\'s title';
-  }
-
-  @override
-  String togetherNoEpisode(String source) {
-    return '$source doesn\'t have the host\'s episode';
-  }
 
   @override
   String get togetherRoomLink => 'Room link';
@@ -6022,9 +5806,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get togetherHostClosed => 'The host closed the room';
-
-  @override
-  String get togetherHostBadge => 'Host';
 
   @override
   String get togetherNowPlaying => 'Now playing';
@@ -6049,15 +5830,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get togetherSettingsDesc => 'Join a friend\'s room with a link';
-
-  @override
-  String get togetherNoPlayer =>
-      'Open an episode and it syncs with the room automatically. Chat and the member list work right now.';
-
-  @override
-  String togetherWatching(String name, String file) {
-    return '$name is watching $file';
-  }
 
   @override
   String get novelBilingual => 'Show original and translation';
@@ -6092,9 +5864,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get novelTranslateShowOriginal => 'Show original';
-
-  @override
-  String get novelTranslating => 'Translating…';
 
   @override
   String novelTranslateFailed(String error) {
@@ -6329,9 +6098,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playerPip => 'Picture in picture';
 
   @override
-  String get playerPipRestore => 'Back to the player';
-
-  @override
   String get playerAutoPip => 'Picture in picture on leave';
 
   @override
@@ -6380,9 +6146,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get playerPauseOnBlurDesc =>
       'Pause while the app is covered, like the notification panel, and resume when you come back';
-
-  @override
-  String get playerHoldSpeed => 'Hold speed';
 
   @override
   String get playerAudioOutput => 'Audio output';
@@ -6725,12 +6488,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Offline mode is on. Changes are saved here and sent when you are back online.';
 
   @override
-  String get offlineLost => 'You\'re offline. Changes are saved on this device';
-
-  @override
-  String get offlineBack => 'Back online. Syncing your changes';
-
-  @override
   String get offlineSaved =>
       'Saved on this device, it will sync when you are online';
 
@@ -7051,9 +6808,6 @@ class AppLocalizationsEn extends AppLocalizations {
       'Mirror your list across services, or let whichever is ahead win.';
 
   @override
-  String get onboardingThemeShape => 'Colours';
-
-  @override
   String get onboardingServices => 'Works with';
 
   @override
@@ -7187,9 +6941,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get sourceMissing => 'Source not found';
-
-  @override
   String sourceMissingDesc(String source) {
     return '$source isn\'t installed in this extension service';
   }
@@ -7314,4 +7065,376 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get updateTryAgain => 'Try again';
+
+  @override
+  String get settingsNotifications => 'Notifications';
+
+  @override
+  String get settingsNotificationsDesc =>
+      'Alerts for your lists, new episodes and chapters, and comment replies';
+
+  @override
+  String get settingsAboutUpdates => 'About & updates';
+
+  @override
+  String get settingsAboutUpdatesDesc =>
+      'App updates, version, logs, links and support';
+
+  @override
+  String get settingsGroupAccount => 'Your account';
+
+  @override
+  String get settingsGroupContent => 'Content';
+
+  @override
+  String get settingsGroupApp => 'App';
+
+  @override
+  String get settingsAnimeDesc =>
+      'Player, subtitles, skipping, episode list and episode details';
+
+  @override
+  String get settingsMangaDesc =>
+      'Reader mode, controls, display and chapter tracking';
+
+  @override
+  String get settingsNovelDesc =>
+      'Text, page turning, translation and read aloud';
+
+  @override
+  String get settingsLocalPlay => 'Local play';
+
+  @override
+  String get settingsLocalPlayDesc =>
+      'Play files, folders, network streams and torrents, or open a book';
+
+  @override
+  String get settingsLocalPlayVideo => 'Video';
+
+  @override
+  String get settingsLocalPlayBooks => 'Books';
+
+  @override
+  String get settingsWatchSections => 'Sections';
+
+  @override
+  String get settingsSectionLists => 'Episode and chapter lists';
+
+  @override
+  String get settingsSectionProgress => 'Progress tracking';
+
+  @override
+  String get updateChannelDesc =>
+      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+
+  @override
+  String get checkNowDesc => 'Look for a newer version right away';
+
+  @override
+  String get generalSectionBasics => 'Language & behaviour';
+
+  @override
+  String get generalSectionSecurity => 'Security';
+
+  @override
+  String get generalSectionPrivacy => 'Privacy';
+
+  @override
+  String notificationsOtherService(String service) {
+    return 'Switch to $service to open this';
+  }
+
+  @override
+  String get secPlayerPlayback =>
+      'Default speed, auto play, video fit, orientation and picture in picture';
+
+  @override
+  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+
+  @override
+  String get secPlayerControls =>
+      'Swipe, hold and tap gestures and seek preview';
+
+  @override
+  String get secPlayerSubtitles =>
+      'Languages, appearance and subtitle rendering';
+
+  @override
+  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+
+  @override
+  String get secPlayerEngine =>
+      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+
+  @override
+  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+
+  @override
+  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+
+  @override
+  String get secProgress =>
+      'When your watched or read progress is saved to your list';
+
+  @override
+  String get secAnimeDetails =>
+      'Where episode titles, thumbnails and summaries come from';
+
+  @override
+  String get secReaderReading =>
+      'Reading mode, page turning, zoom and next chapter';
+
+  @override
+  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+
+  @override
+  String get secReaderDisplay =>
+      'Background, brightness, fullscreen and page number';
+
+  @override
+  String get secNovelText => 'Font, size, spacing, margins and page turning';
+
+  @override
+  String get secNovelTranslate => 'Translate chapters while you read';
+
+  @override
+  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+
+  @override
+  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+
+  @override
+  String get layoutTitle => 'Layout';
+
+  @override
+  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+
+  @override
+  String get layoutHint =>
+      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+
+  @override
+  String layoutDropInto(String zone) {
+    return 'Drop in: $zone';
+  }
+
+  @override
+  String layoutCutting(String name) {
+    return 'Moving $name. Press a paste button to place it';
+  }
+
+  @override
+  String get layoutTitleFixed => 'Title';
+
+  @override
+  String get layoutZoneTopStart => 'Top bar, before the title';
+
+  @override
+  String get layoutZoneTopEnd => 'Top bar, after the title';
+
+  @override
+  String get layoutZoneBottomStart => 'Bottom bar, left';
+
+  @override
+  String get layoutZoneBottomEnd => 'Bottom bar, right';
+
+  @override
+  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+
+  @override
+  String get layoutZoneOverflow => 'Hidden: in the more menu';
+
+  @override
+  String get layoutEmptyZone => 'Drop buttons here';
+
+  @override
+  String get layoutCut => 'Cut';
+
+  @override
+  String get layoutPaste => 'Paste here';
+
+  @override
+  String get layoutHide => 'Hide';
+
+  @override
+  String layoutMoveTo(String zone) {
+    return 'Move to $zone';
+  }
+
+  @override
+  String get layoutReset => 'Reset to default';
+
+  @override
+  String get layoutMore => 'More';
+
+  @override
+  String get sourceWhyAction => 'Why no alert?';
+
+  @override
+  String get sourceWhyStatus => 'Status';
+
+  @override
+  String get sourceWhyLastCheck => 'Last checked';
+
+  @override
+  String get sourceWhyNever => 'Not yet';
+
+  @override
+  String get sourceWhyNextCheck => 'Next check';
+
+  @override
+  String get sourceWhyNewest => 'Newest at the source';
+
+  @override
+  String get sourceWhyProgress => 'Your progress';
+
+  @override
+  String get sourceWhyListStatus => 'List status';
+
+  @override
+  String get sourceWhyFailures => 'Failed checks in a row';
+
+  @override
+  String get sourceWhyLastRelease => 'Last new release seen';
+
+  @override
+  String get sourceWhyVerdictNew =>
+      'A new release appears here as soon as the source lists it and the next check runs.';
+
+  @override
+  String get sourceWhyVerdictAhead =>
+      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+
+  @override
+  String get sourceWhyVerdictSkipped =>
+      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+
+  @override
+  String get sourceWhyVerdictBroken =>
+      'The source can\'t be reached or has been removed, so nothing is being checked.';
+
+  @override
+  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+
+  @override
+  String get externalPlayerTitle => 'Open stream elsewhere';
+
+  @override
+  String get externalCopyUrl => 'Copy stream link';
+
+  @override
+  String get externalCopied => 'Stream link copied';
+
+  @override
+  String get externalChooser => 'Open in another app';
+
+  @override
+  String get externalVlc => 'Open in VLC';
+
+  @override
+  String get externalMpv => 'Open in mpv';
+
+  @override
+  String get externalFailed =>
+      'Couldn\'t open the stream. Is the player installed?';
+
+  @override
+  String get addonInstalled => 'Installed';
+
+  @override
+  String get loadFailedActivity => 'Couldn\'t load activity';
+
+  @override
+  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+
+  @override
+  String get loadFailedStats => 'Couldn\'t load stats';
+
+  @override
+  String get loadFailedReplies => 'Couldn\'t load replies';
+
+  @override
+  String get cantBeUndone => 'This can\'t be undone.';
+
+  @override
+  String get searchTags => 'Search tags';
+
+  @override
+  String get spoilerTapToView => ' Spoiler, tap to view ';
+
+  @override
+  String get mediaVideo => 'Video';
+
+  @override
+  String get notificationSomeone => 'Someone';
+
+  @override
+  String get notificationATitle => 'a title';
+
+  @override
+  String get notificationAddedDetail => 'Was added to AniList';
+
+  @override
+  String get updateNoReleases => 'No releases found';
+
+  @override
+  String get updateInvalidResponse => 'Invalid update response';
+
+  @override
+  String get commentsRateLimited => 'Rate limited';
+
+  @override
+  String get commentsConnectFailed => 'Failed to connect';
+
+  @override
+  String get dnsNoRecords => 'No A records returned';
+
+  @override
+  String get importTokenRejected => 'Token rejected';
+
+  @override
+  String get developerRoleLead => 'Lead Developer';
+
+  @override
+  String get developerRoleModerator => 'Discord Moderator';
+
+  @override
+  String extensionManagerTitle(String type) {
+    return '$type manager';
+  }
+
+  @override
+  String extensionsOfType(String type) {
+    return '$type extensions';
+  }
+
+  @override
+  String extensionSettingsTitle(String name) {
+    return '$name settings';
+  }
+
+  @override
+  String extensionNoSettings(String name) {
+    return '$name doesn\'t provide any settings.';
+  }
+
+  @override
+  String notificationAired(String episode, String title) {
+    return 'Episode $episode of $title aired';
+  }
+
+  @override
+  String notificationAiredDetail(String episode) {
+    return 'Episode $episode aired';
+  }
+
+  @override
+  String notificationAdded(String title) {
+    return '$title was added to AniList';
+  }
+
+  @override
+  String updateNotFound(String message) {
+    return 'Update server couldn\'t find that release: $message';
+  }
 }

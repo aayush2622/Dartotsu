@@ -1,71 +1,47 @@
 {
   "appName": "Dartotsu",
-  "@appName": {},
   "appTagline": "The NEW Best App For\nTracking Anime & Manga",
-  "@appTagline": {},
-
   "anilist": "AniList",
-  "@anilist": {},
   "mal": "MyAnimeList",
-  "@mal": {},
   "simkl": "Simkl",
-  "@simkl": {},
   "kitsu": "Kitsu",
-  "@kitsu": {},
   "mangaBaka": "MangaBaka",
-  "@mangaBaka": {},
   "mangaUpdates": "MangaUpdates",
-  "@mangaUpdates": {},
   "discord": "Discord",
-  "@discord": {},
-
   "loadMore": "Load more",
-  "@loadMore": {},
-
   "login": "Login",
-  "@login": {},
   "continueAsGuest": "Continue as guest",
-  "@continueAsGuest": {},
   "getStarted": "Get Started",
-  "@getStarted": {},
   "loginWithToken": "Login with token",
-  "@loginWithToken": {},
   "pasteTokenHint": "Paste your access token",
-  "@pasteTokenHint": {},
   "loginTo": "Login to {service}",
   "@loginTo": {
-    "placeholders": { "service": { "type": "String" } }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
-
   "settings": "Settings",
-  "@settings": {},
   "account": "Account",
-  "@account": {},
   "about": "About",
-  "@about": {},
   "language": "Language",
-  "@language": {},
   "animationSpeed": "Animations",
-  "@animationSpeed": {},
   "animationSpeedDesc": "Speed of transitions and entrance effects across the app",
-  "@animationSpeedDesc": {},
   "animationSpeedOff": "Off",
-  "@animationSpeedOff": {},
-
   "extension": "{count, plural, =1 {Extension} other {Extensions}}",
   "@extension": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "unknownSource": "Unknown Source",
-  "@unknownSource": {},
   "install": "Install",
-  "@install": {},
   "update": "Update",
-  "@update": {},
   "uninstall": "Uninstall",
-  "@uninstall": {},
   "updateInstallCancelled": "Install cancelled. If Android said the app conflicts with the installed one, the signature differs: uninstall the current version first, then install the update",
-  "@updateInstallCancelled": {},
   "updateInstallFailed": "Update failed: {error}",
   "@updateInstallFailed": {
     "placeholders": {
@@ -75,23 +51,13 @@
     }
   },
   "appLock": "App lock",
-  "@appLock": {},
   "appLockDesc": "Ask for a passcode when the app opens or comes back after a while",
-  "@appLockDesc": {},
   "appLockBiometric": "Unlock with biometrics",
-  "@appLockBiometric": {},
   "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
-  "@appLockBiometricDesc": {},
   "appLockBiometricReason": "Unlock Dartotsu",
-  "@appLockBiometricReason": {},
   "appLockDelay": "Lock when idle",
-  "@appLockDelay": {},
-  "appLockDelayDesc": "How long Dartotsu can stay in the background before asking again",
-  "@appLockDelayDesc": {},
   "appLockDelayAlways": "Always",
-  "@appLockDelayAlways": {},
   "appLockDelayNever": "Never",
-  "@appLockDelayNever": {},
   "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
   "@appLockDelayAfter": {
     "placeholders": {
@@ -101,11 +67,8 @@
     }
   },
   "appLockUseBiometric": "Use biometrics",
-  "@appLockUseBiometric": {},
   "appLockUnlock": "Enter your passcode",
-  "@appLockUnlock": {},
   "appLockWrong": "Wrong passcode",
-  "@appLockWrong": {},
   "appLockWait": "Too many tries, wait {seconds}s",
   "@appLockWait": {
     "placeholders": {
@@ -115,273 +78,196 @@
     }
   },
   "appLockNew": "Choose a passcode",
-  "@appLockNew": {},
   "appLockNewHint": "4 to 8 digits",
-  "@appLockNewHint": {},
   "appLockConfirm": "Enter it again",
-  "@appLockConfirm": {},
   "appLockMismatch": "The passcodes do not match",
-  "@appLockMismatch": {},
   "appLockOn": "Passcode set",
-  "@appLockOn": {},
   "appLockRemoveTitle": "Enter your passcode to turn the lock off",
-  "@appLockRemoveTitle": {},
   "installFailed": "Install failed",
-  "@installFailed": {},
   "updateFailed": "Update failed",
-  "@updateFailed": {},
   "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
-  "@extensionUpdates": {"placeholders": {"count": {"type": "int"}}},
+  "@extensionUpdates": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "updateAll": "Update all",
-  "@updateAll": {},
   "extensionsUpdated": "{done} of {total} extensions updated",
-  "@extensionsUpdated": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@extensionsUpdated": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "updateConflictTitle": "Update not installed",
-  "@updateConflictTitle": {},
   "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
-  "@updateConflictBody": {"placeholders": {"names": {"type": "String"}}},
+  "@updateConflictBody": {
+    "placeholders": {
+      "names": {
+        "type": "String"
+      }
+    }
+  },
   "updateConflictAction": "Uninstall and reinstall",
-  "@updateConflictAction": {},
   "noSourceSettings": "Source doesn't have any settings",
-  "@noSourceSettings": {},
   "addPluginRepository": "Add Plugin Repository",
-  "@addPluginRepository": {},
   "pluginIndexUrlHint": "Plugin index URL",
-  "@pluginIndexUrlHint": {},
   "addRepository": "Add Repository",
-  "@addRepository": {},
   "pluginRepoUpdated": "Plugin repository updated",
-  "@pluginRepoUpdated": {},
   "pluginRepoUpdateFailed": "Failed to refresh plugin repository",
-  "@pluginRepoUpdateFailed": {},
-
   "ok": "OK",
-  "@ok": {},
   "cancel": "Cancel",
-  "@cancel": {},
   "yes": "Yes",
-  "@yes": {},
   "no": "No",
-  "@no": {},
   "save": "Save",
-  "@save": {},
   "reset": "Reset",
-  "@reset": {},
   "clear": "Clear",
-  "@clear": {},
   "test": "Test",
-  "@test": {},
   "testing": "Testing…",
-  "@testing": {},
   "resolving": "Resolving…",
-  "@resolving": {},
   "none": "None",
-  "@none": {},
-
   "selectMediaService": "Select Media Service",
-  "@selectMediaService": {},
   "pickColor": "Pick a color",
-  "@pickColor": {},
-  "colorPickerDefault": "Default",
-  "@colorPickerDefault": {},
   "colorPickerCustom": "Custom",
-  "@colorPickerCustom": {},
   "colorPickerTransparent": "Transparent",
-  "@colorPickerTransparent": {},
-
   "ltr": "Left To Right",
-  "@ltr": {},
-
   "searchSettings": "Search settings",
-  "@searchSettings": {},
   "nothingMatches": "Nothing matches \"{query}\"",
   "@nothingMatches": {
-    "placeholders": { "query": { "type": "String" } }
+    "placeholders": {
+      "query": {
+        "type": "String"
+      }
+    }
   },
   "searchCategory": "Search {category}",
   "@searchCategory": {
-    "placeholders": { "category": { "type": "String" } }
+    "placeholders": {
+      "category": {
+        "type": "String"
+      }
+    }
   },
-
   "settingsAppearance": "Appearance",
-  "@settingsAppearance": {},
   "settingsAppearanceDesc": "Theme, colours, glass mode",
-  "@settingsAppearanceDesc": {},
   "settingsGeneral": "General",
-  "@settingsGeneral": {},
   "settingsGeneralDesc": "Language and behaviour",
-  "@settingsGeneralDesc": {},
   "settingsNetwork": "Network",
-  "@settingsNetwork": {},
   "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
-  "@settingsNetworkDesc": {},
   "settingsAccountDesc": "Tracking service and sign-in",
-  "@settingsAccountDesc": {},
   "settingsUpdates": "Updates",
-  "@settingsUpdates": {},
-  "settingsUpdatesDesc": "Release channel and checks",
-  "@settingsUpdatesDesc": {},
-  "settingsAboutDesc": "Version, links, support",
-  "@settingsAboutDesc": {},
-
   "amoledBlack": "AMOLED black",
-  "@amoledBlack": {},
   "amoledBlackDesc": "Pure black surfaces on dark mode",
-  "@amoledBlackDesc": {},
   "glassMode": "Glass mode",
-  "@glassMode": {},
   "glassModeDesc": "Frosted surfaces over your library art",
-  "@glassModeDesc": {},
   "shelfFrame": "Frame around sections",
-  "@shelfFrame": {},
   "shelfFrameDesc": "Show a card behind each shelf, or let the rows sit directly on the page",
-  "@shelfFrameDesc": {},
   "settingsExtensionsDesc": "Source managers, repositories and extension options",
-  "@settingsExtensionsDesc": {},
   "settingsAddons": "Addons",
-  "@settingsAddons": {},
-  "settingsAddonsDesc": "Optional components such as the torrent server",
-  "@settingsAddonsDesc": {},
   "customPath": "Custom storage path",
-  "@customPath": {},
   "customPathDesc": "Where app data is kept. Long-press to reset",
-  "@customPathDesc": {},
   "selectDirectory": "Select directory",
-  "@selectDirectory": {},
   "differentCacheManager": "Alternative image cache",
-  "@differentCacheManager": {},
   "differentCacheManagerDesc": "Use a different cache manager for images",
-  "@differentCacheManagerDesc": {},
   "backupAndRestore": "Backup and restore",
-  "@backupAndRestore": {},
   "backupAndRestoreDesc": "Save or load your preferences",
-  "@backupAndRestoreDesc": {},
   "backup": "Backup",
-  "@backup": {},
   "restore": "Restore",
-  "@restore": {},
   "loadExtensionsIcon": "Load extension icons",
-  "@loadExtensionsIcon": {},
   "autoUpdateRuntimes": "Update extension runtimes automatically",
-  "@autoUpdateRuntimes": {},
   "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
-  "@autoUpdateRuntimesDesc": {},
   "loadExtensionsIconDesc": "Show source icons in the extension lists",
-  "@loadExtensionsIconDesc": {},
   "sectionStorage": "Storage",
-  "@sectionStorage": {},
-  "sectionBackup": "Backup",
-  "@sectionBackup": {},
   "sectionManagers": "Managers",
-  "@sectionManagers": {},
   "sectionOptions": "Options",
-  "@sectionOptions": {},
   "backupTabBackup": "Back up",
-  "@backupTabBackup": {},
   "backupTabRestore": "Restore",
-  "@backupTabRestore": {},
   "backupSummary": "{keys} settings in {categories} categories",
   "@backupSummary": {
-    "placeholders": {"keys": {}, "categories": {}}
+    "placeholders": {
+      "keys": {},
+      "categories": {}
+    }
   },
   "backupLastBackup": "Last backup {time}",
   "@backupLastBackup": {
-    "placeholders": {"time": {}}
+    "placeholders": {
+      "time": {}
+    }
   },
   "backupNever": "No backup yet",
-  "@backupNever": {},
   "backupSelectAll": "Select all",
-  "@backupSelectAll": {},
   "backupClearAll": "Clear",
-  "@backupClearAll": {},
   "backupKeys": "{count} settings",
   "@backupKeys": {
-    "placeholders": {"count": {}}
+    "placeholders": {
+      "count": {}
+    }
   },
   "backupPassword": "Password (optional)",
-  "@backupPassword": {},
   "backupPasswordHint": "Leave empty to use the default",
-  "@backupPasswordHint": {},
   "backupSensitive": "Includes login tokens. Keep this file private",
-  "@backupSensitive": {},
   "backupCreate": "Create backup",
-  "@backupCreate": {},
   "backupSaved": "Backup saved to {name}",
   "@backupSaved": {
-    "placeholders": {"name": {}}
+    "placeholders": {
+      "name": {}
+    }
   },
   "backupFailed": "Backup failed: {error}",
   "@backupFailed": {
-    "placeholders": {"error": {}}
+    "placeholders": {
+      "error": {}
+    }
   },
   "backupPickFile": "Choose a backup file",
-  "@backupPickFile": {},
   "backupPickFileDesc": "Pick a .json file made by Dartotsu",
-  "@backupPickFileDesc": {},
   "backupChooseAnother": "Choose another file",
-  "@backupChooseAnother": {},
   "backupCreatedAt": "Created",
-  "@backupCreatedAt": {},
   "backupAppVersion": "App version",
-  "@backupAppVersion": {},
   "backupDevice": "Device",
-  "@backupDevice": {},
   "backupAccounts": "Accounts",
-  "@backupAccounts": {},
   "backupSize": "Size",
-  "@backupSize": {},
   "backupEncrypted": "Password protected",
-  "@backupEncrypted": {},
   "backupUnlock": "Unlock",
-  "@backupUnlock": {},
   "backupWrongPassword": "Could not read this file. Check the password",
-  "@backupWrongPassword": {},
   "backupRestoreSelected": "Restore selected",
-  "@backupRestoreSelected": {},
   "backupRestoreConfirm": "Restore {count} settings? Existing values in these categories are overwritten.",
   "@backupRestoreConfirm": {
-    "placeholders": {"count": {}}
+    "placeholders": {
+      "count": {}
+    }
   },
   "backupRestored": "Restored. Restart the app to apply everything",
-  "@backupRestored": {},
   "backupRestoreFailed": "Restore failed: {error}",
   "@backupRestoreFailed": {
-    "placeholders": {"error": {}}
+    "placeholders": {
+      "error": {}
+    }
   },
   "backupSelectOne": "Select at least one category",
-  "@backupSelectOne": {},
   "backupCatTheme": "Appearance",
-  "@backupCatTheme": {},
   "backupCatThemeDesc": "Theme, colors, glass, fonts and card style",
-  "@backupCatThemeDesc": {},
   "backupCatCommon": "General",
-  "@backupCatCommon": {},
   "backupCatCommonDesc": "Language, storage, network and extension options",
-  "@backupCatCommonDesc": {},
   "backupCatPlayer": "Player",
-  "@backupCatPlayer": {},
   "backupCatPlayerDesc": "Player preferences",
-  "@backupCatPlayerDesc": {},
   "backupCatReader": "Reader",
-  "@backupCatReader": {},
   "backupCatReaderDesc": "Reader preferences",
-  "@backupCatReaderDesc": {},
   "backupCatProtected": "Accounts",
-  "@backupCatProtected": {},
   "backupCatProtectedDesc": "Login tokens and sign-in data",
-  "@backupCatProtectedDesc": {},
   "backupCatOther": "Services and feeds",
-  "@backupCatOther": {},
   "backupCatOtherDesc": "Feed layouts, lists and service options",
-  "@backupCatOtherDesc": {},
   "logFile": "Log file",
-  "@logFile": {},
   "logFileDesc": "Share the app log, or copy its path on Linux",
-  "@logFileDesc": {},
   "logDelete": "Delete log files",
-  "@logDelete": {},
   "logDeleteDesc": "Clear the saved app logs to free up space",
-  "@logDeleteDesc": {},
   "logDeleted": "Deleted {size} of logs",
   "@logDeleted": {
     "placeholders": {
@@ -391,31 +277,18 @@
     }
   },
   "missingSequel": "Missing Sequel",
-  "@missingSequel": {},
   "rising": "Rising",
-  "@rising": {},
   "stacks": "Stacks",
-  "@stacks": {},
   "stacksAll": "All",
-  "@stacksAll": {},
   "stacksFeatured": "Featured",
-  "@stacksFeatured": {},
   "stacksMine": "Yours",
-  "@stacksMine": {},
   "stacksSaved": "Saved",
-  "@stacksSaved": {},
   "stacksFollowing": "Following",
-  "@stacksFollowing": {},
   "stacksEmpty": "No stacks here yet",
-  "@stacksEmpty": {},
   "stacksSignIn": "Sign in to MangaBaka to see your stacks",
-  "@stacksSignIn": {},
   "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
-  "@stacksScopeNeeded": {},
   "stacksSignInAgain": "Sign in again",
-  "@stacksSignInAgain": {},
   "stacksCouldntLoad": "Couldn't load the stacks",
-  "@stacksCouldntLoad": {},
   "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
   "@stackSeriesCount": {
     "placeholders": {
@@ -441,17 +314,11 @@
     }
   },
   "stackSpoilers": "Spoilers",
-  "@stackSpoilers": {},
   "stackEmptyEntries": "This stack is empty",
-  "@stackEmptyEntries": {},
   "stackSave": "Save stack",
-  "@stackSave": {},
   "stackUnsave": "Remove from saved",
-  "@stackUnsave": {},
   "stackSavedToast": "Saved to your stacks",
-  "@stackSavedToast": {},
   "stackRemovedToast": "Removed from your saved stacks",
-  "@stackRemovedToast": {},
   "userStacks": "Stacks by {name}",
   "@userStacks": {
     "placeholders": {
@@ -461,264 +328,159 @@
     }
   },
   "newsTitle": "News",
-  "@newsTitle": {},
   "newsEmpty": "No news right now",
-  "@newsEmpty": {},
   "newsCouldntLoad": "Couldn't load the news",
-  "@newsCouldntLoad": {},
-  "seeAll": "See all",
-  "@seeAll": {},
   "logFileCopied": "Log path copied",
-  "@logFileCopied": {},
   "donateSheetTitle": "Enjoying Dartotsu?",
-  "@donateSheetTitle": {},
   "donateSheetMessage": "Dartotsu is built and maintained by one person. If it is useful to you, consider supporting development.",
-  "@donateSheetMessage": {},
   "donateLater": "Maybe later",
-  "@donateLater": {},
   "glassBackground": "Glass background",
-  "@glassBackground": {},
   "glassBackgroundDesc": "Your profile banner unless you set an image link",
-  "@glassBackgroundDesc": {},
   "glassBackgroundHint": "Image link (leave empty for your banner)",
-  "@glassBackgroundHint": {},
   "followCover": "Follow cover",
-  "@followCover": {},
   "followCoverDesc": "Colors follow the background, and the cover on detail pages",
-  "@followCoverDesc": {},
   "followCoverMediaOnly": "Only for media",
-  "@followCoverMediaOnly": {},
   "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
-  "@followCoverMediaOnlyDesc": {},
   "cardStyle": "Card style",
-  "@cardStyle": {},
   "cardStyleDesc": "Title placement, size, progress and badges",
-  "@cardStyleDesc": {},
   "customFont": "Font",
-  "@customFont": {},
   "customFontDesc": "Default, a file from your device, or Google Fonts",
-  "@customFontDesc": {},
   "customFontError": "Couldn't load that font file",
-  "@customFontError": {},
   "googleFontError": "Couldn't download that font",
-  "@googleFontError": {},
   "yourFonts": "Your fonts",
-  "@yourFonts": {},
   "addFontFile": "Add font file…",
-  "@addFontFile": {},
   "browseGoogleFonts": "Browse Google Fonts…",
-  "@browseGoogleFonts": {},
   "searchGoogleFonts": "Search Google Fonts",
-  "@searchGoogleFonts": {},
   "defaultFont": "Default",
-  "@defaultFont": {},
   "materialYou": "Material You",
-  "@materialYou": {},
   "materialYouDesc": "Dynamic colour from the system",
-  "@materialYouDesc": {},
   "jsonTheme": "Custom theme file",
-  "@jsonTheme": {},
   "jsonThemeDesc": "Live colours from ~/.config/dartotsu/theme.json (a custom script, or your own edits)",
-  "@jsonThemeDesc": {},
   "themeMode": "Theme mode",
-  "@themeMode": {},
   "mode": "Mode",
-  "@mode": {},
-
   "trackingService": "Tracking service",
-  "@trackingService": {},
   "signOut": "Sign out",
-  "@signOut": {},
   "signIn": "Sign in",
-  "@signIn": {},
   "notSignedIn": "Not signed in",
-  "@notSignedIn": {},
   "signOutOf": "Sign out of {service}?",
   "@signOutOf": {
-    "placeholders": { "service": { "type": "String" } }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
-
   "checkForUpdates": "Check for updates",
-  "@checkForUpdates": {},
   "checkForUpdatesDesc": "Notify on a new GitHub release",
-  "@checkForUpdatesDesc": {},
   "updateChannel": "Update channel",
-  "@updateChannel": {},
   "channel": "Channel",
-  "@channel": {},
   "stable": "Stable",
-  "@stable": {},
   "preRelease": "Pre-release",
-  "@preRelease": {},
   "alpha": "Alpha",
-  "@alpha": {},
   "checkNow": "Check now",
-  "@checkNow": {},
-
   "userAgent": "User-Agent",
-  "@userAgent": {},
   "settingDefault": "Default",
-  "@settingDefault": {},
   "currentlyUsing": "Currently: {value}",
   "@currentlyUsing": {
-    "placeholders": { "value": { "type": "String" } }
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
   },
   "dnsOverHttps": "DNS-over-HTTPS",
-  "@dnsOverHttps": {},
   "dnsDefault": "Default (Cloudflare)",
-  "@dnsDefault": {},
   "proxy": "Proxy",
-  "@proxy": {},
   "proxyProtocol": "Type",
-  "@proxyProtocol": {},
   "proxyHost": "Host",
-  "@proxyHost": {},
   "proxyPort": "Port",
-  "@proxyPort": {},
   "proxyUsername": "Username",
-  "@proxyUsername": {},
   "proxyPassword": "Password",
-  "@proxyPassword": {},
   "optional": "Optional",
-  "@optional": {},
   "clearCookies": "Clear cookies",
-  "@clearCookies": {},
   "clearCookiesDesc": "Remove every stored cookie",
-  "@clearCookiesDesc": {},
   "notImplementedArea": "{area} — coming soon",
   "@notImplementedArea": {
-    "placeholders": { "area": { "type": "String" } }
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
   },
   "notImplementedService": "{service} doesn't support this yet.",
   "@notImplementedService": {
-    "placeholders": { "service": { "type": "String" } }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
   "couldNotLoadResults": "Couldn't load results",
-  "@couldNotLoadResults": {},
   "updateCheckFailed": "Couldn't check for updates",
-  "@updateCheckFailed": {},
   "highRefreshRate": "High refresh rate",
-  "@highRefreshRate": {},
   "highRefreshRateDesc": "Use the highest refresh rate your screen supports",
-  "@highRefreshRateDesc": {},
   "imageSave": "Save image",
-  "@imageSave": {},
   "imageSavedTo": "Saved to {path}",
   "@imageSavedTo": {
-    "placeholders": { "path": { "type": "String" } }
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
   },
   "imageActionFailed": "Couldn't download the image",
-  "@imageActionFailed": {},
   "imageTitleCover": "Cover",
-  "@imageTitleCover": {},
   "imageTitlePage": "Page",
-  "@imageTitlePage": {},
   "imageTitleBanner": "Banner",
-  "@imageTitleBanner": {},
   "imageTitleAvatar": "Profile picture",
-  "@imageTitleAvatar": {},
   "verifyTls": "Verify certificates",
-  "@verifyTls": {},
   "verifyTlsDesc": "Reject servers with invalid HTTPS certificates. Turn off only for a source that uses a self-signed one",
-  "@verifyTlsDesc": {},
   "clearCookiesConfirm": "Remove all stored cookies? This may sign you out of some sources.",
-  "@clearCookiesConfirm": {},
-
   "version": "Version",
-  "@version": {},
   "gitHub": "GitHub",
-  "@gitHub": {},
   "gitHubDesc": "Source, issues and releases",
-  "@gitHubDesc": {},
   "discordDesc": "Community and support",
-  "@discordDesc": {},
   "supportDeveloper": "Support the developer",
-  "@supportDeveloper": {},
   "buyMeCoffee": "Buy me a coffee",
-  "@buyMeCoffee": {},
   "upiId": "UPI ID",
-  "@upiId": {},
   "upiCopied": "UPI ID copied",
-  "@upiCopied": {},
   "donateDesc": "Support development",
-  "@donateDesc": {},
   "contributors": "Contributors",
-  "@contributors": {},
   "contributorsDesc": "The people who built Dartotsu",
-  "@contributorsDesc": {},
   "contributorsLoadFailed": "Couldn't load contributors",
-  "@contributorsLoadFailed": {},
   "forks": "Forks",
-  "@forks": {},
   "forksDesc": "Projects built on top of Dartotsu",
-  "@forksDesc": {},
   "forksEmpty": "No forks found",
-  "@forksEmpty": {},
-
   "sectionColors": "Colors",
-  "@sectionColors": {},
   "sectionDisplay": "Display",
-  "@sectionDisplay": {},
   "sectionStyle": "Style",
-  "@sectionStyle": {},
   "sectionCommunity": "Community",
-  "@sectionCommunity": {},
   "sectionAppInfo": "App Info",
-  "@sectionAppInfo": {},
-  "sectionCache": "Cache",
-  "@sectionCache": {},
   "sectionRequests": "Requests",
-  "@sectionRequests": {},
   "sectionDnsProxy": "DNS & Proxy",
-  "@sectionDnsProxy": {},
   "onboardingBack": "Back",
-  "@onboardingBack": {},
   "onboardingNext": "Next",
-  "@onboardingNext": {},
   "onboardingSkip": "Skip",
-  "@onboardingSkip": {},
   "onboardingPaletteTitle": "Make it yours",
-  "@onboardingPaletteTitle": {},
   "onboardingPaletteBody": "Pick a palette. Every accent, from cards to the player, follows it.",
-  "@onboardingPaletteBody": {},
   "themeModeAuto": "Auto",
-  "@themeModeAuto": {},
   "themeModeLight": "Light",
-  "@themeModeLight": {},
   "themeModeDark": "Dark",
-  "@themeModeDark": {},
   "onboardingSyncTitle": "Sync your library",
-  "@onboardingSyncTitle": {},
   "onboardingSyncBody": "Sign in with AniList to bring your lists, progress and scores with you. Or skip and browse as a guest.",
-  "@onboardingSyncBody": {},
   "onboardingOpenLinks": "Open AniList and repo links in Dartotsu",
-  "@onboardingOpenLinks": {},
   "onboardingPermsTitle": "Permissions",
-  "@onboardingPermsTitle": {},
   "onboardingPermsBody": "Allow these now so downloads, updates and alerts work without interruptions. You can change them later in system settings.",
-  "@onboardingPermsBody": {},
   "permNotifications": "Notifications",
-  "@permNotifications": {},
   "permNotificationsDesc": "Download progress, new episodes and replies",
-  "@permNotificationsDesc": {},
   "permStorage": "All files access",
-  "@permStorage": {},
   "permStorageDesc": "Save downloads to the public Dartotsu folder",
-  "@permStorageDesc": {},
   "permInstall": "Install updates",
-  "@permInstall": {},
   "permInstallDesc": "Let Dartotsu install its own app updates",
-  "@permInstallDesc": {},
   "permBattery": "Unrestricted battery",
-  "@permBattery": {},
   "permBatteryDesc": "Keep long downloads running in the background",
-  "@permBatteryDesc": {},
   "permGrant": "Allow",
-  "@permGrant": {},
-  "permGranted": "Allowed",
-  "@permGranted": {},
   "linkOpenInApp": "Open links in Dartotsu",
-  "@linkOpenInApp": {},
   "linkOpenInAppDesc": "Let AniList and repo links open the app",
   "reviewsTitle": "Reviews",
   "reviewsEmpty": "No reviews yet",
@@ -753,7 +515,13 @@
   "castPlaybackFailed": "The device could not play this stream",
   "shortcutNothingToContinue": "Nothing to continue yet",
   "shortcutNoCalendar": "{service} has no calendar",
-  "@shortcutNoCalendar": {"placeholders": {"service": {"type": "String"}}},
+  "@shortcutNoCalendar": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "calendarEpisode": "Episode {n}",
   "@calendarEpisode": {
     "placeholders": {
@@ -764,113 +532,63 @@
   },
   "shareAnalytics": "Share anonymous usage data",
   "shareAnalyticsDesc": "Anonymous user counts and crash reports. No account or personal data",
-  "@linkOpenInAppDesc": {},
   "linkOpenAnilist": "Open AniList links in Dartotsu",
-  "@linkOpenAnilist": {},
   "linkOpenAnilistDesc": "Turn on link handling so anilist.co links open the app",
-  "@linkOpenAnilistDesc": {},
   "linkSettingsFailed": "Could not open the system settings",
-  "@linkSettingsFailed": {},
   "discordRichPresence": "Rich Presence",
-  "@discordRichPresence": {},
   "discordRichPresenceTokenDesc": "Show what you are doing on your Discord profile. Needs your Discord token.",
-  "@discordRichPresenceTokenDesc": {},
   "discordRichPresenceDesktopDesc": "Show what you are doing on your Discord profile. Needs the Discord desktop app running.",
-  "@discordRichPresenceDesktopDesc": {},
   "discordBrowsing": "Show browsing activity",
-  "@discordBrowsing": {},
   "discordBrowsingDesc": "Also show the tab, page or profile you are looking at, not only what you watch or read.",
-  "@discordBrowsingDesc": {},
   "discordLookHeader": "Presence look",
-  "@discordLookHeader": {},
   "discordActivityType": "Activity type",
-  "@discordActivityType": {},
   "discordActivityTypeDesc": "How Discord words it: \"Watching …\" or \"Playing …\". Auto uses Watching for anime and Playing for everything else.",
-  "@discordActivityTypeDesc": {},
   "discordWatching": "Watching",
-  "@discordWatching": {},
   "discordPlaying": "Playing",
-  "@discordPlaying": {},
   "discordCovers": "Show covers",
-  "@discordCovers": {},
   "discordCoversDesc": "Cover art and the Dartotsu icon on the card.",
-  "@discordCoversDesc": {},
   "discordTimer": "Show timer",
-  "@discordTimer": {},
   "discordTimerDesc": "Elapsed or remaining time under the title.",
-  "@discordTimerDesc": {},
   "discordButtons": "Show buttons",
-  "@discordButtons": {},
   "discordButtonsDesc": "\"View anime / manga\" and \"Open Dartotsu\" buttons.",
-  "@discordButtonsDesc": {},
   "discordHideTitles": "Hide titles",
-  "@discordHideTitles": {},
   "discordHideTitlesDesc": "Replace anime and manga names (and their cover and link) with \"Something private\".",
-  "@discordHideTitlesDesc": {},
   "discordConnectionHeader": "Connection",
-  "@discordConnectionHeader": {},
   "listSearchHint": "Search this list",
-  "@listSearchHint": {},
   "listSort": "Sort",
-  "@listSort": {},
   "listFilter": "Filter",
-  "@listFilter": {},
   "listRandom": "Random title",
-  "@listRandom": {},
   "listReverse": "Reverse order",
-  "@listReverse": {},
   "listSortDefault": "List order",
-  "@listSortDefault": {},
   "listSortScore": "Your score",
-  "@listSortScore": {},
   "listSortTitle": "Title",
-  "@listSortTitle": {},
   "listSortUpdated": "Last updated",
-  "@listSortUpdated": {},
   "listSortProgress": "Progress",
-  "@listSortProgress": {},
   "listSortReleased": "Release date",
-  "@listSortReleased": {},
   "listSortAverage": "Average score",
-  "@listSortAverage": {},
   "listFilterFormat": "Format",
-  "@listFilterFormat": {},
   "listFilterStatus": "Status",
-  "@listFilterStatus": {},
   "listFilterGenres": "Genres",
-  "@listFilterGenres": {},
   "listFilterClear": "Clear filters",
-  "@listFilterClear": {},
   "listNoMatches": "Nothing in this list matches",
-  "@listNoMatches": {},
   "discordLogin": "Log in to Discord",
-  "@discordLogin": {},
   "discordToken": "Discord token",
-  "@discordToken": {},
   "discordTokenSaved": "Saved. Tap to replace, long press to remove.",
-  "@discordTokenSaved": {},
   "discordTokenNotSet": "Not set. Tap to add.",
-  "@discordTokenNotSet": {},
-  "discordTokenPrompt": "Paste the token of the Discord account to show the presence on. It stays on this device.",
-  "@discordTokenPrompt": {},
-  "discordTokenHint": "Token",
-  "@discordTokenHint": {},
   "discordTokenSavedSnack": "Discord token saved",
-  "@discordTokenSavedSnack": {},
   "discordTokenRemovedSnack": "Discord token removed",
-  "@discordTokenRemovedSnack": {},
   "discordRichPresenceRow": "Discord Rich Presence",
-  "@discordRichPresenceRow": {},
   "discordRichPresenceRowOn": "On · tap to change how it looks",
-  "@discordRichPresenceRowOn": {},
   "discordRichPresenceRowOff": "Show what you are doing on your Discord profile",
-  "@discordRichPresenceRowOff": {},
-
   "loginCancelled": "Login cancelled",
   "invalidToken": "Invalid token",
   "loginFailed": "Login failed: {error}",
   "@loginFailed": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "malLoginFailed": "MyAnimeList login failed",
   "kitsuLoginFailed": "Kitsu login failed. Check your email and password.",
@@ -882,20 +600,12 @@
   "mangaBakaProfile": "MangaBaka profile",
   "refreshFromMangaBaka": "Refresh from MangaBaka",
   "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
-  "mangaUpdatesLoginFailed": "MangaUpdates login failed. Check your username and password.",
   "mangaUpdatesProfile": "MangaUpdates profile",
   "mangaUpdatesAnimeStart": "Anime adaptation starts",
-  "@mangaUpdatesAnimeStart": {},
   "mangaUpdatesAnimeEnd": "Anime adaptation ends",
-  "@mangaUpdatesAnimeEnd": {},
   "refreshFromMangaUpdates": "Refresh from MangaUpdates",
-  "mangaUpdatesAccountOptions": "MangaUpdates account options",
-  "@mangaUpdatesAccountOptions": {},
   "usernameOnly": "Username",
   "releases": "Releases",
-  "@releases": {},
-  "scanlationGroups": "Scanlation Groups",
-  "@scanlationGroups": {},
   "artistsLabel": "Artists",
   "authorsLabel": "Authors",
   "publishersLabel": "Publishers",
@@ -908,7 +618,6 @@
   "hideNsfwDesc": "Keep adult titles out of feeds and search, and list your own adult entries under Hidden Media.",
   "kitsuAccountOptions": "Kitsu account options",
   "mangaBakaAccountOptions": "MangaBaka account options",
-  "@mangaBakaAccountOptions": {},
   "couldNotUpdateKitsuSettings": "Could not update your Kitsu settings",
   "titleCanonical": "Canonical",
   "titleRomanized": "Romanized",
@@ -934,16 +643,31 @@
   "incognitoEditsBlocked": "Incognito: list edits are blocked",
   "serviceError": "{service}: {error}",
   "@serviceError": {
-    "placeholders": { "service": {"type": "String"}, "error": {"type": "String"} }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "incognitoProgressNotSaved": "Incognito: progress not saved",
   "progressSet": "Progress set to {progress}",
   "@progressSet": {
-    "placeholders": { "progress": {"type": "int"} }
+    "placeholders": {
+      "progress": {
+        "type": "int"
+      }
+    }
   },
   "removedFromList": "Removed {title} from your list",
   "@removedFromList": {
-    "placeholders": { "title": {"type": "String"} }
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "following": "Following",
   "homeSections": "Home sections",
@@ -955,7 +679,11 @@
   "addList": "Add list",
   "voiceActorsIn": "Voice actors · {name}",
   "@voiceActorsIn": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "animeAppearances": "Anime appearances",
   "mangaAppearances": "Manga appearances",
@@ -1007,19 +735,41 @@
   "openInBrowser": "Open in browser",
   "viewOnSource": "View on {source}",
   "@viewOnSource": {
-    "placeholders": { "source": {"type": "String"} }
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
   },
   "episodeAirsIn": "Episode {ep} airs in {time}",
   "@episodeAirsIn": {
-    "placeholders": { "ep": {"type": "int"}, "time": {"type": "String"} }
+    "placeholders": {
+      "ep": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
   },
   "nextEpisodeIn": "Next episode in {time}",
   "@nextEpisodeIn": {
-    "placeholders": { "time": {"type": "String"} }
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
   },
   "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
   "@chapterExpectedIn": {
-    "placeholders": { "chapter": {"type": "int"}, "time": {"type": "String"} }
+    "placeholders": {
+      "chapter": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
   },
   "logPathCopied": "Log file path copied to clipboard",
   "animeSource": "Anime source",
@@ -1036,7 +786,11 @@
   "tryOtherFeed": "Try the other feed or search instead.",
   "searchSource": "Search {source}",
   "@searchSource": {
-    "placeholders": { "source": {"type": "String"} }
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
   },
   "animeExtensions": "Anime Extensions",
   "mangaExtensions": "Manga Extensions",
@@ -1054,7 +808,11 @@
   "switchService": "Switch service",
   "logOutOf": "Log out of {name}",
   "@logOutOf": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "loggedIn": "Logged in",
   "notifications": "Notifications",
@@ -1119,11 +877,19 @@
   "couldNotUpdateFollow": "Could not update follow",
   "followedUser": "Followed {name}",
   "@followedUser": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "unfollowedUser": "Unfollowed {name}",
   "@unfollowedUser": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "messages": "Messages",
   "logInToSeeMessages": "Log in to see your messages",
@@ -1212,7 +978,14 @@
   "more": "More",
   "epIn": "Ep {ep} in {time}",
   "@epIn": {
-    "placeholders": { "ep": {"type": "int"}, "time": {"type": "String"} }
+    "placeholders": {
+      "ep": {
+        "type": "int"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
   },
   "sectionLoading": "Loading",
   "querySize": "Query size",
@@ -1224,14 +997,24 @@
   "feedLayout": "Feed layout",
   "sectionsShown": "{shown} of {total} shown — tap to pick and reorder",
   "@sectionsShown": {
-    "placeholders": { "shown": {"type": "int"}, "total": {"type": "int"} }
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
   },
   "labelSections": "{label} sections",
   "@labelSections": {
-    "placeholders": { "label": {"type": "String"} }
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
   },
   "accountOptions": "Account options",
-  "accountOptionsDesc": "Names, score format, list order, notifications and more",
   "anilistAccountOptions": "AniList account options",
   "sectionPrivacy": "Privacy",
   "hidePrivateEntries": "Hide private entries",
@@ -1250,16 +1033,28 @@
   "sortListsBy": "Sort lists by",
   "labelCustomLists": "{label} custom lists",
   "@labelCustomLists": {
-    "placeholders": { "label": {"type": "String"} }
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
   },
   "customListsCount": "{count} lists — tap to add or remove",
   "@customListsCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "mergeActivities": "Merge activities",
   "minutesCount": "{count} mins",
   "@minutesCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "timezone": "Timezone",
   "notSet": "Not set",
@@ -1273,19 +1068,38 @@
   "novel": "Novel",
   "labelService": "{label} service",
   "@labelService": {
-    "placeholders": { "label": {"type": "String"} }
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
   },
   "nameSettings": "{name} settings",
   "@nameSettings": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "extensionBridgeOptions": "Options from the {name} extension bridge",
   "@extensionBridgeOptions": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "extensionServiceFailed": "{name} could not start: {error}",
   "@extensionServiceFailed": {
-    "placeholders": { "name": {"type": "String"}, "error": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "importLists": "Import lists",
   "importListsDesc": "From Aniyomi, Mihon / Tachiyomi or Kotatsu backups",
@@ -1294,56 +1108,98 @@
   "sectionBrowse": "Browse",
   "readingTab": "Reading tab",
   "readingTabDesc": "Which extensions the last tab shows",
-  "@readingTabDesc": {},
   "firstTab": "First tab",
-  "@firstTab": {},
   "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
-  "@firstTabDesc": {},
   "novelExtensions": "Novel Extensions",
-  "@novelExtensions": {},
   "defaultFeed": "Default feed",
   "defaultFeedDesc": "Which list a source opens with",
   "noServiceSupports": "No service supports {type}",
   "@noServiceSupports": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "sourcesLoading": "{name} · {loaded} of {installed} sources loading",
   "@sourcesLoading": {
-    "placeholders": { "name": {"type": "String"}, "loaded": {"type": "int"}, "installed": {"type": "int"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "loaded": {
+        "type": "int"
+      },
+      "installed": {
+        "type": "int"
+      }
+    }
   },
   "noExtensionServiceSupportsHere": "No extension service supports {type} here.",
   "@noExtensionServiceSupportsHere": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "loadDataFrom": "Load data from",
   "noInstalledSourcesYet": "No installed {type} sources yet.",
   "@noInstalledSourcesYet": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "extensionNotInstalled": "The extension for {name} is not installed",
   "@extensionNotInstalled": {
-    "placeholders": { "name": {"type": "String"} }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "thisSource": "this source",
   "failedToAddRepository": "Failed to add repository: {error}",
   "@failedToAddRepository": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "installedType": "Installed {type}",
   "@installedType": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "availableType": "Available {type}",
   "@availableType": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "noInstalledExtensions": "No installed {type} extensions",
   "@noInstalledExtensions": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "noAvailableExtensions": "No available {type} extensions",
   "@noAvailableExtensions": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "nothingToShowYet": "Nothing to show yet",
   "addTitlesHint": "Add some titles to your list and they'll appear here.",
@@ -1352,12 +1208,20 @@
   "nixManagedUpdate": "This build is managed by Nix — run \"nix flake update\" on your flake and rebuild instead of updating from here",
   "autoUpdateFailed": "Automatic update failed ({error}) — opening the download page instead",
   "@autoUpdateFailed": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "unknownPreference": "Unknown preference",
   "unsupportedPreferenceType": "Unsupported preference type {type}",
   "@unsupportedPreferenceType": {
-    "placeholders": { "type": {"type": "String"} }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "notYetReleased": "Not Yet Released",
   "notStarted": "Not Started",
@@ -1368,11 +1232,19 @@
   "chooseBackupFile": "Choose backup file",
   "importAnimeCount": "Import {count} anime",
   "@importAnimeCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "importMangaCount": "Import {count} manga",
   "@importMangaCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "mergeWithExisting": "Merge with existing lists",
   "mergeWithExistingDesc": "Keeps what you already have; off replaces matching titles",
@@ -1380,25 +1252,48 @@
   "import": "Import",
   "animeCount": "{count} anime",
   "@animeCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "mangaCount": "{count} manga",
   "@mangaCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "chooseSaveLocation": "Choose where to save the backup",
   "savedPath": "Saved {path}",
   "@savedPath": {
-    "placeholders": { "path": {"type": "String"} }
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
   },
   "exportFailed": "Export failed: {error}",
   "@exportFailed": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "nothingInLocalLists": "Nothing in your local lists yet.",
   "exportsSummary": "Exports {anime} anime and {manga} manga from your local lists. Kotatsu only supports manga.",
   "@exportsSummary": {
-    "placeholders": { "anime": {"type": "int"}, "manga": {"type": "int"} }
+    "placeholders": {
+      "anime": {
+        "type": "int"
+      },
+      "manga": {
+        "type": "int"
+      }
+    }
   },
   "saveToFolder": "Save to folder",
   "formatAnimeManga": "Anime and manga · .tachibk",
@@ -1422,7 +1317,11 @@
   "duration": "Duration",
   "minutesPerEpisode": "{minutes} min per ep",
   "@minutesPerEpisode": {
-    "placeholders": { "minutes": {"type": "int"} }
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
   },
   "rating": "Rating",
   "studio": "Studio",
@@ -1476,17 +1375,29 @@
   "remove": "Remove",
   "syncToService": "Sync to {service}",
   "@syncToService": {
-    "placeholders": { "service": {"type": "String"} }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
   "syncedToService": "Synced to {service}",
   "@syncedToService": {
-    "placeholders": { "service": {"type": "String"} }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
   "latestReleases": "Latest Releases",
   "topRated": "Top Rated",
   "localSection": "{title} · Local",
   "@localSection": {
-    "placeholders": { "title": {"type": "String"} }
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "localEntryNote": "This title is only in your local list on this device. Editing is turned off here because it could clash with your account list; you can still remove it.",
   "cardPresetPoster": "Poster",
@@ -1512,28 +1423,50 @@
   "scorePoint3": "3 Point Smiley",
   "hoursCount": "{count, plural, =1{1 hour} other{{count} hours}}",
   "@hoursCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "daysCount": "{count, plural, =1{1 day} other{{count} days}}",
   "@daysCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "weeksCount": "{count, plural, =1{1 week} other{{count} weeks}}",
   "@weeksCount": {
-    "placeholders": { "count": {"type": "int"} }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "resumeTitle": "Resume",
-  "@resumeTitle": {},
   "resumeSourceMissing": "Install this title's source to resume",
-  "@resumeSourceMissing": {},
   "resumeRemove": "Remove from resume",
-  "@resumeRemove": {},
-  "resumeMissing": "Couldn't find {title} in this source",
-  "@resumeMissing": {"placeholders": {"title": {"type": "String"}}},
   "resumeAt": "{time} left",
-  "@resumeAt": {"placeholders": {"time": {"type": "String"}}},
+  "@resumeAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "resumePage": "Page {page} of {total}",
-  "@resumePage": {"placeholders": {"page": {"type": "int"}, "total": {"type": "int"}}},
+  "@resumePage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "continueWatching": "Continue Watching",
   "continueReading": "Continue Reading",
   "favouriteAnimeSection": "Favourite Anime",
@@ -1589,26 +1522,46 @@
   "playerNotAvailable": "The player is not available yet",
   "deepLinkInitialError": "Error getting initial deep link: {error}",
   "@deepLinkInitialError": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "deepLinkOpenError": "Error Opening link: {error}",
   "@deepLinkOpenError": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "linkCantBeOpened": "This link can't be opened: {link}",
   "@linkCantBeOpened": {
-    "placeholders": { "link": {"type": "String"} }
+    "placeholders": {
+      "link": {
+        "type": "String"
+      }
+    }
   },
   "linkOpenError": "Error opening link: {error}",
   "@linkOpenError": {
-    "placeholders": { "error": {"type": "String"} }
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
   },
   "forReleasingTitles": "for currently releasing titles",
   "progress": "Progress",
   "notes": "Notes",
   "serviceNotFound": "Service \"{id}\" not found",
   "@serviceNotFound": {
-    "placeholders": { "id": {"type": "String"} }
+    "placeholders": {
+      "id": {
+        "type": "String"
+      }
+    }
   },
   "glassEffectEnabled": "Glass effect enabled",
   "glassEffectDisabled": "Glass effect disabled",
@@ -1620,51 +1573,98 @@
   "mangaList": "Manga list",
   "ownerAnimeList": "{owner}'s anime list",
   "@ownerAnimeList": {
-    "placeholders": { "owner": { "type": "String" } }
+    "placeholders": {
+      "owner": {
+        "type": "String"
+      }
+    }
   },
   "ownerMangaList": "{owner}'s manga list",
   "@ownerMangaList": {
-    "placeholders": { "owner": { "type": "String" } }
+    "placeholders": {
+      "owner": {
+        "type": "String"
+      }
+    }
   },
   "loadingList": "Loading list",
   "earlier": "Earlier",
   "daysAgo": "{count, plural, =1{1 day ago} other{{count} days ago}}",
   "@daysAgo": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "hoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
   "@hoursAgo": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "minutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
   "@minutesAgo": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "minutesAgoShort": "{count}m ago",
   "@minutesAgoShort": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "hoursAgoShort": "{count}h ago",
   "@hoursAgoShort": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "daysAgoShort": "{count}d ago",
   "@daysAgoShort": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "weeksAgoShort": "{count}w ago",
   "@weeksAgoShort": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "couldntLoadSource": "Couldn't load this source",
   "followers": "Followers",
   "couldntLoadTitle": "Couldn't load {title}",
   "@couldntLoadTitle": {
-    "placeholders": { "title": { "type": "String" } }
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "userTitle": "{name} · {title}",
   "@userTitle": {
-    "placeholders": { "name": { "type": "String" }, "title": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
   },
   "couldntLoadProfile": "Couldn't load this profile",
   "profile": "Profile",
@@ -1680,37 +1680,65 @@
   "users": "Users",
   "repositoriesTitle": "{type} Repositories",
   "@repositoriesTitle": {
-    "placeholders": { "type": { "type": "String" } }
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
   },
   "repositoryUrl": "Repository URL",
   "downloadingRepository": "Downloading repository…",
   "noRepositories": "No repositories added",
   "repoExtensionsCount": "{count} extensions",
   "@repoExtensionsCount": {
-    "placeholders": { "count": { "type": "String" } }
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
   },
   "searchExtensions": "Search extensions...",
   "deletePluginTitle": "Delete {name}?",
   "@deletePluginTitle": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "deletePluginMessage": "Are you sure you want to delete this plugin?",
   "pluginDeleted": "{name} deleted",
   "@pluginDeleted": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "pluginNotInRepo": "{name} is not available in the configured repo",
   "@pluginNotInRepo": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "pluginFetchFailed": "Failed to fetch plugin info",
   "installPluginTitle": "Install {name}",
   "@installPluginTitle": {
-    "placeholders": { "name": { "type": "String" } }
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
   },
   "sizeLabel": "Size: {size}",
   "@sizeLabel": {
-    "placeholders": { "size": { "type": "String" } }
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
   },
   "installedState": "Installed",
   "errorLabel": "Error:",
@@ -1719,31 +1747,40 @@
   "copyLogs": "Copy Logs",
   "noListToEdit": "{service} has no list to edit",
   "@noListToEdit": {
-    "placeholders": { "service": { "type": "String" } }
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
   },
   "couldNotReadFile": "Could not read that file",
   "importedSummary": "Imported {anime} anime and {manga} manga",
   "@importedSummary": {
-    "placeholders": { "anime": { "type": "int" }, "manga": { "type": "int" } }
+    "placeholders": {
+      "anime": {
+        "type": "int"
+      },
+      "manga": {
+        "type": "int"
+      }
+    }
   },
   "alreadyThere": " · {count} already there",
   "@alreadyThere": {
-    "placeholders": { "count": { "type": "int" } }
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
   },
   "airingNow": "Airing now",
   "topRatedMovies": "Top rated movies",
   "koreanDramas": "Korean Dramas",
-  "@koreanDramas": {},
   "chineseDramas": "Chinese Dramas",
-  "@chineseDramas": {},
   "japaneseDramas": "Japanese Dramas",
-  "@japaneseDramas": {},
   "thaiDramas": "Thai Dramas",
-  "@thaiDramas": {},
   "turkishDramas": "Turkish Dramas",
-  "@turkishDramas": {},
   "miniSeries": "Mini Series",
-  "@miniSeries": {},
   "topRatedShows": "Top rated shows",
   "recommendedSection": "Recommended",
   "syncRow": "Sync lists",
@@ -1772,14 +1809,50 @@
   "syncStateMissing": "Not in list",
   "syncStateUnmapped": "No match",
   "syncPaused": "Waiting for the rate limit, resumes in {time}",
-  "@syncPaused": {"placeholders": {"time": {"type": "String"}}},
+  "@syncPaused": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "syncOnlyIn": "{count} only on {name}, left untouched",
-  "@syncOnlyIn": {"placeholders": {"count": {"type": "int"}, "name": {"type": "String"}}},
+  "@syncOnlyIn": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "syncProgressOf": "{done} of {total}",
-  "@syncProgressOf": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@syncProgressOf": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "syncNothingHere": "Nothing to show",
   "syncLimits": "{used} of {max} requests used this {window}",
-  "@syncLimits": {"placeholders": {"used": {"type": "int"}, "max": {"type": "int"}, "window": {"type": "String"}}},
+  "@syncLimits": {
+    "placeholders": {
+      "used": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      },
+      "window": {
+        "type": "String"
+      }
+    }
+  },
   "syncMinute": "minute",
   "syncDay": "day",
   "syncNotInList": "Not in list yet",
@@ -1788,29 +1861,86 @@
   "syncOptions": "Options",
   "syncShared": "Shares its entry with another item",
   "syncNotFound": "Not found on {service}",
-  "@syncNotFound": {"placeholders":{"service":{"type":"String"}}},
+  "@syncNotFound": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "syncService": "Sync {service} ({count})",
-  "@syncService": {"placeholders":{"service":{"type":"String"},"count":{"type":"int"}}},
+  "@syncService": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "syncOnEdit": "Sync changes instantly",
   "syncOnEditDesc": "Push every progress update and list edit to your other signed-in services right away",
   "syncPushed": "Synced to {services}",
-  "@syncPushed": {"placeholders": {"services": {"type": "String"}}},
+  "@syncPushed": {
+    "placeholders": {
+      "services": {
+        "type": "String"
+      }
+    }
+  },
   "syncPushFailed": "{service}: {error}",
-  "@syncPushFailed": {"placeholders": {"service": {"type": "String"}, "error": {"type": "String"}}},
+  "@syncPushFailed": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      },
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "syncRateLimited": "Rate limited, try again in a moment",
   "syncAhead": "Whichever is ahead",
   "syncAheadDesc": "Two-way: for every title the entry that is furthest along wins and is copied to all your other services",
   "syncAheadFrom": "From {service}",
-  "@syncAheadFrom": {"placeholders": {"service": {"type": "String"}}},
+  "@syncAheadFrom": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "syncConfirm": "Review before syncing",
   "syncConfirmDesc": "Show what Sync all will change and how many requests it needs",
   "syncPreviewTitle": "Ready to sync",
   "syncPreviewLine": "{updates} updates, {adds} to add",
-  "@syncPreviewLine": {"placeholders": {"updates": {"type": "int"}, "adds": {"type": "int"}}},
+  "@syncPreviewLine": {
+    "placeholders": {
+      "updates": {
+        "type": "int"
+      },
+      "adds": {
+        "type": "int"
+      }
+    }
+  },
   "syncPreviewRequests": "About {count} requests",
-  "@syncPreviewRequests": {"placeholders": {"count": {"type": "int"}}},
+  "@syncPreviewRequests": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "syncPreviewLookups": "{count} ids need a lookup first",
-  "@syncPreviewLookups": {"placeholders": {"count": {"type": "int"}}},
+  "@syncPreviewLookups": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "syncPreviewNothing": "Nothing to change",
   "syncStart": "Start",
   "syncRetry": "Retry",
@@ -1833,9 +1963,21 @@
   "commentsSortHighest": "Highest rated",
   "commentsSortLowest": "Lowest rated",
   "commentsEpisodeShort": "Ep {number}",
-  "@commentsEpisodeShort": {"placeholders": {"number": {"type": "int"}}},
+  "@commentsEpisodeShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "commentsChapterShort": "Ch {number}",
-  "@commentsChapterShort": {"placeholders": {"number": {"type": "int"}}},
+  "@commentsChapterShort": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "commentsFilterEpisodeTitle": "Filter by episode",
   "commentsFilterChapterTitle": "Filter by chapter",
   "commentsFilterTagTitle": "Enter an episode or chapter number",
@@ -1844,19 +1986,49 @@
   "commentsFilterClear": "Show all",
   "commentsPlaceholder": "Add a comment…",
   "commentsReplyingTo": "Replying to {name}",
-  "@commentsReplyingTo": {"placeholders": {"name": {"type": "String"}}},
+  "@commentsReplyingTo": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "commentsSend": "Send",
   "commentsTagButton": "Tag",
   "commentsTagTitle": "Tag {label} (optional)",
-  "@commentsTagTitle": {"placeholders": {"label": {"type": "String"}}},
+  "@commentsTagTitle": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
   "commentsTagEpisode": "episode",
   "commentsTagChapter": "chapter",
   "commentsTagRange": "1–{total}",
-  "@commentsTagRange": {"placeholders": {"total": {"type": "int"}}},
+  "@commentsTagRange": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "commentsTagNumber": "{label} number",
-  "@commentsTagNumber": {"placeholders": {"label": {"type": "String"}}},
+  "@commentsTagNumber": {
+    "placeholders": {
+      "label": {
+        "type": "String"
+      }
+    }
+  },
   "commentsTagTooHigh": "Tag cannot exceed the total ({total})",
-  "@commentsTagTooHigh": {"placeholders": {"total": {"type": "int"}}},
+  "@commentsTagTooHigh": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "commentsNoTag": "No tag",
   "commentsSpoiler": "Spoiler",
   "commentsGif": "GIF",
@@ -1878,7 +2050,13 @@
   "commentsCopy": "Copy",
   "commentsViewReply": "View 1 reply",
   "commentsViewReplies": "View {count} replies",
-  "@commentsViewReplies": {"placeholders": {"count": {"type": "int"}}},
+  "@commentsViewReplies": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "commentsHideReplies": "Hide replies",
   "commentsLoadMore": "Load more comments",
   "commentsEmpty": "No comments yet. Be the first!",
@@ -1899,130 +2077,111 @@
   "commentsSettingAlertsDesc": "Notify me when someone replies to my comments",
   "commentsNoticeReplyTitle": "New comment reply",
   "commentsNoticeReply": "{name} replied to your comment",
-  "@commentsNoticeReply": {"placeholders": {"name": {"type": "String"}}},
+  "@commentsNoticeReply": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "commentsNoticeWarningTitle": "You received a warning",
   "commentsNoticeWarning": "Be more thoughtful with your comments",
   "commentsNoticeUpdateTitle": "Update from Dantotsu",
   "barcodeTitle": "Scan a barcode",
-  "@barcodeTitle": {},
   "barcodeTooltip": "Find a manga or novel from its barcode",
-  "@barcodeTooltip": {},
   "barcodeIntro": "Point the camera at the barcode on the back of a volume, or type its ISBN.",
-  "@barcodeIntro": {},
   "barcodeIntroManual": "Type the ISBN printed above the barcode on the back of a volume.",
-  "@barcodeIntroManual": {},
   "barcodeIsbnHint": "ISBN",
-  "@barcodeIsbnHint": {},
   "barcodeInvalid": "That is not a valid ISBN",
-  "@barcodeInvalid": {},
   "barcodeNotFound": "No book found for {isbn}",
-  "@barcodeNotFound": {"placeholders": {"isbn": {"type": "String"}}},
+  "@barcodeNotFound": {
+    "placeholders": {
+      "isbn": {
+        "type": "String"
+      }
+    }
+  },
   "barcodeCameraDenied": "The camera is not available. Allow camera access or type the ISBN instead.",
-  "@barcodeCameraDenied": {},
   "themesTitle": "Openings & endings",
-  "@themesTitle": {},
-  "themesOpening": "Opening",
-  "@themesOpening": {},
-  "themesEnding": "Ending",
-  "@themesEnding": {},
   "themesPlayVideo": "Play video",
-  "@themesPlayVideo": {},
   "themesPlayAudio": "Play audio only",
-  "@themesPlayAudio": {},
   "themesOpenSite": "Open on AnimeThemes",
-  "@themesOpenSite": {},
   "themesCredit": "Themes from AnimeThemes",
-  "@themesCredit": {},
   "themesVersions": "Versions",
-  "@themesVersions": {},
-  "muTitle": "MangaUpdates",
-  "@muTitle": {},
-  "muReleases": "Recent releases",
-  "@muReleases": {},
-  "muNoReleases": "No recent releases",
-  "@muNoReleases": {},
-  "muLicensed": "Licensed",
-  "@muLicensed": {},
-  "muOpen": "View on MangaUpdates",
-  "@muOpen": {},
-  "muCredit": "Data from MangaUpdates",
-  "@muCredit": {},
-  "muPublishers": "Publishers",
-  "@muPublishers": {},
   "sauceTitle": "Find the source",
-  "@sauceTitle": {},
   "sauceIntro": "Upload a manga page or an artwork, or paste its link, to find where it comes from.",
-  "@sauceIntro": {},
   "sauceKeyTitle": "SauceNAO API key",
-  "@sauceKeyTitle": {},
   "sauceKeyHint": "Optional, raises the daily search limit",
-  "@sauceKeyHint": {},
   "sauceKeyDesc": "Get a free key at saucenao.com/user.php",
-  "@sauceKeyDesc": {},
-  "sauceSearchTitle": "Search this title",
-  "@sauceSearchTitle": {},
   "sauceOpen": "Open source",
-  "@sauceOpen": {},
   "sauceCredit": "Image search by SauceNAO",
-  "@sauceCredit": {},
   "sauceEmpty": "No match found",
-  "@sauceEmpty": {},
   "sauceTooltip": "Find the source of a manga page or artwork",
-  "@sauceTooltip": {},
-  "sauceLowMatch": "Low match",
-  "@sauceLowMatch": {},
   "trendzTitle": "Anime charts",
-  "@trendzTitle": {},
   "trendzAnime": "Anime",
-  "@trendzAnime": {},
   "trendzFemale": "Female characters",
-  "@trendzFemale": {},
   "trendzMale": "Male characters",
-  "@trendzMale": {},
   "trendzCouple": "Couples",
-  "@trendzCouple": {},
   "trendzCredit": "Weekly charts by AniTrendz",
-  "@trendzCredit": {},
   "trendzNew": "NEW",
-  "@trendzNew": {},
-  "trendzSearch": "Search this title",
-  "@trendzSearch": {},
   "trendzEmpty": "The chart is empty",
-  "@trendzEmpty": {},
   "shareCard": "Share card",
-  "@shareCard": {},
   "shareCardList": "Share list card",
-  "@shareCardList": {},
-  "muNotFound": "No MangaUpdates match for this title",
-  "@muNotFound": {},
-  "shareCardWorking": "Making the card\u2026",
-  "@shareCardWorking": {},
   "shareCardSaved": "Card saved",
-  "@shareCardSaved": {},
   "shareCardFailed": "Could not make the card",
-  "@shareCardFailed": {},
   "shareCardListEmpty": "Your list has nothing to share yet",
-  "@shareCardListEmpty": {},
   "shareCardTop": "My top picks",
-  "@shareCardTop": {},
   "themesEpisodes": "Episodes {eps}",
-  "@themesEpisodes": {"placeholders": {"eps": {"type": "String"}}},
-  "muLatest": "Chapter {count}",
-  "@muLatest": {"placeholders": {"count": {"type": "String"}}},
-  "muRating": "{rating} from {votes} votes",
-  "@muRating": {"placeholders": {"rating": {"type": "String"},"votes": {"type": "String"}}},
+  "@themesEpisodes": {
+    "placeholders": {
+      "eps": {
+        "type": "String"
+      }
+    }
+  },
   "sauceSimilarity": "{percent}% match",
-  "@sauceSimilarity": {"placeholders": {"percent": {"type": "String"}}},
-  "trendzWeek": "Week {week} \u00b7 {season}",
-  "@trendzWeek": {"placeholders": {"week": {"type": "String"},"season": {"type": "String"}}},
+  "@sauceSimilarity": {
+    "placeholders": {
+      "percent": {
+        "type": "String"
+      }
+    }
+  },
+  "trendzWeek": "Week {week} · {season}",
+  "@trendzWeek": {
+    "placeholders": {
+      "week": {
+        "type": "String"
+      },
+      "season": {
+        "type": "String"
+      }
+    }
+  },
   "trendzVotes": "{count} votes",
-  "@trendzVotes": {"placeholders": {"count": {"type": "String"}}},
+  "@trendzVotes": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "trendzPeak": "Peak #{rank}",
-  "@trendzPeak": {"placeholders": {"rank": {"type": "String"}}},
+  "@trendzPeak": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
   "trendzWeeks": "{count} weeks in the top ten",
-  "@trendzWeeks": {"placeholders": {"count": {"type": "String"}}},
-  "shareCardEntries": "{count} titles",
-  "@shareCardEntries": {"placeholders": {"count": {"type": "String"}}},
+  "@trendzWeeks": {
+    "placeholders": {
+      "count": {
+        "type": "String"
+      }
+    }
+  },
   "imageSearchTitle": "Search by image",
   "imageSearchTooltip": "Find an anime from a screenshot",
   "imageSearchIntro": "Pick a screenshot or paste an image link and trace.moe will find the episode and the moment it comes from.",
@@ -2032,12 +2191,30 @@
   "imageSearchEmpty": "No match found",
   "imageSearchAdult": "18+",
   "imageSearchEpisode": "Episode {number}",
-  "@imageSearchEpisode": {"placeholders": {"number": {"type": "String"}}},
+  "@imageSearchEpisode": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "imageSearchAt": "at {time}",
-  "@imageSearchAt": {"placeholders": {"time": {"type": "String"}}},
+  "@imageSearchAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "imageSearchPreview": "Preview clip",
   "imageSearchSimilarity": "{percent}% match",
-  "@imageSearchSimilarity": {"placeholders": {"percent": {"type": "int"}}},
+  "@imageSearchSimilarity": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "imageSearchCredit": "Powered by trace.moe",
   "imageSearchOpenFailed": "Couldn't open this title",
   "groups": "Groups",
@@ -2051,7 +2228,13 @@
   "groupsEmptyYours": "You haven't joined any groups yet",
   "groupsSignIn": "Sign in to see the groups you joined",
   "groupsMembersCount": "{count, plural, =1{1 member} other{{count} members}}",
-  "@groupsMembersCount": {"placeholders": {"count": {"type": "int"}}},
+  "@groupsMembersCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "groupsJoin": "Join",
   "groupsJoined": "Joined",
   "groupsLeave": "Leave group",
@@ -2076,7 +2259,13 @@
   "groupsLanguage": "Language",
   "groupsCreated": "Created",
   "groupsLeaders": "{count, plural, =1{1 leader} other{{count} leaders}}",
-  "@groupsLeaders": {"placeholders": {"count": {"type": "int"}}},
+  "@groupsLeaders": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "groupsPrivacy": "Privacy",
   "notificationsAll": "All",
   "notificationsAiring": "Airing",
@@ -2094,24 +2283,57 @@
   "notificationsSettings": "Notification settings",
   "notificationsPollTitle": "Check for new notifications",
   "notificationsPollDesc": "Every {minutes} minutes while the app is open",
-  "@notificationsPollDesc": {"placeholders": {"minutes": {"type": "int"}}},
+  "@notificationsPollDesc": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "notificationsNotifyAbout": "Notify me about",
   "notificationsCommentsHeader": "Comment notifications",
   "systemNotificationsDescFor": "Show a system notification for each unread {service} notification while the app is running.",
-  "@systemNotificationsDescFor": {"placeholders": {"service": {"type": "String"}}},
+  "@systemNotificationsDescFor": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
   "notificationsTestSent": "Test notification sent",
   "notificationsTestDenied": "Notifications are not allowed for Dartotsu. Turn them on in system settings.",
   "notificationsTestHint": "Long press to send a test notification",
   "notificationsTestSample": "This is a test notification",
   "commentsNoticeReplyIn": "{name} replied to your comment in {media}",
-  "@commentsNoticeReplyIn": {"placeholders": {"name": {"type": "String"}, "media": {"type": "String"}}},
+  "@commentsNoticeReplyIn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "media": {
+        "type": "String"
+      }
+    }
+  },
   "imageSearchNotLink": "That doesn't look like a link",
   "imageSearchQuota": "Search quota exceeded",
   "imageSearchBusy": "Too many requests, try again in a moment",
   "imageSearchFailed": "Search failed ({code})",
-  "@imageSearchFailed": {"placeholders": {"code": {"type": "int"}}},
+  "@imageSearchFailed": {
+    "placeholders": {
+      "code": {
+        "type": "int"
+      }
+    }
+  },
   "notificationsNewCount": "{count} new notifications",
-  "@notificationsNewCount": {"placeholders": {"count": {"type": "int"}}},
+  "@notificationsNewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "reactionsTitle": "Reactions",
   "reactionsNeedEntry": "Add this title to your list before reacting",
   "reactionsAdd": "Add a reaction",
@@ -2119,7 +2341,7 @@
   "reactionsPost": "Post",
   "reactionsFailed": "Couldn't update the reaction",
   "settingsWatch": "Watch & read",
-  "settingsWatchDesc": "Episode lists, source matching and episode details",
+  "settingsWatchDesc": "Anime, manga and novel options, local play and shared defaults",
   "watchSettingsLayout": "Episode list",
   "watchSettingsSources": "Sources",
   "watchSettingsMetadata": "Episode details",
@@ -2137,9 +2359,7 @@
   "watchBlurUnwatched": "Hide spoiler thumbnails",
   "watchBlurUnwatchedDesc": "Blur the thumbnail of episodes you have not watched yet",
   "watchResumeShelf": "Resume shelf",
-  "@watchResumeShelf": {},
   "watchResumeShelfDesc": "Show the Resume row on Home",
-  "@watchResumeShelfDesc": {},
   "watchMarkOnLongPress": "Long press marks progress",
   "watchMarkOnLongPressDesc": "Long press an episode or chapter to mark it watched or unwatched",
   "watchMatching": "Source matching",
@@ -2156,31 +2376,85 @@
   "watchClearMetadataDesc": "Forget the cached episode details so they are fetched again",
   "watchMetadataCleared": "Episode details will be fetched again",
   "watchEpisodeCount": "{count, plural, =1{1 Episode} other{{count} Episodes}}",
-  "@watchEpisodeCount": {"placeholders": {"count": {"type": "int"}}},
+  "@watchEpisodeCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "watchChapterCount": "{count, plural, =1{1 Chapter} other{{count} Chapters}}",
-  "@watchChapterCount": {"placeholders": {"count": {"type": "int"}}},
+  "@watchChapterCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "watchEpisodeNumber": "Episode {number}",
-  "@watchEpisodeNumber": {"placeholders": {"number": {"type": "String"}}},
+  "@watchEpisodeNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "watchChapterNumber": "Chapter {number}",
-  "@watchChapterNumber": {"placeholders": {"number": {"type": "String"}}},
+  "@watchChapterNumber": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "watchSearching": "Searching…",
   "watchSearchingFor": "Searching: {term}",
-  "@watchSearchingFor": {"placeholders": {"term": {"type": "String"}}},
+  "@watchSearchingFor": {
+    "placeholders": {
+      "term": {
+        "type": "String"
+      }
+    }
+  },
   "watchSelected": "Selected: {title}",
-  "@watchSelected": {"placeholders": {"title": {"type": "String"}}},
+  "@watchSelected": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "watchFound": "Found: {title}",
-  "@watchFound": {"placeholders": {"title": {"type": "String"}}},
+  "@watchFound": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "watchNothingFound": "Nothing found on this source",
   "watchSearchFailed": "The source search failed",
   "watchLoadFailed": "Couldn't load the list",
   "watchSignInToTrack": "Sign in to track your progress",
   "watchInstallSource": "Install an extension to start {action}",
-  "@watchInstallSource": {"placeholders": {"action": {"type": "String"}}},
+  "@watchInstallSource": {
+    "placeholders": {
+      "action": {
+        "type": "String"
+      }
+    }
+  },
   "watchSourceMissing": "This source isn't installed",
   "watchWrongTitle": "Wrong title?",
   "watchSearchAgain": "Search again",
   "watchSearchSource": "Search {source}",
-  "@watchSearchSource": {"placeholders": {"source": {"type": "String"}}},
+  "@watchSearchSource": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "watchSource": "Source",
   "watchOptions": "Options",
   "watchReverse": "Reverse order",
@@ -2203,9 +2477,24 @@
   "watchOpenWebView": "Open in web view",
   "watchOpenWebViewDesc": "Solve a Cloudflare check or log in; the cookies are shared with the source requests",
   "watchCookieCount": "{count, plural, =0{No cookies saved for {host}} =1{1 cookie saved for {host}} other{{count} cookies saved for {host}}}",
-  "@watchCookieCount": {"placeholders": {"count": {"type": "int"}, "host": {"type": "String"}}},
+  "@watchCookieCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "host": {
+        "type": "String"
+      }
+    }
+  },
   "watchClearanceActive": "Cloudflare clearance active, {time}",
-  "@watchClearanceActive": {"placeholders": {"time": {"type": "String"}}},
+  "@watchClearanceActive": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "watchClearanceMissing": "No Cloudflare clearance cookie",
   "watchClearanceSession": "lasts until the app closes",
   "watchAgentShared": "Requests use the web view's user agent, which Cloudflare checks",
@@ -2213,157 +2502,95 @@
   "watchTestConnection": "Test connection",
   "watchSolveChallenge": "Solve it",
   "watchProbeOk": "Reachable (HTTP {code})",
-  "@watchProbeOk": {"placeholders": {"code": {"type": "int"}}},
+  "@watchProbeOk": {
+    "placeholders": {
+      "code": {
+        "type": "int"
+      }
+    }
+  },
   "watchProbeChallenge": "Cloudflare is still asking for a check",
   "watchProbeBlocked": "Blocked by the site (HTTP {code})",
-  "@watchProbeBlocked": {"placeholders": {"code": {"type": "int"}}},
+  "@watchProbeBlocked": {
+    "placeholders": {
+      "code": {
+        "type": "int"
+      }
+    }
+  },
   "watchProbeFailed": "The site could not be reached",
   "watchClearCookies": "Clear cookies for this site",
   "watchCookiesCleared": "Cookies cleared",
-  "watchResults": "Results",
   "watchMetaSource": "Episode details from",
   "watchMetaAuto": "Automatic",
   "watchMetaOff": "Off",
-  "settingsPlayer": "Player",
-  "@settingsPlayer": {},
-  "settingsPlayerDesc": "Playback, subtitles, shaders, mpv and opening files",
-  "@settingsPlayerDesc": {},
   "playerSettingsTitle": "Player settings",
-  "@playerSettingsTitle": {},
   "playerSectionPlayback": "Playback",
-  "@playerSectionPlayback": {},
   "playerSectionSkip": "Skipping",
-  "@playerSectionSkip": {},
   "playerSectionGestures": "Controls",
-  "@playerSectionGestures": {},
   "playerSectionSubtitles": "Subtitles",
-  "@playerSectionSubtitles": {},
   "playerSectionShaders": "Shaders",
-  "@playerSectionShaders": {},
   "playerSectionEngine": "Engine",
-  "@playerSectionEngine": {},
   "playerSectionMpv": "mpv",
-  "@playerSectionMpv": {},
-  "playerSectionOpen": "Open media",
-  "@playerSectionOpen": {},
   "playerSpeed": "Playback speed",
-  "@playerSpeed": {},
   "playerCursedSpeed": "Extra speeds",
-  "@playerCursedSpeed": {},
   "playerCursedSpeedDesc": "Add speeds up to 10x to the list",
-  "@playerCursedSpeedDesc": {},
   "playerResize": "Resize mode",
-  "@playerResize": {},
   "playerFitFit": "Fit",
-  "@playerFitFit": {},
   "playerFitCover": "Cover",
-  "@playerFitCover": {},
   "playerFitStretch": "Stretch",
-  "@playerFitStretch": {},
   "playerSkipDuration": "Skip button length",
-  "@playerSkipDuration": {},
   "playerSkipDurationDesc": "Seconds the skip button jumps outside openings and endings",
-  "@playerSkipDurationDesc": {},
   "playerSeekDuration": "Double tap seek",
-  "@playerSeekDuration": {},
   "playerSeekDurationDesc": "Seconds to jump on a double tap or arrow key",
-  "@playerSeekDurationDesc": {},
   "playerAutoPlay": "Play next automatically",
-  "@playerAutoPlay": {},
   "playerAutoPlayDesc": "Start the next episode when this one ends",
-  "@playerAutoPlayDesc": {},
   "playerResume": "Resume where you left off",
-  "@playerResume": {},
   "playerResumeDesc": "Continue an episode from its last position",
-  "@playerResumeDesc": {},
   "playerOrientation": "Orientation",
-  "@playerOrientation": {},
   "playerOrientationAuto": "Follow the device",
-  "@playerOrientationAuto": {},
   "playerOrientationLandscape": "Landscape",
-  "@playerOrientationLandscape": {},
   "playerOrientationPortrait": "Portrait",
-  "@playerOrientationPortrait": {},
   "playerAutoSkipOpening": "Skip openings",
-  "@playerAutoSkipOpening": {},
   "playerAutoSkipEnding": "Skip endings",
-  "@playerAutoSkipEnding": {},
   "playerAutoSkipRecap": "Skip recaps",
-  "@playerAutoSkipRecap": {},
   "playerAutoSkipDesc": "Jump past it as soon as it starts, using AniSkip and stream timestamps",
-  "@playerAutoSkipDesc": {},
   "playerSkipOnce": "Skip once only",
-  "@playerSkipOnce": {},
   "playerSkipOnceDesc": "Don't skip the same part again if you seek back into it",
-  "@playerSkipOnceDesc": {},
   "playerAdjustBrightness": "Brightness gesture",
-  "@playerAdjustBrightness": {},
   "playerAdjustBrightnessDesc": "Swipe up and down on the right half of the screen",
-  "@playerAdjustBrightnessDesc": {},
   "playerAdjustVolume": "Volume gesture",
-  "@playerAdjustVolume": {},
   "playerAdjustVolumeDesc": "Swipe up and down on the left half of the screen",
-  "@playerAdjustVolumeDesc": {},
   "playerHoldToSpeed": "Hold to speed up",
-  "@playerHoldToSpeed": {},
   "playerHoldToSpeedDesc": "Press and hold the video to play faster, drag sideways to change the speed",
-  "@playerHoldToSpeedDesc": {},
   "playerThumbless": "Thicker seek bar",
-  "@playerThumbless": {},
   "playerThumblessDesc": "A thick bar without a thumb",
-  "@playerThumblessDesc": {},
   "playerShowSubtitles": "Show subtitles",
-  "@playerShowSubtitles": {},
   "playerShowSubtitlesDesc": "Turn off to hide every subtitle track",
-  "@playerShowSubtitlesDesc": {},
   "playerSubtitleLanguage": "Preferred subtitle language",
-  "@playerSubtitleLanguage": {},
   "playerSubtitleSize": "Subtitle size",
-  "@playerSubtitleSize": {},
   "playerSubtitleWeight": "Subtitle weight",
-  "@playerSubtitleWeight": {},
   "playerSubtitleBottom": "Subtitle bottom padding",
-  "@playerSubtitleBottom": {},
   "playerSubtitleFont": "Subtitle font",
-  "@playerSubtitleFont": {},
   "playerSubtitleColor": "Subtitle colour",
-  "@playerSubtitleColor": {},
   "playerSubtitleBackground": "Subtitle background",
-  "@playerSubtitleBackground": {},
   "playerSubtitleOutline": "Subtitle outline",
-  "@playerSubtitleOutline": {},
   "playerLibass": "Use libass",
-  "@playerLibass": {},
   "playerLibassDesc": "Render styled .ass subtitles. The size, colour and font above then no longer apply",
-  "@playerLibassDesc": {},
   "playerShaders": "Shaders",
-  "@playerShaders": {},
   "playerShadersEnable": "Enable shaders",
-  "@playerShadersEnable": {},
   "playerShadersEnableDesc": "Upscale and clean the picture with GLSL shaders such as Anime4K",
-  "@playerShadersEnableDesc": {},
   "playerShadersOff": "Shaders off",
-  "@playerShadersOff": {},
   "playerShadersMissing": "Anime4K is not installed",
-  "@playerShadersMissing": {},
   "playerShadersMissingDesc": "Download the Anime4K shader pack (about 0.8 MB) to use the built-in modes.",
-  "@playerShadersMissingDesc": {},
   "playerShadersDownload": "Download Anime4K",
-  "@playerShadersDownload": {},
   "playerPictureSave": "Save this frame",
-  "@playerPictureSave": {},
   "playerPictureOriginal": "Original",
-  "@playerPictureOriginal": {},
   "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
-  "@playerPictureOriginalDesc": {},
   "playerPictureProcessed": "With shaders and colors",
-  "@playerPictureProcessed": {},
   "playerPictureProcessedDesc": "The frame as you see it now",
-  "@playerPictureProcessedDesc": {},
   "playerPictureSaved": "Frame saved",
-  "@playerPictureSaved": {},
   "playerPictureSaveFailed": "Could not save the frame",
-  "@playerPictureSaveFailed": {},
   "playerShadersPreview": "Preview on this frame",
   "playerShadersUse": "Use this",
   "playerPicture": "Picture",
@@ -2390,581 +2617,354 @@
   "playerSoftwareRender": "Software rendering",
   "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
   "playerShadersCustomFiles": "Your shaders",
-  "@playerShadersCustomFiles": {},
   "playerShadersCustom": "Custom shaders",
-  "@playerShadersCustom": {},
   "playerShadersImport": "Import .glsl",
-  "@playerShadersImport": {},
   "playerShadersNone": "Import your own .glsl or .hook files and tick them to chain them",
-  "@playerShadersNone": {},
   "playerShadersBadFile": "Choose a .glsl or .hook shader file",
-  "@playerShadersBadFile": {},
   "playerDecoder": "Decoder",
-  "@playerDecoder": {},
   "playerDecoderAuto": "Auto",
-  "@playerDecoderAuto": {},
   "playerDecoderAutoSafe": "Auto (safe)",
-  "@playerDecoderAutoSafe": {},
   "playerDecoderSoftware": "Software",
-  "@playerDecoderSoftware": {},
   "playerDecoderHardware": "Hardware",
-  "@playerDecoderHardware": {},
   "playerDecoderHardwarePlus": "Hardware+",
-  "@playerDecoderHardwarePlus": {},
   "playerVideoOutput": "Video output",
-  "@playerVideoOutput": {},
   "playerAudioChannels": "Audio channels",
-  "@playerAudioChannels": {},
   "playerBuffer": "Buffer size (MB)",
-  "@playerBuffer": {},
   "playerBufferDesc": "Memory the player may use to buffer a stream",
-  "@playerBufferDesc": {},
   "playerUseMpvConf": "Use mpv.conf",
-  "@playerUseMpvConf": {},
   "playerUseMpvConfDesc": "Apply the options in your mpv.conf when playback starts",
-  "@playerUseMpvConfDesc": {},
   "playerMpvConf": "mpv.conf",
-  "@playerMpvConf": {},
   "playerMpvConfEdit": "Edit the mpv configuration",
-  "@playerMpvConfEdit": {},
   "playerMpvConfDesc": "One option per line, like --hwdec=auto in a normal mpv.conf. Profiles in [brackets] are ignored.",
-  "@playerMpvConfDesc": {},
   "playerMpvConfSaved": "mpv.conf saved",
-  "@playerMpvConfSaved": {},
   "playerUseScripts": "Use mpv scripts",
-  "@playerUseScripts": {},
   "playerUseScriptsDesc": "Load the plugins from the scripts folder. They need a libmpv build with Lua or JavaScript support",
-  "@playerUseScriptsDesc": {},
   "playerScripts": "mpv scripts",
-  "@playerScripts": {},
   "playerScriptsManage": "Add, remove and switch plugins",
-  "@playerScriptsManage": {},
   "playerScriptsAdd": "Add script",
-  "@playerScriptsAdd": {},
   "playerScriptsDesc": "Lua, JavaScript and native plugins placed here are loaded when playback starts.",
-  "@playerScriptsDesc": {},
   "playerScriptsNone": "No scripts yet",
-  "@playerScriptsNone": {},
   "playerScriptsBadFile": "Choose a .lua, .js or native plugin file",
-  "@playerScriptsBadFile": {},
   "playerTuning": "Advanced video tuning",
-  "@playerTuning": {},
   "playerTuningDesc": "Override sync, caching, scaling and tone mapping. Wrong values can hurt playback",
-  "@playerTuningDesc": {},
   "playerVideoSync": "Video sync",
-  "@playerVideoSync": {},
   "playerInterpolation": "Frame interpolation",
-  "@playerInterpolation": {},
   "playerInterpolationDesc": "Smooth motion, needs display-resample sync",
-  "@playerInterpolationDesc": {},
   "playerPitch": "Pitch correction",
-  "@playerPitch": {},
   "playerPitchDesc": "Keep voices natural at other speeds",
-  "@playerPitchDesc": {},
   "playerCacheSeconds": "Cache (seconds)",
-  "@playerCacheSeconds": {},
   "playerReadahead": "Read ahead (seconds)",
-  "@playerReadahead": {},
   "playerThreads": "Decoder threads",
-  "@playerThreads": {},
   "playerDeband": "Deband",
-  "@playerDeband": {},
   "playerDebandDesc": "Reduce colour banding in gradients",
-  "@playerDebandDesc": {},
   "playerDebandIterations": "Deband iterations",
-  "@playerDebandIterations": {},
   "playerDebandThreshold": "Deband threshold",
-  "@playerDebandThreshold": {},
   "playerCorrectDownscaling": "Correct downscaling",
-  "@playerCorrectDownscaling": {},
   "playerSigmoid": "Sigmoid upscaling",
-  "@playerSigmoid": {},
   "playerScale": "Upscaler",
-  "@playerScale": {},
   "playerCscale": "Chroma upscaler",
-  "@playerCscale": {},
   "playerDscale": "Downscaler",
-  "@playerDscale": {},
   "playerToneMapping": "Tone mapping",
-  "@playerToneMapping": {},
   "playerTargetPeak": "Target peak",
-  "@playerTargetPeak": {},
   "playerOpenFiles": "Open video files",
-  "@playerOpenFiles": {},
   "playerOpenFilesDesc": "Play files from this device",
-  "@playerOpenFilesDesc": {},
   "playerOpenFolder": "Open a folder",
-  "@playerOpenFolder": {},
   "playerOpenFolderDesc": "Play every video in a folder as a playlist",
-  "@playerOpenFolderDesc": {},
   "playerNetworkStream": "Network stream",
-  "@playerNetworkStream": {},
   "playerNetworkStreamDesc": "Open a direct video or HLS link",
-  "@playerNetworkStreamDesc": {},
   "playerStreamUrl": "Stream URL",
-  "@playerStreamUrl": {},
   "playerStreamReferer": "Referer (optional)",
-  "@playerStreamReferer": {},
   "playerTorrent": "Torrent",
-  "@playerTorrent": {},
   "playerTorrentDesc": "Stream a magnet link or .torrent file",
-  "@playerTorrentDesc": {},
   "playerMagnetLink": "Magnet link or torrent URL",
-  "@playerMagnetLink": {},
   "playerPickTorrent": "Choose a .torrent file",
-  "@playerPickTorrent": {},
   "playerTorrentMissing": "Install the torrent addon from Settings > Addons first",
-  "@playerTorrentMissing": {},
   "playerNoVideos": "No playable videos found",
-  "@playerNoVideos": {},
   "playerReset": "Reset player settings",
-  "@playerReset": {},
   "playerResetDesc": "Restore every player option to its default",
-  "@playerResetDesc": {},
   "playerResetConfirm": "Reset all player settings?",
-  "@playerResetConfirm": {},
   "playerResetDone": "Player settings reset",
-  "@playerResetDone": {},
   "playerQuality": "Quality",
-  "@playerQuality": {},
   "streamGroupSub": "Sub",
-  "@streamGroupSub": {},
   "streamGroupHardSub": "Hard Sub",
-  "@streamGroupHardSub": {},
   "streamGroupSoftSub": "Soft Sub",
-  "@streamGroupSoftSub": {},
   "streamGroupDub": "Dub",
-  "@streamGroupDub": {},
   "streamGroupRaw": "Raw",
-  "@streamGroupRaw": {},
   "streamGroupOther": "Other",
-  "@streamGroupOther": {},
   "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
-  "@streamsCount": {"placeholders": {"count": {"type": "int"}}},
+  "@streamsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "playerStreams": "Streams",
-  "@playerStreams": {},
   "playerAutoSelect": "Auto select stream",
-  "@playerAutoSelect": {},
   "playerAutoSelectDesc": "Pick the stream most like your last choice for this title",
-  "@playerAutoSelectDesc": {},
   "playerLoadingStreams": "Looking for streams…",
-  "@playerLoadingStreams": {},
   "playerNoStreams": "This episode has no streams",
-  "@playerNoStreams": {},
   "playerNoStreamsTitle": "No streams found",
-  "@playerNoStreamsTitle": {},
   "playerFailed": "Playback failed",
-  "@playerFailed": {},
   "playerTorrentNeeded": "This stream is a torrent",
-  "@playerTorrentNeeded": {},
   "playerTorrentNeededDesc": "Install the torrent addon to play magnet links and .torrent files",
-  "@playerTorrentNeededDesc": {},
   "playerOpenAddons": "Open addons",
-  "@playerOpenAddons": {},
   "playerTryAnotherStream": "Try another stream",
-  "@playerTryAnotherStream": {},
   "playerEpisodes": "Episodes",
-  "@playerEpisodes": {},
   "playerLock": "Lock controls",
-  "@playerLock": {},
   "playerFullscreen": "Fullscreen",
-  "@playerFullscreen": {},
-  "settingsReader": "Reader",
-  "@settingsReader": {},
-  "settingsReaderDesc": "Manga, manhwa and novel reading",
-  "@settingsReaderDesc": {},
   "readerChapters": "Chapters",
-  "@readerChapters": {},
   "readerSettingsTitle": "Reader settings",
-  "@readerSettingsTitle": {},
   "readerPreviousChapter": "Previous chapter",
-  "@readerPreviousChapter": {},
   "readerNextChapter": "Next chapter",
-  "@readerNextChapter": {},
   "readerFirstChapter": "This is the first chapter",
-  "@readerFirstChapter": {},
   "readerLastChapter": "You're all caught up",
-  "@readerLastChapter": {},
   "readerFailed": "Couldn't open this chapter",
-  "@readerFailed": {},
   "readerOpenBook": "Open a book",
-  "@readerOpenBook": {},
-  "readerOpenBookDesc": "Read an epub from your files in the novel reader",
-  "@readerOpenBookDesc": {},
+  "readerOpenBookDesc": "Read an epub (novel reader) or a PDF (manga reader) from your files",
   "readerNoText": "This chapter has no text",
-  "@readerNoText": {},
   "readerPerTitle": "Only for this title",
-  "@readerPerTitle": {},
   "readerPerTitleDesc": "Keep these reader settings for this title only",
-  "@readerPerTitleDesc": {},
   "readerSectionReading": "Reading",
-  "@readerSectionReading": {},
   "readerSectionControls": "Controls",
-  "@readerSectionControls": {},
   "readerSectionDisplay": "Display",
-  "@readerSectionDisplay": {},
   "readerSectionNovel": "Novel",
-  "@readerSectionNovel": {},
-  "readerSectionReset": "Reset",
-  "@readerSectionReset": {},
   "readerMode": "Reading mode",
-  "@readerMode": {},
   "readerModeAuto": "Auto (by series type)",
-  "@readerModeAuto": {},
   "readerModeRtl": "Right to left",
-  "@readerModeRtl": {},
   "readerModeLtr": "Left to right",
-  "@readerModeLtr": {},
   "readerModeVertical": "Vertical pages",
-  "@readerModeVertical": {},
   "readerModeWebtoon": "Webtoon",
-  "@readerModeWebtoon": {},
   "readerModeContinuous": "Continuous scroll",
-  "@readerModeContinuous": {},
   "readerScale": "Image scale",
-  "@readerScale": {},
   "readerScaleFit": "Fit screen",
-  "@readerScaleFit": {},
   "readerScaleWidth": "Fit width",
-  "@readerScaleWidth": {},
   "readerScaleHeight": "Fit height",
-  "@readerScaleHeight": {},
   "readerScaleOriginal": "Original size",
-  "@readerScaleOriginal": {},
   "readerScaleSmart": "Smart fit",
-  "@readerScaleSmart": {},
   "readerDoublePage": "Double pages",
-  "@readerDoublePage": {},
   "readerDoublePageDesc": "Show two pages side by side in landscape",
-  "@readerDoublePageDesc": {},
   "readerDoubleTapZoom": "Double tap to zoom",
-  "@readerDoubleTapZoom": {},
   "readerDoubleTapZoomDesc": "Zoom a page in and out with a double tap",
-  "@readerDoubleTapZoomDesc": {},
   "readerAnimate": "Page animation",
-  "@readerAnimate": {},
   "readerAnimateDesc": "Animate page turns",
-  "@readerAnimateDesc": {},
   "readerSidePadding": "Side padding",
-  "@readerSidePadding": {},
   "readerSidePaddingDesc": "Space beside the pages in percent",
-  "@readerSidePaddingDesc": {},
   "readerPageGap": "Page gap",
-  "@readerPageGap": {},
   "readerPageGapDesc": "Space between pages",
-  "@readerPageGapDesc": {},
   "readerAutoNext": "Continue into the next chapter",
-  "@readerAutoNext": {},
   "readerAutoNextDesc": "Load the next chapter while you read the end of this one",
-  "@readerAutoNextDesc": {},
   "readerPreload": "Preload pages",
-  "@readerPreload": {},
   "readerPreloadDesc": "How many pages to download ahead",
-  "@readerPreloadDesc": {},
   "readerTapZones": "Tap zones",
-  "@readerTapZones": {},
   "readerTapDefault": "Default",
-  "@readerTapDefault": {},
   "readerTapLShaped": "L-shaped",
-  "@readerTapLShaped": {},
   "readerTapKindle": "Kindle-like",
-  "@readerTapKindle": {},
   "readerTapEdge": "Edges only",
-  "@readerTapEdge": {},
   "readerTapOff": "Disabled",
-  "@readerTapOff": {},
   "readerInvertTaps": "Invert tap zones",
-  "@readerInvertTaps": {},
   "readerInvertTapsDesc": "Swap the previous and next areas",
-  "@readerInvertTapsDesc": {},
   "readerBackground": "Background",
-  "@readerBackground": {},
   "readerBackgroundBlack": "Black",
-  "@readerBackgroundBlack": {},
   "readerBackgroundGray": "Gray",
-  "@readerBackgroundGray": {},
   "readerBackgroundWhite": "White",
-  "@readerBackgroundWhite": {},
   "readerBackgroundTheme": "App theme",
-  "@readerBackgroundTheme": {},
   "readerFilter": "Color filter",
-  "@readerFilter": {},
   "readerFilterNone": "None",
-  "@readerFilterNone": {},
   "readerFilterGrayscale": "Grayscale",
-  "@readerFilterGrayscale": {},
   "readerFilterInvert": "Invert",
-  "@readerFilterInvert": {},
   "readerFilterSepia": "Sepia",
-  "@readerFilterSepia": {},
   "readerFilterQuality": "Image filter quality",
-  "@readerFilterQuality": {},
   "readerFilterQualityNone": "None (Nearest neighbor)",
-  "@readerFilterQualityNone": {},
   "readerFilterQualityLow": "Low (Bilinear)",
-  "@readerFilterQualityLow": {},
   "readerFilterQualityMedium": "Medium (Trilinear)",
-  "@readerFilterQualityMedium": {},
   "readerFilterQualityHigh": "High (Bicubic)",
-  "@readerFilterQualityHigh": {},
   "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
-  "@readerFilterQualityLanczos": {},
-  "readerFilterQualityDesc": "Resampling quality used when scaling manga pages",
-  "@readerFilterQualityDesc": {},
   "readerDim": "Dim",
-  "@readerDim": {},
   "readerDimDesc": "Darken the pages",
-  "@readerDimDesc": {},
   "readerPageNumber": "Page number",
-  "@readerPageNumber": {},
   "readerPageNumberDesc": "Show the page number while reading",
-  "@readerPageNumberDesc": {},
   "readerFullscreen": "Fullscreen",
-  "@readerFullscreen": {},
   "readerFullscreenDesc": "Hide the system bars",
-  "@readerFullscreenDesc": {},
   "readerCropBorders": "Crop borders",
-  "@readerCropBorders": {},
   "readerCropBordersDesc": "Trim blank white or black margins from pages",
-  "@readerCropBordersDesc": {},
   "readerLongPressSave": "Hold a page to save it",
-  "@readerLongPressSave": {},
   "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
-  "@readerLongPressSaveDesc": {},
   "readerVolumeKeys": "Volume keys turn pages",
-  "@readerVolumeKeys": {},
   "readerVolumeKeysDesc": "Volume down goes forward, volume up goes back",
-  "@readerVolumeKeysDesc": {},
   "readerBookmarks": "Bookmarks",
-  "@readerBookmarks": {},
   "readerBookmarkAdd": "Add bookmark",
-  "@readerBookmarkAdd": {},
   "readerBookmarkRemove": "Remove bookmark",
-  "@readerBookmarkRemove": {},
   "readerBookmarksEmpty": "No bookmarks yet",
-  "@readerBookmarksEmpty": {},
   "readerBookmarkPage": "Page {page} of {total}",
-  "@readerBookmarkPage": {"placeholders": {"page": {"type": "int"}, "total": {"type": "int"}}},
+  "@readerBookmarkPage": {
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "readerAutoScroll": "Auto scroll",
-  "@readerAutoScroll": {},
   "readerAutoScrollStop": "Stop auto scroll",
-  "@readerAutoScrollStop": {},
   "readerAutoScrollSpeed": "Auto scroll speed",
-  "@readerAutoScrollSpeed": {},
   "readerAutoScrollSpeedDesc": "How fast pages scroll or turn on their own",
-  "@readerAutoScrollSpeedDesc": {},
   "readerKeepOn": "Keep screen on",
-  "@readerKeepOn": {},
   "readerKeepOnDesc": "Stop the screen from turning off while reading",
-  "@readerKeepOnDesc": {},
   "readerOrientation": "Orientation",
-  "@readerOrientation": {},
   "readerOrientationFree": "Free",
-  "@readerOrientationFree": {},
   "readerOrientationPortrait": "Portrait",
-  "@readerOrientationPortrait": {},
   "readerOrientationLandscape": "Landscape",
-  "@readerOrientationLandscape": {},
   "readerSaveProgress": "Save progress",
-  "@readerSaveProgress": {},
   "readerSaveProgressDesc": "Remember your page and mark chapters as read",
-  "@readerSaveProgressDesc": {},
   "readerReset": "Reset reader settings",
-  "@readerReset": {},
   "readerResetDesc": "Back to the defaults",
-  "@readerResetDesc": {},
   "novelSize": "Text size",
-  "@novelSize": {},
   "novelFont": "Font",
-  "@novelFont": {},
   "novelLineHeight": "Line height",
-  "@novelLineHeight": {},
   "novelParagraph": "Paragraph spacing",
-  "@novelParagraph": {},
   "novelMargin": "Margins",
-  "@novelMargin": {},
   "novelTheme": "Reader theme",
-  "@novelTheme": {},
   "novelThemeApp": "App theme",
-  "@novelThemeApp": {},
   "novelThemeLight": "Light",
-  "@novelThemeLight": {},
   "novelThemeSepia": "Sepia",
-  "@novelThemeSepia": {},
   "novelThemeDark": "Dark",
-  "@novelThemeDark": {},
   "novelThemeBlack": "Black",
-  "@novelThemeBlack": {},
   "novelJustify": "Justify text",
-  "@novelJustify": {},
   "novelJustifyDesc": "Align text to both edges",
-  "@novelJustifyDesc": {},
   "trackProgressTitle": "Save progress?",
-  "@trackProgressTitle": {},
   "trackProgressAnime": "Track {name} on your list as you watch? Choose \"This device only\" to keep it local, or No to save nothing.",
-  "@trackProgressAnime": {"placeholders": {"name": {"type": "String"}}},
+  "@trackProgressAnime": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "trackProgressManga": "Track {name} on your list when you finish a chapter? Choose \"This device only\" to keep it local, or No to save nothing.",
-  "@trackProgressManga": {"placeholders": {"name": {"type": "String"}}},
+  "@trackProgressManga": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
-  "@trackProgressAnimeLocal": {"placeholders": {"name": {"type": "String"}}},
+  "@trackProgressAnimeLocal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
-  "@trackProgressMangaLocal": {"placeholders": {"name": {"type": "String"}}},
+  "@trackProgressMangaLocal": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "downloadClearQueue": "Clear queue",
-  "@downloadClearQueue": {},
   "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
-  "@downloadClearQueueConfirm": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadClearQueueConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "castTitle": "Cast to device",
-  "@castTitle": {},
   "castSearching": "Looking for devices on your network…",
-  "@castSearching": {},
   "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
-  "@castNoDevices": {},
   "castRefresh": "Search again",
-  "@castRefresh": {},
   "castFailed": "Could not start casting",
-  "@castFailed": {},
   "castStop": "Stop casting",
-  "@castStop": {},
   "castNowCasting": "Casting to {name}",
-  "@castNowCasting": {"placeholders": {"name": {"type": "String"}}},
+  "@castNowCasting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "castProtocolChromecast": "Chromecast",
-  "@castProtocolChromecast": {},
   "castProtocolDlna": "DLNA / Smart TV",
-  "@castProtocolDlna": {},
   "castProtocolRoku": "Roku",
-  "@castProtocolRoku": {},
   "castRokuNote": "Roku can't report or change the position",
-  "@castRokuNote": {},
   "castControls": "Controls",
-  "@castControls": {},
   "castVolume": "TV volume",
-  "@castVolume": {},
   "castSkipPart": "Skip {name}",
-  "@castSkipPart": {"placeholders": {"name": {"type": "String"}}},
-  "trackProgressRemember": "Remember my choice",
-  "@trackProgressRemember": {},
+  "@castSkipPart": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "trackProgressRememberSeries": "Remember for this series",
-  "@trackProgressRememberSeries": {},
   "trackProgressYes": "Save",
-  "@trackProgressYes": {},
   "trackProgressReset": "Save progress prompt reset for this type, it will ask again",
-  "@trackProgressReset": {},
   "trackProgressNo": "No",
-  "@trackProgressNo": {},
   "trackProgressOff": "Off",
-  "@trackProgressOff": {},
   "trackProgressLocal": "This device only",
-  "@trackProgressLocal": {},
   "trackProgressSettingAnime": "Track anime progress",
-  "@trackProgressSettingAnime": {},
   "trackProgressSettingManga": "Track manga and novel progress",
-  "@trackProgressSettingManga": {},
   "trackProgressSettingDesc": "What to do when you open an episode or finish a chapter",
-  "@trackProgressSettingDesc": {},
   "trackProgressAsk": "Ask",
-  "@trackProgressAsk": {},
   "trackProgressAlways": "Always",
-  "@trackProgressAlways": {},
-  "trackProgressNever": "Never",
-  "@trackProgressNever": {},
   "dantotsuImport": "Import from Dantotsu",
-  "@dantotsuImport": {},
   "dantotsuImportDesc": "Read a Dantotsu settings backup (.ani, or encrypted .sani)",
-  "@dantotsuImportDesc": {},
   "dantotsuPick": "Choose a Dantotsu backup",
-  "@dantotsuPick": {},
   "dantotsuNothing": "Nothing in this file can be imported",
-  "@dantotsuNothing": {},
   "dantotsuApply": "Import selected",
-  "@dantotsuApply": {},
   "dantotsuDone": "Imported {done} of {total}",
-  "@dantotsuDone": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@dantotsuDone": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "dantotsuGroupAccounts": "Accounts",
-  "@dantotsuGroupAccounts": {},
   "dantotsuGroupAppearance": "Appearance",
-  "@dantotsuGroupAppearance": {},
   "dantotsuGroupExtensions": "Extensions",
-  "@dantotsuGroupExtensions": {},
   "dantotsuGroupApp": "App",
-  "@dantotsuGroupApp": {},
   "dantotsuGroupPlayer": "Player",
-  "@dantotsuGroupPlayer": {},
   "dantotsuAnilist": "AniList login",
-  "@dantotsuAnilist": {},
   "dantotsuMal": "MyAnimeList login",
-  "@dantotsuMal": {},
   "dantotsuDiscord": "Discord Rich Presence token",
-  "@dantotsuDiscord": {},
   "dantotsuTheme": "Theme",
-  "@dantotsuTheme": {},
   "dantotsuReposAnime": "Anime extension repositories",
-  "@dantotsuReposAnime": {},
   "dantotsuReposManga": "Manga extension repositories",
-  "@dantotsuReposManga": {},
   "dantotsuReposNovel": "Novel extension repositories",
-  "@dantotsuReposNovel": {},
   "dantotsuUpdates": "Update check",
-  "@dantotsuUpdates": {},
   "dantotsuComments": "Comments",
-  "@dantotsuComments": {},
   "dantotsuActivity": "AniList notification polling",
-  "@dantotsuActivity": {},
   "dantotsuDns": "DNS provider",
-  "@dantotsuDns": {},
   "dantotsuPlayer": "Player speed and subtitle colours",
-  "@dantotsuPlayer": {},
   "dantotsuWarning": "This file holds login tokens. Keep it private.",
-  "@dantotsuWarning": {},
   "novelIndent": "Indent paragraphs",
-  "@novelIndent": {},
   "novelIndentDesc": "Start each paragraph with a first-line indent",
-  "@novelIndentDesc": {},
   "novelLetterSpacing": "Letter spacing",
-  "@novelLetterSpacing": {},
   "novelSectionTranslate": "Translation",
-  "@novelSectionTranslate": {},
   "sectionExperimental": "Experimental",
-  "@sectionExperimental": {},
   "kitsuGraphqlDetail": "Faster detail pages (GraphQL)",
-  "@kitsuGraphqlDetail": {},
   "kitsuGraphqlDetailDesc": "Load a title with its characters, staff and your entry in one request",
-  "@kitsuGraphqlDetailDesc": {},
   "togetherTitle": "Watch together",
-  "@togetherTitle": {},
   "togetherIntro": "Paste the room link your friend sent you. You join straight away and the player opens when they start watching.",
-  "@togetherIntro": {},
   "togetherName": "Your name",
-  "@togetherName": {},
-  "togetherRoom": "Room",
-  "@togetherRoom": {},
-  "togetherNewRoom": "New random room",
-  "@togetherNewRoom": {},
-  "togetherServer": "Server",
-  "@togetherServer": {},
-  "togetherPort": "Port",
-  "@togetherPort": {},
-  "togetherPassword": "Server password (optional)",
-  "@togetherPassword": {},
-  "togetherPublicNote": "Public servers have no password and rooms are open. Use a long room name and share it only with friends.",
-  "@togetherPublicNote": {},
-  "togetherConnect": "Connect",
-  "@togetherConnect": {},
   "togetherConnecting": "Connecting…",
-  "@togetherConnecting": {},
   "togetherLeave": "Leave room",
-  "@togetherLeave": {},
-  "togetherLeftRoom": "You left the room",
-  "@togetherLeftRoom": {},
-  "togetherReady": "Ready",
-  "@togetherReady": {},
   "togetherYou": "You",
-  "@togetherYou": {},
   "togetherNoChat": "No messages yet",
-  "@togetherNoChat": {},
   "togetherChatHint": "Message",
-  "@togetherChatHint": {},
   "togetherCopyInvite": "Copy invite",
-  "@togetherCopyInvite": {},
   "togetherShareInvite": "Share invite",
   "togetherShareText": "Watch with me on Dartotsu: {link}",
   "@togetherShareText": {
@@ -2975,122 +2975,140 @@
     }
   },
   "togetherInviteCopied": "Server and room copied",
-  "@togetherInviteCopied": {},
-  "togetherFileMismatch": "Different file or length",
-  "@togetherFileMismatch": {},
   "togetherConnectionLost": "Connection lost",
-  "@togetherConnectionLost": {},
   "togetherConnectedTo": "Connected to {room}",
-  "@togetherConnectedTo": {"placeholders": {"room": {"type": "String"}}},
+  "@togetherConnectedTo": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
   "togetherFailed": "Couldn't connect: {error}",
-  "@togetherFailed": {"placeholders": {"error": {"type": "String"}}},
+  "@togetherFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "togetherJoined": "{name} joined",
-  "@togetherJoined": {"placeholders": {"name": {"type": "String"}}},
+  "@togetherJoined": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "togetherLeft": "{name} left",
-  "@togetherLeft": {"placeholders": {"name": {"type": "String"}}},
+  "@togetherLeft": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "togetherPaused": "{name} paused",
-  "@togetherPaused": {"placeholders": {"name": {"type": "String"}}},
+  "@togetherPaused": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "togetherResumed": "{name} resumed",
-  "@togetherResumed": {"placeholders": {"name": {"type": "String"}}},
+  "@togetherResumed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "togetherSeeked": "{name} jumped to {time}",
-  "@togetherSeeked": {"placeholders": {"name": {"type": "String"}, "time": {"type": "String"}}},
-  "togetherOtherService": "The host is on {service}, syncing is off",
-  "@togetherOtherService": {"placeholders": {"service": {"type": "String"}}},
+  "@togetherSeeked": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      },
+      "time": {
+        "type": "String"
+      }
+    }
+  },
   "togetherFollowFailed": "Couldn't open the host's episode. Open it yourself.",
-  "@togetherFollowFailed": {},
-  "togetherHostRole": "Host a room",
-  "@togetherHostRole": {},
   "togetherJoinRole": "Join a room",
-  "@togetherJoinRole": {},
-  "togetherFollow": "Follow the host's episode",
-  "@togetherFollow": {},
-  "togetherFollowDesc": "Opens and switches episodes automatically when you use the same service",
-  "@togetherFollowDesc": {},
   "togetherOpenHost": "Open host's episode",
-  "@togetherOpenHost": {},
-  "togetherHostWatching": "Host: {title}",
-  "@togetherHostWatching": {"placeholders": {"title": {"type": "String"}}},
-  "togetherLiveChat": "Live chat",
-  "@togetherLiveChat": {},
   "togetherShowChat": "Show live chat",
-  "@togetherShowChat": {},
   "togetherWaitingHost": "Waiting for the host to start an episode",
-  "@togetherWaitingHost": {},
-  "togetherDifferentService": "The host is on another service, syncing is off",
-  "@togetherDifferentService": {},
-  "togetherNoSource": "Install an anime extension to follow the host",
-  "@togetherNoSource": {},
-  "togetherNoMatch": "{source} has no match for the host's title",
-  "@togetherNoMatch": {"placeholders": {"source": {"type": "String"}}},
-  "togetherNoEpisode": "{source} doesn't have the host's episode",
-  "@togetherNoEpisode": {"placeholders": {"source": {"type": "String"}}},
   "togetherRoomLink": "Room link",
-  "@togetherRoomLink": {},
   "togetherBadLink": "That isn't a room link",
-  "@togetherBadLink": {},
   "togetherHostClosed": "The host closed the room",
-  "@togetherHostClosed": {},
-  "togetherHostBadge": "Host",
-  "@togetherHostBadge": {},
   "togetherNowPlaying": "Now playing",
-  "@togetherNowPlaying": {},
   "togetherWatchingCount": "{count} watching",
-  "@togetherWatchingCount": {"placeholders": {"count": {"type": "int"}}},
+  "@togetherWatchingCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "togetherWantsPause": "{user} wants to pause",
-  "@togetherWantsPause": {"placeholders": {"user": {"type": "String"}}},
+  "@togetherWantsPause": {
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
   "togetherWantsResume": "{user} wants to resume",
-  "@togetherWantsResume": {"placeholders": {"user": {"type": "String"}}},
+  "@togetherWantsResume": {
+    "placeholders": {
+      "user": {
+        "type": "String"
+      }
+    }
+  },
   "togetherChip": "Together",
-  "@togetherChip": {},
   "togetherSettingsDesc": "Join a friend's room with a link",
-  "@togetherSettingsDesc": {},
-  "togetherNoPlayer": "Open an episode and it syncs with the room automatically. Chat and the member list work right now.",
-  "@togetherNoPlayer": {},
-  "togetherWatching": "{name} is watching {file}",
-  "@togetherWatching": {"placeholders": {"name": {"type": "String"}, "file": {"type": "String"}}},
   "novelBilingual": "Show original and translation",
-  "@novelBilingual": {},
   "novelBilingualDesc": "Each paragraph shows the original text with its translation below it",
-  "@novelBilingualDesc": {},
   "novelTranslateTo": "Translate to",
-  "@novelTranslateTo": {},
   "novelTranslateOff": "Off",
-  "@novelTranslateOff": {},
   "novelSectionSpeech": "Text to speech",
-  "@novelSectionSpeech": {},
   "novelSpeechRate": "Speech speed",
-  "@novelSpeechRate": {},
   "novelSpeechPitch": "Speech pitch",
-  "@novelSpeechPitch": {},
   "novelSpeak": "Read aloud",
-  "@novelSpeak": {},
   "novelSpeakStop": "Stop reading aloud",
-  "@novelSpeakStop": {},
   "novelTranslate": "Translate chapter",
-  "@novelTranslate": {},
   "novelTranslateShowOriginal": "Show original",
-  "@novelTranslateShowOriginal": {},
-  "novelTranslating": "Translating…",
-  "@novelTranslating": {},
   "novelTranslateFailed": "Translation failed: {error}",
-  "@novelTranslateFailed": {"placeholders": {"error": {"type": "String"}}},
+  "@novelTranslateFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "novelSpeechUnavailable": "Text to speech is not available on this device",
-  "@novelSpeechUnavailable": {},
   "novelSpeechVoice": "Voice",
-  "@novelSpeechVoice": {},
   "novelSpeechVoiceDefault": "System default",
-  "@novelSpeechVoiceDefault": {},
   "novelSpeakPrevious": "Previous line",
-  "@novelSpeakPrevious": {},
   "novelSpeakNext": "Next line",
-  "@novelSpeakNext": {},
   "novelTapPaging": "Tap edges to turn page",
-  "@novelTapPaging": {},
   "novelTapPagingDesc": "Tap the left or right side to scroll a page, the middle shows the controls",
   "novelPaged": "Page turning",
   "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
   "novelPageOf": "Page {current} of {total}",
-  "@novelPageOf": {"placeholders": {"current": {"type": "int"}, "total": {"type": "int"}}},
+  "@novelPageOf": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "novelPaginating": "Laying out pages",
   "novelTools": "Contents, search and highlights",
   "novelContents": "Contents",
@@ -3099,7 +3117,13 @@
   "novelSearchHint": "Search in this chapter",
   "novelSearchNone": "No matches",
   "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
-  "@novelSearchCount": {"placeholders": {"count": {"type": "int"}}},
+  "@novelSearchCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "novelHighlights": "Highlights",
   "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
   "novelHighlight": "Highlight",
@@ -3107,55 +3131,59 @@
   "novelHighlightNoteHint": "Add a note",
   "novelHighlightRemove": "Remove highlight",
   "novelHighlightFailed": "Couldn't match that selection to the text",
-  "@novelTapPagingDesc": {},
   "novelMinutesLeft": "{count} min left",
-  "@novelMinutesLeft": {"placeholders": {"count": {"type": "int"}}},
+  "@novelMinutesLeft": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "novelBold": "Bold text",
-  "@novelBold": {},
   "novelBoldDesc": "Use a heavier weight",
-  "@novelBoldDesc": {},
   "readerFinishedChapter": "Finished {chapter}",
-  "@readerFinishedChapter": {"placeholders": {"chapter": {"type": "String"}}},
+  "@readerFinishedChapter": {
+    "placeholders": {
+      "chapter": {
+        "type": "String"
+      }
+    }
+  },
   "readerNextUp": "Next: {chapter}",
-  "@readerNextUp": {"placeholders": {"chapter": {"type": "String"}}},
+  "@readerNextUp": {
+    "placeholders": {
+      "chapter": {
+        "type": "String"
+      }
+    }
+  },
   "readerPreviousUp": "Previous: {chapter}",
-  "@readerPreviousUp": {"placeholders": {"chapter": {"type": "String"}}},
+  "@readerPreviousUp": {
+    "placeholders": {
+      "chapter": {
+        "type": "String"
+      }
+    }
+  },
   "readerNoPages": "This chapter has no pages",
-  "@readerNoPages": {},
   "readerLoadingPages": "Loading pages…",
   "readerSlowPage": "Still loading this page…",
   "readerPageFailed": "Couldn't load this page",
-  "@readerLoadingPages": {},
   "playerShowComments": "Show comments",
-  "@playerShowComments": {},
   "playerHideComments": "Hide comments",
-  "@playerHideComments": {},
   "playerSubtitles": "Subtitles",
-  "@playerSubtitles": {},
   "playerSubtitlesOff": "Subtitles off",
-  "@playerSubtitlesOff": {},
   "playerAudio": "Audio",
-  "@playerAudio": {},
   "playerAddSubtitle": "Add subtitle file",
-  "@playerAddSubtitle": {},
   "playerAddAudio": "Add audio file",
-  "@playerAddAudio": {},
   "playerChapters": "Chapters",
-  "@playerChapters": {},
   "playerSkipSubmit": "Submit skip times",
-  "@playerSkipSubmit": {},
   "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
-  "@playerSkipSubmitDesc": {},
   "playerSkipStart": "Start",
-  "@playerSkipStart": {},
   "playerSkipEnd": "End",
-  "@playerSkipEnd": {},
   "playerSkipUseNow": "Use current position",
-  "@playerSkipUseNow": {},
   "playerSkipSend": "Submit to AniSkip",
-  "@playerSkipSend": {},
   "playerSkipSent": "Skip times submitted to AniSkip, thank you",
-  "@playerSkipSent": {},
   "playerSkipFailed": "AniSkip refused the skip times: {error}",
   "@playerSkipFailed": {
     "placeholders": {
@@ -3165,63 +3193,74 @@
     }
   },
   "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
-  "@playerUnsupported": {},
   "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
-  "@playerSkipNoMal": {},
   "playerNoChapters": "No chapters",
-  "@playerNoChapters": {},
   "playerTimestamp": "Timestamp",
-  "@playerTimestamp": {},
   "playerAutoPlayDelay": "Next episode countdown",
-  "@playerAutoPlayDelay": {},
   "playerWatchedAt": "Count as watched at",
-  "@playerWatchedAt": {},
   "playerNextIn": "Next episode in {seconds}s",
-  "@playerNextIn": {"placeholders": {"seconds": {"type": "int"}}},
+  "@playerNextIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "playerPlayNow": "Play now",
-  "@playerPlayNow": {},
   "playerAutoSkipOn": "{name}: will skip automatically for this title",
-  "@playerAutoSkipOn": {"placeholders": {"name": {"type": "String"}}},
+  "@playerAutoSkipOn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "playerAutoSkipOff": "{name}: will not skip automatically for this title",
-  "@playerAutoSkipOff": {"placeholders": {"name": {"type": "String"}}},
+  "@playerAutoSkipOff": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "playerAudioLanguage": "Preferred audio language",
-  "@playerAudioLanguage": {},
   "playerLanguageOrderHint": "Separate languages with commas. The first one found is used.",
-  "@playerLanguageOrderHint": {},
   "playerPip": "Picture in picture",
-  "@playerPip": {},
-  "playerPipRestore": "Back to the player",
-  "@playerPipRestore": {},
   "playerAutoPip": "Picture in picture on leave",
-  "@playerAutoPip": {},
   "playerAutoPipDesc": "Keep playing in a small window when you leave the app",
-  "@playerAutoPipDesc": {},
-  "playerAutoPlaying": "Playing {title} next\u2026",
-  "@playerAutoPlaying": {"placeholders": {"title": {"type": "String"}}},
+  "playerAutoPlaying": "Playing {title} next…",
+  "@playerAutoPlaying": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "playerShadersFailed": "Couldn't install the shaders: {error}",
-  "@playerShadersFailed": {"placeholders": {"error": {"type": "String"}}},
+  "@playerShadersFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
   "playerChapter": "Chapter {number}",
-  "@playerChapter": {"placeholders": {"number": {"type": "int"}}},
+  "@playerChapter": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "playerPerTitle": "Only for this title",
-  "@playerPerTitle": {},
   "playerPerTitleDesc": "Keep these options for this title and leave your defaults alone",
-  "@playerPerTitleDesc": {},
   "playerSwapGestures": "Swap swipe sides",
-  "@playerSwapGestures": {},
   "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
-  "@playerSwapGesturesDesc": {},
   "playerOpenBig": "Open in big view",
-  "@playerOpenBig": {},
   "playerOpenBigDesc": "Start the player fullscreen instead of with the episode list",
-  "@playerOpenBigDesc": {},
   "playerPauseOnBlur": "Pause when out of focus",
-  "@playerPauseOnBlur": {},
   "playerPauseOnBlurDesc": "Pause while the app is covered, like the notification panel, and resume when you come back",
-  "@playerPauseOnBlurDesc": {},
-  "playerHoldSpeed": "Hold speed",
-  "@playerHoldSpeed": {},
   "playerAudioOutput": "Audio output",
-  "@playerAudioOutput": {},
   "fontAppDefault": "App font",
   "fontImport": "Import font",
   "fontSample": "The quick brown fox jumps over the lazy dog",
@@ -3236,457 +3275,823 @@
   "playerOnlineMatch": "Matches this file",
   "playerOnlineEpisode": "Episode match",
   "playerOnlineDownloads": "{count} downloads",
-  "@playerOnlineFailed": {"placeholders": {"error": {"type": "String"}}},
-  "@playerOnlineDownloadFailed": {"placeholders": {"error": {"type": "String"}}},
-  "@playerOnlineDownloads": {"placeholders": {"count": {"type": "int"}}},
+  "@playerOnlineFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@playerOnlineDownloadFailed": {
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  },
+  "@playerOnlineDownloads": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "playerSeekPreview": "Seek preview",
   "playerSeekPreviewDesc": "Show a small frame preview above the seek bar while scrubbing. Opens a second low resolution decoder, so it uses extra data on streams.",
   "playerSettingsChip": "Settings",
   "playerAudioDevice": "Audio device",
   "settingsDownloads": "Downloads",
-  "@settingsDownloads": {},
   "settingsDownloadsDesc": "Offline episodes, queue and offline mode",
-  "@settingsDownloadsDesc": {},
   "downloadsTitle": "Downloads",
-  "@downloadsTitle": {},
   "widgetContinue": "Continue",
   "widgetReleases": "Releasing soon",
   "widgetMore": "Also in progress",
   "widgetNothing": "Nothing to continue yet",
   "downloadStorageTitle": "Storage",
   "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
-  "@downloadStorageSummary": {"placeholders": {"count": {"type": "int"}, "size": {"type": "String"}}},
+  "@downloadStorageSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "downloadStorageWatched": "{size} already watched or read",
-  "@downloadStorageWatched": {"placeholders": {"size": {"type": "String"}}},
+  "@downloadStorageWatched": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "downloadFreeUp": "Free up space",
   "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
-  "@downloadFreeUpConfirm": {"placeholders": {"count": {"type": "int"}, "size": {"type": "String"}}},
+  "@downloadFreeUpConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "downloadFreed": "Freed {size}",
-  "@downloadFreed": {"placeholders": {"size": {"type": "String"}}},
+  "@downloadFreed": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "downloadDeleteWatched": "Delete watched",
   "downloadDeleteAll": "Delete all",
   "downloadDeleteAllConfirm": "Delete every download of {title}?",
-  "@downloadDeleteAllConfirm": {"placeholders": {"title": {"type": "String"}}},
+  "@downloadDeleteAllConfirm": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
   "downloadNothingWatched": "Nothing you have finished is downloaded",
   "downloadStorageEmpty": "No downloads are using space",
   "downloadsOpenDesc": "See the queue and everything saved on this device",
-  "@downloadsOpenDesc": {},
   "downloadTitle": "Download",
-  "@downloadTitle": {},
   "downloadAlready": "Already downloaded or in the queue",
-  "@downloadAlready": {},
   "downloadPickStream": "Download which stream?",
-  "@downloadPickStream": {},
   "downloadPickSubtitle": "Download which subtitle?",
-  "@downloadPickSubtitle": {},
   "downloadPickAudio": "Download which audio track?",
-  "@downloadPickAudio": {},
   "downloadNoAudio": "No extra audio",
-  "@downloadNoAudio": {},
   "downloadAudio": "Audio",
-  "@downloadAudio": {},
   "downloadNoSubtitle": "No subtitle",
-  "@downloadNoSubtitle": {},
   "downloadHlsNeedsFfmpeg": "This stream is an HLS playlist. Downloading it needs the FFmpeg addon.",
-  "@downloadHlsNeedsFfmpeg": {},
   "downloadSourceMissing": "The source for this episode is not installed",
-  "@downloadSourceMissing": {},
   "downloadWaitingConnection": "Waiting for a connection",
-  "@downloadWaitingConnection": {},
   "downloadSubtitles": "Subtitles",
-  "@downloadSubtitles": {},
   "downloadDownloaded": "Downloaded",
-  "@downloadDownloaded": {},
   "downloadOffline": "Offline",
-  "@downloadOffline": {},
   "downloadDelete": "Delete download",
-  "@downloadDelete": {},
   "downloadCancel": "Cancel",
-  "@downloadCancel": {},
   "downloadPause": "Pause",
-  "@downloadPause": {},
   "downloadPaused": "Paused",
-  "@downloadPaused": {},
   "downloadResume": "Resume",
-  "@downloadResume": {},
   "downloadPauseAll": "Pause all",
-  "@downloadPauseAll": {},
   "downloadResumeAll": "Resume all",
-  "@downloadResumeAll": {},
   "downloadQueuedState": "Waiting in the queue",
-  "@downloadQueuedState": {},
   "downloadResolving": "Getting the stream…",
-  "@downloadResolving": {},
   "downloadUsedFallback": "No matching stream, used the first one",
-  "@downloadUsedFallback": {},
   "downloadTabQueue": "Queue",
-  "@downloadTabQueue": {},
   "downloadTabDone": "Done",
-  "@downloadTabDone": {},
   "downloadTabFailed": "Failed",
-  "@downloadTabFailed": {},
   "downloadEmptyQueue": "Nothing is downloading",
-  "@downloadEmptyQueue": {},
   "downloadEmptyDone": "Nothing downloaded yet",
-  "@downloadEmptyDone": {},
   "downloadEmptyFailed": "No failed downloads",
-  "@downloadEmptyFailed": {},
   "downloadNext": "Next episode",
-  "@downloadNext": {},
   "downloadNextN": "Next {count} episodes",
-  "@downloadNextN": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadNextN": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadUnwatched": "All unwatched ({count})",
-  "@downloadUnwatched": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadUnwatched": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadRange": "This range ({count})",
-  "@downloadRange": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadRange": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadAll": "All episodes ({count})",
-  "@downloadAll": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadQueued": "{count, plural, =1{1 episode queued} other{{count} episodes queued}}",
-  "@downloadQueued": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadQueued": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadFinished": "{name} downloaded",
-  "@downloadFinished": {"placeholders": {"name": {"type": "String"}}},
+  "@downloadFinished": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "downloadFailedBody": "{name} failed to download",
-  "@downloadFailedBody": {"placeholders": {"name": {"type": "String"}}},
+  "@downloadFailedBody": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "downloadStorage": "{size} used by downloads",
-  "@downloadStorage": {"placeholders": {"size": {"type": "String"}}},
+  "@downloadStorage": {
+    "placeholders": {
+      "size": {
+        "type": "String"
+      }
+    }
+  },
   "downloadQueueHeader": "Queue",
-  "@downloadQueueHeader": {},
   "downloadParallel": "Downloads at once",
-  "@downloadParallel": {},
   "downloadParallelDesc": "Run one download at a time or several together",
-  "@downloadParallelDesc": {},
   "downloadOneByOne": "One by one",
-  "@downloadOneByOne": {},
   "downloadNotifications": "Download notifications",
-  "@downloadNotifications": {},
   "downloadNotificationsDesc": "Live progress where the system supports it, otherwise a note when a download finishes",
-  "@downloadNotificationsDesc": {},
   "downloadNotifyLive": "Live",
-  "@downloadNotifyLive": {},
   "downloadNotifyDone": "When done",
-  "@downloadNotifyDone": {},
   "downloadNotifyOff": "Off",
-  "@downloadNotifyOff": {},
   "downloadInfoFile": "Write an info file next to each download",
-  "@downloadInfoFile": {},
   "downloadInfoFileDesc": "Saves the stream, quality, subtitle and skip times as a small .json file",
-  "@downloadInfoFileDesc": {},
   "offlineHeader": "Offline",
-  "@offlineHeader": {},
   "offlineModeDesc": "Auto goes offline only when the app starts without a connection. Always stays offline until you change it.",
-  "@offlineModeDesc": {},
   "offlineModeOff": "Off",
-  "@offlineModeOff": {},
   "offlineModeAlways": "Always",
-  "@offlineModeAlways": {},
   "offlineModeOn": "Offline mode is on. Changes are saved here and sent when you are back online.",
-  "@offlineModeOn": {},
-  "offlineLost": "You're offline. Changes are saved on this device",
-  "@offlineLost": {},
-  "offlineBack": "Back online. Syncing your changes",
-  "@offlineBack": {},
   "offlineSaved": "Saved on this device, it will sync when you are online",
-  "@offlineSaved": {},
   "offlineSynced": "{count, plural, =1{1 change synced} other{{count} changes synced}}",
-  "@offlineSynced": {"placeholders": {"count": {"type": "int"}}},
+  "@offlineSynced": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "offlinePending": "{count, plural, =1{1 change waiting to sync} other{{count} changes waiting to sync}}",
-  "@offlinePending": {"placeholders": {"count": {"type": "int"}}},
+  "@offlinePending": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "offlinePendingTitle": "Changes waiting to sync",
-  "@offlinePendingTitle": {},
   "offlinePendingNone": "Nothing waiting",
-  "@offlinePendingNone": {},
   "offlineSyncNow": "Sync now",
-  "@offlineSyncNow": {},
   "offlineDiscard": "Discard",
-  "@offlineDiscard": {},
   "downloadNotOffline": "This episode is not downloaded, so it is not available offline",
-  "@downloadNotOffline": {},
   "offlineModeChip": "Offline",
-  "@offlineModeChip": {},
   "downloadNextChapter": "Next chapter",
-  "@downloadNextChapter": {},
   "downloadNextChapters": "Next {count} chapters",
-  "@downloadNextChapters": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadNextChapters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadUnread": "All unread ({count})",
-  "@downloadUnread": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadUnread": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadAllChapters": "All chapters ({count})",
-  "@downloadAllChapters": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadAllChapters": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadPagesProgress": "{done} / {total} pages",
-  "@downloadPagesProgress": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@downloadPagesProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "downloadPagesCount": "{count} pages",
-  "@downloadPagesCount": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadPagesCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadFfmpegTitle": "FFmpeg addon needed",
-  "@downloadFfmpegTitle": {},
   "downloadFfmpegBody": "This stream is an HLS playlist. The FFmpeg addon joins its pieces into one mp4 file. Without it the pieces are kept in an episode folder and play from there.",
-  "@downloadFfmpegBody": {},
   "downloadFfmpegInstall": "Install",
-  "@downloadFfmpegInstall": {},
   "downloadFfmpegInstalling": "Installing FFmpeg, this can take a while…",
-  "@downloadFfmpegInstalling": {},
   "downloadFinishing": "Joining the pieces into one file…",
-  "@downloadFinishing": {},
   "downloadSegmentsProgress": "{done} / {total} parts",
-  "@downloadSegmentsProgress": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}}},
+  "@downloadSegmentsProgress": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "downloadTorrentNoFile": "The torrent has no video file to download",
-  "@downloadTorrentNoFile": {},
   "downloadServiceText": "{count, plural, =1{Downloading 1 item} other{Downloading {count} items}}",
-  "@downloadServiceText": {"placeholders": {"count": {"type": "int"}}},
+  "@downloadServiceText": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadAutoDelete": "Delete watched downloads",
-  "@downloadAutoDelete": {},
   "downloadAutoDeleteDesc": "Removes a download once your progress reaches that episode or chapter",
-  "@downloadAutoDeleteDesc": {},
   "downloadConnections": "Connections per download",
-  "@downloadConnections": {},
   "downloadConnectionsDesc": "Splits a big file into parts fetched at the same time. Some servers limit this.",
-  "@downloadConnectionsDesc": {},
   "downloadPlayChoice": "Play from",
-  "@downloadPlayChoice": {},
   "downloadPlayLocalDesc": "The file saved on this device",
-  "@downloadPlayLocalDesc": {},
   "downloadPlayStream": "Stream online",
-  "@downloadPlayStream": {},
   "downloadPlayStreamDesc": "Load the episode from the source",
-  "@downloadPlayStreamDesc": {},
   "offlineFeedTitle": "Downloaded on this device",
-  "@offlineFeedTitle": {},
   "offlineFeedEmpty": "Download something while you are online and it shows up here",
-  "@offlineFeedEmpty": {},
   "offlineEnabled": "Offline mode is on",
-  "@offlineEnabled": {},
   "offlineDisabled": "Offline mode is off",
-  "@offlineDisabled": {},
   "downloadReadChoice": "Read from",
-  "@downloadReadChoice": {},
   "downloadReadLocalDesc": "The pages saved on this device",
-  "@downloadReadLocalDesc": {},
   "downloadReadOnline": "Read online",
-  "@downloadReadOnline": {},
   "downloadReadOnlineDesc": "Load the chapter from the source",
-  "@downloadReadOnlineDesc": {},
   "downloadDeleteConfirm": "Delete {name} from this device?",
-  "@downloadDeleteConfirm": {"placeholders": {"name": {"type": "String"}}},
+  "@downloadDeleteConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "downloadCancelConfirm": "Cancel the download of {name}? What was already downloaded is deleted.",
-  "@downloadCancelConfirm": {"placeholders": {"name": {"type": "String"}}},
+  "@downloadCancelConfirm": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "downloadFfmpegFolder": "Keep as folder",
-  "@downloadFfmpegFolder": {},
   "offlineDiscardConfirm": "{count, plural, =1{Throw away the change that was never sent? This can't be undone.} other{Throw away {count} changes that were never sent? This can't be undone.}}",
-  "@offlineDiscardConfirm": {"placeholders": {"count": {"type": "int"}}},
+  "@offlineDiscardConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "downloadWaitingWifi": "Waiting for Wi-Fi",
-  "@downloadWaitingWifi": {},
   "downloadWaitingMetered": "Paused on a metered connection",
-  "@downloadWaitingMetered": {},
   "downloadWifiOnly": "Wi-Fi only",
-  "@downloadWifiOnly": {},
   "downloadWifiOnlyDesc": "Downloads wait while you are on mobile data",
-  "@downloadWifiOnlyDesc": {},
   "downloadMetered": "Pause on metered connections",
-  "@downloadMetered": {},
   "downloadMeteredDesc": "Also waits on Wi-Fi that your device marks as metered",
-  "@downloadMeteredDesc": {},
   "downloadSpeedLimit": "Speed limit",
-  "@downloadSpeedLimit": {},
   "downloadSpeedLimitDesc": "Caps the total download speed",
-  "@downloadSpeedLimitDesc": {},
   "downloadUnlimited": "Unlimited",
-  "@downloadUnlimited": {},
   "downloadMoveToTop": "Move to top",
-  "@downloadMoveToTop": {},
   "downloadSwarm": "{seeds} seeds · {peers} peers",
-  "@downloadSwarm": {"placeholders": {"seeds": {"type": "int"}, "peers": {"type": "int"}}},
+  "@downloadSwarm": {
+    "placeholders": {
+      "seeds": {
+        "type": "int"
+      },
+      "peers": {
+        "type": "int"
+      }
+    }
+  },
   "downloadTorrentFile": "Which file?",
-  "@downloadTorrentFile": {},
   "downloadTorrentAuto": "Match the episode automatically",
-  "@downloadTorrentAuto": {},
   "downloadTorrentLoading": "Reading the torrent…",
-  "@downloadTorrentLoading": {},
   "watchAutoSource": "Switch to the next source automatically",
-  "@watchAutoSource": {},
   "watchAutoSourceDesc": "If the source can't find the title or fails to load, try the next installed source",
-  "@watchAutoSourceDesc": {},
   "extensionTest": "Test extensions",
-  "@extensionTest": {},
   "extensionTestCopy": "Copy the failures and their logs",
-  "@extensionTestCopy": {},
   "extensionTestQuery": "Search term",
-  "@extensionTestQuery": {},
   "extensionTestRun": "Run",
-  "@extensionTestRun": {},
   "extensionTestStop": "Stop",
-  "@extensionTestStop": {},
   "extensionTestNone": "No installed extensions of this type",
-  "@extensionTestNone": {},
   "extensionTestNotRun": "Not tested yet",
-  "@extensionTestNotRun": {},
   "extensionTestSearch": "Search",
-  "@extensionTestSearch": {},
   "extensionTestDetail": "Details",
-  "@extensionTestDetail": {},
   "extensionTestUnits": "Episodes / chapters",
-  "@extensionTestUnits": {},
   "extensionTestLinks": "Streams / pages",
-  "@extensionTestLinks": {},
   "extensionTestFailedAt": "Failed at {step}",
-  "@extensionTestFailedAt": {"placeholders": {"step": {"type": "String"}}},
+  "@extensionTestFailedAt": {
+    "placeholders": {
+      "step": {
+        "type": "String"
+      }
+    }
+  },
   "extensionTestSummary": "{done} of {total} tested · {passed} passed · {failed} failed",
-  "@extensionTestSummary": {"placeholders": {"done": {"type": "int"}, "total": {"type": "int"}, "passed": {"type": "int"}, "failed": {"type": "int"}}},
+  "@extensionTestSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "passed": {
+        "type": "int"
+      },
+      "failed": {
+        "type": "int"
+      }
+    }
+  },
   "extensionTestCopyLogs": "Copy everything with the full logs",
-  "@extensionTestCopyLogs": {},
   "onboardingFeaturesTitle": "All of it in one place",
-  "@onboardingFeaturesTitle": {},
   "onboardingFeaturesBody": "Everything you track, watch and read, without juggling apps.",
-  "@onboardingFeaturesBody": {},
   "onboardingFeatureTrack": "Track everything",
-  "@onboardingFeatureTrack": {},
   "onboardingFeatureTrackDesc": "Lists, progress and scores on AniList, MyAnimeList, Simkl, Kitsu and MangaBaka.",
-  "@onboardingFeatureTrackDesc": {},
   "onboardingFeatureWatch": "Watch and read",
-  "@onboardingFeatureWatch": {},
   "onboardingFeatureWatchDesc": "Install extensions and stream anime or read manga and novels right in the app.",
-  "@onboardingFeatureWatchDesc": {},
   "onboardingFeatureOffline": "Take it offline",
-  "@onboardingFeatureOffline": {},
   "onboardingFeatureOfflineDesc": "Download episodes and chapters, and keep going without a connection.",
-  "@onboardingFeatureOfflineDesc": {},
   "onboardingFeatureSync": "Keep lists in sync",
-  "@onboardingFeatureSync": {},
   "onboardingFeatureSyncDesc": "Mirror your list across services, or let whichever is ahead win.",
-  "@onboardingFeatureSyncDesc": {},
-  "onboardingThemeShape": "Colours",
-  "@onboardingThemeShape": {},
   "onboardingServices": "Works with",
-  "@onboardingServices": {},
   "sourceNotifyOn": "You'll be told when {source} has something new",
-  "@sourceNotifyOn": {"placeholders": {"source": {"type": "String"}}},
+  "@sourceNotifyOn": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceNotifyOff": "Release notifications off",
-  "@sourceNotifyOff": {},
   "sourceNotifyNeedsSource": "Pick a source with a match first",
-  "@sourceNotifyNeedsSource": {},
   "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
-  "@sourceNotifyAllOut": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceNotifyAllOut": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sourceNotifyTooltipOn": "Stop release notifications",
-  "@sourceNotifyTooltipOn": {},
   "sourceNotifyTooltipOff": "Notify me about new releases",
-  "@sourceNotifyTooltipOff": {},
   "sourceFoundEpisode": "Episode {number} is out on {source}",
-  "@sourceFoundEpisode": {"placeholders": {"number": {"type": "String"}, "source": {"type": "String"}}},
+  "@sourceFoundEpisode": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
-  "@sourceFoundEpisodes": {"placeholders": {"from": {"type": "String"}, "to": {"type": "String"}, "source": {"type": "String"}}},
+  "@sourceFoundEpisodes": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceFoundChapter": "Chapter {number} is out on {source}",
-  "@sourceFoundChapter": {"placeholders": {"number": {"type": "String"}, "source": {"type": "String"}}},
+  "@sourceFoundChapter": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
-  "@sourceFoundChapters": {"placeholders": {"from": {"type": "String"}, "to": {"type": "String"}, "source": {"type": "String"}}},
+  "@sourceFoundChapters": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      },
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceFoundSummary": "{count} titles have something new",
-  "@sourceFoundSummary": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceFoundSummary": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "navSources": "Sources",
-  "@navSources": {},
   "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
-  "@sourceInactiveOpen": {"placeholders": {"manager": {"type": "String"}}},
+  "@sourceInactiveOpen": {
+    "placeholders": {
+      "manager": {
+        "type": "String"
+      }
+    }
+  },
   "sourceAlertsHeader": "Release notifications",
-  "@sourceAlertsHeader": {},
   "sourceAlertsSwitch": "Check subscribed titles",
-  "@sourceAlertsSwitch": {},
   "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
-  "@sourceAlertsSwitchDesc": {},
   "sourceSkipUnstarted": "Skip titles you haven't started",
-  "@sourceSkipUnstarted": {},
   "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
-  "@sourceSkipUnstartedDesc": {},
   "sourceSkipUnseen": "Skip while you have unseen episodes",
-  "@sourceSkipUnseen": {},
   "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
-  "@sourceSkipUnseenDesc": {},
   "sourceManage": "Subscriptions",
-  "@sourceManage": {},
   "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
-  "@sourceManageDesc": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceManageDesc": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sourceCheckNow": "Check now",
-  "@sourceCheckNow": {},
   "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
-  "@sourceCheckNowDesc": {},
   "sourceChecking": "Checking…",
-  "@sourceChecking": {},
   "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
-  "@sourceCheckResult": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceCheckResult": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sourceEmpty": "No subscriptions yet",
-  "@sourceEmpty": {},
   "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
-  "@sourceEmptyMessage": {},
   "sourceAll": "All",
-  "@sourceAll": {},
   "sourceInactive": "Inactive: {manager}",
-  "@sourceInactive": {"placeholders": {"manager": {"type": "String"}}},
-  "sourceMissing": "Source not found",
-  "@sourceMissing": {},
+  "@sourceInactive": {
+    "placeholders": {
+      "manager": {
+        "type": "String"
+      }
+    }
+  },
   "sourceMissingDesc": "{source} isn't installed in this extension service",
-  "@sourceMissingDesc": {"placeholders": {"source": {"type": "String"}}},
+  "@sourceMissingDesc": {
+    "placeholders": {
+      "source": {
+        "type": "String"
+      }
+    }
+  },
   "sourceUnreachable": "Source isn't responding",
-  "@sourceUnreachable": {},
   "sourceFinished": "Finished",
-  "@sourceFinished": {},
   "sourceSkippedCompleted": "Skipped: completed",
-  "@sourceSkippedCompleted": {},
   "sourceSkippedUnstarted": "Skipped: not started",
-  "@sourceSkippedUnstarted": {},
   "sourceSkippedUnseen": "Skipped: unseen episodes",
-  "@sourceSkippedUnseen": {},
   "sourceWaiting": "Waiting for the next release",
-  "@sourceWaiting": {},
   "sourceNextCheck": "Next check {when}",
-  "@sourceNextCheck": {"placeholders": {"when": {"type": "String"}}},
+  "@sourceNextCheck": {
+    "placeholders": {
+      "when": {
+        "type": "String"
+      }
+    }
+  },
   "sourceSoon": "soon",
-  "@sourceSoon": {},
   "sourceInHours": "in {count}h",
-  "@sourceInHours": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceInHours": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sourceInDays": "in {count}d",
-  "@sourceInDays": {"placeholders": {"count": {"type": "int"}}},
+  "@sourceInDays": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "sourceLatest": "Latest: {number}",
-  "@sourceLatest": {"placeholders": {"number": {"type": "String"}}},
+  "@sourceLatest": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
   "sourceMute": "Mute",
-  "@sourceMute": {},
   "sourceUnmute": "Unmute",
-  "@sourceUnmute": {},
   "sourceMuted": "Muted",
-  "@sourceMuted": {},
   "sourceUnsubscribe": "Unsubscribe",
-  "@sourceUnsubscribe": {},
   "sourcePickAnother": "Pick another source",
-  "@sourcePickAnother": {},
   "sourceOpenExtensions": "Open extensions",
-  "@sourceOpenExtensions": {},
   "sourceNoticesEmpty": "No release notices yet",
-  "@sourceNoticesEmpty": {},
   "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
-  "@sourceNoticesEmptyMessage": {},
   "sourceOpenTitle": "Open title",
-  "@sourceOpenTitle": {},
   "extensionsLoading": "Loading extensions…",
-  "@extensionsLoading": {},
   "updateWhatsNew": "What's new",
-  "@updateWhatsNew": {},
   "updateLater": "Later",
-  "@updateLater": {},
   "updateSkipVersion": "Skip this version",
-  "@updateSkipVersion": {},
   "updatePreparing": "Preparing…",
-  "@updatePreparing": {},
   "updateDownloading": "Downloading",
-  "@updateDownloading": {},
   "updateInstalling": "Installing…",
-  "@updateInstalling": {},
   "updateSizeOf": "{done} of {total}",
-  "@updateSizeOf": {"placeholders": {"done": {"type": "String"}, "total": {"type": "String"}}},
+  "@updateSizeOf": {
+    "placeholders": {
+      "done": {
+        "type": "String"
+      },
+      "total": {
+        "type": "String"
+      }
+    }
+  },
   "updateSpeed": "{speed}/s",
-  "@updateSpeed": {"placeholders": {"speed": {"type": "String"}}},
+  "@updateSpeed": {
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
+  },
   "updateReleased": "Released {date}",
-  "@updateReleased": {"placeholders": {"date": {"type": "String"}}},
+  "@updateReleased": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
   "updateNoAsset": "This release has no download for your device",
-  "@updateNoAsset": {},
   "updateUpToDate": "You're on the latest version",
-  "@updateUpToDate": {},
   "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
-  "@updateIosHint": {},
   "updateOpenedBrowser": "Check your browser",
-  "@updateOpenedBrowser": {},
   "updateTryAgain": "Try again",
-  "@updateTryAgain": {}
+  "settingsNotifications": "Notifications",
+  "settingsNotificationsDesc": "Alerts for your lists, new episodes and chapters, and comment replies",
+  "settingsAboutUpdates": "About & updates",
+  "settingsAboutUpdatesDesc": "App updates, version, logs, links and support",
+  "settingsGroupAccount": "Your account",
+  "settingsGroupContent": "Content",
+  "settingsGroupApp": "App",
+  "settingsAnimeDesc": "Player, subtitles, skipping, episode list and episode details",
+  "settingsMangaDesc": "Reader mode, controls, display and chapter tracking",
+  "settingsNovelDesc": "Text, page turning, translation and read aloud",
+  "settingsLocalPlay": "Local play",
+  "settingsLocalPlayDesc": "Play files, folders, network streams and torrents, or open a book",
+  "settingsLocalPlayVideo": "Video",
+  "settingsLocalPlayBooks": "Books",
+  "settingsWatchSections": "Sections",
+  "settingsSectionLists": "Episode and chapter lists",
+  "settingsSectionProgress": "Progress tracking",
+  "updateChannelDesc": "Stable is the tested release. Pre-release and Alpha get new features sooner but may break",
+  "checkNowDesc": "Look for a newer version right away",
+  "generalSectionBasics": "Language & behaviour",
+  "generalSectionSecurity": "Security",
+  "generalSectionPrivacy": "Privacy",
+  "notificationsOtherService": "Switch to {service} to open this",
+  "@notificationsOtherService": {
+    "placeholders": {
+      "service": {
+        "type": "String"
+      }
+    }
+  },
+  "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
+  "secPlayerSkip": "Skip openings, endings and recaps automatically",
+  "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
+  "secPlayerSubtitles": "Languages, appearance and subtitle rendering",
+  "secPlayerShaders": "Anime upscaling and your own shaders",
+  "secPlayerEngine": "Decoder, video and audio output, buffering. Only change these if playback has problems",
+  "secPlayerMpv": "mpv.conf, scripts and advanced tuning",
+  "secAnimeList": "Filler episodes and unwatched thumbnails",
+  "secProgress": "When your watched or read progress is saved to your list",
+  "secAnimeDetails": "Where episode titles, thumbnails and summaries come from",
+  "secReaderReading": "Reading mode, page turning, zoom and next chapter",
+  "secReaderControls": "Tap zones, volume keys and auto scroll",
+  "secReaderDisplay": "Background, brightness, fullscreen and page number",
+  "secNovelText": "Font, size, spacing, margins and page turning",
+  "secNovelTranslate": "Translate chapters while you read",
+  "secNovelSpeech": "Voice, speed and pitch for read aloud",
+  "secNotifyAbout": "Pick which kinds of activity send an alert",
+  "layoutTitle": "Layout",
+  "layoutDesc": "Choose, move and hide the buttons on the bars",
+  "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
+  "layoutDropInto": "Drop in: {zone}",
+  "@layoutDropInto": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutCutting": "Moving {name}. Press a paste button to place it",
+  "@layoutCutting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutTitleFixed": "Title",
+  "layoutZoneTopStart": "Top bar, before the title",
+  "layoutZoneTopEnd": "Top bar, after the title",
+  "layoutZoneBottomStart": "Bottom bar, left",
+  "layoutZoneBottomEnd": "Bottom bar, right",
+  "layoutZoneSecondRow": "Hidden: second row in normal view",
+  "layoutZoneOverflow": "Hidden: in the more menu",
+  "layoutEmptyZone": "Drop buttons here",
+  "layoutCut": "Cut",
+  "layoutPaste": "Paste here",
+  "layoutHide": "Hide",
+  "layoutMoveTo": "Move to {zone}",
+  "@layoutMoveTo": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutReset": "Reset to default",
+  "layoutMore": "More",
+  "sourceWhyAction": "Why no alert?",
+  "sourceWhyStatus": "Status",
+  "sourceWhyLastCheck": "Last checked",
+  "sourceWhyNever": "Not yet",
+  "sourceWhyNextCheck": "Next check",
+  "sourceWhyNewest": "Newest at the source",
+  "sourceWhyProgress": "Your progress",
+  "sourceWhyListStatus": "List status",
+  "sourceWhyFailures": "Failed checks in a row",
+  "sourceWhyLastRelease": "Last new release seen",
+  "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs.",
+  "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.",
+  "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.",
+  "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked.",
+  "sourceWhyVerdictMuted": "This subscription is muted.",
+  "externalPlayerTitle": "Open stream elsewhere",
+  "externalCopyUrl": "Copy stream link",
+  "externalCopied": "Stream link copied",
+  "externalChooser": "Open in another app",
+  "externalVlc": "Open in VLC",
+  "externalMpv": "Open in mpv",
+  "externalFailed": "Couldn't open the stream. Is the player installed?",
+  "addonInstalled": "Installed",
+  "loadFailedActivity": "Couldn't load activity",
+  "loadFailedFavourites": "Couldn't load favourites. Retry",
+  "loadFailedStats": "Couldn't load stats",
+  "loadFailedReplies": "Couldn't load replies",
+  "cantBeUndone": "This can't be undone.",
+  "searchTags": "Search tags",
+  "spoilerTapToView": " Spoiler, tap to view ",
+  "mediaVideo": "Video",
+  "notificationSomeone": "Someone",
+  "notificationATitle": "a title",
+  "notificationAddedDetail": "Was added to AniList",
+  "updateNoReleases": "No releases found",
+  "updateInvalidResponse": "Invalid update response",
+  "commentsRateLimited": "Rate limited",
+  "commentsConnectFailed": "Failed to connect",
+  "dnsNoRecords": "No A records returned",
+  "importTokenRejected": "Token rejected",
+  "developerRoleLead": "Lead Developer",
+  "developerRoleModerator": "Discord Moderator",
+  "extensionManagerTitle": "{type} manager",
+  "@extensionManagerTitle": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionsOfType": "{type} extensions",
+  "@extensionsOfType": {
+    "placeholders": {
+      "type": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionSettingsTitle": "{name} settings",
+  "@extensionSettingsTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "extensionNoSettings": "{name} doesn't provide any settings.",
+  "@extensionNoSettings": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationAired": "Episode {episode} of {title} aired",
+  "@notificationAired": {
+    "placeholders": {
+      "episode": {
+        "type": "String"
+      },
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationAiredDetail": "Episode {episode} aired",
+  "@notificationAiredDetail": {
+    "placeholders": {
+      "episode": {
+        "type": "String"
+      }
+    }
+  },
+  "notificationAdded": "{title} was added to AniList",
+  "@notificationAdded": {
+    "placeholders": {
+      "title": {
+        "type": "String"
+      }
+    }
+  },
+  "updateNotFound": "Update server couldn't find that release: {message}",
+  "@updateNotFound": {
+    "placeholders": {
+      "message": {
+        "type": "String"
+      }
+    }
+  }
 }

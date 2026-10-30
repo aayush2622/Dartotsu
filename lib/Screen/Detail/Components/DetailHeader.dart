@@ -338,10 +338,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
     return Opacity(
       opacity: p,
       child: ClipRect(
-        child: GlassPane(
-          radius: BorderRadius.zero,
-          scrim: scheme.surface.withValues(alpha: 0.30),
-          window: MediaQuery.sizeOf(context),
+        child: GlassBlur(
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: scheme.surface.withValues(alpha: 0.4),

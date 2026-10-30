@@ -26,6 +26,7 @@ import 'Core/Offline/OfflineMode.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/DynamicColorScheme.dart';
+import 'Utils/Functions/WindowMemory.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'DI.dart';
@@ -202,6 +203,8 @@ Future<void> init(List<String> args) async {
     if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
       WindowManager.instance.ensureInitialized(),
   ]);
+
+  await WindowMemory.instance.restore();
 
   _stage = 'media kit';
   unawaited(applyRefreshRate());

@@ -10,6 +10,7 @@ import 'package:xml/xml.dart';
 
 const comicExtensions = {'cbz', 'zip'};
 const bookExtensions = {'epub'};
+const pdfExtensions = {'pdf'};
 const _imageExtensions = {
   'jpg',
   'jpeg',
@@ -27,6 +28,8 @@ String _extension(String path) =>
 bool isComicArchive(String path) => comicExtensions.contains(_extension(path));
 
 bool isBookFile(String path) => bookExtensions.contains(_extension(path));
+
+bool isPdfFile(String path) => pdfExtensions.contains(_extension(path));
 
 int naturalCompare(String a, String b) {
   final left = RegExp(r'\d+|\D+').allMatches(a.toLowerCase()).toList();

@@ -107,6 +107,32 @@ class MainActivity : FlPiPActivity() {
                     }
                 }.start()
             }
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/external")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "openVideo") return@setMethodCallHandler result.notImplemented()
+                val url = call.argument<String>("url")
+                    ?: return@setMethodCallHandler result.error("args", "url required", null)
+                val title = call.argument<String>("title") ?: ""
+                val headers = call.argument<Map<String, String>>("headers") ?: emptyMap()
+                try {
+                    val view = Intent(Intent.ACTION_VIEW).apply {
+                        setDataAndType(Uri.parse(url), "video/*")
+                        putExtra("title", title)
+                        if (headers.isNotEmpty()) {
+                            putExtra("headers", headers.flatMap { listOf(it.key, it.value) }.toTypedArray())
+                        }
+                        headers.entries.firstOrNull { it.key.equals("user-agent", true) }
+                            ?.let { putExtra("user_agent", it.value) }
+                        headers.entries.firstOrNull { it.key.equals("referer", true) }
+                            ?.let { putExtra("referer", it.value) }
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                    startActivity(Intent.createChooser(view, title.ifEmpty { url }).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                    result.success(true)
+                } catch (e: Exception) {
+                    result.success(false)
+                }
+            }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/links")
             .setMethodCallHandler { call, result ->
                 if (call.method == "isLinkHandlingEnabled") {

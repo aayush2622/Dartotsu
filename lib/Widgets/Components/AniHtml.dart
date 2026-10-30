@@ -672,7 +672,7 @@ class _AniHtmlState extends State<AniHtml> {
     if (src.isEmpty) return const SizedBox.shrink();
     return _MediaTile(
       icon: Icons.play_circle_outline_rounded,
-      label: 'Video',
+      label: getString.mediaVideo,
       onTap: () => openLinkInBrowser(src),
     );
   }
@@ -839,7 +839,7 @@ class _AniHtmlState extends State<AniHtml> {
               TextSpan(
                 recognizer: recognizer,
                 mouseCursor: SystemMouseCursors.click,
-                text: ' Spoiler, click to view ',
+                text: getString.spoilerTapToView,
                 style: style.copyWith(
                   fontSize: (style.fontSize ?? 14) * 0.8,
                   color: scheme.onSurfaceVariant,

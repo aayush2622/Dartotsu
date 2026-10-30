@@ -395,12 +395,6 @@ abstract class AppLocalizations {
   /// **'Lock when idle'**
   String get appLockDelay;
 
-  /// No description provided for @appLockDelayDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'How long Dartotsu can stay in the background before asking again'**
-  String get appLockDelayDesc;
-
   /// No description provided for @appLockDelayAlways.
   ///
   /// In en, this message translates to:
@@ -641,12 +635,6 @@ abstract class AppLocalizations {
   /// **'Pick a color'**
   String get pickColor;
 
-  /// No description provided for @colorPickerDefault.
-  ///
-  /// In en, this message translates to:
-  /// **'Default'**
-  String get colorPickerDefault;
-
   /// No description provided for @colorPickerCustom.
   ///
   /// In en, this message translates to:
@@ -731,18 +719,6 @@ abstract class AppLocalizations {
   /// **'Updates'**
   String get settingsUpdates;
 
-  /// No description provided for @settingsUpdatesDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Release channel and checks'**
-  String get settingsUpdatesDesc;
-
-  /// No description provided for @settingsAboutDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Version, links, support'**
-  String get settingsAboutDesc;
-
   /// No description provided for @amoledBlack.
   ///
   /// In en, this message translates to:
@@ -790,12 +766,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Addons'**
   String get settingsAddons;
-
-  /// No description provided for @settingsAddonsDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Optional components such as the torrent server'**
-  String get settingsAddonsDesc;
 
   /// No description provided for @customPath.
   ///
@@ -880,12 +850,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Storage'**
   String get sectionStorage;
-
-  /// No description provided for @sectionBackup.
-  ///
-  /// In en, this message translates to:
-  /// **'Backup'**
-  String get sectionBackup;
 
   /// No description provided for @sectionManagers.
   ///
@@ -1336,12 +1300,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Couldn\'t load the news'**
   String get newsCouldntLoad;
-
-  /// No description provided for @seeAll.
-  ///
-  /// In en, this message translates to:
-  /// **'See all'**
-  String get seeAll;
 
   /// No description provided for @logFileCopied.
   ///
@@ -1889,12 +1847,6 @@ abstract class AppLocalizations {
   /// **'App Info'**
   String get sectionAppInfo;
 
-  /// No description provided for @sectionCache.
-  ///
-  /// In en, this message translates to:
-  /// **'Cache'**
-  String get sectionCache;
-
   /// No description provided for @sectionRequests.
   ///
   /// In en, this message translates to:
@@ -2038,12 +1990,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Allow'**
   String get permGrant;
-
-  /// No description provided for @permGranted.
-  ///
-  /// In en, this message translates to:
-  /// **'Allowed'**
-  String get permGranted;
 
   /// No description provided for @linkOpenInApp.
   ///
@@ -2429,18 +2375,6 @@ abstract class AppLocalizations {
   /// **'Not set. Tap to add.'**
   String get discordTokenNotSet;
 
-  /// No description provided for @discordTokenPrompt.
-  ///
-  /// In en, this message translates to:
-  /// **'Paste the token of the Discord account to show the presence on. It stays on this device.'**
-  String get discordTokenPrompt;
-
-  /// No description provided for @discordTokenHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Token'**
-  String get discordTokenHint;
-
   /// No description provided for @discordTokenSavedSnack.
   ///
   /// In en, this message translates to:
@@ -2549,12 +2483,6 @@ abstract class AppLocalizations {
   /// **'Sign in to MangaUpdates'**
   String get mangaUpdatesLoginTitle;
 
-  /// No description provided for @mangaUpdatesLoginFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'MangaUpdates login failed. Check your username and password.'**
-  String get mangaUpdatesLoginFailed;
-
   /// No description provided for @mangaUpdatesProfile.
   ///
   /// In en, this message translates to:
@@ -2579,12 +2507,6 @@ abstract class AppLocalizations {
   /// **'Refresh from MangaUpdates'**
   String get refreshFromMangaUpdates;
 
-  /// No description provided for @mangaUpdatesAccountOptions.
-  ///
-  /// In en, this message translates to:
-  /// **'MangaUpdates account options'**
-  String get mangaUpdatesAccountOptions;
-
   /// No description provided for @usernameOnly.
   ///
   /// In en, this message translates to:
@@ -2596,12 +2518,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Releases'**
   String get releases;
-
-  /// No description provided for @scanlationGroups.
-  ///
-  /// In en, this message translates to:
-  /// **'Scanlation Groups'**
-  String get scanlationGroups;
 
   /// No description provided for @artistsLabel.
   ///
@@ -4337,12 +4253,6 @@ abstract class AppLocalizations {
   /// **'Account options'**
   String get accountOptions;
 
-  /// No description provided for @accountOptionsDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Names, score format, list order, notifications and more'**
-  String get accountOptionsDesc;
-
   /// No description provided for @anilistAccountOptions.
   ///
   /// In en, this message translates to:
@@ -5482,12 +5392,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remove from resume'**
   String get resumeRemove;
-
-  /// No description provided for @resumeMissing.
-  ///
-  /// In en, this message translates to:
-  /// **'Couldn\'t find {title} in this source'**
-  String resumeMissing(String title);
 
   /// No description provided for @resumeAt.
   ///
@@ -7097,18 +7001,6 @@ abstract class AppLocalizations {
   /// **'Openings & endings'**
   String get themesTitle;
 
-  /// No description provided for @themesOpening.
-  ///
-  /// In en, this message translates to:
-  /// **'Opening'**
-  String get themesOpening;
-
-  /// No description provided for @themesEnding.
-  ///
-  /// In en, this message translates to:
-  /// **'Ending'**
-  String get themesEnding;
-
   /// No description provided for @themesPlayVideo.
   ///
   /// In en, this message translates to:
@@ -7138,48 +7030,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Versions'**
   String get themesVersions;
-
-  /// No description provided for @muTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'MangaUpdates'**
-  String get muTitle;
-
-  /// No description provided for @muReleases.
-  ///
-  /// In en, this message translates to:
-  /// **'Recent releases'**
-  String get muReleases;
-
-  /// No description provided for @muNoReleases.
-  ///
-  /// In en, this message translates to:
-  /// **'No recent releases'**
-  String get muNoReleases;
-
-  /// No description provided for @muLicensed.
-  ///
-  /// In en, this message translates to:
-  /// **'Licensed'**
-  String get muLicensed;
-
-  /// No description provided for @muOpen.
-  ///
-  /// In en, this message translates to:
-  /// **'View on MangaUpdates'**
-  String get muOpen;
-
-  /// No description provided for @muCredit.
-  ///
-  /// In en, this message translates to:
-  /// **'Data from MangaUpdates'**
-  String get muCredit;
-
-  /// No description provided for @muPublishers.
-  ///
-  /// In en, this message translates to:
-  /// **'Publishers'**
-  String get muPublishers;
 
   /// No description provided for @sauceTitle.
   ///
@@ -7211,12 +7061,6 @@ abstract class AppLocalizations {
   /// **'Get a free key at saucenao.com/user.php'**
   String get sauceKeyDesc;
 
-  /// No description provided for @sauceSearchTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Search this title'**
-  String get sauceSearchTitle;
-
   /// No description provided for @sauceOpen.
   ///
   /// In en, this message translates to:
@@ -7240,12 +7084,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Find the source of a manga page or artwork'**
   String get sauceTooltip;
-
-  /// No description provided for @sauceLowMatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Low match'**
-  String get sauceLowMatch;
 
   /// No description provided for @trendzTitle.
   ///
@@ -7289,12 +7127,6 @@ abstract class AppLocalizations {
   /// **'NEW'**
   String get trendzNew;
 
-  /// No description provided for @trendzSearch.
-  ///
-  /// In en, this message translates to:
-  /// **'Search this title'**
-  String get trendzSearch;
-
   /// No description provided for @trendzEmpty.
   ///
   /// In en, this message translates to:
@@ -7312,18 +7144,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Share list card'**
   String get shareCardList;
-
-  /// No description provided for @muNotFound.
-  ///
-  /// In en, this message translates to:
-  /// **'No MangaUpdates match for this title'**
-  String get muNotFound;
-
-  /// No description provided for @shareCardWorking.
-  ///
-  /// In en, this message translates to:
-  /// **'Making the card…'**
-  String get shareCardWorking;
 
   /// No description provided for @shareCardSaved.
   ///
@@ -7355,18 +7175,6 @@ abstract class AppLocalizations {
   /// **'Episodes {eps}'**
   String themesEpisodes(String eps);
 
-  /// No description provided for @muLatest.
-  ///
-  /// In en, this message translates to:
-  /// **'Chapter {count}'**
-  String muLatest(String count);
-
-  /// No description provided for @muRating.
-  ///
-  /// In en, this message translates to:
-  /// **'{rating} from {votes} votes'**
-  String muRating(String rating, String votes);
-
   /// No description provided for @sauceSimilarity.
   ///
   /// In en, this message translates to:
@@ -7396,12 +7204,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} weeks in the top ten'**
   String trendzWeeks(String count);
-
-  /// No description provided for @shareCardEntries.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} titles'**
-  String shareCardEntries(String count);
 
   /// No description provided for @imageSearchTitle.
   ///
@@ -7922,7 +7724,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsWatchDesc.
   ///
   /// In en, this message translates to:
-  /// **'Episode lists, source matching and episode details'**
+  /// **'Anime, manga and novel options, local play and shared defaults'**
   String get settingsWatchDesc;
 
   /// No description provided for @watchSettingsLayout.
@@ -8435,12 +8237,6 @@ abstract class AppLocalizations {
   /// **'Cookies cleared'**
   String get watchCookiesCleared;
 
-  /// No description provided for @watchResults.
-  ///
-  /// In en, this message translates to:
-  /// **'Results'**
-  String get watchResults;
-
   /// No description provided for @watchMetaSource.
   ///
   /// In en, this message translates to:
@@ -8458,18 +8254,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Off'**
   String get watchMetaOff;
-
-  /// No description provided for @settingsPlayer.
-  ///
-  /// In en, this message translates to:
-  /// **'Player'**
-  String get settingsPlayer;
-
-  /// No description provided for @settingsPlayerDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Playback, subtitles, shaders, mpv and opening files'**
-  String get settingsPlayerDesc;
 
   /// No description provided for @playerSettingsTitle.
   ///
@@ -8518,12 +8302,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'mpv'**
   String get playerSectionMpv;
-
-  /// No description provided for @playerSectionOpen.
-  ///
-  /// In en, this message translates to:
-  /// **'Open media'**
-  String get playerSectionOpen;
 
   /// No description provided for @playerSpeed.
   ///
@@ -9569,18 +9347,6 @@ abstract class AppLocalizations {
   /// **'Fullscreen'**
   String get playerFullscreen;
 
-  /// No description provided for @settingsReader.
-  ///
-  /// In en, this message translates to:
-  /// **'Reader'**
-  String get settingsReader;
-
-  /// No description provided for @settingsReaderDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Manga, manhwa and novel reading'**
-  String get settingsReaderDesc;
-
   /// No description provided for @readerChapters.
   ///
   /// In en, this message translates to:
@@ -9632,7 +9398,7 @@ abstract class AppLocalizations {
   /// No description provided for @readerOpenBookDesc.
   ///
   /// In en, this message translates to:
-  /// **'Read an epub from your files in the novel reader'**
+  /// **'Read an epub (novel reader) or a PDF (manga reader) from your files'**
   String get readerOpenBookDesc;
 
   /// No description provided for @readerNoText.
@@ -9676,12 +9442,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Novel'**
   String get readerSectionNovel;
-
-  /// No description provided for @readerSectionReset.
-  ///
-  /// In en, this message translates to:
-  /// **'Reset'**
-  String get readerSectionReset;
 
   /// No description provided for @readerMode.
   ///
@@ -9988,12 +9748,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Lanczos (Rust high quality)'**
   String get readerFilterQualityLanczos;
-
-  /// No description provided for @readerFilterQualityDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Resampling quality used when scaling manga pages'**
-  String get readerFilterQualityDesc;
 
   /// No description provided for @readerDim.
   ///
@@ -10385,12 +10139,6 @@ abstract class AppLocalizations {
   /// **'Skip {name}'**
   String castSkipPart(String name);
 
-  /// No description provided for @trackProgressRemember.
-  ///
-  /// In en, this message translates to:
-  /// **'Remember my choice'**
-  String get trackProgressRemember;
-
   /// No description provided for @trackProgressRememberSeries.
   ///
   /// In en, this message translates to:
@@ -10456,12 +10204,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Always'**
   String get trackProgressAlways;
-
-  /// No description provided for @trackProgressNever.
-  ///
-  /// In en, this message translates to:
-  /// **'Never'**
-  String get trackProgressNever;
 
   /// No description provided for @dantotsuImport.
   ///
@@ -10667,48 +10409,6 @@ abstract class AppLocalizations {
   /// **'Your name'**
   String get togetherName;
 
-  /// No description provided for @togetherRoom.
-  ///
-  /// In en, this message translates to:
-  /// **'Room'**
-  String get togetherRoom;
-
-  /// No description provided for @togetherNewRoom.
-  ///
-  /// In en, this message translates to:
-  /// **'New random room'**
-  String get togetherNewRoom;
-
-  /// No description provided for @togetherServer.
-  ///
-  /// In en, this message translates to:
-  /// **'Server'**
-  String get togetherServer;
-
-  /// No description provided for @togetherPort.
-  ///
-  /// In en, this message translates to:
-  /// **'Port'**
-  String get togetherPort;
-
-  /// No description provided for @togetherPassword.
-  ///
-  /// In en, this message translates to:
-  /// **'Server password (optional)'**
-  String get togetherPassword;
-
-  /// No description provided for @togetherPublicNote.
-  ///
-  /// In en, this message translates to:
-  /// **'Public servers have no password and rooms are open. Use a long room name and share it only with friends.'**
-  String get togetherPublicNote;
-
-  /// No description provided for @togetherConnect.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect'**
-  String get togetherConnect;
-
   /// No description provided for @togetherConnecting.
   ///
   /// In en, this message translates to:
@@ -10720,18 +10420,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Leave room'**
   String get togetherLeave;
-
-  /// No description provided for @togetherLeftRoom.
-  ///
-  /// In en, this message translates to:
-  /// **'You left the room'**
-  String get togetherLeftRoom;
-
-  /// No description provided for @togetherReady.
-  ///
-  /// In en, this message translates to:
-  /// **'Ready'**
-  String get togetherReady;
 
   /// No description provided for @togetherYou.
   ///
@@ -10774,12 +10462,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Server and room copied'**
   String get togetherInviteCopied;
-
-  /// No description provided for @togetherFileMismatch.
-  ///
-  /// In en, this message translates to:
-  /// **'Different file or length'**
-  String get togetherFileMismatch;
 
   /// No description provided for @togetherConnectionLost.
   ///
@@ -10829,23 +10511,11 @@ abstract class AppLocalizations {
   /// **'{name} jumped to {time}'**
   String togetherSeeked(String name, String time);
 
-  /// No description provided for @togetherOtherService.
-  ///
-  /// In en, this message translates to:
-  /// **'The host is on {service}, syncing is off'**
-  String togetherOtherService(String service);
-
   /// No description provided for @togetherFollowFailed.
   ///
   /// In en, this message translates to:
   /// **'Couldn\'t open the host\'s episode. Open it yourself.'**
   String get togetherFollowFailed;
-
-  /// No description provided for @togetherHostRole.
-  ///
-  /// In en, this message translates to:
-  /// **'Host a room'**
-  String get togetherHostRole;
 
   /// No description provided for @togetherJoinRole.
   ///
@@ -10853,35 +10523,11 @@ abstract class AppLocalizations {
   /// **'Join a room'**
   String get togetherJoinRole;
 
-  /// No description provided for @togetherFollow.
-  ///
-  /// In en, this message translates to:
-  /// **'Follow the host\'s episode'**
-  String get togetherFollow;
-
-  /// No description provided for @togetherFollowDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Opens and switches episodes automatically when you use the same service'**
-  String get togetherFollowDesc;
-
   /// No description provided for @togetherOpenHost.
   ///
   /// In en, this message translates to:
   /// **'Open host\'s episode'**
   String get togetherOpenHost;
-
-  /// No description provided for @togetherHostWatching.
-  ///
-  /// In en, this message translates to:
-  /// **'Host: {title}'**
-  String togetherHostWatching(String title);
-
-  /// No description provided for @togetherLiveChat.
-  ///
-  /// In en, this message translates to:
-  /// **'Live chat'**
-  String get togetherLiveChat;
 
   /// No description provided for @togetherShowChat.
   ///
@@ -10894,30 +10540,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Waiting for the host to start an episode'**
   String get togetherWaitingHost;
-
-  /// No description provided for @togetherDifferentService.
-  ///
-  /// In en, this message translates to:
-  /// **'The host is on another service, syncing is off'**
-  String get togetherDifferentService;
-
-  /// No description provided for @togetherNoSource.
-  ///
-  /// In en, this message translates to:
-  /// **'Install an anime extension to follow the host'**
-  String get togetherNoSource;
-
-  /// No description provided for @togetherNoMatch.
-  ///
-  /// In en, this message translates to:
-  /// **'{source} has no match for the host\'s title'**
-  String togetherNoMatch(String source);
-
-  /// No description provided for @togetherNoEpisode.
-  ///
-  /// In en, this message translates to:
-  /// **'{source} doesn\'t have the host\'s episode'**
-  String togetherNoEpisode(String source);
 
   /// No description provided for @togetherRoomLink.
   ///
@@ -10936,12 +10558,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The host closed the room'**
   String get togetherHostClosed;
-
-  /// No description provided for @togetherHostBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'Host'**
-  String get togetherHostBadge;
 
   /// No description provided for @togetherNowPlaying.
   ///
@@ -10978,18 +10594,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Join a friend\'s room with a link'**
   String get togetherSettingsDesc;
-
-  /// No description provided for @togetherNoPlayer.
-  ///
-  /// In en, this message translates to:
-  /// **'Open an episode and it syncs with the room automatically. Chat and the member list work right now.'**
-  String get togetherNoPlayer;
-
-  /// No description provided for @togetherWatching.
-  ///
-  /// In en, this message translates to:
-  /// **'{name} is watching {file}'**
-  String togetherWatching(String name, String file);
 
   /// No description provided for @novelBilingual.
   ///
@@ -11056,12 +10660,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show original'**
   String get novelTranslateShowOriginal;
-
-  /// No description provided for @novelTranslating.
-  ///
-  /// In en, this message translates to:
-  /// **'Translating…'**
-  String get novelTranslating;
 
   /// No description provided for @novelTranslateFailed.
   ///
@@ -11453,12 +11051,6 @@ abstract class AppLocalizations {
   /// **'Picture in picture'**
   String get playerPip;
 
-  /// No description provided for @playerPipRestore.
-  ///
-  /// In en, this message translates to:
-  /// **'Back to the player'**
-  String get playerPipRestore;
-
   /// No description provided for @playerAutoPip.
   ///
   /// In en, this message translates to:
@@ -11536,12 +11128,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pause while the app is covered, like the notification panel, and resume when you come back'**
   String get playerPauseOnBlurDesc;
-
-  /// No description provided for @playerHoldSpeed.
-  ///
-  /// In en, this message translates to:
-  /// **'Hold speed'**
-  String get playerHoldSpeed;
 
   /// No description provided for @playerAudioOutput.
   ///
@@ -12101,18 +11687,6 @@ abstract class AppLocalizations {
   /// **'Offline mode is on. Changes are saved here and sent when you are back online.'**
   String get offlineModeOn;
 
-  /// No description provided for @offlineLost.
-  ///
-  /// In en, this message translates to:
-  /// **'You\'re offline. Changes are saved on this device'**
-  String get offlineLost;
-
-  /// No description provided for @offlineBack.
-  ///
-  /// In en, this message translates to:
-  /// **'Back online. Syncing your changes'**
-  String get offlineBack;
-
   /// No description provided for @offlineSaved.
   ///
   /// In en, this message translates to:
@@ -12611,12 +12185,6 @@ abstract class AppLocalizations {
   /// **'Mirror your list across services, or let whichever is ahead win.'**
   String get onboardingFeatureSyncDesc;
 
-  /// No description provided for @onboardingThemeShape.
-  ///
-  /// In en, this message translates to:
-  /// **'Colours'**
-  String get onboardingThemeShape;
-
   /// No description provided for @onboardingServices.
   ///
   /// In en, this message translates to:
@@ -12802,12 +12370,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Inactive: {manager}'**
   String sourceInactive(String manager);
-
-  /// No description provided for @sourceMissing.
-  ///
-  /// In en, this message translates to:
-  /// **'Source not found'**
-  String get sourceMissing;
 
   /// No description provided for @sourceMissingDesc.
   ///
@@ -13024,6 +12586,660 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Try again'**
   String get updateTryAgain;
+
+  /// No description provided for @settingsNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settingsNotifications;
+
+  /// No description provided for @settingsNotificationsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Alerts for your lists, new episodes and chapters, and comment replies'**
+  String get settingsNotificationsDesc;
+
+  /// No description provided for @settingsAboutUpdates.
+  ///
+  /// In en, this message translates to:
+  /// **'About & updates'**
+  String get settingsAboutUpdates;
+
+  /// No description provided for @settingsAboutUpdatesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'App updates, version, logs, links and support'**
+  String get settingsAboutUpdatesDesc;
+
+  /// No description provided for @settingsGroupAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account'**
+  String get settingsGroupAccount;
+
+  /// No description provided for @settingsGroupContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Content'**
+  String get settingsGroupContent;
+
+  /// No description provided for @settingsGroupApp.
+  ///
+  /// In en, this message translates to:
+  /// **'App'**
+  String get settingsGroupApp;
+
+  /// No description provided for @settingsAnimeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Player, subtitles, skipping, episode list and episode details'**
+  String get settingsAnimeDesc;
+
+  /// No description provided for @settingsMangaDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reader mode, controls, display and chapter tracking'**
+  String get settingsMangaDesc;
+
+  /// No description provided for @settingsNovelDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Text, page turning, translation and read aloud'**
+  String get settingsNovelDesc;
+
+  /// No description provided for @settingsLocalPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Local play'**
+  String get settingsLocalPlay;
+
+  /// No description provided for @settingsLocalPlayDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Play files, folders, network streams and torrents, or open a book'**
+  String get settingsLocalPlayDesc;
+
+  /// No description provided for @settingsLocalPlayVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get settingsLocalPlayVideo;
+
+  /// No description provided for @settingsLocalPlayBooks.
+  ///
+  /// In en, this message translates to:
+  /// **'Books'**
+  String get settingsLocalPlayBooks;
+
+  /// No description provided for @settingsWatchSections.
+  ///
+  /// In en, this message translates to:
+  /// **'Sections'**
+  String get settingsWatchSections;
+
+  /// No description provided for @settingsSectionLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode and chapter lists'**
+  String get settingsSectionLists;
+
+  /// No description provided for @settingsSectionProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Progress tracking'**
+  String get settingsSectionProgress;
+
+  /// No description provided for @updateChannelDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Stable is the tested release. Pre-release and Alpha get new features sooner but may break'**
+  String get updateChannelDesc;
+
+  /// No description provided for @checkNowDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Look for a newer version right away'**
+  String get checkNowDesc;
+
+  /// No description provided for @generalSectionBasics.
+  ///
+  /// In en, this message translates to:
+  /// **'Language & behaviour'**
+  String get generalSectionBasics;
+
+  /// No description provided for @generalSectionSecurity.
+  ///
+  /// In en, this message translates to:
+  /// **'Security'**
+  String get generalSectionSecurity;
+
+  /// No description provided for @generalSectionPrivacy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get generalSectionPrivacy;
+
+  /// No description provided for @notificationsOtherService.
+  ///
+  /// In en, this message translates to:
+  /// **'Switch to {service} to open this'**
+  String notificationsOtherService(String service);
+
+  /// No description provided for @secPlayerPlayback.
+  ///
+  /// In en, this message translates to:
+  /// **'Default speed, auto play, video fit, orientation and picture in picture'**
+  String get secPlayerPlayback;
+
+  /// No description provided for @secPlayerSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip openings, endings and recaps automatically'**
+  String get secPlayerSkip;
+
+  /// No description provided for @secPlayerControls.
+  ///
+  /// In en, this message translates to:
+  /// **'Swipe, hold and tap gestures and seek preview'**
+  String get secPlayerControls;
+
+  /// No description provided for @secPlayerSubtitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages, appearance and subtitle rendering'**
+  String get secPlayerSubtitles;
+
+  /// No description provided for @secPlayerShaders.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime upscaling and your own shaders'**
+  String get secPlayerShaders;
+
+  /// No description provided for @secPlayerEngine.
+  ///
+  /// In en, this message translates to:
+  /// **'Decoder, video and audio output, buffering. Only change these if playback has problems'**
+  String get secPlayerEngine;
+
+  /// No description provided for @secPlayerMpv.
+  ///
+  /// In en, this message translates to:
+  /// **'mpv.conf, scripts and advanced tuning'**
+  String get secPlayerMpv;
+
+  /// No description provided for @secAnimeList.
+  ///
+  /// In en, this message translates to:
+  /// **'Filler episodes and unwatched thumbnails'**
+  String get secAnimeList;
+
+  /// No description provided for @secProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'When your watched or read progress is saved to your list'**
+  String get secProgress;
+
+  /// No description provided for @secAnimeDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Where episode titles, thumbnails and summaries come from'**
+  String get secAnimeDetails;
+
+  /// No description provided for @secReaderReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading mode, page turning, zoom and next chapter'**
+  String get secReaderReading;
+
+  /// No description provided for @secReaderControls.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap zones, volume keys and auto scroll'**
+  String get secReaderControls;
+
+  /// No description provided for @secReaderDisplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Background, brightness, fullscreen and page number'**
+  String get secReaderDisplay;
+
+  /// No description provided for @secNovelText.
+  ///
+  /// In en, this message translates to:
+  /// **'Font, size, spacing, margins and page turning'**
+  String get secNovelText;
+
+  /// No description provided for @secNovelTranslate.
+  ///
+  /// In en, this message translates to:
+  /// **'Translate chapters while you read'**
+  String get secNovelTranslate;
+
+  /// No description provided for @secNovelSpeech.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice, speed and pitch for read aloud'**
+  String get secNovelSpeech;
+
+  /// No description provided for @secNotifyAbout.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick which kinds of activity send an alert'**
+  String get secNotifyAbout;
+
+  /// No description provided for @layoutTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Layout'**
+  String get layoutTitle;
+
+  /// No description provided for @layoutDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose, move and hide the buttons on the bars'**
+  String get layoutDesc;
+
+  /// No description provided for @layoutHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it'**
+  String get layoutHint;
+
+  /// No description provided for @layoutDropInto.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop in: {zone}'**
+  String layoutDropInto(String zone);
+
+  /// No description provided for @layoutCutting.
+  ///
+  /// In en, this message translates to:
+  /// **'Moving {name}. Press a paste button to place it'**
+  String layoutCutting(String name);
+
+  /// No description provided for @layoutTitleFixed.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get layoutTitleFixed;
+
+  /// No description provided for @layoutZoneTopStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Top bar, before the title'**
+  String get layoutZoneTopStart;
+
+  /// No description provided for @layoutZoneTopEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Top bar, after the title'**
+  String get layoutZoneTopEnd;
+
+  /// No description provided for @layoutZoneBottomStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom bar, left'**
+  String get layoutZoneBottomStart;
+
+  /// No description provided for @layoutZoneBottomEnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom bar, right'**
+  String get layoutZoneBottomEnd;
+
+  /// No description provided for @layoutZoneSecondRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden: second row in normal view'**
+  String get layoutZoneSecondRow;
+
+  /// No description provided for @layoutZoneOverflow.
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden: in the more menu'**
+  String get layoutZoneOverflow;
+
+  /// No description provided for @layoutEmptyZone.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop buttons here'**
+  String get layoutEmptyZone;
+
+  /// No description provided for @layoutCut.
+  ///
+  /// In en, this message translates to:
+  /// **'Cut'**
+  String get layoutCut;
+
+  /// No description provided for @layoutPaste.
+  ///
+  /// In en, this message translates to:
+  /// **'Paste here'**
+  String get layoutPaste;
+
+  /// No description provided for @layoutHide.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide'**
+  String get layoutHide;
+
+  /// No description provided for @layoutMoveTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Move to {zone}'**
+  String layoutMoveTo(String zone);
+
+  /// No description provided for @layoutReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to default'**
+  String get layoutReset;
+
+  /// No description provided for @layoutMore.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get layoutMore;
+
+  /// No description provided for @sourceWhyAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Why no alert?'**
+  String get sourceWhyAction;
+
+  /// No description provided for @sourceWhyStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get sourceWhyStatus;
+
+  /// No description provided for @sourceWhyLastCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Last checked'**
+  String get sourceWhyLastCheck;
+
+  /// No description provided for @sourceWhyNever.
+  ///
+  /// In en, this message translates to:
+  /// **'Not yet'**
+  String get sourceWhyNever;
+
+  /// No description provided for @sourceWhyNextCheck.
+  ///
+  /// In en, this message translates to:
+  /// **'Next check'**
+  String get sourceWhyNextCheck;
+
+  /// No description provided for @sourceWhyNewest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest at the source'**
+  String get sourceWhyNewest;
+
+  /// No description provided for @sourceWhyProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your progress'**
+  String get sourceWhyProgress;
+
+  /// No description provided for @sourceWhyListStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'List status'**
+  String get sourceWhyListStatus;
+
+  /// No description provided for @sourceWhyFailures.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed checks in a row'**
+  String get sourceWhyFailures;
+
+  /// No description provided for @sourceWhyLastRelease.
+  ///
+  /// In en, this message translates to:
+  /// **'Last new release seen'**
+  String get sourceWhyLastRelease;
+
+  /// No description provided for @sourceWhyVerdictNew.
+  ///
+  /// In en, this message translates to:
+  /// **'A new release appears here as soon as the source lists it and the next check runs.'**
+  String get sourceWhyVerdictNew;
+
+  /// No description provided for @sourceWhyVerdictAhead.
+  ///
+  /// In en, this message translates to:
+  /// **'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.'**
+  String get sourceWhyVerdictAhead;
+
+  /// No description provided for @sourceWhyVerdictSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.'**
+  String get sourceWhyVerdictSkipped;
+
+  /// No description provided for @sourceWhyVerdictBroken.
+  ///
+  /// In en, this message translates to:
+  /// **'The source can\'t be reached or has been removed, so nothing is being checked.'**
+  String get sourceWhyVerdictBroken;
+
+  /// No description provided for @sourceWhyVerdictMuted.
+  ///
+  /// In en, this message translates to:
+  /// **'This subscription is muted.'**
+  String get sourceWhyVerdictMuted;
+
+  /// No description provided for @externalPlayerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Open stream elsewhere'**
+  String get externalPlayerTitle;
+
+  /// No description provided for @externalCopyUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy stream link'**
+  String get externalCopyUrl;
+
+  /// No description provided for @externalCopied.
+  ///
+  /// In en, this message translates to:
+  /// **'Stream link copied'**
+  String get externalCopied;
+
+  /// No description provided for @externalChooser.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in another app'**
+  String get externalChooser;
+
+  /// No description provided for @externalVlc.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in VLC'**
+  String get externalVlc;
+
+  /// No description provided for @externalMpv.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in mpv'**
+  String get externalMpv;
+
+  /// No description provided for @externalFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open the stream. Is the player installed?'**
+  String get externalFailed;
+
+  /// No description provided for @addonInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed'**
+  String get addonInstalled;
+
+  /// No description provided for @loadFailedActivity.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load activity'**
+  String get loadFailedActivity;
+
+  /// No description provided for @loadFailedFavourites.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load favourites. Retry'**
+  String get loadFailedFavourites;
+
+  /// No description provided for @loadFailedStats.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load stats'**
+  String get loadFailedStats;
+
+  /// No description provided for @loadFailedReplies.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load replies'**
+  String get loadFailedReplies;
+
+  /// No description provided for @cantBeUndone.
+  ///
+  /// In en, this message translates to:
+  /// **'This can\'t be undone.'**
+  String get cantBeUndone;
+
+  /// No description provided for @searchTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Search tags'**
+  String get searchTags;
+
+  /// No description provided for @spoilerTapToView.
+  ///
+  /// In en, this message translates to:
+  /// **' Spoiler, tap to view '**
+  String get spoilerTapToView;
+
+  /// No description provided for @mediaVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'Video'**
+  String get mediaVideo;
+
+  /// No description provided for @notificationSomeone.
+  ///
+  /// In en, this message translates to:
+  /// **'Someone'**
+  String get notificationSomeone;
+
+  /// No description provided for @notificationATitle.
+  ///
+  /// In en, this message translates to:
+  /// **'a title'**
+  String get notificationATitle;
+
+  /// No description provided for @notificationAddedDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Was added to AniList'**
+  String get notificationAddedDetail;
+
+  /// No description provided for @updateNoReleases.
+  ///
+  /// In en, this message translates to:
+  /// **'No releases found'**
+  String get updateNoReleases;
+
+  /// No description provided for @updateInvalidResponse.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid update response'**
+  String get updateInvalidResponse;
+
+  /// No description provided for @commentsRateLimited.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate limited'**
+  String get commentsRateLimited;
+
+  /// No description provided for @commentsConnectFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to connect'**
+  String get commentsConnectFailed;
+
+  /// No description provided for @dnsNoRecords.
+  ///
+  /// In en, this message translates to:
+  /// **'No A records returned'**
+  String get dnsNoRecords;
+
+  /// No description provided for @importTokenRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Token rejected'**
+  String get importTokenRejected;
+
+  /// No description provided for @developerRoleLead.
+  ///
+  /// In en, this message translates to:
+  /// **'Lead Developer'**
+  String get developerRoleLead;
+
+  /// No description provided for @developerRoleModerator.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord Moderator'**
+  String get developerRoleModerator;
+
+  /// No description provided for @extensionManagerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{type} manager'**
+  String extensionManagerTitle(String type);
+
+  /// No description provided for @extensionsOfType.
+  ///
+  /// In en, this message translates to:
+  /// **'{type} extensions'**
+  String extensionsOfType(String type);
+
+  /// No description provided for @extensionSettingsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} settings'**
+  String extensionSettingsTitle(String name);
+
+  /// No description provided for @extensionNoSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'{name} doesn\'t provide any settings.'**
+  String extensionNoSettings(String name);
+
+  /// No description provided for @notificationAired.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {episode} of {title} aired'**
+  String notificationAired(String episode, String title);
+
+  /// No description provided for @notificationAiredDetail.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode {episode} aired'**
+  String notificationAiredDetail(String episode);
+
+  /// No description provided for @notificationAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'{title} was added to AniList'**
+  String notificationAdded(String title);
+
+  /// No description provided for @updateNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'Update server couldn\'t find that release: {message}'**
+  String updateNotFound(String message);
 }
 
 class _AppLocalizationsDelegate

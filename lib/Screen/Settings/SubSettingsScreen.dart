@@ -5,15 +5,18 @@ import '../../Widgets/Components/BaseScreen.dart';
 import 'SettingsListView.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'SubSettingsState.dart';
+import 'Widgets/SettingsGroup.dart';
 
 class SubSettingsScreen extends StatefulWidget {
   final String title;
   final List<Setting> Function(BuildContext) settings;
+  final Map<String, SectionStyle>? accordion;
 
   const SubSettingsScreen({
     super.key,
     required this.title,
     required this.settings,
+    this.accordion,
   });
 
   @override
@@ -30,7 +33,11 @@ class _SubSettingsScreenState extends BaseScreen<SubSettingsScreen>
   Widget buildContent(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: SettingsListView(title: state.title, searchable: state.build),
+      body: SettingsListView(
+        title: state.title,
+        searchable: state.build,
+        accordion: widget.accordion,
+      ),
     );
   }
 }
