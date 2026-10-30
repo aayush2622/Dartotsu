@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Widgets/Components/Clickable.dart';
 import 'BarLayout.dart';
 import 'LayoutEditorState.dart';
 
@@ -95,7 +97,7 @@ class LayoutSlot extends StatelessWidget {
         state.move(d.data, zone.id, index);
       },
       builder: (context, candidates, rejected) => AnimatedContainer(
-        duration: const Duration(milliseconds: 140),
+        duration: animDuration(140),
         curve: Curves.easeOutCubic,
         padding: const EdgeInsets.all(3),
         constraints: BoxConstraints(minWidth: box, minHeight: box),
@@ -139,6 +141,14 @@ class LayoutSlot extends StatelessWidget {
           );
   }
 
+  Offset _anchor(String id) {
+    final render = state.keyOf(id).currentContext?.findRenderObject();
+    if (render is! RenderBox || !render.attached) return Offset.zero;
+    return render.localToGlobal(
+      Offset(render.size.width / 2, render.size.height),
+    );
+  }
+
   int _indexAt(Offset p, List<String> ids) {
     final vertical = style == SlotStyle.menu;
     for (var i = 0; i < ids.length; i++) {
@@ -156,7 +166,7 @@ class LayoutSlot extends StatelessWidget {
   }
 
   Widget _marker(bool vertical) => AnimatedContainer(
-    duration: const Duration(milliseconds: 120),
+    duration: animDuration(120),
     width: vertical ? null : 4,
     height: vertical ? 4 : box * 0.7,
     margin: vertical
@@ -173,7 +183,7 @@ class LayoutSlot extends StatelessWidget {
 
   Widget _paste(BuildContext context) => Tooltip(
     message: getString.layoutPaste,
-    child: GestureDetector(
+    child: Clickable(
       onTap: () => state.paste(zone.id),
       child: Container(
         width: box,
@@ -321,13 +331,9 @@ class LayoutSlot extends StatelessWidget {
       state.hover.value = null;
     }
 
-    final tappable = MouseRegion(
-      cursor: SystemMouseCursors.grab,
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
-        onTapUp: (d) => onTap(d.globalPosition, zone.id, id),
-        child: face(),
-      ),
+    final tappable = Clickable(
+      onTap: () => onTap(_anchor(id), zone.id, id),
+      child: face(),
     );
     final ghost = Opacity(opacity: 0.25, child: face());
     final dragged = _touch

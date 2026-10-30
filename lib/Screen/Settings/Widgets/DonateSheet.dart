@@ -93,7 +93,7 @@ class _DonateSheet extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         onTap: () => copyToClipboard(kUpiId, message: getString.upiCopied),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 12, 8, 12),
+          padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 8, 12),
           child: Row(
             children: [
               loadSvg(

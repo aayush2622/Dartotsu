@@ -117,8 +117,8 @@ class LayoutPreview extends StatelessWidget {
                     DecoratedBox(
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
+                          begin: AlignmentDirectional.topStart,
+                          end: AlignmentDirectional.bottomEnd,
                           colors: [
                             Color.lerp(Colors.black, scheme.primary, 0.3)!,
                             Colors.black,
@@ -159,10 +159,10 @@ class LayoutPreview extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    PositionedDirectional(
                       top: 0,
-                      left: 0,
-                      right: 0,
+                      start: 0,
+                      end: 0,
                       child: DecoratedBox(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
@@ -203,9 +203,9 @@ class LayoutPreview extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
-                      left: 0,
-                      right: 0,
+                    PositionedDirectional(
+                      start: 0,
+                      end: 0,
                       bottom: 0,
                       child: DecoratedBox(
                         decoration: const BoxDecoration(
@@ -232,7 +232,8 @@ class LayoutPreview extends StatelessWidget {
                                 children: [
                                   Expanded(
                                     child: Align(
-                                      alignment: Alignment.bottomLeft,
+                                      alignment:
+                                          AlignmentDirectional.bottomStart,
                                       child: _slot(
                                         bottomStartZone,
                                         color: Colors.white,
@@ -271,7 +272,7 @@ class LayoutPreview extends StatelessWidget {
   Widget _seekBar(Color color, Color accent) => SizedBox(
     height: 14,
     child: Stack(
-      alignment: Alignment.centerLeft,
+      alignment: AlignmentDirectional.centerStart,
       children: [
         Container(
           height: 4,
@@ -453,9 +454,14 @@ class LayoutPreview extends StatelessWidget {
                             ),
                           ),
                           Align(
-                            alignment: Alignment.topRight,
+                            alignment: AlignmentDirectional.topEnd,
                             child: Padding(
-                              padding: const EdgeInsets.fromLTRB(12, 0, 8, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                12,
+                                0,
+                                8,
+                                0,
+                              ),
                               child: _menuCard(context, accent),
                             ),
                           ),

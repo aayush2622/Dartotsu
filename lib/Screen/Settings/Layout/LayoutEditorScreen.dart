@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/AppBars.dart';
@@ -92,7 +93,7 @@ class _LayoutEditorScreenState extends BaseScreen<LayoutEditorScreen>
     return Padding(
       padding: EdgeInsets.only(top: Dimens.gap),
       child: AnimatedSwitcher(
-        duration: const Duration(milliseconds: 150),
+        duration: animDuration(150),
         child: Row(
           key: ValueKey(text),
           mainAxisAlignment: MainAxisAlignment.center,
