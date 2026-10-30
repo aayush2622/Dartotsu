@@ -141,6 +141,8 @@ Channels: `stable`, `prerelease` (WebKitGTK 4.1 build, recommended) and `alpha`.
 }
 ```
 
+With [NUR](https://github.com/nix-community/NUR), the same channels are `nur.legacyPackages.${system}.repos.dartotsu.<channel>`, or `pkgs.nur.repos.dartotsu.<channel>` once the NUR overlay is applied. The module is `nur.repos.dartotsu.modules.nixos` (home-manager: `modules.homeManager`). The license is unfree, so `nixpkgs.config.allowUnfree = true` is required.
+
 </details>
 
 ## Join the community
