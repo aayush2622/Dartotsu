@@ -16,6 +16,7 @@
         "dartotsu"
         "aniyomi"
         "tachiyomi"
+        "mihon"
         "ireader"
         "legado"
         "yuedu"
