@@ -51,6 +51,7 @@ class ReaderImage extends StatefulWidget {
   final double? width;
   final double? height;
   final double placeholderHeight;
+  final ValueChanged<Size>? onSize;
 
   const ReaderImage({
     super.key,
@@ -59,6 +60,7 @@ class ReaderImage extends StatefulWidget {
     this.width,
     this.height,
     this.placeholderHeight = 480,
+    this.onSize,
   });
 
   @override
@@ -72,6 +74,10 @@ class _ReaderImageState extends State<ReaderImage> {
   final crop = Live<BorderCropInfo?>(null);
   ImageStream? _cropStream;
   ImageStreamListener? _cropListener;
+  ImageStream? _sizeStream;
+  ImageStreamListener? _sizeListener;
+  Size? _natural;
+  Disposer? _cropWatch;
   bool _shown = false;
   bool _logged = false;
 
@@ -79,12 +85,62 @@ class _ReaderImageState extends State<ReaderImage> {
   void initState() {
     super.initState();
     _watch();
+    _cropWatch = onChange(crop, (_) => _emitSize());
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _syncCrop();
+    _syncSize();
+  }
+
+  void _detachSize() {
+    final listener = _sizeListener;
+    final stream = _sizeStream;
+    _sizeStream = null;
+    _sizeListener = null;
+    if (listener == null || stream == null) return;
+    try {
+      stream.removeListener(listener);
+    } catch (_) {}
+  }
+
+  void _syncSize() {
+    _detachSize();
+    _natural = null;
+    if (widget.onSize == null) return;
+    final stream = _baseProvider(
+      context,
+    ).resolve(createLocalImageConfiguration(context));
+    late final ImageStreamListener listener;
+    listener = ImageStreamListener((info, _) {
+      if (identical(_sizeListener, listener)) {
+        stream.removeListener(listener);
+        _sizeStream = null;
+        _sizeListener = null;
+      }
+      _natural = Size(
+        info.image.width.toDouble(),
+        info.image.height.toDouble(),
+      );
+      _emitSize();
+    });
+    _sizeStream = stream;
+    _sizeListener = listener;
+    stream.addListener(listener);
+  }
+
+  void _emitSize() {
+    final natural = _natural;
+    final report = widget.onSize;
+    if (natural == null || report == null || !mounted) return;
+    final rect = crop.value?.rect;
+    report(
+      rect == null
+          ? natural
+          : Size(natural.width * rect.width, natural.height * rect.height),
+    );
   }
 
   ImageProvider _baseProvider(BuildContext context) {
@@ -180,11 +236,14 @@ class _ReaderImageState extends State<ReaderImage> {
       _logged = false;
       _watch();
       _syncCrop();
+      _syncSize();
     }
   }
 
   @override
   void dispose() {
+    _cropWatch?.dispose();
+    _detachSize();
     _detachCrop();
     _slowTimer?.cancel();
     super.dispose();
