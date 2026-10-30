@@ -157,7 +157,7 @@ SkipReason? skipReason(
   SkipRules rules, {
   bool ignoreWindow = false,
 }) {
-  if (s.listStatus == 'COMPLETED') {
+  if (s.listStatus == 'COMPLETED' && s.total != null) {
     return SkipReason.completed;
   }
   final seen = s.seen;
