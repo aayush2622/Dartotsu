@@ -12842,8 +12842,20 @@ abstract class AppLocalizations {
   /// No description provided for @layoutHint.
   ///
   /// In en, this message translates to:
-  /// **'Hold and drag a button to move it. Tap one to cut it, move it or hide it'**
+  /// **'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it'**
   String get layoutHint;
+
+  /// No description provided for @layoutDropInto.
+  ///
+  /// In en, this message translates to:
+  /// **'Drop in: {zone}'**
+  String layoutDropInto(String zone);
+
+  /// No description provided for @layoutCutting.
+  ///
+  /// In en, this message translates to:
+  /// **'Moving {name}. Press a paste button to place it'**
+  String layoutCutting(String name);
 
   /// No description provided for @layoutTitleFixed.
   ///

@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import '../../../Core/State/State.dart';
 import '../../../Widgets/Components/ScreenState.dart';
 import 'BarLayout.dart';
@@ -9,6 +11,11 @@ class LayoutEditorState extends ScreenState {
 
   late final layout = surface.layout.live;
   final cut = Live<String?>(null);
+  final dragging = Live<String?>(null);
+  final hover = Live<({String zone, int index})?>(null);
+  final _keys = <String, GlobalKey>{};
+
+  GlobalKey keyOf(String id) => _keys.putIfAbsent(id, GlobalKey.new);
 
   void _apply(BarLayout next) {
     layout.value = next;
@@ -33,6 +40,8 @@ class LayoutEditorState extends ScreenState {
   }
 
   void startCut(String id) => cut.value = cut.value == id ? null : id;
+
+  void cancelCut() => cut.value = null;
 
   void paste(String zone) {
     final id = cut.value;

@@ -7202,7 +7202,17 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get layoutHint =>
-      'Hold and drag a button to move it. Tap one to cut it, move it or hide it';
+      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+
+  @override
+  String layoutDropInto(String zone) {
+    return 'Drop in: $zone';
+  }
+
+  @override
+  String layoutCutting(String name) {
+    return 'Moving $name. Press a paste button to place it';
+  }
 
   @override
   String get layoutTitleFixed => 'Title';

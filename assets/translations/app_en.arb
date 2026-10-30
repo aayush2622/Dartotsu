@@ -3947,7 +3947,23 @@
   "secNotifyAbout": "Pick which kinds of activity send an alert",
   "layoutTitle": "Layout",
   "layoutDesc": "Choose, move and hide the buttons on the bars",
-  "layoutHint": "Hold and drag a button to move it. Tap one to cut it, move it or hide it",
+  "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
+  "layoutDropInto": "Drop in: {zone}",
+  "@layoutDropInto": {
+    "placeholders": {
+      "zone": {
+        "type": "String"
+      }
+    }
+  },
+  "layoutCutting": "Moving {name}. Press a paste button to place it",
+  "@layoutCutting": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "layoutTitleFixed": "Title",
   "layoutZoneTopStart": "Top bar, before the title",
   "layoutZoneTopEnd": "Top bar, after the title",
