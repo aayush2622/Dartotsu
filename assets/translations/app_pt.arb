@@ -1887,22 +1887,612 @@
     "appLockMismatch": "Os códigos não coincidem",
     "appLockOn": "Código definido",
     "appLockRemoveTitle": "Mete o teu código para desligar o bloqueio",
-    "settingsNetwork": "Rede",
-    "settingsNetworkDesc": "User agent, certificados, DNS e proxy",
-    "mangaBakaAccountOptions": "Opções da conta MangaBaka",
-    "chapterExpectedIn": "Capítulo {chapter} previsto daqui a cerca de {time}",
-    "anilistExcludeList": "Excluir a tua lista",
-    "anilistExcludeListDesc": "Esconde das páginas de anime e manga os títulos que já estão no teu AniList",
-    "koreanDramas": "Doramas coreanos",
-    "chineseDramas": "Doramas chineses",
-    "japaneseDramas": "Doramas japoneses",
-    "thaiDramas": "Doramas tailandeses",
-    "turkishDramas": "Séries turcas",
-    "miniSeries": "Minisséries",
-    "playerSwapGestures": "Trocar lados do deslize",
-    "playerSwapGesturesDesc": "Brilho à esquerda e volume à direita",
+    "settingsNetwork": "Network",
+    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
+    "mangaBakaAccountOptions": "MangaBaka account options",
+    "chapterExpectedIn": "Chapter {chapter} expected in about {time}",
+    "anilistExcludeList": "Exclude your list",
+    "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+    "koreanDramas": "Korean Dramas",
+    "chineseDramas": "Chinese Dramas",
+    "japaneseDramas": "Japanese Dramas",
+    "thaiDramas": "Thai Dramas",
+    "turkishDramas": "Turkish Dramas",
+    "miniSeries": "Mini Series",
+    "playerSwapGestures": "Swap swipe sides",
+    "playerSwapGesturesDesc": "Brightness on the left and volume on the right",
     "playerOpenBig": "Abrir em vista grande",
     "playerOpenBigDesc": "Abre o leitor em ecrã inteiro em vez de com a lista de episódios",
     "playerPauseOnBlur": "Pausar quando perde o foco",
-    "playerPauseOnBlurDesc": "Pausa enquanto a app está tapada, como pelo painel de notificações, e continua quando voltas"
+    "playerPauseOnBlurDesc": "Pausa enquanto a app está tapada, como pelo painel de notificações, e continua quando voltas",
+    "updateLater": "Later",
+    "stacks": "Stacks",
+    "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
+    "@streamsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "readerModeAuto": "Auto (by series type)",
+    "stackSavesCount": "{count, plural, =1{1 save} other{{count} saves}}",
+    "@stackSavesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updatePreparing": "Preparing…",
+    "updateSkipVersion": "Skip this version",
+    "castProtocolDlna": "DLNA / Smart TV",
+    "sourceMute": "Mute",
+    "sourceAlertsHeader": "Release notifications",
+    "sourceSoon": "soon",
+    "castReceiverFailed": "The Chromecast did not start its player",
+    "widgetReleases": "Releasing soon",
+    "downloadStorageTitle": "Storage",
+    "sourcePickAnother": "Pick another source",
+    "missingSequel": "Missing Sequel",
+    "sourceNextCheck": "Next check {when}",
+    "@sourceNextCheck": {
+        "placeholders": {
+            "when": {
+                "type": "String"
+            }
+        }
+    },
+    "castSearching": "Looking for devices on your network…",
+    "stacksFeatured": "Featured",
+    "sourceSkipUnseen": "Skip while you have unseen episodes",
+    "playerSkipStart": "Start",
+    "newsEmpty": "No news right now",
+    "updateAll": "Update all",
+    "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
+    "sourceNoticesEmpty": "No release notices yet",
+    "scanlationGroups": "Scanlation Groups",
+    "sourceNotifyTooltipOn": "Stop release notifications",
+    "stackSpoilers": "Spoilers",
+    "playerSkipSend": "Submit to AniSkip",
+    "sourceChecking": "Checking…",
+    "sourceNotifyNeedsSource": "Pick a source with a match first",
+    "sourceUnreachable": "Source isn't responding",
+    "stacksSignInAgain": "Sign in again",
+    "playerSkipEnd": "End",
+    "widgetMore": "Also in progress",
+    "downloadStorageEmpty": "No downloads are using space",
+    "sourceSkippedUnstarted": "Skipped: not started",
+    "castPlaybackFailed": "The device could not play this stream",
+    "sourceFinished": "Finished",
+    "appLockBiometricReason": "Unlock Dartotsu",
+    "sourceFoundEpisode": "Episode {number} is out on {source}",
+    "@sourceFoundEpisode": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            },
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
+    "@updateConflictBody": {
+        "placeholders": {
+            "names": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreed": "Freed {size}",
+    "@downloadFreed": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "playerSkipSubmit": "Submit skip times",
+    "logDeleteDesc": "Clear the saved app logs to free up space",
+    "stackSave": "Save stack",
+    "refreshFromMangaUpdates": "Refresh from MangaUpdates",
+    "sourceUnmute": "Unmute",
+    "releases": "Releases",
+    "sourceUnsubscribe": "Unsubscribe",
+    "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
+    "downloadFreeUp": "Free up space",
+    "readerFilterQualityLow": "Low (Bilinear)",
+    "stackUnsave": "Remove from saved",
+    "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
+    "sourceInDays": "in {count}d",
+    "@sourceInDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackEmptyEntries": "This stack is empty",
+    "readerFilterQualityMedium": "Medium (Trilinear)",
+    "updateNoAsset": "This release has no download for your device",
+    "castRokuNote": "Roku can't report or change the position",
+    "readerLongPressSave": "Hold a page to save it",
+    "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
+    "@downloadClearQueueConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockDelayDesc": "How long Dartotsu can stay in the background before asking again",
+    "downloadDeleteWatched": "Delete watched",
+    "sourceMuted": "Muted",
+    "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
+    "@repoLinkConfirm": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
+    "readerFilterQualityNone": "None (Nearest neighbor)",
+    "sourceNotifyOff": "Release notifications off",
+    "togetherShareText": "Watch with me on Dartotsu: {link}",
+    "@togetherShareText": {
+        "placeholders": {
+            "link": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceSkipUnstarted": "Skip titles you haven't started",
+    "castTitle": "Cast to device",
+    "sourceAlertsSwitch": "Check subscribed titles",
+    "playerSkipUseNow": "Use current position",
+    "navSources": "Sources",
+    "downloadDeleteAll": "Delete all",
+    "newsCouldntLoad": "Couldn't load the news",
+    "updateDownloading": "Downloading",
+    "playerSkipSent": "Skip times submitted to AniSkip, thank you",
+    "updateOpenedBrowser": "Check your browser",
+    "mangaUpdatesAccountOptions": "MangaUpdates account options",
+    "sourceAll": "All",
+    "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
+    "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
+    "calendarExpected": "Expected",
+    "appLockUseBiometric": "Use biometrics",
+    "extensionsLoading": "Loading extensions…",
+    "stackRemovedToast": "Removed from your saved stacks",
+    "togetherShareInvite": "Share invite",
+    "updateUpToDate": "You're on the latest version",
+    "readerOpenBookDesc": "Read an epub from your files in the novel reader",
+    "streamGroupHardSub": "Hard Sub",
+    "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
+    "seeAll": "See all",
+    "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
+    "@sourceNotifyAllOut": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "castProtocolRoku": "Roku",
+    "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
+    "mangaUpdates": "MangaUpdates",
+    "userStacks": "Stacks by {name}",
+    "@userStacks": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
+    "@downloadStorageSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "castNowCasting": "Casting to {name}",
+    "@castNowCasting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "stacksEmpty": "No stacks here yet",
+    "sourceFoundSummary": "{count} titles have something new",
+    "@sourceFoundSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "mangaUpdatesAnimeEnd": "Anime adaptation ends",
+    "logDelete": "Delete log files",
+    "playerPictureOriginal": "Original",
+    "updateTryAgain": "Try again",
+    "sourceInactive": "Inactive: {manager}",
+    "@sourceInactive": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "stacksSignIn": "Sign in to MangaBaka to see your stacks",
+    "firstTab": "First tab",
+    "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
+    "streamGroupOther": "Other",
+    "updateSizeOf": "{done} of {total}",
+    "@updateSizeOf": {
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "readerFilterQualityDesc": "Resampling quality used when scaling manga pages",
+    "sourceMissing": "Source not found",
+    "followCoverMediaOnly": "Only for media",
+    "extensionsUpdated": "{done} of {total} extensions updated",
+    "@extensionsUpdated": {
+        "placeholders": {
+            "done": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockDelay": "Lock when idle",
+    "playerPictureProcessedDesc": "The frame as you see it now",
+    "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
+    "@sourceCheckResult": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
+    "streamGroupSub": "Sub",
+    "autoUpdateRuntimes": "Update extension runtimes automatically",
+    "widgetNothing": "Nothing to continue yet",
+    "streamGroupSoftSub": "Soft Sub",
+    "downloadDeleteAllConfirm": "Delete every download of {title}?",
+    "@downloadDeleteAllConfirm": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
+    "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
+    "sourceLatest": "Latest: {number}",
+    "@sourceLatest": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadNothingWatched": "Nothing you have finished is downloaded",
+    "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
+    "@trackProgressMangaLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
+    "@downloadFreeUpConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceWaiting": "Waiting for the next release",
+    "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
+    "@sourceFoundEpisodes": {
+        "placeholders": {
+            "from": {
+                "type": "String"
+            },
+            "to": {
+                "type": "String"
+            },
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceFoundChapter": "Chapter {number} is out on {source}",
+    "@sourceFoundChapter": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            },
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "castFailed": "Could not start casting",
+    "stackSavedToast": "Saved to your stacks",
+    "stacksCouldntLoad": "Couldn't load the stacks",
+    "usernameOnly": "Username",
+    "updateWhatsNew": "What's new",
+    "widgetContinue": "Continue",
+    "readerFilterQualityHigh": "High (Bicubic)",
+    "novelExtensions": "Novel Extensions",
+    "imageTitlePage": "Page",
+    "stacksFollowing": "Following",
+    "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
+    "@sourceManageDesc": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updateConflictAction": "Uninstall and reinstall",
+    "streamGroupRaw": "Raw",
+    "mangaUpdatesLoginFailed": "MangaUpdates login failed. Check your username and password.",
+    "castProtocolChromecast": "Chromecast",
+    "playerPictureSave": "Save this frame",
+    "updateInstalling": "Installing…",
+    "shortcutNothingToContinue": "Nothing to continue yet",
+    "sourceManage": "Subscriptions",
+    "mangaUpdatesProfile": "MangaUpdates profile",
+    "castStop": "Stop casting",
+    "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
+    "sourceSkippedCompleted": "Skipped: completed",
+    "stackBy": "by {name}",
+    "@stackBy": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "newsTitle": "News",
+    "sourceInHours": "in {count}h",
+    "@sourceInHours": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceOpenExtensions": "Open extensions",
+    "trackProgressRememberSeries": "Remember for this series",
+    "calendarChapter": "Chapter {n}",
+    "@calendarChapter": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
+    "@appLockDelayAfter": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
+    "readerOpenBook": "Open a book",
+    "castRefresh": "Search again",
+    "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
+    "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
+    "@extensionUpdates": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
+    "updateReleased": "Released {date}",
+    "@updateReleased": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
+    "streamGroupDub": "Dub",
+    "downloadStorageWatched": "{size} already watched or read",
+    "@downloadStorageWatched": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "stacksMine": "Yours",
+    "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
+    "@sourceInactiveOpen": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "stacksSaved": "Saved",
+    "playerPictureSaveFailed": "Could not save the frame",
+    "updateSpeed": "{speed}/s",
+    "@updateSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
+    "mangaUpdatesAnimeStart": "Anime adaptation starts",
+    "appLockDelayNever": "Never",
+    "playerPictureSaved": "Frame saved",
+    "sourceMissingDesc": "{source} isn't installed in this extension service",
+    "@sourceMissingDesc": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "readerFilterQuality": "Image filter quality",
+    "appLockDelayAlways": "Always",
+    "stacksAll": "All",
+    "rising": "Rising",
+    "sourceNotifyOn": "You'll be told when {source} has something new",
+    "@sourceNotifyOn": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictTitle": "Update not installed",
+    "sourceNotifyTooltipOff": "Notify me about new releases",
+    "sourceCheckNow": "Check now",
+    "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
+    "@sourceFoundChapters": {
+        "placeholders": {
+            "from": {
+                "type": "String"
+            },
+            "to": {
+                "type": "String"
+            },
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "logDeleted": "Deleted {size} of logs",
+    "@logDeleted": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "appLockBiometric": "Unlock with biometrics",
+    "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
+    "@stackSeriesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceSkippedUnseen": "Skipped: unseen episodes",
+    "playerSkipFailed": "AniSkip refused the skip times: {error}",
+    "@playerSkipFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
+    "downloadClearQueue": "Clear queue",
+    "playerPictureProcessed": "With shaders and colors",
+    "sourceEmpty": "No subscriptions yet",
+    "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
+    "@trackProgressAnimeLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceOpenTitle": "Open title",
+    "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
+    "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
+    "playerSoftwareRender": "Software rendering",
+    "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
+    "novelPaginating": "Laying out pages",
+    "shortcutNoCalendar": "{service} has no calendar",
+    "@shortcutNoCalendar": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
+    "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
+    "playerShadersSoftware": "Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.",
+    "castVolume": "TV volume",
+    "novelHighlightNote": "Note",
+    "novelTools": "Contents, search and highlights",
+    "supportDeveloper": "Support the developer",
+    "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
+    "@novelSearchCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "novelSearch": "Search",
+    "novelHighlightFailed": "Couldn't match that selection to the text",
+    "buyMeCoffee": "Buy me a coffee",
+    "novelHighlightRemove": "Remove highlight",
+    "novelHighlights": "Highlights",
+    "novelContentsEmpty": "This chapter has no headings",
+    "novelHighlight": "Highlight",
+    "novelSearchHint": "Search in this chapter",
+    "novelHighlightNoteHint": "Add a note",
+    "castSkipPart": "Skip {name}",
+    "@castSkipPart": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "castControls": "Controls",
+    "upiId": "UPI ID",
+    "upiCopied": "UPI ID copied",
+    "novelPageOf": "Page {current} of {total}",
+    "@novelPageOf": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
+    "novelContents": "Contents",
+    "novelSearchNone": "No matches",
+    "novelPaged": "Page turning"
 }
