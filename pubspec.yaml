@@ -100,10 +100,8 @@ dependencies:
   win32: ^6.4.0
   ffi: ^2.2.0
   install_plugin: ^2.1.0
-  dart_discord_presence:
-    git:
-      url: https://github.com/aayush2622/dart_discord_presence.git
-      ref: c464428e44fb319166bd9c4d47a58ff7d86749c0
+  dart_discord_presence: ^1.2.2
+
 
   # Miscellaneous
   receive_sharing_intent: ^1.9.0

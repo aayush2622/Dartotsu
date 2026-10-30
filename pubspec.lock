@@ -316,12 +316,11 @@ packages:
   dart_discord_presence:
     dependency: "direct main"
     description:
-      path: "."
-      ref: c464428e44fb319166bd9c4d47a58ff7d86749c0
-      resolved-ref: c464428e44fb319166bd9c4d47a58ff7d86749c0
-      url: "https://github.com/aayush2622/dart_discord_presence.git"
-    source: git
-    version: "1.2.1"
+      name: dart_discord_presence
+      sha256: "9bccc3811cc4ee1f636d4d88912959f3c1f80527b462d4d9e1041b9e8b366a26"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.2"
   dart_style:
     dependency: transitive
     description:
