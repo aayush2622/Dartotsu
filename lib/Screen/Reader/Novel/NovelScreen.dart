@@ -28,6 +28,7 @@ import '../../Settings/Categories/ReaderSettings.dart';
 import '../../Settings/Widgets/SettingsGroup.dart';
 import '../Components/NovelTools.dart';
 import '../Components/ReaderSheets.dart';
+import '../../Settings/Layout/BarLayout.dart';
 import 'NovelState.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
 
@@ -696,107 +697,165 @@ class _NovelScreenState extends State<NovelScreen>
     icon: Icon(icon),
   );
 
-  Widget _topRow(BuildContext context, Color foreground) => Row(
-    children: [
-      _icon(
-        foreground,
-        Icons.arrow_back_ios_new_rounded,
-        () => popPage(context),
-      ),
-      const SizedBox(width: 8),
-      Expanded(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              state.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: context.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w700,
-                height: 1.25,
-              ),
+  ({IconData icon, String label, VoidCallback? onTap, bool active})? _spec(
+    BuildContext context,
+    String id,
+  ) {
+    switch (id) {
+      case 'speak':
+        if (!state.canSpeak) return null;
+        final on = state.speaking.value;
+        return (
+          icon: Icons.record_voice_over_rounded,
+          label: on ? getString.novelSpeakStop : getString.novelSpeak,
+          onTap: state.toggleSpeaking,
+          active: on,
+        );
+      case 'translate':
+        final shown = state.translated.value != null;
+        return (
+          icon: Icons.g_translate_rounded,
+          label: shown
+              ? getString.novelTranslateShowOriginal
+              : getString.novelTranslate,
+          onTap: state.translating.value ? null : state.toggleTranslation,
+          active: shown,
+        );
+      case 'autoScroll':
+        final on = state.autoScrolling.value;
+        return (
+          icon: on
+              ? Icons.pause_circle_outline_rounded
+              : Icons.play_circle_outline_rounded,
+          label: on
+              ? getString.readerAutoScrollStop
+              : getString.readerAutoScroll,
+          onTap: state.toggleAutoScroll,
+          active: false,
+        );
+      case 'bookmark':
+        final on = state.bookmarked;
+        return (
+          icon: on ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+          label: on
+              ? getString.readerBookmarkRemove
+              : getString.readerBookmarkAdd,
+          onTap: state.toggleBookmark,
+          active: false,
+        );
+      case 'tools':
+        return (
+          icon: Icons.manage_search_rounded,
+          label: getString.novelTools,
+          onTap: () => showNovelTools(context, state),
+          active:
+              state.searchMatches.value.isNotEmpty ||
+              state.record.highlights.isNotEmpty,
+        );
+      case 'chapters':
+        return (
+          icon: Icons.format_list_numbered_rounded,
+          label: getString.readerChapters,
+          onTap: () => showChapterList(
+            context,
+            request: state.request,
+            current: state.index.value,
+            onPick: state.openChapter,
+          ),
+          active: false,
+        );
+      case 'settings':
+        return (
+          icon: Icons.settings_rounded,
+          label: getString.readerSettingsTitle,
+          onTap: () => _options(context),
+          active: false,
+        );
+    }
+    return null;
+  }
+
+  List<Widget> _actionBar(
+    BuildContext context,
+    Color foreground,
+    List<String> ids,
+  ) => [
+    for (final id in ids)
+      if (_spec(context, id) case final a?)
+        _icon(foreground, a.icon, a.onTap, tooltip: a.label, active: a.active),
+  ];
+
+  Widget _overflow(BuildContext context, Color foreground, List<String> ids) {
+    final specs = [
+      for (final id in ids) ?_spec(context, id),
+    ].where((a) => a.onTap != null).toList();
+    if (specs.isEmpty) return const SizedBox.shrink();
+    return PopupMenuButton<int>(
+      tooltip: getString.layoutMore,
+      icon: Icon(Icons.more_vert_rounded, color: foreground),
+      onSelected: (i) => specs[i].onTap!(),
+      itemBuilder: (_) => [
+        for (var i = 0; i < specs.length; i++)
+          PopupMenuItem(
+            value: i,
+            child: Row(
+              children: [
+                Icon(
+                  specs[i].icon,
+                  size: 20,
+                  color: specs[i].active ? context.colorScheme.primary : null,
+                ),
+                const SizedBox(width: 12),
+                Text(specs[i].label),
+              ],
             ),
-            const SizedBox(height: 2),
-            Text(
-              state.request.media.mainName,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: context.textTheme.labelSmall?.copyWith(
-                color: foreground.withValues(alpha: 0.65),
-              ),
-            ),
-          ],
-        ),
-      ),
-      if (state.canSpeak)
+          ),
+      ],
+    );
+  }
+
+  Widget _topRow(BuildContext context, Color foreground) {
+    final layout = LayoutSurface.novel.layout;
+    return Row(
+      children: [
         _icon(
           foreground,
-          Icons.record_voice_over_rounded,
-          state.toggleSpeaking,
-          active: state.speaking.value,
-          tooltip: state.speaking.value
-              ? getString.novelSpeakStop
-              : getString.novelSpeak,
+          Icons.arrow_back_ios_new_rounded,
+          () => popPage(context),
         ),
-      _icon(
-        foreground,
-        Icons.g_translate_rounded,
-        state.translating.value ? null : state.toggleTranslation,
-        active: state.translated.value != null,
-        tooltip: state.translated.value != null
-            ? getString.novelTranslateShowOriginal
-            : getString.novelTranslate,
-      ),
-      _icon(
-        foreground,
-        state.autoScrolling.value
-            ? Icons.pause_circle_outline_rounded
-            : Icons.play_circle_outline_rounded,
-        state.toggleAutoScroll,
-        tooltip: state.autoScrolling.value
-            ? getString.readerAutoScrollStop
-            : getString.readerAutoScroll,
-      ),
-      _icon(
-        foreground,
-        state.bookmarked
-            ? Icons.bookmark_rounded
-            : Icons.bookmark_border_rounded,
-        state.toggleBookmark,
-        tooltip: state.bookmarked
-            ? getString.readerBookmarkRemove
-            : getString.readerBookmarkAdd,
-      ),
-      _icon(
-        foreground,
-        Icons.manage_search_rounded,
-        () => showNovelTools(context, state),
-        tooltip: getString.novelTools,
-        active:
-            state.searchMatches.value.isNotEmpty ||
-            state.record.highlights.isNotEmpty,
-      ),
-      _icon(
-        foreground,
-        Icons.format_list_numbered_rounded,
-        () => showChapterList(
-          context,
-          request: state.request,
-          current: state.index.value,
-          onPick: state.openChapter,
+        ..._actionBar(context, foreground, layout.zone(topStartZone)),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                state.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  height: 1.25,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                state.request.media.mainName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.labelSmall?.copyWith(
+                  color: foreground.withValues(alpha: 0.65),
+                ),
+              ),
+            ],
+          ),
         ),
-        tooltip: getString.readerChapters,
-      ),
-      _icon(
-        foreground,
-        Icons.settings_rounded,
-        () => _options(context),
-        tooltip: getString.readerSettingsTitle,
-      ),
-    ],
-  );
+        ..._actionBar(context, foreground, layout.zone(topEndZone)),
+        _overflow(context, foreground, layout.hidden),
+      ],
+    );
+  }
 
   Widget _bottomRow(BuildContext context, Color foreground) {
     final controls = state.controlsVisible.value;

@@ -21,13 +21,13 @@ import '../Detail/Comments/CommentsSection.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'Components/EpisodePanel.dart';
+import 'Components/PlayerActions.dart';
 import 'Components/PlayerControls.dart';
+import '../Settings/Layout/BarLayout.dart';
 import 'Components/PlayerEpisodes.dart';
 import 'Components/PlayerIndicators.dart';
 import '../Together/TogetherRoomView.dart';
 import 'Components/PlayerSheets.dart';
-import 'Components/SkipSubmitSheet.dart';
-import 'Components/CastSheet.dart';
 import 'Components/PlayerSubtitleView.dart';
 import 'PlayerState.dart';
 
@@ -467,87 +467,29 @@ class _PlayerScreenState extends State<PlayerScreen>
         children: children,
       ),
     );
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        row([
-          chip(
-            Icons.slow_motion_video_rounded,
-            getString.playerSpeed,
-            () => showSpeedSheet(context, state),
-          ),
-          chip(
-            Icons.subtitles_rounded,
-            getString.playerSubtitles,
-            () => showTracksSheet(context, state, audio: false),
-          ),
-          chip(
-            Icons.audiotrack_rounded,
-            getString.playerAudio,
-            () => showTracksSheet(context, state, audio: true),
-          ),
-          if (state.hasChapters)
-            chip(
-              Icons.list_alt_rounded,
-              getString.playerChapters,
-              () => showChaptersSheet(context, state),
-            ),
-          chip(
-            Icons.fit_screen_rounded,
-            getString.playerResize,
-            state.cycleFit,
-          ),
-          chip(
-            Icons.video_settings_rounded,
-            getString.playerSettingsChip,
-            () => showPlayerOptions(context, state),
-          ),
-        ]),
-        row([
-          chip(
-            Icons.photo_filter_rounded,
-            getString.playerPicture,
-            () => showPictureSheet(context, state),
-          ),
-          if (state.canSubmitSkips)
-            chip(
-              Icons.cloud_upload_rounded,
-              getString.playerSkipSubmit,
-              () => showSkipSubmitSheet(context, state),
-            ),
-          Watch(() {
-            final together = state.together;
-            if (!together.active && !together.canShare) {
-              return const SizedBox.shrink();
-            }
-            final label = together.connected
-                ? '${getString.togetherChip} · ${together.users.length}'
-                : getString.togetherChip;
-            return chip(
-              together.unread.value > 0
-                  ? Icons.mark_unread_chat_alt_rounded
-                  : Icons.groups_rounded,
-              label,
-              () {
-                if (!together.active) unawaited(together.startHosting());
-                state.chatOpen.value = true;
-              },
-            );
-          }),
-          Watch(
-            () => chip(
-              state.cast.active
-                  ? Icons.cast_connected_rounded
-                  : Icons.cast_rounded,
-              state.cast.active
-                  ? getString.castNowCasting(state.cast.device.value!.name)
-                  : getString.castTitle,
-              () => showCastSheet(context, state),
-            ),
-          ),
-        ]),
-      ],
-    );
+    return Watch(() {
+      final layout = LayoutSurface.player.layout;
+      Widget? built(String id) {
+        final a = playerAction(context, state, id, compact: true);
+        return a == null ? null : chip(a.icon, a.label, a.onTap);
+      }
+
+      final selected = [
+        for (final id in playerChipOrder)
+          if (layout.zoneOf(id) != hiddenZone) ?built(id),
+      ];
+      final second = [
+        for (final id in layout.hidden)
+          if (!playerFullscreenOnly.contains(id)) ?built(id),
+      ];
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (selected.isNotEmpty) row(selected),
+          if (second.isNotEmpty) row(second),
+        ],
+      );
+    });
   }
 
   Widget _comments(BuildContext context, ColorScheme scheme, Widget stage) {

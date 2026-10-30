@@ -8,6 +8,7 @@ import '../../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/State/State.dart';
 import 'CommentModels.dart';
+import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 class CommentsApi extends AppController {
   static const address = 'https://api.dantotsu.app';
@@ -185,8 +186,8 @@ class CommentsApi extends AppController {
     final message = parsed is Map
         ? parsed['message']?.toString()
         : (parsed is String && parsed.isNotEmpty ? parsed : null);
-    if (status == 429) return message ?? 'Rate limited';
-    if (message == null) return 'Failed to connect';
+    if (status == 429) return message ?? getString.commentsRateLimited;
+    if (message == null) return getString.commentsConnectFailed;
     return status == 500 ? message : '$status: $message';
   }
 

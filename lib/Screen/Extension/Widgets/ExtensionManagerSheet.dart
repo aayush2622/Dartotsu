@@ -31,7 +31,7 @@ void showExtensionManagerSheet(BuildContext context, ItemType type) {
   showCustomBottomDialog(
     context,
     AppSheet(
-      title: '${type.name.capitalizeFirst} Manager',
+      title: getString.extensionManagerTitle(type.name.capitalizeFirst),
       child: Watch(() {
         final current = manager[type];
         final managers = manager.managers

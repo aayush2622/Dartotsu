@@ -124,7 +124,7 @@ class DownloadTask {
     final file = path;
     if (file != null) {
       if (isBookFile(file)) return true;
-      if (isComicArchive(file)) return false;
+      if (isComicArchive(file) || isPdfFile(file)) return false;
     }
     return '${media['format']}'.toLowerCase() == 'novel';
   }

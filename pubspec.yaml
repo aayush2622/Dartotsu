@@ -132,6 +132,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.4.2
   local_auth: ^3.0.2
+  pdfrx: ^2.11.0
 
 # Development dependencies
 dev_dependencies:

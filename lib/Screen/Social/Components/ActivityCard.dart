@@ -78,8 +78,11 @@ class _ActivityCardState extends State<ActivityCard> {
     unawaited(
       (AlertDialogBuilder(context)
             ..setTitle(getString.deleteActivityConfirm)
-            ..setMessage("This can't be undone.")
-            ..setNegativeButton('Cancel', () => confirmed.complete(false))
+            ..setMessage(getString.cantBeUndone)
+            ..setNegativeButton(
+              getString.cancel,
+              () => confirmed.complete(false),
+            )
             ..setPositiveButton(
               getString.delete,
               () => confirmed.complete(true),

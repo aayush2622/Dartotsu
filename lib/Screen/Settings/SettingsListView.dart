@@ -23,6 +23,10 @@ class SettingsListView extends StatefulWidget {
   /// (e.g. the top-level screen's category picker instead of a flat list).
   final WidgetBuilder? emptyBuilder;
 
+  /// Header title -> icon: shows each titled section as a collapsed card
+  /// while the search field is empty (see [SettingsGroup.accordion]).
+  final Map<String, SectionStyle>? accordion;
+
   const SettingsListView({
     super.key,
     required this.searchable,
@@ -30,6 +34,7 @@ class SettingsListView extends StatefulWidget {
     this.hint,
     this.title,
     this.emptyBuilder,
+    this.accordion,
   });
 
   @override
@@ -62,6 +67,7 @@ class _SettingsListViewState extends State<SettingsListView> {
                   return widget.emptyBuilder?.call(context) ??
                       SettingsGroup(
                         settings: (widget.menu ?? widget.searchable)(context),
+                        accordion: widget.accordion,
                       );
                 }
                 final filtered = _filter(widget.searchable(context), q);

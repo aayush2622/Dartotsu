@@ -1,6 +1,7 @@
 import '../../../Logger.dart';
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/State/State.dart';
+import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 class Developer {
   final String name;
@@ -48,7 +49,7 @@ const _defaultBanners = [
   'https://files.catbox.moe/n8pdqc.png',
 ];
 
-const kHardcodedDevelopers = [
+List<Developer> get kHardcodedDevelopers => [
   Developer(
     name: 'aayush262',
     githubId: '99584765',
@@ -57,9 +58,9 @@ const kHardcodedDevelopers = [
     banner:
         'https://s4.anilist.co/file/anilistcdn/user/banner/b5144645-aRu1A0QFBin4.jpg',
     uri: 'https://github.com/aayush2622',
-    role: 'Lead Developer',
+    role: getString.developerRoleLead,
   ),
-  Developer(
+  const Developer(
     name: 'Rintaro',
     githubId: '75238549',
     pfp: 'https://i.ibb.co/MxWNVHvN/rintaro.jpg',
@@ -68,7 +69,7 @@ const kHardcodedDevelopers = [
     uri: 'https://github.com/grayankit',
     role: 'Developer',
   ),
-  Developer(
+  const Developer(
     name: 'itsmechinmoy',
     githubId: '167056923',
     pfp: 'https://files.catbox.moe/o45l03.gif',
@@ -84,7 +85,7 @@ const kHardcodedDevelopers = [
     banner:
         'https://s4.anilist.co/file/anilistcdn/user/banner/b5724017-owslY4fmWD6L.jpg',
     uri: 'https://anilist.co/user/ASheby/',
-    role: 'Discord Moderator',
+    role: getString.developerRoleModerator,
   ),
   Developer(
     name: 'SunglassJerry',
@@ -92,9 +93,9 @@ const kHardcodedDevelopers = [
     pfp: 'https://i.ibb.co/5hKgrZnx/9b2983d1dd5c4a6d8988c0ba24ddd6da.png',
     banner: 'https://files.catbox.moe/2uibuz.jpg',
     uri: 'https://youtu.be/SfT4FMkh1-w',
-    role: 'Discord Moderator',
+    role: getString.developerRoleModerator,
   ),
-  Developer(
+  const Developer(
     name: 'Xerus',
     githubId: '74928953',
     pfp: 'https://i.ibb.co/gF6HSFqZ/20250517-100044.png',
@@ -102,7 +103,7 @@ const kHardcodedDevelopers = [
     uri: 'https://sxenon.carrd.co/',
     role: 'Designer',
   ),
-  Developer(
+  const Developer(
     name: 'Th3 A6add0n1',
     githubId: '34588916',
     pfp:

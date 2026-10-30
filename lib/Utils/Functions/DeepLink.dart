@@ -39,8 +39,13 @@ class DeepLink {
   static void openFiles(List<String> paths) {
     if (paths.isEmpty) return;
     find<AppLock>().run(() {
-      final books = paths.where((a) => a.toLowerCase().endsWith('.epub'));
-      final rest = paths.where((a) => !a.toLowerCase().endsWith('.epub'));
+      bool reads(String a) {
+        final lower = a.toLowerCase();
+        return lower.endsWith('.epub') || lower.endsWith('.pdf');
+      }
+
+      final books = paths.where(reads);
+      final rest = paths.where((a) => !reads(a));
       if (books.isNotEmpty) readFiles?.call(books.toList());
       if (rest.isEmpty) return;
       final play = playFiles;

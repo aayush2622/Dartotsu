@@ -121,7 +121,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
       return EmptyState(
         icon: Icons.cloud_off_rounded,
         failed: true,
-        title: "Couldn't load stats",
+        title: getString.loadFailedStats,
         onAction: _load,
       );
     }

@@ -350,11 +350,11 @@ class ListShareCard extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  _stat('$count', anime ? 'Anime' : 'Manga'),
-                  _stat('$completed', 'Completed'),
+                  _stat('$count', anime ? getString.anime : getString.manga),
+                  _stat('$completed', getString.completed),
                   _stat(
                     mean == null ? '–' : mean!.toStringAsFixed(1),
-                    'Mean score',
+                    getString.meanScore,
                   ),
                 ],
               ),
