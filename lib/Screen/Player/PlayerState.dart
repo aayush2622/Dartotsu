@@ -420,12 +420,23 @@ class PlayerState extends ScreenState {
       if (generation != _generation) return;
     }
     if (engine.duration.value == Duration.zero) return;
-    try {
-      await engine.video.waitUntilFirstFrameRendered.timeout(
-        const Duration(seconds: 6),
-      );
-    } on TimeoutException {
-      if (generation == _generation) await _fallbackToSoftware();
+    var rendered = false;
+    unawaited(
+      engine.video.waitUntilFirstFrameRendered.then((_) => rendered = true),
+    );
+    var stuck = Duration.zero;
+    var waitedFor = Duration.zero;
+    const step = Duration(milliseconds: 250);
+    while (!rendered && waitedFor < const Duration(minutes: 2)) {
+      await Future<void>.delayed(step);
+      waitedFor += step;
+      if (generation != _generation) return;
+      if (engine.buffering.value || !engine.playing.value) continue;
+      stuck += step;
+      if (stuck >= const Duration(seconds: 6)) {
+        await _fallbackToSoftware();
+        return;
+      }
     }
   }
 
@@ -435,7 +446,7 @@ class PlayerState extends ScreenState {
       logLevel: LogLevel.error,
       tag: 'PLAYER',
     );
-    PlayerEngine.softwareRender = true;
+    PlayerEngine.fallBackToSoftware();
     final at = engine.position.value;
     final old = engine;
     engine = PlayerEngine(settings);
