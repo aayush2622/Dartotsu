@@ -1,4 +1,5 @@
 # NUR entry point. NUR calls this as `{ pkgs }:` under restricted eval.
+# These Nix expressions are MIT. See ./LICENSE. The packaged application is not.
 # Do not import <nixpkgs>, use flake inputs, or fetch during evaluation.
 # Hashes and versions come from ../channels.json, the same file the flake uses.
 { pkgs }:
