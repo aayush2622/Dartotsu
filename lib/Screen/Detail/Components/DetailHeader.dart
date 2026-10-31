@@ -14,6 +14,7 @@ import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/GlassSurface.dart';
 import '../../../Widgets/Components/ImageSheet.dart';
+import '../../../Widgets/Components/MarqueeText.dart';
 import 'StatusChip.dart';
 import '../../../Core/State/State.dart';
 import '../Watch/Data/Media/MediaRecord.dart';
@@ -225,10 +226,8 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
                       offset: Offset(48 * (1 - labelP), 0),
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
-                        child: Text(
+                        child: MarqueeText(
                           m.mainName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                           style: context.textTheme.titleMedium?.copyWith(
                             fontWeight: FontWeight.w700,
                           ),
