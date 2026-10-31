@@ -129,14 +129,20 @@ class AlertDialogBuilder {
 
     _onAttach?.call();
 
+    final transition = Duration(milliseconds: (300 * kAnimationSpeed).round());
+    var dismissed = false;
+    void dismiss() {
+      if (dismissed) return;
+      dismissed = true;
+      _onDismiss?.call();
+    }
+
     return showGeneralDialog<T>(
       context: context,
       barrierDismissible: _cancelable,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: Colors.black54,
-      transitionDuration: Duration(
-        milliseconds: (300 * kAnimationSpeed).round(),
-      ),
+      transitionDuration: transition,
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         final curved = CurvedAnimation(
           parent: animation,
@@ -150,6 +156,9 @@ class AlertDialogBuilder {
       },
       pageBuilder: (context, animation, secondaryAnimation) {
         _onShow?.call();
+        animation.addStatusListener((status) {
+          if (status == AnimationStatus.dismissed) dismiss();
+        });
         return Dialog(
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(24),
@@ -202,7 +211,7 @@ class AlertDialogBuilder {
         );
       },
     ).then((value) {
-      _onDismiss?.call();
+      Future.delayed(transition + const Duration(milliseconds: 100), dismiss);
       return value;
     });
   }
