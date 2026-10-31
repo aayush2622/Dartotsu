@@ -54,6 +54,7 @@ import 'Screen/Reader/LocalBook.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
+import 'Core/SettingsSync/SettingsSync.dart';
 import 'Core/State/State.dart';
 
 void main(List<String> args) async {
@@ -260,6 +261,7 @@ Future<void> _postInit(List<String> args) async {
   }
   unawaited(find<AppUpdater>().checkForUpdate());
   find<SyncController>().startAuto();
+  find<SettingsSync>().start();
   find<DiscordPresenceController>().start();
 }
 

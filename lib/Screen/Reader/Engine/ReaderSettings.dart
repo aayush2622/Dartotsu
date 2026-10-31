@@ -146,7 +146,10 @@ class ReaderPrefs {
   static final global = Live<ReaderSettings>(_load());
 
   static ReaderSettings _load() {
-    final raw = PrefManager.getCustomVal<Map>(_globalKey);
+    final raw = PrefManager.getCustomVal<Map>(
+      _globalKey,
+      location: PrefLocation.READER,
+    );
     return raw == null
         ? ReaderSettings()
         : ReaderSettings(Map<String, Object?>.from(raw));
@@ -156,11 +159,17 @@ class ReaderPrefs {
     final next = global.value.copy();
     change(next);
     global.value = next;
-    PrefManager.setCustomVal<Map>(_globalKey, next.toJson());
+    PrefManager.setCustomVal<Map>(
+      _globalKey,
+      next.toJson(),
+      location: PrefLocation.READER,
+    );
   }
+
+  static void reload() => global.value = _load();
 
   static void reset() {
     global.value = ReaderSettings();
-    PrefManager.removeCustomVal(_globalKey);
+    PrefManager.removeCustomVal(_globalKey, location: PrefLocation.READER);
   }
 }

@@ -230,4 +230,32 @@ class PrefName {
   static const customDnsUrl = Pref('customDnsUrl', '', PrefLocation.COMMON);
   static const proxyUrl = Pref('proxyUrl', '', PrefLocation.COMMON);
   static const verifyTls = Pref('verifyTls', true, PrefLocation.COMMON);
+
+  static const settingsSync = Pref('settingsSync', false, PrefLocation.COMMON);
+  static const settingsSyncCategories = Pref<List<String>>(
+    'settingsSyncCategories',
+    ['THEME', 'COMMON', 'PLAYER', 'READER', 'OTHER'],
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncTitles = Pref(
+    'settingsSyncTitles',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncGist = Pref(
+    'settingsSyncGist',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncUser = Pref(
+    'settingsSyncUser',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const githubToken = Pref('githubToken', '', PrefLocation.PROTECTED);
+  static const settingsSyncPassphrase = Pref(
+    'settingsSyncPassphrase',
+    '',
+    PrefLocation.PROTECTED,
+  );
 }

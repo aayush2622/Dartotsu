@@ -12,9 +12,11 @@ import '../../../Core/ThemeManager/language.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/LinkSettings.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Lock/PasscodeSheets.dart';
 import '../Widgets/Backup/BackupSheet.dart';
+import '../SettingsSync/SettingsSyncScreen.dart';
 import '../Widgets/SettingRows.dart';
 import '../../../Core/State/State.dart';
 
@@ -143,6 +145,15 @@ List<Setting> generalSettings(BuildContext context) => [
     icon: Icons.image_outlined,
     isChecked: PrefName.useDifferentCacheManager.rx.value,
     onSwitchChange: (v) => PrefName.useDifferentCacheManager.rx.value = v,
+  ),
+  Setting.normal(
+    name: getString.settingsSync,
+    description: PrefName.settingsSync.rx.value
+        ? getString.settingsSyncSwitch
+        : getString.settingsSyncDesc,
+    icon: Icons.sync_rounded,
+    isActivity: true,
+    onClick: () => navigateToPage(context, const SettingsSyncScreen()),
   ),
   Setting.normal(
     name: getString.backupAndRestore,

@@ -125,8 +125,8 @@ extension WidgetAnimations on Widget {
           duration: _duration(260),
           curve: Curves.easeOut,
         )
-        .slideY(
-          begin: 0.06,
+        .moveY(
+          begin: 28,
           end: 0,
           delay: _delay(delay),
           duration: _duration(380),

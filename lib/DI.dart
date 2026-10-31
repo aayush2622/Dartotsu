@@ -34,6 +34,10 @@ import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'Utils/Functions/RefreshController.dart';
 import 'Core/Preferences/PrefManager.dart';
+import 'Screen/Player/Engine/PlayerSettings.dart';
+import 'Screen/Reader/Engine/ReaderSettings.dart';
+import 'Core/SettingsSync/GithubAuth.dart';
+import 'Core/SettingsSync/SettingsSync.dart';
 import 'Core/State/State.dart';
 import 'Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import 'Screen/Detail/Watch/Data/Media/ResumeStore.dart';
@@ -44,7 +48,20 @@ import 'Screen/Detail/Watch/Data/Media/ResumeStore.dart';
 /// Lazy (`lazyPut`): built on first `find<T>()`.
 class DI {
   static void init() {
+    SettingsSync.titleHooks.addAll([MediaRecords.reload, ResumeStore.reload]);
+    SettingsSync.secretHooks.add(() {
+      for (final service in find<MediaServiceController>().services) {
+        final auth = service.auth;
+        if (auth != null && auth.isLoggedIn) unawaited(auth.refreshUser());
+      }
+    });
+    PrefManager.customReloaders.addAll({
+      'PLAYER/playerSettings': PlayerPrefs.reload,
+      'READER/readerSettings': ReaderPrefs.reload,
+    });
     PrefManager.restoreHooks.addAll([
+      PlayerPrefs.reload,
+      ReaderPrefs.reload,
       MediaRecords.reload,
       ResumeStore.reload,
       () => tryFind<PendingWrites>()?.reload(),
@@ -63,6 +80,8 @@ class DI {
     lazyPut<LocaleController>(LocaleController.new);
     lazyPut<MediaServiceController>(MediaServiceController.new);
     lazyPut<SyncController>(SyncController.new);
+    lazyPut<SettingsSync>(SettingsSync.new);
+    lazyPut<GithubAuth>(GithubAuth.new);
     lazyPut<TogetherController>(TogetherController.new);
     lazyPut<CastService>(CastService.new);
     lazyPut<AnilistAuth>(AnilistAuth.new);

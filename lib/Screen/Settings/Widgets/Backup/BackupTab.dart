@@ -27,10 +27,12 @@ class _BackupTabState extends State<BackupTab> {
   final _selected = <PrefLocation, bool>{}.liveMap;
   final _password = TextEditingController();
   final _hidden = true.live;
+  final _hasPassword = false.live;
 
   @override
   void initState() {
     super.initState();
+    _password.addListener(() => _hasPassword.value = _password.text.isNotEmpty);
     for (final l in widget.keys.keys) {
       _selected[l] = true;
     }
@@ -46,6 +48,10 @@ class _BackupTabState extends State<BackupTab> {
     final chosen = chosenLocations(_selected);
     if (chosen.isEmpty) {
       snackString(getString.backupSelectOne);
+      return;
+    }
+    if (chosen.contains(PrefLocation.PROTECTED) && !_hasPassword.value) {
+      snackString(getString.backupProtectedNeedsPassword);
       return;
     }
     final dir = await FilePicker.getDirectoryPath(
@@ -84,10 +90,14 @@ class _BackupTabState extends State<BackupTab> {
             selected: _selected,
           ),
         const SizedBox(height: 8),
-        PasswordField(
-          controller: _password,
-          hidden: _hidden,
-          hint: getString.backupPasswordHint,
+        Watch(
+          () => PasswordField(
+            controller: _password,
+            hidden: _hidden,
+            hint: (_selected[PrefLocation.PROTECTED] ?? false)
+                ? getString.backupPasswordRequired
+                : getString.backupPasswordHint,
+          ),
         ),
         Watch(
           () => (_selected[PrefLocation.PROTECTED] ?? false)

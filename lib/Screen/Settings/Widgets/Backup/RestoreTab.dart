@@ -73,11 +73,15 @@ class _RestoreTabState extends State<RestoreTab> {
         json: file.json,
         password: _passwordOrNull,
       );
-      _found.value = found;
-      _error.value = null;
+      final skipped =
+          !file.protected && found.containsKey(PrefLocation.PROTECTED);
+      final usable = {...found};
+      if (skipped) usable.remove(PrefLocation.PROTECTED);
+      _found.value = usable;
+      _error.value = skipped ? getString.backupProtectedSkipped : null;
       _selected
         ..clear()
-        ..addAll({for (final l in found.keys) l: true});
+        ..addAll({for (final l in usable.keys) l: true});
     } catch (e, st) {
       logError('RestoreTab', e, st);
       _found.value = null;

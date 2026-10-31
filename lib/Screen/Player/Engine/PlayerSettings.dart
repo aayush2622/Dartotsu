@@ -222,7 +222,10 @@ class PlayerPrefs {
   static final global = Live<PlayerSettings>(_load());
 
   static PlayerSettings _load() {
-    final raw = PrefManager.getCustomVal<Map>(_globalKey);
+    final raw = PrefManager.getCustomVal<Map>(
+      _globalKey,
+      location: PrefLocation.PLAYER,
+    );
     return raw == null
         ? PlayerSettings()
         : PlayerSettings(Map<String, Object?>.from(raw));
@@ -232,11 +235,17 @@ class PlayerPrefs {
     final next = global.value.copy();
     change(next);
     global.value = next;
-    PrefManager.setCustomVal<Map>(_globalKey, next.toJson());
+    PrefManager.setCustomVal<Map>(
+      _globalKey,
+      next.toJson(),
+      location: PrefLocation.PLAYER,
+    );
   }
+
+  static void reload() => global.value = _load();
 
   static void reset() {
     global.value = PlayerSettings();
-    PrefManager.removeCustomVal(_globalKey);
+    PrefManager.removeCustomVal(_globalKey, location: PrefLocation.PLAYER);
   }
 }

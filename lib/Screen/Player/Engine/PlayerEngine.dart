@@ -116,12 +116,20 @@ class PlayerEngine {
 
   static bool? _software;
 
-  static bool get softwareRender =>
-      _software ??= PrefManager.getCustomVal<bool>(_softwareKey) ?? false;
+  static bool get softwareRender => _software ??=
+      PrefManager.getCustomVal<bool>(
+        _softwareKey,
+        location: PrefLocation.PLAYER,
+      ) ??
+      false;
 
   static set softwareRender(bool value) {
     _software = value;
-    PrefManager.setCustomVal<bool>(_softwareKey, value);
+    PrefManager.setCustomVal<bool>(
+      _softwareKey,
+      value,
+      location: PrefLocation.PLAYER,
+    );
   }
 
   static VideoController previewController(Player player) => VideoController(

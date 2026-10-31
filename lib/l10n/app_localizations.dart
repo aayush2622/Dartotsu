@@ -797,6 +797,420 @@ abstract class AppLocalizations {
   /// **'Use a different cache manager for images'**
   String get differentCacheManagerDesc;
 
+  /// No description provided for @settingsSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync settings'**
+  String get settingsSync;
+
+  /// No description provided for @settingsSyncDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep your settings the same on every device. They are stored in a private gist in your GitHub account'**
+  String get settingsSyncDesc;
+
+  /// No description provided for @settingsSyncSwitch.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync on change'**
+  String get settingsSyncSwitch;
+
+  /// No description provided for @settingsSyncModeGithub.
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub'**
+  String get settingsSyncModeGithub;
+
+  /// No description provided for @settingsSyncSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with GitHub'**
+  String get settingsSyncSignIn;
+
+  /// No description provided for @settingsSyncSignInDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings are stored in a private gist in your account'**
+  String get settingsSyncSignInDesc;
+
+  /// No description provided for @settingsSyncToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a personal access token'**
+  String get settingsSyncToken;
+
+  /// No description provided for @settingsSyncTokenDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Create one at github.com/settings/tokens with only the gist permission'**
+  String get settingsSyncTokenDesc;
+
+  /// No description provided for @settingsSyncTokenField.
+  ///
+  /// In en, this message translates to:
+  /// **'Token'**
+  String get settingsSyncTokenField;
+
+  /// No description provided for @settingsSyncSignedIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {user}'**
+  String settingsSyncSignedIn(Object user);
+
+  /// No description provided for @settingsSyncSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get settingsSyncSignOut;
+
+  /// No description provided for @settingsSyncCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter {code} on GitHub'**
+  String settingsSyncCode(Object code);
+
+  /// No description provided for @settingsSyncCodeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.'**
+  String get settingsSyncCodeDesc;
+
+  /// No description provided for @settingsSyncSignInFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not sign in to GitHub'**
+  String get settingsSyncSignInFailed;
+
+  /// No description provided for @settingsSyncOn.
+  ///
+  /// In en, this message translates to:
+  /// **'On'**
+  String get settingsSyncOn;
+
+  /// No description provided for @settingsSyncNoneChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'You haven\'t changed any of these yet, so there is nothing to sync.'**
+  String get settingsSyncNoneChanged;
+
+  /// No description provided for @settingsSyncChangedOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.'**
+  String get settingsSyncChangedOnly;
+
+  /// No description provided for @settingsSyncOffCategory.
+  ///
+  /// In en, this message translates to:
+  /// **'Not syncing. These stay on this device and the server copy is left as it is.'**
+  String get settingsSyncOffCategory;
+
+  /// No description provided for @settingsSyncCatOther.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch, read and services'**
+  String get settingsSyncCatOther;
+
+  /// No description provided for @settingsSyncTitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch progress and titles'**
+  String get settingsSyncTitles;
+
+  /// No description provided for @settingsSyncTitlesCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{records} titles and {resume} resume entries on the server'**
+  String settingsSyncTitlesCount(Object records, Object resume);
+
+  /// No description provided for @settingsSyncTitlesNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing uploaded yet'**
+  String get settingsSyncTitlesNone;
+
+  /// No description provided for @settingsSyncTitlesNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch and read positions, the resume shelf, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.'**
+  String get settingsSyncTitlesNote;
+
+  /// No description provided for @settingsSyncConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get settingsSyncConnect;
+
+  /// No description provided for @settingsSyncConnectDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with GitHub to keep your settings the same on every device.'**
+  String get settingsSyncConnectDesc;
+
+  /// No description provided for @settingsSyncFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync failed'**
+  String get settingsSyncFailedTitle;
+
+  /// No description provided for @settingsSyncPaused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused'**
+  String get settingsSyncPaused;
+
+  /// No description provided for @settingsSyncPausedDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is uploaded or downloaded while this is off.'**
+  String get settingsSyncPausedDesc;
+
+  /// No description provided for @settingsSyncUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get settingsSyncUpToDate;
+
+  /// No description provided for @settingsSyncRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get settingsSyncRetry;
+
+  /// No description provided for @settingsSyncAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'GitHub account'**
+  String get settingsSyncAccount;
+
+  /// No description provided for @settingsSyncAccountDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data goes to a private gist in your own account.'**
+  String get settingsSyncAccountDesc;
+
+  /// No description provided for @settingsSyncWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting for you to approve on GitHub'**
+  String get settingsSyncWaiting;
+
+  /// No description provided for @settingsSyncCopyCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the code to copy it'**
+  String get settingsSyncCopyCode;
+
+  /// No description provided for @settingsSyncCancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get settingsSyncCancel;
+
+  /// No description provided for @settingsSyncStatSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settingsSyncStatSettings;
+
+  /// No description provided for @settingsSyncStatTitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Titles'**
+  String get settingsSyncStatTitles;
+
+  /// No description provided for @settingsSyncStatShelf.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get settingsSyncStatShelf;
+
+  /// No description provided for @settingsSyncUploaded.
+  ///
+  /// In en, this message translates to:
+  /// **'Uploaded {time} from {device}'**
+  String settingsSyncUploaded(Object time, Object device);
+
+  /// No description provided for @settingsSyncChanged.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Nothing changed yet} =1{1 changed} other{{count} changed}}'**
+  String settingsSyncChanged(num count);
+
+  /// No description provided for @settingsSyncSecrets.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts and passwords'**
+  String get settingsSyncSecrets;
+
+  /// No description provided for @settingsSyncSecretsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.'**
+  String get settingsSyncSecretsDesc;
+
+  /// No description provided for @settingsSyncSecretsOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Accounts are synced and encrypted'**
+  String get settingsSyncSecretsOn;
+
+  /// No description provided for @settingsSyncSecretsOnDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing out on one device does not sign you out on the others.'**
+  String get settingsSyncSecretsOnDesc;
+
+  /// No description provided for @settingsSyncSecretsBroken.
+  ///
+  /// In en, this message translates to:
+  /// **'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.'**
+  String get settingsSyncSecretsBroken;
+
+  /// No description provided for @settingsSyncPassphraseSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a passphrase'**
+  String get settingsSyncPassphraseSet;
+
+  /// No description provided for @settingsSyncPassphraseEnter.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your passphrase'**
+  String get settingsSyncPassphraseEnter;
+
+  /// No description provided for @settingsSyncPassphraseField.
+  ///
+  /// In en, this message translates to:
+  /// **'Passphrase'**
+  String get settingsSyncPassphraseField;
+
+  /// No description provided for @settingsSyncPassphraseConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Repeat the passphrase'**
+  String get settingsSyncPassphraseConfirm;
+
+  /// No description provided for @settingsSyncPassphraseNew.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.'**
+  String get settingsSyncPassphraseNew;
+
+  /// No description provided for @settingsSyncPassphraseExisting.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.'**
+  String get settingsSyncPassphraseExisting;
+
+  /// No description provided for @settingsSyncPassphraseWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong passphrase'**
+  String get settingsSyncPassphraseWrong;
+
+  /// No description provided for @settingsSyncPassphraseMismatch.
+  ///
+  /// In en, this message translates to:
+  /// **'The passphrases do not match'**
+  String get settingsSyncPassphraseMismatch;
+
+  /// No description provided for @settingsSyncPassphraseShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Use at least 6 characters'**
+  String get settingsSyncPassphraseShort;
+
+  /// No description provided for @settingsSyncSecretsStop.
+  ///
+  /// In en, this message translates to:
+  /// **'Stop syncing accounts'**
+  String get settingsSyncSecretsStop;
+
+  /// No description provided for @settingsSyncSecretsDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete from GitHub'**
+  String get settingsSyncSecretsDelete;
+
+  /// No description provided for @settingsSyncSecretsDeleteMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.'**
+  String get settingsSyncSecretsDeleteMessage;
+
+  /// No description provided for @settingsSyncWhat.
+  ///
+  /// In en, this message translates to:
+  /// **'What to sync'**
+  String get settingsSyncWhat;
+
+  /// No description provided for @settingsSyncServer.
+  ///
+  /// In en, this message translates to:
+  /// **'On the server'**
+  String get settingsSyncServer;
+
+  /// No description provided for @settingsSyncServerEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing uploaded yet'**
+  String get settingsSyncServerEmpty;
+
+  /// No description provided for @settingsSyncServerInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} settings, uploaded {time} from {device}'**
+  String settingsSyncServerInfo(Object count, Object time, Object device);
+
+  /// No description provided for @settingsSyncThisDevice.
+  ///
+  /// In en, this message translates to:
+  /// **'this device'**
+  String get settingsSyncThisDevice;
+
+  /// No description provided for @settingsSyncCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}'**
+  String settingsSyncCount(num count);
+
+  /// No description provided for @settingsSyncNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync now'**
+  String get settingsSyncNow;
+
+  /// No description provided for @settingsSyncRunning.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing…'**
+  String get settingsSyncRunning;
+
+  /// No description provided for @settingsSyncNever.
+  ///
+  /// In en, this message translates to:
+  /// **'Not synced yet'**
+  String get settingsSyncNever;
+
+  /// No description provided for @settingsSyncLast.
+  ///
+  /// In en, this message translates to:
+  /// **'Last synced {time}'**
+  String settingsSyncLast(Object time);
+
+  /// No description provided for @settingsSyncFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync failed: {error}'**
+  String settingsSyncFailed(Object error);
+
+  /// No description provided for @settingsSyncScope.
+  ///
+  /// In en, this message translates to:
+  /// **'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.'**
+  String get settingsSyncScope;
+
   /// No description provided for @backupAndRestore.
   ///
   /// In en, this message translates to:
@@ -910,6 +1324,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{count} settings'**
   String backupKeys(Object count);
+
+  /// No description provided for @backupPasswordRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'Password (required for account data)'**
+  String get backupPasswordRequired;
+
+  /// No description provided for @backupProtectedNeedsPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Set a password to back up account data, or untick it'**
+  String get backupProtectedNeedsPassword;
+
+  /// No description provided for @backupProtectedSkipped.
+  ///
+  /// In en, this message translates to:
+  /// **'This backup has no password, so its account data was skipped'**
+  String get backupProtectedSkipped;
 
   /// No description provided for @backupPassword.
   ///
