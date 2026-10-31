@@ -229,6 +229,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "An Anilist client";
     homepage = "https://github.com/aayush2622/Dartotsu";
     license = lib.licenses.unfree;
+    sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
     platforms = [ "x86_64-linux" ];
     mainProgram = exe;
   };

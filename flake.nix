@@ -1,3 +1,5 @@
+# Nix expressions in this file and nix/ are MIT. See nix/LICENSE.
+# The packaged application is not.
 {
   description = "Dartotsu - packages the pre-built Linux release bundle from GitHub";
 
