@@ -76,7 +76,7 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
   Widget build(BuildContext context) {
     final request = widget.request;
     return AppSheet(
-      title: unitLabel(request.units[request.index], true),
+      title: unitLabel(request.units[request.index], false),
       child: Watch(() {
         final error = _error.value;
         if (error != null) {
