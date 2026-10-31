@@ -16,6 +16,7 @@ import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../../Settings/ExtensionSourceSettingsScreen.dart';
 import '../ExtensionScreen.dart';
+import 'PluginInstallSheet.dart';
 import '../../../Core/State/State.dart';
 import '../../../Utils/Extensions/StringExtensions.dart';
 import '../../../Widgets/Components/AppSpinner.dart';
@@ -148,7 +149,8 @@ Widget? _serviceTrailing(
             size: 18,
             color: context.colorScheme.primary,
           ),
-          onPressed: () => showInstallDialog(context, plugin, m.name),
+          onPressed: () =>
+              showInstallDialog(context, plugin, m.name, icon: m.icon),
         ),
         remove,
       ],
@@ -158,7 +160,8 @@ Widget? _serviceTrailing(
   if (availableInRepo) {
     return IconButton(
       icon: const Icon(Icons.download, size: 18),
-      onPressed: () => showInstallDialog(context, m.plugin!, m.name),
+      onPressed: () =>
+          showInstallDialog(context, m.plugin!, m.name, icon: m.icon),
     );
   }
 

@@ -1852,6 +1852,14 @@
     }
   },
   "installedState": "Installed",
+  "updatePluginTitle": "Update {name}",
+  "@updatePluginTitle": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "errorLabel": "Error:",
   "stackTraceDetails": "Details (Stack Trace)",
   "shareLogFile": "Share log file",
@@ -2632,6 +2640,44 @@
   "watchProbeFailed": "The site could not be reached",
   "watchClearCookies": "Clear cookies for this site",
   "watchCookiesCleared": "Cookies cleared",
+  "watchFailTimeout": "The check didn't finish in time",
+  "watchFailBlocked": "The site blocked this device (access denied). A check won't help",
+  "watchFailTurnstile": "This check needs a tap that the background solver can't do",
+  "watchFailLoad": "The page didn't load. Check the connection and the site address",
+  "watchFailRejected": "The site rejected the clearance it just gave. Try again or clear the cookies",
+  "watchFailDismissed": "The check was closed before it finished",
+  "watchFailCooldown": "You closed the check a moment ago. Press Solve it to try again",
+  "watchFailQuiet": "The check needs you, and the app was working on its own",
+  "watchFailWebView": "The background web view couldn't start",
+  "watchFailUnavailable": "There is no screen to show the check on",
+  "watchStatusReady": "Ready",
+  "watchStatusChallenge": "Cloudflare check needed",
+  "watchStatusBlocked": "Blocked by the site",
+  "watchStatusOffline": "Can't reach the site",
+  "watchStatusUntested": "Not tested yet",
+  "watchStatusTesting": "Testing the connection…",
+  "watchStatusSolving": "Passing the Cloudflare check…",
+  "watchSolvedBackground": "Cloudflare check passed in the background ({seconds} s)",
+  "@watchSolvedBackground": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "watchSolvedByUser": "Cloudflare check passed",
+  "watchClearanceIssued": "earned {time}",
+  "@watchClearanceIssued": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
+  "watchSectionConnection": "Connection",
+  "watchSectionSession": "Session",
+  "watchSectionTools": "Tools",
   "watchMetaSource": "Episode details from",
   "watchMetaAuto": "Automatic",
   "watchMetaOff": "Off",

@@ -15,6 +15,28 @@ class CookieManager extends Interceptor {
 
   String Function()? clearanceAgent;
 
+  static const clearanceName = "cf_clearance";
+
+  bool isStaleClearance(StoredCookie cookie) {
+    if (cookie.name != clearanceName) return false;
+    final earned = cookie.agent;
+    final current = clearanceAgent?.call();
+    return earned != null && current != null && earned != current;
+  }
+
+  StoredCookie _stamped(StoredCookie cookie, StoredCookie? old) {
+    if (cookie.name != clearanceName) return cookie;
+    final changed =
+        old == null || old.value != cookie.value || isStaleClearance(old);
+    if (changed) {
+      return cookie.copyWith(
+        agent: clearanceAgent?.call(),
+        issued: DateTime.now(),
+      );
+    }
+    return cookie.copyWith(agent: old.agent, issued: old.issued);
+  }
+
   Map<String, StoredCookie>? _cache;
 
   final Map<String, StoredCookie> _sessionCookies = {};
@@ -121,6 +143,8 @@ class CookieManager extends Interceptor {
     for (final cookie in _allCookies) {
       if (cookie.isExpired) continue;
 
+      if (isStaleClearance(cookie)) continue;
+
       if (!domainMatches(uri.host, cookie.domain, cookie.hostOnly)) {
         continue;
       }
@@ -162,16 +186,18 @@ class CookieManager extends Interceptor {
       if (cookie.session) {
         final old = _sessionCookies[cookie.id];
 
+        final next = _stamped(cookie, old);
         _sessionCookies[cookie.id] = old == null
-            ? cookie
-            : cookie.copyWith(created: old.created);
+            ? next
+            : next.copyWith(created: old.created);
         persistent.remove(cookie.id);
       } else {
         final old = persistent[cookie.id];
 
+        final next = _stamped(cookie, old);
         persistent[cookie.id] = old == null
-            ? cookie
-            : cookie.copyWith(created: old.created);
+            ? next
+            : next.copyWith(created: old.created);
         _sessionCookies.remove(cookie.id);
       }
     }
@@ -455,7 +481,9 @@ class CookieManager extends Interceptor {
     for (final c in cookies) {
       final domain = normalizeDomain(c.domain.isEmpty ? uri.host : c.domain);
       final known = getCookie(domain, c.name);
-      if (known != null && known.value == c.value) continue;
+      if (known != null && known.value == c.value && !isStaleClearance(known)) {
+        continue;
+      }
       converted.add(
         StoredCookie(
           name: c.name,
@@ -562,6 +590,10 @@ class StoredCookie {
 
   final DateTime lastAccessed;
 
+  /// The User-Agent a `cf_clearance` cookie was earned with, and when.
+  final String? agent;
+  final DateTime? issued;
+
   const StoredCookie({
     required this.name,
     required this.value,
@@ -577,6 +609,8 @@ class StoredCookie {
     this.priority = CookiePriority.medium,
     this.partitioned = false,
     this.session = false,
+    this.agent,
+    this.issued,
   });
 
   bool get isExpired {
@@ -603,6 +637,8 @@ class StoredCookie {
     "session": session,
     "created": created.toIso8601String(),
     "lastAccessed": lastAccessed.toIso8601String(),
+    if (agent != null) "agent": agent,
+    if (issued != null) "issued": issued!.toIso8601String(),
   };
 
   factory StoredCookie.fromJson(Map<String, dynamic> json) {
@@ -635,6 +671,8 @@ class StoredCookie {
       lastAccessed: json["lastAccessed"] == null
           ? DateTime.now()
           : DateTime.parse(json["lastAccessed"]),
+      agent: json["agent"],
+      issued: json["issued"] == null ? null : DateTime.tryParse(json["issued"]),
     );
   }
 
@@ -653,6 +691,8 @@ class StoredCookie {
     bool? session,
     DateTime? created,
     DateTime? lastAccessed,
+    String? agent,
+    DateTime? issued,
   }) {
     return StoredCookie(
       name: name ?? this.name,
@@ -669,6 +709,8 @@ class StoredCookie {
       session: session ?? this.session,
       created: created ?? this.created,
       lastAccessed: lastAccessed ?? this.lastAccessed,
+      agent: agent ?? this.agent,
+      issued: issued ?? this.issued,
     );
   }
 }

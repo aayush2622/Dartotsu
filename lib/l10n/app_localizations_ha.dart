@@ -3550,6 +3550,11 @@ class AppLocalizationsHa extends AppLocalizations {
   String get installedState => 'An shigar';
 
   @override
+  String updatePluginTitle(String name) {
+    return 'Update $name';
+  }
+
+  @override
   String get errorLabel => 'Kuskure:';
 
   @override
@@ -4840,6 +4845,89 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get watchCookiesCleared => 'An share cookies';
+
+  @override
+  String get watchFailTimeout => 'The check didn\'t finish in time';
+
+  @override
+  String get watchFailBlocked =>
+      'The site blocked this device (access denied). A check won\'t help';
+
+  @override
+  String get watchFailTurnstile =>
+      'This check needs a tap that the background solver can\'t do';
+
+  @override
+  String get watchFailLoad =>
+      'The page didn\'t load. Check the connection and the site address';
+
+  @override
+  String get watchFailRejected =>
+      'The site rejected the clearance it just gave. Try again or clear the cookies';
+
+  @override
+  String get watchFailDismissed => 'The check was closed before it finished';
+
+  @override
+  String get watchFailCooldown =>
+      'You closed the check a moment ago. Press Solve it to try again';
+
+  @override
+  String get watchFailQuiet =>
+      'The check needs you, and the app was working on its own';
+
+  @override
+  String get watchFailWebView => 'The background web view couldn\'t start';
+
+  @override
+  String get watchFailUnavailable => 'There is no screen to show the check on';
+
+  @override
+  String get watchStatusReady => 'Ready';
+
+  @override
+  String get watchStatusChallenge => 'Cloudflare check needed';
+
+  @override
+  String get watchStatusBlocked => 'Blocked by the site';
+
+  @override
+  String get watchStatusOffline => 'Can\'t reach the site';
+
+  @override
+  String get watchStatusUntested => 'Not tested yet';
+
+  @override
+  String get watchStatusTesting => 'Testing the connection…';
+
+  @override
+  String get watchStatusSolving => 'Passing the Cloudflare check…';
+
+  @override
+  String watchSolvedBackground(int seconds) {
+    return 'Cloudflare check passed in the background ($seconds s)';
+  }
+
+  @override
+  String get watchSolvedByUser => 'Cloudflare check passed';
+
+  @override
+  String watchClearanceIssued(String time) {
+    return 'earned $time';
+  }
+
+  @override
+  String get watchClearanceStale =>
+      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+
+  @override
+  String get watchSectionConnection => 'Connection';
+
+  @override
+  String get watchSectionSession => 'Session';
+
+  @override
+  String get watchSectionTools => 'Tools';
 
   @override
   String get watchMetaSource => 'Bayanan episode daga';

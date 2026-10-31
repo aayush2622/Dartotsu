@@ -68,7 +68,8 @@ class SourceAlerts extends AppController {
     _running = true;
     checking.value = true;
     try {
-      return await _run(store, force);
+      if (force) return await _run(store, force);
+      return await CloudflareSolver.quietly(() => _run(store, force));
     } catch (e, st) {
       logError('SourceAlerts', e, st);
       return 0;

@@ -6455,6 +6455,12 @@ abstract class AppLocalizations {
   /// **'Installed'**
   String get installedState;
 
+  /// No description provided for @updatePluginTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update {name}'**
+  String updatePluginTitle(String name);
+
   /// No description provided for @errorLabel.
   ///
   /// In en, this message translates to:
@@ -8668,6 +8674,150 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Cookies cleared'**
   String get watchCookiesCleared;
+
+  /// No description provided for @watchFailTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'The check didn\'t finish in time'**
+  String get watchFailTimeout;
+
+  /// No description provided for @watchFailBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'The site blocked this device (access denied). A check won\'t help'**
+  String get watchFailBlocked;
+
+  /// No description provided for @watchFailTurnstile.
+  ///
+  /// In en, this message translates to:
+  /// **'This check needs a tap that the background solver can\'t do'**
+  String get watchFailTurnstile;
+
+  /// No description provided for @watchFailLoad.
+  ///
+  /// In en, this message translates to:
+  /// **'The page didn\'t load. Check the connection and the site address'**
+  String get watchFailLoad;
+
+  /// No description provided for @watchFailRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'The site rejected the clearance it just gave. Try again or clear the cookies'**
+  String get watchFailRejected;
+
+  /// No description provided for @watchFailDismissed.
+  ///
+  /// In en, this message translates to:
+  /// **'The check was closed before it finished'**
+  String get watchFailDismissed;
+
+  /// No description provided for @watchFailCooldown.
+  ///
+  /// In en, this message translates to:
+  /// **'You closed the check a moment ago. Press Solve it to try again'**
+  String get watchFailCooldown;
+
+  /// No description provided for @watchFailQuiet.
+  ///
+  /// In en, this message translates to:
+  /// **'The check needs you, and the app was working on its own'**
+  String get watchFailQuiet;
+
+  /// No description provided for @watchFailWebView.
+  ///
+  /// In en, this message translates to:
+  /// **'The background web view couldn\'t start'**
+  String get watchFailWebView;
+
+  /// No description provided for @watchFailUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'There is no screen to show the check on'**
+  String get watchFailUnavailable;
+
+  /// No description provided for @watchStatusReady.
+  ///
+  /// In en, this message translates to:
+  /// **'Ready'**
+  String get watchStatusReady;
+
+  /// No description provided for @watchStatusChallenge.
+  ///
+  /// In en, this message translates to:
+  /// **'Cloudflare check needed'**
+  String get watchStatusChallenge;
+
+  /// No description provided for @watchStatusBlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'Blocked by the site'**
+  String get watchStatusBlocked;
+
+  /// No description provided for @watchStatusOffline.
+  ///
+  /// In en, this message translates to:
+  /// **'Can\'t reach the site'**
+  String get watchStatusOffline;
+
+  /// No description provided for @watchStatusUntested.
+  ///
+  /// In en, this message translates to:
+  /// **'Not tested yet'**
+  String get watchStatusUntested;
+
+  /// No description provided for @watchStatusTesting.
+  ///
+  /// In en, this message translates to:
+  /// **'Testing the connection…'**
+  String get watchStatusTesting;
+
+  /// No description provided for @watchStatusSolving.
+  ///
+  /// In en, this message translates to:
+  /// **'Passing the Cloudflare check…'**
+  String get watchStatusSolving;
+
+  /// No description provided for @watchSolvedBackground.
+  ///
+  /// In en, this message translates to:
+  /// **'Cloudflare check passed in the background ({seconds} s)'**
+  String watchSolvedBackground(int seconds);
+
+  /// No description provided for @watchSolvedByUser.
+  ///
+  /// In en, this message translates to:
+  /// **'Cloudflare check passed'**
+  String get watchSolvedByUser;
+
+  /// No description provided for @watchClearanceIssued.
+  ///
+  /// In en, this message translates to:
+  /// **'earned {time}'**
+  String watchClearanceIssued(String time);
+
+  /// No description provided for @watchClearanceStale.
+  ///
+  /// In en, this message translates to:
+  /// **'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one'**
+  String get watchClearanceStale;
+
+  /// No description provided for @watchSectionConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
+  String get watchSectionConnection;
+
+  /// No description provided for @watchSectionSession.
+  ///
+  /// In en, this message translates to:
+  /// **'Session'**
+  String get watchSectionSession;
+
+  /// No description provided for @watchSectionTools.
+  ///
+  /// In en, this message translates to:
+  /// **'Tools'**
+  String get watchSectionTools;
 
   /// No description provided for @watchMetaSource.
   ///
