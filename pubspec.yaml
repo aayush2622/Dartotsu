@@ -4,7 +4,7 @@ description: "An Anilist client"
 publish_to: 'none'
 
 # Application version and build number
-version: 1.1.1
+version: 1.2.0
 
 # Dart SDK constraints
 environment:
@@ -111,7 +111,7 @@ dependencies:
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.4.4
+  webview_all: ^1.4.9
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -128,7 +128,7 @@ dependencies:
   xml: ^6.6.1
   flutter_displaymode: ^0.7.0
   flutter_tts: ^4.2.5
-  mobile_scanner: ^7.4.2
+  mobile_scanner: ^7.4.3
   local_auth: ^3.0.2
   pdfrx: ^2.11.0
 
