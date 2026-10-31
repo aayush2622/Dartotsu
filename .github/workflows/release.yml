@@ -181,6 +181,116 @@ jobs:
       contents: write
     uses: ./.github/workflows/update-nix-channels.yml
 
+  aur:
+    name: Publish to AUR
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [build_linux, publish_release]
+    if: |
+      always() &&
+      needs.publish_release.result == 'success' &&
+      needs.build_linux.result == 'success' &&
+      startsWith(github.ref, 'refs/tags/') &&
+      (github.event_name == 'push' || inputs.dry_run != true)
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Download Linux AppImage Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-appimage
+          path: .
+
+      - name: Generate PKGBUILD
+        env:
+          VERSION: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+          MAINTAINER: ${{ github.repository_owner }}
+        run: |
+          APPIMAGE_FILE=$(find . -name "*.AppImage" | head -n 1)
+          if [ -z "$APPIMAGE_FILE" ]; then
+            echo "Error: AppImage file not found!" >&2
+            exit 1
+          fi
+          APPIMAGE_NAME=$(basename "$APPIMAGE_FILE")
+          HASH=$(sha256sum "$APPIMAGE_FILE" | awk '{print $1}')
+          PKGVER="${VERSION#v}"
+          PKGVER="${PKGVER//-/_}"
+
+          cat > PKGBUILD << EOF
+          # Maintainer: ${MAINTAINER}
+          _pkgname=dartotsu
+          _PkgName=Dartotsu
+          pkgname=\${_pkgname}-bin
+          pkgver=${PKGVER}
+          pkgrel=1
+          arch=(x86_64)
+          pkgdesc='The Ultimate Anime & Manga Experience'
+          url="https://github.com/aayush2622/\${_PkgName}"
+          license=('GPL-3.0-or-later')
+          provides=(\${_pkgname}=\${pkgver})
+          depends=('libepoxy' 'gdk-pixbuf2' 'pango' 'webkit2gtk-4.1' 'harfbuzz' 'libsoup3' 'glibc' 'fontconfig' 'cairo' 'hicolor-icon-theme' 'glib2' 'gcc-libs' 'mpv' 'zlib-ng-compat' 'gtk3' 'at-spi2-core' 'libsecret')
+          conflicts=(dartotsu)
+          _appimage="\${_PkgName}-\${pkgver}.AppImage"
+          source=("\${_appimage}::https://github.com/${REPO}/releases/download/${VERSION}/${APPIMAGE_NAME}"
+                  "LICENSE-\${pkgver}.md::https://raw.githubusercontent.com/${REPO}/refs/tags/${VERSION}/LICENSE.md")
+          noextract=(\${_appimage})
+          sha256sums=('${HASH}' 'SKIP')
+
+          prepare() {
+              chmod +x "\${_appimage}"
+              ./"\${_appimage}" --appimage-extract >/dev/null
+          }
+
+          build() {
+              chmod -R a-x+rX squashfs-root/usr
+              chmod +x squashfs-root/usr/bin/dartotsu
+              if [ -f squashfs-root/usr/bin/dartotsu.bin ]; then
+                  chmod +x squashfs-root/usr/bin/dartotsu.bin
+              fi
+          }
+
+          package() {
+              install -dm755 "\${pkgdir}/usr/"
+              mv "\${srcdir}"/squashfs-root/usr/* "\${pkgdir}/usr/"
+              install -Dm644 "\${srcdir}/LICENSE-\${pkgver}.md" "\${pkgdir}/usr/share/licenses/\${pkgname}/LICENSE.md"
+              if [ -f "\${srcdir}/squashfs-root/dartotsu.png" ]; then
+                  install -Dm644 "\${srcdir}/squashfs-root/dartotsu.png" "\${pkgdir}/usr/share/pixmaps/\${_pkgname}.png"
+                  install -Dm644 "\${srcdir}/squashfs-root/dartotsu.png" "\${pkgdir}/usr/share/icons/hicolor/256x256/apps/\${_pkgname}.png"
+              fi
+              install -Dm644 /dev/stdin "\${pkgdir}/usr/share/applications/\${_pkgname}.desktop" <<DESKTOP
+          [Desktop Entry]
+          Version=\${pkgver}
+          Type=Application
+          Name=\${_PkgName}
+          GenericName=\${_PkgName}
+          Comment=\${pkgdesc}
+          Exec=\${_pkgname} %U
+          Icon=\${_pkgname}
+          Terminal=false
+          Categories=AudioVideo;Player;
+          Keywords=\${_pkgname};anime;manga;novel
+          StartupWMClass=ani.aayush262.dartotsu
+          MimeType=video/mp4;video/x-matroska;video/webm;audio/mpeg;audio/flac;x-scheme-handler/dartotsu;x-scheme-handler/dar;x-scheme-handler/anymex;x-scheme-handler/sugoireads;x-scheme-handler/mangayomi;x-scheme-handler/aniyomi;x-scheme-handler/tachiyomi;x-scheme-handler/ireader;x-scheme-handler/legado;x-scheme-handler/yuedu;
+          StartupNotify=true
+          DESKTOP
+          }
+          EOF
+          cat PKGBUILD
+
+      - name: Publish AUR package
+        continue-on-error: true
+        uses: KSXGitHub/github-actions-deploy-aur@v4.1.1
+        with:
+          pkgname: dartotsu-bin
+          pkgbuild: ./PKGBUILD
+          commit_username: ${{ secrets.AUR_USERNAME || github.actor }}
+          commit_email: ${{ secrets.AUR_EMAIL || format('{0}@users.noreply.github.com', github.actor) }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE_KEY }}
+          commit_message: "Update to ${{ github.ref_name }}"
+          ssh_keyscan_types: rsa,ecdsa,ed25519
+
   post-release-notes:
     runs-on: ubuntu-latest
     timeout-minutes: 20
