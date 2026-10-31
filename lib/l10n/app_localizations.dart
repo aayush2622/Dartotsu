@@ -13822,6 +13822,120 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update server couldn\'t find that release: {message}'**
   String updateNotFound(String message);
+
+  /// No description provided for @installStepJre.
+  ///
+  /// In en, this message translates to:
+  /// **'Java runtime'**
+  String get installStepJre;
+
+  /// No description provided for @installStepCore.
+  ///
+  /// In en, this message translates to:
+  /// **'Runtime core'**
+  String get installStepCore;
+
+  /// No description provided for @installStepsProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String installStepsProgress(int current, int total);
+
+  /// No description provided for @stepWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting'**
+  String get stepWaiting;
+
+  /// No description provided for @stepChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking…'**
+  String get stepChecking;
+
+  /// No description provided for @stepUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get stepUpToDate;
+
+  /// No description provided for @stepUpToDateWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date · {detail}'**
+  String stepUpToDateWith(String detail);
+
+  /// No description provided for @stepWillInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be installed'**
+  String get stepWillInstall;
+
+  /// No description provided for @stepWillUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be updated'**
+  String get stepWillUpdate;
+
+  /// No description provided for @stepWillUpdateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be updated to {version}'**
+  String stepWillUpdateTo(String version);
+
+  /// No description provided for @stepInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed'**
+  String get stepInstalled;
+
+  /// No description provided for @stepNotNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not needed here'**
+  String get stepNotNeeded;
+
+  /// No description provided for @stepFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get stepFailed;
+
+  /// No description provided for @stepFailedWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed: {reason}'**
+  String stepFailedWith(String reason);
+
+  /// No description provided for @installNeedsRuntime.
+  ///
+  /// In en, this message translates to:
+  /// **'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.'**
+  String get installNeedsRuntime;
+
+  /// No description provided for @installRuntimeNewer.
+  ///
+  /// In en, this message translates to:
+  /// **'The runtime this manager runs on has an update.'**
+  String get installRuntimeNewer;
+
+  /// No description provided for @removeJvmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the Java runtime?'**
+  String get removeJvmTitle;
+
+  /// No description provided for @removeJvmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.'**
+  String get removeJvmMessage;
+
+  /// No description provided for @runtimePreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing the runtime…'**
+  String get runtimePreparing;
 }
 
 class _AppLocalizationsDelegate

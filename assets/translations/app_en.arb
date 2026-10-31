@@ -4250,5 +4250,55 @@
         "type": "String"
       }
     }
-  }
+  },
+  "installStepJre": "Java runtime",
+  "installStepCore": "Runtime core",
+  "installStepsProgress": "Step {current} of {total}",
+  "@installStepsProgress": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "stepWaiting": "Waiting",
+  "stepChecking": "Checking…",
+  "stepUpToDate": "Up to date",
+  "stepUpToDateWith": "Up to date · {detail}",
+  "@stepUpToDateWith": {
+    "placeholders": {
+      "detail": {
+        "type": "String"
+      }
+    }
+  },
+  "stepWillInstall": "Will be installed",
+  "stepWillUpdate": "Will be updated",
+  "stepWillUpdateTo": "Will be updated to {version}",
+  "@stepWillUpdateTo": {
+    "placeholders": {
+      "version": {
+        "type": "String"
+      }
+    }
+  },
+  "stepInstalled": "Installed",
+  "stepNotNeeded": "Not needed here",
+  "stepFailed": "Failed",
+  "stepFailedWith": "Failed: {reason}",
+  "@stepFailedWith": {
+    "placeholders": {
+      "reason": {
+        "type": "String"
+      }
+    }
+  },
+  "installNeedsRuntime": "It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.",
+  "installRuntimeNewer": "The runtime this manager runs on has an update.",
+  "removeJvmTitle": "Remove the Java runtime?",
+  "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
+  "runtimePreparing": "Preparing the runtime…"
 }

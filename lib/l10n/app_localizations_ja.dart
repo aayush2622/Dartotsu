@@ -7651,4 +7651,72 @@ class AppLocalizationsJa extends AppLocalizations {
   String updateNotFound(String message) {
     return 'Update server couldn\'t find that release: $message';
   }
+
+  @override
+  String get installStepJre => 'Java runtime';
+
+  @override
+  String get installStepCore => 'Runtime core';
+
+  @override
+  String installStepsProgress(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get stepWaiting => 'Waiting';
+
+  @override
+  String get stepChecking => 'Checking…';
+
+  @override
+  String get stepUpToDate => 'Up to date';
+
+  @override
+  String stepUpToDateWith(String detail) {
+    return 'Up to date · $detail';
+  }
+
+  @override
+  String get stepWillInstall => 'Will be installed';
+
+  @override
+  String get stepWillUpdate => 'Will be updated';
+
+  @override
+  String stepWillUpdateTo(String version) {
+    return 'Will be updated to $version';
+  }
+
+  @override
+  String get stepInstalled => 'Installed';
+
+  @override
+  String get stepNotNeeded => 'Not needed here';
+
+  @override
+  String get stepFailed => 'Failed';
+
+  @override
+  String stepFailedWith(String reason) {
+    return 'Failed: $reason';
+  }
+
+  @override
+  String get installNeedsRuntime =>
+      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+
+  @override
+  String get installRuntimeNewer =>
+      'The runtime this manager runs on has an update.';
+
+  @override
+  String get removeJvmTitle => 'Remove the Java runtime?';
+
+  @override
+  String get removeJvmMessage =>
+      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+
+  @override
+  String get runtimePreparing => 'Preparing the runtime…';
 }

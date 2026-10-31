@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../../Widgets/Components/LoadSvg.dart';
+import 'package:dartotsu_extension_bridge/Engines/JavaEngine/JvmAddon.dart';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +27,7 @@ void showExtensionManagerSheet(BuildContext context, ItemType type) {
   for (final m in manager.managers) {
     final plugin = m.plugin;
     if (plugin != null && plugin.installed.value) {
-      unawaited(plugin.checkForUpdate(forceRefresh: true));
+      unawaited(plugin.plan(refresh: true));
     }
   }
   showCustomBottomDialog(
@@ -79,6 +80,13 @@ Widget _serviceTile(
   final installed = m.plugin == null || m.plugin!.installed.value;
   final availableInRepo = m.plugin == null || m.plugin!.availableInRepo.value;
   final scheme = context.colorScheme;
+  final plugin = m.plugin as DownloadablePlugin?;
+  final preparing =
+      installed &&
+      plugin != null &&
+      JvmAddon.supported &&
+      plugin.dependencies.contains(JvmAddon.instance) &&
+      JvmAddon.instance.downloading.value;
 
   return Opacity(
     opacity: installed || availableInRepo ? 1.0 : 0.5,
@@ -102,6 +110,12 @@ Widget _serviceTile(
         child: assetIcon(m.icon, size: 22),
       ),
       title: Text(m.name),
+      subtitle: preparing
+          ? Text(
+              getString.runtimePreparing,
+              style: TextStyle(color: scheme.primary, fontSize: 12),
+            )
+          : null,
       trailing: _withSettings(
         context,
         m,
