@@ -334,7 +334,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "769001cab59a40067744577e15ee140985bf91c9"
+      resolved-ref: "6ee598c6b69f9a71669779176c6611029982cfc6"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -1263,10 +1263,10 @@ packages:
     dependency: "direct main"
     description:
       name: mobile_scanner
-      sha256: "5a51ea79f0cf8293f616a5d08baae185b59b5e6bb24df01f2a63037ade0bade0"
+      sha256: "5ef343479ba26829aa72c13094a690518c81e1f7b3d6133b64971dabbf650050"
       url: "https://pub.dev"
     source: hosted
-    version: "7.4.2"
+    version: "7.4.3"
   native_toolchain_c:
     dependency: transitive
     description:
@@ -2183,66 +2183,66 @@ packages:
     dependency: "direct main"
     description:
       name: webview_all
-      sha256: d6190ae475c7fdb4d1b1c0afda64d788172b2fbc367dfb72b9be2c704629984d
+      sha256: "9c08f4622a29d01fd0a90251dd2f9b079865c9cabe279a1b7199d3d2f15b26ce"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_android:
     dependency: transitive
     description:
       name: webview_all_android
-      sha256: "34243b07dfed6c6e28ebdba9cd9353f4653ae393e23745aff6001115600a2e30"
+      sha256: ec9e9da7fd463e08a12972bbb17286e98891dd59a91106ec376c21784f53fa8f
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_linux:
     dependency: transitive
     description:
       name: webview_all_linux
-      sha256: e85f0b52d34ff0439acdf1f07602b44f58987046d4241aeb217059a68176d95a
+      sha256: be506cbf90a140d54e0ccde4e43d5f0795309242fd85ba3cc7564382087e443c
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_ohos:
     dependency: transitive
     description:
       name: webview_all_ohos
-      sha256: e86b77b6725264fc17cad1a13d34167bc0d3e19ce36280262b69e2f6db21ac40
+      sha256: "53fe94b963b99eb557c76cc118440d3bb4d8acbcea6ab4d5b6c467092427cc8b"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_web:
     dependency: transitive
     description:
       name: webview_all_web
-      sha256: cd274c08500246d02704c2658c832543aebe80b51dfbf801f5d085378f96097c
+      sha256: d4828a37a39109d8eac04b702f6f579de4b0f7413ef0f7df09d57666232d43a9
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_windows:
     dependency: transitive
     description:
       name: webview_all_windows
-      sha256: cd1d7723d6028515427a072bed119513e7fe1b3f69b70339cf04c11b4add15b9
+      sha256: "5bd9013eb33a711cbdeffe95faa42619c63f187519dec93cd4c9e6d41dcfd683"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_all_wkwebview:
     dependency: transitive
     description:
       name: webview_all_wkwebview
-      sha256: "56c7f30cee7f782f392fd05d1d1c856e0a70577075da257a454f695489c428a3"
+      sha256: "720b72b4b045471485b3c6835b2867a60f79b2186bcc51490b0889f1e2f3389f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   webview_platform_interface:
     dependency: transitive
     description:
       name: webview_platform_interface
-      sha256: aa452be6b70044d95597b7e92830fbac7c18c301e3c5eae391496415d0256fd9
+      sha256: "1972aec36e718faa216df014917bf760bf18eb5bad8e73a73833345836da64b6"
       url: "https://pub.dev"
     source: hosted
-    version: "1.4.7"
+    version: "1.4.9"
   win32:
     dependency: "direct main"
     description:
