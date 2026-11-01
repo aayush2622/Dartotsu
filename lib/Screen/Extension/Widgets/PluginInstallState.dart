@@ -70,7 +70,13 @@ class PluginInstallState extends ScreenState {
       final data = await plugin.fetchRemote(forceRefresh: true);
       if (!mounted) return;
       if (data == null) {
-        phase.value = PluginPhase.missing;
+        final reason = plugin.indexError.value;
+        if (reason == null) {
+          phase.value = PluginPhase.missing;
+        } else {
+          message.value = reason;
+          phase.value = PluginPhase.failed;
+        }
         return;
       }
       remote.value = data;
