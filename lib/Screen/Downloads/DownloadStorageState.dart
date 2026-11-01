@@ -2,11 +2,15 @@ import 'dart:async';
 import 'dart:isolate';
 
 import '../../Core/Downloads/DownloadEngine.dart';
-import '../../Core/Downloads/DownloadPaths.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/Downloads/DownloadScanner.dart';
 import '../../Core/Downloads/DownloadTask.dart';
 import '../../Core/Downloads/DownloadUsage.dart';
-import '../../Core/Downloads/NameMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/State/State.dart';

@@ -1,9 +1,10 @@
 import 'dart:async';
 
-import '../../../Core/Downloads/Archives.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../../Core/Downloads/DownloadEngine.dart';
-import '../../../Core/Downloads/DownloadPaths.dart';
 import '../../../Core/Downloads/PdfPages.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 

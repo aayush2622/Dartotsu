@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../Core/Downloads/DownloadEngine.dart';
-import '../../Core/Downloads/DownloadPaths.dart';
 import '../../Core/Downloads/DownloadTask.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';

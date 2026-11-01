@@ -7,11 +7,13 @@ import 'package:path/path.dart' as p;
 import '../../Logger.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
-import 'Archives.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import 'DownloadEngine.dart';
-import 'DownloadPaths.dart';
 import 'DownloadTask.dart';
-import 'NameMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 
 const localServiceId = 'local';
 

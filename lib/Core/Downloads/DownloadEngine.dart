@@ -1,4 +1,5 @@
-import 'DownloadCancel.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -17,10 +18,6 @@ import '../Preferences/PrefManager.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
-import 'Archives.dart';
-import 'BookText.dart';
-import 'ChapterFetcher.dart';
-import 'DownloadPaths.dart';
 import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
 import 'DownloadQueue.dart';
@@ -28,9 +25,8 @@ import 'DownloadScanner.dart';
 import 'DownloadService.dart';
 import 'DownloadSnapshots.dart';
 import 'DownloadTask.dart';
-import 'FileFetcher.dart';
-import 'Hls.dart';
-import 'HlsFetcher.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 
 class DownloadBlocked implements Exception {
   final String message;
@@ -78,6 +74,7 @@ class DownloadEngine extends AppController {
 
   @override
   void onInit() {
+    DownloadThrottle.limitKbps = () => downloadSpeedLimitPref.value;
     reload();
     _indexWatch = onAnyChange([tasks], () => _byId = null);
     final net = find<NetStatus>();

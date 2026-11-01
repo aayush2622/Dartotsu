@@ -10,7 +10,9 @@ import '../../../Logger.dart';
 import '../../../Screen/Detail/Watch/Data/EpisodeMeta.dart';
 import '../../../Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import '../../../Screen/Detail/Watch/Data/Providers/AniZip.dart';
-import '../../../Screen/Detail/Watch/Data/TitleMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
 import '../../../Screen/Player/Engine/OnlineSubtitles.dart';
 import '../../../Screen/Settings/Sync/Data/SyncIdIndex.dart';
 import '../../../Screen/Settings/Sync/Data/SyncModels.dart';

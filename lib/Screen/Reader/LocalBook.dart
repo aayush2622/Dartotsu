@@ -3,7 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
-import '../../Core/Downloads/Archives.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/Downloads/DownloadScanner.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';

@@ -9,7 +9,8 @@ import '../NetworkManager/NetworkManager.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
 import 'DownloadEngine.dart';
-import 'DownloadPaths.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
 
 class DownloadSnapshot {
   final Media media;

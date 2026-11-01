@@ -6,10 +6,14 @@ import 'package:flutter/material.dart';
 
 import '../../Api/Services/Extension/Services.dart';
 import '../../Core/Downloads/DownloadEngine.dart';
-import '../../Core/Downloads/DownloadPaths.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/Downloads/DownloadScanner.dart';
 import '../../Core/Downloads/DownloadTask.dart';
-import '../../Core/Downloads/NameMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
 import '../../Core/Offline/OfflineMode.dart';
 import '../../Core/Offline/PendingWrites.dart';
 import '../../Core/Services/MediaServiceController.dart';

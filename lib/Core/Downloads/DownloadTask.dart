@@ -1,8 +1,8 @@
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 
 import '../State/State.dart';
-import 'Archives.dart';
-import 'DownloadPaths.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
 
 enum DownloadState { queued, resolving, downloading, paused, done, failed }
 
@@ -253,3 +253,10 @@ class DownloadTask {
     return task;
   }
 }
+
+String unitBaseName(DownloadTask task) => unitFileName(
+  video: task.kind == DownloadKind.video,
+  number: task.number,
+  unitKey: task.unitKey,
+  title: task.title,
+);

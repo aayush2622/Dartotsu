@@ -7,8 +7,11 @@ import 'package:flutter/material.dart';
 import '../../Core/Downloads/DownloadEngine.dart';
 import '../../Core/Downloads/DownloadQueue.dart';
 import '../../Core/Downloads/DownloadTask.dart';
-import '../../Core/Downloads/Hls.dart';
-import '../../Core/Downloads/HlsFetcher.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';

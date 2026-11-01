@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../Core/Downloads/DownloadEngine.dart';
-import '../../../Core/Downloads/DownloadPaths.dart';
 import '../../../Core/Downloads/DownloadTask.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
