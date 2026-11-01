@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/ScoreFormat.dart';
+import '../../Core/SourceAlerts/SourceSubscriptions.dart';
+import '../../Core/Services/Api/IdMapper.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Model/CardStyle.dart';
@@ -55,9 +58,38 @@ class MediaRowFacts {
     return getString.epIn(ep, left);
   }
 
+  int? get released {
+    if (isAnime) {
+      final ep = media.anime?.nextAiringEpisode;
+      if (ep != null && ep > 1) return ep - 1;
+      return total;
+    }
+    final knownTotal = media.manga?.totalChapters;
+    if (knownTotal != null && knownTotal > 0) return knownTotal;
+
+    final sub = tryFind<SourceSubscriptions>()?.byKey(media.id);
+    if (sub != null && sub.lastValue > 0) return sub.lastValue.toInt();
+
+    final serviceId =
+        tryFind<MediaServiceController>()?.currentService.value.id;
+    if (serviceId != null) {
+      final cached = IdMapper.cachedMangaChapters(serviceId, media.id);
+      if (cached != null && cached > 0) return cached;
+    }
+    return null;
+  }
+
+  int? get unreadCount {
+    final r = released;
+    if (r == null || r <= 0) return null;
+    final done = media.userProgress ?? 0;
+    final left = r - done;
+    return left > 0 ? left : null;
+  }
+
   double? get progress {
     final done = media.userProgress ?? 0;
-    final t = total;
+    final t = total ?? released;
     if (done <= 0 || t == null || t <= 0) return null;
     return (done / t).clamp(0.0, 1.0);
   }
@@ -65,7 +97,8 @@ class MediaRowFacts {
   String? get progressText {
     final done = media.userProgress;
     if (done == null || done <= 0) return null;
-    return '$done / ${total ?? '?'}';
+    final t = total ?? released;
+    return '$done / ${t ?? \'?\'}';
   }
 
   List<String> get meta => [

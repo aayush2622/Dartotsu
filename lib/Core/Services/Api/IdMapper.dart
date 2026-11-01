@@ -377,4 +377,20 @@ query (\$search: String) {
       );
     }
   }
+
+  static int? cachedMangaChapters(String service, String mediaId) {
+    final idx = _loaded[false];
+    if (idx == null) return null;
+    final intId = int.tryParse(mediaId);
+    if (intId == null) return null;
+    return idx.totalChaptersOf(service, intId);
+  }
+
+  static String? cachedMangaStatus(String service, String mediaId) {
+    final idx = _loaded[false];
+    if (idx == null) return null;
+    final intId = int.tryParse(mediaId);
+    if (intId == null) return null;
+    return idx.statusOf(service, intId);
+  }
 }

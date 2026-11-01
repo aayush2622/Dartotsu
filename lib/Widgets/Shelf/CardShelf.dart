@@ -265,6 +265,7 @@ class _CardShelfState extends State<CardShelf> {
       subtitle: item.subtitle,
       progress: item.progress,
       progressText: item.progressText,
+      unread: item.unread,
       score: item.score,
       scoreHighlight: item.scoreHighlight,
       airing: item.airing,

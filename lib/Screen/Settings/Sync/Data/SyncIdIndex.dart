@@ -15,6 +15,8 @@ const _mangaColumns = [
   SyncKey.mal,
   SyncKey.mangaupdates,
   SyncKey.kitsu,
+  'total_chapters',
+  'status',
 ];
 
 List<int> compactAnimeIndex(String raw) {
@@ -44,10 +46,14 @@ List<int> compactMangaIndex(String raw) {
         'mal_id',
         'mangaupdates_id',
         'kitsu_id',
+        'total_chapters',
+        'status',
       ])
-        r[c] is int ? r[c] as int : 0,
+        (c == 'total_chapters' && r[c] is num)
+            ? ((r[c] as num) * 100).round()
+            : (r[c] is int ? r[c] as int : 0),
     ];
-    if (row.where((v) => v > 0).length < 2) continue;
+    if (row.take(5).where((v) => v > 0).length < 2) continue;
     out.addAll(row);
   }
   return out;
@@ -61,7 +67,19 @@ class SyncIdIndex {
   late final Map<String, Map<int, int>> _by = _build();
 
   SyncIdIndex(this._flat, {List<String>? columns, bool anime = true})
-    : _columns = columns ?? (anime ? _animeColumns : _mangaColumns);
+    : _columns = columns ?? (anime ? _animeColumns : _detectMangaColumns(_flat));
+
+  static List<String> _detectMangaColumns(List<int> flat) {
+    if (flat.isEmpty) return _mangaColumns;
+    if (flat.length % _mangaColumns.length == 0) return _mangaColumns;
+    return const [
+      SyncKey.mangabaka,
+      SyncKey.anilist,
+      SyncKey.mal,
+      SyncKey.mangaupdates,
+      SyncKey.kitsu,
+    ];
+  }
 
   List<int> get flat => _flat;
   List<String> get columns => _columns;
@@ -97,5 +115,31 @@ class SyncIdIndex {
       return out;
     }
     return ids;
+  }
+
+  int? totalChaptersOf(String service, int id) {
+    final row = _by[service]?[id];
+    if (row == null) return null;
+    final col = _columns.indexOf('total_chapters');
+    if (col < 0) return null;
+    final val = _flat[row * _columns.length + col];
+    if (val <= 0) return null;
+    return (val / 100).floor();
+  }
+
+  String? statusOf(String service, int id) {
+    final row = _by[service]?[id];
+    if (row == null) return null;
+    final col = _columns.indexOf('status');
+    if (col < 0) return null;
+    final code = _flat[row * _columns.length + col];
+    return switch (code) {
+      1 => 'RELEASING',
+      2 => 'COMPLETED',
+      3 => 'HIATUS',
+      4 => 'CANCELLED',
+      5 => 'NOT_YET_RELEASED',
+      _ => null,
+    };
   }
 }

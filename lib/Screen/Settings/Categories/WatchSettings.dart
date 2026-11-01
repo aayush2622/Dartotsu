@@ -146,6 +146,13 @@ List<Setting> _animeExtras(BuildContext context) => [
     isChecked: watchBlurUnwatchedPref.rx.value,
     onSwitchChange: (v) => watchBlurUnwatchedPref.rx.value = v,
   ),
+  Setting.switchType(
+    name: getString.watchUnwatchedBadge,
+    description: getString.watchUnwatchedBadgeDesc,
+    icon: Icons.mark_chat_unread_outlined,
+    isChecked: watchUnwatchedCounterPref.rx.value,
+    onSwitchChange: (v) => watchUnwatchedCounterPref.rx.value = v,
+  ),
   Setting.header(getString.settingsSectionProgress),
   _trackRow(
     getString.trackProgressSettingAnime,
@@ -201,6 +208,13 @@ List<Setting> mangaSettings(BuildContext context) => [
       Icons.menu_book_rounded,
       trackMangaPref.rx.value,
       (v) => trackMangaPref.rx.value = v,
+    ),
+    Setting.switchType(
+      name: getString.readerUnreadBadge,
+      description: getString.readerUnreadBadgeDesc,
+      icon: Icons.mark_chat_unread_outlined,
+      isChecked: readerUnreadCounterPref.rx.value,
+      onSwitchChange: (v) => readerUnreadCounterPref.rx.value = v,
     ),
   ]),
 ];

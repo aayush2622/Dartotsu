@@ -28,6 +28,7 @@ class PosterCard extends StatefulWidget {
   final double? progress;
 
   final String? progressText;
+  final int? unread;
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -52,6 +53,7 @@ class PosterCard extends StatefulWidget {
     this.airing = false,
     this.progress,
     this.progressText,
+    this.unread,
     this.onTap,
     this.onLongPress,
     this.focusable = false,
@@ -352,14 +354,30 @@ class _PosterCardState extends State<PosterCard> {
 
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
     final corner = _scoreCorner(s, bottomTaken: bottomTaken);
+    final opposite = _airingCorner(corner);
+    final hasUnread = widget.unread != null && widget.unread! > 0;
     return [
       if (s.showScore && widget.score != null)
         _corner(
           corner,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (s.showAiring && widget.airing)
-        _corner(_airingCorner(corner), const _AiringDot()),
+      if (hasUnread)
+        _corner(
+          opposite,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (s.showAiring && widget.airing) ...[
+                const _AiringDot(),
+                const SizedBox(width: 4),
+              ],
+              _UnreadBadge(count: widget.unread!),
+            ],
+          ),
+        )
+      else if (s.showAiring && widget.airing)
+        _corner(opposite, const _AiringDot()),
     ];
   }
 
@@ -533,6 +551,41 @@ class _ScoreBadge extends StatelessWidget {
           const SizedBox(width: 2),
           Icon(Icons.star_rounded, color: fg, size: 12),
         ],
+      ),
+    );
+  }
+}
+
+class _UnreadBadge extends StatelessWidget {
+  final int count;
+
+  const _UnreadBadge({required this.count});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return Container(
+      height: 20,
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      decoration: BoxDecoration(
+        color: scheme.primaryContainer.withValues(alpha: 0.95),
+        borderRadius: BorderRadius.circular(999),
+        boxShadow: [
+          BoxShadow(
+            color: scheme.shadow.withValues(alpha: 0.25),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          count > 999 ? '999+' : '$count',
+          style: context.textTheme.labelSmall?.copyWith(
+            color: scheme.onPrimaryContainer,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
       ),
     );
   }

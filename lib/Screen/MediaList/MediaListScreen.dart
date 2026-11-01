@@ -16,6 +16,7 @@ import '../../Widgets/Shelf/PosterCard.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../Detail/ListEditorSheet.dart';
+import '../Detail/Watch/Data/WatchPrefs.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/AppSheet.dart';
@@ -354,17 +355,27 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
   Widget _card(Media media, int index, {required bool skeleton}) {
     final facts = MediaRowFacts(media);
     final tag = skeleton ? null : 'list:${media.id}';
+    final isAnime = facts.isAnime;
+    final showBadge = isAnime
+        ? watchUnwatchedCounterPref.value
+        : readerUnreadCounterPref.value;
+    final total = facts.total;
+    final released = facts.released;
+    final right = released != null && total != null && released != total
+        ? '$released | $total'
+        : (total?.toString() ?? released?.toString() ?? '~');
     return PosterCard(
       heroTag: tag,
       imageUrl: media.cover,
       title: media.mainName,
       subtitle: skeleton
           ? null
-          : '${media.userProgress ?? '~'} | ${facts.total ?? '~'}',
+          : '${media.userProgress ?? '~'} | $right',
       progress: skeleton ? null : facts.progress,
       progressText: skeleton
           ? null
-          : '${media.userProgress ?? '~'} · ${facts.total ?? '~'}',
+          : '${media.userProgress ?? '~'} · $right',
+      unread: !skeleton && showBadge ? facts.unreadCount : null,
       score: skeleton
           ? null
           : (media.userScore ?? 0) > 0

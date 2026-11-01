@@ -11,6 +11,7 @@ import 'CardShelf.dart';
 import 'MediaCarousel.dart';
 import 'MediaRows.dart';
 import 'CardShelfState.dart';
+import '../../Screen/Detail/Watch/Data/WatchPrefs.dart';
 
 class MediaSectionData {
   final int type;
@@ -114,14 +115,25 @@ class MediaSection extends StatelessWidget {
     return next != null && next > 1 ? next - 1 : null;
   }
 
+  static int? _released(Media media) => MediaRowFacts(media).released;
+
   static String _infoText(Media media) {
     final left = media.userProgress?.toString() ?? '~';
     final total = _total(media);
     final released = _released(media);
-    final right = released != null
-        ? '$released | ${total ?? '~'}'
-        : '${total ?? '~'}';
+    final right = released != null && total != null && released != total
+        ? '$released | $total'
+        : (total?.toString() ?? released?.toString() ?? '~');
     return '$left | $right';
+  }
+
+  static int? _unread(Media media) {
+    final isAnime = media.anime != null;
+    final enabled = isAnime
+        ? watchUnwatchedCounterPref.value
+        : readerUnreadCounterPref.value;
+    if (!enabled) return null;
+    return MediaRowFacts(media).unreadCount;
   }
 
   static String? _progressText(Media media) {
@@ -164,6 +176,7 @@ class MediaSection extends StatelessWidget {
       subtitle: detailed ? _infoText(media) : null,
       progress: detailed ? _progress(media) : null,
       progressText: detailed ? _progressText(media) : null,
+      unread: detailed ? _unread(media) : null,
       score: detailed ? _score(media) : null,
       scoreHighlight: (media.userScore ?? 0) > 0,
       airing: detailed && media.status == 'RELEASING',

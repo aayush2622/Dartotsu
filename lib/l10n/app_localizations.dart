@@ -13936,6 +13936,16 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Preparing the runtime…'**
   String get runtimePreparing;
+
+  String get watchUnwatchedBadge => 'Unwatched episodes counter';
+  String get watchUnwatchedBadgeDesc =>
+      'Show badge with remaining unwatched episodes on anime posters';
+  String get readerUnreadBadge => 'Unread chapters counter';
+  String get readerUnreadBadgeDesc =>
+      'Show badge with remaining unread chapters on manga posters';
+  String get calendarAll => 'All';
+  String get calendarAnime => 'Anime';
+  String get calendarManga => 'Manga';
 }
 
 class _AppLocalizationsDelegate

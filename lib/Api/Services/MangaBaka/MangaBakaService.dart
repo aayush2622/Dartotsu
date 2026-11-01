@@ -3,6 +3,7 @@ import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/State/State.dart';
 import 'Auth.dart';
+import 'Screens/Calendar.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Home.dart';
@@ -51,6 +52,9 @@ class MangaBakaService extends MediaService {
 
   @override
   HomeScreenView get homeView => MangaBakaHomeView(this);
+
+  @override
+  CalendarScreenView get calendarView => MangaBakaCalendarView();
 
   @override
   FeedScreenView get feedView => MangaBakaFeedView(this);

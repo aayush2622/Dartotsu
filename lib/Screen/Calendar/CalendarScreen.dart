@@ -72,6 +72,23 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
               ),
             );
           }),
+          Watch(() {
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimens.gap,
+                vertical: Dimens.gapXs,
+              ),
+              child: AppSegmented<CalendarFilter>(
+                value: state.filter.value,
+                onChanged: (v) => state.filter.value = v,
+                segments: [
+                  AppSegment(CalendarFilter.all, label: getString.calendarAll),
+                  AppSegment(CalendarFilter.anime, label: getString.calendarAnime),
+                  AppSegment(CalendarFilter.manga, label: getString.calendarManga),
+                ],
+              ),
+            );
+          }),
           Expanded(
             child: RefreshIndicator(
               onRefresh: state.load,

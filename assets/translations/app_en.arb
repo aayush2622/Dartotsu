@@ -4300,5 +4300,12 @@
   "installRuntimeNewer": "The runtime this manager runs on has an update.",
   "removeJvmTitle": "Remove the Java runtime?",
   "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
-  "runtimePreparing": "Preparing the runtime…"
+  "runtimePreparing": "Preparing the runtime…",
+  "watchUnwatchedBadge": "Unwatched episodes counter",
+  "watchUnwatchedBadgeDesc": "Show badge with remaining unwatched episodes on anime posters",
+  "readerUnreadBadge": "Unread chapters counter",
+  "readerUnreadBadgeDesc": "Show badge with remaining unread chapters on manga posters",
+  "calendarAll": "All",
+  "calendarAnime": "Anime",
+  "calendarManga": "Manga"
 }
