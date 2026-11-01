@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,6 +9,7 @@ import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/StringExtensions.dart';
 import '../../../Utils/Functions/TimeAgo.dart';
+import '../../../Widgets/Components/BlurredImage.dart';
 import '../../../Widgets/Components/AniHtml.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/Clickable.dart';
@@ -317,17 +317,8 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                   scale: 1.04 + 0.1 * state.timer.value,
                   child: child,
                 ),
-                child: ImageFiltered(
-                  imageFilter: ImageFilter.blur(
-                    sigmaX: 24,
-                    sigmaY: 24,
-                    tileMode: TileMode.clamp,
-                  ),
-                  child: cachedNetworkImage(
-                    imageUrl: url,
-                    fit: BoxFit.cover,
-                    cacheWidth: 480,
-                  ),
+                child: SizedBox.expand(
+                  child: BlurredImage(url: url, saturation: 1.2),
                 ),
               ),
             ColoredBox(color: Colors.black.withValues(alpha: 0.42)),
@@ -606,20 +597,15 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
     EdgeInsetsGeometry padding = EdgeInsets.zero,
     double radius = 30,
   }) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(radius),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 14, sigmaY: 14),
-        child: Container(
-          padding: padding,
-          decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.28),
-            borderRadius: BorderRadius.circular(radius),
-            border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
-          ),
-          child: child,
-        ),
+    return Container(
+      clipBehavior: Clip.hardEdge,
+      padding: padding,
+      decoration: BoxDecoration(
+        color: Colors.black.withValues(alpha: 0.4),
+        borderRadius: BorderRadius.circular(radius),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.14)),
       ),
+      child: child,
     );
   }
 
