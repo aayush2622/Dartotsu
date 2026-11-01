@@ -29,12 +29,6 @@ String _verb(PresenceType type) => switch (type) {
   PresenceType.competing => 'Competing',
 };
 
-String _memberVerb(PresenceType type) => switch (type) {
-  PresenceType.listening => 'Listening to',
-  PresenceType.competing => 'Competing in',
-  _ => _verb(type),
-};
-
 IconData _typeIcon(PresenceType type) => switch (type) {
   PresenceType.playing => Icons.sports_esports_rounded,
   PresenceType.listening => Icons.headphones_rounded,
@@ -461,11 +455,19 @@ class _MemberRow extends StatelessWidget {
                   ),
                 ),
                 if (p != null)
-                  Text(
-                    '${_memberVerb(p.type)} $shown',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(color: _D.muted, fontSize: 12),
+                  Row(
+                    children: [
+                      Icon(_typeIcon(p.type), color: _D.muted, size: 14),
+                      const SizedBox(width: 5),
+                      Expanded(
+                        child: Text(
+                          shown ?? '',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(color: _D.muted, fontSize: 12),
+                        ),
+                      ),
+                    ],
                   ),
               ],
             ),

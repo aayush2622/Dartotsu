@@ -1,5 +1,6 @@
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Services/Model/Media.dart';
+import 'Mobile/TokenManager.dart';
 
 const discordLogo =
     'https://cdn.discordapp.com/emojis/1305525420938100787.gif?size=128&animated=true&name=dartotsu';
@@ -65,7 +66,7 @@ class PresenceStyle {
     timer: PrefName.discordTimer.value,
     hideTitles: PrefName.discordHideTitles.value,
     activity: PrefName.discordActivity.value,
-    nameMode: PrefName.discordNameMode.value,
+    nameMode: MobileTokenManager.saved ? PrefName.discordNameMode.value : 'app',
     customName: PrefName.discordCustomName.value,
     statusDisplay: PrefName.discordStatusDisplay.value,
     detailsTemplate: PrefName.discordDetailsTemplate.value,
