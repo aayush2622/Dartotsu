@@ -232,9 +232,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.FINE_GRAIN_TOKEN }}
         run: |
+          # gh release view maps the download URL to .url. browser_download_url is null.
           gh release view --repo "${{ github.repository }}" "${{ github.ref_name }}" \
-            --json assets --jq '.assets[].browser_download_url' > asset_links.txt
+            --json assets --jq '.assets[].url' > asset_links.txt
           cat asset_links.txt
+          if ! grep -q '[^[:space:]]' asset_links.txt; then
+            echo "No release asset download URLs found" >&2
+            exit 1
+          fi
 
       - name: Format download message
         run: |
@@ -253,6 +258,11 @@ jobs:
             elif [[ $LINK == *"Installer"* ]]; then MESSAGE+="• [Windows]($LINK)\n"
             fi
           done <<< "$LINKS"
+          if [[ "$MESSAGE" != *"• ["* ]]; then
+            echo "Release assets were found, but none matched a download label" >&2
+            echo "$MESSAGE" >&2
+            exit 1
+          fi
           {
             echo "MESSAGE<<EOF"
             echo -e "$MESSAGE"
