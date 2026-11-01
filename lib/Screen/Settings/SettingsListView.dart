@@ -57,36 +57,45 @@ class _SettingsListViewState extends State<SettingsListView> {
             Dimens.pagePad,
             Dimens.gapXl,
           ),
-          sliver: SliverList(
-            delegate: SliverChildListDelegate([
-              SettingsSearchField(query: _query, hint: widget.hint),
-              SizedBox(height: Dimens.gap),
+          sliver: SliverMainAxisGroup(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    SettingsSearchField(query: _query, hint: widget.hint),
+                    SizedBox(height: Dimens.gap),
+                  ],
+                ),
+              ),
               Watch(() {
                 final q = _query.value;
                 if (q.isEmpty) {
-                  return widget.emptyBuilder?.call(context) ??
-                      SettingsGroup(
-                        settings: (widget.menu ?? widget.searchable)(context),
-                        accordion: widget.accordion,
-                      );
+                  final custom = widget.emptyBuilder?.call(context);
+                  if (custom != null) return SliverToBoxAdapter(child: custom);
+                  return SliverSettingsGroup(
+                    settings: (widget.menu ?? widget.searchable)(context),
+                    accordion: widget.accordion,
+                  );
                 }
                 final filtered = _filter(widget.searchable(context), q);
                 if (filtered.isEmpty) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 64),
-                    child: Center(
-                      child: Text(
-                        getString.nothingMatches(q),
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 64),
+                      child: Center(
+                        child: Text(
+                          getString.nothingMatches(q),
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
                     ),
                   );
                 }
-                return SettingsGroup(settings: filtered);
+                return SliverSettingsGroup(settings: filtered);
               }),
-            ]),
+            ],
           ),
         ),
       ],

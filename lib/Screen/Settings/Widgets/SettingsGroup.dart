@@ -29,50 +29,81 @@ class SettingsGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final visible = settings.where((s) => s.isVisible).toList();
-    if (visible.isEmpty) return const SizedBox.shrink();
-
-    final sections = <_Section>[];
-    String? header;
-    List<Setting> group = [];
-
-    void flush() {
-      if (group.isNotEmpty) {
-        sections.add(_Section(header: header, items: List.of(group)));
-        header = null;
-        group = [];
-      }
-    }
-
-    for (final s in visible) {
-      if (s.type == SettingType.header) {
-        flush();
-        header = s.name.isEmpty ? null : s.name;
-      } else {
-        group.add(s);
-      }
-    }
-    flush();
-
+    final sections = _sectionsOf(settings);
+    if (sections.isEmpty) return const SizedBox.shrink();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         for (var i = 0; i < sections.length; i++)
-          if (accordion != null &&
-              sections[i].items.length > 3 &&
-              accordion!.containsKey(sections[i].header))
-            _AccordionSection(
-              key: ValueKey('accordion/${sections[i].header}'),
-              section: sections[i],
-              style: accordion![sections[i].header]!,
-              index: i,
-            )
-          else
-            _SectionGroup(section: sections[i], index: i),
+          _sectionAt(sections, i, accordion),
       ],
     );
   }
 }
+
+/// [SettingsGroup] as a sliver: each section is built only when it scrolls
+/// near the screen.
+class SliverSettingsGroup extends StatelessWidget {
+  final List<Setting> settings;
+  final Map<String, SectionStyle>? accordion;
+
+  const SliverSettingsGroup({
+    super.key,
+    required this.settings,
+    this.accordion,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final sections = _sectionsOf(settings);
+    return SliverList.builder(
+      itemCount: sections.length,
+      itemBuilder: (_, i) => _sectionAt(sections, i, accordion),
+    );
+  }
+}
+
+List<_Section> _sectionsOf(List<Setting> settings) {
+  final sections = <_Section>[];
+  String? header;
+  List<Setting> group = [];
+
+  void flush() {
+    if (group.isNotEmpty) {
+      sections.add(_Section(header: header, items: List.of(group)));
+      header = null;
+      group = [];
+    }
+  }
+
+  for (final s in settings) {
+    if (!s.isVisible) continue;
+    if (s.type == SettingType.header) {
+      flush();
+      header = s.name.isEmpty ? null : s.name;
+    } else {
+      group.add(s);
+    }
+  }
+  flush();
+  return sections;
+}
+
+Widget _sectionAt(
+  List<_Section> sections,
+  int i,
+  Map<String, SectionStyle>? accordion,
+) =>
+    accordion != null &&
+        sections[i].items.length > 3 &&
+        accordion.containsKey(sections[i].header)
+    ? _AccordionSection(
+        key: ValueKey('accordion/${sections[i].header}'),
+        section: sections[i],
+        style: accordion[sections[i].header]!,
+        index: i,
+      )
+    : _SectionGroup(section: sections[i], index: i);
 
 class _Section {
   final String? header;
@@ -138,7 +169,9 @@ class _SectionGroup extends StatelessWidget {
             ),
         ],
       ),
-    ).animateFadeUp(delay: Duration(milliseconds: index * 50));
+    ).animateFadeUp(
+      delay: Duration(milliseconds: (index > 6 ? 6 : index) * 50),
+    );
   }
 
   Widget _buildItem(Setting s) => _settingItem(s);
@@ -262,6 +295,8 @@ class _AccordionSectionState extends State<_AccordionSection> {
           ),
         ),
       ),
-    ).animateFadeUp(delay: Duration(milliseconds: widget.index * 40));
+    ).animateFadeUp(
+      delay: Duration(milliseconds: (widget.index > 6 ? 6 : widget.index) * 40),
+    );
   }
 }

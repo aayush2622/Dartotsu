@@ -474,28 +474,27 @@ Future<void> showChaptersSheet(BuildContext context, PlayerState state) async {
             ? getString.playerNoChapters
             : getString.playerChapters,
         heightFactor: 0.6,
-        child: ListView(
+        child: ListView.builder(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-          children: [
-            for (final (i, e) in entries.indexed)
-              SheetTile(
-                tinted: true,
-                radius: BorderRadius.vertical(
-                  top: Radius.circular(i == 0 ? 20 : 6),
-                  bottom: Radius.circular(i == entries.length - 1 ? 20 : 6),
-                ),
-                leading: Text(
-                  formatClock(e.$1.toInt()),
-                  style: context.textTheme.labelMedium,
-                ),
-                title: Text(
-                  e.$2.isEmpty ? getString.playerChapter(i + 1) : e.$2,
-                ),
-                subtitle: e.$3 ? null : Text(getString.playerTimestamp),
-                selected: e.$1 == current.$1 && e.$2 == current.$2,
-                onTap: () => popPage(context, e.$1),
+          itemCount: entries.length,
+          itemBuilder: (_, i) {
+            final e = entries[i];
+            return SheetTile(
+              tinted: true,
+              radius: BorderRadius.vertical(
+                top: Radius.circular(i == 0 ? 20 : 6),
+                bottom: Radius.circular(i == entries.length - 1 ? 20 : 6),
               ),
-          ],
+              leading: Text(
+                formatClock(e.$1.toInt()),
+                style: context.textTheme.labelMedium,
+              ),
+              title: Text(e.$2.isEmpty ? getString.playerChapter(i + 1) : e.$2),
+              subtitle: e.$3 ? null : Text(getString.playerTimestamp),
+              selected: e.$1 == current.$1 && e.$2 == current.$2,
+              onTap: () => popPage(context, e.$1),
+            );
+          },
         ),
       ),
     ),

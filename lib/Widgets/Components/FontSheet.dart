@@ -90,11 +90,16 @@ class _FontSheetState extends State<_FontSheet> {
     child: Watch(() {
       fontsTick.value;
       final values = ['', bundledFont, ..._files];
-      return ListView(
+      final extra =
+          !values.contains(widget.selected) && widget.selected.isNotEmpty;
+      final tail = extra ? 1 : 0;
+      return ListView.builder(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-        children: [
-          for (final (i, value) in values.indexed)
-            _tile(
+        itemCount: values.length + tail + 2,
+        itemBuilder: (_, i) {
+          if (i < values.length) {
+            final value = values[i];
+            return _tile(
               context,
               value,
               value.isEmpty
@@ -102,9 +107,10 @@ class _FontSheetState extends State<_FontSheet> {
                   : fontLabel(value, getString.fontAppDefault),
               first: i == 0,
               last: i == values.length - 1,
-            ),
-          if (!values.contains(widget.selected) && widget.selected.isNotEmpty)
-            Padding(
+            );
+          }
+          if (extra && i == values.length) {
+            return Padding(
               padding: const EdgeInsets.only(top: 8),
               child: _tile(
                 context,
@@ -113,14 +119,15 @@ class _FontSheetState extends State<_FontSheet> {
                 first: true,
                 last: true,
               ),
-            ),
-          const SizedBox(height: 12),
-          FilledButton.tonalIcon(
+            );
+          }
+          if (i == values.length + tail) return const SizedBox(height: 12);
+          return FilledButton.tonalIcon(
             onPressed: _import,
             icon: const Icon(Icons.add_rounded),
             label: Text(getString.fontImport),
-          ),
-        ],
+          );
+        },
       );
     }),
   );
