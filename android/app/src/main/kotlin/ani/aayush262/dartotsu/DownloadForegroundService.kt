@@ -74,8 +74,7 @@ class DownloadForegroundService : Service() {
                         .setProgress(percent.coerceIn(0, 100))
                         .setProgressSegments(listOf(Notification.ProgressStyle.Segment(100)))
                 )
-                .setRequestPromotedOngoing(true)
-                .setShortCriticalText(if (percent < 0) "…" else "$percent%")
+                .promote(if (percent < 0) "…" else "$percent%")
         } else {
             builder.setProgress(100, percent.coerceIn(0, 100), percent < 0)
         }
@@ -90,6 +89,19 @@ class DownloadForegroundService : Service() {
             .setOnlyAlertOnce(true)
             .setContentIntent(open)
             .build()
+    }
+
+    private fun Notification.Builder.promote(shortText: String): Notification.Builder {
+        val cls = Notification.Builder::class.java
+        try {
+            cls.getMethod("setRequestPromotedOngoing", java.lang.Boolean.TYPE).invoke(this, true)
+        } catch (_: Exception) {
+        }
+        try {
+            cls.getMethod("setShortCriticalText", CharSequence::class.java).invoke(this, shortText)
+        } catch (_: Exception) {
+        }
+        return this
     }
 
     companion object {
