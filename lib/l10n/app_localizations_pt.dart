@@ -7902,6 +7902,29 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get runtimePreparing => 'Preparing the runtime…';
+
+  @override
+  String get watchUnwatchedBadge => 'Unwatched episodes counter';
+
+  @override
+  String get watchUnwatchedBadgeDesc =>
+      'Show badge with remaining unwatched episodes on anime posters';
+
+  @override
+  String get readerUnreadBadge => 'Unread chapters counter';
+
+  @override
+  String get readerUnreadBadgeDesc =>
+      'Show badge with remaining unread chapters on manga and novel posters';
+
+  @override
+  String get calendarAll => 'All';
+
+  @override
+  String get calendarAnime => 'Anime';
+
+  @override
+  String get calendarManga => 'Manga';
 }
 
 /// The translations for Portuguese, as used in Brazil (`pt_BR`).

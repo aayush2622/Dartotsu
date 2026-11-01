@@ -112,6 +112,8 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen>
     subtitle: item.subtitle,
     progress: item.progress,
     progressText: item.progressText,
+    unread: skeleton ? null : item.unread,
+    estimated: item.estimated,
     score: item.score,
     scoreHighlight: item.scoreHighlight,
     airing: item.airing,

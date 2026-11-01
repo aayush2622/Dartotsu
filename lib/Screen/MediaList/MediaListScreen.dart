@@ -358,13 +358,11 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
       heroTag: tag,
       imageUrl: media.cover,
       title: media.mainName,
-      subtitle: skeleton
-          ? null
-          : '${media.userProgress ?? '~'} | ${facts.total ?? '~'}',
+      subtitle: skeleton ? null : facts.listed,
       progress: skeleton ? null : facts.progress,
-      progressText: skeleton
-          ? null
-          : '${media.userProgress ?? '~'} · ${facts.total ?? '~'}',
+      progressText: skeleton ? null : facts.listedShort,
+      unread: skeleton ? null : facts.badge,
+      estimated: !skeleton && facts.estimated,
       score: skeleton
           ? null
           : (media.userScore ?? 0) > 0

@@ -72,6 +72,30 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
               ),
             );
           }),
+          Watch(() {
+            if (!state.hasBothKinds) return const SizedBox.shrink();
+            return Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimens.gap,
+                vertical: Dimens.gapXs,
+              ),
+              child: AppSegmented<CalendarFilter>(
+                value: state.filter.value,
+                onChanged: (v) => state.filter.value = v,
+                segments: [
+                  AppSegment(CalendarFilter.all, label: getString.calendarAll),
+                  AppSegment(
+                    CalendarFilter.anime,
+                    label: getString.calendarAnime,
+                  ),
+                  AppSegment(
+                    CalendarFilter.manga,
+                    label: getString.calendarManga,
+                  ),
+                ],
+              ),
+            );
+          }),
           Expanded(
             child: RefreshIndicator(
               onRefresh: state.load,
@@ -191,17 +215,30 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
                           Localizations.localeOf(context).toString(),
                         ).format(e.airingAt),
                         style: context.textTheme.labelLarge?.copyWith(
-                          color: aired
+                          color: e.expected
+                              ? scheme.tertiary
+                              : aired
                               ? scheme.onSurfaceVariant
                               : scheme.primary,
                         ),
                       ),
                       if (e.expected)
-                        Text(
-                          getString.calendarExpected,
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: scheme.onSurfaceVariant,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.schedule_rounded,
+                              size: 12,
+                              color: scheme.tertiary,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              getString.calendarExpected,
+                              style: context.textTheme.labelSmall?.copyWith(
+                                color: scheme.tertiary,
+                              ),
+                            ),
+                          ],
                         )
                       else if (aired)
                         Icon(

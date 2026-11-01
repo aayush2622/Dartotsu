@@ -36,7 +36,7 @@ class ExtensionService extends MediaService {
   DetailScreenView get detailView => ExtensionDetailView(this, _queries);
 
   @override
-  CalendarScreenView get calendarView => ExtensionCalendarView();
+  CalendarScreenView get calendarView => const ExtensionCalendarView();
 
   @override
   SettingsScreenView get settingsView => ExtensionSettingsView();

@@ -72,6 +72,8 @@ class _ResumeScreenState extends BaseScreen<ResumeScreen>
               subtitle: item.subtitle,
               progress: item.progress,
               progressText: item.progressText,
+              unread: item.unread,
+              estimated: item.estimated,
               style: style,
               onTap: item.onTap,
               onLongPress: item.onLongPress,

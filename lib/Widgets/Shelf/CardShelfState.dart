@@ -15,6 +15,8 @@ class ShelfCardItem {
   final bool airing;
   final double? progress;
   final String? progressText;
+  final int? unread;
+  final bool estimated;
   final String? heroTag;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -33,6 +35,8 @@ class ShelfCardItem {
     this.airing = false,
     this.progress,
     this.progressText,
+    this.unread,
+    this.estimated = false,
     this.heroTag,
     this.onTap,
     this.onLongPress,

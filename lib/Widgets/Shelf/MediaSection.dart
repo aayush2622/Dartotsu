@@ -105,32 +105,6 @@ class MediaSection extends StatelessWidget {
 
   const MediaSection({super.key, required this.data});
 
-  static int? _total(Media media) => media.anime != null
-      ? media.anime?.totalEpisodes
-      : media.manga?.totalChapters;
-
-  static int? _released(Media media) {
-    final next = media.anime?.nextAiringEpisode;
-    return next != null && next > 1 ? next - 1 : null;
-  }
-
-  static String _infoText(Media media) {
-    final left = media.userProgress?.toString() ?? '~';
-    final total = _total(media);
-    final released = _released(media);
-    final right = released != null
-        ? '$released | ${total ?? '~'}'
-        : '${total ?? '~'}';
-    return '$left | $right';
-  }
-
-  static String? _progressText(Media media) {
-    final done = media.userProgress?.toString() ?? '~';
-    final total =
-        _total(media)?.toString() ?? _released(media)?.toString() ?? '~';
-    return '$done · $total';
-  }
-
   static double? _score(Media media) {
     final raw = (media.userScore ?? 0) > 0
         ? media.userScore!
@@ -153,6 +127,7 @@ class MediaSection extends StatelessWidget {
         ? 'cover:${data.heroPrefix}:${data.title}:$index:${media.id}'
         : null;
     final source = media.sourceData;
+    final facts = MediaRowFacts(media);
     return ShelfCardItem(
       id: media.id,
       heroTag: heroTag,
@@ -161,9 +136,11 @@ class MediaSection extends StatelessWidget {
       title: media.relation != null && source == null
           ? '${media.relation} · ${media.mainName}'
           : media.mainName,
-      subtitle: detailed ? _infoText(media) : null,
+      subtitle: detailed ? facts.listed : null,
       progress: detailed ? _progress(media) : null,
-      progressText: detailed ? _progressText(media) : null,
+      progressText: detailed ? facts.listedShort : null,
+      unread: detailed ? facts.badge : null,
+      estimated: detailed && facts.estimated,
       score: detailed ? _score(media) : null,
       scoreHighlight: (media.userScore ?? 0) > 0,
       airing: detailed && media.status == 'RELEASING',

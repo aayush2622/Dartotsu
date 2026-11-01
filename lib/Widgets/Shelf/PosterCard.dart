@@ -28,6 +28,8 @@ class PosterCard extends StatefulWidget {
   final double? progress;
 
   final String? progressText;
+  final int? unread;
+  final bool estimated;
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -52,6 +54,8 @@ class PosterCard extends StatefulWidget {
     this.airing = false,
     this.progress,
     this.progressText,
+    this.unread,
+    this.estimated = false,
     this.onTap,
     this.onLongPress,
     this.focusable = false,
@@ -146,7 +150,10 @@ class _PosterCardState extends State<PosterCard> {
             start: 6,
             end: 6,
             bottom: 6,
-            child: _Pill(text: widget.progressText!),
+            child: _Pill(
+              text: widget.progressText!,
+              estimated: widget.estimated,
+            ),
           ),
         PositionedDirectional(
           start: 9,
@@ -172,7 +179,9 @@ class _PosterCardState extends State<PosterCard> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.labelSmall?.copyWith(
-                    color: Colors.white70,
+                    color: widget.estimated
+                        ? Color.lerp(_scheme.tertiary, Colors.white, .4)
+                        : Colors.white70,
                     shadows: const [
                       Shadow(color: Colors.black87, blurRadius: 4),
                     ],
@@ -229,7 +238,10 @@ class _PosterCardState extends State<PosterCard> {
                   start: 6,
                   end: 6,
                   bottom: 6,
-                  child: _Pill(text: widget.progressText!),
+                  child: _Pill(
+                    text: widget.progressText!,
+                    estimated: widget.estimated,
+                  ),
                 ),
             ],
           ),
@@ -292,7 +304,10 @@ class _PosterCardState extends State<PosterCard> {
                           start: 6,
                           end: 6,
                           bottom: 6,
-                          child: _Pill(text: widget.progressText!),
+                          child: _Pill(
+                            text: widget.progressText!,
+                            estimated: widget.estimated,
+                          ),
                         ),
                     ],
                   ),
@@ -352,14 +367,30 @@ class _PosterCardState extends State<PosterCard> {
 
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
     final corner = _scoreCorner(s, bottomTaken: bottomTaken);
+    final opposite = _airingCorner(corner);
+    final unread = widget.unread;
     return [
       if (s.showScore && widget.score != null)
         _corner(
           corner,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (s.showAiring && widget.airing)
-        _corner(_airingCorner(corner), const _AiringDot()),
+      if (unread != null && unread > 0)
+        _corner(
+          opposite,
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (s.showAiring && widget.airing) ...[
+                const _AiringDot(),
+                const SizedBox(width: 4),
+              ],
+              _UnreadBadge(count: unread, estimated: widget.estimated),
+            ],
+          ),
+        )
+      else if (s.showAiring && widget.airing)
+        _corner(opposite, const _AiringDot()),
     ];
   }
 
@@ -419,7 +450,7 @@ class _PosterCardState extends State<PosterCard> {
     child: Text(
       widget.subtitle!,
       style: context.textTheme.labelMedium?.copyWith(
-        color: _scheme.onSurfaceVariant,
+        color: widget.estimated ? _scheme.tertiary : _scheme.onSurfaceVariant,
       ),
       maxLines: s.preset == 'people' ? 2 : 1,
       overflow: TextOverflow.ellipsis,
@@ -538,6 +569,45 @@ class _ScoreBadge extends StatelessWidget {
   }
 }
 
+class _UnreadBadge extends StatelessWidget {
+  final int count;
+  final bool estimated;
+
+  const _UnreadBadge({required this.count, this.estimated = false});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return Container(
+      height: 20,
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      decoration: BoxDecoration(
+        color: (estimated ? scheme.tertiaryContainer : scheme.primaryContainer)
+            .withValues(alpha: 0.95),
+        borderRadius: BorderRadius.circular(999),
+        boxShadow: [
+          BoxShadow(
+            color: scheme.shadow.withValues(alpha: 0.25),
+            blurRadius: 4,
+            offset: const Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Center(
+        child: Text(
+          count > 999 ? '999+' : '$count',
+          style: context.textTheme.labelSmall?.copyWith(
+            color: estimated
+                ? scheme.onTertiaryContainer
+                : scheme.onPrimaryContainer,
+            fontWeight: FontWeight.w800,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _AiringDot extends StatelessWidget {
   const _AiringDot();
 
@@ -576,15 +646,18 @@ class _Bar extends StatelessWidget {
 
 class _Pill extends StatelessWidget {
   final String text;
+  final bool estimated;
 
-  const _Pill({required this.text});
+  const _Pill({required this.text, this.estimated = false});
 
   @override
   Widget build(BuildContext context) => Container(
     height: 19,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: context.colorScheme.primary,
+      color: estimated
+          ? context.colorScheme.tertiary
+          : context.colorScheme.primary,
       borderRadius: BorderRadius.circular(999),
     ),
     child: Text(
@@ -592,7 +665,9 @@ class _Pill extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.labelSmall?.copyWith(
-        color: context.colorScheme.onPrimary,
+        color: estimated
+            ? context.colorScheme.onTertiary
+            : context.colorScheme.onPrimary,
         fontWeight: FontWeight.w700,
       ),
     ),

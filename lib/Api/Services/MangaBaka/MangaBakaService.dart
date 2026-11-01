@@ -2,6 +2,7 @@ import 'Prefs.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/State/State.dart';
+import '../../../Core/SourceAlerts/SubCalendar.dart';
 import 'Auth.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
@@ -18,7 +19,8 @@ const mangaBakaServiceId = 'mangabaka';
 class MangaBakaService extends MediaService {
   @override
   bool isHiddenMedia(Media media) =>
-      super.isHiddenMedia(media) || (media.isAdult && MangaBakaPref.hideNsfw.value);
+      super.isHiddenMedia(media) ||
+      (media.isAdult && MangaBakaPref.hideNsfw.value);
 
   @override
   String get id => mangaBakaServiceId;
@@ -51,6 +53,12 @@ class MangaBakaService extends MediaService {
 
   @override
   HomeScreenView get homeView => MangaBakaHomeView(this);
+
+  @override
+  CalendarScreenView get calendarView => const SubscriptionCalendarView(
+    serviceId: mangaBakaServiceId,
+    chapters: true,
+  );
 
   @override
   FeedScreenView get feedView => MangaBakaFeedView(this);
