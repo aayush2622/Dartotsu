@@ -50,6 +50,13 @@ class ResumeEntry {
 
   String get slot => '$serviceId/${kind.name}/$mediaId';
 
+  String? get image {
+    final shot = thumbnail;
+    if (shot != null && shot.isNotEmpty) return shot;
+    final cover = media['cover'];
+    return cover is String && cover.isNotEmpty ? cover : null;
+  }
+
   String get mediaTitle =>
       (media['userPreferredName'] ??
               media['name'] ??

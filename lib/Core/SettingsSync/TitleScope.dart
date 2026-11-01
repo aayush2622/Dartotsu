@@ -12,7 +12,7 @@ class TitleScope {
 
   static const _recordLocal = {'matches', 'streams', 'tab'};
   static const _watchLocal = {'sourceId', 'sourceName', 'hiddenScanlators'};
-  static const _itemLocal = {'thumb', 'episode', 'source'};
+  static const _itemDevice = {'episode', 'source'};
   static const _deviceMaps = {
     'player': 'PLAYER/playerSettings',
     'reader': 'READER/readerSettings',
@@ -41,6 +41,27 @@ class TitleScope {
       if (!skip.contains(e.key)) e.key: e.value,
   };
 
+  static bool _isUrl(Object? value) =>
+      value is String && value.startsWith(RegExp(r'https?://'));
+
+  static Map<String, dynamic> _portableItem(Map<String, dynamic> item) {
+    final out = _without(item, _itemDevice);
+    if (!_isUrl(out['thumb'])) out.remove('thumb');
+    return out;
+  }
+
+  static Map<String, dynamic> _restoreItem(
+    Map<String, dynamic> remote,
+    Map<String, dynamic>? own,
+  ) {
+    final merged = {...remote, ...?_pick(own, _itemDevice)};
+    final shot = own?['thumb'];
+    if (shot is String && shot.isNotEmpty && !_isUrl(shot)) {
+      merged['thumb'] = shot;
+    }
+    return merged;
+  }
+
   static String slot(Map<String, dynamic> item) =>
       '${item['service']}/${item['kind']}/${_map(item['media'])['id']}';
 
@@ -57,7 +78,7 @@ class TitleScope {
           ...map,
           'items': [
             for (final item in items)
-              if (item is Map) _without(_map(item), _itemLocal),
+              if (item is Map) _portableItem(_map(item)),
           ],
         },
       };
@@ -100,13 +121,10 @@ class TitleScope {
           'items': [
             for (final item in (remote['items'] as List? ?? const []))
               if (item is Map)
-                {
-                  ..._map(item),
-                  ...?_pick(
-                    own['${slot(_map(item))}/${item['unit']}'],
-                    _itemLocal,
-                  ),
-                },
+                _restoreItem(
+                  _map(item),
+                  own['${slot(_map(item))}/${item['unit']}'],
+                ),
           ],
         },
       });
