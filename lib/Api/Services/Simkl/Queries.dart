@@ -476,23 +476,13 @@ class SimklQueries extends Queries {
       for (final m in (await library()).values)
         if ((parseSimklMediaId(m.id)?.$1 == SimklKind.anime) == anime) m,
     ]..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
-    final names = {
+    return groupByStatus(all, {
       'CURRENT': getString.watching,
       'PLANNING': getString.planToWatch,
       'COMPLETED': getString.completed,
       'PAUSED': getString.onHold,
       'DROPPED': getString.dropped,
-    };
-    final out = <String, List<Media>>{};
-    for (final e in names.entries) {
-      final items = [
-        for (final m in all)
-          if (m.userStatus == e.key) m,
-      ];
-      if (items.isNotEmpty) out[e.value] = items;
-    }
-    if (all.isNotEmpty) out['All'] = all;
-    return out;
+    });
   }
 
   Stream<List<CalendarEntry>> schedule() async* {

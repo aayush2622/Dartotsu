@@ -808,24 +808,14 @@ class KitsuQueries extends Queries {
     String? sortOrder,
   }) async {
     final all = await library(anime: anime);
-    final names = {
+    return groupByStatus(all, {
       'CURRENT': anime ? getString.watching : getString.reading,
       'PLANNING': getString.planning,
       'COMPLETED': getString.completed,
       'PAUSED': getString.paused,
       'DROPPED': getString.dropped,
       'REPEATING': anime ? getString.rewatching : getString.rereading,
-    };
-    final out = <String, List<Media>>{};
-    for (final entry in names.entries) {
-      final items = [
-        for (final m in all)
-          if (m.userStatus == entry.key) m,
-      ];
-      if (items.isNotEmpty) out[entry.value] = items;
-    }
-    if (all.isNotEmpty) out['All'] = all;
-    return out;
+    });
   }
 
   Stream<List<CalendarEntry>> schedule() async* {
