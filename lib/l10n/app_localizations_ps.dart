@@ -429,6 +429,31 @@ class AppLocalizationsPs extends AppLocalizations {
       'Not syncing. These stay on this device and the server copy is left as it is.';
 
   @override
+  String get settingsSyncPartsNote =>
+      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+
+  @override
+  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+
+  @override
+  String get settingsSyncPartSubtitlesDesc =>
+      'Size, weight, colours and position';
+
+  @override
+  String get settingsSyncPartPictureColors => 'Picture colours';
+
+  @override
+  String get settingsSyncPartPictureColorsDesc =>
+      'Brightness, contrast, saturation, gamma, hue and HDR';
+
+  @override
+  String get settingsSyncPartPalette => 'Theme colours';
+
+  @override
+  String get settingsSyncPartPaletteDesc =>
+      'Theme, accent colour and OLED black';
+
+  @override
   String get settingsSyncCatOther => 'Watch, read and services';
 
   @override
@@ -7853,20 +7878,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get runtimePreparing => 'Preparing the runtime…';
 
   @override
-  String get watchUnwatchedBadge => 'Unwatched episodes counter';
-
-  @override
-  String get watchUnwatchedBadgeDesc =>
-      'Show badge with remaining unwatched episodes on anime posters';
-
-  @override
-  String get readerUnreadBadge => 'Unread chapters counter';
-
-  @override
-  String get readerUnreadBadgeDesc =>
-      'Show badge with remaining unread chapters on manga and novel posters';
-
-  @override
   String get calendarAll => 'All';
 
   @override
@@ -7874,4 +7885,14 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get calendarManga => 'Manga';
+
+  @override
+  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+
+  @override
+  String get unreadCounter => 'Unread counter';
+
+  @override
+  String get unreadCounterDesc =>
+      'Show how many episodes or chapters are left on posters';
 }

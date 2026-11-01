@@ -222,6 +222,7 @@ class MediaRecord {
   int? commentsId;
   int? mangaUpdatesId;
   int tab;
+  int? latestUnit;
   bool saveProgress;
   String? trackChoice;
   Map<String, bool> skips;
@@ -239,6 +240,7 @@ class MediaRecord {
     this.commentsId,
     this.mangaUpdatesId,
     this.tab = 0,
+    this.latestUnit,
     this.saveProgress = true,
     this.trackChoice,
     Map<String, bool>? skips,
@@ -266,6 +268,7 @@ class MediaRecord {
     'commentsId': commentsId,
     'mangaUpdatesId': mangaUpdatesId,
     'tab': tab,
+    if (latestUnit != null) 'latestUnit': latestUnit,
     'saveProgress': saveProgress,
     'trackChoice': trackChoice,
     'skips': skips,
@@ -304,6 +307,7 @@ class MediaRecord {
       commentsId: (json['commentsId'] as num?)?.toInt(),
       mangaUpdatesId: (json['mangaUpdatesId'] as num?)?.toInt(),
       tab: (json['tab'] as num?)?.toInt() ?? 0,
+      latestUnit: (json['latestUnit'] as num?)?.toInt(),
       saveProgress: json['saveProgress'] != false,
       trackChoice: json['trackChoice'] as String?,
       skips: {

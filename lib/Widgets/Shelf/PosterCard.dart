@@ -29,7 +29,7 @@ class PosterCard extends StatefulWidget {
 
   final String? progressText;
   final int? unread;
-  final bool estimated;
+  final String? estimate;
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -55,7 +55,7 @@ class PosterCard extends StatefulWidget {
     this.progress,
     this.progressText,
     this.unread,
-    this.estimated = false,
+    this.estimate,
     this.onTap,
     this.onLongPress,
     this.focusable = false,
@@ -150,10 +150,7 @@ class _PosterCardState extends State<PosterCard> {
             start: 6,
             end: 6,
             bottom: 6,
-            child: _Pill(
-              text: widget.progressText!,
-              estimated: widget.estimated,
-            ),
+            child: _Pill(text: widget.progressText!),
           ),
         PositionedDirectional(
           start: 9,
@@ -174,18 +171,15 @@ class _PosterCardState extends State<PosterCard> {
                 ),
               ),
               if (showSub)
-                Text(
-                  widget.subtitle!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.labelSmall?.copyWith(
-                    color: widget.estimated
-                        ? Color.lerp(_scheme.tertiary, Colors.white, .4)
-                        : Colors.white70,
+                _subtitleText(
+                  context.textTheme.labelSmall?.copyWith(
+                    color: Colors.white70,
                     shadows: const [
                       Shadow(color: Colors.black87, blurRadius: 4),
                     ],
                   ),
+                  Color.lerp(_scheme.tertiary, Colors.white, .4)!,
+                  1,
                 ),
             ],
           ),
@@ -238,10 +232,7 @@ class _PosterCardState extends State<PosterCard> {
                   start: 6,
                   end: 6,
                   bottom: 6,
-                  child: _Pill(
-                    text: widget.progressText!,
-                    estimated: widget.estimated,
-                  ),
+                  child: _Pill(text: widget.progressText!),
                 ),
             ],
           ),
@@ -286,11 +277,8 @@ class _PosterCardState extends State<PosterCard> {
                     overlays: [
                       if (pill) const _Scrim(kind: _ScrimKind.short),
                       ..._sourceMark(bottom: pill ? 32 : 6),
-                      if (s.showAiring && widget.airing)
-                        _corner(
-                          _airingCorner(posterCorner),
-                          const _AiringDot(),
-                        ),
+                      if (_statusMark(s) case final status?)
+                        _corner(_airingCorner(posterCorner), status),
                       if (hasScore && !scoreFloats)
                         _corner(
                           posterCorner,
@@ -304,10 +292,7 @@ class _PosterCardState extends State<PosterCard> {
                           start: 6,
                           end: 6,
                           bottom: 6,
-                          child: _Pill(
-                            text: widget.progressText!,
-                            estimated: widget.estimated,
-                          ),
+                          child: _Pill(text: widget.progressText!),
                         ),
                     ],
                   ),
@@ -365,32 +350,31 @@ class _PosterCardState extends State<PosterCard> {
     return [PositionedDirectional(start: 6, bottom: bottom, child: overlay)];
   }
 
+  Widget? _statusMark(CardStyle s) {
+    final unread = s.showUnread ? widget.unread : null;
+    final airing = s.showAiring && widget.airing;
+    if (unread == null && !airing) return null;
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        if (unread != null)
+          _UnreadBadge(count: unread, estimated: widget.estimate != null),
+        if (unread != null && airing) const SizedBox(width: 5),
+        if (airing) const _AiringDot(),
+      ],
+    );
+  }
+
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
     final corner = _scoreCorner(s, bottomTaken: bottomTaken);
     final opposite = _airingCorner(corner);
-    final unread = widget.unread;
     return [
       if (s.showScore && widget.score != null)
         _corner(
           corner,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (unread != null && unread > 0)
-        _corner(
-          opposite,
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              if (s.showAiring && widget.airing) ...[
-                const _AiringDot(),
-                const SizedBox(width: 4),
-              ],
-              _UnreadBadge(count: unread, estimated: widget.estimated),
-            ],
-          ),
-        )
-      else if (s.showAiring && widget.airing)
-        _corner(opposite, const _AiringDot()),
+      if (_statusMark(s) case final status?) _corner(opposite, status),
     ];
   }
 
@@ -447,15 +431,39 @@ class _PosterCardState extends State<PosterCard> {
 
   Widget _subtitleBelow(CardStyle s, double width) => SizedBox(
     width: width,
-    child: Text(
-      widget.subtitle!,
-      style: context.textTheme.labelMedium?.copyWith(
-        color: widget.estimated ? _scheme.tertiary : _scheme.onSurfaceVariant,
-      ),
-      maxLines: s.preset == 'people' ? 2 : 1,
-      overflow: TextOverflow.ellipsis,
+    child: _subtitleText(
+      context.textTheme.labelMedium?.copyWith(color: _scheme.onSurfaceVariant),
+      _scheme.tertiary,
+      s.preset == 'people' ? 2 : 1,
     ),
   );
+
+  Widget _subtitleText(TextStyle? style, Color accent, int lines) {
+    final text = widget.subtitle!;
+    final estimate = widget.estimate;
+    if (estimate == null || !text.endsWith(estimate)) {
+      return Text(
+        text,
+        style: style,
+        maxLines: lines,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+    return Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(text: text.substring(0, text.length - estimate.length)),
+          TextSpan(
+            text: estimate,
+            style: TextStyle(color: accent),
+          ),
+        ],
+      ),
+      style: style,
+      maxLines: lines,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 
   Widget _image(ColorScheme scheme, CardStyle s) {
     if (widget.demo && (widget.imageUrl?.isEmpty ?? true)) {
@@ -573,35 +581,42 @@ class _UnreadBadge extends StatelessWidget {
   final int count;
   final bool estimated;
 
-  const _UnreadBadge({required this.count, this.estimated = false});
+  const _UnreadBadge({required this.count, required this.estimated});
 
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
+    final fill = estimated ? scheme.tertiaryContainer : scheme.primaryContainer;
+    final ink = estimated
+        ? scheme.onTertiaryContainer
+        : scheme.onPrimaryContainer;
     return Container(
-      height: 20,
+      constraints: const BoxConstraints(minWidth: 22),
+      height: 22,
       padding: const EdgeInsets.symmetric(horizontal: 6),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: (estimated ? scheme.tertiaryContainer : scheme.primaryContainer)
-            .withValues(alpha: 0.95),
+        color: fill,
         borderRadius: BorderRadius.circular(999),
-        boxShadow: [
+        border: Border.all(
+          color: scheme.surface.withValues(alpha: 0.9),
+          width: 2,
+        ),
+        boxShadow: const [
           BoxShadow(
-            color: scheme.shadow.withValues(alpha: 0.25),
-            blurRadius: 4,
-            offset: const Offset(0, 1),
+            color: Color(0x59000000),
+            blurRadius: 5,
+            offset: Offset(0, 1),
           ),
         ],
       ),
-      child: Center(
-        child: Text(
-          count > 999 ? '999+' : '$count',
-          style: context.textTheme.labelSmall?.copyWith(
-            color: estimated
-                ? scheme.onTertiaryContainer
-                : scheme.onPrimaryContainer,
-            fontWeight: FontWeight.w800,
-          ),
+      child: Text(
+        count > 99 ? '99+' : '$count',
+        maxLines: 1,
+        style: context.textTheme.labelSmall?.copyWith(
+          color: ink,
+          fontWeight: FontWeight.w800,
+          height: 1,
         ),
       ),
     );
@@ -646,18 +661,15 @@ class _Bar extends StatelessWidget {
 
 class _Pill extends StatelessWidget {
   final String text;
-  final bool estimated;
 
-  const _Pill({required this.text, this.estimated = false});
+  const _Pill({required this.text});
 
   @override
   Widget build(BuildContext context) => Container(
     height: 19,
     alignment: Alignment.center,
     decoration: BoxDecoration(
-      color: estimated
-          ? context.colorScheme.tertiary
-          : context.colorScheme.primary,
+      color: context.colorScheme.primary,
       borderRadius: BorderRadius.circular(999),
     ),
     child: Text(
@@ -665,9 +677,7 @@ class _Pill extends StatelessWidget {
       maxLines: 1,
       overflow: TextOverflow.ellipsis,
       style: context.textTheme.labelSmall?.copyWith(
-        color: estimated
-            ? context.colorScheme.onTertiary
-            : context.colorScheme.onPrimary,
+        color: context.colorScheme.onPrimary,
         fontWeight: FontWeight.w700,
       ),
     ),

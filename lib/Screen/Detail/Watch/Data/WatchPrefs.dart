@@ -29,18 +29,6 @@ const watchResumeShelfPref = Pref('watchResumeShelf', true, PrefLocation.OTHER);
 
 const aniSkipSubmitterPref = Pref('aniSkipSubmitter', '', PrefLocation.OTHER);
 
-const watchUnwatchedCounterPref = Pref(
-  'watchUnwatchedCounter',
-  false,
-  PrefLocation.OTHER,
-);
-
-const readerUnreadCounterPref = Pref(
-  'readerUnreadCounter',
-  false,
-  PrefLocation.OTHER,
-);
-
 const trackAnimePref = Pref('trackProgressAnime', 'ask', PrefLocation.OTHER);
 const trackMangaPref = Pref('trackProgressManga', 'ask', PrefLocation.OTHER);
 

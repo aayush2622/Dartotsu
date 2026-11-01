@@ -84,6 +84,7 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
       airing: true,
       progress: 0.34,
       progressText: '1 · 12',
+      unread: 7,
     ),
     PosterCard(
       style: s,
@@ -93,6 +94,8 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
       score: 8.7,
       scoreHighlight: true,
       progressText: '0 · 14',
+      unread: 14,
+      estimate: '14',
     ),
   ];
 
@@ -319,6 +322,13 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
             subtitle: Text(getString.forReleasingTitles),
             value: s.airingDot,
             onChanged: (v) => state.edit((c) => c.copyWith(airingDot: v)),
+          ),
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            title: Text(getString.unreadCounter),
+            subtitle: Text(getString.unreadCounterDesc),
+            value: s.unreadCounter,
+            onChanged: (v) => state.edit((c) => c.copyWith(unreadCounter: v)),
           ),
         ],
       ),

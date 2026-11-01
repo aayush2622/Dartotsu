@@ -905,6 +905,48 @@ abstract class AppLocalizations {
   /// **'Not syncing. These stay on this device and the server copy is left as it is.'**
   String get settingsSyncOffCategory;
 
+  /// No description provided for @settingsSyncPartsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.'**
+  String get settingsSyncPartsNote;
+
+  /// No description provided for @settingsSyncPartSubtitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle size and colours'**
+  String get settingsSyncPartSubtitles;
+
+  /// No description provided for @settingsSyncPartSubtitlesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Size, weight, colours and position'**
+  String get settingsSyncPartSubtitlesDesc;
+
+  /// No description provided for @settingsSyncPartPictureColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Picture colours'**
+  String get settingsSyncPartPictureColors;
+
+  /// No description provided for @settingsSyncPartPictureColorsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness, contrast, saturation, gamma, hue and HDR'**
+  String get settingsSyncPartPictureColorsDesc;
+
+  /// No description provided for @settingsSyncPartPalette.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme colours'**
+  String get settingsSyncPartPalette;
+
+  /// No description provided for @settingsSyncPartPaletteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, accent colour and OLED black'**
+  String get settingsSyncPartPaletteDesc;
+
   /// No description provided for @settingsSyncCatOther.
   ///
   /// In en, this message translates to:
@@ -13937,30 +13979,6 @@ abstract class AppLocalizations {
   /// **'Preparing the runtime…'**
   String get runtimePreparing;
 
-  /// No description provided for @watchUnwatchedBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'Unwatched episodes counter'**
-  String get watchUnwatchedBadge;
-
-  /// No description provided for @watchUnwatchedBadgeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show badge with remaining unwatched episodes on anime posters'**
-  String get watchUnwatchedBadgeDesc;
-
-  /// No description provided for @readerUnreadBadge.
-  ///
-  /// In en, this message translates to:
-  /// **'Unread chapters counter'**
-  String get readerUnreadBadge;
-
-  /// No description provided for @readerUnreadBadgeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show badge with remaining unread chapters on manga and novel posters'**
-  String get readerUnreadBadgeDesc;
-
   /// No description provided for @calendarAll.
   ///
   /// In en, this message translates to:
@@ -13978,6 +13996,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Manga'**
   String get calendarManga;
+
+  /// No description provided for @readerCloudflare.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in browser (Cloudflare check)'**
+  String get readerCloudflare;
+
+  /// No description provided for @unreadCounter.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread counter'**
+  String get unreadCounter;
+
+  /// No description provided for @unreadCounterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show how many episodes or chapters are left on posters'**
+  String get unreadCounterDesc;
 }
 
 class _AppLocalizationsDelegate

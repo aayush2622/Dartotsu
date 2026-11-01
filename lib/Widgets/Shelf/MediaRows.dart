@@ -5,10 +5,10 @@ import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/ScoreFormat.dart';
 import '../../Core/SourceAlerts/SourceSubscriptions.dart';
+import '../../Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Model/CardStyle.dart';
-import '../../Screen/Detail/Watch/Data/WatchPrefs.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
@@ -65,24 +65,29 @@ class MediaRowFacts {
 
   bool get estimated => _latest.estimated;
 
+  String? get estimate => estimated ? counts : null;
+
   ({int? count, bool estimated}) _findLatest() {
     if (isAnime) {
       final next = media.anime?.nextAiringEpisode;
-      return (
-        count: next != null ? (next > 1 ? next - 1 : null) : total,
-        estimated: false,
-      );
+      if (next != null) {
+        return (count: next > 1 ? next - 1 : null, estimated: false);
+      }
     }
     final known = total;
     if (known != null && known > 0) return (count: known, estimated: false);
-    final service = tryFind<MediaServiceController>()?.currentService.value.id;
+    final service = tryFind<MediaServiceController>()?.currentService.value;
     if (service == null) return (count: null, estimated: false);
-    final sub = tryFind<SourceSubscriptions>()?.byKey('$service/${media.id}');
-    if (sub != null && sub.lastValue > 0) {
-      return (count: sub.lastValue.floor(), estimated: true);
-    }
-    final cached = IdMapper.cachedChapters(service, media.id);
-    return (count: cached, estimated: cached != null);
+    final key = '${service.id}/${media.id}';
+    final saved = MediaRecords.of(service, media).latestUnit;
+    final sub = tryFind<SourceSubscriptions>()?.byKey(key)?.lastValue.floor();
+    final index = isAnime
+        ? null
+        : IdMapper.cachedChapters(service.id, media.id);
+    final best = [saved, sub, index].nonNulls
+        .where((v) => v > 0)
+        .fold<int?>(null, (a, b) => a == null || b > a ? b : a);
+    return (count: best, estimated: best != null);
   }
 
   late final int? unread = _unread();
@@ -94,11 +99,6 @@ class MediaRowFacts {
     final left = latest - done;
     return left > 0 ? left : null;
   }
-
-  int? get badge =>
-      (isAnime ? watchUnwatchedCounterPref : readerUnreadCounterPref).value
-      ? unread
-      : null;
 
   String get counts {
     final latest = released;

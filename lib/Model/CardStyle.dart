@@ -36,6 +36,7 @@ class CardStyle {
   final CardProgressStyle progress;
   final CardCorner scoreCorner;
   final bool airingDot;
+  final bool unreadCounter;
 
   const CardStyle({
     this.preset = 'poster',
@@ -49,6 +50,7 @@ class CardStyle {
     this.progress = CardProgressStyle.pill,
     this.scoreCorner = CardCorner.topLeft,
     this.airingDot = true,
+    this.unreadCounter = false,
   });
 
   CardStyle copyWith({
@@ -63,6 +65,7 @@ class CardStyle {
     CardProgressStyle? progress,
     CardCorner? scoreCorner,
     bool? airingDot,
+    bool? unreadCounter,
   }) => CardStyle(
     preset: preset ?? this.preset,
     mode: mode ?? this.mode,
@@ -75,6 +78,7 @@ class CardStyle {
     progress: progress ?? this.progress,
     scoreCorner: scoreCorner ?? this.scoreCorner,
     airingDot: airingDot ?? this.airingDot,
+    unreadCounter: unreadCounter ?? this.unreadCounter,
   );
 
   /// A copy tagged as no-longer-matching-a-preset — used on any single edit.
@@ -92,6 +96,7 @@ class CardStyle {
   int get lines => compact ? 1 : titleLines;
   bool get showScore => !compact && scoreCorner != CardCorner.none;
   bool get showAiring => !compact && airingDot;
+  bool get showUnread => !compact && unreadCounter;
 
   CardProgressStyle get effectiveProgress => progress;
 
@@ -125,6 +130,7 @@ class CardStyle {
     'progress': progress.name,
     'scoreCorner': scoreCorner.name,
     'airingDot': airingDot,
+    'unreadCounter': unreadCounter,
   };
 
   factory CardStyle.fromJson(Map<String, dynamic> j) {
@@ -149,6 +155,7 @@ class CardStyle {
         CardCorner.topLeft,
       ),
       airingDot: j['airingDot'] as bool? ?? true,
+      unreadCounter: j['unreadCounter'] as bool? ?? false,
     );
   }
 
