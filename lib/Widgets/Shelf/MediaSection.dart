@@ -105,6 +105,14 @@ class MediaSection extends StatelessWidget {
 
   const MediaSection({super.key, required this.data});
 
+  static const _unreadSections = {
+    'Continue Watching',
+    'Continue Reading',
+    'Hidden Media',
+  };
+
+  static bool _showsUnread(String? title) => _unreadSections.contains(title);
+
   static double? _score(Media media) {
     final raw = (media.userScore ?? 0) > 0
         ? media.userScore!
@@ -139,7 +147,7 @@ class MediaSection extends StatelessWidget {
       subtitle: detailed ? facts.listed : null,
       progress: detailed ? _progress(media) : null,
       progressText: detailed ? facts.listedShort : null,
-      unread: detailed ? facts.unread : null,
+      unread: detailed && _showsUnread(data.title) ? facts.unread : null,
       estimate: detailed ? facts.estimate : null,
       score: detailed ? _score(media) : null,
       scoreHighlight: (media.userScore ?? 0) > 0,

@@ -361,7 +361,6 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
       subtitle: skeleton ? null : facts.listed,
       progress: skeleton ? null : facts.progress,
       progressText: skeleton ? null : facts.listedShort,
-      unread: skeleton ? null : facts.unread,
       estimate: skeleton ? null : facts.estimate,
       score: skeleton
           ? null

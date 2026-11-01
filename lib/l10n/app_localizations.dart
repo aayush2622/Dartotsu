@@ -14003,6 +14003,18 @@ abstract class AppLocalizations {
   /// **'Open in browser (Cloudflare check)'**
   String get readerCloudflare;
 
+  /// No description provided for @statusBadgePosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Airing dot and counter position'**
+  String get statusBadgePosition;
+
+  /// No description provided for @statusAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get statusAuto;
+
   /// No description provided for @unreadCounter.
   ///
   /// In en, this message translates to:

@@ -330,6 +330,25 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
             value: s.unreadCounter,
             onChanged: (v) => state.edit((c) => c.copyWith(unreadCounter: v)),
           ),
+          SizedBox(height: Dimens.gapSm),
+          LabeledField(
+            label: getString.statusBadgePosition,
+            child: AppChoiceChips<CardCorner>(
+              value: switch (s.statusCorner) {
+                CardCorner.none => CardCorner.auto,
+                CardCorner.bottomLeft when !s.bottomCornersUsable =>
+                  CardCorner.topLeft,
+                CardCorner.bottomRight when !s.bottomCornersUsable =>
+                  CardCorner.topRight,
+                final c => c,
+              },
+              onChanged: (v) => state.edit((c) => c.copyWith(statusCorner: v)),
+              options: [
+                AppSegment(CardCorner.auto, label: getString.statusAuto),
+                ...cornerOptions.where((o) => o.value != CardCorner.none),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -7932,6 +7933,12 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get readerCloudflare => 'Open in browser (Cloudflare check)';
+
+  @override
+  String get statusBadgePosition => 'Airing dot and counter position';
+
+  @override
+  String get statusAuto => 'Auto';
 
   @override
   String get unreadCounter => 'Unread counter';

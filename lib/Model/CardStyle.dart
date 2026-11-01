@@ -12,7 +12,7 @@ enum CardSize { small, medium, large, custom }
 enum CardProgressStyle { pill, bar, outside, none }
 
 /// Which image corner the score badge pins to.
-enum CardCorner { none, topLeft, topRight, bottomLeft, bottomRight }
+enum CardCorner { none, auto, topLeft, topRight, bottomLeft, bottomRight }
 
 /// User-tunable look of the poster card. One instance is persisted
 /// (`PrefName.cardStyle`); `PosterCard` reads it for every media card so the
@@ -37,6 +37,7 @@ class CardStyle {
   final CardCorner scoreCorner;
   final bool airingDot;
   final bool unreadCounter;
+  final CardCorner statusCorner;
 
   const CardStyle({
     this.preset = 'poster',
@@ -51,6 +52,7 @@ class CardStyle {
     this.scoreCorner = CardCorner.topLeft,
     this.airingDot = true,
     this.unreadCounter = false,
+    this.statusCorner = CardCorner.auto,
   });
 
   CardStyle copyWith({
@@ -66,6 +68,7 @@ class CardStyle {
     CardCorner? scoreCorner,
     bool? airingDot,
     bool? unreadCounter,
+    CardCorner? statusCorner,
   }) => CardStyle(
     preset: preset ?? this.preset,
     mode: mode ?? this.mode,
@@ -79,6 +82,7 @@ class CardStyle {
     scoreCorner: scoreCorner ?? this.scoreCorner,
     airingDot: airingDot ?? this.airingDot,
     unreadCounter: unreadCounter ?? this.unreadCounter,
+    statusCorner: statusCorner ?? this.statusCorner,
   );
 
   /// A copy tagged as no-longer-matching-a-preset — used on any single edit.
@@ -131,6 +135,7 @@ class CardStyle {
     'scoreCorner': scoreCorner.name,
     'airingDot': airingDot,
     'unreadCounter': unreadCounter,
+    'statusCorner': statusCorner.name,
   };
 
   factory CardStyle.fromJson(Map<String, dynamic> j) {
@@ -156,6 +161,7 @@ class CardStyle {
       ),
       airingDot: j['airingDot'] as bool? ?? true,
       unreadCounter: j['unreadCounter'] as bool? ?? false,
+      statusCorner: pick(CardCorner.values, j['statusCorner'], CardCorner.auto),
     );
   }
 

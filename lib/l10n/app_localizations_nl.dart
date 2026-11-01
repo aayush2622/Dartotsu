@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -7084,8 +7085,7 @@ class AppLocalizationsNl extends AppLocalizations {
       locale: localeName,
       other:
           '$count wijzigingen die nooit zijn verstuurd weggooien? Dit kan niet ongedaan worden gemaakt.',
-      one:
-          'De wijziging die nooit is verstuurd weggooien? Dit kan niet ongedaan worden gemaakt.',
+      one: 'De wijziging die nooit is verstuurd weggooien? Dit kan niet ongedaan worden gemaakt.',
     );
     return '$_temp0';
   }
@@ -7935,6 +7935,12 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get readerCloudflare => 'Open in browser (Cloudflare check)';
+
+  @override
+  String get statusBadgePosition => 'Airing dot and counter position';
+
+  @override
+  String get statusAuto => 'Auto';
 
   @override
   String get unreadCounter => 'Unread counter';

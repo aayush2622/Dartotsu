@@ -277,16 +277,21 @@ class _PosterCardState extends State<PosterCard> {
                     overlays: [
                       if (pill) const _Scrim(kind: _ScrimKind.short),
                       ..._sourceMark(bottom: pill ? 32 : 6),
-                      if (_statusMark(s) case final status?)
-                        _corner(_airingCorner(posterCorner), status),
-                      if (hasScore && !scoreFloats)
-                        _corner(
-                          posterCorner,
-                          _ScoreBadge(
-                            score: widget.score!,
-                            highlight: widget.scoreHighlight,
+                      ..._grouped([
+                        if (hasScore && !scoreFloats)
+                          (
+                            posterCorner,
+                            _ScoreBadge(
+                              score: widget.score!,
+                              highlight: widget.scoreHighlight,
+                            ),
                           ),
-                        ),
+                        if (_statusMark(s) case final status?)
+                          (
+                            _statusCorner(s, posterCorner, bottomTaken: true),
+                            status,
+                          ),
+                      ]),
                       if (pill)
                         PositionedDirectional(
                           start: 6,
@@ -365,17 +370,58 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
+  CardCorner _statusCorner(
+    CardStyle s,
+    CardCorner score, {
+    required bool bottomTaken,
+  }) {
+    final c = s.statusCorner;
+    if (c == CardCorner.auto || c == CardCorner.none) {
+      return _airingCorner(score);
+    }
+    if (!bottomTaken) return c;
+    return switch (c) {
+      CardCorner.bottomLeft => CardCorner.topLeft,
+      CardCorner.bottomRight => CardCorner.topRight,
+      _ => c,
+    };
+  }
+
+  List<Widget> _grouped(List<(CardCorner, Widget)> marks) {
+    final byCorner = <CardCorner, List<Widget>>{};
+    for (final (corner, mark) in marks) {
+      (byCorner[corner] ??= []).add(mark);
+    }
+    return [
+      for (final e in byCorner.entries)
+        _corner(
+          e.key,
+          e.value.length == 1
+              ? e.value.first
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final (i, mark) in e.value.indexed) ...[
+                      if (i > 0) const SizedBox(width: 5),
+                      mark,
+                    ],
+                  ],
+                ),
+        ),
+    ];
+  }
+
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
     final corner = _scoreCorner(s, bottomTaken: bottomTaken);
-    final opposite = _airingCorner(corner);
-    return [
+    return _grouped([
       if (s.showScore && widget.score != null)
-        _corner(
+        (
           corner,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (_statusMark(s) case final status?) _corner(opposite, status),
-    ];
+      if (_statusMark(s) case final status?)
+        (_statusCorner(s, corner, bottomTaken: bottomTaken), status),
+    ]);
   }
 
   Widget _poster(

@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -7114,8 +7115,7 @@ class AppLocalizationsFr extends AppLocalizations {
       locale: localeName,
       other:
           'Jeter $count modifs qui n\'ont jamais été envoyées ? Cette action est irréversible.',
-      one:
-          'Jeter la modif qui n\'a jamais été envoyée ? Cette action est irréversible.',
+      one: 'Jeter la modif qui n\'a jamais été envoyée ? Cette action est irréversible.',
     );
     return '$_temp0';
   }
@@ -7965,6 +7965,12 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get readerCloudflare => 'Open in browser (Cloudflare check)';
+
+  @override
+  String get statusBadgePosition => 'Airing dot and counter position';
+
+  @override
+  String get statusAuto => 'Auto';
 
   @override
   String get unreadCounter => 'Unread counter';

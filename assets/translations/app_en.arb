@@ -4312,6 +4312,8 @@
   "calendarAnime": "Anime",
   "calendarManga": "Manga",
   "readerCloudflare": "Open in browser (Cloudflare check)",
+  "statusBadgePosition": "Airing dot and counter position",
+  "statusAuto": "Auto",
   "unreadCounter": "Unread counter",
   "unreadCounterDesc": "Show how many episodes or chapters are left on posters"
 }
