@@ -1,5 +1,6 @@
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Widgets/Components/Clickable.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Api/Services/Anilist/AnilistService.dart';
@@ -14,7 +15,9 @@ import '../../../Widgets/Components/EmptyState.dart';
 import '../../../Widgets/Components/ScreenState.dart';
 import 'CommentsState.dart';
 import '../../../Widgets/Components/SectionCard.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
+
 import 'Data/CommentModels.dart';
 import 'CommentNode.dart';
 import 'Components/CommentComposer.dart';
@@ -113,8 +116,8 @@ class _CommentsSectionState extends State<CommentsSection>
     );
   }
 
-  Widget _card(CommentNode node, int index) {
-    final card = SizedBox(
+  Widget _card(CommentNode node) {
+    return SizedBox(
       key: ValueKey('card${node.comment.id}'),
       width: double.infinity,
       child: SectionCard(
@@ -126,8 +129,7 @@ class _CommentsSectionState extends State<CommentsSection>
           node: node,
         ),
       ),
-    );
-    return index < 8 ? card.animateStagger(index) : card;
+    ).animateVerticalEntrance();
   }
 
   Widget _skeleton(BuildContext context) {
@@ -325,7 +327,7 @@ class _CommentsSectionState extends State<CommentsSection>
       else
         SliverList.builder(
           itemCount: nodes.length,
-          itemBuilder: (_, i) => _card(nodes[i], i),
+          itemBuilder: (_, i) => _card(nodes[i]),
         ),
       SliverToBoxAdapter(child: footer),
     ];
