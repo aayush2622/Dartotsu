@@ -44,6 +44,8 @@ Future<String?> loadEnv(String prop) async {
 
 const kDonateUrl = 'https://www.buymeacoffee.com/aayush262';
 const kUpiId = 'aayush2622@ybl';
+const kUpiPayUrl =
+    'https://intradeus.github.io/http-protocol-redirector/?r=upi://pay?pa=$kUpiId&tn=Thanks%20for%20this%20amazing%20app!%20Much%20love%20to%20Dartotsu';
 
 String formatBytes(int bytes) {
   if (bytes < 1024) return '$bytes B';
