@@ -13937,15 +13937,47 @@ abstract class AppLocalizations {
   /// **'Preparing the runtime…'**
   String get runtimePreparing;
 
-  String get watchUnwatchedBadge => 'Unwatched episodes counter';
-  String get watchUnwatchedBadgeDesc =>
-      'Show badge with remaining unwatched episodes on anime posters';
-  String get readerUnreadBadge => 'Unread chapters counter';
-  String get readerUnreadBadgeDesc =>
-      'Show badge with remaining unread chapters on manga posters';
-  String get calendarAll => 'All';
-  String get calendarAnime => 'Anime';
-  String get calendarManga => 'Manga';
+  /// No description provided for @watchUnwatchedBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Unwatched episodes counter'**
+  String get watchUnwatchedBadge;
+
+  /// No description provided for @watchUnwatchedBadgeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show badge with remaining unwatched episodes on anime posters'**
+  String get watchUnwatchedBadgeDesc;
+
+  /// No description provided for @readerUnreadBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread chapters counter'**
+  String get readerUnreadBadge;
+
+  /// No description provided for @readerUnreadBadgeDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show badge with remaining unread chapters on manga and novel posters'**
+  String get readerUnreadBadgeDesc;
+
+  /// No description provided for @calendarAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get calendarAll;
+
+  /// No description provided for @calendarAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime'**
+  String get calendarAnime;
+
+  /// No description provided for @calendarManga.
+  ///
+  /// In en, this message translates to:
+  /// **'Manga'**
+  String get calendarManga;
 }
 
 class _AppLocalizationsDelegate

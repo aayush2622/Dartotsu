@@ -4304,7 +4304,7 @@
   "watchUnwatchedBadge": "Unwatched episodes counter",
   "watchUnwatchedBadgeDesc": "Show badge with remaining unwatched episodes on anime posters",
   "readerUnreadBadge": "Unread chapters counter",
-  "readerUnreadBadgeDesc": "Show badge with remaining unread chapters on manga posters",
+  "readerUnreadBadgeDesc": "Show badge with remaining unread chapters on manga and novel posters",
   "calendarAll": "All",
   "calendarAnime": "Anime",
   "calendarManga": "Manga"

@@ -355,14 +355,14 @@ class _PosterCardState extends State<PosterCard> {
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
     final corner = _scoreCorner(s, bottomTaken: bottomTaken);
     final opposite = _airingCorner(corner);
-    final hasUnread = widget.unread != null && widget.unread! > 0;
+    final unread = widget.unread;
     return [
       if (s.showScore && widget.score != null)
         _corner(
           corner,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (hasUnread)
+      if (unread != null && unread > 0)
         _corner(
           opposite,
           Row(
@@ -372,7 +372,7 @@ class _PosterCardState extends State<PosterCard> {
                 const _AiringDot(),
                 const SizedBox(width: 4),
               ],
-              _UnreadBadge(count: widget.unread!),
+              _UnreadBadge(count: unread),
             ],
           ),
         )

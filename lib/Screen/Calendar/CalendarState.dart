@@ -1,17 +1,8 @@
 import 'dart:async';
 
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-
 import '../../Api/Discord/DiscordPresence.dart';
-import '../../Api/Services/Extension/Screens/Calendar.dart';
-import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/MediaServiceController.dart';
-import '../../Core/Services/Model/Calendar.dart';
-import '../../Core/Services/Model/Media.dart';
-import '../../Core/SourceAlerts/SourceAlerts.dart';
-import '../../Core/SourceAlerts/SourceSchedule.dart';
-import '../../Core/SourceAlerts/SourceSub.dart';
-import '../../Core/SourceAlerts/SourceSubscriptions.dart';
+import '../../Core/SourceAlerts/SubCalendar.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/ScreenState.dart';
@@ -43,16 +34,20 @@ class CalendarState extends ScreenState {
 
   List<DateTime> get days => [for (var i = -1; i <= 5; i++) _day(i)];
 
+  bool get hasBothKinds =>
+      entries.any((e) => e.chapter) && entries.any((e) => !e.chapter);
+
+  bool _shown(CalendarEntry e) => switch (filter.value) {
+    CalendarFilter.all => true,
+    CalendarFilter.manga => e.chapter,
+    CalendarFilter.anime => !e.chapter,
+  };
+
   List<CalendarEntry> get selectedEntries {
     final selected = _day(day.value);
-    final f = filter.value;
     return [
       for (final e in entries)
-        if (dayOf(e.airingAt) == selected)
-          if (f == CalendarFilter.all ||
-              (f == CalendarFilter.manga && e.chapter) ||
-              (f == CalendarFilter.anime && !e.chapter))
-            e,
+        if (dayOf(e.airingAt) == selected && _shown(e)) e,
     ];
   }
 
@@ -62,36 +57,11 @@ class CalendarState extends ScreenState {
   @override
   void onInit() => unawaited(load());
 
-  List<CalendarEntry> _mangaSchedule(int now) {
-    final subs = tryFind<SourceSubscriptions>()?.subs ?? const <SourceSub>[];
-    final alerts = tryFind<SourceAlerts>();
-    final out = <CalendarEntry>[];
-    final currentId = service.id;
-    for (final sub in subs) {
-      if (sub.muted || sub.health == SubHealth.finished) continue;
-      final isAnime =
-          sub.anime || ItemType.values.asNameMap()[sub.type] == ItemType.anime;
-      if (isAnime) continue;
-      if (sub.serviceId != currentId && sub.serviceId != 'extension') continue;
-      final media = sub.buildMedia();
-      for (final r in subReleases(sub, now)) {
-        final value = r.episode;
-        out.add(
-          CalendarEntry(
-            media: media,
-            episode: value != null && value == value.truncateToDouble()
-                ? value.toInt()
-                : null,
-            airingAt: DateTime.fromMillisecondsSinceEpoch(r.at),
-            expected: r.expected,
-            chapter: true,
-            source: sub.sourceName,
-            open: alerts != null ? () => alerts.openSub(sub) : null,
-          ),
-        );
-      }
-    }
-    return out;
+  void _show(List<CalendarEntry> list, List<CalendarEntry> extra) {
+    entries.value = [...list, ...extra]
+      ..sort((a, b) => a.airingAt.compareTo(b.airingAt));
+    if (!hasBothKinds) filter.value = CalendarFilter.all;
+    loading.value = false;
   }
 
   Future<void> load() async {
@@ -99,32 +69,20 @@ class CalendarState extends ScreenState {
     loading.value = true;
     failed.value = false;
     final done = Completer<void>();
-    final now = DateTime.now().millisecondsSinceEpoch;
-    final mangaEntries = view is! ExtensionCalendarView
-        ? _mangaSchedule(now)
-        : const <CalendarEntry>[];
+    final extra = view is SubscriptionCalendarView
+        ? const <CalendarEntry>[]
+        : subscriptionCalendar(serviceId: service.id, chapters: true);
 
     _sub = view.schedule().listen(
-      (list) {
-        final combined = [...list, ...mangaEntries]
-          ..sort((a, b) => a.airingAt.compareTo(b.airingAt));
-        entries.value = combined;
-        loading.value = false;
-      },
+      (list) => _show(list, extra),
       onError: (_) {
-        if (mangaEntries.isNotEmpty) {
-          entries.value = mangaEntries;
-          loading.value = false;
-        } else {
-          failed.value = entries.isEmpty;
-          loading.value = false;
-        }
+        if (entries.isEmpty) _show(const [], extra);
+        failed.value = entries.isEmpty;
+        loading.value = false;
         if (!done.isCompleted) done.complete();
       },
       onDone: () {
-        if (entries.isEmpty && mangaEntries.isNotEmpty) {
-          entries.value = mangaEntries;
-        }
+        if (entries.isEmpty) _show(const [], extra);
         loading.value = false;
         if (!done.isCompleted) done.complete();
       },

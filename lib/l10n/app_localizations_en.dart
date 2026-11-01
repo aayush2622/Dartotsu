@@ -7874,7 +7874,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get readerUnreadBadgeDesc =>
-      'Show badge with remaining unread chapters on manga posters';
+      'Show badge with remaining unread chapters on manga and novel posters';
 
   @override
   String get calendarAll => 'All';

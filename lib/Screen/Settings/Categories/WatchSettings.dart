@@ -146,13 +146,7 @@ List<Setting> _animeExtras(BuildContext context) => [
     isChecked: watchBlurUnwatchedPref.rx.value,
     onSwitchChange: (v) => watchBlurUnwatchedPref.rx.value = v,
   ),
-  Setting.switchType(
-    name: getString.watchUnwatchedBadge,
-    description: getString.watchUnwatchedBadgeDesc,
-    icon: Icons.mark_chat_unread_outlined,
-    isChecked: watchUnwatchedCounterPref.rx.value,
-    onSwitchChange: (v) => watchUnwatchedCounterPref.rx.value = v,
-  ),
+  _badgeRow(anime: true),
   Setting.header(getString.settingsSectionProgress),
   _trackRow(
     getString.trackProgressSettingAnime,
@@ -209,20 +203,28 @@ List<Setting> mangaSettings(BuildContext context) => [
       trackMangaPref.rx.value,
       (v) => trackMangaPref.rx.value = v,
     ),
-    Setting.switchType(
-      name: getString.readerUnreadBadge,
-      description: getString.readerUnreadBadgeDesc,
-      icon: Icons.mark_chat_unread_outlined,
-      isChecked: readerUnreadCounterPref.rx.value,
-      onSwitchChange: (v) => readerUnreadCounterPref.rx.value = v,
-    ),
+    _badgeRow(anime: false),
   ]),
 ];
 
 List<Setting> novelSettings(BuildContext context) => [
   _layoutRow(context, LayoutSurface.novel),
   ...novelReaderSettings(context),
+  _badgeRow(anime: false),
 ];
+
+Setting _badgeRow({required bool anime}) {
+  final pref = (anime ? watchUnwatchedCounterPref : readerUnreadCounterPref).rx;
+  return Setting.switchType(
+    name: anime ? getString.watchUnwatchedBadge : getString.readerUnreadBadge,
+    description: anime
+        ? getString.watchUnwatchedBadgeDesc
+        : getString.readerUnreadBadgeDesc,
+    icon: Icons.mark_chat_unread_outlined,
+    isChecked: pref.value,
+    onSwitchChange: (v) => pref.value = v,
+  );
+}
 
 List<Setting> localPlaySettings(BuildContext context) => [
   Setting.header(getString.settingsLocalPlayVideo),

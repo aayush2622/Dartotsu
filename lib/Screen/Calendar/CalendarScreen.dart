@@ -73,6 +73,7 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
             );
           }),
           Watch(() {
+            if (!state.hasBothKinds) return const SizedBox.shrink();
             return Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: Dimens.gap,
@@ -83,8 +84,14 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
                 onChanged: (v) => state.filter.value = v,
                 segments: [
                   AppSegment(CalendarFilter.all, label: getString.calendarAll),
-                  AppSegment(CalendarFilter.anime, label: getString.calendarAnime),
-                  AppSegment(CalendarFilter.manga, label: getString.calendarManga),
+                  AppSegment(
+                    CalendarFilter.anime,
+                    label: getString.calendarAnime,
+                  ),
+                  AppSegment(
+                    CalendarFilter.manga,
+                    label: getString.calendarManga,
+                  ),
                 ],
               ),
             );

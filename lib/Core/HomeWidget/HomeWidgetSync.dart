@@ -49,7 +49,7 @@ class HomeWidgetSync {
       final all = ResumeStore.visible(service);
       final entry = all.firstOrNull;
       final cutoff = DateTime.now().subtract(_past);
-      final entries = await ExtensionCalendarView().schedule().first;
+      final entries = await const ExtensionCalendarView().schedule().first;
       final time = DateFormat('EEE HH:mm');
       final payload = {
         'heading': getString.widgetContinue,

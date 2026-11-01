@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../Detail/Watch/Data/WatchPrefs.dart';
 import '../../Reader/Engine/NovelSpeech.dart';
 import '../../Reader/Engine/ReaderSettings.dart';
 import '../../Reader/Engine/VolumeKeys.dart';
@@ -280,13 +279,6 @@ List<Setting> mangaReaderRows(
       s.saveProgress,
       (v) => update((x) => x.saveProgress = v),
     ),
-    Setting.switchType(
-      name: getString.readerUnreadBadge,
-      description: getString.readerUnreadBadgeDesc,
-      icon: Icons.mark_chat_unread_outlined,
-      isChecked: readerUnreadCounterPref.rx.value,
-      onSwitchChange: (v) => readerUnreadCounterPref.rx.value = v,
-    ),
   ];
 }
 
@@ -504,13 +496,6 @@ List<Setting> novelReaderRows(
       Icons.history_rounded,
       s.saveProgress,
       (v) => update((x) => x.saveProgress = v),
-    ),
-    Setting.switchType(
-      name: getString.readerUnreadBadge,
-      description: getString.readerUnreadBadgeDesc,
-      icon: Icons.mark_chat_unread_outlined,
-      isChecked: readerUnreadCounterPref.rx.value,
-      onSwitchChange: (v) => readerUnreadCounterPref.rx.value = v,
     ),
   ];
 }
