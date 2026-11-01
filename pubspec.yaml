@@ -17,10 +17,10 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  archive: ^4.5.2
-  firebase_core: ^5.0.0
-  firebase_crashlytics: ^6.0.0
-  firebase_analytics: ^13.0.0
+  archive: ^4.6.0
+  firebase_core: ^5.1.0
+  firebase_crashlytics: ^6.0.1
+  firebase_analytics: ^13.0.1
   # State Management
   get: ^4.7.3
 
@@ -44,7 +44,7 @@ dependencies:
   image: ^4.12.0
   google_fonts: ^9.0.0
   cryptography: ^2.9.0
-  crypto: ^3.0.7
+  crypto: ^3.0.8
 
   # UI Components
   introduction_screen: ^5.0.1
@@ -56,10 +56,10 @@ dependencies:
   skeletonizer: ^3.0.0
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
-  dpad: ^3.1.1
+  dpad: ^3.2.0
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
-  material_ui: ^1.8.0
+  material_ui: ^1.9.0
 
   # UI Enhancements
   html: ^0.15.7
@@ -68,26 +68,21 @@ dependencies:
   # Platform Specific
   media_kit:
     git:
-      url: https://github.com/aayush2622/media-kit.git
+      url: https://github.com/Predidit/media-kit.git
       ref: main
       path: ./media_kit
   media_kit_video:
     git:
-      url: https://github.com/aayush2622/media-kit.git
+      url: https://github.com/Predidit/media-kit.git
       ref: main
       path: ./media_kit_video
-  media_kit_libs_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/universal/media_kit_libs_video
 
   window_manager: ^0.5.2
   screen_retriever: ^0.2.2
-  dbus: ^0.7.15
+  dbus: ^0.8.0
   permission_handler: ^13.0.2
   flutter_local_notifications: ^22.3.3
-  wakelock_plus: ^1.8.0
+  wakelock_plus: ^1.8.2
   flutter_media_session: ^3.0.9
   fl_pip: ^3.2.3
   volume_controller: ^3.7.1
@@ -107,7 +102,7 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.3.0
   package_info_plus: ^10.2.2
-  file_picker: ^13.1.0
+  file_picker: ^13.3.0
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
@@ -124,7 +119,7 @@ dependencies:
       url: https://github.com/aayush2622/DartotsuExtensionBridge.git
       ref: master
   sizer: ^3.1.3
-  connectivity_plus: ^7.3.1
+  connectivity_plus: ^7.3.2
   xml: ^6.6.1
   flutter_displaymode: ^0.7.0
   flutter_tts: ^4.2.5
@@ -146,53 +141,17 @@ dev_dependencies:
 
 dependency_overrides:
   collection: ^1.19.1
+  wakelock_plus: ^1.8.2
   media_kit:
     git:
-      url: https://github.com/aayush2622/media-kit.git
+      url: https://github.com/Predidit/media-kit.git
       ref: main
       path: ./media_kit
   media_kit_video:
     git:
-      url: https://github.com/aayush2622/media-kit.git
+      url: https://github.com/Predidit/media-kit.git
       ref: main
       path: ./media_kit_video
-  media_kit_libs_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/universal/media_kit_libs_video
-  media_kit_libs_linux:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/linux/media_kit_libs_linux
-  media_kit_libs_ios_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/ios/media_kit_libs_ios_video
-  media_kit_libs_android_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/android/media_kit_libs_android_video
-  media_kit_libs_windows_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/windows/media_kit_libs_windows_video
-  media_kit_libs_macos_video:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/macos/media_kit_libs_macos_video
-  media_kit_libs_ohos:
-    git:
-      url: https://github.com/aayush2622/media-kit.git
-      ref: main
-      path: ./libs/ohos/media_kit_libs_ohos
-
-
 
 flutter:
   uses-material-design: true

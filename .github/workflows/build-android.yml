@@ -67,13 +67,6 @@ jobs:
 
       - run: flutter pub get
 
-      - name: Let the libmpv jar download send a plain Accept header
-        run: |
-          for f in "$HOME"/.pub-cache/git/media-kit-*/libs/android/media_kit_libs_android_video/android/build.gradle; do
-            sed -i 's|os << new URL(fileInfo.url).openStream()|def conn = new URL(fileInfo.url).openConnection(); conn.setRequestProperty("Accept", "*/*"); os << conn.inputStream|' "$f"
-            grep -c 'setRequestProperty("Accept"' "$f"
-          done
-
       - run: flutter build apk --release --split-per-abi
       - run: flutter build apk --release
 
