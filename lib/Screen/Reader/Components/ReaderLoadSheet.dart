@@ -97,7 +97,7 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
         final error = _error.value;
         if (error != null) {
           return SizedBox(
-            height: 300,
+            height: 340,
             child: EmptyState(
               icon: Icons.cloud_off_rounded,
               failed: true,
