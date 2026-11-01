@@ -139,9 +139,11 @@ List<DEpisode> prepareChapters(List<DEpisode> input, String title) {
 
 List<DEpisode> normalizeIsolate(List<DEpisode> input) => normalizeAll(input);
 
+final _digits = RegExp(r'\d+');
+
 int _naturalCompare(String a, String b) {
-  final x = int.tryParse(RegExp(r'\d+').firstMatch(a)?.group(0) ?? '');
-  final y = int.tryParse(RegExp(r'\d+').firstMatch(b)?.group(0) ?? '');
+  final x = int.tryParse(_digits.firstMatch(a)?.group(0) ?? '');
+  final y = int.tryParse(_digits.firstMatch(b)?.group(0) ?? '');
   if (x != null && y != null && x != y) return x.compareTo(y);
   return a.toLowerCase().compareTo(b.toLowerCase());
 }

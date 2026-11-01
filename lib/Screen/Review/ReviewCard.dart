@@ -11,6 +11,8 @@ import '../../Widgets/Components/ThemedContainer.dart';
 import '../../Widgets/Components/UserAvatar.dart';
 import '../Social/SocialNavigation.dart';
 
+final _tags = RegExp(r'<[^>]*>');
+
 void openReviewer(BuildContext context, MediaService service, Review review) {
   final user = review.user;
   if (user == null || user.id == 0) return;
@@ -36,7 +38,7 @@ class ReviewCard extends StatelessWidget {
 
   String get _excerpt => (review.summary?.isNotEmpty ?? false)
       ? review.summary!
-      : (review.body ?? '').replaceAll(RegExp(r'<[^>]*>'), ' ').trim();
+      : (review.body ?? '').replaceAll(_tags, ' ').trim();
 
   @override
   Widget build(BuildContext context) {

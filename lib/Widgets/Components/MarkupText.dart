@@ -7,6 +7,11 @@ import '../../Utils/Function.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 
+final _htmlBr = RegExp(r'<br\s*/?>', caseSensitive: false);
+final _htmlBold = RegExp(r'</?(b|strong)>', caseSensitive: false);
+final _htmlItalic = RegExp(r'</?(i|em)>', caseSensitive: false);
+final _htmlTag = RegExp(r'<[^>]+>');
+
 class MarkupText extends StatefulWidget {
   final String text;
   final int collapsedLines;
@@ -57,10 +62,10 @@ class _MarkupTextState extends State<MarkupText> {
 
   static String _clean(String raw) {
     var text = raw
-        .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
-        .replaceAll(RegExp(r'</?(b|strong)>', caseSensitive: false), '__')
-        .replaceAll(RegExp(r'</?(i|em)>', caseSensitive: false), '_')
-        .replaceAll(RegExp(r'<[^>]+>'), '')
+        .replaceAll(_htmlBr, '\n')
+        .replaceAll(_htmlBold, '__')
+        .replaceAll(_htmlItalic, '_')
+        .replaceAll(_htmlTag, '')
         .replaceAll('&amp;', '&')
         .replaceAll('&quot;', '"')
         .replaceAll('&#039;', "'")
