@@ -161,10 +161,28 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
       PrefName.settingsSync.rx,
       PrefName.githubToken.rx,
       PrefName.settingsSyncCategories.rx,
+      PrefName.settingsSyncLocal.rx,
       PrefName.settingsSyncTitles.rx,
       PrefName.settingsSyncPassphrase.rx,
     ], _refresh);
+    _localParts = PrefName.settingsSyncLocal.value.toSet();
+    onChange(PrefName.settingsSyncLocal.rx, (_) => _partsChanged());
     _refresh();
+  }
+
+  Set<String> _localParts = {};
+
+  void _partsChanged() {
+    final now = PrefName.settingsSyncLocal.rx.value.toSet();
+    final released = _localParts.difference(now);
+    _localParts = now;
+    if (!enabled || released.isEmpty) return;
+    for (final part in SyncPart.values) {
+      if (!released.contains(part.name)) continue;
+      for (final kv in PrefManager.allEntries()) {
+        if (part.owns(kv.key)) _changed(kv.key, false);
+      }
+    }
   }
 
   @override

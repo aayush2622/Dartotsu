@@ -155,11 +155,29 @@ class _Items extends StatelessWidget {
       color: scheme.onSurfaceVariant,
     );
     final items = state.sync.syncedIn(category);
+    final parts = state.partsOf(category);
     return Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(60, 0, 8, 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          if (parts.isNotEmpty) ...[
+            for (final part in parts)
+              SheetTile(
+                title: Text(state.partTitle(part)),
+                subtitle: Text(state.partDesc(part)),
+                enabled: on,
+                onTap: () => state.setPart(part, !state.partSynced(part)),
+                trailing: Switch(
+                  value: state.partSynced(part),
+                  onChanged: on ? (v) => state.setPart(part, v) : null,
+                ),
+              ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 2, 0, 10),
+              child: Text(getString.settingsSyncPartsNote, style: muted),
+            ),
+          ],
           if (items.isEmpty)
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),

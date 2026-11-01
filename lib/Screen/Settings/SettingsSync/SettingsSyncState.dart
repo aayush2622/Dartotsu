@@ -61,6 +61,33 @@ class SettingsSyncState extends ScreenState {
 
   void setTitles(bool value) => PrefName.settingsSyncTitles.rx.value = value;
 
+  bool partSynced(SyncPart part) => !SettingsScope.localParts.contains(part);
+
+  List<SyncPart> partsOf(PrefLocation c) => [
+    for (final p in SyncPart.values)
+      if (p.location == c) p,
+  ];
+
+  String partTitle(SyncPart part) => switch (part) {
+    SyncPart.subtitles => getString.settingsSyncPartSubtitles,
+    SyncPart.pictureColors => getString.settingsSyncPartPictureColors,
+    SyncPart.palette => getString.settingsSyncPartPalette,
+  };
+
+  String partDesc(SyncPart part) => switch (part) {
+    SyncPart.subtitles => getString.settingsSyncPartSubtitlesDesc,
+    SyncPart.pictureColors => getString.settingsSyncPartPictureColorsDesc,
+    SyncPart.palette => getString.settingsSyncPartPaletteDesc,
+  };
+
+  void setPart(SyncPart part, bool synced) {
+    final local = SettingsScope.localParts;
+    PrefName.settingsSyncLocal.rx.value = [
+      for (final p in SyncPart.values)
+        if (p == part ? !synced : local.contains(p)) p.name,
+    ];
+  }
+
   void setCategory(PrefLocation c, bool value) {
     final on = categories;
     PrefName.settingsSyncCategories.rx.value = [

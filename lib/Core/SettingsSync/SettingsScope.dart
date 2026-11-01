@@ -1,5 +1,55 @@
 import '../Preferences/PrefManager.dart';
 
+enum SyncPart {
+  subtitles(
+    PrefLocation.PLAYER,
+    map: 'playerSettings',
+    fields: {
+      'subtitleSize',
+      'subtitleWeight',
+      'subtitleColor',
+      'subtitleBackgroundColor',
+      'subtitleOutlineColor',
+      'subtitleBottomPadding',
+    },
+  ),
+  pictureColors(
+    PrefLocation.PLAYER,
+    map: 'playerSettings',
+    fields: {
+      'colorBrightness',
+      'colorContrast',
+      'colorSaturation',
+      'colorGamma',
+      'colorHue',
+      'toneMapping',
+      'targetPeak',
+    },
+  ),
+  palette(
+    PrefLocation.THEME,
+    names: {'theme', 'customColor', 'useCustomColor', 'isOled'},
+  );
+
+  final PrefLocation location;
+  final String? map;
+  final Set<String> fields;
+  final Set<String> names;
+
+  const SyncPart(
+    this.location, {
+    this.map,
+    this.fields = const {},
+    this.names = const {},
+  });
+
+  bool owns(String storageKey) {
+    if (SettingsScope.locationOf(storageKey) != location) return false;
+    final name = SettingsScope.nameOf(storageKey);
+    return names.contains(name) || name == map;
+  }
+}
+
 class SettingsScope {
   SettingsScope._();
 
@@ -115,6 +165,18 @@ class SettingsScope {
     caseSensitive: false,
   );
 
+  static Set<SyncPart>? localOverride;
+
+  static Set<SyncPart> get localParts {
+    final fixed = localOverride;
+    if (fixed != null) return fixed;
+    final names = PrefName.settingsSyncLocal.rx.value;
+    return {
+      for (final p in SyncPart.values)
+        if (names.contains(p.name)) p,
+    };
+  }
+
   static Set<PrefLocation> get enabled {
     final names = PrefName.settingsSyncCategories.rx.value;
     return {
@@ -156,13 +218,24 @@ class SettingsScope {
         !name.endsWith('HideNsfw')) {
       return false;
     }
+    if (localParts.any(
+      (p) => p.names.contains(name) && p.location == location,
+    )) {
+      return false;
+    }
     return !_devicePrefixes.any(name.startsWith) &&
         !_deviceOnly.contains(name) &&
         !_secret.hasMatch(name);
   }
 
-  static Set<String> deviceFields(String storageKey) =>
-      _mapDeviceFields[nameOf(storageKey)] ?? const {};
+  static Set<String> deviceFields(String storageKey) {
+    final name = nameOf(storageKey);
+    return {
+      ...?_mapDeviceFields[name],
+      for (final p in localParts)
+        if (p.map == name) ...p.fields,
+    };
+  }
 
   static bool splitsFields(String storageKey) =>
       _mapDeviceFields.containsKey(nameOf(storageKey));

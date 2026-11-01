@@ -237,6 +237,11 @@ class PrefName {
     ['THEME', 'COMMON', 'PLAYER', 'READER', 'OTHER'],
     PrefLocation.COMMON,
   );
+  static const settingsSyncLocal = Pref<List<String>>(
+    'settingsSyncLocal',
+    ['subtitles', 'pictureColors'],
+    PrefLocation.COMMON,
+  );
   static const settingsSyncTitles = Pref(
     'settingsSyncTitles',
     true,
