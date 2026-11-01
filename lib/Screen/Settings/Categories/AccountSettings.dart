@@ -9,6 +9,7 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
 import '../SubSettingsScreen.dart';
+import '../SettingsSync/SettingsSyncScreen.dart';
 import '../Sync/SyncScreen.dart';
 import 'DiscordSettings.dart';
 import '../../../Core/State/State.dart';
@@ -52,6 +53,15 @@ List<Setting> accountSettings(BuildContext context) {
       icon: Icons.sync_rounded,
       isActivity: true,
       onClick: () => navigateToPage(context, const SyncScreen()),
+    ),
+    Setting.normal(
+      name: getString.settingsSync,
+      description: PrefName.settingsSync.rx.value
+          ? getString.settingsSyncSwitch
+          : getString.settingsSyncDesc,
+      icon: Icons.cloud_sync_rounded,
+      isActivity: true,
+      onClick: () => navigateToPage(context, const SettingsSyncScreen()),
     ),
     Setting.normal(
       name: getString.discordRichPresenceRow,
