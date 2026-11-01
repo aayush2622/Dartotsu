@@ -1090,9 +1090,14 @@ class PlayerState extends ScreenState {
           rec.saveProgress &&
           !isIncognito &&
           engine.duration.value > Duration.zero) {
-        final bytes = await engine.player
-            .screenshot(format: 'image/jpeg')
+        final probe = await engine.player
+            .screenshot(format: 'image/png')
             .timeout(const Duration(seconds: 2));
+        final bytes = PlayerEngine.blankPng(probe)
+            ? null
+            : await engine.player
+                  .screenshot(format: 'image/jpeg')
+                  .timeout(const Duration(seconds: 2));
         if (bytes != null) {
           await ResumeStore.snapshot(
             kind: ResumeKind.watch,
@@ -1186,6 +1191,16 @@ class PlayerState extends ScreenState {
     await engine.play();
   }
 
+  String? _episodeShot() {
+    final media = request.media;
+    for (final shot in [item.unit?.thumbnail, item.episode?.thumbnail]) {
+      if (shot == null || shot.isEmpty) continue;
+      if (shot == media?.banner || shot == media?.cover) continue;
+      return shot;
+    }
+    return null;
+  }
+
   void _saveProgress({bool force = false}) {
     final position = _watchPosition.inSeconds;
     final total = _watchDuration.inSeconds;
@@ -1208,7 +1223,7 @@ class PlayerState extends ScreenState {
           unitKey: itemKey,
           number: item.number,
           title: item.title,
-          thumbnail: item.unit?.thumbnail ?? media.banner ?? media.cover,
+          thumbnail: _episodeShot(),
           position: position,
           duration: total,
           episode: item.episode?.toJson().cast<String, Object?>(),

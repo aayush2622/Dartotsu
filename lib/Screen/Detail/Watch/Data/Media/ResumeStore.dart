@@ -13,6 +13,8 @@ import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Core/SourceAlerts/SourceSubscriptions.dart';
 import '../../../../../Core/State/State.dart';
 
+final _url = RegExp(r'^https?://');
+
 enum ResumeKind { watch, read }
 
 class ResumeEntry {
@@ -50,9 +52,23 @@ class ResumeEntry {
 
   String get slot => '$serviceId/${kind.name}/$mediaId';
 
+  static bool _isUrl(String? value) => value != null && _url.hasMatch(value);
+
+  String? get shot {
+    final own = thumbnail;
+    if (own != null && own.isNotEmpty) {
+      final art = {media['cover'], media['banner']};
+      if (!art.contains(own) && (_isUrl(own) || File(own).existsSync())) {
+        return own;
+      }
+    }
+    final source = episode?['thumbnail'];
+    return source is String && _isUrl(source) ? source : null;
+  }
+
   String? get image {
-    final shot = thumbnail;
-    if (shot != null && shot.isNotEmpty) return shot;
+    final real = shot;
+    if (real != null) return real;
     final cover = media['cover'];
     return cover is String && cover.isNotEmpty ? cover : null;
   }
@@ -263,7 +279,12 @@ class ResumeStore {
       unitKey: unitKey,
       number: number,
       title: title,
-      thumbnail: keepShot ? previous.thumbnail : thumbnail,
+      thumbnail: keepShot
+          ? previous.thumbnail
+          : thumbnail ??
+                (previous != null && previous.unitKey == unitKey
+                    ? previous.thumbnail
+                    : null),
       position: position,
       duration: duration,
       at: DateTime.now().millisecondsSinceEpoch,
