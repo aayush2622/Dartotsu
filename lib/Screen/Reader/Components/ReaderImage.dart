@@ -146,9 +146,11 @@ class _ReaderImageState extends State<ReaderImage> {
   }
 
   ImageProvider _baseProvider(BuildContext context) {
-    final media = MediaQuery.of(context);
     final decode = widget.fit == BoxFit.fitWidth
-        ? (media.size.width * media.devicePixelRatio).round().clamp(320, 2400)
+        ? (MediaQuery.sizeOf(context).width *
+                  MediaQuery.devicePixelRatioOf(context))
+              .round()
+              .clamp(320, 2400)
         : null;
     final base = ReaderImageLoader.providerFor(widget.page);
     return decode == null
@@ -160,9 +162,10 @@ class _ReaderImageState extends State<ReaderImage> {
     if (quality != 'lanczos' || !DartotsuImageRust.isSupported) {
       return _baseProvider(context);
     }
-    final media = MediaQuery.of(context);
-    final width = (media.size.width * media.devicePixelRatio).round();
-    final height = (media.size.height * media.devicePixelRatio).round();
+    final size = MediaQuery.sizeOf(context);
+    final ratio = MediaQuery.devicePixelRatioOf(context);
+    final width = (size.width * ratio).round();
+    final height = (size.height * ratio).round();
     final (maxW, maxH) = switch (widget.fit) {
       BoxFit.fitWidth => (width, 0),
       BoxFit.fitHeight => (0, height),

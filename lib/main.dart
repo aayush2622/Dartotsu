@@ -300,11 +300,11 @@ class _MyAppState extends State<MyApp> {
   /// `LayoutBuilder` above the app — that breaks semantics on Flutter 3.29+),
   /// then the d-pad wrapper.
   Widget _appBuilder(BuildContext context, Widget? child) {
-    final mq = MediaQuery.of(context);
+    final size = MediaQuery.sizeOf(context);
     Device.setScreenSize(
       context,
-      BoxConstraints.tightFor(width: mq.size.width, height: mq.size.height),
-      mq.orientation,
+      BoxConstraints.tightFor(width: size.width, height: size.height),
+      MediaQuery.orientationOf(context),
       600,
       1100,
     );
