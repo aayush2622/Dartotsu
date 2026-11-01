@@ -59,4 +59,10 @@ void main() {
     expect(facts.counts, '~');
     expect(facts.listed, '4 | ~');
   });
+
+  test('counts from the service itself are not marked as estimated', () {
+    expect(MediaRowFacts(manga(total: 80, progress: 1)).estimated, isFalse);
+    expect(MediaRowFacts(anime(total: 12, next: 6)).estimated, isFalse);
+    expect(MediaRowFacts(manga(progress: 4)).estimated, isFalse);
+  });
 }

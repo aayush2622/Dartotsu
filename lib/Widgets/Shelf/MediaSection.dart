@@ -140,6 +140,7 @@ class MediaSection extends StatelessWidget {
       progress: detailed ? _progress(media) : null,
       progressText: detailed ? facts.listedShort : null,
       unread: detailed ? facts.badge : null,
+      estimated: detailed && facts.estimated,
       score: detailed ? _score(media) : null,
       scoreHighlight: (media.userScore ?? 0) > 0,
       airing: detailed && media.status == 'RELEASING',

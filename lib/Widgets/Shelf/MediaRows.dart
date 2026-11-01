@@ -59,21 +59,30 @@ class MediaRowFacts {
     return getString.epIn(ep, left);
   }
 
-  late final int? released = _released();
+  late final ({int? count, bool estimated}) _latest = _findLatest();
 
-  int? _released() {
+  int? get released => _latest.count;
+
+  bool get estimated => _latest.estimated;
+
+  ({int? count, bool estimated}) _findLatest() {
     if (isAnime) {
       final next = media.anime?.nextAiringEpisode;
-      if (next != null) return next > 1 ? next - 1 : null;
-      return total;
+      return (
+        count: next != null ? (next > 1 ? next - 1 : null) : total,
+        estimated: false,
+      );
     }
     final known = total;
-    if (known != null && known > 0) return known;
+    if (known != null && known > 0) return (count: known, estimated: false);
     final service = tryFind<MediaServiceController>()?.currentService.value.id;
-    if (service == null) return null;
+    if (service == null) return (count: null, estimated: false);
     final sub = tryFind<SourceSubscriptions>()?.byKey('$service/${media.id}');
-    if (sub != null && sub.lastValue > 0) return sub.lastValue.floor();
-    return IdMapper.cachedChapters(service, media.id);
+    if (sub != null && sub.lastValue > 0) {
+      return (count: sub.lastValue.floor(), estimated: true);
+    }
+    final cached = IdMapper.cachedChapters(service, media.id);
+    return (count: cached, estimated: cached != null);
   }
 
   late final int? unread = _unread();

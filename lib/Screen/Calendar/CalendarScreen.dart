@@ -215,17 +215,30 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
                           Localizations.localeOf(context).toString(),
                         ).format(e.airingAt),
                         style: context.textTheme.labelLarge?.copyWith(
-                          color: aired
+                          color: e.expected
+                              ? scheme.tertiary
+                              : aired
                               ? scheme.onSurfaceVariant
                               : scheme.primary,
                         ),
                       ),
                       if (e.expected)
-                        Text(
-                          getString.calendarExpected,
-                          style: context.textTheme.labelSmall?.copyWith(
-                            color: scheme.onSurfaceVariant,
-                          ),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              Icons.schedule_rounded,
+                              size: 12,
+                              color: scheme.tertiary,
+                            ),
+                            const SizedBox(width: 3),
+                            Text(
+                              getString.calendarExpected,
+                              style: context.textTheme.labelSmall?.copyWith(
+                                color: scheme.tertiary,
+                              ),
+                            ),
+                          ],
                         )
                       else if (aired)
                         Icon(

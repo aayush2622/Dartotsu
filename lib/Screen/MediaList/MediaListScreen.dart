@@ -362,6 +362,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
       progress: skeleton ? null : facts.progress,
       progressText: skeleton ? null : facts.listedShort,
       unread: skeleton ? null : facts.badge,
+      estimated: !skeleton && facts.estimated,
       score: skeleton
           ? null
           : (media.userScore ?? 0) > 0
