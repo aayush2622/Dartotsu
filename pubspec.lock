@@ -334,7 +334,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "3f87790eadca586c5bf6a41e6365bd4a879b1c0f"
+      resolved-ref: b5c16949bd118f0f9db4fdb466096292bd0bebb5
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -391,10 +391,10 @@ packages:
     dependency: "direct main"
     description:
       name: dpad
-      sha256: a8643bf8ffbb7b171f5e876b8e23f9acfd2d65ec14d88d418ba3645013b9116a
+      sha256: "0bd3d509987a85602c0e6668f1c161264cf26151a85cff051ed85d949e2e6b22"
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.0"
+    version: "3.3.0"
   dynamic_color:
     dependency: "direct main"
     description:
@@ -464,18 +464,18 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: e67f1bcbef00f8b28f3b6ce09a1f0d2d9de37cf1e1e7e73b70df7a20d3eee8be
+      sha256: "02f2945a7f29535c735f6b283c3c5553810566d3052d730429aec78fe9d06592"
       url: "https://pub.dev"
     source: hosted
-    version: "13.3.0"
+    version: "13.3.1"
   file_picker_darwin:
     dependency: transitive
     description:
       name: file_picker_darwin
-      sha256: "13e731433fb3e59c1aff5a1197e41c5c5f930fad16342d101579086271a70d7b"
+      sha256: b845af092ca7a3cff0e768029f835157d371a8341750f4158a7ad358143b0e54
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.0"
+    version: "2.4.1"
   file_picker_linux:
     dependency: transitive
     description:
@@ -1200,10 +1200,10 @@ packages:
     dependency: "direct main"
     description:
       name: mobile_scanner
-      sha256: "5ef343479ba26829aa72c13094a690518c81e1f7b3d6133b64971dabbf650050"
+      sha256: "175c62fc813c2bd762757359a2088f8cbdb72020cf85d4cd27fc4d3fe59be058"
       url: "https://pub.dev"
     source: hosted
-    version: "7.4.3"
+    version: "7.5.0"
   native_toolchain_c:
     dependency: transitive
     description:
