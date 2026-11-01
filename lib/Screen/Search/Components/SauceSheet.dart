@@ -1,161 +1,61 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
+import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/SauceNao.dart';
-import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
-import '../../../Widgets/Components/AppSheet.dart';
+import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
-import '../../../Widgets/Components/EmptyState.dart';
-import '../../../Widgets/Components/ScreenState.dart';
-import 'SauceState.dart';
+import 'ReverseSearchSheet.dart';
 
 Future<SauceHit?> showSauceSearch(BuildContext context) =>
-    showCustomBottomDialog<SauceHit>(context, const SauceSheet());
-
-class SauceSheet extends StatefulWidget {
-  const SauceSheet({super.key});
-
-  @override
-  State<SauceSheet> createState() => _SauceSheetState();
-}
-
-class _SauceSheetState extends State<SauceSheet>
-    with ScreenStateHost<SauceSheet, SauceState> {
-  @override
-  SauceState buildState() => SauceState();
-
-  @override
-  Widget build(BuildContext context) => Watch(() => _build(context));
-
-  Widget _build(BuildContext context) {
-    final scheme = context.colorScheme;
-    final hits = state.hits.value;
-    final busy = state.busy.value;
-    final error = state.error.value;
-    return AppSheet(
-      title: getString.sauceTitle,
-      heightFactor: 0.9,
-      trailing: IconButton(
-        tooltip: getString.sauceKeyTitle,
-        onPressed: state.editKey,
-        icon: const Icon(Icons.key_rounded),
-      ),
-      child: ListView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          0,
-          Dimens.pagePad,
-          Dimens.gapXl,
+    showCustomBottomDialog<SauceHit>(
+      context,
+      ReverseSearchSheet<SauceHit>(
+        title: getString.sauceTitle,
+        intro: getString.sauceIntro,
+        empty: getString.sauceEmpty,
+        credit: getString.sauceCredit,
+        trailing: Builder(
+          builder: (context) => IconButton(
+            tooltip: getString.sauceKeyTitle,
+            onPressed: () => _editKey(context),
+            icon: const Icon(Icons.key_rounded),
+          ),
         ),
-        children: [
-          Text(
-            getString.sauceIntro,
-            style: context.textTheme.bodyMedium?.copyWith(
-              color: scheme.onSurfaceVariant,
-            ),
-          ),
-          SizedBox(height: Dimens.gap),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: state.link,
-                  enabled: !busy,
-                  keyboardType: TextInputType.url,
-                  textInputAction: TextInputAction.search,
-                  onSubmitted: (_) => unawaited(state.submitLink()),
-                  decoration: InputDecoration(
-                    hintText: getString.imageSearchLinkHint,
-                    prefixIcon: const Icon(Icons.link_rounded),
-                  ),
-                ),
-              ),
-              SizedBox(width: Dimens.gapSm),
-              IconButton.filled(
-                tooltip: getString.imageSearchGo,
-                onPressed: busy ? null : () => unawaited(state.submitLink()),
-                icon: const Icon(Icons.search_rounded),
-              ),
-            ],
-          ),
-          SizedBox(height: Dimens.gapSm),
-          SizedBox(
-            width: double.infinity,
-            child: FilledButton.tonalIcon(
-              onPressed: busy ? null : () => unawaited(state.pick()),
-              icon: const Icon(Icons.image_search_rounded),
-              label: Text(getString.imageSearchPick),
-            ),
-          ),
-          if (state.bytes.value != null || state.url.value != null) ...[
-            SizedBox(height: Dimens.gap),
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxHeight: 180),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: state.bytes.value != null
-                      ? Image.memory(state.bytes.value!, fit: BoxFit.cover)
-                      : cachedNetworkImage(
-                          imageUrl: state.url.value,
-                          fit: BoxFit.cover,
-                        ),
-                ),
-              ),
-            ),
-          ],
-          SizedBox(height: Dimens.gap),
-          if (busy)
-            Skeletonizer(
-              child: Column(
-                children: [
-                  for (var i = 0; i < 3; i++) ...[
-                    const _HitTile(hit: _placeholder),
-                    SizedBox(height: Dimens.gapSm),
-                  ],
-                ],
-              ),
-            )
-          else if (error != null)
-            EmptyState(
-              icon: Icons.error_outline_rounded,
-              failed: true,
-              title: error,
-            )
-          else if (hits != null && hits.isEmpty)
-            EmptyState(
-              icon: Icons.search_off_rounded,
-              title: getString.sauceEmpty,
-            )
-          else if (hits != null)
-            for (final (i, hit) in hits.indexed) ...[
-              _HitTile(hit: hit).animateStagger(i),
-              SizedBox(height: Dimens.gapSm),
-            ],
-          SizedBox(height: Dimens.gapSm),
-          Center(
-            child: Text(
-              getString.sauceCredit,
-              style: context.textTheme.labelSmall?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
-            ),
-          ),
-        ],
+        byBytes: (data, name) => SauceNao.byBytes(data, name: name),
+        byUrl: SauceNao.byUrl,
+        placeholder: _placeholder,
+        tile: (hit) => _HitTile(hit: hit),
       ),
     );
-  }
+
+void _editKey(BuildContext context) {
+  final field = TextEditingController(text: PrefName.sauceNaoKey.value);
+  AlertDialogBuilder(context)
+      .setTitle(getString.sauceKeyTitle)
+      .setCustomView(
+        TextField(
+          controller: field,
+          decoration: InputDecoration(
+            hintText: getString.sauceKeyHint,
+            helperText: getString.sauceKeyDesc,
+            prefixIcon: const Icon(Icons.key_rounded),
+          ),
+        ),
+      )
+      .setNegativeButton(getString.cancel, null)
+      .setPositiveButton(getString.ok, () {
+        PrefName.sauceNaoKey.value = field.text.trim();
+      })
+      .show();
 }
 
 const _placeholder = SauceHit(
