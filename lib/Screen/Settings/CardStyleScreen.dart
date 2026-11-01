@@ -1,3 +1,5 @@
+import 'Components/BadgeBoard.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Model/CardStyle.dart';
@@ -101,19 +103,47 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
 
   Widget _preview(CardStyle s) {
     final cards = _previewCards(s);
+    final editable = !s.compact;
     return SectionCard(
       title: getString.preview,
-      child: SizedBox(
-        height: s.itemHeightFor(context) + 8,
-        child: ScrollConfig(
-          context,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              for (final c in cards) ...[c, SizedBox(width: Dimens.cardGap)],
-            ],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: s.itemHeightFor(context) + 8,
+            child: ScrollConfig(
+              context,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  for (final (i, c) in cards.indexed) ...[
+                    if (i == 0 && editable)
+                      Stack(
+                        children: [
+                          c,
+                          Positioned(
+                            left: 0,
+                            top: 0,
+                            child: BadgeDropLayer(
+                              style: s,
+                              editor: state.badges,
+                            ),
+                          ),
+                        ],
+                      )
+                    else
+                      c,
+                    SizedBox(width: Dimens.cardGap),
+                  ],
+                ],
+              ),
+            ),
           ),
-        ),
+          if (editable) ...[
+            SizedBox(height: Dimens.gapSm),
+            BadgeTray(style: s, editor: state.badges),
+          ],
+        ],
       ),
     );
   }
@@ -260,15 +290,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
   }
 
   Widget _overlays(CardStyle s) {
-    final cornerOptions = [
-      AppSegment(CardCorner.none, label: getString.off),
-      AppSegment(CardCorner.topLeft, label: getString.topLeft),
-      AppSegment(CardCorner.topRight, label: getString.topRight),
-      if (s.bottomCornersUsable) ...[
-        AppSegment(CardCorner.bottomLeft, label: getString.bottomLeft),
-        AppSegment(CardCorner.bottomRight, label: getString.bottomRight),
-      ],
-    ];
     return SectionCard(
       title: getString.overlays,
       child: Column(
@@ -301,54 +322,6 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
             ),
           ),
           SizedBox(height: Dimens.gap),
-          LabeledField(
-            label: getString.scoreBadge,
-            child: AppChoiceChips<CardCorner>(
-              value: s.bottomCornersUsable
-                  ? s.scoreCorner
-                  : switch (s.scoreCorner) {
-                      CardCorner.bottomLeft => CardCorner.topLeft,
-                      CardCorner.bottomRight => CardCorner.topRight,
-                      final c => c,
-                    },
-              onChanged: (v) => state.edit((c) => c.copyWith(scoreCorner: v)),
-              options: cornerOptions,
-            ),
-          ),
-          SizedBox(height: Dimens.gapSm),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(getString.airingDot),
-            subtitle: Text(getString.forReleasingTitles),
-            value: s.airingDot,
-            onChanged: (v) => state.edit((c) => c.copyWith(airingDot: v)),
-          ),
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            title: Text(getString.unreadCounter),
-            subtitle: Text(getString.unreadCounterDesc),
-            value: s.unreadCounter,
-            onChanged: (v) => state.edit((c) => c.copyWith(unreadCounter: v)),
-          ),
-          SizedBox(height: Dimens.gapSm),
-          LabeledField(
-            label: getString.statusBadgePosition,
-            child: AppChoiceChips<CardCorner>(
-              value: switch (s.statusCorner) {
-                CardCorner.none => CardCorner.auto,
-                CardCorner.bottomLeft when !s.bottomCornersUsable =>
-                  CardCorner.topLeft,
-                CardCorner.bottomRight when !s.bottomCornersUsable =>
-                  CardCorner.topRight,
-                final c => c,
-              },
-              onChanged: (v) => state.edit((c) => c.copyWith(statusCorner: v)),
-              options: [
-                AppSegment(CardCorner.auto, label: getString.statusAuto),
-                ...cornerOptions.where((o) => o.value != CardCorner.none),
-              ],
-            ),
-          ),
         ],
       ),
     );

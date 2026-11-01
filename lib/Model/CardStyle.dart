@@ -14,6 +14,18 @@ enum CardProgressStyle { pill, bar, outside, none }
 /// Which image corner the score badge pins to.
 enum CardCorner { none, auto, topLeft, topRight, bottomLeft, bottomRight }
 
+class CardCorners {
+  final CardCorner score;
+  final CardCorner airing;
+  final CardCorner unread;
+
+  const CardCorners({
+    required this.score,
+    required this.airing,
+    required this.unread,
+  });
+}
+
 /// User-tunable look of the poster card. One instance is persisted
 /// (`PrefName.cardStyle`); `PosterCard` reads it for every media card so the
 /// whole app follows the chosen style. Kept Flutter-free so the prefs layer
@@ -37,7 +49,8 @@ class CardStyle {
   final CardCorner scoreCorner;
   final bool airingDot;
   final bool unreadCounter;
-  final CardCorner statusCorner;
+  final CardCorner airingCorner;
+  final CardCorner unreadCorner;
 
   const CardStyle({
     this.preset = 'poster',
@@ -52,7 +65,8 @@ class CardStyle {
     this.scoreCorner = CardCorner.topLeft,
     this.airingDot = true,
     this.unreadCounter = false,
-    this.statusCorner = CardCorner.auto,
+    this.airingCorner = CardCorner.auto,
+    this.unreadCorner = CardCorner.auto,
   });
 
   CardStyle copyWith({
@@ -68,7 +82,8 @@ class CardStyle {
     CardCorner? scoreCorner,
     bool? airingDot,
     bool? unreadCounter,
-    CardCorner? statusCorner,
+    CardCorner? airingCorner,
+    CardCorner? unreadCorner,
   }) => CardStyle(
     preset: preset ?? this.preset,
     mode: mode ?? this.mode,
@@ -82,7 +97,8 @@ class CardStyle {
     scoreCorner: scoreCorner ?? this.scoreCorner,
     airingDot: airingDot ?? this.airingDot,
     unreadCounter: unreadCounter ?? this.unreadCounter,
-    statusCorner: statusCorner ?? this.statusCorner,
+    airingCorner: airingCorner ?? this.airingCorner,
+    unreadCorner: unreadCorner ?? this.unreadCorner,
   );
 
   /// A copy tagged as no-longer-matching-a-preset — used on any single edit.
@@ -120,6 +136,57 @@ class CardStyle {
       effectiveProgress != CardProgressStyle.bar &&
       effectiveProgress != CardProgressStyle.pill;
 
+  CardCorners corners({required bool bottomTaken, bool scoreFloats = false}) {
+    final free = [
+      CardCorner.topLeft,
+      CardCorner.topRight,
+      if (!bottomTaken) ...[CardCorner.bottomRight, CardCorner.bottomLeft],
+    ];
+    final taken = <CardCorner>{};
+    CardCorner place(CardCorner wanted, List<CardCorner> order) {
+      var c = switch (wanted) {
+        CardCorner.bottomLeft when bottomTaken => CardCorner.topLeft,
+        CardCorner.bottomRight when bottomTaken => CardCorner.topRight,
+        _ => wanted,
+      };
+      if (c == CardCorner.auto || c == CardCorner.none || taken.contains(c)) {
+        c = order.firstWhere(
+          (o) => !taken.contains(o) && free.contains(o),
+          orElse: () =>
+              c == CardCorner.auto || c == CardCorner.none ? order.first : c,
+        );
+      }
+      taken.add(c);
+      return c;
+    }
+
+    final score = showScore && !scoreFloats
+        ? place(scoreCorner, const [
+            CardCorner.topLeft,
+            CardCorner.topRight,
+            CardCorner.bottomRight,
+            CardCorner.bottomLeft,
+          ])
+        : CardCorner.none;
+    final airing = showAiring
+        ? place(airingCorner, const [
+            CardCorner.topRight,
+            CardCorner.topLeft,
+            CardCorner.bottomRight,
+            CardCorner.bottomLeft,
+          ])
+        : CardCorner.none;
+    final unread = showUnread
+        ? place(unreadCorner, const [
+            CardCorner.topRight,
+            CardCorner.topLeft,
+            CardCorner.bottomRight,
+            CardCorner.bottomLeft,
+          ])
+        : CardCorner.none;
+    return CardCorners(score: score, airing: airing, unread: unread);
+  }
+
   // --- json ------------------------------------------------------------
 
   Map<String, dynamic> toJson() => {
@@ -135,7 +202,8 @@ class CardStyle {
     'scoreCorner': scoreCorner.name,
     'airingDot': airingDot,
     'unreadCounter': unreadCounter,
-    'statusCorner': statusCorner.name,
+    'airingCorner': airingCorner.name,
+    'unreadCorner': unreadCorner.name,
   };
 
   factory CardStyle.fromJson(Map<String, dynamic> j) {
@@ -161,7 +229,16 @@ class CardStyle {
       ),
       airingDot: j['airingDot'] as bool? ?? true,
       unreadCounter: j['unreadCounter'] as bool? ?? false,
-      statusCorner: pick(CardCorner.values, j['statusCorner'], CardCorner.auto),
+      airingCorner: pick(
+        CardCorner.values,
+        j['airingCorner'] ?? j['statusCorner'],
+        CardCorner.auto,
+      ),
+      unreadCorner: pick(
+        CardCorner.values,
+        j['unreadCorner'] ?? j['statusCorner'],
+        CardCorner.auto,
+      ),
     );
   }
 

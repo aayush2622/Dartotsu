@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/ScoreFormat.dart';
@@ -250,7 +251,7 @@ class _PosterCardState extends State<PosterCard> {
     final hasScore = s.showScore && widget.score != null;
     final pill = _pillOn && widget.progressText != null;
     final scoreFloats = hasScore && !pill;
-    final posterCorner = _scoreCorner(s, bottomTaken: true);
+    final corners = s.corners(bottomTaken: true, scoreFloats: scoreFloats);
     final onRight =
         s.scoreCorner == CardCorner.bottomRight ||
         s.scoreCorner == CardCorner.topRight ||
@@ -280,17 +281,13 @@ class _PosterCardState extends State<PosterCard> {
                       ..._grouped([
                         if (hasScore && !scoreFloats)
                           (
-                            posterCorner,
+                            corners.score,
                             _ScoreBadge(
                               score: widget.score!,
                               highlight: widget.scoreHighlight,
                             ),
                           ),
-                        if (_statusMark(s) case final status?)
-                          (
-                            _statusCorner(s, posterCorner, bottomTaken: true),
-                            status,
-                          ),
+                        ..._statusMarks(s, corners),
                       ]),
                       if (pill)
                         PositionedDirectional(
@@ -337,54 +334,22 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
-  CardCorner _scoreCorner(CardStyle s, {required bool bottomTaken}) {
-    final c = s.scoreCorner == CardCorner.none
-        ? CardCorner.topLeft
-        : s.scoreCorner;
-    if (!bottomTaken) return c;
-    return switch (c) {
-      CardCorner.bottomLeft => CardCorner.topLeft,
-      CardCorner.bottomRight => CardCorner.topRight,
-      _ => c,
-    };
-  }
-
   List<Widget> _sourceMark({required double bottom}) {
     final overlay = widget.overlay;
     if (overlay == null) return const [];
     return [PositionedDirectional(start: 6, bottom: bottom, child: overlay)];
   }
 
-  Widget? _statusMark(CardStyle s) {
+  List<(CardCorner, Widget)> _statusMarks(CardStyle s, CardCorners corners) {
     final unread = s.showUnread ? widget.unread : null;
-    final airing = s.showAiring && widget.airing;
-    if (unread == null && !airing) return null;
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        if (unread != null)
+    return [
+      if (unread != null)
+        (
+          corners.unread,
           _UnreadBadge(count: unread, estimated: widget.estimate != null),
-        if (unread != null && airing) const SizedBox(width: 5),
-        if (airing) const _AiringDot(),
-      ],
-    );
-  }
-
-  CardCorner _statusCorner(
-    CardStyle s,
-    CardCorner score, {
-    required bool bottomTaken,
-  }) {
-    final c = s.statusCorner;
-    if (c == CardCorner.auto || c == CardCorner.none) {
-      return _airingCorner(score);
-    }
-    if (!bottomTaken) return c;
-    return switch (c) {
-      CardCorner.bottomLeft => CardCorner.topLeft,
-      CardCorner.bottomRight => CardCorner.topRight,
-      _ => c,
-    };
+        ),
+      if (s.showAiring && widget.airing) (corners.airing, const _AiringDot()),
+    ];
   }
 
   List<Widget> _grouped(List<(CardCorner, Widget)> marks) {
@@ -412,15 +377,14 @@ class _PosterCardState extends State<PosterCard> {
   }
 
   List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
-    final corner = _scoreCorner(s, bottomTaken: bottomTaken);
+    final corners = s.corners(bottomTaken: bottomTaken);
     return _grouped([
       if (s.showScore && widget.score != null)
         (
-          corner,
+          corners.score,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (_statusMark(s) case final status?)
-        (_statusCorner(s, corner, bottomTaken: bottomTaken), status),
+      ..._statusMarks(s, corners),
     ]);
   }
 
@@ -539,9 +503,6 @@ class _PosterCardState extends State<PosterCard> {
       ),
     );
   }
-
-  static CardCorner _airingCorner(CardCorner score) =>
-      score == CardCorner.topLeft ? CardCorner.topRight : CardCorner.topLeft;
 
   Widget _corner(CardCorner c, Widget child) => Positioned(
     top: c == CardCorner.topLeft || c == CardCorner.topRight ? 6 : null,
