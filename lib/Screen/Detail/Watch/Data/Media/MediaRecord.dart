@@ -356,6 +356,13 @@ class MediaRecords {
     return _memo[k] = record;
   }
 
+  static int? latestUnit(MediaService service, Media media) {
+    final k = key(service, media);
+    final hit = _memo[k];
+    if (hit != null) return hit.latestUnit;
+    return (PrefManager.getCustomVal<Map>(k)?['latestUnit'] as num?)?.toInt();
+  }
+
   static void save(MediaService service, Media media) {
     final record = of(service, media);
     PrefManager.setCustomVal<Map>(key(service, media), record.toJson());

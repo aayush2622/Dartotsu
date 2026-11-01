@@ -20,28 +20,30 @@ Widget downloadCover(
   double width = 56,
   double height = 80,
 }) {
+  final cover = task.cover;
+  final remote = cover == null || cover.isEmpty
+      ? SizedBox(
+          width: width,
+          height: height,
+          child: const ColoredBox(
+            color: Colors.black12,
+            child: Icon(Icons.menu_book_rounded),
+          ),
+        )
+      : cachedNetworkImage(
+          imageUrl: cover,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+        );
   final path = task.path;
-  if (path != null) {
-    final local = File(p.join(p.dirname(path), 'cover.jpg'));
-    if (local.existsSync()) {
-      return Image.file(local, width: width, height: height, fit: BoxFit.cover);
-    }
-  }
-  if (task.cover == null || task.cover!.isEmpty) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: const ColoredBox(
-        color: Colors.black12,
-        child: Icon(Icons.menu_book_rounded),
-      ),
-    );
-  }
-  return cachedNetworkImage(
-    imageUrl: task.cover!,
+  if (path == null) return remote;
+  return Image.file(
+    File(p.join(p.dirname(path), 'cover.jpg')),
     width: width,
     height: height,
     fit: BoxFit.cover,
+    errorBuilder: (_, _, _) => remote,
   );
 }
 

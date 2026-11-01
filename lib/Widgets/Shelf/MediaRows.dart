@@ -79,7 +79,7 @@ class MediaRowFacts {
     final service = tryFind<MediaServiceController>()?.currentService.value;
     if (service == null) return (count: null, estimated: false);
     final key = '${service.id}/${media.id}';
-    final saved = MediaRecords.of(service, media).latestUnit;
+    final saved = MediaRecords.latestUnit(service, media);
     final sub = tryFind<SourceSubscriptions>()?.byKey(key)?.lastValue.floor();
     final index = isAnime
         ? null
