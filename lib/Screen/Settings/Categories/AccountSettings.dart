@@ -8,10 +8,9 @@ import '../../../Model/Setting.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
-import '../SubSettingsScreen.dart';
 import '../SettingsSync/SettingsSyncScreen.dart';
 import '../Sync/SyncScreen.dart';
-import 'DiscordSettings.dart';
+import '../Discord/DiscordSettingsScreen.dart';
 import '../../../Core/State/State.dart';
 
 List<Setting> accountSettings(BuildContext context) {
@@ -70,10 +69,7 @@ List<Setting> accountSettings(BuildContext context) {
           : getString.discordRichPresenceRowOff,
       icon: Icons.sports_esports_rounded,
       isActivity: true,
-      onClick: () => navigateToPage(
-        context,
-        SubSettingsScreen(title: getString.discord, settings: discordSettings),
-      ),
+      onClick: () => navigateToPage(context, const DiscordSettingsScreen()),
     ),
   ];
 }

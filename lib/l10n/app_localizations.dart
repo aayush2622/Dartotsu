@@ -102,8 +102,7 @@ import 'app_localizations_zh.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -111,8 +110,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -124,13 +122,12 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
@@ -176,7 +173,7 @@ abstract class AppLocalizations {
     Locale('tr'),
     Locale('uk'),
     Locale('vi'),
-    Locale('zh'),
+    Locale('zh')
   ];
 
   /// No description provided for @appName.
@@ -880,6 +877,438 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not sign in to GitHub'**
   String get settingsSyncSignInFailed;
+
+  /// No description provided for @dcPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get dcPreview;
+
+  /// No description provided for @dcSampleWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching'**
+  String get dcSampleWatching;
+
+  /// No description provided for @dcSampleReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get dcSampleReading;
+
+  /// No description provided for @dcSampleBrowsing.
+  ///
+  /// In en, this message translates to:
+  /// **'Browsing'**
+  String get dcSampleBrowsing;
+
+  /// No description provided for @dcSampleLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now'**
+  String get dcSampleLive;
+
+  /// No description provided for @dcLiveNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.'**
+  String get dcLiveNothing;
+
+  /// No description provided for @dcMemberList.
+  ///
+  /// In en, this message translates to:
+  /// **'In the member list'**
+  String get dcMemberList;
+
+  /// No description provided for @dcAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get dcAccount;
+
+  /// No description provided for @dcSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Discord'**
+  String get dcSignIn;
+
+  /// No description provided for @dcSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get dcSignOut;
+
+  /// No description provided for @dcDesktopHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.'**
+  String get dcDesktopHint;
+
+  /// No description provided for @dcMobileHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Rich Presence on mobile runs through your Discord account. Sign in to start.'**
+  String get dcMobileHint;
+
+  /// No description provided for @dcRouteDesktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Through the Discord desktop app'**
+  String get dcRouteDesktop;
+
+  /// No description provided for @dcRouteHeadless.
+  ///
+  /// In en, this message translates to:
+  /// **'Through your account'**
+  String get dcRouteHeadless;
+
+  /// No description provided for @dcRouteGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Through your account, live'**
+  String get dcRouteGateway;
+
+  /// No description provided for @dcRouteNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get dcRouteNone;
+
+  /// No description provided for @dcAccountOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs a signed-in account'**
+  String get dcAccountOnly;
+
+  /// No description provided for @dcStatusSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get dcStatusSection;
+
+  /// No description provided for @dcControlStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Control my status'**
+  String get dcControlStatus;
+
+  /// No description provided for @dcControlStatusDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.'**
+  String get dcControlStatusDesc;
+
+  /// No description provided for @dcStatusOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get dcStatusOnline;
+
+  /// No description provided for @dcStatusIdle.
+  ///
+  /// In en, this message translates to:
+  /// **'Idle'**
+  String get dcStatusIdle;
+
+  /// No description provided for @dcStatusDnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not disturb'**
+  String get dcStatusDnd;
+
+  /// No description provided for @dcStatusInvisible.
+  ///
+  /// In en, this message translates to:
+  /// **'Invisible'**
+  String get dcStatusInvisible;
+
+  /// No description provided for @dcCustomStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom status'**
+  String get dcCustomStatus;
+
+  /// No description provided for @dcCustomStatusHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you up to?'**
+  String get dcCustomStatusHint;
+
+  /// No description provided for @dcActivitySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get dcActivitySection;
+
+  /// No description provided for @dcShowWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Show while watching'**
+  String get dcShowWatching;
+
+  /// No description provided for @dcShowReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Show while reading'**
+  String get dcShowReading;
+
+  /// No description provided for @dcListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening'**
+  String get dcListening;
+
+  /// No description provided for @dcCompeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Competing'**
+  String get dcCompeting;
+
+  /// No description provided for @dcActivityName.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity name'**
+  String get dcActivityName;
+
+  /// No description provided for @dcNameApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Dartotsu'**
+  String get dcNameApp;
+
+  /// No description provided for @dcNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get dcNameTitle;
+
+  /// No description provided for @dcNameCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get dcNameCustom;
+
+  /// No description provided for @dcCustomNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Name shown after “Watching”'**
+  String get dcCustomNameHint;
+
+  /// No description provided for @dcStatusText.
+  ///
+  /// In en, this message translates to:
+  /// **'Status text'**
+  String get dcStatusText;
+
+  /// No description provided for @dcStatusTextDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'What the member list shows next to your name'**
+  String get dcStatusTextDesc;
+
+  /// No description provided for @dcDisplayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get dcDisplayName;
+
+  /// No description provided for @dcDisplayState.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get dcDisplayState;
+
+  /// No description provided for @dcDisplayDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get dcDisplayDetails;
+
+  /// No description provided for @dcTextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get dcTextSection;
+
+  /// No description provided for @dcDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Top line'**
+  String get dcDetails;
+
+  /// No description provided for @dcState.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom line'**
+  String get dcState;
+
+  /// No description provided for @dcTemplateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty uses the default'**
+  String get dcTemplateHint;
+
+  /// No description provided for @dcVariables.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to insert a value'**
+  String get dcVariables;
+
+  /// No description provided for @dcImagesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get dcImagesSection;
+
+  /// No description provided for @dcLargeImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Large image'**
+  String get dcLargeImage;
+
+  /// No description provided for @dcLargeAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get dcLargeAuto;
+
+  /// No description provided for @dcLargeCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover'**
+  String get dcLargeCover;
+
+  /// No description provided for @dcLargeLogo.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo'**
+  String get dcLargeLogo;
+
+  /// No description provided for @dcSmallImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Small image'**
+  String get dcSmallImage;
+
+  /// No description provided for @dcSmallAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo'**
+  String get dcSmallAuto;
+
+  /// No description provided for @dcSmallNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get dcSmallNone;
+
+  /// No description provided for @dcTimerStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer style'**
+  String get dcTimerStyle;
+
+  /// No description provided for @dcTimerAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get dcTimerAuto;
+
+  /// No description provided for @dcTimerElapsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Elapsed'**
+  String get dcTimerElapsed;
+
+  /// No description provided for @dcTimerRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get dcTimerRemaining;
+
+  /// No description provided for @dcButtonsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons'**
+  String get dcButtonsSection;
+
+  /// No description provided for @dcButtonMedia.
+  ///
+  /// In en, this message translates to:
+  /// **'Link to the title'**
+  String get dcButtonMedia;
+
+  /// No description provided for @dcButtonApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Link to Dartotsu'**
+  String get dcButtonApp;
+
+  /// No description provided for @dcButtonCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom button'**
+  String get dcButtonCustom;
+
+  /// No description provided for @dcButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get dcButtonLabel;
+
+  /// No description provided for @dcButtonUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Link'**
+  String get dcButtonUrl;
+
+  /// No description provided for @dcPrivacySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get dcPrivacySection;
+
+  /// No description provided for @dcPrivateText.
+  ///
+  /// In en, this message translates to:
+  /// **'Private text'**
+  String get dcPrivateText;
+
+  /// No description provided for @dcPrivateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Something private'**
+  String get dcPrivateHint;
+
+  /// No description provided for @dcTokenWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.'**
+  String get dcTokenWarning;
+
+  /// No description provided for @dcConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get dcConnected;
+
+  /// No description provided for @dcConnecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting…'**
+  String get dcConnecting;
+
+  /// No description provided for @dcDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get dcDisconnected;
+
+  /// No description provided for @dcSignedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {name}'**
+  String dcSignedInAs(String name);
 
   /// No description provided for @settingsSyncOn.
   ///
@@ -14015,11 +14444,11 @@ abstract class AppLocalizations {
   /// **'Open in browser (Cloudflare check)'**
   String get readerCloudflare;
 
-  /// No description provided for @statusBadgePosition.
+  /// No description provided for @badgeBoardHint.
   ///
   /// In en, this message translates to:
-  /// **'Airing dot and counter position'**
-  String get statusBadgePosition;
+  /// **'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.'**
+  String get badgeBoardHint;
 
   /// No description provided for @statusAuto.
   ///
@@ -14040,8 +14469,7 @@ abstract class AppLocalizations {
   String get unreadCounterDesc;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -14050,160 +14478,74 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) => <String>[
-    'am',
-    'ar',
-    'as',
-    'bn',
-    'da',
-    'de',
-    'el',
-    'en',
-    'es',
-    'fa',
-    'fil',
-    'fr',
-    'ha',
-    'he',
-    'hi',
-    'hr',
-    'id',
-    'it',
-    'ja',
-    'kn',
-    'ko',
-    'ml',
-    'mr',
-    'ms',
-    'ne',
-    'nl',
-    'or',
-    'pl',
-    'ps',
-    'pt',
-    'ru',
-    'sa',
-    'si',
-    'so',
-    'sw',
-    'ta',
-    'te',
-    'th',
-    'tr',
-    'uk',
-    'vi',
-    'zh',
-  ].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['am', 'ar', 'as', 'bn', 'da', 'de', 'el', 'en', 'es', 'fa', 'fil', 'fr', 'ha', 'he', 'hi', 'hr', 'id', 'it', 'ja', 'kn', 'ko', 'ml', 'mr', 'ms', 'ne', 'nl', 'or', 'pl', 'ps', 'pt', 'ru', 'sa', 'si', 'so', 'sw', 'ta', 'te', 'th', 'tr', 'uk', 'vi', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
 }
 
 AppLocalizations lookupAppLocalizations(Locale locale) {
+
   // Lookup logic when language+country codes are specified.
   switch (locale.languageCode) {
-    case 'pt':
-      {
-        switch (locale.countryCode) {
-          case 'BR':
-            return AppLocalizationsPtBr();
-        }
-        break;
-      }
+    case 'pt': {
+  switch (locale.countryCode) {
+    case 'BR': return AppLocalizationsPtBr();
+   }
+  break;
+   }
   }
 
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'am':
-      return AppLocalizationsAm();
-    case 'ar':
-      return AppLocalizationsAr();
-    case 'as':
-      return AppLocalizationsAs();
-    case 'bn':
-      return AppLocalizationsBn();
-    case 'da':
-      return AppLocalizationsDa();
-    case 'de':
-      return AppLocalizationsDe();
-    case 'el':
-      return AppLocalizationsEl();
-    case 'en':
-      return AppLocalizationsEn();
-    case 'es':
-      return AppLocalizationsEs();
-    case 'fa':
-      return AppLocalizationsFa();
-    case 'fil':
-      return AppLocalizationsFil();
-    case 'fr':
-      return AppLocalizationsFr();
-    case 'ha':
-      return AppLocalizationsHa();
-    case 'he':
-      return AppLocalizationsHe();
-    case 'hi':
-      return AppLocalizationsHi();
-    case 'hr':
-      return AppLocalizationsHr();
-    case 'id':
-      return AppLocalizationsId();
-    case 'it':
-      return AppLocalizationsIt();
-    case 'ja':
-      return AppLocalizationsJa();
-    case 'kn':
-      return AppLocalizationsKn();
-    case 'ko':
-      return AppLocalizationsKo();
-    case 'ml':
-      return AppLocalizationsMl();
-    case 'mr':
-      return AppLocalizationsMr();
-    case 'ms':
-      return AppLocalizationsMs();
-    case 'ne':
-      return AppLocalizationsNe();
-    case 'nl':
-      return AppLocalizationsNl();
-    case 'or':
-      return AppLocalizationsOr();
-    case 'pl':
-      return AppLocalizationsPl();
-    case 'ps':
-      return AppLocalizationsPs();
-    case 'pt':
-      return AppLocalizationsPt();
-    case 'ru':
-      return AppLocalizationsRu();
-    case 'sa':
-      return AppLocalizationsSa();
-    case 'si':
-      return AppLocalizationsSi();
-    case 'so':
-      return AppLocalizationsSo();
-    case 'sw':
-      return AppLocalizationsSw();
-    case 'ta':
-      return AppLocalizationsTa();
-    case 'te':
-      return AppLocalizationsTe();
-    case 'th':
-      return AppLocalizationsTh();
-    case 'tr':
-      return AppLocalizationsTr();
-    case 'uk':
-      return AppLocalizationsUk();
-    case 'vi':
-      return AppLocalizationsVi();
-    case 'zh':
-      return AppLocalizationsZh();
+    case 'am': return AppLocalizationsAm();
+    case 'ar': return AppLocalizationsAr();
+    case 'as': return AppLocalizationsAs();
+    case 'bn': return AppLocalizationsBn();
+    case 'da': return AppLocalizationsDa();
+    case 'de': return AppLocalizationsDe();
+    case 'el': return AppLocalizationsEl();
+    case 'en': return AppLocalizationsEn();
+    case 'es': return AppLocalizationsEs();
+    case 'fa': return AppLocalizationsFa();
+    case 'fil': return AppLocalizationsFil();
+    case 'fr': return AppLocalizationsFr();
+    case 'ha': return AppLocalizationsHa();
+    case 'he': return AppLocalizationsHe();
+    case 'hi': return AppLocalizationsHi();
+    case 'hr': return AppLocalizationsHr();
+    case 'id': return AppLocalizationsId();
+    case 'it': return AppLocalizationsIt();
+    case 'ja': return AppLocalizationsJa();
+    case 'kn': return AppLocalizationsKn();
+    case 'ko': return AppLocalizationsKo();
+    case 'ml': return AppLocalizationsMl();
+    case 'mr': return AppLocalizationsMr();
+    case 'ms': return AppLocalizationsMs();
+    case 'ne': return AppLocalizationsNe();
+    case 'nl': return AppLocalizationsNl();
+    case 'or': return AppLocalizationsOr();
+    case 'pl': return AppLocalizationsPl();
+    case 'ps': return AppLocalizationsPs();
+    case 'pt': return AppLocalizationsPt();
+    case 'ru': return AppLocalizationsRu();
+    case 'sa': return AppLocalizationsSa();
+    case 'si': return AppLocalizationsSi();
+    case 'so': return AppLocalizationsSo();
+    case 'sw': return AppLocalizationsSw();
+    case 'ta': return AppLocalizationsTa();
+    case 'te': return AppLocalizationsTe();
+    case 'th': return AppLocalizationsTh();
+    case 'tr': return AppLocalizationsTr();
+    case 'uk': return AppLocalizationsUk();
+    case 'vi': return AppLocalizationsVi();
+    case 'zh': return AppLocalizationsZh();
   }
 
   throw FlutterError(
     'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
-    'that was used.',
+    'that was used.'
   );
 }

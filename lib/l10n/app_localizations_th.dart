@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -75,8 +74,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get animationSpeed => 'แอนิเมชัน';
 
   @override
-  String get animationSpeedDesc =>
-      'ความเร็วของการเปลี่ยนหน้าและเอฟเฟกต์ตอนเปิดทั่วทั้งแอป';
+  String get animationSpeedDesc => 'ความเร็วของการเปลี่ยนหน้าและเอฟเฟกต์ตอนเปิดทั่วทั้งแอป';
 
   @override
   String get animationSpeedOff => 'ปิด';
@@ -105,8 +103,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get uninstall => 'ถอนการติดตั้ง';
 
   @override
-  String get updateInstallCancelled =>
-      'ยกเลิกการติดตั้งแล้ว ถ้า Android แจ้งว่าแอปขัดแย้งกับตัวที่ติดตั้งอยู่ แปลว่าลายเซ็นไม่ตรงกัน ให้ถอนการติดตั้งเวอร์ชันปัจจุบันก่อน แล้วค่อยติดตั้งอัปเดต';
+  String get updateInstallCancelled => 'ยกเลิกการติดตั้งแล้ว ถ้า Android แจ้งว่าแอปขัดแย้งกับตัวที่ติดตั้งอยู่ แปลว่าลายเซ็นไม่ตรงกัน ให้ถอนการติดตั้งเวอร์ชันปัจจุบันก่อน แล้วค่อยติดตั้งอัปเดต';
 
   @override
   String updateInstallFailed(String error) {
@@ -117,15 +114,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get appLock => 'ล็อกแอป';
 
   @override
-  String get appLockDesc =>
-      'ถามรหัสผ่านตอนเปิดแอปหรือกลับมาหลังจากทิ้งไว้สักพัก';
+  String get appLockDesc => 'ถามรหัสผ่านตอนเปิดแอปหรือกลับมาหลังจากทิ้งไว้สักพัก';
 
   @override
   String get appLockBiometric => 'Unlock with biometrics';
 
   @override
-  String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+  String get appLockBiometricDesc => 'Use your fingerprint or face instead of typing the passcode';
 
   @override
   String get appLockBiometricReason => 'Unlock Dartotsu';
@@ -340,8 +335,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shelfFrameDesc => 'แสดงการ์ดหลังแต่ละแถว หรือให้แถววางบนหน้าตรง ๆ';
 
   @override
-  String get settingsExtensionsDesc =>
-      'ตัวจัดการซอร์ส คลัง และตัวเลือกส่วนขยาย';
+  String get settingsExtensionsDesc => 'ตัวจัดการซอร์ส คลัง และตัวเลือกส่วนขยาย';
 
   @override
   String get settingsAddons => 'แอดออน';
@@ -365,8 +359,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSync => 'Sync settings';
 
   @override
-  String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+  String get settingsSyncDesc => 'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
 
   @override
   String get settingsSyncSwitch => 'Sync on change';
@@ -378,15 +371,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncSignIn => 'Sign in with GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+  String get settingsSyncSignInDesc => 'Settings are stored in a private gist in your account';
 
   @override
   String get settingsSyncToken => 'Use a personal access token';
 
   @override
-  String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+  String get settingsSyncTokenDesc => 'Create one at github.com/settings/tokens with only the gist permission';
 
   @override
   String get settingsSyncTokenField => 'Token';
@@ -405,11 +396,228 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+  String get settingsSyncCodeDesc => 'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
 
   @override
   String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+
+  @override
+  String get dcPreview => 'Preview';
+
+  @override
+  String get dcSampleWatching => 'Watching';
+
+  @override
+  String get dcSampleReading => 'Reading';
+
+  @override
+  String get dcSampleBrowsing => 'Browsing';
+
+  @override
+  String get dcSampleLive => 'Right now';
+
+  @override
+  String get dcLiveNothing => 'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+
+  @override
+  String get dcMemberList => 'In the member list';
+
+  @override
+  String get dcAccount => 'Account';
+
+  @override
+  String get dcSignIn => 'Sign in with Discord';
+
+  @override
+  String get dcSignOut => 'Sign out';
+
+  @override
+  String get dcDesktopHint => 'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.';
+
+  @override
+  String get dcMobileHint => 'Rich Presence on mobile runs through your Discord account. Sign in to start.';
+
+  @override
+  String get dcRouteDesktop => 'Through the Discord desktop app';
+
+  @override
+  String get dcRouteHeadless => 'Through your account';
+
+  @override
+  String get dcRouteGateway => 'Through your account, live';
+
+  @override
+  String get dcRouteNone => 'Not connected';
+
+  @override
+  String get dcAccountOnly => 'Needs a signed-in account';
+
+  @override
+  String get dcStatusSection => 'Status';
+
+  @override
+  String get dcControlStatus => 'Control my status';
+
+  @override
+  String get dcControlStatusDesc => 'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+
+  @override
+  String get dcStatusOnline => 'Online';
+
+  @override
+  String get dcStatusIdle => 'Idle';
+
+  @override
+  String get dcStatusDnd => 'Do not disturb';
+
+  @override
+  String get dcStatusInvisible => 'Invisible';
+
+  @override
+  String get dcCustomStatus => 'Custom status';
+
+  @override
+  String get dcCustomStatusHint => 'What are you up to?';
+
+  @override
+  String get dcActivitySection => 'Activity';
+
+  @override
+  String get dcShowWatching => 'Show while watching';
+
+  @override
+  String get dcShowReading => 'Show while reading';
+
+  @override
+  String get dcListening => 'Listening';
+
+  @override
+  String get dcCompeting => 'Competing';
+
+  @override
+  String get dcActivityName => 'Activity name';
+
+  @override
+  String get dcNameApp => 'Dartotsu';
+
+  @override
+  String get dcNameTitle => 'Title';
+
+  @override
+  String get dcNameCustom => 'Custom';
+
+  @override
+  String get dcCustomNameHint => 'Name shown after “Watching”';
+
+  @override
+  String get dcStatusText => 'Status text';
+
+  @override
+  String get dcStatusTextDesc => 'What the member list shows next to your name';
+
+  @override
+  String get dcDisplayName => 'Name';
+
+  @override
+  String get dcDisplayState => 'State';
+
+  @override
+  String get dcDisplayDetails => 'Details';
+
+  @override
+  String get dcTextSection => 'Text';
+
+  @override
+  String get dcDetails => 'Top line';
+
+  @override
+  String get dcState => 'Bottom line';
+
+  @override
+  String get dcTemplateHint => 'Empty uses the default';
+
+  @override
+  String get dcVariables => 'Tap to insert a value';
+
+  @override
+  String get dcImagesSection => 'Images';
+
+  @override
+  String get dcLargeImage => 'Large image';
+
+  @override
+  String get dcLargeAuto => 'Auto';
+
+  @override
+  String get dcLargeCover => 'Cover';
+
+  @override
+  String get dcLargeLogo => 'Logo';
+
+  @override
+  String get dcSmallImage => 'Small image';
+
+  @override
+  String get dcSmallAuto => 'Logo';
+
+  @override
+  String get dcSmallNone => 'None';
+
+  @override
+  String get dcTimerStyle => 'Timer style';
+
+  @override
+  String get dcTimerAuto => 'Auto';
+
+  @override
+  String get dcTimerElapsed => 'Elapsed';
+
+  @override
+  String get dcTimerRemaining => 'Remaining';
+
+  @override
+  String get dcButtonsSection => 'Buttons';
+
+  @override
+  String get dcButtonMedia => 'Link to the title';
+
+  @override
+  String get dcButtonApp => 'Link to Dartotsu';
+
+  @override
+  String get dcButtonCustom => 'Custom button';
+
+  @override
+  String get dcButtonLabel => 'Label';
+
+  @override
+  String get dcButtonUrl => 'Link';
+
+  @override
+  String get dcPrivacySection => 'Privacy';
+
+  @override
+  String get dcPrivateText => 'Private text';
+
+  @override
+  String get dcPrivateHint => 'Something private';
+
+  @override
+  String get dcTokenWarning => 'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+
+  @override
+  String get dcConnected => 'Connected';
+
+  @override
+  String get dcConnecting => 'Connecting…';
+
+  @override
+  String get dcDisconnected => 'Not connected';
+
+  @override
+  String dcSignedInAs(String name) {
+    return 'Signed in as $name';
+  }
 
   @override
   String get settingsSyncOn => 'On';
@@ -421,41 +629,34 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncChangedHeader => 'Changed settings';
 
   @override
-  String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+  String get settingsSyncNoneChanged => 'You haven\'t changed any of these yet, so there is nothing to sync.';
 
   @override
-  String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+  String get settingsSyncChangedOnly => 'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
 
   @override
-  String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+  String get settingsSyncOffCategory => 'Not syncing. These stay on this device and the server copy is left as it is.';
 
   @override
-  String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+  String get settingsSyncPartsNote => 'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
 
   @override
   String get settingsSyncPartSubtitles => 'Subtitle size and colours';
 
   @override
-  String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+  String get settingsSyncPartSubtitlesDesc => 'Size, weight, colours and position';
 
   @override
   String get settingsSyncPartPictureColors => 'Picture colours';
 
   @override
-  String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+  String get settingsSyncPartPictureColorsDesc => 'Brightness, contrast, saturation, gamma, hue and HDR';
 
   @override
   String get settingsSyncPartPalette => 'Theme colours';
 
   @override
-  String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+  String get settingsSyncPartPaletteDesc => 'Theme, accent colour and OLED black';
 
   @override
   String get settingsSyncCatOther => 'Watch, read and services';
@@ -472,15 +673,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncTitlesNone => 'Nothing uploaded yet';
 
   @override
-  String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+  String get settingsSyncTitlesNote => 'Watch and read positions, the resume shelf, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
 
   @override
   String get settingsSyncConnect => 'Not connected';
 
   @override
-  String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+  String get settingsSyncConnectDesc => 'Sign in with GitHub to keep your settings the same on every device.';
 
   @override
   String get settingsSyncFailedTitle => 'Sync failed';
@@ -489,8 +688,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncPaused => 'Paused';
 
   @override
-  String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+  String get settingsSyncPausedDesc => 'Nothing is uploaded or downloaded while this is off.';
 
   @override
   String get settingsSyncUpToDate => 'Up to date';
@@ -502,8 +700,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncAccount => 'GitHub account';
 
   @override
-  String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+  String get settingsSyncAccountDesc => 'Your data goes to a private gist in your own account.';
 
   @override
   String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
@@ -544,19 +741,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncSecrets => 'Accounts and passwords';
 
   @override
-  String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+  String get settingsSyncSecretsDesc => 'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
 
   @override
   String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
 
   @override
-  String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+  String get settingsSyncSecretsOnDesc => 'Signing out on one device does not sign you out on the others.';
 
   @override
-  String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+  String get settingsSyncSecretsBroken => 'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
 
   @override
   String get settingsSyncPassphraseSet => 'Set a passphrase';
@@ -571,12 +765,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
 
   @override
-  String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+  String get settingsSyncPassphraseNew => 'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
 
   @override
-  String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+  String get settingsSyncPassphraseExisting => 'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
 
   @override
   String get settingsSyncPassphraseWrong => 'Wrong passphrase';
@@ -594,8 +786,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSyncSecretsDelete => 'Delete from GitHub';
 
   @override
-  String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+  String get settingsSyncSecretsDeleteMessage => 'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
 
   @override
   String get settingsSyncWhat => 'What to sync';
@@ -646,8 +837,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+  String get settingsSyncScope => 'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
 
   @override
   String get backupAndRestore => 'สำรองและกู้คืน';
@@ -668,8 +858,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get autoUpdateRuntimes => 'Update extension runtimes automatically';
 
   @override
-  String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+  String get autoUpdateRuntimesDesc => 'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
 
   @override
   String get loadExtensionsIconDesc => 'แสดงไอคอนซอร์สในรายการส่วนขยาย';
@@ -717,12 +906,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get backupPasswordRequired => 'Password (required for account data)';
 
   @override
-  String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+  String get backupProtectedNeedsPassword => 'Set a password to back up account data, or untick it';
 
   @override
-  String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+  String get backupProtectedSkipped => 'This backup has no password, so its account data was skipped';
 
   @override
   String get backupPassword => 'รหัสผ่าน (ไม่บังคับ)';
@@ -731,8 +918,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get backupPasswordHint => 'เว้นว่างไว้เพื่อใช้ค่าเริ่มต้น';
 
   @override
-  String get backupSensitive =>
-      'มีโทเคนเข้าสู่ระบบอยู่ เก็บไฟล์นี้เป็นความลับนะ';
+  String get backupSensitive => 'มีโทเคนเข้าสู่ระบบอยู่ เก็บไฟล์นี้เป็นความลับนะ';
 
   @override
   String get backupCreate => 'สร้างข้อมูลสำรอง';
@@ -809,8 +995,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get backupCatCommon => 'ทั่วไป';
 
   @override
-  String get backupCatCommonDesc =>
-      'ภาษา ที่เก็บข้อมูล เครือข่าย และตัวเลือกส่วนขยาย';
+  String get backupCatCommonDesc => 'ภาษา ที่เก็บข้อมูล เครือข่าย และตัวเลือกส่วนขยาย';
 
   @override
   String get backupCatPlayer => 'เครื่องเล่น';
@@ -884,8 +1069,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
 
   @override
-  String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+  String get stacksScopeNeeded => 'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
 
   @override
   String get stacksSignInAgain => 'Sign in again';
@@ -959,8 +1143,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get donateSheetTitle => 'ชอบ Dartotsu ไหม?';
 
   @override
-  String get donateSheetMessage =>
-      'Dartotsu สร้างและดูแลโดยคนเดียว ถ้าใช้แล้วมีประโยชน์ ช่วยสนับสนุนการพัฒนาหน่อยนะ';
+  String get donateSheetMessage => 'Dartotsu สร้างและดูแลโดยคนเดียว ถ้าใช้แล้วมีประโยชน์ ช่วยสนับสนุนการพัฒนาหน่อยนะ';
 
   @override
   String get donateLater => 'ไว้ทีหลัง';
@@ -969,8 +1152,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get glassBackground => 'พื้นหลังกระจก';
 
   @override
-  String get glassBackgroundDesc =>
-      'ใช้แบนเนอร์โปรไฟล์ของคุณ ถ้าไม่ได้ใส่ลิงก์รูป';
+  String get glassBackgroundDesc => 'ใช้แบนเนอร์โปรไฟล์ของคุณ ถ้าไม่ได้ใส่ลิงก์รูป';
 
   @override
   String get glassBackgroundHint => 'ลิงก์รูป (เว้นว่างเพื่อใช้แบนเนอร์ของคุณ)';
@@ -985,8 +1167,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get followCoverMediaOnly => 'Only for media';
 
   @override
-  String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+  String get followCoverMediaOnlyDesc => 'Only follow the cover on media pages, everywhere else keeps the normal colors';
 
   @override
   String get cardStyle => 'สไตล์การ์ด';
@@ -1031,8 +1212,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get jsonTheme => 'ไฟล์ธีมกำหนดเอง';
 
   @override
-  String get jsonThemeDesc =>
-      'สีสดจาก ~/.config/dartotsu/theme.json (สคริปต์เอง หรือแก้เอง)';
+  String get jsonThemeDesc => 'สีสดจาก ~/.config/dartotsu/theme.json (สคริปต์เอง หรือแก้เอง)';
 
   @override
   String get themeMode => 'โหมดธีม';
@@ -1174,12 +1354,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get verifyTls => 'ตรวจสอบใบรับรอง';
 
   @override
-  String get verifyTlsDesc =>
-      'ปฏิเสธเซิร์ฟเวอร์ที่ใบรับรอง HTTPS ไม่ถูกต้อง ปิดเฉพาะกับซอร์สที่ใช้ใบรับรองที่เซ็นเอง';
+  String get verifyTlsDesc => 'ปฏิเสธเซิร์ฟเวอร์ที่ใบรับรอง HTTPS ไม่ถูกต้อง ปิดเฉพาะกับซอร์สที่ใช้ใบรับรองที่เซ็นเอง';
 
   @override
-  String get clearCookiesConfirm =>
-      'ลบคุกกี้ที่เก็บไว้ทั้งหมด? อาจทำให้ออกจากระบบบางซอร์สได้';
+  String get clearCookiesConfirm => 'ลบคุกกี้ที่เก็บไว้ทั้งหมด? อาจทำให้ออกจากระบบบางซอร์สได้';
 
   @override
   String get version => 'เวอร์ชัน';
@@ -1260,8 +1438,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get onboardingPaletteTitle => 'ทำให้เป็นของคุณ';
 
   @override
-  String get onboardingPaletteBody =>
-      'เลือกจานสี สีเน้นทุกจุดตั้งแต่การ์ดจนถึงเครื่องเล่นจะตามนี้';
+  String get onboardingPaletteBody => 'เลือกจานสี สีเน้นทุกจุดตั้งแต่การ์ดจนถึงเครื่องเล่นจะตามนี้';
 
   @override
   String get themeModeAuto => 'อัตโนมัติ';
@@ -1276,8 +1453,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get onboardingSyncTitle => 'ซิงก์คลังของคุณ';
 
   @override
-  String get onboardingSyncBody =>
-      'เข้าสู่ระบบด้วย AniList เพื่อนำรายการ ความคืบหน้า และคะแนนมาด้วย หรือข้ามไปดูแบบผู้เยี่ยมชมก็ได้';
+  String get onboardingSyncBody => 'เข้าสู่ระบบด้วย AniList เพื่อนำรายการ ความคืบหน้า และคะแนนมาด้วย หรือข้ามไปดูแบบผู้เยี่ยมชมก็ได้';
 
   @override
   String get onboardingOpenLinks => 'เปิดลิงก์ AniList และคลังใน Dartotsu';
@@ -1286,15 +1462,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get onboardingPermsTitle => 'สิทธิ์การเข้าถึง';
 
   @override
-  String get onboardingPermsBody =>
-      'อนุญาตตอนนี้เลย ดาวน์โหลด อัปเดต และแจ้งเตือนจะได้ทำงานไม่สะดุด เปลี่ยนทีหลังได้ในตั้งค่าระบบ';
+  String get onboardingPermsBody => 'อนุญาตตอนนี้เลย ดาวน์โหลด อัปเดต และแจ้งเตือนจะได้ทำงานไม่สะดุด เปลี่ยนทีหลังได้ในตั้งค่าระบบ';
 
   @override
   String get permNotifications => 'การแจ้งเตือน';
 
   @override
-  String get permNotificationsDesc =>
-      'ความคืบหน้าดาวน์โหลด ตอนใหม่ และการตอบกลับ';
+  String get permNotificationsDesc => 'ความคืบหน้าดาวน์โหลด ตอนใหม่ และการตอบกลับ';
 
   @override
   String get permStorage => 'เข้าถึงไฟล์ทั้งหมด';
@@ -1386,15 +1560,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shareAnalytics => 'แชร์ข้อมูลการใช้งานแบบไม่ระบุตัวตน';
 
   @override
-  String get shareAnalyticsDesc =>
-      'จำนวนผู้ใช้และรายงานแครชแบบไม่ระบุตัวตน ไม่มีบัญชีหรือข้อมูลส่วนตัว';
+  String get shareAnalyticsDesc => 'จำนวนผู้ใช้และรายงานแครชแบบไม่ระบุตัวตน ไม่มีบัญชีหรือข้อมูลส่วนตัว';
 
   @override
   String get linkOpenAnilist => 'เปิดลิงก์ AniList ใน Dartotsu';
 
   @override
-  String get linkOpenAnilistDesc =>
-      'เปิดการจัดการลิงก์ เพื่อให้ลิงก์ anilist.co เปิดในแอป';
+  String get linkOpenAnilistDesc => 'เปิดการจัดการลิงก์ เพื่อให้ลิงก์ anilist.co เปิดในแอป';
 
   @override
   String get linkSettingsFailed => 'เปิดการตั้งค่าระบบไม่ได้';
@@ -1403,19 +1575,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องใช้โทเคน Discord ของคุณ';
+  String get discordRichPresenceTokenDesc => 'แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องใช้โทเคน Discord ของคุณ';
 
   @override
-  String get discordRichPresenceDesktopDesc =>
-      'แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องเปิดแอป Discord บนเดสก์ท็อปไว้';
+  String get discordRichPresenceDesktopDesc => 'แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องเปิดแอป Discord บนเดสก์ท็อปไว้';
 
   @override
   String get discordBrowsing => 'แสดงกิจกรรมการเลือกดู';
 
   @override
-  String get discordBrowsingDesc =>
-      'แสดงแท็บ หน้า หรือโปรไฟล์ที่กำลังดูด้วย ไม่ใช่แค่สิ่งที่ดูหรืออ่าน';
+  String get discordBrowsingDesc => 'แสดงแท็บ หน้า หรือโปรไฟล์ที่กำลังดูด้วย ไม่ใช่แค่สิ่งที่ดูหรืออ่าน';
 
   @override
   String get discordLookHeader => 'หน้าตาสถานะ';
@@ -1424,8 +1593,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordActivityType => 'ประเภทกิจกรรม';
 
   @override
-  String get discordActivityTypeDesc =>
-      'Discord จะเขียนว่าอะไร: \"Watching …\" หรือ \"Playing …\" อัตโนมัติจะใช้ Watching กับอนิเมะ และ Playing กับอย่างอื่น';
+  String get discordActivityTypeDesc => 'Discord จะเขียนว่าอะไร: \"Watching …\" หรือ \"Playing …\" อัตโนมัติจะใช้ Watching กับอนิเมะ และ Playing กับอย่างอื่น';
 
   @override
   String get discordWatching => 'กำลังดู';
@@ -1449,15 +1617,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordButtons => 'แสดงปุ่ม';
 
   @override
-  String get discordButtonsDesc =>
-      'ปุ่ม \"ดูอนิเมะ / มังงะ\" และ \"เปิด Dartotsu\"';
+  String get discordButtonsDesc => 'ปุ่ม \"ดูอนิเมะ / มังงะ\" และ \"เปิด Dartotsu\"';
 
   @override
   String get discordHideTitles => 'ซ่อนชื่อเรื่อง';
 
   @override
-  String get discordHideTitlesDesc =>
-      'แทนชื่ออนิเมะและมังงะ (รวมถึงปกและลิงก์) ด้วย \"Something private\"';
+  String get discordHideTitlesDesc => 'แทนชื่ออนิเมะและมังงะ (รวมถึงปกและลิงก์) ด้วย \"Something private\"';
 
   @override
   String get discordConnectionHeader => 'การเชื่อมต่อ';
@@ -1555,8 +1721,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get malLoginFailed => 'เข้าสู่ระบบ MyAnimeList ไม่สำเร็จ';
 
   @override
-  String get kitsuLoginFailed =>
-      'เข้าสู่ระบบ Kitsu ไม่สำเร็จ เช็กอีเมลกับรหัสผ่านดู';
+  String get kitsuLoginFailed => 'เข้าสู่ระบบ Kitsu ไม่สำเร็จ เช็กอีเมลกับรหัสผ่านดู';
 
   @override
   String get kitsuLoginTitle => 'เข้าสู่ระบบ Kitsu';
@@ -1628,8 +1793,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get hideNsfw => 'ซ่อน NSFW';
 
   @override
-  String get hideNsfwDesc =>
-      'ไม่ให้เรื่องผู้ใหญ่โผล่ในฟีดและการค้นหา และแยกรายการผู้ใหญ่ของคุณเองไว้ใน Hidden Media';
+  String get hideNsfwDesc => 'ไม่ให้เรื่องผู้ใหญ่โผล่ในฟีดและการค้นหา และแยกรายการผู้ใหญ่ของคุณเองไว้ใน Hidden Media';
 
   @override
   String get kitsuAccountOptions => 'ตัวเลือกบัญชี Kitsu';
@@ -1712,8 +1876,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get incognitoProgressNotSaved =>
-      'ไม่ระบุตัวตน: ไม่ได้บันทึกความคืบหน้า';
+  String get incognitoProgressNotSaved => 'ไม่ระบุตัวตน: ไม่ได้บันทึกความคืบหน้า';
 
   @override
   String progressSet(int progress) {
@@ -1732,8 +1895,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get homeSections => 'หมวดหน้าหลัก';
 
   @override
-  String get homeSectionsHint =>
-      'ลากเพื่อเรียงลำดับ หมวดที่ซ่อนจะไม่ถูกโหลดเลย';
+  String get homeSectionsHint => 'ลากเพื่อเรียงลำดับ หมวดที่ซ่อนจะไม่ถูกโหลดเลย';
 
   @override
   String get customListDeleteFailed => 'ลบรายการกำหนดเองไม่สำเร็จ';
@@ -1973,8 +2135,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get nothingHereYet => 'ยังไม่มีอะไรที่นี่';
 
   @override
-  String get savedOnDeviceUntilLogin =>
-      'ทุกอย่างด้านล่างเก็บไว้ในเครื่องนี้จนกว่าคุณจะลบ';
+  String get savedOnDeviceUntilLogin => 'ทุกอย่างด้านล่างเก็บไว้ในเครื่องนี้จนกว่าคุณจะลบ';
 
   @override
   String get yourProfile => 'โปรไฟล์ของคุณ';
@@ -2235,8 +2396,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get nothingToPreview => 'ไม่มีอะไรให้ดูตัวอย่าง';
 
   @override
-  String get writeSomethingHint =>
-      'เขียนอะไรหน่อย… ใช้มาร์กดาวน์ของ AniList ได้ที่นี่';
+  String get writeSomethingHint => 'เขียนอะไรหน่อย… ใช้มาร์กดาวน์ของ AniList ได้ที่นี่';
 
   @override
   String get privateMessage => 'ข้อความส่วนตัว';
@@ -2472,8 +2632,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get querySize => 'ขนาดการสืบค้น';
 
   @override
-  String get querySizeDesc =>
-      'แบบก้อนใหญ่จะโหลดทุกแถว (และโปรไฟล์ทั้งหมด) ในคำขอเดียว แบบแยกจะส่งคำขอเล็ก ๆ ต่อแถวหรือต่อส่วนของโปรไฟล์ แต่ละอันเร็ว และส่วนต่าง ๆ จะขึ้นเมื่อมาถึง';
+  String get querySizeDesc => 'แบบก้อนใหญ่จะโหลดทุกแถว (และโปรไฟล์ทั้งหมด) ในคำขอเดียว แบบแยกจะส่งคำขอเล็ก ๆ ต่อแถวหรือต่อส่วนของโปรไฟล์ แต่ละอันเร็ว และส่วนต่าง ๆ จะขึ้นเมื่อมาถึง';
 
   @override
   String get oneBig => 'ก้อนใหญ่';
@@ -2513,15 +2672,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get hidePrivateEntries => 'ซ่อนรายการส่วนตัว';
 
   @override
-  String get hidePrivateEntriesDesc =>
-      'ไม่เอารายการที่ตั้งเป็นส่วนตัวใน AniList มาขึ้นในฟีด';
+  String get hidePrivateEntriesDesc => 'ไม่เอารายการที่ตั้งเป็นส่วนตัวใน AniList มาขึ้นในฟีด';
 
   @override
   String get anilistExcludeList => 'ไม่รวมลิสต์ของฉัน';
 
   @override
-  String get anilistExcludeListDesc =>
-      'ซ่อนเรื่องที่อยู่ใน AniList ของคุณแล้วจากหน้าอนิเมะและมังงะ';
+  String get anilistExcludeListDesc => 'ซ่อนเรื่องที่อยู่ใน AniList ของคุณแล้วจากหน้าอนิเมะและมังงะ';
 
   @override
   String get anilistProfile => 'โปรไฟล์ AniList';
@@ -2539,8 +2696,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get titleLanguage => 'ภาษาของชื่อเรื่อง';
 
   @override
-  String get titleLanguageDesc =>
-      'วิธีเขียนชื่อเรื่องทุกที่ เช่น Attack on Titan / Shingeki no Kyojin / 進撃の巨人';
+  String get titleLanguageDesc => 'วิธีเขียนชื่อเรื่องทุกที่ เช่น Attack on Titan / Shingeki no Kyojin / 進撃の巨人';
 
   @override
   String get staffCharacterNames => 'ชื่อทีมงานและตัวละคร';
@@ -2582,22 +2738,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get airingNotifications => 'แจ้งเตือนการออกอากาศ';
 
   @override
-  String get airingNotificationsDesc =>
-      'แจ้งเตือนเมื่อตอนใหม่ของเรื่องที่ติดตามออกอากาศ';
+  String get airingNotificationsDesc => 'แจ้งเตือนเมื่อตอนใหม่ของเรื่องที่ติดตามออกอากาศ';
 
   @override
   String get displayAdultContent => 'แสดงเนื้อหาผู้ใหญ่';
 
   @override
-  String get displayAdultContentDesc =>
-      'รวมเรื่อง 18+ ในการเลือกดู ค้นหา และฟีด';
+  String get displayAdultContentDesc => 'รวมเรื่อง 18+ ในการเลือกดู ค้นหา และฟีด';
 
   @override
   String get restrictMessages => 'จำกัดข้อความเฉพาะคนที่ติดตาม';
 
   @override
-  String get restrictMessagesDesc =>
-      'เฉพาะคนที่คุณติดตามเท่านั้นที่ส่งข้อความหาคุณได้';
+  String get restrictMessagesDesc => 'เฉพาะคนที่คุณติดตามเท่านั้นที่ส่งข้อความหาคุณได้';
 
   @override
   String get sectionServices => 'บริการ';
@@ -2629,8 +2782,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get importLists => 'นำเข้ารายการ';
 
   @override
-  String get importListsDesc =>
-      'จากข้อมูลสำรอง Aniyomi, Mihon / Tachiyomi หรือ Kotatsu';
+  String get importListsDesc => 'จากข้อมูลสำรอง Aniyomi, Mihon / Tachiyomi หรือ Kotatsu';
 
   @override
   String get exportLists => 'ส่งออกรายการ';
@@ -2651,8 +2803,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get firstTab => 'First tab';
 
   @override
-  String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+  String get firstTabDesc => 'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
 
   @override
   String get novelExtensions => 'Novel Extensions';
@@ -2729,12 +2880,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get couldntLoad => 'โหลดไม่ได้';
 
   @override
-  String get progressStyleHint =>
-      'แคปซูลและแถบทับบนโปสเตอร์ ส่วนด้านนอกแสดงจำนวนเดียวกันเป็นข้อความธรรมดา — เลือกอย่างใดอย่างหนึ่ง';
+  String get progressStyleHint => 'แคปซูลและแถบทับบนโปสเตอร์ ส่วนด้านนอกแสดงจำนวนเดียวกันเป็นข้อความธรรมดา — เลือกอย่างใดอย่างหนึ่ง';
 
   @override
-  String get nixManagedUpdate =>
-      'บิลด์นี้จัดการโดย Nix — ให้รัน \"nix flake update\" บน flake ของคุณแล้วบิลด์ใหม่ แทนการอัปเดตจากตรงนี้';
+  String get nixManagedUpdate => 'บิลด์นี้จัดการโดย Nix — ให้รัน \"nix flake update\" บน flake ของคุณแล้วบิลด์ใหม่ แทนการอัปเดตจากตรงนี้';
 
   @override
   String autoUpdateFailed(String error) {
@@ -2762,12 +2911,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sort => 'เรียงลำดับ';
 
   @override
-  String get chooseBackupDialog =>
-      'เลือกข้อมูลสำรอง Aniyomi, Mihon หรือ Kotatsu';
+  String get chooseBackupDialog => 'เลือกข้อมูลสำรอง Aniyomi, Mihon หรือ Kotatsu';
 
   @override
-  String get importListsHint =>
-      'ย้ายคลังมาจาก Aniyomi, Mihon / Tachiyomi หรือ Kotatsu ชื่อเรื่อง ปก ความคืบหน้า และหมวดหมู่จะยังอยู่';
+  String get importListsHint => 'ย้ายคลังมาจาก Aniyomi, Mihon / Tachiyomi หรือ Kotatsu ชื่อเรื่อง ปก ความคืบหน้า และหมวดหมู่จะยังอยู่';
 
   @override
   String get chooseBackupFile => 'เลือกไฟล์สำรอง';
@@ -2786,8 +2933,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mergeWithExisting => 'รวมกับรายการที่มี';
 
   @override
-  String get mergeWithExistingDesc =>
-      'เก็บของที่มีอยู่ไว้ ถ้าปิดจะแทนที่เรื่องที่ตรงกัน';
+  String get mergeWithExistingDesc => 'เก็บของที่มีอยู่ไว้ ถ้าปิดจะแทนที่เรื่องที่ตรงกัน';
 
   @override
   String get chooseAnother => 'เลือกอันอื่น';
@@ -3063,8 +3209,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get localEntryNote =>
-      'เรื่องนี้อยู่ในรายการในเครื่องนี้เท่านั้น ปิดการแก้ไขไว้เพราะอาจชนกับรายการในบัญชีของคุณ แต่ยังลบได้';
+  String get localEntryNote => 'เรื่องนี้อยู่ในรายการในเครื่องนี้เท่านั้น ปิดการแก้ไขไว้เพราะอาจชนกับรายการในบัญชีของคุณ แต่ยังลบได้';
 
   @override
   String get cardPresetPoster => 'โปสเตอร์';
@@ -3634,8 +3779,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncMainService => 'บริการหลัก';
 
   @override
-  String get syncMainServiceDesc =>
-      'ใช้รายการของบริการนี้เป็นหลัก บริการอื่นที่เข้าสู่ระบบอยู่จะถูกอัปเดตให้ตรงกัน';
+  String get syncMainServiceDesc => 'ใช้รายการของบริการนี้เป็นหลัก บริการอื่นที่เข้าสู่ระบบอยู่จะถูกอัปเดตให้ตรงกัน';
 
   @override
   String get syncAuto => 'ซิงก์อัตโนมัติ';
@@ -3683,8 +3827,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncComparing => 'กำลังเทียบรายการ';
 
   @override
-  String get syncIntro =>
-      'เลือกบริการหลักแล้วกดดึงข้อมูล ระบบจะขอรายการจากแต่ละบริการหนึ่งครั้ง แล้วเทียบกับบริการหลัก';
+  String get syncIntro => 'เลือกบริการหลักแล้วกดดึงข้อมูล ระบบจะขอรายการจากแต่ละบริการหนึ่งครั้ง แล้วเทียบกับบริการหลัก';
 
   @override
   String get syncStateSynced => 'ซิงก์แล้ว';
@@ -3756,8 +3899,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncOnEdit => 'ซิงก์การเปลี่ยนแปลงทันที';
 
   @override
-  String get syncOnEditDesc =>
-      'ส่งทุกการอัปเดตความคืบหน้าและการแก้ไขรายการไปยังบริการอื่นที่เข้าสู่ระบบอยู่ทันที';
+  String get syncOnEditDesc => 'ส่งทุกการอัปเดตความคืบหน้าและการแก้ไขรายการไปยังบริการอื่นที่เข้าสู่ระบบอยู่ทันที';
 
   @override
   String syncPushed(String services) {
@@ -3776,8 +3918,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncAhead => 'อันไหนไปไกลกว่าก็เอาอันนั้น';
 
   @override
-  String get syncAheadDesc =>
-      'สองทาง: แต่ละเรื่องอันที่ไปไกลที่สุดจะชนะและถูกคัดลอกไปบริการอื่นของคุณทั้งหมด';
+  String get syncAheadDesc => 'สองทาง: แต่ละเรื่องอันที่ไปไกลที่สุดจะชนะและถูกคัดลอกไปบริการอื่นของคุณทั้งหมด';
 
   @override
   String syncAheadFrom(String service) {
@@ -3788,8 +3929,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncConfirm => 'ตรวจดูก่อนซิงก์';
 
   @override
-  String get syncConfirmDesc =>
-      'แสดงสิ่งที่ซิงก์ทั้งหมดจะเปลี่ยนและต้องใช้กี่คำขอ';
+  String get syncConfirmDesc => 'แสดงสิ่งที่ซิงก์ทั้งหมดจะเปลี่ยนและต้องใช้กี่คำขอ';
 
   @override
   String get syncPreviewTitle => 'พร้อมซิงก์';
@@ -3855,8 +3995,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get commentsRules => 'กฎการคอมเมนต์';
 
   @override
-  String get commentsRulesBody =>
-      'ฝ่าฝืนกฎข้อไหนก็โดนเตะ\n\n1. ห้ามเหยียดเชื้อชาติ เลือกปฏิบัติ หรือใช้คำพูดสร้างความเกลียดชัง\n2. ห้ามสแปมหรือโปรโมตตัวเอง\n3. ห้ามมีเนื้อหา NSFW เด็ดขาด\n4. ภาษาอังกฤษเท่านั้น ไม่มีข้อยกเว้น\n5. ห้ามแอบอ้างตัวตน คุกคาม หรือด่าทอ\n6. ห้ามเนื้อหาผิดกฎหมายหรือดูหมิ่นแฟนดอมใดอย่างรุนแรง\n7. ห้ามขอหรือแชร์คลังหรือส่วนขยาย\n8. สปอยล์ได้เฉพาะเมื่อใส่แท็กสปอยล์และคำเตือน\n9. ห้ามคอมเมนต์ในเชิงลามกหรือไม่เหมาะสมเกี่ยวกับตัวละครที่เป็นเด็ก\n10. ถ้ามันผิด ก็อย่าโพสต์!';
+  String get commentsRulesBody => 'ฝ่าฝืนกฎข้อไหนก็โดนเตะ\n\n1. ห้ามเหยียดเชื้อชาติ เลือกปฏิบัติ หรือใช้คำพูดสร้างความเกลียดชัง\n2. ห้ามสแปมหรือโปรโมตตัวเอง\n3. ห้ามมีเนื้อหา NSFW เด็ดขาด\n4. ภาษาอังกฤษเท่านั้น ไม่มีข้อยกเว้น\n5. ห้ามแอบอ้างตัวตน คุกคาม หรือด่าทอ\n6. ห้ามเนื้อหาผิดกฎหมายหรือดูหมิ่นแฟนดอมใดอย่างรุนแรง\n7. ห้ามขอหรือแชร์คลังหรือส่วนขยาย\n8. สปอยล์ได้เฉพาะเมื่อใส่แท็กสปอยล์และคำเตือน\n9. ห้ามคอมเมนต์ในเชิงลามกหรือไม่เหมาะสมเกี่ยวกับตัวละครที่เป็นเด็ก\n10. ถ้ามันผิด ก็อย่าโพสต์!';
 
   @override
   String get commentsRulesAccept => 'เข้าใจแล้ว';
@@ -4022,8 +4161,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get commentsSignIn => 'เข้าสู่ระบบ AniList เพื่ออ่านและเขียนคอมเมนต์';
 
   @override
-  String get commentsSignInMessage =>
-      'คอมเมนต์ใช้ร่วมกันทุกบริการและใช้บัญชี AniList ของคุณ';
+  String get commentsSignInMessage => 'คอมเมนต์ใช้ร่วมกันทุกบริการและใช้บัญชี AniList ของคุณ';
 
   @override
   String get commentsUnavailable => 'เรื่องนี้ไม่มีคอมเมนต์';
@@ -4053,8 +4191,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get commentsSettingEnabled => 'คอมเมนต์';
 
   @override
-  String get commentsSettingEnabledDesc =>
-      'แสดงแท็บคอมเมนต์ในหน้าเรื่อง และเข้าสู่ระบบเซิร์ฟเวอร์คอมเมนต์ด้วยบัญชี AniList ของคุณ';
+  String get commentsSettingEnabledDesc => 'แสดงแท็บคอมเมนต์ในหน้าเรื่อง และเข้าสู่ระบบเซิร์ฟเวอร์คอมเมนต์ด้วยบัญชี AniList ของคุณ';
 
   @override
   String get commentsSettingAlerts => 'แจ้งเตือนการตอบกลับ';
@@ -4086,12 +4223,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get barcodeTooltip => 'หามังงะหรือนิยายจากบาร์โค้ด';
 
   @override
-  String get barcodeIntro =>
-      'เล็งกล้องไปที่บาร์โค้ดด้านหลังเล่ม หรือพิมพ์ ISBN เอา';
+  String get barcodeIntro => 'เล็งกล้องไปที่บาร์โค้ดด้านหลังเล่ม หรือพิมพ์ ISBN เอา';
 
   @override
-  String get barcodeIntroManual =>
-      'พิมพ์ ISBN ที่อยู่เหนือบาร์โค้ดด้านหลังเล่ม';
+  String get barcodeIntroManual => 'พิมพ์ ISBN ที่อยู่เหนือบาร์โค้ดด้านหลังเล่ม';
 
   @override
   String get barcodeIsbnHint => 'ISBN';
@@ -4105,8 +4240,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get barcodeCameraDenied =>
-      'ใช้กล้องไม่ได้ อนุญาตการเข้าถึงกล้อง หรือพิมพ์ ISBN แทน';
+  String get barcodeCameraDenied => 'ใช้กล้องไม่ได้ อนุญาตการเข้าถึงกล้อง หรือพิมพ์ ISBN แทน';
 
   @override
   String get themesTitle => 'เพลงเปิดและเพลงปิด';
@@ -4130,8 +4264,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sauceTitle => 'หาต้นทาง';
 
   @override
-  String get sauceIntro =>
-      'อัปโหลดหน้ามังงะหรือภาพศิลป์ หรือวางลิงก์ แล้วจะหาให้ว่ามาจากไหน';
+  String get sauceIntro => 'อัปโหลดหน้ามังงะหรือภาพศิลป์ หรือวางลิงก์ แล้วจะหาให้ว่ามาจากไหน';
 
   @override
   String get sauceKeyTitle => 'คีย์ API ของ SauceNAO';
@@ -4233,8 +4366,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get imageSearchTooltip => 'หาอนิเมะจากภาพแคป';
 
   @override
-  String get imageSearchIntro =>
-      'เลือกภาพแคปหรือวางลิงก์รูป แล้ว trace.moe จะหาว่ามาจากตอนไหนและฉากไหน';
+  String get imageSearchIntro => 'เลือกภาพแคปหรือวางลิงก์รูป แล้ว trace.moe จะหาว่ามาจากตอนไหนและฉากไหน';
 
   @override
   String get imageSearchPick => 'เลือกรูป';
@@ -4329,8 +4461,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get groupsLeaveAsk => 'คุณจะไม่เห็นโพสต์ของกลุ่มนี้ในฟีดอีก';
 
   @override
-  String get groupsJoinFailed =>
-      'เข้าร่วมกลุ่มนี้ไม่ได้ อาจเป็นแบบเชิญเท่านั้น';
+  String get groupsJoinFailed => 'เข้าร่วมกลุ่มนี้ไม่ได้ อาจเป็นแบบเชิญเท่านั้น';
 
   @override
   String get groupsLeaveFailed => 'ออกจากกลุ่มนี้ไม่ได้';
@@ -4425,12 +4556,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get notificationsFollows => 'การติดตาม';
 
   @override
-  String get notificationsNoServices =>
-      'ไม่มีบริการที่เข้าสู่ระบบอยู่ที่มีการแจ้งเตือน';
+  String get notificationsNoServices => 'ไม่มีบริการที่เข้าสู่ระบบอยู่ที่มีการแจ้งเตือน';
 
   @override
-  String get notificationsNoServicesMessage =>
-      'เข้าสู่ระบบบริการที่ส่งการแจ้งเตือน แล้วจะขึ้นที่นี่';
+  String get notificationsNoServicesMessage => 'เข้าสู่ระบบบริการที่ส่งการแจ้งเตือน แล้วจะขึ้นที่นี่';
 
   @override
   String get notificationsEmptyKind => 'หมวดนี้ยังไม่มีอะไร';
@@ -4439,8 +4568,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get notificationsCommentsEmpty => 'ไม่มีการแจ้งเตือนคอมเมนต์';
 
   @override
-  String get notificationsCommentsEmptyMessage =>
-      'การตอบกลับคอมเมนต์ของคุณและประกาศจาก Dantotsu จะขึ้นที่นี่';
+  String get notificationsCommentsEmptyMessage => 'การตอบกลับคอมเมนต์ของคุณและประกาศจาก Dantotsu จะขึ้นที่นี่';
 
   @override
   String get notificationsSettings => 'ตั้งค่าการแจ้งเตือน';
@@ -4468,8 +4596,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get notificationsTestSent => 'ส่งการแจ้งเตือนทดสอบแล้ว';
 
   @override
-  String get notificationsTestDenied =>
-      'Dartotsu ไม่ได้รับอนุญาตให้แจ้งเตือน เปิดได้ในตั้งค่าระบบ';
+  String get notificationsTestDenied => 'Dartotsu ไม่ได้รับอนุญาตให้แจ้งเตือน เปิดได้ในตั้งค่าระบบ';
 
   @override
   String get notificationsTestHint => 'กดค้างเพื่อส่งการแจ้งเตือนทดสอบ';
@@ -4547,8 +4674,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchCompactView => 'กะทัดรัด';
 
   @override
-  String get watchDefaultLayoutDesc =>
-      'วิธีจัดวางตอนต่าง ๆ จนกว่าจะเปลี่ยนเฉพาะเรื่อง';
+  String get watchDefaultLayoutDesc => 'วิธีจัดวางตอนต่าง ๆ จนกว่าจะเปลี่ยนเฉพาะเรื่อง';
 
   @override
   String get watchChunkSize => 'ขนาดช่วง';
@@ -4560,15 +4686,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchShowDescription => 'แสดงคำอธิบาย';
 
   @override
-  String get watchShowDescriptionDesc =>
-      'แสดงเรื่องย่อของตอนใต้ชื่อแต่ละตอนในเลย์เอาต์รายการ';
+  String get watchShowDescriptionDesc => 'แสดงเรื่องย่อของตอนใต้ชื่อแต่ละตอนในเลย์เอาต์รายการ';
 
   @override
   String get watchShowFiller => 'แสดงตอนฟิลเลอร์';
 
   @override
-  String get watchShowFillerDesc =>
-      'ปิดเพื่อซ่อนตอนที่ถูกทำเครื่องหมายเป็นฟิลเลอร์';
+  String get watchShowFillerDesc => 'ปิดเพื่อซ่อนตอนที่ถูกทำเครื่องหมายเป็นฟิลเลอร์';
 
   @override
   String get watchBlurUnwatched => 'ซ่อนภาพตัวอย่างที่สปอยล์';
@@ -4586,15 +4710,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchMarkOnLongPress => 'กดค้างเพื่อทำเครื่องหมายความคืบหน้า';
 
   @override
-  String get watchMarkOnLongPressDesc =>
-      'กดตอนค้างไว้เพื่อทำเครื่องหมายว่าดูแล้วหรือยังไม่ได้ดู';
+  String get watchMarkOnLongPressDesc => 'กดตอนค้างไว้เพื่อทำเครื่องหมายว่าดูแล้วหรือยังไม่ได้ดู';
 
   @override
   String get watchMatching => 'การจับคู่ซอร์ส';
 
   @override
-  String get watchMatchingDesc =>
-      'ใกล้เคียงที่สุดจะเอาผลค้นหาที่ดีที่สุด ตรงเป๊ะเท่านั้นจะรับเฉพาะชื่อที่เกือบเหมือนกัน แล้วให้คุณเลือกเองสำหรับที่เหลือ';
+  String get watchMatchingDesc => 'ใกล้เคียงที่สุดจะเอาผลค้นหาที่ดีที่สุด ตรงเป๊ะเท่านั้นจะรับเฉพาะชื่อที่เกือบเหมือนกัน แล้วให้คุณเลือกเองสำหรับที่เหลือ';
 
   @override
   String get watchMatchClosest => 'ใกล้เคียงที่สุด';
@@ -4603,8 +4725,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchMatchExact => 'ตรงเป๊ะเท่านั้น';
 
   @override
-  String get watchMetadataDesc =>
-      'ชื่อตอน เรื่องย่อ ภาพตัวอย่าง วันออกอากาศ และป้ายฟิลเลอร์ มาจากไหน ลากเพื่อกำหนดลำดับความสำคัญ ซอร์สแรกที่มีค่าจะชนะ';
+  String get watchMetadataDesc => 'ชื่อตอน เรื่องย่อ ภาพตัวอย่าง วันออกอากาศ และป้ายฟิลเลอร์ มาจากไหน ลากเพื่อกำหนดลำดับความสำคัญ ซอร์สแรกที่มีค่าจะชนะ';
 
   @override
   String get watchMetaAniZipDesc => 'ชื่อตอน เรื่องย่อ ภาพนิ่ง และวันออกอากาศ';
@@ -4616,19 +4737,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchMetaSimklDesc => 'ชื่อตอน คำอธิบาย ภาพนิ่ง และวันออกอากาศ';
 
   @override
-  String get watchMetaAniListDesc =>
-      'ชื่อตอนสตรีมมิง ภาพตัวอย่าง และตารางออกอากาศ';
+  String get watchMetaAniListDesc => 'ชื่อตอนสตรีมมิง ภาพตัวอย่าง และตารางออกอากาศ';
 
   @override
-  String get watchMetaTenraiDesc =>
-      'ชื่อตอน วันออกอากาศ ป้ายฟิลเลอร์ และรีแคปของ MyAnimeList ผ่าน Tenrai';
+  String get watchMetaTenraiDesc => 'ชื่อตอน วันออกอากาศ ป้ายฟิลเลอร์ และรีแคปของ MyAnimeList ผ่าน Tenrai';
 
   @override
   String get watchClearMetadata => 'รีเฟรชรายละเอียดตอน';
 
   @override
-  String get watchClearMetadataDesc =>
-      'ลืมรายละเอียดตอนที่แคชไว้ เพื่อดึงมาใหม่';
+  String get watchClearMetadataDesc => 'ลืมรายละเอียดตอนที่แคชไว้ เพื่อดึงมาใหม่';
 
   @override
   String get watchMetadataCleared => 'จะดึงรายละเอียดตอนใหม่';
@@ -4775,8 +4893,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchOpenWebView => 'เปิดใน Web View';
 
   @override
-  String get watchOpenWebViewDesc =>
-      'ผ่านการเช็ก Cloudflare หรือเข้าสู่ระบบ คุกกี้จะใช้ร่วมกับคำขอของซอร์ส';
+  String get watchOpenWebViewDesc => 'ผ่านการเช็ก Cloudflare หรือเข้าสู่ระบบ คุกกี้จะใช้ร่วมกับคำขอของซอร์ส';
 
   @override
   String watchCookieCount(int count, String host) {
@@ -4802,12 +4919,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchClearanceSession => 'ใช้ได้จนกว่าจะปิดแอป';
 
   @override
-  String get watchAgentShared =>
-      'คำขอใช้ user agent ของ Web View ซึ่ง Cloudflare ตรวจสอบ';
+  String get watchAgentShared => 'คำขอใช้ user agent ของ Web View ซึ่ง Cloudflare ตรวจสอบ';
 
   @override
-  String get watchAgentCustom =>
-      'ตั้ง user agent กำหนดเองไว้ Cloudflare clearance จาก Web View อาจถูกปฏิเสธ';
+  String get watchAgentCustom => 'ตั้ง user agent กำหนดเองไว้ Cloudflare clearance จาก Web View อาจถูกปฏิเสธ';
 
   @override
   String get watchTestConnection => 'ทดสอบการเชื่อมต่อ';
@@ -4841,31 +4956,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchFailTimeout => 'The check didn\'t finish in time';
 
   @override
-  String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+  String get watchFailBlocked => 'The site blocked this device (access denied). A check won\'t help';
 
   @override
-  String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+  String get watchFailTurnstile => 'This check needs a tap that the background solver can\'t do';
 
   @override
-  String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+  String get watchFailLoad => 'The page didn\'t load. Check the connection and the site address';
 
   @override
-  String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+  String get watchFailRejected => 'The site rejected the clearance it just gave. Try again or clear the cookies';
 
   @override
   String get watchFailDismissed => 'The check was closed before it finished';
 
   @override
-  String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+  String get watchFailCooldown => 'You closed the check a moment ago. Press Solve it to try again';
 
   @override
-  String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+  String get watchFailQuiet => 'The check needs you, and the app was working on its own';
 
   @override
   String get watchFailWebView => 'The background web view couldn\'t start';
@@ -4908,8 +5017,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+  String get watchClearanceStale => 'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
 
   @override
   String get watchSectionConnection => 'Connection';
@@ -4978,15 +5086,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSkipDuration => 'ความยาวปุ่มข้าม';
 
   @override
-  String get playerSkipDurationDesc =>
-      'จำนวนวินาทีที่ปุ่มข้ามกระโดดนอกช่วงเพลงเปิดและเพลงปิด';
+  String get playerSkipDurationDesc => 'จำนวนวินาทีที่ปุ่มข้ามกระโดดนอกช่วงเพลงเปิดและเพลงปิด';
 
   @override
   String get playerSeekDuration => 'แตะสองครั้งเพื่อข้าม';
 
   @override
-  String get playerSeekDurationDesc =>
-      'วินาทีที่กระโดดเมื่อแตะสองครั้งหรือกดปุ่มลูกศร';
+  String get playerSeekDurationDesc => 'วินาทีที่กระโดดเมื่อแตะสองครั้งหรือกดปุ่มลูกศร';
 
   @override
   String get playerAutoPlay => 'เล่นตอนถัดไปอัตโนมัติ';
@@ -5022,8 +5128,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerAutoSkipRecap => 'ข้ามรีแคป';
 
   @override
-  String get playerAutoSkipDesc =>
-      'ข้ามทันทีที่เริ่ม โดยใช้ AniSkip และไทม์สแตมป์ของสตรีม';
+  String get playerAutoSkipDesc => 'ข้ามทันทีที่เริ่ม โดยใช้ AniSkip และไทม์สแตมป์ของสตรีม';
 
   @override
   String get playerSkipOnce => 'ข้ามแค่ครั้งเดียว';
@@ -5047,8 +5152,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerHoldToSpeed => 'กดค้างเพื่อเร่งความเร็ว';
 
   @override
-  String get playerHoldToSpeedDesc =>
-      'กดวิดีโอค้างไว้เพื่อเล่นเร็วขึ้น ลากไปข้างๆ เพื่อเปลี่ยนความเร็ว';
+  String get playerHoldToSpeedDesc => 'กดวิดีโอค้างไว้เพื่อเล่นเร็วขึ้น ลากไปข้างๆ เพื่อเปลี่ยนความเร็ว';
 
   @override
   String get playerThumbless => 'แถบเลื่อนหนาขึ้น';
@@ -5090,8 +5194,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerLibass => 'ใช้ libass';
 
   @override
-  String get playerLibassDesc =>
-      'เรนเดอร์คำบรรยาย .ass แบบมีสไตล์ ขนาด สี และฟอนต์ด้านบนจะไม่มีผล';
+  String get playerLibassDesc => 'เรนเดอร์คำบรรยาย .ass แบบมีสไตล์ ขนาด สี และฟอนต์ด้านบนจะไม่มีผล';
 
   @override
   String get playerShaders => 'เชเดอร์';
@@ -5100,8 +5203,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerShadersEnable => 'เปิดใช้เชเดอร์';
 
   @override
-  String get playerShadersEnableDesc =>
-      'ขยายและทำภาพให้คมด้วยเชเดอร์ GLSL เช่น Anime4K';
+  String get playerShadersEnableDesc => 'ขยายและทำภาพให้คมด้วยเชเดอร์ GLSL เช่น Anime4K';
 
   @override
   String get playerShadersOff => 'ปิดเชเดอร์';
@@ -5110,8 +5212,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerShadersMissing => 'ยังไม่ได้ติดตั้ง Anime4K';
 
   @override
-  String get playerShadersMissingDesc =>
-      'ดาวน์โหลดชุดเชเดอร์ Anime4K (ประมาณ 0.8 MB) เพื่อใช้โหมดที่มีมาให้';
+  String get playerShadersMissingDesc => 'ดาวน์โหลดชุดเชเดอร์ Anime4K (ประมาณ 0.8 MB) เพื่อใช้โหมดที่มีมาให้';
 
   @override
   String get playerShadersDownload => 'ดาวน์โหลด Anime4K';
@@ -5123,8 +5224,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerPictureOriginal => 'Original';
 
   @override
-  String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+  String get playerPictureOriginalDesc => 'The frame as the video has it, without shaders or colors';
 
   @override
   String get playerPictureProcessed => 'With shaders and colors';
@@ -5205,15 +5305,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerShadersPreviewFailed => 'จับเฟรมมาดูตัวอย่างไม่ได้';
 
   @override
-  String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+  String get playerShadersSoftware => 'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
 
   @override
   String get playerSoftwareRender => 'Software rendering';
 
   @override
-  String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+  String get playerSoftwareRenderDesc => 'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
 
   @override
   String get playerShadersCustomFiles => 'เชเดอร์ของคุณ';
@@ -5225,8 +5323,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerShadersImport => 'นำเข้า .glsl';
 
   @override
-  String get playerShadersNone =>
-      'นำเข้าไฟล์ .glsl หรือ .hook ของคุณเอง แล้วติ๊กเพื่อต่อเป็นลูกโซ่';
+  String get playerShadersNone => 'นำเข้าไฟล์ .glsl หรือ .hook ของคุณเอง แล้วติ๊กเพื่อต่อเป็นลูกโซ่';
 
   @override
   String get playerShadersBadFile => 'เลือกไฟล์เชเดอร์ .glsl หรือ .hook';
@@ -5265,8 +5362,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerUseMpvConf => 'ใช้ mpv.conf';
 
   @override
-  String get playerUseMpvConfDesc =>
-      'ใช้ตัวเลือกใน mpv.conf ของคุณตอนเริ่มเล่น';
+  String get playerUseMpvConfDesc => 'ใช้ตัวเลือกใน mpv.conf ของคุณตอนเริ่มเล่น';
 
   @override
   String get playerMpvConf => 'mpv.conf';
@@ -5275,8 +5371,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerMpvConfEdit => 'แก้ไขการตั้งค่า mpv';
 
   @override
-  String get playerMpvConfDesc =>
-      'หนึ่งตัวเลือกต่อบรรทัด เหมือน --hwdec=auto ใน mpv.conf ปกติ โปรไฟล์ใน [วงเล็บเหลี่ยม] จะถูกเมิน';
+  String get playerMpvConfDesc => 'หนึ่งตัวเลือกต่อบรรทัด เหมือน --hwdec=auto ใน mpv.conf ปกติ โปรไฟล์ใน [วงเล็บเหลี่ยม] จะถูกเมิน';
 
   @override
   String get playerMpvConfSaved => 'บันทึก mpv.conf แล้ว';
@@ -5285,8 +5380,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerUseScripts => 'ใช้สคริปต์ mpv';
 
   @override
-  String get playerUseScriptsDesc =>
-      'โหลดปลั๊กอินจากโฟลเดอร์ scripts ต้องใช้ libmpv ที่รองรับ Lua หรือ JavaScript';
+  String get playerUseScriptsDesc => 'โหลดปลั๊กอินจากโฟลเดอร์ scripts ต้องใช้ libmpv ที่รองรับ Lua หรือ JavaScript';
 
   @override
   String get playerScripts => 'สคริปต์ mpv';
@@ -5298,8 +5392,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerScriptsAdd => 'เพิ่มสคริปต์';
 
   @override
-  String get playerScriptsDesc =>
-      'ปลั๊กอิน Lua, JavaScript และเนทีฟที่วางไว้ที่นี่จะถูกโหลดตอนเริ่มเล่น';
+  String get playerScriptsDesc => 'ปลั๊กอิน Lua, JavaScript และเนทีฟที่วางไว้ที่นี่จะถูกโหลดตอนเริ่มเล่น';
 
   @override
   String get playerScriptsNone => 'ยังไม่มีสคริปต์';
@@ -5311,8 +5404,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerTuning => 'ปรับแต่งวิดีโอขั้นสูง';
 
   @override
-  String get playerTuningDesc =>
-      'เขียนทับการซิงก์ แคช การสเกล และโทนแมปปิง ค่าที่ผิดอาจทำให้เล่นไม่ดี';
+  String get playerTuningDesc => 'เขียนทับการซิงก์ แคช การสเกล และโทนแมปปิง ค่าที่ผิดอาจทำให้เล่นไม่ดี';
 
   @override
   String get playerVideoSync => 'ซิงก์วิดีโอ';
@@ -5321,8 +5413,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerInterpolation => 'การสอดแทรกเฟรม';
 
   @override
-  String get playerInterpolationDesc =>
-      'ภาพเคลื่อนไหวลื่น ต้องใช้ซิงก์ display-resample';
+  String get playerInterpolationDesc => 'ภาพเคลื่อนไหวลื่น ต้องใช้ซิงก์ display-resample';
 
   @override
   String get playerPitch => 'แก้พิทช์';
@@ -5409,8 +5500,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerPickTorrent => 'เลือกไฟล์ .torrent';
 
   @override
-  String get playerTorrentMissing =>
-      'ติดตั้งแอดออนทอร์เรนต์จากตั้งค่า > แอดออนก่อน';
+  String get playerTorrentMissing => 'ติดตั้งแอดออนทอร์เรนต์จากตั้งค่า > แอดออนก่อน';
 
   @override
   String get playerNoVideos => 'ไม่พบวิดีโอที่เล่นได้';
@@ -5466,8 +5556,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerAutoSelect => 'เลือกสตรีมอัตโนมัติ';
 
   @override
-  String get playerAutoSelectDesc =>
-      'เลือกสตรีมที่คล้ายกับที่เลือกครั้งล่าสุดของเรื่องนี้ที่สุด';
+  String get playerAutoSelectDesc => 'เลือกสตรีมที่คล้ายกับที่เลือกครั้งล่าสุดของเรื่องนี้ที่สุด';
 
   @override
   String get playerLoadingStreams => 'กำลังหาสตรีม…';
@@ -5485,8 +5574,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerTorrentNeeded => 'สตรีมนี้เป็นทอร์เรนต์';
 
   @override
-  String get playerTorrentNeededDesc =>
-      'ติดตั้งแอดออนทอร์เรนต์เพื่อเล่นลิงก์แม็กเน็ตและไฟล์ .torrent';
+  String get playerTorrentNeededDesc => 'ติดตั้งแอดออนทอร์เรนต์เพื่อเล่นลิงก์แม็กเน็ตและไฟล์ .torrent';
 
   @override
   String get playerOpenAddons => 'เปิดแอดออน';
@@ -5528,8 +5616,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerOpenBook => 'Open a book';
 
   @override
-  String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+  String get readerOpenBookDesc => 'Read an epub (novel reader) or a PDF (manga reader) from your files';
 
   @override
   String get readerNoText => 'ตอนนี้ไม่มีข้อความ';
@@ -5538,8 +5625,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerPerTitle => 'เฉพาะเรื่องนี้';
 
   @override
-  String get readerPerTitleDesc =>
-      'ใช้การตั้งค่าตัวอ่านเหล่านี้กับเรื่องนี้เท่านั้น';
+  String get readerPerTitleDesc => 'ใช้การตั้งค่าตัวอ่านเหล่านี้กับเรื่องนี้เท่านั้น';
 
   @override
   String get readerSectionReading => 'การอ่าน';
@@ -5734,8 +5820,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerLongPressSave => 'Hold a page to save it';
 
   @override
-  String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+  String get readerLongPressSaveDesc => 'Long press a page to open save, share and copy options';
 
   @override
   String get readerVolumeKeys => 'ปุ่มเสียงพลิกหน้า';
@@ -5794,8 +5879,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerSaveProgress => 'บันทึกความคืบหน้า';
 
   @override
-  String get readerSaveProgressDesc =>
-      'จำหน้าที่อ่านและทำเครื่องหมายตอนว่าอ่านแล้ว';
+  String get readerSaveProgressDesc => 'จำหน้าที่อ่านและทำเครื่องหมายตอนว่าอ่านแล้ว';
 
   @override
   String get readerReset => 'รีเซ็ตการตั้งค่าตัวอ่าน';
@@ -5880,8 +5964,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get castSearching => 'Looking for devices on your network…';
 
   @override
-  String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+  String get castNoDevices => 'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
 
   @override
   String get castRefresh => 'Search again';
@@ -5927,8 +6010,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get trackProgressYes => 'บันทึก';
 
   @override
-  String get trackProgressReset =>
-      'รีเซ็ตการถามบันทึกความคืบหน้าของประเภทนี้แล้ว จะถามใหม่';
+  String get trackProgressReset => 'รีเซ็ตการถามบันทึกความคืบหน้าของประเภทนี้แล้ว จะถามใหม่';
 
   @override
   String get trackProgressNo => 'ไม่';
@@ -5958,8 +6040,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get dantotsuImport => 'นำเข้าจาก Dantotsu';
 
   @override
-  String get dantotsuImportDesc =>
-      'อ่านข้อมูลสำรองการตั้งค่า Dantotsu (.ani หรือ .sani ที่เข้ารหัส)';
+  String get dantotsuImportDesc => 'อ่านข้อมูลสำรองการตั้งค่า Dantotsu (.ani หรือ .sani ที่เข้ารหัส)';
 
   @override
   String get dantotsuPick => 'เลือกข้อมูลสำรอง Dantotsu';
@@ -6048,15 +6129,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get kitsuGraphqlDetail => 'หน้ารายละเอียดเร็วขึ้น (GraphQL)';
 
   @override
-  String get kitsuGraphqlDetailDesc =>
-      'โหลดเรื่องพร้อมตัวละคร ทีมงาน และรายการของคุณในคำขอเดียว';
+  String get kitsuGraphqlDetailDesc => 'โหลดเรื่องพร้อมตัวละคร ทีมงาน และรายการของคุณในคำขอเดียว';
 
   @override
   String get togetherTitle => 'ดูด้วยกัน';
 
   @override
-  String get togetherIntro =>
-      'วางลิงก์ห้องที่เพื่อนส่งมา คุณจะเข้าร่วมทันที และเครื่องเล่นจะเปิดเมื่อเขาเริ่มดู';
+  String get togetherIntro => 'วางลิงก์ห้องที่เพื่อนส่งมา คุณจะเข้าร่วมทันที และเครื่องเล่นจะเปิดเมื่อเขาเริ่มดู';
 
   @override
   String get togetherName => 'ชื่อของคุณ';
@@ -6180,8 +6259,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get novelBilingual => 'แสดงต้นฉบับและคำแปล';
 
   @override
-  String get novelBilingualDesc =>
-      'แต่ละย่อหน้าจะแสดงข้อความต้นฉบับและคำแปลอยู่ข้างใต้';
+  String get novelBilingualDesc => 'แต่ละย่อหน้าจะแสดงข้อความต้นฉบับและคำแปลอยู่ข้างใต้';
 
   @override
   String get novelTranslateTo => 'แปลเป็น';
@@ -6234,15 +6312,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get novelTapPaging => 'แตะขอบเพื่อพลิกหน้า';
 
   @override
-  String get novelTapPagingDesc =>
-      'แตะด้านซ้ายหรือขวาเพื่อเลื่อนหนึ่งหน้า ตรงกลางจะแสดงปุ่มควบคุม';
+  String get novelTapPagingDesc => 'แตะด้านซ้ายหรือขวาเพื่อเลื่อนหนึ่งหน้า ตรงกลางจะแสดงปุ่มควบคุม';
 
   @override
   String get novelPaged => 'Page turning';
 
   @override
-  String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+  String get novelPagedDesc => 'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
 
   @override
   String novelPageOf(int current, int total) {
@@ -6285,8 +6361,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get novelHighlights => 'Highlights';
 
   @override
-  String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+  String get novelHighlightsEmpty => 'Select some text and tap Highlight to keep it here';
 
   @override
   String get novelHighlight => 'Highlight';
@@ -6301,8 +6376,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get novelHighlightRemove => 'Remove highlight';
 
   @override
-  String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+  String get novelHighlightFailed => 'Couldn\'t match that selection to the text';
 
   @override
   String novelMinutesLeft(int count) {
@@ -6370,8 +6444,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSkipSubmit => 'Submit skip times';
 
   @override
-  String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+  String get playerSkipSubmitDesc => 'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
 
   @override
   String get playerSkipStart => 'Start';
@@ -6394,12 +6467,10 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+  String get playerUnsupported => 'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
 
   @override
-  String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+  String get playerSkipNoMal => 'This title has no MyAnimeList id, AniSkip can\'t take it';
 
   @override
   String get playerNoChapters => 'ไม่มีตอน';
@@ -6465,8 +6536,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerPerTitle => 'เฉพาะเรื่องนี้';
 
   @override
-  String get playerPerTitleDesc =>
-      'ใช้ตัวเลือกเหล่านี้กับเรื่องนี้ และไม่แตะค่าเริ่มต้นของคุณ';
+  String get playerPerTitleDesc => 'ใช้ตัวเลือกเหล่านี้กับเรื่องนี้ และไม่แตะค่าเริ่มต้นของคุณ';
 
   @override
   String get playerSwapGestures => 'สลับด้านปัด';
@@ -6478,15 +6548,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerOpenBig => 'เปิดแบบเต็มจอ';
 
   @override
-  String get playerOpenBigDesc =>
-      'เปิดเครื่องเล่นแบบเต็มจอ แทนที่จะมีรายการตอนด้วย';
+  String get playerOpenBigDesc => 'เปิดเครื่องเล่นแบบเต็มจอ แทนที่จะมีรายการตอนด้วย';
 
   @override
   String get playerPauseOnBlur => 'หยุดชั่วคราวเมื่อไม่ได้โฟกัส';
 
   @override
-  String get playerPauseOnBlurDesc =>
-      'หยุดชั่วคราวตอนแอปถูกบัง เช่น เปิดแถบแจ้งเตือน แล้วเล่นต่อเมื่อกลับมา';
+  String get playerPauseOnBlurDesc => 'หยุดชั่วคราวตอนแอปถูกบัง เช่น เปิดแถบแจ้งเตือน แล้วเล่นต่อเมื่อกลับมา';
 
   @override
   String get playerAudioOutput => 'เอาต์พุตเสียง';
@@ -6498,8 +6566,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get fontImport => 'นำเข้าฟอนต์';
 
   @override
-  String get fontSample =>
-      'ทดสอบฟอนต์ภาษาไทยและ The quick brown fox jumps over the lazy dog';
+  String get fontSample => 'ทดสอบฟอนต์ภาษาไทยและ The quick brown fox jumps over the lazy dog';
 
   @override
   String get playerSubtitleDelay => 'ดีเลย์คำบรรยาย';
@@ -6544,8 +6611,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSeekPreview => 'ตัวอย่างตอนเลื่อน';
 
   @override
-  String get playerSeekPreviewDesc =>
-      'แสดงเฟรมตัวอย่างเล็ก ๆ เหนือแถบเลื่อนตอนลาก จะเปิดตัวถอดรหัสความละเอียดต่ำตัวที่สอง จึงใช้ข้อมูลเพิ่มกับสตรีม';
+  String get playerSeekPreviewDesc => 'แสดงเฟรมตัวอย่างเล็ก ๆ เหนือแถบเลื่อนตอนลาก จะเปิดตัวถอดรหัสความละเอียดต่ำตัวที่สอง จึงใช้ข้อมูลเพิ่มกับสตรีม';
 
   @override
   String get playerSettingsChip => 'ตั้งค่า';
@@ -6624,8 +6690,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+  String get downloadNothingWatched => 'Nothing you have finished is downloaded';
 
   @override
   String get downloadStorageEmpty => 'No downloads are using space';
@@ -6658,8 +6723,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadNoSubtitle => 'ไม่มีคำบรรยาย';
 
   @override
-  String get downloadHlsNeedsFfmpeg =>
-      'สตรีมนี้เป็นเพลย์ลิสต์ HLS ต้องใช้แอดออน FFmpeg เพื่อดาวน์โหลด';
+  String get downloadHlsNeedsFfmpeg => 'สตรีมนี้เป็นเพลย์ลิสต์ HLS ต้องใช้แอดออน FFmpeg เพื่อดาวน์โหลด';
 
   @override
   String get downloadSourceMissing => 'ยังไม่ได้ติดตั้งซอร์สของตอนนี้';
@@ -6789,8 +6853,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadNotifications => 'แจ้งเตือนการดาวน์โหลด';
 
   @override
-  String get downloadNotificationsDesc =>
-      'แสดงความคืบหน้าสดถ้าระบบรองรับ ไม่งั้นแจ้งเมื่อดาวน์โหลดเสร็จ';
+  String get downloadNotificationsDesc => 'แสดงความคืบหน้าสดถ้าระบบรองรับ ไม่งั้นแจ้งเมื่อดาวน์โหลดเสร็จ';
 
   @override
   String get downloadNotifyLive => 'สด';
@@ -6805,15 +6868,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadInfoFile => 'เขียนไฟล์ข้อมูลไว้ข้างแต่ละดาวน์โหลด';
 
   @override
-  String get downloadInfoFileDesc =>
-      'บันทึกสตรีม คุณภาพ คำบรรยาย และเวลาข้ามเป็นไฟล์ .json เล็ก ๆ';
+  String get downloadInfoFileDesc => 'บันทึกสตรีม คุณภาพ คำบรรยาย และเวลาข้ามเป็นไฟล์ .json เล็ก ๆ';
 
   @override
   String get offlineHeader => 'ออฟไลน์';
 
   @override
-  String get offlineModeDesc =>
-      'อัตโนมัติจะออฟไลน์เฉพาะตอนเปิดแอปโดยไม่มีเน็ต เสมอจะออฟไลน์ไปจนกว่าจะเปลี่ยน';
+  String get offlineModeDesc => 'อัตโนมัติจะออฟไลน์เฉพาะตอนเปิดแอปโดยไม่มีเน็ต เสมอจะออฟไลน์ไปจนกว่าจะเปลี่ยน';
 
   @override
   String get offlineModeOff => 'ปิด';
@@ -6822,8 +6883,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get offlineModeAlways => 'เสมอ';
 
   @override
-  String get offlineModeOn =>
-      'เปิดโหมดออฟไลน์อยู่ การเปลี่ยนแปลงจะบันทึกไว้ที่นี่และส่งเมื่อกลับมาออนไลน์';
+  String get offlineModeOn => 'เปิดโหมดออฟไลน์อยู่ การเปลี่ยนแปลงจะบันทึกไว้ที่นี่และส่งเมื่อกลับมาออนไลน์';
 
   @override
   String get offlineSaved => 'บันทึกไว้ในเครื่องนี้แล้ว จะซิงก์เมื่อออนไลน์';
@@ -6863,8 +6923,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get offlineDiscard => 'ทิ้ง';
 
   @override
-  String get downloadNotOffline =>
-      'ตอนนี้ยังไม่ได้ดาวน์โหลด จึงใช้แบบออฟไลน์ไม่ได้';
+  String get downloadNotOffline => 'ตอนนี้ยังไม่ได้ดาวน์โหลด จึงใช้แบบออฟไลน์ไม่ได้';
 
   @override
   String get offlineModeChip => 'ออฟไลน์';
@@ -6901,15 +6960,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadFfmpegTitle => 'ต้องใช้แอดออน FFmpeg';
 
   @override
-  String get downloadFfmpegBody =>
-      'สตรีมนี้เป็นเพลย์ลิสต์ HLS แอดออน FFmpeg จะรวมชิ้นส่วนเป็นไฟล์ mp4 ไฟล์เดียว ถ้าไม่มีจะเก็บชิ้นส่วนไว้ในโฟลเดอร์ของตอนและเล่นจากตรงนั้น';
+  String get downloadFfmpegBody => 'สตรีมนี้เป็นเพลย์ลิสต์ HLS แอดออน FFmpeg จะรวมชิ้นส่วนเป็นไฟล์ mp4 ไฟล์เดียว ถ้าไม่มีจะเก็บชิ้นส่วนไว้ในโฟลเดอร์ของตอนและเล่นจากตรงนั้น';
 
   @override
   String get downloadFfmpegInstall => 'ติดตั้ง';
 
   @override
-  String get downloadFfmpegInstalling =>
-      'กำลังติดตั้ง FFmpeg อาจใช้เวลาสักพัก…';
+  String get downloadFfmpegInstalling => 'กำลังติดตั้ง FFmpeg อาจใช้เวลาสักพัก…';
 
   @override
   String get downloadFinishing => 'กำลังรวมชิ้นส่วนเป็นไฟล์เดียว…';
@@ -6937,15 +6994,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadAutoDelete => 'ลบที่ดาวน์โหลดแล้วดู';
 
   @override
-  String get downloadAutoDeleteDesc =>
-      'ลบที่ดาวน์โหลดเมื่อความคืบหน้าของคุณไปถึงตอนนั้น';
+  String get downloadAutoDeleteDesc => 'ลบที่ดาวน์โหลดเมื่อความคืบหน้าของคุณไปถึงตอนนั้น';
 
   @override
   String get downloadConnections => 'การเชื่อมต่อต่อดาวน์โหลด';
 
   @override
-  String get downloadConnectionsDesc =>
-      'แบ่งไฟล์ใหญ่เป็นส่วน ๆ ที่ดึงพร้อมกัน บางเซิร์ฟเวอร์จำกัดเรื่องนี้';
+  String get downloadConnectionsDesc => 'แบ่งไฟล์ใหญ่เป็นส่วน ๆ ที่ดึงพร้อมกัน บางเซิร์ฟเวอร์จำกัดเรื่องนี้';
 
   @override
   String get downloadPlayChoice => 'เล่นจาก';
@@ -7023,8 +7078,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadMetered => 'หยุดเมื่อใช้เน็ตจำกัด';
 
   @override
-  String get downloadMeteredDesc =>
-      'รอตอนใช้ Wi-Fi ที่เครื่องตั้งเป็นเน็ตจำกัดด้วย';
+  String get downloadMeteredDesc => 'รอตอนใช้ Wi-Fi ที่เครื่องตั้งเป็นเน็ตจำกัดด้วย';
 
   @override
   String get downloadSpeedLimit => 'จำกัดความเร็ว';
@@ -7056,8 +7110,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchAutoSource => 'สลับไปซอร์สถัดไปอัตโนมัติ';
 
   @override
-  String get watchAutoSourceDesc =>
-      'ถ้าซอร์สหาเรื่องไม่เจอหรือโหลดไม่ได้ ให้ลองซอร์สที่ติดตั้งถัดไป';
+  String get watchAutoSourceDesc => 'ถ้าซอร์สหาเรื่องไม่เจอหรือโหลดไม่ได้ ให้ลองซอร์สที่ติดตั้งถัดไป';
 
   @override
   String get extensionTest => 'ทดสอบส่วนขยาย';
@@ -7109,36 +7162,31 @@ class AppLocalizationsTh extends AppLocalizations {
   String get onboardingFeaturesTitle => 'ครบในที่เดียว';
 
   @override
-  String get onboardingFeaturesBody =>
-      'ทุกอย่างที่ติดตาม ดู และอ่าน โดยไม่ต้องสลับแอป';
+  String get onboardingFeaturesBody => 'ทุกอย่างที่ติดตาม ดู และอ่าน โดยไม่ต้องสลับแอป';
 
   @override
   String get onboardingFeatureTrack => 'ติดตามทุกอย่าง';
 
   @override
-  String get onboardingFeatureTrackDesc =>
-      'รายการ ความคืบหน้า และคะแนนบน AniList, MyAnimeList, Simkl, Kitsu และ MangaBaka';
+  String get onboardingFeatureTrackDesc => 'รายการ ความคืบหน้า และคะแนนบน AniList, MyAnimeList, Simkl, Kitsu และ MangaBaka';
 
   @override
   String get onboardingFeatureWatch => 'ดูและอ่าน';
 
   @override
-  String get onboardingFeatureWatchDesc =>
-      'ติดตั้งส่วนขยายแล้วสตรีมอนิเมะ หรืออ่านมังงะและนิยายได้ในแอปเลย';
+  String get onboardingFeatureWatchDesc => 'ติดตั้งส่วนขยายแล้วสตรีมอนิเมะ หรืออ่านมังงะและนิยายได้ในแอปเลย';
 
   @override
   String get onboardingFeatureOffline => 'พกไปออฟไลน์';
 
   @override
-  String get onboardingFeatureOfflineDesc =>
-      'ดาวน์โหลดตอนไว้ แล้วดูต่อได้แม้ไม่มีเน็ต';
+  String get onboardingFeatureOfflineDesc => 'ดาวน์โหลดตอนไว้ แล้วดูต่อได้แม้ไม่มีเน็ต';
 
   @override
   String get onboardingFeatureSync => 'ซิงก์รายการให้ตรงกัน';
 
   @override
-  String get onboardingFeatureSyncDesc =>
-      'คัดลอกรายการข้ามบริการ หรือให้อันที่ไปไกลกว่าชนะ';
+  String get onboardingFeatureSyncDesc => 'คัดลอกรายการข้ามบริการ หรือให้อันที่ไปไกลกว่าชนะ';
 
   @override
   String get onboardingServices => 'ใช้งานร่วมกับ';
@@ -7205,22 +7253,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sourceAlertsSwitch => 'Check subscribed titles';
 
   @override
-  String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+  String get sourceAlertsSwitchDesc => 'Once each time the app opens, for titles you turned the bell on';
 
   @override
   String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
 
   @override
-  String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+  String get sourceSkipUnstartedDesc => 'Nothing watched or read yet, but episodes already exist';
 
   @override
   String get sourceSkipUnseen => 'Skip while you have unseen episodes';
 
   @override
-  String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+  String get sourceSkipUnseenDesc => 'You still have released episodes to catch up on';
 
   @override
   String get sourceManage => 'Subscriptions';
@@ -7262,8 +7307,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sourceEmpty => 'No subscriptions yet';
 
   @override
-  String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+  String get sourceEmptyMessage => 'Tap the bell above a title\'s episodes to be told about new ones';
 
   @override
   String get sourceAll => 'All';
@@ -7341,8 +7385,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sourceNoticesEmpty => 'No release notices yet';
 
   @override
-  String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+  String get sourceNoticesEmptyMessage => 'New episodes and chapters from your subscribed titles show up here';
 
   @override
   String get sourceOpenTitle => 'Open title';
@@ -7390,8 +7433,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get updateUpToDate => 'You\'re on the latest version';
 
   @override
-  String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+  String get updateIosHint => 'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
 
   @override
   String get updateOpenedBrowser => 'Check your browser';
@@ -7403,15 +7445,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsNotifications => 'Notifications';
 
   @override
-  String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+  String get settingsNotificationsDesc => 'Alerts for your lists, new episodes and chapters, and comment replies';
 
   @override
   String get settingsAboutUpdates => 'About & updates';
 
   @override
-  String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+  String get settingsAboutUpdatesDesc => 'App updates, version, logs, links and support';
 
   @override
   String get settingsGroupAccount => 'Your account';
@@ -7423,23 +7463,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsGroupApp => 'App';
 
   @override
-  String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+  String get settingsAnimeDesc => 'Player, subtitles, skipping, episode list and episode details';
 
   @override
-  String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+  String get settingsMangaDesc => 'Reader mode, controls, display and chapter tracking';
 
   @override
-  String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+  String get settingsNovelDesc => 'Text, page turning, translation and read aloud';
 
   @override
   String get settingsLocalPlay => 'Local play';
 
   @override
-  String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+  String get settingsLocalPlayDesc => 'Play files, folders, network streams and torrents, or open a book';
 
   @override
   String get settingsLocalPlayVideo => 'Video';
@@ -7457,8 +7493,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsSectionProgress => 'Progress tracking';
 
   @override
-  String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+  String get updateChannelDesc => 'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
 
   @override
   String get checkNowDesc => 'Look for a newer version right away';
@@ -7478,26 +7513,22 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+  String get secPlayerPlayback => 'Default speed, auto play, video fit, orientation and picture in picture';
 
   @override
   String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
 
   @override
-  String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+  String get secPlayerControls => 'Swipe, hold and tap gestures and seek preview';
 
   @override
-  String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+  String get secPlayerSubtitles => 'Languages, appearance and subtitle rendering';
 
   @override
   String get secPlayerShaders => 'Anime upscaling and your own shaders';
 
   @override
-  String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+  String get secPlayerEngine => 'Decoder, video and audio output, buffering. Only change these if playback has problems';
 
   @override
   String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
@@ -7506,23 +7537,19 @@ class AppLocalizationsTh extends AppLocalizations {
   String get secAnimeList => 'Filler episodes and unwatched thumbnails';
 
   @override
-  String get secProgress =>
-      'When your watched or read progress is saved to your list';
+  String get secProgress => 'When your watched or read progress is saved to your list';
 
   @override
-  String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+  String get secAnimeDetails => 'Where episode titles, thumbnails and summaries come from';
 
   @override
-  String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+  String get secReaderReading => 'Reading mode, page turning, zoom and next chapter';
 
   @override
   String get secReaderControls => 'Tap zones, volume keys and auto scroll';
 
   @override
-  String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+  String get secReaderDisplay => 'Background, brightness, fullscreen and page number';
 
   @override
   String get secNovelText => 'Font, size, spacing, margins and page turning';
@@ -7543,8 +7570,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get layoutDesc => 'Choose, move and hide the buttons on the bars';
 
   @override
-  String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+  String get layoutHint => 'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
 
   @override
   String layoutDropInto(String zone) {
@@ -7631,20 +7657,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sourceWhyLastRelease => 'Last new release seen';
 
   @override
-  String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+  String get sourceWhyVerdictNew => 'A new release appears here as soon as the source lists it and the next check runs.';
 
   @override
-  String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+  String get sourceWhyVerdictAhead => 'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
 
   @override
-  String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+  String get sourceWhyVerdictSkipped => 'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
 
   @override
-  String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+  String get sourceWhyVerdictBroken => 'The source can\'t be reached or has been removed, so nothing is being checked.';
 
   @override
   String get sourceWhyVerdictMuted => 'This subscription is muted.';
@@ -7668,8 +7690,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get externalMpv => 'Open in mpv';
 
   @override
-  String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+  String get externalFailed => 'Couldn\'t open the stream. Is the player installed?';
 
   @override
   String get addonInstalled => 'Installed';
@@ -7822,19 +7843,16 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+  String get installNeedsRuntime => 'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
 
   @override
-  String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+  String get installRuntimeNewer => 'The runtime this manager runs on has an update.';
 
   @override
   String get removeJvmTitle => 'Remove the Java runtime?';
 
   @override
-  String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+  String get removeJvmMessage => 'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
 
   @override
   String get runtimePreparing => 'Preparing the runtime…';
@@ -7852,7 +7870,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerCloudflare => 'Open in browser (Cloudflare check)';
 
   @override
-  String get statusBadgePosition => 'Airing dot and counter position';
+  String get badgeBoardHint => 'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
 
   @override
   String get statusAuto => 'Auto';
@@ -7861,6 +7879,5 @@ class AppLocalizationsTh extends AppLocalizations {
   String get unreadCounter => 'Unread counter';
 
   @override
-  String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+  String get unreadCounterDesc => 'Show how many episodes or chapters are left on posters';
 }

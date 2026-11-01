@@ -64,9 +64,15 @@ class DesktopRPC extends AppController implements BaseDiscordRPC {
       PresenceType.playing => discord_rpc.DiscordActivityType.playing,
       PresenceType.listening => discord_rpc.DiscordActivityType.listening,
       PresenceType.watching => discord_rpc.DiscordActivityType.watching,
+      PresenceType.competing => discord_rpc.DiscordActivityType.competing,
     },
     details: p.details,
     state: p.state,
+    statusDisplayType: switch (p.statusDisplay) {
+      1 => discord_rpc.DiscordStatusDisplayType.state,
+      2 => discord_rpc.DiscordStatusDisplayType.details,
+      _ => null,
+    },
     largeAsset: p.largeImage == null
         ? null
         : discord_rpc.DiscordAsset.fromUrl(p.largeImage!, text: p.largeText),

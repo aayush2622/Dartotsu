@@ -187,6 +187,92 @@ class PrefName {
     'auto',
     PrefLocation.COMMON,
   );
+  static const discordStatus = Pref(
+    'discordStatus',
+    'online',
+    PrefLocation.COMMON,
+  );
+  static const discordLive = Pref('discordLive', false, PrefLocation.COMMON);
+  static const discordCustomStatus = Pref(
+    'discordCustomStatus',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordNameMode = Pref(
+    'discordNameMode',
+    'app',
+    PrefLocation.COMMON,
+  );
+  static const discordCustomName = Pref(
+    'discordCustomName',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordStatusDisplay = Pref(
+    'discordStatusDisplay',
+    'name',
+    PrefLocation.COMMON,
+  );
+  static const discordDetailsTemplate = Pref(
+    'discordDetailsTemplate',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordStateTemplate = Pref(
+    'discordStateTemplate',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordLargeImage = Pref(
+    'discordLargeImage',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordSmallImage = Pref(
+    'discordSmallImage',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordTimerStyle = Pref(
+    'discordTimerStyle',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordMediaButton = Pref(
+    'discordMediaButton',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordAppButton = Pref(
+    'discordAppButton',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordButtonLabel = Pref(
+    'discordButtonLabel',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordButtonUrl = Pref(
+    'discordButtonUrl',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordPrivateText = Pref(
+    'discordPrivateText',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordShowWatching = Pref(
+    'discordShowWatching',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordShowReading = Pref(
+    'discordShowReading',
+    true,
+    PrefLocation.COMMON,
+  );
 
   static const lastBackupAt = Pref('lastBackupAt', '', PrefLocation.COMMON);
 
@@ -237,11 +323,10 @@ class PrefName {
     ['THEME', 'COMMON', 'PLAYER', 'READER', 'OTHER'],
     PrefLocation.COMMON,
   );
-  static const settingsSyncLocal = Pref<List<String>>(
-    'settingsSyncLocal',
-    ['subtitles', 'pictureColors'],
-    PrefLocation.COMMON,
-  );
+  static const settingsSyncLocal = Pref<List<String>>('settingsSyncLocal', [
+    'subtitles',
+    'pictureColors',
+  ], PrefLocation.COMMON);
   static const settingsSyncTitles = Pref(
     'settingsSyncTitles',
     true,
