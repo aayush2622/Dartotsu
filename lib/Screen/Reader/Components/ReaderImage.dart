@@ -10,6 +10,8 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Logger.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../../Webview/WebView.dart';
 
 class ReaderCropScope extends InheritedWidget {
   final bool enabled;
@@ -257,6 +259,11 @@ class _ReaderImageState extends State<ReaderImage> {
     });
   }
 
+  Future<void> _solveCloudflare() async {
+    await navigateToPage<void>(context, WebView(url: widget.page.url));
+    if (mounted) await _retry();
+  }
+
   Future<void> _retry() async {
     _shown = false;
     final scaled = _provider(context, ReaderCropScope.qualityOf(context));
@@ -405,6 +412,11 @@ class _ReaderImageState extends State<ReaderImage> {
           ),
           const SizedBox(height: 12),
           _reload(),
+          TextButton.icon(
+            onPressed: _solveCloudflare,
+            icon: const Icon(Icons.language_rounded, size: 18),
+            label: Text(getString.readerCloudflare),
+          ),
         ],
       ),
     );

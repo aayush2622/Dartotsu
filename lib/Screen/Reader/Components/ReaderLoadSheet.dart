@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import '../../../Core/Downloads/Archives.dart';
 import '../../../Core/Downloads/DownloadEngine.dart';
 import '../../../Core/Downloads/DownloadPaths.dart';
@@ -13,6 +15,7 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/EmptyState.dart';
+import '../../Webview/WebView.dart';
 import '../../Detail/Watch/Components/UnitTile.dart';
 
 class ReaderLoadSheet extends StatefulWidget {
@@ -31,6 +34,18 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
   void initState() {
     super.initState();
     _load();
+  }
+
+  String? get _siteUrl {
+    final url = widget.request.source?.baseUrl?.trim();
+    return url == null || url.isEmpty ? null : url;
+  }
+
+  Future<void> _openSite() async {
+    final url = _siteUrl;
+    if (url == null) return;
+    await navigateToPage<void>(context, WebView(url: url));
+    if (mounted) unawaited(_load());
   }
 
   Future<void> _load() async {
@@ -89,6 +104,10 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
               message: error,
               actionLabel: getString.retry,
               onAction: _load,
+              secondaryLabel: _siteUrl == null
+                  ? null
+                  : getString.readerCloudflare,
+              onSecondary: _openSite,
             ),
           );
         }
