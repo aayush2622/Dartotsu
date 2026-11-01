@@ -18,6 +18,7 @@ class SettingsSyncState extends ScreenState {
   final sync = find<SettingsSync>();
   final auth = find<GithubAuth>();
   final open = Live<PrefLocation?>(null);
+  final expanded = Live<Set<PrefLocation>>({});
 
   @override
   void onInit() {
@@ -52,8 +53,18 @@ class SettingsSyncState extends ScreenState {
     if (v is List) return '${v.length}';
     if (v is Map) return '{…}';
     final text = '$v';
-    return text.isEmpty ? '—' : text;
+    if (text.isEmpty) return '—';
+    if (text.startsWith('{') || text.startsWith('[') || text.length > 28) {
+      return getString.settingsSyncCustom;
+    }
+    return text;
   }
+
+  void toggleExpanded(PrefLocation c) => expanded.value = {
+    for (final e in expanded.value)
+      if (e != c) e,
+    if (!expanded.value.contains(c)) c,
+  };
 
   void toggleOpen(PrefLocation c) => open.value = open.value == c ? null : c;
 

@@ -420,6 +420,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsSyncOn => 'On';
 
   @override
+  String get settingsSyncCustom => 'Custom';
+
+  @override
+  String get settingsSyncChangedHeader => 'Changed settings';
+
+  @override
   String get settingsSyncNoneChanged =>
       'You haven\'t changed any of these yet, so there is nothing to sync.';
 

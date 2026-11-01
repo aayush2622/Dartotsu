@@ -887,6 +887,18 @@ abstract class AppLocalizations {
   /// **'On'**
   String get settingsSyncOn;
 
+  /// No description provided for @settingsSyncCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get settingsSyncCustom;
+
+  /// No description provided for @settingsSyncChangedHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Changed settings'**
+  String get settingsSyncChangedHeader;
+
   /// No description provided for @settingsSyncNoneChanged.
   ///
   /// In en, this message translates to:

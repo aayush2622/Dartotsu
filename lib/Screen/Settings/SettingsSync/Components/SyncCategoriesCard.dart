@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/SettingsSync/SettingsScope.dart';
+import '../../../../Core/SettingsSync/SettingsSync.dart';
 import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Animation/WidgetAnimations.dart';
@@ -148,88 +149,197 @@ class _Items extends StatelessWidget {
 
   const _Items({required this.state, required this.category, required this.on});
 
+  static const _preview = 5;
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final scheme = context.colorScheme;
     final muted = context.textTheme.bodySmall?.copyWith(
       color: scheme.onSurfaceVariant,
     );
     final items = state.sync.syncedIn(category);
     final parts = state.partsOf(category);
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(60, 0, 8, 8),
+    final all = state.expanded.value.contains(category);
+    final shown = all ? items : items.take(_preview).toList();
+    final groups = <String, List<_Row>>{};
+    for (final item in shown) {
+      final cut = item.name.indexOf(': ');
+      final group = cut < 0 ? '' : item.name.substring(0, cut);
+      groups
+          .putIfAbsent(group, () => [])
+          .add(_Row(cut < 0 ? item.name : item.name.substring(cut + 2), item));
+    }
+
+    return Container(
+      margin: const EdgeInsetsDirectional.fromSTEB(16, 2, 4, 10),
+      padding: const EdgeInsets.fromLTRB(4, 6, 4, 12),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(18),
+        color: scheme.onSurface.withValues(alpha: 0.045),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          if (parts.isNotEmpty) ...[
-            for (final part in parts)
-              SheetTile(
-                title: Text(state.partTitle(part)),
-                subtitle: Text(state.partDesc(part)),
-                enabled: on,
-                onTap: () => state.setPart(part, !state.partSynced(part)),
-                trailing: Switch(
-                  value: state.partSynced(part),
-                  onChanged: on ? (v) => state.setPart(part, v) : null,
-                ),
+          for (final part in parts)
+            SheetTile(
+              title: Text(state.partTitle(part)),
+              subtitle: Text(state.partDesc(part)),
+              enabled: on,
+              onTap: () => state.setPart(part, !state.partSynced(part)),
+              trailing: Switch(
+                value: state.partSynced(part),
+                onChanged: on ? (v) => state.setPart(part, v) : null,
               ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 2, 0, 10),
-              child: Text(getString.settingsSyncPartsNote, style: muted),
             ),
-          ],
+          if (parts.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(
+                    Icons.devices_rounded,
+                    size: 14,
+                    color: scheme.onSurfaceVariant,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(getString.settingsSyncPartsNote, style: muted),
+                  ),
+                ],
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    getString.settingsSyncChangedHeader.toUpperCase(),
+                    style: context.textTheme.labelSmall?.copyWith(
+                      color: scheme.primary,
+                      letterSpacing: 1,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                Text(getString.settingsSyncChanged(items.length), style: muted),
+              ],
+            ),
+          ),
           if (items.isEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 6),
+              padding: const EdgeInsets.fromLTRB(16, 4, 16, 0),
               child: Text(getString.settingsSyncNoneChanged, style: muted),
             )
           else
-            for (final item in items)
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: Opacity(
-                  opacity: on ? 1 : 0.5,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
+            Opacity(
+              opacity: on ? 1 : 0.5,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  for (final g in groups.entries) ...[
+                    if (g.key.isNotEmpty)
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 2),
                         child: Text(
-                          item.name,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                          g.key,
+                          style: context.textTheme.labelMedium?.copyWith(
+                            color: scheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
-                      SizedBox(width: Dimens.gapSm),
-                      Expanded(
-                        flex: 2,
+                    for (final row in g.value) _ItemRow(state: state, row: row),
+                  ],
+                  if (items.length > _preview)
+                    Align(
+                      alignment: AlignmentDirectional.centerStart,
+                      child: TextButton(
+                        onPressed: () => state.toggleExpanded(category),
                         child: Text(
-                          state.valueText(item.value),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.end,
-                          style: muted,
+                          all
+                              ? getString.showLess
+                              : '${getString.showAll} (${items.length})',
                         ),
                       ),
-                      SizedBox(width: Dimens.gapSm),
-                      Icon(
-                        item.onServer
-                            ? Icons.cloud_done_outlined
-                            : Icons.cloud_upload_outlined,
-                        size: 16,
-                        color: item.onServer
-                            ? scheme.primary
-                            : scheme.onSurfaceVariant,
-                      ),
-                    ],
-                  ),
+                    ),
+                ],
+              ),
+            ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 6, 16, 0),
+            child: Text(
+              on
+                  ? getString.settingsSyncChangedOnly
+                  : getString.settingsSyncOffCategory,
+              style: muted,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Row {
+  final String name;
+  final SyncedSetting item;
+
+  const _Row(this.name, this.item);
+}
+
+class _ItemRow extends StatelessWidget {
+  final SettingsSyncState state;
+  final _Row row;
+
+  const _ItemRow({required this.state, required this.row});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    final value = row.item.value;
+    final swatch = value is int && value > 0xFFFFFF ? Color(value) : null;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 3,
+            child: Text(row.name, maxLines: 1, overflow: TextOverflow.ellipsis),
+          ),
+          const SizedBox(width: 8),
+          if (swatch != null)
+            Container(
+              width: 18,
+              height: 18,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: swatch,
+                border: Border.all(color: scheme.outlineVariant),
+              ),
+            )
+          else
+            Flexible(
+              flex: 2,
+              child: Text(
+                state.valueText(value),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.end,
+                style: context.textTheme.bodySmall?.copyWith(
+                  color: scheme.onSurfaceVariant,
                 ),
               ),
-          const SizedBox(height: 6),
-          Text(
-            on
-                ? getString.settingsSyncChangedOnly
-                : getString.settingsSyncOffCategory,
-            style: muted,
+            ),
+          const SizedBox(width: 8),
+          Icon(
+            row.item.onServer
+                ? Icons.cloud_done_outlined
+                : Icons.cloud_upload_outlined,
+            size: 16,
+            color: row.item.onServer ? scheme.primary : scheme.onSurfaceVariant,
           ),
         ],
       ),

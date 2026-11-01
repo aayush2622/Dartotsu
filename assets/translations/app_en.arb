@@ -200,6 +200,8 @@
   "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
   "settingsSyncSignInFailed": "Could not sign in to GitHub",
   "settingsSyncOn": "On",
+  "settingsSyncCustom": "Custom",
+  "settingsSyncChangedHeader": "Changed settings",
   "settingsSyncNoneChanged": "You haven't changed any of these yet, so there is nothing to sync.",
   "settingsSyncChangedOnly": "Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.",
   "settingsSyncOffCategory": "Not syncing. These stay on this device and the server copy is left as it is.",
