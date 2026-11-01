@@ -351,11 +351,17 @@ Widget _tracksList(
   final engine = state.engine;
   final tracks = (audio ? engine.audioTracks : engine.subtitleTracks).value;
   final active = audio ? engine.activeAudio.value : engine.activeSubtitle.value;
+  final loaded = {
+    for (final t in tracks)
+      if (t.external) (t.title ?? '').trim().toLowerCase(),
+  };
   final extra = <v.Track>[
     for (final t
         in (audio ? state.video?.audios : state.video?.subtitles) ??
             const <v.Track>[])
-      if (t.file != null) t,
+      if (t.file != null &&
+          !loaded.contains((t.label ?? '').trim().toLowerCase()))
+        t,
   ];
   return ListView(
     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),

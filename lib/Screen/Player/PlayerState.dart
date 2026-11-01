@@ -812,19 +812,26 @@ class PlayerState extends ScreenState {
       );
       return;
     }
-    for (var i = 0; i < 10 && engine.subtitleTracks.value.isEmpty; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 150));
+    unawaited(_pickEmbeddedSubtitle(_generation, priority));
+  }
+
+  Future<void> _pickEmbeddedSubtitle(
+    int generation,
+    List<String> priority,
+  ) async {
+    for (var i = 0; i < 60 && engine.subtitleTracks.value.isEmpty; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+      if (_closed || generation != _generation) return;
     }
-    final embedded = pickTrack(
-      engine.subtitleTracks.value,
-      priority,
-      avoidSigns: true,
-    );
+    final tracks = engine.subtitleTracks.value;
+    if (tracks.isEmpty || _closed || generation != _generation) return;
+    final embedded = pickTrack(tracks, priority, avoidSigns: true);
     if (embedded != null) {
-      await engine.setSubtitle(embedded.id);
-    } else if (engine.activeSubtitle.value == null &&
-        engine.subtitleTracks.value.isNotEmpty) {
-      await engine.setSubtitle(engine.subtitleTracks.value.first.id);
+      if (engine.activeSubtitle.value != embedded.id) {
+        await engine.setSubtitle(embedded.id);
+      }
+    } else if (engine.activeSubtitle.value == null) {
+      await engine.setSubtitle(tracks.first.id);
     }
   }
 
@@ -859,10 +866,10 @@ class PlayerState extends ScreenState {
         if (t.file != null && t.file!.isNotEmpty) t,
     ];
     for (final wanted in languageList(settings.subtitleLanguage)) {
-      final pattern = languagePattern(wanted);
-      if (pattern == null) continue;
+      final matcher = languageMatcher(wanted);
+      if (matcher == null) continue;
       final found = tracks
-          .where((t) => languageMatches(pattern, title: t.label))
+          .where((t) => matcher.matches(title: t.label))
           .toList();
       if (found.isEmpty) continue;
       return found.where((t) => !labelIsSigns(t.label ?? '')).firstOrNull ??
