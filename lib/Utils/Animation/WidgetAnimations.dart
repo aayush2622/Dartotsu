@@ -92,9 +92,8 @@ extension WidgetAnimations on Widget {
     int duration = 250,
     Curve curve = Curves.easeOut,
   }) {
-    return _animation(
-      target,
-    ).fadeIn(delay: delay, duration: _duration(duration), curve: curve);
+    return _animation(target)
+        .fadeIn(delay: delay, duration: _duration(duration), curve: curve);
   }
 
   Animate _fadeScale({
@@ -344,15 +343,14 @@ extension WidgetAnimations on Widget {
 
   Widget animatePageTransition(double animation) {
     if (_disabled) return this;
-
-    if (PrefName.useGlassMode.value) {
-      return animate(
-        adapter: ValueAdapter(animation),
-      ).slideX(begin: 0.12, end: 0, curve: Curves.easeOutExpo);
-    }
-    return animate(adapter: ValueAdapter(animation))
-        .fade(begin: 0, end: 1, curve: Curves.easeOutExpo)
-        .slideX(begin: 0.12, end: 0, curve: Curves.easeOutExpo);
+    final t = Curves.easeOutExpo.transform(animation);
+    final slid = FractionalTranslation(
+      translation: Offset(0.12 * (1 - t), 0),
+      child: this,
+    );
+    return PrefName.useGlassMode.value
+        ? slid
+        : Opacity(opacity: t, child: slid);
   }
 
   Widget animateNavItem({required bool selected, bool active = false}) {

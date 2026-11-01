@@ -145,6 +145,7 @@ class AppSliverBar extends StatelessWidget {
                 opacity: collapsed,
                 child: find<ThemeController>().useGlassMode.value
                     ? const ThemedContainer(
+                        blur: true,
                         borderRadius: BorderRadius.zero,
                         border: Border(),
                         padding: EdgeInsets.zero,

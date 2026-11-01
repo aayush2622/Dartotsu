@@ -164,10 +164,11 @@ class AlertDialogBuilder {
           insetPadding: const EdgeInsets.all(24),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.8,
+              maxWidth: MediaQuery.sizeOf(context).width * 0.8,
             ),
             child: IntrinsicWidth(
               child: ThemedContainer(
+                blur: true,
                 padding: const EdgeInsets.all(20),
                 borderRadius: BorderRadius.circular(32),
                 child: Material(
@@ -192,7 +193,7 @@ class AlertDialogBuilder {
                         fit: FlexFit.loose,
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height * 0.6,
+                            maxHeight: MediaQuery.sizeOf(context).height * 0.6,
                           ),
                           child: Watch(_buildContent),
                         ),
@@ -257,7 +258,7 @@ class AlertDialogBuilder {
   Widget _buildReorderableWithCheckBoxWidget(
     void Function(int, int) onReorder,
   ) => SizedBox(
-    width: MediaQuery.of(context).size.width * 0.7,
+    width: MediaQuery.sizeOf(context).width * 0.7,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -290,7 +291,7 @@ class AlertDialogBuilder {
   );
 
   Widget _buildReorderableWidget(void Function(int, int) onReorder) => SizedBox(
-    width: MediaQuery.of(context).size.width * 0.7,
+    width: MediaQuery.sizeOf(context).width * 0.7,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -357,7 +358,7 @@ class AlertDialogBuilder {
   }
 
   Widget _buildListContent(Widget Function(String) itemBuilder) {
-    final media = MediaQuery.of(context).size;
+    final media = MediaQuery.sizeOf(context);
     return SizedBox(
       width: media.width * 0.7,
       child: ListView.builder(
@@ -370,7 +371,7 @@ class AlertDialogBuilder {
 
   Widget _buildDefaultContent() => ConstrainedBox(
     constraints: BoxConstraints(
-      minWidth: MediaQuery.of(context).size.width * 0.7,
+      minWidth: MediaQuery.sizeOf(context).width * 0.7,
     ),
     child: _customView ?? Text(_message ?? ''),
   );

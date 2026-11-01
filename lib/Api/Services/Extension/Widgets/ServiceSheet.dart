@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../../../Widgets/Components/LoadSvg.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -29,6 +30,7 @@ class ExtensionServiceSheet extends StatelessWidget {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       child: ThemedContainer(
+        blur: true,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
         padding: EdgeInsets.zero,
         child: Padding(
