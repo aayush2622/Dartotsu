@@ -1,6 +1,7 @@
 import '../../Core/Cast/CastService.dart';
 import '../../Core/Downloads/DownloadEngine.dart';
 import '../../Utils/Functions/DisplayMode.dart';
+
 import 'dart:async';
 import 'dart:io';
 
@@ -798,7 +799,7 @@ class PlayerState extends ScreenState {
   }
 
   Future<void> _pickDefaultSubtitle(v.Video chosen) async {
-    await _pickDefaultAudio();
+    unawaited(_pickDefaultAudio(_generation));
     if (!settings.showSubtitle) {
       await engine.noSubtitle();
       return;
@@ -878,19 +879,24 @@ class PlayerState extends ScreenState {
     return null;
   }
 
-  Future<void> _pickDefaultAudio() async {
+  Future<void> _pickDefaultAudio(int generation) async {
     final priority = languageList(settings.audioLanguage);
-    var tracks = engine.audioTracks.value;
-    for (var i = 0; i < 20 && tracks.isEmpty; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 150));
-      tracks = engine.audioTracks.value;
+    if (priority.isEmpty) return;
+    var stable = 0;
+    var seen = -1;
+    for (var i = 0; i < 60; i++) {
+      final tracks = engine.audioTracks.value;
+      final pick = tracks.isEmpty ? null : pickTrack(tracks, priority);
+      if (pick != null) {
+        if (engine.activeAudio.value != pick.id) await engine.setAudio(pick.id);
+        return;
+      }
+      stable = tracks.length == seen ? stable + 1 : 0;
+      seen = tracks.length;
+      if (tracks.isNotEmpty && stable >= 8) return;
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+      if (_closed || generation != _generation) return;
     }
-    if (tracks.isEmpty) return;
-    final pick = priority.isEmpty ? null : pickTrack(tracks, priority);
-    final current = tracks
-        .where((t) => t.id == engine.activeAudio.value)
-        .firstOrNull;
-    await engine.setAudio((pick ?? current ?? tracks.first).id);
   }
 
   Disposer? _errorSub;

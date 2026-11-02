@@ -11,14 +11,18 @@ import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 
-typedef ShaderPick =
-    Future<void> Function(String profile, String name, List<String>? custom);
+typedef ShaderPick = Future<void> Function(
+  String profile,
+  String name,
+  List<String>? custom,
+);
 
 class ShaderSheet extends StatefulWidget {
   final PlayerSettings Function() settings;
   final ShaderPick onPick;
   final Future<void> Function()? onPreview;
   final bool embedded;
+  final List<Widget> header;
   final Live<String?>? problem;
 
   const ShaderSheet({
@@ -27,6 +31,7 @@ class ShaderSheet extends StatefulWidget {
     required this.onPick,
     this.onPreview,
     this.embedded = false,
+    this.header = const [],
     this.problem,
   });
 
@@ -123,6 +128,7 @@ class _ShaderSheetState extends State<ShaderSheet> {
       return ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
         children: [
+          ...widget.header,
           if (widget.onPreview != null && installed) ...[
             FilledButton.tonalIcon(
               onPressed: widget.onPreview,
