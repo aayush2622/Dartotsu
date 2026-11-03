@@ -1485,6 +1485,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get onboardingSkip => 'এড়িয়ে যাও';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'নিজের মতো সাজাও';
 
   @override
@@ -2259,6 +2263,9 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get listOnly => 'শুধু লিস্ট';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'ফিল্টার';

@@ -1495,6 +1495,10 @@ class AppLocalizationsFil extends AppLocalizations {
   String get onboardingSkip => 'Laktawan';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'Gawin mong sa\'yo';
 
   @override
@@ -2277,6 +2281,9 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get listOnly => 'Listahan lang';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'I-filter';

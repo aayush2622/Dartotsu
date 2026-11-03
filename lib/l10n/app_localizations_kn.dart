@@ -1493,6 +1493,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get onboardingSkip => 'ಬಿಟ್ಟುಬಿಡು';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'ನಿನ್ನದಾಗಿಸಿಕೊ';
 
   @override
@@ -2276,6 +2280,9 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get listOnly => 'ಪಟ್ಟಿ ಮಾತ್ರ';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'ಫಿಲ್ಟರ್';

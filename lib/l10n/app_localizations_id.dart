@@ -1491,6 +1491,10 @@ class AppLocalizationsId extends AppLocalizations {
   String get onboardingSkip => 'Lewati';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'Sesuaikan sesukamu';
 
   @override
@@ -2269,6 +2273,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get listOnly => 'Hanya di daftar';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'Filter';

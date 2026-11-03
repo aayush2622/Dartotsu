@@ -1493,6 +1493,10 @@ class AppLocalizationsHa extends AppLocalizations {
   String get onboardingSkip => 'Tsallake';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'Mai da shi naka';
 
   @override
@@ -2268,6 +2272,9 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get listOnly => 'Jeri kawai';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'Tace';
