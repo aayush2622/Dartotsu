@@ -18,13 +18,13 @@ import '../../Model/SearchResults.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
+import '../../Widgets/Shelf/MediaSection.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Social/Components/UserCard.dart';
 import '../../Widgets/Components/EmptyState.dart';
@@ -446,21 +446,24 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     );
   }
 
+  static const _shelf = MediaSection(data: MediaSectionData(type: 0));
+
   Widget _card(Object item, {bool skeleton = false}) {
     if (item is Media) {
-      final year = item.startDate?.year;
+      final shelf = _shelf.toItem(context, 0, item);
       final tag = skeleton ? null : 'search:${item.id}';
       return PosterCard(
         heroTag: tag,
-        imageUrl: item.cover,
+        imageUrl: shelf.imageUrl,
         overlay: skeleton ? null : widget.view.overlay(item),
-        title: item.mainName,
-        subtitle: [
-          if (item.format != null) item.format!.titleCase,
-          ?MediaRowFacts(item).count,
-          if (year != null) '$year',
-        ].join(' · '),
-        score: (item.meanScore ?? 0) > 0 ? item.meanScore! / 10 : null,
+        title: shelf.title,
+        subtitle: shelf.subtitle,
+        progress: shelf.progress,
+        progressText: shelf.progressText,
+        estimate: shelf.estimate,
+        score: shelf.score,
+        scoreHighlight: shelf.scoreHighlight,
+        airing: shelf.airing,
         onTap: skeleton ? null : () => state.open(item, tag!),
         onLongPress: skeleton
             ? null
