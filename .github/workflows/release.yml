@@ -18,7 +18,23 @@ env:
   FLUTTER_VERSION: 3.47.4
 
 jobs:
+  prune_caches:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 10
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prune stale Actions caches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLUTTER_VERSION: "3.47.4"
+        run: bash scripts/ci/prune-actions-cache.sh
+
   build_android:
+    needs: prune_caches
     uses: ./.github/workflows/build-android.yml
     with:
       flutter-version: "3.47.4"
@@ -32,6 +48,7 @@ jobs:
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
 
   build_windows:
+    needs: prune_caches
     uses: ./.github/workflows/build-windows.yml
     with:
       flutter-version: "3.47.4"
@@ -43,6 +60,7 @@ jobs:
       PFX_PASSWORD: ${{ secrets.PFX_PASSWORD }}
 
   build_linux:
+    needs: prune_caches
     uses: ./.github/workflows/build-linux.yml
     with:
       flutter-version: "3.47.4"
@@ -54,6 +72,7 @@ jobs:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
 
   build_ios:
+    needs: prune_caches
     uses: ./.github/workflows/build-ios.yml
     with:
       flutter-version: "3.47.4"
@@ -63,6 +82,7 @@ jobs:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
 
   build_macos:
+    needs: prune_caches
     uses: ./.github/workflows/build-macos.yml
     with:
       flutter-version: "3.47.4"

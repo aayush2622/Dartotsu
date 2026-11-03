@@ -8,6 +8,10 @@ inputs:
     description: Optional override from secrets.FLUTTER_VERSION
     required: false
     default: ""
+  cache:
+    description: Cache the Flutter SDK and pub packages. The Linux job leaves this off.
+    required: false
+    default: "true"
 runs:
   using: composite
   steps:
@@ -28,7 +32,7 @@ runs:
       uses: subosito/flutter-action@v2
       with:
         flutter-version: ${{ env.FLUTTER_VERSION }}
-        cache: true
+        cache: ${{ inputs.cache != 'false' }}
 
     - name: Setup env file
       shell: bash
