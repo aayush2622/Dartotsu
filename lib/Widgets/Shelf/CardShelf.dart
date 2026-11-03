@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import '../../Utils/Nav/DpadLayers.dart';
 import '../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -54,6 +55,8 @@ class _CardShelfState extends State<CardShelf> {
   final state = CardShelfState();
   int _direction = 1;
   bool _scrolled = false;
+  bool _entrance = true;
+  bool _entranceSet = false;
 
   bool get _loading => widget.items == null;
 
@@ -78,6 +81,18 @@ class _CardShelfState extends State<CardShelf> {
   void initState() {
     super.initState();
     state.updateItems(widget.items);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (_entranceSet) return;
+    _entranceSet = true;
+    final position = Scrollable.maybeOf(context)?.position;
+    _entrance =
+        position == null ||
+        !position.hasPixels ||
+        position.pixels < MediaQuery.sizeOf(context).height * 0.25;
   }
 
   @override
@@ -256,25 +271,9 @@ class _CardShelfState extends State<CardShelf> {
   }
 
   Widget _cardFor(int index, ShelfCardItem item) {
-    final defaultCard = PosterCard(
-      style: widget.styleOverride,
-      heroTag: item.heroTag,
-      imageUrl: item.imageUrl,
-      overlay: item.overlay,
-      title: item.title,
-      subtitle: item.subtitle,
-      progress: item.progress,
-      progressText: item.progressText,
-      unread: item.unread,
-      estimate: item.estimate,
-      score: item.score,
-      scoreHighlight: item.scoreHighlight,
-      airing: item.airing,
-      onTap: item.onTap,
-      onLongPress: item.onLongPress,
-      focusable: item.focusable,
-    );
+    final defaultCard = PosterCard.item(item, style: widget.styleOverride);
     final card = item.cardBuilder?.call(defaultCard) ?? defaultCard;
+    if (!_entrance) return card;
     return card.animateHorizontalEntrance(
       index: index,
       direction: _direction,
