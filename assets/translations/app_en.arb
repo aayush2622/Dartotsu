@@ -815,6 +815,7 @@
   "noLabel": "No",
   "ratingSteps": "Rating steps",
   "hideNsfw": "Hide NSFW",
+  "hideNsfwSourcesDesc": "Hide sources marked 18+ from the feeds and the source picker. They stay installed.",
   "hideNsfwDesc": "Keep adult titles out of feeds and search, and list your own adult entries under Hidden Media.",
   "kitsuAccountOptions": "Kitsu account options",
   "mangaBakaAccountOptions": "MangaBaka account options",

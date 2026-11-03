@@ -1878,6 +1878,10 @@ class AppLocalizationsTe extends AppLocalizations {
   String get hideNsfw => 'NSFW దాచు';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc =>
       'అడల్ట్ టైటిల్స్‌ని ఫీడ్‌లు, సెర్చ్ నుండి తీసేయ్, నీ సొంత అడల్ట్ ఎంట్రీలను హిడెన్ మీడియా కింద చూపించు.';
 

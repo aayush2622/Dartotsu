@@ -3497,6 +3497,12 @@ abstract class AppLocalizations {
   /// **'Hide NSFW'**
   String get hideNsfw;
 
+  /// No description provided for @hideNsfwSourcesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide sources marked 18+ from the feeds and the source picker. They stay installed.'**
+  String get hideNsfwSourcesDesc;
+
   /// No description provided for @hideNsfwDesc.
   ///
   /// In en, this message translates to:

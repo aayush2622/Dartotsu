@@ -1879,6 +1879,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get hideNsfw => 'Esconder NSFW';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc =>
       'Tira títulos adultos dos feeds e da busca e lista suas entradas adultas em Mídia oculta.';
 

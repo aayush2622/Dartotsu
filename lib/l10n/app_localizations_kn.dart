@@ -1876,6 +1876,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get hideNsfw => 'NSFW ಮರೆಮಾಡು';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc =>
       'ವಯಸ್ಕರ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಫೀಡ್ ಮತ್ತು ಹುಡುಕಾಟದಿಂದ ಹೊರಗಿಡು, ಮತ್ತು ನಿನ್ನ ವಯಸ್ಕರ ಎಂಟ್ರಿಗಳನ್ನು ಮರೆಮಾಡಿದ ಮೀಡಿಯಾ ಅಡಿಯಲ್ಲಿ ತೋರಿಸು.';
 

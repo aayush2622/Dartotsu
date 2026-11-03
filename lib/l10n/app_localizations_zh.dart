@@ -1837,6 +1837,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hideNsfw => '隐藏 NSFW';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc => '在信息流和搜索中隐藏成人作品，并把你自己的成人条目放进“隐藏媒体”。';
 
   @override

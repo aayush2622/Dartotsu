@@ -1861,6 +1861,10 @@ class AppLocalizationsBn extends AppLocalizations {
   String get hideNsfw => 'NSFW লুকাও';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc =>
       'প্রাপ্তবয়স্কদের টাইটেল ফিড আর সার্চ থেকে সরিয়ে রাখো, আর তোমার নিজের প্রাপ্তবয়স্ক এন্ট্রিগুলো \"লুকানো মিডিয়া\"-র নিচে দেখাও।';
 

@@ -1867,6 +1867,10 @@ class AppLocalizationsPs extends AppLocalizations {
   String get hideNsfw => 'NSFW پټ کړه';
 
   @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+
+  @override
   String get hideNsfwDesc =>
       'بالغ سرلیکونه له فیډونو او لټون څخه لرې وساته، او خپل بالغ ننوتنې د پټ میډیا لاندې وښیه.';
 
