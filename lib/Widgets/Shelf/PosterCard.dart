@@ -11,6 +11,7 @@ import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../Components/ThemedContainer.dart';
 import '../../Core/State/State.dart';
+import 'CardShelfState.dart';
 
 enum _ScrimKind { none, short, full }
 
@@ -64,6 +65,32 @@ class PosterCard extends StatefulWidget {
     this.demo = false,
     this.heroTag,
   });
+
+  PosterCard.item(
+    ShelfCardItem item, {
+    super.key,
+    String? heroTag,
+    Widget? overlay,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    this.style,
+    bool skeleton = false,
+  }) : title = item.title,
+       imageUrl = item.imageUrl,
+       subtitle = item.subtitle,
+       overlay = skeleton ? null : overlay ?? item.overlay,
+       score = item.score,
+       scoreHighlight = item.scoreHighlight,
+       airing = item.airing,
+       progress = item.progress,
+       progressText = item.progressText,
+       unread = skeleton ? null : item.unread,
+       estimate = item.estimate,
+       onTap = skeleton ? null : onTap ?? item.onTap,
+       onLongPress = skeleton ? null : onLongPress ?? item.onLongPress,
+       focusable = item.focusable,
+       demo = false,
+       heroTag = skeleton ? null : heroTag ?? item.heroTag;
 
   @override
   State<PosterCard> createState() => _PosterCardState();

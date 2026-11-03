@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ClickCursor.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
@@ -452,26 +453,17 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     if (item is Media) {
       final shelf = _shelf.toItem(context, 0, item);
       final tag = skeleton ? null : 'search:${item.id}';
-      return PosterCard(
+      return PosterCard.item(
+        shelf,
         heroTag: tag,
-        imageUrl: shelf.imageUrl,
-        overlay: skeleton ? null : widget.view.overlay(item),
-        title: shelf.title,
-        subtitle: shelf.subtitle,
-        progress: shelf.progress,
-        progressText: shelf.progressText,
-        estimate: shelf.estimate,
-        score: shelf.score,
-        scoreHighlight: shelf.scoreHighlight,
-        airing: shelf.airing,
-        onTap: skeleton ? null : () => state.open(item, tag!),
-        onLongPress: skeleton
-            ? null
-            : () => showQuickListEditor(
-                context,
-                find<MediaServiceController>().currentService.value,
-                item,
-              ),
+        overlay: widget.view.overlay(item),
+        skeleton: skeleton,
+        onTap: () => state.open(item, tag!),
+        onLongPress: () => showQuickListEditor(
+          context,
+          find<MediaServiceController>().currentService.value,
+          item,
+        ),
       );
     }
     return switch (item) {
