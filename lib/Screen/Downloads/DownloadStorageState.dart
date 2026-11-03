@@ -59,7 +59,8 @@ class DownloadStorageState extends ScreenState {
         if (t.isDone) t,
     ];
     final paths = {
-      for (final t in done) t.id: [?t.path, ?t.subtitlePath, ?t.audioPath],
+      for (final t in done)
+        t.id: [?t.path, ...t.subtitlePaths, ...t.audioPaths],
     };
     final sizes = await Isolate.run(
       () => {

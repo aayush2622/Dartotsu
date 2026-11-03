@@ -121,52 +121,50 @@ Future<void> downloadUnits(
     for (final t in video.subtitles ?? const <v.Track>[])
       if ((t.file ?? '').isNotEmpty) t,
   ];
-  v.Track? subtitle;
+  var subtitles = <v.Track>[];
   if (subs.isNotEmpty) {
-    final picked = await showChoiceSheet<int>(
+    final picked = await showMultiChoiceSheet<int>(
       live(),
       title: getString.downloadPickSubtitle,
       icon: Icons.subtitles_rounded,
-      selected: -1,
       options: [
-        ChoiceOption(-1, getString.downloadNoSubtitle),
         for (final (i, t) in subs.indexed)
           ChoiceOption(i, t.label ?? t.file ?? ''),
       ],
     );
     if (picked == null) return;
-    if (picked >= 0) subtitle = subs[picked];
+    subtitles = [for (final i in picked) subs[i]];
   }
   final audios = [
     for (final a in hlsAudios) v.Track(label: a.label),
     for (final t in video.audios ?? const <v.Track>[])
       if ((t.file ?? '').isNotEmpty) t,
   ];
-  v.Track? audio;
+  var pickedAudios = <v.Track>[];
   if (audios.isNotEmpty) {
     final required = hlsAudios.isNotEmpty;
     final defaultIndex = required
         ? max(0, hlsAudios.indexWhere((a) => a.isDefault))
         : (hls && video.audios?.isNotEmpty == true ? 0 : -1);
-    final picked = await showChoiceSheet<int>(
+    final picked = await showMultiChoiceSheet<int>(
       live(),
       title: getString.downloadPickAudio,
       icon: Icons.audiotrack_rounded,
-      selected: defaultIndex,
+      initial: defaultIndex >= 0 ? {defaultIndex} : const {},
       options: [
-        if (!required) ChoiceOption(-1, getString.downloadNoAudio),
         for (final (i, t) in audios.indexed)
           ChoiceOption(i, t.label ?? t.file ?? ''),
       ],
     );
     if (picked == null) return;
-    if (picked >= 0) audio = audios[picked];
+    final indexes = picked.isEmpty && required ? [defaultIndex] : picked;
+    pickedAudios = [for (final i in indexes) audios[i]];
   }
   final profile = StreamProfile(
     streamLabel(video),
-    subtitle?.label,
+    [for (final t in subtitles) ?t.label],
     height: height,
-    audio: audio?.label,
+    audios: [for (final t in pickedAudios) ?t.label],
   );
   engine.queueVideos(
     service: state.service,
@@ -176,8 +174,8 @@ Future<void> downloadUnits(
     profile: profile,
     video: video,
     height: height,
-    subtitle: subtitle,
-    audio: audio,
+    subtitles: subtitles,
+    audios: pickedAudios,
     folder: folder,
     torrentFile: torrentFile,
   );

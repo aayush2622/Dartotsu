@@ -11135,6 +11135,30 @@ abstract class AppLocalizations {
   /// **'Cancel all {count} downloads in the queue? What was already downloaded is deleted.'**
   String downloadClearQueueConfirm(int count);
 
+  /// No description provided for @downloadSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String downloadSelectedCount(int count);
+
+  /// No description provided for @downloadSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get downloadSelectAll;
+
+  /// No description provided for @downloadDeleteSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected'**
+  String get downloadDeleteSelected;
+
+  /// No description provided for @downloadDeleteSelectedConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {count} downloads? Their files are removed from the device.'**
+  String downloadDeleteSelectedConfirm(int count);
+
   /// No description provided for @castTitle.
   ///
   /// In en, this message translates to:
@@ -12458,7 +12482,7 @@ abstract class AppLocalizations {
   /// No description provided for @downloadPickSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Download which subtitle?'**
+  /// **'Download which subtitles?'**
   String get downloadPickSubtitle;
 
   /// No description provided for @downloadPickAudio.

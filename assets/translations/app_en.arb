@@ -3123,6 +3123,24 @@
       }
     }
   },
+  "downloadSelectedCount": "{count} selected",
+  "@downloadSelectedCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "downloadSelectAll": "Select all",
+  "downloadDeleteSelected": "Delete selected",
+  "downloadDeleteSelectedConfirm": "Delete {count} downloads? Their files are removed from the device.",
+  "@downloadDeleteSelectedConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "castTitle": "Cast to device",
   "castSearching": "Looking for devices on your network…",
   "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
@@ -3610,7 +3628,7 @@
   "downloadTitle": "Download",
   "downloadAlready": "Already downloaded or in the queue",
   "downloadPickStream": "Download which stream?",
-  "downloadPickSubtitle": "Download which subtitle?",
+  "downloadPickSubtitle": "Download which subtitles?",
   "downloadPickAudio": "Download which audio track?",
   "downloadNoAudio": "No extra audio",
   "downloadAudio": "Audio",

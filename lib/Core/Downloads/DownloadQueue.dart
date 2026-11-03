@@ -38,8 +38,8 @@ extension DownloadQueue on DownloadEngine {
     required StreamProfile profile,
     required v.Video video,
     required int? height,
-    required v.Track? subtitle,
-    v.Track? audio,
+    required List<v.Track> subtitles,
+    List<v.Track> audios = const [],
     bool folder = false,
     int? torrentFile,
   }) {
@@ -66,8 +66,8 @@ extension DownloadQueue on DownloadEngine {
           height: height,
           folder: folder,
           torrentFile: i == 0 ? torrentFile : null,
-          subtitle: i == 0 ? subtitle?.toJson() : null,
-          audio: i == 0 ? audio?.toJson() : null,
+          subtitles: i == 0 ? [for (final t in subtitles) t.toJson()] : null,
+          audios: i == 0 ? [for (final t in audios) t.toJson()] : null,
         ),
     ]);
   }

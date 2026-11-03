@@ -10,26 +10,41 @@ enum DownloadKind { video, chapter }
 
 class StreamProfile {
   final String label;
-  final String? subtitle;
+  final List<String> subtitles;
   final int? height;
-  final String? audio;
+  final List<String> audios;
 
-  const StreamProfile(this.label, this.subtitle, {this.height, this.audio});
+  const StreamProfile(
+    this.label,
+    this.subtitles, {
+    this.height,
+    this.audios = const [],
+  });
 
   Map<String, Object?> toJson() => {
     'label': label,
-    'subtitle': subtitle,
+    'subtitles': subtitles,
     'height': height,
-    'audio': audio,
+    'audios': audios,
   };
 
   static StreamProfile? fromJson(Object? json) {
     if (json is! Map || json['label'] is! String) return null;
     return StreamProfile(
       json['label'] as String,
-      json['subtitle'] as String?,
+      [
+        if (json['subtitles'] is List)
+          for (final s in json['subtitles'] as List) '$s'
+        else if (json['subtitle'] is String)
+          json['subtitle'] as String,
+      ],
       height: (json['height'] as num?)?.toInt(),
-      audio: json['audio'] as String?,
+      audios: [
+        if (json['audios'] is List)
+          for (final a in json['audios'] as List) '$a'
+        else if (json['audio'] is String)
+          json['audio'] as String,
+      ],
     );
   }
 }
@@ -51,11 +66,11 @@ class DownloadTask {
   final int createdAt;
 
   Map<String, Object?>? video;
-  Map<String, Object?>? subtitle;
-  Map<String, Object?>? audio;
+  List<Map<String, Object?>> subtitles;
+  List<Map<String, Object?>> audios;
   String? path;
-  String? subtitlePath;
-  String? audioPath;
+  List<String> subtitlePaths;
+  List<String> audioPaths;
   bool fallback;
   bool segmented;
   bool folder;
@@ -102,17 +117,20 @@ class DownloadTask {
     required this.profile,
     required this.createdAt,
     this.video,
-    this.subtitle,
-    this.audio,
+    List<Map<String, Object?>>? subtitles,
+    List<Map<String, Object?>>? audios,
     this.path,
-    this.subtitlePath,
-    this.audioPath,
+    List<String>? subtitlePaths,
+    List<String>? audioPaths,
     this.fallback = false,
     this.segmented = false,
     this.folder = false,
     this.height,
     this.torrentFile,
-  });
+  }) : subtitles = subtitles ?? [],
+       subtitlePaths = subtitlePaths ?? [],
+       audios = audios ?? [],
+       audioPaths = audioPaths ?? [];
 
   static String idOf(String serviceId, String mediaId, String unitKey) =>
       '$serviceId/$mediaId/$unitKey';
@@ -147,19 +165,15 @@ class DownloadTask {
         : v.Video.fromJson(Map<String, dynamic>.from(json));
   }
 
-  v.Track? get chosenSubtitle {
-    final json = subtitle;
-    return json == null
-        ? null
-        : v.Track.fromJson(Map<String, dynamic>.from(json));
-  }
+  List<v.Track> get chosenSubtitles => [
+    for (final json in subtitles)
+      v.Track.fromJson(Map<String, dynamic>.from(json)),
+  ];
 
-  v.Track? get chosenAudio {
-    final json = audio;
-    return json == null
-        ? null
-        : v.Track.fromJson(Map<String, dynamic>.from(json));
-  }
+  List<v.Track> get chosenAudios => [
+    for (final json in audios)
+      v.Track.fromJson(Map<String, dynamic>.from(json)),
+  ];
 
   Map<String, Object?> toJson() => {
     'id': id,
@@ -177,11 +191,11 @@ class DownloadTask {
     'profile': profile?.toJson(),
     'created': createdAt,
     'video': video,
-    'subtitle': subtitle,
-    'audio': audio,
+    'subtitles': subtitles,
+    'audios': audios,
     'path': path,
-    'subtitlePath': subtitlePath,
-    'audioPath': audioPath,
+    'subtitlePaths': subtitlePaths,
+    'audioPaths': audioPaths,
     'fallback': fallback,
     'segmented': segmented,
     'folder': folder,
@@ -226,11 +240,35 @@ class DownloadTask {
       profile: StreamProfile.fromJson(json['profile']),
       createdAt: (json['created'] as num?)?.toInt() ?? 0,
       video: map(json['video']),
-      subtitle: map(json['subtitle']),
-      audio: map(json['audio']),
+      subtitles: [
+        if (json['subtitles'] is List)
+          for (final s in json['subtitles'] as List)
+            if (map(s) != null)
+              map(s)!
+            else if (map(json['subtitle']) != null)
+              map(json['subtitle'])!,
+      ],
+      audios: [
+        if (json['audios'] is List)
+          for (final a in json['audios'] as List)
+            if (map(a) != null)
+              map(a)!
+            else if (map(json['audio']) != null)
+              map(json['audio'])!,
+      ],
       path: json['path'] as String?,
-      subtitlePath: json['subtitlePath'] as String?,
-      audioPath: json['audioPath'] as String?,
+      subtitlePaths: [
+        if (json['subtitlePaths'] is List)
+          for (final s in json['subtitlePaths'] as List) '$s'
+        else if (json['subtitlePath'] is String)
+          json['subtitlePath'] as String,
+      ],
+      audioPaths: [
+        if (json['audioPaths'] is List)
+          for (final a in json['audioPaths'] as List) '$a'
+        else if (json['audioPath'] is String)
+          json['audioPath'] as String,
+      ],
       fallback: json['fallback'] == true,
       segmented: json['segmented'] == true,
       folder: json['folder'] == true,

@@ -6144,6 +6144,22 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String downloadSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get downloadSelectAll => 'Select all';
+
+  @override
+  String get downloadDeleteSelected => 'Delete selected';
+
+  @override
+  String downloadDeleteSelectedConfirm(int count) {
+    return 'Delete $count downloads? Their files are removed from the device.';
+  }
+
+  @override
   String get castTitle => 'Cast to device';
 
   @override
@@ -6921,7 +6937,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get downloadPickStream => 'Download which stream?';
 
   @override
-  String get downloadPickSubtitle => 'Download which subtitle?';
+  String get downloadPickSubtitle => 'Download which subtitles?';
 
   @override
   String get downloadPickAudio => 'Download which audio track?';
