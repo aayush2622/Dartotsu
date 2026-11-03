@@ -7,7 +7,7 @@ import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_brightness/screen_brightness.dart';
@@ -36,6 +36,7 @@ import 'Engine/PlayerSettings.dart';
 import 'Engine/TorrentStream.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Preferences/Incognito.dart';
+import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
@@ -1177,13 +1178,18 @@ class PlayerState extends ScreenState {
         RegExp(r'[\\/:*?"<>|]'),
         '',
       );
-      final saved = await FilePicker.saveFile(
-        fileName: '$name.png',
-        bytes: bytes,
-        mimeType: 'image/png',
-        type: FileType.image,
+      final dir = await StorageManager.getDirectory(
+        subPath: 'screenshots',
+        useCustomPath: true,
+        useSystemPath: false,
       );
-      if (saved != null) snackString(getString.playerPictureSaved);
+      if (dir == null) throw StateError('no storage folder');
+      var target = File(p.join(dir.path, '$name.png'));
+      for (var n = 2; await target.exists(); n++) {
+        target = File(p.join(dir.path, '$name ($n).png'));
+      }
+      await target.writeAsBytes(bytes);
+      snackString(getString.playerPictureSaved);
     } catch (e, st) {
       logError('PlayerState', e, st);
       snackString(getString.playerPictureSaveFailed);

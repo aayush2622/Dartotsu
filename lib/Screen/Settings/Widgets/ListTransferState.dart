@@ -94,11 +94,13 @@ class ExportListsState extends ScreenState {
         final file = await ExternalListService.save(dir!.path, format, bytes);
         shareFile(file.path, 'Dartotsu library');
       } else {
-        final dir = await FilePicker.getDirectoryPath(
-          dialogTitle: getString.chooseSaveLocation,
+        final dir = await StorageManager.getDirectory(
+          subPath: 'exports',
+          useCustomPath: true,
+          useSystemPath: false,
         );
-        if (dir == null) return;
-        final file = await ExternalListService.save(dir, format, bytes);
+        if (dir == null) throw StateError('no storage folder');
+        final file = await ExternalListService.save(dir.path, format, bytes);
         snackString(getString.savedPath(file.path));
       }
     } catch (e) {
