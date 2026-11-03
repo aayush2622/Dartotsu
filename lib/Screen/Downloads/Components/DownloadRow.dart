@@ -52,6 +52,8 @@ class DownloadRow extends StatelessWidget {
   final bool showMedia;
   final int? dragIndex;
   final bool canMoveUp;
+  final bool? selected;
+  final VoidCallback? onSelect;
 
   const DownloadRow({
     super.key,
@@ -60,6 +62,8 @@ class DownloadRow extends StatelessWidget {
     this.showMedia = true,
     this.dragIndex,
     this.canMoveUp = false,
+    this.selected,
+    this.onSelect,
   });
 
   @override
@@ -68,9 +72,12 @@ class DownloadRow extends StatelessWidget {
     final engine = find<DownloadEngine>();
     return Clickable(
       onTap: onTap,
+      onLongPress: onSelect,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: scheme.surfaceContainerLow,
+          color: selected == true
+              ? scheme.secondaryContainer
+              : scheme.surfaceContainerLow,
           borderRadius: Dimens.borderSm,
         ),
         child: Padding(
@@ -186,24 +193,28 @@ class DownloadRow extends StatelessWidget {
                   );
                 }),
               ),
-              if (canMoveUp)
-                _button(
-                  Icons.keyboard_double_arrow_up_rounded,
-                  getString.downloadMoveToTop,
-                  () => engine.moveToTop(task),
-                ),
-              Watch(() => _actions(context, engine)),
-              if (dragIndex != null)
-                ReorderableDragStartListener(
-                  index: dragIndex!,
-                  child: Padding(
-                    padding: EdgeInsets.all(Dimens.gapSm),
-                    child: Icon(
-                      Icons.drag_handle_rounded,
-                      color: scheme.onSurfaceVariant,
+              if (selected != null)
+                Checkbox(value: selected, onChanged: (_) => onTap?.call())
+              else ...[
+                if (canMoveUp)
+                  _button(
+                    Icons.keyboard_double_arrow_up_rounded,
+                    getString.downloadMoveToTop,
+                    () => engine.moveToTop(task),
+                  ),
+                Watch(() => _actions(context, engine)),
+                if (dragIndex != null)
+                  ReorderableDragStartListener(
+                    index: dragIndex!,
+                    child: Padding(
+                      padding: EdgeInsets.all(Dimens.gapSm),
+                      child: Icon(
+                        Icons.drag_handle_rounded,
+                        color: scheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
-                ),
+              ],
             ],
           ),
         ),

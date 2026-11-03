@@ -51,3 +51,22 @@ void confirmClearQueue(
       .setNegativeButton(getString.cancel, null)
       .show<void>(),
 );
+
+void confirmRemoveMany(
+  BuildContext context,
+  DownloadEngine engine,
+  List<DownloadTask> tasks,
+  VoidCallback onDone,
+) => unawaited(
+  AlertDialogBuilder(context)
+      .setTitle(getString.downloadDeleteSelected)
+      .setMessage(getString.downloadDeleteSelectedConfirm(tasks.length))
+      .setPositiveButton(getString.delete, () {
+        onDone();
+        for (final task in tasks) {
+          unawaited(engine.remove(task));
+        }
+      })
+      .setNegativeButton(getString.cancel, null)
+      .show<void>(),
+);

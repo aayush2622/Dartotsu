@@ -35,6 +35,27 @@ class DownloadsState extends ScreenState {
   final pending = find<PendingWrites>();
   final offline = find<OfflineMode>();
   final bytes = 0.live;
+  final selected = <String>{}.live;
+
+  bool get selecting => selected.value.isNotEmpty;
+
+  void toggle(DownloadTask task) {
+    final next = {...selected.value};
+    if (!next.remove(task.id)) next.add(task.id);
+    selected.value = next;
+  }
+
+  void clearSelection() => selected.value = {};
+
+  void selectAll() {
+    final tasks = tabs.index == 2 ? failed : done;
+    selected.value = {for (final t in tasks) t.id};
+  }
+
+  List<DownloadTask> get selectedTasks => [
+    for (final t in engine.tasks)
+      if (selected.value.contains(t.id)) t,
+  ];
 
   late final tabs = TabController(
     length: 3,
@@ -55,6 +76,7 @@ class DownloadsState extends ScreenState {
     _watch?.dispose();
     tabs.dispose();
     bytes.close();
+    selected.close();
   }
 
   List<DownloadTask> get queue => [
