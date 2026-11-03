@@ -96,10 +96,20 @@ class SourceMatcher {
     ];
     final tried = <String>{};
     SourceMatch? best;
+    (Object, StackTrace)? failure;
+    var failures = 0;
     for (final term in terms) {
       if (term.trim().isEmpty || !tried.add(term.toLowerCase())) continue;
       onStatus?.call(term);
-      final found = await search(source, term, targets);
+      final List<SourceMatch> found;
+      try {
+        found = await search(source, term, targets);
+      } catch (e, st) {
+        failure ??= (e, st);
+        failures++;
+        if (tried.length >= 4) break;
+        continue;
+      }
       if (found.isNotEmpty &&
           (best == null || found.first.score > best.score)) {
         best = found.first;
@@ -107,7 +117,12 @@ class SourceMatcher {
       if (best != null && best.score >= 96) break;
       if (tried.length >= 4) break;
     }
-    if (best == null) return null;
+    if (best == null) {
+      if (failure != null && failures == tried.length) {
+        Error.throwWithStackTrace(failure.$1, failure.$2);
+      }
+      return null;
+    }
     final needed = mode == 'exact' ? 90 : 0;
     return best.score >= needed ? best.media : null;
   }
