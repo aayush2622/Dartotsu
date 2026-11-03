@@ -217,14 +217,19 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     final chips = q.toChipList();
     return Column(
       children: [
-        if (spec.onList || spec.adult)
+        if (spec.onList || spec.notOnList || spec.adult)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Dimens.gapSm),
             child: Row(
               children: [
                 if (spec.onList)
-                  _checkbox(getString.listOnly, q.onList ?? false, (v) {
+                  _checkbox(getString.listOnly, q.onList == true, (v) {
                     q.onList = v ? true : null;
+                    state.restart();
+                  }),
+                if (spec.notOnList)
+                  _checkbox(getString.notInList, q.onList == false, (v) {
+                    q.onList = v ? false : null;
                     state.restart();
                   }),
                 const Spacer(),
@@ -452,6 +457,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
         title: item.mainName,
         subtitle: [
           if (item.format != null) item.format!.titleCase,
+          ?MediaRowFacts(item).count,
           if (year != null) '$year',
         ].join(' · '),
         score: (item.meanScore ?? 0) > 0 ? item.meanScore! / 10 : null,
