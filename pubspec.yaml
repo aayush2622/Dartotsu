@@ -50,13 +50,13 @@ dependencies:
   introduction_screen: ^5.0.1
   flutter_animate: ^4.5.2
   cached_network_image: ^4.0.6
-  flutter_cache_manager: ^3.4.6
+  flutter_cache_manager: ^3.4.8
   precached_network_image: ^1.4.1
   flutter_svg: ^2.3.2
   skeletonizer: ^3.0.0
   blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
-  dpad: ^3.2.0
+  dpad: ^3.3.0
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
   material_ui: ^1.9.0
@@ -77,8 +77,8 @@ dependencies:
       ref: main
       path: ./media_kit_video
 
-  window_manager: ^0.5.2
-  screen_retriever: ^0.2.2
+  window_manager: ^0.6.0
+  screen_retriever: ^0.3.1
   dbus: ^0.8.0
   permission_handler: ^13.0.2
   flutter_local_notifications: ^22.3.3
@@ -102,11 +102,11 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.3.0
   package_info_plus: ^10.2.2
-  file_picker: ^13.3.0
+  file_picker: ^13.3.2
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.4.9
+  webview_all: ^1.4.11
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -123,7 +123,7 @@ dependencies:
   xml: ^6.6.1
   flutter_displaymode: ^0.7.0
   flutter_tts: ^4.2.5
-  mobile_scanner: ^7.4.3
+  mobile_scanner: ^7.5.0
   local_auth: ^3.0.2
   pdfrx: ^2.11.0
 
@@ -136,7 +136,7 @@ dev_dependencies:
   # Code Generation dart run build_runner build
   isar_community_generator: ^3.4.1
   json_serializable: ^6.15.2
-  build_runner: ^2.15.1
+  build_runner: ^2.16.2
   inno_bundle: ^0.12.0
 
 dependency_overrides:

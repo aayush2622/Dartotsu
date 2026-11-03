@@ -17,7 +17,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rhttp/rhttp.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Downloads/DownloadEngine.dart';
@@ -201,8 +200,6 @@ Future<void> init(List<String> args) async {
       },
     ),
     initializeDateFormatting(),
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-      WindowManager.instance.ensureInitialized(),
   ]);
 
   await WindowMemory.instance.restore();
