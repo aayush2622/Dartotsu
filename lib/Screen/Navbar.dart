@@ -263,7 +263,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
                   color: selected
-                      ? theme.secondaryContainer
+                      ? theme.primaryContainer
                       : hovered
                       ? theme.onSurface.withValues(alpha: .08)
                       : Colors.transparent,
@@ -273,7 +273,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 item.icon,
                 size: 28,
                 color: selected
-                    ? theme.onSecondaryContainer
+                    ? theme.onPrimaryContainer
                     : hovered
                     ? theme.onSurface
                     : theme.onSurfaceVariant,
