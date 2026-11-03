@@ -112,9 +112,8 @@ class _ReaderImageState extends State<ReaderImage> {
     _detachSize();
     _natural = null;
     if (widget.onSize == null) return;
-    final stream = _baseProvider(
-      context,
-    ).resolve(createLocalImageConfiguration(context));
+    final stream = _baseProvider(context)
+        .resolve(createLocalImageConfiguration(context));
     late final ImageStreamListener listener;
     listener = ImageStreamListener((info, _) {
       if (identical(_sizeListener, listener)) {
@@ -127,7 +126,7 @@ class _ReaderImageState extends State<ReaderImage> {
         info.image.height.toDouble(),
       );
       _emitSize();
-    });
+    }, onError: (_, _) => _detachSize());
     _sizeStream = stream;
     _sizeListener = listener;
     stream.addListener(listener);
@@ -211,9 +210,8 @@ class _ReaderImageState extends State<ReaderImage> {
       return;
     }
     crop.value = null;
-    final stream = _baseProvider(
-      context,
-    ).resolve(createLocalImageConfiguration(context));
+    final stream = _baseProvider(context)
+        .resolve(createLocalImageConfiguration(context));
     late final ImageStreamListener listener;
     listener = ImageStreamListener((info, _) async {
       if (identical(_cropListener, listener)) {
@@ -227,7 +225,7 @@ class _ReaderImageState extends State<ReaderImage> {
       final result = BorderCropInfo(rect, width, height);
       BorderCropCache.put(key, result);
       if (mounted && widget.page.url == key) crop.value = result;
-    });
+    }, onError: (_, _) => _detachCrop());
     _cropStream = stream;
     _cropListener = listener;
     stream.addListener(listener);
