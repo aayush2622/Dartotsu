@@ -5,8 +5,10 @@ import 'dart:io';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 import 'Core/Preferences/StorageManager.dart';
+import 'Utils/Function.dart';
 
 final DebugPrintCallback _consolePrint = debugPrint;
 
@@ -308,11 +310,26 @@ class Logger {
 
   static final DeviceInfoPlugin _deviceInfo = DeviceInfoPlugin();
 
+  static Future<String> _appVersion() async {
+    try {
+      final info = await PackageInfo.fromPlatform();
+      final hash = (await loadEnv('hash')) ?? '';
+      final short = hash.length > 7 ? hash.substring(0, 7) : hash;
+      final base = '${info.version}+${info.buildNumber}';
+      return short.isEmpty ? base : '$base ($short)';
+    } catch (e) {
+      return 'unknown ($e)';
+    }
+  }
+
   static Future<String> _collectDeviceInfo() async {
     final buffer = StringBuffer();
 
+    final version = await _appVersion();
+
     buffer
       ..writeln('==== DEVICE INFO ====')
+      ..writeln('App Version   : $version')
       ..writeln(_field('OS', () => Platform.operatingSystem))
       ..writeln(_field('OS Version', () => Platform.operatingSystemVersion))
       ..writeln(_field('Locale', () => Platform.localeName))
