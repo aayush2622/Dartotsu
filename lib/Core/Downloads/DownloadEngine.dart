@@ -36,16 +36,23 @@ class DownloadBlocked implements Exception {
   String toString() => message;
 }
 
-bool isHlsUrl(String url) {
-  final lower = url.toLowerCase();
-  return lower.contains('.m3u8') || lower.contains('.mpd');
-}
+bool isHlsUrl(String url) => url.toLowerCase().contains('.m3u8');
+
+bool isDashUrl(String url) => url.toLowerCase().contains('.mpd');
 
 Future<bool> isHlsStream(String url, Map<String, String>? headers) async {
   if (isHlsUrl(url)) return true;
+  if (isDashUrl(url)) return false;
   if (isTorrentSource(url)) return false;
   if (videoExtensions.contains(extensionOf(url, fallback: ''))) return false;
   return probeHls(url, headers: headers);
+}
+
+Future<bool> isDashStream(String url, Map<String, String>? headers) async {
+  if (isDashUrl(url)) return true;
+  if (isHlsUrl(url) || isTorrentSource(url)) return false;
+  if (videoExtensions.contains(extensionOf(url, fallback: ''))) return false;
+  return probeDash(url, headers: headers);
 }
 
 class DownloadEngine extends AppController {
@@ -670,6 +677,83 @@ class DownloadEngine extends AppController {
     }
   }
 
+  Future<void> _fetchDash(
+    DownloadTask task,
+    Directory dir,
+    String base,
+    DownloadCancel cancel,
+  ) async {
+    final addon = ffmpegAddon();
+    final ffmpeg = addon != null && addon.installed.value ? addon : null;
+    final output = File(p.join(dir.path, '$base.mp4'));
+    task.path = output.path;
+    task.segmented = true;
+    var reResolved = false;
+    var attempt = 0;
+    while (true) {
+      final video = task.chosenVideo!;
+      final seen = <String>{};
+      final labels = [
+        for (final label in [
+          for (final t in task.chosenAudios) ?t.label,
+          ...?task.profile?.audios,
+        ])
+          if (seen.add(label.toLowerCase())) label,
+      ];
+      final job = FfmpegCancel();
+      _ffmpegCancels[task.id] = job;
+      try {
+        await downloadDash(
+          url: video.url,
+          output: output,
+          ffmpeg: ffmpeg,
+          cancel: cancel,
+          ffmpegCancel: job,
+          headers: video.headers,
+          height: task.height ?? task.profile?.height,
+          audioLabels: labels,
+          onProgress: (done, total) {
+            task.received.value = done;
+            task.total.value = total;
+            _notifyOverall();
+          },
+          onFinishing: () => task.finishing.value = true,
+        );
+        return;
+      } catch (e) {
+        if (_stopped.containsKey(task.id)) rethrow;
+        if (e is DashUnsupported) {
+          throw e.needsFfmpeg
+              ? DownloadBlocked(getString.downloadHlsNeedsFfmpeg)
+              : e;
+        }
+        final status = e is DownloadHttpError ? e.status : 0;
+        final expired = status == 401 || status == 403 || status == 410;
+        if (expired && !reResolved && task.episode != null) {
+          reResolved = true;
+          await _resolve(
+            task,
+            previous: StreamProfile(
+              streamLabel(video),
+              [for (final t in task.chosenSubtitles) ?t.label],
+              height: task.height ?? task.profile?.height,
+              audios: [for (final t in task.chosenAudios) ?t.label],
+            ),
+          );
+          continue;
+        }
+        if (e is FfmpegFailure) rethrow;
+        if (status >= 400 && status < 500) rethrow;
+        if (!await find<NetStatus>().check()) rethrow;
+        if (++attempt > 3) rethrow;
+        await Future<void>.delayed(Duration(seconds: 2 * attempt * attempt));
+      } finally {
+        _ffmpegCancels.remove(task.id);
+        task.finishing.value = false;
+      }
+    }
+  }
+
   Future<void> _fetchChapter(DownloadTask task, DownloadCancel cancel) async {
     final novel = task.isNovel;
     final source = await _sourceFor(
@@ -790,6 +874,8 @@ class DownloadEngine extends AppController {
         await _fetchTorrent(task, video, dir, base, cancel);
       } else if (await isHlsStream(video.url, video.headers)) {
         merged = await _fetchHls(task, dir, base, cancel);
+      } else if (await isDashStream(video.url, video.headers)) {
+        await _fetchDash(task, dir, base, cancel);
       } else {
         var attempt = 0;
         var tick = DateTime.now();

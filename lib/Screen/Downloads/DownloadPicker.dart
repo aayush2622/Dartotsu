@@ -88,6 +88,45 @@ Future<void> downloadUnits(
     if (chosen != torrentFileAuto) torrentFile = chosen;
   }
   final hls = await isHlsStream(video.url, video.headers);
+  final dash = !hls && await isDashStream(video.url, video.headers);
+  if (dash) {
+    final mode = await chooseHlsMode(live());
+    if (mode == HlsMode.cancel) return;
+    try {
+      final manifest = await loadDash(video.url, headers: video.headers);
+      if (manifest.protected) {
+        throw const DashUnsupported('This stream is DRM protected');
+      }
+      if (manifest.videos.isEmpty) {
+        throw const DashUnsupported('The DASH manifest has no video');
+      }
+      final sorted = [...manifest.videos]
+        ..sort((a, b) => b.bandwidth.compareTo(a.bandwidth));
+      var chosen = sorted.first;
+      if (sorted.length > 1) {
+        final picked = await showChoiceSheet<int>(
+          live(),
+          title: getString.playerQuality,
+          icon: Icons.hd_rounded,
+          selected: 0,
+          options: [
+            for (final (i, r) in sorted.indexed) ChoiceOption(i, r.quality),
+          ],
+        );
+        if (picked == null) return;
+        chosen = sorted[picked];
+        height = chosen.height;
+      }
+      if (!chosen.isMuxed) {
+        hlsAudios = [
+          for (final (i, a) in dashAudioOptions(manifest.audios).indexed)
+            HlsAudio(null, a.audioLabel, a.language, 'audio', i == 0),
+        ];
+      }
+    } catch (e) {
+      return snackString('$e');
+    }
+  }
   if (hls) {
     final mode = await chooseHlsMode(live());
     if (mode == HlsMode.cancel) return;
