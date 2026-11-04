@@ -1,9 +1,11 @@
 import '../../../../Logger.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../../Core/NetworkManager/CookieManager.dart';
 import '../../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../../Core/State/State.dart';
+import '../../../../Utils/Function.dart';
 
 enum ProbeResult { ok, challenge, blocked, failed }
 
@@ -40,8 +42,8 @@ class SourceHealth {
 
   static SourceHealth read(Source source) {
     final net = find<NetworkManager>();
-    final url = source.baseUrl?.trim();
-    final uri = url == null || url.isEmpty ? null : Uri.tryParse(url);
+    final url = webUrl(source.baseUrl);
+    final uri = url == null ? null : Uri.tryParse(url);
     final host = uri?.host ?? '';
     final jar = host.isEmpty
         ? const <StoredCookie>[]
@@ -65,9 +67,8 @@ class SourceHealth {
   }
 
   static Uri? _uri(Source source) {
-    final url = source.baseUrl?.trim();
-    if (url == null || url.isEmpty) return null;
-    return Uri.tryParse(url);
+    final url = webUrl(source.baseUrl);
+    return url == null ? null : Uri.tryParse(url);
   }
 
   static CloudflareResult? lastSolve(Source source) {

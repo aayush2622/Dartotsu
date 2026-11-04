@@ -18,6 +18,7 @@ import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/EmptyState.dart';
 import '../../Webview/WebView.dart';
 import '../../Detail/Watch/Components/UnitTile.dart';
+import '../../../Utils/Function.dart';
 
 class ReaderLoadSheet extends StatefulWidget {
   final ReaderRequest request;
@@ -37,10 +38,7 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
     _load();
   }
 
-  String? get _siteUrl {
-    final url = widget.request.source?.baseUrl?.trim();
-    return url == null || url.isEmpty ? null : url;
-  }
+  String? get _siteUrl => webUrl(widget.request.source?.baseUrl);
 
   Future<void> _openSite() async {
     final url = _siteUrl;

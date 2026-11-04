@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
+
 import 'dart:async';
 
 import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../Logger.dart';
 
 Future<void> openLinkInBrowser(String url) async {
@@ -29,6 +31,14 @@ void shareText(String text) =>
 void shareFile(String path, String text) => SharePlus.instance.share(
   ShareParams(text: text, files: [XFile(path)], downloadFallbackEnabled: true),
 );
+
+String? webUrl(String? raw) {
+  final value = raw?.trim();
+  if (value == null || value.isEmpty) return null;
+  final uri = Uri.tryParse(value);
+  if (uri == null || !uri.hasAuthority || uri.host.isEmpty) return null;
+  return uri.scheme == 'http' || uri.scheme == 'https' ? value : null;
+}
 
 Future<String?> loadEnv(String prop) async {
   try {
