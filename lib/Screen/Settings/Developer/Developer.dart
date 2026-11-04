@@ -112,6 +112,14 @@ List<Developer> get kHardcodedDevelopers => [
     uri: 'https://github.com/Th3-A6add0n',
     role: 'Donor',
   ),
+  const Developer(
+    name: 'frostnova721',
+    githubId: '83959988',
+    pfp: 'https://avatars.githubusercontent.com/u/83959988?v=4',
+    banner: 'https://i.ibb.co/tTBdT650/dnbx67k.png',
+    uri: 'https://github.com/frostnova721',
+    role: 'Contributor',
+  ),
 ];
 
 Future<List<Developer>> loadDevelopers() async {
