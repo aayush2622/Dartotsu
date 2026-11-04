@@ -14,21 +14,33 @@ inputs:
   key-alias:
     description: Key alias
     required: true
+outputs:
+  gradle-cache-key:
+    description: Primary Gradle cache key. Empty when caching is skipped.
+    value: ${{ steps.gradle-cache.outputs.cache-primary-key }}
+  gradle-restored:
+    description: true when a Gradle cache was restored, including a fallback key
+    value: ${{ steps.gradle-cache.outputs.cache-matched-key != '' }}
 runs:
   using: composite
   steps:
     # modules-2 and the build cache are what keep a warm Android compile off
     # a 21 minute cold start. transforms, the daemon, and journals are the
     # bulk of a 3 GB cache and are not worth evicting the other platforms for.
-    - name: Cache Gradle dependencies
+    # Restore only. Saving happens after the compile, and only on a total miss,
+    # so a lockfile change does not write a second 2 GB entry.
+    - name: Restore Gradle cache
+      id: gradle-cache
       if: ${{ inputs.clean-build != 'true' && !contains(github.event.head_commit.message || '', '[clean]') }}
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: |
           ~/.gradle/caches/modules-2
           ~/.gradle/caches/build-cache-1
           ~/.gradle/wrapper
         key: v2-${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'pubspec.lock') }}
+        restore-keys: |
+          v2-${{ runner.os }}-gradle-
 
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v2

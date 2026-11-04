@@ -19,6 +19,11 @@ on:
         type: string
         required: false
         default: universal
+      apk-targets:
+        description: "all builds every ABI plus a universal APK. arm64 builds only arm64-v8a."
+        type: string
+        required: false
+        default: all
     outputs:
       apk_link:
         description: arm64 Drive web content link
@@ -54,6 +59,7 @@ jobs:
           flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
 
       - name: Setup Android build
+        id: android
         uses: ./.github/actions/setup-android-build
         with:
           clean-build: ${{ inputs.clean-build }}
@@ -100,8 +106,26 @@ jobs:
           path: build/rhttp/build/aarch64-linux-android
           key: v1-${{ runner.os }}-rhttp-target-${{ steps.rhttp-cargo.outputs.hash }}
 
-      - run: flutter build apk --release --split-per-abi
-      - run: flutter build apk --release
+      - name: Build release APKs
+        run: |
+          if [ "$APK_TARGETS" = "arm64" ]; then
+            flutter build apk --release --split-per-abi --target-platform android-arm64
+          else
+            flutter build apk --release --split-per-abi
+            flutter build apk --release
+          fi
+        env:
+          APK_TARGETS: ${{ inputs.apk-targets }}
+
+      - name: Save Gradle cache
+        if: ${{ !cancelled() && steps.android.outputs.gradle-restored != 'true' && steps.android.outputs.gradle-cache-key != '' && inputs.clean-build != true && !contains(github.event.head_commit.message || '', '[clean]') }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/caches/build-cache-1
+            ~/.gradle/wrapper
+          key: ${{ steps.android.outputs.gradle-cache-key }}
 
       - name: Rename APKs
         run: |
@@ -114,8 +138,10 @@ jobs:
             abi=$(echo "$base" | sed 's/app-\(.*\)-release.apk/\1/')
             mv "$file" "build/app/outputs/flutter-apk/Dartotsu_Android_${abi}_${SAFE_REF}.apk"
           done
-          mv build/app/outputs/flutter-apk/app-release.apk \
-            "build/app/outputs/flutter-apk/Dartotsu_Android_${UNIVERSAL_NAME}_${SAFE_REF}.apk"
+          if [[ -f build/app/outputs/flutter-apk/app-release.apk ]]; then
+            mv build/app/outputs/flutter-apk/app-release.apk \
+              "build/app/outputs/flutter-apk/Dartotsu_Android_${UNIVERSAL_NAME}_${SAFE_REF}.apk"
+          fi
           ls build/app/outputs/flutter-apk
         env:
           SAFE_REF: ${{ env.SAFE_REF }}
@@ -141,7 +167,7 @@ jobs:
           overrwrite: true
 
       - name: Upload armeabi File To Google Drive
-        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        if: ${{ inputs.apk-targets != 'arm64' && (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
           file-path: build/app/outputs/flutter-apk/Dartotsu_Android_armeabi-v7a_${{ env.SAFE_REF }}.apk
@@ -151,7 +177,7 @@ jobs:
           overrwrite: true
 
       - name: Upload x86 File To Google Drive
-        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        if: ${{ inputs.apk-targets != 'arm64' && (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
           file-path: build/app/outputs/flutter-apk/Dartotsu_Android_x86_64_${{ env.SAFE_REF }}.apk
@@ -161,7 +187,7 @@ jobs:
           overrwrite: true
 
       - name: Upload universal File To Google Drive
-        if: ${{ (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
+        if: ${{ inputs.apk-targets != 'arm64' && (inputs.publish-mode == 'gdrive' || inputs.publish-mode == 'both') && github.ref == 'refs/heads/main' && github.event_name != 'pull_request' }}
         uses: hoatruongdev09/google-drive-file-upload-github-action@v1.1
         with:
           file-path: build/app/outputs/flutter-apk/Dartotsu_Android_${{ inputs.universal-name }}_${{ env.SAFE_REF }}.apk
