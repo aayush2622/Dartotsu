@@ -65,7 +65,6 @@ jobs:
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
       universal-name: universal
-      apk-targets: arm64
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       APK_SIGN: ${{ secrets.APK_SIGN }}
