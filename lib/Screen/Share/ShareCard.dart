@@ -78,7 +78,10 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Icon(Icons.auto_awesome_rounded, size: 14, color: _muted),
+      ClipRRect(
+        borderRadius: BorderRadius.circular(4),
+        child: Image.asset('assets/images/logo.png', width: 16, height: 16),
+      ),
       const SizedBox(width: 6),
       const Text(
         'Dartotsu',

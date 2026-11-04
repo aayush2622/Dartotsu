@@ -33,6 +33,7 @@ const extensionHideNsfwPref = Pref(
 );
 
 bool _allowed(Source source) =>
+    !source.isPlaceholder &&
     !(extensionHideNsfwPref.value && (source.isNsfw ?? false));
 
 const extensionDefaultFeedPref = Pref(
@@ -95,7 +96,7 @@ List<Source> installedSources(ItemType type) =>
 Source? installedSourceById(String id) {
   for (final type in ItemType.values) {
     for (final s in installedSources(type)) {
-      if (s.id == id) return s;
+      if (s.id == id && !s.isPlaceholder) return s;
     }
   }
   return null;
