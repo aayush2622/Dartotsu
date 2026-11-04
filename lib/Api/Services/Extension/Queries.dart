@@ -80,7 +80,9 @@ class ExtensionQueries extends Queries {
     int page, {
     required bool popular,
   }) async {
-    final media = await _page(source, anime, page, popular: popular);
+    final media = await CloudflareSolver.quietly(
+      () => _page(source, anime, page, popular: popular),
+    );
     return media.isEmpty ? const {} : {title: media};
   }
 
