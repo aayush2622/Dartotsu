@@ -5386,6 +5386,15 @@ class AppLocalizationsSw extends AppLocalizations {
   String get playerSubtitleOutline => 'Mstari wa nje wa manukuu';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'Tumia libass';
 
   @override

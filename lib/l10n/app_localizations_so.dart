@@ -5388,6 +5388,15 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerSubtitleOutline => 'Xariiqda tarjumaadaha';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'Isticmaal libass';
 
   @override

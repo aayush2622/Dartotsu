@@ -10,6 +10,7 @@ enum SyncPart {
       'subtitleColor',
       'subtitleBackgroundColor',
       'subtitleOutlineColor',
+      'subtitleOutlineWidth',
       'subtitleBottomPadding',
     },
   ),

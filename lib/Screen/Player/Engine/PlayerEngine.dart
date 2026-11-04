@@ -387,6 +387,7 @@ class PlayerEngine {
       'sub-font-size': '${settings.subtitleSize}',
       'sub-color': argb(settings.subtitleColor),
       'sub-border-color': argb(settings.subtitleOutlineColor),
+      'sub-border-size': '${settings.subtitleOutlineWidth}',
       'sub-bold': settings.subtitleWeight >= 6 ? 'yes' : 'no',
       'sub-margin-y': '${settings.subtitleBottomPadding}',
       'sub-back-color': argb(background),

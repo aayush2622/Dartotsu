@@ -5356,6 +5356,15 @@ class AppLocalizationsHi extends AppLocalizations {
   String get playerSubtitleOutline => 'सबटाइटल आउटलाइन';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass इस्तेमाल करो';
 
   @override

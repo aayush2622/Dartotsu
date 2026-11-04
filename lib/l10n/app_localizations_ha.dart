@@ -5366,6 +5366,15 @@ class AppLocalizationsHa extends AppLocalizations {
   String get playerSubtitleOutline => 'Layin waje na subtitle';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'Yi amfani da libass';
 
   @override

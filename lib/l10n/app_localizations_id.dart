@@ -5368,6 +5368,15 @@ class AppLocalizationsId extends AppLocalizations {
   String get playerSubtitleOutline => 'Outline subtitle';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'Pakai libass';
 
   @override

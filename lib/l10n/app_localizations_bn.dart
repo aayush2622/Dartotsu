@@ -5342,6 +5342,15 @@ class AppLocalizationsBn extends AppLocalizations {
   String get playerSubtitleOutline => 'সাবটাইটেলের আউটলাইন';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass ব্যবহার করো';
 
   @override

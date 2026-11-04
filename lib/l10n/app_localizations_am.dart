@@ -5295,6 +5295,15 @@ class AppLocalizationsAm extends AppLocalizations {
   String get playerSubtitleOutline => 'የንዑስ ርዕስ ዝርዝር ጠርዝ';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass ተጠቀም';
 
   @override

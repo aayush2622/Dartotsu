@@ -5354,6 +5354,15 @@ class AppLocalizationsPs extends AppLocalizations {
   String get playerSubtitleOutline => 'د فرعي سرلیک کرښه';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass وکاروه';
 
   @override

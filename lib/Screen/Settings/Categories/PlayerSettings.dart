@@ -12,6 +12,7 @@ import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Player/Components/MpvSheets.dart';
 import '../../Player/Components/ShaderSheet.dart';
+import '../../Player/Components/SubtitlePreview.dart';
 import '../../Player/PlayerLauncher.dart';
 import '../Widgets/SegmentedSetting.dart';
 import '../../Player/Engine/AudioDevices.dart';
@@ -357,6 +358,19 @@ List<Setting> playerSettingsRows(
       Icons.border_color_rounded,
       s.subtitleOutlineColor,
       (v) => update((x) => x.subtitleOutlineColor = v),
+    ),
+    sliderSetting(
+      getString.playerSubtitleOutlineWidth,
+      '',
+      Icons.line_weight_rounded,
+      s.subtitleOutlineWidth,
+      0,
+      10,
+      (v) => update((x) => x.subtitleOutlineWidth = v),
+    ),
+    Setting.custom(
+      name: getString.playerSubtitlePreview,
+      builder: (_) => SubtitlePreview(settings: s),
     ),
     switchSetting(
       getString.playerLibass,

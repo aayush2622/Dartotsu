@@ -5260,6 +5260,15 @@ class AppLocalizationsZh extends AppLocalizations {
   String get playerSubtitleOutline => '字幕描边';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => '使用 libass';
 
   @override

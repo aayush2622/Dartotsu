@@ -5369,6 +5369,15 @@ class AppLocalizationsKn extends AppLocalizations {
   String get playerSubtitleOutline => 'ಸಬ್‌ಟೈಟಲ್ ಔಟ್‌ಲೈನ್';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass ಬಳಸು';
 
   @override

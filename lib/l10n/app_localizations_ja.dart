@@ -5261,6 +5261,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get playerSubtitleOutline => '字幕の縁取り';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libassを使う';
 
   @override

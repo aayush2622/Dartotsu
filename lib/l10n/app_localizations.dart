@@ -9647,6 +9647,24 @@ abstract class AppLocalizations {
   /// **'Subtitle outline'**
   String get playerSubtitleOutline;
 
+  /// No description provided for @playerSubtitleOutlineWidth.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle outline width'**
+  String get playerSubtitleOutlineWidth;
+
+  /// No description provided for @playerSubtitlePreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle preview'**
+  String get playerSubtitlePreview;
+
+  /// No description provided for @playerSubtitlePreviewText.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle preview text'**
+  String get playerSubtitlePreviewText;
+
   /// No description provided for @playerLibass.
   ///
   /// In en, this message translates to:

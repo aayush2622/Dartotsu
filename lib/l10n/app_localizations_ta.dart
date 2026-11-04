@@ -5381,6 +5381,15 @@ class AppLocalizationsTa extends AppLocalizations {
   String get playerSubtitleOutline => 'சப்டைட்டில் அவுட்லைன்';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass யூஸ் பண்ணு';
 
   @override

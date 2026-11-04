@@ -5401,6 +5401,15 @@ class AppLocalizationsMl extends AppLocalizations {
   String get playerSubtitleOutline => 'സബ്ടൈറ്റിൽ ഔട്ട്‌ലൈൻ';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass ഉപയോഗിക്കൂ';
 
   @override
