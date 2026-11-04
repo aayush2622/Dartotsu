@@ -68,6 +68,8 @@ class PrefManager {
   static final Map<String, void Function()> customReloaders = {};
   static final Map<String, _Pending> _pending = {};
   static bool _flushScheduled = false;
+  static int _flushRetries = 0;
+  static const _maxFlushRetries = 40;
   static bool _applying = false;
 
   static void Function(String storageKey, bool deleted)? onLocalChange;
@@ -363,8 +365,20 @@ class PrefManager {
           }
         }
       });
+      _flushRetries = 0;
     } catch (e) {
-      logger('PrefManager flush failed: $e', logLevel: LogLevel.error);
+      for (final entry in batch.entries) {
+        _pending.putIfAbsent(entry.key, () => entry.value);
+      }
+      if (++_flushRetries > _maxFlushRetries) {
+        _flushRetries = 0;
+        logger('PrefManager flush failed: $e', logLevel: LogLevel.error);
+        return;
+      }
+      if (!_flushScheduled) {
+        _flushScheduled = true;
+        Timer(const Duration(milliseconds: 50), _flushPending);
+      }
     }
   }
 }
