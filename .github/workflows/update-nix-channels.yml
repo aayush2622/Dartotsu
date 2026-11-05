@@ -110,10 +110,12 @@ jobs:
         run: nix flake check -L --accept-flake-config
 
       - name: Commit and push if channels.json changed
+        id: commit
         run: |
           set -euo pipefail
           if git diff --quiet -- channels.json; then
             echo "channels.json unchanged, nothing to commit"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
           git config user.name "github-actions[bot]"
@@ -121,3 +123,8 @@ jobs:
           git add channels.json
           git commit -m "chore: bump nix channels.json"
           git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Refresh NUR
+        if: steps.commit.outputs.changed == 'true'
+        run: curl -fsS -XPOST "https://nur-update.nix-community.org/update?repo=dartotsu"
