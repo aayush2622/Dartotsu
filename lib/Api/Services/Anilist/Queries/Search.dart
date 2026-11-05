@@ -48,23 +48,50 @@ extension on AnilistQueries {
       if (r.excludedTags?.isNotEmpty == true) 'excludedTags': r.excludedTags,
     };
 
-    final data = await client.query(
-      _querySearchMedia(r.perPage ?? 30),
-      variables: variables,
-    );
-    final page = data['Page'] as Map<String, dynamic>?;
-    if (page == null) return null;
+    try {
+      final data = await client.query(
+        _querySearchMedia(r.perPage ?? 30),
+        variables: variables,
+      );
+      final page = data['Page'] as Map<String, dynamic>?;
+      if (page == null) return null;
 
-    final media = (page['media'] as List? ?? const [])
-        .cast<Map<String, dynamic>>()
-        .map((m) => mapAnilistMedia(m))
-        .toList();
-    final info = page['pageInfo'] as Map<String, dynamic>?;
+      final media = (page['media'] as List? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map((m) => mapAnilistMedia(m))
+          .toList();
+      final info = page['pageInfo'] as Map<String, dynamic>?;
+
+      return r
+        ..results = media
+        ..page = (info?['currentPage'] as num?)?.toInt() ?? r.page
+        ..hasNextPage = info?['hasNextPage'] == true;
+    } on AnilistException {
+      // AniList is unreachable — fall back to the static title index.
+      return _searchMediaFromIndex(r);
+    }
+  }
+
+  /// Offline search: query the flat title index from the media index CDN.
+  /// Only works for text-search queries (no filters, no pagination beyond page 1).
+  Future<SearchResults?> _searchMediaFromIndex(SearchResults r) async {
+    final query = r.search;
+    if (query == null || query.isEmpty) return null;
+
+    final isAnime =
+        r.type != SearchType.MANGA && r.type != SearchType.NOVEL;
+
+    final hits = await _mediaIndex.searchByTitle(
+      query,
+      isAnime: isAnime,
+      limit: r.perPage ?? 30,
+    );
+    if (hits.isEmpty) return null;
 
     return r
-      ..results = media
-      ..page = (info?['currentPage'] as num?)?.toInt() ?? r.page
-      ..hasNextPage = info?['hasNextPage'] == true;
+      ..results = hits
+      ..page = 1
+      ..hasNextPage = false;
   }
 
   Future<SearchResults?> _searchPeople(
