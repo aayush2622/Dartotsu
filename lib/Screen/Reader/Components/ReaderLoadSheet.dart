@@ -1,4 +1,10 @@
+import 'dart:async';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../../Core/Downloads/DownloadEngine.dart';
+import '../../../Core/Downloads/PdfPages.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +16,9 @@ import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/EmptyState.dart';
+import '../../Webview/WebView.dart';
 import '../../Detail/Watch/Components/UnitTile.dart';
+import '../../../Utils/Function.dart';
 
 class ReaderLoadSheet extends StatefulWidget {
   final ReaderRequest request;
@@ -30,12 +38,27 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
     _load();
   }
 
+  String? get _siteUrl => webUrl(widget.request.source?.baseUrl);
+
+  Future<void> _openSite() async {
+    final url = _siteUrl;
+    if (url == null) return;
+    await navigateToPage<void>(context, WebView(url: url));
+    if (mounted) unawaited(_load());
+  }
+
   Future<void> _load() async {
     _error.value = null;
     final request = widget.request;
     try {
       final unit = request.units[request.index];
-      final local = request.online
+      final file = request.file;
+      final local = file != null && isPdfFile(file)
+          ? [
+              for (final f in await renderPdf(file, archiveCache(file)))
+                PageUrl(f),
+            ]
+          : request.online
           ? null
           : await find<DownloadEngine>().localPages(
               request.service.id,
@@ -67,12 +90,12 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
   Widget build(BuildContext context) {
     final request = widget.request;
     return AppSheet(
-      title: unitLabel(request.units[request.index], true),
+      title: unitLabel(request.units[request.index], false),
       child: Watch(() {
         final error = _error.value;
         if (error != null) {
           return SizedBox(
-            height: 300,
+            height: 340,
             child: EmptyState(
               icon: Icons.cloud_off_rounded,
               failed: true,
@@ -80,6 +103,10 @@ class _ReaderLoadSheetState extends State<ReaderLoadSheet> {
               message: error,
               actionLabel: getString.retry,
               onAction: _load,
+              secondaryLabel: _siteUrl == null
+                  ? null
+                  : getString.readerCloudflare,
+              onSecondary: _openSite,
             ),
           );
         }

@@ -25,6 +25,7 @@ class ColorSheet extends StatefulWidget {
   final Uint8List? frame;
   final Future<void> Function(ColorValues values) onChange;
   final bool embedded;
+  final List<Widget> header;
 
   const ColorSheet({
     super.key,
@@ -32,6 +33,7 @@ class ColorSheet extends StatefulWidget {
     required this.frame,
     required this.onChange,
     this.embedded = false,
+    this.header = const [],
   });
 
   @override
@@ -65,6 +67,7 @@ class _ColorSheetState extends State<ColorSheet> {
       return ListView(
         padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
         children: [
+          ...widget.header,
           if (widget.frame != null)
             ClipRRect(
               borderRadius: BorderRadius.circular(16),

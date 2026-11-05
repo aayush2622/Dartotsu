@@ -60,6 +60,7 @@ jobs:
         with:
           flutter-version: ${{ inputs.flutter-version }}
           flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
+          cache: "false"
 
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable

@@ -1,9 +1,12 @@
+import 'dart:async';
+
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:flutter/material.dart';
 
 import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../../Utils/Functions/ExternalPlayer.dart';
 import '../../../../Widgets/Components/SheetTile.dart';
 import '../../../Player/Engine/PlayRequest.dart';
 
@@ -87,6 +90,7 @@ class _GroupedStreamsState extends State<GroupedStreams> {
           : null,
       selected: index == widget.selected,
       onTap: () => widget.onPick(index),
+      onLongPress: () => unawaited(showExternalPlayerSheet(context, video)),
     );
   }
 

@@ -17,6 +17,7 @@ import '../State/State.dart';
 import '../ThemeManager/ThemeController.dart';
 import '../ThemeManager/ThemeMode.dart';
 import 'PrefManager.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 
 enum DantotsuGroup { accounts, appearance, extensions, app, player }
 
@@ -203,7 +204,7 @@ List<DantotsuItem> planDantotsu(DantotsuBackup b) {
       b.get<String>('Protected', 'AnilistUserName') ?? '',
       () => guard('anilist', () async {
         final ok = await find<AnilistAuth>().loginWithToken(aniToken);
-        return ok ? null : 'Token rejected';
+        return ok ? null : getString.importTokenRejected;
       }),
     );
   }
@@ -220,7 +221,7 @@ List<DantotsuItem> planDantotsu(DantotsuBackup b) {
         await auth.refreshUser();
         if (auth.user.value != null) return null;
         MalPref.token.value = '';
-        return 'Token rejected';
+        return getString.importTokenRejected;
       }),
     );
   }

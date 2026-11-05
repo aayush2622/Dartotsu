@@ -113,15 +113,52 @@ class PlayerEngine {
   bool _torrent = false;
 
   static const _softwareKey = 'playerSoftwareRender';
+  static const _autoKey = 'playerSoftwareAuto';
+  static const _autoLasts = Duration(days: 3);
 
-  static bool? _software;
+  static bool? _manual;
+  static int? _auto;
+
+  static bool get _autoOn {
+    _auto ??=
+        PrefManager.getCustomVal<int>(
+          _autoKey,
+          location: PrefLocation.PLAYER,
+        ) ??
+        0;
+    return DateTime.now().millisecondsSinceEpoch - _auto! <
+        _autoLasts.inMilliseconds;
+  }
 
   static bool get softwareRender =>
-      _software ??= PrefManager.getCustomVal<bool>(_softwareKey) ?? false;
+      (_manual ??=
+          PrefManager.getCustomVal<bool>(
+            _softwareKey,
+            location: PrefLocation.PLAYER,
+          ) ??
+          false) ||
+      _autoOn;
 
   static set softwareRender(bool value) {
-    _software = value;
-    PrefManager.setCustomVal<bool>(_softwareKey, value);
+    _manual = value;
+    PrefManager.setCustomVal<bool>(
+      _softwareKey,
+      value,
+      location: PrefLocation.PLAYER,
+    );
+    if (!value) {
+      _auto = 0;
+      PrefManager.setCustomVal<int>(_autoKey, 0, location: PrefLocation.PLAYER);
+    }
+  }
+
+  static void fallBackToSoftware() {
+    _auto = DateTime.now().millisecondsSinceEpoch;
+    PrefManager.setCustomVal<int>(
+      _autoKey,
+      _auto!,
+      location: PrefLocation.PLAYER,
+    );
   }
 
   static VideoController previewController(Player player) => VideoController(
@@ -350,6 +387,7 @@ class PlayerEngine {
       'sub-font-size': '${settings.subtitleSize}',
       'sub-color': argb(settings.subtitleColor),
       'sub-border-color': argb(settings.subtitleOutlineColor),
+      'sub-border-size': '${settings.subtitleOutlineWidth}',
       'sub-bold': settings.subtitleWeight >= 6 ? 'yes' : 'no',
       'sub-margin-y': '${settings.subtitleBottomPadding}',
       'sub-back-color': argb(background),

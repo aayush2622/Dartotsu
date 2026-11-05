@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import '../../../Screen/Detail/Watch/Data/TitleMatch.dart';
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
 import '../../NetworkManager/NetworkManager.dart';
 import '../../State/State.dart';
 

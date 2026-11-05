@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 
+import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
@@ -27,6 +28,8 @@ void showImageSheet(
   final remote = url != null && url.startsWith('http');
   if (file == null && !remote) return;
   final busy = false.live;
+  final size = Live<int?>(null);
+  unawaited(_measure(url: url, file: file).then((bytes) => size.value = bytes));
 
   Future<File> source() async {
     if (file != null) {
@@ -55,6 +58,32 @@ void showImageSheet(
     Builder(
       builder: (sheet) => AppSheet(
         title: title ?? name,
+        trailing: Watch(() {
+          final bytes = size.value;
+          if (bytes == null || bytes <= 0) return const SizedBox.shrink();
+          final scheme = Theme.of(sheet).colorScheme;
+          return Padding(
+            padding: const EdgeInsetsDirectional.only(end: 12),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                color: scheme.secondaryContainer,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                child: Text(
+                  formatBytes(bytes),
+                  style: Theme.of(sheet).textTheme.labelMedium?.copyWith(
+                    color: scheme.onSecondaryContainer,
+                  ),
+                ),
+              ),
+            ),
+          );
+        }),
         child: ListView(
           shrinkWrap: true,
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
@@ -137,6 +166,22 @@ void showImageSheet(
       ),
     ),
   );
+}
+
+Future<int?> _measure({
+  required String? url,
+  Future<File?> Function()? file,
+}) async {
+  try {
+    if (file != null) return await (await file())?.length();
+    if (url == null) return null;
+    final res = await find<NetworkManager>().head(url);
+    for (final entry in res.headers.entries) {
+      if (entry.key.toLowerCase() != 'content-length') continue;
+      return int.tryParse(entry.value.first);
+    }
+  } catch (_) {}
+  return null;
 }
 
 class _FileImage extends StatelessWidget {

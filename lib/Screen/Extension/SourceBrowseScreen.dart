@@ -25,6 +25,7 @@ import '../Webview/WebView.dart';
 import 'SourceBrowseState.dart';
 import 'SourcePreferenceScreen.dart';
 import 'SourceFilterSheet.dart';
+import '../../Utils/Function.dart';
 
 class SourceBrowseScreen extends StatefulWidget {
   final Source source;
@@ -49,18 +50,17 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen>
   @override
   Widget buildContent(BuildContext context) {
     final scheme = context.colorScheme;
-    final baseUrl = widget.source.baseUrl?.trim();
-    final webUrl = baseUrl == null || baseUrl.isEmpty ? null : baseUrl;
+    final siteUrl = webUrl(widget.source.baseUrl);
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppScreenBar(
         actions: [
-          if (webUrl != null)
+          if (siteUrl != null)
             IconButton(
               tooltip: getString.watchOpenWebView,
               icon: const Icon(Icons.public_rounded),
               onPressed: () =>
-                  navigateToPage<void>(context, WebView(url: webUrl)),
+                  navigateToPage<void>(context, WebView(url: siteUrl)),
             ),
           IconButton(
             tooltip: getString.watchSourceSettings,

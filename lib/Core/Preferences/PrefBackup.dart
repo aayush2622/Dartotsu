@@ -55,6 +55,10 @@ class PrefBackup {
     Map<String, dynamic> info = const {},
   }) async {
     final selected = _backable(locations);
+    if (selected.contains(PrefLocation.PROTECTED) &&
+        (password == null || password.isEmpty)) {
+      throw Exception('A password is required to back up account data');
+    }
 
     final result = <String, Map<String, dynamic>>{};
 
@@ -136,6 +140,9 @@ class PrefBackup {
     Validator.validate(decrypted);
 
     final selected = _backable(locations);
+    if (json['passwordType'] == 'default') {
+      selected.remove(PrefLocation.PROTECTED);
+    }
     final entries = <KeyValue>[];
 
     for (final section in decrypted.entries) {
@@ -150,6 +157,7 @@ class PrefBackup {
       final values = (section.value as Map).cast<String, dynamic>();
       for (final value in values.values) {
         final entry = KeyValue.fromJson(value as Map<String, dynamic>);
+        entry.key = PrefManager.renamed(entry.key);
         if (!isInternal(entry.key)) entries.add(entry);
       }
     }

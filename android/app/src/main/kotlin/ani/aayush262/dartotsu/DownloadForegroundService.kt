@@ -65,11 +65,23 @@ class DownloadForegroundService : Service() {
             Notification.Builder(this, CHANNEL)
         else
             @Suppress("DEPRECATION") Notification.Builder(this)
+        val live = Build.VERSION.SDK_INT >= 36
+        if (live) {
+            builder
+                .setStyle(
+                    Notification.ProgressStyle()
+                        .setProgressIndeterminate(percent < 0)
+                        .setProgress(percent.coerceIn(0, 100))
+                        .setProgressSegments(listOf(Notification.ProgressStyle.Segment(100)))
+                )
+                .promote(if (percent < 0) "…" else "$percent%")
+        } else {
+            builder.setProgress(100, percent.coerceIn(0, 100), percent < 0)
+        }
         return builder
             .setSmallIcon(android.R.drawable.stat_sys_download)
             .setContentTitle(title)
             .setContentText(text)
-            .setProgress(100, percent.coerceIn(0, 100), percent < 0)
             .setSubText(sub)
             .setCategory(Notification.CATEGORY_PROGRESS)
             .setColor(0xFF21C0D0.toInt())
@@ -77,6 +89,19 @@ class DownloadForegroundService : Service() {
             .setOnlyAlertOnce(true)
             .setContentIntent(open)
             .build()
+    }
+
+    private fun Notification.Builder.promote(shortText: String): Notification.Builder {
+        val cls = Notification.Builder::class.java
+        try {
+            cls.getMethod("setRequestPromotedOngoing", java.lang.Boolean.TYPE).invoke(this, true)
+        } catch (_: Exception) {
+        }
+        try {
+            cls.getMethod("setShortCriticalText", CharSequence::class.java).invoke(this, shortText)
+        } catch (_: Exception) {
+        }
+        return this
     }
 
     companion object {

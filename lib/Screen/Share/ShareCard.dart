@@ -78,7 +78,10 @@ class _Footer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: [
-      const Icon(Icons.auto_awesome_rounded, size: 14, color: _muted),
+      ClipRRect(
+        borderRadius: BorderRadius.circular(4),
+        child: Image.asset('assets/images/logo.png', width: 16, height: 16),
+      ),
       const SizedBox(width: 6),
       const Text(
         'Dartotsu',
@@ -350,11 +353,11 @@ class ListShareCard extends StatelessWidget {
               const SizedBox(height: 16),
               Row(
                 children: [
-                  _stat('$count', anime ? 'Anime' : 'Manga'),
-                  _stat('$completed', 'Completed'),
+                  _stat('$count', anime ? getString.anime : getString.manga),
+                  _stat('$completed', getString.completed),
                   _stat(
                     mean == null ? '–' : mean!.toStringAsFixed(1),
-                    'Mean score',
+                    getString.meanScore,
                   ),
                 ],
               ),

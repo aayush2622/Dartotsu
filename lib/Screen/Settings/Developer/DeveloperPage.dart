@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../Widgets/Components/AppBars.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -36,7 +35,7 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage>
           final loading = snapshot.connectionState != ConnectionState.done;
           final items = state.itemsFor(loading: loading, list: snapshot.data);
 
-          final grid = CustomScrollConfig(
+          return CustomScrollConfig(
             context,
             children: [
               AppSliverBar(
@@ -89,8 +88,6 @@ class _DeveloperPageState extends BaseScreen<DeveloperPage>
                 ),
             ],
           );
-
-          return loading ? Skeletonizer(child: grid) : grid;
         }),
       ),
     );

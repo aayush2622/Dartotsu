@@ -7,6 +7,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../../Settings/Layout/BarLayout.dart';
 import '../ReaderState.dart';
 import 'BookmarksSheet.dart';
 import 'ReaderSheets.dart';
@@ -72,8 +73,99 @@ class ReaderControls extends StatelessWidget {
     );
   }
 
+  ({IconData icon, String label, VoidCallback onTap})? _spec(
+    BuildContext context,
+    String id,
+  ) {
+    switch (id) {
+      case 'autoScroll':
+        final on = state.autoScrolling.value;
+        return (
+          icon: on
+              ? Icons.pause_circle_outline_rounded
+              : Icons.play_circle_outline_rounded,
+          label: on
+              ? getString.readerAutoScrollStop
+              : getString.readerAutoScroll,
+          onTap: state.toggleAutoScroll,
+        );
+      case 'bookmark':
+        final on = state.bookmarked;
+        return (
+          icon: on ? Icons.bookmark_rounded : Icons.bookmark_border_rounded,
+          label: on
+              ? getString.readerBookmarkRemove
+              : getString.readerBookmarkAdd,
+          onTap: state.toggleBookmark,
+        );
+      case 'bookmarks':
+        if (state.record.bookmarks.isEmpty) return null;
+        return (
+          icon: Icons.bookmarks_outlined,
+          label: getString.readerBookmarks,
+          onTap: () => showBookmarks(
+            context,
+            record: state.record,
+            tick: state.bookmarkTick,
+            detail: (b) =>
+                getString.readerBookmarkPage(b.position + 1, b.total),
+            onOpen: state.openBookmark,
+            onRemove: state.removeBookmark,
+          ),
+        );
+      case 'chapters':
+        return (
+          icon: Icons.format_list_numbered_rounded,
+          label: getString.readerChapters,
+          onTap: () => showChapterList(
+            context,
+            request: state.request,
+            current: state.chapter,
+            onPick: state.openChapter,
+          ),
+        );
+      case 'settings':
+        return (
+          icon: Icons.settings_rounded,
+          label: getString.readerSettingsTitle,
+          onTap: () => showReaderOptions(context, state),
+        );
+    }
+    return null;
+  }
+
+  List<Widget> _bar(BuildContext context, List<String> ids) => [
+    for (final id in ids)
+      if (_spec(context, id) case final a?)
+        _icon(a.icon, a.onTap, tooltip: a.label),
+  ];
+
+  Widget _overflow(BuildContext context, List<String> ids) {
+    final specs = [for (final id in ids) ?_spec(context, id)];
+    if (specs.isEmpty) return const SizedBox.shrink();
+    return PopupMenuButton<int>(
+      tooltip: getString.layoutMore,
+      icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
+      onSelected: (i) => specs[i].onTap(),
+      itemBuilder: (_) => [
+        for (var i = 0; i < specs.length; i++)
+          PopupMenuItem(
+            value: i,
+            child: Row(
+              children: [
+                Icon(specs[i].icon, size: 20),
+                const SizedBox(width: 12),
+                Text(specs[i].label),
+              ],
+            ),
+          ),
+      ],
+    );
+  }
+
   Widget _top(BuildContext context) {
     state.current.value;
+    final layout = LayoutSurface.reader.layout;
     return DecoratedBox(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -89,6 +181,7 @@ class ReaderControls extends StatelessWidget {
           child: Row(
             children: [
               _icon(Icons.arrow_back_ios_new_rounded, () => popPage(context)),
+              ..._bar(context, layout.zone(topStartZone)),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,53 +206,8 @@ class ReaderControls extends StatelessWidget {
                   ],
                 ),
               ),
-              _icon(
-                state.autoScrolling.value
-                    ? Icons.pause_circle_outline_rounded
-                    : Icons.play_circle_outline_rounded,
-                state.toggleAutoScroll,
-                tooltip: state.autoScrolling.value
-                    ? getString.readerAutoScrollStop
-                    : getString.readerAutoScroll,
-              ),
-              _icon(
-                state.bookmarked
-                    ? Icons.bookmark_rounded
-                    : Icons.bookmark_border_rounded,
-                state.toggleBookmark,
-                tooltip: state.bookmarked
-                    ? getString.readerBookmarkRemove
-                    : getString.readerBookmarkAdd,
-              ),
-              if (state.record.bookmarks.isNotEmpty)
-                _icon(
-                  Icons.bookmarks_outlined,
-                  () => showBookmarks(
-                    context,
-                    record: state.record,
-                    tick: state.bookmarkTick,
-                    detail: (b) =>
-                        getString.readerBookmarkPage(b.position + 1, b.total),
-                    onOpen: state.openBookmark,
-                    onRemove: state.removeBookmark,
-                  ),
-                  tooltip: getString.readerBookmarks,
-                ),
-              _icon(
-                Icons.format_list_numbered_rounded,
-                () => showChapterList(
-                  context,
-                  request: state.request,
-                  current: state.chapter,
-                  onPick: state.openChapter,
-                ),
-                tooltip: getString.readerChapters,
-              ),
-              _icon(
-                Icons.settings_rounded,
-                () => showReaderOptions(context, state),
-                tooltip: getString.readerSettingsTitle,
-              ),
+              ..._bar(context, layout.zone(topEndZone)),
+              _overflow(context, layout.hidden),
             ],
           ),
         ),

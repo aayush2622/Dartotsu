@@ -30,24 +30,25 @@ Future<void> showBookmarks(
           title: getString.readerBookmarksEmpty,
         );
       }
-      return ListView(
-        children: [
-          for (final b in list)
-            ListTile(
-              leading: const Icon(Icons.bookmark_rounded),
-              title: Text(b.label),
-              subtitle: Text(detail(b)),
-              trailing: IconButton(
-                tooltip: getString.readerBookmarkRemove,
-                icon: const Icon(Icons.delete_outline_rounded),
-                onPressed: () => onRemove(b),
-              ),
-              onTap: () {
-                popPage(context);
-                onOpen(b);
-              },
+      return ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (_, i) {
+          final b = list[i];
+          return ListTile(
+            leading: const Icon(Icons.bookmark_rounded),
+            title: Text(b.label),
+            subtitle: Text(detail(b)),
+            trailing: IconButton(
+              tooltip: getString.readerBookmarkRemove,
+              icon: const Icon(Icons.delete_outline_rounded),
+              onPressed: () => onRemove(b),
             ),
-        ],
+            onTap: () {
+              popPage(context);
+              onOpen(b);
+            },
+          );
+        },
       );
     }),
   ),

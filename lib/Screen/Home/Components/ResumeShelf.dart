@@ -77,7 +77,7 @@ ShelfCardItem resumeItem(
     id: entry.slot.toString(),
     title: entry.mediaTitle,
     subtitle: subtitle,
-    imageUrl: entry.thumbnail,
+    imageUrl: entry.image,
     progress: entry.fraction.clamp(0.0, 1.0),
     progressText: left,
     onTap: () => openResume(context, service, entry),

@@ -9,7 +9,7 @@ import '../Widgets/SegmentedSetting.dart';
 import '../../../Core/State/State.dart';
 
 List<Setting> updateSettings(BuildContext context) => [
-  Setting.header(getString.channel),
+  Setting.header(getString.settingsUpdates),
   Setting.switchType(
     name: getString.checkForUpdates,
     description: getString.checkForUpdatesDesc,
@@ -19,6 +19,7 @@ List<Setting> updateSettings(BuildContext context) => [
   ),
   segmentedSetting<UpdateChannel>(
     name: getString.updateChannel,
+    description: getString.updateChannelDesc,
     icon: Icons.science_rounded,
     label: getString.channel,
     value: PrefName.updateChannel.rx.value,
@@ -31,6 +32,7 @@ List<Setting> updateSettings(BuildContext context) => [
   ),
   Setting.normal(
     name: getString.checkNow,
+    description: getString.checkNowDesc,
     icon: Icons.refresh_rounded,
     trailingIcon: Icons.chevron_right_rounded,
     onClick: () => find<AppUpdater>().checkForUpdate(force: true),

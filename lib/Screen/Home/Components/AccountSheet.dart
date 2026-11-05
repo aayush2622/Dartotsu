@@ -190,8 +190,8 @@ class _Profile extends StatelessWidget {
     AlertDialogBuilder(context)
       ..setTitle(getString.logOutOf(name))
       ..setMessage(getString.logOutConfirm)
-      ..setPositiveButton('Yes', auth.logout)
-      ..setNegativeButton('No', null)
+      ..setPositiveButton(getString.yes, auth.logout)
+      ..setNegativeButton(getString.no, null)
       ..show();
   }
 }

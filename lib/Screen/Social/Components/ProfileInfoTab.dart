@@ -105,7 +105,7 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
                     unawaited(_load());
                   },
                   icon: const Icon(Icons.refresh_rounded),
-                  label: const Text("Couldn't load favourites. Retry"),
+                  label: Text(getString.loadFailedFavourites),
                 ),
               ),
             ),

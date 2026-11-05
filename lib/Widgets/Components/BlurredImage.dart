@@ -8,8 +8,6 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:image/image.dart' as img;
 
 import '../../Core/State/State.dart';
-import '../../Utils/Functions/RefreshController.dart' show routeObserver;
-import 'GlassSurface.dart';
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Lru.dart';
@@ -41,8 +39,8 @@ class BlurredImage extends StatefulWidget {
         final file = File(url).isAbsolute
             ? File(url)
             : await DefaultCacheManager().getSingleFile(url);
-        final bytes = await file.readAsBytes();
-        final raw = await compute(_blur, (bytes, saturation));
+        final small = await _shrink(await file.readAsBytes());
+        final raw = await compute(_blur, (small, saturation));
         final out = await _decode(raw);
         _done[key] = out;
         return out;
@@ -61,6 +59,26 @@ class BlurredImage extends StatefulWidget {
 
 typedef _Raw = (int, int, Uint8List);
 
+const _side = 160;
+
+Future<_Raw> _shrink(Uint8List bytes) async {
+  final buffer = await ui.ImmutableBuffer.fromUint8List(bytes);
+  final descriptor = await ui.ImageDescriptor.encoded(buffer);
+  final portrait = descriptor.height > descriptor.width;
+  final codec = await descriptor.instantiateCodec(
+    targetWidth: portrait ? _side : null,
+    targetHeight: portrait ? null : _side,
+  );
+  final image = (await codec.getNextFrame()).image;
+  final data = await image.toByteData();
+  final out = (image.width, image.height, data!.buffer.asUint8List());
+  image.dispose();
+  codec.dispose();
+  descriptor.dispose();
+  buffer.dispose();
+  return out;
+}
+
 Future<ui.Image> _decode(_Raw raw) {
   final done = Completer<ui.Image>();
   ui.decodeImageFromPixels(
@@ -73,60 +91,35 @@ Future<ui.Image> _decode(_Raw raw) {
   return done.future;
 }
 
-_Raw _blur((Uint8List, double) input) {
-  final (bytes, saturation) = input;
-  final source = img.decodeImage(bytes);
-  if (source == null) throw StateError('decode');
-  final portrait = source.height > source.width;
-  var small = img.copyResize(
-    source,
-    width: portrait ? 128 : null,
-    height: portrait ? null : 128,
-    interpolation: img.Interpolation.average,
+_Raw _blur((_Raw, double) input) {
+  final ((width, height, pixels), saturation) = input;
+  var small = img.Image.fromBytes(
+    width: width,
+    height: height,
+    bytes: pixels.buffer,
+    numChannels: 4,
+    order: img.ChannelOrder.rgba,
   );
-  small = img.gaussianBlur(small, radius: 4);
+  small = img.gaussianBlur(small, radius: 9);
   if (saturation != 1) small = img.adjustColor(small, saturation: saturation);
-  final rgba = small.convert(numChannels: 4, alpha: 255);
-  return (rgba.width, rgba.height, rgba.getBytes(order: img.ChannelOrder.rgba));
+  return (
+    small.width,
+    small.height,
+    small.getBytes(order: img.ChannelOrder.rgba),
+  );
 }
 
-class _BlurredImageState extends State<BlurredImage> with RouteAware {
-  final _image = Live<ui.Image?>(null);
-  ModalRoute<dynamic>? _route;
+class _BlurredImageState extends State<BlurredImage> {
+  late final _image = Live<ui.Image?>(
+    BlurredImage.peek(widget.url, widget.saturation),
+  );
+  late final _instant = _image.value != null;
   int _run = 0;
 
   @override
   void initState() {
     super.initState();
     _start();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final route = ModalRoute.of(context);
-    if (route != null && route != _route) {
-      routeObserver.unsubscribe(this);
-      _route = route;
-      routeObserver.subscribe(this, route);
-    }
-  }
-
-  @override
-  void didPopNext() => _publish();
-
-  @override
-  void didPush() => _publish();
-
-  void _publish() {
-    final image = _image.value;
-    if (image != null) GlassField.show(image);
-  }
-
-  @override
-  void dispose() {
-    routeObserver.unsubscribe(this);
-    super.dispose();
   }
 
   @override
@@ -148,7 +141,6 @@ class _BlurredImageState extends State<BlurredImage> with RouteAware {
       }
       if (mounted && run == _run && out != null) {
         _image.value = out;
-        if (_route?.isCurrent ?? true) GlassField.show(out);
       }
     }());
   }
@@ -158,7 +150,7 @@ class _BlurredImageState extends State<BlurredImage> with RouteAware {
     final image = _image.value;
     return AnimatedOpacity(
       opacity: image == null ? 0 : 1,
-      duration: animDuration(350),
+      duration: _instant ? Duration.zero : animDuration(350),
       child: image == null
           ? const SizedBox.expand()
           : RawImage(

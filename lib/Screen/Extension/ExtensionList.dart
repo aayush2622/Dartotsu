@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
 import '../../Core/ThemeManager/ThemeController.dart';
 
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -347,7 +348,14 @@ class _ExtensionListState extends State<ExtensionList>
         children: [
           chip(completeLanguageName(source.lang?.toLowerCase() ?? 'unknown')),
 
-          if ((source.version ?? '').isNotEmpty) chip('v${source.version}'),
+          if ((source.version ?? '').isNotEmpty)
+            chip(
+              source.isPlaceholder ? source.version! : 'v${source.version}',
+              background: source.isPlaceholder
+                  ? theme.primaryContainer.withValues(alpha: .5)
+                  : null,
+              foreground: source.isPlaceholder ? theme.primary : null,
+            ),
 
           if (source.isNsfw ?? false)
             chip(
@@ -455,18 +463,27 @@ class _ExtensionListState extends State<ExtensionList>
         IconButton(
           icon: const Icon(Icons.settings_rounded),
           tooltip: getString.settings,
-          onPressed: () =>
-              navigateToPage(context, SourcePreferenceScreen(source: source)),
+          onPressed: source.isPlaceholder
+              ? null
+              : () => navigateToPage(
+                  context,
+                  SourcePreferenceScreen(source: source),
+                ),
         ),
         Padding(
           padding: const EdgeInsetsDirectional.only(start: 8),
-          child: MouseRegion(
-            cursor: SystemMouseCursors.grab,
-            child: ReorderableDragStartListener(
-              index: index,
-              child: const Icon(Icons.drag_indicator_rounded),
-            ),
-          ),
+          child: source.isPlaceholder
+              ? Icon(
+                  Icons.drag_indicator_rounded,
+                  color: Theme.of(context).disabledColor,
+                )
+              : MouseRegion(
+                  cursor: SystemMouseCursors.grab,
+                  child: ReorderableDragStartListener(
+                    index: index,
+                    child: const Icon(Icons.drag_indicator_rounded),
+                  ),
+                ),
         ),
       ],
     );

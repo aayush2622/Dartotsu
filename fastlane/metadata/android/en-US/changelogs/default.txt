@@ -1,60 +1,143 @@
--: feat: long press a manga page to save, share or copy it, with a reader setting to turn it off
--: feat: submit skip times to AniSkip from the player
--: feat: remember the save progress choice for a single series
--: feat: compact playback speed sheet and remember the last used speed
--: feat: discord presence shows real playback position and a paused state in the player
--: feat: progress bar thumb with press feedback
--: feat: build seek previews from the buffered video and drop the live screenshots
--: feat(reader): port Rust image processing (vips-rs & SIMD) & add selectable image filter quality (#159)
--: feat: send desktop analytics to GA4 so Linux and Windows users show up
--: feat: optional app passcode lock with a one-minute grace period
--: feat: include extension bridge settings in backups
--: feat: open player fullscreen and pause when the app loses focus, fold player settings sections
--: feat: player tracks sheet tabs for subtitle settings
--: feat: add strings for app lock, player options and updater messages, translate them
+-: feat: installing an extension manager lists the Java runtime, core and manager as steps, and the runtime is an addon
+-: feat: the image sheet shows the file size of the page or image
+-: feat: a clearance is only sent with the user agent that earned it, the source settings sheet shows why a Cloudflare check failed, and the extension installer sheet shows progress, errors and cancel like the app update
+-: feat: settings, watch progress and (with a passphrase) accounts sync through a private GitHub Gist; player and reader settings move to their own groups; protected backups require a password
+-: feat: a long title in the details page app bar scrolls instead of being cut off
+-: feat: layout editor edits a live mock of the real screen with drag highlight, insertion marker and mouse drag
+-: feat: settings restructure with collapsible sections, bar layout editor, PDF reading, external player hand-off
+-: feat: handle mihon://add-repo links
+-: feat: remember the desktop window size, position and maximized state between launches
+-: feat: casting follows the TV from the player, with episodes, quality, subtitles, volume and speed in the cast sheet
+-: feat: source browse page gets web view and source settings buttons
+-: feat: novel reader gets contents, search, highlights, a stable reading position and page turning
+-: feat: Support the developer opens a sheet with the UPI id next to Buy me a coffee
+-: feat: redesigned update sheet with progress, speed and cancel, and a second tap no longer starts another download
+-: feat: offline mode fails every non-local request at once instead of trying the network
+-: feat: the large Android widget scrolls through every resume entry and the next releases, and each entry opens its own title
+-: feat: MangaBaka stacks, rising, news, library sync, a private switch and separate manga and novel sections, plus a news page for any service
+-: feat: Auto reading mode picks webtoon or right to left from the series type
+-: feat: Resume has a big view with every entry and never shows private or hidden titles
+-: feat: AniList Missing Sequel rail, released episode count on the detail page and pull to refresh forces it, plus the feed no longer pages on upward scrolls
+-: feat: better shortcut icons
+-: feat: lock when idle setting, biometric prompt opens on launch, long press the title to copy it and a button to delete log files
+-: feat: saved per-source search filters with a filter button in the wrong title dialog, used by title matching and extension search
+-: feat: Android home-screen widget with a Material You continue card and upcoming releases
+-: feat: extension calendar of subscription releases, share Together invites, and a download storage view with free up space
+-: feat: Android app shortcuts for continue, search, downloads and calendar, and Together invite links open the app on Android
+-: feat: Linux media keys and playerctl control the player through an MPRIS D-Bus service
+-: feat: pinch zoom works in every reader mode, can zoom out and snaps back when let go
+-: feat: extension Update all with an updates card and a reinstall prompt, and open epub books from the files in the novel reader
+-: feat: Simkl series progress, seasons count on from the one before and the source picker shows a spinner while extensions load
+-: feat: subscribe to a title's source to get notified about new episodes and chapters
+-: feat: save the current frame from the picture sheet, original or with shaders and colors
+-: feat: cast to chromecast, dlna and roku from the player
+-: feat: the extension service can choose what its first tab shows and its home rail follows both tabs
+-: feat: extension runtimes show an update button and auto update is a setting that is off by default
+-: feat: clear the whole download queue at once and a clearer move to top icon
+-: feat: one id mapper for sync, comments, metadata and lookups, auto sync keeps going past long waits and instant sync covers manga
+-: feat: follow cover can be limited to media pages
+-: feat: reader settings group translation and text to speech under novel
+-: feat: editable aniskip times, pause when the window loses focus and working keyboard volume
+-: feat: separate seasons by scanlator, source picker tabs per service and grouped streams
+-: feat: biometric unlock and an animated pin pad with auto submit
+-: feat: discord presence for reading manga and novels, android image save goes to downloads without storage permission
+-: feat: rework glass theme with real glass surfaces, translucent tonal colours and a cpu-blurred background
+-: feat: manrope replaces poppins as the default font
+-: feat(sync): add manga and novel cross-service mapping index integration
+-: feat: add MangaUpdates service and update README
 ### 🛠️ Bug Fixes & Improvements
--: fix: simkl trending movies row goes last
--: fix: detect blank android frame captures by size so the shader preview gets a real frame
--: fix: start the app when libmpv can't load on old android and disable only the player
--: fix: remove invisible characters from fastlane paths
--: fix: simkl country and mini-series rows built from trending files
--: fix: detail title fits 3-4 lines within the cover height
--: fix: match display refresh rate to the video and idle the hidden player controls
--: fix: seek pill no longer flashes +0s while fading out
--: fix: bottom sheets focus the drag handle first for keyboard navigation
--: fix: save progress choice can only be remembered per series
--: fix: shader and seek previews use the same android video output setup as the player
--: fix: dns resolver never throws so the app no longer aborts without internet
--: fix: remove button backgrounds from the manga reader controls
--: fix: crop border listener removed twice from a disposed image stream
--: fix: resume opens the saved episode and shows the main series name
--: fix: skip stream recovery when playback is still alive after an error log
--: fix: reload the detail page from the api after editing the list instead of using the cache
--: fix: clear the list entry on the series after it is removed from MAL, Kitsu, Simkl, MangaBaka and local lists
--: fix: novel reader rendered at zero size, drop icon backgrounds in its bars
--: fix: delay and shrink cover colour extraction so opening a series does not lag
--: fix: reopen the stream at the last position when playback errors after a long pause
--: fix: send a plain Accept header when gradle downloads the libmpv jars [build.all] [ping]
--: fix: record native crashes and previous exit reasons, flush logcat promptly and drop its noise
--: fix: finish mobile OAuth logins from the deep link when the browser session is dropped
--: fix: let long reply code blocks scroll without trapping the page
--: fix: report APK install failures and cancellation instead of crashing
--: fix: smoother scrolling and no replayed entrance animation in the continue watching shelf
--: fix: lift bottom sheets above the keyboard
--: fix: only show libass subtitles for ass tracks, swap gesture indicators and ignore top-edge swipes
+-: fix: dispose dialog text controllers after the close animation, not when the dialog is popped
+-: fix: a slow stream no longer switches the player to software rendering for good, so shaders keep working
+-: fix: the chapter loading popup says Chapter instead of Episode
+-: fix: pages underneath the current screen are no longer painted, which made screen changes lag in glass mode
+-: fix: glass blurs the content behind floating bars again and the background texture is smooth instead of blocky
+-: fix: new chapter alerts keep working for ongoing series whose list entry is Completed
+-: fix: zoomed manga pages can no longer be panned past their top and bottom edges into the black padding
+-: fix: race condition
+-: fix: AniList bio SVG cards render again: nested SVG images, embedded WOFF2 fonts decoded in Dart, filters dropped
+-: fix: the calendar shortcut follows the current service and says when it has none, and shortcuts and links wait for the service's account refresh
+-: fix: novel chapters from Extension-service sources open the novel reader instead of failing with 'no pages'
+-: fix: auto subtitle and audio selection matches languages with regex, so labels like 'English - [Group]' are found, and waits for embedded subtitle tracks
+-: fix: leaving fullscreen on a tablet no longer rotates and re-enters fullscreen
+-: fix: the player keeps keyboard focus so space no longer opens the service switcher, and its tools split into two rows with fewer in fullscreen
+-: fix: shaders say when software rendering blocks them, and software rendering can be switched off in Player settings
+-: fix: the passcode pad takes number keys and keeps keyboard focus on desktop
+-: fix: a failed profile refresh is logged instead of opening the crash screen when launching offline
+-: fix: a progress write queued offline is really sent when the connection returns
+-: fix: casting advertises the interface that reaches the TV, only uses the default media receiver, waits for DLNA renderers before playing and repeats discovery
+-: fix: updatable extensions stay in the normal installed list and installed ones no longer show as available
+-: fix: Home no longer scrolls back to the top when the app regains focus
+-: fix: source subscriptions work for services that only report the chapters released so far
+-: fix: extension titles restored from the local list resolve their installed source again, and a link arriving through several listeners opens once
+-: fix: extension text settings accept new lines so several addon urls can be entered
+-: fix: add-repo links ask first, pinch zoom keeps webtoon page tracking, only the host controls a Together room, Chromecast waits for the receiver, DST-safe dates, stable notification ids and smaller crash fixes
+-: fix: casting detects HLS streams without an m3u8 url, serves bare media playlists and audio renditions through the proxy and sends the real content type
+-: fix: source subscriptions start their own extension manager even when it is not the default
+-: fix: reader images wait and retry on 429 and slow down per host
+-: fix: downloads detect HLS streams without an m3u8 url and merge their separate audio playlist
+-: fix: story double tap likes only in the middle, side taps only skip
+-: fix: profile settings icon matches the menu icon color
+-: fix: the collapsed details header keeps only back and title, the rest moves into the menu
+-: fix: the save progress prompt offers one option when the service isn't signed in
+-: fix: the list editor only shows private and hide from status lists for services that support them
+-: fix: simkl no longer sends a made-up app version when the real one can't be read
+-: fix: follow cover theme lets go the moment you leave a details page instead of after the animation and a delay
+-: fix: glass renders the blurred background once and reuses it instead of a live backdrop blur
+-: fix: player subtitles get a real outline instead of blurred shadows
+-: fix: mangaupdates library entries without a series id no longer crash the home feed
+-: fix: android player draws into the display cutout so the notch no longer shows black bars
+-: fix: player applies the default audio and subtitle track explicitly
+-: fix: aniskip accepts a 201 on submit and the lookup resolves the mal id
+-: fix: svg images with a prologue or doctype no longer show invalid svg data
+-: fix: simkl requests send the real app version
+-: fix: strip characters above the basic plane from anilist posts, replies and notes
+-: fix: hidden media keeps its paging and fullscreen on windows restores the maximized window
+-: fix: player and reader rebuild only the parts that change
+-: fix: picture sheet opens instantly and the shader preview uses a half-size source on android
+-: fix: tab selection indicator follows the swipe animation
+-: fix: reading the latest chapter of an ongoing series no longer marks it completed
+-: fix: settings version shows the git hash instead of the build number
+-: fix: simkl posts wait 1.1 s after the previous one finishes
+-: fix: simkl library sync checks activities first and only does a full sync without a stored timestamp
+-: fix: mangaupdates service builds against the current api and uses the real endpoints
+-: fix: manga id index is optional for sync, single cache map and formatting
+-: fix: crash on hidden media
+-: fix: (windows)  fullscreen not working properly
+-: fix: (android) shader preview [build.android]
 ### 🧹 Chores & Documentation
--: chore: bump version to 1.1.1
--: chore: pub upgrade [build.all] [ping]
--: chore: consistency pass with shared spinner, chips and sheet padding, and remove dead code
+-: chore: version bump
 -: chore: bump nix channels.json
--: chore: trigger build [build.all] [ping]
 -: chore: pub upgrade [build.all] [ping]
--: chore: pub upgrade [build.all] [ping]
--: chore: trigger build [build.all] [ping]
--: chore: trigger build [build.all] [ping]
--: chore: regenerate localizations for the reader filter strings
+-: chore: bridge without the repeated Java probe and plugin index fetches
+-: chore: bridge with the JVM addon and thin desktop plugins
 -: chore: bump nix channels.json
--: chore: trigger build [build.all] [ping]
--: chore: use precompiled cargokit binaries [build.all]
+-: chore: bump nix channels.json
+-: chore: pub upgrade [build.all] [ping]
+-: chore: dart_discord_presence from pub.dev
+-: chore: layout editor and donate sheet follow the consistency rules (start/end geometry, animation speed, Clickable)
+-: chore: bump nix channels.json
+-: chore: pub upgrade [build.all]
+-: docs: keep the original README header, move Why you'll like it and the screenshots to the bottom, no emojis
+-: docs: rewrite README for everyday users with screenshots, bring back the visitor counter, CodeFactor and DeepWiki
+-: chore: pub upgrade [build.all]
+-: ci: package a Linux AppImage on release
+-: chore: bump nix channels.json
+-: chore: remove the test suite
+-: chore: pub upgrade [build.all]
+-: chore: pub upgrade
+-: chore: bump nix channels.json
+-: chore: pub upgrade [build.all]
+-: chore: format
+-: chore: pub upgrade [build.all]
+-: chore: pub upgrade [build.all]
+-: chore: pub upgrade [build.all]
+-: chore: bump nix channels.json
+-: chore: pub upgrade [build.all]
+-: chore: pub upgrade [build.all] [ping]
+-: chore: pub upgrade [build.all] [ping]
+-: chore: strings for casting, extension tabs and runtime updates, the track prompt and clearing the download queue
+-: chore: bump nix channels.json
+-: chore: pub upgrade [build.all] [ping]
+-: chore: add strings for app lock biometrics, stream groups and source picker
 -: chore: bump nix channels.json
 -: chore: bump nix channels.json

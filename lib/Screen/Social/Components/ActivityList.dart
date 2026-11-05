@@ -112,7 +112,7 @@ class _ActivityListState extends State<ActivityList>
                   child: EmptyState(
                     icon: Icons.cloud_off_rounded,
                     failed: true,
-                    title: "Couldn't load activity",
+                    title: getString.loadFailedActivity,
                     onAction: () => state.load(reset: true),
                   ),
                 )

@@ -70,6 +70,27 @@ class UnitSliver extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (view == 2) {
+      return SliverLayoutBuilder(
+        builder: (context, constraints) {
+          final gap = Dimens.gapSm;
+          final columns = (constraints.crossAxisExtent / 64).floor().clamp(
+            4,
+            16,
+          );
+          return SliverGrid.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: columns,
+              mainAxisSpacing: gap,
+              crossAxisSpacing: gap,
+              mainAxisExtent: 48,
+            ),
+            itemCount: units.length,
+            itemBuilder: (_, i) => builder(units[i]),
+          );
+        },
+      );
+    }
     if (view != 0) {
       return SliverToBoxAdapter(
         child: UnitLayout(units: units, view: view, builder: builder),

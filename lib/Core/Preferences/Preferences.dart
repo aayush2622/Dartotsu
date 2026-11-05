@@ -62,6 +62,7 @@ class PrefName {
   static const service = Pref('service', 'anilist', PrefLocation.COMMON);
   static const appLocale = Pref('appLocale', 'en', PrefLocation.COMMON);
   static const customPath = Pref('customPath', '', PrefLocation.COMMON);
+  static const windowState = Pref('windowState', '', PrefLocation.COMMON);
   static const hasCompletedOnboarding = Pref(
     'hasCompletedOnboarding',
     false,
@@ -186,6 +187,92 @@ class PrefName {
     'auto',
     PrefLocation.COMMON,
   );
+  static const discordStatus = Pref(
+    'discordStatus',
+    'online',
+    PrefLocation.COMMON,
+  );
+  static const discordLive = Pref('discordLive', false, PrefLocation.COMMON);
+  static const discordCustomStatus = Pref(
+    'discordCustomStatus',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordNameMode = Pref(
+    'discordNameMode',
+    'app',
+    PrefLocation.COMMON,
+  );
+  static const discordCustomName = Pref(
+    'discordCustomName',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordStatusDisplay = Pref(
+    'discordStatusDisplay',
+    'name',
+    PrefLocation.COMMON,
+  );
+  static const discordDetailsTemplate = Pref(
+    'discordDetailsTemplate',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordStateTemplate = Pref(
+    'discordStateTemplate',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordLargeImage = Pref(
+    'discordLargeImage',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordSmallImage = Pref(
+    'discordSmallImage',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordTimerStyle = Pref(
+    'discordTimerStyle',
+    'auto',
+    PrefLocation.COMMON,
+  );
+  static const discordMediaButton = Pref(
+    'discordMediaButton',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordAppButton = Pref(
+    'discordAppButton',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordButtonLabel = Pref(
+    'discordButtonLabel',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordButtonUrl = Pref(
+    'discordButtonUrl',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordPrivateText = Pref(
+    'discordPrivateText',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const discordShowWatching = Pref(
+    'discordShowWatching',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const discordShowReading = Pref(
+    'discordShowReading',
+    true,
+    PrefLocation.COMMON,
+  );
 
   static const lastBackupAt = Pref('lastBackupAt', '', PrefLocation.COMMON);
 
@@ -229,4 +316,36 @@ class PrefName {
   static const customDnsUrl = Pref('customDnsUrl', '', PrefLocation.COMMON);
   static const proxyUrl = Pref('proxyUrl', '', PrefLocation.COMMON);
   static const verifyTls = Pref('verifyTls', true, PrefLocation.COMMON);
+
+  static const settingsSync = Pref('settingsSync', false, PrefLocation.COMMON);
+  static const settingsSyncCategories = Pref<List<String>>(
+    'settingsSyncCategories',
+    ['THEME', 'COMMON', 'PLAYER', 'READER', 'OTHER'],
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncLocal = Pref<List<String>>('settingsSyncLocal', [
+    'subtitles',
+    'pictureColors',
+  ], PrefLocation.COMMON);
+  static const settingsSyncTitles = Pref(
+    'settingsSyncTitles',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncGist = Pref(
+    'settingsSyncGist',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const settingsSyncUser = Pref(
+    'settingsSyncUser',
+    '',
+    PrefLocation.COMMON,
+  );
+  static const githubToken = Pref('githubToken', '', PrefLocation.PROTECTED);
+  static const settingsSyncPassphrase = Pref(
+    'settingsSyncPassphrase',
+    '',
+    PrefLocation.PROTECTED,
+  );
 }

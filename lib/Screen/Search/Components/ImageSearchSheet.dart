@@ -1,161 +1,32 @@
-import '../../../Utils/Animation/WidgetAnimations.dart';
-import '../../../Widgets/Components/ScrollConfig.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../Core/Services/Api/TraceMoe.dart';
-import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Utils/Function.dart';
-import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/Clickable.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
-import '../../../Widgets/Components/EmptyState.dart';
-import '../../../Widgets/Components/ScreenState.dart';
-import 'ImageSearchState.dart';
+import 'ReverseSearchSheet.dart';
 
 Future<TraceHit?> showImageSearch(BuildContext context) =>
-    showCustomBottomDialog<TraceHit>(context, const ImageSearchSheet());
-
-class ImageSearchSheet extends StatefulWidget {
-  const ImageSearchSheet({super.key});
-
-  @override
-  State<ImageSearchSheet> createState() => _ImageSearchSheetState();
-}
-
-class _ImageSearchSheetState extends State<ImageSearchSheet>
-    with ScreenStateHost<ImageSearchSheet, ImageSearchState> {
-  @override
-  ImageSearchState buildState() => ImageSearchState();
-
-  @override
-  Widget build(BuildContext context) => Watch(() => _build(context));
-
-  Widget _build(BuildContext context) {
-    final scheme = context.colorScheme;
-    final hits = state.hits.value;
-    final busy = state.busy.value;
-    final error = state.error.value;
-    return AppSheet(
-      title: getString.imageSearchTitle,
-      heightFactor: 0.9,
-      child: ScrollConfig(
-        context,
-        child: ListView(
-          padding: EdgeInsets.fromLTRB(
-            Dimens.pagePad,
-            0,
-            Dimens.pagePad,
-            Dimens.gapXl,
-          ),
-          children: [
-            Text(
-              getString.imageSearchIntro,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
-            ),
-            SizedBox(height: Dimens.gap),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: state.link,
-                    enabled: !busy,
-                    keyboardType: TextInputType.url,
-                    textInputAction: TextInputAction.search,
-                    onSubmitted: (_) => unawaited(state.submitLink()),
-                    decoration: InputDecoration(
-                      hintText: getString.imageSearchLinkHint,
-                      prefixIcon: const Icon(Icons.link_rounded),
-                    ),
-                  ),
-                ),
-                SizedBox(width: Dimens.gapSm),
-                IconButton.filled(
-                  tooltip: getString.imageSearchGo,
-                  onPressed: busy ? null : () => unawaited(state.submitLink()),
-                  icon: const Icon(Icons.search_rounded),
-                ),
-              ],
-            ),
-            SizedBox(height: Dimens.gapSm),
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.tonalIcon(
-                onPressed: busy ? null : () => unawaited(state.pick()),
-                icon: const Icon(Icons.image_search_rounded),
-                label: Text(getString.imageSearchPick),
-              ),
-            ),
-            if (state.bytes.value != null || state.url.value != null) ...[
-              SizedBox(height: Dimens.gap),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 180),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: state.bytes.value != null
-                        ? Image.memory(state.bytes.value!, fit: BoxFit.cover)
-                        : cachedNetworkImage(
-                            imageUrl: state.url.value,
-                            fit: BoxFit.cover,
-                          ),
-                  ),
-                ),
-              ),
-            ],
-            SizedBox(height: Dimens.gap),
-            if (busy)
-              Skeletonizer(
-                child: Column(
-                  children: [
-                    for (var i = 0; i < 3; i++) ...[
-                      const _HitTile(hit: _placeholder),
-                      SizedBox(height: Dimens.gapSm),
-                    ],
-                  ],
-                ),
-              )
-            else if (error != null)
-              EmptyState(
-                icon: Icons.error_outline_rounded,
-                failed: true,
-                title: error,
-              )
-            else if (hits != null && hits.isEmpty)
-              EmptyState(
-                icon: Icons.search_off_rounded,
-                title: getString.imageSearchEmpty,
-              )
-            else if (hits != null)
-              for (final (i, hit) in hits.indexed) ...[
-                _HitTile(hit: hit).animateStagger(i),
-                SizedBox(height: Dimens.gapSm),
-              ],
-            SizedBox(height: Dimens.gapSm),
-            Center(
-              child: Text(
-                getString.imageSearchCredit,
-                style: context.textTheme.labelSmall?.copyWith(
-                  color: scheme.onSurfaceVariant,
-                ),
-              ),
-            ),
-          ],
-        ),
+    showCustomBottomDialog<TraceHit>(
+      context,
+      ReverseSearchSheet<TraceHit>(
+        title: getString.imageSearchTitle,
+        intro: getString.imageSearchIntro,
+        empty: getString.imageSearchEmpty,
+        credit: getString.imageSearchCredit,
+        byBytes: (data, name) => TraceMoe.byBytes(data, name: name),
+        byUrl: TraceMoe.byUrl,
+        placeholder: _placeholder,
+        tile: (hit) => _HitTile(hit: hit),
       ),
     );
-  }
-}
 
 const _placeholder = TraceHit(
   anilistId: 0,

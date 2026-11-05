@@ -45,13 +45,15 @@ class _DownloadStorageScreenState extends BaseScreen<DownloadStorageScreen>
         final total = state.total;
         return ScrollConfig(
           context,
-          child: ListView(
+          child: ListView.builder(
             padding: EdgeInsets.all(Dimens.pagePad),
-            children: [
-              _summary(context, total),
-              SizedBox(height: Dimens.gap),
-              for (final u in usage) _title(context, u, total),
-            ],
+            itemCount: usage.length + 1,
+            itemBuilder: (_, i) => i == 0
+                ? Padding(
+                    padding: EdgeInsets.only(bottom: Dimens.gap),
+                    child: _summary(context, total),
+                  )
+                : _title(context, usage[i - 1], total),
           ),
         );
       }),

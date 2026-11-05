@@ -128,7 +128,7 @@ class AppUpdater extends AppController {
         if (response.statusCode != 200 ||
             response.data is! List ||
             (response.data as List).isEmpty) {
-          if (force) snackString("No releases found");
+          if (force) snackString(getString.updateNoReleases);
           return null;
         }
         return (response.data as List).first as Map;
@@ -141,13 +141,13 @@ class AppUpdater extends AppController {
   }) {
     if (response.statusCode == 404) {
       if (force) {
-        snackString("Ooo Nooo you fell into limbo: ${response.statusMessage}");
+        snackString(getString.updateNotFound('${response.statusMessage}'));
       }
       return null;
     }
     if (response.statusCode != 200) return null;
     if (response.data == null || response.data is! Map) {
-      if (force) snackString("Invalid update response");
+      if (force) snackString(getString.updateInvalidResponse);
       return null;
     }
     return response.data as Map;

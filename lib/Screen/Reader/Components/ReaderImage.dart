@@ -10,6 +10,8 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Logger.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../../Webview/WebView.dart';
 
 class ReaderCropScope extends InheritedWidget {
   final bool enabled;
@@ -51,6 +53,7 @@ class ReaderImage extends StatefulWidget {
   final double? width;
   final double? height;
   final double placeholderHeight;
+  final ValueChanged<Size>? onSize;
 
   const ReaderImage({
     super.key,
@@ -59,6 +62,7 @@ class ReaderImage extends StatefulWidget {
     this.width,
     this.height,
     this.placeholderHeight = 480,
+    this.onSize,
   });
 
   @override
@@ -72,6 +76,10 @@ class _ReaderImageState extends State<ReaderImage> {
   final crop = Live<BorderCropInfo?>(null);
   ImageStream? _cropStream;
   ImageStreamListener? _cropListener;
+  ImageStream? _sizeStream;
+  ImageStreamListener? _sizeListener;
+  Size? _natural;
+  Disposer? _cropWatch;
   bool _shown = false;
   bool _logged = false;
 
@@ -79,18 +87,69 @@ class _ReaderImageState extends State<ReaderImage> {
   void initState() {
     super.initState();
     _watch();
+    _cropWatch = onChange(crop, (_) => _emitSize());
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     _syncCrop();
+    _syncSize();
+  }
+
+  void _detachSize() {
+    final listener = _sizeListener;
+    final stream = _sizeStream;
+    _sizeStream = null;
+    _sizeListener = null;
+    if (listener == null || stream == null) return;
+    try {
+      stream.removeListener(listener);
+    } catch (_) {}
+  }
+
+  void _syncSize() {
+    _detachSize();
+    _natural = null;
+    if (widget.onSize == null) return;
+    final stream = _baseProvider(context)
+        .resolve(createLocalImageConfiguration(context));
+    late final ImageStreamListener listener;
+    listener = ImageStreamListener((info, _) {
+      if (identical(_sizeListener, listener)) {
+        stream.removeListener(listener);
+        _sizeStream = null;
+        _sizeListener = null;
+      }
+      _natural = Size(
+        info.image.width.toDouble(),
+        info.image.height.toDouble(),
+      );
+      _emitSize();
+    }, onError: (_, _) => _detachSize());
+    _sizeStream = stream;
+    _sizeListener = listener;
+    stream.addListener(listener);
+  }
+
+  void _emitSize() {
+    final natural = _natural;
+    final report = widget.onSize;
+    if (natural == null || report == null || !mounted) return;
+    final rect = crop.value?.rect;
+    report(
+      rect == null
+          ? natural
+          : Size(natural.width * rect.width, natural.height * rect.height),
+    );
   }
 
   ImageProvider _baseProvider(BuildContext context) {
-    final media = MediaQuery.of(context);
     final decode = widget.fit == BoxFit.fitWidth
-        ? (media.size.width * media.devicePixelRatio).round().clamp(320, 2400)
+        ? (MediaQuery.sizeOf(context).width *
+                  MediaQuery.devicePixelRatioOf(context))
+              .round()
+              .clamp(320, 2400)
         : null;
     final base = ReaderImageLoader.providerFor(widget.page);
     return decode == null
@@ -102,9 +161,10 @@ class _ReaderImageState extends State<ReaderImage> {
     if (quality != 'lanczos' || !DartotsuImageRust.isSupported) {
       return _baseProvider(context);
     }
-    final media = MediaQuery.of(context);
-    final width = (media.size.width * media.devicePixelRatio).round();
-    final height = (media.size.height * media.devicePixelRatio).round();
+    final size = MediaQuery.sizeOf(context);
+    final ratio = MediaQuery.devicePixelRatioOf(context);
+    final width = (size.width * ratio).round();
+    final height = (size.height * ratio).round();
     final (maxW, maxH) = switch (widget.fit) {
       BoxFit.fitWidth => (width, 0),
       BoxFit.fitHeight => (0, height),
@@ -150,9 +210,8 @@ class _ReaderImageState extends State<ReaderImage> {
       return;
     }
     crop.value = null;
-    final stream = _baseProvider(
-      context,
-    ).resolve(createLocalImageConfiguration(context));
+    final stream = _baseProvider(context)
+        .resolve(createLocalImageConfiguration(context));
     late final ImageStreamListener listener;
     listener = ImageStreamListener((info, _) async {
       if (identical(_cropListener, listener)) {
@@ -166,7 +225,7 @@ class _ReaderImageState extends State<ReaderImage> {
       final result = BorderCropInfo(rect, width, height);
       BorderCropCache.put(key, result);
       if (mounted && widget.page.url == key) crop.value = result;
-    });
+    }, onError: (_, _) => _detachCrop());
     _cropStream = stream;
     _cropListener = listener;
     stream.addListener(listener);
@@ -180,11 +239,14 @@ class _ReaderImageState extends State<ReaderImage> {
       _logged = false;
       _watch();
       _syncCrop();
+      _syncSize();
     }
   }
 
   @override
   void dispose() {
+    _cropWatch?.dispose();
+    _detachSize();
     _detachCrop();
     _slowTimer?.cancel();
     super.dispose();
@@ -196,6 +258,11 @@ class _ReaderImageState extends State<ReaderImage> {
     _slowTimer = Timer(const Duration(seconds: 8), () {
       if (mounted && !_shown) slow.value = true;
     });
+  }
+
+  Future<void> _solveCloudflare() async {
+    await navigateToPage<void>(context, WebView(url: widget.page.url));
+    if (mounted) await _retry();
   }
 
   Future<void> _retry() async {
@@ -346,6 +413,11 @@ class _ReaderImageState extends State<ReaderImage> {
           ),
           const SizedBox(height: 12),
           _reload(),
+          TextButton.icon(
+            onPressed: _solveCloudflare,
+            icon: const Icon(Icons.language_rounded, size: 18),
+            label: Text(getString.readerCloudflare),
+          ),
         ],
       ),
     );

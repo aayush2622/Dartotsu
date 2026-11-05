@@ -10,7 +10,8 @@ class AppSegment<T> {
   final T value;
   final String? label;
   final IconData? icon;
-  const AppSegment(this.value, {this.label, this.icon});
+  final bool enabled;
+  const AppSegment(this.value, {this.label, this.icon, this.enabled = true});
 }
 
 class AppSegmented<T> extends StatelessWidget {
@@ -110,13 +111,19 @@ class _SegmentButton<T> extends StatelessWidget {
       decoration: BoxDecoration(
         color: selected
             ? scheme.primary
-            : scheme.onSurface.withValues(alpha: 0.08),
+            : scheme.onSurface.withValues(alpha: segment.enabled ? 0.08 : 0.03),
         borderRadius: radius,
       ),
+      foregroundDecoration: segment.enabled
+          ? null
+          : BoxDecoration(
+              color: scheme.surface.withValues(alpha: 0.35),
+              borderRadius: radius,
+            ),
       child: Material(
         type: MaterialType.transparency,
         child: InkWell(
-          onTap: onTap,
+          onTap: segment.enabled ? onTap : null,
           borderRadius: radius.resolve(Directionality.of(context)),
           focusColor: foreground.withValues(alpha: 0.16),
           mouseCursor: kClickCursor,

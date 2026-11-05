@@ -18,6 +18,7 @@ import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../../../Widgets/Components/SectionCard.dart';
 import '../../Extension/ExtensionScreen.dart';
+import 'SubDiagnosis.dart';
 
 class SourceStatus {
   final String text;
@@ -118,6 +119,11 @@ Future<void> showSubActions(BuildContext context, SourceSub sub) async {
           icon: Icons.extension_rounded,
         ),
       ChoiceOption(
+        'why',
+        getString.sourceWhyAction,
+        icon: Icons.help_outline_rounded,
+      ),
+      ChoiceOption(
         'mute',
         sub.muted ? getString.sourceUnmute : getString.sourceMute,
         icon: sub.muted
@@ -137,6 +143,8 @@ Future<void> showSubActions(BuildContext context, SourceSub sub) async {
       find<SourceAlerts>().openSub(sub);
     case 'extensions':
       unawaited(navigateToPage(context, const ExtensionScreen()));
+    case 'why':
+      unawaited(showSubDiagnosis(context, sub));
     case 'mute':
       sub.muted = !sub.muted;
       store.changed();

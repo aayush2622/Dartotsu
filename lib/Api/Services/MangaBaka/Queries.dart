@@ -438,24 +438,14 @@ class MangaBakaQueries extends Queries {
   }) async {
     if (anime) return {};
     final all = await library();
-    final names = {
+    return groupByStatus(all, {
       'CURRENT': getString.reading,
       'PLANNING': getString.planning,
       'COMPLETED': getString.completed,
       'PAUSED': getString.paused,
       'DROPPED': getString.dropped,
       'REPEATING': getString.rereading,
-    };
-    final out = <String, List<Media>>{};
-    for (final entry in names.entries) {
-      final items = [
-        for (final m in all)
-          if (m.userStatus == entry.key) m,
-      ];
-      if (items.isNotEmpty) out[entry.value] = items;
-    }
-    if (all.isNotEmpty) out['All'] = all;
-    return out;
+    });
   }
 
   @override

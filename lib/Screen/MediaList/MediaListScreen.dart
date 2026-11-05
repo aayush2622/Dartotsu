@@ -1,4 +1,5 @@
 import '../../Utils/Extensions/StringExtensions.dart';
+
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -11,7 +12,7 @@ import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
-import '../../Widgets/Shelf/MediaRows.dart';
+import '../../Widgets/Shelf/MediaSection.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Feed/FeedNavigation.dart';
 import '../../Widgets/Components/EmptyState.dart';
@@ -190,9 +191,8 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
               children: [
                 Text(
                   label,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w700),
+                  style: Theme.of(context).textTheme.labelLarge
+                      ?.copyWith(fontWeight: FontWeight.w700),
                 ),
                 const SizedBox(height: 8),
                 Wrap(
@@ -351,33 +351,16 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     return skeleton ? Skeletonizer(child: scrolling) : scrolling;
   }
 
+  static const _shelf = MediaSection(data: MediaSectionData(type: 0));
+
   Widget _card(Media media, int index, {required bool skeleton}) {
-    final facts = MediaRowFacts(media);
-    final tag = skeleton ? null : 'list:${media.id}';
-    return PosterCard(
+    final tag = 'list:${media.id}';
+    return PosterCard.item(
+      _shelf.toItem(context, index, media),
       heroTag: tag,
-      imageUrl: media.cover,
-      title: media.mainName,
-      subtitle: skeleton
-          ? null
-          : '${media.userProgress ?? '~'} | ${facts.total ?? '~'}',
-      progress: skeleton ? null : facts.progress,
-      progressText: skeleton
-          ? null
-          : '${media.userProgress ?? '~'} · ${facts.total ?? '~'}',
-      score: skeleton
-          ? null
-          : (media.userScore ?? 0) > 0
-          ? media.userScore! / 10
-          : facts.score,
-      scoreHighlight: (media.userScore ?? 0) > 0,
-      airing: !skeleton && media.status == 'RELEASING',
-      onTap: skeleton
-          ? null
-          : () => openDetail(context, widget.service, media, heroTag: tag),
-      onLongPress: skeleton
-          ? null
-          : () => showQuickListEditor(context, widget.service, media),
+      skeleton: skeleton,
+      onTap: () => openDetail(context, widget.service, media, heroTag: tag),
+      onLongPress: () => showQuickListEditor(context, widget.service, media),
     );
   }
 }

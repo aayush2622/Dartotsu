@@ -54,6 +54,7 @@ jobs:
           flutter-version-secret: ${{ secrets.FLUTTER_VERSION }}
 
       - name: Setup Android build
+        id: android
         uses: ./.github/actions/setup-android-build
         with:
           clean-build: ${{ inputs.clean-build }}
@@ -65,17 +66,53 @@ jobs:
         if: ${{ inputs.clean-build || contains(github.event.head_commit.message || '', '[clean]') }}
         run: flutter clean
 
+      - name: Cache Rust toolchain
+        if: ${{ inputs.clean-build != true && !contains(github.event.head_commit.message || '', '[clean]') }}
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.rustup
+            ~/.cargo/registry
+            ~/.cargo/git
+          key: v1-${{ runner.os }}-rustup-stable
+
       - run: flutter pub get
 
-      - name: Let the libmpv jar download send a plain Accept header
+      # cargokit passes --target-dir and ignores CARGO_TARGET_DIR. The app
+      # redirects plugin builds to build/<plugin>, so the arm64 output is
+      # build/rhttp/build/aarch64-linux-android.
+      - name: Hash rhttp Cargo.lock
+        id: rhttp-cargo
+        if: ${{ inputs.clean-build != true && !contains(github.event.head_commit.message || '', '[clean]') }}
         run: |
-          for f in "$HOME"/.pub-cache/git/media-kit-*/libs/android/media_kit_libs_android_video/android/build.gradle; do
-            sed -i 's|os << new URL(fileInfo.url).openStream()|def conn = new URL(fileInfo.url).openConnection(); conn.setRequestProperty("Accept", "*/*"); os << conn.inputStream|' "$f"
-            grep -c 'setRequestProperty("Accept"' "$f"
-          done
+          lock=$(find "${PUB_CACHE:-$HOME/.pub-cache}/hosted" -path '*/rhttp-*/rust/Cargo.lock' -print -quit)
+          if [ -z "$lock" ]; then
+            echo "hash=missing" >> "$GITHUB_OUTPUT"
+            echo "rhttp Cargo.lock not found"
+            exit 0
+          fi
+          echo "hash=$(sha256sum "$lock" | awk '{print $1}')" >> "$GITHUB_OUTPUT"
+          echo "Using $lock"
+
+      - name: Cache rhttp cargo target
+        if: ${{ inputs.clean-build != true && !contains(github.event.head_commit.message || '', '[clean]') && steps.rhttp-cargo.outputs.hash != 'missing' }}
+        uses: actions/cache@v4
+        with:
+          path: build/rhttp/build/aarch64-linux-android
+          key: v1-${{ runner.os }}-rhttp-target-${{ steps.rhttp-cargo.outputs.hash }}
 
       - run: flutter build apk --release --split-per-abi
       - run: flutter build apk --release
+
+      - name: Save Gradle cache
+        if: ${{ !cancelled() && steps.android.outputs.gradle-restored != 'true' && steps.android.outputs.gradle-cache-key != '' && inputs.clean-build != true && !contains(github.event.head_commit.message || '', '[clean]') }}
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.gradle/caches/modules-2
+            ~/.gradle/caches/build-cache-1
+            ~/.gradle/wrapper
+          key: ${{ steps.android.outputs.gradle-cache-key }}
 
       - name: Rename APKs
         run: |

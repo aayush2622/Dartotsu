@@ -112,6 +112,14 @@
 			</dict>
 			<dict>
 				<key>CFBundleURLName</key>
+				<string>mihon</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>mihon</string>
+				</array>
+			</dict>
+			<dict>
+				<key>CFBundleURLName</key>
 				<string>sugoireads</string>
 				<key>CFBundleURLSchemes</key>
 				<array>

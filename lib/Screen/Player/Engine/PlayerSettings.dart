@@ -98,6 +98,8 @@ class PlayerSettings {
   set subtitleBackgroundColor(int v) => _v['subtitleBackgroundColor'] = v;
   int get subtitleOutlineColor => _get('subtitleOutlineColor', 0xFF000000);
   set subtitleOutlineColor(int v) => _v['subtitleOutlineColor'] = v;
+  int get subtitleOutlineWidth => _get('subtitleOutlineWidth', 3);
+  set subtitleOutlineWidth(int v) => _v['subtitleOutlineWidth'] = v;
   int get subtitleBottomPadding => _get('subtitleBottomPadding', 0);
   set subtitleBottomPadding(int v) => _v['subtitleBottomPadding'] = v;
   int get subtitleWeight => _get('subtitleWeight', 5);
@@ -222,7 +224,10 @@ class PlayerPrefs {
   static final global = Live<PlayerSettings>(_load());
 
   static PlayerSettings _load() {
-    final raw = PrefManager.getCustomVal<Map>(_globalKey);
+    final raw = PrefManager.getCustomVal<Map>(
+      _globalKey,
+      location: PrefLocation.PLAYER,
+    );
     return raw == null
         ? PlayerSettings()
         : PlayerSettings(Map<String, Object?>.from(raw));
@@ -232,11 +237,17 @@ class PlayerPrefs {
     final next = global.value.copy();
     change(next);
     global.value = next;
-    PrefManager.setCustomVal<Map>(_globalKey, next.toJson());
+    PrefManager.setCustomVal<Map>(
+      _globalKey,
+      next.toJson(),
+      location: PrefLocation.PLAYER,
+    );
   }
+
+  static void reload() => global.value = _load();
 
   static void reset() {
     global.value = PlayerSettings();
-    PrefManager.removeCustomVal(_globalKey);
+    PrefManager.removeCustomVal(_globalKey, location: PrefLocation.PLAYER);
   }
 }

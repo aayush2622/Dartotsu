@@ -146,37 +146,38 @@ class _SourcePickerState extends State<_SourcePicker> {
         ),
       );
     }
-    return ListView(
+    return ListView.builder(
       padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-      children: [
-        for (final (i, s) in sources.indexed)
-          SheetTile(
-            tinted: true,
-            radius: groupedRadius(i, sources.length),
-            selected: s.id == widget.current?.id,
-            leading: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: SizedBox(
-                width: 36,
-                height: 36,
-                child: cachedNetworkImage(
-                  imageUrl: s.iconUrl ?? '',
-                  fit: BoxFit.cover,
-                  errorWidget: (_, _, _) => Icon(
-                    Icons.extension_rounded,
-                    color: scheme.onSurfaceVariant,
-                    size: 20,
-                  ),
+      itemCount: sources.length,
+      itemBuilder: (_, i) {
+        final s = sources[i];
+        return SheetTile(
+          tinted: true,
+          radius: groupedRadius(i, sources.length),
+          selected: s.id == widget.current?.id,
+          leading: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: SizedBox(
+              width: 36,
+              height: 36,
+              child: cachedNetworkImage(
+                imageUrl: s.iconUrl ?? '',
+                fit: BoxFit.cover,
+                errorWidget: (_, _, _) => Icon(
+                  Icons.extension_rounded,
+                  color: scheme.onSurfaceVariant,
+                  size: 20,
                 ),
               ),
             ),
-            title: Text(s.name ?? ''),
-            subtitle: (s.lang ?? '').isEmpty
-                ? null
-                : Text((s.lang ?? '').toUpperCase()),
-            onTap: () => popPage(context, s),
           ),
-      ],
+          title: Text(s.name ?? ''),
+          subtitle: (s.lang ?? '').isEmpty
+              ? null
+              : Text((s.lang ?? '').toUpperCase()),
+          onTap: () => popPage(context, s),
+        );
+      },
     );
   }
 

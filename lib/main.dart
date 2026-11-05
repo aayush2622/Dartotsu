@@ -17,7 +17,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rhttp/rhttp.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Downloads/DownloadEngine.dart';
@@ -26,6 +25,7 @@ import 'Core/Offline/OfflineMode.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/DynamicColorScheme.dart';
+import 'Utils/Functions/WindowMemory.dart';
 import 'Core/ThemeManager/LocaleController.dart';
 import 'Core/ThemeManager/ThemeController.dart';
 import 'DI.dart';
@@ -53,6 +53,7 @@ import 'Screen/Reader/LocalBook.dart';
 import 'Utils/Functions/SnackBar.dart';
 import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
+import 'Core/SettingsSync/SettingsSync.dart';
 import 'Core/State/State.dart';
 
 void main(List<String> args) async {
@@ -199,9 +200,9 @@ Future<void> init(List<String> args) async {
       },
     ),
     initializeDateFormatting(),
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-      WindowManager.instance.ensureInitialized(),
   ]);
+
+  await WindowMemory.instance.restore();
 
   _stage = 'media kit';
   unawaited(applyRefreshRate());
@@ -257,6 +258,7 @@ Future<void> _postInit(List<String> args) async {
   }
   unawaited(find<AppUpdater>().checkForUpdate());
   find<SyncController>().startAuto();
+  find<SettingsSync>().start();
   find<DiscordPresenceController>().start();
 }
 
@@ -295,11 +297,11 @@ class _MyAppState extends State<MyApp> {
   /// `LayoutBuilder` above the app — that breaks semantics on Flutter 3.29+),
   /// then the d-pad wrapper.
   Widget _appBuilder(BuildContext context, Widget? child) {
-    final mq = MediaQuery.of(context);
+    final size = MediaQuery.sizeOf(context);
     Device.setScreenSize(
       context,
-      BoxConstraints.tightFor(width: mq.size.width, height: mq.size.height),
-      mq.orientation,
+      BoxConstraints.tightFor(width: size.width, height: size.height),
+      MediaQuery.orientationOf(context),
       600,
       1100,
     );

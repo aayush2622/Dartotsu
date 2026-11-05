@@ -1,17 +1,17 @@
 import '../../Core/Cast/CastService.dart';
 import '../../Core/Downloads/DownloadEngine.dart';
 import '../../Utils/Functions/DisplayMode.dart';
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:volume_controller/volume_controller.dart';
-import 'package:window_manager/window_manager.dart';
 
 import '../Detail/Watch/Data/Media/MediaRecord.dart';
 import '../Detail/Watch/Data/EpisodeMeta.dart';
@@ -36,6 +36,7 @@ import 'Engine/PlayerSettings.dart';
 import 'Engine/TorrentStream.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Preferences/Incognito.dart';
+import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
@@ -43,6 +44,7 @@ import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'PlayerMediaSession.dart';
 import '../Together/TogetherController.dart';
+import '../../Utils/Functions/AppWindow.dart';
 import '../../Utils/Functions/DesktopFullscreen.dart';
 import '../../Utils/Functions/Wakelock.dart';
 
@@ -420,12 +422,23 @@ class PlayerState extends ScreenState {
       if (generation != _generation) return;
     }
     if (engine.duration.value == Duration.zero) return;
-    try {
-      await engine.video.waitUntilFirstFrameRendered.timeout(
-        const Duration(seconds: 6),
-      );
-    } on TimeoutException {
-      if (generation == _generation) await _fallbackToSoftware();
+    var rendered = false;
+    unawaited(
+      engine.video.waitUntilFirstFrameRendered.then((_) => rendered = true),
+    );
+    var stuck = Duration.zero;
+    var waitedFor = Duration.zero;
+    const step = Duration(milliseconds: 250);
+    while (!rendered && waitedFor < const Duration(minutes: 2)) {
+      await Future<void>.delayed(step);
+      waitedFor += step;
+      if (generation != _generation) return;
+      if (engine.buffering.value || !engine.playing.value) continue;
+      stuck += step;
+      if (stuck >= const Duration(seconds: 6)) {
+        await _fallbackToSoftware();
+        return;
+      }
     }
   }
 
@@ -435,7 +448,7 @@ class PlayerState extends ScreenState {
       logLevel: LogLevel.error,
       tag: 'PLAYER',
     );
-    PlayerEngine.softwareRender = true;
+    PlayerEngine.fallBackToSoftware();
     final at = engine.position.value;
     final old = engine;
     engine = PlayerEngine(settings);
@@ -787,7 +800,7 @@ class PlayerState extends ScreenState {
   }
 
   Future<void> _pickDefaultSubtitle(v.Video chosen) async {
-    await _pickDefaultAudio();
+    unawaited(_pickDefaultAudio(_generation));
     if (!settings.showSubtitle) {
       await engine.noSubtitle();
       return;
@@ -801,19 +814,26 @@ class PlayerState extends ScreenState {
       );
       return;
     }
-    for (var i = 0; i < 10 && engine.subtitleTracks.value.isEmpty; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 150));
+    unawaited(_pickEmbeddedSubtitle(_generation, priority));
+  }
+
+  Future<void> _pickEmbeddedSubtitle(
+    int generation,
+    List<String> priority,
+  ) async {
+    for (var i = 0; i < 60 && engine.subtitleTracks.value.isEmpty; i++) {
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+      if (_closed || generation != _generation) return;
     }
-    final embedded = pickTrack(
-      engine.subtitleTracks.value,
-      priority,
-      avoidSigns: true,
-    );
+    final tracks = engine.subtitleTracks.value;
+    if (tracks.isEmpty || _closed || generation != _generation) return;
+    final embedded = pickTrack(tracks, priority, avoidSigns: true);
     if (embedded != null) {
-      await engine.setSubtitle(embedded.id);
-    } else if (engine.activeSubtitle.value == null &&
-        engine.subtitleTracks.value.isNotEmpty) {
-      await engine.setSubtitle(engine.subtitleTracks.value.first.id);
+      if (engine.activeSubtitle.value != embedded.id) {
+        await engine.setSubtitle(embedded.id);
+      }
+    } else if (engine.activeSubtitle.value == null) {
+      await engine.setSubtitle(tracks.first.id);
     }
   }
 
@@ -848,10 +868,10 @@ class PlayerState extends ScreenState {
         if (t.file != null && t.file!.isNotEmpty) t,
     ];
     for (final wanted in languageList(settings.subtitleLanguage)) {
-      final pattern = languagePattern(wanted);
-      if (pattern == null) continue;
+      final matcher = languageMatcher(wanted);
+      if (matcher == null) continue;
       final found = tracks
-          .where((t) => languageMatches(pattern, title: t.label))
+          .where((t) => matcher.matches(title: t.label))
           .toList();
       if (found.isEmpty) continue;
       return found.where((t) => !labelIsSigns(t.label ?? '')).firstOrNull ??
@@ -860,19 +880,24 @@ class PlayerState extends ScreenState {
     return null;
   }
 
-  Future<void> _pickDefaultAudio() async {
+  Future<void> _pickDefaultAudio(int generation) async {
     final priority = languageList(settings.audioLanguage);
-    var tracks = engine.audioTracks.value;
-    for (var i = 0; i < 20 && tracks.isEmpty; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 150));
-      tracks = engine.audioTracks.value;
+    if (priority.isEmpty) return;
+    var stable = 0;
+    var seen = -1;
+    for (var i = 0; i < 60; i++) {
+      final tracks = engine.audioTracks.value;
+      final pick = tracks.isEmpty ? null : pickTrack(tracks, priority);
+      if (pick != null) {
+        if (engine.activeAudio.value != pick.id) await engine.setAudio(pick.id);
+        return;
+      }
+      stable = tracks.length == seen ? stable + 1 : 0;
+      seen = tracks.length;
+      if (tracks.isNotEmpty && stable >= 8) return;
+      await Future<void>.delayed(const Duration(milliseconds: 250));
+      if (_closed || generation != _generation) return;
     }
-    if (tracks.isEmpty) return;
-    final pick = priority.isEmpty ? null : pickTrack(tracks, priority);
-    final current = tracks
-        .where((t) => t.id == engine.activeAudio.value)
-        .firstOrNull;
-    await engine.setAudio((pick ?? current ?? tracks.first).id);
   }
 
   Disposer? _errorSub;
@@ -1072,9 +1097,14 @@ class PlayerState extends ScreenState {
           rec.saveProgress &&
           !isIncognito &&
           engine.duration.value > Duration.zero) {
-        final bytes = await engine.player
-            .screenshot(format: 'image/jpeg')
+        final probe = await engine.player
+            .screenshot(format: 'image/png')
             .timeout(const Duration(seconds: 2));
+        final bytes = PlayerEngine.blankPng(probe)
+            ? null
+            : await engine.player
+                  .screenshot(format: 'image/jpeg')
+                  .timeout(const Duration(seconds: 2));
         if (bytes != null) {
           await ResumeStore.snapshot(
             kind: ResumeKind.watch,
@@ -1148,13 +1178,18 @@ class PlayerState extends ScreenState {
         RegExp(r'[\\/:*?"<>|]'),
         '',
       );
-      final saved = await FilePicker.saveFile(
-        fileName: '$name.png',
-        bytes: bytes,
-        mimeType: 'image/png',
-        type: FileType.image,
+      final dir = await StorageManager.getDirectory(
+        subPath: 'screenshots',
+        useCustomPath: true,
+        useSystemPath: false,
       );
-      if (saved != null) snackString(getString.playerPictureSaved);
+      if (dir == null) throw StateError('no storage folder');
+      var target = File(p.join(dir.path, '$name.png'));
+      for (var n = 2; await target.exists(); n++) {
+        target = File(p.join(dir.path, '$name ($n).png'));
+      }
+      await target.writeAsBytes(bytes);
+      snackString(getString.playerPictureSaved);
     } catch (e, st) {
       logError('PlayerState', e, st);
       snackString(getString.playerPictureSaveFailed);
@@ -1166,6 +1201,16 @@ class PlayerState extends ScreenState {
     if (_closed) return;
     if (at > const Duration(seconds: 1)) await engine.seek(at);
     await engine.play();
+  }
+
+  String? _episodeShot() {
+    final media = request.media;
+    for (final shot in [item.unit?.thumbnail, item.episode?.thumbnail]) {
+      if (shot == null || shot.isEmpty) continue;
+      if (shot == media?.banner || shot == media?.cover) continue;
+      return shot;
+    }
+    return null;
   }
 
   void _saveProgress({bool force = false}) {
@@ -1190,7 +1235,7 @@ class PlayerState extends ScreenState {
           unitKey: itemKey,
           number: item.number,
           title: item.title,
-          thumbnail: item.unit?.thumbnail ?? media.banner ?? media.cover,
+          thumbnail: _episodeShot(),
           position: position,
           duration: total,
           episode: item.episode?.toJson().cast<String, Object?>(),
@@ -1358,7 +1403,7 @@ class PlayerState extends ScreenState {
 
   Future<void> _initFullscreen() async {
     try {
-      fullscreen.value = await windowManager.isFullScreen();
+      fullscreen.value = appWindow?.isFullScreen ?? false;
     } catch (e, st) {
       logError('PlayerState', e, st);
     }

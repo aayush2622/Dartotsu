@@ -5,8 +5,9 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
-import '../Engine/Pip.dart';
+import '../../Settings/Layout/BarLayout.dart';
 import '../PlayerState.dart';
+import 'PlayerActions.dart';
 import 'PlayerSeekBar.dart';
 import 'PlayerSheets.dart';
 import '../../../Widgets/Components/Clickable.dart';
@@ -125,6 +126,21 @@ class PlayerControls extends StatelessWidget {
     icon: Icon(icon),
   );
 
+  List<Widget> _actions(
+    BuildContext context,
+    Iterable<String> ids, {
+    double size = 24,
+  }) => [
+    for (final id in ids)
+      if (playerAction(context, state, id, compact: compact) case final a?)
+        _icon(a.icon, a.onTap, size: size, tooltip: a.label),
+  ];
+
+  List<String> _compactBar(List<String> wanted, BarLayout layout) => [
+    for (final id in wanted)
+      if (layout.zoneOf(id) != hiddenZone) id,
+  ];
+
   EdgeInsets _side(BuildContext context) {
     if (compact) return EdgeInsets.zero;
     final p = MediaQuery.paddingOf(context);
@@ -134,6 +150,7 @@ class PlayerControls extends StatelessWidget {
   Widget _top(BuildContext context, bool locked) {
     final item = state.item;
     final media = state.request.media;
+    final layout = LayoutSurface.player.layout;
     return SafeArea(
       bottom: false,
       left: false,
@@ -151,6 +168,8 @@ class PlayerControls extends StatelessWidget {
                 compact ? () => popPage(context) : state.exitFullscreen,
                 size: compact ? 24 : 32,
               ),
+            if (!locked && !compact)
+              ..._actions(context, layout.zone(topStartZone)),
             Expanded(
               child: locked || compact
                   ? const SizedBox(height: 40)
@@ -188,39 +207,12 @@ class PlayerControls extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: [
-                      if (compact &&
-                          (state.videos.length > 1 || state.request.tracked))
-                        _icon(
-                          Icons.source_rounded,
-                          () => _streams(context),
-                          tooltip: getString.playerStreams,
-                        ),
-                      if (state.engine.videoVariants.value.length > 1)
-                        _icon(
-                          Icons.hd_rounded,
-                          () => showQualitySheet(context, state),
-                          tooltip: getString.playerQuality,
-                        ),
-                      if (!compact) ...[
-                        if (state.items.length > 1)
-                          _icon(
-                            Icons.video_collection_rounded,
-                            () => state.panel.value = !state.panel.value,
-                            tooltip: getString.playerEpisodes,
-                          ),
-                        _icon(
-                          Icons.slow_motion_video_rounded,
-                          () => showSpeedSheet(context, state),
-                          tooltip: getString.playerSpeed,
-                        ),
-                        _icon(
-                          Icons.lock_open_rounded,
-                          state.toggleLock,
-                          tooltip: getString.playerLock,
-                        ),
-                      ],
-                    ],
+                    children: _actions(
+                      context,
+                      compact
+                          ? _compactBar(['streams', 'quality'], layout)
+                          : layout.zone(topEndZone),
+                    ),
                   ),
                   _qualityTag(context),
                 ],
@@ -256,12 +248,6 @@ class PlayerControls extends StatelessWidget {
         ? Clickable(onTap: () => showQualitySheet(context, state), child: tag)
         : tag;
   }
-
-  Widget _pipButton() => _icon(
-    Icons.picture_in_picture_alt_rounded,
-    state.enterPip,
-    tooltip: getString.playerPip,
-  );
 
   Widget _center(BuildContext context) {
     final busy = state.loading.value || state.engine.buffering.value;
@@ -387,12 +373,13 @@ class PlayerControls extends StatelessWidget {
                         stamp?.name ?? '+${state.settings.skipDuration}s',
                       ),
                     ),
-                  if (compact && PlayerPip.supported) _pipButton(),
                   if (compact)
-                    _icon(
-                      Icons.fullscreen_rounded,
-                      state.toggleFullscreen,
-                      tooltip: getString.playerFullscreen,
+                    ..._actions(
+                      context,
+                      _compactBar([
+                        'pip',
+                        'fullscreen',
+                      ], LayoutSurface.player.layout),
                     ),
                 ],
               );
@@ -436,68 +423,19 @@ class PlayerControls extends StatelessWidget {
               ),
             ),
             if (!locked && !compact)
-              Watch(
-                () => Row(
+              Watch(() {
+                final layout = LayoutSurface.player.layout;
+                return Row(
                   children: [
-                    _icon(
-                      Icons.video_settings_rounded,
-                      () => showPlayerOptions(context, state),
-                      tooltip: getString.playerSettingsTitle,
-                    ),
-                    if (state.videos.length > 1 || state.request.tracked)
-                      _icon(
-                        Icons.source_rounded,
-                        () => _streams(context),
-                        tooltip: getString.playerStreams,
-                      ),
-                    _icon(
-                      Icons.subtitles_rounded,
-                      () => showTracksSheet(context, state, audio: false),
-                      tooltip: getString.playerSubtitles,
-                    ),
-                    _icon(
-                      Icons.audiotrack_rounded,
-                      () => showTracksSheet(context, state, audio: true),
-                      tooltip: getString.playerAudio,
-                    ),
-                    if (state.hasChapters)
-                      _icon(
-                        Icons.list_alt_rounded,
-                        () => showChaptersSheet(context, state),
-                        tooltip: getString.playerChapters,
-                      ),
+                    ..._actions(context, layout.zone(bottomStartZone)),
                     const Spacer(),
-                    if (PlayerPip.supported) _pipButton(),
-                    _icon(
-                      Icons.fit_screen_rounded,
-                      state.cycleFit,
-                      tooltip: getString.playerResize,
-                    ),
-                    _icon(
-                      Icons.fullscreen_exit_rounded,
-                      state.toggleFullscreen,
-                      tooltip: getString.playerFullscreen,
-                    ),
+                    ..._actions(context, layout.zone(bottomEndZone)),
                   ],
-                ),
-              ),
+                );
+              }),
           ],
         ),
       ),
     );
   }
-
-  Future<void> _streams(BuildContext context) =>
-      state.whilePaused<void>(() async {
-        if (!context.mounted) return;
-        final picked = await showStreamSheet(
-          context,
-          state,
-          state.videos.toList(),
-          selected: state.videoIndex.value,
-        );
-        if (picked != null && picked != state.videoIndex.value) {
-          await state.selectStream(picked);
-        }
-      });
 }

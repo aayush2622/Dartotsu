@@ -1,6 +1,9 @@
 import '../../Detail/Watch/Data/Media/MediaRecord.dart';
 import 'NovelText.dart';
 
+final _spaces = RegExp(r'[ \t\r]+');
+final _lineEdges = RegExp(r' ?\n ?');
+
 const _snippetLength = 32;
 
 String snippetOf(NovelBlock block) {
@@ -134,8 +137,8 @@ class NovelRange {
 
 String cleanSelection(String text) => text
     .replaceAll(' ', '')
-    .replaceAll(RegExp(r'[ \t\r]+'), ' ')
-    .replaceAll(RegExp(r' ?\n ?'), '\n')
+    .replaceAll(_spaces, ' ')
+    .replaceAll(_lineEdges, '\n')
     .trim();
 
 List<NovelRange> locateSelection(

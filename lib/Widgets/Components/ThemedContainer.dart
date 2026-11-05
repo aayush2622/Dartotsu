@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Core/ThemeManager/GlassTheme.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/State/State.dart';
 import 'GlassSurface.dart';
@@ -25,50 +26,48 @@ class ThemedContainer extends StatelessWidget {
     this.padding,
     this.margin,
     this.alignment,
-    this.blur = true,
+    this.blur = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final controller = find<ThemeController>();
-    final scheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
     final radius = borderRadius ?? BorderRadius.circular(28);
     final pad = padding ?? const EdgeInsets.all(8);
 
-    return Watch(() {
-      if (controller.useGlassMode.value) {
-        return GlassSurface(
-          margin: margin,
-          padding: pad,
-          alignment: alignment,
-          tint: color,
-          border: border,
-          borderRadius: radius,
-          blur: blur,
-          shadow: blur,
-          child: glassChild ?? child,
-        );
-      }
-
-      return Container(
+    if (theme.extension<GlassTheme>() != null) {
+      return GlassSurface(
+        margin: margin,
         padding: pad,
         alignment: alignment,
-        margin: margin,
-        decoration: BoxDecoration(
-          color: color ?? scheme.surfaceContainerHigh,
-          border: border,
-          borderRadius: radius,
-          boxShadow: [
-            BoxShadow(
-              color: scheme.shadow.withValues(alpha: 0.08),
-              blurRadius: 16,
-              offset: const Offset(0, 4),
-            ),
-          ],
-        ),
-        child: Material(color: Colors.transparent, child: child),
+        tint: color,
+        border: border,
+        borderRadius: radius,
+        blur: blur,
+        shadow: blur,
+        child: glassChild ?? child,
       );
-    });
+    }
+
+    return Container(
+      padding: pad,
+      alignment: alignment,
+      margin: margin,
+      decoration: BoxDecoration(
+        color: color ?? scheme.surfaceContainerHigh,
+        border: border,
+        borderRadius: radius,
+        boxShadow: [
+          BoxShadow(
+            color: scheme.shadow.withValues(alpha: 0.08),
+            blurRadius: 16,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Material(color: Colors.transparent, child: child),
+    );
   }
 }
 

@@ -8,7 +8,7 @@ import '../../../Model/Setting.dart';
 import '../../../Core/ThemeManager/language.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../Widgets/SettingRows.dart';
-import '../Widgets/SettingSections.dart';
+import '../Widgets/SettingsGroup.dart';
 
 typedef ReaderUpdate = void Function(void Function(ReaderSettings s) change);
 
@@ -450,6 +450,7 @@ List<Setting> novelReaderRows(
       200,
       (v) => update((x) => x.speechPitch = v),
     ),
+    Setting.header(getString.readerSectionControls),
     sliderSetting(
       getString.readerAutoScrollSpeed,
       getString.readerAutoScrollSpeedDesc,
@@ -467,6 +468,7 @@ List<Setting> novelReaderRows(
         s.volumeKeys,
         (v) => update((x) => x.volumeKeys = v),
       ),
+    Setting.header(getString.readerSectionDisplay),
     switchSetting(
       getString.novelBold,
       getString.novelBoldDesc,
@@ -498,32 +500,71 @@ List<Setting> novelReaderRows(
   ];
 }
 
-List<Setting> readerSettings(BuildContext context) => foldSections(
-  context,
-  _globalReaderRows,
-  [
-    SettingSection(getString.readerSectionDisplay, Icons.palette_outlined),
-    SettingSection(
-      getString.readerSectionNovel,
-      Icons.menu_book_rounded,
-      includes: [getString.novelSectionTranslate, getString.novelSectionSpeech],
-    ),
-  ],
-);
+void _updateReader(void Function(ReaderSettings s) change) =>
+    ReaderPrefs.update(change);
 
-List<Setting> _globalReaderRows(BuildContext context) {
-  final s = ReaderPrefs.global.value;
-  void update(void Function(ReaderSettings s) change) =>
-      ReaderPrefs.update(change);
-  return [
-    ...mangaReaderRows(context, settings: s, update: update),
-    ...novelReaderRows(context, settings: s, update: update),
-    Setting.header(getString.readerSectionReset),
-    Setting.normal(
-      name: getString.readerReset,
-      description: getString.readerResetDesc,
-      icon: Icons.restart_alt_rounded,
-      onClick: ReaderPrefs.reset,
-    ),
-  ];
-}
+List<Setting> _readerReset() => [
+  const Setting.header(''),
+  Setting.normal(
+    name: getString.readerReset,
+    description: getString.readerResetDesc,
+    icon: Icons.restart_alt_rounded,
+    onClick: ReaderPrefs.reset,
+  ),
+];
+
+List<Setting> mangaReaderSettings(BuildContext context) => [
+  ...mangaReaderRows(
+    context,
+    settings: ReaderPrefs.global.value,
+    update: _updateReader,
+  ),
+  ..._readerReset(),
+];
+
+List<Setting> novelReaderSettings(BuildContext context) => [
+  ...novelReaderRows(
+    context,
+    settings: ReaderPrefs.global.value,
+    update: _updateReader,
+  ),
+  ..._readerReset(),
+];
+
+Map<String, SectionStyle> get mangaReaderSectionIcons => {
+  getString.readerSectionReading: SectionStyle(
+    Icons.chrome_reader_mode_rounded,
+    getString.secReaderReading,
+  ),
+  getString.readerSectionControls: SectionStyle(
+    Icons.touch_app_rounded,
+    getString.secReaderControls,
+  ),
+  getString.readerSectionDisplay: SectionStyle(
+    Icons.palette_outlined,
+    getString.secReaderDisplay,
+  ),
+};
+
+Map<String, SectionStyle> get novelReaderSectionIcons => {
+  getString.readerSectionNovel: SectionStyle(
+    Icons.menu_book_rounded,
+    getString.secNovelText,
+  ),
+  getString.novelSectionTranslate: SectionStyle(
+    Icons.translate_rounded,
+    getString.secNovelTranslate,
+  ),
+  getString.novelSectionSpeech: SectionStyle(
+    Icons.record_voice_over_rounded,
+    getString.secNovelSpeech,
+  ),
+  getString.readerSectionControls: SectionStyle(
+    Icons.touch_app_rounded,
+    getString.secReaderControls,
+  ),
+  getString.readerSectionDisplay: SectionStyle(
+    Icons.palette_outlined,
+    getString.secReaderDisplay,
+  ),
+};

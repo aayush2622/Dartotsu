@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 extension ContextExtensions on BuildContext {
-  Size get mediaQuerySize => MediaQuery.of(this).size;
+  Size get mediaQuerySize => MediaQuery.sizeOf(this);
 
   double get mediaQueryShortestSide => mediaQuerySize.shortestSide;
 

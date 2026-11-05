@@ -259,8 +259,11 @@ class _Slide extends StatelessWidget {
                         scheme.surface.withValues(alpha: 0.1),
                         scheme.surface.withValues(alpha: 0.55),
                         scheme.surface,
+                        scheme.surface,
                       ],
-                stops: const [0.0, 0.55, 1.0],
+                stops: glass
+                    ? const [0.0, 0.55, 1.0]
+                    : const [0.0, 0.55, 0.9, 1.0],
               ),
             ),
           ),

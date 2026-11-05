@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:webview_all/webview_all.dart';
 
-import '../../../Api/Discord/BaseDiscordRPC.dart';
-import '../../../Api/Discord/Mobile/MobileRPC.dart';
 import '../../../Api/Discord/Mobile/TokenManager.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -78,8 +76,7 @@ class DiscordLoginState extends ScreenState {
       if (token == null || token.isEmpty) return;
       _done = true;
       MobileTokenManager.saveAuthToken(token);
-      final rpc = tryFind<BaseDiscordRPC>();
-      if (rpc is MobileRPC) await rpc.tokenManager.clear();
+      await MobileTokenManager().clear();
       snackString(getString.discordTokenSavedSnack);
       if (mounted) pop();
     } catch (e, st) {

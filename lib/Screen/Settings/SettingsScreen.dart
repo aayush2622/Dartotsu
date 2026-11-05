@@ -44,29 +44,59 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen>
 
   Widget _categoryList(BuildContext context) {
     final scheme = context.colorScheme;
-    final categories = settingsCategories;
+    final groups = <String, List<SettingsCategory>>{};
+    for (final c in settingsCategories) {
+      groups.putIfAbsent(c.group, () => []).add(c);
+    }
 
-    return ClipRRect(
-      borderRadius: Dimens.border,
-      child: ThemedContainer(
-        color: scheme.surfaceContainerLow,
-        borderRadius: Dimens.border,
-        padding: EdgeInsets.zero,
-        child: Column(
-          children: [
-            for (var i = 0; i < categories.length; i++) ...[
-              if (i > 0)
-                Divider(
-                  height: 1,
-                  indent: 72,
-                  endIndent: 0,
-                  color: scheme.outlineVariant.withValues(alpha: 0.5),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (final entry in groups.entries) ...[
+          Padding(
+            padding: EdgeInsets.fromLTRB(
+              Dimens.gapSm,
+              Dimens.gapXs,
+              Dimens.gapSm,
+              Dimens.gapSm + 2,
+            ),
+            child: Text(
+              entry.key.toUpperCase(),
+              style: context.textTheme.labelMedium?.copyWith(
+                color: scheme.primary,
+                letterSpacing: 0.8,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(bottom: Dimens.gap),
+            child: ClipRRect(
+              borderRadius: Dimens.border,
+              child: ThemedContainer(
+                blur: false,
+                color: scheme.surfaceContainerLow,
+                borderRadius: Dimens.border,
+                padding: EdgeInsets.zero,
+                child: Column(
+                  children: [
+                    for (var i = 0; i < entry.value.length; i++) ...[
+                      if (i > 0)
+                        Divider(
+                          height: 1,
+                          indent: 56,
+                          endIndent: 16,
+                          color: scheme.outlineVariant.withValues(alpha: 0.5),
+                        ),
+                      _CategoryRow(category: entry.value[i]),
+                    ],
+                  ],
                 ),
-              _CategoryRow(category: categories[i]),
-            ],
-          ],
-        ),
-      ),
+              ),
+            ),
+          ),
+        ],
+      ],
     ).animateFadeUp();
   }
 }

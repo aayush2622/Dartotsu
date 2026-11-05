@@ -3,7 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
-import '../../Core/Downloads/Archives.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/Downloads/DownloadScanner.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
@@ -20,7 +21,7 @@ void installReaderLinks() =>
     DeepLink.readFiles = (paths) => openLocalBooks(paths);
 
 Future<void> openLocalBooks(List<String> paths, {BuildContext? context}) async {
-  final books = paths.where(isBookFile).toList();
+  final books = paths.where((f) => isBookFile(f) || isPdfFile(f)).toList();
   if (books.isEmpty) return;
   await openLocalBook(books.first, context: context);
 }
@@ -28,7 +29,7 @@ Future<void> openLocalBooks(List<String> paths, {BuildContext? context}) async {
 Future<void> pickAndReadBook({BuildContext? context}) async {
   final picked = await FilePicker.pickFiles(
     type: FileType.custom,
-    allowedExtensions: bookExtensions.toList(),
+    allowedExtensions: [...bookExtensions, ...pdfExtensions],
   );
   final paths = [
     for (final f in picked)
@@ -48,7 +49,7 @@ Future<void> openLocalBook(String path, {BuildContext? context}) async {
     name: title,
     nameRomaji: title,
     userPreferredName: title,
-    format: 'NOVEL',
+    format: isPdfFile(path) ? 'MANGA' : 'NOVEL',
     shareLink: path,
   );
   final record = MediaRecords.of(service, media);

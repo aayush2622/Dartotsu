@@ -1,3 +1,8 @@
+import '../../../Utils/Lru.dart';
+
+final _quoteMark = RegExp(r'^>\s?');
+final _codeSlot = RegExp('\u0000(\\d+)\u0000');
+
 final _code = RegExp(r'`([^`\n]+)`');
 final _image = RegExp(r'!\[[^\]]*\]\(([^)\s]+)\)');
 final _link = RegExp(r'\[([^\]]+)\]\(([^)\s]+)\)');
@@ -10,7 +15,11 @@ final _bare = RegExp(r'(?<![="\x27>])(https?://[^\s<>)"]+)');
 String _escape(String s) =>
     s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
 
-String commentHtml(String raw) {
+final _cache = Lru<String, String>(400);
+
+String commentHtml(String raw) => _cache[raw] ??= _commentHtml(raw);
+
+String _commentHtml(String raw) {
   final codes = <String>[];
   var text = raw.replaceAllMapped(_code, (m) {
     codes.add('<code>${_escape(m[1]!)}</code>');
@@ -38,7 +47,7 @@ String commentHtml(String raw) {
   final lines = text.split('\n');
   for (final (i, line) in lines.indexed) {
     if (line.startsWith('>')) {
-      quote.add(line.replaceFirst(RegExp(r'^>\s?'), ''));
+      quote.add(line.replaceFirst(_quoteMark, ''));
       continue;
     }
     flush();
@@ -47,7 +56,7 @@ String commentHtml(String raw) {
   }
   flush();
   return out.toString().replaceAllMapped(
-    RegExp('\u0000(\\d+)\u0000'),
+    _codeSlot,
     (m) => codes[int.parse(m[1]!)],
   );
 }

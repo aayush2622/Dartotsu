@@ -1,5 +1,6 @@
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Widgets/Components/Clickable.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Api/Services/Anilist/AnilistService.dart';
@@ -14,7 +15,9 @@ import '../../../Widgets/Components/EmptyState.dart';
 import '../../../Widgets/Components/ScreenState.dart';
 import 'CommentsState.dart';
 import '../../../Widgets/Components/SectionCard.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
+
 import 'Data/CommentModels.dart';
 import 'CommentNode.dart';
 import 'Components/CommentComposer.dart';
@@ -56,54 +59,65 @@ class _CommentsSectionState extends State<CommentsSection>
 
   Widget _build(BuildContext context) {
     final phase = state.phase.value;
-    return Padding(
+    return SliverPadding(
       padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _header(context, phase),
-          SizedBox(height: Dimens.gapSm),
-          AppSwitcher(
-            child: KeyedSubtree(
-              key: ValueKey(phase),
-              child: switch (phase) {
-                CommentsPhase.loading => _skeleton(context),
-                CommentsPhase.disabled => EmptyState(
-                  icon: Icons.comments_disabled_rounded,
-                  title: getString.commentsDisabled,
-                  message: getString.commentsDisabledMessage,
-                ),
-                CommentsPhase.signedOut => EmptyState(
-                  icon: Icons.lock_outline_rounded,
-                  title: getString.commentsSignIn,
-                  message: getString.commentsSignInMessage,
-                  actionLabel: getString.signIn,
-                  onAction: _signIn,
-                ),
-                CommentsPhase.unavailable => EmptyState(
-                  icon: Icons.link_off_rounded,
-                  title: getString.commentsUnavailable,
-                  message: getString.commentsUnavailableMessage,
-                ),
-                CommentsPhase.failed => EmptyState(
-                  icon: Icons.cloud_off_rounded,
-                  failed: true,
-                  title: getString.commentsOffline,
-                  message: state.failure.value,
-                  actionLabel: getString.retry,
-                  onAction: state.start,
-                ),
-                CommentsPhase.ready => _list(context),
-              },
+      sliver: SliverMainAxisGroup(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _header(context, phase),
+                SizedBox(height: Dimens.gapSm),
+              ],
             ),
           ),
+          if (phase == CommentsPhase.ready)
+            ..._list(context)
+          else
+            SliverToBoxAdapter(
+              child: AppSwitcher(
+                child: KeyedSubtree(
+                  key: ValueKey(phase),
+                  child: switch (phase) {
+                    CommentsPhase.loading => _skeleton(context),
+                    CommentsPhase.disabled => EmptyState(
+                      icon: Icons.comments_disabled_rounded,
+                      title: getString.commentsDisabled,
+                      message: getString.commentsDisabledMessage,
+                    ),
+                    CommentsPhase.signedOut => EmptyState(
+                      icon: Icons.lock_outline_rounded,
+                      title: getString.commentsSignIn,
+                      message: getString.commentsSignInMessage,
+                      actionLabel: getString.signIn,
+                      onAction: _signIn,
+                    ),
+                    CommentsPhase.unavailable => EmptyState(
+                      icon: Icons.link_off_rounded,
+                      title: getString.commentsUnavailable,
+                      message: getString.commentsUnavailableMessage,
+                    ),
+                    CommentsPhase.failed => EmptyState(
+                      icon: Icons.cloud_off_rounded,
+                      failed: true,
+                      title: getString.commentsOffline,
+                      message: state.failure.value,
+                      actionLabel: getString.retry,
+                      onAction: state.start,
+                    ),
+                    CommentsPhase.ready => const SizedBox.shrink(),
+                  },
+                ),
+              ),
+            ),
         ],
       ),
     );
   }
 
-  Widget _card(CommentNode node, int index) {
-    final card = SizedBox(
+  Widget _card(CommentNode node) {
+    return SizedBox(
       key: ValueKey('card${node.comment.id}'),
       width: double.infinity,
       child: SectionCard(
@@ -115,8 +129,7 @@ class _CommentsSectionState extends State<CommentsSection>
           node: node,
         ),
       ),
-    );
-    return index < 8 ? card.animateStagger(index) : card;
+    ).animateVerticalEntrance();
   }
 
   Widget _skeleton(BuildContext context) {
@@ -236,13 +249,13 @@ class _CommentsSectionState extends State<CommentsSection>
     );
   }
 
-  Widget _list(BuildContext context) {
+  List<Widget> _list(BuildContext context) {
     final api = find<CommentsApi>();
     final session = api.session.value;
     final nodes = state.nodes.toList();
     final loading = state.loadingList.value;
     final filtered = state.effectiveFilter != null;
-    return Column(
+    final top = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _filters(context),
@@ -283,30 +296,40 @@ class _CommentsSectionState extends State<CommentsSection>
               ),
             ),
           ),
-        if (loading)
-          _skeleton(context)
-        else if (nodes.isEmpty)
-          EmptyState(
-            icon: Icons.forum_outlined,
-            title: filtered
-                ? getString.commentsEmptyFiltered
-                : getString.commentsEmpty,
-          )
-        else
-          for (final (i, node) in nodes.indexed) _card(node, i),
-        if (state.loadingMore.value)
-          Padding(
+      ],
+    );
+    final footer = state.loadingMore.value
+        ? Padding(
             padding: EdgeInsets.all(Dimens.gapLg),
             child: const Center(child: CircularProgressIndicator()),
           )
-        else if (state.hasMore && !loading)
-          Center(
+        : state.hasMore && !loading
+        ? Center(
             child: TextButton(
               onPressed: state.loadMore,
               child: Text(getString.commentsLoadMore),
             ),
+          )
+        : const SizedBox.shrink();
+    return [
+      SliverToBoxAdapter(child: top),
+      if (loading)
+        SliverToBoxAdapter(child: _skeleton(context))
+      else if (nodes.isEmpty)
+        SliverToBoxAdapter(
+          child: EmptyState(
+            icon: Icons.forum_outlined,
+            title: filtered
+                ? getString.commentsEmptyFiltered
+                : getString.commentsEmpty,
           ),
-      ],
-    );
+        )
+      else
+        SliverList.builder(
+          itemCount: nodes.length,
+          itemBuilder: (_, i) => _card(nodes[i]),
+        ),
+      SliverToBoxAdapter(child: footer),
+    ];
   }
 }

@@ -17,7 +17,7 @@ List<Setting> extensionSettings(BuildContext context) {
     Setting.header(getString.sectionManagers),
     for (final type in ItemType.values) ...[
       Setting.normal(
-        name: '${type.name.capitalizeFirst} extensions',
+        name: getString.extensionsOfType(type.name.capitalizeFirst),
         description: manager[type].name,
         icon: switch (type) {
           ItemType.anime => Icons.movie_filter_rounded,
@@ -29,8 +29,8 @@ List<Setting> extensionSettings(BuildContext context) {
       ),
       if (manager[type].settings(context).isNotEmpty)
         Setting.normal(
-          name: '${manager[type].name} settings',
-          description: '${type.name.capitalizeFirst} extensions',
+          name: getString.extensionSettingsTitle(manager[type].name),
+          description: getString.extensionsOfType(type.name.capitalizeFirst),
           icon: Icons.settings_rounded,
           isActivity: true,
           onClick: () => openExtensionSettings(context, manager[type]),

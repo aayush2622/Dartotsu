@@ -134,9 +134,7 @@ void _showProxySheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _ProxySheet(network: network),
         ),
       ),
@@ -424,9 +422,7 @@ void _showDnsSheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _DnsSheet(network: network),
         ),
       ),
@@ -558,7 +554,7 @@ Future<(bool, String)> _testDns(String url) async {
     sw.stop();
     return addrs.isNotEmpty
         ? (true, '${addrs.first} · ${sw.elapsedMilliseconds} ms')
-        : (false, 'No A records returned');
+        : (false, getString.dnsNoRecords);
   } catch (e) {
     sw.stop();
     final msg = e.toString().split('\n').first;
@@ -573,9 +569,7 @@ void _showUaSheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _UaSheet(network: network),
         ),
       ),

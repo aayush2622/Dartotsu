@@ -18,7 +18,23 @@ env:
   FLUTTER_VERSION: 3.47.4
 
 jobs:
+  prune_caches:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 10
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prune stale Actions caches
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FLUTTER_VERSION: "3.47.4"
+        run: bash scripts/ci/prune-actions-cache.sh
+
   build_android:
+    needs: prune_caches
     uses: ./.github/workflows/build-android.yml
     with:
       flutter-version: "3.47.4"
@@ -32,6 +48,7 @@ jobs:
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
 
   build_windows:
+    needs: prune_caches
     uses: ./.github/workflows/build-windows.yml
     with:
       flutter-version: "3.47.4"
@@ -43,6 +60,7 @@ jobs:
       PFX_PASSWORD: ${{ secrets.PFX_PASSWORD }}
 
   build_linux:
+    needs: prune_caches
     uses: ./.github/workflows/build-linux.yml
     with:
       flutter-version: "3.47.4"
@@ -54,6 +72,7 @@ jobs:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
 
   build_ios:
+    needs: prune_caches
     uses: ./.github/workflows/build-ios.yml
     with:
       flutter-version: "3.47.4"
@@ -63,6 +82,7 @@ jobs:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
 
   build_macos:
+    needs: prune_caches
     uses: ./.github/workflows/build-macos.yml
     with:
       flutter-version: "3.47.4"
@@ -171,6 +191,16 @@ jobs:
           prerelease: ${{ contains(github.ref_name, '-') }}
           make_latest: ${{ contains(github.ref_name, '-') && 'false' || 'true' }}
 
+  update_nix_channels:
+    needs: [publish_release]
+    if: |
+      needs.publish_release.result == 'success' &&
+      startsWith(github.ref, 'refs/tags/') &&
+      (github.event_name == 'push' || inputs.dry_run != true)
+    permissions:
+      contents: write
+    uses: ./.github/workflows/update-nix-channels.yml
+
   post-release-notes:
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -222,9 +252,14 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.FINE_GRAIN_TOKEN }}
         run: |
+          # gh release view maps the download URL to .url. browser_download_url is null.
           gh release view --repo "${{ github.repository }}" "${{ github.ref_name }}" \
-            --json assets --jq '.assets[].browser_download_url' > asset_links.txt
+            --json assets --jq '.assets[].url' > asset_links.txt
           cat asset_links.txt
+          if ! grep -q '[^[:space:]]' asset_links.txt; then
+            echo "No release asset download URLs found" >&2
+            exit 1
+          fi
 
       - name: Format download message
         run: |
@@ -243,6 +278,11 @@ jobs:
             elif [[ $LINK == *"Installer"* ]]; then MESSAGE+="• [Windows]($LINK)\n"
             fi
           done <<< "$LINKS"
+          if [[ "$MESSAGE" != *"• ["* ]]; then
+            echo "Release assets were found, but none matched a download label" >&2
+            echo "$MESSAGE" >&2
+            exit 1
+          fi
           {
             echo "MESSAGE<<EOF"
             echo -e "$MESSAGE"

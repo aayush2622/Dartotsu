@@ -23,6 +23,10 @@ class SettingsListView extends StatefulWidget {
   /// (e.g. the top-level screen's category picker instead of a flat list).
   final WidgetBuilder? emptyBuilder;
 
+  /// Header title -> icon: shows each titled section as a collapsed card
+  /// while the search field is empty (see [SettingsGroup.accordion]).
+  final Map<String, SectionStyle>? accordion;
+
   const SettingsListView({
     super.key,
     required this.searchable,
@@ -30,6 +34,7 @@ class SettingsListView extends StatefulWidget {
     this.hint,
     this.title,
     this.emptyBuilder,
+    this.accordion,
   });
 
   @override
@@ -52,35 +57,45 @@ class _SettingsListViewState extends State<SettingsListView> {
             Dimens.pagePad,
             Dimens.gapXl,
           ),
-          sliver: SliverList(
-            delegate: SliverChildListDelegate([
-              SettingsSearchField(query: _query, hint: widget.hint),
-              SizedBox(height: Dimens.gap),
+          sliver: SliverMainAxisGroup(
+            slivers: [
+              SliverToBoxAdapter(
+                child: Column(
+                  children: [
+                    SettingsSearchField(query: _query, hint: widget.hint),
+                    SizedBox(height: Dimens.gap),
+                  ],
+                ),
+              ),
               Watch(() {
                 final q = _query.value;
                 if (q.isEmpty) {
-                  return widget.emptyBuilder?.call(context) ??
-                      SettingsGroup(
-                        settings: (widget.menu ?? widget.searchable)(context),
-                      );
+                  final custom = widget.emptyBuilder?.call(context);
+                  if (custom != null) return SliverToBoxAdapter(child: custom);
+                  return SliverSettingsGroup(
+                    settings: (widget.menu ?? widget.searchable)(context),
+                    accordion: widget.accordion,
+                  );
                 }
                 final filtered = _filter(widget.searchable(context), q);
                 if (filtered.isEmpty) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 64),
-                    child: Center(
-                      child: Text(
-                        getString.nothingMatches(q),
-                        style: context.textTheme.bodyMedium?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
+                  return SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 64),
+                      child: Center(
+                        child: Text(
+                          getString.nothingMatches(q),
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: context.colorScheme.onSurfaceVariant,
+                          ),
                         ),
                       ),
                     ),
                   );
                 }
-                return SettingsGroup(settings: filtered);
+                return SliverSettingsGroup(settings: filtered);
               }),
-            ]),
+            ],
           ),
         ),
       ],

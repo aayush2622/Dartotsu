@@ -26,6 +26,16 @@ Pref<List<String>> mutedSourcesPref(String serviceId, ItemType type) => Pref(
   PrefLocation.OTHER,
 );
 
+const extensionHideNsfwPref = Pref(
+  'extensionHideNsfw',
+  false,
+  PrefLocation.OTHER,
+);
+
+bool _allowed(Source source) =>
+    !source.isPlaceholder &&
+    !(extensionHideNsfwPref.value && (source.isNsfw ?? false));
+
 const extensionDefaultFeedPref = Pref(
   'extensionDefaultFeed',
   'popular',
@@ -86,7 +96,7 @@ List<Source> installedSources(ItemType type) =>
 Source? installedSourceById(String id) {
   for (final type in ItemType.values) {
     for (final s in installedSources(type)) {
-      if (s.id == id) return s;
+      if (s.id == id && !s.isPlaceholder) return s;
     }
   }
   return null;
@@ -101,7 +111,7 @@ List<Source> watchSources(ItemType type) {
   final order = {for (final (i, id) in saved.indexed) id: i};
   final list = [
     for (final s in state.installed.value)
-      if (languages.isEmpty || languages.contains(s.lang)) s,
+      if ((languages.isEmpty || languages.contains(s.lang)) && _allowed(s)) s,
   ];
   if (order.isNotEmpty) {
     mergeSort<Source>(
@@ -162,7 +172,7 @@ List<Source> loadedSources(ItemType type) {
         .state(type)
         .installed
         .value
-        .where((s) => !muted.contains(s.id))
+        .where((s) => !muted.contains(s.id) && _allowed(s))
         .toList(),
   );
   return _isConfigured(service.id, type)

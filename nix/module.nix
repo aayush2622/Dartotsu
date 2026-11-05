@@ -1,8 +1,12 @@
-{ self, linkSchemes, homeManager }:
+{
+  packageFor,
+  linkSchemes,
+  homeManager,
+  packageDefaultText ? "dartotsu.packages.\${system}.\${config.programs.dartotsu.channel}",
+}:
 { config, lib, pkgs, ... }:
 let
   cfg = config.programs.dartotsu;
-  system = pkgs.stdenv.hostPlatform.system;
   handlers = lib.genAttrs
     (map (scheme: "x-scheme-handler/${scheme}") linkSchemes)
     (_: cfg.package.desktopFile);
@@ -23,8 +27,8 @@ in
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = self.packages.${system}.${cfg.channel};
-      defaultText = lib.literalExpression "dartotsu.packages.\${system}.\${config.programs.dartotsu.channel}";
+      default = packageFor pkgs cfg.channel;
+      defaultText = lib.literalExpression packageDefaultText;
       description = "The Dartotsu package to install.";
     };
 

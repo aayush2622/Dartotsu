@@ -295,7 +295,7 @@ class _FilterBodyState extends State<_FilterBody>
       onChanged: (v) => state.tagQuery.value = v,
       decoration: InputDecoration(
         isDense: true,
-        hintText: 'Search tags',
+        hintText: getString.searchTags,
         prefixIcon: const Icon(Icons.search_rounded, size: 20),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(16)),
       ),

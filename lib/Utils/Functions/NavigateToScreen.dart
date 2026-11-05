@@ -9,6 +9,7 @@ PageRouteBuilder<T> _route<T>(
   bool hero = false,
   bool instant = false,
 }) => PageRouteBuilder<T>(
+  opaque: true,
   transitionDuration: instant ? Duration.zero : animDuration(380),
   reverseTransitionDuration: animDuration(300),
   pageBuilder: (_, _, _) => DpadEnter(child: page),

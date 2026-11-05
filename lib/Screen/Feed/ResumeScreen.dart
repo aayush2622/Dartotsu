@@ -66,16 +66,7 @@ class _ResumeScreenState extends BaseScreen<ResumeScreen>
           itemBuilder: (context, i) {
             final entry = entries[i];
             final item = resumeItem(context, widget.service, entry);
-            final card = PosterCard(
-              imageUrl: item.imageUrl,
-              title: item.title,
-              subtitle: item.subtitle,
-              progress: item.progress,
-              progressText: item.progressText,
-              style: style,
-              onTap: item.onTap,
-              onLongPress: item.onLongPress,
-            );
+            final card = PosterCard.item(item, style: style);
             return Align(
               key: ValueKey('resume:${item.id}'),
               alignment: Alignment.topCenter,

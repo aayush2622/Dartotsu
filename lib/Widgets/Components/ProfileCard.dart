@@ -53,7 +53,7 @@ class ProfileCard extends StatelessWidget {
 
   Widget _banner(ColorScheme scheme, {double? cacheWidth}) {
     final fill = ColoredBox(color: scheme.secondaryContainer);
-    if (skeleton) return Skeleton.leaf(child: fill);
+    if (skeleton) return fill;
     if (banner == null || banner!.isEmpty) return fill;
     return cachedNetworkImage(
       imageUrl: banner,
@@ -66,6 +66,21 @@ class ProfileCard extends StatelessWidget {
 
   Widget _textBlock(BuildContext context, {required bool big}) {
     final scheme = context.colorScheme;
+    if (skeleton) {
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Bone.text(words: 2, fontSize: 16),
+          SizedBox(height: Dimens.gapXs),
+          Bone(width: 76, height: 20, borderRadius: BorderRadius.circular(999)),
+          if (meta != null) ...[
+            SizedBox(height: Dimens.gapXs),
+            const Bone.text(words: 1, fontSize: 11),
+          ],
+        ],
+      );
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -98,7 +113,8 @@ class ProfileCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    final body = wide ? _wide(context, scheme) : _grid(context, scheme);
+    var body = wide ? _wide(context, scheme) : _grid(context, scheme);
+    if (skeleton) body = Skeletonizer.zone(child: body);
     return ThemedContainer(
       blur: false,
       padding: EdgeInsets.zero,
@@ -136,17 +152,7 @@ class ProfileCard extends StatelessWidget {
                     color: scheme.surfaceContainerHigh,
                   ),
                   child: skeleton
-                      ? Skeleton.leaf(
-                          child: SizedBox.square(
-                            dimension: _avatarD - 6,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: scheme.surfaceContainerHighest,
-                              ),
-                            ),
-                          ),
-                        )
+                      ? const Bone.circle(size: _avatarD - 6)
                       : UserAvatar(
                           url: avatar,
                           name: name,
@@ -199,17 +205,7 @@ class ProfileCard extends StatelessWidget {
             child: Row(
               children: [
                 skeleton
-                    ? Skeleton.leaf(
-                        child: SizedBox.square(
-                          dimension: 58,
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: scheme.surfaceContainerHighest,
-                            ),
-                          ),
-                        ),
-                      )
+                    ? const Bone.circle(size: 58)
                     : UserAvatar(
                         url: avatar,
                         name: name,

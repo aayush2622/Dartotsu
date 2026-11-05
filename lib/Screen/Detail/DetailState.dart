@@ -160,10 +160,10 @@ class DetailState extends ScreenState {
     final box = ctx.findRenderObject();
     if (box is! RenderBox || !box.attached || !box.hasSize) return;
     final rect = box.localToGlobal(Offset.zero) & box.size;
-    final mq = MediaQuery.of(context);
-    final topInset = mq.padding.top + 56 + 12;
-    final bottomInset = context.isPhone ? 110.0 + mq.padding.bottom : 24.0;
-    final limit = mq.size.height - bottomInset;
+    final padding = MediaQuery.paddingOf(context);
+    final topInset = padding.top + 56 + 12;
+    final bottomInset = context.isPhone ? 110.0 + padding.bottom : 24.0;
+    final limit = MediaQuery.sizeOf(context).height - bottomInset;
     var delta = 0.0;
     if (rect.top < topInset) {
       delta = rect.top - topInset;

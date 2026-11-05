@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 
+import '../../Core/Services/Api/IdMapper.dart';
+import '../../Core/Services/MediaServiceController.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Services/ScoreFormat.dart';
+import '../../Core/SourceAlerts/SourceSubscriptions.dart';
+import '../../Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import '../../Core/ThemeManager/CardStyleController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Model/CardStyle.dart';
@@ -16,7 +20,7 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 class MediaRowFacts {
   final Media media;
 
-  const MediaRowFacts(this.media);
+  MediaRowFacts(this.media);
 
   bool get isAnime => media.anime != null;
 
@@ -55,9 +59,62 @@ class MediaRowFacts {
     return getString.epIn(ep, left);
   }
 
+  late final ({int? count, bool estimated}) _latest = _findLatest();
+
+  int? get released => _latest.count;
+
+  bool get estimated => _latest.estimated;
+
+  String? get estimate => estimated ? counts : null;
+
+  ({int? count, bool estimated}) _findLatest() {
+    if (isAnime) {
+      final next = media.anime?.nextAiringEpisode;
+      if (next != null) {
+        return (count: next > 1 ? next - 1 : null, estimated: false);
+      }
+    }
+    final known = total;
+    if (known != null && known > 0) return (count: known, estimated: false);
+    final service = tryFind<MediaServiceController>()?.currentService.value;
+    if (service == null) return (count: null, estimated: false);
+    final key = '${service.id}/${media.id}';
+    final saved = MediaRecords.latestUnit(service, media);
+    final sub = tryFind<SourceSubscriptions>()?.byKey(key)?.lastValue.floor();
+    final index = isAnime
+        ? null
+        : IdMapper.cachedChapters(service.id, media.id);
+    final best = [saved, sub, index].nonNulls
+        .where((v) => v > 0)
+        .fold<int?>(null, (a, b) => a == null || b > a ? b : a);
+    return (count: best, estimated: best != null);
+  }
+
+  late final int? unread = _unread();
+
+  int? _unread() {
+    final done = media.userProgress;
+    final latest = released;
+    if (done == null || latest == null) return null;
+    final left = latest - done;
+    return left > 0 ? left : null;
+  }
+
+  String get counts {
+    final latest = released;
+    final all = total;
+    if (latest != null && all != null && latest != all) return '$latest | $all';
+    return (all ?? latest)?.toString() ?? '~';
+  }
+
+  String get listed => '${media.userProgress ?? '~'} | $counts';
+
+  String get listedShort =>
+      '${media.userProgress ?? '~'} · ${total ?? released ?? '~'}';
+
   double? get progress {
     final done = media.userProgress ?? 0;
-    final t = total;
+    final t = total ?? released;
     if (done <= 0 || t == null || t <= 0) return null;
     return (done / t).clamp(0.0, 1.0);
   }
@@ -65,7 +122,7 @@ class MediaRowFacts {
   String? get progressText {
     final done = media.userProgress;
     if (done == null || done <= 0) return null;
-    return '$done / ${total ?? '?'}';
+    return '$done / ${total ?? released ?? '?'}';
   }
 
   List<String> get meta => [

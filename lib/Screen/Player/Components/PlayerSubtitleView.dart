@@ -22,9 +22,6 @@ class PlayerSubtitleView extends StatelessWidget {
   Widget build(BuildContext context) => Watch(() => _build(context));
 
   Widget _build(BuildContext context) {
-    fontsTick.value;
-
-    final family = fontFamilyOf(settings.subtitleFont);
     final text = [
       for (final line in lines)
         if (line.trim().isNotEmpty) line.trim(),
@@ -34,17 +31,10 @@ class PlayerSubtitleView extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final outline = Color(settings.subtitleOutlineColor);
-
-    return _positioned(context, text, family, outline);
+    return _positioned(context, text);
   }
 
-  Widget _positioned(
-    BuildContext context,
-    String text,
-    String? family,
-    Color outline,
-  ) {
+  Widget _positioned(BuildContext context, String text) {
     return AnimatedPositioned(
       duration: animDuration(200),
       left: 16,
@@ -70,7 +60,11 @@ class PlayerSubtitleView extends StatelessWidget {
                     color: Color(settings.subtitleBackgroundColor),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: _outlined(text, family, outline, scale),
+                  child: SubtitleText(
+                    text: text,
+                    settings: settings,
+                    scale: scale,
+                  ),
                 ),
               ),
             ),
@@ -79,19 +73,43 @@ class PlayerSubtitleView extends StatelessWidget {
       ),
     );
   }
+}
 
-  Widget _outlined(String text, String? family, Color outline, double scale) {
+class SubtitleText extends StatelessWidget {
+  final String text;
+  final PlayerSettings settings;
+  final double scale;
+
+  const SubtitleText({
+    super.key,
+    required this.text,
+    required this.settings,
+    this.scale = 1,
+  });
+
+  @override
+  Widget build(BuildContext context) => Watch(() => _build());
+
+  Widget _build() {
+    fontsTick.value;
     final size = settings.subtitleSize * scale;
     final base = TextStyle(
       fontSize: size,
       fontWeight: FontWeight.values[settings.subtitleWeight.clamp(0, 8)],
-      fontFamily: family,
+      fontFamily: fontFamilyOf(settings.subtitleFont),
     );
+    final width = settings.subtitleOutlineWidth * 2 * scale;
+    final fill = Text.rich(
+      TextSpan(children: subtitleSpans(text)),
+      textAlign: TextAlign.center,
+      style: base.copyWith(color: Color(settings.subtitleColor)),
+    );
+    if (width <= 0) return fill;
     final stroke = Paint()
       ..style = PaintingStyle.stroke
       ..strokeJoin = StrokeJoin.round
-      ..strokeWidth = (size * 0.16).clamp(2.0, 6.0)
-      ..color = outline;
+      ..strokeWidth = width
+      ..color = Color(settings.subtitleOutlineColor);
     return Stack(
       children: [
         Text.rich(
@@ -99,11 +117,7 @@ class PlayerSubtitleView extends StatelessWidget {
           textAlign: TextAlign.center,
           style: base.copyWith(foreground: stroke),
         ),
-        Text.rich(
-          TextSpan(children: subtitleSpans(text)),
-          textAlign: TextAlign.center,
-          style: base.copyWith(color: Color(settings.subtitleColor)),
-        ),
+        fill,
       ],
     );
   }

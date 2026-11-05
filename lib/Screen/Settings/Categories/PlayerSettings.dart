@@ -12,12 +12,13 @@ import '../../../Widgets/Components/AppControls.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Player/Components/MpvSheets.dart';
 import '../../Player/Components/ShaderSheet.dart';
+import '../../Player/Components/SubtitlePreview.dart';
 import '../../Player/PlayerLauncher.dart';
 import '../Widgets/SegmentedSetting.dart';
 import '../../Player/Engine/AudioDevices.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../Widgets/SettingRows.dart';
-import '../Widgets/SettingSections.dart';
+import '../Widgets/SettingsGroup.dart';
 
 typedef PlayerUpdate = void Function(void Function(PlayerSettings s) change);
 
@@ -358,6 +359,19 @@ List<Setting> playerSettingsRows(
       s.subtitleOutlineColor,
       (v) => update((x) => x.subtitleOutlineColor = v),
     ),
+    sliderSetting(
+      getString.playerSubtitleOutlineWidth,
+      '',
+      Icons.line_weight_rounded,
+      s.subtitleOutlineWidth,
+      0,
+      10,
+      (v) => update((x) => x.subtitleOutlineWidth = v),
+    ),
+    Setting.custom(
+      name: getString.playerSubtitlePreview,
+      builder: (_) => SubtitlePreview(settings: s),
+    ),
     switchSetting(
       getString.playerLibass,
       getString.playerLibassDesc,
@@ -676,35 +690,7 @@ List<Setting> playerSettingsRows(
           (v) => update((x) => x.targetPeak = v),
         ),
       ],
-      Setting.header(getString.playerSectionOpen),
-      Setting.normal(
-        name: getString.playerOpenFiles,
-        description: getString.playerOpenFilesDesc,
-        icon: Icons.video_library_rounded,
-        isActivity: true,
-        onClick: pickAndPlayFiles,
-      ),
-      Setting.normal(
-        name: getString.playerOpenFolder,
-        description: getString.playerOpenFolderDesc,
-        icon: Icons.folder_rounded,
-        isActivity: true,
-        onClick: pickAndPlayFolder,
-      ),
-      Setting.normal(
-        name: getString.playerNetworkStream,
-        description: getString.playerNetworkStreamDesc,
-        icon: Icons.stream_rounded,
-        isActivity: true,
-        onClick: () => askNetworkStream(context),
-      ),
-      Setting.normal(
-        name: getString.playerTorrent,
-        description: getString.playerTorrentDesc,
-        icon: Icons.hub_rounded,
-        isActivity: true,
-        onClick: () => askTorrent(context),
-      ),
+      const Setting.header(''),
       Setting.normal(
         name: getString.playerReset,
         description: getString.playerResetDesc,
@@ -723,6 +709,37 @@ List<Setting> playerSettingsRows(
   ];
 }
 
+List<Setting> localPlayRows(BuildContext context) => [
+  Setting.normal(
+    name: getString.playerOpenFiles,
+    description: getString.playerOpenFilesDesc,
+    icon: Icons.video_library_rounded,
+    isActivity: true,
+    onClick: pickAndPlayFiles,
+  ),
+  Setting.normal(
+    name: getString.playerOpenFolder,
+    description: getString.playerOpenFolderDesc,
+    icon: Icons.folder_rounded,
+    isActivity: true,
+    onClick: pickAndPlayFolder,
+  ),
+  Setting.normal(
+    name: getString.playerNetworkStream,
+    description: getString.playerNetworkStreamDesc,
+    icon: Icons.stream_rounded,
+    isActivity: true,
+    onClick: () => askNetworkStream(context),
+  ),
+  Setting.normal(
+    name: getString.playerTorrent,
+    description: getString.playerTorrentDesc,
+    icon: Icons.hub_rounded,
+    isActivity: true,
+    onClick: () => askTorrent(context),
+  ),
+];
+
 List<Setting> _globalPlayerRows(BuildContext context) => playerSettingsRows(
   context,
   settings: PlayerPrefs.global.value,
@@ -730,18 +747,35 @@ List<Setting> _globalPlayerRows(BuildContext context) => playerSettingsRows(
 );
 
 List<Setting> playerSettings(BuildContext context) =>
-    foldSections(context, _globalPlayerRows, [
-      SettingSection(
-        getString.playerSectionPlayback,
-        Icons.play_circle_outline_rounded,
-      ),
-      SettingSection(getString.playerSectionSkip, Icons.skip_next_rounded),
-      SettingSection(getString.playerSectionGestures, Icons.swipe_rounded),
-      SettingSection(getString.playerSectionSubtitles, Icons.subtitles_rounded),
-      SettingSection(
-        getString.playerSectionShaders,
-        Icons.auto_awesome_rounded,
-      ),
-      SettingSection(getString.playerSectionEngine, Icons.memory_rounded),
-      SettingSection(getString.playerSectionMpv, Icons.terminal_rounded),
-    ]);
+    _globalPlayerRows(context);
+
+Map<String, SectionStyle> get playerSectionIcons => {
+  getString.playerSectionPlayback: SectionStyle(
+    Icons.play_circle_outline_rounded,
+    getString.secPlayerPlayback,
+  ),
+  getString.playerSectionSkip: SectionStyle(
+    Icons.skip_next_rounded,
+    getString.secPlayerSkip,
+  ),
+  getString.playerSectionGestures: SectionStyle(
+    Icons.swipe_rounded,
+    getString.secPlayerControls,
+  ),
+  getString.playerSectionSubtitles: SectionStyle(
+    Icons.subtitles_rounded,
+    getString.secPlayerSubtitles,
+  ),
+  getString.playerSectionShaders: SectionStyle(
+    Icons.auto_awesome_rounded,
+    getString.secPlayerShaders,
+  ),
+  getString.playerSectionEngine: SectionStyle(
+    Icons.memory_rounded,
+    getString.secPlayerEngine,
+  ),
+  getString.playerSectionMpv: SectionStyle(
+    Icons.terminal_rounded,
+    getString.secPlayerMpv,
+  ),
+};

@@ -136,6 +136,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
             context,
             controller: state.scroll,
             physics: const AlwaysScrollableScrollPhysics(),
+            cacheExtent: MediaQuery.sizeOf(context).height * 1.5,
             children: [
               if (widget.header != null)
                 SliverToBoxAdapter(child: widget.header!),

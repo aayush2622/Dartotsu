@@ -351,11 +351,17 @@ Widget _tracksList(
   final engine = state.engine;
   final tracks = (audio ? engine.audioTracks : engine.subtitleTracks).value;
   final active = audio ? engine.activeAudio.value : engine.activeSubtitle.value;
+  final loaded = {
+    for (final t in tracks)
+      if (t.external) (t.title ?? '').trim().toLowerCase(),
+  };
   final extra = <v.Track>[
     for (final t
         in (audio ? state.video?.audios : state.video?.subtitles) ??
             const <v.Track>[])
-      if (t.file != null) t,
+      if (t.file != null &&
+          !loaded.contains((t.label ?? '').trim().toLowerCase()))
+        t,
   ];
   return ListView(
     padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
@@ -468,28 +474,27 @@ Future<void> showChaptersSheet(BuildContext context, PlayerState state) async {
             ? getString.playerNoChapters
             : getString.playerChapters,
         heightFactor: 0.6,
-        child: ListView(
+        child: ListView.builder(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-          children: [
-            for (final (i, e) in entries.indexed)
-              SheetTile(
-                tinted: true,
-                radius: BorderRadius.vertical(
-                  top: Radius.circular(i == 0 ? 20 : 6),
-                  bottom: Radius.circular(i == entries.length - 1 ? 20 : 6),
-                ),
-                leading: Text(
-                  formatClock(e.$1.toInt()),
-                  style: context.textTheme.labelMedium,
-                ),
-                title: Text(
-                  e.$2.isEmpty ? getString.playerChapter(i + 1) : e.$2,
-                ),
-                subtitle: e.$3 ? null : Text(getString.playerTimestamp),
-                selected: e.$1 == current.$1 && e.$2 == current.$2,
-                onTap: () => popPage(context, e.$1),
+          itemCount: entries.length,
+          itemBuilder: (_, i) {
+            final e = entries[i];
+            return SheetTile(
+              tinted: true,
+              radius: BorderRadius.vertical(
+                top: Radius.circular(i == 0 ? 20 : 6),
+                bottom: Radius.circular(i == entries.length - 1 ? 20 : 6),
               ),
-          ],
+              leading: Text(
+                formatClock(e.$1.toInt()),
+                style: context.textTheme.labelMedium,
+              ),
+              title: Text(e.$2.isEmpty ? getString.playerChapter(i + 1) : e.$2),
+              subtitle: e.$3 ? null : Text(getString.playerTimestamp),
+              selected: e.$1 == current.$1 && e.$2 == current.$2,
+              onTap: () => popPage(context, e.$1),
+            );
+          },
         ),
       ),
     ),

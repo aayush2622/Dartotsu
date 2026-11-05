@@ -19,6 +19,42 @@ import '../Widgets/SettingRows.dart';
 import '../../../Core/State/State.dart';
 
 List<Setting> generalSettings(BuildContext context) => [
+  Setting.header(getString.generalSectionBasics),
+  Setting.normal(
+    name: getString.language,
+    icon: Icons.translate,
+    trailing: Icon(
+      Icons.chevron_right_rounded,
+      size: 18,
+      color: context.colorScheme.onSurfaceVariant,
+    ),
+    description: completeLanguageName(
+      find<LocaleController>().code.value.toUpperCase(),
+    ),
+    onClick: () => showCustomBottomDialog<void>(context, const LanguageSheet()),
+  ),
+  Setting.slider(
+    name: getString.animationSpeed,
+    description: PrefName.animationSpeed.rx.value <= 0
+        ? getString.animationSpeedOff
+        : getString.animationSpeedDesc,
+    icon: Icons.animation_rounded,
+    minValue: 0,
+    maxValue: 300,
+    initialValue: (PrefName.animationSpeed.rx.value * 100).round().clamp(
+      0,
+      300,
+    ),
+    onSliderChange: (v) => PrefName.animationSpeed.rx.value = v / 100,
+  ),
+  Setting.normal(
+    name: getString.linkOpenInApp,
+    description: getString.linkOpenInAppDesc,
+    icon: Icons.link_rounded,
+    isVisible: canOpenLinkSettings,
+    onClick: openLinkSettings,
+  ),
+  Setting.header(getString.generalSectionSecurity),
   Setting.switchType(
     name: getString.appLock,
     description: getString.appLockDesc,
@@ -59,40 +95,7 @@ List<Setting> generalSettings(BuildContext context) => [
     onPick: (v) => PrefName.appLockDelay.rx.value = v,
     isVisible: PrefName.appLockHash.rx.value.isNotEmpty,
   ),
-  Setting.normal(
-    name: getString.linkOpenInApp,
-    description: getString.linkOpenInAppDesc,
-    icon: Icons.link_rounded,
-    isVisible: canOpenLinkSettings,
-    onClick: openLinkSettings,
-  ),
-  Setting.normal(
-    name: getString.language,
-    icon: Icons.translate,
-    trailing: Icon(
-      Icons.chevron_right_rounded,
-      size: 18,
-      color: context.colorScheme.onSurfaceVariant,
-    ),
-    description: completeLanguageName(
-      find<LocaleController>().code.value.toUpperCase(),
-    ),
-    onClick: () => showCustomBottomDialog<void>(context, const LanguageSheet()),
-  ),
-  Setting.slider(
-    name: getString.animationSpeed,
-    description: PrefName.animationSpeed.rx.value <= 0
-        ? getString.animationSpeedOff
-        : getString.animationSpeedDesc,
-    icon: Icons.animation_rounded,
-    minValue: 0,
-    maxValue: 300,
-    initialValue: (PrefName.animationSpeed.rx.value * 100).round().clamp(
-      0,
-      300,
-    ),
-    onSliderChange: (v) => PrefName.animationSpeed.rx.value = v / 100,
-  ),
+  Setting.header(getString.generalSectionPrivacy),
   Setting.switchType(
     name: getString.shareAnalytics,
     description: getString.shareAnalyticsDesc,

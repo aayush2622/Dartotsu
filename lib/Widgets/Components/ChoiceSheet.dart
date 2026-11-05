@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../Core/State/State.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 
@@ -60,6 +62,66 @@ Future<T?> showChoiceSheet<T>(
     ),
   ),
 );
+
+Future<List<T>?> showMultiChoiceSheet<T>(
+  BuildContext context, {
+  required String title,
+  required List<ChoiceOption<T>> options,
+  Set<T> initial = const {},
+  IconData? icon,
+}) {
+  final picked = {...initial}.live;
+  return showCustomBottomDialog<List<T>>(
+    context,
+    AppSheet(
+      title: title,
+      child: Builder(
+        builder: (sheet) => Watch(
+          () => ListView(
+            shrinkWrap: true,
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+            children: [
+              for (var i = 0; i < options.length; i++)
+                SheetTile(
+                  tinted: true,
+                  radius: groupedRadius(i, options.length),
+                  leading: _Leading(
+                    option: options[i],
+                    fallback: icon,
+                    selected: picked.value.contains(options[i].value),
+                  ),
+                  title: Text(options[i].label),
+                  subtitle: options[i].subtitle == null
+                      ? null
+                      : Text(options[i].subtitle!),
+                  selected: picked.value.contains(options[i].value),
+                  trailing: Checkbox(
+                    value: picked.value.contains(options[i].value),
+                    onChanged: null,
+                  ),
+                  onTap: () {
+                    final next = {...picked.value};
+                    if (!next.remove(options[i].value)) {
+                      next.add(options[i].value);
+                    }
+                    picked.value = next;
+                  },
+                ),
+              const SizedBox(height: 12),
+              FilledButton(
+                onPressed: () => popPage(sheet, [
+                  for (final o in options)
+                    if (picked.value.contains(o.value)) o.value,
+                ]),
+                child: Text(getString.done),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}
 
 class _Leading<T> extends StatelessWidget {
   final ChoiceOption<T> option;

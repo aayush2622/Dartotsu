@@ -65,8 +65,15 @@ class PrefManager {
   static final Map<String, Live<dynamic>> _rx = {};
   static final Map<String, void Function()> _reloadRx = {};
   static final List<void Function()> restoreHooks = [];
+  static final Map<String, void Function()> customReloaders = {};
   static final Map<String, _Pending> _pending = {};
   static bool _flushScheduled = false;
+  static int _flushRetries = 0;
+  static const _maxFlushRetries = 40;
+  static bool _applying = false;
+
+  static void Function(String storageKey, bool deleted)? onLocalChange;
+
   static Future<void> init() async {
     try {
       final path = await StorageManager.getDirectory(subPath: 'settings');
@@ -89,6 +96,39 @@ class PrefManager {
   static void _migrate() {
     _migrateSchema();
     _moveLegacyCaches();
+    _moveSettingsKeys();
+  }
+
+  static const _moved = {
+    'OTHER/playerSettings': 'PLAYER/playerSettings',
+    'OTHER/readerSettings': 'READER/readerSettings',
+    'OTHER/playerSoftwareRender': 'PLAYER/playerSoftwareRender',
+  };
+  static const _settingsMovedKey = 'OTHER/__settingsMoved';
+
+  static String renamed(String storageKey) => _moved[storageKey] ?? storageKey;
+
+  static void _moveSettingsKeys() {
+    if (_kv.getByKeySync(_settingsMovedKey) != null) return;
+    dartotsuPreferences.writeTxnSync(() {
+      for (final e in _moved.entries) {
+        final old = _kv.getByKeySync(e.key);
+        if (old == null) continue;
+        if (_kv.getByKeySync(e.value) == null) {
+          _kv.putByKeySync(
+            KeyValue()
+              ..key = e.value
+              ..value = old.value,
+          );
+        }
+        _kv.deleteByKeySync(e.key);
+      }
+      _kv.putByKeySync(
+        KeyValue()
+          ..key = _settingsMovedKey
+          ..value = true,
+      );
+    });
   }
 
   static const _cachesMovedKey = 'OTHER/__cachesMoved';
@@ -164,6 +204,7 @@ class PrefManager {
   static void removeVal<T>(Pref<T> pref) {
     _cache[pref.storageKey] = null;
     _enqueue(pref.storageKey, null, delete: true);
+    onLocalChange?.call(pref.storageKey, true);
 
     final rx = _rx[pref.storageKey];
     if (rx is Live<T>) rx.value = pref.defaultValue;
@@ -207,6 +248,7 @@ class PrefManager {
     final storageKey = '${location.name}/$key';
     _cache[storageKey] = null;
     _enqueue(storageKey, null, delete: true);
+    onLocalChange?.call(storageKey, true);
   }
 
   static T? getCustomType<T>(
@@ -241,6 +283,8 @@ class PrefManager {
     }
     for (final e in entries) {
       _reloadRx[e.key]?.call();
+      customReloaders[e.key]?.call();
+      onLocalChange?.call(e.key, false);
     }
     for (final hook in restoreHooks) {
       try {
@@ -248,6 +292,32 @@ class PrefManager {
       } catch (err, st) {
         logError('PrefManager', err, st);
       }
+    }
+  }
+
+  static void applyRemote(List<KeyValue> upserts, List<String> deletes) {
+    if (upserts.isEmpty && deletes.isEmpty) return;
+    flush();
+    dartotsuPreferences.writeTxnSync(() {
+      for (final e in upserts) {
+        _kv.putByKeySync(e);
+      }
+      _kv.deleteAllByKeySync(deletes);
+    });
+    _applying = true;
+    try {
+      for (final e in upserts) {
+        _cache[e.key] = e.value;
+      }
+      for (final key in deletes) {
+        _cache[key] = null;
+      }
+      for (final key in [...upserts.map((e) => e.key), ...deletes]) {
+        _reloadRx[key]?.call();
+        customReloaders[key]?.call();
+      }
+    } finally {
+      _applying = false;
     }
   }
 
@@ -261,7 +331,9 @@ class PrefManager {
   static void _writeRaw(String storageKey, Object? raw) {
     if (_cache.containsKey(storageKey) && _cache[storageKey] == raw) return;
     _cache[storageKey] = raw;
+    if (_applying) return;
     _enqueue(storageKey, raw);
+    onLocalChange?.call(storageKey, false);
   }
 
   static void _enqueue(String key, Object? raw, {bool delete = false}) {
@@ -293,8 +365,20 @@ class PrefManager {
           }
         }
       });
+      _flushRetries = 0;
     } catch (e) {
-      logger('PrefManager flush failed: $e', logLevel: LogLevel.error);
+      for (final entry in batch.entries) {
+        _pending.putIfAbsent(entry.key, () => entry.value);
+      }
+      if (++_flushRetries > _maxFlushRetries) {
+        _flushRetries = 0;
+        logger('PrefManager flush failed: $e', logLevel: LogLevel.error);
+        return;
+      }
+      if (!_flushScheduled) {
+        _flushScheduled = true;
+        Timer(const Duration(milliseconds: 50), _flushPending);
+      }
     }
   }
 }

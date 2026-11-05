@@ -1,4 +1,5 @@
 import '../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -95,7 +96,15 @@ class WebViewState extends ScreenState {
     if (custom.isNotEmpty) await c.setUserAgent(custom);
     await _injectFont();
     await cookieManager.applyCookiesToWebView();
-    await c.loadRequest(Uri.parse(initialUrl));
+    final target = webUrl(initialUrl);
+    if (target == null) {
+      logger(
+        'WebView: not a web address: $initialUrl',
+        logLevel: LogLevel.warning,
+      );
+      return;
+    }
+    await c.loadRequest(Uri.parse(target));
   }
 
   Future<void> _injectFont() async {

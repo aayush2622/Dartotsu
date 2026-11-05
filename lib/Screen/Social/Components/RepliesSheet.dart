@@ -66,7 +66,7 @@ class _RepliesSheetState extends State<RepliesSheet>
           ? EmptyState(
               icon: Icons.cloud_off_rounded,
               failed: true,
-              title: "Couldn't load replies",
+              title: getString.loadFailedReplies,
               onAction: state.load,
             )
           : !loading && replies.isEmpty

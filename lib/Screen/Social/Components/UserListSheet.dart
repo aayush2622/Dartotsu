@@ -37,23 +37,24 @@ Future<void> showUserListSheet(
               ),
             ),
           )
-        : ListView(
-            shrinkWrap: true,
+        : ListView.builder(
+            shrinkWrap: users.length <= 6,
             padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-            children: [
-              for (final user in users)
-                SheetTile(
-                  leading: UserAvatar(url: user.avatar, name: user.name),
-                  title: Text(user.name),
-                  subtitle: followLabel(user).isEmpty
-                      ? null
-                      : Text(followLabel(user)),
-                  onTap: () {
-                    popPage(context);
-                    openProfile(context, service, id: user.id, user: user);
-                  },
-                ),
-            ],
+            itemCount: users.length,
+            itemBuilder: (_, i) {
+              final user = users[i];
+              return SheetTile(
+                leading: UserAvatar(url: user.avatar, name: user.name),
+                title: Text(user.name),
+                subtitle: followLabel(user).isEmpty
+                    ? null
+                    : Text(followLabel(user)),
+                onTap: () {
+                  popPage(context);
+                  openProfile(context, service, id: user.id, user: user);
+                },
+              );
+            },
           ),
   ),
 );

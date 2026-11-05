@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../Core/Downloads/DownloadEngine.dart';
-import '../../Core/Downloads/DownloadPaths.dart';
 import '../../Core/Downloads/DownloadTask.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
@@ -49,6 +48,25 @@ void confirmClearQueue(
       .setTitle(getString.downloadClearQueue)
       .setMessage(getString.downloadClearQueueConfirm(count))
       .setPositiveButton(getString.delete, () => unawaited(engine.clearQueue()))
+      .setNegativeButton(getString.cancel, null)
+      .show<void>(),
+);
+
+void confirmRemoveMany(
+  BuildContext context,
+  DownloadEngine engine,
+  List<DownloadTask> tasks,
+  VoidCallback onDone,
+) => unawaited(
+  AlertDialogBuilder(context)
+      .setTitle(getString.downloadDeleteSelected)
+      .setMessage(getString.downloadDeleteSelectedConfirm(tasks.length))
+      .setPositiveButton(getString.delete, () {
+        onDone();
+        for (final task in tasks) {
+          unawaited(engine.remove(task));
+        }
+      })
       .setNegativeButton(getString.cancel, null)
       .show<void>(),
 );

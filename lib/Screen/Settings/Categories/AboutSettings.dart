@@ -10,6 +10,7 @@ import '../../../Utils/Functions/CopyToClip.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../Developer/DeveloperPage.dart';
+import 'UpdateSettings.dart';
 import '../Widgets/DonateSheet.dart';
 import '../Forks/ForksPage.dart';
 import '../../../Core/State/State.dart';
@@ -17,6 +18,7 @@ import '../../../Core/State/State.dart';
 final settingsAppVersion = ''.live;
 
 List<Setting> aboutSettings(BuildContext context) => [
+  ...updateSettings(context),
   Setting.header(getString.sectionAppInfo),
   Setting.normal(
     name: getString.version,

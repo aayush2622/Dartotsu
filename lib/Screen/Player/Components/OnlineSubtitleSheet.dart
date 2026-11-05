@@ -183,44 +183,43 @@ class _OnlineSubtitleSheetState extends State<_OnlineSubtitleSheet> {
                   ),
                 );
               }
-              return ListView(
+              return ListView.builder(
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
-                children: [
-                  for (final (i, s) in results.indexed)
-                    SheetTile(
-                      tinted: true,
-                      radius: BorderRadius.vertical(
-                        top: Radius.circular(i == 0 ? 20 : 6),
-                        bottom: Radius.circular(
-                          i == results.length - 1 ? 20 : 6,
-                        ),
-                      ),
-                      leading: busy == s.id
-                          ? const AppSpinner(size: 24)
-                          : Icon(
-                              s.hashMatch
-                                  ? Icons.verified_rounded
-                                  : Icons.subtitles_rounded,
-                            ),
-                      title: Text(
-                        s.name,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      subtitle: Text(
-                        [
-                          if (s.hashMatch) getString.playerOnlineMatch,
-                          if (!s.hashMatch && s.episodeMatch)
-                            getString.playerOnlineEpisode,
-                          s.provider,
-                          s.format.toUpperCase(),
-                          if (s.downloads > 0)
-                            getString.playerOnlineDownloads(s.downloads),
-                        ].join(' • '),
-                      ),
-                      onTap: busy.isEmpty ? () => _use(s) : null,
+                itemCount: results.length,
+                itemBuilder: (_, i) {
+                  final s = results[i];
+                  return SheetTile(
+                    tinted: true,
+                    radius: BorderRadius.vertical(
+                      top: Radius.circular(i == 0 ? 20 : 6),
+                      bottom: Radius.circular(i == results.length - 1 ? 20 : 6),
                     ),
-                ],
+                    leading: busy == s.id
+                        ? const AppSpinner(size: 24)
+                        : Icon(
+                            s.hashMatch
+                                ? Icons.verified_rounded
+                                : Icons.subtitles_rounded,
+                          ),
+                    title: Text(
+                      s.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    subtitle: Text(
+                      [
+                        if (s.hashMatch) getString.playerOnlineMatch,
+                        if (!s.hashMatch && s.episodeMatch)
+                          getString.playerOnlineEpisode,
+                        s.provider,
+                        s.format.toUpperCase(),
+                        if (s.downloads > 0)
+                          getString.playerOnlineDownloads(s.downloads),
+                      ].join(' • '),
+                    ),
+                    onTap: busy.isEmpty ? () => _use(s) : null,
+                  );
+                },
               );
             }),
           ),

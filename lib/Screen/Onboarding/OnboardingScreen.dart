@@ -8,6 +8,7 @@ import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/AppTheme.dart';
 import '../../Core/ThemeManager/GlassBackgroundSource.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../Core/ThemeManager/language.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Core/ThemeManager/ThemeMode.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
@@ -74,9 +75,10 @@ class _OnboardingScreenState extends State<OnboardingScreen>
                       onPageChanged: (v) => state.page.value = v,
                       children: [
                         _welcome(page == 0),
-                        _features(page == 1),
-                        _look(page == 2),
-                        if (Platform.isAndroid) _permissions(page == 3),
+                        _language(page == 1),
+                        _features(page == 2),
+                        _look(page == 3),
+                        if (Platform.isAndroid) _permissions(page == 4),
                         _accounts(page == OnboardingState.pageCount - 1),
                       ],
                     ),
@@ -285,6 +287,31 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     icon: Icons.auto_awesome_rounded,
     title: getString.appName.toUpperCase(),
     body: getString.appTagline,
+  );
+
+  Widget _language(bool active) => _frame(
+    active: active,
+    icon: Icons.translate_rounded,
+    title: getString.language,
+    body: getString.onboardingLanguageBody,
+    children: [
+      Watch(() {
+        final current = state.locale.code.value;
+        return Wrap(
+          alignment: WrapAlignment.center,
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            for (final code in state.languages)
+              ChoiceChip(
+                label: Text(completeLanguageName(code)),
+                selected: code == current,
+                onSelected: (_) => state.locale.code.value = code,
+              ),
+          ],
+        );
+      }),
+    ],
   );
 
   Widget _features(bool active) {

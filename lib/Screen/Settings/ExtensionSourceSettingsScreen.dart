@@ -7,10 +7,11 @@ import '../../Widgets/Components/BaseScreen.dart';
 import 'SettingsListView.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'ExtensionSourceSettingsState.dart';
+import '../../Core/ThemeManager/LanguageSwitcher.dart';
 
 void openExtensionSettings(BuildContext context, Extension extension) {
   if (extension.settings(context).isEmpty) {
-    snackString("${extension.name} doesn't provide any settings.");
+    snackString(getString.extensionNoSettings(extension.name));
     return;
   }
   navigateToPage(context, ExtensionSourceSettingsScreen(extension: extension));
@@ -19,7 +20,7 @@ void openExtensionSettings(BuildContext context, Extension extension) {
 Widget? extensionSettingsButton(BuildContext context, Extension extension) {
   if (extension.settings(context).isEmpty) return null;
   return IconButton(
-    tooltip: '${extension.name} settings',
+    tooltip: getString.extensionSettingsTitle(extension.name),
     icon: const Icon(Icons.settings_rounded, size: 20),
     onPressed: () => openExtensionSettings(context, extension),
   );

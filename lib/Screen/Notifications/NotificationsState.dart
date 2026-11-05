@@ -230,8 +230,14 @@ class NotificationsState extends ScreenState {
 
   bool canOpen(ServiceNotification n) => canOpenNotification(n);
 
-  void open(NotificationFeed from, ServiceNotification n) =>
-      openNotification(context, from.service, n);
+  void open(NotificationFeed from, ServiceNotification n) {
+    final current = find<MediaServiceController>().currentService.value;
+    if (from.service.id != current.id) {
+      snackString(getString.notificationsOtherService(from.service.name));
+      return;
+    }
+    openNotification(context, from.service, n);
+  }
 
   List<(String, List<ServiceNotification>)> grouped(
     List<ServiceNotification> items,

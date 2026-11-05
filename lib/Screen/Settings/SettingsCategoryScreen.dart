@@ -29,6 +29,7 @@ class _SettingsCategoryScreenState extends BaseScreen<SettingsCategoryScreen>
         searchable: widget.category.search ?? widget.category.build,
         menu: widget.category.build,
         hint: state.hint,
+        accordion: widget.category.accordion?.call(),
       ),
     );
   }

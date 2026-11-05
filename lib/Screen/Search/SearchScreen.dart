@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ClickCursor.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
@@ -18,13 +19,13 @@ import '../../Model/SearchResults.dart';
 import '../../Utils/Extensions/CardStyleMetrics.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
-import '../../Utils/Extensions/StringExtensions.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
 import '../../Widgets/Shelf/MediaRows.dart';
+import '../../Widgets/Shelf/MediaSection.dart';
 import '../../Widgets/Shelf/PosterCard.dart';
 import '../Social/Components/UserCard.dart';
 import '../../Widgets/Components/EmptyState.dart';
@@ -217,14 +218,19 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     final chips = q.toChipList();
     return Column(
       children: [
-        if (spec.onList || spec.adult)
+        if (spec.onList || spec.notOnList || spec.adult)
           Padding(
             padding: EdgeInsets.symmetric(horizontal: Dimens.gapSm),
             child: Row(
               children: [
                 if (spec.onList)
-                  _checkbox(getString.listOnly, q.onList ?? false, (v) {
+                  _checkbox(getString.listOnly, q.onList == true, (v) {
                     q.onList = v ? true : null;
+                    state.restart();
+                  }),
+                if (spec.notOnList)
+                  _checkbox(getString.notInList, q.onList == false, (v) {
+                    q.onList = v ? false : null;
                     state.restart();
                   }),
                 const Spacer(),
@@ -441,28 +447,23 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     );
   }
 
+  static const _shelf = MediaSection(data: MediaSectionData(type: 0));
+
   Widget _card(Object item, {bool skeleton = false}) {
     if (item is Media) {
-      final year = item.startDate?.year;
+      final shelf = _shelf.toItem(context, 0, item);
       final tag = skeleton ? null : 'search:${item.id}';
-      return PosterCard(
+      return PosterCard.item(
+        shelf,
         heroTag: tag,
-        imageUrl: item.cover,
-        overlay: skeleton ? null : widget.view.overlay(item),
-        title: item.mainName,
-        subtitle: [
-          if (item.format != null) item.format!.titleCase,
-          if (year != null) '$year',
-        ].join(' · '),
-        score: (item.meanScore ?? 0) > 0 ? item.meanScore! / 10 : null,
-        onTap: skeleton ? null : () => state.open(item, tag!),
-        onLongPress: skeleton
-            ? null
-            : () => showQuickListEditor(
-                context,
-                find<MediaServiceController>().currentService.value,
-                item,
-              ),
+        overlay: widget.view.overlay(item),
+        skeleton: skeleton,
+        onTap: () => state.open(item, tag!),
+        onLongPress: () => showQuickListEditor(
+          context,
+          find<MediaServiceController>().currentService.value,
+          item,
+        ),
       );
     }
     return switch (item) {

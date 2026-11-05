@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:dartotsu_extension_bridge/ExtensionBridge.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
 import 'package:rhttp/rhttp.dart';
 import 'package:webview_all/webview_all.dart' show OffscreenWebViewSession;
 
@@ -100,6 +101,15 @@ class NetworkManager extends AppController implements BridgeNetwork {
       if (ua == null || ua.isEmpty) return;
       PrefName.fetchedUserAgent.value = ua;
       reinitialize();
+    } on PlatformException catch (e) {
+      if (e.code != 'webview2_runtime_unavailable') {
+        logError('NetworkManager', e, StackTrace.current);
+        return;
+      }
+      logger(
+        'WebView2 runtime is not installed, using the default user agent',
+        tag: 'NetworkManager',
+      );
     } catch (e, st) {
       logError('NetworkManager', e, st);
     } finally {

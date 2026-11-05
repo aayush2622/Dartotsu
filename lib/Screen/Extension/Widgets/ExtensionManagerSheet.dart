@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../../Widgets/Components/LoadSvg.dart';
+import 'package:dartotsu_extension_bridge/Engines/JavaEngine/JvmAddon.dart';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Widgets/Components/SheetTile.dart';
 import '../../Settings/ExtensionSourceSettingsScreen.dart';
 import '../ExtensionScreen.dart';
+import 'PluginInstallSheet.dart';
 import '../../../Core/State/State.dart';
 import '../../../Utils/Extensions/StringExtensions.dart';
 import '../../../Widgets/Components/AppSpinner.dart';
@@ -25,13 +27,13 @@ void showExtensionManagerSheet(BuildContext context, ItemType type) {
   for (final m in manager.managers) {
     final plugin = m.plugin;
     if (plugin != null && plugin.installed.value) {
-      unawaited(plugin.checkForUpdate(forceRefresh: true));
+      unawaited(plugin.plan(refresh: true));
     }
   }
   showCustomBottomDialog(
     context,
     AppSheet(
-      title: '${type.name.capitalizeFirst} Manager',
+      title: getString.extensionManagerTitle(type.name.capitalizeFirst),
       child: Watch(() {
         final current = manager[type];
         final managers = manager.managers
@@ -78,6 +80,13 @@ Widget _serviceTile(
   final installed = m.plugin == null || m.plugin!.installed.value;
   final availableInRepo = m.plugin == null || m.plugin!.availableInRepo.value;
   final scheme = context.colorScheme;
+  final plugin = m.plugin as DownloadablePlugin?;
+  final preparing =
+      installed &&
+      plugin != null &&
+      JvmAddon.supported &&
+      plugin.dependencies.contains(JvmAddon.instance) &&
+      JvmAddon.instance.downloading.value;
 
   return Opacity(
     opacity: installed || availableInRepo ? 1.0 : 0.5,
@@ -101,6 +110,12 @@ Widget _serviceTile(
         child: assetIcon(m.icon, size: 22),
       ),
       title: Text(m.name),
+      subtitle: preparing
+          ? Text(
+              getString.runtimePreparing,
+              style: TextStyle(color: scheme.primary, fontSize: 12),
+            )
+          : null,
       trailing: _withSettings(
         context,
         m,
@@ -148,7 +163,8 @@ Widget? _serviceTrailing(
             size: 18,
             color: context.colorScheme.primary,
           ),
-          onPressed: () => showInstallDialog(context, plugin, m.name),
+          onPressed: () =>
+              showInstallDialog(context, plugin, m.name, icon: m.icon),
         ),
         remove,
       ],
@@ -158,7 +174,8 @@ Widget? _serviceTrailing(
   if (availableInRepo) {
     return IconButton(
       icon: const Icon(Icons.download, size: 18),
-      onPressed: () => showInstallDialog(context, m.plugin!, m.name),
+      onPressed: () =>
+          showInstallDialog(context, m.plugin!, m.name, icon: m.icon),
     );
   }
 

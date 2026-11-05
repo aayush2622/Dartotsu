@@ -8,9 +8,9 @@ import '../../../Model/Setting.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Login/LoginScreen.dart';
-import '../SubSettingsScreen.dart';
+import '../SettingsSync/SettingsSyncScreen.dart';
 import '../Sync/SyncScreen.dart';
-import 'DiscordSettings.dart';
+import '../Discord/DiscordSettingsScreen.dart';
 import '../../../Core/State/State.dart';
 
 List<Setting> accountSettings(BuildContext context) {
@@ -54,16 +54,22 @@ List<Setting> accountSettings(BuildContext context) {
       onClick: () => navigateToPage(context, const SyncScreen()),
     ),
     Setting.normal(
+      name: getString.settingsSync,
+      description: PrefName.settingsSync.rx.value
+          ? getString.settingsSyncSwitch
+          : getString.settingsSyncDesc,
+      icon: Icons.cloud_sync_rounded,
+      isActivity: true,
+      onClick: () => navigateToPage(context, const SettingsSyncScreen()),
+    ),
+    Setting.normal(
       name: getString.discordRichPresenceRow,
       description: PrefName.discordRpc.rx.value
           ? getString.discordRichPresenceRowOn
           : getString.discordRichPresenceRowOff,
       icon: Icons.sports_esports_rounded,
       isActivity: true,
-      onClick: () => navigateToPage(
-        context,
-        SubSettingsScreen(title: getString.discord, settings: discordSettings),
-      ),
+      onClick: () => navigateToPage(context, const DiscordSettingsScreen()),
     ),
   ];
 }

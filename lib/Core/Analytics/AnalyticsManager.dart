@@ -82,6 +82,7 @@ class AnalyticsManager extends AppController {
   Future<void> _analytics(
     Future<void> Function(FirebaseAnalytics a) run,
   ) async {
+    if (Platform.isWindows) return;
     try {
       await run(FirebaseAnalytics.instance);
     } catch (e, st) {
