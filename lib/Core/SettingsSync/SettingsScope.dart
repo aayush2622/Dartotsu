@@ -124,7 +124,6 @@ class SettingsScope {
     'incognito',
     'incognitoBlockEdits',
     'customPath',
-    'safFolder',
     'customFontPath',
     'customUserAgent',
     'customDnsUrl',

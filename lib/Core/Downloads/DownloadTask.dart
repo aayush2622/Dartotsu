@@ -74,17 +74,13 @@ class DownloadTask {
   bool fallback;
   bool segmented;
   bool folder;
-  String? safPath;
-  int savedBytes;
   int? height;
   int? torrentFile;
   final swarm = Live<String?>(null);
 
   int? _size;
 
-  int get size => safPath != null
-      ? savedBytes
-      : _size ??= path == null ? 0 : pathSize(path!);
+  int get size => _size ??= path == null ? 0 : pathSize(path!);
 
   void forgetSize() => _size = null;
 
@@ -129,8 +125,6 @@ class DownloadTask {
     this.fallback = false,
     this.segmented = false,
     this.folder = false,
-    this.safPath,
-    this.savedBytes = 0,
     this.height,
     this.torrentFile,
   }) : subtitles = subtitles ?? [],
@@ -205,8 +199,6 @@ class DownloadTask {
     'fallback': fallback,
     'segmented': segmented,
     'folder': folder,
-    'safPath': safPath,
-    'savedBytes': savedBytes,
     'height': height,
     'torrentFile': torrentFile,
     'state': state.value.name,
@@ -280,8 +272,6 @@ class DownloadTask {
       fallback: json['fallback'] == true,
       segmented: json['segmented'] == true,
       folder: json['folder'] == true,
-      safPath: json['safPath'] as String?,
-      savedBytes: (json['savedBytes'] as num?)?.toInt() ?? 0,
       height: (json['height'] as num?)?.toInt(),
       torrentFile: (json['torrentFile'] as num?)?.toInt(),
     );

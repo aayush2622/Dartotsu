@@ -356,25 +356,6 @@ class AppLocalizationsTe extends AppLocalizations {
       'యాప్ డేటా ఎక్కడ ఉంటుందో. రీసెట్ చేయడానికి లాంగ్ ప్రెస్ చెయ్యి';
 
   @override
-  String get storageFolderDesc =>
-      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
-
-  @override
-  String get storageFolderRequiredTitle => 'Choose a folder for downloads';
-
-  @override
-  String get storageFolderRequiredMessage =>
-      'Dartotsu saves downloads to a folder you pick, so it doesn\'t need access to all your files. Pick any folder; a Dartotsu folder is created inside it unless the folder is already named that.';
-
-  @override
-  String get storageFolderChoose => 'Choose folder';
-
-  @override
-  String storageFolderSet(String name) {
-    return 'Saving to $name';
-  }
-
-  @override
   String get selectDirectory => 'ఫోల్డర్ ఎంచుకో';
 
   @override

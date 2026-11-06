@@ -26,17 +26,10 @@ import java.io.File
 class MainActivity : FlPiPActivity() {
     private var volumeChannel: MethodChannel? = null
     private var interceptVolume = false
-    private var safStorage: SafStorage? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         flutterEngine.plugins.add(NativeLogger())
-        val saf = SafStorage(this).also { safStorage = it }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/saf")
-            .setMethodCallHandler { call, result ->
-                @Suppress("UNCHECKED_CAST")
-                saf.handle(call.method, (call.arguments as? Map<String, Any?>) ?: emptyMap(), result)
-            }
         volumeChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/volumekeys").also { channel ->
             channel.setMethodCallHandler { call, result ->
                 if (call.method != "setEnabled") return@setMethodCallHandler result.notImplemented()
@@ -294,11 +287,6 @@ class MainActivity : FlPiPActivity() {
             return true
         }
         return super.dispatchKeyEvent(event)
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (safStorage?.onActivityResult(requestCode, resultCode, data) == true) return
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

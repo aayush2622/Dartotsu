@@ -4,7 +4,6 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
-import '../../../Core/Preferences/SafStorage.dart';
 import '../../../Core/Security/AppLock.dart';
 import '../../../Core/Security/Biometric.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -13,7 +12,6 @@ import '../../../Core/ThemeManager/language.dart';
 import '../../../Model/Setting.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Functions/LinkSettings.dart';
-import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Lock/PasscodeSheets.dart';
 import '../Widgets/Backup/BackupSheet.dart';
@@ -124,26 +122,14 @@ List<Setting> generalSettings(BuildContext context) => [
   Setting.header(getString.sectionStorage),
   Setting.normal(
     name: getString.customPath,
-    description: Platform.isAndroid
-        ? (PrefName.safFolder.rx.value.isEmpty
-              ? getString.storageFolderDesc
-              : (SafStorage.folder?.name ?? getString.storageFolderDesc))
-        : PrefName.customPath.rx.value.isEmpty
+    description: PrefName.customPath.rx.value.isEmpty
         ? getString.customPathDesc
         : PrefName.customPath.rx.value,
     icon: Icons.folder_outlined,
     isVisible: !(Platform.isIOS || Platform.isMacOS),
     isActivity: true,
-    onLongClick: () {
-      if (Platform.isAndroid) return SafStorage.clear();
-      PrefName.customPath.rx.value = '';
-    },
+    onLongClick: () => PrefName.customPath.rx.value = '',
     onClick: () async {
-      if (Platform.isAndroid) {
-        final picked = await SafStorage.pick();
-        if (picked != null) snackString(getString.storageFolderSet(picked.name));
-        return;
-      }
       final result = await FilePicker.getDirectoryPath(
         dialogTitle: getString.selectDirectory,
         initialDirectory: PrefName.customPath.value,

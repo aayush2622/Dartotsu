@@ -355,25 +355,6 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಆ್ಯಪ್ ಡೇಟಾ ಎಲ್ಲಿ ಇರುತ್ತದೆ. ರೀಸೆಟ್ ಮಾಡಲು ಒತ್ತಿ ಹಿಡಿ';
 
   @override
-  String get storageFolderDesc =>
-      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
-
-  @override
-  String get storageFolderRequiredTitle => 'Choose a folder for downloads';
-
-  @override
-  String get storageFolderRequiredMessage =>
-      'Dartotsu saves downloads to a folder you pick, so it doesn\'t need access to all your files. Pick any folder; a Dartotsu folder is created inside it unless the folder is already named that.';
-
-  @override
-  String get storageFolderChoose => 'Choose folder';
-
-  @override
-  String storageFolderSet(String name) {
-    return 'Saving to $name';
-  }
-
-  @override
   String get selectDirectory => 'ಡೈರೆಕ್ಟರಿ ಆಯ್ಕೆ ಮಾಡು';
 
   @override

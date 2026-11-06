@@ -779,36 +779,6 @@ abstract class AppLocalizations {
   /// **'Where app data is kept. Long-press to reset'**
   String get customPathDesc;
 
-  /// No description provided for @storageFolderDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear'**
-  String get storageFolderDesc;
-
-  /// No description provided for @storageFolderRequiredTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose a folder for downloads'**
-  String get storageFolderRequiredTitle;
-
-  /// No description provided for @storageFolderRequiredMessage.
-  ///
-  /// In en, this message translates to:
-  /// **'Dartotsu saves downloads to a folder you pick, so it doesn\'t need access to all your files. Pick any folder; a Dartotsu folder is created inside it unless the folder is already named that.'**
-  String get storageFolderRequiredMessage;
-
-  /// No description provided for @storageFolderChoose.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose folder'**
-  String get storageFolderChoose;
-
-  /// No description provided for @storageFolderSet.
-  ///
-  /// In en, this message translates to:
-  /// **'Saving to {name}'**
-  String storageFolderSet(String name);
-
   /// No description provided for @selectDirectory.
   ///
   /// In en, this message translates to:

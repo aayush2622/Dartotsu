@@ -172,18 +172,6 @@
   "settingsAddons": "Addons",
   "customPath": "Custom storage path",
   "customPathDesc": "Where app data is kept. Long-press to reset",
-  "storageFolderDesc": "Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear",
-  "storageFolderRequiredTitle": "Choose a folder for downloads",
-  "storageFolderRequiredMessage": "Dartotsu saves downloads to a folder you pick, so it doesn't need access to all your files. Pick any folder; a Dartotsu folder is created inside it unless the folder is already named that.",
-  "storageFolderChoose": "Choose folder",
-  "storageFolderSet": "Saving to {name}",
-  "@storageFolderSet": {
-    "placeholders": {
-      "name": {
-        "type": "String"
-      }
-    }
-  },
   "selectDirectory": "Select directory",
   "differentCacheManager": "Alternative image cache",
   "differentCacheManagerDesc": "Use a different cache manager for images",

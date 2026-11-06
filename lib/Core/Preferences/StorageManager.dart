@@ -37,7 +37,7 @@ class StorageManager {
       }
 
       if (Platform.isAndroid) {
-        final hasPermission = await hasStoragePermission();
+        final hasPermission = await requestPermission();
 
         if (!hasPermission || useSystemPath) {
           final base = withAppRoot(appDir.path);

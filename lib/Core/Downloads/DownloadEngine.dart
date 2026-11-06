@@ -21,8 +21,6 @@ import '../State/State.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
-import '../Preferences/SafStorage.dart';
-import 'DownloadExport.dart';
 import 'DownloadQueue.dart';
 import 'DownloadScanner.dart';
 import 'DownloadService.dart';
@@ -132,23 +130,12 @@ class DownloadEngine extends AppController {
     _pump();
   }
 
-  void markStored(DownloadTask task, String relative, int bytes) {
-    task
-      ..safPath = relative
-      ..savedBytes = bytes;
-    tasks.refresh();
-    _persist(now: true);
-  }
-
   void adoptScanned(List<DownloadTask> found) {
     var changed = false;
     final onDisk = {for (final t in found) t.id};
     for (final task in tasks.toList()) {
       final path = task.path;
-      if (task.isDone &&
-          task.safPath == null &&
-          path != null &&
-          !pathExists(path)) {
+      if (task.isDone && path != null && !pathExists(path)) {
         tasks.remove(task);
         changed = true;
       }
@@ -213,18 +200,8 @@ class DownloadEngine extends AppController {
     final task = taskFor(serviceId, mediaId, unitKey);
     final root = task?.path;
     if (task == null || !task.isDone || root == null) return null;
-    final stored = task.safPath;
-    final inFolder = stored != null &&
-        !task.folder &&
-        SafStorage.folder != null &&
-        !File(root).existsSync();
-    final path = inFolder
-        ? 'saf://$stored'
-        : task.folder
-        ? p.join(root, 'index.m3u8')
-        : root;
-    if (task.kind != DownloadKind.video ||
-        (!inFolder && !File(path).existsSync())) {
+    final path = task.folder ? p.join(root, 'index.m3u8') : root;
+    if (task.kind != DownloadKind.video || !File(path).existsSync()) {
       return null;
     }
     final chosen = task.chosenSubtitles;
@@ -470,7 +447,6 @@ class DownloadEngine extends AppController {
   }
 
   Future<void> _deleteFiles(DownloadTask task) async {
-    unawaited(DownloadExport.removed(task));
     for (final path in [task.path, ...task.subtitlePaths, ...task.audioPaths]) {
       if (path == null) continue;
       try {
@@ -887,7 +863,6 @@ class DownloadEngine extends AppController {
           ..forgetSize()
           ..state.value = DownloadState.done;
         _persist(now: true);
-        unawaited(DownloadExport.finished(task));
         unawaited(_notifyDone(task));
         return;
       }
@@ -975,7 +950,6 @@ class DownloadEngine extends AppController {
         ..forgetSize()
         ..state.value = DownloadState.done;
       _persist(now: true);
-      unawaited(DownloadExport.finished(task));
       unawaited(_notifyDone(task));
     } catch (e, st) {
       if (_stopped.remove(task.id) != null) return;
