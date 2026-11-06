@@ -15,10 +15,12 @@ class ScreenData {
   final int chipLimit;
   final List<(String, String)> rows;
   final void Function(String chip)? onChipTap;
+  final Map<String, void Function(BuildContext context)> onRowTap;
   final int? columns;
 
   const ScreenData({
     this.onChipTap,
+    this.onRowTap = const {},
     this.columns,
     this.text,
     this.html,

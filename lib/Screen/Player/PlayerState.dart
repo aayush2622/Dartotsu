@@ -36,6 +36,7 @@ import 'Engine/PlayerSettings.dart';
 import 'Engine/TorrentStream.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Preferences/Incognito.dart';
+import '../../Core/Preferences/SafStorage.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -849,27 +850,47 @@ class PlayerState extends ScreenState {
       );
       return;
     }
-    unawaited(_pickEmbeddedSubtitle(_generation, priority));
+    unawaited(_pickEmbeddedSubtitle(_generation, priority, chosen));
   }
 
   Future<void> _pickEmbeddedSubtitle(
     int generation,
     List<String> priority,
+    v.Video chosen,
   ) async {
     for (var i = 0; i < 60 && engine.subtitleTracks.value.isEmpty; i++) {
       await Future<void>.delayed(const Duration(milliseconds: 250));
       if (_closed || generation != _generation) return;
     }
+    if (_closed || generation != _generation) return;
     final tracks = engine.subtitleTracks.value;
-    if (tracks.isEmpty || _closed || generation != _generation) return;
-    final embedded = pickTrack(tracks, priority, avoidSigns: true);
+    final embedded = tracks.isEmpty
+        ? null
+        : pickTrack(tracks, priority, avoidSigns: true);
     if (embedded != null) {
       if (engine.activeSubtitle.value != embedded.id) {
         await engine.setSubtitle(embedded.id);
       }
-    } else if (engine.activeSubtitle.value == null) {
+      return;
+    }
+    final fallback = _firstExternalSubtitle(chosen);
+    if (fallback?.file != null && tracks.isEmpty) {
+      await engine.addSubtitle(
+        fallback!.file!,
+        fallback.label ?? (priority.firstOrNull ?? ''),
+      );
+    } else if (tracks.isNotEmpty && engine.activeSubtitle.value == null) {
       await engine.setSubtitle(tracks.first.id);
     }
+  }
+
+  v.Track? _firstExternalSubtitle(v.Video chosen) {
+    final tracks = [
+      for (final t in chosen.subtitles ?? const <v.Track>[])
+        if (t.file != null && t.file!.isNotEmpty) t,
+    ];
+    return tracks.where((t) => !labelIsSigns(t.label ?? '')).firstOrNull ??
+        tracks.firstOrNull;
   }
 
   Future<void> _verifyAudio(int generation) async {
@@ -929,7 +950,12 @@ class PlayerState extends ScreenState {
       }
       stable = tracks.length == seen ? stable + 1 : 0;
       seen = tracks.length;
-      if (tracks.isNotEmpty && stable >= 8) return;
+      if (tracks.isNotEmpty && stable >= 8) {
+        if (engine.activeAudio.value == null) {
+          await engine.setAudio(tracks.first.id);
+        }
+        return;
+      }
       await Future<void>.delayed(const Duration(milliseconds: 250));
       if (_closed || generation != _generation) return;
     }
@@ -1224,6 +1250,7 @@ class PlayerState extends ScreenState {
         target = File(p.join(dir.path, '$name ($n).png'));
       }
       await target.writeAsBytes(bytes);
+      unawaited(SafStorage.exportPath(target.path, base: p.dirname(dir.path)));
       snackString(getString.playerPictureSaved);
     } catch (e, st) {
       logError('PlayerState', e, st);

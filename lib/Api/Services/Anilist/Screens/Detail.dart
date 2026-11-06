@@ -11,7 +11,7 @@ import '../Data/Media.dart';
 import '../Data/User.dart';
 import '../../../../Screen/Review/ReviewsShelf.dart';
 import '../Widgets/FollowersShelf.dart';
-import '../Widgets/StudioChip.dart';
+import '../../../../Screen/Feed/FeedNavigation.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 class AnilistDetailView extends DetailScreenView {
@@ -70,10 +70,6 @@ class AnilistDetailView extends DetailScreenView {
           ),
         ),
       ..._info(m),
-      if (m.anime?.studio != null)
-        ScreenWidget.extra(
-          StudioChip(service: service, studio: m.anime!.studio!),
-        ),
       ...nameSections(m),
       ..._followers(m),
       if (m.genres.isNotEmpty)
@@ -108,7 +104,9 @@ class AnilistDetailView extends DetailScreenView {
         ? '${airing - 1} | $total'
         : total;
     final studio = anime?.studio?.name;
-    final author = (anime?.author ?? m.manga?.author)?.name;
+    final studioId = anime?.studio?.id;
+    final authorEntity = anime?.author ?? m.manga?.author;
+    final author = authorEntity?.name;
     final season = anime?.season;
     final rows = [
       (m.isAnime ? getString.episodes : getString.chapters, count),
@@ -122,7 +120,33 @@ class AnilistDetailView extends DetailScreenView {
       if (m.startDate?.getFormattedDate() != null)
         (getString.aired, airedRange(m)),
     ];
-    return [ScreenWidget.data(getString.details, ScreenData(rows: rows))];
+    return [
+      ScreenWidget.data(
+        getString.details,
+        ScreenData(
+          rows: rows,
+          onRowTap: {
+            if (studioId != null && (studio?.isNotEmpty ?? false))
+              getString.studio: (context) => openEntity(
+                context,
+                service,
+                EntityKind.studio,
+                studioId,
+                name: studio,
+              ),
+            if (authorEntity != null && (author?.isNotEmpty ?? false))
+              getString.author: (context) => openEntity(
+                context,
+                service,
+                EntityKind.staff,
+                authorEntity.id,
+                name: author,
+                image: authorEntity.image,
+              ),
+          },
+        ),
+      ),
+    ];
   }
 
   List<ScreenWidget> _followers(Media m) {

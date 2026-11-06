@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../../../Widgets/Components/SeekProgressBar.dart';
+
 import 'package:flutter/services.dart';
 
 import '../../../Core/Fonts/AppFonts.dart';
@@ -92,9 +94,8 @@ class _NovelScreenState extends State<NovelScreen>
     return Theme(
       data: Theme.of(context).copyWith(
         iconTheme: IconThemeData(color: foreground),
-        textTheme: Theme.of(
-          context,
-        ).textTheme.apply(bodyColor: foreground, displayColor: foreground),
+        textTheme: Theme.of(context).textTheme
+            .apply(bodyColor: foreground, displayColor: foreground),
       ),
       child: Scaffold(
         backgroundColor: background,
@@ -443,17 +444,23 @@ class _NovelScreenState extends State<NovelScreen>
         padding: EdgeInsets.only(bottom: gap),
         child: SizedBox(
           height: layout.pictureHeight,
-          child: _picture(block, BoxFit.contain),
+          child: Center(child: _picture(block, BoxFit.contain)),
         ),
       );
     }
     return _block(context, block, slice.block, base, s);
   }
 
-  Widget _picture(NovelPicture p, BoxFit fit) =>
-      !p.url.startsWith('http') && File(p.url).isAbsolute
-      ? Image.file(File(p.url), fit: fit, width: double.infinity)
-      : cachedNetworkImage(imageUrl: p.url, fit: fit, width: double.infinity);
+  Widget _picture(NovelPicture p, BoxFit fit) {
+    final image = !p.url.startsWith('http') && File(p.url).isAbsolute
+        ? Image.file(File(p.url), fit: fit)
+        : cachedNetworkImage(imageUrl: p.url, fit: fit);
+    if (p.fraction != null) {
+      return FractionallySizedBox(widthFactor: p.fraction, child: image);
+    }
+    if (p.width != null) return SizedBox(width: p.width, child: image);
+    return image;
+  }
 
   List<TextMark> _marks(BuildContext context, int block) {
     final scheme = context.colorScheme;
@@ -560,7 +567,7 @@ class _NovelScreenState extends State<NovelScreen>
       case NovelPicture p:
         return Padding(
           padding: EdgeInsets.only(bottom: gap),
-          child: _picture(p, BoxFit.fitWidth),
+          child: Center(child: _picture(p, BoxFit.contain)),
         );
       case NovelRule():
         return Padding(
@@ -786,9 +793,9 @@ class _NovelScreenState extends State<NovelScreen>
   ];
 
   Widget _overflow(BuildContext context, Color foreground, List<String> ids) {
-    final specs = [
-      for (final id in ids) ?_spec(context, id),
-    ].where((a) => a.onTap != null).toList();
+    final specs = [for (final id in ids) ?_spec(context, id)]
+        .where((a) => a.onTap != null)
+        .toList();
     if (specs.isEmpty) return const SizedBox.shrink();
     return PopupMenuButton<int>(
       tooltip: getString.layoutMore,

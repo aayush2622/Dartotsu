@@ -6,7 +6,7 @@ import '../NotificationKindInfo.dart';
 import 'ServiceScreens.dart';
 
 Set<String> mutedKinds(NotificationScreenView view) => {
-  for (final k in (view.mutedPref?.value ?? '').split(','))
+  for (final k in (view.mutedPref?.rx.value ?? '').split(','))
     if (k.isNotEmpty) k,
 };
 

@@ -14,8 +14,29 @@ class NovelParagraph extends NovelBlock {
 
 class NovelPicture extends NovelBlock {
   final String url;
+  final double? width;
+  final double? fraction;
 
-  const NovelPicture(this.url);
+  const NovelPicture(this.url, {this.width, this.fraction});
+}
+
+final _cssWidth = RegExp(
+  r'(?:^|;)\s*(?:max-)?width\s*:\s*([\d.]+)\s*(%|px|em|rem)?',
+);
+
+NovelPicture _picture(String src, dom.Element img) {
+  final style = _cssWidth.firstMatch(img.attributes['style'] ?? '');
+  final raw = style?.group(1) ?? img.attributes['width'];
+  final unit = style?.group(2) ?? '';
+  final value = raw == null ? null : double.tryParse(raw.replaceAll('%', ''));
+  if (value == null || value <= 0) return NovelPicture(src);
+  if (unit == '%' || (raw?.endsWith('%') ?? false)) {
+    return NovelPicture(src, fraction: (value / 100).clamp(0.05, 1.0));
+  }
+  return NovelPicture(
+    src,
+    width: unit == 'em' || unit == 'rem' ? value * 16 : value,
+  );
 }
 
 class NovelRule extends NovelBlock {
@@ -86,7 +107,7 @@ List<NovelBlock> parseNovel(String source) {
     if (tag == 'img') {
       flush(heading);
       final src = node.attributes['src'] ?? node.attributes['data-src'];
-      if (src != null && src.isNotEmpty) out.add(NovelPicture(src));
+      if (src != null && src.isNotEmpty) out.add(_picture(src, node));
       return;
     }
     if (tag == 'hr') {

@@ -106,6 +106,21 @@ class DataSection extends StatelessWidget {
         const SizedBox(height: 4),
         if (label == kStatusRowLabel)
           StatusChip(status: value)
+        else if (data.onRowTap[label] case final tap?)
+          Clickable(
+            press: false,
+            behavior: HitTestBehavior.translucent,
+            onTap: () => tap(context),
+            child: Text(
+              value,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: context.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.w600,
+                color: scheme.primary,
+              ),
+            ),
+          )
         else
           SelectionArea(
             child: Text(

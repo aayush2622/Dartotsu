@@ -300,7 +300,9 @@ class PlayerEngine {
     }
 
     try {
-      final cache = await StorageManager.getDirectory(subPath: 'cache/mpv');
+      final cache = Platform.isAndroid || Platform.isIOS
+          ? null
+          : await StorageManager.getDirectory(subPath: 'cache/mpv');
       if (cache != null) {
         await set('demuxer-cache-dir', cache.path);
       } else {
