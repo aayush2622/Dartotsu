@@ -26,6 +26,13 @@ class SafFolder {
   }
 }
 
+class SafHandle {
+  final int fd;
+  final String path;
+
+  const SafHandle(this.fd, this.path);
+}
+
 class SafStorage {
   static const _channel = MethodChannel('dartotsu/saf');
 
@@ -82,6 +89,9 @@ class SafStorage {
 
   static bool get active =>
       Platform.isAndroid && !_legacyAccess && !_unusable && folder != null;
+
+  static bool get needsFolder =>
+      Platform.isAndroid && !_legacyAccess && folder == null;
 
   static Future<SafFolder?> pick() async {
     try {
@@ -179,6 +189,46 @@ class SafStorage {
     } catch (e) {
       logger(
         'Removing from the chosen folder failed: $e',
+        tag: _tag,
+        logLevel: LogLevel.warning,
+      );
+    }
+  }
+
+  static Future<SafHandle?> open(String relative) async {
+    final target = folder;
+    if (target == null) return null;
+    try {
+      final fd = await _channel.invokeMethod<int>('openFd', {
+        'tree': target.tree,
+        'root': target.root,
+        'relative': relative,
+      });
+      if (fd == null) {
+        logger(
+          'Could not open $relative from the chosen folder',
+          tag: _tag,
+          logLevel: LogLevel.warning,
+        );
+        return null;
+      }
+      return SafHandle(fd, '/proc/self/fd/$fd');
+    } catch (e) {
+      logger(
+        'Opening $relative failed: $e',
+        tag: _tag,
+        logLevel: LogLevel.warning,
+      );
+      return null;
+    }
+  }
+
+  static Future<void> close(int fd) async {
+    try {
+      await _channel.invokeMethod<bool>('closeFd', {'fd': fd});
+    } catch (e) {
+      logger(
+        'Closing fd $fd failed: $e',
         tag: _tag,
         logLevel: LogLevel.warning,
       );

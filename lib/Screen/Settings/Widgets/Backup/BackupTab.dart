@@ -5,7 +5,6 @@ import 'package:path/path.dart' as p;
 
 import '../../../../Core/Preferences/PrefBackup.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
-import '../../../../Core/Preferences/SafStorage.dart';
 import '../../../../Core/Preferences/StorageManager.dart';
 import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -16,6 +15,7 @@ import 'BackupCategoryTile.dart';
 import 'BackupSelection.dart';
 import 'PasswordField.dart';
 import '../../../../Core/State/State.dart';
+import '../../../Downloads/StorageFolderPrompt.dart';
 
 class BackupTab extends StatefulWidget {
   final Map<PrefLocation, List<String>> keys;
@@ -75,7 +75,7 @@ class _BackupTabState extends State<BackupTab> {
         accounts: services.accounts,
         service: services.currentService.value.id,
       );
-      unawaited(SafStorage.exportPath(p.join(dir, name), base: p.dirname(dir)));
+      unawaited(saveToChosenFolder(p.join(dir, name), base: p.dirname(dir)));
       snackString(getString.backupSaved(name));
     } catch (e) {
       snackString(getString.backupFailed('$e'));

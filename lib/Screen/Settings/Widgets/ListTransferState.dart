@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:path/path.dart' as p;
 
 import '../Backup/ExternalLists/ExternalList.dart';
 import '../Backup/ExternalLists/ExternalListService.dart';
@@ -13,6 +15,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Function.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/ScreenState.dart';
+import '../../Downloads/StorageFolderPrompt.dart';
 
 class ImportListsState extends ScreenState {
   final MediaService service;
@@ -101,6 +104,7 @@ class ExportListsState extends ScreenState {
         );
         if (dir == null) throw StateError('no storage folder');
         final file = await ExternalListService.save(dir.path, format, bytes);
+        unawaited(saveToChosenFolder(file.path, base: p.dirname(dir.path)));
         snackString(getString.savedPath(file.path));
       }
     } catch (e) {

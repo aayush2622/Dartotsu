@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../../Utils/Function.dart';
 import '../../Utils/Functions/CopyToClip.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import '../MainScreen.dart';
+import '../Downloads/StorageFolderPrompt.dart';
 
 class ErrorState extends ScreenState {
   final String error;
@@ -62,6 +64,9 @@ class ErrorState extends ScreenState {
       useCustomPath: true,
     );
     final logPath = '${dir?.path ?? ''}/appLogs.txt'.fixSeparator;
+    if (dir != null && Platform.isAndroid) {
+      unawaited(saveToChosenFolder(logPath, base: dir.path));
+    }
     if (Platform.isLinux) {
       copyToClipboard(logPath, message: getString.logPathCopied);
     } else {

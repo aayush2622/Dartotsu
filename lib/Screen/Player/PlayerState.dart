@@ -36,7 +36,6 @@ import 'Engine/PlayerSettings.dart';
 import 'Engine/TorrentStream.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/Preferences/Incognito.dart';
-import '../../Core/Preferences/SafStorage.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -48,6 +47,7 @@ import '../Together/TogetherController.dart';
 import '../../Utils/Functions/AppWindow.dart';
 import '../../Utils/Functions/DesktopFullscreen.dart';
 import '../../Utils/Functions/Wakelock.dart';
+import '../Downloads/StorageFolderPrompt.dart';
 
 const resizeFits = [BoxFit.contain, BoxFit.cover, BoxFit.fill];
 
@@ -1250,7 +1250,7 @@ class PlayerState extends ScreenState {
         target = File(p.join(dir.path, '$name ($n).png'));
       }
       await target.writeAsBytes(bytes);
-      unawaited(SafStorage.exportPath(target.path, base: p.dirname(dir.path)));
+      unawaited(saveToChosenFolder(target.path, base: p.dirname(dir.path)));
       snackString(getString.playerPictureSaved);
     } catch (e, st) {
       logError('PlayerState', e, st);

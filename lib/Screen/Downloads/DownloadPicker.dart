@@ -25,6 +25,7 @@ import '../Player/Engine/TorrentStream.dart';
 import 'Components/DownloadStreamSheet.dart';
 import 'Components/TorrentFileSheet.dart';
 import 'FfmpegPrompt.dart';
+import 'StorageFolderPrompt.dart';
 
 String downloadIdOf(WatchState state, WatchUnit unit) =>
     DownloadTask.idOf(state.service.id, state.current.id, unit.key);
@@ -38,6 +39,7 @@ Future<void> downloadUnits(
       context.mounted ? context : (appOverlayContext ?? appContext)!;
   final source = state.source.value;
   if (source == null) return snackString(getString.watchSourceMissing);
+  if (!await ensureStorageFolder(live())) return;
   final engine = find<DownloadEngine>();
   final fresh = engine
       .notQueued(

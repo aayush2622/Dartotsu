@@ -17,6 +17,7 @@ import '../../Utils/Function.dart';
 import '../../Utils/Functions/ImageActions.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/ScreenState.dart';
+import '../Downloads/StorageFolderPrompt.dart';
 
 class ShareCardState extends ScreenState {
   final MediaService service;
@@ -197,6 +198,7 @@ class ShareCardState extends ScreenState {
         target = File(p.join(dir.path, '$fileName ($n).png'));
       }
       await target.writeAsBytes(bytes);
+      unawaited(saveToChosenFolder(target.path, base: p.dirname(dir.path)));
       snackString(getString.shareCardSaved);
     } catch (e, st) {
       logError('ShareCard', e, st);
