@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../Core/State/State.dart';
+import '../../Core/ThemeManager/LocaleController.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
+import '../../l10n/app_localizations.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import '../Login/LoginScreen.dart';
 
 class OnboardingState extends ScreenState {
-  static final pageCount = Platform.isAndroid ? 5 : 4;
+  static final pageCount = Platform.isAndroid ? 6 : 5;
 
   static final permissions = <Permission>[
     Permission.notification,
@@ -26,6 +28,8 @@ class OnboardingState extends ScreenState {
   @override
   void onInit() {
     super.onInit();
+    final device = LocaleController.deviceLanguage;
+    if (device != null) locale.code.value = device;
     if (Platform.isAndroid) refreshPermissions();
   }
 
@@ -42,6 +46,12 @@ class OnboardingState extends ScreenState {
   }
 
   ThemeController get theme => find();
+
+  LocaleController get locale => find();
+
+  late final languages = <String>{
+    for (final l in AppLocalizations.supportedLocales) l.languageCode,
+  }.toList();
 
   final controller = PageController();
   final page = 0.live;

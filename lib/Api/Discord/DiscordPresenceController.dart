@@ -32,7 +32,7 @@ class DiscordPresenceController extends AppController
     if (_started) return;
     _started = true;
     WidgetsBinding.instance.addObserver(this);
-    for (final pref in [
+    for (final pref in <Live>[
       PrefName.discordRpc.rx,
       PrefName.discordBrowsing.rx,
       PrefName.incognito.rx,
@@ -41,6 +41,22 @@ class DiscordPresenceController extends AppController
       PrefName.discordTimer.rx,
       PrefName.discordHideTitles.rx,
       PrefName.discordActivity.rx,
+      PrefName.discordLive.rx,
+      PrefName.discordNameMode.rx,
+      PrefName.discordCustomName.rx,
+      PrefName.discordStatusDisplay.rx,
+      PrefName.discordDetailsTemplate.rx,
+      PrefName.discordStateTemplate.rx,
+      PrefName.discordLargeImage.rx,
+      PrefName.discordSmallImage.rx,
+      PrefName.discordTimerStyle.rx,
+      PrefName.discordMediaButton.rx,
+      PrefName.discordAppButton.rx,
+      PrefName.discordButtonLabel.rx,
+      PrefName.discordButtonUrl.rx,
+      PrefName.discordPrivateText.rx,
+      PrefName.discordShowWatching.rx,
+      PrefName.discordShowReading.rx,
     ]) {
       onChange(pref, (_) => _schedule());
     }
@@ -107,24 +123,19 @@ class DiscordPresenceController extends AppController
     _schedule();
   }
 
+  DiscordPresence? get current {
+    if (_stack.isEmpty) return null;
+    final entry = _stack.values.last;
+    return entry.presence.shifted(entry.shift);
+  }
+
   DiscordPresence? _desired() {
     if (!PrefName.discordRpc.value || isIncognito) return null;
     if (_appHidden || _held || _stack.isEmpty) return null;
-    final entry = _stack.values.last;
-    if (entry.presence.isBrowsing && !PrefName.discordBrowsing.value) {
-      return null;
-    }
-    return entry.presence
-        .shifted(entry.shift)
-        .styled(
-          PresenceStyle(
-            images: PrefName.discordImages.value,
-            buttons: PrefName.discordButtons.value,
-            timer: PrefName.discordTimer.value,
-            hideTitles: PrefName.discordHideTitles.value,
-            activity: PrefName.discordActivity.value,
-          ),
-        );
+    final style = PresenceStyle.fromPrefs();
+    final shown = current;
+    if (shown == null || !style.shows(shown.kind)) return null;
+    return shown.styled(style);
   }
 
   void _schedule() {

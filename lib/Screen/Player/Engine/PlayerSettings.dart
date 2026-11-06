@@ -98,6 +98,8 @@ class PlayerSettings {
   set subtitleBackgroundColor(int v) => _v['subtitleBackgroundColor'] = v;
   int get subtitleOutlineColor => _get('subtitleOutlineColor', 0xFF000000);
   set subtitleOutlineColor(int v) => _v['subtitleOutlineColor'] = v;
+  int get subtitleOutlineWidth => _get('subtitleOutlineWidth', 3);
+  set subtitleOutlineWidth(int v) => _v['subtitleOutlineWidth'] = v;
   int get subtitleBottomPadding => _get('subtitleBottomPadding', 0);
   set subtitleBottomPadding(int v) => _v['subtitleBottomPadding'] = v;
   int get subtitleWeight => _get('subtitleWeight', 5);

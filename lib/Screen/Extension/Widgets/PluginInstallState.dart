@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
+import 'package:dartotsu_extension_bridge/Extensions/InstallStep.dart';
 
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
@@ -26,9 +27,31 @@ class PluginInstallState extends ScreenState {
   bool get busy =>
       phase.value == PluginPhase.downloading || plugin.downloading.value;
 
-  bool get upToDate => installed && !hasUpdate.value;
+  bool get upToDate => installed && !hasUpdate.value && !prerequisitesPending;
 
-  bool get installing => busy && plugin.progress.value >= 1;
+  List<InstallStep> get steps => plugin.steps;
+
+  InstallStep? get activeStep {
+    for (final step in steps) {
+      if (step.active) return step;
+    }
+    return null;
+  }
+
+  bool get installing =>
+      busy && activeStep?.state.value == StepStatus.installing;
+
+  bool get cancellable => busy && !installing;
+
+  bool get hasPrerequisites => steps.length > 1;
+
+  bool get prerequisitesPending =>
+      steps.any((s) => s != plugin.step && !s.finished);
+
+  int get position {
+    final index = steps.indexWhere((s) => !s.finished);
+    return index < 0 ? steps.length : index + 1;
+  }
 
   bool get canStart =>
       !busy && !upToDate && remote.value != null && phase.value.canStart;
@@ -47,11 +70,18 @@ class PluginInstallState extends ScreenState {
       final data = await plugin.fetchRemote(forceRefresh: true);
       if (!mounted) return;
       if (data == null) {
-        phase.value = PluginPhase.missing;
+        final reason = plugin.indexError.value;
+        if (reason == null) {
+          phase.value = PluginPhase.missing;
+        } else {
+          message.value = reason;
+          phase.value = PluginPhase.failed;
+        }
         return;
       }
       remote.value = data;
-      hasUpdate.value = installed && await plugin.checkForUpdate();
+      await plugin.plan(refresh: true);
+      hasUpdate.value = installed && plugin.updateAvailable.value;
       if (!mounted) return;
       phase.value = PluginPhase.ready;
     } catch (e, st) {
@@ -97,7 +127,7 @@ class PluginInstallState extends ScreenState {
   }
 
   void cancel() {
-    if (!busy || installing) return;
+    if (!cancellable) return;
     _cancelled = true;
     plugin.cancel();
   }

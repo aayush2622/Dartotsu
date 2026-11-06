@@ -881,11 +881,455 @@ abstract class AppLocalizations {
   /// **'Could not sign in to GitHub'**
   String get settingsSyncSignInFailed;
 
+  /// No description provided for @dcPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Preview'**
+  String get dcPreview;
+
+  /// No description provided for @dcSampleWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Watching'**
+  String get dcSampleWatching;
+
+  /// No description provided for @dcSampleReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reading'**
+  String get dcSampleReading;
+
+  /// No description provided for @dcSampleBrowsing.
+  ///
+  /// In en, this message translates to:
+  /// **'Browsing'**
+  String get dcSampleBrowsing;
+
+  /// No description provided for @dcSampleLive.
+  ///
+  /// In en, this message translates to:
+  /// **'Right now'**
+  String get dcSampleLive;
+
+  /// No description provided for @dcLiveNothing.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.'**
+  String get dcLiveNothing;
+
+  /// No description provided for @dcMemberList.
+  ///
+  /// In en, this message translates to:
+  /// **'In the member list'**
+  String get dcMemberList;
+
+  /// No description provided for @dcAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get dcAccount;
+
+  /// No description provided for @dcSignIn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Discord'**
+  String get dcSignIn;
+
+  /// No description provided for @dcSignOut.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign out'**
+  String get dcSignOut;
+
+  /// No description provided for @dcDesktopHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.'**
+  String get dcDesktopHint;
+
+  /// No description provided for @dcMobileHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Rich Presence on mobile runs through your Discord account. Sign in to start.'**
+  String get dcMobileHint;
+
+  /// No description provided for @dcRouteDesktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Through the Discord desktop app'**
+  String get dcRouteDesktop;
+
+  /// No description provided for @dcRouteHeadless.
+  ///
+  /// In en, this message translates to:
+  /// **'Through your account'**
+  String get dcRouteHeadless;
+
+  /// No description provided for @dcRouteGateway.
+  ///
+  /// In en, this message translates to:
+  /// **'Through your account, live'**
+  String get dcRouteGateway;
+
+  /// No description provided for @dcRouteNone.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get dcRouteNone;
+
+  /// No description provided for @dcAccountOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs a signed-in account'**
+  String get dcAccountOnly;
+
+  /// No description provided for @dcStatusSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get dcStatusSection;
+
+  /// No description provided for @dcControlStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Control my status'**
+  String get dcControlStatus;
+
+  /// No description provided for @dcControlStatusDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.'**
+  String get dcControlStatusDesc;
+
+  /// No description provided for @dcStatusOnline.
+  ///
+  /// In en, this message translates to:
+  /// **'Online'**
+  String get dcStatusOnline;
+
+  /// No description provided for @dcStatusIdle.
+  ///
+  /// In en, this message translates to:
+  /// **'Idle'**
+  String get dcStatusIdle;
+
+  /// No description provided for @dcStatusDnd.
+  ///
+  /// In en, this message translates to:
+  /// **'Do not disturb'**
+  String get dcStatusDnd;
+
+  /// No description provided for @dcStatusInvisible.
+  ///
+  /// In en, this message translates to:
+  /// **'Invisible'**
+  String get dcStatusInvisible;
+
+  /// No description provided for @dcCustomStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom status'**
+  String get dcCustomStatus;
+
+  /// No description provided for @dcCustomStatusHint.
+  ///
+  /// In en, this message translates to:
+  /// **'What are you up to?'**
+  String get dcCustomStatusHint;
+
+  /// No description provided for @dcActivitySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity'**
+  String get dcActivitySection;
+
+  /// No description provided for @dcShowWatching.
+  ///
+  /// In en, this message translates to:
+  /// **'Show while watching'**
+  String get dcShowWatching;
+
+  /// No description provided for @dcShowReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Show while reading'**
+  String get dcShowReading;
+
+  /// No description provided for @dcListening.
+  ///
+  /// In en, this message translates to:
+  /// **'Listening'**
+  String get dcListening;
+
+  /// No description provided for @dcCompeting.
+  ///
+  /// In en, this message translates to:
+  /// **'Competing'**
+  String get dcCompeting;
+
+  /// No description provided for @dcActivityName.
+  ///
+  /// In en, this message translates to:
+  /// **'Activity name'**
+  String get dcActivityName;
+
+  /// No description provided for @dcNameApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Dartotsu'**
+  String get dcNameApp;
+
+  /// No description provided for @dcNameTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get dcNameTitle;
+
+  /// No description provided for @dcNameCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get dcNameCustom;
+
+  /// No description provided for @dcCustomNameHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Name shown after “Watching”'**
+  String get dcCustomNameHint;
+
+  /// No description provided for @dcStatusText.
+  ///
+  /// In en, this message translates to:
+  /// **'Status text'**
+  String get dcStatusText;
+
+  /// No description provided for @dcStatusTextDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'What the member list shows next to your name'**
+  String get dcStatusTextDesc;
+
+  /// No description provided for @dcDisplayName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get dcDisplayName;
+
+  /// No description provided for @dcDisplayState.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get dcDisplayState;
+
+  /// No description provided for @dcDisplayDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get dcDisplayDetails;
+
+  /// No description provided for @dcTextSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Text'**
+  String get dcTextSection;
+
+  /// No description provided for @dcDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Top line'**
+  String get dcDetails;
+
+  /// No description provided for @dcState.
+  ///
+  /// In en, this message translates to:
+  /// **'Bottom line'**
+  String get dcState;
+
+  /// No description provided for @dcTemplateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Empty uses the default'**
+  String get dcTemplateHint;
+
+  /// No description provided for @dcVariables.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to insert a value'**
+  String get dcVariables;
+
+  /// No description provided for @dcImagesSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Images'**
+  String get dcImagesSection;
+
+  /// No description provided for @dcLargeImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Large image'**
+  String get dcLargeImage;
+
+  /// No description provided for @dcLargeAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get dcLargeAuto;
+
+  /// No description provided for @dcLargeCover.
+  ///
+  /// In en, this message translates to:
+  /// **'Cover'**
+  String get dcLargeCover;
+
+  /// No description provided for @dcLargeLogo.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo'**
+  String get dcLargeLogo;
+
+  /// No description provided for @dcSmallImage.
+  ///
+  /// In en, this message translates to:
+  /// **'Small image'**
+  String get dcSmallImage;
+
+  /// No description provided for @dcSmallAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Logo'**
+  String get dcSmallAuto;
+
+  /// No description provided for @dcSmallNone.
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get dcSmallNone;
+
+  /// No description provided for @dcTimerStyle.
+  ///
+  /// In en, this message translates to:
+  /// **'Timer style'**
+  String get dcTimerStyle;
+
+  /// No description provided for @dcTimerAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get dcTimerAuto;
+
+  /// No description provided for @dcTimerElapsed.
+  ///
+  /// In en, this message translates to:
+  /// **'Elapsed'**
+  String get dcTimerElapsed;
+
+  /// No description provided for @dcTimerRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'Remaining'**
+  String get dcTimerRemaining;
+
+  /// No description provided for @dcButtonsSection.
+  ///
+  /// In en, this message translates to:
+  /// **'Buttons'**
+  String get dcButtonsSection;
+
+  /// No description provided for @dcButtonMedia.
+  ///
+  /// In en, this message translates to:
+  /// **'Link to the title'**
+  String get dcButtonMedia;
+
+  /// No description provided for @dcButtonApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Link to Dartotsu'**
+  String get dcButtonApp;
+
+  /// No description provided for @dcButtonCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom button'**
+  String get dcButtonCustom;
+
+  /// No description provided for @dcButtonLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Label'**
+  String get dcButtonLabel;
+
+  /// No description provided for @dcButtonUrl.
+  ///
+  /// In en, this message translates to:
+  /// **'Link'**
+  String get dcButtonUrl;
+
+  /// No description provided for @dcPrivacySection.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy'**
+  String get dcPrivacySection;
+
+  /// No description provided for @dcPrivateText.
+  ///
+  /// In en, this message translates to:
+  /// **'Private text'**
+  String get dcPrivateText;
+
+  /// No description provided for @dcPrivateHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Something private'**
+  String get dcPrivateHint;
+
+  /// No description provided for @dcTokenWarning.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.'**
+  String get dcTokenWarning;
+
+  /// No description provided for @dcConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected'**
+  String get dcConnected;
+
+  /// No description provided for @dcConnecting.
+  ///
+  /// In en, this message translates to:
+  /// **'Connecting…'**
+  String get dcConnecting;
+
+  /// No description provided for @dcDisconnected.
+  ///
+  /// In en, this message translates to:
+  /// **'Not connected'**
+  String get dcDisconnected;
+
+  /// No description provided for @dcSignedInAs.
+  ///
+  /// In en, this message translates to:
+  /// **'Signed in as {name}'**
+  String dcSignedInAs(String name);
+
   /// No description provided for @settingsSyncOn.
   ///
   /// In en, this message translates to:
   /// **'On'**
   String get settingsSyncOn;
+
+  /// No description provided for @settingsSyncCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom'**
+  String get settingsSyncCustom;
+
+  /// No description provided for @settingsSyncChangedHeader.
+  ///
+  /// In en, this message translates to:
+  /// **'Changed settings'**
+  String get settingsSyncChangedHeader;
 
   /// No description provided for @settingsSyncNoneChanged.
   ///
@@ -904,6 +1348,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Not syncing. These stay on this device and the server copy is left as it is.'**
   String get settingsSyncOffCategory;
+
+  /// No description provided for @settingsSyncPartsNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.'**
+  String get settingsSyncPartsNote;
+
+  /// No description provided for @settingsSyncPartSubtitles.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle size and colours'**
+  String get settingsSyncPartSubtitles;
+
+  /// No description provided for @settingsSyncPartSubtitlesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Size, weight, colours and position'**
+  String get settingsSyncPartSubtitlesDesc;
+
+  /// No description provided for @settingsSyncPartPictureColors.
+  ///
+  /// In en, this message translates to:
+  /// **'Picture colours'**
+  String get settingsSyncPartPictureColors;
+
+  /// No description provided for @settingsSyncPartPictureColorsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Brightness, contrast, saturation, gamma, hue and HDR'**
+  String get settingsSyncPartPictureColorsDesc;
+
+  /// No description provided for @settingsSyncPartPalette.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme colours'**
+  String get settingsSyncPartPalette;
+
+  /// No description provided for @settingsSyncPartPaletteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme, accent colour and OLED black'**
+  String get settingsSyncPartPaletteDesc;
 
   /// No description provided for @settingsSyncCatOther.
   ///
@@ -2309,6 +2795,12 @@ abstract class AppLocalizations {
   /// **'Skip'**
   String get onboardingSkip;
 
+  /// No description provided for @onboardingLanguageBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose the language Dartotsu is shown in. You can change it later in Settings.'**
+  String get onboardingLanguageBody;
+
   /// No description provided for @onboardingPaletteTitle.
   ///
   /// In en, this message translates to:
@@ -3004,6 +3496,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Hide NSFW'**
   String get hideNsfw;
+
+  /// No description provided for @hideNsfwSourcesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide sources marked 18+ from the feeds and the source picker. They stay installed.'**
+  String get hideNsfwSourcesDesc;
 
   /// No description provided for @hideNsfwDesc.
   ///
@@ -3754,6 +4252,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'List Only'**
   String get listOnly;
+
+  /// No description provided for @notInList.
+  ///
+  /// In en, this message translates to:
+  /// **'Not In List'**
+  String get notInList;
 
   /// No description provided for @filter.
   ///
@@ -9143,6 +9647,24 @@ abstract class AppLocalizations {
   /// **'Subtitle outline'**
   String get playerSubtitleOutline;
 
+  /// No description provided for @playerSubtitleOutlineWidth.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle outline width'**
+  String get playerSubtitleOutlineWidth;
+
+  /// No description provided for @playerSubtitlePreview.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle preview'**
+  String get playerSubtitlePreview;
+
+  /// No description provided for @playerSubtitlePreviewText.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitle preview text'**
+  String get playerSubtitlePreviewText;
+
   /// No description provided for @playerLibass.
   ///
   /// In en, this message translates to:
@@ -10637,6 +11159,30 @@ abstract class AppLocalizations {
   /// **'Cancel all {count} downloads in the queue? What was already downloaded is deleted.'**
   String downloadClearQueueConfirm(int count);
 
+  /// No description provided for @downloadSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String downloadSelectedCount(int count);
+
+  /// No description provided for @downloadSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get downloadSelectAll;
+
+  /// No description provided for @downloadDeleteSelected.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete selected'**
+  String get downloadDeleteSelected;
+
+  /// No description provided for @downloadDeleteSelectedConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete {count} downloads? Their files are removed from the device.'**
+  String downloadDeleteSelectedConfirm(int count);
+
   /// No description provided for @castTitle.
   ///
   /// In en, this message translates to:
@@ -11960,7 +12506,7 @@ abstract class AppLocalizations {
   /// No description provided for @downloadPickSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Download which subtitle?'**
+  /// **'Download which subtitles?'**
   String get downloadPickSubtitle;
 
   /// No description provided for @downloadPickAudio.
@@ -13822,6 +14368,168 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Update server couldn\'t find that release: {message}'**
   String updateNotFound(String message);
+
+  /// No description provided for @installStepJre.
+  ///
+  /// In en, this message translates to:
+  /// **'Java runtime'**
+  String get installStepJre;
+
+  /// No description provided for @installStepCore.
+  ///
+  /// In en, this message translates to:
+  /// **'Runtime core'**
+  String get installStepCore;
+
+  /// No description provided for @installStepsProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String installStepsProgress(int current, int total);
+
+  /// No description provided for @stepWaiting.
+  ///
+  /// In en, this message translates to:
+  /// **'Waiting'**
+  String get stepWaiting;
+
+  /// No description provided for @stepChecking.
+  ///
+  /// In en, this message translates to:
+  /// **'Checking…'**
+  String get stepChecking;
+
+  /// No description provided for @stepUpToDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date'**
+  String get stepUpToDate;
+
+  /// No description provided for @stepUpToDateWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Up to date · {detail}'**
+  String stepUpToDateWith(String detail);
+
+  /// No description provided for @stepWillInstall.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be installed'**
+  String get stepWillInstall;
+
+  /// No description provided for @stepWillUpdate.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be updated'**
+  String get stepWillUpdate;
+
+  /// No description provided for @stepWillUpdateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be updated to {version}'**
+  String stepWillUpdateTo(String version);
+
+  /// No description provided for @stepInstalled.
+  ///
+  /// In en, this message translates to:
+  /// **'Installed'**
+  String get stepInstalled;
+
+  /// No description provided for @stepNotNeeded.
+  ///
+  /// In en, this message translates to:
+  /// **'Not needed here'**
+  String get stepNotNeeded;
+
+  /// No description provided for @stepFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed'**
+  String get stepFailed;
+
+  /// No description provided for @stepFailedWith.
+  ///
+  /// In en, this message translates to:
+  /// **'Failed: {reason}'**
+  String stepFailedWith(String reason);
+
+  /// No description provided for @installNeedsRuntime.
+  ///
+  /// In en, this message translates to:
+  /// **'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.'**
+  String get installNeedsRuntime;
+
+  /// No description provided for @installRuntimeNewer.
+  ///
+  /// In en, this message translates to:
+  /// **'The runtime this manager runs on has an update.'**
+  String get installRuntimeNewer;
+
+  /// No description provided for @removeJvmTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the Java runtime?'**
+  String get removeJvmTitle;
+
+  /// No description provided for @removeJvmMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.'**
+  String get removeJvmMessage;
+
+  /// No description provided for @runtimePreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing the runtime…'**
+  String get runtimePreparing;
+
+  /// No description provided for @calendarAll.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get calendarAll;
+
+  /// No description provided for @calendarAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime'**
+  String get calendarAnime;
+
+  /// No description provided for @calendarManga.
+  ///
+  /// In en, this message translates to:
+  /// **'Manga'**
+  String get calendarManga;
+
+  /// No description provided for @readerCloudflare.
+  ///
+  /// In en, this message translates to:
+  /// **'Open in browser (Cloudflare check)'**
+  String get readerCloudflare;
+
+  /// No description provided for @badgeBoardHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.'**
+  String get badgeBoardHint;
+
+  /// No description provided for @statusAuto.
+  ///
+  /// In en, this message translates to:
+  /// **'Auto'**
+  String get statusAuto;
+
+  /// No description provided for @unreadCounter.
+  ///
+  /// In en, this message translates to:
+  /// **'Unread counter'**
+  String get unreadCounter;
+
+  /// No description provided for @unreadCounterDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Show how many episodes or chapters are left on posters'**
+  String get unreadCounterDesc;
 }
 
 class _AppLocalizationsDelegate

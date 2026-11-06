@@ -1,5 +1,7 @@
-import '../../../Core/Downloads/BookText.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../../Core/Downloads/DownloadEngine.dart';
+
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';

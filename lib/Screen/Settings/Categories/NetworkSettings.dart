@@ -134,9 +134,7 @@ void _showProxySheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _ProxySheet(network: network),
         ),
       ),
@@ -424,9 +422,7 @@ void _showDnsSheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _DnsSheet(network: network),
         ),
       ),
@@ -573,9 +569,7 @@ void _showUaSheet(BuildContext context, NetworkManager network) =>
       context,
       Builder(
         builder: (ctx) => Padding(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(ctx).viewInsets.bottom,
-          ),
+          padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(ctx).bottom),
           child: _UaSheet(network: network),
         ),
       ),

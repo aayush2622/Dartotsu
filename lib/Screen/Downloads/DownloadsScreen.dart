@@ -43,26 +43,55 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
       appBar: AppScreenBar(
         title: getString.downloadsTitle,
         actions: [
-          IconButton(
-            tooltip: getString.downloadPauseAll,
-            onPressed: engine.pauseAll,
-            icon: const Icon(Icons.pause_circle_outline_rounded),
-          ),
-          IconButton(
-            tooltip: getString.downloadResumeAll,
-            onPressed: engine.resumeAll,
-            icon: const Icon(Icons.play_circle_outline_rounded),
-          ),
-          Watch(() {
-            final count = state.queue.length + state.failed.length;
-            return IconButton(
-              tooltip: getString.downloadClearQueue,
-              onPressed: count == 0
-                  ? null
-                  : () => confirmClearQueue(context, engine, count),
-              icon: const Icon(Icons.delete_sweep_outlined),
-            );
-          }),
+          if (state.selecting) ...[
+            Center(
+              child: Text(
+                getString.downloadSelectedCount(state.selected.value.length),
+                style: context.textTheme.titleSmall,
+              ),
+            ),
+            IconButton(
+              tooltip: getString.downloadSelectAll,
+              onPressed: state.selectAll,
+              icon: const Icon(Icons.select_all_rounded),
+            ),
+            IconButton(
+              tooltip: getString.downloadDeleteSelected,
+              onPressed: () => confirmRemoveMany(
+                context,
+                engine,
+                state.selectedTasks,
+                state.clearSelection,
+              ),
+              icon: const Icon(Icons.delete_outline_rounded),
+            ),
+            IconButton(
+              tooltip: getString.cancel,
+              onPressed: state.clearSelection,
+              icon: const Icon(Icons.close_rounded),
+            ),
+          ] else ...[
+            IconButton(
+              tooltip: getString.downloadPauseAll,
+              onPressed: engine.pauseAll,
+              icon: const Icon(Icons.pause_circle_outline_rounded),
+            ),
+            IconButton(
+              tooltip: getString.downloadResumeAll,
+              onPressed: engine.resumeAll,
+              icon: const Icon(Icons.play_circle_outline_rounded),
+            ),
+            Watch(() {
+              final count = state.queue.length + state.failed.length;
+              return IconButton(
+                tooltip: getString.downloadClearQueue,
+                onPressed: count == 0
+                    ? null
+                    : () => confirmClearQueue(context, engine, count),
+                icon: const Icon(Icons.delete_sweep_outlined),
+              );
+            }),
+          ],
         ],
       ),
       body: Watch(() {
@@ -200,6 +229,25 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
     );
   }
 
+  Widget _selectable(
+    DownloadTask task, {
+    bool showMedia = true,
+    bool play = false,
+  }) {
+    final picking = state.selecting;
+    return DownloadRow(
+      task: task,
+      showMedia: showMedia,
+      selected: picking ? state.selected.value.contains(task.id) : null,
+      onSelect: () => state.toggle(task),
+      onTap: picking
+          ? () => state.toggle(task)
+          : play
+          ? () => state.play(task)
+          : null,
+    );
+  }
+
   Widget _list(BuildContext context, List<DownloadTask> list, String empty) {
     if (list.isEmpty) {
       return EmptyState(icon: Icons.download_done_rounded, title: empty);
@@ -210,7 +258,7 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
         padding: EdgeInsets.all(Dimens.pagePad),
         itemCount: list.length,
         separatorBuilder: (_, _) => SizedBox(height: Dimens.gapSm),
-        itemBuilder: (_, i) => DownloadRow(task: list[i]),
+        itemBuilder: (_, i) => _selectable(list[i]),
       ),
     );
   }
@@ -224,92 +272,80 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
         title: getString.downloadEmptyDone,
       );
     }
+    final rows = <Widget Function()>[
+      for (final list in groups) ...[
+        () => Clickable(
+          onTap: () => state.openTitle(list.first),
+          child: Padding(
+            padding: EdgeInsets.only(bottom: Dimens.gapXs),
+            child: Text(
+              '${list.first.mediaTitle} · ${list.length}',
+              style: context.textTheme.titleSmall?.copyWith(
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ),
+        for (final (i, t) in list.indexed)
+          () => Padding(
+            padding: EdgeInsets.only(
+              bottom: i == list.length - 1 ? Dimens.gap : Dimens.gapXs,
+            ),
+            child: _selectable(t, showMedia: false, play: true),
+          ),
+      ],
+      for (final group in local) ...[
+        () => Padding(
+          padding: EdgeInsets.only(bottom: Dimens.gapXs),
+          child: Text(
+            '${group.title} · ${group.files.length}',
+            style: context.textTheme.titleSmall?.copyWith(
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+        for (final (i, file) in group.files.indexed)
+          () => Padding(
+            padding: EdgeInsets.only(
+              bottom: i == group.files.length - 1 ? Dimens.gap : Dimens.gapXs,
+            ),
+            child: Clickable(
+              onTap: () => state.playLocal(group, i),
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: context.colorScheme.surfaceContainerLow,
+                  borderRadius: Dimens.borderSm,
+                ),
+                child: Padding(
+                  padding: EdgeInsets.all(Dimens.gap),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.movie_outlined),
+                      SizedBox(width: Dimens.gap),
+                      Expanded(
+                        child: Text(
+                          p.basename(file),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    ];
     return RefreshIndicator(
       onRefresh: state.refresh,
       child: ScrollConfig(
         context,
-        child: ListView(
+        child: ListView.builder(
           physics: const AlwaysScrollableScrollPhysics(),
           padding: EdgeInsets.all(Dimens.pagePad),
-          children: [
-            for (final list in groups)
-              Padding(
-                padding: EdgeInsets.only(bottom: Dimens.gap),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Clickable(
-                      onTap: () => state.openTitle(list.first),
-                      child: Padding(
-                        padding: EdgeInsets.only(bottom: Dimens.gapXs),
-                        child: Text(
-                          '${list.first.mediaTitle} · ${list.length}',
-                          style: context.textTheme.titleSmall?.copyWith(
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                      ),
-                    ),
-                    for (final t in list)
-                      Padding(
-                        padding: EdgeInsets.only(bottom: Dimens.gapXs),
-                        child: DownloadRow(
-                          task: t,
-                          showMedia: false,
-                          onTap: () => state.play(t),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-            for (final group in local)
-              Padding(
-                padding: EdgeInsets.only(bottom: Dimens.gap),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(bottom: Dimens.gapXs),
-                      child: Text(
-                        '${group.title} · ${group.files.length}',
-                        style: context.textTheme.titleSmall?.copyWith(
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                    ),
-                    for (final (i, file) in group.files.indexed)
-                      Padding(
-                        padding: EdgeInsets.only(bottom: Dimens.gapXs),
-                        child: Clickable(
-                          onTap: () => state.playLocal(group, i),
-                          child: DecoratedBox(
-                            decoration: BoxDecoration(
-                              color: context.colorScheme.surfaceContainerLow,
-                              borderRadius: Dimens.borderSm,
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(Dimens.gap),
-                              child: Row(
-                                children: [
-                                  const Icon(Icons.movie_outlined),
-                                  SizedBox(width: Dimens.gap),
-                                  Expanded(
-                                    child: Text(
-                                      p.basename(file),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-              ),
-          ],
+          itemCount: rows.length,
+          itemBuilder: (_, i) => rows[i](),
         ),
       ),
     );

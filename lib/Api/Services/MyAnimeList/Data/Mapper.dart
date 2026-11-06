@@ -8,6 +8,13 @@ import '../../../../Core/Services/Model/Review.dart';
 import '../../../../Core/Services/Model/Studio.dart';
 import '../../../../Core/Services/Model/User.dart';
 
+final _minutes = RegExp(r'(\d+)\s*min');
+final _spoiler = RegExp(
+  r'\[spoiler\](.*?)\[/spoiler\]',
+  caseSensitive: false,
+  dotAll: true,
+);
+
 String malMediaId(bool anime, Object id) => '${anime ? 'anime' : 'manga'}/$id';
 
 (bool, int)? parseMalMediaId(String id) {
@@ -328,8 +335,7 @@ Media mapTenraiMedia(Map<String, dynamic> n, {required bool anime}) {
         ? Anime(
             totalEpisodes: _positive(n['episodes']),
             episodeDuration: int.tryParse(
-              RegExp(r'(\d+)\s*min').firstMatch('${n['duration']}')?.group(1) ??
-                  '',
+              _minutes.firstMatch('${n['duration']}')?.group(1) ?? '',
             ),
             season: (n['season'] as String?)?.toUpperCase(),
             seasonYear: (n['year'] as num?)?.toInt(),
@@ -446,11 +452,7 @@ String tenraiHtml(String? text) => (text ?? '')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAllMapped(
-      RegExp(
-        r'\[spoiler\](.*?)\[/spoiler\]',
-        caseSensitive: false,
-        dotAll: true,
-      ),
+      _spoiler,
       (m) => "<span class='markdown_spoiler'>${m[1]!.trim()}</span>",
     )
     .replaceAll('\n', '<br>');

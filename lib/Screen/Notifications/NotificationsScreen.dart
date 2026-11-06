@@ -216,37 +216,39 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen>
     } else {
       final grouped = state.grouped(items);
       var shown = 0;
+      final rows = <Widget Function()>[
+        for (final group in grouped) ...[
+          () => Padding(
+            padding: EdgeInsets.fromLTRB(
+              Dimens.gapSm,
+              Dimens.gap,
+              Dimens.gapSm,
+              Dimens.gapSm,
+            ),
+            child: Text(
+              group.$1,
+              style: context.textTheme.labelLarge?.copyWith(
+                color: context.colorScheme.primary,
+              ),
+            ),
+          ),
+          for (final n in group.$2) _tileAt(feed, n, shown++),
+        ],
+        if (feed.loadingMore.value)
+          () => Padding(
+            padding: EdgeInsets.all(Dimens.gapLg),
+            child: const Center(child: CircularProgressIndicator()),
+          ),
+      ];
       body = NotificationListener<ScrollNotification>(
         onNotification: state.onScroll,
         child: ScrollConfig(
           context,
-          child: ListView(
+          child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: _padding,
-            children: [
-              for (final group in grouped) ...[
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                    Dimens.gapSm,
-                    Dimens.gap,
-                    Dimens.gapSm,
-                    Dimens.gapSm,
-                  ),
-                  child: Text(
-                    group.$1,
-                    style: context.textTheme.labelLarge?.copyWith(
-                      color: context.colorScheme.primary,
-                    ),
-                  ),
-                ),
-                for (final n in group.$2) _tile(feed, n, shown++),
-              ],
-              if (feed.loadingMore.value)
-                Padding(
-                  padding: EdgeInsets.all(Dimens.gapLg),
-                  child: const Center(child: CircularProgressIndicator()),
-                ),
-            ],
+            itemCount: rows.length,
+            itemBuilder: (_, i) => rows[i](),
           ),
         ),
       );
@@ -271,6 +273,13 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen>
       ],
     );
   }
+
+  Widget Function() _tileAt(
+    NotificationFeed feed,
+    ServiceNotification n,
+    int index,
+  ) =>
+      () => _tile(feed, n, index);
 
   Widget _tile(NotificationFeed feed, ServiceNotification n, int index) {
     final tile = NotificationTile(
@@ -325,12 +334,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen>
     }
     return ScrollConfig(
       context,
-      child: ListView(
+      child: ListView.builder(
         physics: const AlwaysScrollableScrollPhysics(),
         padding: _padding,
-        children: [
-          for (final (i, n) in notices.indexed) _sourceNotice(store, n, i),
-        ],
+        itemCount: notices.length,
+        itemBuilder: (_, i) => _sourceNotice(store, notices[i], i),
       ),
     );
   });
@@ -403,10 +411,11 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen>
         }
         return ScrollConfig(
           context,
-          child: ListView(
+          child: ListView.builder(
             physics: const AlwaysScrollableScrollPhysics(),
             padding: _padding,
-            children: [for (final (i, n) in items.indexed) _notice(n, i)],
+            itemCount: items.length,
+            itemBuilder: (_, i) => _notice(items[i], i),
           ),
         );
     }

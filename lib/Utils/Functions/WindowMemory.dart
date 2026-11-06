@@ -8,10 +8,11 @@ import 'package:window_manager/window_manager.dart';
 
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Logger.dart';
+import 'AppWindow.dart';
 
 const _minSize = Size(480, 360);
 
-class WindowMemory with WindowListener {
+class WindowMemory {
   WindowMemory._();
 
   static final instance = WindowMemory._();
@@ -23,23 +24,34 @@ class WindowMemory with WindowListener {
 
   Future<void> restore() async {
     if (!supported) return;
+    final window = appWindow;
+    if (window == null) return;
     try {
       final saved = _read();
       if (saved != null) {
-        final bounds = await _visible(saved.bounds);
+        final bounds = _visible(saved.bounds);
         if (bounds != null) {
-          await windowManager.setBounds(bounds);
+          window.bounds = bounds.toNative();
         } else {
-          await windowManager.setSize(saved.bounds.size);
-          await windowManager.center();
+          window.setSize(saved.bounds.size.toNative(), false);
+          window.center();
         }
-        if (saved.maximized) await windowManager.maximize();
+        if (saved.maximized) window.maximize();
       }
     } catch (e, st) {
       logError('WINDOW', e, st);
     }
     _ready = true;
-    windowManager.addListener(this);
+    window.addListener(_onEvent);
+  }
+
+  void _onEvent(WindowEvent event) {
+    if (event is WindowResizedEvent ||
+        event is WindowMovedEvent ||
+        event is WindowMaximizedEvent ||
+        event is WindowRestoredEvent) {
+      _schedule();
+    }
   }
 
   _Saved? _read() {
@@ -64,11 +76,9 @@ class WindowMemory with WindowListener {
     }
   }
 
-  Future<Rect?> _visible(Rect bounds) async {
-    final displays = await screenRetriever.getAllDisplays();
-    for (final d in displays) {
-      final origin = d.visiblePosition ?? Offset.zero;
-      final area = origin & (d.visibleSize ?? d.size);
+  Rect? _visible(Rect bounds) {
+    for (final d in DisplayManager.instance.getAll()) {
+      final area = d.workArea.toRect();
       if (area.contains(bounds.center) && area.contains(bounds.topLeft)) {
         return bounds;
       }
@@ -83,16 +93,15 @@ class WindowMemory with WindowListener {
   }
 
   Future<void> _save() async {
+    final window = appWindow;
+    if (window == null) return;
     try {
-      if (await windowManager.isFullScreen() ||
-          await windowManager.isMinimized()) {
-        return;
-      }
-      final maximized = await windowManager.isMaximized();
+      if (window.isFullScreen || window.isMinimized) return;
+      final maximized = window.isMaximized;
       final previous = _read();
       final bounds = maximized && previous != null
           ? previous.bounds
-          : await windowManager.getBounds();
+          : window.bounds.toRect();
       PrefName.windowState.value = jsonEncode({
         'x': bounds.left,
         'y': bounds.top,
@@ -104,18 +113,6 @@ class WindowMemory with WindowListener {
       logError('WINDOW', e, st);
     }
   }
-
-  @override
-  void onWindowResized() => _schedule();
-
-  @override
-  void onWindowMoved() => _schedule();
-
-  @override
-  void onWindowMaximize() => _schedule();
-
-  @override
-  void onWindowUnmaximize() => _schedule();
 }
 
 class _Saved {

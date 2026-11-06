@@ -3,6 +3,9 @@ import '../../../../Core/Services/Model/Date.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Model/Studio.dart';
 
+final _usDate = RegExp(r'^(\d{2})/(\d{2})/(\d{4})$');
+final _number = RegExp(r'(\d+)');
+
 enum SimklKind {
   anime('anime', 'anime'),
   movies('movies', 'movies'),
@@ -78,7 +81,7 @@ String? _airStatus(String? s) => switch (s?.toLowerCase()) {
 
 Date? parseSimklDate(Object? raw) {
   if (raw is! String || raw.isEmpty) return null;
-  final us = RegExp(r'^(\d{2})/(\d{2})/(\d{4})$').firstMatch(raw);
+  final us = _usDate.firstMatch(raw);
   if (us != null) {
     return Date(
       year: int.parse(us.group(3)!),
@@ -92,7 +95,7 @@ Date? parseSimklDate(Object? raw) {
 
 int? _minutes(Object? v) {
   if (v is num) return v.toInt();
-  final m = RegExp(r'(\d+)').firstMatch('$v');
+  final m = _number.firstMatch('$v');
   return m == null ? null : int.parse(m.group(1)!);
 }
 

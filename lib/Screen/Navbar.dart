@@ -1,4 +1,5 @@
 import '../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 
 import '../Core/Services/MediaServiceController.dart';
@@ -64,6 +65,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
       child: Align(
         alignment: Alignment.topCenter,
         child: ThemedContainer(
+          blur: true,
           borderRadius: BorderRadius.circular(48),
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
           child: _lane(
@@ -151,6 +153,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
               Align(
                 alignment: Alignment.center,
                 child: ThemedContainer(
+                  blur: true,
                   borderRadius: BorderRadius.circular(32),
                   padding: EdgeInsets.zero,
                   child: SizedBox(
@@ -260,7 +263,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(999),
                   color: selected
-                      ? theme.secondaryContainer
+                      ? theme.primaryContainer
                       : hovered
                       ? theme.onSurface.withValues(alpha: .08)
                       : Colors.transparent,
@@ -270,7 +273,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
                 item.icon,
                 size: 28,
                 color: selected
-                    ? theme.onSecondaryContainer
+                    ? theme.onPrimaryContainer
                     : hovered
                     ? theme.onSurface
                     : theme.onSurfaceVariant,

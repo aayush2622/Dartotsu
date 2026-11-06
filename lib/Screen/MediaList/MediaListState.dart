@@ -6,12 +6,37 @@ import 'package:flutter/material.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
 import '../../Core/Services/MediaService.dart';
+import '../../Core/Preferences/Pref.dart';
+import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Services/Model/Media.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/ScreenState.dart';
 
 enum ListSort { listOrder, score, title, updated, progress, released, average }
+
+final _animeSortPref = enumPref(
+  'listSortAnime',
+  ListSort.listOrder,
+  ListSort.values,
+  PrefLocation.COMMON,
+);
+final _mangaSortPref = enumPref(
+  'listSortManga',
+  ListSort.listOrder,
+  ListSort.values,
+  PrefLocation.COMMON,
+);
+final _animeReversePref = const Pref<bool>(
+  'listReverseAnime',
+  false,
+  PrefLocation.COMMON,
+);
+final _mangaReversePref = const Pref<bool>(
+  'listReverseManga',
+  false,
+  PrefLocation.COMMON,
+);
 
 class MediaListState extends ScreenState {
   final MediaService service;
@@ -39,8 +64,8 @@ class MediaListState extends ScreenState {
 
   final query = ''.live;
   final searching = false.live;
-  final sort = ListSort.listOrder.live;
-  final reversed = false.live;
+  late final sort = (anime ? _animeSortPref : _mangaSortPref).rx;
+  late final reversed = (anime ? _animeReversePref : _mangaReversePref).rx;
   final formats = <String>{}.live;
   final statuses = <String>{}.live;
   final genres = <String>{}.live;

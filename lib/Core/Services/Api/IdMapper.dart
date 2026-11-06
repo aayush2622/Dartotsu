@@ -10,7 +10,9 @@ import '../../../Logger.dart';
 import '../../../Screen/Detail/Watch/Data/EpisodeMeta.dart';
 import '../../../Screen/Detail/Watch/Data/Media/MediaRecord.dart';
 import '../../../Screen/Detail/Watch/Data/Providers/AniZip.dart';
-import '../../../Screen/Detail/Watch/Data/TitleMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
+
 import '../../../Screen/Player/Engine/OnlineSubtitles.dart';
 import '../../../Screen/Settings/Sync/Data/SyncIdIndex.dart';
 import '../../../Screen/Settings/Sync/Data/SyncModels.dart';
@@ -63,7 +65,18 @@ class IdMapper {
 
   static Future<File> _file(bool anime) async {
     final dir = await StorageManager.getDirectory(subPath: 'sync');
-    return File(p.join(dir!.path, anime ? 'anime-ids.json' : 'manga-ids.json'));
+    if (!anime) {
+      unawaited(_dropLegacy(File(p.join(dir!.path, 'manga-ids.json'))));
+    }
+    return File(
+      p.join(dir!.path, anime ? 'anime-ids.json' : 'manga-ids-2.json'),
+    );
+  }
+
+  static Future<void> _dropLegacy(File file) async {
+    try {
+      if (await file.exists()) await file.delete();
+    } catch (_) {}
   }
 
   static Future<SyncIdIndex> _load(bool anime, bool force) async {
@@ -376,5 +389,10 @@ query (\$search: String) {
         tag: 'IDMAP',
       );
     }
+  }
+
+  static int? cachedChapters(String service, String mediaId) {
+    final id = int.tryParse(mediaId.split('/').last);
+    return id == null ? null : _loaded[false]?.chaptersOf(service, id);
   }
 }

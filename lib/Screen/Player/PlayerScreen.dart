@@ -531,14 +531,12 @@ class _PlayerScreenState extends State<PlayerScreen>
           ),
           SliverPadding(
             padding: EdgeInsets.only(bottom: Dimens.gapLg),
-            sliver: SliverToBoxAdapter(
-              child: CommentsSection(
-                key: ValueKey('player-comments-${widget.request.media!.id}'),
-                service: service,
-                media: state.mediaLive,
-                scroll: state.commentsScroll,
-                episode: state.episodeTag,
-              ),
+            sliver: CommentsSection(
+              key: ValueKey('player-comments-${widget.request.media!.id}'),
+              service: service,
+              media: state.mediaLive,
+              scroll: state.commentsScroll,
+              episode: state.episodeTag,
             ),
           ),
         ],

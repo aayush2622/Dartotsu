@@ -9,21 +9,21 @@ extension IntExtension on int {
 
   double bottomBar() {
     var context = appContext;
-    return this + MediaQuery.of(context!).padding.bottom;
+    return this + MediaQuery.paddingOf(context!).bottom;
   }
 
   double screenWidth() {
     var context = appContext;
-    return MediaQuery.of(context!).size.width;
+    return MediaQuery.sizeOf(context!).width;
   }
 
   double screenWidthWithContext(BuildContext context) {
-    return MediaQuery.of(context).size.width;
+    return MediaQuery.sizeOf(context).width;
   }
 
   double screenHeight() {
     var context = appContext;
-    return MediaQuery.of(context!).size.height;
+    return MediaQuery.sizeOf(context!).height;
   }
 
   String get durationLabel {

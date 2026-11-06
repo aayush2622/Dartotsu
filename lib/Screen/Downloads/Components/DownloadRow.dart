@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../Core/Downloads/DownloadEngine.dart';
-import '../../../Core/Downloads/DownloadPaths.dart';
 import '../../../Core/Downloads/DownloadTask.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -20,28 +19,30 @@ Widget downloadCover(
   double width = 56,
   double height = 80,
 }) {
+  final cover = task.cover;
+  final remote = cover == null || cover.isEmpty
+      ? SizedBox(
+          width: width,
+          height: height,
+          child: const ColoredBox(
+            color: Colors.black12,
+            child: Icon(Icons.menu_book_rounded),
+          ),
+        )
+      : cachedNetworkImage(
+          imageUrl: cover,
+          width: width,
+          height: height,
+          fit: BoxFit.cover,
+        );
   final path = task.path;
-  if (path != null) {
-    final local = File(p.join(p.dirname(path), 'cover.jpg'));
-    if (local.existsSync()) {
-      return Image.file(local, width: width, height: height, fit: BoxFit.cover);
-    }
-  }
-  if (task.cover == null || task.cover!.isEmpty) {
-    return SizedBox(
-      width: width,
-      height: height,
-      child: const ColoredBox(
-        color: Colors.black12,
-        child: Icon(Icons.menu_book_rounded),
-      ),
-    );
-  }
-  return cachedNetworkImage(
-    imageUrl: task.cover!,
+  if (path == null) return remote;
+  return Image.file(
+    File(p.join(p.dirname(path), 'cover.jpg')),
     width: width,
     height: height,
     fit: BoxFit.cover,
+    errorBuilder: (_, _, _) => remote,
   );
 }
 
@@ -51,6 +52,8 @@ class DownloadRow extends StatelessWidget {
   final bool showMedia;
   final int? dragIndex;
   final bool canMoveUp;
+  final bool? selected;
+  final VoidCallback? onSelect;
 
   const DownloadRow({
     super.key,
@@ -59,6 +62,8 @@ class DownloadRow extends StatelessWidget {
     this.showMedia = true,
     this.dragIndex,
     this.canMoveUp = false,
+    this.selected,
+    this.onSelect,
   });
 
   @override
@@ -67,9 +72,12 @@ class DownloadRow extends StatelessWidget {
     final engine = find<DownloadEngine>();
     return Clickable(
       onTap: onTap,
+      onLongPress: onSelect,
       child: DecoratedBox(
         decoration: BoxDecoration(
-          color: scheme.surfaceContainerLow,
+          color: selected == true
+              ? scheme.secondaryContainer
+              : scheme.surfaceContainerLow,
           borderRadius: Dimens.borderSm,
         ),
         child: Padding(
@@ -185,24 +193,28 @@ class DownloadRow extends StatelessWidget {
                   );
                 }),
               ),
-              if (canMoveUp)
-                _button(
-                  Icons.keyboard_double_arrow_up_rounded,
-                  getString.downloadMoveToTop,
-                  () => engine.moveToTop(task),
-                ),
-              Watch(() => _actions(context, engine)),
-              if (dragIndex != null)
-                ReorderableDragStartListener(
-                  index: dragIndex!,
-                  child: Padding(
-                    padding: EdgeInsets.all(Dimens.gapSm),
-                    child: Icon(
-                      Icons.drag_handle_rounded,
-                      color: scheme.onSurfaceVariant,
+              if (selected != null)
+                Checkbox(value: selected, onChanged: (_) => onTap?.call())
+              else ...[
+                if (canMoveUp)
+                  _button(
+                    Icons.keyboard_double_arrow_up_rounded,
+                    getString.downloadMoveToTop,
+                    () => engine.moveToTop(task),
+                  ),
+                Watch(() => _actions(context, engine)),
+                if (dragIndex != null)
+                  ReorderableDragStartListener(
+                    index: dragIndex!,
+                    child: Padding(
+                      padding: EdgeInsets.all(Dimens.gapSm),
+                      child: Icon(
+                        Icons.drag_handle_rounded,
+                        color: scheme.onSurfaceVariant,
+                      ),
                     ),
                   ),
-                ),
+              ],
             ],
           ),
         ),

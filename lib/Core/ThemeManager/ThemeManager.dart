@@ -122,7 +122,7 @@ ThemeData buildAppTheme(
     canvasColor: glass ? Colors.transparent : base.canvasColor,
     cardColor: cardColor,
     focusColor: scheme.secondaryContainer.withValues(alpha: 0.9),
-    splashFactory: InkSparkle.splashFactory,
+    splashFactory: InkRipple.splashFactory,
     appBarTheme: base.appBarTheme.copyWith(
       backgroundColor: glass ? Colors.transparent : null,
       scrolledUnderElevation: glass ? 0 : null,

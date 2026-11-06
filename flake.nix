@@ -1,3 +1,5 @@
+# Nix expressions in this file and nix/ are MIT. See nix/LICENSE.
+# The packaged application is not.
 {
   description = "Dartotsu - packages the pre-built Linux release bundle from GitHub";
 
@@ -50,6 +52,7 @@
             libxcb
             libxfixes
             libxext
+            libxi
             libxrandr
             libxscrnsaver
             libxv
@@ -119,6 +122,14 @@
             (pkgs.lib.splitString ":" libPath);
 
           LD_LIBRARY_PATH = libPath;
+
+          shellHook = ''
+            hookBin="$(mktemp -d)"
+            printf '#!/bin/sh\nexport PKG_CONFIG_PATH=%s\nexec %s "$@"\n' \
+              "$(printf '%q' "$PKG_CONFIG_PATH")" "$(command -v pkg-config)" > "$hookBin/pkg-config"
+            chmod +x "$hookBin/pkg-config"
+            export PATH="$hookBin:$PATH"
+          '';
 
           GIO_EXTRA_MODULES = "${pkgs.glib-networking}/lib/gio/modules";
         };

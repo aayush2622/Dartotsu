@@ -107,21 +107,22 @@ class _SourceSubsSheetState extends State<SourceSubsSheet> {
                 Expanded(
                   child: ScrollConfig(
                     context,
-                    child: ListView(
+                    child: ListView.builder(
                       padding: EdgeInsets.fromLTRB(
                         Dimens.gap,
                         Dimens.gapXs,
                         Dimens.gap,
                         Dimens.gapXl,
                       ),
-                      children: [
-                        for (final s in shown)
-                          SourceSubTile(
-                            key: ValueKey(s.key),
-                            sub: s,
-                            dimmed: !isManagerActive(s),
-                          ),
-                      ],
+                      itemCount: shown.length,
+                      itemBuilder: (_, i) {
+                        final s = shown[i];
+                        return SourceSubTile(
+                          key: ValueKey(s.key),
+                          sub: s,
+                          dimmed: !isManagerActive(s),
+                        );
+                      },
                     ),
                   ),
                 ),

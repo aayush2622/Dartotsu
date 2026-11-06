@@ -129,14 +129,20 @@ class AlertDialogBuilder {
 
     _onAttach?.call();
 
+    final transition = Duration(milliseconds: (300 * kAnimationSpeed).round());
+    var dismissed = false;
+    void dismiss() {
+      if (dismissed) return;
+      dismissed = true;
+      _onDismiss?.call();
+    }
+
     return showGeneralDialog<T>(
       context: context,
       barrierDismissible: _cancelable,
       barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
       barrierColor: Colors.black54,
-      transitionDuration: Duration(
-        milliseconds: (300 * kAnimationSpeed).round(),
-      ),
+      transitionDuration: transition,
       transitionBuilder: (context, animation, secondaryAnimation, child) {
         final curved = CurvedAnimation(
           parent: animation,
@@ -150,15 +156,19 @@ class AlertDialogBuilder {
       },
       pageBuilder: (context, animation, secondaryAnimation) {
         _onShow?.call();
+        animation.addStatusListener((status) {
+          if (status == AnimationStatus.dismissed) dismiss();
+        });
         return Dialog(
           backgroundColor: Colors.transparent,
           insetPadding: const EdgeInsets.all(24),
           child: ConstrainedBox(
             constraints: BoxConstraints(
-              maxWidth: MediaQuery.of(context).size.width * 0.8,
+              maxWidth: MediaQuery.sizeOf(context).width * 0.8,
             ),
             child: IntrinsicWidth(
               child: ThemedContainer(
+                blur: true,
                 padding: const EdgeInsets.all(20),
                 borderRadius: BorderRadius.circular(32),
                 child: Material(
@@ -183,7 +193,7 @@ class AlertDialogBuilder {
                         fit: FlexFit.loose,
                         child: ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxHeight: MediaQuery.of(context).size.height * 0.6,
+                            maxHeight: MediaQuery.sizeOf(context).height * 0.6,
                           ),
                           child: Watch(_buildContent),
                         ),
@@ -202,7 +212,7 @@ class AlertDialogBuilder {
         );
       },
     ).then((value) {
-      _onDismiss?.call();
+      Future.delayed(transition + const Duration(milliseconds: 100), dismiss);
       return value;
     });
   }
@@ -248,7 +258,7 @@ class AlertDialogBuilder {
   Widget _buildReorderableWithCheckBoxWidget(
     void Function(int, int) onReorder,
   ) => SizedBox(
-    width: MediaQuery.of(context).size.width * 0.7,
+    width: MediaQuery.sizeOf(context).width * 0.7,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -281,7 +291,7 @@ class AlertDialogBuilder {
   );
 
   Widget _buildReorderableWidget(void Function(int, int) onReorder) => SizedBox(
-    width: MediaQuery.of(context).size.width * 0.7,
+    width: MediaQuery.sizeOf(context).width * 0.7,
     child: Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -348,7 +358,7 @@ class AlertDialogBuilder {
   }
 
   Widget _buildListContent(Widget Function(String) itemBuilder) {
-    final media = MediaQuery.of(context).size;
+    final media = MediaQuery.sizeOf(context);
     return SizedBox(
       width: media.width * 0.7,
       child: ListView.builder(
@@ -361,7 +371,7 @@ class AlertDialogBuilder {
 
   Widget _buildDefaultContent() => ConstrainedBox(
     constraints: BoxConstraints(
-      minWidth: MediaQuery.of(context).size.width * 0.7,
+      minWidth: MediaQuery.sizeOf(context).width * 0.7,
     ),
     child: _customView ?? Text(_message ?? ''),
   );

@@ -1,7 +1,9 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Core/State/State.dart';
 import '../../../../Model/Setting.dart';
+import '../../../../Utils/Functions/RefreshController.dart';
 import '../../../../Screen/Settings/Widgets/SegmentedSetting.dart';
 import '../../../../Widgets/Components/AppControls.dart';
 import '../../../../Core/Services/MediaService.dart';
@@ -54,6 +56,17 @@ class ExtensionSettingsView extends SettingsScreenView {
       icon: Icons.upload_rounded,
       isActivity: true,
       onClick: () => showListExportSheet(context, extensionService()),
+    ),
+    Setting.header(getString.sectionPrivacy),
+    Setting.switchType(
+      name: getString.hideNsfw,
+      description: getString.hideNsfwSourcesDesc,
+      icon: Icons.visibility_off_outlined,
+      isChecked: extensionHideNsfwPref.rx.value,
+      onSwitchChange: (v) {
+        extensionHideNsfwPref.rx.value = v;
+        tryFind<RefreshController>()?.all();
+      },
     ),
     Setting.header(getString.sectionBrowse),
     segmentedSetting<String>(

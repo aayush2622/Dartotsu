@@ -1,8 +1,8 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Core/Preferences/PrefBackup.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
+import '../../../../Core/Preferences/StorageManager.dart';
 import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -54,10 +54,13 @@ class _BackupTabState extends State<BackupTab> {
       snackString(getString.backupProtectedNeedsPassword);
       return;
     }
-    final dir = await FilePicker.getDirectoryPath(
-      dialogTitle: getString.selectDirectory,
+    final folder = await StorageManager.getDirectory(
+      subPath: 'backups',
+      useCustomPath: true,
+      useSystemPath: false,
     );
-    if (dir == null) return;
+    if (folder == null) return;
+    final dir = folder.path;
     _busy.value = true;
     try {
       final services = find<MediaServiceController>();

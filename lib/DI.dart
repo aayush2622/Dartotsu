@@ -1,12 +1,12 @@
 import 'Core/Cast/CastService.dart';
 import 'Screen/Together/TogetherController.dart';
+
 import 'dart:async';
-import 'dart:io';
 
 import 'Api/Discord/BaseDiscordRPC.dart';
-import 'Api/Discord/Desktop/DesktopRPC.dart';
+import 'Api/Discord/DiscordAccount.dart';
+import 'Api/Discord/DiscordRpcRouter.dart';
 import 'Api/Discord/DiscordPresenceController.dart';
-import 'Api/Discord/Mobile/MobileRPC.dart';
 import 'Api/Services/Anilist/Auth.dart';
 import 'Api/Services/MyAnimeList/Auth.dart';
 import 'Api/Services/Simkl/Auth.dart';
@@ -50,6 +50,7 @@ class DI {
   static void init() {
     SettingsSync.titleHooks.addAll([MediaRecords.reload, ResumeStore.reload]);
     SettingsSync.secretHooks.add(() {
+      tryFind<DiscordAccount>()?.onSignedIn();
       for (final service in find<MediaServiceController>().services) {
         final auth = service.auth;
         if (auth != null && auth.isLoggedIn) unawaited(auth.refreshUser());
@@ -102,8 +103,8 @@ class DI {
     lazyPut<OfflineMode>(OfflineMode.new);
     lazyPut<DownloadEngine>(DownloadEngine.new);
     lazyPut<DiscordPresenceController>(DiscordPresenceController.new);
-    lazyPut<BaseDiscordRPC>(
-      () => Platform.isAndroid || Platform.isIOS ? MobileRPC() : DesktopRPC(),
-    );
+    lazyPut<DiscordRpcRouter>(DiscordRpcRouter.new);
+    lazyPut<BaseDiscordRPC>(() => find<DiscordRpcRouter>());
+    lazyPut<DiscordAccount>(DiscordAccount.new);
   }
 }

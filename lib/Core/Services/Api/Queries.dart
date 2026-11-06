@@ -35,3 +35,19 @@ abstract class Queries {
 
   Future<SearchResults?> search(SearchResults? results);
 }
+
+/// Splits [all] into one list per status in [names] (status key -> shown
+/// title, in display order), followed by an `All` list.
+Map<String, List<Media>> groupByStatus(
+  List<Media> all,
+  Map<String, String> names,
+) {
+  final buckets = <String, List<Media>>{};
+  for (final m in all) {
+    if (m.userStatus case final status?) (buckets[status] ??= []).add(m);
+  }
+  return {
+    for (final e in names.entries) e.value: ?buckets[e.key],
+    if (all.isNotEmpty) 'All': all,
+  };
+}

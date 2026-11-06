@@ -342,24 +342,25 @@ class _Bookmarks extends StatelessWidget {
         title: getString.readerBookmarksEmpty,
       );
     }
-    return ListView(
-      children: [
-        for (final b in list)
-          ListTile(
-            leading: const Icon(Icons.bookmark_rounded),
-            title: Text(b.label),
-            subtitle: Text('${(b.position * 100 / b.total).round()}%'),
-            trailing: IconButton(
-              tooltip: getString.readerBookmarkRemove,
-              icon: const Icon(Icons.delete_outline_rounded),
-              onPressed: () => state.removeBookmark(b),
-            ),
-            onTap: () {
-              popPage(context);
-              state.openBookmark(b);
-            },
+    return ListView.builder(
+      itemCount: list.length,
+      itemBuilder: (_, i) {
+        final b = list[i];
+        return ListTile(
+          leading: const Icon(Icons.bookmark_rounded),
+          title: Text(b.label),
+          subtitle: Text('${(b.position * 100 / b.total).round()}%'),
+          trailing: IconButton(
+            tooltip: getString.readerBookmarkRemove,
+            icon: const Icon(Icons.delete_outline_rounded),
+            onPressed: () => state.removeBookmark(b),
           ),
-      ],
+          onTap: () {
+            popPage(context);
+            state.openBookmark(b);
+          },
+        );
+      },
     );
   }
 }

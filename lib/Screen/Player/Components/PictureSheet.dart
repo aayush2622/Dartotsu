@@ -89,7 +89,7 @@ class _PictureSheetState extends State<PictureSheet> {
     final frame = widget.frame.value;
     if (frame == null) return const SizedBox.shrink();
     return Padding(
-      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      padding: const EdgeInsets.only(bottom: 8),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 160),
         child: ClipRRect(
@@ -113,66 +113,63 @@ class _PictureSheetState extends State<PictureSheet> {
     heightFactor: 0.85,
     child: Watch(() {
       final tab = _tab.value;
-      return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: AppSegmented<int>(
-              value: tab,
-              onChanged: (v) => _tab.value = v,
-              segments: [
-                AppSegment(0, label: getString.playerShaders),
-                AppSegment(1, label: getString.playerColors),
-              ],
-            ),
+      final header = <Widget>[
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: AppSegmented<int>(
+            value: tab,
+            onChanged: (v) => _tab.value = v,
+            segments: [
+              AppSegment(0, label: getString.playerShaders),
+              AppSegment(1, label: getString.playerColors),
+            ],
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
-            child: Row(
-              children: [
-                Expanded(
-                  child: FilledButton.tonalIcon(
-                    onPressed: widget.capturing.value ? null : widget.onPreview,
-                    icon: widget.capturing.value
-                        ? const AppSpinner()
-                        : const Icon(Icons.preview_rounded),
-                    label: Text(getString.playerShadersPreview),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                IconButton.filledTonal(
-                  tooltip: getString.playerPictureSave,
-                  onPressed:
-                      widget.capturing.value || widget.frame.value == null
-                      ? null
-                      : _save,
-                  icon: _saving.value
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: Row(
+            children: [
+              Expanded(
+                child: FilledButton.tonalIcon(
+                  onPressed: widget.capturing.value ? null : widget.onPreview,
+                  icon: widget.capturing.value
                       ? const AppSpinner()
-                      : const Icon(Icons.download_rounded),
+                      : const Icon(Icons.preview_rounded),
+                  label: Text(getString.playerShadersPreview),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 8),
+              IconButton.filledTonal(
+                tooltip: getString.playerPictureSave,
+                onPressed: widget.capturing.value || widget.frame.value == null
+                    ? null
+                    : _save,
+                icon: _saving.value
+                    ? const AppSpinner()
+                    : const Icon(Icons.download_rounded),
+              ),
+            ],
           ),
-          if (tab == 0) _still(),
-          Expanded(
-            child: tab == 0
-                ? ShaderSheet(
-                    key: const ValueKey('picture-shaders'),
-                    embedded: true,
-                    settings: widget.settings,
-                    onPick: widget.onPick,
-                    problem: widget.problem,
-                  )
-                : ColorSheet(
-                    key: const ValueKey('picture-colors'),
-                    embedded: true,
-                    initial: widget.settings().color,
-                    frame: widget.frame.value,
-                    onChange: widget.onColor,
-                  ),
-          ),
-        ],
-      );
+        ),
+        if (tab == 0) _still(),
+      ];
+      return tab == 0
+          ? ShaderSheet(
+              key: const ValueKey('picture-shaders'),
+              embedded: true,
+              header: header,
+              settings: widget.settings,
+              onPick: widget.onPick,
+              problem: widget.problem,
+            )
+          : ColorSheet(
+              key: const ValueKey('picture-colors'),
+              embedded: true,
+              header: header,
+              initial: widget.settings().color,
+              frame: widget.frame.value,
+              onChange: widget.onColor,
+            );
     }),
   );
 }

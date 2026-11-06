@@ -1,10 +1,11 @@
-import '../../../Logger.dart';
 import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:window_manager/window_manager.dart';
+
+import '../../../Logger.dart';
+import '../../../Utils/Functions/AppWindow.dart';
 
 const kAuthPort = 43721;
 
@@ -76,8 +77,9 @@ Future<String> _viaLoopback(Uri url, Uri callback, Duration timeout) async {
     }
     final result = await done.future.timeout(timeout);
     try {
-      await windowManager.show();
-      await windowManager.focus();
+      appWindow
+        ?..show()
+        ..focus();
     } catch (e, st) {
       logError('BrowserAuth', e, st);
     }

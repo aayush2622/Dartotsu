@@ -17,7 +17,6 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rhttp/rhttp.dart';
-import 'package:window_manager/window_manager.dart';
 
 import 'Api/Updater/AppUpdater.dart';
 import 'Core/Downloads/DownloadEngine.dart';
@@ -201,8 +200,6 @@ Future<void> init(List<String> args) async {
       },
     ),
     initializeDateFormatting(),
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS)
-      WindowManager.instance.ensureInitialized(),
   ]);
 
   await WindowMemory.instance.restore();
@@ -300,11 +297,11 @@ class _MyAppState extends State<MyApp> {
   /// `LayoutBuilder` above the app — that breaks semantics on Flutter 3.29+),
   /// then the d-pad wrapper.
   Widget _appBuilder(BuildContext context, Widget? child) {
-    final mq = MediaQuery.of(context);
+    final size = MediaQuery.sizeOf(context);
     Device.setScreenSize(
       context,
-      BoxConstraints.tightFor(width: mq.size.width, height: mq.size.height),
-      mq.orientation,
+      BoxConstraints.tightFor(width: size.width, height: size.height),
+      MediaQuery.orientationOf(context),
       600,
       1100,
     );

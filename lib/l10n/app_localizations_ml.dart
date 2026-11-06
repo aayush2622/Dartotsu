@@ -1,5 +1,6 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
+
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -417,7 +418,236 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
 
   @override
+  String get dcPreview => 'Preview';
+
+  @override
+  String get dcSampleWatching => 'Watching';
+
+  @override
+  String get dcSampleReading => 'Reading';
+
+  @override
+  String get dcSampleBrowsing => 'Browsing';
+
+  @override
+  String get dcSampleLive => 'Right now';
+
+  @override
+  String get dcLiveNothing =>
+      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+
+  @override
+  String get dcMemberList => 'In the member list';
+
+  @override
+  String get dcAccount => 'Account';
+
+  @override
+  String get dcSignIn => 'Sign in with Discord';
+
+  @override
+  String get dcSignOut => 'Sign out';
+
+  @override
+  String get dcDesktopHint =>
+      'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.';
+
+  @override
+  String get dcMobileHint =>
+      'Rich Presence on mobile runs through your Discord account. Sign in to start.';
+
+  @override
+  String get dcRouteDesktop => 'Through the Discord desktop app';
+
+  @override
+  String get dcRouteHeadless => 'Through your account';
+
+  @override
+  String get dcRouteGateway => 'Through your account, live';
+
+  @override
+  String get dcRouteNone => 'Not connected';
+
+  @override
+  String get dcAccountOnly => 'Needs a signed-in account';
+
+  @override
+  String get dcStatusSection => 'Status';
+
+  @override
+  String get dcControlStatus => 'Control my status';
+
+  @override
+  String get dcControlStatusDesc =>
+      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+
+  @override
+  String get dcStatusOnline => 'Online';
+
+  @override
+  String get dcStatusIdle => 'Idle';
+
+  @override
+  String get dcStatusDnd => 'Do not disturb';
+
+  @override
+  String get dcStatusInvisible => 'Invisible';
+
+  @override
+  String get dcCustomStatus => 'Custom status';
+
+  @override
+  String get dcCustomStatusHint => 'What are you up to?';
+
+  @override
+  String get dcActivitySection => 'Activity';
+
+  @override
+  String get dcShowWatching => 'Show while watching';
+
+  @override
+  String get dcShowReading => 'Show while reading';
+
+  @override
+  String get dcListening => 'Listening';
+
+  @override
+  String get dcCompeting => 'Competing';
+
+  @override
+  String get dcActivityName => 'Activity name';
+
+  @override
+  String get dcNameApp => 'Dartotsu';
+
+  @override
+  String get dcNameTitle => 'Title';
+
+  @override
+  String get dcNameCustom => 'Custom';
+
+  @override
+  String get dcCustomNameHint => 'Name shown after “Watching”';
+
+  @override
+  String get dcStatusText => 'Status text';
+
+  @override
+  String get dcStatusTextDesc => 'What the member list shows next to your name';
+
+  @override
+  String get dcDisplayName => 'Name';
+
+  @override
+  String get dcDisplayState => 'State';
+
+  @override
+  String get dcDisplayDetails => 'Details';
+
+  @override
+  String get dcTextSection => 'Text';
+
+  @override
+  String get dcDetails => 'Top line';
+
+  @override
+  String get dcState => 'Bottom line';
+
+  @override
+  String get dcTemplateHint => 'Empty uses the default';
+
+  @override
+  String get dcVariables => 'Tap to insert a value';
+
+  @override
+  String get dcImagesSection => 'Images';
+
+  @override
+  String get dcLargeImage => 'Large image';
+
+  @override
+  String get dcLargeAuto => 'Auto';
+
+  @override
+  String get dcLargeCover => 'Cover';
+
+  @override
+  String get dcLargeLogo => 'Logo';
+
+  @override
+  String get dcSmallImage => 'Small image';
+
+  @override
+  String get dcSmallAuto => 'Logo';
+
+  @override
+  String get dcSmallNone => 'None';
+
+  @override
+  String get dcTimerStyle => 'Timer style';
+
+  @override
+  String get dcTimerAuto => 'Auto';
+
+  @override
+  String get dcTimerElapsed => 'Elapsed';
+
+  @override
+  String get dcTimerRemaining => 'Remaining';
+
+  @override
+  String get dcButtonsSection => 'Buttons';
+
+  @override
+  String get dcButtonMedia => 'Link to the title';
+
+  @override
+  String get dcButtonApp => 'Link to Dartotsu';
+
+  @override
+  String get dcButtonCustom => 'Custom button';
+
+  @override
+  String get dcButtonLabel => 'Label';
+
+  @override
+  String get dcButtonUrl => 'Link';
+
+  @override
+  String get dcPrivacySection => 'Privacy';
+
+  @override
+  String get dcPrivateText => 'Private text';
+
+  @override
+  String get dcPrivateHint => 'Something private';
+
+  @override
+  String get dcTokenWarning =>
+      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+
+  @override
+  String get dcConnected => 'Connected';
+
+  @override
+  String get dcConnecting => 'Connecting…';
+
+  @override
+  String get dcDisconnected => 'Not connected';
+
+  @override
+  String dcSignedInAs(String name) {
+    return 'Signed in as $name';
+  }
+
+  @override
   String get settingsSyncOn => 'On';
+
+  @override
+  String get settingsSyncCustom => 'Custom';
+
+  @override
+  String get settingsSyncChangedHeader => 'Changed settings';
 
   @override
   String get settingsSyncNoneChanged =>
@@ -430,6 +660,31 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String get settingsSyncOffCategory =>
       'Not syncing. These stay on this device and the server copy is left as it is.';
+
+  @override
+  String get settingsSyncPartsNote =>
+      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+
+  @override
+  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+
+  @override
+  String get settingsSyncPartSubtitlesDesc =>
+      'Size, weight, colours and position';
+
+  @override
+  String get settingsSyncPartPictureColors => 'Picture colours';
+
+  @override
+  String get settingsSyncPartPictureColorsDesc =>
+      'Brightness, contrast, saturation, gamma, hue and HDR';
+
+  @override
+  String get settingsSyncPartPalette => 'Theme colours';
+
+  @override
+  String get settingsSyncPartPaletteDesc =>
+      'Theme, accent colour and OLED black';
 
   @override
   String get settingsSyncCatOther => 'Watch, read and services';
@@ -1242,6 +1497,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get onboardingSkip => 'ഒഴിവാക്കൂ';
 
   @override
+  String get onboardingLanguageBody =>
+      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+
+  @override
   String get onboardingPaletteTitle => 'നിനക്കിഷ്ടമുള്ളതാക്കൂ';
 
   @override
@@ -1619,6 +1878,10 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get hideNsfw => 'NSFW മറയ്ക്കൂ';
+
+  @override
+  String get hideNsfwSourcesDesc =>
+      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
 
   @override
   String get hideNsfwDesc =>
@@ -2029,6 +2292,9 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get listOnly => 'ലിസ്റ്റ് മാത്രം';
+
+  @override
+  String get notInList => 'Not In List';
 
   @override
   String get filter => 'ഫിൽട്ടർ';
@@ -5135,6 +5401,15 @@ class AppLocalizationsMl extends AppLocalizations {
   String get playerSubtitleOutline => 'സബ്ടൈറ്റിൽ ഔട്ട്‌ലൈൻ';
 
   @override
+  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+
+  @override
+  String get playerSubtitlePreview => 'Subtitle preview';
+
+  @override
+  String get playerSubtitlePreviewText => 'Subtitle preview text';
+
+  @override
   String get playerLibass => 'libass ഉപയോഗിക്കൂ';
 
   @override
@@ -5935,6 +6210,22 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String downloadClearQueueConfirm(int count) {
     return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+  }
+
+  @override
+  String downloadSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get downloadSelectAll => 'Select all';
+
+  @override
+  String get downloadDeleteSelected => 'Delete selected';
+
+  @override
+  String downloadDeleteSelectedConfirm(int count) {
+    return 'Delete $count downloads? Their files are removed from the device.';
   }
 
   @override
@@ -7850,4 +8141,98 @@ class AppLocalizationsMl extends AppLocalizations {
   String updateNotFound(String message) {
     return 'Update server couldn\'t find that release: $message';
   }
+
+  @override
+  String get installStepJre => 'Java runtime';
+
+  @override
+  String get installStepCore => 'Runtime core';
+
+  @override
+  String installStepsProgress(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get stepWaiting => 'Waiting';
+
+  @override
+  String get stepChecking => 'Checking…';
+
+  @override
+  String get stepUpToDate => 'Up to date';
+
+  @override
+  String stepUpToDateWith(String detail) {
+    return 'Up to date · $detail';
+  }
+
+  @override
+  String get stepWillInstall => 'Will be installed';
+
+  @override
+  String get stepWillUpdate => 'Will be updated';
+
+  @override
+  String stepWillUpdateTo(String version) {
+    return 'Will be updated to $version';
+  }
+
+  @override
+  String get stepInstalled => 'Installed';
+
+  @override
+  String get stepNotNeeded => 'Not needed here';
+
+  @override
+  String get stepFailed => 'Failed';
+
+  @override
+  String stepFailedWith(String reason) {
+    return 'Failed: $reason';
+  }
+
+  @override
+  String get installNeedsRuntime =>
+      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+
+  @override
+  String get installRuntimeNewer =>
+      'The runtime this manager runs on has an update.';
+
+  @override
+  String get removeJvmTitle => 'Remove the Java runtime?';
+
+  @override
+  String get removeJvmMessage =>
+      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+
+  @override
+  String get runtimePreparing => 'Preparing the runtime…';
+
+  @override
+  String get calendarAll => 'All';
+
+  @override
+  String get calendarAnime => 'Anime';
+
+  @override
+  String get calendarManga => 'Manga';
+
+  @override
+  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+
+  @override
+  String get badgeBoardHint =>
+      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+
+  @override
+  String get statusAuto => 'Auto';
+
+  @override
+  String get unreadCounter => 'Unread counter';
+
+  @override
+  String get unreadCounterDesc =>
+      'Show how many episodes or chapters are left on posters';
 }

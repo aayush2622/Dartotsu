@@ -295,6 +295,14 @@ class WatchState extends ScreenState {
       _subscribeTarget != null &&
       episodes.isNotEmpty;
 
+  void _noteLatest(List<DEpisode> normalized) {
+    final max = latestOf(normalized, season: season.value, anime: anime)?.max;
+    final value = max?.floor();
+    if (value == null || value <= 0 || record.latestUnit == value) return;
+    record.latestUnit = value;
+    MediaRecords.save(service, current);
+  }
+
   void _noteSubscription(Source src, DMedia target, List<DEpisode> normalized) {
     final explicit = _explicitPick;
     _explicitPick = false;
@@ -390,6 +398,7 @@ class WatchState extends ScreenState {
       _chunkPinned = false;
       _derive();
       phase.value = WatchPhase.ready;
+      _noteLatest(normalized);
       _noteSubscription(src, target, normalized);
       final downloads = find<DownloadEngine>();
       if (downloads.hasDownloads(service.id, current.id)) {

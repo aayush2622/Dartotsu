@@ -53,6 +53,7 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
     return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       child: ThemedContainer(
+        blur: true,
         borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
         padding: EdgeInsets.zero,
         child: Padding(

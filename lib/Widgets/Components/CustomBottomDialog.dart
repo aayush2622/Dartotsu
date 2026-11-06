@@ -1,4 +1,5 @@
 import '../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Utils/Nav/DpadLayers.dart';
@@ -60,6 +61,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
 
     return SheetDragScope(
       child: ThemedContainer(
+        blur: true,
         color: colorScheme.surface,
         border: Border.all(
           width: 0,

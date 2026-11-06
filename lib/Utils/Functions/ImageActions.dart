@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
-import '../../Core/Downloads/ChapterFetcher.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';

@@ -182,14 +182,12 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
         if (visited.contains(2))
           keep(
             2,
-            SliverToBoxAdapter(
-              child: CommentsSection(
-                key: ValueKey('comments-${state.host.media.value.id}'),
-                service: state.view.service,
-                media: state.host.media,
-                scroll: state.scroll,
-                focusId: state.commentId,
-              ),
+            CommentsSection(
+              key: ValueKey('comments-${state.host.media.value.id}'),
+              service: state.view.service,
+              media: state.host.media,
+              scroll: state.scroll,
+              focusId: state.commentId,
             ),
           ),
         SliverLayoutBuilder(

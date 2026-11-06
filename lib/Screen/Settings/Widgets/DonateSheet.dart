@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -91,7 +92,9 @@ class _DonateSheet extends StatelessWidget {
       borderRadius: BorderRadius.circular(20),
       child: InkWell(
         borderRadius: BorderRadius.circular(20),
-        onTap: () => copyToClipboard(kUpiId, message: getString.upiCopied),
+        onTap: () => Platform.isAndroid || Platform.isIOS
+            ? openLinkInBrowser(kUpiPayUrl)
+            : copyToClipboard(kUpiId, message: getString.upiCopied),
         child: Padding(
           padding: const EdgeInsetsDirectional.fromSTEB(16, 12, 8, 12),
           child: Row(

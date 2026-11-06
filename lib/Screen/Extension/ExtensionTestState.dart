@@ -8,7 +8,8 @@ import '../../Core/State/State.dart';
 import '../../Logger.dart';
 import '../../Utils/Functions/CopyToClip.dart';
 import '../../Widgets/Components/ScreenState.dart';
-import 'Data/SourceTester.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 
 class ExtensionTestState extends ScreenState {
   static const parallel = 10;

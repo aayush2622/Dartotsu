@@ -190,7 +190,13 @@ class SyncController extends AppController {
     OfflineMutations.onProgressSaved = (service, media) {
       if (instant && canPush(service, media.isAnime)) {
         unawaited(pushEdit(service, media));
+        return;
       }
+      logger(
+        'Instant sync not used for ${media.id}: instant=$instant, '
+        'main=$mainId, from=${service.id}',
+        tag: 'SYNC',
+      );
     };
     _auto?.cancel();
     _auto = Timer.periodic(const Duration(minutes: 30), (_) => _autoRun());
@@ -418,7 +424,13 @@ class SyncController extends AppController {
     if (adapter == null || incognitoBlocksEdits) return;
     final isAnime = media.isAnime;
     final targets = targetsFor(service.id, isAnime);
-    if (targets.isEmpty) return;
+    if (targets.isEmpty) {
+      logger(
+        'Instant sync: ${service.name} has no other service to write to',
+        tag: 'SYNC',
+      );
+      return;
+    }
     var ids = await IdMapper.expand(
       adapter.idsOf(media),
       anime: isAnime,
@@ -469,6 +481,11 @@ class SyncController extends AppController {
         }
         final wait = _waitFor(target.id, other);
         if (wait > const Duration(seconds: 20)) {
+          logger(
+            'Instant sync: ${target.name} skipped for ${media.id}, '
+            'its request budget needs ${wait.inSeconds}s',
+            tag: 'SYNC',
+          );
           snackString(
             getString.syncPushFailed(target.name, getString.syncRateLimited),
           );
@@ -483,12 +500,26 @@ class SyncController extends AppController {
         done.add(target.name);
       } on SyncRateLimited catch (e) {
         _budget.hold(target.id, e.retryAfter);
+        logger(
+          'Instant sync: ${target.name} rate limited for ${media.id}: $e',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
         snackString(getString.syncPushFailed(target.name, '$e'));
-      } catch (e) {
+      } catch (e, st) {
+        logger(
+          'Instant sync: ${target.name} failed for ${media.id}: $e\n$st',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
         snackString(getString.syncPushFailed(target.name, '$e'));
       }
     }
     if (done.isNotEmpty) {
+      logger(
+        'Instant sync: ${media.id} written to ${done.join(', ')}',
+        tag: 'SYNC',
+      );
       snackString(getString.syncPushed(done.join(', ')));
       _saveSoon();
     }

@@ -1,17 +1,17 @@
 {
   "stable": {
-    "version": "1.1.1",
-    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.1.1/Dartotsu_LinuxZip_v1.1.1.zip",
-    "hash": "sha256-FoYRuihn8jttDJNsyMQWY4LOFr52AswDPMpZS1vjWC0="
+    "version": "1.2.0",
+    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.0/Dartotsu_LinuxZip_v1.2.0.zip",
+    "hash": "sha256-iRy3HOkZcA0QoMe4GqJMnUq2OH8IS5cWtP12C1JF83w="
   },
   "prerelease": {
-    "version": "1.1.1",
-    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.1.1/Dartotsu_LinuxZip_v1.1.1.zip",
-    "hash": "sha256-FoYRuihn8jttDJNsyMQWY4LOFr52AswDPMpZS1vjWC0="
+    "version": "1.2.0",
+    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.0/Dartotsu_LinuxZip_v1.2.0.zip",
+    "hash": "sha256-iRy3HOkZcA0QoMe4GqJMnUq2OH8IS5cWtP12C1JF83w="
   },
   "alpha": {
-    "version": "4f9da0f",
-    "url": "https://github.com/grayankit/Dartotsu-Downloader/releases/download/4f9da0f/Dartotsu_linux.zip",
-    "hash": "sha256-UMusunjZL8IwJYy2j6WSnjF8bSf0ygoIxyue8j+Of34="
+    "version": "bb20cdd",
+    "url": "https://github.com/grayankit/Dartotsu-Downloader/releases/download/bb20cdd/Dartotsu_linux.zip",
+    "hash": "sha256-yrJ18gjKQpvRkmD1xKGZMA+2anMYwOzjvKIiW43rvYU="
   }
 }

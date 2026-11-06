@@ -29,6 +29,7 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
         'details': p.details,
         'state': ?p.state,
         'type': p.type.code,
+        if (p.statusDisplay != 0) 'status_display_type': p.statusDisplay,
         'platform': _platform,
         if (p.start != null)
           'timestamps': {'start': p.start, if (p.end != null) 'end': p.end},

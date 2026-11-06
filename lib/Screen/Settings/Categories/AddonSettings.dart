@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,7 @@ import '../../../Model/Setting.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 import '../../../Utils/Functions/SnackBar.dart';
+import '../../../Widgets/Components/AlertDialogBuilder.dart';
 
 List<Setting> addonSettings(BuildContext context) {
   final manager = tryFind<AddonManager>();
@@ -30,18 +33,27 @@ List<Setting> addonSettings(BuildContext context) {
             : Icons.download_rounded,
         onClick: () async {
           if (addon.downloading.value) return;
-          try {
-            if (addon.hasUpdate.value) {
-              await addon.update();
-            } else if (addon.installed.value) {
-              await addon.uninstall();
-            } else {
-              await addon.install();
+          Future<void> run(Future<void> Function() job) async {
+            try {
+              await job();
+            } catch (e, st) {
+              logError('Addons', e, st);
+              snackString('${addon.name}: $e');
             }
-          } catch (e, st) {
-            logError('Addons', e, st);
-            snackString('${addon.name}: $e');
           }
+
+          if (addon.hasUpdate.value) return run(addon.update);
+          if (!addon.installed.value) return run(addon.install);
+          if (addon.id != 'jvm') return run(addon.uninstall);
+          final dialog = AlertDialogBuilder(context)
+            ..setTitle(getString.removeJvmTitle)
+            ..setMessage(getString.removeJvmMessage)
+            ..setPositiveButton(
+              getString.yes,
+              () => unawaited(run(addon.uninstall)),
+            )
+            ..setNegativeButton(getString.no, () {});
+          unawaited(dialog.show());
         },
       ),
   ];

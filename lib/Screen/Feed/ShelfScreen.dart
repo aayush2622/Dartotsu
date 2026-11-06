@@ -104,18 +104,9 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen>
     );
   }
 
-  Widget _card(ShelfCardItem item, {bool skeleton = false}) => PosterCard(
-    heroTag: skeleton || item.heroTag == null ? null : 'shelf:${item.heroTag}',
-    imageUrl: item.imageUrl,
-    overlay: item.overlay,
-    title: item.title,
-    subtitle: item.subtitle,
-    progress: item.progress,
-    progressText: item.progressText,
-    score: item.score,
-    scoreHighlight: item.scoreHighlight,
-    airing: item.airing,
-    onTap: skeleton ? null : item.onTap,
-    onLongPress: skeleton ? null : item.onLongPress,
+  Widget _card(ShelfCardItem item, {bool skeleton = false}) => PosterCard.item(
+    item,
+    heroTag: item.heroTag == null ? null : 'shelf:${item.heroTag}',
+    skeleton: skeleton,
   );
 }

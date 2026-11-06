@@ -65,9 +65,11 @@ Widget CustomScrollConfig(
   ScrollPhysics? physics,
   ScrollController? controller,
   bool shrinkWrap = false,
+  double? cacheExtent,
 }) {
   return CustomScrollView(
     controller: controller,
+    cacheExtent: cacheExtent,
     scrollBehavior: ScrollConfiguration.of(
       context,
     ).copyWith(scrollbars: false, dragDevices: _dragDevices),

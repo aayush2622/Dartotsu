@@ -1,4 +1,5 @@
-import 'DownloadCancel.dart';
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -17,10 +18,6 @@ import '../Preferences/PrefManager.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
-import 'Archives.dart';
-import 'BookText.dart';
-import 'ChapterFetcher.dart';
-import 'DownloadPaths.dart';
 import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
 import 'DownloadQueue.dart';
@@ -28,9 +25,8 @@ import 'DownloadScanner.dart';
 import 'DownloadService.dart';
 import 'DownloadSnapshots.dart';
 import 'DownloadTask.dart';
-import 'FileFetcher.dart';
-import 'Hls.dart';
-import 'HlsFetcher.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 
 class DownloadBlocked implements Exception {
   final String message;
@@ -40,16 +36,23 @@ class DownloadBlocked implements Exception {
   String toString() => message;
 }
 
-bool isHlsUrl(String url) {
-  final lower = url.toLowerCase();
-  return lower.contains('.m3u8') || lower.contains('.mpd');
-}
+bool isHlsUrl(String url) => url.toLowerCase().contains('.m3u8');
+
+bool isDashUrl(String url) => url.toLowerCase().contains('.mpd');
 
 Future<bool> isHlsStream(String url, Map<String, String>? headers) async {
   if (isHlsUrl(url)) return true;
+  if (isDashUrl(url)) return false;
   if (isTorrentSource(url)) return false;
   if (videoExtensions.contains(extensionOf(url, fallback: ''))) return false;
   return probeHls(url, headers: headers);
+}
+
+Future<bool> isDashStream(String url, Map<String, String>? headers) async {
+  if (isDashUrl(url)) return true;
+  if (isHlsUrl(url) || isTorrentSource(url)) return false;
+  if (videoExtensions.contains(extensionOf(url, fallback: ''))) return false;
+  return probeDash(url, headers: headers);
 }
 
 class DownloadEngine extends AppController {
@@ -78,6 +81,7 @@ class DownloadEngine extends AppController {
 
   @override
   void onInit() {
+    DownloadThrottle.limitKbps = () => downloadSpeedLimitPref.value;
     reload();
     _indexWatch = onAnyChange([tasks], () => _byId = null);
     final net = find<NetStatus>();
@@ -145,13 +149,13 @@ class DownloadEngine extends AppController {
           onDisk.contains(existing.id) &&
           (existing.path == null || !pathExists(existing.path!))) {
         existing.path = task.path;
-        existing.subtitlePath = task.subtitlePath;
-        existing.audioPath = task.audioPath;
+        existing.subtitlePaths = task.subtitlePaths;
+        existing.audioPaths = task.audioPaths;
         changed = true;
       } else if (existing.isDone &&
-          existing.subtitlePath == null &&
-          task.subtitlePath != null) {
-        existing.subtitlePath = task.subtitlePath;
+          existing.subtitlePaths.isEmpty &&
+          task.subtitlePaths.isNotEmpty) {
+        existing.subtitlePaths = task.subtitlePaths;
         changed = true;
       }
     }
@@ -199,24 +203,28 @@ class DownloadEngine extends AppController {
     if (task.kind != DownloadKind.video || !File(path).existsSync()) {
       return null;
     }
-    final sub = task.subtitlePath;
-    final subs = sub != null && File(sub).existsSync()
-        ? [
-            v.Track(
-              file: Uri.file(sub).toString(),
-              label: task.chosenSubtitle?.label ?? getString.downloadSubtitles,
-            ),
-          ]
-        : <v.Track>[];
-    final audio = task.audioPath;
-    final audios = audio != null && File(audio).existsSync()
-        ? [
-            v.Track(
-              file: Uri.file(audio).toString(),
-              label: task.chosenAudio?.label ?? getString.downloadAudio,
-            ),
-          ]
-        : <v.Track>[];
+    final chosen = task.chosenSubtitles;
+    final subs = [
+      for (final (i, path) in task.subtitlePaths.indexed)
+        if (File(path).existsSync())
+          v.Track(
+            file: Uri.file(path).toString(),
+            label: i < chosen.length && chosen[i].label != null
+                ? chosen[i].label
+                : getString.downloadSubtitles,
+          ),
+    ];
+    final chosenAudios = task.chosenAudios;
+    final audios = [
+      for (final (i, path) in task.audioPaths.indexed)
+        if (File(path).existsSync())
+          v.Track(
+            file: Uri.file(path).toString(),
+            label: i < chosenAudios.length && chosenAudios[i].label != null
+                ? chosenAudios[i].label
+                : getString.downloadAudio,
+          ),
+    ];
     return v.Video(
       getString.downloadDownloaded,
       path,
@@ -438,7 +446,7 @@ class DownloadEngine extends AppController {
   }
 
   Future<void> _deleteFiles(DownloadTask task) async {
-    for (final path in [task.path, task.subtitlePath, task.audioPath]) {
+    for (final path in [task.path, ...task.subtitlePaths, ...task.audioPaths]) {
       if (path == null) continue;
       try {
         final dir = Directory(path);
@@ -579,7 +587,7 @@ class DownloadEngine extends AppController {
     }
   }
 
-  Future<bool> _fetchHls(
+  Future<Set<String>> _fetchHls(
     DownloadTask task,
     Directory dir,
     String base,
@@ -599,13 +607,26 @@ class DownloadEngine extends AppController {
     var attempt = 0;
     while (true) {
       final video = task.chosenVideo!;
-      final audioFile = task.chosenAudio?.file;
-      final audioUrl =
-          audioFile != null &&
-              audioFile.isNotEmpty &&
-              await isHlsStream(audioFile, video.headers)
-          ? audioFile
-          : null;
+      final chosen = task.chosenAudios;
+      final external = <v.Track>[];
+      for (final t in chosen) {
+        final file = t.file;
+        if (file != null &&
+            file.isNotEmpty &&
+            await isHlsStream(file, video.headers)) {
+          external.add(t);
+        }
+      }
+      final merged = {for (final t in external) t.file!};
+      final seen = <String>{};
+      final labels = [
+        for (final label in [
+          for (final t in external) ?t.label,
+          for (final t in chosen) ?t.label,
+          ...?task.profile?.audios,
+        ])
+          if (seen.add(label.toLowerCase())) label,
+      ];
       final job = FfmpegCancel();
       _ffmpegCancels[task.id] = job;
       try {
@@ -617,8 +638,8 @@ class DownloadEngine extends AppController {
           ffmpegCancel: job,
           headers: video.headers,
           height: task.height ?? task.profile?.height,
-          audioLabel: task.chosenAudio?.label ?? task.profile?.audio,
-          audioUrl: audioUrl,
+          audioLabels: labels,
+          audioUrls: [for (final t in external) t.file!],
           onProgress: (done, total) {
             task.received.value = done;
             task.total.value = total;
@@ -626,7 +647,7 @@ class DownloadEngine extends AppController {
           },
           onFinishing: () => task.finishing.value = true,
         );
-        return audioUrl != null;
+        return merged;
       } catch (e) {
         if (_stopped.containsKey(task.id)) rethrow;
         final status = e is DownloadHttpError ? e.status : 0;
@@ -637,14 +658,91 @@ class DownloadEngine extends AppController {
             task,
             previous: StreamProfile(
               streamLabel(video),
-              task.chosenSubtitle?.label,
+              [for (final t in task.chosenSubtitles) ?t.label],
               height: task.height ?? task.profile?.height,
-              audio: task.chosenAudio?.label,
+              audios: [for (final t in task.chosenAudios) ?t.label],
             ),
           );
           continue;
         }
         if (e is HlsUnsupported || e is FfmpegFailure) rethrow;
+        if (status >= 400 && status < 500) rethrow;
+        if (!await find<NetStatus>().check()) rethrow;
+        if (++attempt > 3) rethrow;
+        await Future<void>.delayed(Duration(seconds: 2 * attempt * attempt));
+      } finally {
+        _ffmpegCancels.remove(task.id);
+        task.finishing.value = false;
+      }
+    }
+  }
+
+  Future<void> _fetchDash(
+    DownloadTask task,
+    Directory dir,
+    String base,
+    DownloadCancel cancel,
+  ) async {
+    final addon = ffmpegAddon();
+    final ffmpeg = addon != null && addon.installed.value ? addon : null;
+    final output = File(p.join(dir.path, '$base.mp4'));
+    task.path = output.path;
+    task.segmented = true;
+    var reResolved = false;
+    var attempt = 0;
+    while (true) {
+      final video = task.chosenVideo!;
+      final seen = <String>{};
+      final labels = [
+        for (final label in [
+          for (final t in task.chosenAudios) ?t.label,
+          ...?task.profile?.audios,
+        ])
+          if (seen.add(label.toLowerCase())) label,
+      ];
+      final job = FfmpegCancel();
+      _ffmpegCancels[task.id] = job;
+      try {
+        await downloadDash(
+          url: video.url,
+          output: output,
+          ffmpeg: ffmpeg,
+          cancel: cancel,
+          ffmpegCancel: job,
+          headers: video.headers,
+          height: task.height ?? task.profile?.height,
+          audioLabels: labels,
+          onProgress: (done, total) {
+            task.received.value = done;
+            task.total.value = total;
+            _notifyOverall();
+          },
+          onFinishing: () => task.finishing.value = true,
+        );
+        return;
+      } catch (e) {
+        if (_stopped.containsKey(task.id)) rethrow;
+        if (e is DashUnsupported) {
+          throw e.needsFfmpeg
+              ? DownloadBlocked(getString.downloadHlsNeedsFfmpeg)
+              : e;
+        }
+        final status = e is DownloadHttpError ? e.status : 0;
+        final expired = status == 401 || status == 403 || status == 410;
+        if (expired && !reResolved && task.episode != null) {
+          reResolved = true;
+          await _resolve(
+            task,
+            previous: StreamProfile(
+              streamLabel(video),
+              [for (final t in task.chosenSubtitles) ?t.label],
+              height: task.height ?? task.profile?.height,
+              audios: [for (final t in task.chosenAudios) ?t.label],
+            ),
+          );
+          continue;
+        }
+        if (e is FfmpegFailure) rethrow;
         if (status >= 400 && status < 500) rethrow;
         if (!await find<NetStatus>().check()) rethrow;
         if (++attempt > 3) rethrow;
@@ -723,22 +821,20 @@ class DownloadEngine extends AppController {
     }
     final video = list[index];
     task.video = video.toJson();
-    task.subtitle = null;
-    final wanted = profile?.subtitle?.toLowerCase();
-    if (wanted != null) {
-      final track = video.subtitles
-          ?.where((t) => (t.label ?? '').toLowerCase() == wanted)
-          .firstOrNull;
-      task.subtitle = track?.toJson();
-    }
-    task.audio = null;
-    final wantedAudio = profile?.audio?.toLowerCase();
-    if (wantedAudio != null) {
-      final track = video.audios
-          ?.where((t) => (t.label ?? '').toLowerCase() == wantedAudio)
-          .firstOrNull;
-      task.audio = track?.toJson();
-    }
+    final wanted = {
+      for (final s in profile?.subtitles ?? const <String>[]) s.toLowerCase(),
+    };
+    task.subtitles = [
+      for (final t in video.subtitles ?? const <v.Track>[])
+        if (wanted.contains((t.label ?? '').toLowerCase())) t.toJson(),
+    ];
+    final wantedAudio = {
+      for (final a in profile?.audios ?? const <String>[]) a.toLowerCase(),
+    };
+    task.audios = [
+      for (final t in video.audios ?? const <v.Track>[])
+        if (wantedAudio.contains((t.label ?? '').toLowerCase())) t.toJson(),
+    ];
   }
 
   Future<void> _run(DownloadTask task) async {
@@ -747,7 +843,7 @@ class DownloadEngine extends AppController {
     _cancels[task.id] = cancel;
     task.error.value = null;
     var reResolved = false;
-    var audioMerged = false;
+    var merged = <String>{};
     try {
       if (task.kind == DownloadKind.chapter) {
         await _fetchChapter(task, cancel);
@@ -777,7 +873,9 @@ class DownloadEngine extends AppController {
       if (isTorrentSource(video.url)) {
         await _fetchTorrent(task, video, dir, base, cancel);
       } else if (await isHlsStream(video.url, video.headers)) {
-        audioMerged = await _fetchHls(task, dir, base, cancel);
+        merged = await _fetchHls(task, dir, base, cancel);
+      } else if (await isDashStream(video.url, video.headers)) {
+        await _fetchDash(task, dir, base, cancel);
       } else {
         var attempt = 0;
         var tick = DateTime.now();
@@ -813,13 +911,13 @@ class DownloadEngine extends AppController {
             final expired = status == 401 || status == 403 || status == 410;
             if (expired && !reResolved && task.episode != null) {
               reResolved = true;
-              final old = task.chosenSubtitle?.label;
+              final old = [for (final t in task.chosenSubtitles) ?t.label];
               await _resolve(
                 task,
                 previous: StreamProfile(
                   streamLabel(video),
                   old,
-                  audio: task.chosenAudio?.label,
+                  audios: [for (final t in task.chosenAudios) ?t.label],
                 ),
               );
               video = task.chosenVideo!;
@@ -835,7 +933,7 @@ class DownloadEngine extends AppController {
         }
       }
       await _fetchSubtitle(task, dir, base, cancel);
-      if (!audioMerged) await _fetchAudio(task, dir, base, cancel);
+      await _fetchAudio(task, dir, base, cancel, merged);
       if (downloadInfoFilePref.value) await _writeInfo(task, dir, base);
       task.speed.value = 0;
       task
@@ -874,24 +972,29 @@ class DownloadEngine extends AppController {
     String base,
     DownloadCancel cancel,
   ) async {
-    final track = task.chosenSubtitle;
-    final url = track?.file;
-    if (track == null || url == null || url.isEmpty) return;
-    try {
-      final label = safeName(track.label ?? 'sub');
-      final ext = extensionOf(url, fallback: 'vtt');
-      final target = File(p.join(dir.path, '$base.$label.$ext'));
-      await fetchFile(
-        url: url,
-        target: target,
-        cancel: cancel,
-        headers: task.chosenVideo?.headers,
-        onProgress: (_, _) {},
-      );
-      task.subtitlePath = target.path;
-    } catch (e) {
-      logger('Subtitle download failed: $e', tag: 'DOWNLOAD');
+    final paths = <String>[];
+    final used = <String>{};
+    for (final track in task.chosenSubtitles) {
+      final url = track.file;
+      if (url == null || url.isEmpty) continue;
+      try {
+        var label = safeName(track.label ?? 'sub');
+        if (!used.add(label)) label = '$label.${used.length}';
+        final ext = extensionOf(url, fallback: 'vtt');
+        final target = File(p.join(dir.path, '$base.$label.$ext'));
+        await fetchFile(
+          url: url,
+          target: target,
+          cancel: cancel,
+          headers: task.chosenVideo?.headers,
+          onProgress: (_, _) {},
+        );
+        paths.add(target.path);
+      } catch (e) {
+        logger('Subtitle download failed: $e', tag: 'DOWNLOAD');
+      }
     }
+    task.subtitlePaths = paths;
   }
 
   Future<void> _fetchAudio(
@@ -899,25 +1002,31 @@ class DownloadEngine extends AppController {
     Directory dir,
     String base,
     DownloadCancel cancel,
+    Set<String> merged,
   ) async {
-    final track = task.chosenAudio;
-    final url = track?.file;
-    if (track == null || url == null || url.isEmpty) return;
-    try {
-      final label = safeName(track.label ?? 'audio');
-      final ext = extensionOf(url, fallback: 'm4a');
-      final target = File(p.join(dir.path, '$base.audio.$label.$ext'));
-      await fetchFile(
-        url: url,
-        target: target,
-        cancel: cancel,
-        headers: task.chosenVideo?.headers,
-        onProgress: (_, _) {},
-      );
-      task.audioPath = target.path;
-    } catch (e) {
-      logger('Audio download failed: $e', tag: 'DOWNLOAD');
+    final paths = <String>[];
+    final used = <String>{};
+    for (final track in task.chosenAudios) {
+      final url = track.file;
+      if (url == null || url.isEmpty || merged.contains(url)) continue;
+      try {
+        var label = safeName(track.label ?? 'audio');
+        if (!used.add(label)) label = '$label.${used.length}';
+        final ext = extensionOf(url, fallback: 'm4a');
+        final target = File(p.join(dir.path, '$base.audio.$label.$ext'));
+        await fetchFile(
+          url: url,
+          target: target,
+          cancel: cancel,
+          headers: task.chosenVideo?.headers,
+          onProgress: (_, _) {},
+        );
+        paths.add(target.path);
+      } catch (e) {
+        logger('Audio download failed: $e', tag: 'DOWNLOAD');
+      }
     }
+    task.audioPaths = paths;
   }
 
   Future<void> _writeInfo(DownloadTask task, Directory dir, String base) async {
@@ -928,7 +1037,7 @@ class DownloadEngine extends AppController {
           'source': task.sourceId,
           'stream': video == null ? null : streamLabel(video),
           'quality': video?.quality,
-          'subtitle': task.chosenSubtitle?.label,
+          'subtitles': [for (final t in task.chosenSubtitles) t.label],
           'timeStamps': video?.timeStamps?.map((e) => e.toJson()).toList(),
         }),
       );

@@ -126,6 +126,9 @@ class SearchFilterSpec {
   /// Offers the "only titles on my list" switch.
   final bool onList;
 
+  /// Also offers "only titles not on my list" (needs `onList: false` support).
+  final bool notOnList;
+
   const SearchFilterSpec({
     this.sorts = const {},
     this.formats = const [],
@@ -138,6 +141,7 @@ class SearchFilterSpec {
     this.year = false,
     this.adult = false,
     this.onList = false,
+    this.notOnList = false,
   });
 
   static const none = SearchFilterSpec();
@@ -152,7 +156,8 @@ class SearchFilterSpec {
       !season &&
       !year &&
       !adult &&
-      !onList;
+      !onList &&
+      !notOnList;
 }
 
 abstract class SearchScreenView {

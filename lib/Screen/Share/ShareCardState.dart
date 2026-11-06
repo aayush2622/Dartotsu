@@ -4,7 +4,6 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:path/path.dart' as p;
@@ -187,13 +186,18 @@ class ShareCardState extends ScreenState {
     try {
       final bytes = await _capture();
       if (bytes == null) throw StateError('capture failed');
-      final saved = await FilePicker.saveFile(
-        fileName: '$fileName.png',
-        bytes: bytes,
-        mimeType: 'image/png',
-        type: FileType.image,
+      final dir = await StorageManager.getDirectory(
+        subPath: 'screenshots',
+        useCustomPath: true,
+        useSystemPath: false,
       );
-      if (saved != null) snackString(getString.shareCardSaved);
+      if (dir == null) throw StateError('no storage folder');
+      var target = File(p.join(dir.path, '$fileName.png'));
+      for (var n = 2; await target.exists(); n++) {
+        target = File(p.join(dir.path, '$fileName ($n).png'));
+      }
+      await target.writeAsBytes(bytes);
+      snackString(getString.shareCardSaved);
     } catch (e, st) {
       logError('ShareCard', e, st);
       snackString(getString.shareCardFailed);

@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/ScoreFormat.dart';
@@ -10,6 +11,7 @@ import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../Components/ThemedContainer.dart';
 import '../../Core/State/State.dart';
+import 'CardShelfState.dart';
 
 enum _ScrimKind { none, short, full }
 
@@ -28,6 +30,8 @@ class PosterCard extends StatefulWidget {
   final double? progress;
 
   final String? progressText;
+  final int? unread;
+  final String? estimate;
 
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -52,6 +56,8 @@ class PosterCard extends StatefulWidget {
     this.airing = false,
     this.progress,
     this.progressText,
+    this.unread,
+    this.estimate,
     this.onTap,
     this.onLongPress,
     this.focusable = false,
@@ -59,6 +65,32 @@ class PosterCard extends StatefulWidget {
     this.demo = false,
     this.heroTag,
   });
+
+  PosterCard.item(
+    ShelfCardItem item, {
+    super.key,
+    String? heroTag,
+    Widget? overlay,
+    VoidCallback? onTap,
+    VoidCallback? onLongPress,
+    this.style,
+    bool skeleton = false,
+  }) : title = item.title,
+       imageUrl = item.imageUrl,
+       subtitle = item.subtitle,
+       overlay = skeleton ? null : overlay ?? item.overlay,
+       score = item.score,
+       scoreHighlight = item.scoreHighlight,
+       airing = item.airing,
+       progress = item.progress,
+       progressText = item.progressText,
+       unread = skeleton ? null : item.unread,
+       estimate = item.estimate,
+       onTap = skeleton ? null : onTap ?? item.onTap,
+       onLongPress = skeleton ? null : onLongPress ?? item.onLongPress,
+       focusable = item.focusable,
+       demo = false,
+       heroTag = skeleton ? null : heroTag ?? item.heroTag;
 
   @override
   State<PosterCard> createState() => _PosterCardState();
@@ -167,16 +199,15 @@ class _PosterCardState extends State<PosterCard> {
                 ),
               ),
               if (showSub)
-                Text(
-                  widget.subtitle!,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.labelSmall?.copyWith(
+                _subtitleText(
+                  context.textTheme.labelSmall?.copyWith(
                     color: Colors.white70,
                     shadows: const [
                       Shadow(color: Colors.black87, blurRadius: 4),
                     ],
                   ),
+                  Color.lerp(_scheme.tertiary, Colors.white, .4)!,
+                  1,
                 ),
             ],
           ),
@@ -247,7 +278,7 @@ class _PosterCardState extends State<PosterCard> {
     final hasScore = s.showScore && widget.score != null;
     final pill = _pillOn && widget.progressText != null;
     final scoreFloats = hasScore && !pill;
-    final posterCorner = _scoreCorner(s, bottomTaken: true);
+    final corners = s.corners(bottomTaken: true, scoreFloats: scoreFloats);
     final onRight =
         s.scoreCorner == CardCorner.bottomRight ||
         s.scoreCorner == CardCorner.topRight ||
@@ -274,19 +305,17 @@ class _PosterCardState extends State<PosterCard> {
                     overlays: [
                       if (pill) const _Scrim(kind: _ScrimKind.short),
                       ..._sourceMark(bottom: pill ? 32 : 6),
-                      if (s.showAiring && widget.airing)
-                        _corner(
-                          _airingCorner(posterCorner),
-                          const _AiringDot(),
-                        ),
-                      if (hasScore && !scoreFloats)
-                        _corner(
-                          posterCorner,
-                          _ScoreBadge(
-                            score: widget.score!,
-                            highlight: widget.scoreHighlight,
+                      ..._grouped([
+                        if (hasScore && !scoreFloats)
+                          (
+                            corners.score,
+                            _ScoreBadge(
+                              score: widget.score!,
+                              highlight: widget.scoreHighlight,
+                            ),
                           ),
-                        ),
+                        ..._statusMarks(s, corners),
+                      ]),
                       if (pill)
                         PositionedDirectional(
                           start: 6,
@@ -332,35 +361,58 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
-  CardCorner _scoreCorner(CardStyle s, {required bool bottomTaken}) {
-    final c = s.scoreCorner == CardCorner.none
-        ? CardCorner.topLeft
-        : s.scoreCorner;
-    if (!bottomTaken) return c;
-    return switch (c) {
-      CardCorner.bottomLeft => CardCorner.topLeft,
-      CardCorner.bottomRight => CardCorner.topRight,
-      _ => c,
-    };
-  }
-
   List<Widget> _sourceMark({required double bottom}) {
     final overlay = widget.overlay;
     if (overlay == null) return const [];
     return [PositionedDirectional(start: 6, bottom: bottom, child: overlay)];
   }
 
-  List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
-    final corner = _scoreCorner(s, bottomTaken: bottomTaken);
+  List<(CardCorner, Widget)> _statusMarks(CardStyle s, CardCorners corners) {
+    final unread = s.showUnread ? widget.unread : null;
     return [
-      if (s.showScore && widget.score != null)
+      if (unread != null)
+        (
+          corners.unread,
+          _UnreadBadge(count: unread, estimated: widget.estimate != null),
+        ),
+      if (s.showAiring && widget.airing) (corners.airing, const _AiringDot()),
+    ];
+  }
+
+  List<Widget> _grouped(List<(CardCorner, Widget)> marks) {
+    final byCorner = <CardCorner, List<Widget>>{};
+    for (final (corner, mark) in marks) {
+      (byCorner[corner] ??= []).add(mark);
+    }
+    return [
+      for (final e in byCorner.entries)
         _corner(
-          corner,
+          e.key,
+          e.value.length == 1
+              ? e.value.first
+              : Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    for (final (i, mark) in e.value.indexed) ...[
+                      if (i > 0) const SizedBox(width: 5),
+                      mark,
+                    ],
+                  ],
+                ),
+        ),
+    ];
+  }
+
+  List<Widget> _cornerMarks(CardStyle s, {bool bottomTaken = false}) {
+    final corners = s.corners(bottomTaken: bottomTaken);
+    return _grouped([
+      if (s.showScore && widget.score != null)
+        (
+          corners.score,
           _ScoreBadge(score: widget.score!, highlight: widget.scoreHighlight),
         ),
-      if (s.showAiring && widget.airing)
-        _corner(_airingCorner(corner), const _AiringDot()),
-    ];
+      ..._statusMarks(s, corners),
+    ]);
   }
 
   Widget _poster(
@@ -416,15 +468,39 @@ class _PosterCardState extends State<PosterCard> {
 
   Widget _subtitleBelow(CardStyle s, double width) => SizedBox(
     width: width,
-    child: Text(
-      widget.subtitle!,
-      style: context.textTheme.labelMedium?.copyWith(
-        color: _scheme.onSurfaceVariant,
-      ),
-      maxLines: s.preset == 'people' ? 2 : 1,
-      overflow: TextOverflow.ellipsis,
+    child: _subtitleText(
+      context.textTheme.labelMedium?.copyWith(color: _scheme.onSurfaceVariant),
+      _scheme.tertiary,
+      s.preset == 'people' ? 2 : 1,
     ),
   );
+
+  Widget _subtitleText(TextStyle? style, Color accent, int lines) {
+    final text = widget.subtitle!;
+    final estimate = widget.estimate;
+    if (estimate == null || !text.endsWith(estimate)) {
+      return Text(
+        text,
+        style: style,
+        maxLines: lines,
+        overflow: TextOverflow.ellipsis,
+      );
+    }
+    return Text.rich(
+      TextSpan(
+        children: [
+          TextSpan(text: text.substring(0, text.length - estimate.length)),
+          TextSpan(
+            text: estimate,
+            style: TextStyle(color: accent),
+          ),
+        ],
+      ),
+      style: style,
+      maxLines: lines,
+      overflow: TextOverflow.ellipsis,
+    );
+  }
 
   Widget _image(ColorScheme scheme, CardStyle s) {
     if (widget.demo && (widget.imageUrl?.isEmpty ?? true)) {
@@ -454,9 +530,6 @@ class _PosterCardState extends State<PosterCard> {
       ),
     );
   }
-
-  static CardCorner _airingCorner(CardCorner score) =>
-      score == CardCorner.topLeft ? CardCorner.topRight : CardCorner.topLeft;
 
   Widget _corner(CardCorner c, Widget child) => Positioned(
     top: c == CardCorner.topLeft || c == CardCorner.topRight ? 6 : null,
@@ -533,6 +606,52 @@ class _ScoreBadge extends StatelessWidget {
           const SizedBox(width: 2),
           Icon(Icons.star_rounded, color: fg, size: 12),
         ],
+      ),
+    );
+  }
+}
+
+class _UnreadBadge extends StatelessWidget {
+  final int count;
+  final bool estimated;
+
+  const _UnreadBadge({required this.count, required this.estimated});
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    final fill = estimated ? scheme.tertiaryContainer : scheme.primaryContainer;
+    final ink = estimated
+        ? scheme.onTertiaryContainer
+        : scheme.onPrimaryContainer;
+    return Container(
+      constraints: const BoxConstraints(minWidth: 22),
+      height: 22,
+      padding: const EdgeInsets.symmetric(horizontal: 6),
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: fill,
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(
+          color: scheme.surface.withValues(alpha: 0.9),
+          width: 2,
+        ),
+        boxShadow: const [
+          BoxShadow(
+            color: Color(0x59000000),
+            blurRadius: 5,
+            offset: Offset(0, 1),
+          ),
+        ],
+      ),
+      child: Text(
+        count > 99 ? '99+' : '$count',
+        maxLines: 1,
+        style: context.textTheme.labelSmall?.copyWith(
+          color: ink,
+          fontWeight: FontWeight.w800,
+          height: 1,
+        ),
       ),
     );
   }

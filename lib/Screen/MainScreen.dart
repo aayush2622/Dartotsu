@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../Core/Services/MediaServiceController.dart';
 import '../Core/ThemeManager/CardStyleController.dart';
+import '../Utils/Animation/WidgetAnimations.dart';
 import '../Utils/Extensions/ContextExtensions.dart';
 import '../Widgets/Components/BaseScreen.dart';
 import 'Feed/FeedTabs.dart';
@@ -87,7 +88,7 @@ class MainScreenState extends BaseScreen<MainScreen>
           children: [
             if (!context.isPhone)
               SizedBox(width: 100, child: _navbar(shellRailKey)),
-            Expanded(child: body),
+            Expanded(child: body.animateFadeUp(begin: 0.015, duration: 520)),
           ],
         ),
         if (context.isPhone) _navbar(shellLaneKey),

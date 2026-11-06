@@ -104,6 +104,7 @@ class AnilistSearchView extends SearchScreenView {
       year: true,
       adult: true,
       onList: anilistAuth.isLoggedIn,
+      notOnList: anilistAuth.isLoggedIn,
     );
   }
 }

@@ -11,6 +11,9 @@ class EmptyState extends StatelessWidget {
   final bool failed;
   final String? actionLabel;
   final VoidCallback? onAction;
+  final String? secondaryLabel;
+  final IconData secondaryIcon;
+  final VoidCallback? onSecondary;
 
   const EmptyState({
     super.key,
@@ -20,6 +23,9 @@ class EmptyState extends StatelessWidget {
     this.failed = false,
     this.actionLabel,
     this.onAction,
+    this.secondaryLabel,
+    this.secondaryIcon = Icons.language_rounded,
+    this.onSecondary,
   });
 
   @override
@@ -70,6 +76,14 @@ class EmptyState extends StatelessWidget {
                 onPressed: onAction,
                 icon: const Icon(Icons.refresh_rounded, size: 18),
                 label: Text(actionLabel ?? getString.retry),
+              ),
+            ],
+            if (onSecondary != null && secondaryLabel != null) ...[
+              SizedBox(height: Dimens.gapSm),
+              TextButton.icon(
+                onPressed: onSecondary,
+                icon: Icon(secondaryIcon, size: 18),
+                label: Text(secondaryLabel!),
               ),
             ],
           ],

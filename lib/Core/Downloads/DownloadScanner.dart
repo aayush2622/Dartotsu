@@ -7,11 +7,13 @@ import 'package:path/path.dart' as p;
 import '../../Logger.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
-import 'Archives.dart';
+
+import 'package:dartotsu_extension_bridge/downloads.dart';
+
 import 'DownloadEngine.dart';
-import 'DownloadPaths.dart';
 import 'DownloadTask.dart';
-import 'NameMatch.dart';
+
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 
 const localServiceId = 'local';
 
@@ -209,10 +211,10 @@ class DownloadScanner {
       if (number == null) continue;
       final key = unitKeyOf(number);
       final base = p.basenameWithoutExtension(video.path);
-      final sub = subtitles
-          .where((s) => p.basename(s.path).startsWith('$base.'))
-          .map((s) => s.path)
-          .firstOrNull;
+      final subs = [
+        for (final s in subtitles)
+          if (p.basename(s.path).startsWith('$base.')) s.path,
+      ];
       found.add(
         DownloadTask(
           id: DownloadTask.idOf(serviceId, mediaId, key),
@@ -230,7 +232,7 @@ class DownloadScanner {
           profile: null,
           createdAt: now,
           path: video.path,
-          subtitlePath: sub,
+          subtitlePaths: subs,
         )..state.value = DownloadState.done,
       );
     }
