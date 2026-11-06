@@ -49,23 +49,40 @@ extension on AnilistQueries {
       if (r.excludedTags?.isNotEmpty == true) 'excludedTags': r.excludedTags,
     };
 
-    final data = await client.query(
-      _querySearchMedia(r.perPage ?? 30),
-      variables: variables,
-    );
-    final page = data['Page'] as Map<String, dynamic>?;
-    if (page == null) return null;
+    try {
+      final data = await client.query(
+        _querySearchMedia(r.perPage ?? 30),
+        variables: variables,
+        showErrors: !MediaIndexClient.canServe(r),
+      );
+      final page = data['Page'] as Map<String, dynamic>?;
+      if (page == null) return null;
 
-    final media = (page['media'] as List? ?? const [])
-        .cast<Map<String, dynamic>>()
-        .map((m) => mapAnilistMedia(m))
-        .toList();
-    final info = page['pageInfo'] as Map<String, dynamic>?;
+      final media = (page['media'] as List? ?? const [])
+          .cast<Map<String, dynamic>>()
+          .map((m) => mapAnilistMedia(m))
+          .toList();
+      final info = page['pageInfo'] as Map<String, dynamic>?;
 
-    return r
-      ..results = media
-      ..page = (info?['currentPage'] as num?)?.toInt() ?? r.page
-      ..hasNextPage = info?['hasNextPage'] == true;
+      return r
+        ..results = media
+        ..page = (info?['currentPage'] as num?)?.toInt() ?? r.page
+        ..hasNextPage = info?['hasNextPage'] == true;
+    } on AnilistException catch (e) {
+      if (!MediaIndexClient.canServe(r)) rethrow;
+      final cached = await _mediaIndex.search(
+        r,
+        allowAdult: r.isAdult ?? AnilistPref.displayAdult.value,
+      );
+      if (cached == null) {
+        snackString(getString.serviceError(getString.anilist, e.message));
+        rethrow;
+      }
+      return r
+        ..results = cached.media
+        ..page = r.page ?? 1
+        ..hasNextPage = cached.hasNext;
+    }
   }
 
   Future<SearchResults?> _searchPeople(

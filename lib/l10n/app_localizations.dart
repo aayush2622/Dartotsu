@@ -4013,6 +4013,12 @@ abstract class AppLocalizations {
   /// **'Copy title'**
   String get copyTitle;
 
+  /// No description provided for @detailStale.
+  ///
+  /// In en, this message translates to:
+  /// **'AniList could not be reached. This is saved information and may be outdated.'**
+  String get detailStale;
+
   /// No description provided for @copyLink.
   ///
   /// In en, this message translates to:

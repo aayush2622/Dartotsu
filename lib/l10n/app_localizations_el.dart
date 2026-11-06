@@ -2159,6 +2159,10 @@ class AppLocalizationsEl extends AppLocalizations {
   String get copyTitle => 'Αντιγραφή τίτλου';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Αντιγραφή συνδέσμου';
 
   @override

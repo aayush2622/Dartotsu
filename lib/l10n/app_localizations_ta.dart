@@ -2150,6 +2150,10 @@ class AppLocalizationsTa extends AppLocalizations {
   String get copyTitle => 'டைட்டிலை காப்பி பண்ணு';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'லிங்க்கை காப்பி பண்ணு';
 
   @override

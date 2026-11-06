@@ -4,6 +4,7 @@ import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
+import '../../../../Screen/Detail/Components/StaleNotice.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
 import '../Auth.dart';
 import '../Data/Media.dart';
@@ -57,6 +58,7 @@ class AnilistDetailView extends DetailScreenView {
     final m = host.media.value;
     final description = (m.description ?? '').trim();
     return [
+      if (m.stale) const ScreenWidget.extra(StaleNotice()),
       ScreenWidget.extra(DetailStats(host)),
       if (description.isNotEmpty)
         ScreenWidget.data(

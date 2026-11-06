@@ -2106,6 +2106,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get copyTitle => '제목 복사';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => '링크 복사';
 
   @override

@@ -25,6 +25,7 @@ import 'Data/Notification.dart';
 import 'Data/Social.dart';
 import 'Prefs.dart';
 import 'AnilistService.dart';
+import 'MediaIndex/MediaIndexClient.dart';
 import 'package:collection/collection.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
@@ -48,6 +49,8 @@ class AnilistQueries extends Queries {
   final AnilistClient client;
   final int? Function() userId;
   final Future<bool> Function() refreshUser;
+
+  final MediaIndexClient _mediaIndex = MediaIndexClient();
 
   AnilistQueries(
     this.client, {

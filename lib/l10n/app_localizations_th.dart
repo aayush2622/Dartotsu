@@ -2125,6 +2125,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get copyTitle => 'คัดลอกชื่อ';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'คัดลอกลิงก์';
 
   @override

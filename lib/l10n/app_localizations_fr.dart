@@ -2158,6 +2158,10 @@ class AppLocalizationsFr extends AppLocalizations {
   String get copyTitle => 'Copier le titre';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Copier le lien';
 
   @override

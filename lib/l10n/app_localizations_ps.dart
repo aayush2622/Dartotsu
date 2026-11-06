@@ -2138,6 +2138,10 @@ class AppLocalizationsPs extends AppLocalizations {
   String get copyTitle => 'سرلیک کاپي کړه';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'لینک کاپي کړه';
 
   @override

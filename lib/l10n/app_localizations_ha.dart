@@ -2143,6 +2143,10 @@ class AppLocalizationsHa extends AppLocalizations {
   String get copyTitle => 'Kwafi take';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Kwafi hanyar haɗi';
 
   @override

@@ -2151,6 +2151,10 @@ class AppLocalizationsKn extends AppLocalizations {
   String get copyTitle => 'ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಮಾಡು';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'ಲಿಂಕ್ ಕಾಪಿ ಮಾಡು';
 
   @override

@@ -2139,6 +2139,10 @@ class AppLocalizationsVi extends AppLocalizations {
   String get copyTitle => 'Sao chép tiêu đề';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Sao chép link';
 
   @override
