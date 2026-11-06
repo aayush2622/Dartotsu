@@ -20,6 +20,18 @@ class DownloadExport {
 
   static Future<void> finished(DownloadTask task) async {
     if (!SafStorage.active) return;
+    try {
+      await _finished(task);
+    } catch (e) {
+      logger(
+        'Copying ${task.id} to the chosen folder failed: $e',
+        tag: 'DOWNLOAD',
+        logLevel: LogLevel.warning,
+      );
+    }
+  }
+
+  static Future<void> _finished(DownloadTask task) async {
     final path = task.path;
     if (path == null) return;
     final base = (await DownloadPaths.root()).path;
@@ -41,10 +53,18 @@ class DownloadExport {
 
   static Future<void> removed(DownloadTask task) async {
     if (!SafStorage.active) return;
-    final targets = _paths(task);
-    final base = (await DownloadPaths.root()).path;
-    for (final target in targets) {
-      await SafStorage.remove(target, base: base);
+    try {
+      final targets = _paths(task);
+      final base = (await DownloadPaths.root()).path;
+      for (final target in targets) {
+        await SafStorage.remove(target, base: base);
+      }
+    } catch (e) {
+      logger(
+        'Removing ${task.id} from the chosen folder failed: $e',
+        tag: 'DOWNLOAD',
+        logLevel: LogLevel.warning,
+      );
     }
   }
 }

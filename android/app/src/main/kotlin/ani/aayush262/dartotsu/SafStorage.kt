@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.DocumentsContract
+import android.util.Log
 import android.webkit.MimeTypeMap
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
@@ -15,7 +16,20 @@ class SafStorage(private val activity: Activity) {
     private val resolver get() = activity.contentResolver
 
     fun handle(method: String, args: Map<String, Any?>, result: MethodChannel.Result) {
+        try {
+            dispatch(method, args, result)
+        } catch (e: Exception) {
+            Log.w(TAG, "$method failed", e)
+            pending = null
+            result.error("saf", e.message ?: e.javaClass.simpleName, null)
+        }
+    }
+
+    private fun dispatch(method: String, args: Map<String, Any?>, result: MethodChannel.Result) {
         when (method) {
+            "check" -> background(result) {
+                check(Uri.parse(args["tree"] as String), args["root"] as String)
+            }
             "pick" -> pick(result)
             "export" -> background(result) {
                 export(
@@ -42,6 +56,7 @@ class SafStorage(private val activity: Activity) {
         pending = null
         val tree = data?.data
         if (resultCode != Activity.RESULT_OK || tree == null) {
+            Log.i(TAG, "Picker closed without a folder (resultCode=$resultCode)")
             result.success(null)
             return true
         }
@@ -54,11 +69,14 @@ class SafStorage(private val activity: Activity) {
                 val picked = try {
                     resolveRoot(tree)
                 } catch (e: Exception) {
+                    Log.w(TAG, "Could not prepare the picked folder $tree", e)
                     null
                 }
+                Log.i(TAG, "Picked $tree -> ${picked?.get("root")}")
                 activity.runOnUiThread { result.success(picked) }
             }.start()
         } catch (e: Exception) {
+            Log.w(TAG, "Could not keep access to $tree", e)
             result.success(null)
         }
         return true
@@ -83,6 +101,7 @@ class SafStorage(private val activity: Activity) {
             val value = try {
                 work()
             } catch (e: Exception) {
+                Log.w(TAG, "Storage call failed", e)
                 null
             }
             activity.runOnUiThread { result.success(value) }
@@ -111,6 +130,19 @@ class SafStorage(private val activity: Activity) {
         }
         val rootName = displayName(DocumentsContract.buildDocumentUriUsingTree(tree, rootId))
         return mapOf("tree" to tree.toString(), "root" to rootId, "name" to rootName)
+    }
+
+    private fun check(tree: Uri, rootId: String): Boolean {
+        val granted = resolver.persistedUriPermissions.any {
+            it.uri == tree && it.isReadPermission && it.isWritePermission
+        }
+        if (!granted) {
+            Log.w(TAG, "Access to $tree is no longer granted")
+            return false
+        }
+        val name = displayName(DocumentsContract.buildDocumentUriUsingTree(tree, rootId))
+        if (name.isEmpty()) Log.w(TAG, "The folder $rootId under $tree is gone")
+        return name.isNotEmpty()
     }
 
     private fun displayName(doc: Uri): String =
@@ -180,7 +212,11 @@ class SafStorage(private val activity: Activity) {
                 name,
             ) ?: return false
         }
-        val output = resolver.openOutputStream(target, "wt") ?: return false
+        val output = resolver.openOutputStream(target, "wt")
+        if (output == null) {
+            Log.w(TAG, "Cannot open $relative for writing")
+            return false
+        }
         output.use { out -> file.inputStream().use { it.copyTo(out) } }
         return true
     }
@@ -198,6 +234,7 @@ class SafStorage(private val activity: Activity) {
     }
 
     companion object {
+        const val TAG = "SafStorage"
         const val REQUEST_PICK = 7421
         const val APP_FOLDER = "Dartotsu"
     }

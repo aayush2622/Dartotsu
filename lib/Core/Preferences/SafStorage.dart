@@ -29,11 +29,44 @@ class SafFolder {
 class SafStorage {
   static const _channel = MethodChannel('dartotsu/saf');
 
+  static const _tag = 'STORAGE';
+  static const _maxFailures = 5;
+
   static bool _legacyAccess = false;
+  static bool _unusable = false;
+  static int _failures = 0;
 
   static Future<void> init() async {
     if (!Platform.isAndroid) return;
-    _legacyAccess = await StorageManager.hasStoragePermission();
+    try {
+      _legacyAccess = await StorageManager.hasStoragePermission();
+      final target = folder;
+      logger(
+        'Storage: all-files access=$_legacyAccess, chosen folder=${target?.name ?? 'none'}',
+        tag: _tag,
+      );
+      if (!_legacyAccess && target != null) {
+        final ok = await _channel.invokeMethod<bool>('check', {
+          'tree': target.tree,
+          'root': target.root,
+        });
+        if (ok != true) {
+          _unusable = true;
+          logger(
+            'The chosen folder ${target.name} is not reachable any more, keeping files in app storage only',
+            tag: _tag,
+            logLevel: LogLevel.warning,
+          );
+        }
+      }
+    } catch (e) {
+      _unusable = true;
+      logger(
+        'Storage check failed, keeping files in app storage only: $e',
+        tag: _tag,
+        logLevel: LogLevel.warning,
+      );
+    }
   }
 
   static SafFolder? get folder {
@@ -48,19 +81,44 @@ class SafStorage {
   }
 
   static bool get active =>
-      Platform.isAndroid && !_legacyAccess && folder != null;
+      Platform.isAndroid && !_legacyAccess && !_unusable && folder != null;
 
   static Future<SafFolder?> pick() async {
-    final result = await _channel.invokeMapMethod<String, String>('pick');
-    if (result == null) return null;
-    final picked = SafFolder.fromJson(result);
-    if (picked != null) {
-      PrefName.safFolder.rx.value = jsonEncode(picked.toJson());
+    try {
+      final result = await _channel.invokeMapMethod<String, String>('pick');
+      if (result == null) return null;
+      final picked = SafFolder.fromJson(result);
+      if (picked != null) {
+        PrefName.safFolder.rx.value = jsonEncode(picked.toJson());
+        _unusable = false;
+        _failures = 0;
+        logger('Chosen folder set to ${picked.name}', tag: _tag);
+      }
+      return picked;
+    } catch (e) {
+      logger(
+        'Picking a folder failed: $e',
+        tag: _tag,
+        logLevel: LogLevel.warning,
+      );
+      return null;
     }
-    return picked;
   }
 
-  static void clear() => PrefName.safFolder.rx.value = '';
+  static void clear() {
+    PrefName.safFolder.rx.value = '';
+    logger('Chosen folder cleared', tag: _tag);
+  }
+
+  static void _fail(String what) {
+    if (++_failures < _maxFailures || _unusable) return;
+    _unusable = true;
+    logger(
+      'Giving up on the chosen folder after $_failures failures ($what)',
+      tag: _tag,
+      logLevel: LogLevel.warning,
+    );
+  }
 
   static String relative(String path, String base) =>
       p.relative(path, from: base).replaceAll(r'\', '/');
@@ -86,13 +144,25 @@ class SafStorage {
           'relative': relative(file.path, base),
           'source': file.path,
         });
-        if (ok == true) count++;
+        if (ok == true) {
+          count++;
+          _failures = 0;
+        } else {
+          logger(
+            'Could not copy ${file.path} to the chosen folder',
+            tag: _tag,
+            logLevel: LogLevel.warning,
+          );
+          _fail(file.path);
+        }
       }
     } catch (e) {
       logger(
         'Export to the chosen folder failed: $e',
+        tag: _tag,
         logLevel: LogLevel.warning,
       );
+      _fail('$e');
     }
     return count;
   }
@@ -109,6 +179,7 @@ class SafStorage {
     } catch (e) {
       logger(
         'Removing from the chosen folder failed: $e',
+        tag: _tag,
         logLevel: LogLevel.warning,
       );
     }
