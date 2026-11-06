@@ -12,6 +12,7 @@ import '../../../Widgets/Components/EmptyState.dart';
 import '../../Detail/Watch/Components/StreamGroups.dart';
 import '../../Detail/Watch/Data/EpisodeUnits.dart';
 import '../../Player/Engine/PlayRequest.dart';
+import '../../Player/Engine/StreamFeed.dart';
 
 class DownloadStreamSheet extends StatefulWidget {
   final Source source;
@@ -28,7 +29,7 @@ class DownloadStreamSheet extends StatefulWidget {
 }
 
 class _DownloadStreamSheetState extends State<DownloadStreamSheet> {
-  final _streams = Live<List<v.Video>?>(null);
+  final _feed = Live<StreamFeed?>(null);
   final _error = Live<String?>(null);
 
   @override
@@ -37,19 +38,26 @@ class _DownloadStreamSheetState extends State<DownloadStreamSheet> {
     _load();
   }
 
+  @override
+  void dispose() {
+    _feed.value?.cancel();
+    super.dispose();
+  }
+
   Future<void> _load() async {
-    _streams.value = null;
+    _feed.value?.cancel();
+    _feed.value = null;
     _error.value = null;
+    final feed = StreamFeed.of(widget.source, widget.unit.raw);
+    _feed.value = feed;
     try {
-      final list = await widget.source.methods.getVideoList(widget.unit.raw);
-      if (!mounted) return;
-      shareSubtitles(list);
+      final list = await feed.all;
+      if (!mounted || _feed.value != feed) return;
       logger('Download streams: ${list.length}', tag: 'DOWNLOAD');
       if (list.length == 1) {
         popPage(context, StreamPick(list, 0));
         return;
       }
-      _streams.value = list;
       if (list.isEmpty) _error.value = getString.playerNoStreams;
     } catch (e, st) {
       logger(
@@ -67,7 +75,8 @@ class _DownloadStreamSheetState extends State<DownloadStreamSheet> {
     return AppSheet(
       title: getString.downloadPickStream,
       child: Watch(() {
-        final list = _streams.value;
+        final feed = _feed.value;
+        final list = feed?.videos.value ?? const <v.Video>[];
         final error = _error.value;
         if (error != null) {
           return SizedBox(
@@ -82,7 +91,7 @@ class _DownloadStreamSheetState extends State<DownloadStreamSheet> {
             ),
           );
         }
-        if (list == null) {
+        if (feed == null || list.isEmpty) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
             child: Column(
@@ -104,10 +113,11 @@ class _DownloadStreamSheetState extends State<DownloadStreamSheet> {
           shrinkWrap: true,
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
           children: [
+            if (!feed.done.value) const LinearProgressIndicator(),
             GroupedStreams(
               list: list,
               icon: Icons.download_rounded,
-              onPick: (i) => popPage(context, StreamPick(list, i)),
+              onPick: (i) => popPage(context, StreamPick(feed.videos.value, i)),
             ),
           ],
         );

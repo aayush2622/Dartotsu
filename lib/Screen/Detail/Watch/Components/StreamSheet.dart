@@ -1,8 +1,8 @@
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
 import '../../../Player/Engine/PlayRequest.dart';
+import '../../../Player/Engine/StreamFeed.dart';
 import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../Data/EpisodeUnits.dart';
@@ -26,7 +26,7 @@ class StreamSheet extends StatefulWidget {
 }
 
 class _StreamSheetState extends State<StreamSheet> {
-  final _streams = Live<List<v.Video>?>(null);
+  final _feed = Live<StreamFeed?>(null);
   final _error = Live<String?>(null);
   late final _auto = widget.state.record.streams.auto.live;
 
@@ -36,27 +36,37 @@ class _StreamSheetState extends State<StreamSheet> {
     _load();
   }
 
+  @override
+  void dispose() {
+    _feed.value?.cancel();
+    super.dispose();
+  }
+
   Future<void> _load() async {
-    _streams.value = null;
+    _feed.value?.cancel();
+    _feed.value = null;
     _error.value = null;
     final source = widget.state.source.value;
     if (source == null) {
       _error.value = getString.watchSourceMissing;
       return;
     }
+    final feed = StreamFeed.of(source, widget.unit.raw);
+    _feed.value = feed;
+    final record = widget.state.record.streams;
+    final last = record.auto ? record.last[source.id] : null;
     try {
-      final list = await source.methods.getVideoList(widget.unit.raw);
-      if (!mounted) return;
-      shareSubtitles(list);
-      final last = widget.state.record.streams.last[source.id];
-      final remembered = widget.state.record.streams.auto && last != null
-          ? bestStreamIndex(list, last)
-          : null;
-      if (remembered != null || list.length == 1) {
+      final list = last == null
+          ? await feed.all
+          : await feed.until(
+              (l) => bestStreamIndex(l, last, exact: true) != null,
+            );
+      if (!mounted || _feed.value != feed) return;
+      final remembered = last == null ? null : bestStreamIndex(list, last);
+      if (remembered != null || (feed.done.value && list.length == 1)) {
         popPage(context, StreamPick(list, remembered ?? 0));
         return;
       }
-      _streams.value = list;
       if (list.isEmpty) _error.value = getString.playerNoStreams;
     } catch (e, st) {
       logger('Streams failed: $e\n$st', logLevel: LogLevel.error, tag: 'WATCH');
@@ -70,7 +80,7 @@ class _StreamSheetState extends State<StreamSheet> {
     return AppSheet(
       title: unitLabel(widget.unit, true),
       child: Watch(() {
-        final list = _streams.value;
+        final feed = _feed.value;
         final error = _error.value;
         if (error != null) {
           return SizedBox(
@@ -85,7 +95,8 @@ class _StreamSheetState extends State<StreamSheet> {
             ),
           );
         }
-        if (list == null) {
+        final list = feed?.videos.value ?? const <v.Video>[];
+        if (feed == null || list.isEmpty) {
           return Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
             child: Column(
@@ -107,6 +118,7 @@ class _StreamSheetState extends State<StreamSheet> {
           shrinkWrap: true,
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
           children: [
+            if (!feed.done.value) const LinearProgressIndicator(),
             SwitchListTile(
               contentPadding: const EdgeInsets.symmetric(horizontal: 8),
               value: _auto.value,
@@ -121,7 +133,7 @@ class _StreamSheetState extends State<StreamSheet> {
             GroupedStreams(
               list: list,
               icon: Icons.play_circle_outline_rounded,
-              onPick: (i) => popPage(context, StreamPick(list, i)),
+              onPick: (i) => popPage(context, StreamPick(feed.videos.value, i)),
             ),
           ],
         );

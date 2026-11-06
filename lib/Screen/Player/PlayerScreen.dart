@@ -57,8 +57,8 @@ class _PlayerScreenState extends State<PlayerScreen>
     FocusManager.instance.addListener(_guardFocus);
     state.askStream = (list) =>
         showStreamSheet(context, state, list, selected: -1);
-    state.askPendingStream = (pending) =>
-        showPendingStreamSheet(context, state, pending);
+    state.askPendingStream = (feed) =>
+        showPendingStreamSheet(context, state, feed);
   }
 
   @override

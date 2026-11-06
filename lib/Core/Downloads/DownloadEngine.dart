@@ -11,6 +11,7 @@ import 'package:path/path.dart' as p;
 import '../../Api/Services/Extension/Services.dart';
 import '../../Logger.dart';
 import '../../Screen/Player/Engine/PlayRequest.dart';
+import '../../Screen/Player/Engine/StreamFeed.dart';
 import '../../Screen/Player/Engine/TorrentStream.dart';
 import '../NotificationManager/NotificationManager.dart';
 import '../Offline/NetStatus.dart';
@@ -807,8 +808,17 @@ class DownloadEngine extends AppController {
   Future<void> _resolve(DownloadTask task, {StreamProfile? previous}) async {
     final profile = previous ?? task.profile;
     final source = await _sourceFor(task, ItemType.anime);
-    final list = await source.methods.getVideoList(_episodeOf(task));
-    shareSubtitles(list);
+    final feed = StreamFeed.of(source, _episodeOf(task));
+    final List<v.Video> list;
+    try {
+      list = profile == null
+          ? await feed.all
+          : await feed.until(
+              (l) => bestStreamIndex(l, profile.label, exact: true) != null,
+            );
+    } finally {
+      feed.cancel();
+    }
     if (list.isEmpty) throw DownloadBlocked(getString.playerNoStreams);
     var index = 0;
     if (profile != null) {

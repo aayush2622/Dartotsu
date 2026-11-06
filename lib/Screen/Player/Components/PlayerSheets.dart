@@ -1,8 +1,11 @@
 import 'dart:async';
+
 import '../../../Logger.dart';
+
 import 'dart:typed_data';
 
 import '../../../Utils/Functions/SnackBar.dart';
+
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,7 @@ import 'package:flutter/material.dart';
 import '../../Detail/Watch/Components/StreamGroups.dart';
 import '../Engine/PlayerPlaylist.dart';
 import '../Engine/PlayerSettings.dart';
+import '../Engine/StreamFeed.dart';
 import '../../Detail/Watch/Data/Media/MediaRecord.dart';
 import '../../../Core/State/State.dart';
 import '../../../Model/Setting.dart';
@@ -192,40 +196,31 @@ Future<int?> showStreamSheet(
 Future<int?> showPendingStreamSheet(
   BuildContext context,
   PlayerState state,
-  Future<List<v.Video>> pending,
+  StreamFeed feed,
 ) => showCustomBottomDialog<int>(
   context,
-  _PendingStreams(state: state, pending: pending),
+  _PendingStreams(state: state, feed: feed),
 );
 
 class _PendingStreams extends StatefulWidget {
   final PlayerState state;
-  final Future<List<v.Video>> pending;
+  final StreamFeed feed;
 
-  const _PendingStreams({required this.state, required this.pending});
+  const _PendingStreams({required this.state, required this.feed});
 
   @override
   State<_PendingStreams> createState() => _PendingStreamsState();
 }
 
 class _PendingStreamsState extends State<_PendingStreams> {
-  final _list = Live<List<v.Video>?>(null);
-  final _error = Live<String?>(null);
-
   @override
   void initState() {
     super.initState();
-    widget.pending.then(
-      (list) {
-        if (!mounted) return;
-        if (list.length == 1) return _close(0);
-        if (list.isEmpty) return _close(null);
-        _list.value = list;
-      },
-      onError: (Object e) {
-        if (mounted) _error.value = '$e';
-      },
-    );
+    widget.feed.all.then((list) {
+      if (!mounted) return;
+      if (list.length == 1) return _close(0);
+      if (list.isEmpty) return _close(null);
+    }, onError: (Object e) {});
   }
 
   void _close(int? result) {
@@ -243,20 +238,21 @@ class _PendingStreamsState extends State<_PendingStreams> {
   Widget build(BuildContext context) => AppSheet(
     title: getString.playerStreams,
     child: Watch(() {
-      final error = _error.value;
-      final list = _list.value;
+      final error = widget.feed.failure.value;
+      final list = widget.feed.videos.value;
+      final done = widget.feed.done.value;
       if (error != null) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
           child: Text(
-            error,
+            '$error',
             style: context.textTheme.bodyMedium?.copyWith(
               color: context.colorScheme.error,
             ),
           ),
         );
       }
-      if (list == null) {
+      if (list.isEmpty) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(16, 8, 16, 32),
           child: Column(
@@ -274,7 +270,13 @@ class _PendingStreamsState extends State<_PendingStreams> {
           ),
         );
       }
-      return _streamList(context, widget.state, list, -1);
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (!done) const LinearProgressIndicator(),
+          Flexible(child: _streamList(context, widget.state, list, -1)),
+        ],
+      );
     }),
   );
 }

@@ -6,7 +6,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
-import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:path/path.dart' as p;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -27,6 +26,7 @@ import 'Engine/IntroDb.dart';
 import 'Engine/LocalPlayback.dart';
 import 'Engine/MpvFiles.dart';
 import 'Engine/Pip.dart';
+import 'Engine/StreamFeed.dart';
 import 'Engine/TrackPick.dart';
 import 'Engine/SeekPreview.dart';
 import 'Engine/PlayRequest.dart';
@@ -467,6 +467,8 @@ class PlayerState extends ScreenState {
   void onClose() {
     openCount--;
     _closed = true;
+    _feed?.cancel();
+    _feedWatch?.dispose();
     if (cast.active) unawaited(cast.stop());
     _castPositionSub?.dispose();
     _castEndedSub?.dispose();
@@ -542,8 +544,8 @@ class PlayerState extends ScreenState {
     );
   }
 
-  Future<List<v.Video>> fetchStreams(PlayItem target) async {
-    if (target.hasFixedStreams) return target.fixed;
+  StreamFeed openStreams(PlayItem target) {
+    if (target.hasFixedStreams) return StreamFeed.ready(target.fixed);
     final svc = request.service;
     final med = request.media;
     if (svc != null && med != null) {
@@ -552,15 +554,16 @@ class PlayerState extends ScreenState {
         med.id,
         target.downloadKey,
       );
-      if (local != null) return [local];
+      if (local != null) return StreamFeed.ready([local]);
     }
     final source = request.source;
     final episode = target.episode;
-    if (source == null || episode == null) return const [];
-    final list = await source.methods.getVideoList(episode);
-    shareSubtitles(list);
-    return list;
+    if (source == null || episode == null) return StreamFeed.ready(const []);
+    return StreamFeed.of(source, episode);
   }
+
+  Future<List<v.Video>> fetchStreams(PlayItem target) =>
+      openStreams(target).all;
 
   Future<void> loadItem(
     int next, {
@@ -577,24 +580,38 @@ class PlayerState extends ScreenState {
     loadError.value = null;
     _preloading = false;
     try {
-      final Future<List<v.Video>> loaded;
-      var cached = false;
+      StreamFeed? feed;
+      List<v.Video>? ready;
       if (preset != null) {
-        loaded = Future.value(preset);
+        ready = preset;
       } else if (_nextFor == next && _nextStreams != null) {
-        loaded = Future.value(_nextStreams!);
-        cached = true;
+        ready = _nextStreams!;
       } else {
-        loaded = fetchStreams(items[next]);
+        _feed?.cancel();
+        feed = openStreams(items[next]);
+        _feed = feed;
       }
-      unawaited(loaded.then((_) {}, onError: (_) {}));
+      unawaited(feed?.all.then((_) {}, onError: (_) {}));
       final early =
-          preset == null &&
-          !cached &&
-          askPendingStream != null &&
-          !_remembersStream();
-      final Future<int?>? sheet = early ? askPendingStream!(loaded) : null;
-      final list = await loaded;
+          feed != null && askPendingStream != null && !_remembersStream();
+      final Future<int?>? sheet = early ? askPendingStream!(feed) : null;
+      final List<v.Video> list;
+      int? picked;
+      if (feed == null) {
+        list = ready!;
+      } else if (sheet != null) {
+        picked = await sheet;
+        if (generation != _generation) return;
+        list = feed.videos.value;
+        if (list.isEmpty && feed.failure.value != null) await feed.all;
+      } else {
+        final label = _rememberedLabel();
+        list = label == null
+            ? await feed.all
+            : await feed.until(
+                (l) => bestStreamIndex(l, label, exact: true) != null,
+              );
+      }
       if (generation != _generation) return;
       if (sheet == null) await _confirmTracking();
       if (generation != _generation) return;
@@ -606,9 +623,9 @@ class PlayerState extends ScreenState {
         return;
       }
       videos.value = list;
+      _followFeed(feed, generation);
       final chosen =
-          presetIndex ??
-          (sheet != null ? await sheet : await _chooseStream(list));
+          presetIndex ?? (sheet != null ? picked : await _chooseStream(list));
       if (generation != _generation) return;
       if (sheet != null && chosen != null) await _confirmTracking();
       if (generation != _generation) return;
@@ -658,14 +675,28 @@ class PlayerState extends ScreenState {
   }
 
   Future<int?> Function(List<v.Video> list)? askStream;
-  Future<int?> Function(Future<List<v.Video>> pending)? askPendingStream;
+  Future<int?> Function(StreamFeed feed)? askPendingStream;
 
-  bool _remembersStream() {
+  String? _rememberedLabel() {
     final rec = record;
     final src = request.source;
-    if (rec == null || src == null) return false;
-    return (rec.streams.auto || request.resume) &&
-        rec.streams.last[src.id] != null;
+    if (rec == null || src == null) return null;
+    if (!(rec.streams.auto || request.resume)) return null;
+    return rec.streams.last[src.id];
+  }
+
+  bool _remembersStream() => _rememberedLabel() != null;
+
+  StreamFeed? _feed;
+  Disposer? _feedWatch;
+
+  void _followFeed(StreamFeed? feed, int generation) {
+    _feedWatch?.dispose();
+    _feedWatch = null;
+    if (feed == null || feed.done.value) return;
+    _feedWatch = onChange(feed.videos, (list) {
+      if (generation == _generation && !_closed) videos.value = list;
+    });
   }
 
   void rememberStream(v.Video chosen) {
