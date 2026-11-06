@@ -349,6 +349,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get customPathDesc => 'アプリのデータを置く場所。長押しでリセット';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'フォルダを選択';
 
   @override

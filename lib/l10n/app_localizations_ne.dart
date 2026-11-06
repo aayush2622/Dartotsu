@@ -353,6 +353,15 @@ class AppLocalizationsNe extends AppLocalizations {
   String get customPathDesc => 'एपको डाटा कहाँ राख्ने। रिसेट गर्न लामो थिच';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'डिरेक्टरी छान';
 
   @override

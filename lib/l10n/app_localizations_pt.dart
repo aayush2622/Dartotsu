@@ -357,6 +357,15 @@ class AppLocalizationsPt extends AppLocalizations {
       'Onde ficam os dados do app. Segure pra redefinir';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Selecionar pasta';
 
   @override

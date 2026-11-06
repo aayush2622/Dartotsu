@@ -356,6 +356,15 @@ class AppLocalizationsTa extends AppLocalizations {
       'ஆப் டேட்டா எங்க சேவ் ஆகணும். ரீசெட் பண்ண லாங் பிரஸ் பண்ணு';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'டைரக்டரியை செலக்ட் பண்ணு';
 
   @override

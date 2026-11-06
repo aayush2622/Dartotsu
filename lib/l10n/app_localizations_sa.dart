@@ -356,6 +356,15 @@ class AppLocalizationsSa extends AppLocalizations {
       'ऐप्-दत्तांशः कुत्र रक्ष्यते। पुनःस्थापनार्थं दीर्घं नुद';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'निर्देशिकां चिनु';
 
   @override

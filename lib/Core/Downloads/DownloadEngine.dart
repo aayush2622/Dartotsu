@@ -21,6 +21,7 @@ import '../State/State.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
+import 'DownloadExport.dart';
 import 'DownloadQueue.dart';
 import 'DownloadScanner.dart';
 import 'DownloadService.dart';
@@ -447,6 +448,7 @@ class DownloadEngine extends AppController {
   }
 
   Future<void> _deleteFiles(DownloadTask task) async {
+    unawaited(DownloadExport.removed(task));
     for (final path in [task.path, ...task.subtitlePaths, ...task.audioPaths]) {
       if (path == null) continue;
       try {
@@ -863,6 +865,7 @@ class DownloadEngine extends AppController {
           ..forgetSize()
           ..state.value = DownloadState.done;
         _persist(now: true);
+        unawaited(DownloadExport.finished(task));
         unawaited(_notifyDone(task));
         return;
       }
@@ -950,6 +953,7 @@ class DownloadEngine extends AppController {
         ..forgetSize()
         ..state.value = DownloadState.done;
       _persist(now: true);
+      unawaited(DownloadExport.finished(task));
       unawaited(_notifyDone(task));
     } catch (e, st) {
       if (_stopped.remove(task.id) != null) return;

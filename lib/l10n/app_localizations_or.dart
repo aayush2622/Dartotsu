@@ -356,6 +356,15 @@ class AppLocalizationsOr extends AppLocalizations {
       'ଆପ୍ ଡାଟା କେଉଁଠି ରହିବ। ରିସେଟ୍ କରିବାକୁ ଲମ୍ବା ଦବାନ୍ତୁ';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'ଡାଇରେକ୍ଟୋରୀ ବାଛନ୍ତୁ';
 
   @override

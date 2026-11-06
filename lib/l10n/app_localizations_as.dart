@@ -354,6 +354,15 @@ class AppLocalizationsAs extends AppLocalizations {
   String get customPathDesc => 'এপৰ ডাটা য’ত থাকে। ৰিছেট কৰিবলৈ হেঁচি ধৰি ৰাখা';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'ডাইৰেক্টৰী বাছা';
 
   @override

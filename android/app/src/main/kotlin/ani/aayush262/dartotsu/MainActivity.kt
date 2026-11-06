@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.CancellationSignal
 import android.os.Environment
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.provider.Settings
 import android.view.KeyEvent
 import fl.pip.FlPiPActivity
@@ -25,10 +26,17 @@ import java.io.File
 class MainActivity : FlPiPActivity() {
     private var volumeChannel: MethodChannel? = null
     private var interceptVolume = false
+    private var safStorage: SafStorage? = null
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         flutterEngine.plugins.add(NativeLogger())
+        val saf = SafStorage(this).also { safStorage = it }
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/saf")
+            .setMethodCallHandler { call, result ->
+                @Suppress("UNCHECKED_CAST")
+                saf.handle(call.method, (call.arguments as? Map<String, Any?>) ?: emptyMap(), result)
+            }
         volumeChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/volumekeys").also { channel ->
             channel.setMethodCallHandler { call, result ->
                 if (call.method != "setEnabled") return@setMethodCallHandler result.notImplemented()
@@ -105,6 +113,30 @@ class MainActivity : FlPiPActivity() {
                     } catch (e: Exception) {
                         runOnUiThread { result.error("save", e.message, null) }
                     }
+                }.start()
+            }
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/content")
+            .setMethodCallHandler { call, result ->
+                if (call.method != "copyToCache") return@setMethodCallHandler result.notImplemented()
+                val uri = call.argument<String>("uri")
+                    ?: return@setMethodCallHandler result.error("args", "uri required", null)
+                Thread {
+                    val path = try {
+                        val parsed = Uri.parse(uri)
+                        var name = parsed.lastPathSegment?.substringAfterLast('/') ?: "shared"
+                        contentResolver.query(parsed, arrayOf(OpenableColumns.DISPLAY_NAME), null, null, null)?.use { cursor ->
+                            val column = cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                            if (cursor.moveToFirst() && column >= 0) cursor.getString(column)?.let { name = it }
+                        }
+                        val dir = File(cacheDir, "shared").apply { mkdirs() }
+                        val target = File(dir, name.replace('/', '_'))
+                        val input = contentResolver.openInputStream(parsed) ?: throw IllegalStateException("cannot open $uri")
+                        input.use { source -> target.outputStream().use { source.copyTo(it) } }
+                        target.absolutePath
+                    } catch (e: Exception) {
+                        null
+                    }
+                    runOnUiThread { result.success(path) }
                 }.start()
             }
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/external")
@@ -262,6 +294,11 @@ class MainActivity : FlPiPActivity() {
             return true
         }
         return super.dispatchKeyEvent(event)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (safStorage?.onActivityResult(requestCode, resultCode, data) == true) return
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

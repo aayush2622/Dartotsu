@@ -355,6 +355,15 @@ class AppLocalizationsMs extends AppLocalizations {
       'Tempat data app disimpan. Tekan lama untuk set semula';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Pilih direktori';
 
   @override

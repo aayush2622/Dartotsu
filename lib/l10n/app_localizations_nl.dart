@@ -357,6 +357,15 @@ class AppLocalizationsNl extends AppLocalizations {
       'Waar de appdata staat. Lang indrukken om te resetten';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Map kiezen';
 
   @override

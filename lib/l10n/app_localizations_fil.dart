@@ -357,6 +357,15 @@ class AppLocalizationsFil extends AppLocalizations {
       'Kung saan nakalagay ang data ng app. Pindutin nang matagal para i-reset';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Pumili ng directory';
 
   @override

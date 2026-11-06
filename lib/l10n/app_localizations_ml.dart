@@ -358,6 +358,15 @@ class AppLocalizationsMl extends AppLocalizations {
       'ആപ്പ് ഡാറ്റ സൂക്ഷിക്കുന്ന സ്ഥലം. റീസെറ്റ് ചെയ്യാൻ ലോങ് പ്രസ് ചെയ്യൂ';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'ഡയറക്ടറി തിരഞ്ഞെടുക്കൂ';
 
   @override

@@ -23,6 +23,7 @@ import 'Core/Downloads/DownloadEngine.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Offline/OfflineMode.dart';
 import 'Core/Preferences/PrefManager.dart';
+import 'Core/Preferences/SafStorage.dart';
 import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/DynamicColorScheme.dart';
 import 'Utils/Functions/WindowMemory.dart';
@@ -182,6 +183,7 @@ Future<void> init(List<String> args) async {
   Logger.captureDebugPrint();
   _stage = 'preferences and http';
   await Future.wait([PrefManager.init(), Rhttp.init()]);
+  await SafStorage.init();
   _stage = 'dependency injection';
   DI.init();
 

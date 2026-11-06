@@ -779,6 +779,18 @@ abstract class AppLocalizations {
   /// **'Where app data is kept. Long-press to reset'**
   String get customPathDesc;
 
+  /// No description provided for @storageFolderDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear'**
+  String get storageFolderDesc;
+
+  /// No description provided for @storageFolderSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Saving to {name}'**
+  String storageFolderSet(String name);
+
   /// No description provided for @selectDirectory.
   ///
   /// In en, this message translates to:

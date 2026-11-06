@@ -353,6 +353,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get customPathDesc => 'ที่เก็บข้อมูลแอป กดค้างเพื่อรีเซ็ต';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'เลือกโฟลเดอร์';
 
   @override

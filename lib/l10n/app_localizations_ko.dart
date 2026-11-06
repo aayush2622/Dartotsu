@@ -349,6 +349,15 @@ class AppLocalizationsKo extends AppLocalizations {
   String get customPathDesc => '앱 데이터를 보관하는 위치예요. 길게 누르면 초기화돼요';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => '폴더 선택';
 
   @override

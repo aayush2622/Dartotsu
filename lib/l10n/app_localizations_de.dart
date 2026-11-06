@@ -357,6 +357,15 @@ class AppLocalizationsDe extends AppLocalizations {
       'Wo die App-Daten liegen. Lange drücken zum Zurücksetzen';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Verzeichnis auswählen';
 
   @override

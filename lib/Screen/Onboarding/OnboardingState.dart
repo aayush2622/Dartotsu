@@ -18,7 +18,6 @@ class OnboardingState extends ScreenState {
 
   static final permissions = <Permission>[
     Permission.notification,
-    Permission.manageExternalStorage,
     Permission.requestInstallPackages,
     Permission.ignoreBatteryOptimizations,
   ];

@@ -353,6 +353,15 @@ class AppLocalizationsVi extends AppLocalizations {
   String get customPathDesc => 'Nơi lưu dữ liệu app. Nhấn giữ để đặt lại';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Chọn thư mục';
 
   @override

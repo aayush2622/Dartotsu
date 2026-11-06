@@ -530,12 +530,6 @@ class _OnboardingScreenState extends State<OnboardingScreen>
         getString.permNotificationsDesc,
       ),
       (
-        Permission.manageExternalStorage,
-        Icons.folder_rounded,
-        getString.permStorage,
-        getString.permStorageDesc,
-      ),
-      (
         Permission.requestInstallPackages,
         Icons.system_update_rounded,
         getString.permInstall,

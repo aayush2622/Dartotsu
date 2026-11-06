@@ -1,7 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:path/path.dart' as p;
 
 import '../../../../Core/Preferences/PrefBackup.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
+import '../../../../Core/Preferences/SafStorage.dart';
 import '../../../../Core/Preferences/StorageManager.dart';
 import '../../../../Core/Services/MediaServiceController.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -71,6 +75,7 @@ class _BackupTabState extends State<BackupTab> {
         accounts: services.accounts,
         service: services.currentService.value.id,
       );
+      unawaited(SafStorage.exportPath(p.join(dir, name), base: p.dirname(dir)));
       snackString(getString.backupSaved(name));
     } catch (e) {
       snackString(getString.backupFailed('$e'));

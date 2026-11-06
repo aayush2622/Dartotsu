@@ -354,6 +354,15 @@ class AppLocalizationsFa extends AppLocalizations {
       'جایی که داده‌های اپ نگه داشته می‌شه. برای بازنشانی، نگه دار';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'انتخاب پوشه';
 
   @override

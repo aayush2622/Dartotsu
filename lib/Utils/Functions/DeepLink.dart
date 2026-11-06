@@ -12,6 +12,7 @@ import '../../Core/Services/Api/BrowserAuth.dart';
 import '../../Core/Security/AppLock.dart';
 import '../../Core/Services/MediaServiceController.dart';
 import '../Extensions/StringExtensions.dart';
+import 'ContentUri.dart';
 import 'DeepLinkHandlers.dart';
 import 'SnackBar.dart';
 import 'WindowProtocol.dart';
@@ -69,7 +70,7 @@ class DeepLink {
 
     final intent = ReceiveSharingIntent.instance;
 
-    void handleFiles(List<SharedMediaFile> files) {
+    Future<void> handleFiles(List<SharedMediaFile> files) async {
       final paths = <String>[];
       for (final file in files) {
         final value = file.path.trim();
@@ -78,6 +79,15 @@ class DeepLink {
             file.type == SharedMediaType.url ||
             file.type == SharedMediaType.text;
         final uri = Uri.tryParse(value);
+        if (uri != null && uri.scheme == 'content') {
+          final local = await copyContentToCache(value);
+          if (local != null) {
+            paths.add(local);
+          } else {
+            snackString(getString.linkCantBeOpened(value));
+          }
+          continue;
+        }
         if (isLink || (uri != null && uri.hasScheme && uri.scheme.length > 1)) {
           if (uri != null && uri.hasScheme) {
             if (value.toLowerCase().startsWith('magnet:')) {
@@ -168,6 +178,13 @@ class DeepLink {
     }
     final context = appContext;
     if (context == null || !context.mounted) return;
+    if (uri.scheme == 'content') {
+      final local = await copyContentToCache(uri.toString());
+      if (local == null) {
+        return snackString(getString.linkCantBeOpened(uri.toString()));
+      }
+      return openFiles([local]);
+    }
     final handler = handlers.firstWhereOrNull((h) => h.matches(uri));
     if (handler == null) {
       return snackString(getString.linkCantBeOpened(uri.toString()));

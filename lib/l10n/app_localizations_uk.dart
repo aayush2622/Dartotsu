@@ -357,6 +357,15 @@ class AppLocalizationsUk extends AppLocalizations {
       'Де зберігаються дані застосунку. Довге натискання скидає';
 
   @override
+  String get storageFolderDesc =>
+      'Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear';
+
+  @override
+  String storageFolderSet(String name) {
+    return 'Saving to $name';
+  }
+
+  @override
   String get selectDirectory => 'Обрати теку';
 
   @override

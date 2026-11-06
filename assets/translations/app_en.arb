@@ -172,6 +172,15 @@
   "settingsAddons": "Addons",
   "customPath": "Custom storage path",
   "customPathDesc": "Where app data is kept. Long-press to reset",
+  "storageFolderDesc": "Folder for downloads, backups and screenshots. No storage permission needed. Long-press to clear",
+  "storageFolderSet": "Saving to {name}",
+  "@storageFolderSet": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "selectDirectory": "Select directory",
   "differentCacheManager": "Alternative image cache",
   "differentCacheManagerDesc": "Use a different cache manager for images",
