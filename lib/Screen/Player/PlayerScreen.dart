@@ -115,12 +115,13 @@ class _PlayerScreenState extends State<PlayerScreen>
           _PlayPauseIntent: _PlayPauseAction(() {
             unawaited(state.togglePlayback());
             state.showControls();
-          }),
+          }, () => state.ownsKeys),
         },
-        child: KeyboardListener(
+        child: Focus(
           focusNode: state.focus,
           autofocus: true,
-          onKeyEvent: _key,
+          onKeyEvent: (_, event) =>
+              _key(event) ? KeyEventResult.handled : KeyEventResult.ignored,
           child: body,
         ),
       ),
@@ -214,6 +215,8 @@ class _PlayerScreenState extends State<PlayerScreen>
     );
     return Watch(
       () => MouseRegion(
+        onEnter: (_) => state.pointerOnStage = true,
+        onExit: (_) => state.pointerOnStage = false,
         onHover: (_) => state.showControls(),
         cursor: state.controlsVisible.value
             ? SystemMouseCursors.basic
@@ -229,39 +232,43 @@ class _PlayerScreenState extends State<PlayerScreen>
       value: SystemUiOverlayStyle.light.copyWith(
         statusBarColor: Colors.transparent,
       ),
-      child: LayoutBuilder(
-        builder: (context, box) => Watch(() {
-          final top = MediaQuery.paddingOf(context).top;
-          final height = (box.maxWidth * 9 / 16).clamp(
-            0.0,
-            box.maxHeight * 0.7,
-          );
-          final stage = ColoredBox(
-            color: Colors.black,
-            child: Padding(
-              padding: EdgeInsets.only(top: top),
-              child: SizedBox(
-                height: height,
-                width: double.infinity,
-                child: MediaQuery.removePadding(
-                  context: context,
-                  removeTop: true,
-                  removeBottom: true,
-                  child: _stage(context, compact: true),
+      child: MouseRegion(
+        onEnter: (_) => state.pointerOnPage = true,
+        onExit: (_) => state.pointerOnPage = false,
+        child: LayoutBuilder(
+          builder: (context, box) => Watch(() {
+            final top = MediaQuery.paddingOf(context).top;
+            final height = (box.maxWidth * 9 / 16).clamp(
+              0.0,
+              box.maxHeight * 0.7,
+            );
+            final stage = ColoredBox(
+              color: Colors.black,
+              child: Padding(
+                padding: EdgeInsets.only(top: top),
+                child: SizedBox(
+                  height: height,
+                  width: double.infinity,
+                  child: MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    removeBottom: true,
+                    child: _stage(context, compact: true),
+                  ),
                 ),
               ),
-            ),
-          );
-          final together = state.together;
-          if (together.following) return _guest(context, scheme, stage);
-          if (state.chatOpen.value && together.connected) {
-            return _chat(context, scheme, stage);
-          }
-          if (!state.commentsOpen.value || widget.request.service == null) {
-            return _episodes(context, scheme, stage);
-          }
-          return _comments(context, scheme, stage);
-        }),
+            );
+            final together = state.together;
+            if (together.following) return _guest(context, scheme, stage);
+            if (state.chatOpen.value && together.connected) {
+              return _chat(context, scheme, stage);
+            }
+            if (!state.commentsOpen.value || widget.request.service == null) {
+              return _episodes(context, scheme, stage);
+            }
+            return _comments(context, scheme, stage);
+          }),
+        ),
       ),
     );
   }
@@ -794,9 +801,21 @@ class _PlayerScreenState extends State<PlayerScreen>
     );
   }
 
-  void _key(KeyEvent event) {
-    if (event is! KeyDownEvent) return;
+  bool _key(KeyEvent event) {
+    if (event is KeyUpEvent || !state.ownsKeys) return false;
+    final typing =
+        FocusManager.instance.primaryFocus?.context
+            ?.findAncestorWidgetOfExactType<EditableText>() !=
+        null;
+    if (typing) return false;
     final key = event.logicalKey;
+    final repeat = event is KeyRepeatEvent;
+    final arrow =
+        key == LogicalKeyboardKey.arrowLeft ||
+        key == LogicalKeyboardKey.arrowRight ||
+        key == LogicalKeyboardKey.arrowUp ||
+        key == LogicalKeyboardKey.arrowDown;
+    if (repeat && !arrow) return _handles(key);
     final shift = HardwareKeyboard.instance.isShiftPressed;
     final engine = state.engine;
     if (key == LogicalKeyboardKey.keyK) {
@@ -835,8 +854,26 @@ class _PlayerScreenState extends State<PlayerScreen>
         state.seekTo(total * (digit / 10));
       }
     }
+    return _handles(key);
   }
+
+  bool _handles(LogicalKeyboardKey key) =>
+      _playerKeys.contains(key) || int.tryParse(key.keyLabel) != null;
 }
+
+final _playerKeys = {
+  LogicalKeyboardKey.keyK,
+  LogicalKeyboardKey.arrowLeft,
+  LogicalKeyboardKey.arrowRight,
+  LogicalKeyboardKey.arrowUp,
+  LogicalKeyboardKey.arrowDown,
+  LogicalKeyboardKey.keyF,
+  LogicalKeyboardKey.keyN,
+  LogicalKeyboardKey.keyP,
+  LogicalKeyboardKey.keyS,
+  LogicalKeyboardKey.keyM,
+  LogicalKeyboardKey.enter,
+};
 
 class _PlayPauseIntent extends Intent {
   const _PlayPauseIntent();
@@ -844,11 +881,13 @@ class _PlayPauseIntent extends Intent {
 
 class _PlayPauseAction extends Action<_PlayPauseIntent> {
   final VoidCallback onPlayPause;
+  final bool Function() owns;
 
-  _PlayPauseAction(this.onPlayPause);
+  _PlayPauseAction(this.onPlayPause, this.owns);
 
   @override
   bool isEnabled(_PlayPauseIntent intent) {
+    if (!owns()) return false;
     final focus = FocusManager.instance.primaryFocus?.context;
     return focus == null ||
         focus.findAncestorWidgetOfExactType<EditableText>() == null;
