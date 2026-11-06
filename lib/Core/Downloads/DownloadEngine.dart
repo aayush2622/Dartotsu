@@ -21,6 +21,7 @@ import '../State/State.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'PdfPages.dart';
 import 'DownloadPrefs.dart';
+import '../Preferences/SafStorage.dart';
 import 'DownloadExport.dart';
 import 'DownloadQueue.dart';
 import 'DownloadScanner.dart';
@@ -131,12 +132,23 @@ class DownloadEngine extends AppController {
     _pump();
   }
 
+  void markStored(DownloadTask task, String relative, int bytes) {
+    task
+      ..safPath = relative
+      ..savedBytes = bytes;
+    tasks.refresh();
+    _persist(now: true);
+  }
+
   void adoptScanned(List<DownloadTask> found) {
     var changed = false;
     final onDisk = {for (final t in found) t.id};
     for (final task in tasks.toList()) {
       final path = task.path;
-      if (task.isDone && path != null && !pathExists(path)) {
+      if (task.isDone &&
+          task.safPath == null &&
+          path != null &&
+          !pathExists(path)) {
         tasks.remove(task);
         changed = true;
       }
@@ -201,8 +213,18 @@ class DownloadEngine extends AppController {
     final task = taskFor(serviceId, mediaId, unitKey);
     final root = task?.path;
     if (task == null || !task.isDone || root == null) return null;
-    final path = task.folder ? p.join(root, 'index.m3u8') : root;
-    if (task.kind != DownloadKind.video || !File(path).existsSync()) {
+    final stored = task.safPath;
+    final inFolder = stored != null &&
+        !task.folder &&
+        SafStorage.folder != null &&
+        !File(root).existsSync();
+    final path = inFolder
+        ? 'saf://$stored'
+        : task.folder
+        ? p.join(root, 'index.m3u8')
+        : root;
+    if (task.kind != DownloadKind.video ||
+        (!inFolder && !File(path).existsSync())) {
       return null;
     }
     final chosen = task.chosenSubtitles;

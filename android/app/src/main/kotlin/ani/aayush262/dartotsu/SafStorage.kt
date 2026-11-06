@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.ParcelFileDescriptor
 import android.provider.DocumentsContract
 import android.util.Log
 import android.webkit.MimeTypeMap
@@ -38,6 +39,22 @@ class SafStorage(private val activity: Activity) {
                     args["relative"] as String,
                     args["source"] as String,
                 )
+            }
+            "openFd" -> background(result) {
+                openFd(
+                    Uri.parse(args["tree"] as String),
+                    args["root"] as String,
+                    args["relative"] as String,
+                )
+            }
+            "closeFd" -> {
+                val fd = (args["fd"] as Number).toInt()
+                try {
+                    ParcelFileDescriptor.adoptFd(fd).close()
+                } catch (e: Exception) {
+                    Log.w(TAG, "Could not close fd $fd", e)
+                }
+                result.success(true)
             }
             "delete" -> background(result) {
                 delete(
@@ -217,8 +234,34 @@ class SafStorage(private val activity: Activity) {
             Log.w(TAG, "Cannot open $relative for writing")
             return false
         }
-        output.use { out -> file.inputStream().use { it.copyTo(out) } }
+        val copied = output.use { out -> file.inputStream().use { it.copyTo(out) } }
+        if (copied != file.length()) {
+            Log.w(TAG, "Copied $copied of ${file.length()} bytes to $relative")
+            return false
+        }
         return true
+    }
+
+    private fun openFd(tree: Uri, rootId: String, relative: String): Int? {
+        val parts = relative.split('/').filter { it.isNotEmpty() }
+        if (parts.isEmpty()) return null
+        var parent = rootId
+        for (segment in parts.dropLast(1)) parent = folder(tree, parent, segment, false) ?: return null
+        val match = children(tree, parent).firstOrNull { it.name == parts.last() }
+        if (match == null) {
+            Log.w(TAG, "$relative is not in the chosen folder")
+            return null
+        }
+        val pfd = resolver.openFileDescriptor(
+            DocumentsContract.buildDocumentUriUsingTree(tree, match.id),
+            "r",
+        )
+        if (pfd == null) {
+            Log.w(TAG, "No file descriptor for $relative")
+            return null
+        }
+        Log.i(TAG, "Opened $relative as a file descriptor")
+        return pfd.detachFd()
     }
 
     private fun delete(tree: Uri, rootId: String, relative: String): Boolean {

@@ -5,6 +5,8 @@ import 'package:path/path.dart' as p;
 
 import '../../Logger.dart';
 import '../Preferences/SafStorage.dart';
+import '../State/State.dart';
+import 'DownloadEngine.dart';
 import 'DownloadTask.dart';
 
 class DownloadExport {
@@ -37,7 +39,9 @@ class DownloadExport {
     final base = (await DownloadPaths.root()).path;
     var count = 0;
     for (final target in _paths(task)) {
-      count += await SafStorage.exportPath(target, base: base);
+      final copied = await SafStorage.exportPath(target, base: base);
+      count += copied;
+      if (copied == 1 && target == path) await _settle(task, target, base);
     }
     for (final name in const ['media.json', 'cover.jpg']) {
       final file = File(p.join(p.dirname(path), name));
@@ -49,6 +53,24 @@ class DownloadExport {
       'Exported $count files of ${task.id} to the chosen folder',
       tag: 'DOWNLOAD',
     );
+  }
+
+  static Future<void> _settle(
+    DownloadTask task,
+    String path,
+    String base,
+  ) async {
+    if (task.kind != DownloadKind.video || task.folder) return;
+    final file = File(path);
+    if (!await file.exists()) return;
+    final size = await file.length();
+    final relative = SafStorage.relative(path, base);
+    final handle = await SafStorage.open(relative);
+    if (handle == null) return;
+    await SafStorage.close(handle.fd);
+    await file.delete();
+    find<DownloadEngine>().markStored(task, relative, size);
+    logger('Moved ${task.id} to the chosen folder', tag: 'DOWNLOAD');
   }
 
   static Future<void> removed(DownloadTask task) async {

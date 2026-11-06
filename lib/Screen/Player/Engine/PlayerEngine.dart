@@ -9,6 +9,7 @@ import 'package:path/path.dart' as p;
 import '../../../Logger.dart';
 import '../../../Core/Fonts/AppFonts.dart';
 import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Core/Preferences/SafStorage.dart';
 import '../../../Core/Preferences/StorageManager.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -651,6 +652,16 @@ class PlayerEngine {
           logger('mpv $key failed: $e', tag: 'MPV');
         }
       }
+    } else if (url.startsWith('saf://')) {
+      final handle = await SafStorage.open(url.substring(6));
+      if (handle == null) throw StateError('Could not open $url');
+      await _releaseSaf();
+      _safFd = handle.fd;
+      target = Uri.file(handle.path).toString();
+      logger(
+        'Playing from the chosen folder through ${handle.path}',
+        tag: 'PLAYER',
+      );
     } else if (!_isUri(url)) {
       target = Uri.file(url).toString();
     }
@@ -681,6 +692,14 @@ class PlayerEngine {
       play: autoplay,
     );
     _watchChapters();
+  }
+
+  int? _safFd;
+
+  Future<void> _releaseSaf() async {
+    final fd = _safFd;
+    _safFd = null;
+    if (fd != null) await SafStorage.close(fd);
   }
 
   bool _isUri(String url) {
@@ -827,5 +846,6 @@ class PlayerEngine {
     _subs.clear();
     if (_torrent) unawaited(stopTorrentStream());
     await player.dispose();
+    await _releaseSaf();
   }
 }
