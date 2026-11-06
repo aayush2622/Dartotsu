@@ -92,8 +92,6 @@ class Media {
   int? malId;
 
   @JsonKey(includeFromJson: false, includeToJson: false)
-  bool stale = false;
-  @JsonKey(includeFromJson: false, includeToJson: false)
   Source? sourceData;
 
   Media({

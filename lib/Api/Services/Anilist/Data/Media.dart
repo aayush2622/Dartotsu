@@ -6,12 +6,14 @@ class AnilistMedia extends Media {
   int? idMal;
   Map<String, bool> inCustomListsOf;
   int? userFavOrder;
+  bool stale;
 
   AnilistMedia({
     required super.id,
     this.idMal,
     Map<String, bool>? inCustomListsOf,
     this.userFavOrder,
+    this.stale = false,
     super.anime,
     super.manga,
     super.name,

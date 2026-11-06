@@ -58,7 +58,7 @@ class AnilistDetailView extends DetailScreenView {
     final m = host.media.value;
     final description = (m.description ?? '').trim();
     return [
-      if (m.stale) const ScreenWidget.extra(StaleNotice()),
+      if (m is AnilistMedia && m.stale) const ScreenWidget.extra(StaleNotice()),
       ScreenWidget.extra(DetailStats(host)),
       if (description.isNotEmpty)
         ScreenWidget.data(

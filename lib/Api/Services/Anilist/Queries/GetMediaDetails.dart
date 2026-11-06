@@ -28,7 +28,9 @@ extension on AnilistQueries {
     final id = int.tryParse(media.id);
     final named = media.name != null || media.nameRomaji != null;
     final base = named || id == null ? media : await _mediaIndex.findById(id);
-    return (base ?? media)..stale = true;
+    final result = base ?? media;
+    if (result is AnilistMedia) result.stale = true;
+    return result;
   }
 }
 
@@ -39,7 +41,7 @@ Media _parseDetail(Map<String, dynamic> args) {
   if (node == null) return media;
   node['Page'] = data['Page'];
   mapAnilistDetail(media, node);
-  media.stale = false;
+  if (media is AnilistMedia) media.stale = false;
   return media;
 }
 

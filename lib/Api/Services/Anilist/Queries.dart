@@ -25,6 +25,7 @@ import 'Data/Notification.dart';
 import 'Data/Social.dart';
 import 'Prefs.dart';
 import 'AnilistService.dart';
+import 'Data/Media.dart';
 import 'MediaIndex/MediaIndexClient.dart';
 import 'package:collection/collection.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
