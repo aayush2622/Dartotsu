@@ -24,7 +24,8 @@ List<InlineSpan> buildSpans(
   int? to,
   String prefix = '',
 }) {
-  final end = to ?? text.length;
+  final end = (to ?? text.length).clamp(0, text.length);
+  from = from.clamp(0, end);
   final spans = <InlineSpan>[];
   if (prefix.isNotEmpty) spans.add(TextSpan(text: prefix));
   if (marks.isEmpty) {
