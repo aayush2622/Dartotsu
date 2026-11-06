@@ -557,9 +557,12 @@ class _AniHtmlState extends State<AniHtml> {
       case 'hr':
         return Padding(
           padding: const EdgeInsets.symmetric(vertical: 12),
-          child: Divider(
+          child: SizedBox(
+            width: double.infinity,
             height: 1,
-            color: scheme.outlineVariant.withValues(alpha: 0.6),
+            child: ColoredBox(
+              color: scheme.outlineVariant.withValues(alpha: 0.6),
+            ),
           ),
         );
       case 'ul' || 'ol':

@@ -157,7 +157,9 @@ class _WatchSectionState extends State<WatchSection>
 
   Widget _titleRow(BuildContext context) {
     final scheme = context.colorScheme;
-    final count = state.units.length;
+    final count = state.anime
+        ? state.units.length
+        : {for (final u in state.units) u.value.floor()}.length;
     return Row(
       children: [
         Expanded(

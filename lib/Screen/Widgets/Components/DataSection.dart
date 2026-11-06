@@ -1,9 +1,13 @@
 import '../../../Utils/Extensions/StringExtensions.dart';
 import '../../Reader/Engine/NovelSpeech.dart';
 import 'SpeakButton.dart';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
+import '../../../Utils/Functions/CopyToClip.dart';
+import '../../../Widgets/Components/Clickable.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
@@ -128,20 +132,27 @@ class DataSection extends StatelessWidget {
         runSpacing: 8,
         children: [
           for (final chip in shown)
-            ActionChip(
-              mouseCursor: kClickCursor,
-              backgroundColor: context.colorScheme.secondaryContainer,
-              disabledColor: context.colorScheme.secondaryContainer,
-              side: BorderSide.none,
-              label: Text(chip),
-              labelStyle: context.textTheme.labelLarge?.copyWith(
-                color: context.colorScheme.onSecondaryContainer,
+            Clickable(
+              press: false,
+              onLongPress: () {
+                HapticFeedback.mediumImpact();
+                copyToClipboard(chip);
+              },
+              child: ActionChip(
+                mouseCursor: kClickCursor,
+                backgroundColor: context.colorScheme.secondaryContainer,
+                disabledColor: context.colorScheme.secondaryContainer,
+                side: BorderSide.none,
+                label: Text(chip),
+                labelStyle: context.textTheme.labelLarge?.copyWith(
+                  color: context.colorScheme.onSecondaryContainer,
+                ),
+                visualDensity: VisualDensity.compact,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                onPressed: data.onChipTap == null
+                    ? null
+                    : () => data.onChipTap!(chip),
               ),
-              visualDensity: VisualDensity.compact,
-              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-              onPressed: data.onChipTap == null
-                  ? null
-                  : () => data.onChipTap!(chip),
             ),
           if (chips.length > limit)
             ActionChip(
