@@ -50,7 +50,6 @@ class AnilistQueries extends Queries {
   final int? Function() userId;
   final Future<bool> Function() refreshUser;
 
-  /// Lazy singleton — shared across all query calls.
   final MediaIndexClient _mediaIndex = MediaIndexClient();
 
   AnilistQueries(
