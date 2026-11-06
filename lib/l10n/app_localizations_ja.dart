@@ -2107,6 +2107,10 @@ class AppLocalizationsJa extends AppLocalizations {
   String get copyTitle => 'タイトルをコピー';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'リンクをコピー';
 
   @override

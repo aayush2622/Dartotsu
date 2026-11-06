@@ -2157,6 +2157,10 @@ class AppLocalizationsMl extends AppLocalizations {
   String get copyTitle => 'ടൈറ്റിൽ കോപ്പി ചെയ്യൂ';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'ലിങ്ക് കോപ്പി ചെയ്യൂ';
 
   @override

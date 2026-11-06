@@ -2151,6 +2151,10 @@ class AppLocalizationsSi extends AppLocalizations {
   String get copyTitle => 'ටයිටල් එක කොපි කරන්න';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'ලින්ක් එක කොපි කරන්න';
 
   @override

@@ -2149,6 +2149,10 @@ class AppLocalizationsRu extends AppLocalizations {
   String get copyTitle => 'Копировать название';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Копировать ссылку';
 
   @override

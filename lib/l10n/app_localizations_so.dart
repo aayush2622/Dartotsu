@@ -2162,6 +2162,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get copyTitle => 'Koobi ciwaanka';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Koobi xiriirka';
 
   @override

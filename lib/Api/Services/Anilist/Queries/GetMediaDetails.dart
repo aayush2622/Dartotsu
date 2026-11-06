@@ -15,13 +15,20 @@ extension on AnilistQueries {
         return await compute(_parseDetail, {'media': media, 'body': body});
       } on AnilistException catch (e) {
         snackString(getString.serviceError(getString.anilist, e.message));
-        return media;
+        return await _unreachable(media);
       } catch (e, st) {
         logError('GetMediaDetails', e, st);
         snackString(getString.errorGettingAnilistData);
-        return media;
+        return await _unreachable(media);
       }
     }
+  }
+
+  Future<Media> _unreachable(Media media) async {
+    final id = int.tryParse(media.id);
+    final named = media.name != null || media.nameRomaji != null;
+    final base = named || id == null ? media : await _mediaIndex.findById(id);
+    return (base ?? media)..stale = true;
   }
 }
 
@@ -32,6 +39,7 @@ Media _parseDetail(Map<String, dynamic> args) {
   if (node == null) return media;
   node['Page'] = data['Page'];
   mapAnilistDetail(media, node);
+  media.stale = false;
   return media;
 }
 

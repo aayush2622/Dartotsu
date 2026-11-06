@@ -2144,6 +2144,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get copyTitle => 'Копіювати назву';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Копіювати посилання';
 
   @override

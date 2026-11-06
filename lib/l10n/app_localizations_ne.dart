@@ -2126,6 +2126,10 @@ class AppLocalizationsNe extends AppLocalizations {
   String get copyTitle => 'शीर्षक कपी गर';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'लिङ्क कपी गर';
 
   @override

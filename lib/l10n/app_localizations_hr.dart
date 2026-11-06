@@ -2150,6 +2150,10 @@ class AppLocalizationsHr extends AppLocalizations {
   String get copyTitle => 'Kopiraj naslov';
 
   @override
+  String get detailStale =>
+      'AniList could not be reached. This is saved information and may be outdated.';
+
+  @override
   String get copyLink => 'Kopiraj poveznicu';
 
   @override
