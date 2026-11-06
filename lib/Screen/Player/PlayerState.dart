@@ -124,6 +124,10 @@ class PlayerState extends ScreenState {
   Live<Media>? _mediaLive;
 
   final focus = FocusNode();
+  bool pointerOnPage = false;
+  bool pointerOnStage = false;
+
+  bool get ownsKeys => fullscreen.value || !pointerOnPage || pointerOnStage;
 
   Timer? _hideTimer;
   Timer? _volumeTimer;

@@ -524,9 +524,6 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
           if (v == 'favourite') onFavourite?.call();
           if (v == 'share') shareLink(m.shareLink);
           if (v == 'browser') openLinkInBrowser(m.shareLink);
-          if (v == 'copyTitle') {
-            copyToClipboard(m.mainName, message: getString.titleCopied);
-          }
           if (v == 'copyLink') {
             copyToClipboard(m.shareLink, message: getString.linkCopied);
           }
@@ -593,15 +590,6 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
                 title: Text(getString.shareCard),
               ),
             ),
-          PopupMenuItem(
-            value: 'copyTitle',
-            child: ListTile(
-              dense: true,
-              contentPadding: EdgeInsets.zero,
-              leading: const Icon(Icons.title_rounded),
-              title: Text(getString.copyTitle),
-            ),
-          ),
           PopupMenuItem(
             value: 'copyLink',
             child: ListTile(

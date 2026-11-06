@@ -719,6 +719,7 @@ class NovelState extends ScreenState {
         onProgress: (p) => translateProgress.value = p,
       );
       if (_closed || run != _run) return;
+      _dropPages();
       translated.value = result;
       _stamp++;
     } catch (e, st) {
@@ -734,6 +735,7 @@ class NovelState extends ScreenState {
   }
 
   void showOriginal() {
+    _dropPages();
     translated.value = null;
     _stamp++;
     stopSpeaking();
@@ -923,6 +925,16 @@ class NovelState extends ScreenState {
         );
       }
     });
+  }
+
+  void _dropPages() {
+    if (!paged || pages.value.isEmpty) return;
+    if (_pendingLocator == null && _pendingFraction == null) {
+      _pendingLocator = currentLocator();
+    }
+    _pageRun++;
+    pages.value = const [];
+    pageSlots.clear();
   }
 
   void ensurePages(PageLayout layout) {

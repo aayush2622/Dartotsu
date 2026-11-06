@@ -211,6 +211,19 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
         ),
       );
 
+  static const _chipFade = 28.0;
+
+  Widget _fadeEnd(Widget child) => ShaderMask(
+    blendMode: BlendMode.dstIn,
+    shaderCallback: (rect) => LinearGradient(
+      begin: AlignmentDirectional.centerStart,
+      end: AlignmentDirectional.centerEnd,
+      colors: const [Colors.white, Colors.white, Colors.transparent],
+      stops: [0, 1 - _chipFade / rect.width, 1],
+    ).createShader(rect, textDirection: Directionality.of(context)),
+    child: child,
+  );
+
   Widget _mediaHeader() => Watch(() {
     if (!state.isMedia) return const SizedBox.shrink();
     final spec = state.spec;
@@ -249,21 +262,26 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
                   ? const SizedBox(height: 48)
                   : SizedBox(
                       height: 48,
-                      child: ScrollConfig(
-                        context,
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: Dimens.gap,
-                            vertical: 6,
-                          ),
-                          itemCount: chips.length,
-                          separatorBuilder: (_, _) => const SizedBox(width: 6),
-                          itemBuilder: (_, i) => InputChip(
-                            mouseCursor: kClickCursor,
-                            label: Text(chips[i].text.replaceAll('_', ' ')),
-                            onDeleted: () => state.removeChip(chips[i]),
-                            visualDensity: VisualDensity.compact,
+                      child: _fadeEnd(
+                        ScrollConfig(
+                          context,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            padding: EdgeInsetsDirectional.only(
+                              start: Dimens.gap,
+                              end: _chipFade,
+                              top: 6,
+                              bottom: 6,
+                            ),
+                            itemCount: chips.length,
+                            separatorBuilder: (_, _) =>
+                                const SizedBox(width: 6),
+                            itemBuilder: (_, i) => InputChip(
+                              mouseCursor: kClickCursor,
+                              label: Text(chips[i].text.replaceAll('_', ' ')),
+                              onDeleted: () => state.removeChip(chips[i]),
+                              visualDensity: VisualDensity.compact,
+                            ),
                           ),
                         ),
                       ),

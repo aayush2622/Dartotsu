@@ -56,6 +56,16 @@ String? _header(Map<String, String>? headers, String name) {
   return null;
 }
 
+List<v.Track> _subtitles(v.Video video) => [
+  for (final t in video.subtitles ?? const <v.Track>[])
+    if ((t.file ?? '').isNotEmpty) t,
+];
+
+List<v.Track> _audios(v.Video video) => [
+  for (final t in video.audios ?? const <v.Track>[])
+    if ((t.file ?? '').isNotEmpty) t,
+];
+
 Future<bool> _launch(String exe, List<String> args) async {
   try {
     await Process.start(exe, args, mode: ProcessStartMode.detached);
@@ -74,6 +84,8 @@ Future<bool> _openMpv(v.Video video) async {
       '--http-header-fields-append=${e.key}: ${e.value}',
     if (video.title != null && video.title!.isNotEmpty)
       '--force-media-title=${video.title}',
+    for (final t in _subtitles(video)) '--sub-file=${t.file}',
+    for (final t in _audios(video)) '--audio-file=${t.file}',
     video.url,
   ]);
 }
@@ -92,6 +104,9 @@ Future<bool> _openVlc(v.Video video) async {
   return _launch(exe, [
     if (agent != null) '--http-user-agent=$agent',
     if (referer != null) '--http-referrer=$referer',
+    for (final t in _subtitles(video)) '--sub-file=${t.file}',
+    if (_audios(video).isNotEmpty)
+      '--input-slave=${_audios(video).map((t) => t.file).join('#')}',
     video.url,
   ]);
 }
@@ -102,6 +117,8 @@ Future<bool> _openChooser(v.Video video) async {
       'url': video.url,
       'title': video.title ?? '',
       'headers': video.headers ?? const <String, String>{},
+      'subtitles': [for (final t in _subtitles(video)) t.file],
+      'subtitleNames': [for (final t in _subtitles(video)) t.label ?? ''],
     });
     return ok ?? false;
   } catch (e) {
