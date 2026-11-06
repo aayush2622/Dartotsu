@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:convert';
 import 'dart:async';
 
@@ -278,9 +279,8 @@ class MalQueries extends Queries {
 
   Future<int> chaptersRead() async {
     try {
-      return (await library(
-        anime: false,
-      )).fold<int>(0, (sum, m) => sum + (m.userProgress ?? 0));
+      return (await library(anime: false))
+          .fold<int>(0, (sum, m) => sum + (m.userProgress ?? 0));
     } catch (e, st) {
       logError('Queries', e, st);
       return 0;
@@ -695,7 +695,7 @@ class MalQueries extends Queries {
   }
 
   static (String?, String?) _searchDates(SearchResults r) {
-    final year = r.seasonYear;
+    final year = r.seasonYear ?? r.startYear;
     if (year == null) return (null, null);
     final months = switch (r.season?.toUpperCase()) {
       'WINTER' => (1, 3),

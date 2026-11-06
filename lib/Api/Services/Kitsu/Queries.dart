@@ -1,4 +1,5 @@
 import '../../../Utils/Lru.dart';
+
 import 'dart:convert';
 import 'dart:async';
 
@@ -929,9 +930,9 @@ class KitsuQueries extends Queries {
           if (anime && results.season != null)
             'filter[season]': results.season!.toLowerCase(),
           'filter[status]': ?status,
-          if (results.seasonYear != null)
+          if ((results.seasonYear ?? results.startYear) != null)
             anime ? 'filter[seasonYear]' : 'filter[year]':
-                '${results.seasonYear}',
+                '${(results.seasonYear ?? results.startYear)}',
           'page[limit]': '$perPage',
           'page[offset]': '${(page - 1) * perPage}',
         },

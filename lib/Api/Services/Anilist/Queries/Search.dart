@@ -35,6 +35,7 @@ extension on AnilistQueries {
       if (r.id != null) 'id': r.id,
       if (r.search != null && r.search!.isNotEmpty) 'search': r.search,
       if (r.seasonYear != null) 'seasonYear': r.seasonYear,
+      if (r.startYear != null) 'startDate': '${r.startYear}%',
       if (r.season != null) 'season': r.season,
       if (r.sort != null) 'sort': r.sort,
       if (r.status != null) 'status': r.status!.replaceAll(' ', '_'),
@@ -153,7 +154,7 @@ query (
   \$page: Int = 1, \$id: Int, \$type: MediaType, \$isAdult: Boolean = false,
   \$search: String, \$format: [MediaFormat], \$status: MediaStatus,
   \$countryOfOrigin: CountryCode, \$source: MediaSource, \$season: MediaSeason,
-  \$seasonYear: Int, \$onList: Boolean, \$genres: [String],
+  \$seasonYear: Int, \$startDate: String, \$onList: Boolean, \$genres: [String],
   \$excludedGenres: [String], \$tags: [String], \$excludedTags: [String],
   \$sort: [MediaSort] = [POPULARITY_DESC, SCORE_DESC]
 ) {
@@ -163,6 +164,7 @@ query (
       id: \$id, type: \$type, season: \$season, format_in: \$format,
       status: \$status, countryOfOrigin: \$countryOfOrigin, source: \$source,
       search: \$search, onList: \$onList, seasonYear: \$seasonYear,
+      startDate_like: \$startDate,
       genre_in: \$genres, genre_not_in: \$excludedGenres, tag_in: \$tags,
       tag_not_in: \$excludedTags, sort: \$sort, isAdult: \$isAdult
     ) {

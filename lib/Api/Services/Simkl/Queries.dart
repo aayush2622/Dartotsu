@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -574,10 +575,10 @@ class SimklQueries extends Queries {
       for (final item in found)
         ?mapSimklItem((item as Map).cast<String, dynamic>(), kind: kind),
     ];
-    if (query.isNotEmpty && results.seasonYear != null) {
+    if (query.isNotEmpty && (results.seasonYear ?? results.startYear) != null) {
       items = [
         for (final m in items)
-          if (m.startDate?.year == results.seasonYear) m,
+          if (m.startDate?.year == (results.seasonYear ?? results.startYear)) m,
       ];
     }
     return results
@@ -593,9 +594,8 @@ List<Map<String, Object?>> _parseCalendar(Map<String, Object?> args) {
   final meta = (file['metadata'] as Map?) ?? const {};
   final rows = <Map<String, Object?>>[];
   for (final e in (file['calendar'] as List?) ?? const []) {
-    final at = DateTime.tryParse(
-      '${(e as Map)['date']}',
-    )?.millisecondsSinceEpoch;
+    final at = DateTime.tryParse('${(e as Map)['date']}')
+        ?.millisecondsSinceEpoch;
     if (at == null || at < start || at > end) continue;
     final node = meta['${e['simkl_id']}'];
     if (node is! Map) continue;

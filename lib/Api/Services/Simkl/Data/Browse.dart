@@ -153,13 +153,15 @@ String? simklBrowsePath(SimklKind kind, SearchResults q) {
   final genre = q.genres?.firstOrNull;
   final hasFilter =
       genre != null ||
-      q.seasonYear != null ||
+      (q.seasonYear ?? q.startYear) != null ||
       q.sort != null ||
       q.format != null ||
       (q.countryOfOrigin?.isNotEmpty ?? false);
   if (!hasFilter) return null;
   final g = genre == null ? 'all' : _slug(genre);
-  final year = q.seasonYear == null ? 'all' : '${q.seasonYear}';
+  final year = (q.seasonYear ?? q.startYear) == null
+      ? 'all'
+      : '${q.seasonYear ?? q.startYear}';
   final sort = _sorts[q.sort] ?? 'popular-this-month';
   final country = (q.countryOfOrigin?.isNotEmpty ?? false)
       ? q.countryOfOrigin!.toLowerCase()
