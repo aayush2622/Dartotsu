@@ -9,6 +9,7 @@ import '../../../../../Logger.dart';
 import '../../../../../Core/Preferences/StorageManager.dart';
 import '../../../../../Core/Preferences/PrefManager.dart';
 import '../../../../../Core/Services/MediaService.dart';
+import '../../../../../Core/Downloads/DownloadScanner.dart';
 import '../../../../../Core/Services/Model/Media.dart';
 import '../../../../../Core/SourceAlerts/SourceSubscriptions.dart';
 import '../../../../../Core/State/State.dart';
@@ -251,6 +252,7 @@ class ResumeStore {
     Map<String, Object?>? episode,
   }) {
     _load();
+    if (_isLocalFile(media.id)) return;
     final slot = '${service.id}/${kind.name}/${media.id}';
     if (service.isHiddenMedia(media)) {
       _drop(slot);
@@ -330,7 +332,7 @@ class ResumeStore {
     required Media media,
     required List<int> bytes,
   }) async {
-    if (bytes.isEmpty) return;
+    if (bytes.isEmpty || _isLocalFile(media.id)) return;
     final slot = '${service.id}/${kind.name}/${media.id}';
     try {
       final dir = await StorageManager.getDirectory(subPath: 'resume');
@@ -385,11 +387,15 @@ class ResumeStore {
     _persist();
   }
 
+  static bool _isLocalFile(String mediaId) =>
+      mediaId.startsWith('$localServiceId/');
+
   static List<ResumeEntry> visible(MediaService service) {
     _load();
     return [
       for (final e in entries)
         if (e.serviceId == service.id &&
+            !_isLocalFile(e.mediaId) &&
             !hides(e, e.progress) &&
             !service.isHiddenMedia(e.buildMedia()))
           e,
