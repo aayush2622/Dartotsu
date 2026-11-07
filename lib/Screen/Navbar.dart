@@ -221,7 +221,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
   }) {
     return DpadFocusable(
       onSelect: onTap,
-      builder: dpadIconFocus(radius: 22),
+      builder: _pillFocus(56),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: SizedBox(
@@ -243,7 +243,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
     return DpadFocusable(
       onSelect: () => widget.onTabSelected(item.index),
-      builder: dpadIconFocus(radius: 22),
+      builder: _pillFocus(68),
       child: SizedBox(
         width: 64,
         height: 64,
@@ -285,3 +285,24 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
     );
   }
 }
+
+Widget Function(BuildContext, DpadFocusState, Widget) _pillFocus(
+  double width,
+) =>
+    (context, state, child) => Stack(
+      alignment: Alignment.center,
+      children: [
+        AnimatedContainer(
+          duration: animDuration(150),
+          width: width,
+          height: 36,
+          decoration: BoxDecoration(
+            color: kDpadFocused(state)
+                ? context.colorScheme.secondaryContainer
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(18),
+          ),
+        ),
+        child,
+      ],
+    );
