@@ -342,7 +342,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: d1447b604359d8244949e68f4b256b3bcaef3f6f
+      resolved-ref: "707017701a9a41abc7bc4f8feb02b1af80eeceb6"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
