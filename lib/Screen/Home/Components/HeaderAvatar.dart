@@ -36,6 +36,7 @@ class HeaderAvatar extends StatelessWidget {
         ),
       ),
       child: ClipOval(
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         child: url == null
             ? ColoredBox(
                 color: scheme.surfaceContainerHighest,

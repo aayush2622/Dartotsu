@@ -1,6 +1,7 @@
 import '../../Core/Offline/OfflineMode.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../Downloads/DownloadsScreen.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class HomeHeader extends StatelessWidget {
             constraints: BoxConstraints(
               minHeight: banner == null
                   ? 0
-                  : 160 + MediaQuery.paddingOf(context).top,
+                  : 136 + MediaQuery.paddingOf(context).top,
             ),
             child: Padding(
               padding: EdgeInsets.fromLTRB(
@@ -163,7 +164,7 @@ class HomeHeader extends StatelessWidget {
                               ),
                       ),
                     if (service.hasVideo && service.hasReading)
-                      const SizedBox(width: 8),
+                      const SizedBox(width: 6),
                     if (service.hasReading)
                       HeaderStatPill(
                         icon: Icons.menu_book_rounded,
