@@ -26,6 +26,8 @@ const _pill = StadiumBorder();
 bool _keyFocus(Set<WidgetState> states) =>
     states.contains(WidgetState.focused) && usingKeyboard;
 
+const _containerTint = 0.28;
+
 ThemeData buildAppTheme(
   ThemeData base, {
   required bool isOled,
@@ -58,6 +60,18 @@ ThemeData buildAppTheme(
     surfaceContainer: layer(0.07, 0.46),
     surfaceContainerHigh: layer(0.10, 0.52),
     surfaceContainerHighest: layer(0.13, 0.58),
+  );
+  scheme = scheme.copyWith(
+    primaryContainer: Color.lerp(
+      scheme.primaryContainer,
+      scheme.primary,
+      _containerTint,
+    ),
+    secondaryContainer: Color.lerp(
+      scheme.secondaryContainer,
+      scheme.primary,
+      _containerTint,
+    ),
   );
   if (glass) {
     final tonal = dark ? 0.58 : 0.66;
