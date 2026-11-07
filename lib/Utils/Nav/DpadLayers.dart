@@ -1,4 +1,5 @@
 import '../Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../Functions/AppShortcuts.dart';
@@ -114,7 +115,7 @@ class DpadIcon extends StatelessWidget {
                 ? Theme.of(context).colorScheme.secondaryContainer
                 : Colors.transparent,
             shape: round ? BoxShape.circle : BoxShape.rectangle,
-            borderRadius: round ? null : BorderRadius.circular(14),
+            borderRadius: round ? null : BorderRadius.circular(16),
           ),
           child: inner,
         ),

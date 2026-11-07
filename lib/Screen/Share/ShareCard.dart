@@ -87,7 +87,7 @@ class _Footer extends StatelessWidget {
         'Dartotsu',
         style: TextStyle(
           color: _text,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           fontSize: 12,
           letterSpacing: 0.4,
         ),
@@ -166,7 +166,7 @@ class TitleShareCard extends StatelessWidget {
                 width: 190,
                 height: 274,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x99000000),
@@ -176,7 +176,7 @@ class TitleShareCard extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                   child: cachedNetworkImage(
                     imageUrl: media.cover,
                     fit: BoxFit.cover,
@@ -195,7 +195,7 @@ class TitleShareCard extends StatelessWidget {
                   color: _text,
                   fontSize: 22,
                   height: 1.2,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               if (meta.isNotEmpty) ...[
@@ -289,7 +289,7 @@ class ListShareCard extends StatelessWidget {
           style: const TextStyle(
             color: _text,
             fontSize: 20,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
           ),
         ),
         Text(label, style: const TextStyle(color: _muted, fontSize: 11)),
@@ -338,7 +338,7 @@ class ListShareCard extends StatelessWidget {
                           style: const TextStyle(
                             color: _text,
                             fontSize: 17,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
@@ -466,7 +466,7 @@ class EntityShareCard extends StatelessWidget {
                 width: 170,
                 height: 240,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: const [
                     BoxShadow(
                       color: Color(0x99000000),
@@ -476,7 +476,7 @@ class EntityShareCard extends StatelessWidget {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                   child: cachedNetworkImage(
                     imageUrl: profile.image,
                     fit: BoxFit.cover,
@@ -495,7 +495,7 @@ class EntityShareCard extends StatelessWidget {
                   color: _text,
                   fontSize: 22,
                   height: 1.2,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               if (profile.nativeName != null &&
@@ -564,7 +564,7 @@ class ProfileShareCard extends StatelessWidget {
           style: const TextStyle(
             color: _text,
             fontSize: 19,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
           ),
         ),
         const SizedBox(height: 2),
@@ -577,7 +577,7 @@ class ProfileShareCard extends StatelessWidget {
     padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
     decoration: BoxDecoration(
       color: Colors.white.withValues(alpha: 0.1),
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(20),
     ),
     child: Column(
       children: [
@@ -616,7 +616,7 @@ class ProfileShareCard extends StatelessWidget {
                 style: const TextStyle(
                   color: _text,
                   fontSize: 22,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 6),
@@ -726,7 +726,7 @@ class UnitShareCard extends StatelessWidget {
                   color: _text,
                   fontSize: 20,
                   height: 1.2,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const SizedBox(height: 6),
@@ -803,7 +803,7 @@ class ActivityShareCard extends StatelessWidget {
                       style: const TextStyle(
                         color: _text,
                         fontSize: 17,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -845,7 +845,7 @@ class ActivityShareCard extends StatelessWidget {
                               color: _text,
                               fontSize: 18,
                               height: 1.2,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],

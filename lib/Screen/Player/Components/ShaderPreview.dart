@@ -493,7 +493,7 @@ class _ShaderPreviewState extends State<ShaderPreview> {
   Widget _tag(String text) => DecoratedBox(
     decoration: BoxDecoration(
       color: Colors.black.withValues(alpha: 0.6),
-      borderRadius: BorderRadius.circular(10),
+      borderRadius: BorderRadius.circular(12),
     ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),

@@ -93,7 +93,7 @@ class ProfileCard extends StatelessWidget {
               (big
                       ? context.textTheme.titleMedium
                       : context.textTheme.titleSmall)
-                  ?.copyWith(fontWeight: FontWeight.w800),
+                  ?.copyWith(fontWeight: FontWeight.w600),
         ),
         if (chip != null) ...[SizedBox(height: Dimens.gapXs), chip!],
         if (meta != null)

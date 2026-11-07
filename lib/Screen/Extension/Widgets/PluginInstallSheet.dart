@@ -96,12 +96,6 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: scheme.primaryContainer,
-            boxShadow: [
-              BoxShadow(
-                color: scheme.primary.withValues(alpha: 0.25),
-                blurRadius: 20,
-              ),
-            ],
           ),
           child: widget.icon == null
               ? Icon(

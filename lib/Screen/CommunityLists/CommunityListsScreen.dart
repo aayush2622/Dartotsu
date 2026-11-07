@@ -148,7 +148,7 @@ class _CommunityListsScreenState extends BaseScreen<CommunityListsScreen>
           children: [
             if (list.cover != null) ...[
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 child: SizedBox(
                   width: 56,
                   height: 80,

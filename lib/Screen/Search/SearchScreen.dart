@@ -317,7 +317,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
           Text(
             getString.searchResults,
             style: context.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const Spacer(),
@@ -364,7 +364,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
               Text(
                 getString.recentSearches,
                 style: context.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               const Spacer(),
@@ -386,7 +386,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
               padding: const EdgeInsets.symmetric(vertical: 3),
               child: Material(
                 color: scheme.surfaceContainerLow.withValues(alpha: 0.7),
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
                 clipBehavior: Clip.antiAlias,
                 child: ListTile(
                   contentPadding: const EdgeInsetsDirectional.only(
@@ -549,7 +549,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   if (subtitle != null)
@@ -600,7 +600,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.titleSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

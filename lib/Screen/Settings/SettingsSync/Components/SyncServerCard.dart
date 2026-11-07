@@ -112,7 +112,7 @@ class _Stat extends StatelessWidget {
             Text(
               '$value',
               style: context.textTheme.titleLarge?.copyWith(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w600,
               ),
             ),
             Text(

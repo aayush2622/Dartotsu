@@ -112,7 +112,7 @@ class BadgeGlyph extends StatelessWidget {
           '3',
           style: context.textTheme.labelSmall?.copyWith(
             color: scheme.onPrimaryContainer,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
             height: 1,
           ),
         ),
@@ -224,7 +224,7 @@ class BadgeDropLayer extends StatelessWidget {
         duration: animDuration(140),
         margin: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           color: hovered && open
               ? accent.withValues(alpha: 0.28)
               : Colors.transparent,

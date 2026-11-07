@@ -103,7 +103,7 @@ class _StackScreenState extends BaseScreen<StackScreen>
                       Text(
                         stack.title,
                         style: text.titleMedium?.copyWith(
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                       if (stack.owner.username.isNotEmpty) ...[

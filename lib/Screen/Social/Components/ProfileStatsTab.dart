@@ -1,6 +1,7 @@
 import '../../../Logger.dart';
 import 'ProfileSkeleton.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -225,7 +226,7 @@ class _ProfileStatsTabState extends State<ProfileStatsTab>
                   Text(
                     value,
                     style: context.textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(

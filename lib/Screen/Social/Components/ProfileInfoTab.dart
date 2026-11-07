@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -128,7 +129,7 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
             title,
             style: context.textTheme.labelLarge?.copyWith(
               color: context.colorScheme.primary,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(height: 8),
@@ -141,7 +142,7 @@ class _ProfileInfoTabState extends State<ProfileInfoTab>
                   Text(
                     value,
                     style: context.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(

@@ -263,21 +263,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     return Container(
       width: 112,
       height: 112,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: AlignmentDirectional.topStart,
-          end: AlignmentDirectional.bottomEnd,
-          colors: [scheme.primary, scheme.tertiary],
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: scheme.primary.withValues(alpha: 0.35),
-            blurRadius: 36,
-            spreadRadius: 2,
-          ),
-        ],
-      ),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: scheme.primary),
       child: Icon(icon, size: 52, color: scheme.onPrimary),
     );
   }
@@ -367,7 +353,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             height: 44,
             decoration: BoxDecoration(
               color: scheme.primaryContainer,
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(icon, color: scheme.onPrimaryContainer),
           ),

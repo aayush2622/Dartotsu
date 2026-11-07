@@ -318,7 +318,7 @@ class _Slide extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     style: text.labelMedium?.copyWith(
                                       color: scheme.primary,
-                                      fontWeight: FontWeight.w800,
+                                      fontWeight: FontWeight.w600,
                                       letterSpacing: 0.5,
                                     ),
                                   ),
@@ -334,7 +334,7 @@ class _Slide extends StatelessWidget {
                                 Text(
                                   score.toStringAsFixed(1),
                                   style: text.labelMedium?.copyWith(
-                                    fontWeight: FontWeight.w800,
+                                    fontWeight: FontWeight.w600,
                                   ),
                                 ),
                               ],
@@ -347,7 +347,7 @@ class _Slide extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             style: text.titleLarge?.copyWith(
                               color: fg,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],

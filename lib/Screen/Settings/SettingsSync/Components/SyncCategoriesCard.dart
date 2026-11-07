@@ -176,7 +176,7 @@ class _Items extends StatelessWidget {
       margin: const EdgeInsetsDirectional.fromSTEB(16, 2, 4, 10),
       padding: const EdgeInsets.fromLTRB(4, 6, 4, 12),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
         color: scheme.onSurface.withValues(alpha: 0.045),
       ),
       child: Column(

@@ -140,7 +140,7 @@ class _CardShelfState extends State<CardShelf> {
       height: 42,
       decoration: BoxDecoration(
         color: theme.primaryColor,
-        borderRadius: BorderRadius.circular(16.0),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Center(
         child: Transform.translate(

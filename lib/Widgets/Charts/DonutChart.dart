@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -99,7 +100,7 @@ class _DonutChartState extends State<DonutChart> {
                               widget.centerValue ??
                               compactNumber(total),
                           style: context.textTheme.titleLarge?.copyWith(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         Text(
@@ -178,14 +179,14 @@ class _DonutChartState extends State<DonutChart> {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: context.textTheme.bodyMedium?.copyWith(
-                    fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+                    fontWeight: selected ? FontWeight.w600 : FontWeight.w500,
                   ),
                 ),
               ),
               Text(
                 d.display,
                 style: context.textTheme.labelLarge?.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(

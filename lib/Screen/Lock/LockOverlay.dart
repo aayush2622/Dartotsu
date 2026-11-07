@@ -104,64 +104,48 @@ class _LockScreenState extends State<_LockScreen> {
       canPop: false,
       child: Material(
         color: scheme.surface,
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: RadialGradient(
-              center: const Alignment(0, -0.7),
-              radius: 1.1,
-              colors: [scheme.primary.withValues(alpha: 0.16), scheme.surface],
-            ),
-          ),
-          child: SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.all(Dimens.pagePad),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: 76,
-                      height: 76,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: scheme.primaryContainer,
-                        boxShadow: [
-                          BoxShadow(
-                            color: scheme.primary.withValues(alpha: 0.3),
-                            blurRadius: 28,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.lock_rounded,
-                        size: 34,
-                        color: scheme.onPrimaryContainer,
-                      ),
-                    ).animateDropIn(),
-                    SizedBox(height: Dimens.gap),
-                    Text(
-                      getString.appLockUnlock,
-                      style: context.textTheme.headlineSmall?.copyWith(
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ).animateFadeUp(),
-                    SizedBox(height: Dimens.gapLg),
-                    PinPad(
-                      onSubmit: _submit,
-                      matches: _matches,
-                      message: _message.value,
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(Dimens.pagePad),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: 76,
+                    height: 76,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: scheme.primaryContainer,
                     ),
-                    if (find<AppLock>().biometricReady) ...[
-                      SizedBox(height: Dimens.gap),
-                      TextButton.icon(
-                        onPressed: _biometric,
-                        icon: const Icon(Icons.fingerprint_rounded),
-                        label: Text(getString.appLockUseBiometric),
-                      ),
-                    ],
+                    child: Icon(
+                      Icons.lock_rounded,
+                      size: 34,
+                      color: scheme.onPrimaryContainer,
+                    ),
+                  ).animateDropIn(),
+                  SizedBox(height: Dimens.gap),
+                  Text(
+                    getString.appLockUnlock,
+                    style: context.textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ).animateFadeUp(),
+                  SizedBox(height: Dimens.gapLg),
+                  PinPad(
+                    onSubmit: _submit,
+                    matches: _matches,
+                    message: _message.value,
+                  ),
+                  if (find<AppLock>().biometricReady) ...[
+                    SizedBox(height: Dimens.gap),
+                    TextButton.icon(
+                      onPressed: _biometric,
+                      icon: const Icon(Icons.fingerprint_rounded),
+                      label: Text(getString.appLockUseBiometric),
+                    ),
                   ],
-                ),
+                ],
               ),
             ),
           ),

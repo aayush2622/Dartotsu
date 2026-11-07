@@ -77,7 +77,7 @@ class _SourcePickerState extends State<_SourcePicker> {
               label: service.name,
               selected: selected.value == service.id,
               icon: (color) => ClipRRect(
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(4),
                 child: assetIcon(service.icon, size: 18),
               ),
             ),
@@ -111,9 +111,10 @@ class _SourcePickerState extends State<_SourcePicker> {
         if (term.isEmpty || (s.name ?? '').toLowerCase().contains(term)) s,
     ];
     final preparing =
-        extensionServiceFor(
-          widget.type,
-        )?.state(widget.type).loadingInstalled.value ??
+        extensionServiceFor(widget.type)
+            ?.state(widget.type)
+            .loadingInstalled
+            .value ??
         false;
     if (sources.isEmpty && preparing) {
       return Center(
@@ -156,7 +157,7 @@ class _SourcePickerState extends State<_SourcePicker> {
           radius: groupedRadius(i, sources.length),
           selected: s.id == widget.current?.id,
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
             child: SizedBox(
               width: 36,
               height: 36,

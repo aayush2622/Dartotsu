@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -124,7 +125,7 @@ class _MarkupTextState extends State<MarkupText> {
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 320, maxHeight: 320),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(12),
           child: Image.network(
             url,
             fit: BoxFit.contain,

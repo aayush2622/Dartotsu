@@ -1,6 +1,9 @@
 import '../../../Core/SourceAlerts/SourceSubscriptions.dart';
+
 import 'dart:async';
+
 import '../../../Core/Offline/OfflineMode.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
@@ -228,7 +231,7 @@ class _Toggles extends StatelessWidget {
           Watch(
             () => SwitchListTile(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
               ),
               secondary: Icon(Icons.download_rounded, color: scheme.primary),
               title: Text(getString.offlineMode),
@@ -272,7 +275,7 @@ class _SwitchRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Watch(
       () => SwitchListTile(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         secondary: icon,
         title: Text(title),
         value: rx.value,

@@ -206,7 +206,7 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
     final scheme = context.colorScheme;
     return Material(
       elevation: 6,
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(20),
       clipBehavior: Clip.antiAlias,
       color: scheme.surfaceContainerHigh,
       child: SizedBox(
@@ -244,7 +244,7 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           if (profile.nativeName != null &&

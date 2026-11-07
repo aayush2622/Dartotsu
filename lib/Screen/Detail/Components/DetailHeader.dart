@@ -378,7 +378,7 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleLarge?.copyWith(
               fontSize: 19,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
               height: 1.15,
               color: scheme.onSurface,
             ),

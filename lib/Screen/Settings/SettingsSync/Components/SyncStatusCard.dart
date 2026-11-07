@@ -123,7 +123,7 @@ class SyncStatusCard extends StatelessWidget {
               child: SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 title: Text(getString.settingsSyncSwitch),
                 subtitle: Text(getString.settingsSyncDesc),

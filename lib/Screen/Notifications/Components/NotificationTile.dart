@@ -48,7 +48,7 @@ class NotificationTile extends StatelessWidget {
                 children: [
                   _image(
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                       child: SizedBox(
                         width: 44,
                         height: 58,

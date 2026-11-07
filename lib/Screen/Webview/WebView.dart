@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:webview_all/webview_all.dart';
 
@@ -70,7 +71,7 @@ class _WebViewState extends State<WebView>
           height: 44,
           decoration: BoxDecoration(
             color: scheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(22),
+            borderRadius: BorderRadius.circular(20),
           ),
           alignment: Alignment.center,
           child: state.isEditing.value

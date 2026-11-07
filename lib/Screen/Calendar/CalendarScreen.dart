@@ -167,7 +167,7 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
               child: Row(
                 children: [
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(12),
                     child: SizedBox(
                       width: 52,
                       height: 72,

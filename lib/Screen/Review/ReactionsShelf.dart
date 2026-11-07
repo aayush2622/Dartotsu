@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -126,7 +127,7 @@ class _ReactionsShelfState extends State<ReactionsShelf>
                     '${r.votes}',
                     style: context.textTheme.labelMedium?.copyWith(
                       color: r.voted ? scheme.primary : scheme.onSurfaceVariant,
-                      fontWeight: r.voted ? FontWeight.w800 : null,
+                      fontWeight: r.voted ? FontWeight.w600 : null,
                     ),
                   ),
                 ],

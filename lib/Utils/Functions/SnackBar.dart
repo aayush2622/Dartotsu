@@ -36,7 +36,7 @@ void snackString(
                 color: Colors.transparent,
                 child: ThemedContainer(
                   blur: true,
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                   padding: const EdgeInsets.symmetric(
                     horizontal: 16,
                     vertical: 14,

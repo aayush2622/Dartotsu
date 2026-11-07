@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -183,7 +184,7 @@ class _ColumnPainter extends CustomPainter {
         Offset(cx, base + labelHeight / 2 + 2),
         isActive ? strong : text,
         11,
-        weight: isActive ? FontWeight.w800 : FontWeight.w500,
+        weight: isActive ? FontWeight.w600 : FontWeight.w500,
       );
       if (isActive) {
         final tip = d.display;
@@ -193,7 +194,7 @@ class _ColumnPainter extends CustomPainter {
             style: TextStyle(
               color: strong,
               fontSize: 12,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           textDirection: TextDirection.ltr,
@@ -207,7 +208,7 @@ class _ColumnPainter extends CustomPainter {
             width: tp.width + 16,
             height: 22,
           ),
-          const Radius.circular(11),
+          const Radius.circular(12),
         );
         canvas.drawRRect(bubble, Paint()..color = grid.withValues(alpha: 0.95));
         tp.paint(canvas, bubble.center - Offset(tp.width / 2, tp.height / 2));

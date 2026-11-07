@@ -48,7 +48,7 @@ class SubtitlePreview extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: Color(settings.subtitleBackgroundColor),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(12),
                     ),
                     child: SubtitleText(
                       text: getString.playerSubtitlePreviewText,

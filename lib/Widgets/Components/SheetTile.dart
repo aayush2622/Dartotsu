@@ -1,4 +1,5 @@
 import '../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -33,7 +34,7 @@ class SheetTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
     final onColor = selected ? scheme.onPrimaryContainer : scheme.onSurface;
-    final shape = radius ?? BorderRadius.circular(14);
+    final shape = radius ?? BorderRadius.circular(16);
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: tinted ? 1 : 2),

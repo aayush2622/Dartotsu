@@ -75,12 +75,12 @@ class SyncAccountCard extends StatelessWidget {
           if (code != null) ...[
             DpadTap(
               onTap: () => copyToClipboard(code.userCode),
-              borderRadius: BorderRadius.circular(18),
+              borderRadius: BorderRadius.circular(20),
               child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 18),
                 decoration: BoxDecoration(
                   color: scheme.primaryContainer.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(18),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   children: [
@@ -89,7 +89,7 @@ class SyncAccountCard extends StatelessWidget {
                       child: Text(
                         code.userCode,
                         style: context.textTheme.headlineMedium?.copyWith(
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                           letterSpacing: 4,
                           color: scheme.onPrimaryContainer,
                         ),

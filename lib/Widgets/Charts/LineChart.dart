@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -214,7 +215,7 @@ class _LinePainter extends CustomPainter {
         '${data[a].label} · ${data[a].display}',
         strong,
         12,
-        FontWeight.w800,
+        FontWeight.w600,
       );
       final cx = p.dx.clamp(tp.width / 2 + 10, size.width - tp.width / 2 - 10);
       final rect = RRect.fromRectAndRadius(

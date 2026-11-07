@@ -24,6 +24,7 @@ import 'Components/GroupCard.dart';
 import 'Components/GroupMembersTab.dart';
 import 'GroupState.dart';
 import 'GroupsState.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
 class GroupScreen extends StatefulWidget {
@@ -241,7 +242,7 @@ class _GroupScreenState extends BaseScreen<GroupScreen>
               Text(
                 group.name,
                 style: text.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               if (group.tagline != null && group.tagline!.isNotEmpty)

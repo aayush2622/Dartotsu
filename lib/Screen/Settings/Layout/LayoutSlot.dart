@@ -112,15 +112,6 @@ class LayoutSlot extends StatelessWidget {
                 : Colors.transparent,
             width: 1.5,
           ),
-          boxShadow: active
-              ? [
-                  BoxShadow(
-                    color: accent.withValues(alpha: 0.4),
-                    blurRadius: 16,
-                    spreadRadius: 1,
-                  ),
-                ]
-              : null,
         ),
         child: body,
       ),
@@ -175,9 +166,6 @@ class LayoutSlot extends StatelessWidget {
     decoration: BoxDecoration(
       color: accent,
       borderRadius: BorderRadius.circular(4),
-      boxShadow: [
-        BoxShadow(color: accent.withValues(alpha: 0.7), blurRadius: 8),
-      ],
     ),
   );
 
@@ -279,7 +267,7 @@ class LayoutSlot extends StatelessWidget {
                   : lifted
                   ? scheme.primaryContainer
                   : null,
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
               children: [

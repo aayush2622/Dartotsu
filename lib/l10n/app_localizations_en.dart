@@ -3598,7 +3598,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mostWatchedThisMonth => 'Most Watched This Month';
 
   @override
-  String get repoLinksAdded => 'Added Repo Links Successfully!';
+  String get repoLinksAdded => 'Repo links added';
 
   @override
   String repoLinkConfirm(String url) {
@@ -4363,7 +4363,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get commentsLoadMore => 'Load more comments';
 
   @override
-  String get commentsEmpty => 'No comments yet. Be the first!';
+  String get commentsEmpty => 'No comments yet';
 
   @override
   String get commentsEmptyFiltered => 'No comments for this filter';

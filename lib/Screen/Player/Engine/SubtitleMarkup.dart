@@ -41,9 +41,8 @@ Color? _parseColour(String raw) {
 }
 
 List<InlineSpan> subtitleSpans(String source, {Paint? stroke}) {
-  final text = cleanSubtitle(
-    source,
-  ).replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n');
+  final text = cleanSubtitle(source)
+      .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n');
   final spans = <InlineSpan>[];
   var italic = 0;
   var bold = 0;
@@ -53,7 +52,7 @@ List<InlineSpan> subtitleSpans(String source, {Paint? stroke}) {
 
   TextStyle style() => TextStyle(
     fontStyle: italic > 0 ? FontStyle.italic : null,
-    fontWeight: bold > 0 ? FontWeight.w800 : null,
+    fontWeight: bold > 0 ? FontWeight.w600 : null,
     decoration: underline > 0 ? TextDecoration.underline : null,
     color: stroke == null ? colours.whereType<Color>().lastOrNull : null,
     foreground: stroke,

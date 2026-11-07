@@ -120,7 +120,7 @@ Widget _progress(BuildContext context, bool loading, double? progress) {
                         ),
                         const SizedBox(height: 8),
                         ClipRRect(
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(12),
                           child: LinearProgressIndicator(
                             value: progress,
                             minHeight: 6,
@@ -165,7 +165,7 @@ Widget _repoTile(
     onLongPress: () => copyToClipboard(repo.url),
     leading: repo.iconUrl != null
         ? ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
             child: Image.network(
               repo.iconUrl!,
               width: 36,

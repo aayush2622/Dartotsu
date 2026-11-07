@@ -1,4 +1,5 @@
 import '../../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
@@ -65,14 +66,14 @@ class HeaderAvatar extends StatelessWidget {
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: scheme.error,
-                    borderRadius: BorderRadius.circular(9),
+                    borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: scheme.surface, width: 1.5),
                   ),
                   child: Text(
                     badge > 99 ? '99+' : '$badge',
                     style: context.textTheme.labelSmall?.copyWith(
                       color: scheme.onError,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                       fontSize: 10,
                     ),
                   ),

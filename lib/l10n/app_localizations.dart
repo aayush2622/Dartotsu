@@ -6674,7 +6674,7 @@ abstract class AppLocalizations {
   /// No description provided for @repoLinksAdded.
   ///
   /// In en, this message translates to:
-  /// **'Added Repo Links Successfully!'**
+  /// **'Repo links added'**
   String get repoLinksAdded;
 
   /// No description provided for @repoLinkConfirm.
@@ -7934,7 +7934,7 @@ abstract class AppLocalizations {
   /// No description provided for @commentsEmpty.
   ///
   /// In en, this message translates to:
-  /// **'No comments yet. Be the first!'**
+  /// **'No comments yet'**
   String get commentsEmpty;
 
   /// No description provided for @commentsEmptyFiltered.

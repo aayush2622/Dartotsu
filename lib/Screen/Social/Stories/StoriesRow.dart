@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -309,7 +310,7 @@ class _StoriesRowState extends State<StoriesRow> {
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: context.textTheme.labelSmall?.copyWith(
-                  fontWeight: fresh ? FontWeight.w800 : FontWeight.w500,
+                  fontWeight: fresh ? FontWeight.w600 : FontWeight.w500,
                   color: fresh ? null : scheme.onSurfaceVariant,
                 ),
               ),

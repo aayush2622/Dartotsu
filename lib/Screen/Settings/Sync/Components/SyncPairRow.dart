@@ -44,13 +44,13 @@ class SyncPairRow extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 3, horizontal: Dimens.gapSm),
       child: DpadTap(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
         child: ThemedContainer(
           blur: false,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(20),
           padding: EdgeInsets.zero,
           child: ClipRRect(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(20),
             child: Stack(
               children: [
                 PositionedDirectional(

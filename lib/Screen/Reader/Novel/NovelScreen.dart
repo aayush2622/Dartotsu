@@ -539,7 +539,7 @@ class _NovelScreenState extends State<NovelScreen>
       state.title,
       style: base.copyWith(
         fontSize: base.fontSize! * 1.4,
-        fontWeight: FontWeight.w800,
+        fontWeight: FontWeight.w600,
       ),
     ),
   );

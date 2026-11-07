@@ -40,9 +40,9 @@ abstract final class Dimens {
   static const EdgeInsets sheetInsets = EdgeInsets.fromLTRB(20, 0, 20, 24);
 
   // --- radii ---
-  static double get radius => 26;
-  static double get radiusSm => 18;
-  static double get radiusLg => 34;
+  static double get radius => 28;
+  static double get radiusSm => 20;
+  static double get radiusLg => 32;
   static BorderRadius get border => BorderRadius.circular(radius);
   static BorderRadius get borderSm => BorderRadius.circular(radiusSm);
   static BorderRadius get borderLg => BorderRadius.circular(radiusLg);

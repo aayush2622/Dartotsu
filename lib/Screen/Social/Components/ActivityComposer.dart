@@ -133,7 +133,7 @@ class _ActivityComposerState extends State<ActivityComposer>
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 title: Text(getString.privateMessage),
                 value: state.private.value,

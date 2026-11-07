@@ -1,4 +1,5 @@
 import '../Animation/WidgetAnimations.dart';
+
 import 'package:dpad/dpad.dart' hide DpadFocusable;
 import 'package:dpad/dpad.dart' as base show DpadFocusable;
 export 'package:dpad/dpad.dart' hide DpadFocusable;
@@ -131,7 +132,7 @@ Widget dpadFocusHighlight(
   return Container(
     decoration: BoxDecoration(
       color: dpadHighlightColor(context, state.focused) ?? Colors.transparent,
-      borderRadius: BorderRadius.circular(14),
+      borderRadius: BorderRadius.circular(16),
     ),
     child: child,
   );
@@ -194,7 +195,7 @@ class DpadTap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (onTap == null && onLongPress == null) return child;
-    final radius = (borderRadius ?? BorderRadius.circular(14)).resolve(
+    final radius = (borderRadius ?? BorderRadius.circular(16)).resolve(
       Directionality.of(context),
     );
     return DpadFocusable(

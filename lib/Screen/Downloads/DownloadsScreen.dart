@@ -281,7 +281,7 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
             child: Text(
               '${list.first.mediaTitle} · ${list.length}',
               style: context.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -300,7 +300,7 @@ class _DownloadsScreenState extends BaseScreen<DownloadsScreen>
           child: Text(
             '${group.title} · ${group.files.length}',
             style: context.textTheme.titleSmall?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

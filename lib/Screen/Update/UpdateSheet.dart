@@ -86,12 +86,6 @@ class UpdateSheet extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: scheme.primaryContainer,
-            boxShadow: [
-              BoxShadow(
-                color: scheme.primary.withValues(alpha: 0.25),
-                blurRadius: 20,
-              ),
-            ],
           ),
           child: Icon(
             Icons.system_update_rounded,

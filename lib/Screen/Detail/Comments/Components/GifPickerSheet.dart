@@ -2,6 +2,7 @@ import '../../../../Logger.dart';
 import '../../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../../Widgets/Components/ScrollConfig.dart';
 import '../../../../Utils/Functions/NavigateToScreen.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -152,7 +153,7 @@ class _GifPickerSheetState extends State<GifPickerSheet> {
                           Clickable(
                             onTap: () => popPage(context, gifs[i]),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(16),
                               child: cachedNetworkImage(
                                 imageUrl: gifs[i],
                                 fit: BoxFit.cover,

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
+
 import 'package:flutter/services.dart';
 
 import '../../../Core/Services/MediaService.dart';
@@ -397,18 +398,18 @@ class _ActivityCardState extends State<ActivityCard> {
     return DecoratedBox(
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: InkWell(
         mouseCursor: kClickCursor,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         onTap: () => openDetail(context, widget.service, media, heroTag: tag),
         child: Padding(
           padding: const EdgeInsets.all(10),
           child: Row(
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 child: SizedBox(
                   width: 54,
                   height: 78,
@@ -437,7 +438,7 @@ class _ActivityCardState extends State<ActivityCard> {
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ],

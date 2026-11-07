@@ -201,13 +201,13 @@ class _ChartsScreenState extends BaseScreen<ChartsScreen>
                   '${e.position}',
                   textAlign: TextAlign.center,
                   style: text.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     color: top ? scheme.primary : scheme.onSurface,
                   ),
                 ),
               ),
               ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(12),
                 child: SizedBox(
                   width: 56,
                   height: 76,
@@ -271,7 +271,7 @@ class _ChartsScreenState extends BaseScreen<ChartsScreen>
           getString.trendzNew,
           style: context.textTheme.labelMedium?.copyWith(
             color: scheme.tertiary,
-            fontWeight: FontWeight.w800,
+            fontWeight: FontWeight.w600,
           ),
         ),
       );

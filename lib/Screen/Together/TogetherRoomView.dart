@@ -188,7 +188,7 @@ class TogetherRoomView extends StatelessWidget {
                 child: Text(
                   u.name.isEmpty ? '?' : u.name[0].toUpperCase(),
                   style: TextStyle(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     color: mine
                         ? scheme.onPrimaryContainer
                         : scheme.onSecondaryContainer,

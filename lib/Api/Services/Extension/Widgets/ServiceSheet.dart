@@ -51,7 +51,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                     () => SheetTile(
                       selected: extensionServiceFor(type)?.id == service.id,
                       leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                         child: assetIcon(service.icon, size: 28),
                       ),
                       title: Text(service.name),
@@ -83,7 +83,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                         Watch(
                           () => SwitchListTile(
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14),
+                              borderRadius: BorderRadius.circular(16),
                             ),
                             value: isSourceLoaded(type, source),
                             onChanged: (v) {

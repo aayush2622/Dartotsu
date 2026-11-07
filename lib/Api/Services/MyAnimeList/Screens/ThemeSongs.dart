@@ -80,7 +80,7 @@ class ThemeSongs extends StatelessWidget {
                           child: Text(
                             song.number ?? '',
                             style: text.labelSmall?.copyWith(
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                               color: scheme.onSecondaryContainer,
                             ),
                           ),

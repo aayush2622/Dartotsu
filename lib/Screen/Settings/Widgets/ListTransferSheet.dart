@@ -71,7 +71,7 @@ class _ImportSheetState extends State<_ImportSheet>
                 margin: const EdgeInsets.only(bottom: 12),
                 decoration: BoxDecoration(
                   color: scheme.errorContainer,
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
                   state.error.value!,
@@ -93,7 +93,7 @@ class _ImportSheetState extends State<_ImportSheet>
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   title: Text(getString.importAnimeCount(lists.anime.length)),
                   value: state.anime.value,
@@ -103,7 +103,7 @@ class _ImportSheetState extends State<_ImportSheet>
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(16),
                   ),
                   title: Text(getString.importMangaCount(lists.manga.length)),
                   value: state.manga.value,
@@ -112,7 +112,7 @@ class _ImportSheetState extends State<_ImportSheet>
               SwitchListTile(
                 contentPadding: EdgeInsets.zero,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 title: Text(getString.mergeWithExisting),
                 subtitle: Text(getString.mergeWithExistingDesc),
@@ -149,7 +149,7 @@ class _ImportSheetState extends State<_ImportSheet>
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: scheme.surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -165,7 +165,7 @@ class _ImportSheetState extends State<_ImportSheet>
                     Text(
                       lists.format.label,
                       style: context.textTheme.titleSmall?.copyWith(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     Text(

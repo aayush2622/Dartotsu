@@ -1,12 +1,15 @@
 import 'Core/Services/Api/IdMapper.dart';
 import 'Screen/Together/TogetherLink.dart';
+
 import 'dart:async';
 import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+
 import 'Screen/Settings/Sync/Data/SyncController.dart';
 import 'Utils/Nav/DpadLayers.dart';
 import 'Utils/Nav/DpadNav.dart';
+
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
@@ -281,13 +284,13 @@ class _MyAppState extends State<MyApp> {
         DpadScaleEffect(scale: 1.04),
         DpadBorderEffect(
           width: 2.5,
-          borderRadius: BorderRadius.all(Radius.circular(18)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
         DpadGlowEffect(
           opacity: 0.28,
           blurRadius: 14,
           spreadRadius: 0,
-          borderRadius: BorderRadius.all(Radius.circular(18)),
+          borderRadius: BorderRadius.all(Radius.circular(20)),
         ),
       ],
     ),

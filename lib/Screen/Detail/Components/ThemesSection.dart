@@ -121,7 +121,7 @@ class _ThemesSectionState extends State<ThemesSection>
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: text.labelSmall?.copyWith(
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     color: ink,
                   ),
                 ),

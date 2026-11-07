@@ -74,7 +74,7 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen>
         titleWidget: Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(12),
               child: SizedBox(
                 width: 34,
                 height: 34,

@@ -218,7 +218,7 @@ class _SearchState extends State<_Search> {
                               TextSpan(
                                 text: m.hit,
                                 style: TextStyle(
-                                  fontWeight: FontWeight.w800,
+                                  fontWeight: FontWeight.w600,
                                   color: scheme.primary,
                                 ),
                               ),
@@ -284,7 +284,7 @@ class _Highlights extends StatelessWidget {
             height: 40,
             decoration: BoxDecoration(
               color: Color(highlightColors[h.color]),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: BorderRadius.circular(4),
             ),
           ),
           title: Text(h.text, maxLines: 3, overflow: TextOverflow.ellipsis),
@@ -386,9 +386,8 @@ Future<void> showHighlightSheet(
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Color(
-                    highlightColors[color.value],
-                  ).withValues(alpha: 0.3),
+                  color: Color(highlightColors[color.value])
+                      .withValues(alpha: 0.3),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(

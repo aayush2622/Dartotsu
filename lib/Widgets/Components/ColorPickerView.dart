@@ -116,7 +116,7 @@ class _ColorPickerViewState extends State<ColorPickerView> {
               height: 44,
               decoration: BoxDecoration(
                 color: color,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: scheme.outlineVariant),
               ),
             ),

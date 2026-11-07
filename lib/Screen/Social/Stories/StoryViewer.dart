@@ -431,7 +431,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                             user.name,
                             style: const TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
                           ),
@@ -643,7 +643,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                 ),
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(22),
+                    borderRadius: BorderRadius.circular(20),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withValues(alpha: 0.5),
@@ -653,7 +653,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                     ],
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(22),
+                    borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
                       width: 200,
                       height: 290,
@@ -689,7 +689,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                     color: Colors.white,
                     fontSize: 22,
                     height: 1.2,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

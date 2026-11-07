@@ -291,7 +291,7 @@ class _PlayerScreenState extends State<PlayerScreen>
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: context.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
               height: 1.2,
             ),
           ),

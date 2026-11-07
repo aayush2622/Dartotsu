@@ -139,7 +139,7 @@ class _ErrorScreenState extends State<ErrorScreen>
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: theme.surfaceContainerHighest,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: SelectableText(
         widget.error,
@@ -160,7 +160,7 @@ class _ErrorScreenState extends State<ErrorScreen>
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: theme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
           ),
           child: SelectableText.rich(
             TextSpan(children: state.stackSpans),

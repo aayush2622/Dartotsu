@@ -55,7 +55,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
     final textTheme = ContextExtensions(context).textTheme;
     final buttonStyle = OutlinedButton.styleFrom(
       padding: const EdgeInsets.symmetric(vertical: 24),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       side: BorderSide(color: colorScheme.primary),
     );
 
@@ -67,7 +67,7 @@ class _CustomBottomDialogState extends State<CustomBottomDialog> {
           width: 0,
           color: colorScheme.onSurface.withValues(alpha: 0.2),
         ),
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(16.0)),
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
         padding: EdgeInsets.only(
           bottom: 24.0 + MediaQuery.viewPaddingOf(context).bottom,
           top: 12.0,

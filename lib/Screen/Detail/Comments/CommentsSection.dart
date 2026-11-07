@@ -184,7 +184,7 @@ class _CommentsSectionState extends State<CommentsSection>
           child: Text(
             getString.comments,
             style: context.textTheme.titleLarge?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),

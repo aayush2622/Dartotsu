@@ -40,7 +40,7 @@ class DPanel extends StatelessWidget {
                   title.toUpperCase(),
                   style: context.textTheme.labelMedium?.copyWith(
                     color: scheme.primary,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                     letterSpacing: 1.1,
                   ),
                 ),

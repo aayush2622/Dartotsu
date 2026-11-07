@@ -107,7 +107,7 @@ class DiscordPreview extends StatelessWidget {
                       style: const TextStyle(
                         color: _D.text,
                         fontSize: 20,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     if (profile != null)
@@ -298,7 +298,7 @@ class _Activity extends StatelessWidget {
                 style: const TextStyle(
                   color: _D.text,
                   fontSize: 14,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),

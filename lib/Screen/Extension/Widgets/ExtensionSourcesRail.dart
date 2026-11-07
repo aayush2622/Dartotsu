@@ -77,7 +77,7 @@ class ExtensionSourcesRail extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(16),
               child: Container(
                 width: 48,
                 height: 48,

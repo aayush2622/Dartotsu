@@ -265,7 +265,7 @@ class _SourceTile extends StatelessWidget {
           shape: const Border(),
           collapsedShape: const Border(),
           leading: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(12),
             child: SizedBox(
               width: 38,
               height: 38,

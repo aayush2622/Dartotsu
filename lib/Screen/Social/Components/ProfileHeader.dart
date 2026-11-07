@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../Share/ShareCardSheet.dart';
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -178,7 +179,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
                                       overflow: TextOverflow.ellipsis,
                                       style: context.textTheme.titleLarge
                                           ?.copyWith(
-                                            fontWeight: FontWeight.w800,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                     ),
                                   ),
@@ -346,7 +347,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
               Text(
                 value == null ? '–' : _compact(value),
                 style: context.textTheme.titleMedium?.copyWith(
-                  fontWeight: FontWeight.w800,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               Text(

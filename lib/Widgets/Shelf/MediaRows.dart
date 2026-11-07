@@ -361,7 +361,7 @@ class _ScoreChip extends StatelessWidget {
             Text(
               highlight ? score.userScoreLabel : score.toStringAsFixed(1),
               style: context.textTheme.labelSmall?.copyWith(
-                fontWeight: FontWeight.w800,
+                fontWeight: FontWeight.w600,
                 color: highlight ? scheme.onPrimaryContainer : null,
               ),
             ),
@@ -435,7 +435,7 @@ class MediaListTile extends StatelessWidget {
                               maxLines: style.lines,
                               overflow: TextOverflow.ellipsis,
                               style: text.titleSmall?.copyWith(
-                                fontWeight: FontWeight.w800,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
                           ),
@@ -467,7 +467,7 @@ class MediaListTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: text.labelMedium?.copyWith(
                             color: scheme.primary,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       ],
@@ -480,7 +480,7 @@ class MediaListTile extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: text.labelMedium?.copyWith(
                             color: scheme.primary,
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                       if (style.showProgress) _Progress(facts),
@@ -581,7 +581,7 @@ class MediaBannerTile extends StatelessWidget {
                           maxLines: style.lines,
                           overflow: TextOverflow.ellipsis,
                           style: text.titleMedium?.copyWith(
-                            fontWeight: FontWeight.w800,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(height: 6),
@@ -631,7 +631,7 @@ class MediaBannerTile extends StatelessWidget {
                             facts.airing!,
                             style: text.labelMedium?.copyWith(
                               color: scheme.primary,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],

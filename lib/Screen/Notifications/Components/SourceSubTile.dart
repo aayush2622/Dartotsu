@@ -187,7 +187,7 @@ class SourceSubTile extends StatelessWidget {
                     clipBehavior: Clip.none,
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                         child: SizedBox(
                           width: 44,
                           height: 58,

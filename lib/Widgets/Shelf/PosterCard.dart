@@ -600,7 +600,7 @@ class _ScoreBadge extends StatelessWidget {
             highlight ? score.userScoreLabel : score.toStringAsFixed(1),
             style: context.textTheme.labelSmall?.copyWith(
               color: fg,
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           const SizedBox(width: 2),
@@ -649,7 +649,7 @@ class _UnreadBadge extends StatelessWidget {
         maxLines: 1,
         style: context.textTheme.labelSmall?.copyWith(
           color: ink,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           height: 1,
         ),
       ),

@@ -1,5 +1,6 @@
 import '../../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../../Utils/Extensions/Responsive.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../Core/State/State.dart';
@@ -154,7 +155,7 @@ class CommentTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: text.labelLarge?.copyWith(
                         color: scheme.primary,
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),
@@ -164,7 +165,7 @@ class CommentTile extends StatelessWidget {
                   '[$level]',
                   style: text.labelSmall?.copyWith(
                     color: color,
-                    fontWeight: FontWeight.w800,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 if (comment.isAdmin) ...[
@@ -197,7 +198,7 @@ class CommentTile extends StatelessWidget {
                       ),
                       decoration: BoxDecoration(
                         color: scheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(12),
                       ),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
@@ -212,7 +213,7 @@ class CommentTile extends StatelessWidget {
                             '${comment.tag}',
                             style: text.labelSmall?.copyWith(
                               color: scheme.onPrimaryContainer,
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
@@ -362,7 +363,7 @@ class CommentTile extends StatelessWidget {
                     key: ValueKey(comment.score),
                     style: text.labelMedium?.copyWith(
                       color: scoreColor,
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

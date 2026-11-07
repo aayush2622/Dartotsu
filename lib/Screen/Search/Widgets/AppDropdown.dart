@@ -86,7 +86,7 @@ class _AppDropdownState extends State<AppDropdown> {
               elevation: const WidgetStatePropertyAll(6),
               backgroundColor: WidgetStatePropertyAll(theme.cardColor),
               shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
             ),
             onSelected: (v) {

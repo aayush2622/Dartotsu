@@ -136,7 +136,7 @@ class _GroupedStreamsState extends State<GroupedStreams> {
     return Padding(
       padding: const EdgeInsets.only(top: 8, bottom: 4),
       child: InkWell(
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(16),
         onTap: () => _collapsed.value = open
             ? {..._collapsed.value, group.key}
             : ({..._collapsed.value}..remove(group.key)),

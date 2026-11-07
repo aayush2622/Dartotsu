@@ -114,7 +114,7 @@ class ShelfFrame extends StatelessWidget {
             color: kDpadFocused(state)
                 ? Theme.of(context).colorScheme.secondaryContainer
                 : Colors.transparent,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: child,
         ),

@@ -1,5 +1,6 @@
 import '../../../Logger.dart';
 import '../../../Utils/Lru.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -77,7 +78,7 @@ class _AniMediaCardState extends State<AniMediaCard> {
               height: 104,
               decoration: BoxDecoration(
                 color: scheme.surfaceContainerHigh,
-                borderRadius: BorderRadius.circular(18),
+                borderRadius: BorderRadius.circular(20),
                 border: Border.all(
                   color: scheme.outlineVariant.withValues(alpha: 0.4),
                 ),
@@ -110,7 +111,7 @@ class _AniMediaCardState extends State<AniMediaCard> {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: context.textTheme.titleSmall?.copyWith(
-                              fontWeight: FontWeight.w800,
+                              fontWeight: FontWeight.w600,
                               color: scheme.primary,
                             ),
                           ),

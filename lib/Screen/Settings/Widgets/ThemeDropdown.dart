@@ -1,5 +1,6 @@
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Nav/DpadNav.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -267,7 +268,7 @@ class _UiSkeletonPreview extends StatelessWidget {
     const side = 5.0;
 
     return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
       child: Container(
         color: bg,
         child: LayoutBuilder(
@@ -379,7 +380,7 @@ class _UiSkeletonPreview extends StatelessWidget {
         decoration: active
             ? BoxDecoration(
                 color: color.withValues(alpha: 0.18),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(4),
               )
             : null,
         child: Icon(icon, size: 8, color: color),
@@ -398,7 +399,7 @@ class _UiSkeletonPreview extends StatelessWidget {
 class _RainbowPreview extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ClipRRect(
-    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
+    borderRadius: const BorderRadius.vertical(top: Radius.circular(12)),
     child: Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(

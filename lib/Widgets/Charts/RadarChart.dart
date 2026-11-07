@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -158,7 +159,7 @@ class _RadarPainter extends CustomPainter {
           style: TextStyle(
             color: isActive ? strong : text,
             fontSize: 11,
-            fontWeight: isActive ? FontWeight.w800 : FontWeight.w500,
+            fontWeight: isActive ? FontWeight.w600 : FontWeight.w500,
           ),
         ),
         textDirection: TextDirection.ltr,

@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+
 import '../../../../Widgets/Components/ThemedContainer.dart';
+
 import 'package:intl/intl.dart';
 
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -406,7 +408,7 @@ class UnitTile extends StatelessWidget {
         child: ThemedContainer(
           blur: false,
           color: background,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
           padding: EdgeInsets.zero,
           child: Stack(
             alignment: Alignment.center,

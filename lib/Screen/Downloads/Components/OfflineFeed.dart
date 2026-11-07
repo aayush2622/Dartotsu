@@ -84,7 +84,7 @@ class OfflineFeed extends StatelessWidget {
                     child: Text(
                       getString.offlineFeedTitle,
                       style: context.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w800,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

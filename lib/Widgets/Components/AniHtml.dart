@@ -1,5 +1,6 @@
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -20,8 +21,11 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import 'AppSpinner.dart';
 import 'SvgPrepare.dart';
 
-typedef AniLinkCardBuilder =
-    Widget? Function(BuildContext context, String url, bool centered);
+typedef AniLinkCardBuilder = Widget? Function(
+  BuildContext context,
+  String url,
+  bool centered,
+);
 
 class AniHtml extends StatefulWidget {
   final String html;
@@ -531,7 +535,7 @@ class _AniHtmlState extends State<AniHtml> {
         };
         final headingStyle = style.copyWith(
           fontSize: (style.fontSize ?? 14) * size,
-          fontWeight: FontWeight.w800,
+          fontWeight: FontWeight.w600,
           height: 1.3,
         );
         return Padding(
@@ -627,7 +631,7 @@ class _AniHtmlState extends State<AniHtml> {
               start: BorderSide(color: scheme.primary, width: 3),
             ),
             borderRadius: const BorderRadiusDirectional.horizontal(
-              end: Radius.circular(10),
+              end: Radius.circular(12),
             ),
           ),
           child: Column(
@@ -709,7 +713,7 @@ class _AniHtmlState extends State<AniHtml> {
       case 'strong' || 'b':
         return _children(
           node,
-          style.copyWith(fontWeight: FontWeight.w800),
+          style.copyWith(fontWeight: FontWeight.w600),
           href,
         );
       case 'em' || 'i':
@@ -1027,7 +1031,7 @@ class _MediaTile extends StatelessWidget {
                         label,
                         style: const TextStyle(
                           color: Colors.white,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -1065,7 +1069,7 @@ class _SpoilerBlockState extends State<_SpoilerBlock> {
         width: double.infinity,
         decoration: BoxDecoration(
           color: scheme.surfaceContainerHighest.withValues(alpha: 0.5),
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

@@ -70,7 +70,7 @@ class _DownloadStorageScreenState extends BaseScreen<DownloadStorageScreen>
           Text(
             formatBytes(total),
             style: context.textTheme.headlineMedium?.copyWith(
-              fontWeight: FontWeight.w800,
+              fontWeight: FontWeight.w600,
             ),
           ),
           Text(
@@ -121,7 +121,7 @@ class _DownloadStorageScreenState extends BaseScreen<DownloadStorageScreen>
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: context.textTheme.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w800,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),

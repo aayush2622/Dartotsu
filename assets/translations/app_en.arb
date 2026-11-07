@@ -1724,7 +1724,7 @@
   "mostWatchedShowsMonth": "Most Watched Shows This Month",
   "trendingThisWeek": "Trending This Week",
   "mostWatchedThisMonth": "Most Watched This Month",
-  "repoLinksAdded": "Added Repo Links Successfully!",
+  "repoLinksAdded": "Repo links added",
   "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
   "@repoLinkConfirm": {
     "placeholders": {
@@ -2304,7 +2304,7 @@
   },
   "commentsHideReplies": "Hide replies",
   "commentsLoadMore": "Load more comments",
-  "commentsEmpty": "No comments yet. Be the first!",
+  "commentsEmpty": "No comments yet",
   "commentsEmptyFiltered": "No comments for this filter",
   "commentsSignIn": "Sign in to AniList to read and write comments",
   "commentsSignInMessage": "Comments are shared between every service and use your AniList account.",

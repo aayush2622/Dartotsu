@@ -153,14 +153,6 @@ class _PinPadState extends State<PinPad> {
                           : scheme.outline.withValues(alpha: 0.7),
                       width: 2,
                     ),
-                    boxShadow: i < length
-                        ? [
-                            BoxShadow(
-                              color: scheme.primary.withValues(alpha: 0.35),
-                              blurRadius: 8,
-                            ),
-                          ]
-                        : null,
                   ),
                 ),
               ),
