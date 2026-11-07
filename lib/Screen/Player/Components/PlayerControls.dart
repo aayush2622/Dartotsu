@@ -324,7 +324,7 @@ class PlayerControls extends StatelessWidget {
               final duration = state.duration;
               final label =
                   stamp?.name ??
-                  engine.chapters.value
+                  state.shownChapters
                       .where((c) => c.start <= position.inSeconds)
                       .lastOrNull
                       ?.title ??
@@ -395,7 +395,7 @@ class PlayerControls extends StatelessWidget {
                         : state.heldBuffer,
                     duration: state.duration,
                     stamps: state.stamps.toList(),
-                    chapters: engine.chapters.value,
+                    chapters: state.shownChapters,
                     thumbless: state.settings.thumbLessSeekBar,
                     enabled: !locked,
                     previewAt: state.previewAt.value,

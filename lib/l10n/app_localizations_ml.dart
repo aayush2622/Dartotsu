@@ -2124,6 +2124,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get moviesAndSeries => 'സിനിമകളും സീരീസുകളും';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'ട്രാക്കിംഗ് മാത്രം';
 
   @override
@@ -2207,6 +2214,18 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get popular => 'ജനപ്രിയം';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'ഏറ്റവും പുതിയത്';
@@ -5412,6 +5431,13 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'AniSkip-ഉം സ്ട്രീം ടൈംസ്റ്റാമ്പുകളും ഉപയോഗിച്ച് തുടങ്ങിയ ഉടൻ ചാടിക്കടക്കൂ';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'ഒരു തവണ മാത്രം സ്കിപ്പ് ചെയ്യൂ';

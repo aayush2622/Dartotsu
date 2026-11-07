@@ -2118,6 +2118,13 @@ class AppLocalizationsSw extends AppLocalizations {
   String get moviesAndSeries => 'Filamu na Mfululizo';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Ufuatiliaji tu';
 
   @override
@@ -2201,6 +2208,18 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get popular => 'Maarufu';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Mpya zaidi';
@@ -5397,6 +5416,13 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Ruka mara tu inapoanza, kwa kutumia AniSkip na muda wa stream';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Ruka mara moja tu';

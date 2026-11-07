@@ -2126,6 +2126,13 @@ class AppLocalizationsEs extends AppLocalizations {
   String get moviesAndSeries => 'Películas y series';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Solo seguimiento';
 
   @override
@@ -2209,6 +2216,18 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get popular => 'Populares';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Recientes';
@@ -5413,6 +5432,13 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Salta en cuanto empiezan, usando AniSkip y las marcas de tiempo del stream';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Saltar solo una vez';

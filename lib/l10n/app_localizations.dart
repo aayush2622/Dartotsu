@@ -3947,6 +3947,18 @@ abstract class AppLocalizations {
   /// **'Movies & Series'**
   String get moviesAndSeries;
 
+  /// No description provided for @simklMoviesOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies & series only'**
+  String get simklMoviesOnly;
+
+  /// No description provided for @simklMoviesOnlyDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows'**
+  String get simklMoviesOnlyDesc;
+
   /// No description provided for @trackingOnly.
   ///
   /// In en, this message translates to:
@@ -4096,6 +4108,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Popular'**
   String get popular;
+
+  /// No description provided for @allCustomLists.
+  ///
+  /// In en, this message translates to:
+  /// **'All custom lists'**
+  String get allCustomLists;
+
+  /// No description provided for @people.
+  ///
+  /// In en, this message translates to:
+  /// **'People'**
+  String get people;
+
+  /// No description provided for @mostComments.
+  ///
+  /// In en, this message translates to:
+  /// **'Most comments'**
+  String get mostComments;
+
+  /// No description provided for @alphabetical.
+  ///
+  /// In en, this message translates to:
+  /// **'Alphabetical'**
+  String get alphabetical;
 
   /// No description provided for @latest.
   ///
@@ -9658,6 +9694,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Jump past it as soon as it starts, using AniSkip and stream timestamps'**
   String get playerAutoSkipDesc;
+
+  /// No description provided for @playerDisableSkips.
+  ///
+  /// In en, this message translates to:
+  /// **'Disable skips'**
+  String get playerDisableSkips;
+
+  /// No description provided for @playerDisableSkipsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'No AniSkip or stream timestamps, chapter marks or skip submissions in the player'**
+  String get playerDisableSkipsDesc;
 
   /// No description provided for @playerSkipOnce.
   ///

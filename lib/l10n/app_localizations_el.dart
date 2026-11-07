@@ -2126,6 +2126,13 @@ class AppLocalizationsEl extends AppLocalizations {
   String get moviesAndSeries => 'Ταινίες & σειρές';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Μόνο παρακολούθηση';
 
   @override
@@ -2209,6 +2216,18 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get popular => 'Δημοφιλή';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Τελευταία';
@@ -5410,6 +5429,13 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Παράλειψη μόλις ξεκινήσει, με χρήση του AniSkip και των χρονοσημάνσεων του stream';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Παράλειψη μόνο μία φορά';

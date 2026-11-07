@@ -2111,6 +2111,13 @@ class AppLocalizationsUk extends AppLocalizations {
   String get moviesAndSeries => 'Фільми й серіали';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Лише трекінг';
 
   @override
@@ -2193,6 +2200,18 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get popular => 'Популярне';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Нове';
@@ -5398,6 +5417,13 @@ class AppLocalizationsUk extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Перестрибувати одразу на початку, за даними AniSkip і позначок стріму';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Пропускати лише раз';

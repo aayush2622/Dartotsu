@@ -13,10 +13,30 @@ import '../../../Player/Engine/PlayRequest.dart';
 enum StreamKind { sub, hardSub, softSub, dub, raw, other }
 
 class StreamGroup {
-  final StreamKind kind;
+  final String key;
+  final String label;
   final List<int> indices;
 
-  const StreamGroup(this.kind, this.indices);
+  const StreamGroup(this.key, this.label, this.indices);
+}
+
+String? hosterOf(v.Video video) {
+  try {
+    final hoster = (video as dynamic).hoster;
+    return hoster is String && hoster.trim().isNotEmpty ? hoster.trim() : null;
+  } catch (_) {
+    return null;
+  }
+}
+
+String hosterTitle(v.Video video) {
+  final label = streamLabel(video);
+  final hoster = hosterOf(video);
+  if (hoster == null) return label;
+  final prefix = '$hoster - ';
+  return label.startsWith(prefix) && label.length > prefix.length
+      ? label.substring(prefix.length)
+      : label;
 }
 
 final _hard = RegExp(r'\bhard[\s_-]?sub(?:bed|s)?\b|\bhsub\b');
@@ -36,6 +56,22 @@ StreamKind streamKindOf(v.Video video) {
 }
 
 List<StreamGroup>? groupStreams(List<v.Video> list) {
+  if (list.any((video) => hosterOf(video) != null)) {
+    final byHoster = <String, List<int>>{};
+    for (final (i, video) in list.indexed) {
+      (byHoster[hosterOf(video) ?? ''] ??= []).add(i);
+    }
+    return [
+      for (final e in byHoster.entries)
+        if (e.key.isNotEmpty) StreamGroup('hoster:${e.key}', e.key, e.value),
+      if (byHoster[''] != null)
+        StreamGroup(
+          'hoster:',
+          streamKindLabel(StreamKind.other),
+          byHoster['']!,
+        ),
+    ];
+  }
   final buckets = <StreamKind, List<int>>{};
   for (final (i, video) in list.indexed) {
     (buckets[streamKindOf(video)] ??= []).add(i);
@@ -44,7 +80,8 @@ List<StreamGroup>? groupStreams(List<v.Video> list) {
   if (typed == 0 || buckets.length < 2) return null;
   return [
     for (final kind in StreamKind.values)
-      if (buckets[kind] != null) StreamGroup(kind, buckets[kind]!),
+      if (buckets[kind] != null)
+        StreamGroup(kind.name, streamKindLabel(kind), buckets[kind]!),
   ];
 }
 
@@ -76,7 +113,7 @@ class GroupedStreams extends StatefulWidget {
 }
 
 class _GroupedStreamsState extends State<GroupedStreams> {
-  final _collapsed = Live<Set<StreamKind>>(const {});
+  final _collapsed = Live<Set<String>>(const {});
 
   Widget _tile(int index, int position, int count) {
     final video = widget.list[index];
@@ -84,7 +121,7 @@ class _GroupedStreamsState extends State<GroupedStreams> {
       tinted: true,
       radius: groupedRadius(position, count),
       leading: Icon(widget.icon),
-      title: Text(streamLabel(video)),
+      title: Text(hosterTitle(video)),
       subtitle: video.quality.isNotEmpty && video.quality != video.title
           ? Text(video.quality)
           : null,
@@ -101,14 +138,14 @@ class _GroupedStreamsState extends State<GroupedStreams> {
       child: InkWell(
         borderRadius: BorderRadius.circular(14),
         onTap: () => _collapsed.value = open
-            ? {..._collapsed.value, group.kind}
-            : ({..._collapsed.value}..remove(group.kind)),
+            ? {..._collapsed.value, group.key}
+            : ({..._collapsed.value}..remove(group.key)),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
           child: Row(
             children: [
               Text(
-                streamKindLabel(group.kind),
+                group.label,
                 style: context.textTheme.titleSmall?.copyWith(
                   color: scheme.primary,
                   fontWeight: FontWeight.w700,
@@ -151,8 +188,8 @@ class _GroupedStreamsState extends State<GroupedStreams> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           for (final group in groups) ...[
-            _header(context, group, !_collapsed.value.contains(group.kind)),
-            if (!_collapsed.value.contains(group.kind))
+            _header(context, group, !_collapsed.value.contains(group.key)),
+            if (!_collapsed.value.contains(group.key))
               for (final (p, i) in group.indices.indexed)
                 _tile(i, p, group.indices.length),
           ],

@@ -36,6 +36,28 @@ const kSimklMovieSections = <String, bool>{
   'Trending Movies Today': true,
 };
 
+const kSimklMovieOnlySections = <String, bool>{
+  'Trending Movies Today': true,
+  'Trending Movies This Week': true,
+  'Most Watched Movies This Month': false,
+  'Top Rated Movies': true,
+};
+
+const kSimklSeriesSections = <String, bool>{
+  'Trending Shows Today': true,
+  'Trending Anime': true,
+  'Airing Now': true,
+  'Trending Shows This Week': false,
+  'Most Watched Shows This Month': false,
+  'Top Rated Shows': true,
+  'Korean Dramas': true,
+  'Chinese Dramas': true,
+  'Japanese Dramas': true,
+  'Thai Dramas': false,
+  'Turkish Dramas': false,
+  'Mini Series': false,
+};
+
 class SimklPref {
   SimklPref._();
 
@@ -47,6 +69,8 @@ class SimklPref {
     PrefLocation.PROTECTED,
   );
 
+  static const moviesOnly = Pref('simklMoviesOnly', false, PrefLocation.OTHER);
+
   static final homeLayout = layoutPref('simklHomeLayout', kSimklHomeSections);
   static final animeLayout = layoutPref(
     'simklAnimeLayout',
@@ -55,5 +79,13 @@ class SimklPref {
   static final movieLayout = layoutPref(
     'simklMovieLayout',
     kSimklMovieSections,
+  );
+  static final movieOnlyLayout = layoutPref(
+    'simklMovieOnlyLayout',
+    kSimklMovieOnlySections,
+  );
+  static final seriesLayout = layoutPref(
+    'simklSeriesLayout',
+    kSimklSeriesSections,
   );
 }

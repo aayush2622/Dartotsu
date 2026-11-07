@@ -2119,6 +2119,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get moviesAndSeries => 'సినిమాలు & సిరీస్‌లు';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'ట్రాకింగ్ మాత్రమే';
 
   @override
@@ -2201,6 +2208,18 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get popular => 'పాపులర్';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'లేటెస్ట్';
@@ -5391,6 +5410,13 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'AniSkip, స్ట్రీమ్ టైమ్‌స్టాంపులు వాడి, మొదలైన వెంటనే దాటేయ్';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'ఒక్కసారి మాత్రమే స్కిప్ చెయ్యి';

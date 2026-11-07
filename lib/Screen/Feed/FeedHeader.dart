@@ -14,6 +14,7 @@ class FeedHeader extends StatelessWidget {
   final VoidCallback? onSearch;
   final VoidCallback? onCalendar;
   final VoidCallback? onNews;
+  final VoidCallback? onLists;
   final VoidCallback? onCharts;
 
   const FeedHeader({
@@ -22,6 +23,7 @@ class FeedHeader extends StatelessWidget {
     this.onSearch,
     this.onCalendar,
     this.onNews,
+    this.onLists,
     this.onCharts,
   });
 
@@ -72,6 +74,12 @@ class FeedHeader extends StatelessWidget {
                 tooltip: getString.newsTitle,
                 icon: const Icon(Icons.newspaper_rounded),
                 onPressed: onNews,
+              ),
+            if (onLists != null)
+              IconButton(
+                tooltip: getString.customLists,
+                icon: const Icon(Icons.format_list_bulleted_rounded),
+                onPressed: onLists,
               ),
             if (onCalendar != null)
               IconButton(

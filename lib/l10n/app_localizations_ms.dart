@@ -2108,6 +2108,13 @@ class AppLocalizationsMs extends AppLocalizations {
   String get moviesAndSeries => 'Filem & siri';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Penjejakan sahaja';
 
   @override
@@ -2190,6 +2197,18 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get popular => 'Popular';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Terkini';
@@ -5377,6 +5396,13 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Terus lompat bila bermula, guna AniSkip dan cap masa strim';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Langkau sekali sahaja';

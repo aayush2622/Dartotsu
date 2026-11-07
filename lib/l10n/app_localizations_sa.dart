@@ -2108,6 +2108,13 @@ class AppLocalizationsSa extends AppLocalizations {
   String get moviesAndSeries => 'चलचित्राणि धारावाहिकाः च';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'केवलम् अनुसरणम्';
 
   @override
@@ -2190,6 +2197,18 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get popular => 'लोकप्रियम्';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'नवीनतमम्';
@@ -5377,6 +5396,13 @@ class AppLocalizationsSa extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'AniSkip स्ट्रीम्-समय-चिह्नानि च प्रयुज्य आरम्भे एव उत्पत';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'एकवारमेव त्यज';

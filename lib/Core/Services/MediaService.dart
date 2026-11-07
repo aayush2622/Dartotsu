@@ -104,6 +104,8 @@ abstract class MediaService {
 
   NewsScreenView? get newsView => null;
 
+  CommunityListsView? get communityListsView => null;
+
   NotificationScreenView? get notificationView => null;
 
   SettingsScreenView? get settingsView => null;

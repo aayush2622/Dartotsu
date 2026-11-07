@@ -457,7 +457,7 @@ Widget _tracksList(
 });
 
 Future<void> showChaptersSheet(BuildContext context, PlayerState state) async {
-  final chapters = state.engine.chapters.value;
+  final chapters = state.shownChapters;
   final stamps = state.stamps.toList();
   final entries = <(double, String, bool)>[
     for (final c in chapters) (c.start, c.title, true),

@@ -2106,6 +2106,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get moviesAndSeries => 'Phim & Series';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Chỉ theo dõi';
 
   @override
@@ -2188,6 +2195,18 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get popular => 'Phổ biến';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Mới nhất';
@@ -5366,6 +5385,13 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Nhảy qua ngay khi nó bắt đầu, dựa trên AniSkip và mốc thời gian của luồng';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Chỉ bỏ qua một lần';

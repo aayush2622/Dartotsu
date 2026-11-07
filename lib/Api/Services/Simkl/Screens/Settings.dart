@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/Setting.dart';
 import '../../../../Utils/Function.dart';
@@ -21,6 +22,13 @@ class SimklSettingsView extends SettingsScreenView {
     final user = simklAuth.user.value;
     return [
       Setting.header(getString.feedLayout),
+      Setting.switchType(
+        name: getString.simklMoviesOnly,
+        description: getString.simklMoviesOnlyDesc,
+        icon: Icons.theaters_rounded,
+        isChecked: SimklPref.moviesOnly.rx.value,
+        onSwitchChange: (v) => SimklPref.moviesOnly.rx.value = v,
+      ),
       Setting.normal(
         name: getString.homeSections,
         description: _shown(SimklPref.homeLayout),
@@ -29,28 +37,53 @@ class SimklSettingsView extends SettingsScreenView {
         isVisible: simklAuth.isLoggedIn,
         onClick: () => showHomeLayoutSheet(context, pref: SimklPref.homeLayout),
       ),
-      Setting.normal(
-        name: getString.labelSections(getString.anime),
-        description: _shown(SimklPref.animeLayout),
-        icon: Icons.movie_filter_rounded,
-        isActivity: true,
-        onClick: () => showHomeLayoutSheet(
-          context,
-          title: getString.labelSections(getString.anime),
-          pref: SimklPref.animeLayout,
+      if (SimklPref.moviesOnly.rx.value) ...[
+        Setting.normal(
+          name: getString.labelSections(getString.movies),
+          description: _shown(SimklPref.movieOnlyLayout),
+          icon: Icons.theaters_rounded,
+          isActivity: true,
+          onClick: () => showHomeLayoutSheet(
+            context,
+            title: getString.labelSections(getString.movies),
+            pref: SimklPref.movieOnlyLayout,
+          ),
         ),
-      ),
-      Setting.normal(
-        name: getString.labelSections(getString.moviesAndSeries),
-        description: _shown(SimklPref.movieLayout),
-        icon: Icons.theaters_rounded,
-        isActivity: true,
-        onClick: () => showHomeLayoutSheet(
-          context,
-          title: getString.labelSections(getString.moviesAndSeries),
-          pref: SimklPref.movieLayout,
+        Setting.normal(
+          name: getString.labelSections(getString.shows),
+          description: _shown(SimklPref.seriesLayout),
+          icon: Icons.live_tv_rounded,
+          isActivity: true,
+          onClick: () => showHomeLayoutSheet(
+            context,
+            title: getString.labelSections(getString.shows),
+            pref: SimklPref.seriesLayout,
+          ),
         ),
-      ),
+      ] else ...[
+        Setting.normal(
+          name: getString.labelSections(getString.anime),
+          description: _shown(SimklPref.animeLayout),
+          icon: Icons.movie_filter_rounded,
+          isActivity: true,
+          onClick: () => showHomeLayoutSheet(
+            context,
+            title: getString.labelSections(getString.anime),
+            pref: SimklPref.animeLayout,
+          ),
+        ),
+        Setting.normal(
+          name: getString.labelSections(getString.moviesAndSeries),
+          description: _shown(SimklPref.movieLayout),
+          icon: Icons.theaters_rounded,
+          isActivity: true,
+          onClick: () => showHomeLayoutSheet(
+            context,
+            title: getString.labelSections(getString.moviesAndSeries),
+            pref: SimklPref.movieLayout,
+          ),
+        ),
+      ],
       Setting.header(getString.account),
       if (user is SimklUser)
         Setting.normal(

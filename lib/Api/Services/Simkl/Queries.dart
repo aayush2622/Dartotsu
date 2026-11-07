@@ -90,61 +90,81 @@ class SimklSection {
   };
 }
 
+const _simklAnimeOnSeries = [
+  SimklSection('Trending Anime', 'anime/today_100'),
+  SimklSection('Airing Now', 'anime/today_500', airing: true),
+];
+
 List<SimklSection> simklSections(MediaType type) {
-  if (type != MediaType.anime) {
-    return const [
-      SimklSection('Trending Shows Today', 'tv/today_100'),
-      SimklSection('Trending Movies This Week', 'movies/week_100'),
-      SimklSection('Trending Shows This Week', 'tv/week_100'),
-      SimklSection('Most Watched Movies This Month', 'movies/month_100'),
-      SimklSection('Most Watched Shows This Month', 'tv/month_100'),
-      SimklSection(
-        'Top Rated Movies',
-        'movies/month_500',
-        sort: SimklSort.rating,
-      ),
-      SimklSection('Top Rated Shows', 'tv/month_500', sort: SimklSort.rating),
-      SimklSection.country('Korean Dramas', 'kr'),
-      SimklSection.country('Chinese Dramas', 'cn'),
-      SimklSection.country('Japanese Dramas', 'jp'),
-      SimklSection.country('Thai Dramas', 'th'),
-      SimklSection.country('Turkish Dramas', 'tr'),
-      SimklSection.tvGenre('Mini Series', 'Mini-Series'),
-      SimklSection('Trending Movies Today', 'movies/today_100'),
-    ];
+  if (SimklPref.moviesOnly.rx.value && type != MediaType.anime) {
+    final all = _simklMovieSections;
+    return type == MediaType.movie
+        ? [
+            for (final s in all)
+              if (s.file.startsWith('movies/')) s,
+          ]
+        : [
+            for (final s in all)
+              if (!s.file.startsWith('movies/')) s,
+            ..._simklAnimeOnSeries,
+          ];
   }
-  return const [
-    SimklSection('Trending Now', 'anime/today_100'),
-    SimklSection('Trending This Week', 'anime/week_100'),
-    SimklSection('Most Watched This Month', 'anime/month_100'),
-    SimklSection('Airing Now', 'anime/today_500', airing: true),
-    SimklSection(
-      'Top Rated Series',
-      'anime/month_500',
-      type: 'tv',
-      sort: SimklSort.rating,
-    ),
-    SimklSection(
-      'Top Movies',
-      'anime/month_500',
-      type: 'movie',
-      sort: SimklSort.rating,
-    ),
-    SimklSection(
-      'Top ONA',
-      'anime/month_500',
-      type: 'ona',
-      sort: SimklSort.rating,
-    ),
-    SimklSection('Most Popular', 'anime/month_500', sort: SimklSort.watching),
-  ];
+  if (type != MediaType.anime) return _simklMovieSections;
+  return _simklAnimeSections;
 }
+
+const _simklMovieSections = [
+  SimklSection('Trending Shows Today', 'tv/today_100'),
+  SimklSection('Trending Movies This Week', 'movies/week_100'),
+  SimklSection('Trending Shows This Week', 'tv/week_100'),
+  SimklSection('Most Watched Movies This Month', 'movies/month_100'),
+  SimklSection('Most Watched Shows This Month', 'tv/month_100'),
+  SimklSection('Top Rated Movies', 'movies/month_500', sort: SimklSort.rating),
+  SimklSection('Top Rated Shows', 'tv/month_500', sort: SimklSort.rating),
+  SimklSection.country('Korean Dramas', 'kr'),
+  SimklSection.country('Chinese Dramas', 'cn'),
+  SimklSection.country('Japanese Dramas', 'jp'),
+  SimklSection.country('Thai Dramas', 'th'),
+  SimklSection.country('Turkish Dramas', 'tr'),
+  SimklSection.tvGenre('Mini Series', 'Mini-Series'),
+  SimklSection('Trending Movies Today', 'movies/today_100'),
+];
+
+const _simklAnimeSections = [
+  SimklSection('Trending Now', 'anime/today_100'),
+  SimklSection('Trending This Week', 'anime/week_100'),
+  SimklSection('Most Watched This Month', 'anime/month_100'),
+  SimklSection('Airing Now', 'anime/today_500', airing: true),
+  SimklSection(
+    'Top Rated Series',
+    'anime/month_500',
+    type: 'tv',
+    sort: SimklSort.rating,
+  ),
+  SimklSection(
+    'Top Movies',
+    'anime/month_500',
+    type: 'movie',
+    sort: SimklSort.rating,
+  ),
+  SimklSection(
+    'Top ONA',
+    'anime/month_500',
+    type: 'ona',
+    sort: SimklSort.rating,
+  ),
+  SimklSection('Most Popular', 'anime/month_500', sort: SimklSort.watching),
+];
 
 List<SimklSection> simklLayoutSections(MediaType type) => applyLayout(
   simklSections(type),
   (s) => s.title,
-  (type == MediaType.anime ? SimklPref.animeLayout : SimklPref.movieLayout)
-      .value,
+  switch (type) {
+    MediaType.anime => SimklPref.animeLayout,
+    _ when !SimklPref.moviesOnly.rx.value => SimklPref.movieLayout,
+    MediaType.movie => SimklPref.movieOnlyLayout,
+    _ => SimklPref.seriesLayout,
+  }.value,
 );
 
 class _Activity {

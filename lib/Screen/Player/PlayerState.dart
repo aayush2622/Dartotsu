@@ -782,7 +782,10 @@ class PlayerState extends ScreenState {
     }
     if (generation != _generation) return;
     final own = <SkipStamp>[
-      for (final t in chosen.timeStamps ?? const <v.TimeStamp>[])
+      for (final t
+          in settings.disableSkips
+              ? const <v.TimeStamp>[]
+              : chosen.timeStamps ?? const <v.TimeStamp>[])
         SkipStamp(
           t.name ?? 'Skip',
           skipKindOf(t.name ?? ''),
@@ -805,7 +808,10 @@ class PlayerState extends ScreenState {
       malId = (await IdMapper.resolve(skipService, skipMedia)).mal;
       if (generation != _generation) return;
     }
-    if (own.isEmpty && malId != null && skipMedia!.isAnime) {
+    if (!settings.disableSkips &&
+        own.isEmpty &&
+        malId != null &&
+        skipMedia!.isAnime) {
       final stamp = await AniSkip.fetch(
         malId: malId,
         episode: item.number.floor(),
@@ -814,7 +820,7 @@ class PlayerState extends ScreenState {
       if (generation != _generation) return;
       if (stamp.isNotEmpty) stamps.value = stamp;
     }
-    if (own.isEmpty && stamps.value.isEmpty) {
+    if (!settings.disableSkips && own.isEmpty && stamps.value.isEmpty) {
       final media = request.media;
       final service = request.service;
       if (media != null && service != null) {
@@ -1711,9 +1717,14 @@ class PlayerState extends ScreenState {
   }
 
   bool get canSubmitSkips =>
-      request.media?.isAnime == true && request.service != null;
+      !settings.disableSkips &&
+      request.media?.isAnime == true &&
+      request.service != null;
 
-  bool get hasChapters => engine.chapters.value.isNotEmpty || stamps.isNotEmpty;
+  List<PlayerChapter> get shownChapters =>
+      settings.disableSkips ? const [] : engine.chapters.value;
+
+  bool get hasChapters => shownChapters.isNotEmpty || stamps.isNotEmpty;
 
   Future<void> setColor(ColorValues values) async {
     updateSettings((s) => s.color = values);

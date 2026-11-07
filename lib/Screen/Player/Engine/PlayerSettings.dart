@@ -60,6 +60,8 @@ class PlayerSettings {
   set autoPlayDelay(int v) => _v['autoPlayDelay'] = v;
   int get watchedAt => _get('watchedAt', 80);
   set watchedAt(int v) => _v['watchedAt'] = v;
+  bool get disableSkips => _get('disableSkips', false);
+  set disableSkips(bool v) => _v['disableSkips'] = v;
   bool get autoSkipOpening => _get('autoSkipOpening', false);
   set autoSkipOpening(bool v) => _v['autoSkipOpening'] = v;
   bool get autoSkipEnding => _get('autoSkipEnding', false);

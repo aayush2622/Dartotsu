@@ -2071,6 +2071,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get moviesAndSeries => '电影与剧集';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => '仅追踪';
 
   @override
@@ -2153,6 +2160,18 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get popular => '热门';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => '最新';
@@ -5276,6 +5295,13 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get playerAutoSkipDesc => '一开始就直接跳过，依据 AniSkip 和视频流的时间戳';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => '只跳过一次';

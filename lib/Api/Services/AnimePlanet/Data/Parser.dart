@@ -207,6 +207,68 @@ List<AnimePlanetCustomList> parseAnimePlanetCustomLists(String body) {
   return out;
 }
 
+class AnimePlanetListHit {
+  final String title;
+  final String path;
+  final String author;
+  final String? description;
+  final String? cover;
+  final String count;
+  final int likes;
+  final List<String> titles;
+
+  const AnimePlanetListHit({
+    required this.title,
+    required this.path,
+    required this.author,
+    this.description,
+    this.cover,
+    this.count = '',
+    this.likes = 0,
+    this.titles = const [],
+  });
+
+  String get id =>
+      'list/${path.replaceFirst('/users/', '').replaceFirst('/lists/', '/')}';
+}
+
+List<AnimePlanetListHit> parseAnimePlanetCommunityLists(String body) {
+  final doc = html.parse(body);
+  final out = <AnimePlanetListHit>[];
+  for (final hand in doc.querySelectorAll('.entryLists .cardHand')) {
+    final link = hand.querySelector('a.listTitle');
+    final href = link?.attributes['href'];
+    final title = _clean(link?.text);
+    if (href == null || title == null || !href.startsWith('/users/')) continue;
+    final cards = hand.querySelectorAll('li.card');
+    out.add(
+      AnimePlanetListHit(
+        title: title,
+        path: href.split('#').first,
+        author: _clean(hand.querySelector('h4 span a')?.text) ?? '',
+        description: hand
+            .querySelectorAll('div > p')
+            .map((p) => _clean(p.text))
+            .whereType<String>()
+            .firstOrNull,
+        cover: _absolute(
+          cards.firstOrNull?.querySelector('img')?.attributes['src'],
+        ),
+        count: _clean(hand.querySelector('.metadata a')?.text) ?? '',
+        likes:
+            int.tryParse(_clean(hand.querySelector('.heartOn')?.text) ?? '') ??
+            0,
+        titles: [
+          for (final c in cards)
+            if (_clean(c.attributes['title']) != null)
+              _clean(c.attributes['title'])!,
+        ],
+      ),
+    );
+  }
+  return out;
+}
+
 List<Media> parseAnimePlanetCustomList(String body) {
   final doc = html.parse(body);
   final out = <Media>[];

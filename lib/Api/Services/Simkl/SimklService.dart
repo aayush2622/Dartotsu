@@ -1,6 +1,7 @@
 import '../../../Core/State/State.dart';
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
+import 'Prefs.dart';
 import 'Screens/Home.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Search.dart';
@@ -43,11 +44,20 @@ class SimklService extends MediaService {
   bool get seriesProgress => true;
 
   @override
-  List<MediaType> get feedTypes => const [MediaType.anime, MediaType.movie];
+  List<MediaType> get feedTypes => SimklPref.moviesOnly.rx.value
+      ? const [MediaType.movie, MediaType.series]
+      : const [MediaType.anime, MediaType.movie];
 
   @override
-  String feedLabel(MediaType type) =>
-      type == MediaType.movie ? getString.moviesAndSeries : type.label;
+  String feedLabel(MediaType type) => SimklPref.moviesOnly.rx.value
+      ? switch (type) {
+          MediaType.movie => getString.movies,
+          MediaType.series => getString.shows,
+          _ => type.label,
+        }
+      : type == MediaType.movie
+      ? getString.moviesAndSeries
+      : type.label;
 
   @override
   HomeScreenView get homeView => SimklHomeView(this);

@@ -137,7 +137,7 @@ String _queryFavMedia(int userId, bool anime, int page) =>
     favourites {
       ${anime ? 'anime' : 'manga'}(page: $page) {
         pageInfo { hasNextPage }
-        edges { favouriteOrder node { $anilistMediaFragment } }
+        edges { favouriteOrder node { $anilistMediaFragment startDate { year month day } } }
       }
     }
   }
@@ -154,7 +154,7 @@ String _queryUserLists(int userId, bool anime) =>
         status progress repeat private score(format: POINT_100) updatedAt
         startedAt { year month day }
         completedAt { year month day }
-        media { $anilistMediaFragment }
+        media { $anilistMediaFragment startDate { year month day } }
       }
     }
     user {

@@ -2105,6 +2105,13 @@ class AppLocalizationsPs extends AppLocalizations {
   String get moviesAndSeries => 'فلمونه او سریالونه';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'یوازې تعقیب';
 
   @override
@@ -2187,6 +2194,18 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get popular => 'مشهور';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'وروستی';
@@ -5366,6 +5385,13 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'کله چې پیل شي سمدلاسه ورباندې ټوپ کړه، د AniSkip او سټرېم د وخت نښو په کارولو سره';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'یوازې یو ځل پرېږده';

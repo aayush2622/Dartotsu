@@ -2073,6 +2073,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get moviesAndSeries => '영화 & 시리즈';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => '트래킹 전용';
 
   @override
@@ -2155,6 +2162,18 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get popular => '인기';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => '최신';
@@ -5277,6 +5296,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get playerAutoSkipDesc => 'AniSkip과 스트림 타임스탬프를 사용해서 시작하자마자 넘어가요';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => '한 번만 건너뛰기';

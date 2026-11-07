@@ -9,6 +9,7 @@ import '../../../Widgets/Components/ListEditorFields.dart';
 import '../../../Screen/Detail/DetailWidgets.dart';
 import '../../Preferences/Pref.dart';
 import '../Model/Media.dart';
+import '../Model/CommunityList.dart';
 import '../Model/News.dart';
 import '../MediaService.dart';
 import '../../ThemeManager/LanguageSwitcher.dart';
@@ -273,6 +274,20 @@ class ListEditorScreenView {
 
 abstract class CalendarScreenView {
   Stream<List<CalendarEntry>> schedule();
+}
+
+abstract class CommunityListsView {
+  List<(String, String)> get kinds;
+
+  List<(String, String)> get sorts;
+
+  Future<CommunityListPage> lists({
+    required String kind,
+    required String sort,
+    int page = 1,
+  });
+
+  Future<void> open(BuildContext context, CommunityList list);
 }
 
 abstract class NewsScreenView {

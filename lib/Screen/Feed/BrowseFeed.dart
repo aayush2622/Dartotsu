@@ -3,6 +3,7 @@ import '../Charts/ChartsScreen.dart';
 import '../../Core/Offline/OfflineMode.dart';
 import '../../Core/State/State.dart';
 import '../Downloads/Components/OfflineFeed.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Api/Services/Extension/Services.dart' show extensionServiceId;
@@ -44,6 +45,9 @@ class BrowseFeed extends StatelessWidget {
         onNews: service.newsView == null
             ? null
             : () => openNews(context, service),
+        onLists: service.communityListsView == null
+            ? null
+            : () => openCommunityLists(context, service),
         onCharts: type == MediaType.anime
             ? () => navigateToPage(context, ChartsScreen(service: service))
             : null,

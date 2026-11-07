@@ -5,6 +5,7 @@ import '../../Core/Services/Model/Media.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Widgets/Components/NotImplemented.dart';
 import '../Calendar/CalendarScreen.dart';
+import '../CommunityLists/CommunityListsScreen.dart';
 import '../Detail/DetailScreen.dart';
 import '../Entity/EntityScreen.dart';
 import '../News/NewsScreen.dart';
@@ -63,6 +64,16 @@ void openCalendar(BuildContext context, MediaService service) {
     view == null
         ? NotImplemented(service: service.name, area: 'Calendar')
         : CalendarScreen(view: view),
+  );
+}
+
+void openCommunityLists(BuildContext context, MediaService service) {
+  final view = service.communityListsView;
+  navigateToPage(
+    context,
+    view == null
+        ? NotImplemented(service: service.name, area: 'Lists')
+        : CommunityListsScreen(view: view),
   );
 }
 

@@ -5,6 +5,7 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/LibraryCache.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
+import '../../../Core/Services/Model/CommunityList.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/Services/Model/Review.dart';
@@ -457,6 +458,58 @@ class AnimePlanetQueries extends Queries {
         in (anime ? _anime : _manga)?.types ?? const <AnimePlanetFacet>[])
       t.name,
   ];
+
+  Future<CommunityListPage> communityLists({
+    required String kind,
+    required String sort,
+    int page = 1,
+  }) async {
+    final body = await client.page(
+      '/community/custom-lists',
+      query: {
+        if (kind.isNotEmpty) 'filter': kind,
+        'sort': sort,
+        if (page > 1) 'page': '$page',
+      },
+      cache: const Duration(minutes: 5),
+    );
+    final pages = parseAnimePlanetPages(body);
+    return CommunityListPage([
+      for (final h in parseAnimePlanetCommunityLists(body))
+        CommunityList(
+          id: h.id,
+          title: h.title,
+          author: h.author,
+          description: h.description,
+          cover: h.cover,
+          count: h.count,
+          likes: h.likes,
+          kind: RegExp(r'\d+\s+([a-z]+)').firstMatch(h.count)?.group(1) ?? '',
+        ),
+    ], page < pages);
+  }
+
+  Future<List<Media>> customListTitles(String id) async {
+    final path =
+        '/users/${id.replaceFirst('list/', '').replaceFirst('/', '/lists/')}';
+    final out = <Media>[];
+    final seen = <String>{};
+    var pages = 1;
+    for (var page = 1; page <= pages && page <= 20; page++) {
+      final body = await client.page(
+        path,
+        query: page > 1 ? {'page': '$page'} : null,
+        cache: const Duration(minutes: 10),
+      );
+      if (page == 1) pages = parseAnimePlanetPages(body);
+      final items = parseAnimePlanetCustomList(body);
+      if (items.isEmpty) break;
+      for (final m in items) {
+        if (seen.add(m.id)) out.add(m);
+      }
+    }
+    return out;
+  }
 
   @override
   Future<SearchResults?> search(SearchResults? query) async {

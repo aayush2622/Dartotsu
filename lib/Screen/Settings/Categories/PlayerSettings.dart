@@ -176,33 +176,42 @@ List<Setting> playerSettingsRows(
       ),
     Setting.header(getString.playerSectionSkip),
     switchSetting(
-      getString.playerAutoSkipOpening,
-      getString.playerAutoSkipDesc,
-      Icons.music_note_rounded,
-      s.autoSkipOpening,
-      (v) => update((x) => x.autoSkipOpening = v),
+      getString.playerDisableSkips,
+      getString.playerDisableSkipsDesc,
+      Icons.block_rounded,
+      s.disableSkips,
+      (v) => update((x) => x.disableSkips = v),
     ),
-    switchSetting(
-      getString.playerAutoSkipEnding,
-      getString.playerAutoSkipDesc,
-      Icons.movie_rounded,
-      s.autoSkipEnding,
-      (v) => update((x) => x.autoSkipEnding = v),
-    ),
-    switchSetting(
-      getString.playerAutoSkipRecap,
-      getString.playerAutoSkipDesc,
-      Icons.history_toggle_off_rounded,
-      s.autoSkipRecap,
-      (v) => update((x) => x.autoSkipRecap = v),
-    ),
-    switchSetting(
-      getString.playerSkipOnce,
-      getString.playerSkipOnceDesc,
-      Icons.looks_one_rounded,
-      s.skipOnce,
-      (v) => update((x) => x.skipOnce = v),
-    ),
+    if (!s.disableSkips) ...[
+      switchSetting(
+        getString.playerAutoSkipOpening,
+        getString.playerAutoSkipDesc,
+        Icons.music_note_rounded,
+        s.autoSkipOpening,
+        (v) => update((x) => x.autoSkipOpening = v),
+      ),
+      switchSetting(
+        getString.playerAutoSkipEnding,
+        getString.playerAutoSkipDesc,
+        Icons.movie_rounded,
+        s.autoSkipEnding,
+        (v) => update((x) => x.autoSkipEnding = v),
+      ),
+      switchSetting(
+        getString.playerAutoSkipRecap,
+        getString.playerAutoSkipDesc,
+        Icons.history_toggle_off_rounded,
+        s.autoSkipRecap,
+        (v) => update((x) => x.autoSkipRecap = v),
+      ),
+      switchSetting(
+        getString.playerSkipOnce,
+        getString.playerSkipOnceDesc,
+        Icons.looks_one_rounded,
+        s.skipOnce,
+        (v) => update((x) => x.skipOnce = v),
+      ),
+    ],
     Setting.header(getString.playerSectionGestures),
     switchSetting(
       getString.playerAdjustBrightness,
@@ -695,15 +704,16 @@ List<Setting> playerSettingsRows(
         name: getString.playerReset,
         description: getString.playerResetDesc,
         icon: Icons.restart_alt_rounded,
-        onClick: () => AlertDialogBuilder(context)
-            .setTitle(getString.playerReset)
-            .setMessage(getString.playerResetConfirm)
-            .setNegativeButton(getString.cancel, null)
-            .setPositiveButton(getString.reset, () {
-              PlayerPrefs.reset();
-              snackString(getString.playerResetDone);
-            })
-            .show(),
+        onClick: () =>
+            AlertDialogBuilder(context)
+                .setTitle(getString.playerReset)
+                .setMessage(getString.playerResetConfirm)
+                .setNegativeButton(getString.cancel, null)
+                .setPositiveButton(getString.reset, () {
+                  PlayerPrefs.reset();
+                  snackString(getString.playerResetDone);
+                })
+                .show(),
       ),
     ],
   ];

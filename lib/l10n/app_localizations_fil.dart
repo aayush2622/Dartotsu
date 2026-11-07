@@ -2118,6 +2118,13 @@ class AppLocalizationsFil extends AppLocalizations {
   String get moviesAndSeries => 'Mga Pelikula & Serye';
 
   @override
+  String get simklMoviesOnly => 'Movies & series only';
+
+  @override
+  String get simklMoviesOnlyDesc =>
+      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+
+  @override
   String get trackingOnly => 'Tracking lang';
 
   @override
@@ -2200,6 +2207,18 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get popular => 'Sikat';
+
+  @override
+  String get allCustomLists => 'All custom lists';
+
+  @override
+  String get people => 'People';
+
+  @override
+  String get mostComments => 'Most comments';
+
+  @override
+  String get alphabetical => 'Alphabetical';
 
   @override
   String get latest => 'Pinakabago';
@@ -5402,6 +5421,13 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get playerAutoSkipDesc =>
       'Lumaktaw agad pagkasimula nito, gamit ang AniSkip at mga timestamp ng stream';
+
+  @override
+  String get playerDisableSkips => 'Disable skips';
+
+  @override
+  String get playerDisableSkipsDesc =>
+      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
 
   @override
   String get playerSkipOnce => 'Isang beses lang mag-skip';
