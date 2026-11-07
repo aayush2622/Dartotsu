@@ -885,7 +885,10 @@ class PlayerState extends ScreenState {
         fallback.label ?? (priority.firstOrNull ?? ''),
       );
     } else if (tracks.isNotEmpty && engine.activeSubtitle.value == null) {
-      await engine.setSubtitle(tracks.first.id);
+      final first =
+          tracks.where((t) => !labelIsSigns(t.label)).firstOrNull ??
+          tracks.first;
+      await engine.setSubtitle(first.id);
     }
   }
 
@@ -941,28 +944,31 @@ class PlayerState extends ScreenState {
     return null;
   }
 
-  Future<void> _pickDefaultAudio(int generation) async {
-    final priority = languageList(settings.audioLanguage);
-    if (priority.isEmpty) return;
+  Future<List<PlayerTrack>> _settledTracks(
+    int generation,
+    Live<List<PlayerTrack>> source,
+  ) async {
     var stable = 0;
     var seen = -1;
     for (var i = 0; i < 60; i++) {
-      final tracks = engine.audioTracks.value;
-      final pick = tracks.isEmpty ? null : pickTrack(tracks, priority);
-      if (pick != null) {
-        if (engine.activeAudio.value != pick.id) await engine.setAudio(pick.id);
-        return;
-      }
+      final tracks = source.value;
       stable = tracks.length == seen ? stable + 1 : 0;
       seen = tracks.length;
-      if (tracks.isNotEmpty && stable >= 8) {
-        if (engine.activeAudio.value == null) {
-          await engine.setAudio(tracks.first.id);
-        }
-        return;
-      }
+      if (tracks.isNotEmpty && stable >= 6) return tracks;
       await Future<void>.delayed(const Duration(milliseconds: 250));
-      if (_closed || generation != _generation) return;
+      if (_closed || generation != _generation) return const [];
+    }
+    return source.value;
+  }
+
+  Future<void> _pickDefaultAudio(int generation) async {
+    final tracks = await _settledTracks(generation, engine.audioTracks);
+    if (tracks.isEmpty || _closed || generation != _generation) return;
+    final priority = languageList(settings.audioLanguage);
+    final pick = priority.isEmpty ? null : pickTrack(tracks, priority);
+    final target = pick ?? tracks.first;
+    if (engine.activeAudio.value != target.id) {
+      await engine.setAudio(target.id);
     }
   }
 

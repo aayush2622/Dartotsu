@@ -280,12 +280,28 @@ class PlayerEngine {
       }),
       s.track.listen((t) {
         activeVariant.value = t.video.id;
-        activeSubtitle.value = t.subtitle.id == 'no' ? null : t.subtitle.id;
+        _syncActive(activeSubtitle, t.subtitle.id, 'sid');
         _subtitleCodec = t.subtitle.codec?.toLowerCase();
         unawaited(_syncAss());
-        activeAudio.value = t.audio.id == 'no' ? null : t.audio.id;
+        _syncActive(activeAudio, t.audio.id, 'aid');
       }),
     ]);
+  }
+
+  void _syncActive(Live<String?> live, String id, String property) {
+    if (id != 'auto') {
+      live.value = id == 'no' ? null : id;
+      return;
+    }
+    unawaited(() async {
+      try {
+        final current = await native?.getProperty(property);
+        if (_disposed || current == null) return;
+        live.value = current == 'no' || current == 'false' || current.isEmpty
+            ? null
+            : current;
+      } catch (_) {}
+    }());
   }
 
   Future<void> configure() async {
