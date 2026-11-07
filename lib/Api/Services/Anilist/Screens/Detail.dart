@@ -111,7 +111,7 @@ class AnilistDetailView extends DetailScreenView {
     final season = anime?.season;
     final rows = [
       (m.isAnime ? getString.episodes : getString.chapters, count),
-      if (m.format != null) (getString.format, m.format!.titleCase),
+      if (m.format != null) (getString.format, _formatLabel(m.format!)),
       if (m.source != null) (getString.source, m.source!.titleCase),
       if (studio?.isNotEmpty ?? false) (getString.studio, studio!),
       if (author?.isNotEmpty ?? false) (getString.author, author!),
@@ -200,3 +200,10 @@ class AnilistListEditorView extends ListEditorScreenView {
     };
   }
 }
+
+String _formatLabel(String format) => switch (format) {
+  'TV' || 'OVA' || 'ONA' => format,
+  'TV_SHORT' => 'TV short',
+  'ONE_SHOT' => 'One shot',
+  _ => format.titleCase,
+};

@@ -77,7 +77,7 @@ class _Follower extends StatelessWidget {
   });
 
   String get _status => user.status == 'CURRENT'
-      ? (media.isAnime ? 'WATCHING' : 'READING')
+      ? (media.isAnime ? 'Watching' : 'Reading')
       : (user.status ?? '').titleCase;
 
   @override
@@ -95,7 +95,7 @@ class _Follower extends StatelessWidget {
             Material(
               elevation: 2,
               shape: const CircleBorder(),
-              clipBehavior: Clip.antiAlias,
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               child: SizedBox(
                 width: 84,
                 height: 84,
@@ -107,36 +107,37 @@ class _Follower extends StatelessWidget {
                       width: 84,
                       height: 84,
                     ),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        width: 84,
-                        height: 26,
-                        decoration: BoxDecoration(
-                          color: score == 0 ? scheme.primary : scheme.tertiary,
-                          borderRadius: const BorderRadius.vertical(
-                            top: Radius.circular(256),
+                    if (score > 0)
+                      Positioned(
+                        bottom: 0,
+                        child: Container(
+                          width: 84,
+                          height: 26,
+                          decoration: BoxDecoration(
+                            color: scheme.tertiary,
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(256),
+                            ),
                           ),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              (score / 10).toString(),
-                              style: context.textTheme.labelMedium?.copyWith(
-                                fontWeight: FontWeight.bold,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                (score / 10).toString(),
+                                style: context.textTheme.labelMedium?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: scheme.onPrimary,
+                                ),
+                              ),
+                              Icon(
+                                Icons.star_rounded,
+                                size: 12,
                                 color: scheme.onPrimary,
                               ),
-                            ),
-                            Icon(
-                              Icons.star_rounded,
-                              size: 12,
-                              color: scheme.onPrimary,
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
                   ],
                 ),
               ),
@@ -146,14 +147,13 @@ class _Follower extends StatelessWidget {
               _status,
               textAlign: TextAlign.center,
               style: context.textTheme.labelSmall?.copyWith(
-                fontStyle: FontStyle.italic,
                 fontWeight: FontWeight.w600,
                 color: scheme.onSurfaceVariant,
               ),
             ),
             const SizedBox(height: 4),
             Text(
-              isMe ? 'YOU' : user.name,
+              isMe ? 'You' : user.name,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               style: context.textTheme.bodyMedium,
