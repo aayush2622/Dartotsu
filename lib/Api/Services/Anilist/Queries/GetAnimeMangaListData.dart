@@ -42,7 +42,8 @@ extension on AnilistQueries {
       return [() => _fetchRails(rails)];
     }
     return [
-      for (final rail in rails) () => _fetchRails([rail]),
+      for (var i = 0; i < rails.length; i += 2)
+        () => _fetchRails(rails.sublist(i, min(i + 2, rails.length))),
     ];
   }
 

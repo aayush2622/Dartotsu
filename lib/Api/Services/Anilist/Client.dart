@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:collection';
 import 'dart:convert';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
@@ -39,12 +41,37 @@ class AnilistClient {
 
   NetworkManager get _network => find();
 
-  void _rateGuard(int nowSec) {
-    if (_rateLimitResetEpoch > nowSec) {
-      throw AnilistException(
-        'Rate limited, wait ${_rateLimitResetEpoch - nowSec}s',
-      );
+  static const _slots = 6;
+  static const _maxWait = 70;
+  int _active = 0;
+  final _queue = Queue<Completer<void>>();
+
+  Future<void> _acquire() async {
+    if (_active < _slots) {
+      _active++;
+      return;
     }
+    final turn = Completer<void>();
+    _queue.add(turn);
+    await turn.future;
+  }
+
+  void _release() {
+    if (_queue.isNotEmpty) {
+      _queue.removeFirst().complete();
+    } else {
+      _active--;
+    }
+  }
+
+  Future<void> _waitForWindow() async {
+    final left =
+        _rateLimitResetEpoch - DateTime.now().millisecondsSinceEpoch ~/ 1000;
+    if (left <= 0) return;
+    if (left > _maxWait) {
+      throw AnilistException('Rate limited, wait ${left}s');
+    }
+    await Future<void>.delayed(Duration(seconds: left));
   }
 
   Map<String, String> _headers(bool useToken) {
@@ -60,7 +87,8 @@ class AnilistClient {
     if (res.statusCode != 429) return false;
     final retryAfter =
         int.tryParse(res.headers['retry-after']?.first ?? '') ?? 60;
-    _rateLimitResetEpoch = nowSec + retryAfter;
+    final reset = nowSec + retryAfter;
+    if (reset > _rateLimitResetEpoch) _rateLimitResetEpoch = reset;
     return true;
   }
 
@@ -72,19 +100,25 @@ class AnilistClient {
     Map<String, dynamic> variables,
     bool useToken,
   ) async {
-    final nowSec = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-    _rateGuard(nowSec);
-
-    final res = await _network.post(
-      _endpoint,
-      headers: _headers(useToken),
-      data: {'query': gql.trim(), 'variables': variables},
-      decodeJson: false,
-    );
-    if (_handle429(res, nowSec)) {
-      throw AnilistException('Rate limited, try again shortly');
+    await _acquire();
+    try {
+      for (var attempt = 0; ; attempt++) {
+        await _waitForWindow();
+        final nowSec = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+        final res = await _network.post(
+          _endpoint,
+          headers: _headers(useToken),
+          data: {'query': gql.trim(), 'variables': variables},
+          decodeJson: false,
+        );
+        if (!_handle429(res, nowSec)) return res.data as String;
+        if (attempt >= 2) {
+          throw AnilistException('Rate limited, try again shortly');
+        }
+      }
+    } finally {
+      _release();
     }
-    return res.data as String;
   }
 
   /// Decoded `data` node. Use for light queries and mutations.

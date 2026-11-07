@@ -42,7 +42,8 @@ extension on AnilistQueries {
       return [job(sections), ?sequel];
     }
     return [
-      for (final section in sections) job([section]),
+      for (var i = 0; i < sections.length; i += 2)
+        job(sections.sublist(i, min(i + 2, sections.length))),
       ?sequel,
     ];
   }

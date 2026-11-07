@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:collection/collection.dart';
+
 import '../../Logger.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -56,7 +58,13 @@ class ScreenWidgetListState extends ScreenState {
   void onInit() {
     unawaited(paintCached());
     refresh();
-    reloadSub = reloadOn?.listen((_) => refresh());
+    reloadSub = reloadOn?.listen((_) {
+      if (isVisible()) {
+        unawaited(refresh());
+      } else {
+        dirty = true;
+      }
+    });
 
     final key = cacheId;
     if (key != null) {
