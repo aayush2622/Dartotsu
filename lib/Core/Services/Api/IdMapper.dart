@@ -63,20 +63,50 @@ class IdMapper {
     ).whenComplete(() => _loading.remove(anime));
   }
 
+  static Future<Directory> _dir() async =>
+      (await StorageManager.getDirectory(subPath: 'sync'))!;
+
   static Future<File> _file(bool anime) async {
-    final dir = await StorageManager.getDirectory(subPath: 'sync');
-    if (!anime) {
-      unawaited(_dropLegacy(File(p.join(dir!.path, 'manga-ids.json'))));
+    final dir = await _dir();
+    for (final old in const [
+      'manga-ids.json',
+      'manga-ids-2.json',
+      'anime-ids.json',
+    ]) {
+      unawaited(_dropLegacy(File(p.join(dir.path, old))));
     }
     return File(
-      p.join(dir!.path, anime ? 'anime-ids.json' : 'manga-ids-2.json'),
+      p.join(dir.path, anime ? 'anime-ids-2.json' : 'manga-ids-3.json'),
     );
   }
+
+  static Future<File> _slugFile(bool anime) async => File(
+    p.join(
+      (await _dir()).path,
+      anime ? 'anime-slugs.json' : 'manga-slugs.json',
+    ),
+  );
 
   static Future<void> _dropLegacy(File file) async {
     try {
       if (await file.exists()) await file.delete();
     } catch (_) {}
+  }
+
+  static final _slugs = <bool, Map<String, String>>{};
+
+  static Future<String?> animePlanetSlug(int key, {required bool anime}) async {
+    var table = _slugs[anime];
+    if (table == null) {
+      await index(anime: anime);
+      final file = await _slugFile(anime);
+      table = _slugs[anime] = await file.exists()
+          ? Map<String, String>.from(
+              jsonDecode(await file.readAsString()) as Map,
+            )
+          : <String, String>{};
+    }
+    return table['$key'];
   }
 
   static Future<SyncIdIndex> _load(bool anime, bool force) async {
@@ -96,6 +126,12 @@ class IdMapper {
             res.data as String,
           );
           if (flat.isNotEmpty) {
+            final slugs = await compute(
+              anime ? compactAnimeSlugs : compactMangaSlugs,
+              res.data as String,
+            );
+            await (await _slugFile(anime)).writeAsString(jsonEncode(slugs));
+            _slugs[anime] = slugs;
             await file.writeAsString(jsonEncode(flat));
             return _loaded[anime] = SyncIdIndex(flat, anime: anime);
           }

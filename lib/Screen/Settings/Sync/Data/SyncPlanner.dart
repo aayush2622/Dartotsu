@@ -16,6 +16,7 @@ class SyncTarget {
   final List<String> resolveKeys;
   final bool syncsDates;
   final bool syncsRepeat;
+  final bool syncsPrivate;
   final String prefix;
 
   const SyncTarget({
@@ -24,6 +25,7 @@ class SyncTarget {
     required this.resolveKeys,
     required this.syncsDates,
     required this.syncsRepeat,
+    this.syncsPrivate = false,
     required this.prefix,
   });
 
@@ -35,6 +37,7 @@ class SyncTarget {
       resolveKeys: adapter.resolveKeys,
       syncsDates: adapter.syncsDates,
       syncsRepeat: adapter.syncsRepeat,
+      syncsPrivate: adapter.syncsPrivate,
       prefix: sample.substring(0, sample.length - 1),
     );
   }
@@ -95,6 +98,7 @@ SyncTargetPlan planWith({
     final pair = SyncPair(
       dates: spec.syncsDates && mainDates,
       repeat: spec.syncsRepeat && mainRepeat,
+      privacy: spec.syncsPrivate,
       main: m,
       targetId: targetId,
       target: shared ? null : found,

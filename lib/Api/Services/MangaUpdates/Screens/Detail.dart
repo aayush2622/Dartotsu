@@ -1,6 +1,7 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../../Screen/Detail/Components/DetailRelated.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
@@ -83,6 +84,7 @@ class MangaUpdatesDetailView extends DetailScreenView {
           getString.tags,
           ScreenData(chips: m.tags.take(30).toList()),
         ),
+      ...prequelSequelWidgets(host, m),
       if ((m.relations ?? const []).isNotEmpty)
         ScreenWidget.media(getString.relations, m.relations),
       if ((m.recommendations ?? const []).isNotEmpty)

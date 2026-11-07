@@ -4,6 +4,7 @@ import '../../Core/Downloads/DownloadEngine.dart';
 import '../../Core/Downloads/DownloadSnapshots.dart';
 import 'DetailWidgets.dart';
 import '../../Core/Offline/PendingWrites.dart';
+
 import 'dart:async';
 
 import 'Watch/Data/Media/MediaRecord.dart';
@@ -11,6 +12,7 @@ import 'Watch/Data/Media/ResumeStore.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 
 import 'package:flutter/material.dart';
+
 import '../../Logger.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
@@ -373,6 +375,8 @@ class DetailState extends ScreenState {
     'PAUSED' => getString.paused,
     'DROPPED' => getString.dropped,
     'REPEATING' => isAnime ? getString.rewatching : getString.rereading,
+    'WONT' =>
+      isAnime ? getString.animePlanetWontWatch : getString.animePlanetWontRead,
     _ => getString.addToList,
   };
 }

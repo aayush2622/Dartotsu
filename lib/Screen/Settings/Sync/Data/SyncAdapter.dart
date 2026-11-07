@@ -13,6 +13,8 @@ abstract class SyncAdapter {
 
   bool get syncsRepeat => true;
 
+  bool get syncsPrivate => false;
+
   List<SyncLimit> get limits;
 
   int get requestsPerBatch => 1;

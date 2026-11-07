@@ -1,4 +1,5 @@
 import '../../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ import 'Data/SyncModels.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/ScreenState.dart';
+import 'Components/SyncPrivateDialog.dart';
 import 'Components/SyncSheets.dart';
 
 class SyncState extends ScreenState {
@@ -164,11 +166,21 @@ class SyncState extends ScreenState {
   }
 
   Future<void> _run(BuildContext context, {String? only}) async {
+    bool? includePrivate;
+    final privates = controller.privateCount(only: only);
+    if (privates > 0 && PrefName.syncPrivate.value == 'ask') {
+      includePrivate = await askSyncPrivate(context, privates);
+      if (includePrivate == null || !context.mounted) return;
+    }
+    controller.choosePrivate(includePrivate);
     if (PrefName.syncConfirm.rx.value) {
       final ok = await showSyncPreview(context, controller.preview(only: only));
-      if (ok != true) return;
+      if (ok != true) {
+        controller.choosePrivate(null);
+        return;
+      }
     }
-    await controller.start(only: only);
+    await controller.start(only: only, includePrivate: includePrivate);
   }
 
   void openPair(BuildContext context, MediaService service, SyncPair pair) =>

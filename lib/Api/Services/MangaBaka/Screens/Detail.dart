@@ -1,6 +1,7 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../../Screen/Detail/Components/DetailRelated.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
@@ -59,6 +60,7 @@ class MangaBakaDetailView extends DetailScreenView {
           getString.tags,
           ScreenData(chips: m.tags.take(24).toList()),
         ),
+      ...prequelSequelWidgets(host, m),
       ...linkChips(getString.links, extras?.links),
       if ((m.relations ?? const []).isNotEmpty)
         ScreenWidget.media(getString.relations, m.relations),

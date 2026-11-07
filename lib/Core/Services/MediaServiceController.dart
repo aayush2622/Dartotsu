@@ -4,6 +4,7 @@ import '../../Api/Services/Anilist/AnilistService.dart';
 import '../../Api/Services/Extension/ExtensionService.dart';
 import '../../Api/Services/Kitsu/KitsuService.dart';
 import '../../Api/Services/MangaBaka/MangaBakaService.dart';
+import '../../Api/Services/AnimePlanet/AnimePlanetService.dart';
 import '../../Api/Services/MangaUpdates/MangaUpdatesService.dart';
 import '../../Api/Services/MyAnimeList/MalService.dart';
 import '../../Api/Services/Simkl/SimklService.dart';
@@ -39,6 +40,7 @@ class MediaServiceController extends AppController {
       KitsuService(),
       MangaBakaService(),
       MangaUpdatesService(),
+      AnimePlanetService(),
       ExtensionService(),
     ]);
 

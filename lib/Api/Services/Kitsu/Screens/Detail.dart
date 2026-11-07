@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../../Screen/Detail/Components/DetailRelated.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Screen/Review/ReactionsShelf.dart';
@@ -94,6 +96,7 @@ class KitsuDetailView extends DetailScreenView {
           getString.genres,
           ScreenData(chips: m.genres, onChipTap: host.search),
         ),
+      ...prequelSequelWidgets(host, m),
       ...linkChips(getString.links, extras?.links),
       ScreenWidget.extra(
         ReactionsShelf(

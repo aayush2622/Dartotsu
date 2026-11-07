@@ -7,6 +7,7 @@ const _animeColumns = [
   SyncKey.mal,
   SyncKey.kitsu,
   SyncKey.simkl,
+  SyncKey.animeplanet,
 ];
 
 const _mangaColumns = [
@@ -15,9 +16,29 @@ const _mangaColumns = [
   SyncKey.mal,
   SyncKey.mangaupdates,
   SyncKey.kitsu,
+  SyncKey.animeplanet,
 ];
 
 const _mangaExtras = 1;
+
+int _slugKey(Object? slug) =>
+    slug is String && slug.isNotEmpty ? syncSlugKey(slug) : 0;
+
+Map<String, String> compactAnimeSlugs(String raw) =>
+    _slugTable(raw, 'anime-planet_id');
+
+Map<String, String> compactMangaSlugs(String raw) =>
+    _slugTable(raw, 'anime_planet_id');
+
+Map<String, String> _slugTable(String raw, String field) {
+  final out = <String, String>{};
+  for (final r in jsonDecode(raw) as List) {
+    if (r is! Map) continue;
+    final slug = r[field];
+    if (slug is String && slug.isNotEmpty) out['${syncSlugKey(slug)}'] = slug;
+  }
+  return out;
+}
 
 List<int> compactAnimeIndex(String raw) {
   final rows = jsonDecode(raw) as List;
@@ -27,6 +48,7 @@ List<int> compactAnimeIndex(String raw) {
     final row = [
       for (final c in const ['anilist_id', 'mal_id', 'kitsu_id', 'simkl_id'])
         r[c] is int ? r[c] as int : 0,
+      _slugKey(r['anime-planet_id']),
     ];
     if (row.where((v) => v > 0).length < 2) continue;
     out.addAll(row);
@@ -48,6 +70,7 @@ List<int> compactMangaIndex(String raw) {
         'kitsu_id',
       ])
         r[c] is int ? r[c] as int : 0,
+      _slugKey(r['anime_planet_id']),
     ];
     if (ids.where((v) => v > 0).length < 2) continue;
     final chapters = r['total_chapters'];

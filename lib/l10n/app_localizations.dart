@@ -3731,6 +3731,12 @@ abstract class AppLocalizations {
   /// **'Add list'**
   String get addList;
 
+  /// No description provided for @voiceActors.
+  ///
+  /// In en, this message translates to:
+  /// **'Voice actors'**
+  String get voiceActors;
+
   /// No description provided for @voiceActorsIn.
   ///
   /// In en, this message translates to:
@@ -3784,6 +3790,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Prequel & Sequel'**
   String get prequelSequel;
+
+  /// No description provided for @prequel.
+  ///
+  /// In en, this message translates to:
+  /// **'Prequel'**
+  String get prequel;
+
+  /// No description provided for @sequel.
+  ///
+  /// In en, this message translates to:
+  /// **'Sequel'**
+  String get sequel;
 
   /// No description provided for @previousSeason.
   ///
@@ -4492,6 +4510,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Refresh'**
   String get refresh;
+
+  /// No description provided for @animePlanetRank.
+  ///
+  /// In en, this message translates to:
+  /// **'Rank'**
+  String get animePlanetRank;
+
+  /// No description provided for @animePlanetMagazine.
+  ///
+  /// In en, this message translates to:
+  /// **'Magazine'**
+  String get animePlanetMagazine;
+
+  /// No description provided for @animePlanetRefreshLists.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh your lists'**
+  String get animePlanetRefreshLists;
+
+  /// No description provided for @animePlanetRefreshListsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Read your Anime-Planet lists again'**
+  String get animePlanetRefreshListsDesc;
+
+  /// No description provided for @animePlanetLocalNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime-Planet lists are read-only here; changes you make stay on this device'**
+  String get animePlanetLocalNote;
 
   /// No description provided for @share.
   ///
@@ -7144,6 +7192,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Don\'t lower the progress of a service that is already ahead'**
   String get syncOnlyForwardDesc;
+
+  /// No description provided for @animePlanetWontWatch.
+  ///
+  /// In en, this message translates to:
+  /// **'Won\'t watch'**
+  String get animePlanetWontWatch;
+
+  /// No description provided for @animePlanetWontRead.
+  ///
+  /// In en, this message translates to:
+  /// **'Won\'t read'**
+  String get animePlanetWontRead;
+
+  /// No description provided for @animePlanetAlreadyOnList.
+  ///
+  /// In en, this message translates to:
+  /// **'Already on this list'**
+  String get animePlanetAlreadyOnList;
+
+  /// No description provided for @animePlanetNewList.
+  ///
+  /// In en, this message translates to:
+  /// **'New list name'**
+  String get animePlanetNewList;
+
+  /// No description provided for @syncPrivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Private entries'**
+  String get syncPrivate;
+
+  /// No description provided for @syncPrivateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly'**
+  String get syncPrivateDesc;
+
+  /// No description provided for @syncPrivateModeAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'Ask'**
+  String get syncPrivateModeAsk;
+
+  /// No description provided for @syncPrivateModeSync.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync them'**
+  String get syncPrivateModeSync;
+
+  /// No description provided for @syncPrivateModeSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip them'**
+  String get syncPrivateModeSkip;
+
+  /// No description provided for @syncPrivateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Private entries'**
+  String get syncPrivateTitle;
+
+  /// No description provided for @syncPrivateAsk.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them?'**
+  String syncPrivateAsk(int count);
+
+  /// No description provided for @syncPrivateInclude.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync them'**
+  String get syncPrivateInclude;
+
+  /// No description provided for @syncPrivateSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip them'**
+  String get syncPrivateSkip;
 
   /// No description provided for @syncFetch.
   ///

@@ -26,6 +26,9 @@ class AnilistSync extends SyncAdapter {
   String get key => SyncKey.anilist;
 
   @override
+  bool get syncsPrivate => true;
+
+  @override
   bool supports({required bool anime}) => true;
 
   @override
@@ -134,6 +137,7 @@ String? anilistSaveBatch(List<SyncOp> batch) {
       'progress: ${w.progress}',
       if (w.score > 0) 'scoreRaw: ${w.score.clamp(0, 100)}',
       if (w.repeat > 0) 'repeat: ${w.repeat}',
+      if (w.isPrivate) 'private: true',
       if (w.started?.year != null) 'startedAt: ${_date(w.started!)}',
       if (w.completed?.year != null) 'completedAt: ${_date(w.completed!)}',
     ];

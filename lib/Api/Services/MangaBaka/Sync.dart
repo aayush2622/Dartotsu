@@ -16,6 +16,9 @@ class MangaBakaSync extends SyncAdapter {
   String get key => SyncKey.mangabaka;
 
   @override
+  bool get syncsPrivate => true;
+
+  @override
   bool supports({required bool anime}) => !anime;
 
   @override

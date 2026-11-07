@@ -16,6 +16,9 @@ class KitsuSync extends SyncAdapter {
   String get key => SyncKey.kitsu;
 
   @override
+  bool get syncsPrivate => true;
+
+  @override
   bool supports({required bool anime}) => true;
 
   @override

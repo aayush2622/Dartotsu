@@ -186,6 +186,20 @@ class SyncHeader extends StatelessWidget {
           value: PrefName.syncAddMissing.rx.value,
           onChanged: (v) => PrefName.syncAddMissing.rx.value = v,
         ),
+        ListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(getString.syncPrivate),
+          subtitle: Text(getString.syncPrivateDesc),
+        ),
+        AppChoiceChips<String>(
+          value: PrefName.syncPrivate.rx.value,
+          onChanged: (v) => PrefName.syncPrivate.rx.value = v,
+          options: [
+            AppSegment('ask', label: getString.syncPrivateModeAsk),
+            AppSegment('sync', label: getString.syncPrivateModeSync),
+            AppSegment('skip', label: getString.syncPrivateModeSkip),
+          ],
+        ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(getString.syncOnlyForward),

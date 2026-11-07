@@ -878,6 +878,7 @@
   "customListsSaved": "Custom lists saved",
   "listName": "List name",
   "addList": "Add list",
+  "voiceActors": "Voice actors",
   "voiceActorsIn": "Voice actors · {name}",
   "@voiceActorsIn": {
     "placeholders": {
@@ -894,6 +895,8 @@
   "mainProductions": "Main productions",
   "otherWorks": "Other works",
   "prequelSequel": "Prequel & Sequel",
+  "prequel": "Prequel",
+  "sequel": "Sequel",
   "previousSeason": "Previous season",
   "thisSeason": "This season",
   "nextSeason": "Next season",
@@ -1060,6 +1063,11 @@
   "done": "Done",
   "searchOrEnterUrl": "Search or enter URL",
   "refresh": "Refresh",
+  "animePlanetRank": "Rank",
+  "animePlanetMagazine": "Magazine",
+  "animePlanetRefreshLists": "Refresh your lists",
+  "animePlanetRefreshListsDesc": "Read your Anime-Planet lists again",
+  "animePlanetLocalNote": "Anime-Planet lists are read-only here; changes you make stay on this device",
   "share": "Share",
   "characters": "Characters",
   "staff": "Staff",
@@ -2005,6 +2013,26 @@
   "syncAddMissingDesc": "Also add entries the other service doesn't have yet",
   "syncOnlyForward": "Keep further progress",
   "syncOnlyForwardDesc": "Don't lower the progress of a service that is already ahead",
+  "animePlanetWontWatch": "Won't watch",
+  "animePlanetWontRead": "Won't read",
+  "animePlanetAlreadyOnList": "Already on this list",
+  "animePlanetNewList": "New list name",
+  "syncPrivate": "Private entries",
+  "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
+  "syncPrivateModeAsk": "Ask",
+  "syncPrivateModeSync": "Sync them",
+  "syncPrivateModeSkip": "Skip them",
+  "syncPrivateTitle": "Private entries",
+  "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them?",
+  "@syncPrivateAsk": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncPrivateInclude": "Sync them",
+  "syncPrivateSkip": "Skip them",
   "syncFetch": "Fetch",
   "syncFetchAgain": "Fetch again",
   "syncAll": "Sync all",

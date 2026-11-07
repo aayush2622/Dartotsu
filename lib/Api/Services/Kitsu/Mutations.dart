@@ -43,6 +43,7 @@ class KitsuMutations extends Mutations {
       'notes': media.notes ?? '',
       'startedAt': kitsuDateOut(media.userStartedAt),
       'finishedAt': kitsuDateOut(media.userCompletedAt),
+      if (media.isListPrivate) 'private': true,
     };
     if (exists == true) {
       attributes.removeWhere((k, v) => v == null || v == '');

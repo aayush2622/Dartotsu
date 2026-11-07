@@ -1,0 +1,552 @@
+<html><body class="desktop ">
+	    <input type="radio" name="mTog" id="mNavToggle" class="hidden"/>
+    <input type="radio" name="mTog" id="mUserToggle" class="hidden"/>
+    <input type="radio" name="mTog" id="mSearchToggle" class="hidden"/>
+
+    <header id="siteHeader">
+        <div class="pure-g">
+            <div class="pure-1-4">
+                <label for="mNavToggle" id="mobile-nav-toggle"></label>
+                <a itemprop="url" id="siteLogo" class="siteLogo" href="/">
+                    <svg id="logo" data-name="Anime-Planet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 586 95" width="586" height="95" fill="#FC5342">
+                        <title>Anime-Planet</title>
+                        <g id="desktop" class="logo">
+                            <path d="M43,28.4a3.48,3.48,0,0,0-3.52,3.52V33.6a19.82,19.82,0,0,0-13.26-5.2C15,28.4,5.91,38,5.91,49.75S15,71.11,26.22,71.11a19.77,19.77,0,0,0,13.26-5.27v1.75a3.52,3.52,0,1,0,7,0V31.92A3.47,3.47,0,0,0,43,28.4ZM39.48,49.75c0,7.9-5.95,14.32-13.26,14.32S13,57.65,13,49.75,18.9,35.36,26.22,35.36,39.48,41.81,39.48,49.75Z" />
+                            <path d="M77,28.48a17.59,17.59,0,0,0-10.68,3.61V32a3.48,3.48,0,1,0-7,0V68.73l.2.19a1.59,1.59,0,0,0,.22.43,3.73,3.73,0,0,0,2.18,1.7l.92.06a3.33,3.33,0,0,0,2.69-1.31,3.37,3.37,0,0,0,.7-1.5l.05-.19v-22A10.85,10.85,0,0,1,77,35.52a10.61,10.61,0,0,1,10.61,10.6V67.59a3.52,3.52,0,0,0,7,0V46.12A17.66,17.66,0,0,0,77,28.48Z" />
+                            <path d="M112.4,28.4a3.47,3.47,0,0,0-3.52,3.52V67.59a3.56,3.56,0,0,0,7.12,0V31.92A3.52,3.52,0,0,0,112.4,28.4Z" />
+                            <path d="M177.36,28.48a17.92,17.92,0,0,0-14.19,7.08A17.65,17.65,0,0,0,138.43,32v-.1a3.48,3.48,0,0,0-7,0V68.33l.08.24a3.68,3.68,0,0,0,2.94,2.53h.66a2.09,2.09,0,0,0,.93-.18,2.68,2.68,0,0,0,.8-.43,3.33,3.33,0,0,0,1.55-2.83V46.12a10.61,10.61,0,1,1,21.21,0V68.73l.08.08V69l.1.1.06,1.15h.93a2,2,0,0,0,.63.43,2.34,2.34,0,0,0,.53.27,1.79,1.79,0,0,0,.78.19h.41a3.82,3.82,0,0,0,1.78-.47,3.63,3.63,0,0,0,1.66-1.91l.08-.24v-.06a1.67,1.67,0,0,0,.08-.52V46.12a10.65,10.65,0,0,1,10.6-10.68,10.78,10.78,0,0,1,10.69,10.7V67.67a3.44,3.44,0,0,0,3.43,3.44A3.48,3.48,0,0,0,195,67.67V46.12A17.66,17.66,0,0,0,177.36,28.48Z" />
+                            <path d="M226.18,28.4c-11.46,0-20.79,9.61-20.79,21.43a21.07,21.07,0,0,0,20.79,21.28,20.42,20.42,0,0,0,17.35-9.75,3.63,3.63,0,0,0-1.09-4.82l-.11-.08a3.51,3.51,0,0,0-2.67-.37,3.38,3.38,0,0,0-2.09,1.56,13.33,13.33,0,0,1-11.39,6.42,13.94,13.94,0,0,1-13.58-12h30.69a3.4,3.4,0,0,0,3.52-3.36v-.44C245.92,36.94,237.05,28.4,226.18,28.4ZM239,45.1H213.13a13.72,13.72,0,0,1,13.05-9.66A13.54,13.54,0,0,1,239,45.1Z" />
+                            <path d="M355.3,28.4a20.21,20.21,0,0,0-13.42,5.17V31.92a3.56,3.56,0,0,0-7.12,0V84.13a3.56,3.56,0,0,0,7.12,0V65.65a20.07,20.07,0,0,0,13.42,5.22c11.42,0,20.71-9.55,20.71-21.28A21,21,0,0,0,355.3,28.4Zm13.59,21.19c0,7.78-6.1,14.16-13.57,14.24-7.41-.08-13.44-6.46-13.44-14.24V49c.28-7.44,6.31-13.49,13.42-13.49A13.85,13.85,0,0,1,368.89,49.59Z" />
+                            <path d="M390.49,11.45A3.56,3.56,0,0,0,387,15V67.59a3.56,3.56,0,0,0,7.12,0V15A3.57,3.57,0,0,0,390.49,11.45Z" />
+                            <path d="M441.84,28.4a3.48,3.48,0,0,0-3.52,3.52V33.6a19.82,19.82,0,0,0-13.26-5.2c-11.2,0-20.31,9.58-20.31,21.35s9.11,21.36,20.31,21.36a19.77,19.77,0,0,0,13.26-5.27v1.75a3.52,3.52,0,0,0,7,0V31.92A3.47,3.47,0,0,0,441.84,28.4Zm-3.52,21.35c0,7.9-5.95,14.32-13.26,14.32s-13.27-6.42-13.27-14.32,5.95-14.39,13.27-14.39S438.32,41.81,438.32,49.75Z" />
+                            <path d="M476.74,28.48a17.6,17.6,0,0,0-10.69,3.61V32a3.48,3.48,0,1,0-7,0V68.73l.2.19a1.59,1.59,0,0,0,.22.43,3.76,3.76,0,0,0,2.18,1.7l.92.06a3.33,3.33,0,0,0,2.69-1.31,3.45,3.45,0,0,0,.71-1.5l0-.19v-22a10.86,10.86,0,0,1,10.69-10.64,10.61,10.61,0,0,1,10.6,10.6V67.59a3.52,3.52,0,1,0,7,0V46.12A17.66,17.66,0,0,0,476.74,28.48Z" />
+                            <path d="M524.61,28.4c-11.47,0-20.79,9.61-20.79,21.43a21.06,21.06,0,0,0,20.79,21.28A20.39,20.39,0,0,0,542,61.36a3.62,3.62,0,0,0-1.08-4.82l-.12-.08a3.48,3.48,0,0,0-2.66-.37A3.35,3.35,0,0,0,536,57.65a13.33,13.33,0,0,1-11.39,6.42,14,14,0,0,1-13.59-12h30.7a3.4,3.4,0,0,0,3.52-3.36v-.44C544.35,36.94,535.48,28.4,524.61,28.4Zm12.84,16.7H511.56a13.72,13.72,0,0,1,13.05-9.66A13.56,13.56,0,0,1,537.45,45.1Z" />
+                            <path d="M313.36,60.86A3.35,3.35,0,0,0,309,62.63a23.6,23.6,0,0,1-43.42,0,3.34,3.34,0,1,0-6.15,2.62,30.29,30.29,0,0,0,55.72,0A3.36,3.36,0,0,0,313.36,60.86Z" />
+                            <path d="M578.44,66.38a3.31,3.31,0,0,0-1.23-2.27l-.05,0a3.38,3.38,0,0,0-2.52-.83,3.57,3.57,0,0,0-2.42,1.2,3.84,3.84,0,0,1-3,1.42c-1.89,0-3.67-1.06-3.79-3.2h0V35.44h7.8a3.52,3.52,0,0,0,0-7h-7.8V21.62a3.75,3.75,0,0,0-3.68-3.52,3.66,3.66,0,0,0-3.52,3.52V28.4h-3c-3.52,0-3.52,2.65-3.52,3.52s0,3.52,3.52,3.52h3V61.82h0c0,.25,0,.49,0,.73v.11h0a11,11,0,0,0,11,10.18A11.15,11.15,0,0,0,577.62,69,3.53,3.53,0,0,0,578.44,66.38Z" />
+                            <path d="M112.05,12.13a3.62,3.62,0,1,0,0,7.22,3.77,3.77,0,0,0,4-3.65A3.76,3.76,0,0,0,112.05,12.13Z" />
+                        </g>
+                        <g id="mobile" class="logo">
+                            <path class="st0" d="M43,28.4c-1.9,0-3.5,1.5-3.5,3.4c0,0,0,0.1,0,0.1v1.7c-3.6-3.3-8.3-5.2-13.3-5.2C15,28.4,5.9,38,5.9,49.8
+                                S15,71.1,26.2,71.1c4.9,0,9.7-1.9,13.3-5.3v1.8c-0.2,1.9,1.2,3.7,3.1,3.9c1.9,0.2,3.7-1.2,3.9-3.1c0-0.2,0-0.5,0-0.7V31.9
+                                C46.5,30,45,28.4,43,28.4C43,28.4,43,28.4,43,28.4z M39.5,49.8c0,7.9-6,14.3-13.3,14.3S13,57.7,13,49.8s5.9-14.4,13.2-14.4
+                                S39.5,41.8,39.5,49.8z"/>
+                            <path class="st0" d="M149.8,28.4c-5,0-9.7,1.9-13.4,5.2v-1.6c0-2-1.6-3.6-3.6-3.6c-2,0-3.6,1.6-3.6,3.6v52.2c0,2,1.6,3.6,3.6,3.6
+                                c2,0,3.6-1.6,3.6-3.6V65.7c3.7,3.3,8.5,5.2,13.4,5.2c11.4,0,20.7-9.5,20.7-21.3C170.6,38,161.3,28.6,149.8,28.4z M163.4,49.6
+                                c0,7.8-6.1,14.2-13.6,14.2c-7.4-0.1-13.4-6.5-13.4-14.2V49c0.3-7.4,6.3-13.5,13.4-13.5C157.4,35.7,163.5,42,163.4,49.6L163.4,49.6z"
+                                />
+                            <path class="st0" d="M113.8,60.9c-1.7-0.7-3.6,0.1-4.4,1.8c-5.1,12-19,17.6-31,12.5c-5.6-2.4-10.1-6.9-12.5-12.5
+                                c-0.7-1.7-2.7-2.5-4.4-1.8c-1.7,0.7-2.5,2.7-1.8,4.4c6.6,15.4,24.4,22.5,39.7,16c7.2-3.1,12.9-8.8,16-16
+                                C116.3,63.5,115.5,61.6,113.8,60.9z"/>
+                        </g>
+                    </svg>
+                </a>
+                <meta itemprop="logo" content="/inc/img/logo.png" />
+            </div>
+
+            <nav id="siteNav" class="pure-2-5">
+                <ul id="menuRoot">
+                    <li class="pure-u"><a href="/anime/">Anime</a>
+                        <ul>
+                            <li><a href="/anime/seasons/fall-2026">Anime season charts</a></li>
+                            <li><a href="/anime/recommendations/">Anime recommendations</a></li>
+                            <li><a href="/anime/all">Browse all anime</a></li>
+                            <li><a href="/anime/top-anime">Top anime list</a></li>
+                        </ul>
+                    </li>
+                    <li class="pure-u"><a href="/manga/">Manga</a>
+                        <ul>
+                            <li><a href="/manga/read-online/">Read manga online</a></li>
+                            <li><a href="/manga/recommendations/">Manga recommendations</a></li>
+                            <li><a href="/manga/all">Browse all manga</a></li>
+                            <li><a href="/manga/webtoons/">Webtoon database</a></li>
+                            <li><a href="/manga/light-novels/">Light novel database</a></li>
+                            <li><a href="/manga/top-manga">Top manga list</a></li>
+                        </ul>
+                    </li>
+                    <li class="pure-u"><a href="/characters/">Characters</a>
+                        <ul>
+                            <li><a href="/characters/top-loved">Top loved characters</a></li>
+                            <li><a href="/characters/top-hated">Top hated characters </a></li>
+                            <li><a href="/characters/all">Browse all characters</a></li>
+                        </ul>
+                    </li>
+                    <li class="pure-u"><a href="/community/">Community</a>
+                        <ul>
+                            <li><a href="/forum/">Forum</a></li>
+                            <li><a href="/users/recent_user_reviews.php?mode=anime">Anime reviews</a></li>
+                            <li><a href="/users/recent_user_reviews.php?mode=manga">Manga reviews</a></li>
+                            <li><a href="/community/custom-lists">Custom lists</a></li>
+                            <li><a href="/challenges/">Challenges</a></li>
+                            <li><a href="/forum/forums/14">Site news</a></li>
+                            <li><a href="https://discord.gg/animeplanet">Discord chat</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="siteSearchUser" class="pure-1 md-1-3 alignright">
+                <label for="mSearchToggle" id="mobile-search-toggle"></label>
+                <form method="post" action="/" id="siteSearch" class="pure-u">
+                    <div class="dropSearch">
+                        <input name="search_submission" type="hidden" value="1">
+                        <input name="search" type="search" id="siteSearch-input" class="ds-search">
+                        <select name="selectSource">
+                                                            <option value="anime" >anime</option>
+                                                            <option value="manga" >manga</option>
+                                                            <option value="characters" selected>characters</option>
+                                                            <option value="people" >people</option>
+                                                            <option value="users" >users</option>
+                                                    </select>
+                    </div>
+                </form>
+
+                <li class="icon_link  HeaderNotifications--logged_out  ">
+  
+
+<a href="#" class="notification_icon round_icon" data-toggle="notifications" aria-expanded="false" id="HeaderNotifications__toggle">
+      <i class="fas fa-bell"></i>
+  </a>
+
+  <div data-toggle="notifications_holder">
+    
+<section hidden role="region" aria-labelledby="HeaderNotifications__toggle" class="HeaderNotifications">
+  <nav>
+    <ul class="HeaderNotifications__actions">
+      
+      <li><a href="#" data-notifications-mark-all-read>Mark All as Read</a></li>
+
+          </ul>
+  </nav>
+  <ul role="feed" id="HeaderNotifications__list" class="HeaderNotifications__list notifications_list" data-notifications-list>
+  </ul>
+</section>
+  </div>
+</li>
+
+                <!-- Fill in the number of notifications very early -->
+                                
+                <button id="notifications" class="notificationIcon" style="display:none">
+                    1
+                </button>
+
+                <div id="siteUser">
+                                            <div class="loggedOut pure-border">
+                            <span class='signup'>sign up</span>
+                            <span class="login">log in</span>
+                        </div>
+                                    </div>
+            </div>
+        </div>
+            </header>
+    <div id="siteContainer" >
+
+    
+    
+
+    
+
+    <div class="gah aligncenter">
+                </div>
+
+<h1 itemprop="name" >Edward</h1>
+<h2 class='aka'>Aka: Ed, Edward WONG HAU PEPELU TIVRUSKY IV, Radical Edward</h2>
+  <nav>
+    <ul class="subNav">
+
+        <li class="selected"><a href='/characters/edward'>overview</a></li>
+
+            <li ><a href='/characters/edward/lists'>custom lists</a></li>
+                <li ><a rel="nofollow" href='/characters/edward/comments'>comments</a></li>
+    
+    </ul>
+</nav>
+
+
+
+  
+<section class="pure-g entryBar">
+    
+<div class="pure-1 md-1-5">
+      Gender: Female  </div>
+<div class="pure-1 md-1-5">
+      Hair Color: Orange  </div>
+<div class="pure-1 md-1-5">
+      <i class="fa fa-heart"></i> Rank <a href="/characters/top-loved">#305</a>
+  </div>
+<div class="pure-1 md-1-5">
+      <span class="heartOff"></span> Rank <a href="/characters/top-hated">#1,667</a>
+</div>
+<div class="md-1-5"></div>
+</section>
+<section class="pure-g">
+
+    <div class="pure-1 md-2-3">
+        <div class="pure-g entrySynopsis">
+            <div class="pure-1-2 md-1-3">
+                <div class="mainEntry">
+    <img itemprop="image"  class="screenshots" alt="Edward" src="https://cdn.anime-planet.com/characters/primary/edward-1-190x266.jpg?t=1625965256" />
+
+	<div class='userActions'></div></div>
+
+            </div>
+            <div class="pure-1 md-2-3">
+                <div class="EntryMetadata NoPadding">
+                    <div class="EntryMetadata__item">
+                <h3 class="EntryMetadata__title">
+                Eye color
+                </h3>
+                <div class="EntryMetadata__value">
+                    Brown                 </div>
+            </div>
+                    <div class="EntryMetadata__item">
+                <h3 class="EntryMetadata__title">
+                Blood Type
+                </h3>
+                <div class="EntryMetadata__value">
+                    AB                </div>
+            </div>
+                    <div class="EntryMetadata__item">
+                <h3 class="EntryMetadata__title">
+                Birthday
+                </h3>
+                <div class="EntryMetadata__value">
+                    January 1                </div>
+            </div>
+                </div>
+
+        <div class='tags'><h4>Tags</h4><ul><li><a href='/characters/tags/hackers' data-tooltip='tags'  data-tooltip-id='146' data-tooltip-entry='characters'>Hackers</a></li><li><a href='/characters/tags/bounty-hunters' data-tooltip='tags'  data-tooltip-id='262' data-tooltip-entry='characters'>Bounty Hunters</a></li><li><a href='/characters/tags/goggles' data-tooltip='tags'  data-tooltip-id='408' data-tooltip-entry='characters'>Goggles</a></li><li><a href='/characters/tags/rosy-cheeks' data-tooltip='tags'  data-tooltip-id='459' data-tooltip-entry='characters'>Rosy Cheeks</a></li><li><a href='/characters/tags/barefoot' data-tooltip='tags'  data-tooltip-id='643' data-tooltip-entry='characters'>Barefoot</a></li><li><a href='/characters/tags/hyperactive' data-tooltip='tags'  data-tooltip-id='771' data-tooltip-entry='characters'>Hyperactive</a></li><li><a href='/characters/tags/dark-skinned' data-tooltip='tags'  data-tooltip-id='877' data-tooltip-entry='characters'>Dark-skinned</a></li></ul></div><div class="myFeelings">
+  I <span class="heartSwitch  characters196"><a rel="nofollow" class="heartOn tooltip" data-class="fav" title="I love this character" href='javascript:toggle_favorite(&quot;characters&quot;,196,1,&quot;love&quot;)'></a><a rel='nofollow' class='heartOff tooltip' data-class='fav' title='I hate this character' href='javascript:toggle_favorite(&quot;characters&quot;,196,1,&quot;hate&quot;)'></a></span> this character</div>            </div>
+        </div>
+
+        
+
+
+
+        
+        
+<h3>Anime Roles</h3>
+<table class="pure-table striped noHeader">
+		<tr>
+        <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop&lt;/h5&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;type&#039;&gt;TV (26 eps)&lt;/li&gt;&lt;li&gt;Sunrise&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;1998 - 1999&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;4.3&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop&#039; src=&#039;https://cdn.anime-planet.com/anime/primary/cowboy-bebop-1-190x285.jpg?t=1625885472&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;Follow interstellar bounty hunters Spike Spiegel and Jet Black as they scour the galaxy for criminals with prices on their heads. Hoping to escape their past, they live on the spaceship Bebop, but it&#039;s a dangerous business and old enemies don&#039;t forget easily. Allies come from unlikely sources, however, as they find comrades in the beautiful swindler Faye Valentine, the genius child hacker Ed and the genetically engineered &#039;data dog&#039; Ein. Will they be able to help each other though their respective struggles, or is their fate really inevitable?&lt;/p&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Action&lt;/li&gt;&lt;li&gt;Adventure&lt;/li&gt;&lt;li&gt;Drama&lt;/li&gt;&lt;li&gt;Sci Fi&lt;/li&gt;&lt;li&gt;Bounty Hunters&lt;/li&gt;&lt;li&gt;Episodic&lt;/li&gt;&lt;li&gt;Noir&lt;/li&gt;&lt;li&gt;Outer Space&lt;/li&gt;&lt;li&gt;Western&lt;/li&gt;&lt;li&gt;Original Work&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" href="/anime/cowboy-bebop" class="tooltip">Cowboy Bebop</a></td>
+        <td>Main</td>
+        <td class="tableActors">
+					    <div class='flag flagJP'>jp.
+                            <a class="tooltip" title="<h5 class='theme-font'>Aoi TADA</h5><div class='pure-g'><div class='pure-1-3'><img alt='Aoi TADA' src='https://cdn.anime-planet.com/people/primary/aoi-tada-1-190x266.jpg?t=1625787628' /></div><div class='pure-2-3'><p>Aoi TADA is best known for voice acting <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, <a href='/characters/jenryas-terriermon'>Jenrya&#039;s Terriermon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/lopmon'>Lopmon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/liz-lazarus'>Liz</a> from <a href='/anime/lazarus'>Lazarus</a></p>" href="/people/aoi-tada">Aoi TADA</a>
+                        </div>
+							    <div class='flag flagUS'>en.
+                            <a class="tooltip" title="<h5 class='theme-font'>Melissa FAHN</h5><div class='pure-g'><div class='pure-1-3'><img alt='Melissa FAHN' src='https://cdn.anime-planet.com/people/primary/melissa-fahn-1-190x266.jpg?t=1625787085' /></div><div class='pure-2-3'><p>Melissa FAHN is best known for voice acting <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, <a href='/characters/rider'>Rider</a> from <a href='/anime/fate-stay-night-unlimited-blade-works'>Fate/stay night: Unlimited Blade Works</a>, <a href='/characters/himawari-uzumaki'>Himawari UZUMAKI</a> from <a href='/anime/boruto-naruto-next-generations'>Boruto: Naruto Next Generations</a>, <a href='/characters/maria-campbell'>Maria CAMPBELL</a> from <a href='/anime/my-next-life-as-a-villainess-all-routes-lead-to-doom'>My Next Life as a Villainess: All Routes Lead to Doom!</a>, and <a href='/characters/tachikoma'>Tachikoma</a> from <a href='/anime/ghost-in-the-shell-stand-alone-complex'>Ghost in the Shell: Stand Alone Complex</a>.</p>" href="/people/melissa-fahn">Melissa FAHN</a>
+                        </div>
+							    <div class='flag flagES'>es.
+                            <a class="tooltip" title="<h5 class='theme-font'>Isabel MARTI&Ntilde;ON</h5><div class='pure-g'><div class='pure-1-3'><img alt='Isabel MARTI&Ntilde;ON' src='https://cdn.anime-planet.com/images/people/default/default-staff.svg' /></div><div class='pure-2-3'><p>Isabel MARTIÑON is best known for voice acting <a href='/characters/naruto-uzumaki'>Naruto UZUMAKI</a> from <a href='/anime/naruto'>Naruto</a>, <a href='/characters/ichigo-kurosaki'>Ichigo KUROSAKI</a> from <a href='/anime/bleach'>Bleach</a>, <a href='/characters/minoru-mineta'>Minoru MINETA</a> from <a href='/anime/my-hero-academia-movie-two-heroes'>My Hero Academia Movie: Two Heroes</a>, <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, and <a href='/characters/bulma'>Bulma</a> from <a href='/anime/dragon-ball-z'>Dragon Ball Z</a>.</p>" href="/people/isabel-martinon">Isabel MARTIÑON</a>
+                        </div>
+						<tr>
+        <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop: Ein&amp;#039;s Summer Vacation&lt;/h5&gt;&lt;h6 class=&#039;theme-font tooltip-alt&#039;&gt;Alt title: Cowboy Bebop: Ein no Natsuyasumi&lt;/h6&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;type&#039;&gt;DVD Special (1 ep)&lt;/li&gt;&lt;li&gt;Sunrise&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;2012&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;3.1&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop: Ein&amp;#039;s Summer Vacation&#039; src=&#039;https://cdn.anime-planet.com/anime/primary/cowboy-bebop-eins-summer-vacation-1-190x266.jpg?t=1625896525&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;Ein enjoys a relaxing summer vacation, from snorkeling to playing with markers and even surfing a giant wave.&lt;/p&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Slice of Life&lt;/li&gt;&lt;li&gt;Picture Drama&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" href="/anime/cowboy-bebop-eins-summer-vacation" class="tooltip">Cowboy Bebop: Ein&#039;s Summer Vacation</a></td>
+        <td>Minor</td>
+        <td class="tableActors">
+			Non-Speaking Role	<tr>
+        <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop Session XX: Mish-Mash Blues&lt;/h5&gt;&lt;h6 class=&#039;theme-font tooltip-alt&#039;&gt;Alt title: Cowboy Bebop: Yose Atsume Blues&lt;/h6&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;type&#039;&gt;TV Special (1 ep)&lt;/li&gt;&lt;li&gt;Sunrise&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;1998&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;3.7&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop Session XX: Mish-Mash Blues&#039; src=&#039;https://cdn.anime-planet.com/anime/primary/cowboy-bebop-session-xx-mish-mash-blues-1-190x282.jpg?t=1625886455&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;Spike, Faye, Ed, Jet and even Ein reflect on their adventures aboard the Bebop. With pensive minds, the Bebop&#039;s crew philosophically ponders the different ways that life can turn out. The motley group of bounty hunters aren&#039;t finished though, as not all endings are truly the end.&lt;/p&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Action&lt;/li&gt;&lt;li&gt;Sci Fi&lt;/li&gt;&lt;li&gt;Outer Space&lt;/li&gt;&lt;li&gt;Recap&lt;/li&gt;&lt;li&gt;Original Work&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" href="/anime/cowboy-bebop-session-xx-mish-mash-blues" class="tooltip">Cowboy Bebop Session XX: Mish-Mash Blues</a></td>
+        <td>Main</td>
+        <td class="tableActors">
+					    <div class='flag flagJP'>jp.
+                            <a class="tooltip" title="<h5 class='theme-font'>Aoi TADA</h5><div class='pure-g'><div class='pure-1-3'><img alt='Aoi TADA' src='https://cdn.anime-planet.com/people/primary/aoi-tada-1-190x266.jpg?t=1625787628' /></div><div class='pure-2-3'><p>Aoi TADA is best known for voice acting <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, <a href='/characters/jenryas-terriermon'>Jenrya&#039;s Terriermon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/lopmon'>Lopmon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/liz-lazarus'>Liz</a> from <a href='/anime/lazarus'>Lazarus</a>, and <a href='/characters/terriermon-assistant'>Terriermon Assistant</a> from <a href='/anime/digimon-ghost-game'>Digimon Ghost Game</a>.</p>" href="/people/aoi-tada">Aoi TADA</a>
+                        </div>
+						<tr>
+        <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop: The Movie&lt;/h5&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;type&#039;&gt;Movie (1 ep)&lt;/li&gt;&lt;li&gt;Bones&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;2001&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;4.2&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop: The Movie&#039; src=&#039;https://cdn.anime-planet.com/anime/primary/cowboy-bebop-the-movie-1-190x282.jpg?t=1625885495&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;While on the hunt for an underage hacker, Faye is the sole witness to identifying a man who causes a tanker explosion that leaves people up to three miles away in comas. The bounty that ensues is the largest the galaxy has EVER seen, 300,000,000 wulongs. It&#039;s up to Spike and the gang to solve the mystery of this strange disease, and to stop the assailant at large, for failure would result in all life on Mars being eliminated on Halloween night.&lt;/p&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Action&lt;/li&gt;&lt;li&gt;Sci Fi&lt;/li&gt;&lt;li&gt;Bounty Hunters&lt;/li&gt;&lt;li&gt;Halloween&lt;/li&gt;&lt;li&gt;Mars&lt;/li&gt;&lt;li&gt;Noir&lt;/li&gt;&lt;li&gt;Western&lt;/li&gt;&lt;li&gt;Original Work&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;" href="/anime/cowboy-bebop-the-movie" class="tooltip">Cowboy Bebop: The Movie</a></td>
+        <td>Main</td>
+        <td class="tableActors">
+					    <div class='flag flagJP'>jp.
+                            <a class="tooltip" title="<h5 class='theme-font'>Aoi TADA</h5><div class='pure-g'><div class='pure-1-3'><img alt='Aoi TADA' src='https://cdn.anime-planet.com/people/primary/aoi-tada-1-190x266.jpg?t=1625787628' /></div><div class='pure-2-3'><p>Aoi TADA is best known for voice acting <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, <a href='/characters/jenryas-terriermon'>Jenrya&#039;s Terriermon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/lopmon'>Lopmon</a> from <a href='/anime/digimon-tamers'>Digimon Tamers</a>, <a href='/characters/liz-lazarus'>Liz</a> from <a href='/anime/lazarus'>Lazarus</a>, and <a href='/characters/terriermon-assistant'>Terriermon Assistant</a> from <a href='/anime/digimon-ghost-game'>Digimon Ghost Game</a>.</p>" href="/people/aoi-tada">Aoi TADA</a>
+                        </div>
+							    <div class='flag flagUS'>en.
+                            <a class="tooltip" title="<h5 class='theme-font'>Melissa FAHN</h5><div class='pure-g'><div class='pure-1-3'><img alt='Melissa FAHN' src='https://cdn.anime-planet.com/people/primary/melissa-fahn-1-190x266.jpg?t=1625787085' /></div><div class='pure-2-3'><p>Melissa FAHN is best known for voice acting <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, <a href='/characters/rider'>Rider</a> from <a href='/anime/fate-stay-night-unlimited-blade-works'>Fate/stay night: Unlimited Blade Works</a>, <a href='/characters/himawari-uzumaki'>Himawari UZUMAKI</a> from <a href='/anime/boruto-naruto-next-generations'>Boruto: Naruto Next Generations</a>, <a href='/characters/maria-campbell'>Maria CAMPBELL</a> from <a href='/anime/my-next-life-as-a-villainess-all-routes-lead-to-doom'>My Next Life as a Villainess: All Routes Lead to Doom!</a>, and <a href='/characters/tachikoma'>Tachikoma</a> from <a href='/anime/ghost-in-the-shell-stand-alone-complex'>Ghost in the Shell: Stand Alone Complex</a>.</p>" href="/people/melissa-fahn">Melissa FAHN</a>
+                        </div>
+							    <div class='flag flagES'>es.
+                            <a class="tooltip" title="<h5 class='theme-font'>Isabel MARTI&Ntilde;ON</h5><div class='pure-g'><div class='pure-1-3'><img alt='Isabel MARTI&Ntilde;ON' src='https://cdn.anime-planet.com/images/people/default/default-staff.svg' /></div><div class='pure-2-3'><p>Isabel MARTIÑON is best known for voice acting <a href='/characters/naruto-uzumaki'>Naruto UZUMAKI</a> from <a href='/anime/naruto'>Naruto</a>, <a href='/characters/ichigo-kurosaki'>Ichigo KUROSAKI</a> from <a href='/anime/bleach'>Bleach</a>, <a href='/characters/minoru-mineta'>Minoru MINETA</a> from <a href='/anime/my-hero-academia-movie-two-heroes'>My Hero Academia Movie: Two Heroes</a>, <a href='/characters/edward'>Edward</a> from <a href='/anime/cowboy-bebop'>Cowboy Bebop</a>, and <a href='/characters/bulma'>Bulma</a> from <a href='/anime/dragon-ball-z'>Dragon Ball Z</a>.</p>" href="/people/isabel-martinon">Isabel MARTIÑON</a>
+                        </div>
+					        </td>
+    </tr>
+</table>
+	    <h3>Manga Roles</h3>
+    <table class="pure-table striped noHeader">
+			<tr>
+            <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop&lt;/h5&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;iconVol&#039;&gt;Vol: 3; Ch: 11&lt;/li&gt;&lt;li&gt;Fan Dera&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;1998 - 2000&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;3.7&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop&#039; src=&#039;https://cdn.anime-planet.com/manga/primary/cowboy-bebop-1-190x287.jpg?t=1625908527&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;Follow interstellar bounty hunters Spike Spiegel and Jet Black as they scour the galaxy for criminals with prices on their heads. Hoping to escape their past, they live on the spaceship Bebop, but it&#039;s a dangerous business and old enemies don&#039;t forget easily. Allies come from unlikely sources, however, as they find comrades in the beautiful swindler Faye Valentine, the genius child hacker Ed and the genetically engineered &#039;data dog&#039; Ein. Will they be able to help each other though their respective struggles, or is their fate really inevitable?&lt;/p&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Adventure&lt;/li&gt;&lt;li&gt;Sci Fi&lt;/li&gt;&lt;li&gt;Shoujo&lt;/li&gt;&lt;li&gt;Bounty Hunters&lt;/li&gt;&lt;li&gt;Based on an Anime&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;"  href="/manga/cowboy-bebop" class="tooltip">Cowboy Bebop</a></td>
+            <td>Main</td>
+        </tr>
+			<tr>
+            <td><a data-class='tooltip-full' title="&lt;h5 class=&#039;theme-font&#039;&gt;Cowboy Bebop: Shooting Star&lt;/h5&gt;&lt;ul class=&#039;entryBar&#039;&gt;&lt;li class=&#039;iconVol&#039;&gt;Vol: 2; Ch: 10&lt;/li&gt;&lt;li&gt;Fan Dera&lt;/li&gt;&lt;li class=&#039;iconYear&#039;&gt;1997 - 1998&lt;/li&gt;&lt;li&gt;&lt;div class=&#039;ttRating&#039;&gt;3.5&lt;/div&gt;&lt;/li&gt;&lt;/ul&gt;&lt;div class=&#039;pure-g&#039;&gt;&lt;div class=&#039;pure-1-3&#039;&gt;&lt;img alt=&#039;Cowboy Bebop: Shooting Star&#039; src=&#039;https://cdn.anime-planet.com/manga/primary/cowboy-bebop-shooting-star-1-190x269.jpg?t=1625908528&#039; /&gt;&lt;/div&gt;&lt;div class=&#039;pure-2-3&#039;&gt;&lt;p&gt;Kai Lucas hires the Bebop crew to find his mischievous doppelganger, but the bounty goes bust and Spike and Jet once again find themselves broke - and hungry. And to add to their woes, Spike ends up mysteriously on the police&#039;s most wanted list, either the butt of a joke or the victim of a severe computer glitch. But what&#039;s worse, being targeted by every bounty hunter in the solar system, or taking on a kid-genius, a genius puppy and a genus: fatale, species: femme as part of the crew. Well, if Scorpion or the Dragon Head Family doesn&#039;t kill them, the extra mouths to feed certainly will.&lt;/p&gt;&lt;div class=&#039;tooltip notes&#039;style=&#039;padding-top: 1em;&#039;&gt;&lt;p&gt;Source: Tokyopop&lt;/p&gt;&lt;/div&gt;&lt;div class=&#039;tags&#039;&gt;&lt;h4&gt;Tags&lt;/h4&gt;&lt;ul&gt;&lt;li&gt;Adventure&lt;/li&gt;&lt;li&gt;Sci Fi&lt;/li&gt;&lt;li&gt;Shoujo&lt;/li&gt;&lt;li&gt;Bounty Hunters&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;"  href="/manga/cowboy-bebop-shooting-star" class="tooltip">Cowboy Bebop: Shooting Star</a></td>
+            <td>Main</td>
+        </tr>
+		    </table>
+	
+      <div class="tabs commentContainer">
+            <ul class="tabsUl">
+                <li><a href="#comments">31 comments</a></li>
+                <li><a href="#leavecomment">Leave a comment</a></li>
+            </ul>
+
+            <div class="tab" id="leavecomment">
+                <p>You must be logged in to leave comments. <span class="login">Login</span> or <span class="signup">sign up</a> today!</p>      </div>
+
+        <div class="tab" id="comments">
+            <div class="commentSection">
+                                    <section class="pure-g">
+                        <div class="pure-1-4 sm-1-6 md-1-8">
+
+                            <a class="avatar avatar-border avatar-border-" rel='nofollow' href='/users/Harmony524'>
+                                <img alt="Harmony524's avatar" src="/images/users/avatars/5147571.jpg?t=1727476170" />
+                            </a>
+                        </div>
+                        <div class="pure-3-4 sm-5-6 md-7-8">
+
+                            <span class="userActions" id="2109156">
+
+                                                        </span>
+
+                            <div class="authorDate">
+                                <a href='/users/Harmony524'>Harmony524</a>
+                                <span class="time" title="Jul 18, 2025 10:46 pm">Jul 18, 2025</span>                            </div>
+
+                            <div class="userContent">
+                                <p>The first time I've seen Edward, I always thought it's a boy...</p>                            </div>
+
+                            <div class='cta horizontal-cta'>
+
+                                <a class="leaveComment" rel='nofollow' href='/users/Harmony524#leavecomment'>
+                                    Respond to Harmony524                                </a>
+
+                                                                    <a href='javascript:;' onclick="toggle_follow(5147571)" class="follow friend5147571 ">
+                                        Follow                                    </a>
+                                                                </div>
+                        </div>
+                    </section>
+                                    <section class="pure-g">
+                        <div class="pure-1-4 sm-1-6 md-1-8">
+
+                            <a class="avatar avatar-border avatar-border-" rel='nofollow' href='/users/rajberries'>
+                                <img alt="rajberries's avatar" src="/images/users/avatars/1375712.jpg?t=1697433689" />
+                            </a>
+                        </div>
+                        <div class="pure-3-4 sm-5-6 md-7-8">
+
+                            <span class="userActions" id="1754892">
+
+                                                        </span>
+
+                            <div class="authorDate">
+                                <a href='/users/rajberries'>rajberries</a>
+                                <span class="time" title="Feb 3, 2023 10:37 pm">Feb 3, 2023</span>                            </div>
+
+                            <div class="userContent">
+                                <p>built like me fr</p>                            </div>
+
+                            <div class='cta horizontal-cta'>
+
+                                <a class="leaveComment" rel='nofollow' href='/users/rajberries#leavecomment'>
+                                    Respond to rajberries                                </a>
+
+                                                                    <a href='javascript:;' onclick="toggle_follow(1375712)" class="follow friend1375712 ">
+                                        Follow                                    </a>
+                                                                </div>
+                        </div>
+                    </section>
+                                    <section class="pure-g">
+                        <div class="pure-1-4 sm-1-6 md-1-8">
+
+                            <a class="avatar avatar-border avatar-border-" rel='nofollow' href='/users/Rookblonkorules'>
+                                <img alt="Rookblonkorules's avatar" src="/images/users/avatars/3507309.jpg?t=1677213137" />
+                            </a>
+                        </div>
+                        <div class="pure-3-4 sm-5-6 md-7-8">
+
+                            <span class="userActions" id="1503405">
+
+                                                        </span>
+
+                            <div class="authorDate">
+                                <a href='/users/Rookblonkorules'>Rookblonkorules</a>
+                                <span class="time" title="Dec 12, 2021 9:55 pm">Dec 12, 2021</span>                            </div>
+
+                            <div class="userContent">
+                                <p>She was really annoying at first, but she grew on me.</p>                            </div>
+
+                            <div class='cta horizontal-cta'>
+
+                                <a class="leaveComment" rel='nofollow' href='/users/Rookblonkorules#leavecomment'>
+                                    Respond to Rookblonkorules                                </a>
+
+                                                                    <a href='javascript:;' onclick="toggle_follow(3507309)" class="follow friend3507309 ">
+                                        Follow                                    </a>
+                                                                </div>
+                        </div>
+                    </section>
+                                    <section class="pure-g">
+                        <div class="pure-1-4 sm-1-6 md-1-8">
+
+                            <a class="avatar avatar-border avatar-border-" rel='nofollow' href='/users/Purrichan'>
+                                <img alt="Purrichan's avatar" src="/images/users/avatars/465803.jpg?t=1773552467" />
+                            </a>
+                        </div>
+                        <div class="pure-3-4 sm-5-6 md-7-8">
+
+                            <span class="userActions" id="1439954">
+
+                                                        </span>
+
+                            <div class="authorDate">
+                                <a href='/users/Purrichan'>Purrichan</a>
+                                <span class="time" title="Apr 30, 2021 10:35 am">Apr 30, 2021</span>                            </div>
+
+                            <div class="userContent">
+                                <p><strong>Mi personaje favorito, volvia todo m&aacute;s entretenido y gracioso^^</strong></p>
+<p><strong><img src="https://spoilertime.com/wp-content/uploads/2018/11/ed-1.gif" alt="" width="449" height="241"></strong></p>                            </div>
+
+                            <div class='cta horizontal-cta'>
+
+                                <a class="leaveComment" rel='nofollow' href='/users/Purrichan#leavecomment'>
+                                    Respond to Purrichan                                </a>
+
+                                                                    <a href='javascript:;' onclick="toggle_follow(465803)" class="follow friend465803 ">
+                                        Follow                                    </a>
+                                                                </div>
+                        </div>
+                    </section>
+                                    <section class="pure-g">
+                        <div class="pure-1-4 sm-1-6 md-1-8">
+
+                            <a class="avatar avatar-border avatar-border-" rel='nofollow' href='/users/mcarey393'>
+                                <img alt="mcarey393's avatar" src="/images/users/avatars/3568458.jpg?t=1711325679" />
+                            </a>
+                        </div>
+                        <div class="pure-3-4 sm-5-6 md-7-8">
+
+                            <span class="userActions" id="1427117">
+
+                                                        </span>
+
+                            <div class="authorDate">
+                                <a href='/users/mcarey393'>mcarey393</a>
+                                <span class="time" title="Mar 31, 2021 2:37 am">Mar 31, 2021</span>                            </div>
+
+                            <div class="userContent">
+                                <p>such a&nbsp;entertaining and lovable character &lt;3</p>                            </div>
+
+                            <div class='cta horizontal-cta'>
+
+                                <a class="leaveComment" rel='nofollow' href='/users/mcarey393#leavecomment'>
+                                    Respond to mcarey393                                </a>
+
+                                                                    <a href='javascript:;' onclick="toggle_follow(3568458)" class="follow friend3568458 ">
+                                        Follow                                    </a>
+                                                                </div>
+                        </div>
+                    </section>
+                <div class='pagination aligncenter'><ul class='nav'><li class='prev'><span></span></li><li class='selected'>1</li><li><a href='/characters/edward/comments?page=2'>2</a></li><li><a href='/characters/edward/comments?page=3'>3</a></li><li><a href='/characters/edward/comments?page=4'>4</a></li><li><a href='/characters/edward/comments?page=5'>5</a></li><li><a href='/characters/edward/comments?page=6'>6</a></li><li><a href='/characters/edward/comments?page=7'>7</a></li><li class='next'><a href='/characters/edward/comments?page=2'></a></li></ul></div>                </div>
+            </div>
+        </div>
+            </div>
+    <div class="pure-1 md-1-3">
+        <div class="gah alignright">
+                        </div>
+
+        <section class="sidebarStats">
+            
+        <h3 class="smSidebar">6,532 users            <span class="heartOn"></span></h3>
+
+        <ul class='recentUsers'><li><a href='/users/Julppu'>Julppu</a></li><li><a href='/users/firagaboss'>firagaboss</a></li><li><a href='/users/Daringdeku'>Daringdeku</a></li><li><a href='/users/yusukev22'>yusukev22</a></li><li><a href='/users/Ilovebeastars'>Ilovebeastars</a></li><li><a href='/users/Allijaydor'>Allijaydor</a></li><li><a href='/users/Bloom19'>Bloom19</a></li><li><a href='/users/VinnyMctwinkles'>VinnyMctwinkles</a></li><li><a href='/users/ruinexplorer'>ruinexplorer</a></li><li><a href='/users/Danodan94'>Danodan94</a></li><li><a href='/users/BlackTies'>BlackTies</a></li><li><a href='/users/EggBenz'>EggBenz</a></li><li><a href='/users/Skody12'>Skody12</a></li><li><a href='/users/Jmoneyplayz6928'>Jmoneyplayz6928</a></li><li><a href='/users/UshiromiyaBeatrice'>UshiromiyaBeatrice</a></li><li><a href='/users/salmontic'>salmontic</a></li><li><a href='/users/hugerbiggerlarger'>hugerbiggerlarger</a></li><li><a href='/users/VGYeti'>VGYeti</a></li><li><a href='/users/BigCF02'>BigCF02</a></li><li><a href='/users/Boyinator'>Boyinator</a></li></ul>
+        <h3 class="smSidebar">348 users            <span class="heartOff"></span></h3>
+
+        <ul class='recentUsers'><li><a href='/users/luhhertz'>luhhertz</a></li><li><a href='/users/EclipseP'>EclipseP</a></li><li><a href='/users/SP300'>SP300</a></li><li><a href='/users/Snowwolf2156'>Snowwolf2156</a></li><li><a href='/users/helsucks'>helsucks</a></li><li><a href='/users/GiWave'>GiWave</a></li><li><a href='/users/LoriJ'>LoriJ</a></li><li><a href='/users/ItzzzNovahhh'>ItzzzNovahhh</a></li><li><a href='/users/sirmattis'>sirmattis</a></li><li><a href='/users/unicornlady1'>unicornlady1</a></li><li><a href='/users/UltraRage86'>UltraRage86</a></li><li><a href='/users/chasm'>chasm</a></li><li><a href='/users/KarlKroenen'>KarlKroenen</a></li><li><a href='/users/smokierboots'>smokierboots</a></li><li><a href='/users/parsaar22'>parsaar22</a></li><li><a href='/users/DHT1'>DHT1</a></li><li><a href='/users/blackros1997'>blackros1997</a></li><li><a href='/users/sispa'>sispa</a></li><li><a href='/users/XVerethragnaX'>XVerethragnaX</a></li><li><a href='/users/EmberLumen'>EmberLumen</a></li></ul>        </section>
+
+        <div class="gah aligncenter skyscraper">
+                     </div>
+    </div>
+</section>
+
+
+
+
+<div id="tooltipModal" style="display:none"></div>
+
+    
+            <div class="gah aligncenter pagebottom">
+                        </div>
+    </div><!-- sitecontainer -->
+
+<footer id="siteFooter">
+    <div class="pure-g">
+        <div class="pure-u-1 pure-u-sm-1-1 pure-u-md-2-5 pure-u-lg-4-8 footer-about">
+            <h2><strong>Anime-Planet</strong> is run by fans, for fans</h2>
+            <p><a class="button cta-2" href="https://patreon.com/animeplanet?utm_source=animeplanet&amp;utm_campaign=footer" target="_blank" rel="noopener"><i class="fab fa-patreon"></i>Support us on Patreon</a></p>
+            <p>Learn about more ways to <a href="/support">support Anime-Planet</a></p>
+                    </div>
+        <div class="pure-u-1 pure-u-sm-1-1 pure-u-md-2-5 pure-u-lg-2-8 footer-social">
+            <ul>
+                <li>
+                    <a href="https://facebook.com/animeplanet" target="_blank" rel="noopener">
+                        <i class="fab fa-facebook-f"></i>
+                        <div>facebook</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/animeplanet" target="_blank" rel="noopener">
+                        <i class="fab fa-twitter"></i>
+                        <div>twitter</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/officialanimeplanet/" target="_blank" rel="noopener">
+                        <i class="fab fa-instagram"></i>
+                        <div>instagram</div>
+                    </a>
+                </li>
+                <li>
+                    <a rel="nofollow noopener" href="https://discord.gg/animeplanet" target="_blank">
+                        <i class="fab fa-discord"></i>
+                        <div>discord</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://patreon.com/animeplanet?utm_source=animeplanet&amp;utm_campaign=footer" target="_blank" rel="noopener">
+                        <i class="fab fa-patreon"></i>
+                        <div>patreon</div>
+                    </a>
+                </li>
+            </ul>
+
+            <button class="button cta-1 lightswitch_button dark_mode_toggle">
+                <span>
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </span>
+
+                <div>
+                    Light Mode
+                </div>
+
+                <div>
+                    Dark Mode
+                </div>
+            </button>
+        </div>
+        <div class="pure-u-1 pure-u-sm-1-1 pure-u-md-1-5 pure-u-lg-2-8 footer-nav">
+            <nav>
+                <ul>
+                    <li><a rel="nofollow" href='/contact'>Contact</a></li>
+                    <li><a rel="nofollow" href='/about'>About</a></li>
+                    <li><a rel="nofollow" href='/termsofuse'>Terms of Use</a></li>
+                    <li><a rel="nofollow" href='/privacypolicy'>Privacy Policy</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <p class="footer-copyright alignleft">&copy; Anime-Planet, 2001-2026</p>
+</footer>
+    
+        
+            
+        
+    
+            <div class="hookable"></div>
+                        
+        </body>
+</html>

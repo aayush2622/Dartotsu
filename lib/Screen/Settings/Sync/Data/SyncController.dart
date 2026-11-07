@@ -17,6 +17,7 @@ import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Core/Offline/OfflineMutations.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../Components/SyncPrivateDialog.dart';
 import 'SyncAdapter.dart';
 import 'SyncAhead.dart';
 import 'SyncCompute.dart';
@@ -375,9 +376,38 @@ class SyncController extends AppController {
     }
   }
 
-  Future<void> start({String? only, bool auto = false}) async {
+  bool? _includePrivate;
+
+  void choosePrivate(bool? value) {
+    if (!busy) _includePrivate = value;
+  }
+
+  bool _blocksPrivate(SyncPair p) =>
+      p.main.isPrivate &&
+      (_includePrivate == false ||
+          _includePrivate == null && PrefName.syncPrivate.value == 'skip');
+
+  int privateCount({String? only}) {
+    final current = plan.value;
+    if (current == null) return 0;
+    return [
+      for (final e in current.targets.entries)
+        if (only == null || only == e.key)
+          for (final p in e.value.pairs)
+            if (p.main.isPrivate && p.pending) p,
+    ].length;
+  }
+
+  Future<void> start({
+    String? only,
+    bool auto = false,
+    bool? includePrivate,
+  }) async {
     final current = plan.value;
     if (busy || current == null) return;
+    _includePrivate =
+        includePrivate ??
+        (auto ? PrefName.syncPrivate.value == 'sync' : _includePrivate);
     if (incognitoBlocksEdits) {
       snackString(getString.incognitoEditsBlocked);
       return;
@@ -396,6 +426,7 @@ class SyncController extends AppController {
           if (only == null || only == id) _work(id, current, auto),
       ]);
     } finally {
+      _includePrivate = null;
       for (final id in current.targets.keys) {
         await _services
             .firstWhereOrNull((s) => s.id == id)
@@ -424,6 +455,22 @@ class SyncController extends AppController {
     if (adapter == null || incognitoBlocksEdits) return;
     final isAnime = media.isAnime;
     final targets = targetsFor(service.id, isAnime);
+    if (targets.isNotEmpty && media.isListPrivate) {
+      final mode = PrefName.syncPrivate.value;
+      final context = appContext;
+      final allowed = mode == 'sync'
+          ? true
+          : mode == 'ask' && context != null && context.mounted
+          ? await askSyncPrivate(context, 1)
+          : false;
+      if (allowed != true) {
+        logger(
+          'Instant sync: ${media.id} is private and was not synced',
+          tag: 'SYNC',
+        );
+        return;
+      }
+    }
     if (targets.isEmpty) {
       logger(
         'Instant sync: ${service.name} has no other service to write to',
@@ -599,6 +646,7 @@ class SyncController extends AppController {
 
   bool isWanted(SyncPair p) =>
       p.pending &&
+      !_blocksPrivate(p) &&
       (p.state == SyncStatus.outdated ||
           PrefName.syncAddMissing.rx.value && p.state == SyncStatus.missing);
 

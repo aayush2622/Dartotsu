@@ -12,6 +12,15 @@ class SyncKey {
   static const simkl = 'simkl';
   static const mangabaka = 'mangabaka';
   static const mangaupdates = 'mangaupdates';
+  static const animeplanet = 'animeplanet';
+}
+
+int syncSlugKey(String slug) {
+  var h = 0x84222325cbf29ce;
+  for (final unit in slug.codeUnits) {
+    h = ((h ^ unit) * 0x100000001b3) & 0xffffffffffff;
+  }
+  return h | 0x800000000000;
 }
 
 String syncCanonStatus(String? status) => switch (status) {
@@ -45,6 +54,7 @@ class SyncItem {
   final int? total;
   final int? listId;
   final String? source;
+  final bool isPrivate;
 
   const SyncItem({
     required this.id,
@@ -60,6 +70,7 @@ class SyncItem {
     this.total,
     this.listId,
     this.source,
+    this.isPrivate = false,
   });
 
   factory SyncItem.fromMedia(Media media, Map<String, int> ids) => SyncItem(
@@ -75,6 +86,7 @@ class SyncItem {
     completed: media.userCompletedAt,
     total: media.totalUnits,
     listId: media.userListId,
+    isPrivate: media.isListPrivate,
   );
 
   SyncItem copy({
@@ -97,6 +109,7 @@ class SyncItem {
     total: total,
     listId: listId,
     source: source ?? this.source,
+    isPrivate: isPrivate,
   );
 
   SyncItem withIds(Map<String, int> next) => copy(ids: next);
@@ -116,6 +129,7 @@ class SyncItem {
     completed: completed,
     total: previous?.total ?? total,
     listId: previous?.listId,
+    isPrivate: isPrivate || (previous?.isPrivate ?? false),
   );
 
   Media toMedia({required bool anime, String? idOverride}) => Media(
@@ -129,6 +143,7 @@ class SyncItem {
     userStartedAt: started,
     userCompletedAt: completed,
     userListId: listId,
+    isListPrivate: isPrivate,
     shareLink: '',
   );
 
@@ -139,6 +154,7 @@ class SyncItem {
     'score': score,
     'repeat': repeat,
     'listId': ?listId,
+    if (isPrivate) 'priv': true,
   };
 
   factory SyncItem.fromCompact(Map<String, dynamic> j, SyncItem like) =>
@@ -153,6 +169,7 @@ class SyncItem {
         repeat: (j['repeat'] as num?)?.toInt() ?? 0,
         total: like.total,
         listId: (j['listId'] as num?)?.toInt(),
+        isPrivate: j['priv'] == true,
       );
 
   Map<String, dynamic> toJson() => {
@@ -169,6 +186,7 @@ class SyncItem {
     'total': ?total,
     'listId': ?listId,
     'src': ?source,
+    if (isPrivate) 'priv': true,
   };
 
   factory SyncItem.fromJson(Map<String, dynamic> j) => SyncItem(
@@ -187,6 +205,7 @@ class SyncItem {
     total: (j['total'] as num?)?.toInt(),
     listId: (j['listId'] as num?)?.toInt(),
     source: j['src'] as String?,
+    isPrivate: j['priv'] == true,
   );
 }
 
@@ -205,6 +224,7 @@ class SyncPair {
   String? error;
   final bool dates;
   final bool repeat;
+  final bool privacy;
 
   SyncPair({
     required this.main,
@@ -215,6 +235,7 @@ class SyncPair {
     this.error,
     this.dates = false,
     this.repeat = false,
+    this.privacy = false,
   });
 
   SyncItem get want {
@@ -242,6 +263,7 @@ class SyncPair {
               _dateDiffers(main.completed, t.completed)))
         'dates',
       if (repeat && main.repeat > 0 && main.repeat != t.repeat) 'repeat',
+      if (privacy && main.isPrivate && !t.isPrivate) 'private',
     ];
   }
 
@@ -254,6 +276,7 @@ class SyncPair {
     'error': ?error,
     if (dates) 'dt': true,
     if (repeat) 'rp': true,
+    if (privacy) 'pv': true,
   };
 
   factory SyncPair.fromJson(Map<String, dynamic> j, List<SyncItem> mains) {
@@ -272,6 +295,7 @@ class SyncPair {
       error: j['error'] as String?,
       dates: j['dt'] == true,
       repeat: j['rp'] == true,
+      privacy: j['pv'] == true,
     );
   }
 }

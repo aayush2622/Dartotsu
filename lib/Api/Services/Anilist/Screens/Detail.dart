@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Screen/Detail/Components/DetailRelated.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Screen/Detail/Components/StaleNotice.dart';
@@ -81,10 +82,10 @@ class AnilistDetailView extends DetailScreenView {
           ),
         ),
       ..._tags(m, host),
+      ...prequelSequelWidgets(host, m),
       ScreenWidget.extra(
         ReviewsShelf(key: ValueKey('reviews-${m.id}'), media: m, view: this),
       ),
-      ..._sequels(m),
       if ((m.characters ?? const []).isNotEmpty)
         ScreenWidget.characters(getString.characters, m.characters),
       if ((m.staff ?? const []).isNotEmpty)
@@ -162,16 +163,6 @@ class AnilistDetailView extends DetailScreenView {
         ),
       ),
     ];
-  }
-
-  List<ScreenWidget> _sequels(Media m) {
-    final related = [
-      if (m.prequel != null) m.prequel!,
-      if (m.sequel != null) m.sequel!,
-    ];
-    return related.isEmpty
-        ? const []
-        : [ScreenWidget.media(getString.prequelSequel, related)];
   }
 
   List<ScreenWidget> _tags(Media m, DetailHost host) {

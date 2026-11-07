@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
+import '../../../../Screen/Detail/Components/DetailRelated.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -64,6 +66,7 @@ class SimklDetailView extends DetailScreenView {
           getString.genres,
           ScreenData(chips: m.genres, onChipTap: host.search),
         ),
+      ...prequelSequelWidgets(host, m),
       ...linkChips(getString.trailers, extras?.trailers),
       ...linkChips(getString.links, extras?.links),
       if ((m.characters ?? const []).isNotEmpty)
