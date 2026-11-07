@@ -34,6 +34,7 @@ class UserAvatar extends StatelessWidget {
       ),
     );
     final avatar = ClipOval(
+      clipBehavior: Clip.antiAliasWithSaveLayer,
       child: SizedBox(
         width: size,
         height: size,

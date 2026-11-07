@@ -1,4 +1,5 @@
 import '../../../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -38,6 +39,7 @@ class ForkTile extends StatelessWidget {
         child: Row(
           children: [
             ClipOval(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               child: SizedBox(
                 width: 36,
                 height: 36,

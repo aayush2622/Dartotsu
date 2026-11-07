@@ -582,6 +582,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
         child: Row(
           children: [
             ClipOval(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               child: SizedBox(
                 width: 48,
                 height: 48,

@@ -191,6 +191,7 @@ class _Avatar extends StatelessWidget {
             padding: EdgeInsets.all(size * 0.07),
             decoration: BoxDecoration(shape: BoxShape.circle, color: ring),
             child: ClipOval(
+              clipBehavior: Clip.antiAliasWithSaveLayer,
               child: ColoredBox(
                 color: _D.blurple,
                 child: url == null

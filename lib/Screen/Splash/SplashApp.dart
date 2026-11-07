@@ -53,6 +53,7 @@ class _SplashAppState extends State<SplashApp>
                       child: Transform.scale(
                         scale: scale,
                         child: ClipOval(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
                           child: Image.asset(
                             'assets/images/logo.png',
                             width: 144,

@@ -47,6 +47,7 @@ void snackString(
                     children: [
                       icon == null
                           ? ClipOval(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
                               child: Image.asset(
                                 'assets/images/logo.png',
                                 width: 20,

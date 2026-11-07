@@ -472,6 +472,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             ),
           ),
           child: ClipOval(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
             child: Stack(
               fit: StackFit.expand,
               children: [

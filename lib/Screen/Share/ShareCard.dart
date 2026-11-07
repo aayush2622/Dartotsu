@@ -314,6 +314,7 @@ class ListShareCard extends StatelessWidget {
                 children: [
                   if (avatar != null) ...[
                     ClipOval(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
                       child: SizedBox(
                         width: 40,
                         height: 40,
@@ -418,6 +419,7 @@ class _Avatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ClipOval(
+    clipBehavior: Clip.antiAliasWithSaveLayer,
     child: SizedBox(
       width: size,
       height: size,
