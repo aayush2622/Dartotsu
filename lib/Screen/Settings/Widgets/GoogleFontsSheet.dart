@@ -9,18 +9,12 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../../Widgets/Components/SheetTile.dart';
-import '../../../Widgets/Components/ThemedContainer.dart';
+import '../../../Widgets/Components/AppSheet.dart';
 import '../../../Core/State/State.dart';
 import '../../../Widgets/Components/AppSpinner.dart';
 
 Future<void> showGoogleFontsPicker(BuildContext context) =>
-    showCustomBottomDialog<void>(
-      context,
-      const FractionallySizedBox(
-        heightFactor: 0.85,
-        child: _GoogleFontsSheet(),
-      ),
-    );
+    showCustomBottomDialog<void>(context, const _GoogleFontsSheet());
 
 class _GoogleFontsSheet extends StatefulWidget {
   const _GoogleFontsSheet();
@@ -50,80 +44,61 @@ class _GoogleFontsSheetState extends State<_GoogleFontsSheet> {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return ClipRRect(
-      borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-      child: ThemedContainer(
-        blur: true,
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
-        padding: EdgeInsets.zero,
-        child: Padding(
-          padding: const EdgeInsets.only(bottom: 24, top: 12),
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 12),
-                  decoration: BoxDecoration(
-                    color: scheme.onSurface.withValues(alpha: 0.3),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
+    return AppSheet(
+      heightFactor: 0.85,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
+            child: TextField(
+              onChanged: (v) => _query.value = v.trim().toLowerCase(),
+              decoration: InputDecoration(
+                hintText: getString.searchGoogleFonts,
+                prefixIcon: Icon(
+                  Icons.search_rounded,
+                  color: scheme.onSurfaceVariant,
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 0, 20, 12),
-                child: TextField(
-                  onChanged: (v) => _query.value = v.trim().toLowerCase(),
-                  decoration: InputDecoration(
-                    hintText: getString.searchGoogleFonts,
-                    prefixIcon: Icon(
-                      Icons.search_rounded,
-                      color: scheme.onSurfaceVariant,
-                    ),
-                    filled: true,
-                    fillColor: scheme.surfaceContainerHigh,
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(28),
-                      borderSide: BorderSide.none,
-                    ),
-                    contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                  ),
+                filled: true,
+                fillColor: scheme.surfaceContainerHigh,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(28),
+                  borderSide: BorderSide.none,
                 ),
+                contentPadding: const EdgeInsets.symmetric(vertical: 12),
               ),
-              Expanded(
-                child: Watch(() {
-                  final q = _query.value;
-                  final filtered = q.isEmpty
-                      ? _all
-                      : _all.where((f) => f.toLowerCase().contains(q)).toList();
-                  final busy = _downloading.value;
-                  final activeName = _t.useCustomFont.value
-                      ? p.basenameWithoutExtension(_t.customFontPath.value)
-                      : null;
-                  return ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    itemExtent: 60,
-                    addAutomaticKeepAlives: false,
-                    itemCount: filtered.length,
-                    itemBuilder: (_, i) {
-                      final family = filtered[i];
-                      final isBusy = busy == family;
-                      final isActive = activeName == family;
-                      return SheetTile(
-                        enabled: busy.isEmpty,
-                        selected: isActive,
-                        onTap: () => _apply(family),
-                        title: Text(family),
-                        trailing: isBusy ? const AppSpinner() : null,
-                      );
-                    },
-                  );
-                }),
-              ),
-            ],
+            ),
           ),
-        ),
+          Expanded(
+            child: Watch(() {
+              final q = _query.value;
+              final filtered = q.isEmpty
+                  ? _all
+                  : _all.where((f) => f.toLowerCase().contains(q)).toList();
+              final busy = _downloading.value;
+              final activeName = _t.useCustomFont.value
+                  ? p.basenameWithoutExtension(_t.customFontPath.value)
+                  : null;
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemExtent: 60,
+                addAutomaticKeepAlives: false,
+                itemCount: filtered.length,
+                itemBuilder: (_, i) {
+                  final family = filtered[i];
+                  final isBusy = busy == family;
+                  final isActive = activeName == family;
+                  return SheetTile(
+                    enabled: busy.isEmpty,
+                    selected: isActive,
+                    onTap: () => _apply(family),
+                    title: Text(family),
+                    trailing: isBusy ? const AppSpinner() : null,
+                  );
+                },
+              );
+            }),
+          ),
+        ],
       ),
     );
   }

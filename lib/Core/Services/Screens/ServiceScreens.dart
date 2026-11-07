@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:convert';
 
 import 'package:flutter/widgets.dart';
@@ -269,6 +270,48 @@ class ListEditorScreenView {
       ScreenWidget.extra(ListPrivateField(draft: draft)),
       ScreenWidget.extra(ListOtherSection(draft: draft)),
     ],
+  ];
+}
+
+class TrackerListEditorView extends ListEditorScreenView {
+  TrackerListEditorView(super.service);
+
+  bool get hasPrivate => false;
+
+  @override
+  Map<String, String> statuses({required bool anime}) => {
+    'CURRENT': anime ? getString.watching : getString.reading,
+    'PLANNING': anime ? getString.planToWatch : getString.planToRead,
+    'COMPLETED': getString.completed,
+    'PAUSED': getString.onHold,
+    'DROPPED': getString.dropped,
+    'REPEATING': anime ? getString.rewatching : getString.rereading,
+  };
+
+  @override
+  List<ScreenWidget> build(Media media, ListEditorDraft draft) => [
+    ScreenWidget.extra(
+      ListStatusField(
+        draft: draft,
+        statuses: statuses(anime: media.isAnime),
+      ),
+    ),
+    ScreenWidget.extra(
+      ListProgressField(draft: draft, total: media.totalUnits),
+    ),
+    ScreenWidget.extra(ListScoreField(draft: draft)),
+    ScreenWidget.extra(ListDatesField(draft: draft)),
+    ScreenWidget.extra(
+      ListRepeatField(
+        draft: draft,
+        label: media.isAnime ? getString.timesRewatched : getString.timesReread,
+      ),
+    ),
+    if (hasPrivate)
+      ScreenWidget.extra(
+        ListPrivateField(draft: draft, hideFromStatusLists: false),
+      ),
+    ScreenWidget.extra(ListNotesField(draft: draft, label: getString.comments)),
   ];
 }
 

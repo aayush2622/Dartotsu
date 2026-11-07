@@ -22,7 +22,7 @@ class StreamGroup {
 
 String? hosterOf(v.Video video) {
   try {
-    final hoster = (video as dynamic).hoster;
+    final hoster = video.hoster;
     return hoster is String && hoster.trim().isNotEmpty ? hoster.trim() : null;
   } catch (_) {
     return null;

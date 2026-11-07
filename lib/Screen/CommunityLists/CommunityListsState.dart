@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:flutter/material.dart';
+
 import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/Model/CommunityList.dart';
 import '../../Core/State/State.dart';
@@ -21,8 +23,19 @@ class CommunityListsState extends ScreenState {
   int _page = 1;
   int _run = 0;
 
+  late final tabs = TabController(length: view.kinds.length, vsync: vsync)
+    ..addListener(_tabChanged);
+
   @override
   void onInit() => unawaited(load(reset: true));
+
+  @override
+  void onClose() => tabs.dispose();
+
+  void _tabChanged() {
+    if (tabs.indexIsChanging) return;
+    pickKind(view.kinds[tabs.index].$1);
+  }
 
   void pickKind(String value) {
     if (kind.value == value) return;

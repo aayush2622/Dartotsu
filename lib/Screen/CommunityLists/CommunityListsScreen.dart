@@ -9,7 +9,7 @@ import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/AppBars.dart';
-import '../../Widgets/Components/AppControls.dart';
+import '../../Widgets/Components/AppTabs.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
 import '../../Widgets/Components/Clickable.dart';
@@ -29,51 +29,39 @@ class CommunityListsScreen extends StatefulWidget {
 }
 
 class _CommunityListsScreenState extends BaseScreen<CommunityListsScreen>
-    with ScreenStateHost<CommunityListsScreen, CommunityListsState> {
+    with
+        SingleTickerProviderStateMixin,
+        ScreenStateHost<CommunityListsScreen, CommunityListsState> {
   @override
   CommunityListsState buildState() => CommunityListsState(widget.view);
 
   @override
   Widget buildContent(BuildContext context) => Scaffold(
     backgroundColor: Colors.transparent,
-    appBar: AppScreenBar(title: getString.customLists),
+    appBar: AppScreenBar(
+      title: getString.customLists,
+      actions: [Watch(_sortMenu)],
+      bottom: AppTabs(
+        controller: state.tabs,
+        items: [for (final (_, label) in widget.view.kinds) AppTabItem(label)],
+      ),
+    ),
     body: Watch(() => _body(context)),
   );
 
-  Widget _filters() {
-    final kind = state.kind.value;
+  Widget _sortMenu() {
     final sort = state.sort.value;
-    return Padding(
-      padding: EdgeInsets.fromLTRB(
-        Dimens.pagePad,
-        Dimens.gapSm,
-        Dimens.pagePad,
-        Dimens.gapSm,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppChoiceChips<String>(
-            scrollable: true,
-            options: [
-              for (final (id, label) in widget.view.kinds)
-                AppSegment(id, label: label),
-            ],
-            value: kind,
-            onChanged: state.pickKind,
+    return PopupMenuButton<String>(
+      icon: const Icon(Icons.more_vert_rounded),
+      onSelected: state.pickSort,
+      itemBuilder: (_) => [
+        for (final (id, label) in widget.view.sorts)
+          CheckedPopupMenuItem(
+            value: id,
+            checked: id == sort,
+            child: Text(label),
           ),
-          SizedBox(height: Dimens.gapSm),
-          AppChoiceChips<String>(
-            scrollable: true,
-            options: [
-              for (final (id, label) in widget.view.sorts)
-                AppSegment(id, label: label),
-            ],
-            value: sort,
-            onChanged: state.pickSort,
-          ),
-        ],
-      ),
+      ],
     );
   }
 
@@ -141,12 +129,7 @@ class _CommunityListsScreenState extends BaseScreen<CommunityListsScreen>
         ),
       );
     }
-    return Column(
-      children: [
-        _filters(),
-        Expanded(child: content),
-      ],
-    );
+    return content;
   }
 
   Widget _tile(

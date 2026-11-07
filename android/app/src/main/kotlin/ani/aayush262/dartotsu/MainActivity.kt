@@ -20,6 +20,7 @@ import android.provider.Settings
 import android.view.KeyEvent
 import fl.pip.FlPiPActivity
 import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 
@@ -30,20 +31,38 @@ class MainActivity : FlPiPActivity() {
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         flutterEngine.plugins.add(NativeLogger())
-        volumeChannel = MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/volumekeys").also { channel ->
+        registerVolumekeys(flutterEngine.dartExecutor.binaryMessenger)
+        registerNetwork(flutterEngine.dartExecutor.binaryMessenger)
+        registerWidget(flutterEngine.dartExecutor.binaryMessenger)
+        registerDownloads(flutterEngine.dartExecutor.binaryMessenger)
+        registerBiometric(flutterEngine.dartExecutor.binaryMessenger)
+        registerMedia(flutterEngine.dartExecutor.binaryMessenger)
+        registerContent(flutterEngine.dartExecutor.binaryMessenger)
+        registerExternal(flutterEngine.dartExecutor.binaryMessenger)
+        registerLinks(flutterEngine.dartExecutor.binaryMessenger)
+    }
+
+    private fun registerVolumekeys(messenger: BinaryMessenger) {
+        volumeChannel = MethodChannel(messenger, "dartotsu/volumekeys").also { channel ->
             channel.setMethodCallHandler { call, result ->
                 if (call.method != "setEnabled") return@setMethodCallHandler result.notImplemented()
                 interceptVolume = call.arguments as? Boolean ?: false
                 result.success(null)
             }
         }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/network")
+    }
+
+    private fun registerNetwork(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/network")
             .setMethodCallHandler { call, result ->
                 if (call.method != "isMetered") return@setMethodCallHandler result.notImplemented()
                 val manager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 result.success(manager.isActiveNetworkMetered)
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/widget")
+    }
+
+    private fun registerWidget(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/widget")
             .setMethodCallHandler { call, result ->
                 if (call.method != "update") return@setMethodCallHandler result.notImplemented()
                 val json = call.arguments as? String
@@ -58,7 +77,10 @@ class MainActivity : FlPiPActivity() {
                 }.start()
                 result.success(null)
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/downloads")
+    }
+
+    private fun registerDownloads(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/downloads")
             .setMethodCallHandler { call, result ->
                 when (call.method) {
                     "start" -> try {
@@ -80,7 +102,10 @@ class MainActivity : FlPiPActivity() {
                     else -> result.notImplemented()
                 }
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/biometric")
+    }
+
+    private fun registerBiometric(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/biometric")
             .setMethodCallHandler { call, result ->
                 when (call.method) {
                     "available" -> result.success(biometricAvailable())
@@ -92,7 +117,10 @@ class MainActivity : FlPiPActivity() {
                     else -> result.notImplemented()
                 }
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/media")
+    }
+
+    private fun registerMedia(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/media")
             .setMethodCallHandler { call, result ->
                 if (call.method != "saveToDownloads") return@setMethodCallHandler result.notImplemented()
                 val path = call.argument<String>("path")
@@ -108,7 +136,10 @@ class MainActivity : FlPiPActivity() {
                     }
                 }.start()
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/content")
+    }
+
+    private fun registerContent(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/content")
             .setMethodCallHandler { call, result ->
                 if (call.method != "copyToCache") return@setMethodCallHandler result.notImplemented()
                 val uri = call.argument<String>("uri")
@@ -132,7 +163,10 @@ class MainActivity : FlPiPActivity() {
                     runOnUiThread { result.success(path) }
                 }.start()
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/external")
+    }
+
+    private fun registerExternal(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/external")
             .setMethodCallHandler { call, result ->
                 if (call.method != "openVideo") return@setMethodCallHandler result.notImplemented()
                 val url = call.argument<String>("url")
@@ -166,7 +200,10 @@ class MainActivity : FlPiPActivity() {
                     result.success(false)
                 }
             }
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, "dartotsu/links")
+    }
+
+    private fun registerLinks(messenger: BinaryMessenger) {
+        MethodChannel(messenger, "dartotsu/links")
             .setMethodCallHandler { call, result ->
                 if (call.method == "isLinkHandlingEnabled") {
                     return@setMethodCallHandler result.success(isLinkHandlingEnabled())

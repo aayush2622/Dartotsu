@@ -338,48 +338,11 @@ class _PlayerScreenState extends State<PlayerScreen>
 
   Widget _episodes(BuildContext context, ColorScheme scheme, Widget stage) {
     final tracked = widget.request.media != null;
-    final item = state.item;
-    final media = widget.request.media;
     return CustomScrollView(
       controller: state.pageScroll,
       slivers: [
         SliverToBoxAdapter(child: stage),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-              Dimens.pagePad,
-              Dimens.gap,
-              Dimens.pagePad,
-              Dimens.gapSm,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.title,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w800,
-                    height: 1.2,
-                  ),
-                ),
-                if ((media?.mainName ?? item.subtitle) != null) ...[
-                  SizedBox(height: Dimens.gapXs),
-                  Text(
-                    media?.mainName ?? item.subtitle!,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: context.textTheme.bodyMedium?.copyWith(
-                      color: scheme.primary,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
+        SliverToBoxAdapter(child: _heading(context, scheme)),
         SliverToBoxAdapter(child: _tools(context)),
         if (tracked || state.together.connected)
           SliverToBoxAdapter(

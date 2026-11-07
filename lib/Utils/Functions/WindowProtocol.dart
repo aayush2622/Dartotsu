@@ -38,35 +38,35 @@ class WindowsProtocolHandler extends ProtocolHandler {
 
   String _regPrefix(String scheme) => 'SOFTWARE\\Classes\\$scheme';
 
-  WIN32_ERROR _regCreateStringKey(
-    HKEY hKey,
-    String key,
-    String valueName,
-    String data,
-  ) {
-    final keyPtr = key.toNativeUtf16();
-    final valuePtr = valueName.toNativeUtf16();
-    final dataPtr = data.toNativeUtf16();
-
-    try {
-      return RegSetKeyValue(
-        hKey,
-        PCWSTR(keyPtr),
-        PCWSTR(valuePtr),
-        REG_SZ,
-        dataPtr,
-        (data.length + 1) * 2,
-      );
-    } finally {
-      calloc.free(keyPtr);
-      calloc.free(valuePtr);
-      calloc.free(dataPtr);
-    }
-  }
-
   String _sanitize(String value) {
     value = value.replaceAll(r'%s', '%1').replaceAll(r'"', r'\"');
     return '"$value"';
+  }
+}
+
+WIN32_ERROR _regCreateStringKey(
+  HKEY hKey,
+  String key,
+  String valueName,
+  String data,
+) {
+  final keyPtr = key.toNativeUtf16();
+  final valuePtr = valueName.toNativeUtf16();
+  final dataPtr = data.toNativeUtf16();
+
+  try {
+    return RegSetKeyValue(
+      hKey,
+      PCWSTR(keyPtr),
+      PCWSTR(valuePtr),
+      REG_SZ,
+      dataPtr,
+      (data.length + 1) * 2,
+    );
+  } finally {
+    calloc.free(keyPtr);
+    calloc.free(valuePtr);
+    calloc.free(dataPtr);
   }
 }
 
@@ -125,32 +125,6 @@ class WindowsFileAssociationHandler {
       '',
       '"$exe" $args',
     );
-  }
-
-  WIN32_ERROR _regCreateStringKey(
-    HKEY hKey,
-    String key,
-    String valueName,
-    String data,
-  ) {
-    final keyPtr = key.toNativeUtf16();
-    final valuePtr = valueName.toNativeUtf16();
-    final dataPtr = data.toNativeUtf16();
-
-    try {
-      return RegSetKeyValue(
-        hKey,
-        PCWSTR(keyPtr),
-        PCWSTR(valuePtr),
-        REG_SZ,
-        dataPtr,
-        (data.length + 1) * 2,
-      );
-    } finally {
-      calloc.free(keyPtr);
-      calloc.free(valuePtr);
-      calloc.free(dataPtr);
-    }
   }
 }
 
