@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../../Utils/Functions/RefreshController.dart';
@@ -72,6 +73,8 @@ class SyncController extends AppController {
   Timer? _saver;
   Timer? _auto;
   bool _autoBusy = false;
+  DateTime _lastAuto = DateTime.fromMillisecondsSinceEpoch(0);
+  AppLifecycleListener? _lifecycle;
 
   List<MediaService> get _services => find<MediaServiceController>().services;
 
@@ -141,6 +144,7 @@ class SyncController extends AppController {
   void onClose() {
     _saver?.cancel();
     _auto?.cancel();
+    _lifecycle?.dispose();
     super.onClose();
   }
 
@@ -202,12 +206,29 @@ class SyncController extends AppController {
     _auto?.cancel();
     _auto = Timer.periodic(const Duration(minutes: 30), (_) => _autoRun());
     Timer(const Duration(seconds: 45), _autoRun);
+    _lifecycle?.dispose();
+    _lifecycle = AppLifecycleListener(
+      onResume: () {
+        if (DateTime.now().difference(_lastAuto) >
+            const Duration(minutes: 10)) {
+          unawaited(_autoRun());
+        }
+      },
+    );
   }
 
   Future<void> _autoRun() async {
     if (!PrefName.syncAuto.value || busy || _autoBusy) return;
-    if (incognitoBlocksEdits || mainId.isEmpty) return;
+    if (incognitoBlocksEdits || mainId.isEmpty) {
+      logger(
+        'Auto sync skipped: incognito=$incognitoBlocksEdits main="$mainId"',
+        tag: 'SYNC',
+      );
+      return;
+    }
     _autoBusy = true;
+    _lastAuto = DateTime.now();
+    logger('Auto sync started (main=$mainId)', tag: 'SYNC');
     try {
       for (final isAnime in [true, false]) {
         if (targetsFor(mainId, isAnime).isEmpty) continue;
@@ -216,7 +237,13 @@ class SyncController extends AppController {
         }
         try {
           await fetch(anime: isAnime, auto: true);
-          if (plan.value?.hasPending == true) await start(auto: true);
+          if (error.value != null) {
+            logger('Auto sync fetch failed: ${error.value}', tag: 'SYNC');
+          }
+          if (plan.value?.hasPending == true) {
+            logger('Auto sync writing pending changes', tag: 'SYNC');
+            await start(auto: true);
+          }
         } catch (e, st) {
           logError('SyncController', e, st);
         }
@@ -545,6 +572,7 @@ class SyncController extends AppController {
         _budget.stamp(target.id, used);
         await other.finish();
         done.add(target.name);
+        _markPushed(target.id, media.id);
       } on SyncRateLimited catch (e) {
         _budget.hold(target.id, e.retryAfter);
         logger(
@@ -570,6 +598,19 @@ class SyncController extends AppController {
       snackString(getString.syncPushed(done.join(', ')));
       _saveSoon();
     }
+  }
+
+  void _markPushed(String target, String mainId) {
+    final pairs = plan.value?.targets[target]?.pairs;
+    if (pairs == null) return;
+    for (final p in pairs) {
+      if (p.main.id != mainId) continue;
+      p
+        ..state = SyncStatus.synced
+        ..op = SyncOpState.done
+        ..error = null;
+    }
+    _notify();
   }
 
   void _recall(String service, SyncAdapter? adapter, SyncPair p, bool isAnime) {
