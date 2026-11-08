@@ -1,4 +1,5 @@
 import '../../../../Utils/Extensions/Responsive.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -170,54 +171,66 @@ class _CommentComposerState extends State<CommentComposer> {
                 ),
               ],
             ),
-            Row(
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              runSpacing: 4,
               children: [
-                if (widget.tagging)
-                  _action(
-                    context,
-                    icon: tagged == null
-                        ? Icons.label_outline_rounded
-                        : Icons.label_rounded,
-                    label: tagged?.toString(),
-                    active: tagged != null,
-                    tooltip: getString.commentsTagButton,
-                    onTap: () async {
-                      final pick = widget.pickTag;
-                      if (pick == null) return;
-                      final answer = await pick();
-                      if (answer != -1 && mounted) _tag.value = answer;
-                    },
-                  ),
-                _action(
-                  context,
-                  icon: _spoiler.value
-                      ? Icons.visibility_off_rounded
-                      : Icons.visibility_rounded,
-                  active: _spoiler.value,
-                  tooltip: getString.commentsSpoiler,
-                  onTap: () => _spoiler.value = !_spoiler.value,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (widget.tagging)
+                      _action(
+                        context,
+                        icon: tagged == null
+                            ? Icons.label_outline_rounded
+                            : Icons.label_rounded,
+                        label: tagged?.toString(),
+                        active: tagged != null,
+                        tooltip: getString.commentsTagButton,
+                        onTap: () async {
+                          final pick = widget.pickTag;
+                          if (pick == null) return;
+                          final answer = await pick();
+                          if (answer != -1 && mounted) _tag.value = answer;
+                        },
+                      ),
+                    _action(
+                      context,
+                      icon: _spoiler.value
+                          ? Icons.visibility_off_rounded
+                          : Icons.visibility_rounded,
+                      active: _spoiler.value,
+                      tooltip: getString.commentsSpoiler,
+                      onTap: () => _spoiler.value = !_spoiler.value,
+                    ),
+                    _action(
+                      context,
+                      icon: Icons.gif_box_rounded,
+                      tooltip: getString.commentsGif,
+                      onTap: () => unawaited(_gif()),
+                    ),
+                  ],
                 ),
-                _action(
-                  context,
-                  icon: Icons.gif_box_rounded,
-                  tooltip: getString.commentsGif,
-                  onTap: () => unawaited(_gif()),
-                ),
-                const Spacer(),
-                if (widget.onCancel != null)
-                  TextButton(
-                    onPressed: busy ? null : widget.onCancel,
-                    child: Text(getString.cancel),
-                  ),
-                FilledButton(
-                  onPressed: busy || _empty.value ? null : _send,
-                  style: FilledButton.styleFrom(
-                    minimumSize: const Size(0, 36),
-                    padding: EdgeInsets.symmetric(horizontal: Dimens.gapLg),
-                  ),
-                  child: busy
-                      ? const AppSpinner(size: 16)
-                      : Text(getString.commentsSend),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    if (widget.onCancel != null)
+                      TextButton(
+                        onPressed: busy ? null : widget.onCancel,
+                        child: Text(getString.cancel),
+                      ),
+                    FilledButton(
+                      onPressed: busy || _empty.value ? null : _send,
+                      style: FilledButton.styleFrom(
+                        minimumSize: const Size(0, 36),
+                        padding: EdgeInsets.symmetric(horizontal: Dimens.gapLg),
+                      ),
+                      child: busy
+                          ? const AppSpinner(size: 16)
+                          : Text(getString.commentsSend),
+                    ),
+                  ],
                 ),
               ],
             ),
