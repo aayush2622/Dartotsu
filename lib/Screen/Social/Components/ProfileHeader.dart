@@ -373,16 +373,18 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
           end: -40,
           top: -40,
           bottom: -40,
-          child: ImageFiltered(
-            imageFilter: ImageFilter.blur(
-              sigmaX: 10,
-              sigmaY: 10,
-              tileMode: TileMode.clamp,
-            ),
-            child: cachedNetworkImage(
-              imageUrl: url,
-              fit: BoxFit.cover,
-              cacheWidth: 720,
+          child: RepaintBoundary(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(
+                sigmaX: 10,
+                sigmaY: 10,
+                tileMode: TileMode.clamp,
+              ),
+              child: cachedNetworkImage(
+                imageUrl: url,
+                fit: BoxFit.cover,
+                cacheWidth: 720,
+              ),
             ),
           ),
         ),

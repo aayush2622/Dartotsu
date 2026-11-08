@@ -141,18 +141,19 @@ class AppSliverBar extends StatelessWidget {
           return Stack(
             fit: StackFit.expand,
             children: [
-              Opacity(
-                opacity: collapsed,
-                child: find<ThemeController>().useGlassMode.value
-                    ? const ThemedContainer(
-                        blur: true,
-                        borderRadius: BorderRadius.zero,
-                        border: Border(),
-                        padding: EdgeInsets.zero,
-                        child: SizedBox.expand(),
-                      )
-                    : ColoredBox(color: scheme.surface),
-              ),
+              if (collapsed > 0)
+                Opacity(
+                  opacity: collapsed,
+                  child: find<ThemeController>().useGlassMode.value
+                      ? ThemedContainer(
+                          blur: collapsed >= 0.98,
+                          borderRadius: BorderRadius.zero,
+                          border: const Border(),
+                          padding: EdgeInsets.zero,
+                          child: const SizedBox.expand(),
+                        )
+                      : ColoredBox(color: scheme.surface),
+                ),
               PositionedDirectional(
                 start: 44,
                 end: 56,

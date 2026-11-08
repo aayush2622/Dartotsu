@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -97,7 +96,7 @@ class _SettingsScreenState extends BaseScreen<SettingsScreen>
           ),
         ],
       ],
-    ).animateFadeUp();
+    );
   }
 }
 

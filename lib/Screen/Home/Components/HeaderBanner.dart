@@ -17,12 +17,14 @@ class HeaderBanner extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
-          ImageFiltered(
-            imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-            child: cachedNetworkImage(
-              imageUrl: url,
-              fit: BoxFit.cover,
-              cacheWidth: 720,
+          RepaintBoundary(
+            child: ImageFiltered(
+              imageFilter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+              child: cachedNetworkImage(
+                imageUrl: url,
+                fit: BoxFit.cover,
+                cacheWidth: 720,
+              ),
             ),
           ),
           DecoratedBox(

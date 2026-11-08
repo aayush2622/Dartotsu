@@ -92,8 +92,8 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     super.didChangeDependencies();
     final tickers = TickerMode.getNotifier(context);
     if (!identical(tickers, _tickers)) {
-      _tickers?.removeListener(state.flushDirty);
-      _tickers = tickers..addListener(state.flushDirty);
+      _tickers?.removeListener(_flush);
+      _tickers = tickers..addListener(_flush);
     }
     final route = ModalRoute.of(context);
     if (route != null && !identical(route, _route)) {
@@ -104,11 +104,32 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   }
 
   @override
-  void didPopNext() => state.flushDirty();
+  void didPopNext() => _flush();
+
+  bool _waiting = false;
+
+  void _flush() {
+    if (!mounted) return;
+    final animation = ModalRoute.of(context)?.secondaryAnimation;
+    if (animation == null || animation.isDismissed) {
+      state.flushDirty();
+      return;
+    }
+    if (_waiting) return;
+    _waiting = true;
+    void settle(AnimationStatus status) {
+      if (status != AnimationStatus.dismissed) return;
+      animation.removeStatusListener(settle);
+      _waiting = false;
+      if (mounted) state.flushDirty();
+    }
+
+    animation.addStatusListener(settle);
+  }
 
   @override
   void dispose() {
-    _tickers?.removeListener(state.flushDirty);
+    _tickers?.removeListener(_flush);
     routeObserver.unsubscribe(this);
     super.dispose();
   }

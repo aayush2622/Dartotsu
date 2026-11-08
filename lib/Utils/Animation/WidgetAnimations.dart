@@ -341,12 +341,14 @@ extension WidgetAnimations on Widget {
     );
   }
 
-  Widget animatePageTransition(double animation) {
+  Widget animatePageTransition(double animation, {bool reversing = false}) {
     if (_disabled) return this;
-    final t = Curves.easeOutExpo.transform(animation);
+    final t = (reversing ? Curves.easeInCubic : Curves.easeOutCubic).transform(
+      animation,
+    );
     final slid = FractionalTranslation(
-      translation: Offset(0.12 * (1 - t), 0),
-      child: this,
+      translation: Offset(0.08 * (1 - t), 0),
+      child: RepaintBoundary(child: this),
     );
     return PrefName.useGlassMode.value
         ? slid

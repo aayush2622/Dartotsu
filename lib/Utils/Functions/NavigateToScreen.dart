@@ -12,7 +12,8 @@ PageRouteBuilder<T> _route<T>(
   opaque: true,
   transitionDuration: instant ? Duration.zero : animDuration(380),
   reverseTransitionDuration: animDuration(300),
-  pageBuilder: (_, _, _) => DpadEnter(child: page),
+  pageBuilder: (_, _, _) =>
+      page is NativeViewPage ? page : DpadEnter(child: page),
   transitionsBuilder: (_, animation, _, child) {
     if (hero) {
       return FadeTransition(
@@ -23,7 +24,10 @@ PageRouteBuilder<T> _route<T>(
         child: child,
       );
     }
-    return child.animatePageTransition(animation.value);
+    return child.animatePageTransition(
+      animation.value,
+      reversing: animation.status == AnimationStatus.reverse,
+    );
   },
 );
 

@@ -169,8 +169,6 @@ class _SectionGroup extends StatelessWidget {
             ),
         ],
       ),
-    ).animateFadeUp(
-      delay: Duration(milliseconds: (index > 6 ? 6 : index) * 50),
     );
   }
 
@@ -295,8 +293,6 @@ class _AccordionSectionState extends State<_AccordionSection> {
           ),
         ),
       ),
-    ).animateFadeUp(
-      delay: Duration(milliseconds: (widget.index > 6 ? 6 : widget.index) * 40),
     );
   }
 }

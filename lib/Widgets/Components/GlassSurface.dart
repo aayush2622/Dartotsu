@@ -33,15 +33,61 @@ class GlassStyle {
   }
 }
 
-class GlassBlur extends StatelessWidget {
+class GlassBlur extends StatefulWidget {
   final Widget child;
 
   const GlassBlur({super.key, required this.child});
 
   @override
-  Widget build(BuildContext context) => BackdropGroup.of(context) != null
-      ? BackdropFilter.grouped(filter: GlassStyle.filter, child: child)
-      : BackdropFilter(filter: GlassStyle.filter, child: child);
+  State<GlassBlur> createState() => _GlassBlurState();
+}
+
+class _GlassBlurState extends State<GlassBlur> {
+  final _slot = GlobalKey();
+  Animation<double>? _animation;
+  Animation<double>? _secondary;
+  bool _settled = true;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final route = ModalRoute.of(context);
+    final animation = route?.animation;
+    final secondary = route?.secondaryAnimation;
+    if (animation == _animation && secondary == _secondary) return;
+    _animation?.removeStatusListener(_onStatus);
+    _secondary?.removeStatusListener(_onStatus);
+    _animation = animation;
+    _secondary = secondary;
+    animation?.addStatusListener(_onStatus);
+    secondary?.addStatusListener(_onStatus);
+    _settled = _isSettled();
+  }
+
+  bool _isSettled() =>
+      (_animation == null || _animation!.isCompleted) &&
+      (_secondary == null || _secondary!.isDismissed);
+
+  void _onStatus(AnimationStatus status) {
+    final settled = _isSettled();
+    if (settled != _settled && mounted) setState(() => _settled = settled);
+  }
+
+  @override
+  void dispose() {
+    _animation?.removeStatusListener(_onStatus);
+    _secondary?.removeStatusListener(_onStatus);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final child = KeyedSubtree(key: _slot, child: widget.child);
+    if (!_settled) return child;
+    return BackdropGroup.of(context) != null
+        ? BackdropFilter.grouped(filter: GlassStyle.filter, child: child)
+        : BackdropFilter(filter: GlassStyle.filter, child: child);
+  }
 }
 
 class GlassBackdrop extends StatelessWidget {
