@@ -6,6 +6,7 @@ import '../../../Core/SourceAlerts/SourceSub.dart';
 import '../../../Core/SourceAlerts/SourceSubscriptions.dart';
 import '../../../Core/Downloads/DownloadEngine.dart';
 import '../../../Core/Downloads/DownloadSnapshots.dart';
+
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
@@ -206,6 +207,7 @@ class WatchState extends ScreenState {
     _explicitPick = remember;
     if (!fallback) _tried.clear();
     source.value = next;
+    if (!fallback) CloudflareSolver.focus(next.baseUrl);
     if (remember) {
       settings.value
         ..sourceId = next.id
@@ -372,6 +374,7 @@ class WatchState extends ScreenState {
   Future<void> _loadEpisodes(DMedia target, int generation) async {
     final src = source.value;
     if (src == null) return;
+    if (!_canFallback) CloudflareSolver.focus(src.baseUrl);
     phase.value = WatchPhase.loading;
     try {
       final detail = await src.methods.getDetail(target);

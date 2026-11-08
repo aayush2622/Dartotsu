@@ -175,6 +175,7 @@ class _PagedFileService extends FileService {
 
     ensureOpen();
     final host = Uri.tryParse(url)?.host ?? '';
+    var cleared = false;
     try {
       for (var attempt = 1; ; attempt++) {
         await _pace(host);
@@ -187,7 +188,22 @@ class _PagedFileService extends FileService {
         );
         ensureOpen();
         final code = res.statusCode;
-        if (code >= 200 && code < 300 && res.body.isNotEmpty) {
+        final processed = ReaderImageLoader._processors.containsKey(url);
+        final challenged =
+            (code >= 200 && code < 300 && !processed && !_isImage(res.body)) ||
+            code == 403 ||
+            code == 503;
+        if (challenged && !cleared) {
+          cleared = true;
+          final uri = Uri.tryParse(url);
+          if (uri != null &&
+              uri.hasAuthority &&
+              await CloudflareSolver.solve(uri)) {
+            ensureOpen();
+            continue;
+          }
+        }
+        if (code >= 200 && code < 300 && res.body.isNotEmpty && !challenged) {
           _served(host);
           ReaderImageLoader._errors.remove(url);
           final process = ReaderImageLoader._processors[url];
@@ -214,7 +230,12 @@ class _PagedFileService extends FileService {
             continue;
           }
         }
-        throw HttpException('HTTP $code', uri: Uri.tryParse(url));
+        throw HttpException(
+          challenged && code < 300
+              ? 'Blocked by the site (Cloudflare check)'
+              : 'HTTP $code',
+          uri: Uri.tryParse(url),
+        );
       }
     } catch (e) {
       if (epoch == ReaderImageLoader._epoch) {
@@ -226,6 +247,18 @@ class _PagedFileService extends FileService {
       ReaderImageLoader._finished(url);
     }
   }
+}
+
+bool _isImage(List<int> b) {
+  if (b.length < 12) return false;
+  if (b[0] == 0xFF && b[1] == 0xD8) return true;
+  if (b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47) return true;
+  if (b[0] == 0x47 && b[1] == 0x49 && b[2] == 0x46) return true;
+  if (b[0] == 0x42 && b[1] == 0x4D) return true;
+  if (b[0] == 0x52 && b[1] == 0x49 && b[2] == 0x46 && b[3] == 0x46) return true;
+  if (b[4] == 0x66 && b[5] == 0x74 && b[6] == 0x79 && b[7] == 0x70) return true;
+  final head = String.fromCharCodes(b.take(64)).trimLeft().toLowerCase();
+  return !(head.startsWith('<') || head.startsWith('{'));
 }
 
 class _BytesResponse implements FileServiceResponse {

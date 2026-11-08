@@ -392,7 +392,12 @@ class PlayerState extends ScreenState {
     _playingSub?.dispose();
     _errorSub?.dispose();
     _errorSub = engine.error.listen((e) {
-      if (e != null) unawaited(_recover());
+      if (e == null) return;
+      unawaited(
+        _skipBroken(e).then((skipped) {
+          if (!skipped) return _recover();
+        }),
+      );
     });
     _positionSub = engine.position.listen(_onPosition);
     _completedSub = engine.completed.listen((done) {
@@ -647,6 +652,7 @@ class PlayerState extends ScreenState {
       _lastSave = -1;
       _lastGood = Duration.zero;
       _recoveries = 0;
+      _brokenStreams.clear();
       await selectStream(chosen, fromStart: false);
     } catch (e, st) {
       if (generation != _generation) return;
@@ -979,6 +985,33 @@ class PlayerState extends ScreenState {
   Duration _lastGood = Duration.zero;
   int _recoveries = 0;
   bool _recovering = false;
+
+  final _brokenStreams = <int>{};
+
+  Future<bool> _skipBroken(String error) async {
+    if (_closed || _recovering || loading.value || videos.length < 2) {
+      return false;
+    }
+    if (_lastGood >= const Duration(seconds: 3)) return false;
+    final lower = error.toLowerCase();
+    if (!lower.contains('recognize file format') &&
+        !lower.contains('failed to open') &&
+        !lower.contains('loading failed')) {
+      return false;
+    }
+    final generation = _generation;
+    final index = videoIndex.value;
+    _brokenStreams.add(index);
+    for (var step = 1; step < videos.length; step++) {
+      final next = (index + step) % videos.length;
+      if (_brokenStreams.contains(next)) continue;
+      snackString(getString.playerStreamFailedNext);
+      if (generation != _generation || _closed) return true;
+      await selectStream(next);
+      return true;
+    }
+    return false;
+  }
 
   Future<void> _recover() async {
     if (_closed || _recovering || loading.value) return;

@@ -50,6 +50,7 @@ class SourceBrowseState extends ScreenState {
 
   @override
   void onInit() {
+    CloudflareSolver.focus(source.baseUrl);
     unawaited(_loadFilters());
     reload();
   }
@@ -109,9 +110,10 @@ class SourceBrowseState extends ScreenState {
       if (!searching.value &&
           !filtering.value &&
           feed.value == SourceFeed.saved) {
-        items.value = extensionStore(
-          type,
-        ).read().where(_fromThisSource).toList();
+        items.value = extensionStore(type)
+            .read()
+            .where(_fromThisSource)
+            .toList();
         _hasMore = false;
         return;
       }
