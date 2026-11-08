@@ -1,5 +1,6 @@
 import '../../Core/SourceAlerts/SourceSubscriptions.dart';
 import '../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -61,6 +62,13 @@ class ListEditorSession {
     final sync = find<SyncController>();
     if (sync.instant && sync.canPush(view.service, media.isAnime)) {
       unawaited(sync.pushEdit(view.service, media));
+    } else {
+      logger(
+        'Instant sync not used for ${media.id}: instant=${sync.instant}, '
+        'main=${sync.mainId}, from=${view.service.id}, '
+        'targets=${sync.targetsFor(view.service.id, media.isAnime).map((t) => t.id).join(',')}',
+        tag: 'SYNC',
+      );
     }
   }, getString.savedToList);
 

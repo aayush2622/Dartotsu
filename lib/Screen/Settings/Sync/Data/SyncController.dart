@@ -199,7 +199,8 @@ class SyncController extends AppController {
       }
       logger(
         'Instant sync not used for ${media.id}: instant=$instant, '
-        'main=$mainId, from=${service.id}',
+        'main=$mainId, from=${service.id}, targets='
+        '${targetsFor(service.id, media.isAnime).map((t) => t.id).join(',')}',
         tag: 'SYNC',
       );
     };
@@ -510,15 +511,30 @@ class SyncController extends AppController {
       anime: isAnime,
       prefer: adapter.key,
     );
-    try {
-      final resolved = await IdMapper.resolve(
-        service,
-        media,
-        need: {for (final t in targets) t.syncAdapter!.key},
+    final need = {
+      for (final t in targets)
+        if (ids[t.syncAdapter!.key] == null) t.syncAdapter!.key,
+    };
+    if (need.isNotEmpty) {
+      logger(
+        'Instant sync: looking up ${need.join(', ')} ids for ${media.id}',
+        tag: 'SYNC',
       );
-      ids = {...resolved.syncIds(), ...ids};
-    } catch (e, st) {
-      logError('SyncController', e, st);
+      try {
+        final resolved = await IdMapper.resolve(
+          service,
+          media,
+          need: need,
+        ).timeout(const Duration(seconds: 25));
+        ids = {...resolved.syncIds(), ...ids};
+      } catch (e, st) {
+        logger(
+          'Instant sync: id lookup for ${media.id} failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
+        logError('SyncController', e, st);
+      }
     }
     IdMapper.learn(ids, anime: isAnime);
     final want = SyncItem.fromMedia(media, ids);
