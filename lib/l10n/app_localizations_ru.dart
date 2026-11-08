@@ -234,6 +234,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get addRepository => 'Добавить репозиторий';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'Репозиторий плагинов обновлён';
 
   @override
@@ -2448,7 +2451,7 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'Поделиться';
@@ -5889,6 +5892,10 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get playerStreams => 'Потоки';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'Выбирать поток автоматически';

@@ -232,6 +232,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get addRepository => 'Ongeza hazina';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'Hazina ya programu jalizi imesasishwa';
 
   @override
@@ -2451,7 +2454,7 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'Shiriki';
@@ -5882,6 +5885,10 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get playerStreams => 'Stream';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'Chagua stream kiotomatiki';

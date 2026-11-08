@@ -545,6 +545,12 @@ abstract class AppLocalizations {
   /// **'Add Repository'**
   String get addRepository;
 
+  /// No description provided for @importRepositoryFile.
+  ///
+  /// In en, this message translates to:
+  /// **'Import a file'**
+  String get importRepositoryFile;
+
   /// No description provided for @pluginRepoUpdated.
   ///
   /// In en, this message translates to:
@@ -4574,7 +4580,7 @@ abstract class AppLocalizations {
   /// No description provided for @animePlanetLocalNote.
   ///
   /// In en, this message translates to:
-  /// **'Anime-Planet lists are read-only here; changes you make stay on this device'**
+  /// **'Sign in to save changes to your Anime-Planet account. Until then they stay on this device'**
   String get animePlanetLocalNote;
 
   /// No description provided for @share.
@@ -10552,6 +10558,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Streams'**
   String get playerStreams;
+
+  /// No description provided for @playerStreamFailedNext.
+  ///
+  /// In en, this message translates to:
+  /// **'That stream won\'t play, trying the next one'**
+  String get playerStreamFailedNext;
 
   /// No description provided for @playerAutoSelect.
   ///

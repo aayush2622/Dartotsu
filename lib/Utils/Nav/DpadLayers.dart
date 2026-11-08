@@ -125,6 +125,8 @@ class DpadIcon extends StatelessWidget {
   );
 }
 
+abstract interface class NativeViewPage {}
+
 class DpadEnter extends StatefulWidget {
   final Widget child;
 

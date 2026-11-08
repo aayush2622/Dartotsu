@@ -229,6 +229,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get addRepository => '添加仓库';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => '插件仓库已更新';
 
   @override
@@ -2399,7 +2402,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => '分享';
@@ -5738,6 +5741,10 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get playerStreams => '视频流';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => '自动选择视频流';

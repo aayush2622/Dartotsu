@@ -233,6 +233,9 @@ class AppLocalizationsSo extends AppLocalizations {
   String get addRepository => 'Ku dar kayd';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'Kaydka plugin-ka waa la cusboonaysiiyay';
 
   @override
@@ -2460,7 +2463,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'La wadaag';
@@ -5880,6 +5883,10 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get playerStreams => 'Stream-yada';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'Dooro stream si toos ah';

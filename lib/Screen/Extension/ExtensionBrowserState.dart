@@ -1,7 +1,9 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
@@ -147,6 +149,21 @@ class ExtensionBrowserState extends ScreenState {
         }
       })
       ..show();
+  }
+
+  Future<void> importRepositoryFile(ItemType type) async {
+    final extension = manager[type];
+    final picked = await FilePicker.pickFile(
+      type: FileType.custom,
+      allowedExtensions: extension.importExtensions,
+    );
+    final path = picked?.path;
+    if (path == null) return;
+    try {
+      await extension.importFile(path, type).drain<void>();
+    } catch (e) {
+      snackString(getString.failedToAddRepository(e.toString()));
+    }
   }
 
   Future<void> selectRepo(ItemType type, Repo repo) =>

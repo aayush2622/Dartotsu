@@ -5,13 +5,14 @@ import 'package:webview_all/webview_all.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Utils/Nav/DpadLayers.dart';
 import '../../Widgets/Components/Clickable.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'WebViewState.dart';
 
-class WebView extends StatefulWidget {
+class WebView extends StatefulWidget implements NativeViewPage {
   final String url;
 
   const WebView({super.key, required this.url});

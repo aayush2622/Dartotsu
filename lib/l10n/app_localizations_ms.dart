@@ -231,6 +231,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get addRepository => 'Tambah repositori';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'Repositori plugin dikemas kini';
 
   @override
@@ -2440,7 +2443,7 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'Kongsi';
@@ -5856,6 +5859,10 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get playerStreams => 'Strim';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'Pilih strim secara auto';

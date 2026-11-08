@@ -73,6 +73,14 @@ void showExtensionReposSheet(
                 icon: const Icon(Icons.add_rounded),
                 label: Text(getString.addRepository),
               ),
+              if (manager[type].importExtensions.isNotEmpty) ...[
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: () => state.importRepositoryFile(type),
+                  icon: const Icon(Icons.upload_file_rounded),
+                  label: Text(getString.importRepositoryFile),
+                ),
+              ],
               const SizedBox(height: 16),
             ],
           );

@@ -231,6 +231,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get addRepository => 'रिपॉज़िटरी जोड़ो';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'प्लगइन रिपॉज़िटरी अपडेट हो गई';
 
   @override
@@ -2434,7 +2437,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'शेयर करो';
@@ -5846,6 +5849,10 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get playerStreams => 'स्ट्रीम';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'स्ट्रीम ऑटो चुनो';

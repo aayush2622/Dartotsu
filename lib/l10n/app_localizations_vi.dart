@@ -230,6 +230,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get addRepository => 'Thêm kho';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'Đã cập nhật kho plugin';
 
   @override
@@ -2436,7 +2439,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'Chia sẻ';
@@ -5841,6 +5844,10 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get playerStreams => 'Luồng';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'Tự chọn luồng';

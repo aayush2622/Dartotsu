@@ -231,6 +231,9 @@ class AppLocalizationsPs extends AppLocalizations {
   String get addRepository => 'ذخیره اضافه کړه';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'د پلګین ذخیره تازه شوه';
 
   @override
@@ -2437,7 +2440,7 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'شریک کړه';
@@ -5843,6 +5846,10 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get playerStreams => 'سټرېمونه';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'سټرېم په اتوماتیک ډول وټاکه';

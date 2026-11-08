@@ -66,9 +66,7 @@ class AnimePlanetSettingsView extends SettingsScreenView {
         ),
       Setting.normal(
         name: getString.animePlanetRefreshLists,
-        description: animePlanetAuth.isLoggedIn
-            ? getString.animePlanetRefreshListsDesc
-            : getString.animePlanetLocalNote,
+        description: getString.animePlanetRefreshListsDesc,
         icon: Icons.refresh_rounded,
         isVisible: animePlanetAuth.isLoggedIn,
         onClick: () async {
@@ -82,6 +80,7 @@ class AnimePlanetSettingsView extends SettingsScreenView {
       Setting.normal(
         name: getString.animePlanetLocalNote,
         icon: Icons.info_outline_rounded,
+        isVisible: !animePlanetAuth.isLoggedIn,
       ),
     ];
   }

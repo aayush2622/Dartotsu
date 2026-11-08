@@ -231,6 +231,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get addRepository => 'ரெப்போ சேர்';
 
   @override
+  String get importRepositoryFile => 'Import a file';
+
+  @override
   String get pluginRepoUpdated => 'பிளகின் ரெப்போ அப்டேட் ஆயிடுச்சு';
 
   @override
@@ -2449,7 +2452,7 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get animePlanetLocalNote =>
-      'Anime-Planet lists are read-only here; changes you make stay on this device';
+      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
 
   @override
   String get share => 'ஷேர்';
@@ -5876,6 +5879,10 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get playerStreams => 'ஸ்ட்ரீம்ஸ்';
+
+  @override
+  String get playerStreamFailedNext =>
+      'That stream won\'t play, trying the next one';
 
   @override
   String get playerAutoSelect => 'ஸ்ட்ரீமை தானா செலக்ட் பண்ணு';
