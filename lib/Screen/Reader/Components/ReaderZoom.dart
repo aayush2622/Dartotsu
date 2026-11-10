@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -160,10 +162,15 @@ class _ReaderZoomState extends State<ReaderZoom>
     onZoom: widget.onZoom,
     pan: axis == Axis.vertical,
     child: Watch(
-      () => SingleChildScrollView(
-        scrollDirection: axis,
-        physics: _pinching.value ? const NeverScrollableScrollPhysics() : null,
-        child: image,
+      () => ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          scrollDirection: axis,
+          physics: _pinching.value
+              ? const NeverScrollableScrollPhysics()
+              : null,
+          child: image,
+        )),
       ),
     ),
   );

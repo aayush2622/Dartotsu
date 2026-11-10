@@ -213,31 +213,34 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
           );
         }
 
-        return SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
-          child: SizedBox(
-            width: double.infinity,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                group(
-                  getString.listFilterFormat,
-                  state.formatOptions,
-                  state.formats,
-                ),
-                group(
-                  getString.listFilterStatus,
-                  state.statusOptions,
-                  state.statuses,
-                ),
-                group(
-                  getString.listFilterGenres,
-                  state.genreOptions,
-                  state.genres,
-                ),
-              ],
+        return ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  group(
+                    getString.listFilterFormat,
+                    state.formatOptions,
+                    state.formats,
+                  ),
+                  group(
+                    getString.listFilterStatus,
+                    state.statusOptions,
+                    state.statuses,
+                  ),
+                  group(
+                    getString.listFilterGenres,
+                    state.genreOptions,
+                    state.genres,
+                  ),
+                ],
+              ),
             ),
-          ),
+          )),
         );
       }),
     ),

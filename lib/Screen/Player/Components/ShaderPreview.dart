@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 import 'dart:io';
 
@@ -600,30 +602,33 @@ class _ShaderPreviewState extends State<ShaderPreview> {
               ],
             ),
             const SizedBox(height: 8),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  for (final key in colorPresets.keys)
+            ScrollConfig(
+              context,
+              child: ScrollConfig(context, child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    for (final key in colorPresets.keys)
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 8),
+                        child: ChoiceChip(
+                          avatar: const Icon(Icons.palette_rounded, size: 16),
+                          label: Text(colorPresetLabel(key)),
+                          selected: presetOf(_color.value) == key,
+                          onSelected: (_) => _pickColor(colorPresets[key]!),
+                        ),
+                      ),
                     Padding(
                       padding: const EdgeInsetsDirectional.only(end: 8),
-                      child: ChoiceChip(
-                        avatar: const Icon(Icons.palette_rounded, size: 16),
-                        label: Text(colorPresetLabel(key)),
-                        selected: presetOf(_color.value) == key,
-                        onSelected: (_) => _pickColor(colorPresets[key]!),
+                      child: ActionChip(
+                        avatar: const Icon(Icons.tune_rounded, size: 16),
+                        label: Text(getString.playerColorAdjust),
+                        onPressed: () => _adjust.value = !_adjust.value,
                       ),
                     ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.only(end: 8),
-                    child: ActionChip(
-                      avatar: const Icon(Icons.tune_rounded, size: 16),
-                      label: Text(getString.playerColorAdjust),
-                      onPressed: () => _adjust.value = !_adjust.value,
-                    ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              )),
             ),
             if (_adjust.value) ...[
               const SizedBox(height: 4),

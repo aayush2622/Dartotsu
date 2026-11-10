@@ -50,25 +50,28 @@ class _CalendarScreenState extends BaseScreen<CalendarScreen>
             final selected = state.day.value;
             return ScrollConfig(
               context,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimens.gap,
-                  vertical: Dimens.gapXs,
-                ),
-                child: AppChoiceChips<int>(
-                  value: selected,
-                  onChanged: (v) => state.day.value = v,
-                  options: [
-                    for (var i = 0; i < days.length; i++)
-                      AppSegment(
-                        i - 1,
-                        label: i == 1
-                            ? getString.calendarToday
-                            : DateFormat('EEE d', locale).format(days[i]),
-                      ),
-                  ],
-                ),
+              child: ScrollConfig(
+                context,
+                child: ScrollConfig(context, child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Dimens.gap,
+                    vertical: Dimens.gapXs,
+                  ),
+                  child: AppChoiceChips<int>(
+                    value: selected,
+                    onChanged: (v) => state.day.value = v,
+                    options: [
+                      for (var i = 0; i < days.length; i++)
+                        AppSegment(
+                          i - 1,
+                          label: i == 1
+                              ? getString.calendarToday
+                              : DateFormat('EEE d', locale).format(days[i]),
+                        ),
+                    ],
+                  ),
+                )),
               ),
             );
           }),

@@ -1,3 +1,4 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Nav/DpadNav.dart';
 
@@ -82,78 +83,81 @@ class _ThemePickerSheet extends StatelessWidget {
                       : null;
 
                   final itemCount = AppTheme.values.length + 1;
-                  return SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3,
-                            childAspectRatio: 0.72,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                          ),
-                      itemCount: itemCount,
-                      itemBuilder: (ctx, i) {
-                        if (i == 0) {
-                          final selected = isCustom;
-                          final displayColor = customColor ?? scheme.primary;
-                          final previewScheme = customColor == null
-                              ? null
-                              : (isDark
-                                        ? getCustomDarkTheme(
-                                            customColor.toARGB32(),
-                                          )
-                                        : getCustomLightTheme(
-                                            customColor.toARGB32(),
-                                          ))
-                                    .colorScheme;
+                  return ScrollConfig(
+                    context,
+                    child: ScrollConfig(context, child: SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3,
+                              childAspectRatio: 0.72,
+                              mainAxisSpacing: 8,
+                              crossAxisSpacing: 8,
+                            ),
+                        itemCount: itemCount,
+                        itemBuilder: (ctx, i) {
+                          if (i == 0) {
+                            final selected = isCustom;
+                            final displayColor = customColor ?? scheme.primary;
+                            final previewScheme = customColor == null
+                                ? null
+                                : (isDark
+                                          ? getCustomDarkTheme(
+                                              customColor.toARGB32(),
+                                            )
+                                          : getCustomLightTheme(
+                                              customColor.toARGB32(),
+                                            ))
+                                      .colorScheme;
+                            return DpadTap(
+                              scale: true,
+                              ripple: false,
+                              onTap: () async {
+                                unawaited(HapticFeedback.selectionClick());
+                                final picked = await openColorPicker(
+                                  displayColor,
+                                );
+                                if (picked != null) {
+                                  controller.setCustomColor(picked);
+                                  controller.setUseCustomColor(true);
+                                }
+                              },
+                              child: _ThemeCell(
+                                label: getString.colorPickerCustom,
+                                previewScheme: previewScheme,
+                                selected: selected,
+                                isCustom: true,
+                                scheme: scheme,
+                              ),
+                            );
+                          }
+                          final t = AppTheme.values[i - 1];
+                          final previewScheme = t
+                              .themeFor(
+                                isDark ? Brightness.dark : Brightness.light,
+                              )
+                              .colorScheme;
+                          final selected = !isCustom && t.name == current;
                           return DpadTap(
                             scale: true,
                             ripple: false,
-                            onTap: () async {
-                              unawaited(HapticFeedback.selectionClick());
-                              final picked = await openColorPicker(
-                                displayColor,
-                              );
-                              if (picked != null) {
-                                controller.setCustomColor(picked);
-                                controller.setUseCustomColor(true);
-                              }
+                            onTap: () {
+                              HapticFeedback.selectionClick();
+                              controller.setTheme(t.name);
                             },
                             child: _ThemeCell(
-                              label: getString.colorPickerCustom,
+                              label: t.label,
                               previewScheme: previewScheme,
                               selected: selected,
-                              isCustom: true,
                               scheme: scheme,
                             ),
                           );
-                        }
-                        final t = AppTheme.values[i - 1];
-                        final previewScheme = t
-                            .themeFor(
-                              isDark ? Brightness.dark : Brightness.light,
-                            )
-                            .colorScheme;
-                        final selected = !isCustom && t.name == current;
-                        return DpadTap(
-                          scale: true,
-                          ripple: false,
-                          onTap: () {
-                            HapticFeedback.selectionClick();
-                            controller.setTheme(t.name);
-                          },
-                          child: _ThemeCell(
-                            label: t.label,
-                            previewScheme: previewScheme,
-                            selected: selected,
-                            scheme: scheme,
-                          ),
-                        );
-                      },
-                    ),
+                        },
+                      ),
+                    )),
                   );
                 }),
               ),

@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Core/Services/MediaService.dart';
@@ -63,97 +65,100 @@ class _ActivityComposerState extends State<ActivityComposer>
         ),
         onPressed: () => state.preview.value = !state.preview.value,
       ),
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (state.preview.value)
-              Container(
-                constraints: const BoxConstraints(minHeight: 120),
-                padding: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  color: scheme.surfaceContainerHigh,
-                  borderRadius: BorderRadius.circular(16),
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (state.preview.value)
+                Container(
+                  constraints: const BoxConstraints(minHeight: 120),
+                  padding: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    color: scheme.surfaceContainerHigh,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: state.controller.text.trim().isEmpty
+                      ? Text(
+                          getString.nothingToPreview,
+                          style: TextStyle(color: scheme.onSurfaceVariant),
+                        )
+                      : MarkupText(
+                          text: state.controller.text,
+                          collapsible: false,
+                        ),
+                )
+              else ...[
+                Wrap(
+                  spacing: 2,
+                  children: [
+                    _tool(
+                      Icons.format_bold_rounded,
+                      'Bold',
+                      () => state.wrap('__'),
+                    ),
+                    _tool(
+                      Icons.format_italic_rounded,
+                      'Italic',
+                      () => state.wrap('_'),
+                    ),
+                    _tool(
+                      Icons.visibility_off_rounded,
+                      'Spoiler',
+                      () => state.wrap('~!', '!~'),
+                    ),
+                    _tool(
+                      Icons.link_rounded,
+                      'Link',
+                      () => state.wrap('[', '](https://)'),
+                    ),
+                    _tool(
+                      Icons.image_rounded,
+                      'Image',
+                      () => state.wrap('img(', ')'),
+                    ),
+                  ],
                 ),
-                child: state.controller.text.trim().isEmpty
-                    ? Text(
-                        getString.nothingToPreview,
-                        style: TextStyle(color: scheme.onSurfaceVariant),
-                      )
-                    : MarkupText(
-                        text: state.controller.text,
-                        collapsible: false,
-                      ),
-              )
-            else ...[
-              Wrap(
-                spacing: 2,
-                children: [
-                  _tool(
-                    Icons.format_bold_rounded,
-                    'Bold',
-                    () => state.wrap('__'),
+                TextField(
+                  controller: state.controller,
+                  autofocus: true,
+                  minLines: 4,
+                  maxLines: 10,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    hintText: getString.writeSomethingHint,
                   ),
-                  _tool(
-                    Icons.format_italic_rounded,
-                    'Italic',
-                    () => state.wrap('_'),
+                ),
+              ],
+              if (widget.kind == ComposerKind.message)
+                SwitchListTile(
+                  contentPadding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
                   ),
-                  _tool(
-                    Icons.visibility_off_rounded,
-                    'Spoiler',
-                    () => state.wrap('~!', '!~'),
+                  title: Text(getString.privateMessage),
+                  value: state.private.value,
+                  onChanged: (v) => state.private.value = v,
+                ),
+              const SizedBox(height: 12),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: FilledButton.icon(
+                  onPressed: state.busy.value ? null : state.submit,
+                  icon: state.busy.value
+                      ? const AppSpinner(size: 16)
+                      : const Icon(Icons.send_rounded, size: 18),
+                  label: Text(
+                    widget.editId == null ? getString.post : getString.save,
                   ),
-                  _tool(
-                    Icons.link_rounded,
-                    'Link',
-                    () => state.wrap('[', '](https://)'),
-                  ),
-                  _tool(
-                    Icons.image_rounded,
-                    'Image',
-                    () => state.wrap('img(', ')'),
-                  ),
-                ],
-              ),
-              TextField(
-                controller: state.controller,
-                autofocus: true,
-                minLines: 4,
-                maxLines: 10,
-                keyboardType: TextInputType.multiline,
-                decoration: InputDecoration(
-                  hintText: getString.writeSomethingHint,
                 ),
               ),
             ],
-            if (widget.kind == ComposerKind.message)
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                title: Text(getString.privateMessage),
-                value: state.private.value,
-                onChanged: (v) => state.private.value = v,
-              ),
-            const SizedBox(height: 12),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: FilledButton.icon(
-                onPressed: state.busy.value ? null : state.submit,
-                icon: state.busy.value
-                    ? const AppSpinner(size: 16)
-                    : const Icon(Icons.send_rounded, size: 18),
-                label: Text(
-                  widget.editId == null ? getString.post : getString.save,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        )),
       ),
     );
   }

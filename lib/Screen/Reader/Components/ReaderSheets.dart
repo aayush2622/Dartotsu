@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../Engine/ReaderRequest.dart';
@@ -31,31 +33,34 @@ Future<void> showReaderOptions(BuildContext context, ReaderState state) =>
       AppSheet(
         title: getString.readerSettingsTitle,
         heightFactor: 0.85,
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-          child: Builder(
-            builder: (sheet) => Watch(() {
-              state.settingsVersion.value;
-              final perTitle = state.perTitle.value;
-              return SettingsGroup(
-                key: ValueKey(perTitle),
-                settings: [
-                  Setting.switchType(
-                    name: getString.readerPerTitle,
-                    description: getString.readerPerTitleDesc,
-                    icon: Icons.bookmark_rounded,
-                    isChecked: perTitle,
-                    onSwitchChange: state.setPerTitle,
-                  ),
-                  ...mangaReaderRows(
-                    sheet,
-                    settings: state.settings,
-                    update: state.updateSettings,
-                  ),
-                ],
-              );
-            }),
-          ),
+        child: ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
+            child: Builder(
+              builder: (sheet) => Watch(() {
+                state.settingsVersion.value;
+                final perTitle = state.perTitle.value;
+                return SettingsGroup(
+                  key: ValueKey(perTitle),
+                  settings: [
+                    Setting.switchType(
+                      name: getString.readerPerTitle,
+                      description: getString.readerPerTitleDesc,
+                      icon: Icons.bookmark_rounded,
+                      isChecked: perTitle,
+                      onSwitchChange: state.setPerTitle,
+                    ),
+                    ...mangaReaderRows(
+                      sheet,
+                      settings: state.settings,
+                      update: state.updateSettings,
+                    ),
+                  ],
+                );
+              }),
+            ),
+          )),
         ),
       ),
     );

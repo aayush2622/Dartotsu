@@ -217,44 +217,47 @@ class _OnboardingScreenState extends State<OnboardingScreen>
     String? body,
     List<Widget> children = const [],
   }) => LayoutBuilder(
-    builder: (context, box) => SingleChildScrollView(
-      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-      child: ConstrainedBox(
-        constraints: BoxConstraints(minHeight: box.maxHeight - 32),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 520),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                _badge(icon).animatePopIn(),
-                const SizedBox(height: 28),
-                Text(
-                  title,
-                  textAlign: TextAlign.center,
-                  style: theme.textTheme.headlineMedium?.copyWith(
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                if (body != null) ...[
-                  const SizedBox(height: 12),
+    builder: (context, box) => ScrollConfig(
+      context,
+      child: ScrollConfig(context, child: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(minHeight: box.maxHeight - 32),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 520),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  _badge(icon).animatePopIn(),
+                  const SizedBox(height: 28),
                   Text(
-                    body,
+                    title,
                     textAlign: TextAlign.center,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: theme.colorScheme.onSurfaceVariant,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
+                  if (body != null) ...[
+                    const SizedBox(height: 12),
+                    Text(
+                      body,
+                      textAlign: TextAlign.center,
+                      style: theme.textTheme.bodyLarge?.copyWith(
+                        color: theme.colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                  if (children.isNotEmpty) ...[
+                    const SizedBox(height: 28),
+                    ...children,
+                  ],
                 ],
-                if (children.isNotEmpty) ...[
-                  const SizedBox(height: 28),
-                  ...children,
-                ],
-              ],
-            ).animateFadeUp(target: active, begin: 0.15, delay: 100.ms),
+              ).animateFadeUp(target: active, begin: 0.15, delay: 100.ms),
+            ),
           ),
         ),
-      ),
+      )),
     ),
   );
 

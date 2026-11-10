@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -625,76 +627,79 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
       if (!bare && a.progress != null) 'of',
     ].join(' ');
     return Center(
-      child: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (media != null)
-              Clickable(
-                onTap: () => state.paused(
-                  () => navigateToPage(
-                    context,
-                    DetailScreen(
-                      media: media,
-                      view: widget.service.detailView,
-                      mutations: widget.service.getMutations,
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              if (media != null)
+                Clickable(
+                  onTap: () => state.paused(
+                    () => navigateToPage(
+                      context,
+                      DetailScreen(
+                        media: media,
+                        view: widget.service.detailView,
+                        mutations: widget.service.getMutations,
+                      ),
                     ),
                   ),
-                ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.5),
-                        blurRadius: 36,
-                        offset: const Offset(0, 16),
-                      ),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: SizedBox(
-                      width: 200,
-                      height: 290,
-                      child: cachedNetworkImage(
-                        imageUrl: media.cover,
-                        fit: BoxFit.cover,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withValues(alpha: 0.5),
+                          blurRadius: 36,
+                          offset: const Offset(0, 16),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: SizedBox(
                         width: 200,
                         height: 290,
+                        child: cachedNetworkImage(
+                          imageUrl: media.cover,
+                          fit: BoxFit.cover,
+                          width: 200,
+                          height: 290,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            const SizedBox(height: 22),
-            Text(
-              line,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Colors.white70,
-                fontSize: 15,
-                letterSpacing: 0.4,
-              ),
-            ),
-            if (media != null)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(28, 6, 28, 0),
-                child: Text(
-                  media.mainName,
-                  textAlign: TextAlign.center,
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    height: 1.2,
-                    fontWeight: FontWeight.w600,
-                  ),
+              const SizedBox(height: 22),
+              Text(
+                line,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 15,
+                  letterSpacing: 0.4,
                 ),
               ),
-          ],
-        ),
+              if (media != null)
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(28, 6, 28, 0),
+                  child: Text(
+                    media.mainName,
+                    textAlign: TextAlign.center,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      height: 1.2,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        )),
       ),
     );
   }
@@ -709,25 +714,28 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
           borderRadius: BorderRadius.circular(28),
           border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
         ),
-        child: SingleChildScrollView(
-          child: a.html == null || a.html!.trim().isEmpty
-              ? MarkupText(
-                  text: a.text ?? '',
-                  collapsible: false,
-                  color: Colors.white,
-                  onLink: (url) => state.paused(
-                    () => openAppLink(context, widget.service, url),
+        child: ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            child: a.html == null || a.html!.trim().isEmpty
+                ? MarkupText(
+                    text: a.text ?? '',
+                    collapsible: false,
+                    color: Colors.white,
+                    onLink: (url) => state.paused(
+                      () => openAppLink(context, widget.service, url),
+                    ),
+                  )
+                : AniHtml(
+                    html: a.html!,
+                    color: Colors.white,
+                    fontSize: 16,
+                    onLink: (url) => state.paused(
+                      () => openAppLink(context, widget.service, url),
+                    ),
+                    linkCard: aniLinkCards(widget.service),
                   ),
-                )
-              : AniHtml(
-                  html: a.html!,
-                  color: Colors.white,
-                  fontSize: 16,
-                  onLink: (url) => state.paused(
-                    () => openAppLink(context, widget.service, url),
-                  ),
-                  linkCard: aniLinkCards(widget.service),
-                ),
+          )),
         ),
       ),
     );

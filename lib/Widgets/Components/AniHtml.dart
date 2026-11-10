@@ -1,3 +1,4 @@
+import 'ScrollConfig.dart';
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 
@@ -254,9 +255,12 @@ class _AniHtmlState extends State<AniHtml> {
                   height: limit,
                   child: Stack(
                     children: [
-                      SingleChildScrollView(
-                        physics: const NeverScrollableScrollPhysics(),
-                        child: body,
+                      ScrollConfig(
+                        context,
+                        child: ScrollConfig(context, child: SingleChildScrollView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          child: body,
+                        )),
                       ),
                       PositionedDirectional(
                         start: 0,

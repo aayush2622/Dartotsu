@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 
 import '../../../Logger.dart';
@@ -324,25 +326,28 @@ Future<void> showTracksSheet(
 }
 
 Widget _subtitleSettings(BuildContext context, PlayerState state) =>
-    SingleChildScrollView(
-      padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-      child: Watch(() {
-        state.settingsVersion.value;
-        return SettingsGroup(
-          settings: sectionRows(
-            playerSettingsRows(
-              context,
-              settings: state.settings,
-              update: (change) {
-                state.updateSettings(change);
-                state.settingsVersion.value++;
-              },
-              inPlayer: true,
+    ScrollConfig(
+      context,
+      child: ScrollConfig(context, child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
+        child: Watch(() {
+          state.settingsVersion.value;
+          return SettingsGroup(
+            settings: sectionRows(
+              playerSettingsRows(
+                context,
+                settings: state.settings,
+                update: (change) {
+                  state.updateSettings(change);
+                  state.settingsVersion.value++;
+                },
+                inPlayer: true,
+              ),
+              getString.playerSectionSubtitles,
             ),
-            getString.playerSectionSubtitles,
-          ),
-        );
-      }),
+          );
+        }),
+      )),
     );
 
 Widget _tracksList(
@@ -561,34 +566,37 @@ Future<void> showPlayerOptions(BuildContext context, PlayerState state) =>
         AppSheet(
           title: getString.playerSettingsTitle,
           heightFactor: 0.85,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-            child: Watch(() {
-              state.settingsVersion.value;
-              final perTitle = state.perTitle.value;
-              return SettingsGroup(
-                key: ValueKey(perTitle),
-                settings: [
-                  if (state.request.tracked)
-                    Setting.switchType(
-                      name: getString.playerPerTitle,
-                      description: getString.playerPerTitleDesc,
-                      icon: Icons.bookmark_rounded,
-                      isChecked: perTitle,
-                      onSwitchChange: state.setPerTitle,
+          child: ScrollConfig(
+            context,
+            child: ScrollConfig(context, child: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
+              child: Watch(() {
+                state.settingsVersion.value;
+                final perTitle = state.perTitle.value;
+                return SettingsGroup(
+                  key: ValueKey(perTitle),
+                  settings: [
+                    if (state.request.tracked)
+                      Setting.switchType(
+                        name: getString.playerPerTitle,
+                        description: getString.playerPerTitleDesc,
+                        icon: Icons.bookmark_rounded,
+                        isChecked: perTitle,
+                        onSwitchChange: state.setPerTitle,
+                      ),
+                    ...playerSettingsRows(
+                      context,
+                      settings: state.settings,
+                      update: (change) {
+                        state.updateSettings(change);
+                        state.settingsVersion.value++;
+                      },
+                      inPlayer: true,
                     ),
-                  ...playerSettingsRows(
-                    context,
-                    settings: state.settings,
-                    update: (change) {
-                      state.updateSettings(change);
-                      state.settingsVersion.value++;
-                    },
-                    inPlayer: true,
-                  ),
-                ],
-              );
-            }),
+                  ],
+                );
+              }),
+            )),
           ),
         ),
       ),

@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Core/State/State.dart';
@@ -167,71 +169,74 @@ class _PlayerOptionsSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AppSheet(
     title: getString.watchOptions,
-    child: SingleChildScrollView(
-      padding: EdgeInsets.fromLTRB(
-        Dimens.pagePad,
-        0,
-        Dimens.pagePad,
-        Dimens.gapLg,
-      ),
-      child: Watch(() {
-        state.progressTick.value;
-        final s = state.record!.watch;
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            LabeledField(
-              label: getString.watchLayout,
-              child: AppSegmented<int>(
-                value: s.view,
-                onChanged: (v) =>
-                    state.updateWatchSettings(s.copy()..viewType = v),
-                segments: [
-                  AppSegment(
-                    0,
-                    icon: Icons.view_list_rounded,
-                    label: getString.watchListView,
-                  ),
-                  AppSegment(
-                    1,
-                    icon: Icons.grid_view_rounded,
-                    label: getString.watchGridView,
-                  ),
-                  AppSegment(
-                    2,
-                    icon: Icons.view_comfy_rounded,
-                    label: getString.watchCompactView,
-                  ),
-                ],
-              ),
-            ),
-            SwitchListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text(getString.watchReverse),
-              value: s.reverse,
-              onChanged: (v) =>
-                  state.updateWatchSettings(s.copy()..reverse = v),
-            ),
-            Align(
-              alignment: AlignmentDirectional.centerEnd,
-              child: TextButton.icon(
-                onPressed: () {
-                  state.updateWatchSettings(
-                    MediaWatchSettings(
-                      sourceId: s.sourceId,
-                      sourceName: s.sourceName,
+    child: ScrollConfig(
+      context,
+      child: ScrollConfig(context, child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          Dimens.pagePad,
+          0,
+          Dimens.pagePad,
+          Dimens.gapLg,
+        ),
+        child: Watch(() {
+          state.progressTick.value;
+          final s = state.record!.watch;
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              LabeledField(
+                label: getString.watchLayout,
+                child: AppSegmented<int>(
+                  value: s.view,
+                  onChanged: (v) =>
+                      state.updateWatchSettings(s.copy()..viewType = v),
+                  segments: [
+                    AppSegment(
+                      0,
+                      icon: Icons.view_list_rounded,
+                      label: getString.watchListView,
                     ),
-                  );
-                  popPage(context);
-                },
-                icon: const Icon(Icons.restart_alt_rounded),
-                label: Text(getString.watchResetOptions),
+                    AppSegment(
+                      1,
+                      icon: Icons.grid_view_rounded,
+                      label: getString.watchGridView,
+                    ),
+                    AppSegment(
+                      2,
+                      icon: Icons.view_comfy_rounded,
+                      label: getString.watchCompactView,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
-        );
-      }),
+              SwitchListTile(
+                contentPadding: EdgeInsets.zero,
+                title: Text(getString.watchReverse),
+                value: s.reverse,
+                onChanged: (v) =>
+                    state.updateWatchSettings(s.copy()..reverse = v),
+              ),
+              Align(
+                alignment: AlignmentDirectional.centerEnd,
+                child: TextButton.icon(
+                  onPressed: () {
+                    state.updateWatchSettings(
+                      MediaWatchSettings(
+                        sourceId: s.sourceId,
+                        sourceName: s.sourceName,
+                      ),
+                    );
+                    popPage(context);
+                  },
+                  icon: const Icon(Icons.restart_alt_rounded),
+                  label: Text(getString.watchResetOptions),
+                ),
+              ),
+            ],
+          );
+        }),
+      )),
     ),
   );
 }

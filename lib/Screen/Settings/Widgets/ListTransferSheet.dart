@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import 'package:flutter/material.dart';
@@ -53,92 +55,95 @@ class _ImportSheetState extends State<_ImportSheet>
     final lists = state.lists.value;
     return AppSheet(
       title: getString.importLists,
-      child: SingleChildScrollView(
-        padding: Dimens.sheetInsets,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              getString.importListsHint,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
-              ),
-            ),
-            const SizedBox(height: 14),
-            if (state.error.value != null)
-              Container(
-                padding: const EdgeInsets.all(12),
-                margin: const EdgeInsets.only(bottom: 12),
-                decoration: BoxDecoration(
-                  color: scheme.errorContainer,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Text(
-                  state.error.value!,
-                  style: TextStyle(color: scheme.onErrorContainer),
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: Dimens.sheetInsets,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                getString.importListsHint,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
                 ),
               ),
-            if (lists == null)
-              FilledButton.icon(
-                onPressed: state.busy.value ? null : state.pick,
-                icon: state.busy.value
-                    ? const AppSpinner(size: 16)
-                    : const Icon(Icons.upload_file_rounded),
-                label: Text(getString.chooseBackupFile),
-              )
-            else ...[
-              _summary(context, lists),
-              const SizedBox(height: 8),
-              if (lists.anime.isNotEmpty)
+              const SizedBox(height: 14),
+              if (state.error.value != null)
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  margin: const EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: scheme.errorContainer,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Text(
+                    state.error.value!,
+                    style: TextStyle(color: scheme.onErrorContainer),
+                  ),
+                ),
+              if (lists == null)
+                FilledButton.icon(
+                  onPressed: state.busy.value ? null : state.pick,
+                  icon: state.busy.value
+                      ? const AppSpinner(size: 16)
+                      : const Icon(Icons.upload_file_rounded),
+                  label: Text(getString.chooseBackupFile),
+                )
+              else ...[
+                _summary(context, lists),
+                const SizedBox(height: 8),
+                if (lists.anime.isNotEmpty)
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    title: Text(getString.importAnimeCount(lists.anime.length)),
+                    value: state.anime.value,
+                    onChanged: (v) => state.anime.value = v,
+                  ),
+                if (lists.manga.isNotEmpty)
+                  SwitchListTile(
+                    contentPadding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    title: Text(getString.importMangaCount(lists.manga.length)),
+                    value: state.manga.value,
+                    onChanged: (v) => state.manga.value = v,
+                  ),
                 SwitchListTile(
                   contentPadding: EdgeInsets.zero,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
-                  title: Text(getString.importAnimeCount(lists.anime.length)),
-                  value: state.anime.value,
-                  onChanged: (v) => state.anime.value = v,
+                  title: Text(getString.mergeWithExisting),
+                  subtitle: Text(getString.mergeWithExistingDesc),
+                  value: state.merge.value,
+                  onChanged: (v) => state.merge.value = v,
                 ),
-              if (lists.manga.isNotEmpty)
-                SwitchListTile(
-                  contentPadding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(16),
-                  ),
-                  title: Text(getString.importMangaCount(lists.manga.length)),
-                  value: state.manga.value,
-                  onChanged: (v) => state.manga.value = v,
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    TextButton(
+                      onPressed: state.busy.value ? null : state.pick,
+                      child: Text(getString.chooseAnother),
+                    ),
+                    const Spacer(),
+                    FilledButton.icon(
+                      onPressed: (state.anime.value || state.manga.value)
+                          ? state.import
+                          : null,
+                      icon: const Icon(Icons.download_done_rounded),
+                      label: Text(getString.import),
+                    ),
+                  ],
                 ),
-              SwitchListTile(
-                contentPadding: EdgeInsets.zero,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                title: Text(getString.mergeWithExisting),
-                subtitle: Text(getString.mergeWithExistingDesc),
-                value: state.merge.value,
-                onChanged: (v) => state.merge.value = v,
-              ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  TextButton(
-                    onPressed: state.busy.value ? null : state.pick,
-                    child: Text(getString.chooseAnother),
-                  ),
-                  const Spacer(),
-                  FilledButton.icon(
-                    onPressed: (state.anime.value || state.manga.value)
-                        ? state.import
-                        : null,
-                    icon: const Icon(Icons.download_done_rounded),
-                    label: Text(getString.import),
-                  ),
-                ],
-              ),
+              ],
             ],
-          ],
-        ),
+          ),
+        )),
       ),
     );
   }
@@ -227,63 +232,66 @@ class _ExportSheetState extends State<_ExportSheet>
     final manga = media.length - anime;
     return AppSheet(
       title: getString.exportLists,
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
-              child: Text(
-                media.isEmpty
-                    ? getString.nothingInLocalLists
-                    : getString.exportsSummary(anime, manga),
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: scheme.onSurfaceVariant,
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 12),
+                child: Text(
+                  media.isEmpty
+                      ? getString.nothingInLocalLists
+                      : getString.exportsSummary(anime, manga),
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: scheme.onSurfaceVariant,
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: AppSegmented<bool>(
-                value: state.share.value,
-                onChanged: (v) => state.share.value = v,
-                segments: [
-                  AppSegment(false, label: getString.saveToFolder),
-                  AppSegment(true, label: getString.share),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: AppSegmented<bool>(
+                  value: state.share.value,
+                  onChanged: (v) => state.share.value = v,
+                  segments: [
+                    AppSegment(false, label: getString.saveToFolder),
+                    AppSegment(true, label: getString.share),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            for (final (format, note, icon) in [
-              (
-                ExternalFormat.aniyomi,
-                getString.formatAnimeManga,
-                Icons.movie_filter_rounded,
-              ),
-              (
-                ExternalFormat.mihon,
-                getString.formatMangaTachibk,
-                Icons.menu_book_rounded,
-              ),
-              (
-                ExternalFormat.kotatsu,
-                getString.formatMangaZip,
-                Icons.auto_stories_rounded,
-              ),
-            ])
-              SheetTile(
-                leading: Icon(icon, color: scheme.primary),
-                title: Text(format.label),
-                subtitle: Text(note),
-                trailing: state.busy.value
-                    ? const AppSpinner()
-                    : const Icon(Icons.chevron_right_rounded),
-                enabled: !state.busy.value && media.isNotEmpty,
-                onTap: () => state.export(format),
-              ),
-          ],
-        ),
+              const SizedBox(height: 8),
+              for (final (format, note, icon) in [
+                (
+                  ExternalFormat.aniyomi,
+                  getString.formatAnimeManga,
+                  Icons.movie_filter_rounded,
+                ),
+                (
+                  ExternalFormat.mihon,
+                  getString.formatMangaTachibk,
+                  Icons.menu_book_rounded,
+                ),
+                (
+                  ExternalFormat.kotatsu,
+                  getString.formatMangaZip,
+                  Icons.auto_stories_rounded,
+                ),
+              ])
+                SheetTile(
+                  leading: Icon(icon, color: scheme.primary),
+                  title: Text(format.label),
+                  subtitle: Text(note),
+                  trailing: state.busy.value
+                      ? const AppSpinner()
+                      : const Icon(Icons.chevron_right_rounded),
+                  enabled: !state.busy.value && media.isNotEmpty,
+                  onTap: () => state.export(format),
+                ),
+            ],
+          ),
+        )),
       ),
     );
   }

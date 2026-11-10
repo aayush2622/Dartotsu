@@ -9,6 +9,7 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
+import '../../Widgets/Components/ScrollConfig.dart';
 import 'PinPad.dart';
 
 class LockOverlay extends StatelessWidget {
@@ -105,49 +106,87 @@ class _LockScreenState extends State<_LockScreen> {
       child: Material(
         color: scheme.surface,
         child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.all(Dimens.pagePad),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    width: 76,
-                    height: 76,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: scheme.primaryContainer,
-                    ),
-                    child: Icon(
-                      Icons.lock_rounded,
-                      size: 34,
-                      color: scheme.onPrimaryContainer,
-                    ),
-                  ).animateDropIn(),
-                  SizedBox(height: Dimens.gap),
-                  Text(
-                    getString.appLockUnlock,
-                    style: context.textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ).animateFadeUp(),
-                  SizedBox(height: Dimens.gapLg),
-                  PinPad(
-                    onSubmit: _submit,
-                    matches: _matches,
-                    message: _message.value,
+          child: LayoutBuilder(
+            builder: (context, box) {
+              final wide = box.maxWidth > box.maxHeight && box.maxHeight < 620;
+              final head = [
+                Container(
+                  width: 76,
+                  height: 76,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: scheme.primaryContainer,
                   ),
-                  if (find<AppLock>().biometricReady) ...[
-                    SizedBox(height: Dimens.gap),
-                    TextButton.icon(
-                      onPressed: _biometric,
-                      icon: const Icon(Icons.fingerprint_rounded),
-                      label: Text(getString.appLockUseBiometric),
-                    ),
-                  ],
+                  child: Icon(
+                    Icons.lock_rounded,
+                    size: 34,
+                    color: scheme.onPrimaryContainer,
+                  ),
+                ).animateDropIn(),
+                SizedBox(height: Dimens.gap),
+                Text(
+                  getString.appLockUnlock,
+                  style: context.textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ).animateFadeUp(),
+              ];
+              final pad = PinPad(
+                onSubmit: _submit,
+                matches: _matches,
+                message: _message.value,
+              );
+              final biometric = [
+                if (find<AppLock>().biometricReady) ...[
+                  SizedBox(height: Dimens.gap),
+                  TextButton.icon(
+                    onPressed: _biometric,
+                    icon: const Icon(Icons.fingerprint_rounded),
+                    label: Text(getString.appLockUseBiometric),
+                  ),
                 ],
-              ),
-            ),
+              ];
+              if (wide) {
+                return Padding(
+                  padding: EdgeInsets.all(Dimens.pagePad),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [...head, ...biometric],
+                        ),
+                      ),
+                      Expanded(
+                        child: FittedBox(fit: BoxFit.scaleDown, child: pad),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return CustomScrollConfig(
+                context,
+                children: [
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(Dimens.pagePad),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            ...head,
+                            SizedBox(height: Dimens.gapLg),
+                            pad,
+                            ...biometric,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),

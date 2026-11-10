@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Detail/Watch/Data/Media/MediaRecord.dart';
@@ -78,55 +80,58 @@ class _ChapterListState extends State<ChapterList> {
         : chunks[chunk];
     final blur = watchBlurUnwatchedPref.rx.value;
     final description = watchShowDescriptionPref.rx.value;
-    return SingleChildScrollView(
-      controller: _scroll,
-      padding: EdgeInsets.fromLTRB(
-        Dimens.pagePad,
-        0,
-        Dimens.pagePad,
-        Dimens.gapXl,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          if (chunks.length > 1) ...[
-            RangeBar(
-              selected: chunk,
-              onChanged: (i) => _chunk.value = i,
-              labels: [
-                for (final c in chunks) '${c.first.number}-${c.last.number}',
-              ],
+    return ScrollConfig(
+      context,
+      child: ScrollConfig(context, child: SingleChildScrollView(
+        controller: _scroll,
+        padding: EdgeInsets.fromLTRB(
+          Dimens.pagePad,
+          0,
+          Dimens.pagePad,
+          Dimens.gapXl,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (chunks.length > 1) ...[
+              RangeBar(
+                selected: chunk,
+                onChanged: (i) => _chunk.value = i,
+                labels: [
+                  for (final c in chunks) '${c.first.number}-${c.last.number}',
+                ],
+              ),
+              SizedBox(height: Dimens.gap),
+            ],
+            UnitLayout(
+              units: shown,
+              view: settings.view,
+              builder: (u) {
+                final isCurrent = identical(u, playing);
+                return KeyedSubtree(
+                  key: isCurrent ? _currentKey : null,
+                  child: UnitTile(
+                    key: ValueKey('reader-unit-${u.number}-${u.scanlator}'),
+                    unit: u,
+                    anime: false,
+                    view: settings.view,
+                    watched: u.isWatched(progress),
+                    progress: partialFraction(record.playback[u.number]),
+                    next: isCurrent,
+                    blur: blur,
+                    showDescription: description,
+                    onTap: () {
+                      popPage(context);
+                      final at = units.indexOf(u);
+                      if (at != widget.current) widget.onPick(at);
+                    },
+                  ),
+                );
+              },
             ),
-            SizedBox(height: Dimens.gap),
           ],
-          UnitLayout(
-            units: shown,
-            view: settings.view,
-            builder: (u) {
-              final isCurrent = identical(u, playing);
-              return KeyedSubtree(
-                key: isCurrent ? _currentKey : null,
-                child: UnitTile(
-                  key: ValueKey('reader-unit-${u.number}-${u.scanlator}'),
-                  unit: u,
-                  anime: false,
-                  view: settings.view,
-                  watched: u.isWatched(progress),
-                  progress: partialFraction(record.playback[u.number]),
-                  next: isCurrent,
-                  blur: blur,
-                  showDescription: description,
-                  onTap: () {
-                    popPage(context);
-                    final at = units.indexOf(u);
-                    if (at != widget.current) widget.onPick(at);
-                  },
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+        ),
+      )),
     );
   }
 }

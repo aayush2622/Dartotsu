@@ -1,3 +1,5 @@
+import '../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -103,61 +105,64 @@ class _ShareCardSheetState extends State<ShareCardSheet>
     final busy = state.busy.value;
     return AppSheet(
       title: state.isList ? getString.shareCardList : getString.shareCard,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          0,
-          Dimens.pagePad,
-          Dimens.gapXl,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (state.isList)
-              Padding(
-                padding: EdgeInsets.only(bottom: Dimens.gap),
-                child: Align(
-                  alignment: AlignmentDirectional.centerStart,
-                  child: AppChoiceChips<int>(
-                    value: state.mode,
-                    onChanged: state.setMode,
-                    options: [
-                      AppSegment(0, label: getString.anime),
-                      AppSegment(1, label: getString.manga),
-                      if (state.user != null)
-                        AppSegment(2, label: getString.profile),
-                    ],
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            0,
+            Dimens.pagePad,
+            Dimens.gapXl,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              if (state.isList)
+                Padding(
+                  padding: EdgeInsets.only(bottom: Dimens.gap),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: AppChoiceChips<int>(
+                      value: state.mode,
+                      onChanged: state.setMode,
+                      options: [
+                        AppSegment(0, label: getString.anime),
+                        AppSegment(1, label: getString.manga),
+                        if (state.user != null)
+                          AppSegment(2, label: getString.profile),
+                      ],
+                    ),
                   ),
                 ),
+              _card(context),
+              SizedBox(height: Dimens.gapLg),
+              Row(
+                children: [
+                  Expanded(
+                    child: FilledButton.icon(
+                      onPressed: busy || !state.ready
+                          ? null
+                          : () => unawaited(state.share()),
+                      icon: const Icon(Icons.ios_share_rounded),
+                      label: Text(getString.share),
+                    ),
+                  ),
+                  SizedBox(width: Dimens.gap),
+                  Expanded(
+                    child: FilledButton.tonalIcon(
+                      onPressed: busy || !state.ready
+                          ? null
+                          : () => unawaited(state.save()),
+                      icon: const Icon(Icons.download_rounded),
+                      label: Text(getString.save),
+                    ),
+                  ),
+                ],
               ),
-            _card(context),
-            SizedBox(height: Dimens.gapLg),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton.icon(
-                    onPressed: busy || !state.ready
-                        ? null
-                        : () => unawaited(state.share()),
-                    icon: const Icon(Icons.ios_share_rounded),
-                    label: Text(getString.share),
-                  ),
-                ),
-                SizedBox(width: Dimens.gap),
-                Expanded(
-                  child: FilledButton.tonalIcon(
-                    onPressed: busy || !state.ready
-                        ? null
-                        : () => unawaited(state.save()),
-                    icon: const Icon(Icons.download_rounded),
-                    label: Text(getString.save),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+            ],
+          ),
+        )),
       ),
     );
   }

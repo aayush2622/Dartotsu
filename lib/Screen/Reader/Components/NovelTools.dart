@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -377,92 +379,95 @@ Future<void> showHighlightSheet(
     AppSheet(
       title: getString.novelHighlight,
       child: Watch(
-        () => SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  color: Color(highlightColors[color.value])
-                      .withValues(alpha: 0.3),
-                  borderRadius: BorderRadius.circular(12),
+        () => ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: Color(highlightColors[color.value])
+                        .withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Text(
+                    highlight.text,
+                    maxLines: 6,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
-                child: Text(
-                  highlight.text,
-                  maxLines: 6,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              const SizedBox(height: 12),
-              Row(
-                children: [
-                  for (var i = 0; i < highlightColors.length; i++)
-                    Padding(
-                      padding: const EdgeInsetsDirectional.only(end: 10),
-                      child: InkWell(
-                        customBorder: const CircleBorder(),
-                        onTap: () {
-                          color.value = i;
-                          state.updateHighlight(highlight, color: i);
-                        },
-                        child: Container(
-                          width: 36,
-                          height: 36,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(highlightColors[i]),
-                            border: Border.all(
-                              width: 3,
-                              color: color.value == i
-                                  ? context.colorScheme.onSurface
-                                  : Colors.transparent,
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    for (var i = 0; i < highlightColors.length; i++)
+                      Padding(
+                        padding: const EdgeInsetsDirectional.only(end: 10),
+                        child: InkWell(
+                          customBorder: const CircleBorder(),
+                          onTap: () {
+                            color.value = i;
+                            state.updateHighlight(highlight, color: i);
+                          },
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color(highlightColors[i]),
+                              border: Border.all(
+                                width: 3,
+                                color: color.value == i
+                                    ? context.colorScheme.onSurface
+                                    : Colors.transparent,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                ],
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: note,
-                minLines: 1,
-                maxLines: 4,
-                decoration: InputDecoration(
-                  labelText: getString.novelHighlightNote,
-                  hintText: getString.novelHighlightNoteHint,
+                  ],
                 ),
-              ),
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Expanded(
-                    child: OutlinedButton.icon(
-                      onPressed: () {
-                        state.removeHighlight(highlight);
-                        popPage(context);
-                      },
-                      icon: const Icon(Icons.delete_outline_rounded),
-                      label: Text(getString.novelHighlightRemove),
-                    ),
+                const SizedBox(height: 12),
+                TextField(
+                  controller: note,
+                  minLines: 1,
+                  maxLines: 4,
+                  decoration: InputDecoration(
+                    labelText: getString.novelHighlightNote,
+                    hintText: getString.novelHighlightNoteHint,
                   ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        state.updateHighlight(highlight, note: note.text);
-                        popPage(context);
-                      },
-                      child: Text(getString.save),
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          state.removeHighlight(highlight);
+                          popPage(context);
+                        },
+                        icon: const Icon(Icons.delete_outline_rounded),
+                        label: Text(getString.novelHighlightRemove),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: () {
+                          state.updateHighlight(highlight, note: note.text);
+                          popPage(context);
+                        },
+                        child: Text(getString.save),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )),
         ),
       ),
     ),

@@ -1,3 +1,5 @@
+import 'ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Utils/Animation/WidgetAnimations.dart';
@@ -240,16 +242,19 @@ class AppChoiceChips<T> extends StatelessWidget {
     if (scrollable) {
       return DpadRegion(
         horizontalEdge: DpadEdgeBehavior.stop,
-        child: SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              for (var i = 0; i < options.length; i++) ...[
-                if (i > 0) const SizedBox(width: 8),
-                _chip(options[i]),
+        child: ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
+                for (var i = 0; i < options.length; i++) ...[
+                  if (i > 0) const SizedBox(width: 8),
+                  _chip(options[i]),
+                ],
               ],
-            ],
-          ),
+            ),
+          )),
         ),
       );
     }

@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -101,9 +103,12 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
                         _portrait(context, profile.image),
                         SizedBox(width: Dimens.gap),
                         Expanded(
-                          child: SingleChildScrollView(
-                            physics: const NeverScrollableScrollPhysics(),
-                            child: _info(context, profile),
+                          child: ScrollConfig(
+                            context,
+                            child: ScrollConfig(context, child: SingleChildScrollView(
+                              physics: const NeverScrollableScrollPhysics(),
+                              child: _info(context, profile),
+                            )),
                           ),
                         ),
                       ],

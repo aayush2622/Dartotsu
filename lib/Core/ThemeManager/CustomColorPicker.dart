@@ -1,3 +1,5 @@
+import '../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Utils/Functions/NavigateToScreen.dart';
@@ -18,11 +20,14 @@ Future<Color?> showColorPickerDialog(
       .popOnFinish(false)
       .setTitle(getString.pickColor)
       .setCustomView(
-        SingleChildScrollView(
-          child: ColorPickerView(
-            initial: initialColor,
-            onChanged: (color) => selectedColor = color,
-          ),
+        ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            child: ColorPickerView(
+              initial: initialColor,
+              onChanged: (color) => selectedColor = color,
+            ),
+          )),
         ),
       )
       .setNeutralButton(

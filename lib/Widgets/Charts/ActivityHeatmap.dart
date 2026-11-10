@@ -1,3 +1,4 @@
+import '../Components/ScrollConfig.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 
 import 'dart:math' as math;
@@ -154,43 +155,46 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
           ],
         ),
         const SizedBox(height: 14),
-        SingleChildScrollView(
-          controller: _scroll,
-          scrollDirection: Axis.horizontal,
-          child: MouseRegion(
-            onHover: (e) {
-              final d = _at(e.localPosition);
-              if (d != _hover.value) _hover.value = d;
-            },
-            onExit: (_) => _hover.value = null,
-            child: GestureDetector(
-              onTapDown: (d) {
-                final day = _at(d.localPosition);
-                _hover.value = day == _hover.value ? null : day;
+        ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            controller: _scroll,
+            scrollDirection: Axis.horizontal,
+            child: MouseRegion(
+              onHover: (e) {
+                final d = _at(e.localPosition);
+                if (d != _hover.value) _hover.value = d;
               },
-              child: TweenAnimationBuilder<double>(
-                tween: Tween(begin: 0, end: 1),
-                duration: animDuration(900),
-                curve: Curves.easeOutCubic,
-                builder: (_, t, _) => CustomPaint(
-                  size: Size(width, _top + 7 * _step + 4),
-                  painter: _HeatPainter(
-                    start: _start,
-                    today: _today,
-                    weeks: _weeks,
-                    byDay: _byDay,
-                    hover: hover,
-                    progress: t,
-                    primary: scheme.primary,
-                    empty: scheme.surfaceContainerHighest.withValues(
-                      alpha: 0.55,
+              onExit: (_) => _hover.value = null,
+              child: GestureDetector(
+                onTapDown: (d) {
+                  final day = _at(d.localPosition);
+                  _hover.value = day == _hover.value ? null : day;
+                },
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(begin: 0, end: 1),
+                  duration: animDuration(900),
+                  curve: Curves.easeOutCubic,
+                  builder: (_, t, _) => CustomPaint(
+                    size: Size(width, _top + 7 * _step + 4),
+                    painter: _HeatPainter(
+                      start: _start,
+                      today: _today,
+                      weeks: _weeks,
+                      byDay: _byDay,
+                      hover: hover,
+                      progress: t,
+                      primary: scheme.primary,
+                      empty: scheme.surfaceContainerHighest.withValues(
+                        alpha: 0.55,
+                      ),
+                      text: scheme.onSurfaceVariant,
                     ),
-                    text: scheme.onSurfaceVariant,
                   ),
                 ),
               ),
             ),
-          ),
+          )),
         ),
         const SizedBox(height: 8),
         Row(

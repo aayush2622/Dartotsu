@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -73,80 +75,83 @@ class _BarcodeSheetState extends State<BarcodeSheet>
     return AppSheet(
       title: getString.barcodeTitle,
       heightFactor: camera != null ? 0.85 : null,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          0,
-          Dimens.pagePad,
-          Dimens.gapXl,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              camera != null
-                  ? getString.barcodeIntro
-                  : getString.barcodeIntroManual,
-              style: context.textTheme.bodyMedium?.copyWith(
-                color: scheme.onSurfaceVariant,
+      child: ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            0,
+            Dimens.pagePad,
+            Dimens.gapXl,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                camera != null
+                    ? getString.barcodeIntro
+                    : getString.barcodeIntroManual,
+                style: context.textTheme.bodyMedium?.copyWith(
+                  color: scheme.onSurfaceVariant,
+                ),
               ),
-            ),
-            SizedBox(height: Dimens.gap),
-            if (camera != null)
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: AspectRatio(
-                  aspectRatio: 1,
-                  child: MobileScanner(
-                    controller: camera,
-                    onDetect: _detect,
-                    errorBuilder: (context, error) => Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Text(
-                          getString.barcodeCameraDenied,
-                          textAlign: TextAlign.center,
+              SizedBox(height: Dimens.gap),
+              if (camera != null)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: MobileScanner(
+                      controller: camera,
+                      onDetect: _detect,
+                      errorBuilder: (context, error) => Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Text(
+                            getString.barcodeCameraDenied,
+                            textAlign: TextAlign.center,
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            if (camera != null) SizedBox(height: Dimens.gap),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: state.isbn,
-                    enabled: !state.busy.value,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.search,
-                    onSubmitted: (_) => unawaited(state.submit()),
-                    decoration: InputDecoration(
-                      hintText: getString.barcodeIsbnHint,
-                      prefixIcon: const Icon(Icons.qr_code_2_rounded),
+              if (camera != null) SizedBox(height: Dimens.gap),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: state.isbn,
+                      enabled: !state.busy.value,
+                      keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.search,
+                      onSubmitted: (_) => unawaited(state.submit()),
+                      decoration: InputDecoration(
+                        hintText: getString.barcodeIsbnHint,
+                        prefixIcon: const Icon(Icons.qr_code_2_rounded),
+                      ),
                     ),
                   ),
-                ),
-                SizedBox(width: Dimens.gapSm),
-                IconButton.filled(
-                  tooltip: getString.imageSearchGo,
-                  onPressed: state.busy.value
-                      ? null
-                      : () => unawaited(state.submit()),
-                  icon: state.busy.value
-                      ? const AppSpinner(size: 20)
-                      : const Icon(Icons.search_rounded),
-                ),
+                  SizedBox(width: Dimens.gapSm),
+                  IconButton.filled(
+                    tooltip: getString.imageSearchGo,
+                    onPressed: state.busy.value
+                        ? null
+                        : () => unawaited(state.submit()),
+                    icon: state.busy.value
+                        ? const AppSpinner(size: 20)
+                        : const Icon(Icons.search_rounded),
+                  ),
+                ],
+              ),
+              if (error != null) ...[
+                SizedBox(height: Dimens.gapSm),
+                Text(error, style: TextStyle(color: scheme.error)),
               ],
-            ),
-            if (error != null) ...[
-              SizedBox(height: Dimens.gapSm),
-              Text(error, style: TextStyle(color: scheme.error)),
             ],
-          ],
-        ),
+          ),
+        )),
       ),
     );
   }

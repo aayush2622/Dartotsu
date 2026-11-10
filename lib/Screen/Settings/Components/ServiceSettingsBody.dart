@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Core/Services/MediaServiceController.dart';
@@ -19,17 +21,20 @@ class _ServiceSettingsBodyState extends State<ServiceSettingsBody> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      padding: EdgeInsets.only(top: Dimens.gap, bottom: Dimens.gapXl),
-      child: Watch(() {
-        _anchor.value;
-        return Column(
-          children: [
-            for (final w in widget.service.settingsView!.widgets(context))
-              ScreenWidgetView(w),
-          ],
-        );
-      }),
+    return ScrollConfig(
+      context,
+      child: ScrollConfig(context, child: SingleChildScrollView(
+        padding: EdgeInsets.only(top: Dimens.gap, bottom: Dimens.gapXl),
+        child: Watch(() {
+          _anchor.value;
+          return Column(
+            children: [
+              for (final w in widget.service.settingsView!.widgets(context))
+                ScreenWidgetView(w),
+            ],
+          );
+        }),
+      )),
     );
   }
 }

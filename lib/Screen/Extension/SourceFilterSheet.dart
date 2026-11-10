@@ -1,3 +1,5 @@
+import '../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:convert';
 
 import 'package:dartotsu_extension_bridge/Models/SourceFilter.dart';
@@ -170,15 +172,18 @@ class _SourceFilterSheetState extends State<SourceFilterSheet> {
     child: Column(
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-            child: Watch(() {
-              _tick.track();
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [for (final f in _working) _filter(context, f)],
-              );
-            }),
+          child: ScrollConfig(
+            context,
+            child: ScrollConfig(context, child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+              child: Watch(() {
+                _tick.track();
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [for (final f in _working) _filter(context, f)],
+                );
+              }),
+            )),
           ),
         ),
         Padding(

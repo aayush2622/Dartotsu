@@ -1,3 +1,5 @@
+import '../../Widgets/Components/ScrollConfig.dart';
+
 import 'package:flutter/material.dart';
 import 'package:markdown_widget/config/configs.dart';
 import 'package:markdown_widget/widget/blocks/leaf/heading.dart';
@@ -43,25 +45,28 @@ class UpdateSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AppSheet(
     child: Watch(
-      () => SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          Dimens.gapSm,
-          Dimens.pagePad,
-          Dimens.pagePad,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _header(context),
-            SizedBox(height: Dimens.gap),
-            if (info.body.trim().isNotEmpty) _notes(context),
-            AppSize(child: _status(context)),
-            SizedBox(height: Dimens.gap),
-            _actions(context),
-          ],
-        ),
+      () => ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            Dimens.gapSm,
+            Dimens.pagePad,
+            Dimens.pagePad,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _header(context),
+              SizedBox(height: Dimens.gap),
+              if (info.body.trim().isNotEmpty) _notes(context),
+              AppSize(child: _status(context)),
+              SizedBox(height: Dimens.gap),
+              _actions(context),
+            ],
+          ),
+        )),
       ),
     ),
   );

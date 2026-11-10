@@ -71,15 +71,18 @@ class _StacksScreenState extends BaseScreen<StacksScreen>
             ),
             child: Align(
               alignment: AlignmentDirectional.centerStart,
-              child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: AppChoiceChips<StackScope>(
-                  value: state.scope.value,
-                  onChanged: state.setScope,
-                  options: [
-                    for (final s in scopes) AppSegment(s, label: _label(s)),
-                  ],
-                ),
+              child: ScrollConfig(
+                context,
+                child: ScrollConfig(context, child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: AppChoiceChips<StackScope>(
+                    value: state.scope.value,
+                    onChanged: state.setScope,
+                    options: [
+                      for (final s in scopes) AppSegment(s, label: _label(s)),
+                    ],
+                  ),
+                )),
               ),
             ),
           ),

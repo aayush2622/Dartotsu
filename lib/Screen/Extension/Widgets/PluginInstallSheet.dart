@@ -1,3 +1,5 @@
+import '../../../Widgets/Components/ScrollConfig.dart';
+
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
@@ -52,24 +54,27 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
   @override
   Widget build(BuildContext context) => AppSheet(
     child: Watch(
-      () => SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(
-          Dimens.pagePad,
-          Dimens.gapSm,
-          Dimens.pagePad,
-          Dimens.pagePad,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _header(context),
-            SizedBox(height: Dimens.gap),
-            AppSize(child: _body(context)),
-            SizedBox(height: Dimens.gap),
-            _actions(context),
-          ],
-        ),
+      () => ScrollConfig(
+        context,
+        child: ScrollConfig(context, child: SingleChildScrollView(
+          padding: EdgeInsets.fromLTRB(
+            Dimens.pagePad,
+            Dimens.gapSm,
+            Dimens.pagePad,
+            Dimens.pagePad,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _header(context),
+              SizedBox(height: Dimens.gap),
+              AppSize(child: _body(context)),
+              SizedBox(height: Dimens.gap),
+              _actions(context),
+            ],
+          ),
+        )),
       ),
     ),
   );
@@ -200,27 +205,30 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
       margin: EdgeInsets.zero,
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxHeight: 180),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (description.isNotEmpty)
-                Text(
-                  description,
-                  style: theme.bodyMedium?.copyWith(height: 1.4),
-                ),
-              if (hint != null) ...[
-                if (description.isNotEmpty) SizedBox(height: Dimens.gapSm),
-                Text(
-                  hint,
-                  style: theme.bodySmall?.copyWith(
-                    color: context.colorScheme.onSurfaceVariant,
-                    height: 1.4,
+        child: ScrollConfig(
+          context,
+          child: ScrollConfig(context, child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (description.isNotEmpty)
+                  Text(
+                    description,
+                    style: theme.bodyMedium?.copyWith(height: 1.4),
                   ),
-                ),
+                if (hint != null) ...[
+                  if (description.isNotEmpty) SizedBox(height: Dimens.gapSm),
+                  Text(
+                    hint,
+                    style: theme.bodySmall?.copyWith(
+                      color: context.colorScheme.onSurfaceVariant,
+                      height: 1.4,
+                    ),
+                  ),
+                ],
               ],
-            ],
-          ),
+            ),
+          )),
         ),
       ),
     );

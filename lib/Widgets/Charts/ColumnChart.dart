@@ -1,3 +1,4 @@
+import '../Components/ScrollConfig.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 
 import 'dart:math' as math;
@@ -88,9 +89,12 @@ class _ColumnChartState extends State<ColumnChart> {
           ),
         );
         return width > box.maxWidth
-            ? SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: chart,
+            ? ScrollConfig(
+                context,
+                child: ScrollConfig(context, child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: chart,
+                )),
               )
             : chart;
       },
