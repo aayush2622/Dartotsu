@@ -6,17 +6,14 @@ import '../../Core/Services/Model/CommunityList.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/AppTabs.dart';
 import '../../Widgets/Components/BaseScreen.dart';
-import '../../Widgets/Components/CachedNetworkImage.dart';
-import '../../Widgets/Components/Clickable.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
-import '../../Widgets/Components/SectionCard.dart';
+import 'Components/CommunityListCard.dart';
 import 'CommunityListsState.dart';
 
 class CommunityListsScreen extends StatefulWidget {
@@ -136,70 +133,17 @@ class _CommunityListsScreenState extends BaseScreen<CommunityListsScreen>
     BuildContext context,
     CommunityList list, {
     VoidCallback? onTap,
-  }) {
-    final scheme = context.colorScheme;
-    final text = context.textTheme;
-    return Clickable(
-      onTap: onTap,
-      child: SectionCard(
-        padding: EdgeInsets.all(Dimens.cardPad),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (list.cover != null) ...[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(12),
-                child: SizedBox(
-                  width: 56,
-                  height: 80,
-                  child: cachedNetworkImage(
-                    imageUrl: list.cover,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              SizedBox(width: Dimens.gap),
-            ],
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    list.title,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: text.titleSmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  SizedBox(height: Dimens.gapXs),
-                  Text(
-                    [
-                      if (list.author.isNotEmpty) list.author,
-                      if (list.count.isNotEmpty) list.count,
-                      if (list.likes > 0) '♥ ${list.likes}',
-                    ].join(' · '),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: text.bodySmall?.copyWith(
-                      color: scheme.onSurfaceVariant,
-                    ),
-                  ),
-                  if ((list.description ?? '').isNotEmpty) ...[
-                    SizedBox(height: Dimens.gapXs),
-                    Text(
-                      list.description!,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: text.bodySmall,
-                    ),
-                  ],
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
+  }) => CommunityListCard(
+    title: list.title,
+    covers: list.covers.isNotEmpty
+        ? list.covers
+        : [if (list.cover != null) list.cover!],
+    author: list.author,
+    meta: [
+      if (list.count.isNotEmpty) list.count,
+      if (list.likes > 0) '♥ ${list.likes}',
+    ].join(' · '),
+    description: list.description,
+    onTap: onTap,
+  );
 }

@@ -7,6 +7,8 @@ class CommunityList {
   final String count;
   final int likes;
   final String kind;
+  final List<String> covers;
+  final String? url;
 
   const CommunityList({
     required this.id,
@@ -17,6 +19,8 @@ class CommunityList {
     this.count = '',
     this.likes = 0,
     this.kind = '',
+    this.covers = const [],
+    this.url,
   });
 }
 

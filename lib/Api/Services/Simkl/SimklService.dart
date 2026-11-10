@@ -1,3 +1,4 @@
+import 'Screens/CommunityLists.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
@@ -39,6 +40,9 @@ class SimklService extends MediaService {
 
   @override
   ServiceAuth get auth => _auth;
+
+  @override
+  CommunityListsView get communityListsView => SimklCommunityListsView();
 
   @override
   bool get seriesProgress => true;
