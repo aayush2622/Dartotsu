@@ -28,8 +28,19 @@ class CommentsTarget {
   }
 
   static Future<int?> _lookup(MediaService service, Media media) async {
-    if (service.syncAdapter == null) return null;
-    int? id;
+    final adapter = service.syncAdapter;
+    if (adapter == null) return null;
+    final local = await IdMapper.expand(
+      {...adapter.idsOf(media), SyncKey.mal: ?media.malId},
+      anime: media.isAnime,
+      prefer: SyncKey.anilist,
+    );
+    int? id = local[SyncKey.anilist];
+    if (id != null) {
+      MediaRecords.of(service, media).commentsId = id;
+      MediaRecords.save(service, media);
+      return id;
+    }
     for (var attempt = 0; attempt < 2 && id == null; attempt++) {
       try {
         id = await IdMapper.resolveKey(

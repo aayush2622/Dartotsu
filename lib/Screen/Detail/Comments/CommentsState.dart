@@ -117,25 +117,22 @@ class CommentsState extends ScreenState {
     phase.value = CommentsPhase.loading;
     failure.value = null;
     try {
-      final (resolved, session) = await (
-        CommentsTarget.resolve(
-          service,
-          media.value,
-        ).timeout(const Duration(seconds: 45), onTimeout: () => null),
+      unawaited(
         api
             .ensureSession()
             .timeout(const Duration(seconds: 20))
             .then<CommentSession?>((s) => s, onError: (Object _) => null),
-      ).wait;
-      target = resolved;
+      );
+      target = await CommentsTarget.resolve(
+        service,
+        media.value,
+      ).timeout(const Duration(seconds: 45), onTimeout: () => null);
       logger('Comments start run $run/$_generation target $target');
       if (run != _generation) return;
       if (target == null) {
         phase.value = CommentsPhase.unavailable;
         return;
       }
-      logger('Comments session ${session?.userId} run $run/$_generation');
-      if (run != _generation) return;
       if (focusId != null) {
         await _loadSingle(focusId!);
       } else {

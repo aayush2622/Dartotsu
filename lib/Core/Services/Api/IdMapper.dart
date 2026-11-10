@@ -253,11 +253,15 @@ class IdMapper {
     final before = jsonEncode(ids.toJson());
     final first = !ids.known;
     if (first || need.any((k) => ids[k] == null)) {
-      await _gather(service, media, ids, anime, first);
-      await _fill(service, media, ids, {
-        ...need,
-        if (first) anime ? SyncKey.simkl : SyncKey.mangabaka,
-      }, anime);
+      await _gatherLocal(service, media, ids, anime);
+      final enough = need.isNotEmpty && need.every((k) => ids[k] != null);
+      if (!enough) {
+        await _gatherRemote(service, media, ids, anime, first);
+        await _fill(service, media, ids, {
+          ...need,
+          if (first) anime ? SyncKey.simkl : SyncKey.mangabaka,
+        }, anime);
+      }
     }
     final after = jsonEncode(ids.toJson());
     if (ids.known && after != before) {
@@ -270,33 +274,48 @@ class IdMapper {
     return ids;
   }
 
-  static Future<void> _gather(
+  static Future<void> _gatherLocal(
     MediaService service,
     Media media,
     MetaIds ids,
     bool anime,
-    bool first,
   ) async {
     var map = <String, int>{...ids.syncIds()};
     final adapter = service.syncAdapter;
     if (adapter != null) {
       map = {...adapter.idsOf(media), ...map};
       adapter.contributeIds(media, ids);
-      if (map[SyncKey.anilist] == null && map[SyncKey.mal] == null) {
-        try {
-          map = {...map, ...await adapter.foreignIds(media)};
-        } catch (e) {
-          logger(
-            'Id mapper foreignIds failed: $e',
-            logLevel: LogLevel.error,
-            tag: 'IDMAP',
-          );
-        }
-      }
     }
     map = await expand(map, anime: anime, prefer: adapter?.key);
     ids.merge(map);
     ids.mal ??= media.malId;
+  }
+
+  static Future<void> _gatherRemote(
+    MediaService service,
+    Media media,
+    MetaIds ids,
+    bool anime,
+    bool first,
+  ) async {
+    final adapter = service.syncAdapter;
+    if (adapter != null && ids.anilist == null && ids.mal == null) {
+      try {
+        final map = await expand(
+          {...ids.syncIds(), ...await adapter.foreignIds(media)},
+          anime: anime,
+          prefer: adapter.key,
+        );
+        ids.merge(map);
+        ids.mal ??= media.malId;
+      } catch (e) {
+        logger(
+          'Id mapper foreignIds failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'IDMAP',
+        );
+      }
+    }
     if (!first) return;
     if (!ids.known) await _byTitle(media, ids, anime);
     if (anime &&

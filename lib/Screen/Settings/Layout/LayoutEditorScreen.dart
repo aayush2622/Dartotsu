@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
-import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/AppBars.dart';
@@ -92,29 +91,25 @@ class _LayoutEditorScreenState extends BaseScreen<LayoutEditorScreen>
     }
     return Padding(
       padding: EdgeInsets.only(top: Dimens.gap),
-      child: AnimatedSwitcher(
-        duration: animDuration(150),
-        child: Row(
-          key: ValueKey(text),
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: strong ? scheme.primary : scheme.onSurfaceVariant,
-                  fontWeight: strong ? FontWeight.w700 : null,
-                ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              text,
+              textAlign: TextAlign.center,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: strong ? scheme.primary : scheme.onSurfaceVariant,
+                fontWeight: strong ? FontWeight.w700 : null,
               ),
             ),
-            if (cutInfo != null && over == null)
-              IconButton(
-                onPressed: state.cancelCut,
-                icon: const Icon(Icons.close_rounded, size: 18),
-              ),
-          ],
-        ),
+          ),
+          if (cutInfo != null && over == null)
+            IconButton(
+              onPressed: state.cancelCut,
+              icon: const Icon(Icons.close_rounded, size: 18),
+            ),
+        ],
       ),
     );
   }
