@@ -9,11 +9,13 @@ import '../../Api/Discord/DiscordPresence.dart';
 import '../../Api/Discord/PresenceScope.dart';
 import 'Engine/ColorPresets.dart';
 import 'Engine/PlayRequest.dart';
+import '../../Core/Shortcuts/KeyBindings.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Utils/Functions/SnackBar.dart';
 import '../Settings/Categories/AddonSettings.dart';
 import '../Settings/SubSettingsScreen.dart';
 import '../../Utils/Extensions/Responsive.dart';
@@ -106,25 +108,12 @@ class _PlayerScreenState extends State<PlayerScreen>
         body: fullscreen ? _fullscreen(context) : _page(context),
       ),
     );
-    final wrapped = Shortcuts(
-      shortcuts: const {
-        SingleActivator(LogicalKeyboardKey.space): _PlayPauseIntent(),
-      },
-      child: Actions(
-        actions: {
-          _PlayPauseIntent: _PlayPauseAction(() {
-            unawaited(state.togglePlayback());
-            state.showControls();
-          }, () => state.ownsKeys),
-        },
-        child: Focus(
-          focusNode: state.focus,
-          autofocus: true,
-          onKeyEvent: (_, event) =>
-              _key(event) ? KeyEventResult.handled : KeyEventResult.ignored,
-          child: body,
-        ),
-      ),
+    final wrapped = Focus(
+      focusNode: state.focus,
+      autofocus: true,
+      onKeyEvent: (_, event) =>
+          _key(event) ? KeyEventResult.handled : KeyEventResult.ignored,
+      child: body,
     );
     if (media == null) return wrapped;
     return Watch(() {
@@ -764,6 +753,8 @@ class _PlayerScreenState extends State<PlayerScreen>
     );
   }
 
+  String? _lastSubtitle;
+
   bool _key(KeyEvent event) {
     if (event is KeyUpEvent || !state.ownsKeys) return false;
     final typing =
@@ -771,94 +762,120 @@ class _PlayerScreenState extends State<PlayerScreen>
             ?.findAncestorWidgetOfExactType<EditableText>() !=
         null;
     if (typing) return false;
-    final key = event.logicalKey;
-    final repeat = event is KeyRepeatEvent;
-    final arrow =
-        key == LogicalKeyboardKey.arrowLeft ||
-        key == LogicalKeyboardKey.arrowRight ||
-        key == LogicalKeyboardKey.arrowUp ||
-        key == LogicalKeyboardKey.arrowDown;
-    if (repeat && !arrow) return _handles(key);
-    final shift = HardwareKeyboard.instance.isShiftPressed;
-    final engine = state.engine;
-    if (key == LogicalKeyboardKey.keyK) {
-      unawaited(state.togglePlayback());
-      state.showControls();
-    } else if (key == LogicalKeyboardKey.arrowRight ||
-        key == LogicalKeyboardKey.arrowLeft) {
-      final forward = key == LogicalKeyboardKey.arrowRight;
-      if (shift) {
-        unawaited(engine.command([forward ? 'frame-step' : 'frame-back-step']));
-      } else {
-        state.doubleTapSeek(forward);
-      }
-    } else if (key == LogicalKeyboardKey.arrowUp ||
-        key == LogicalKeyboardKey.arrowDown) {
-      state.changeVolume(
-        key == LogicalKeyboardKey.arrowUp ? 0.05 : -0.05,
-        keyboard: true,
-      );
-    } else if (key == LogicalKeyboardKey.keyF) {
-      unawaited(state.toggleFullscreen());
-    } else if (key == LogicalKeyboardKey.keyN) {
-      state.openNext();
-    } else if (key == LogicalKeyboardKey.keyP) {
-      state.openPrevious();
-    } else if (key == LogicalKeyboardKey.keyS) {
-      state.skipStamp();
-    } else if (key == LogicalKeyboardKey.keyM) {
-      state.toggleMute();
-    } else if (key == LogicalKeyboardKey.enter) {
-      state.panel.value = !state.panel.value;
-    } else {
-      final digit = int.tryParse(key.keyLabel);
+    final action = KeyBindings.match(BindingGroup.player, event);
+    if (action == null) {
+      final digit = int.tryParse(event.logicalKey.keyLabel);
       final total = state.duration;
-      if (digit != null && total > Duration.zero) {
+      if (digit == null || !KeyBindings.enabled(BindingGroup.player)) {
+        return false;
+      }
+      if (event is KeyDownEvent && total > Duration.zero) {
         state.seekTo(total * (digit / 10));
       }
+      return true;
     }
-    return _handles(key);
+    if (event is KeyRepeatEvent && !action.repeat) return true;
+    _run(action.id);
+    return true;
   }
 
-  bool _handles(LogicalKeyboardKey key) =>
-      _playerKeys.contains(key) || int.tryParse(key.keyLabel) != null;
-}
-
-final _playerKeys = {
-  LogicalKeyboardKey.keyK,
-  LogicalKeyboardKey.arrowLeft,
-  LogicalKeyboardKey.arrowRight,
-  LogicalKeyboardKey.arrowUp,
-  LogicalKeyboardKey.arrowDown,
-  LogicalKeyboardKey.keyF,
-  LogicalKeyboardKey.keyN,
-  LogicalKeyboardKey.keyP,
-  LogicalKeyboardKey.keyS,
-  LogicalKeyboardKey.keyM,
-  LogicalKeyboardKey.enter,
-};
-
-class _PlayPauseIntent extends Intent {
-  const _PlayPauseIntent();
-}
-
-class _PlayPauseAction extends Action<_PlayPauseIntent> {
-  final VoidCallback onPlayPause;
-  final bool Function() owns;
-
-  _PlayPauseAction(this.onPlayPause, this.owns);
-
-  @override
-  bool isEnabled(_PlayPauseIntent intent) {
-    if (!owns()) return false;
-    final focus = FocusManager.instance.primaryFocus?.context;
-    return focus == null ||
-        focus.findAncestorWidgetOfExactType<EditableText>() == null;
+  void _run(String id) {
+    final engine = state.engine;
+    switch (id) {
+      case 'playerPlayPause':
+        unawaited(state.togglePlayback());
+        state.showControls();
+      case 'playerSeekForward':
+        state.doubleTapSeek(true);
+      case 'playerSeekBack':
+        state.doubleTapSeek(false);
+      case 'playerSeekForwardLong':
+        state.seekBy(const Duration(seconds: 30));
+      case 'playerSeekBackLong':
+        state.seekBy(const Duration(seconds: -30));
+      case 'playerFrameForward':
+        unawaited(engine.command(['frame-step']));
+      case 'playerFrameBack':
+        unawaited(engine.command(['frame-back-step']));
+      case 'playerVolumeUp':
+        state.changeVolume(0.05, keyboard: true);
+      case 'playerVolumeDown':
+        state.changeVolume(-0.05, keyboard: true);
+      case 'playerMute':
+        state.toggleMute();
+      case 'playerFullscreen':
+        unawaited(state.toggleFullscreen());
+      case 'playerNext':
+        state.openNext();
+      case 'playerPrevious':
+        state.openPrevious();
+      case 'playerSkip':
+        state.skipStamp();
+      case 'playerPanel':
+        state.panel.value = !state.panel.value;
+      case 'playerSpeedUp':
+        _speed(engine.rate.value + 0.25);
+      case 'playerSpeedDown':
+        _speed(engine.rate.value - 0.25);
+      case 'playerSpeedReset':
+        _speed(1);
+      case 'playerSubtitleToggle':
+        _toggleSubtitle();
+      case 'playerSubtitleCycle':
+        _cycleSubtitle();
+      case 'playerAudioCycle':
+        _cycleAudio();
+      case 'playerStreamCycle':
+        final count = state.videos.length;
+        if (count > 1) {
+          unawaited(state.selectStream((state.videoIndex.value + 1) % count));
+        }
+      case 'playerFit':
+        state.cycleFit();
+    }
   }
 
-  @override
-  Object? invoke(_PlayPauseIntent intent) {
-    onPlayPause();
-    return null;
+  void _speed(double value) {
+    final next = value.clamp(0.25, 4.0).toDouble();
+    state.setSpeed(next);
+    snackString('${next}x');
+  }
+
+  void _toggleSubtitle() {
+    final engine = state.engine;
+    final active = engine.activeSubtitle.value;
+    if (active != null) {
+      _lastSubtitle = active;
+      unawaited(engine.noSubtitle());
+      return;
+    }
+    final tracks = engine.subtitleTracks.value;
+    final id = _lastSubtitle ?? (tracks.isEmpty ? null : tracks.first.id);
+    if (id != null) unawaited(engine.setSubtitle(id));
+  }
+
+  void _cycleSubtitle() {
+    final engine = state.engine;
+    final tracks = engine.subtitleTracks.value;
+    if (tracks.isEmpty) return;
+    final at = tracks.indexWhere((t) => t.id == engine.activeSubtitle.value);
+    if (at == tracks.length - 1) {
+      unawaited(engine.noSubtitle());
+      snackString(getString.off);
+      return;
+    }
+    final next = tracks[at + 1];
+    unawaited(engine.setSubtitle(next.id));
+    snackString(next.label);
+  }
+
+  void _cycleAudio() {
+    final engine = state.engine;
+    final tracks = engine.audioTracks.value;
+    if (tracks.length < 2) return;
+    final at = tracks.indexWhere((t) => t.id == engine.activeAudio.value);
+    final next = tracks[(at + 1) % tracks.length];
+    unawaited(engine.setAudio(next.id));
+    snackString(next.label);
   }
 }

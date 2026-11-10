@@ -97,6 +97,18 @@ class PrefName {
     PrefLocation.PROTECTED,
   );
   static const incognito = Pref('incognito', false, PrefLocation.COMMON);
+  static const keyBindings = Pref('keyBindings', '{}', PrefLocation.COMMON);
+  static const shortcutsApp = Pref('shortcutsApp', true, PrefLocation.COMMON);
+  static const shortcutsPlayer = Pref(
+    'shortcutsPlayer',
+    true,
+    PrefLocation.COMMON,
+  );
+  static const shortcutsReader = Pref(
+    'shortcutsReader',
+    true,
+    PrefLocation.COMMON,
+  );
   static const incognitoBlockEdits = Pref(
     'incognitoBlockEdits',
     false,

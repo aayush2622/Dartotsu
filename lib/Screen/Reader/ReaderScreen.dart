@@ -7,6 +7,7 @@ import 'Engine/ReaderItems.dart';
 import 'Engine/ReaderRequest.dart';
 import 'Engine/ReaderSettings.dart';
 import 'Components/ReadingPresence.dart';
+import '../../Core/Shortcuts/KeyBindings.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -255,25 +256,24 @@ class _ReaderScreenState extends State<ReaderScreen>
 
   void _key(KeyEvent event) {
     if (event is! KeyDownEvent) return;
-    final key = event.logicalKey;
+    final action = KeyBindings.match(BindingGroup.reader, event);
+    if (action == null) return;
     final reversed = state.settings.reversed;
-    if (key == LogicalKeyboardKey.arrowRight) {
-      _move(reversed ? -1 : 1);
-    } else if (key == LogicalKeyboardKey.arrowLeft) {
-      _move(reversed ? 1 : -1);
-    } else if (key == LogicalKeyboardKey.arrowDown ||
-        key == LogicalKeyboardKey.pageDown ||
-        key == LogicalKeyboardKey.space) {
-      _move(1);
-    } else if (key == LogicalKeyboardKey.arrowUp ||
-        key == LogicalKeyboardKey.pageUp) {
-      _move(-1);
-    } else if (key == LogicalKeyboardKey.keyM) {
-      state.toggleControls();
-    } else if (key == LogicalKeyboardKey.keyN) {
-      state.openNextChapter();
-    } else if (key == LogicalKeyboardKey.keyP) {
-      state.openPreviousChapter();
+    switch (action.id) {
+      case 'readerRight':
+        _move(reversed ? -1 : 1);
+      case 'readerLeft':
+        _move(reversed ? 1 : -1);
+      case 'readerNextPage':
+        _move(1);
+      case 'readerPreviousPage':
+        _move(-1);
+      case 'readerControls':
+        state.toggleControls();
+      case 'readerNextChapter':
+        state.openNextChapter();
+      case 'readerPreviousChapter':
+        state.openPreviousChapter();
     }
   }
 }

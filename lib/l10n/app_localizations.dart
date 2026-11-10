@@ -14722,6 +14722,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show how many episodes or chapters are left on posters'**
   String get unreadCounterDesc;
+
+  /// No description provided for @settingsShortcuts.
+  ///
+  /// In en, this message translates to:
+  /// **'Keyboard shortcuts'**
+  String get settingsShortcuts;
+
+  /// No description provided for @settingsShortcutsDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'See, change and turn off every key'**
+  String get settingsShortcutsDesc;
+
+  /// No description provided for @shortcutGroupApp.
+  ///
+  /// In en, this message translates to:
+  /// **'App'**
+  String get shortcutGroupApp;
+
+  /// No description provided for @shortcutGroupPlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Video player'**
+  String get shortcutGroupPlayer;
+
+  /// No description provided for @shortcutGroupReader.
+  ///
+  /// In en, this message translates to:
+  /// **'Reader'**
+  String get shortcutGroupReader;
+
+  /// No description provided for @shortcutsEnableApp.
+  ///
+  /// In en, this message translates to:
+  /// **'App shortcuts'**
+  String get shortcutsEnableApp;
+
+  /// No description provided for @shortcutsEnablePlayer.
+  ///
+  /// In en, this message translates to:
+  /// **'Player shortcuts'**
+  String get shortcutsEnablePlayer;
+
+  /// No description provided for @shortcutsEnableReader.
+  ///
+  /// In en, this message translates to:
+  /// **'Reader shortcuts'**
+  String get shortcutsEnableReader;
+
+  /// No description provided for @shortcutsEnableDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Turn every key in this group on or off'**
+  String get shortcutsEnableDesc;
+
+  /// No description provided for @shortcutNotSet.
+  ///
+  /// In en, this message translates to:
+  /// **'Not set'**
+  String get shortcutNotSet;
+
+  /// No description provided for @shortcutAddKey.
+  ///
+  /// In en, this message translates to:
+  /// **'Add a key'**
+  String get shortcutAddKey;
+
+  /// No description provided for @shortcutResetOne.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to default'**
+  String get shortcutResetOne;
+
+  /// No description provided for @shortcutClearKeys.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove all keys'**
+  String get shortcutClearKeys;
+
+  /// No description provided for @shortcutResetAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset all shortcuts'**
+  String get shortcutResetAll;
+
+  /// No description provided for @shortcutResetAllDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Put every key back to its default'**
+  String get shortcutResetAllDesc;
+
+  /// No description provided for @shortcutPress.
+  ///
+  /// In en, this message translates to:
+  /// **'Press the key or combination you want'**
+  String get shortcutPress;
+
+  /// No description provided for @shortcutPressHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Each combination can only belong to one action, so taking one moves it.'**
+  String get shortcutPressHint;
+
+  /// No description provided for @shortcutSeekPercent.
+  ///
+  /// In en, this message translates to:
+  /// **'Jump to a point of the video'**
+  String get shortcutSeekPercent;
+
+  /// No description provided for @shortcutSeekPercentKeys.
+  ///
+  /// In en, this message translates to:
+  /// **'0 – 9'**
+  String get shortcutSeekPercentKeys;
+
+  /// No description provided for @shortcutAppBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Go back'**
+  String get shortcutAppBack;
+
+  /// No description provided for @shortcutAppFullscreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle fullscreen'**
+  String get shortcutAppFullscreen;
+
+  /// No description provided for @shortcutAppGlass.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle glass mode'**
+  String get shortcutAppGlass;
+
+  /// No description provided for @shortcutAppMaterialYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle Material You'**
+  String get shortcutAppMaterialYou;
+
+  /// No description provided for @shortcutAppDark.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle dark mode'**
+  String get shortcutAppDark;
+
+  /// No description provided for @shortcutAppOled.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle OLED black'**
+  String get shortcutAppOled;
+
+  /// No description provided for @shortcutAppSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Open search'**
+  String get shortcutAppSearch;
+
+  /// No description provided for @shortcutAppSettings.
+  ///
+  /// In en, this message translates to:
+  /// **'Open settings'**
+  String get shortcutAppSettings;
+
+  /// No description provided for @shortcutAppDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Open downloads'**
+  String get shortcutAppDownloads;
+
+  /// No description provided for @shortcutAppNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Open notifications'**
+  String get shortcutAppNotifications;
+
+  /// No description provided for @shortcutAppIncognito.
+  ///
+  /// In en, this message translates to:
+  /// **'Toggle incognito'**
+  String get shortcutAppIncognito;
+
+  /// No description provided for @shortcutAppShortcuts.
+  ///
+  /// In en, this message translates to:
+  /// **'Show keyboard shortcuts'**
+  String get shortcutAppShortcuts;
+
+  /// No description provided for @shortcutPlayerPlayPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Play or pause'**
+  String get shortcutPlayerPlayPause;
+
+  /// No description provided for @shortcutPlayerSeekForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Seek forward'**
+  String get shortcutPlayerSeekForward;
+
+  /// No description provided for @shortcutPlayerSeekBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Seek back'**
+  String get shortcutPlayerSeekBack;
+
+  /// No description provided for @shortcutPlayerSeekForwardLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Seek forward 30 seconds'**
+  String get shortcutPlayerSeekForwardLong;
+
+  /// No description provided for @shortcutPlayerSeekBackLong.
+  ///
+  /// In en, this message translates to:
+  /// **'Seek back 30 seconds'**
+  String get shortcutPlayerSeekBackLong;
+
+  /// No description provided for @shortcutPlayerFrameForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Next frame'**
+  String get shortcutPlayerFrameForward;
+
+  /// No description provided for @shortcutPlayerFrameBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous frame'**
+  String get shortcutPlayerFrameBack;
+
+  /// No description provided for @shortcutPlayerVolumeUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume up'**
+  String get shortcutPlayerVolumeUp;
+
+  /// No description provided for @shortcutPlayerVolumeDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Volume down'**
+  String get shortcutPlayerVolumeDown;
+
+  /// No description provided for @shortcutPlayerMute.
+  ///
+  /// In en, this message translates to:
+  /// **'Mute'**
+  String get shortcutPlayerMute;
+
+  /// No description provided for @shortcutPlayerFullscreen.
+  ///
+  /// In en, this message translates to:
+  /// **'Fullscreen'**
+  String get shortcutPlayerFullscreen;
+
+  /// No description provided for @shortcutPlayerNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next episode'**
+  String get shortcutPlayerNext;
+
+  /// No description provided for @shortcutPlayerPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous episode'**
+  String get shortcutPlayerPrevious;
+
+  /// No description provided for @shortcutPlayerSkip.
+  ///
+  /// In en, this message translates to:
+  /// **'Skip intro or ending'**
+  String get shortcutPlayerSkip;
+
+  /// No description provided for @shortcutPlayerPanel.
+  ///
+  /// In en, this message translates to:
+  /// **'Episode list'**
+  String get shortcutPlayerPanel;
+
+  /// No description provided for @shortcutPlayerSpeedUp.
+  ///
+  /// In en, this message translates to:
+  /// **'Faster playback'**
+  String get shortcutPlayerSpeedUp;
+
+  /// No description provided for @shortcutPlayerSpeedDown.
+  ///
+  /// In en, this message translates to:
+  /// **'Slower playback'**
+  String get shortcutPlayerSpeedDown;
+
+  /// No description provided for @shortcutPlayerSpeedReset.
+  ///
+  /// In en, this message translates to:
+  /// **'Normal speed'**
+  String get shortcutPlayerSpeedReset;
+
+  /// No description provided for @shortcutPlayerSubtitleToggle.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtitles on or off'**
+  String get shortcutPlayerSubtitleToggle;
+
+  /// No description provided for @shortcutPlayerSubtitleCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Next subtitle track'**
+  String get shortcutPlayerSubtitleCycle;
+
+  /// No description provided for @shortcutPlayerAudioCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Next audio track'**
+  String get shortcutPlayerAudioCycle;
+
+  /// No description provided for @shortcutPlayerStreamCycle.
+  ///
+  /// In en, this message translates to:
+  /// **'Next stream'**
+  String get shortcutPlayerStreamCycle;
+
+  /// No description provided for @shortcutPlayerFit.
+  ///
+  /// In en, this message translates to:
+  /// **'Change video fit'**
+  String get shortcutPlayerFit;
+
+  /// No description provided for @shortcutReaderRight.
+  ///
+  /// In en, this message translates to:
+  /// **'Page to the right'**
+  String get shortcutReaderRight;
+
+  /// No description provided for @shortcutReaderLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'Page to the left'**
+  String get shortcutReaderLeft;
+
+  /// No description provided for @shortcutReaderNextPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Next page'**
+  String get shortcutReaderNextPage;
+
+  /// No description provided for @shortcutReaderPreviousPage.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous page'**
+  String get shortcutReaderPreviousPage;
+
+  /// No description provided for @shortcutReaderControls.
+  ///
+  /// In en, this message translates to:
+  /// **'Show or hide controls'**
+  String get shortcutReaderControls;
+
+  /// No description provided for @shortcutReaderNextChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'Next chapter'**
+  String get shortcutReaderNextChapter;
+
+  /// No description provided for @shortcutReaderPreviousChapter.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous chapter'**
+  String get shortcutReaderPreviousChapter;
+
+  /// No description provided for @shortcutTaken.
+  ///
+  /// In en, this message translates to:
+  /// **'Taken from {action}'**
+  String shortcutTaken(String action);
+
+  /// No description provided for @incognitoTurnedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Incognito mode on'**
+  String get incognitoTurnedOn;
+
+  /// No description provided for @incognitoTurnedOff.
+  ///
+  /// In en, this message translates to:
+  /// **'Incognito mode off'**
+  String get incognitoTurnedOff;
 }
 
 class _AppLocalizationsDelegate

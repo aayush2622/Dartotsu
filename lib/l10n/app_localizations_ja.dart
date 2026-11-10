@@ -8147,4 +8147,199 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get unreadCounterDesc =>
       'Show how many episodes or chapters are left on posters';
+
+  @override
+  String get settingsShortcuts => 'Keyboard shortcuts';
+
+  @override
+  String get settingsShortcutsDesc => 'See, change and turn off every key';
+
+  @override
+  String get shortcutGroupApp => 'App';
+
+  @override
+  String get shortcutGroupPlayer => 'Video player';
+
+  @override
+  String get shortcutGroupReader => 'Reader';
+
+  @override
+  String get shortcutsEnableApp => 'App shortcuts';
+
+  @override
+  String get shortcutsEnablePlayer => 'Player shortcuts';
+
+  @override
+  String get shortcutsEnableReader => 'Reader shortcuts';
+
+  @override
+  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+
+  @override
+  String get shortcutNotSet => 'Not set';
+
+  @override
+  String get shortcutAddKey => 'Add a key';
+
+  @override
+  String get shortcutResetOne => 'Reset to default';
+
+  @override
+  String get shortcutClearKeys => 'Remove all keys';
+
+  @override
+  String get shortcutResetAll => 'Reset all shortcuts';
+
+  @override
+  String get shortcutResetAllDesc => 'Put every key back to its default';
+
+  @override
+  String get shortcutPress => 'Press the key or combination you want';
+
+  @override
+  String get shortcutPressHint =>
+      'Each combination can only belong to one action, so taking one moves it.';
+
+  @override
+  String get shortcutSeekPercent => 'Jump to a point of the video';
+
+  @override
+  String get shortcutSeekPercentKeys => '0 – 9';
+
+  @override
+  String get shortcutAppBack => 'Go back';
+
+  @override
+  String get shortcutAppFullscreen => 'Toggle fullscreen';
+
+  @override
+  String get shortcutAppGlass => 'Toggle glass mode';
+
+  @override
+  String get shortcutAppMaterialYou => 'Toggle Material You';
+
+  @override
+  String get shortcutAppDark => 'Toggle dark mode';
+
+  @override
+  String get shortcutAppOled => 'Toggle OLED black';
+
+  @override
+  String get shortcutAppSearch => 'Open search';
+
+  @override
+  String get shortcutAppSettings => 'Open settings';
+
+  @override
+  String get shortcutAppDownloads => 'Open downloads';
+
+  @override
+  String get shortcutAppNotifications => 'Open notifications';
+
+  @override
+  String get shortcutAppIncognito => 'Toggle incognito';
+
+  @override
+  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+
+  @override
+  String get shortcutPlayerPlayPause => 'Play or pause';
+
+  @override
+  String get shortcutPlayerSeekForward => 'Seek forward';
+
+  @override
+  String get shortcutPlayerSeekBack => 'Seek back';
+
+  @override
+  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+
+  @override
+  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+
+  @override
+  String get shortcutPlayerFrameForward => 'Next frame';
+
+  @override
+  String get shortcutPlayerFrameBack => 'Previous frame';
+
+  @override
+  String get shortcutPlayerVolumeUp => 'Volume up';
+
+  @override
+  String get shortcutPlayerVolumeDown => 'Volume down';
+
+  @override
+  String get shortcutPlayerMute => 'Mute';
+
+  @override
+  String get shortcutPlayerFullscreen => 'Fullscreen';
+
+  @override
+  String get shortcutPlayerNext => 'Next episode';
+
+  @override
+  String get shortcutPlayerPrevious => 'Previous episode';
+
+  @override
+  String get shortcutPlayerSkip => 'Skip intro or ending';
+
+  @override
+  String get shortcutPlayerPanel => 'Episode list';
+
+  @override
+  String get shortcutPlayerSpeedUp => 'Faster playback';
+
+  @override
+  String get shortcutPlayerSpeedDown => 'Slower playback';
+
+  @override
+  String get shortcutPlayerSpeedReset => 'Normal speed';
+
+  @override
+  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+
+  @override
+  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+
+  @override
+  String get shortcutPlayerAudioCycle => 'Next audio track';
+
+  @override
+  String get shortcutPlayerStreamCycle => 'Next stream';
+
+  @override
+  String get shortcutPlayerFit => 'Change video fit';
+
+  @override
+  String get shortcutReaderRight => 'Page to the right';
+
+  @override
+  String get shortcutReaderLeft => 'Page to the left';
+
+  @override
+  String get shortcutReaderNextPage => 'Next page';
+
+  @override
+  String get shortcutReaderPreviousPage => 'Previous page';
+
+  @override
+  String get shortcutReaderControls => 'Show or hide controls';
+
+  @override
+  String get shortcutReaderNextChapter => 'Next chapter';
+
+  @override
+  String get shortcutReaderPreviousChapter => 'Previous chapter';
+
+  @override
+  String shortcutTaken(String action) {
+    return 'Taken from $action';
+  }
+
+  @override
+  String get incognitoTurnedOn => 'Incognito mode on';
+
+  @override
+  String get incognitoTurnedOff => 'Incognito mode off';
 }
