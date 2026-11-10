@@ -1,148 +1,162 @@
 
 ### 🎉 New Features
-* [b47c79f8](https://github.com/aayush2622/Dartotsu/commit/b47c79f8): feat: installing an extension manager lists the Java runtime, core and manager as steps, and the runtime is an addon
-* [5333f288](https://github.com/aayush2622/Dartotsu/commit/5333f288): feat: the image sheet shows the file size of the page or image
-* [8554063c](https://github.com/aayush2622/Dartotsu/commit/8554063c): feat: a clearance is only sent with the user agent that earned it, the source settings sheet shows why a Cloudflare check failed, and the extension installer sheet shows progress, errors and cancel like the app update
-* [7bdc0610](https://github.com/aayush2622/Dartotsu/commit/7bdc0610): feat: settings, watch progress and (with a passphrase) accounts sync through a private GitHub Gist; player and reader settings move to their own groups; protected backups require a password
-* [12d2a8b0](https://github.com/aayush2622/Dartotsu/commit/12d2a8b0): feat: a long title in the details page app bar scrolls instead of being cut off
-* [15a08474](https://github.com/aayush2622/Dartotsu/commit/15a08474): feat: layout editor edits a live mock of the real screen with drag highlight, insertion marker and mouse drag
-* [b38ca447](https://github.com/aayush2622/Dartotsu/commit/b38ca447): feat: settings restructure with collapsible sections, bar layout editor, PDF reading, external player hand-off
-* [fd591347](https://github.com/aayush2622/Dartotsu/commit/fd591347): feat: handle mihon://add-repo links
-* [50b7f896](https://github.com/aayush2622/Dartotsu/commit/50b7f896): feat: remember the desktop window size, position and maximized state between launches
-* [fd5d99f6](https://github.com/aayush2622/Dartotsu/commit/fd5d99f6): feat: casting follows the TV from the player, with episodes, quality, subtitles, volume and speed in the cast sheet
-* [944e4a70](https://github.com/aayush2622/Dartotsu/commit/944e4a70): feat: source browse page gets web view and source settings buttons
-* [c9d665bf](https://github.com/aayush2622/Dartotsu/commit/c9d665bf): feat: novel reader gets contents, search, highlights, a stable reading position and page turning
-* [1d95771a](https://github.com/aayush2622/Dartotsu/commit/1d95771a): feat: Support the developer opens a sheet with the UPI id next to Buy me a coffee
-* [26ec80da](https://github.com/aayush2622/Dartotsu/commit/26ec80da): feat: redesigned update sheet with progress, speed and cancel, and a second tap no longer starts another download
-* [23044917](https://github.com/aayush2622/Dartotsu/commit/23044917): feat: offline mode fails every non-local request at once instead of trying the network
-* [75e1684c](https://github.com/aayush2622/Dartotsu/commit/75e1684c): feat: the large Android widget scrolls through every resume entry and the next releases, and each entry opens its own title
-* [47edefe9](https://github.com/aayush2622/Dartotsu/commit/47edefe9): feat: MangaBaka stacks, rising, news, library sync, a private switch and separate manga and novel sections, plus a news page for any service
-* [003e7c4e](https://github.com/aayush2622/Dartotsu/commit/003e7c4e): feat: Auto reading mode picks webtoon or right to left from the series type
-* [a35484c3](https://github.com/aayush2622/Dartotsu/commit/a35484c3): feat: Resume has a big view with every entry and never shows private or hidden titles
-* [eb7b9c51](https://github.com/aayush2622/Dartotsu/commit/eb7b9c51): feat: AniList Missing Sequel rail, released episode count on the detail page and pull to refresh forces it, plus the feed no longer pages on upward scrolls
-* [22f452c9](https://github.com/aayush2622/Dartotsu/commit/22f452c9): feat: better shortcut icons
-* [24fb14d8](https://github.com/aayush2622/Dartotsu/commit/24fb14d8): feat: lock when idle setting, biometric prompt opens on launch, long press the title to copy it and a button to delete log files
-* [12fca720](https://github.com/aayush2622/Dartotsu/commit/12fca720): feat: saved per-source search filters with a filter button in the wrong title dialog, used by title matching and extension search
-* [084d84e8](https://github.com/aayush2622/Dartotsu/commit/084d84e8): feat: Android home-screen widget with a Material You continue card and upcoming releases
-* [c9de785b](https://github.com/aayush2622/Dartotsu/commit/c9de785b): feat: extension calendar of subscription releases, share Together invites, and a download storage view with free up space
-* [f6de57ec](https://github.com/aayush2622/Dartotsu/commit/f6de57ec): feat: Android app shortcuts for continue, search, downloads and calendar, and Together invite links open the app on Android
-* [145928e6](https://github.com/aayush2622/Dartotsu/commit/145928e6): feat: Linux media keys and playerctl control the player through an MPRIS D-Bus service
-* [dc8738cb](https://github.com/aayush2622/Dartotsu/commit/dc8738cb): feat: pinch zoom works in every reader mode, can zoom out and snaps back when let go
-* [fcb259e6](https://github.com/aayush2622/Dartotsu/commit/fcb259e6): feat: extension Update all with an updates card and a reinstall prompt, and open epub books from the files in the novel reader
-* [ef6809ea](https://github.com/aayush2622/Dartotsu/commit/ef6809ea): feat: Simkl series progress, seasons count on from the one before and the source picker shows a spinner while extensions load
-* [4f1f1631](https://github.com/aayush2622/Dartotsu/commit/4f1f1631): feat: subscribe to a title's source to get notified about new episodes and chapters
-* [583370cc](https://github.com/aayush2622/Dartotsu/commit/583370cc): feat: save the current frame from the picture sheet, original or with shaders and colors
-* [4b41ecdd](https://github.com/aayush2622/Dartotsu/commit/4b41ecdd): feat: cast to chromecast, dlna and roku from the player
-* [737dd139](https://github.com/aayush2622/Dartotsu/commit/737dd139): feat: the extension service can choose what its first tab shows and its home rail follows both tabs
-* [78cecc8f](https://github.com/aayush2622/Dartotsu/commit/78cecc8f): feat: extension runtimes show an update button and auto update is a setting that is off by default
-* [4a679235](https://github.com/aayush2622/Dartotsu/commit/4a679235): feat: clear the whole download queue at once and a clearer move to top icon
-* [7d9ba36b](https://github.com/aayush2622/Dartotsu/commit/7d9ba36b): feat: one id mapper for sync, comments, metadata and lookups, auto sync keeps going past long waits and instant sync covers manga
-* [8c04c119](https://github.com/aayush2622/Dartotsu/commit/8c04c119): feat: follow cover can be limited to media pages
-* [51773774](https://github.com/aayush2622/Dartotsu/commit/51773774): feat: reader settings group translation and text to speech under novel
-* [6222a2f4](https://github.com/aayush2622/Dartotsu/commit/6222a2f4): feat: editable aniskip times, pause when the window loses focus and working keyboard volume
-* [954dd25e](https://github.com/aayush2622/Dartotsu/commit/954dd25e): feat: separate seasons by scanlator, source picker tabs per service and grouped streams
-* [fbd7571a](https://github.com/aayush2622/Dartotsu/commit/fbd7571a): feat: biometric unlock and an animated pin pad with auto submit
-* [9bd230b1](https://github.com/aayush2622/Dartotsu/commit/9bd230b1): feat: discord presence for reading manga and novels, android image save goes to downloads without storage permission
-* [dd46090e](https://github.com/aayush2622/Dartotsu/commit/dd46090e): feat: rework glass theme with real glass surfaces, translucent tonal colours and a cpu-blurred background
-* [b7e15a5f](https://github.com/aayush2622/Dartotsu/commit/b7e15a5f): feat: manrope replaces poppins as the default font
-* [cdb7b3b4](https://github.com/aayush2622/Dartotsu/commit/cdb7b3b4): feat(sync): add manga and novel cross-service mapping index integration
-* [9715ae0c](https://github.com/aayush2622/Dartotsu/commit/9715ae0c): feat: add MangaUpdates service and update README
+* [4ac32da0](https://github.com/aayush2622/Dartotsu/commit/4ac32da0): feat: editable keyboard shortcuts for the app, player and reader with a settings screen and per group switches
+* [51b1a2d7](https://github.com/aayush2622/Dartotsu/commit/51b1a2d7): feat: community lists, disable skips, hoster grouping, Simkl movies & series mode
+* [5d387f41](https://github.com/aayush2622/Dartotsu/commit/5d387f41): feat: add Anime-Planet service, private-aware list sync and prequel/sequel cards
+* [5a5a3731](https://github.com/aayush2622/Dartotsu/commit/5a5a3731): feat: finished videos move into the chosen folder and play through a file descriptor
+* [00421b14](https://github.com/aayush2622/Dartotsu/commit/00421b14): feat: ask for a folder whenever something needs saving and no storage permission or folder is set
+* [6ef84d60](https://github.com/aayush2622/Dartotsu/commit/6ef84d60): feat: pick a storage folder with the system picker instead of all-files access, finished downloads, backups and screenshots are copied there; content:// files open
+* [3cffd5c7](https://github.com/aayush2622/Dartotsu/commit/3cffd5c7): feat: stream links reach the player, watch and download pickers as providers find them
+* [4d6961be](https://github.com/aayush2622/Dartotsu/commit/4d6961be): feat: offline fallback for AniList via static media index CDN (#175)
+* [dfd3d7fd](https://github.com/aayush2622/Dartotsu/commit/dfd3d7fd): feat: external players get the stream's subtitles and audio tracks
+* [d07d1117](https://github.com/aayush2622/Dartotsu/commit/d07d1117): feat: player keyboard shortcuts follow the mouse, player or page
+* [d97fd820](https://github.com/aayush2622/Dartotsu/commit/d97fd820): feat: DASH streams download with quality and audio choice instead of failing as HLS
+* [7f6164ed](https://github.com/aayush2622/Dartotsu/commit/7f6164ed): feat: add frostnova721's contributor banner
+* [385a8e59](https://github.com/aayush2622/Dartotsu/commit/385a8e59): feat: app version and build in the log header
+* [f2811aa5](https://github.com/aayush2622/Dartotsu/commit/f2811aa5): feat: subtitle outline width setting and a live subtitle preview in player settings
+* [bf7662af](https://github.com/aayush2622/Dartotsu/commit/bf7662af): feat: option to hide 18+ sources from the extension feeds and source picker
+* [47dff820](https://github.com/aayush2622/Dartotsu/commit/47dff820): feat: download several subtitles and audio tracks per episode
+* [861ddccb](https://github.com/aayush2622/Dartotsu/commit/861ddccb): feat: select several downloads and delete them together
+* [d1b85ee0](https://github.com/aayush2622/Dartotsu/commit/d1b85ee0): feat: ask for the app language in onboarding, preselecting the device language
+* [7c3eaa19](https://github.com/aayush2622/Dartotsu/commit/7c3eaa19): feat: not-in-list search filter for AniList and chapter counts on search cards
+* [c351332c](https://github.com/aayush2622/Dartotsu/commit/c351332c): feat: placeholder rows for extensions that are still converting
+* [800c783a](https://github.com/aayush2622/Dartotsu/commit/800c783a): feat: drag the score badge, airing dot and unread counter onto separate poster corners
+* [f8b9a1c7](https://github.com/aayush2622/Dartotsu/commit/f8b9a1c7): feat: Discord settings overhaul with live preview, account sign-in on desktop, status control, text/image/button options and synced token
+* [56fe3a94](https://github.com/aayush2622/Dartotsu/commit/56fe3a94): feat: Android 16 Live Update progress notification for downloads
+* [3cc17a7f](https://github.com/aayush2622/Dartotsu/commit/3cc17a7f): feat: fade the main screen in on app open
+* [857fc05c](https://github.com/aayush2622/Dartotsu/commit/857fc05c): feat: comment cards use the episode entrance animation
+* [4703649a](https://github.com/aayush2622/Dartotsu/commit/4703649a): feat: tidier What to sync panel with grouped changed settings, colour swatches and a show-all toggle
+* [7b0f037c](https://github.com/aayush2622/Dartotsu/commit/7b0f037c): feat: move gist sync from General to Account settings
+* [d0ae4a7b](https://github.com/aayush2622/Dartotsu/commit/d0ae4a7b): feat: resume shelf shows the episode thumbnail, falling back to the cover, with a live player frame on close
+* [01b44448](https://github.com/aayush2622/Dartotsu/commit/01b44448): feat: unread counter only on continue shelves, status corner setting and calendar button on every browse tab
+* [ccd1bc0f](https://github.com/aayush2622/Dartotsu/commit/ccd1bc0f): feat: UPI pay link on the donate sheet
+* [d641ae1c](https://github.com/aayush2622/Dartotsu/commit/d641ae1c): feat: auto subtitle selection with language matching and a visible selection
+* [2943f03d](https://github.com/aayush2622/Dartotsu/commit/2943f03d): feat: resume thumbnails fall back to the cover and sync their urls
+* [eebdea99](https://github.com/aayush2622/Dartotsu/commit/eebdea99): feat: per-device sync switches for subtitle look, picture colours and theme colours
+* [4694b8ff](https://github.com/aayush2622/Dartotsu/commit/4694b8ff): feat: open the site in the web view from failed manga pages and chapters
+* [8f81fea2](https://github.com/aayush2622/Dartotsu/commit/8f81fea2): feat: unread counter in the card style and the last retrieved chapter count
+* [d268eae3](https://github.com/aayush2622/Dartotsu/commit/d268eae3): feat: add unread/unwatched counter badges and manga release calendar (#173)
 
 ### 🛠️ Bug Fixes & Improvements
-* [0026df32](https://github.com/aayush2622/Dartotsu/commit/0026df32): fix: dispose dialog text controllers after the close animation, not when the dialog is popped
-* [3dd5f424](https://github.com/aayush2622/Dartotsu/commit/3dd5f424): fix: a slow stream no longer switches the player to software rendering for good, so shaders keep working
-* [2fb2cda6](https://github.com/aayush2622/Dartotsu/commit/2fb2cda6): fix: the chapter loading popup says Chapter instead of Episode
-* [f22bea4a](https://github.com/aayush2622/Dartotsu/commit/f22bea4a): fix: pages underneath the current screen are no longer painted, which made screen changes lag in glass mode
-* [a0cd4760](https://github.com/aayush2622/Dartotsu/commit/a0cd4760): fix: glass blurs the content behind floating bars again and the background texture is smooth instead of blocky
-* [50051cd3](https://github.com/aayush2622/Dartotsu/commit/50051cd3): fix: new chapter alerts keep working for ongoing series whose list entry is Completed
-* [02975cb9](https://github.com/aayush2622/Dartotsu/commit/02975cb9): fix: zoomed manga pages can no longer be panned past their top and bottom edges into the black padding
-* [c4cd89b1](https://github.com/aayush2622/Dartotsu/commit/c4cd89b1): fix: race condition
-* [4e56b144](https://github.com/aayush2622/Dartotsu/commit/4e56b144): fix: AniList bio SVG cards render again: nested SVG images, embedded WOFF2 fonts decoded in Dart, filters dropped
-* [12824cbb](https://github.com/aayush2622/Dartotsu/commit/12824cbb): fix: the calendar shortcut follows the current service and says when it has none, and shortcuts and links wait for the service's account refresh
-* [7bb4aa73](https://github.com/aayush2622/Dartotsu/commit/7bb4aa73): fix: novel chapters from Extension-service sources open the novel reader instead of failing with 'no pages'
-* [959281cd](https://github.com/aayush2622/Dartotsu/commit/959281cd): fix: auto subtitle and audio selection matches languages with regex, so labels like 'English - [Group]' are found, and waits for embedded subtitle tracks
-* [5869e1ce](https://github.com/aayush2622/Dartotsu/commit/5869e1ce): fix: leaving fullscreen on a tablet no longer rotates and re-enters fullscreen
-* [2ec8cf10](https://github.com/aayush2622/Dartotsu/commit/2ec8cf10): fix: the player keeps keyboard focus so space no longer opens the service switcher, and its tools split into two rows with fewer in fullscreen
-* [0f242e74](https://github.com/aayush2622/Dartotsu/commit/0f242e74): fix: shaders say when software rendering blocks them, and software rendering can be switched off in Player settings
-* [dd7484e2](https://github.com/aayush2622/Dartotsu/commit/dd7484e2): fix: the passcode pad takes number keys and keeps keyboard focus on desktop
-* [4b390d70](https://github.com/aayush2622/Dartotsu/commit/4b390d70): fix: a failed profile refresh is logged instead of opening the crash screen when launching offline
-* [86ab3fcd](https://github.com/aayush2622/Dartotsu/commit/86ab3fcd): fix: a progress write queued offline is really sent when the connection returns
-* [feb054b5](https://github.com/aayush2622/Dartotsu/commit/feb054b5): fix: casting advertises the interface that reaches the TV, only uses the default media receiver, waits for DLNA renderers before playing and repeats discovery
-* [39a0cf39](https://github.com/aayush2622/Dartotsu/commit/39a0cf39): fix: updatable extensions stay in the normal installed list and installed ones no longer show as available
-* [45dcaa98](https://github.com/aayush2622/Dartotsu/commit/45dcaa98): fix: Home no longer scrolls back to the top when the app regains focus
-* [ffdab7a6](https://github.com/aayush2622/Dartotsu/commit/ffdab7a6): fix: source subscriptions work for services that only report the chapters released so far
-* [1d6d390d](https://github.com/aayush2622/Dartotsu/commit/1d6d390d): fix: extension titles restored from the local list resolve their installed source again, and a link arriving through several listeners opens once
-* [93158abe](https://github.com/aayush2622/Dartotsu/commit/93158abe): fix: extension text settings accept new lines so several addon urls can be entered
-* [6cf3c886](https://github.com/aayush2622/Dartotsu/commit/6cf3c886): fix: add-repo links ask first, pinch zoom keeps webtoon page tracking, only the host controls a Together room, Chromecast waits for the receiver, DST-safe dates, stable notification ids and smaller crash fixes
-* [87b5d8da](https://github.com/aayush2622/Dartotsu/commit/87b5d8da): fix: casting detects HLS streams without an m3u8 url, serves bare media playlists and audio renditions through the proxy and sends the real content type
-* [609b95e0](https://github.com/aayush2622/Dartotsu/commit/609b95e0): fix: source subscriptions start their own extension manager even when it is not the default
-* [f2db2d15](https://github.com/aayush2622/Dartotsu/commit/f2db2d15): fix: reader images wait and retry on 429 and slow down per host
-* [1624b4b2](https://github.com/aayush2622/Dartotsu/commit/1624b4b2): fix: downloads detect HLS streams without an m3u8 url and merge their separate audio playlist
-* [4fde6970](https://github.com/aayush2622/Dartotsu/commit/4fde6970): fix: story double tap likes only in the middle, side taps only skip
-* [52d8fb9a](https://github.com/aayush2622/Dartotsu/commit/52d8fb9a): fix: profile settings icon matches the menu icon color
-* [8e72cc89](https://github.com/aayush2622/Dartotsu/commit/8e72cc89): fix: the collapsed details header keeps only back and title, the rest moves into the menu
-* [a54f7b35](https://github.com/aayush2622/Dartotsu/commit/a54f7b35): fix: the save progress prompt offers one option when the service isn't signed in
-* [0af63b28](https://github.com/aayush2622/Dartotsu/commit/0af63b28): fix: the list editor only shows private and hide from status lists for services that support them
-* [dce9e7b9](https://github.com/aayush2622/Dartotsu/commit/dce9e7b9): fix: simkl no longer sends a made-up app version when the real one can't be read
-* [25ca8cd7](https://github.com/aayush2622/Dartotsu/commit/25ca8cd7): fix: follow cover theme lets go the moment you leave a details page instead of after the animation and a delay
-* [9cd68767](https://github.com/aayush2622/Dartotsu/commit/9cd68767): fix: glass renders the blurred background once and reuses it instead of a live backdrop blur
-* [71d25928](https://github.com/aayush2622/Dartotsu/commit/71d25928): fix: player subtitles get a real outline instead of blurred shadows
-* [71dc1432](https://github.com/aayush2622/Dartotsu/commit/71dc1432): fix: mangaupdates library entries without a series id no longer crash the home feed
-* [23aa8928](https://github.com/aayush2622/Dartotsu/commit/23aa8928): fix: android player draws into the display cutout so the notch no longer shows black bars
-* [f93837c7](https://github.com/aayush2622/Dartotsu/commit/f93837c7): fix: player applies the default audio and subtitle track explicitly
-* [d7441e22](https://github.com/aayush2622/Dartotsu/commit/d7441e22): fix: aniskip accepts a 201 on submit and the lookup resolves the mal id
-* [b6dbcaf5](https://github.com/aayush2622/Dartotsu/commit/b6dbcaf5): fix: svg images with a prologue or doctype no longer show invalid svg data
-* [63922cf1](https://github.com/aayush2622/Dartotsu/commit/63922cf1): fix: simkl requests send the real app version
-* [48682f65](https://github.com/aayush2622/Dartotsu/commit/48682f65): fix: strip characters above the basic plane from anilist posts, replies and notes
-* [eae5d91f](https://github.com/aayush2622/Dartotsu/commit/eae5d91f): fix: hidden media keeps its paging and fullscreen on windows restores the maximized window
-* [66cd690e](https://github.com/aayush2622/Dartotsu/commit/66cd690e): fix: player and reader rebuild only the parts that change
-* [1359d4c3](https://github.com/aayush2622/Dartotsu/commit/1359d4c3): fix: picture sheet opens instantly and the shader preview uses a half-size source on android
-* [ffb3f2f1](https://github.com/aayush2622/Dartotsu/commit/ffb3f2f1): fix: tab selection indicator follows the swipe animation
-* [17f890e8](https://github.com/aayush2622/Dartotsu/commit/17f890e8): fix: reading the latest chapter of an ongoing series no longer marks it completed
-* [af909dea](https://github.com/aayush2622/Dartotsu/commit/af909dea): fix: settings version shows the git hash instead of the build number
-* [539815ad](https://github.com/aayush2622/Dartotsu/commit/539815ad): fix: simkl posts wait 1.1 s after the previous one finishes
-* [e849d568](https://github.com/aayush2622/Dartotsu/commit/e849d568): fix: simkl library sync checks activities first and only does a full sync without a stored timestamp
-* [a075c4fd](https://github.com/aayush2622/Dartotsu/commit/a075c4fd): fix: mangaupdates service builds against the current api and uses the real endpoints
-* [44d26db6](https://github.com/aayush2622/Dartotsu/commit/44d26db6): fix: manga id index is optional for sync, single cache map and formatting
-* [3428624a](https://github.com/aayush2622/Dartotsu/commit/3428624a): fix: crash on hidden media
-* [d9513338](https://github.com/aayush2622/Dartotsu/commit/d9513338): fix: (windows)  fullscreen not working properly
-* [55142157](https://github.com/aayush2622/Dartotsu/commit/55142157): fix: (android) shader preview [build.android]
+* [211f4e22](https://github.com/aayush2622/Dartotsu/commit/211f4e22): fix: android compiles notification plugins against sdk 37 and keeps androidx core on 1.18 elsewhere [build.apk]
+* [2320a4f5](https://github.com/aayush2622/Dartotsu/commit/2320a4f5): fix: cargokit plugins stay on compile sdk 36 so their build script can read it [build.apk]
+* [b73e2139](https://github.com/aayush2622/Dartotsu/commit/b73e2139): fix: android plugins compile against sdk 37 for androidx core 1.19
+* [90184d5b](https://github.com/aayush2622/Dartotsu/commit/90184d5b): fix: the lock screen fits landscape and every scroll view uses the shared scroll config
+* [f458235c](https://github.com/aayush2622/Dartotsu/commit/f458235c): fix: the scroll to top button hides while idle and glass page transitions are shorter
+* [c038c380](https://github.com/aayush2622/Dartotsu/commit/c038c380): fix: blur and page transitions are lighter, the top bar only blurs once collapsed and settings pages skip their entrance animation
+* [6dde0fd2](https://github.com/aayush2622/Dartotsu/commit/6dde0fd2): fix: the reply buttons wrap instead of being cut off in deep comment threads
+* [af39c564](https://github.com/aayush2622/Dartotsu/commit/af39c564): fix: instant sync only looks up ids a target is missing and logs why a push was skipped
+* [dc2adcd0](https://github.com/aayush2622/Dartotsu/commit/dc2adcd0): fix: reader pages blocked by Cloudflare retry after clearing, streams that won't open skip to the next one and the source in use is the only one that opens the challenge page
+* [643029e4](https://github.com/aayush2622/Dartotsu/commit/643029e4): fix: the Windows web view keeps keyboard focus, the Anime-Planet read-only note only shows when signed out and Kotatsu repositories can import a jar file
+* [c61445d9](https://github.com/aayush2622/Dartotsu/commit/c61445d9): fix: circular clips use the best edge smoothing
+* [d3b123e3](https://github.com/aayush2622/Dartotsu/commit/d3b123e3): fix: home stat buttons are smaller and quieter and the banner header leaves less empty space
+* [81fda763](https://github.com/aayush2622/Dartotsu/commit/81fda763): fix: detail followers labels are sentence case, empty scores are hidden and TV formats keep their case
+* [3a1b906b](https://github.com/aayush2622/Dartotsu/commit/3a1b906b): fix: primary and secondary containers lean toward the theme primary
+* [8f3208d4](https://github.com/aayush2622/Dartotsu/commit/8f3208d4): fix: navbar d-pad focus is a pill sized like the selected item
+* [6159fc06](https://github.com/aayush2622/Dartotsu/commit/6159fc06): fix: drop colour glows and the hue gradient, lower heavy weights, snap radii to the 4px grid, trim exclamation copy
+* [316e0bd6](https://github.com/aayush2622/Dartotsu/commit/316e0bd6): fix: Saikou secondary colours are purple and the selected navbar item follows the theme primary
+* [6ce6f8c8](https://github.com/aayush2622/Dartotsu/commit/6ce6f8c8): fix: auto sync runs when the app resumes and instant sync updates the sync plan
+* [462c1dfe](https://github.com/aayush2622/Dartotsu/commit/462c1dfe): fix: default audio and subtitle tracks are selected explicitly and shown as active
+* [b6087ec2](https://github.com/aayush2622/Dartotsu/commit/b6087ec2): fix: AniList requests queue and retry on rate limits, split mode stacks two rows per request, hidden tabs reload only when shown
+* [3579c803](https://github.com/aayush2622/Dartotsu/commit/3579c803): fix: resolve CodeFactor issues and move custom list filters into tabs
+* [1399d0fa](https://github.com/aayush2622/Dartotsu/commit/1399d0fa): fix: chosen-folder storage logs every step and falls back to app storage when the folder is unreachable
+* [838db4ef](https://github.com/aayush2622/Dartotsu/commit/838db4ef): fix: local files stay out of Resume
+* [cefeab3a](https://github.com/aayush2622/Dartotsu/commit/cefeab3a): fix: player falls back to the first sub/audio track, studio and author open from Details, notification toggles refresh, novel images follow the book's sizing, no disk demuxer cache on mobile
+* [03aeb4c6](https://github.com/aayush2622/Dartotsu/commit/03aeb4c6): fix: AniList stale-data flag lives on AnilistMedia instead of the shared Media
+* [3901c95e](https://github.com/aayush2622/Dartotsu/commit/3901c95e): fix: synopsis divider, manga chapter count, copy on long press for title and synonyms
+* [e909a9bb](https://github.com/aayush2622/Dartotsu/commit/e909a9bb): fix: start year filter applies to manga and novel searches
+* [9eb07e6d](https://github.com/aayush2622/Dartotsu/commit/9eb07e6d): fix: search filter chips fade at the edge instead of clipping
+* [70b07c76](https://github.com/aayush2622/Dartotsu/commit/70b07c76): fix: novel translation no longer throws a RangeError when pages are rebuilt
+* [11154c17](https://github.com/aayush2622/Dartotsu/commit/11154c17): fix: sources without a website no longer open or probe a NONE address
+* [7efe4707](https://github.com/aayush2622/Dartotsu/commit/7efe4707): fix: a preference write that collides with another Isar write is retried instead of lost
+* [83a5a993](https://github.com/aayush2622/Dartotsu/commit/83a5a993): fix: extension feeds never open the Cloudflare challenge page on their own
+* [7c5607b2](https://github.com/aayush2622/Dartotsu/commit/7c5607b2): fix: share card shows the app logo and placeholder sources are hidden from the source lists
+* [24dfea5a](https://github.com/aayush2622/Dartotsu/commit/24dfea5a): fix: media lists remember their sort order and direction
+* [0f756cb6](https://github.com/aayush2622/Dartotsu/commit/0f756cb6): fix: shelves use PosterCard.item and skip the card entrance animation when built mid-scroll
+* [33a0ad0d](https://github.com/aayush2622/Dartotsu/commit/33a0ad0d): fix: every media card is built from the same shelf item through PosterCard.item
+* [5ca3ab9d](https://github.com/aayush2622/Dartotsu/commit/5ca3ab9d): fix: saved frames, share cards, list exports and backups go to the default storage folder instead of asking for a path
+* [731a380c](https://github.com/aayush2622/Dartotsu/commit/731a380c): fix: search cards use the same item mapping as the shelves
+* [c7733b15](https://github.com/aayush2622/Dartotsu/commit/c7733b15): fix: selected navbar item follows the theme's primary colour
+* [79015c18](https://github.com/aayush2622/Dartotsu/commit/79015c18): fix: build the home feed a screen and a half ahead to avoid the first-scroll hitch
+* [acfd3e22](https://github.com/aayush2622/Dartotsu/commit/acfd3e22): fix: port window handling to window_manager 0.6, keep fl_pip on 3.x and give the dev shell libXi and a hook-visible pkg-config
+* [59a26ca3](https://github.com/aayush2622/Dartotsu/commit/59a26ca3): fix: make the banner carousel fade fully opaque before its bottom edge
+* [f2d24e9c](https://github.com/aayush2622/Dartotsu/commit/f2d24e9c): fix: a failing search term falls through to the next term when matching a source
+* [6e38cb68](https://github.com/aayush2622/Dartotsu/commit/6e38cb68): fix: a reader page that cannot be decoded shows the failure card instead of the error screen
+* [5f0739de](https://github.com/aayush2622/Dartotsu/commit/5f0739de): fix: the picture sheet scrolls in landscape and the preferred audio track is picked once late-listed tracks appear
+* [2908e19d](https://github.com/aayush2622/Dartotsu/commit/2908e19d): fix: reader load sheet error state no longer overflows
+* [ac6e5616](https://github.com/aayush2622/Dartotsu/commit/ac6e5616): fix: Discord preview uses the app name without an account and the member row matches Discord
+* [c5d5db96](https://github.com/aayush2622/Dartotsu/commit/c5d5db96): fix: call the Android 16 promoted-notification builder methods by reflection so CI's SDK compiles
+* [05b61a6a](https://github.com/aayush2622/Dartotsu/commit/05b61a6a): fix: contributors skeleton shows bones for avatar and text instead of one block
+* [daeeef03](https://github.com/aayush2622/Dartotsu/commit/daeeef03): fix: make the glass theme cheap — blur only on floating surfaces, one-widget cards, native background decode
+* [0ccc564f](https://github.com/aayush2622/Dartotsu/commit/0ccc564f): fix: report an unreachable plugin index and silence Windows noise warnings
+
+### 🔧 Refactors
+* [7edde87a](https://github.com/aayush2622/Dartotsu/commit/7edde87a): refactor: move download transport and title/HLS/source-test helpers to the extension bridge
+* [f626ab41](https://github.com/aayush2622/Dartotsu/commit/f626ab41): refactor: group list entries by status in one shared helper
+* [c3de800b](https://github.com/aayush2622/Dartotsu/commit/c3de800b): refactor: share one reverse image search sheet between trace.moe and SauceNAO
+
+### 🚀 Performance Improvements
+* [65fcbec9](https://github.com/aayush2622/Dartotsu/commit/65fcbec9): perf: story backgrounds use the cached pre-blurred bitmap instead of live blur
+* [09ce3c20](https://github.com/aayush2622/Dartotsu/commit/09ce3c20): perf: cheaper download cover and latest-unit lookup
+* [d84d5b9d](https://github.com/aayush2622/Dartotsu/commit/d84d5b9d): perf: read only the MediaQuery aspect each widget needs
+* [5830b23f](https://github.com/aayush2622/Dartotsu/commit/5830b23f): perf: compile regexes once instead of on every call
+* [f95d7781](https://github.com/aayush2622/Dartotsu/commit/f95d7781): perf: build long lists lazily in downloads, notifications, sheets and settings
+* [59aa319d](https://github.com/aayush2622/Dartotsu/commit/59aa319d): perf: comment thread is a sliver so the detail page and player scroll without lag
 
 ### 🧹 Chores & Documentation
-* [d290fcf0](https://github.com/aayush2622/Dartotsu/commit/d290fcf0): chore: version bump
-* [4bb3cfb8](https://github.com/aayush2622/Dartotsu/commit/4bb3cfb8): chore: bump nix channels.json
-* [4c8e09b5](https://github.com/aayush2622/Dartotsu/commit/4c8e09b5): chore: pub upgrade [build.all] [ping]
-* [42f03e33](https://github.com/aayush2622/Dartotsu/commit/42f03e33): chore: bridge without the repeated Java probe and plugin index fetches
-* [18a7e57c](https://github.com/aayush2622/Dartotsu/commit/18a7e57c): chore: bridge with the JVM addon and thin desktop plugins
-* [6edc4161](https://github.com/aayush2622/Dartotsu/commit/6edc4161): chore: bump nix channels.json
-* [d319bf24](https://github.com/aayush2622/Dartotsu/commit/d319bf24): chore: bump nix channels.json
-* [f090481c](https://github.com/aayush2622/Dartotsu/commit/f090481c): chore: pub upgrade [build.all] [ping]
-* [849e44c1](https://github.com/aayush2622/Dartotsu/commit/849e44c1): chore: dart_discord_presence from pub.dev
-* [685d60c8](https://github.com/aayush2622/Dartotsu/commit/685d60c8): chore: layout editor and donate sheet follow the consistency rules (start/end geometry, animation speed, Clickable)
-* [f32e587f](https://github.com/aayush2622/Dartotsu/commit/f32e587f): chore: bump nix channels.json
-* [b94d4f67](https://github.com/aayush2622/Dartotsu/commit/b94d4f67): chore: pub upgrade [build.all]
-* [7bf2c39d](https://github.com/aayush2622/Dartotsu/commit/7bf2c39d): docs: keep the original README header, move Why you'll like it and the screenshots to the bottom, no emojis
-* [8d47319b](https://github.com/aayush2622/Dartotsu/commit/8d47319b): docs: rewrite README for everyday users with screenshots, bring back the visitor counter, CodeFactor and DeepWiki
-* [8ef33dcb](https://github.com/aayush2622/Dartotsu/commit/8ef33dcb): chore: pub upgrade [build.all]
-* [2b4d971c](https://github.com/aayush2622/Dartotsu/commit/2b4d971c): ci: package a Linux AppImage on release
-* [dcfb7f13](https://github.com/aayush2622/Dartotsu/commit/dcfb7f13): chore: bump nix channels.json
-* [30352093](https://github.com/aayush2622/Dartotsu/commit/30352093): chore: remove the test suite
-* [42d52cbc](https://github.com/aayush2622/Dartotsu/commit/42d52cbc): chore: pub upgrade [build.all]
-* [b696207a](https://github.com/aayush2622/Dartotsu/commit/b696207a): chore: pub upgrade
-* [7d9f76b8](https://github.com/aayush2622/Dartotsu/commit/7d9f76b8): chore: bump nix channels.json
-* [cb382b43](https://github.com/aayush2622/Dartotsu/commit/cb382b43): chore: pub upgrade [build.all]
-* [25774f14](https://github.com/aayush2622/Dartotsu/commit/25774f14): chore: format
-* [cf47e5e4](https://github.com/aayush2622/Dartotsu/commit/cf47e5e4): chore: pub upgrade [build.all]
-* [52719dce](https://github.com/aayush2622/Dartotsu/commit/52719dce): chore: pub upgrade [build.all]
-* [13525a8d](https://github.com/aayush2622/Dartotsu/commit/13525a8d): chore: pub upgrade [build.all]
-* [e48e80ca](https://github.com/aayush2622/Dartotsu/commit/e48e80ca): chore: bump nix channels.json
-* [4193a6ad](https://github.com/aayush2622/Dartotsu/commit/4193a6ad): chore: pub upgrade [build.all]
-* [7aa6089f](https://github.com/aayush2622/Dartotsu/commit/7aa6089f): chore: pub upgrade [build.all] [ping]
-* [005db139](https://github.com/aayush2622/Dartotsu/commit/005db139): chore: pub upgrade [build.all] [ping]
-* [6585fb60](https://github.com/aayush2622/Dartotsu/commit/6585fb60): chore: strings for casting, extension tabs and runtime updates, the track prompt and clearing the download queue
-* [11df2ca5](https://github.com/aayush2622/Dartotsu/commit/11df2ca5): chore: bump nix channels.json
-* [14a8c6bd](https://github.com/aayush2622/Dartotsu/commit/14a8c6bd): chore: pub upgrade [build.all] [ping]
-* [7f73acbd](https://github.com/aayush2622/Dartotsu/commit/7f73acbd): chore: add strings for app lock biometrics, stream groups and source picker
-* [7e81f80f](https://github.com/aayush2622/Dartotsu/commit/7e81f80f): chore: bump nix channels.json
-* [537958a0](https://github.com/aayush2622/Dartotsu/commit/537958a0): chore: bump nix channels.json
+* [2aadb0b5](https://github.com/aayush2622/Dartotsu/commit/2aadb0b5): chore: pub upgrade [build.all]
+* [0411d542](https://github.com/aayush2622/Dartotsu/commit/0411d542): chore: version bump
+* [b8486cb3](https://github.com/aayush2622/Dartotsu/commit/b8486cb3): chore: update dependencies
+* [994f8d22](https://github.com/aayush2622/Dartotsu/commit/994f8d22): chore: update the extension bridge
+* [b94f8c68](https://github.com/aayush2622/Dartotsu/commit/b94f8c68): chore: bump nix channels.json
+* [b4e1b4c9](https://github.com/aayush2622/Dartotsu/commit/b4e1b4c9): chore: build all [build.all]
+* [6bfd7d4e](https://github.com/aayush2622/Dartotsu/commit/6bfd7d4e): chore: update the extension bridge
+* [d2338b4b](https://github.com/aayush2622/Dartotsu/commit/d2338b4b): chore: bump nix channels.json
+* [24eabb8e](https://github.com/aayush2622/Dartotsu/commit/24eabb8e): chore: build all [build.all]
+* [d0ca6edf](https://github.com/aayush2622/Dartotsu/commit/d0ca6edf): chore: bump nix channels.json
+* [a49bb11d](https://github.com/aayush2622/Dartotsu/commit/a49bb11d): chore: build all [build.all]
+* [5a876663](https://github.com/aayush2622/Dartotsu/commit/5a876663): chore: build all [build.all]
+* [33d2763a](https://github.com/aayush2622/Dartotsu/commit/33d2763a): chore: bump nix channels.json
+* [8ad97712](https://github.com/aayush2622/Dartotsu/commit/8ad97712): chore: build all [build.all]
+* [8588adae](https://github.com/aayush2622/Dartotsu/commit/8588adae): chore: update dependencies
+* [ea0040a4](https://github.com/aayush2622/Dartotsu/commit/ea0040a4): chore: build all [build.all]
+* [6e94bd72](https://github.com/aayush2622/Dartotsu/commit/6e94bd72): chore: remove the chosen-folder storage and keep all-files access
+* [21273ec7](https://github.com/aayush2622/Dartotsu/commit/21273ec7): chore: build all [build.all]
+* [0ece8840](https://github.com/aayush2622/Dartotsu/commit/0ece8840): chore: bridge with latest plugins [build.all]
+* [2427b891](https://github.com/aayush2622/Dartotsu/commit/2427b891): chore: bridge with streamed video links
+* [b291549a](https://github.com/aayush2622/Dartotsu/commit/b291549a): chore: bridge with the iOS embedded jar fix
+* [c99c8730](https://github.com/aayush2622/Dartotsu/commit/c99c8730): chore: bridge with faster CloudStream link loading
+* [3400a06a](https://github.com/aayush2622/Dartotsu/commit/3400a06a): chore: bump nix channels.json
+* [bb20cdde](https://github.com/aayush2622/Dartotsu/commit/bb20cdde): chore: build all [build.all]
+* [4fef4381](https://github.com/aayush2622/Dartotsu/commit/4fef4381): chore: bridge with DASH downloads
+* [d6b294f0](https://github.com/aayush2622/Dartotsu/commit/d6b294f0): chore: bump nix channels.json
+* [54b2ebf8](https://github.com/aayush2622/Dartotsu/commit/54b2ebf8): ci: build every Android ABI on alpha again
+* [0c86bb6f](https://github.com/aayush2622/Dartotsu/commit/0c86bb6f): ci: keep a warm Android compile across lockfile changes
+* [7580a534](https://github.com/aayush2622/Dartotsu/commit/7580a534): chore: build all [build.all]
+* [19869c72](https://github.com/aayush2622/Dartotsu/commit/19869c72): chore: bridge with iOS classpath fix, Windows trust store, wider converter stamp and month-name dates
+* [da3580b1](https://github.com/aayush2622/Dartotsu/commit/da3580b1): chore: bump nix channels.json
+* [c839c406](https://github.com/aayush2622/Dartotsu/commit/c839c406): chore: build all [build.all]
+* [f83a2c9b](https://github.com/aayush2622/Dartotsu/commit/f83a2c9b): chore: bridge with CloudStream conversion fixes and dynamic iOS runtime jar
+* [c51eac40](https://github.com/aayush2622/Dartotsu/commit/c51eac40): chore: bump nix channels.json
+* [6e4089fe](https://github.com/aayush2622/Dartotsu/commit/6e4089fe): ci: keep Android Flutter cache and prune stale Actions caches
+* [6c6504b8](https://github.com/aayush2622/Dartotsu/commit/6c6504b8): chore: bump nix channels.json
+* [402f7ba3](https://github.com/aayush2622/Dartotsu/commit/402f7ba3): chore: build with multi-audio downloads and the window_manager 0.6 port [build.all]
+* [ab9e2d92](https://github.com/aayush2622/Dartotsu/commit/ab9e2d92): chore: update the extension bridge for multi-audio HLS downloads
+* [ecfbe93f](https://github.com/aayush2622/Dartotsu/commit/ecfbe93f): chore: add strings for the not-in-list filter and the onboarding language step
+* [92df5660](https://github.com/aayush2622/Dartotsu/commit/92df5660): chore: bump nix channels.json
+* [9e2d80dc](https://github.com/aayush2622/Dartotsu/commit/9e2d80dc): chore: build with the CloudStream plugin change stream [build.all]
+* [394da76d](https://github.com/aayush2622/Dartotsu/commit/394da76d): chore: use the bridge that streams CloudStream plugin changes
+* [ef0ff3aa](https://github.com/aayush2622/Dartotsu/commit/ef0ff3aa): chore: bump nix channels.json
+* [62354fc3](https://github.com/aayush2622/Dartotsu/commit/62354fc3): chore: use the bridge that fetches Aniyomi pages through the extension's own client [build.all]
+* [18dad2b6](https://github.com/aayush2622/Dartotsu/commit/18dad2b6): chore: bump nix channels.json
+* [ee70177f](https://github.com/aayush2622/Dartotsu/commit/ee70177f): chore: use the bridge with Flutter-backed source WebViews [build.all]
+* [c371aa22](https://github.com/aayush2622/Dartotsu/commit/c371aa22): chore: use the pushed bridge with the toolkit and downloads libraries [build.all]
+* [ee77f493](https://github.com/aayush2622/Dartotsu/commit/ee77f493): chore: document the Discord overhaul, bridge downloads and card badge editor in CLAUDE.md
+* [45e7ff83](https://github.com/aayush2622/Dartotsu/commit/45e7ff83): chore: Flutter 3.47 and Dart 3.13 minimums
+* [28e05cd3](https://github.com/aayush2622/Dartotsu/commit/28e05cd3): chore: bump nix channels.json
+* [e4fdfc53](https://github.com/aayush2622/Dartotsu/commit/e4fdfc53): chore: remove the test folder and build all [build.all]
+* [8ea9223f](https://github.com/aayush2622/Dartotsu/commit/8ea9223f): docs: update CLAUDE.md for the card counter, subtitle matching and media-kit
+* [a3e7f577](https://github.com/aayush2622/Dartotsu/commit/a3e7f577): chore: use Predidit's media-kit
+* [273600f1](https://github.com/aayush2622/Dartotsu/commit/273600f1): ci: use gh download URLs for release Discord links
+* [e21781cb](https://github.com/aayush2622/Dartotsu/commit/e21781cb): chore: bump nix channels.json
 
