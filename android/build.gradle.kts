@@ -16,7 +16,11 @@ subprojects {
 
         extensions.findByType(BaseExtension::class.java)?.apply {
 
-            compileSdkVersion("android-37")
+            if (File(projectDir.parentFile, "cargokit").exists()) {
+                compileSdkVersion(36)
+            } else {
+                compileSdkVersion("android-37")
+            }
             buildToolsVersion("36.0.0")
 
             compileOptions {
