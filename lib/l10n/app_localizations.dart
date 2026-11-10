@@ -4121,6 +4121,54 @@ abstract class AppLocalizations {
   /// **'All custom lists'**
   String get allCustomLists;
 
+  /// No description provided for @simklTitleLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime title language'**
+  String get simklTitleLanguage;
+
+  /// No description provided for @titleLanguageEnglish.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get titleLanguageEnglish;
+
+  /// No description provided for @titleLanguageRomaji.
+  ///
+  /// In en, this message translates to:
+  /// **'Romaji'**
+  String get titleLanguageRomaji;
+
+  /// No description provided for @simklListsTrending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get simklListsTrending;
+
+  /// No description provided for @simklListsMostLiked.
+  ///
+  /// In en, this message translates to:
+  /// **'Most liked'**
+  String get simklListsMostLiked;
+
+  /// No description provided for @simklListsMostFollowed.
+  ///
+  /// In en, this message translates to:
+  /// **'Most followed'**
+  String get simklListsMostFollowed;
+
+  /// No description provided for @simklListsOfficial.
+  ///
+  /// In en, this message translates to:
+  /// **'Official'**
+  String get simklListsOfficial;
+
+  /// No description provided for @simklListTitles.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 title} other{{count} titles}}'**
+  String simklListTitles(int count);
+
   /// No description provided for @people.
   ///
   /// In en, this message translates to:
@@ -7223,6 +7271,42 @@ abstract class AppLocalizations {
   /// **'Also add entries the other service doesn\'t have yet'**
   String get syncAddMissingDesc;
 
+  /// No description provided for @syncDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete what the main service doesn\'t have'**
+  String get syncDelete;
+
+  /// No description provided for @syncDeleteDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay'**
+  String get syncDeleteDesc;
+
+  /// No description provided for @syncDeleteTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete entries?'**
+  String get syncDeleteTitle;
+
+  /// No description provided for @syncDeleteConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.'**
+  String syncDeleteConfirm(int count);
+
+  /// No description provided for @syncDeleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get syncDeleteAction;
+
+  /// No description provided for @syncWillRemove.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} will be deleted from {name}'**
+  String syncWillRemove(int count, String name);
+
   /// No description provided for @syncOnlyForward.
   ///
   /// In en, this message translates to:
@@ -7298,7 +7382,7 @@ abstract class AppLocalizations {
   /// No description provided for @syncPrivateAsk.
   ///
   /// In en, this message translates to:
-  /// **'{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them?'**
+  /// **'{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.'**
   String syncPrivateAsk(int count);
 
   /// No description provided for @syncPrivateInclude.
@@ -7492,6 +7576,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Push every progress update and list edit to your other signed-in services right away'**
   String get syncOnEditDesc;
+
+  /// No description provided for @syncRemoved.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed from {services}'**
+  String syncRemoved(String services);
 
   /// No description provided for @syncPushed.
   ///
@@ -9568,6 +9658,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Playback speed'**
   String get playerSpeed;
+
+  /// No description provided for @localSource.
+  ///
+  /// In en, this message translates to:
+  /// **'Local files'**
+  String get localSource;
+
+  /// No description provided for @localMissing.
+  ///
+  /// In en, this message translates to:
+  /// **'This file or folder is no longer in your Local folder'**
+  String get localMissing;
+
+  /// No description provided for @playerStickyStage.
+  ///
+  /// In en, this message translates to:
+  /// **'Sticky video'**
+  String get playerStickyStage;
+
+  /// No description provided for @playerStickyStageDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep the video fixed at the top while you scroll the episodes and comments below'**
+  String get playerStickyStageDesc;
 
   /// No description provided for @playerCursedSpeed.
   ///

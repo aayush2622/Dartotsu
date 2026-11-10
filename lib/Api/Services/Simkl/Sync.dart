@@ -162,7 +162,11 @@ List<(String, Map<String, Object>)> simklRequests(List<SyncOp> batch) {
     final want = op.want;
     final have = op.have;
     final old = have?.progress ?? 0;
-    final status = simklStatusOut(want.status, SimklKind.anime);
+    final movie = want.isMovie || (have?.isMovie ?? false);
+    final status = simklStatusOut(
+      want.status,
+      movie ? SimklKind.movies : SimklKind.anime,
+    );
     final progress = status == 'completed'
         ? [
             want.progress,
@@ -193,7 +197,11 @@ List<(String, Map<String, Object>)> simklRequests(List<SyncOp> batch) {
     final moved =
         status != null &&
         (have == null ||
-            status != simklStatusOut(have.status, SimklKind.anime));
+            status !=
+                simklStatusOut(
+                  have.status,
+                  movie ? SimklKind.movies : SimklKind.anime,
+                ));
     if (moved) {
       lists.putIfAbsent(status, () => []).add({'ids': _ids(op.targetId)});
     }

@@ -139,7 +139,8 @@ class SyncState extends ScreenState {
     final t = plan?.targets[id];
     if (t == null) return 0;
     PrefName.syncAddMissing.rx.value;
-    return t.pairs.where(controller.isWanted).length;
+    return t.pairs.where(controller.isWanted).length +
+        (PrefName.syncDelete.rx.value ? t.removals.length : 0);
   }
 
   void setMain(String id) {
@@ -171,6 +172,11 @@ class SyncState extends ScreenState {
     if (privates > 0 && PrefName.syncPrivate.value == 'ask') {
       includePrivate = await askSyncPrivate(context, privates);
       if (includePrivate == null || !context.mounted) return;
+    }
+    final removals = controller.removalCount(only: only);
+    if (removals > 0) {
+      final ok = await askSyncDelete(context, removals);
+      if (!ok || !context.mounted) return;
     }
     controller.choosePrivate(includePrivate);
     if (PrefName.syncConfirm.rx.value) {

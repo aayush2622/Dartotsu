@@ -70,6 +70,11 @@ class SimklPref {
   );
 
   static const moviesOnly = Pref('simklMoviesOnly', false, PrefLocation.OTHER);
+  static const titleLanguage = Pref(
+    'simklTitleLanguage',
+    'en',
+    PrefLocation.OTHER,
+  );
 
   static final homeLayout = layoutPref('simklHomeLayout', kSimklHomeSections);
   static final animeLayout = layoutPref(

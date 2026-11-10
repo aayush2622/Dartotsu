@@ -68,6 +68,7 @@ SyncTargetPlan planWith({
   bool mainDates = true,
   bool mainRepeat = true,
   required bool onlyForward,
+  bool collectRemovals = false,
 }) {
   final byNative = {for (final t in target) t.id: t};
   final byAny = <String, SyncItem>{};
@@ -119,9 +120,16 @@ SyncTargetPlan planWith({
     }
     pairs.add(pair);
   }
+  final extra = target.where((t) => !matched.contains(t.id)).toList();
   return SyncTargetPlan(
     pairs,
-    onlyInTarget: target.where((t) => !matched.contains(t.id)).length,
+    onlyInTarget: extra.length,
+    removals: collectRemovals && main.isNotEmpty
+        ? [
+            for (final t in extra)
+              if (t.ids.keys.any((k) => k != spec.key)) t,
+          ]
+        : null,
   );
 }
 

@@ -10,6 +10,13 @@ import '../../../../Utils/Extensions/Responsive.dart';
 import '../../../../Utils/Nav/DpadLayers.dart';
 import '../../../../Widgets/Components/AppControls.dart';
 import '../../../../Widgets/Components/SectionCard.dart';
+import '../../../../Core/Services/MediaServiceController.dart';
+import '../../../../Utils/Functions/NavigateToScreen.dart';
+import '../../../../Widgets/Components/AppSheet.dart';
+import '../../../../Widgets/Components/ConnectedPair.dart';
+import '../../../../Widgets/Components/CustomBottomDialog.dart';
+import '../../../../Widgets/Components/LoadSvg.dart';
+import '../../../../Widgets/Components/SheetTile.dart';
 import '../SyncState.dart';
 
 class SyncHeader extends StatelessWidget {
@@ -65,15 +72,7 @@ class SyncHeader extends StatelessWidget {
           if (candidates.isEmpty)
             Text(getString.syncNoTargets)
           else
-            AppChoiceChips<String>(
-              value: state.mainId,
-              onChanged: state.setMain,
-              options: [
-                for (final s in candidates) AppSegment(s.id, label: s.name),
-                if (candidates.length > 1)
-                  AppSegment(syncAheadId, label: getString.syncAhead),
-              ],
-            ),
+            _mainPicker(context, candidates),
           SizedBox(height: Dimens.gap),
           AppSegmented<bool>(
             value: state.isAnime,
@@ -155,6 +154,81 @@ class SyncHeader extends StatelessWidget {
     );
   }
 
+  Widget _icon(BuildContext context, String id, double size, Color color) {
+    final service = id == syncAheadId
+        ? null
+        : state.candidates.firstWhere((c) => c.id == id).iconPath;
+    return service == null
+        ? Icon(Icons.swap_vert_rounded, size: size, color: color)
+        : loadSvg(service, width: size, height: size, color: color);
+  }
+
+  Widget _mainPicker(BuildContext context, List<MediaService> candidates) {
+    final scheme = context.colorScheme;
+    final names = {
+      for (final c in candidates) c.id: c.name,
+      if (candidates.length > 1) syncAheadId: getString.syncAhead,
+    };
+    return ConnectedPair(
+      color: scheme.secondaryContainer,
+      onTap: () => _pickMain(context, names),
+      child: Padding(
+        padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 0),
+        child: Row(
+          children: [
+            _icon(context, state.mainId, 26, scheme.onSecondaryContainer),
+            SizedBox(width: Dimens.gap),
+            Expanded(
+              child: Text(
+                names[state.mainId] ?? '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: context.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: scheme.onSecondaryContainer,
+                ),
+              ),
+            ),
+            Icon(Icons.expand_more_rounded, color: scheme.onSecondaryContainer),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<void> _pickMain(
+    BuildContext context,
+    Map<String, String> names,
+  ) async {
+    final entries = names.entries.toList();
+    final picked = await showCustomBottomDialog<String>(
+      context,
+      AppSheet(
+        title: getString.syncMainService,
+        child: ListView.builder(
+          padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+          itemCount: entries.length,
+          itemBuilder: (sheet, i) => SheetTile(
+            tinted: true,
+            radius: groupedRadius(i, entries.length),
+            selected: entries[i].key == state.mainId,
+            leading: _icon(
+              sheet,
+              entries[i].key,
+              28,
+              entries[i].key == state.mainId
+                  ? sheet.colorScheme.onPrimaryContainer
+                  : sheet.colorScheme.onSurfaceVariant,
+            ),
+            title: Text(entries[i].value),
+            onTap: () => popPage(sheet, entries[i].key),
+          ),
+        ),
+      ),
+    );
+    if (picked != null) state.setMain(picked);
+  }
+
   Widget _options() => Watch(
     () => Column(
       children: [
@@ -201,6 +275,13 @@ class SyncHeader extends StatelessWidget {
             AppSegment('sync', label: getString.syncPrivateModeSync),
             AppSegment('skip', label: getString.syncPrivateModeSkip),
           ],
+        ),
+        SwitchListTile(
+          contentPadding: EdgeInsets.zero,
+          title: Text(getString.syncDelete),
+          subtitle: Text(getString.syncDeleteDesc),
+          value: PrefName.syncDelete.rx.value,
+          onChanged: (v) => PrefName.syncDelete.rx.value = v,
         ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,

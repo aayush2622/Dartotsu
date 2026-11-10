@@ -72,11 +72,13 @@ class ListEditorSession {
     }
   }, getString.savedToList);
 
-  Future<void> remove(BuildContext context) => _run(
-    context,
-    () => mutations.deleteFromList(media),
-    getString.removedFromYourList,
-  );
+  Future<void> remove(BuildContext context) => _run(context, () async {
+    await mutations.deleteFromList(media);
+    final sync = find<SyncController>();
+    if (sync.instant && sync.canPush(view.service, media.isAnime)) {
+      unawaited(sync.pushDelete(view.service, media));
+    }
+  }, getString.removedFromYourList);
 }
 
 class QuickListEditorState extends ScreenState {

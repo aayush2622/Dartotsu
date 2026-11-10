@@ -6,6 +6,9 @@ import '../../../../Utils/Function.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
 import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Widgets/Components/HomeLayoutSheet.dart';
+import '../../../../Screen/Settings/Widgets/SettingRows.dart';
+import '../../../../Core/State/State.dart';
+import '../../../../Utils/Functions/RefreshController.dart';
 import '../Auth.dart';
 import '../Prefs.dart';
 import '../Data/User.dart';
@@ -22,6 +25,21 @@ class SimklSettingsView extends SettingsScreenView {
     final user = simklAuth.user.value;
     return [
       Setting.header(getString.feedLayout),
+      choiceSetting<String>(
+        context,
+        name: getString.simklTitleLanguage,
+        icon: Icons.translate_rounded,
+        value: SimklPref.titleLanguage.rx.value,
+        values: const ['en', 'romaji'],
+        label: (v) => v == 'romaji'
+            ? getString.titleLanguageRomaji
+            : getString.titleLanguageEnglish,
+        onPick: (v) {
+          SimklPref.titleLanguage.rx.value = v;
+          simklAuth.queries.invalidateLibrary(full: true);
+          tryFind<RefreshController>()?.all();
+        },
+      ),
       Setting.switchType(
         name: getString.simklMoviesOnly,
         description: getString.simklMoviesOnlyDesc,

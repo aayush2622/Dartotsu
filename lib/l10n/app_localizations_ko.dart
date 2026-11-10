@@ -2170,6 +2170,38 @@ class AppLocalizationsKo extends AppLocalizations {
   String get allCustomLists => 'All custom lists';
 
   @override
+  String get simklTitleLanguage => 'Anime title language';
+
+  @override
+  String get titleLanguageEnglish => 'English';
+
+  @override
+  String get titleLanguageRomaji => 'Romaji';
+
+  @override
+  String get simklListsTrending => 'Trending';
+
+  @override
+  String get simklListsMostLiked => 'Most liked';
+
+  @override
+  String get simklListsMostFollowed => 'Most followed';
+
+  @override
+  String get simklListsOfficial => 'Official';
+
+  @override
+  String simklListTitles(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count titles',
+      one: '1 title',
+    );
+    return '$_temp0';
+  }
+
+  @override
   String get people => 'People';
 
   @override
@@ -3901,6 +3933,35 @@ class AppLocalizationsKo extends AppLocalizations {
   String get syncAddMissingDesc => '다른 서비스에 아직 없는 항목도 추가해요';
 
   @override
+  String get syncDelete => 'Delete what the main service doesn\'t have';
+
+  @override
+  String get syncDeleteDesc =>
+      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+
+  @override
+  String get syncDeleteTitle => 'Delete entries?';
+
+  @override
+  String syncDeleteConfirm(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries',
+      one: '1 entry',
+    );
+    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+  }
+
+  @override
+  String get syncDeleteAction => 'Delete';
+
+  @override
+  String syncWillRemove(int count, String name) {
+    return '$count will be deleted from $name';
+  }
+
+  @override
   String get syncOnlyForward => '더 나간 진행도 유지';
 
   @override
@@ -3945,7 +4006,7 @@ class AppLocalizationsKo extends AppLocalizations {
       other: '$count entries are private',
       one: '1 entry is private',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them?';
+    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
   }
 
   @override
@@ -4056,6 +4117,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get syncOnEditDesc => '진행도 업데이트와 리스트 편집을 로그인된 다른 서비스에 바로 반영해요';
+
+  @override
+  String syncRemoved(String services) {
+    return 'Removed from $services';
+  }
 
   @override
   String syncPushed(String services) {
@@ -5233,6 +5299,20 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get playerSpeed => '재생 속도';
+
+  @override
+  String get localSource => 'Local files';
+
+  @override
+  String get localMissing =>
+      'This file or folder is no longer in your Local folder';
+
+  @override
+  String get playerStickyStage => 'Sticky video';
+
+  @override
+  String get playerStickyStageDesc =>
+      'Keep the video fixed at the top while you scroll the episodes and comments below';
 
   @override
   String get playerCursedSpeed => '추가 속도';

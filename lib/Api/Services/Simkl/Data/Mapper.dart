@@ -1,46 +1,9 @@
-import 'dart:convert';
-
-import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Core/Services/Model/Anime.dart';
+import '../Prefs.dart';
 import '../../../../Core/Services/Model/Date.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Model/Studio.dart';
 import '../../../../Utils/Extensions/StringExtensions.dart';
-
-const _titlesKey = 'simkl/englishTitles';
-
-Map<String, String>? _titles;
-
-Map<String, String> get _knownTitles => _titles ??= () {
-  try {
-    final raw = PrefManager.getCustomVal<String>(
-      _titlesKey,
-      location: PrefLocation.CACHE,
-    );
-    if (raw == null || raw.isEmpty) return <String, String>{};
-    return Map<String, String>.from(jsonDecode(raw) as Map);
-  } catch (_) {
-    return <String, String>{};
-  }
-}();
-
-String? simklKnownTitle(String id) => _knownTitles[id];
-
-void _rememberTitle(String id, String? title) {
-  if (title == null || title.isEmpty) return;
-  final known = _knownTitles;
-  if (known[id] == title) return;
-  known.remove(id);
-  known[id] = title;
-  while (known.length > 2000) {
-    known.remove(known.keys.first);
-  }
-  PrefManager.setCustomVal(
-    _titlesKey,
-    jsonEncode(known),
-    location: PrefLocation.CACHE,
-  );
-}
 
 final _usDate = RegExp(r'^(\d{2})/(\d{2})/(\d{4})$');
 final _number = RegExp(r'(\d+)');
@@ -96,7 +59,7 @@ const _statusToSimkl = {
 String? simklStatusOut(String? status, SimklKind kind) {
   final out = _statusToSimkl[status];
   if (kind == SimklKind.movies && (out == 'watching' || out == 'hold')) {
-    return out == 'watching' ? 'completed' : 'plantowatch';
+    return 'plantowatch';
   }
   return out;
 }
@@ -184,11 +147,7 @@ Media? mapSimklItem(Map<String, dynamic> m, {SimklKind? kind}) {
   );
   return Media(
     id: simklMediaId(k, id),
-    name:
-        ((m['en_title'] as String?) ??
-                _knownTitles[simklMediaId(k, id)] ??
-                m['title'] as String?)
-            ?.stripHtml,
+    name: ((m['en_title'] as String?) ?? m['title'] as String?)?.stripHtml,
     nameRomaji:
         ((m['title_romaji'] as String?) ?? m['title'] as String?)?.stripHtml,
     cover: simklPoster(m['poster'] as String?),
@@ -299,8 +258,15 @@ SimklExtras _extrasOf(Map<String, dynamic> d, SimklKind kind) {
 Media? mapSimklDetail(Map<String, dynamic> d, SimklKind kind) {
   final media = mapSimklItem(d, kind: kind);
   if (media == null) return null;
+  if (kind == SimklKind.anime && SimklPref.titleLanguage.value == 'romaji') {
+    final romaji = (d['title_romaji'] as String?) ?? d['title'] as String?;
+    if (romaji != null && romaji.isNotEmpty) {
+      media
+        ..name = romaji.stripHtml
+        ..nameRomaji = romaji.stripHtml;
+    }
+  }
   simklExtras[media] = _extrasOf(d, kind);
-  _rememberTitle(media.id, d['en_title'] as String?);
   final trailers = (d['trailers'] as List?) ?? const [];
   final youtube = trailers.isEmpty
       ? null

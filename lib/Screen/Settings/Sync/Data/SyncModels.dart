@@ -55,6 +55,7 @@ class SyncItem {
   final int? listId;
   final String? source;
   final bool isPrivate;
+  final bool isMovie;
 
   const SyncItem({
     required this.id,
@@ -71,6 +72,7 @@ class SyncItem {
     this.listId,
     this.source,
     this.isPrivate = false,
+    this.isMovie = false,
   });
 
   factory SyncItem.fromMedia(Media media, Map<String, int> ids) => SyncItem(
@@ -87,6 +89,7 @@ class SyncItem {
     total: media.totalUnits,
     listId: media.userListId,
     isPrivate: media.isListPrivate,
+    isMovie: media.format == 'MOVIE',
   );
 
   SyncItem copy({
@@ -110,6 +113,7 @@ class SyncItem {
     listId: listId,
     source: source ?? this.source,
     isPrivate: isPrivate,
+    isMovie: isMovie,
   );
 
   SyncItem withIds(Map<String, int> next) => copy(ids: next);
@@ -130,6 +134,7 @@ class SyncItem {
     total: previous?.total ?? total,
     listId: previous?.listId,
     isPrivate: isPrivate || (previous?.isPrivate ?? false),
+    isMovie: isMovie || (previous?.isMovie ?? false),
   );
 
   Media toMedia({required bool anime, String? idOverride}) => Media(
@@ -170,6 +175,7 @@ class SyncItem {
         total: like.total,
         listId: (j['listId'] as num?)?.toInt(),
         isPrivate: j['priv'] == true,
+        isMovie: like.isMovie,
       );
 
   Map<String, dynamic> toJson() => {
@@ -187,6 +193,7 @@ class SyncItem {
     'listId': ?listId,
     'src': ?source,
     if (isPrivate) 'priv': true,
+    if (isMovie) 'movie': true,
   };
 
   factory SyncItem.fromJson(Map<String, dynamic> j) => SyncItem(
@@ -206,6 +213,7 @@ class SyncItem {
     listId: (j['listId'] as num?)?.toInt(),
     source: j['src'] as String?,
     isPrivate: j['priv'] == true,
+    isMovie: j['movie'] == true,
   );
 }
 
@@ -310,8 +318,14 @@ class SyncTargetPlan {
   final List<SyncPair> pairs;
   final int onlyInTarget;
   final String? error;
+  final List<SyncItem> removals;
 
-  SyncTargetPlan(this.pairs, {this.onlyInTarget = 0, this.error});
+  SyncTargetPlan(
+    this.pairs, {
+    this.onlyInTarget = 0,
+    this.error,
+    List<SyncItem>? removals,
+  }) : removals = removals ?? [];
 
   int count(SyncStatus state) => pairs.where((p) => p.state == state).length;
 
@@ -325,6 +339,7 @@ class SyncTargetPlan {
     'pairs': [for (final p in pairs) p.toJson(index[p.main]!)],
     'onlyInTarget': onlyInTarget,
     'error': ?error,
+    if (removals.isNotEmpty) 'rm': [for (final r in removals) r.toJson()],
   };
 
   factory SyncTargetPlan.fromJson(
@@ -337,6 +352,10 @@ class SyncTargetPlan {
     ],
     onlyInTarget: (j['onlyInTarget'] as num?)?.toInt() ?? 0,
     error: j['error'] as String?,
+    removals: [
+      for (final r in (j['rm'] as List? ?? const []))
+        SyncItem.fromJson(Map<String, dynamic>.from(r as Map)),
+    ],
   );
 }
 

@@ -1,3 +1,4 @@
+import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Widgets/Components/ScrollConfig.dart';
 
 import 'package:flutter/material.dart';
@@ -132,27 +133,30 @@ class SyncOverview extends StatelessWidget {
           DpadRow(
             child: ScrollConfig(
               context,
-              child: ScrollConfig(context, child: SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    for (final t in tiles)
-                      if (t.$1 == null || t.$3 > 0)
-                        Padding(
-                          padding: EdgeInsetsDirectional.only(
-                            end: Dimens.gapSm,
+              child: ScrollConfig(
+                context,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      for (final t in tiles)
+                        if (t.$1 == null || t.$3 > 0)
+                          Padding(
+                            padding: EdgeInsetsDirectional.only(
+                              end: Dimens.gapSm,
+                            ),
+                            child: _StatTile(
+                              label: t.$2,
+                              count: t.$3,
+                              color: t.$4,
+                              selected: state.effectiveFilter == t.$1,
+                              onTap: () => state.filter.value = t.$1,
+                            ),
                           ),
-                          child: _StatTile(
-                            label: t.$2,
-                            count: t.$3,
-                            color: t.$4,
-                            selected: state.effectiveFilter == t.$1,
-                            onTap: () => state.filter.value = t.$1,
-                          ),
-                        ),
-                  ],
+                    ],
+                  ),
                 ),
-              )),
+              ),
             ),
           ),
           SizedBox(height: Dimens.gapSm),
@@ -164,6 +168,14 @@ class SyncOverview extends StatelessWidget {
                 Text(
                   getString.syncOnlyIn(target.onlyInTarget, service.name),
                   style: small,
+                ),
+              if (PrefName.syncDelete.rx.value && target.removals.isNotEmpty)
+                Text(
+                  getString.syncWillRemove(
+                    target.removals.length,
+                    service.name,
+                  ),
+                  style: small?.copyWith(color: scheme.error),
                 ),
               for (final limit in adapter.limits)
                 Text(

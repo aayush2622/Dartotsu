@@ -172,6 +172,7 @@ class PrefName {
     true,
     PrefLocation.COMMON,
   );
+  static const syncDelete = Pref('syncDelete', false, PrefLocation.COMMON);
   static const syncOnlyForward = Pref(
     'syncOnlyForward',
     true,

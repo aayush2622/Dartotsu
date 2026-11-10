@@ -471,6 +471,8 @@ class SyncController extends AppController {
 
   void stop() => _stop = true;
 
+  final removed = 0.live;
+
   bool get instant => PrefName.syncAuto.value || PrefName.syncOnEdit.value;
 
   bool canPush(MediaService service, bool anime) =>
@@ -506,62 +508,13 @@ class SyncController extends AppController {
       );
       return;
     }
-    var ids = await IdMapper.expand(
-      adapter.idsOf(media),
-      anime: isAnime,
-      prefer: adapter.key,
-    );
-    final need = {
-      for (final t in targets)
-        if (ids[t.syncAdapter!.key] == null) t.syncAdapter!.key,
-    };
-    if (need.isNotEmpty) {
-      logger(
-        'Instant sync: looking up ${need.join(', ')} ids for ${media.id}',
-        tag: 'SYNC',
-      );
-      try {
-        final resolved = await IdMapper.resolve(
-          service,
-          media,
-          need: need,
-        ).timeout(const Duration(seconds: 25));
-        ids = {...resolved.syncIds(), ...ids};
-      } catch (e, st) {
-        logger(
-          'Instant sync: id lookup for ${media.id} failed: $e',
-          logLevel: LogLevel.error,
-          tag: 'SYNC',
-        );
-        logError('SyncController', e, st);
-      }
-    }
-    IdMapper.learn(ids, anime: isAnime);
+    final ids = await _idsFor(service, adapter, media, targets);
     final want = SyncItem.fromMedia(media, ids);
     final done = <String>[];
     for (final target in targets) {
       final other = target.syncAdapter!;
       try {
-        var targetId = switch (ids[other.key]) {
-          final native? => other.targetId(native, anime: isAnime),
-          _ => null,
-        };
-        for (final from in other.resolveKeys) {
-          final ref = ids[from];
-          if (targetId != null || ref == null) continue;
-          var native = _memory.native(target.id, isAnime, ref, from);
-          if (native == null && other.canResolve) {
-            final (found, used) = await other.resolveBy(from, [
-              ref,
-            ], anime: isAnime);
-            _budget.stamp(target.id, used);
-            native = found[ref];
-            if (native != null) {
-              _memory.remember(target.id, isAnime, ref, native, from);
-            }
-          }
-          if (native != null) targetId = other.targetId(native, anime: isAnime);
-        }
+        final targetId = await _targetIdFor(target, other, ids, isAnime);
         if (targetId == null) {
           logger(
             'Instant sync: no ${target.name} id for ${media.id} ($ids)',
@@ -613,6 +566,114 @@ class SyncController extends AppController {
       );
       snackString(getString.syncPushed(done.join(', ')));
       _saveSoon();
+    }
+  }
+
+  Future<Map<String, int>> _idsFor(
+    MediaService service,
+    SyncAdapter adapter,
+    Media media,
+    List<MediaService> targets,
+  ) async {
+    final isAnime = media.isAnime;
+    var ids = await IdMapper.expand(
+      adapter.idsOf(media),
+      anime: isAnime,
+      prefer: adapter.key,
+    );
+    final need = {
+      for (final t in targets)
+        if (ids[t.syncAdapter!.key] == null) t.syncAdapter!.key,
+    };
+    if (need.isNotEmpty) {
+      logger(
+        'Instant sync: looking up ${need.join(', ')} ids for ${media.id}',
+        tag: 'SYNC',
+      );
+      try {
+        final resolved = await IdMapper.resolve(
+          service,
+          media,
+          need: need,
+        ).timeout(const Duration(seconds: 25));
+        ids = {...resolved.syncIds(), ...ids};
+      } catch (e, st) {
+        logger(
+          'Instant sync: id lookup for ${media.id} failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
+        logError('SyncController', e, st);
+      }
+    }
+    IdMapper.learn(ids, anime: isAnime);
+    return ids;
+  }
+
+  Future<String?> _targetIdFor(
+    MediaService target,
+    SyncAdapter other,
+    Map<String, int> ids,
+    bool isAnime,
+  ) async {
+    var targetId = switch (ids[other.key]) {
+      final native? => other.targetId(native, anime: isAnime),
+      _ => null,
+    };
+    for (final from in other.resolveKeys) {
+      final ref = ids[from];
+      if (targetId != null || ref == null) continue;
+      var native = _memory.native(target.id, isAnime, ref, from);
+      if (native == null && other.canResolve) {
+        final (found, used) = await other.resolveBy(from, [
+          ref,
+        ], anime: isAnime);
+        _budget.stamp(target.id, used);
+        native = found[ref];
+        if (native != null) {
+          _memory.remember(target.id, isAnime, ref, native, from);
+        }
+      }
+      if (native != null) targetId = other.targetId(native, anime: isAnime);
+    }
+    return targetId;
+  }
+
+  Future<void> pushDelete(MediaService service, Media media) async {
+    final adapter = service.syncAdapter;
+    if (adapter == null || incognitoBlocksEdits) return;
+    final isAnime = media.isAnime;
+    final targets = targetsFor(service.id, isAnime);
+    if (targets.isEmpty) return;
+    final ids = await _idsFor(service, adapter, media, targets);
+    final want = SyncItem.fromMedia(media, ids);
+    final done = <String>[];
+    for (final target in targets) {
+      final other = target.syncAdapter!;
+      try {
+        final targetId = await _targetIdFor(target, other, ids, isAnime);
+        if (targetId == null) continue;
+        await target.getMutations?.deleteFromList(
+          want.toMedia(anime: isAnime, idOverride: targetId),
+        );
+        await other.finish();
+        done.add(target.name);
+      } catch (e, st) {
+        logger(
+          'Instant sync: removing ${media.id} from ${target.name} failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
+        logError('SyncController', e, st);
+        snackString(getString.syncPushFailed(target.name, '$e'));
+      }
+    }
+    if (done.isNotEmpty) {
+      logger(
+        'Instant sync: ${media.id} removed from ${done.join(', ')}',
+        tag: 'SYNC',
+      );
+      snackString(getString.syncRemoved(done.join(', ')));
     }
   }
 
@@ -766,6 +827,55 @@ class SyncController extends AppController {
       _notify();
       _saveSoon();
     }
+    if (!_stop && !auto && PrefName.syncDelete.value) {
+      await _removeExtras(id, service, adapter, current);
+    }
+  }
+
+  Future<void> _removeExtras(
+    String id,
+    MediaService service,
+    SyncAdapter adapter,
+    SyncPlan current,
+  ) async {
+    final removals = current.targets[id]!.removals;
+    while (!_stop && removals.isNotEmpty) {
+      final wait = _waitFor(id, adapter);
+      if (wait > Duration.zero) {
+        await _sleep(id, wait);
+        continue;
+      }
+      resumeAt.remove(id);
+      final item = removals.first;
+      try {
+        await service.getMutations?.deleteFromList(
+          item.toMedia(anime: current.anime, idOverride: item.id),
+        );
+        _budget.stamp(id, 1);
+        removals.removeAt(0);
+        removed.value++;
+      } on SyncRateLimited catch (e) {
+        _budget.hold(id, e.retryAfter);
+      } catch (e, st) {
+        logger(
+          'Sync: removing ${item.id} from ${service.name} failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'SYNC',
+        );
+        logError('SyncController', e, st);
+        removals.removeAt(0);
+      }
+      _notify();
+      _saveSoon();
+    }
+  }
+
+  int removalCount({String? only}) {
+    final current = plan.value;
+    if (current == null || !PrefName.syncDelete.value) return 0;
+    return current.targets.entries
+        .where((e) => only == null || only == e.key)
+        .fold<int>(0, (n, e) => n + e.value.removals.length);
   }
 
   Future<void> _resolve(

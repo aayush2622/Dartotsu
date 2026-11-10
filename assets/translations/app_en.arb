@@ -984,6 +984,21 @@
   "mangaSource": "Manga source",
   "popular": "Popular",
   "allCustomLists": "All custom lists",
+  "simklTitleLanguage": "Anime title language",
+  "titleLanguageEnglish": "English",
+  "titleLanguageRomaji": "Romaji",
+  "simklListsTrending": "Trending",
+  "simklListsMostLiked": "Most liked",
+  "simklListsMostFollowed": "Most followed",
+  "simklListsOfficial": "Official",
+  "simklListTitles": "{count, plural, =1{1 title} other{{count} titles}}",
+  "@simklListTitles": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "people": "People",
   "mostComments": "Most comments",
   "alphabetical": "Alphabetical",
@@ -2018,6 +2033,29 @@
   "syncAutoDesc": "Fetch and sync in the background when the app opens and every 30 minutes",
   "syncAddMissing": "Add missing entries",
   "syncAddMissingDesc": "Also add entries the other service doesn't have yet",
+  "syncDelete": "Delete what the main service doesn't have",
+  "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
+  "syncDeleteTitle": "Delete entries?",
+  "syncDeleteConfirm": "{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.",
+  "@syncDeleteConfirm": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "syncDeleteAction": "Delete",
+  "syncWillRemove": "{count} will be deleted from {name}",
+  "@syncWillRemove": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "syncOnlyForward": "Keep further progress",
   "syncOnlyForwardDesc": "Don't lower the progress of a service that is already ahead",
   "animePlanetWontWatch": "Won't watch",
@@ -2030,7 +2068,7 @@
   "syncPrivateModeSync": "Sync them",
   "syncPrivateModeSkip": "Skip them",
   "syncPrivateTitle": "Private entries",
-  "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them?",
+  "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.",
   "@syncPrivateAsk": {
     "placeholders": {
       "count": {
@@ -2127,6 +2165,14 @@
   },
   "syncOnEdit": "Sync changes instantly",
   "syncOnEditDesc": "Push every progress update and list edit to your other signed-in services right away",
+  "syncRemoved": "Removed from {services}",
+  "@syncRemoved": {
+    "placeholders": {
+      "services": {
+        "type": "String"
+      }
+    }
+  },
   "syncPushed": "Synced to {services}",
   "@syncPushed": {
     "placeholders": {
@@ -2817,6 +2863,10 @@
   "playerSectionEngine": "Engine",
   "playerSectionMpv": "mpv",
   "playerSpeed": "Playback speed",
+  "localSource": "Local files",
+  "localMissing": "This file or folder is no longer in your Local folder",
+  "playerStickyStage": "Sticky video",
+  "playerStickyStageDesc": "Keep the video fixed at the top while you scroll the episodes and comments below",
   "playerCursedSpeed": "Extra speeds",
   "playerCursedSpeedDesc": "Add speeds up to 10x to the list",
   "playerResize": "Resize mode",

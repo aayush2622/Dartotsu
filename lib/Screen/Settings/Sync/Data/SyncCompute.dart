@@ -56,6 +56,7 @@ Future<SyncPlanned> syncPlanFromMain({
       mainDates: mainDates,
       mainRepeat: mainRepeat,
       onlyForward: onlyForward,
+      collectRemovals: true,
     );
   }
   return SyncPlanned(out, main.length);
