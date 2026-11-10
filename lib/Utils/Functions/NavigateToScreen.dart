@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 
+import '../../Core/Preferences/PrefManager.dart';
 import '../Animation/WidgetAnimations.dart';
 import '../Nav/DpadLayers.dart';
 import '../../Core/State/State.dart';
@@ -10,8 +11,12 @@ PageRouteBuilder<T> _route<T>(
   bool instant = false,
 }) => PageRouteBuilder<T>(
   opaque: true,
-  transitionDuration: instant ? Duration.zero : animDuration(380),
-  reverseTransitionDuration: animDuration(300),
+  transitionDuration: instant
+      ? Duration.zero
+      : animDuration(PrefName.useGlassMode.value ? 260 : 380),
+  reverseTransitionDuration: animDuration(
+    PrefName.useGlassMode.value ? 200 : 300,
+  ),
   pageBuilder: (_, _, _) =>
       page is NativeViewPage ? page : DpadEnter(child: page),
   transitionsBuilder: (_, animation, _, child) {

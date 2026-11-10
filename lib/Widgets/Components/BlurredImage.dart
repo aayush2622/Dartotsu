@@ -158,7 +158,7 @@ class _BlurredImageState extends State<BlurredImage> {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              filterQuality: FilterQuality.medium,
+              filterQuality: FilterQuality.low,
             ),
     );
   });

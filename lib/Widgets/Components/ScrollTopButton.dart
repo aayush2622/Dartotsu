@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/State/State.dart';
@@ -16,6 +18,7 @@ class _ScrollTopButtonState extends State<ScrollTopButton> {
   final shown = false.live;
   final _far = <int, bool>{};
   BuildContext? _origin;
+  Timer? _hide;
 
   bool _onScroll(ScrollNotification n) {
     if (n.depth > 1 || n.metrics.axis != Axis.vertical) return false;
@@ -24,6 +27,10 @@ class _ScrollTopButtonState extends State<ScrollTopButton> {
       if (n.context != null && _far[n.depth] == true) _origin = n.context;
       final any = _far.values.any((v) => v);
       if (shown.value != any) shown.value = any;
+      _hide?.cancel();
+      if (any) {
+        _hide = Timer(const Duration(seconds: 3), () => shown.value = false);
+      }
     }
     return false;
   }
@@ -82,6 +89,12 @@ class _ScrollTopButtonState extends State<ScrollTopButton> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _hide?.cancel();
+    super.dispose();
   }
 
   @override
