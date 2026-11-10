@@ -1238,7 +1238,7 @@
   "hidePrivateEntries": "Hide private entries",
   "hidePrivateEntriesDesc": "Keep entries marked private on AniList out of the feed",
   "anilistExcludeList": "Exclude your list",
-  "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages",
+  "anilistExcludeListDesc": "Keep titles already on your AniList out of the anime and manga pages and the recommended row",
   "anilistProfile": "AniList profile",
   "refreshFromAnilist": "Refresh from AniList",
   "couldNotUpdateAnilistSettings": "Could not update AniList settings",
@@ -4530,5 +4530,11 @@
     }
   },
   "incognitoTurnedOn": "Incognito mode on",
-  "incognitoTurnedOff": "Incognito mode off"
+  "incognitoTurnedOff": "Incognito mode off",
+  "onHoldAnime": "On hold anime",
+  "onHoldManga": "On hold manga",
+  "droppedAnime": "Dropped anime",
+  "droppedManga": "Dropped manga",
+  "trailerLoading": "Loading the trailer…",
+  "trailerFailed": "Could not play the trailer here, opening it in the browser"
 }

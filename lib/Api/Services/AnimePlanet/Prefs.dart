@@ -6,8 +6,10 @@ const kAnimePlanetHomeSections = <String, bool>{
   'Continue Reading': true,
   'Planned Anime': true,
   'Planned Manga': true,
-  'On Hold': true,
-  'Dropped': true,
+  'On Hold Anime': true,
+  'On Hold Manga': true,
+  'Dropped Anime': true,
+  'Dropped Manga': true,
 };
 
 const kAnimePlanetAnimeSections = <String, bool>{
@@ -33,6 +35,10 @@ class AnimePlanetPref {
   static final homeLayout = layoutPref(
     'animePlanetHomeLayout',
     kAnimePlanetHomeSections,
+    splits: {
+      'On Hold': ['On Hold Anime', 'On Hold Manga'],
+      'Dropped': ['Dropped Anime', 'Dropped Manga'],
+    },
   );
   static final animeLayout = layoutPref(
     'animePlanetAnimeLayout',

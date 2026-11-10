@@ -8438,4 +8438,23 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get incognitoTurnedOff => 'Incognito mode off';
+
+  @override
+  String get onHoldAnime => 'On hold anime';
+
+  @override
+  String get onHoldManga => 'On hold manga';
+
+  @override
+  String get droppedAnime => 'Dropped anime';
+
+  @override
+  String get droppedManga => 'Dropped manga';
+
+  @override
+  String get trailerLoading => 'Loading the trailer…';
+
+  @override
+  String get trailerFailed =>
+      'Could not play the trailer here, opening it in the browser';
 }

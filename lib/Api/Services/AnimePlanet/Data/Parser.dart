@@ -364,7 +364,12 @@ void _applyEntry(Media media, dom.DocumentFragment tip, dom.Element card) {
   media.userStatus = status;
   final progress = RegExp(r'(\d+)(?:/\d+)?\s*(eps?|chs?)(?![a-z])')
       .firstMatch(text);
-  if (progress != null) media.userProgress = int.parse(progress.group(1)!);
+  if (progress != null) {
+    media.userProgress = int.parse(progress.group(1)!);
+  } else if (status == 'COMPLETED') {
+    media.userProgress =
+        media.anime?.totalEpisodes ?? media.manga?.totalChapters;
+  }
   if (status == 'COMPLETED') {
     final times = int.tryParse(
       RegExp(r'(\d+)x').firstMatch(text)?.group(1) ?? '',
@@ -405,7 +410,12 @@ Media _tipMedia(
         RegExp(r'(\d+)\s*eps?').firstMatch(typeText ?? '')?.group(1) ?? '',
       );
   final chapters = int.tryParse(
-    RegExp(r'Ch:\s*(\d+)').firstMatch(typeText ?? '')?.group(1) ?? '',
+    RegExp(r'Ch:\s*(\d+)')
+            .firstMatch(
+              _clean(tip.querySelector('li.iconVol')?.text) ?? typeText ?? '',
+            )
+            ?.group(1) ??
+        '',
   );
   return Media(
     id: id,

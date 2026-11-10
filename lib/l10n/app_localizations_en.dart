@@ -2820,7 +2820,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get anilistExcludeListDesc =>
-      'Keep titles already on your AniList out of the anime and manga pages';
+      'Keep titles already on your AniList out of the anime and manga pages and the recommended row';
 
   @override
   String get anilistProfile => 'AniList profile';
@@ -8484,4 +8484,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get incognitoTurnedOff => 'Incognito mode off';
+
+  @override
+  String get onHoldAnime => 'On hold anime';
+
+  @override
+  String get onHoldManga => 'On hold manga';
+
+  @override
+  String get droppedAnime => 'Dropped anime';
+
+  @override
+  String get droppedManga => 'Dropped manga';
+
+  @override
+  String get trailerLoading => 'Loading the trailer…';
+
+  @override
+  String get trailerFailed =>
+      'Could not play the trailer here, opening it in the browser';
 }

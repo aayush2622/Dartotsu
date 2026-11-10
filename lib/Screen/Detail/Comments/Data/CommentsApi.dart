@@ -1,4 +1,5 @@
 import '../../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -95,14 +96,12 @@ class CommentsApi extends AppController {
     }
     for (var attempt = 0; ; attempt++) {
       try {
-        final body =
-            await _send(
-                  'POST',
-                  '/authenticate',
-                  form: {'token': token},
-                  auth: false,
-                )
-                as Map<String, dynamic>;
+        final body = await _send(
+          'POST',
+          '/authenticate',
+          form: {'token': token},
+          auth: false,
+        ) as Map<String, dynamic>;
         final next = CommentSession.fromApi(
           body,
           body['authToken'] as String,
@@ -245,19 +244,17 @@ class CommentsApi extends AppController {
   }) async {
     final me = session.value ?? await ensureSession();
     if (me == null) throw const CommentsException(401, 'Not signed in');
-    final body =
-        await _send(
-              'POST',
-              '/comments',
-              form: {
-                'user_id': me.userId,
-                'media_id': '$mediaId',
-                'content': content,
-                'tag': ?tag?.toString(),
-                'parent_comment_id': ?parentId?.toString(),
-              },
-            )
-            as Map<String, dynamic>;
+    final body = await _send(
+      'POST',
+      '/comments',
+      form: {
+        'user_id': me.userId,
+        'media_id': '$mediaId',
+        'content': content,
+        'tag': ?tag?.toString(),
+        'parent_comment_id': ?parentId?.toString(),
+      },
+    ) as Map<String, dynamic>;
     final made = Comment.fromJson({
       ...body,
       'comment_id': body['comment_id'] ?? body['id'],

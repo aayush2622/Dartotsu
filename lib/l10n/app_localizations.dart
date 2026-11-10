@@ -5318,7 +5318,7 @@ abstract class AppLocalizations {
   /// No description provided for @anilistExcludeListDesc.
   ///
   /// In en, this message translates to:
-  /// **'Keep titles already on your AniList out of the anime and manga pages'**
+  /// **'Keep titles already on your AniList out of the anime and manga pages and the recommended row'**
   String get anilistExcludeListDesc;
 
   /// No description provided for @anilistProfile.
@@ -15106,6 +15106,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Incognito mode off'**
   String get incognitoTurnedOff;
+
+  /// No description provided for @onHoldAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'On hold anime'**
+  String get onHoldAnime;
+
+  /// No description provided for @onHoldManga.
+  ///
+  /// In en, this message translates to:
+  /// **'On hold manga'**
+  String get onHoldManga;
+
+  /// No description provided for @droppedAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'Dropped anime'**
+  String get droppedAnime;
+
+  /// No description provided for @droppedManga.
+  ///
+  /// In en, this message translates to:
+  /// **'Dropped manga'**
+  String get droppedManga;
+
+  /// No description provided for @trailerLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading the trailer…'**
+  String get trailerLoading;
+
+  /// No description provided for @trailerFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not play the trailer here, opening it in the browser'**
+  String get trailerFailed;
 }
 
 class _AppLocalizationsDelegate

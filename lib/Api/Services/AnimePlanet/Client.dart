@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:rhttp/rhttp.dart' show HttpBody;
+import 'package:rhttp/rhttp.dart' show HttpBody, RhttpException;
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/State/State.dart';
@@ -169,15 +169,21 @@ class AnimePlanetClient {
   Future<String> _request(String url) async {
     NetworkResponse<dynamic>? res;
     for (var attempt = 0; attempt < 3; attempt++) {
-      res = await _net.get(
-        url,
-        decodeJson: false,
-        headers: const {
-          'User-Agent': _agent,
-          'Accept': 'text/html,application/xhtml+xml',
-          'Accept-Language': 'en-US,en;q=0.9',
-        },
-      );
+      try {
+        res = await _net.get(
+          url,
+          decodeJson: false,
+          headers: const {
+            'User-Agent': _agent,
+            'Accept': 'text/html,application/xhtml+xml',
+            'Accept-Language': 'en-US,en;q=0.9',
+          },
+        );
+      } on RhttpException {
+        if (attempt == 2) rethrow;
+        await Future<void>.delayed(Duration(seconds: attempt + 1));
+        continue;
+      }
       final retry = res.statusCode == 429 || res.statusCode >= 500;
       if (!retry) break;
       final after = int.tryParse(res.headers['retry-after']?.first ?? '');

@@ -1743,6 +1743,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.0"
+  simple_sparse_list:
+    dependency: transitive
+    description:
+      name: simple_sparse_list
+      sha256: aa648fd240fa39b49dcd11c19c266990006006de6699a412de485695910fbc1f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
   sizer:
     dependency: "direct main"
     description:
@@ -1908,6 +1916,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.4.0"
+  unicode:
+    dependency: transitive
+    description:
+      name: unicode
+      sha256: a6f7bcfc8ea1d5ce1f6c0b1c39117a9919f4953edd9fd7a64090a9796c499b57
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.9"
   universal_platform:
     dependency: transitive
     description:
@@ -2268,6 +2284,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.4"
+  youtube_explode_dart:
+    dependency: "direct main"
+    description:
+      name: youtube_explode_dart
+      sha256: "10134a53989b2f3dc576121735aec8fc6d88784956f4a2ad1a2525b006373a76"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.1.0"
 sdks:
   dart: ">=3.13.0 <4.0.0"
   flutter: ">=3.47.0"

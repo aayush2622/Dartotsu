@@ -17,7 +17,6 @@ class SpeechVoice {
 class NovelSpeech {
   FlutterTts? _tts;
   final _processes = <Process>[];
-  Completer<void>? _done;
   bool _stopped = false;
 
   static bool get supported =>
@@ -35,22 +34,14 @@ class NovelSpeech {
     if (existing != null) return existing;
     final tts = FlutterTts();
     await tts.awaitSpeakCompletion(true);
-    tts.setCompletionHandler(_finish);
-    tts.setCancelHandler(_finish);
     tts.setErrorHandler((message) {
       logger(
         'Speech failed: $message',
         logLevel: LogLevel.error,
         tag: 'READER',
       );
-      _finish();
     });
     return _tts = tts;
-  }
-
-  void _finish() {
-    final done = _done;
-    if (done != null && !done.isCompleted) done.complete();
   }
 
   Future<bool> speak(
@@ -62,15 +53,11 @@ class NovelSpeech {
     void Function(int start, int end)? onWord,
   }) async {
     _stopped = false;
-    final done = _done = Completer<void>();
     try {
       if (_useProcess) {
         await _speakProcess(text, rate, pitch, language, voice);
       } else {
         final tts = await _engine();
-        tts.setProgressHandler((spoken, start, end, word) {
-          if (onWord != null && spoken == text) onWord(start, end);
-        });
         if (voice != null && voice.contains('|')) {
           final at = voice.lastIndexOf('|');
           await tts.setVoice({
@@ -82,20 +69,70 @@ class NovelSpeech {
         }
         await tts.setSpeechRate((rate / 200).clamp(0.05, 1.0));
         await tts.setPitch((pitch / 100).clamp(0.5, 2.0));
-        final budget = Duration(
-          milliseconds:
-              4000 + (text.length * 9000 / rate.clamp(50, 400)).round(),
-        );
-        await Future.any<void>([
-          tts.speak(text),
-          done.future,
-        ]).timeout(budget, onTimeout: () => unawaited(tts.stop()));
+        final limit = await _inputLimit(tts);
+        var offset = 0;
+        for (final chunk in _chunks(text, limit)) {
+          if (_stopped) break;
+          final base = offset;
+          tts.setProgressHandler((spoken, start, end, word) {
+            if (onWord != null && spoken == chunk) {
+              onWord(base + start, base + end);
+            }
+          });
+          if (!await _speakChunk(tts, chunk, rate)) return false;
+          offset += chunk.length;
+        }
       }
     } catch (e) {
       logger('Speech failed: $e', logLevel: LogLevel.error, tag: 'READER');
       return false;
     }
     return !_stopped;
+  }
+
+  Future<bool> _speakChunk(FlutterTts tts, String chunk, int rate) async {
+    final budget = Duration(
+      milliseconds: 4000 + (chunk.length * 9000 / rate.clamp(50, 400)).round(),
+    );
+    for (var attempt = 0; attempt < 3; attempt++) {
+      final result = await tts
+          .speak(chunk)
+          .timeout(
+            budget,
+            onTimeout: () {
+              unawaited(tts.stop());
+              return 0;
+            },
+          );
+      if (_stopped || result == 1) return true;
+      await tts.stop();
+      await Future<void>.delayed(const Duration(milliseconds: 150));
+      if (_stopped) return true;
+    }
+    return false;
+  }
+
+  static const _fallbackLimit = 3000;
+
+  static Future<int> _inputLimit(FlutterTts tts) async {
+    if (kIsWeb || !Platform.isAndroid) return 1 << 30;
+    try {
+      final max = await tts.getMaxSpeechInputLength;
+      if (max != null && max > 200) return (max - 200).clamp(200, 3500);
+    } catch (_) {}
+    return _fallbackLimit;
+  }
+
+  static Iterable<String> _chunks(String text, int limit) sync* {
+    var rest = text;
+    while (rest.length > limit) {
+      var cut = rest.lastIndexOf(RegExp(r'[.!?。！？…]\s'), limit - 1);
+      if (cut < limit ~/ 2) cut = rest.lastIndexOf(' ', limit - 1);
+      if (cut < limit ~/ 2) cut = limit - 1;
+      yield rest.substring(0, cut + 1);
+      rest = rest.substring(cut + 1);
+    }
+    if (rest.isNotEmpty) yield rest;
   }
 
   static List<File> piperModels() {
@@ -258,7 +295,6 @@ class NovelSpeech {
         await tts.stop();
       } catch (_) {}
     }
-    _finish();
   }
 
   Future<void> dispose() => stop();

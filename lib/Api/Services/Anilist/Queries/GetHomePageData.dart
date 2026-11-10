@@ -56,6 +56,7 @@ extension on AnilistQueries {
     'sections': sections,
     'removeList': AnilistPref.removeList.value,
     'hidePrivate': AnilistPref.hidePrivate.value,
+    'excludeList': AnilistPref.excludeListActive,
     'continueAnime': anilistContinueOrder.read(anime: true),
     'continueManga': anilistContinueOrder.read(anime: false),
   });
@@ -91,6 +92,7 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
   final sections = (args['sections'] as List).cast<String>();
   final removeList = (args['removeList'] as List).cast<String>().toSet();
   final hidePrivate = args['hidePrivate'] as bool;
+  final excludeList = args['excludeList'] as bool;
   final out = <String, List<Media>>{};
   final hidden = <Media>[];
 
@@ -129,7 +131,7 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
       ),
       'Favourite Anime' => _favouriteMedia(data['favoriteAnime'], anime: true),
       'Favourite Manga' => _favouriteMedia(data['favoriteManga'], anime: false),
-      'Recommended' => _recommended(data),
+      'Recommended' => _recommended(data, newOnly: excludeList),
       _ => const <Media>[],
     };
     out[section] = keep(media);
@@ -177,7 +179,7 @@ List<Media> _favouriteMedia(Object? user, {required bool anime}) {
       .toList();
 }
 
-List<Media> _recommended(Map<String, dynamic> data) {
+List<Media> _recommended(Map<String, dynamic> data, {bool newOnly = false}) {
   final byId = <String, Media>{};
   final recs =
       ((data['recommended'] as Map<String, dynamic>?)?['recommendations']
@@ -187,18 +189,21 @@ List<Media> _recommended(Map<String, dynamic> data) {
     final node = rec['mediaRecommendation'] as Map<String, dynamic>?;
     if (node == null) continue;
     final media = mapAnilistMedia(node);
+    if (newOnly && media.userStatus != null) continue;
     byId[media.id] = media;
   }
-  for (final media in [
-    ...anilistCollectionMedia(
-      data['recommendedAnime'] as Map<String, dynamic>?,
-    ),
-    ...anilistCollectionMedia(
-      data['recommendedManga'] as Map<String, dynamic>?,
-    ),
-  ]) {
-    if (media.status == 'RELEASING' || media.status == 'FINISHED') {
-      byId[media.id] = media;
+  if (!newOnly) {
+    for (final media in [
+      ...anilistCollectionMedia(
+        data['recommendedAnime'] as Map<String, dynamic>?,
+      ),
+      ...anilistCollectionMedia(
+        data['recommendedManga'] as Map<String, dynamic>?,
+      ),
+    ]) {
+      if (media.status == 'RELEASING' || media.status == 'FINISHED') {
+        byId[media.id] = media;
+      }
     }
   }
   return byId.values.toList()

@@ -69,14 +69,25 @@ String _titleCase(String s) => s
 
 String? _cover(Object? cover) {
   if (cover is! Map) return null;
+  final raw = cover['raw'];
+  if (raw is Map) {
+    final url = raw['url'];
+    final size = raw['size'];
+    if (url is String &&
+        url.isNotEmpty &&
+        size is num &&
+        size > 0 &&
+        size < 400000) {
+      return url;
+    }
+  }
   for (final size in const ['x350', 'x250']) {
     final value = cover[size];
     final url = value is Map ? value['x2'] ?? value['x1'] : value;
     if (url is String && url.isNotEmpty) return url;
   }
-  final value = cover['raw'];
-  final raw = value is Map ? value['url'] : value;
-  return raw is String && raw.isNotEmpty ? raw : null;
+  final url = raw is Map ? raw['url'] : raw;
+  return url is String && url.isNotEmpty ? url : null;
 }
 
 String? _primary(List<dynamic> titles) {

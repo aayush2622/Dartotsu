@@ -231,19 +231,12 @@ class MangaUpdatesQueries extends Queries {
             : null;
         final seriesMap = metadata?['series'];
         final ref = _record(record['series']);
-        final media = seriesMap is Map
-            ? mapMangaUpdatesSeries({
-                ...ref,
-                for (final e in _record(seriesMap).entries)
-                  if (e.value != null) e.key: e.value,
-              })
-            : Media(
-                id: '${ref['id'] ?? ''}',
-                name: '${ref['title'] ?? ''}',
-                shareLink:
-                    (ref['url'] as String?) ??
-                    mangaUpdatesShareLink(ref['id'] ?? ''),
-              );
+        final media = mapMangaUpdatesSeries({
+          ...ref,
+          if (seriesMap is Map)
+            for (final e in _record(seriesMap).entries)
+              if (e.value != null) e.key: e.value,
+        });
         applyMangaUpdatesEntry(media, record, metadata: metadata);
         out.add(media);
       }

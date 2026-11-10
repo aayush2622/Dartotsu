@@ -470,21 +470,6 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
               ),
               label: Text(listLabel?.call(m) ?? getString.addToList),
             ),
-          if (onEditList != null && m.trailer != null)
-            SizedBox(width: Dimens.gapSm),
-          if (m.trailer != null)
-            OutlinedButton.icon(
-              style: const ButtonStyle(
-                minimumSize: WidgetStatePropertyAll(Size(0, 44)),
-                padding: WidgetStatePropertyAll(
-                  EdgeInsets.symmetric(horizontal: 16),
-                ),
-                visualDensity: VisualDensity.compact,
-              ),
-              onPressed: () => openLinkInBrowser(m.trailer!),
-              icon: const Icon(Icons.play_arrow_rounded, size: 18),
-              label: Text(getString.trailer),
-            ),
         ],
       ),
     );
@@ -527,9 +512,6 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
           if (v == 'copyLink') {
             copyToClipboard(m.shareLink, message: getString.linkCopied);
           }
-          if (v == 'trailer' && m.trailer != null) {
-            openLinkInBrowser(m.trailer!);
-          }
           if (v == 'shareCard') onShareCard?.call();
         },
         itemBuilder: (_) => [
@@ -570,16 +552,6 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
               ),
             ),
           ],
-          if (m.trailer != null)
-            PopupMenuItem(
-              value: 'trailer',
-              child: ListTile(
-                dense: true,
-                contentPadding: EdgeInsets.zero,
-                leading: const Icon(Icons.play_circle_outline_rounded),
-                title: Text(getString.watchTrailer),
-              ),
-            ),
           if (onShareCard != null)
             PopupMenuItem(
               value: 'shareCard',

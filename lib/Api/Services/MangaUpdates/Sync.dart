@@ -18,6 +18,12 @@ class MangaUpdatesSync extends SyncAdapter {
   bool supports({required bool anime}) => !anime;
 
   @override
+  bool get syncsDates => false;
+
+  @override
+  bool get syncsRepeat => false;
+
+  @override
   List<SyncLimit> get limits => const [SyncLimit(10, Duration(minutes: 1))];
 
   @override

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../Widgets/Components/ThemedContainer.dart';
 
 import '../../../Core/Services/Api/MuForecast.dart';
@@ -41,9 +42,8 @@ class DetailStats extends StatelessWidget {
   static Duration? _airingIn(Media m) {
     final at = m.anime?.nextAiringEpisodeTime;
     if (at == null) return null;
-    final diff = DateTime.fromMillisecondsSinceEpoch(
-      at * 1000,
-    ).difference(DateTime.now());
+    final diff = DateTime.fromMillisecondsSinceEpoch(at * 1000)
+        .difference(DateTime.now());
     return diff.isNegative ? null : diff;
   }
 

@@ -306,8 +306,10 @@ class AnimePlanetQueries extends Queries {
       ),
       ('Planned Anime', job('Planned Anime', true, {'PLANNING'})),
       ('Planned Manga', job('Planned Manga', false, {'PLANNING'})),
-      ('On Hold', job('On Hold', true, {'PAUSED'})),
-      ('Dropped', job('Dropped', true, {'DROPPED'})),
+      ('On Hold Anime', job('On Hold Anime', true, {'PAUSED'})),
+      ('On Hold Manga', job('On Hold Manga', false, {'PAUSED'})),
+      ('Dropped Anime', job('Dropped Anime', true, {'DROPPED'})),
+      ('Dropped Manga', job('Dropped Manga', false, {'DROPPED'})),
     ];
     return [
       for (final j in applyLayout(

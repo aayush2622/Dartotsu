@@ -1,5 +1,7 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
+
 import '../../Widgets/Components/ThemedContainer.dart';
 
 import '../../Core/Offline/OfflineMode.dart';
@@ -23,6 +25,7 @@ import '../Widgets/Components/DataSection.dart';
 import '../Share/ShareCardSheet.dart';
 import 'Comments/CommentsSection.dart';
 import 'Components/ThemesSection.dart';
+import 'Trailer/TrailerSection.dart';
 import 'Watch/WatchSection.dart';
 import 'Components/DetailHeader.dart';
 import '../../Api/Discord/DiscordPresence.dart';
@@ -273,13 +276,22 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
   Widget _extra() {
     if (find<OfflineMode>().isOffline.value) return const SizedBox.shrink();
     final media = state.host.media.value;
-    return state.isAnime
-        ? ThemesSection(
+    final trailer = media.trailer;
+    return Column(
+      children: [
+        if (TrailerSection.supports(trailer))
+          TrailerSection(
+            key: ValueKey('trailer-${media.id}-$trailer'),
+            url: trailer!,
+          ),
+        if (state.isAnime)
+          ThemesSection(
             key: ValueKey('themes-${media.id}'),
             service: state.view.service,
             media: media,
-          )
-        : const SizedBox.shrink();
+          ),
+      ],
+    );
   }
 
   Widget _errorCard() => Padding(
