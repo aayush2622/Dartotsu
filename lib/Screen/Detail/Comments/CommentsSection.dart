@@ -278,13 +278,22 @@ class _CommentsSectionState extends State<CommentsSection>
               ],
             ),
           )
+        else if (session == null)
+          Padding(
+            padding: EdgeInsets.only(bottom: Dimens.gapSm),
+            child: OutlinedButton.icon(
+              onPressed: _signIn,
+              icon: const Icon(Icons.login_rounded),
+              label: Text(getString.commentsSignIn),
+            ),
+          )
         else
           Padding(
             padding: EdgeInsets.only(bottom: Dimens.gapSm),
             child: CommentComposer(
               hint: getString.commentsPlaceholder,
-              avatar: session?.avatar,
-              name: session?.username ?? '',
+              avatar: session.avatar,
+              name: session.username,
               tagging: true,
               tag: state.topTag,
               pickTag: () =>

@@ -29,7 +29,16 @@ class CommentsTarget {
 
   static Future<int?> _lookup(MediaService service, Media media) async {
     if (service.syncAdapter == null) return null;
-    final id = await IdMapper.resolveKey(service, media, SyncKey.anilist);
+    int? id;
+    for (var attempt = 0; attempt < 2 && id == null; attempt++) {
+      try {
+        id = await IdMapper.resolveKey(
+          service,
+          media,
+          SyncKey.anilist,
+        ).timeout(const Duration(seconds: 20));
+      } catch (_) {}
+    }
     if (id != null) {
       MediaRecords.of(service, media).commentsId = id;
       MediaRecords.save(service, media);

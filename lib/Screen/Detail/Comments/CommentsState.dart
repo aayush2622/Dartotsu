@@ -114,20 +114,18 @@ class CommentsState extends ScreenState {
       phase.value = CommentsPhase.disabled;
       return;
     }
-    if (!api.hasToken) {
-      phase.value = CommentsPhase.signedOut;
-      nodes.clear();
-      return;
-    }
     phase.value = CommentsPhase.loading;
     failure.value = null;
     try {
       final (resolved, session) = await (
-        CommentsTarget.resolve(service, media.value),
-        api.ensureSession().then<CommentSession?>(
-          (s) => s,
-          onError: (Object _) => null,
-        ),
+        CommentsTarget.resolve(
+          service,
+          media.value,
+        ).timeout(const Duration(seconds: 45), onTimeout: () => null),
+        api
+            .ensureSession()
+            .timeout(const Duration(seconds: 20))
+            .then<CommentSession?>((s) => s, onError: (Object _) => null),
       ).wait;
       target = resolved;
       logger('Comments start run $run/$_generation target $target');
@@ -138,13 +136,6 @@ class CommentsState extends ScreenState {
       }
       logger('Comments session ${session?.userId} run $run/$_generation');
       if (run != _generation) return;
-      if (session == null) {
-        final retry = await api.ensureSession();
-        if (retry == null) {
-          phase.value = CommentsPhase.signedOut;
-          return;
-        }
-      }
       if (focusId != null) {
         await _loadSingle(focusId!);
       } else {

@@ -266,7 +266,7 @@ class IdMapper {
       MediaRecords.save(service, media);
     }
     learn(ids.syncIds(), anime: anime);
-    _memo[key] = ids;
+    if (need.every((k) => ids[k] != null)) _memo[key] = ids;
     return ids;
   }
 
