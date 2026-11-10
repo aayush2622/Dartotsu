@@ -7,6 +7,18 @@ allprojects {
         mavenCentral()
         maven("https://jitpack.io")
     }
+    if (project.name != "flutter_local_notifications") {
+        configurations.configureEach {
+            resolutionStrategy.eachDependency {
+                if (requested.group == "androidx.core" &&
+                    (requested.name == "core" || requested.name == "core-ktx") &&
+                    requested.version?.startsWith("1.19") == true
+                ) {
+                    useVersion("1.18.0")
+                }
+            }
+        }
+    }
 }
 
 rootProject.layout.buildDirectory.set(file("../build"))
@@ -16,10 +28,12 @@ subprojects {
 
         extensions.findByType(BaseExtension::class.java)?.apply {
 
-            if (File(projectDir.parentFile, "cargokit").exists()) {
-                compileSdkVersion(36)
-            } else {
+            if (project.name == "permission_handler_android" ||
+                project.name == "flutter_local_notifications"
+            ) {
                 compileSdkVersion("android-37")
+            } else {
+                compileSdkVersion(36)
             }
             buildToolsVersion("36.0.0")
 
