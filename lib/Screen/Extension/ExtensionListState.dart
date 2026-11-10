@@ -116,7 +116,10 @@ class ExtensionListState extends ScreenState {
 
   List<Source> updatable() => [
     for (final s in applySavedOrder(dedupeById(bridgeState.installed.value)))
-      if (hasUpdate(s)) s,
+      if (hasUpdate(s) &&
+          (selectedLanguages.isEmpty ||
+              selectedLanguages.contains(s.lang?.toLowerCase())))
+        s,
   ];
 
   Future<void> updateAll() async {
@@ -181,7 +184,8 @@ class ExtensionListState extends ScreenState {
           source.name?.toLowerCase().contains(searchTerm) ?? false;
 
       final matchesLanguage =
-          selectedLanguages.isEmpty || selectedLanguages.contains(source.lang);
+          selectedLanguages.isEmpty ||
+          selectedLanguages.contains(source.lang?.toLowerCase());
 
       return matchesSearch && matchesLanguage;
     }).toList();

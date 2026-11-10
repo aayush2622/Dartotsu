@@ -101,7 +101,7 @@ class ExtensionBrowserState extends ScreenState {
       final matchesSearch = source.name?.toLowerCase().contains(query) ?? false;
       final matchesLanguage =
           state.selectedLanguages.isEmpty ||
-          state.selectedLanguages.contains(source.lang);
+          state.selectedLanguages.contains(source.lang?.toLowerCase());
       return matchesSearch && matchesLanguage;
     }).length;
   }
