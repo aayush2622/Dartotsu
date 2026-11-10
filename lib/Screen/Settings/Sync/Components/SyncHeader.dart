@@ -51,15 +51,17 @@ class SyncHeader extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            state.isAhead
-                ? getString.syncAheadDesc
-                : getString.syncMainServiceDesc,
-            style: context.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurfaceVariant,
+          if (plan == null) ...[
+            Text(
+              state.isAhead
+                  ? getString.syncAheadDesc
+                  : getString.syncMainServiceDesc,
+              style: context.textTheme.bodySmall?.copyWith(
+                color: scheme.onSurfaceVariant,
+              ),
             ),
-          ),
-          SizedBox(height: Dimens.gapSm),
+            SizedBox(height: Dimens.gapSm),
+          ],
           if (candidates.isEmpty)
             Text(getString.syncNoTargets)
           else

@@ -247,13 +247,17 @@ class MalQueries extends Queries {
         ? 'list_status{status,score,num_episodes_watched,is_rewatching,num_times_rewatched,start_date,finish_date,updated_at},$rest'
         : 'list_status{status,score,num_chapters_read,is_rereading,num_times_reread,start_date,finish_date,updated_at},$rest';
     try {
-      return await _loadLibrary(anime, fields: detailed);
+      return await _loadLibrary(anime, fields: detailed, allowAdult: true);
     } on MalException {
-      return _loadLibrary(anime);
+      return _loadLibrary(anime, allowAdult: true);
     }
   }
 
-  Future<List<Media>> _loadLibrary(bool anime, {String? fields}) async {
+  Future<List<Media>> _loadLibrary(
+    bool anime, {
+    String? fields,
+    bool allowAdult = false,
+  }) async {
     final all = <Media>[];
     String? next;
     var first = true;
@@ -267,7 +271,7 @@ class MalQueries extends Queries {
                 'sort': 'list_updated_at',
                 'limit': '1000',
                 'fields': fields ?? _listFields,
-                if (!MalPref.hideNsfw.value) 'nsfw': 'true',
+                if (allowAdult || !MalPref.hideNsfw.value) 'nsfw': 'true',
               }
             : null,
       );

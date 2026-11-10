@@ -344,7 +344,7 @@ class SyncController extends AppController {
               anime: isAnime,
             )
           : await syncPlanFromMain(
-              main: prepared!.items,
+              main: _withRemembered(prepared!.items, targets, isAnime),
               targets: libraries,
               flat: flat,
               mainDates: adapter!.syncsDates,
@@ -627,6 +627,35 @@ class SyncController extends AppController {
         ..error = null;
     }
     _notify();
+  }
+
+  List<SyncItem> _withRemembered(
+    List<SyncItem> items,
+    Iterable<MediaService> targets,
+    bool isAnime,
+  ) {
+    final adapters = [
+      for (final t in targets)
+        if (t.syncAdapter case final a?) (t.id, a),
+    ];
+    return [
+      for (final item in items)
+        () {
+          Map<String, int>? ids;
+          for (final (id, adapter) in adapters) {
+            if (item.ids[adapter.key] != null) continue;
+            for (final from in adapter.resolveKeys) {
+              final ref = item.ids[from];
+              if (ref == null) continue;
+              final native = _memory.native(id, isAnime, ref, from);
+              if (native == null) continue;
+              (ids ??= {...item.ids})[adapter.key] = native;
+              break;
+            }
+          }
+          return ids == null ? item : item.withIds(ids);
+        }(),
+    ];
   }
 
   void _recall(String service, SyncAdapter? adapter, SyncPair p, bool isAnime) {

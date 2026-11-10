@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import '../../../Logger.dart';
 import '../../../Screen/Settings/Sync/Data/SyncAdapter.dart';
 import '../../../Screen/Settings/Sync/Data/SyncModels.dart';
 import '../../../Core/Services/Model/Media.dart';
@@ -40,8 +43,17 @@ class SimklSync extends SyncAdapter {
   @override
   Future<List<SyncItem>> library({required bool anime}) async {
     try {
-      queries.invalidateLibrary();
+      queries.invalidateLibrary(full: true);
       final all = await queries.library();
+      final kinds = <String, int>{};
+      for (final id in all.keys) {
+        kinds.update(id.split('/').first, (n) => n + 1, ifAbsent: () => 1);
+      }
+      logger(
+        'Simkl sync library $kinds, 36703=${[for (final k in all.keys)
+          if (k.endsWith('/36703') || k.endsWith('/1973554')) k]}',
+        tag: 'SYNC',
+      );
       return [
         for (final m in all.values)
           if (parseSimklMediaId(m.id) case (SimklKind.anime, final id))
@@ -63,7 +75,20 @@ class SimklSync extends SyncAdapter {
     final requests = simklRequests(batch);
     try {
       for (final r in requests) {
-        await client.post(r.$1, r.$2);
+        final answer = await client.post(r.$1, r.$2);
+        logger(
+          'Simkl ${r.$1} ${jsonEncode(r.$2)} -> ${jsonEncode(answer)}',
+          tag: 'SYNC',
+        );
+        final missing = simklNotFound(answer);
+        if (missing != null) {
+          logger(
+            'Simkl ${r.$1} could not find $missing',
+            logLevel: LogLevel.error,
+            tag: 'SYNC',
+          );
+          throw Exception('Simkl could not find $missing');
+        }
       }
     } on SimklException catch (e) {
       throw syncError(e, status: e.status);
@@ -105,7 +130,22 @@ class SimklSync extends SyncAdapter {
   }
 
   @override
-  Future<void> finish() async => queries.invalidateLibrary();
+  Future<void> finish() async => queries.invalidateLibrary(full: true);
+}
+
+String? simklNotFound(Object? answer) {
+  if (answer is! Map) return null;
+  final missing = answer['not_found'];
+  if (missing is! Map) return null;
+  final found = <String>[];
+  for (final list in missing.values) {
+    if (list is! List) continue;
+    for (final item in list) {
+      final ids = item is Map ? item['ids'] : null;
+      found.add('${ids ?? item}');
+    }
+  }
+  return found.isEmpty ? null : found.join(', ');
 }
 
 Map<String, Object> _ids(String targetId) => {
@@ -123,26 +163,32 @@ List<(String, Map<String, Object>)> simklRequests(List<SyncOp> batch) {
     final have = op.have;
     final old = have?.progress ?? 0;
     final status = simklStatusOut(want.status, SimklKind.anime);
+    final progress = status == 'completed'
+        ? [
+            want.progress,
+            want.total ?? 0,
+            have?.total ?? 0,
+            1,
+          ].reduce((a, b) => a > b ? a : b)
+        : want.progress;
     final score = (want.score / 10).round().clamp(0, 10);
     final rate = score > 0 && score != ((have?.score ?? 0) / 10).round();
-    if (want.progress < old) {
+    if (progress < old) {
       remove.add({
         'ids': _ids(op.targetId),
         'episodes': [
-          for (var n = want.progress + 1; n <= old; n++) {'number': n},
+          for (var n = progress + 1; n <= old; n++) {'number': n},
         ],
       });
     }
-    if (want.progress > old) {
+    if (progress > old) {
       history.add({
         'ids': _ids(op.targetId),
         'episodes': [
-          for (var n = old + 1; n <= want.progress; n++) {'number': n},
+          for (var n = old + 1; n <= progress; n++) {'number': n},
         ],
         'status': ?status,
-        if (rate) 'rating': score,
       });
-      continue;
     }
     final moved =
         status != null &&

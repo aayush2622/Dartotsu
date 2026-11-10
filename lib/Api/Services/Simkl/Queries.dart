@@ -281,7 +281,10 @@ class SimklQueries extends Queries {
     }
   }
 
-  void invalidateLibrary() => _library.expire();
+  void invalidateLibrary({bool full = false}) {
+    if (full) _seen = null;
+    _library.expire();
+  }
 
   Future<Map<String, Media>> library() =>
       client.hasToken ? _library.get() : Future.value(const {});
@@ -335,6 +338,10 @@ class SimklQueries extends Queries {
     onEpisodes?.call(
       library.values.fold<int>(0, (sum, m) => sum + (m.userProgress ?? 0)),
     );
+    for (final m in library.values) {
+      final known = simklKnownTitle(m.id);
+      if (known != null) m.name = known;
+    }
     final seen = _seen;
     if (persist && seen != null) unawaited(_writeDisk(library, seen));
     return library;
