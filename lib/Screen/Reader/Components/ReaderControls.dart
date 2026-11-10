@@ -216,6 +216,9 @@ class ReaderControls extends StatelessWidget {
   }
 
   Widget _bottom(BuildContext context) {
+    final bar = LayoutSurface.reader.layout;
+    final start = _bar(context, bar.zone(bottomStartZone));
+    final end = _bar(context, bar.zone(bottomEndZone));
     final count = state.pageCount;
     final page = state.page;
     final rtl = state.settings.reversed;
@@ -235,6 +238,8 @@ class ReaderControls extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               if (state.autoScrolling.value) _speed(context),
+              if (start.isNotEmpty || end.isNotEmpty)
+                Row(children: [...start, const Spacer(), ...end]),
               Directionality(
                 textDirection: rtl ? TextDirection.rtl : TextDirection.ltr,
                 child: Row(

@@ -45,10 +45,8 @@ extension LayoutSurfaceInfo on LayoutSurface {
   List<LayoutZone> get zones => [
     LayoutZone(topStartZone, () => getString.layoutZoneTopStart),
     LayoutZone(topEndZone, () => getString.layoutZoneTopEnd),
-    if (this == LayoutSurface.player) ...[
-      LayoutZone(bottomStartZone, () => getString.layoutZoneBottomStart),
-      LayoutZone(bottomEndZone, () => getString.layoutZoneBottomEnd),
-    ],
+    LayoutZone(bottomStartZone, () => getString.layoutZoneBottomStart),
+    LayoutZone(bottomEndZone, () => getString.layoutZoneBottomEnd),
     LayoutZone(
       hiddenZone,
       () => this == LayoutSurface.player

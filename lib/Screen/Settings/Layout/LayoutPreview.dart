@@ -468,11 +468,97 @@ class LayoutPreview extends StatelessWidget {
                         ],
                       ),
                     ),
+                    _readerBottom(context, fg, accent, side, novel: novel),
                   ],
                 );
               },
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _readerBottom(
+    BuildContext context,
+    Color fg,
+    Color accent,
+    double side, {
+    required bool novel,
+  }) {
+    final scheme = context.colorScheme;
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        gradient: novel
+            ? null
+            : const LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Color(0x00000000), Color(0xE6000000)],
+              ),
+        color: novel ? scheme.surfaceContainer : null,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(8, 10, 8, 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: AlignmentDirectional.bottomStart,
+                    child: _slot(
+                      bottomStartZone,
+                      color: fg,
+                      accent: accent,
+                      box: 36,
+                      maxWidth: side,
+                    ),
+                  ),
+                ),
+                _slot(
+                  bottomEndZone,
+                  color: fg,
+                  accent: accent,
+                  box: 36,
+                  maxWidth: side,
+                  alignment: WrapAlignment.end,
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                _fixed(
+                  Icons.skip_previous_rounded,
+                  36,
+                  color: fg.withValues(alpha: 0.6),
+                ),
+                Text(
+                  novel ? '42%' : '12',
+                  style: context.textTheme.labelLarge?.copyWith(color: fg),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: _seekBar(fg, accent),
+                  ),
+                ),
+                Text(
+                  novel ? '9 min' : '30',
+                  style: context.textTheme.labelLarge?.copyWith(
+                    color: fg.withValues(alpha: 0.7),
+                  ),
+                ),
+                _fixed(
+                  Icons.skip_next_rounded,
+                  36,
+                  color: fg.withValues(alpha: 0.6),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

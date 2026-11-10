@@ -868,6 +868,9 @@ class _NovelScreenState extends State<NovelScreen>
 
   Widget _bottomRow(BuildContext context, Color foreground) {
     final controls = state.controlsVisible.value;
+    final layout = LayoutSurface.novel.layout;
+    final start = _actionBar(context, foreground, layout.zone(bottomStartZone));
+    final end = _actionBar(context, foreground, layout.zone(bottomEndZone));
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -882,6 +885,8 @@ class _NovelScreenState extends State<NovelScreen>
           ),
         if (state.speaking.value) _speech(context, foreground),
         if (controls && state.autoScrolling.value) _speed(context, foreground),
+        if (controls && (start.isNotEmpty || end.isNotEmpty))
+          Row(children: [...start, const Spacer(), ...end]),
         if (controls)
           Row(
             children: [
@@ -1118,30 +1123,33 @@ class _NovelScreenState extends State<NovelScreen>
       heightFactor: 0.85,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
-          padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-          child: Watch(() {
-            state.settingsVersion.value;
-            final perTitle = state.perTitle.value;
-            return SettingsGroup(
-              key: ValueKey(perTitle),
-              settings: [
-                Setting.switchType(
-                  name: getString.readerPerTitle,
-                  description: getString.readerPerTitleDesc,
-                  icon: Icons.bookmark_rounded,
-                  isChecked: perTitle,
-                  onSwitchChange: state.setPerTitle,
-                ),
-                ...novelReaderRows(
-                  context,
-                  settings: state.settings,
-                  update: state.updateSettings,
-                ),
-              ],
-            );
-          }),
-        )),
+        child: ScrollConfig(
+          context,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
+            child: Watch(() {
+              state.settingsVersion.value;
+              final perTitle = state.perTitle.value;
+              return SettingsGroup(
+                key: ValueKey(perTitle),
+                settings: [
+                  Setting.switchType(
+                    name: getString.readerPerTitle,
+                    description: getString.readerPerTitleDesc,
+                    icon: Icons.bookmark_rounded,
+                    isChecked: perTitle,
+                    onSwitchChange: state.setPerTitle,
+                  ),
+                  ...novelReaderRows(
+                    context,
+                    settings: state.settings,
+                    update: state.updateSettings,
+                  ),
+                ],
+              );
+            }),
+          ),
+        ),
       ),
     ),
   );
