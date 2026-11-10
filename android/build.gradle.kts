@@ -16,11 +16,7 @@ subprojects {
 
         extensions.findByType(BaseExtension::class.java)?.apply {
 
-            if (project.name == "permission_handler_android") {
-                compileSdkVersion("android-37")
-            } else {
-                compileSdkVersion(36)
-            }
+            compileSdkVersion("android-37")
             buildToolsVersion("36.0.0")
 
             compileOptions {
