@@ -50,7 +50,7 @@ dependencies:
   introduction_screen: ^5.0.1
   flutter_animate: ^4.5.2
   cached_network_image: ^4.0.6
-  flutter_cache_manager: ^3.4.8
+  flutter_cache_manager: ^3.5.0
   precached_network_image: ^1.4.1
   flutter_svg: ^2.3.2
   skeletonizer: ^3.0.0
@@ -59,7 +59,7 @@ dependencies:
   dpad: ^3.3.0
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
-  material_ui: ^1.9.0
+  material_ui: ^1.11.0
 
   # UI Enhancements
   html: ^0.15.7
@@ -81,9 +81,9 @@ dependencies:
   screen_retriever: ^0.3.1
   dbus: ^0.8.0
   permission_handler: ^13.0.2
-  flutter_local_notifications: ^22.3.3
+  flutter_local_notifications: ^23.0.0
   wakelock_plus: ^1.8.2
-  flutter_media_session: ^3.0.9
+  flutter_media_session: ^3.1.0
   fl_pip: ^3.2.3
   volume_controller: ^3.7.1
   screen_brightness:
@@ -106,7 +106,7 @@ dependencies:
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.4.11
+  webview_all: ^1.4.12
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -125,7 +125,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.5.0
   local_auth: ^3.0.2
-  pdfrx: ^2.11.0
+  pdfrx: ^2.12.0
 
 # Development dependencies
 dev_dependencies:
