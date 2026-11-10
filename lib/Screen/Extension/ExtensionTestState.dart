@@ -1,3 +1,5 @@
+import '../../Api/Services/Extension/LocalSource.dart';
+
 import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
@@ -52,7 +54,10 @@ class ExtensionTestState extends ScreenState {
     reports.clear();
     loading.value = true;
     await ensureSourcesReady(next);
-    sources.value = watchSources(next);
+    sources.value = [
+      for (final s in watchSources(next))
+        if (s is! LocalSource) s,
+    ];
     loading.value = false;
   }
 

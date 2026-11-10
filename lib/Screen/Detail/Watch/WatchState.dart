@@ -1,10 +1,12 @@
 import '../../../Core/NotificationManager/NotificationManager.dart';
+import '../../../Core/Offline/NetStatus.dart';
 import '../../../Core/Offline/OfflineMode.dart';
 import '../../../Core/SourceAlerts/SourcePrefs.dart';
 import '../../../Core/SourceAlerts/SourceSchedule.dart';
 import '../../../Core/SourceAlerts/SourceSub.dart';
 import '../../../Core/SourceAlerts/SourceSubscriptions.dart';
 import '../../../Core/Downloads/DownloadEngine.dart';
+import '../../../Core/Downloads/DownloadTask.dart';
 import '../../../Core/Downloads/DownloadSnapshots.dart';
 
 import 'dart:async';
@@ -131,7 +133,13 @@ class WatchState extends ScreenState {
     _offlineList = false;
     phase.value = WatchPhase.sources;
     failure.value = null;
-    if (find<OfflineMode>().isOffline.value && await _startOffline()) return;
+    if (_noConnection && await _startOffline()) return;
+    if (find<OfflineMode>().isOffline.value) {
+      if (generation != _generation) return;
+      failure.value = getString.watchStatusOffline;
+      phase.value = WatchPhase.failed;
+      return;
+    }
     if (anime) unawaited(_loadMeta());
     if (fixedSource) {
       await ensureSourcesReady(itemType);
@@ -161,16 +169,34 @@ class WatchState extends ScreenState {
     await selectSource(next, remember: false, fallback: true);
   }
 
+  bool get _noConnection =>
+      find<OfflineMode>().isOffline.value || !find<NetStatus>().online.value;
+
   Future<bool> _startOffline([int? generation]) async {
     final snapshot = await DownloadSnapshots.read(service.id, current.id);
     if (generation != null && generation != _generation) return true;
-    if (snapshot == null || snapshot.episodes.isEmpty) return false;
-    final id = snapshot.sourceId;
-    final offline = find<OfflineMode>().isOffline.value;
+    var episodes = snapshot?.episodes ?? const <DEpisode>[];
+    var id = snapshot?.sourceId;
+    if (episodes.isEmpty) {
+      final done = find<DownloadEngine>().tasks.where(
+        (t) =>
+            t.serviceId == service.id &&
+            t.mediaId == current.id &&
+            t.state.value == DownloadState.done &&
+            t.episode != null,
+      );
+      episodes = [
+        for (final t in done)
+          DEpisode.fromJson(Map<String, dynamic>.from(t.episode!)),
+      ];
+      id ??= done.firstOrNull?.sourceId;
+    }
+    if (episodes.isEmpty) return false;
+    final offline = _noConnection;
     if (offline) source.value = id == null ? null : installedSourceById(id);
     if (offline) sources.value = [?source.value];
     _offlineList = true;
-    _setEpisodes(snapshot.episodes);
+    _setEpisodes(episodes);
     failure.value = null;
     _chunkPinned = false;
     _derive();
@@ -182,7 +208,9 @@ class WatchState extends ScreenState {
 
   Future<bool> _tryNextSource() async {
     final failed = source.value;
-    if (!_canFallback || failed == null || fixedSource) return false;
+    if (!_canFallback || failed == null || fixedSource || _noConnection) {
+      return false;
+    }
     if (!watchAutoSourcePref.value) return false;
     _tried.add(_triedKey(failed));
     final next = sources

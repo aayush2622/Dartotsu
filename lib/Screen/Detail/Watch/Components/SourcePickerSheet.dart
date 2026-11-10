@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Api/Services/Extension/LocalSource.dart';
 import '../../../../Api/Services/Extension/Services.dart';
 import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -165,7 +166,9 @@ class _SourcePickerState extends State<_SourcePicker> {
                 imageUrl: s.iconUrl ?? '',
                 fit: BoxFit.cover,
                 errorWidget: (_, _, _) => Icon(
-                  Icons.extension_rounded,
+                  s is LocalSource
+                      ? Icons.folder_rounded
+                      : Icons.extension_rounded,
                   color: scheme.onSurfaceVariant,
                   size: 20,
                 ),

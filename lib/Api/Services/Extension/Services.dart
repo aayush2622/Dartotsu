@@ -4,10 +4,12 @@ import 'package:collection/collection.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
+import '../../../Core/Local/LocalLibrary.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Functions/SnackBar.dart';
+import 'LocalSource.dart';
 
 const extensionServiceId = 'extension';
 
@@ -94,6 +96,8 @@ List<Source> installedSources(ItemType type) =>
     extensionServiceFor(type)?.state(type).installed.value ?? const [];
 
 Source? installedSourceById(String id) {
+  final local = LocalSource.byId(id);
+  if (local != null) return local;
   for (final type in ItemType.values) {
     for (final s in installedSources(type)) {
       if (s.id == id && !s.isPlaceholder) return s;
@@ -103,15 +107,23 @@ Source? installedSourceById(String id) {
 }
 
 List<Source> watchSources(ItemType type) {
+  final list = _extensionSources(type);
+  if (LocalLibrary.has(type)) list.add(LocalSource(type));
+  return list;
+}
+
+List<Source> _extensionSources(ItemType type) {
   final extension = extensionServiceFor(type);
-  if (extension == null) return const [];
+  if (extension == null) return [];
   final state = extension.state(type);
   final languages = state.selectedLanguages;
   final saved = PrefName.extensionOrder(extension.name, type.name).value;
   final order = {for (final (i, id) in saved.indexed) id: i};
   final list = [
     for (final s in state.installed.value)
-      if ((languages.isEmpty || languages.contains(s.lang)) && _allowed(s)) s,
+      if ((languages.isEmpty || languages.contains(s.lang?.toLowerCase())) &&
+          _allowed(s))
+        s,
   ];
   if (order.isNotEmpty) {
     mergeSort<Source>(
@@ -219,6 +231,7 @@ LocalListStore extensionStore(ItemType type) {
 }
 
 Future<void> ensureSourcesReady(ItemType type) async {
+  await LocalLibrary.refresh();
   final service = extensionServiceFor(type);
   if (service == null) return;
   await service.initializeInstalled(type);

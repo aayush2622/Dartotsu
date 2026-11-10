@@ -1,6 +1,7 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../Api/Services/Extension/LocalSource.dart';
 import '../../../../Widgets/Components/ConnectedPair.dart';
 
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -61,7 +62,9 @@ class SourceBar extends StatelessWidget {
                       height: 34,
                       fit: BoxFit.cover,
                       placeholder: (_, _) => Icon(
-                        Icons.extension_rounded,
+                        source is LocalSource
+                            ? Icons.folder_rounded
+                            : Icons.extension_rounded,
                         color: scheme.onSecondaryContainer,
                       ),
                     ),

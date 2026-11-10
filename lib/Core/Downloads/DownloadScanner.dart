@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 
 import '../../Logger.dart';
+import '../Local/LocalLibrary.dart';
 import '../Services/Model/Media.dart';
 import '../State/State.dart';
 
@@ -74,6 +75,7 @@ class DownloadScanner {
         if (entity is File && isVideoFile(entity.path)) {
           rootFiles.add(entity.path);
         } else if (entity is Directory) {
+          if (p.basename(entity.path) == localFolderName) continue;
           await _folder(entity, found, loose);
         }
       }
@@ -83,6 +85,7 @@ class DownloadScanner {
       }
       groups.value = loose;
       engine.adoptScanned(found);
+      unawaited(LocalLibrary.refresh());
     } catch (e, st) {
       logError('DownloadScanner', e, st);
     } finally {
@@ -185,6 +188,7 @@ class DownloadScanner {
       }
     }
     final info = await _info(dir);
+    if (info == null && depth > 0) return;
     if (info == null && depth == 0) {
       for (final sub in folders) {
         await _folder(sub, found, loose, depth: 1);

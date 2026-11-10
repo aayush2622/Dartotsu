@@ -215,6 +215,15 @@ class _PlayerScreenState extends State<PlayerScreen>
     );
   }
 
+  double _stageExtent = 0;
+
+  Widget _stageSliver(Widget stage) => state.settings.stickyStage
+      ? SliverPersistentHeader(
+          pinned: true,
+          delegate: _PinnedStage(_stageExtent, stage),
+        )
+      : SliverToBoxAdapter(child: stage);
+
   Widget _page(BuildContext context) {
     final scheme = context.colorScheme;
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -247,6 +256,7 @@ class _PlayerScreenState extends State<PlayerScreen>
                 ),
               ),
             );
+            _stageExtent = top + height;
             final together = state.together;
             if (together.following) return _guest(context, scheme, stage);
             if (state.chatOpen.value && together.connected) {
@@ -330,7 +340,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     return CustomScrollView(
       controller: state.pageScroll,
       slivers: [
-        SliverToBoxAdapter(child: stage),
+        _stageSliver(stage),
         SliverToBoxAdapter(child: _heading(context, scheme)),
         SliverToBoxAdapter(child: _tools(context)),
         if (tracked || state.together.connected)
@@ -458,7 +468,7 @@ class _PlayerScreenState extends State<PlayerScreen>
       child: CustomScrollView(
         controller: state.commentsScroll,
         slivers: [
-          SliverToBoxAdapter(child: stage),
+          _stageSliver(stage),
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(
@@ -878,4 +888,28 @@ class _PlayerScreenState extends State<PlayerScreen>
     unawaited(engine.setAudio(next.id));
     snackString(next.label);
   }
+}
+
+class _PinnedStage extends SliverPersistentHeaderDelegate {
+  final double extent;
+  final Widget child;
+
+  const _PinnedStage(this.extent, this.child);
+
+  @override
+  double get minExtent => extent;
+
+  @override
+  double get maxExtent => extent;
+
+  @override
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) => child;
+
+  @override
+  bool shouldRebuild(_PinnedStage old) =>
+      old.extent != extent || old.child != child;
 }

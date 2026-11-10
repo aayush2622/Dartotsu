@@ -74,6 +74,13 @@ List<Setting> playerSettingsRows(
       onPick: (v) => update((x) => x.speed = v),
     ),
     switchSetting(
+      getString.playerStickyStage,
+      getString.playerStickyStageDesc,
+      Icons.vertical_align_top_rounded,
+      s.stickyStage,
+      (v) => update((x) => x.stickyStage = v),
+    ),
+    switchSetting(
       getString.playerCursedSpeed,
       getString.playerCursedSpeedDesc,
       Icons.speed_rounded,

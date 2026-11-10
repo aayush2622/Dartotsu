@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    show ItemType;
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../Core/Downloads/DownloadEngine.dart';
 import '../../../Core/Downloads/DownloadScanner.dart';
 import '../../../Core/Downloads/DownloadTask.dart';
+import '../../../Core/Local/LocalLibrary.dart';
 import '../../../Core/Services/MediaService.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/State/State.dart';
@@ -21,6 +24,7 @@ import '../../Player/Engine/PlayRequest.dart';
 import '../../Player/Engine/PlayerPlaylist.dart';
 import '../../Player/PlayerLauncher.dart';
 import '../DownloadsScreen.dart';
+import '../LocalLauncher.dart';
 
 class OfflineFeed extends StatelessWidget {
   final MediaService service;
@@ -67,6 +71,12 @@ class OfflineFeed extends StatelessWidget {
     final local = type == null || type!.isVideo
         ? engine.scanner.groups.toList()
         : const <LocalGroup>[];
+    LocalLibrary.version.value;
+    final wanted = localTypeOf(type);
+    final titles = [
+      for (final t in ItemType.values)
+        if (wanted == null || wanted == t) ...LocalLibrary.titles(t),
+    ];
     final scheme = context.colorScheme;
     return ScrollConfig(
       context,
@@ -98,7 +108,7 @@ class OfflineFeed extends StatelessWidget {
               ),
             ),
           ),
-          if (list.isEmpty && local.isEmpty)
+          if (list.isEmpty && local.isEmpty && titles.isEmpty)
             SliverFillRemaining(
               hasScrollBody: false,
               child: EmptyState(
@@ -148,6 +158,52 @@ class OfflineFeed extends StatelessWidget {
                 }, childCount: list.length + local.length),
               ),
             ),
+          if (titles.isNotEmpty) ...[
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(
+                  Dimens.pagePad,
+                  Dimens.gapLg,
+                  Dimens.pagePad,
+                  Dimens.gap,
+                ),
+                child: Row(
+                  children: [
+                    Icon(Icons.folder_rounded, color: scheme.primary),
+                    SizedBox(width: Dimens.gap),
+                    Expanded(
+                      child: Text(
+                        getString.localSource,
+                        style: context.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SliverPadding(
+              padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
+              sliver: SliverGrid(
+                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 150,
+                  childAspectRatio: 0.55,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                delegate: SliverChildBuilderDelegate((context, i) {
+                  final title = titles[i];
+                  return PosterCard(
+                    title: title.name,
+                    subtitle: '${title.units.length}',
+                    imageUrl: title.cover,
+                    onTap: () => openLocalTitle(context, title),
+                  );
+                }, childCount: titles.length),
+              ),
+            ),
+          ],
           SliverToBoxAdapter(child: SizedBox(height: Dimens.gapXl * 3)),
         ],
       ),

@@ -34,6 +34,8 @@ class PlayerSettings {
 
   double get speed => _get('speed', 1.0);
   set speed(double v) => _v['speed'] = v;
+  bool get stickyStage => _get('stickyStage', false);
+  set stickyStage(bool v) => _v['stickyStage'] = v;
   bool get cursedSpeed => _get('cursedSpeed', false);
   set cursedSpeed(bool v) => _v['cursedSpeed'] = v;
   int get resizeMode => _get('resizeMode', 0);
