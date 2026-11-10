@@ -26,6 +26,10 @@ class WindowMemory {
     if (!supported) return;
     final window = appWindow;
     if (window == null) return;
+    if (tilingCompositor) {
+      _ready = true;
+      return;
+    }
     try {
       final saved = _read();
       if (saved != null) {
