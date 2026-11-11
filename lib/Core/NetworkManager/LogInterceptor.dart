@@ -1,6 +1,5 @@
 import 'package:rhttp/rhttp.dart';
 
-import '../../Utils/Functions/SnackBar.dart';
 import '../../Logger.dart';
 
 class LogInterceptor extends Interceptor {
@@ -30,14 +29,9 @@ class LogInterceptor extends Interceptor {
       '${type != null ? ' [$type${length != null ? ', $length B' : ''}]' : ''}',
     );
 
-    final cloudflare =
-        [403, 503].contains(response.statusCode) &&
-        [
-          "cloudflare-nginx",
-          "cloudflare",
-        ].contains(response.headerMap['server']?.toLowerCase());
-
-    if (cloudflare) snackString('  ⚠️ Detected Cloudflare protection');
+    if (response.headerMap['cf-mitigated']?.toLowerCase() == 'challenge') {
+      logger('Cloudflare challenge on ${response.request.url}');
+    }
 
     return Interceptor.next();
   }
