@@ -121,8 +121,8 @@ class _CardStyleScreenState extends BaseScreen<CardStyleScreen>
                       Stack(
                         children: [
                           c,
-                          Positioned(
-                            left: 0,
+                          PositionedDirectional(
+                            start: 0,
                             top: 0,
                             child: BadgeDropLayer(
                               style: s,

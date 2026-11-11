@@ -143,11 +143,11 @@ class BadgeDropLayer extends StatelessWidget {
 
   const BadgeDropLayer({super.key, required this.style, required this.editor});
 
-  Alignment _align(CardCorner c) => switch (c) {
-    CardCorner.topLeft => Alignment.topLeft,
-    CardCorner.topRight => Alignment.topRight,
-    CardCorner.bottomLeft => Alignment.bottomLeft,
-    _ => Alignment.bottomRight,
+  AlignmentGeometry _align(CardCorner c) => switch (c) {
+    CardCorner.topLeft => AlignmentDirectional.topStart,
+    CardCorner.topRight => AlignmentDirectional.topEnd,
+    CardCorner.bottomLeft => AlignmentDirectional.bottomStart,
+    _ => AlignmentDirectional.bottomEnd,
   };
 
   static double _width(BadgeMark m) => switch (m) {
@@ -311,7 +311,7 @@ class BadgeTray extends StatelessWidget {
     final on = BadgeEditor.on(style, m);
     final body = AnimatedContainer(
       duration: animDuration(160),
-      padding: const EdgeInsets.fromLTRB(8, 6, 12, 6),
+      padding: const EdgeInsetsDirectional.fromSTEB(8, 6, 12, 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(99),
         color: on

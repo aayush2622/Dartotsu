@@ -531,13 +531,13 @@ class _PosterCardState extends State<PosterCard> {
     );
   }
 
-  Widget _corner(CardCorner c, Widget child) => Positioned(
+  Widget _corner(CardCorner c, Widget child) => PositionedDirectional(
     top: c == CardCorner.topLeft || c == CardCorner.topRight ? 6 : null,
     bottom: c == CardCorner.bottomLeft || c == CardCorner.bottomRight
         ? 6
         : null,
-    left: c == CardCorner.topLeft || c == CardCorner.bottomLeft ? 6 : null,
-    right: c == CardCorner.topRight || c == CardCorner.bottomRight ? 6 : null,
+    start: c == CardCorner.topLeft || c == CardCorner.bottomLeft ? 6 : null,
+    end: c == CardCorner.topRight || c == CardCorner.bottomRight ? 6 : null,
     child: child,
   );
 

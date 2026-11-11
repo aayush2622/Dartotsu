@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import '../../../Widgets/Components/LoadSvg.dart';
+
 import 'package:dartotsu_extension_bridge/Engines/JavaEngine/JvmAddon.dart';
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
@@ -113,7 +114,9 @@ Widget _serviceTile(
       subtitle: preparing
           ? Text(
               getString.runtimePreparing,
-              style: TextStyle(color: scheme.primary, fontSize: 12),
+              style: context.textTheme.bodySmall?.copyWith(
+                color: scheme.primary,
+              ),
             )
           : null,
       trailing: _withSettings(

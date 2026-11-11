@@ -21,8 +21,8 @@ class SubtitlePreview extends StatelessWidget {
           child: DecoratedBox(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                begin: AlignmentDirectional.topStart,
+                end: AlignmentDirectional.bottomEnd,
                 colors: [
                   Color(0xFF5B6B8C),
                   Color(0xFFD9C7A5),
@@ -34,12 +34,12 @@ class SubtitlePreview extends StatelessWidget {
               builder: (context, box) => Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: EdgeInsets.only(
+                  padding: EdgeInsetsDirectional.only(
                     bottom:
                         settings.subtitleBottomPadding.toDouble() *
                         (box.maxWidth / 720),
-                    left: 16,
-                    right: 16,
+                    start: 16,
+                    end: 16,
                   ),
                   child: Container(
                     padding: const EdgeInsets.symmetric(

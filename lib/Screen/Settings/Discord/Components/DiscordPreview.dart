@@ -1,3 +1,5 @@
+import '../../../../Utils/Extensions/ContextExtensions.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../Api/Discord/DiscordAccount.dart';
@@ -85,8 +87,8 @@ class DiscordPreview extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                   ),
-                  Positioned(
-                    left: 16,
+                  PositionedDirectional(
+                    start: 16,
                     bottom: -36,
                     child: _Avatar(
                       url: profile?.avatarUrl(256),
@@ -104,16 +106,17 @@ class DiscordPreview extends StatelessWidget {
                   children: [
                     Text(
                       name,
-                      style: const TextStyle(
+                      style: context.textTheme.titleLarge?.copyWith(
                         color: _D.text,
-                        fontSize: 20,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
                     if (profile != null)
                       Text(
                         profile!.username,
-                        style: const TextStyle(color: _D.muted, fontSize: 13),
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: _D.muted,
+                        ),
                       ),
                     if (customStatus.trim().isNotEmpty) ...[
                       const SizedBox(height: 10),
@@ -128,7 +131,9 @@ class DiscordPreview extends StatelessWidget {
                         ),
                         child: Text(
                           customStatus.trim(),
-                          style: const TextStyle(color: _D.text, fontSize: 13),
+                          style: context.textTheme.bodyMedium?.copyWith(
+                            color: _D.text,
+                          ),
                         ),
                       ),
                     ],
@@ -145,7 +150,9 @@ class DiscordPreview extends StatelessWidget {
                 child: presence == null
                     ? Text(
                         getString.dcLiveNothing,
-                        style: const TextStyle(color: _D.muted, fontSize: 13),
+                        style: context.textTheme.bodyMedium?.copyWith(
+                          color: _D.muted,
+                        ),
                       )
                     : _Activity(presence: presence!, now: now),
               ),
@@ -209,8 +216,8 @@ class _Avatar extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            right: 0,
+          PositionedDirectional(
+            end: 0,
             bottom: 0,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
@@ -265,11 +272,11 @@ class _Activity extends StatelessWidget {
             children: [
               Text(
                 _clock(Duration(milliseconds: done)),
-                style: const TextStyle(color: _D.muted, fontSize: 11),
+                style: context.textTheme.labelSmall?.copyWith(color: _D.muted),
               ),
               Text(
                 _clock(Duration(milliseconds: total)),
-                style: const TextStyle(color: _D.muted, fontSize: 11),
+                style: context.textTheme.labelSmall?.copyWith(color: _D.muted),
               ),
             ],
           ),
@@ -296,9 +303,8 @@ class _Activity extends StatelessWidget {
                 named ? '${_verb(p.type)} ${p.name}' : _verb(p.type),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(
+                style: context.textTheme.bodyMedium?.copyWith(
                   color: _D.text,
-                  fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -329,8 +335,8 @@ class _Activity extends StatelessWidget {
                       ),
                     ),
                     if (p.smallImage != null)
-                      Positioned(
-                        right: -6,
+                      PositionedDirectional(
+                        end: -6,
                         bottom: -6,
                         child: Container(
                           width: 26,
@@ -358,9 +364,8 @@ class _Activity extends StatelessWidget {
                     named ? p.details : p.name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: context.textTheme.bodyMedium?.copyWith(
                       color: _D.text,
-                      fontSize: 14,
                       fontWeight: FontWeight.w700,
                     ),
                   ),
@@ -369,14 +374,18 @@ class _Activity extends StatelessWidget {
                       p.details,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: _D.text, fontSize: 13),
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: _D.text,
+                      ),
                     ),
                   if (p.state != null)
                     Text(
                       p.state!,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: _D.muted, fontSize: 13),
+                      style: context.textTheme.bodyMedium?.copyWith(
+                        color: _D.muted,
+                      ),
                     ),
                   ?time,
                 ],
@@ -397,9 +406,8 @@ class _Activity extends StatelessWidget {
               b.label,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: context.textTheme.bodyMedium?.copyWith(
                 color: _D.text,
-                fontSize: 13,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -465,7 +473,9 @@ class _MemberRow extends StatelessWidget {
                           shown ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: _D.muted, fontSize: 12),
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: _D.muted,
+                          ),
                         ),
                       ),
                     ],
@@ -475,7 +485,9 @@ class _MemberRow extends StatelessWidget {
           ),
           Text(
             getString.dcMemberList,
-            style: const TextStyle(color: Colors.white38, fontSize: 11),
+            style: context.textTheme.labelSmall?.copyWith(
+              color: Colors.white38,
+            ),
           ),
         ],
       ),
@@ -508,7 +520,10 @@ class _TimerLine extends StatelessWidget {
       children: [
         Icon(_typeIcon(type), color: _D.muted, size: 15),
         const SizedBox(width: 5),
-        Text(text, style: const TextStyle(color: _D.muted, fontSize: 12)),
+        Text(
+          text,
+          style: context.textTheme.bodySmall?.copyWith(color: _D.muted),
+        ),
       ],
     ),
   );
