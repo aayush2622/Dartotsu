@@ -350,7 +350,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "7cefff2222bba4aa2b0605b4578196b709237274"
+      resolved-ref: "666d8e9303c1a3ceeaed0135049f524fcf5c070a"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -693,10 +693,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: e99e9c6078d1359ba131b2c1eb8d68837170836a01bf2cea3cf2fa13e62ac2ac
+      sha256: "58f9ea245d7194363c05f7a012bbc73291736c2d8b5f555a8e0ea3f9121868b4"
       url: "https://pub.dev"
     source: hosted
-    version: "23.0.0"
+    version: "23.0.1"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -1256,10 +1256,10 @@ packages:
     dependency: transitive
     description:
       name: objective_c
-      sha256: "322d5f1f0680534acaf557c5d68e97b40c3800ee5e15b63dcacc3c31504674c2"
+      sha256: c965d264fd4b0b4dd402dce9d049b70656bf98d3ca108b9bc55d2544ceadbe5e
       url: "https://pub.dev"
     source: hosted
-    version: "9.6.3"
+    version: "9.6.4"
   octo_image:
     dependency: transitive
     description:
