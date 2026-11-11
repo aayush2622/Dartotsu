@@ -18,7 +18,7 @@ migrate_working_dir/
 *.iws
 .idea/
 !.idea/icon.png
-
+.openidea/
 .vscode/
 
 *.jks
@@ -62,3 +62,5 @@ graft-statusline.cjs
 
 
 .ignore
+
+.zed/
