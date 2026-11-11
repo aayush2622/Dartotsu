@@ -1,4 +1,5 @@
 import '../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
@@ -514,7 +515,7 @@ class CookieManager extends Interceptor {
         webview.WebViewCookie(
           name: cookie.name,
           value: cookie.value,
-          domain: cookie.domain,
+          domain: cookie.hostOnly ? cookie.domain : '.${cookie.domain}',
           path: cookie.path,
         ),
       );

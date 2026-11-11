@@ -3935,6 +3935,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get syncAddMissingDesc => '也添加另一个服务里还没有的条目';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -3957,6 +3962,12 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7001,6 +7012,17 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get downloadTitle => '下载';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => '已下载或在队列中';

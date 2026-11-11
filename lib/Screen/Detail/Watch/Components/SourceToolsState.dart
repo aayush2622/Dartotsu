@@ -65,6 +65,7 @@ class SourceToolsState extends ScreenState {
     final url = health.value.url;
     if (url == null) return;
     await navigateToPage<void>(context, WebView(url: url));
+    CloudflareSolver.reset(health.value.host);
     if (!mounted) return;
     refresh();
     unawaited(test());
@@ -78,6 +79,7 @@ class SourceToolsState extends ScreenState {
     final host = health.value.host;
     if (host.isEmpty) return;
     await find<NetworkManager>().cookieManager.deleteCookiesForDomain(host);
+    CloudflareSolver.reset(host);
     if (!mounted) return;
     probe.value = null;
     refresh();

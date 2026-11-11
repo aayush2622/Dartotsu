@@ -4002,6 +4002,11 @@ class AppLocalizationsTa extends AppLocalizations {
   String get syncAddMissingDesc => 'மத்த சர்வீஸ்ல இல்லாத என்ட்ரிஸையும் சேர்';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -4024,6 +4029,12 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7169,6 +7180,17 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get downloadTitle => 'டவுன்லோட்';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready =>

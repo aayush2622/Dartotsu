@@ -3984,6 +3984,11 @@ class AppLocalizationsAr extends AppLocalizations {
       'أضف كمان المدخلات اللي ما عند الخدمة الثانية';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -4006,6 +4011,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7127,6 +7138,17 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get downloadTitle => 'تنزيل';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => 'تم تنزيله أو في الطابور';

@@ -3968,6 +3968,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncAddMissingDesc => 'เพิ่มรายการที่อีกบริการยังไม่มีด้วย';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -3990,6 +3995,12 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7085,6 +7096,17 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get downloadTitle => 'ดาวน์โหลด';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => 'ดาวน์โหลดแล้วหรืออยู่ในคิว';

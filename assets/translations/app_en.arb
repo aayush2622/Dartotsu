@@ -2033,6 +2033,14 @@
   "syncAutoDesc": "Fetch and sync in the background when the app opens and every 30 minutes",
   "syncAddMissing": "Add missing entries",
   "syncAddMissingDesc": "Also add entries the other service doesn't have yet",
+  "syncServiceOn": "Sync with {name}",
+  "@syncServiceOn": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
   "syncDelete": "Delete what the main service doesn't have",
   "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
   "syncDeleteTitle": "Delete entries?",
@@ -2045,6 +2053,8 @@
     }
   },
   "syncDeleteAction": "Delete",
+  "syncToDelete": "To delete",
+  "syncDeletedNote": "Will be deleted",
   "syncWillRemove": "{count} will be deleted from {name}",
   "@syncWillRemove": {
     "placeholders": {
@@ -3719,6 +3729,16 @@
   "downloadStorageEmpty": "No downloads are using space",
   "downloadsOpenDesc": "See the queue and everything saved on this device",
   "downloadTitle": "Download",
+  "downloadMetaOnly": "Metadata only",
+  "downloadMetaFailed": "Couldn't create the title folder",
+  "downloadMetaSaved": "Saved. Put your files in {path}",
+  "@downloadMetaSaved": {
+    "placeholders": {
+      "path": {
+        "type": "String"
+      }
+    }
+  },
   "downloadAlready": "Already downloaded or in the queue",
   "downloadPickStream": "Download which stream?",
   "downloadPickSubtitle": "Download which subtitles?",

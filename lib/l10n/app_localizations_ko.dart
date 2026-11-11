@@ -3933,6 +3933,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get syncAddMissingDesc => '다른 서비스에 아직 없는 항목도 추가해요';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -3955,6 +3960,12 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7013,6 +7024,17 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get downloadTitle => '다운로드';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => '이미 다운로드했거나 대기열에 있어요';

@@ -1,4 +1,3 @@
-import '../../../../Core/Preferences/PrefManager.dart';
 import '../../../../Widgets/Components/ScrollConfig.dart';
 
 import 'package:flutter/material.dart';
@@ -149,10 +148,20 @@ class SyncOverview extends StatelessWidget {
                               label: t.$2,
                               count: t.$3,
                               color: t.$4,
-                              selected: state.effectiveFilter == t.$1,
-                              onTap: () => state.filter.value = t.$1,
+                              selected:
+                                  !state.removing.value &&
+                                  state.effectiveFilter == t.$1,
+                              onTap: () => state.showFilter(t.$1),
                             ),
                           ),
+                      if (state.removals.isNotEmpty)
+                        _StatTile(
+                          label: getString.syncToDelete,
+                          count: state.removals.length,
+                          color: scheme.error,
+                          selected: state.showingRemovals,
+                          onTap: () => state.removing.value = true,
+                        ),
                     ],
                   ),
                 ),
@@ -164,18 +173,13 @@ class SyncOverview extends StatelessWidget {
             spacing: Dimens.gap,
             runSpacing: 2,
             children: [
-              if (target.onlyInTarget > 0)
+              if (target.onlyInTarget - state.removals.length > 0)
                 Text(
-                  getString.syncOnlyIn(target.onlyInTarget, service.name),
-                  style: small,
-                ),
-              if (PrefName.syncDelete.rx.value && target.removals.isNotEmpty)
-                Text(
-                  getString.syncWillRemove(
-                    target.removals.length,
+                  getString.syncOnlyIn(
+                    target.onlyInTarget - state.removals.length,
                     service.name,
                   ),
-                  style: small?.copyWith(color: scheme.error),
+                  style: small,
                 ),
               for (final limit in adapter.limits)
                 Text(

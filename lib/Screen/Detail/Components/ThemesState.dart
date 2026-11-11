@@ -32,7 +32,9 @@ class ThemesState extends ScreenState {
       if (id != null) result.value = await AnimeThemes.forAnilist(id);
     } catch (e, st) {
       logger(
-        'AnimeThemes failed: $e\n$st',
+        e is StateError
+            ? 'AnimeThemes failed: $e'
+            : 'AnimeThemes failed: $e\n$st',
         logLevel: LogLevel.warning,
         tag: 'THEMES',
       );

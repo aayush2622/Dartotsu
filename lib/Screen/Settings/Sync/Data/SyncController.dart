@@ -90,10 +90,18 @@ class SyncController extends AppController {
     return _candidates.firstOrNull?.id ?? '';
   }
 
-  List<MediaService> get _candidates => [
+  List<MediaService> get signedIn => [
     for (final s in _services)
       if (s.syncAdapter != null && s.isLoggedIn) s,
   ];
+
+  List<MediaService> get _candidates {
+    final off = PrefName.syncDisabled.rx.value;
+    return [
+      for (final s in signedIn)
+        if (!off.contains(s.id)) s,
+    ];
+  }
 
   List<MediaService> get candidates => _candidates;
 
@@ -451,7 +459,9 @@ class SyncController extends AppController {
     try {
       await Future.wait([
         for (final id in current.targets.keys)
-          if (only == null || only == id) _work(id, current, auto),
+          if ((only == null || only == id) &&
+              _candidates.any((s) => s.id == id))
+            _work(id, current, auto),
       ]);
     } finally {
       _includePrivate = null;

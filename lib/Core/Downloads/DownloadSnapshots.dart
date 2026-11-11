@@ -23,16 +23,17 @@ class DownloadSnapshot {
 class DownloadSnapshots {
   DownloadSnapshots._();
 
-  static Future<File?> _file(String serviceId, String mediaId) async {
+  static Future<File?> _file(
+    String serviceId,
+    String mediaId, [
+    String? fallbackTitle,
+  ]) async {
     final task = find<DownloadEngine>().tasks
         .where((t) => t.serviceId == serviceId && t.mediaId == mediaId)
         .firstOrNull;
-    if (task == null) return null;
-    final dir = await DownloadPaths.mediaDir(
-      serviceId,
-      mediaId,
-      task.mediaTitle,
-    );
+    final title = task?.mediaTitle ?? fallbackTitle;
+    if (title == null) return null;
+    final dir = await DownloadPaths.mediaDir(serviceId, mediaId, title);
     return File(p.join(dir.path, 'media.json'));
   }
 
@@ -79,9 +80,10 @@ class DownloadSnapshots {
     String? title,
     List<DEpisode>? episodes,
     String? sourceId,
+    bool create = false,
   }) async {
     try {
-      final file = await _file(serviceId, mediaId);
+      final file = await _file(serviceId, mediaId, create ? title : null);
       if (file == null) return;
       final json = await _readJson(file) ?? <String, Object?>{};
       json
@@ -109,4 +111,10 @@ class DownloadSnapshots {
       logger('Snapshot write failed: $e', tag: 'DOWNLOAD');
     }
   }
+
+  static Future<String?> folderOf(
+    String serviceId,
+    String mediaId,
+    String title,
+  ) async => (await _file(serviceId, mediaId, title))?.parent.path;
 }

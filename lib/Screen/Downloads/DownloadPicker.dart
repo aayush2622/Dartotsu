@@ -5,6 +5,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
 import '../../Core/Downloads/DownloadEngine.dart';
+import '../../Core/Downloads/DownloadSnapshots.dart';
 import '../../Core/Downloads/DownloadQueue.dart';
 import '../../Core/Downloads/DownloadTask.dart';
 
@@ -238,6 +239,30 @@ List<DownloadUnit> _asDownloadUnits(List<WatchUnit> units) => [
     DownloadUnit(key: u.key, number: u.value, title: u.title, raw: u.raw),
 ];
 
+const _metaOnly = 'metaOnly';
+
+Future<void> _saveMetadata(WatchState state) async {
+  final media = state.current;
+  final title = media.mainName;
+  final engine = find<DownloadEngine>();
+  await DownloadSnapshots.write(
+    state.service.id,
+    media.id,
+    media: engine.slim(media),
+    title: title,
+    episodes: [for (final u in state.units) u.raw],
+    sourceId: state.source.value?.id,
+    create: true,
+  );
+  final folder = await DownloadSnapshots.folderOf(
+    state.service.id,
+    media.id,
+    title,
+  );
+  if (folder == null) return snackString(getString.downloadMetaFailed);
+  snackString(getString.downloadMetaSaved(folder), clipboard: folder);
+}
+
 Future<void> downloadMenu(BuildContext context, WatchState state) async {
   final next = state.next;
   final all = state.anime
@@ -288,11 +313,17 @@ Future<void> downloadMenu(BuildContext context, WatchState state) async {
     icon: Icons.download_rounded,
     selected: '',
     options: [
+      ChoiceOption(
+        _metaOnly,
+        getString.downloadMetaOnly,
+        icon: Icons.folder_open_rounded,
+      ),
       for (final key in options.keys)
         ChoiceOption(key, label(key), icon: Icons.download_rounded),
     ],
   );
   if (picked == null) return;
+  if (picked == _metaOnly) return _saveMetadata(state);
   await downloadUnits(
     context.mounted ? context : (appOverlayContext ?? appContext)!,
     state,

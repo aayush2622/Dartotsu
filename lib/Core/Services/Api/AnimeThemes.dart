@@ -162,6 +162,8 @@ AnimeThemesResult? parseAnimeThemes(Map<String, dynamic> json) {
 int _order(String slug) =>
     int.tryParse(RegExp(r'\d+').firstMatch(slug)?.group(0) ?? '') ?? 0;
 
+bool _transient(int code) => code == 429 || code >= 500;
+
 class AnimeThemes {
   AnimeThemes._();
 
@@ -170,27 +172,34 @@ class AnimeThemes {
 
   static Future<AnimeThemesResult?> forAnilist(int id) {
     if (_cache.containsKey(id)) return Future.value(_cache[id]);
-    return _pending[id] ??= _fetch(id).then((r) => _cache[id] = r).whenComplete(
-      () {
-        _pending.remove(id);
-      },
-    );
+    return _pending[id] ??= _fetch(id)
+        .then((r) => _cache[id] = r)
+        .whenComplete(() {
+          _pending.remove(id);
+        });
   }
 
   static Future<AnimeThemesResult?> _fetch(int id) async {
-    final res = await find<NetworkManager>().get(
-      'https://api.animethemes.moe/anime',
-      query: {
-        'filter[has]': 'resources',
-        'filter[site]': 'AniList',
-        'filter[external_id]': '$id',
-        'include':
-            'animethemes.animethemeentries.videos.audio,'
-            'animethemes.song.artists',
-        'fields[video]': 'id,basename,link,tags,resolution,nc,source',
-        'fields[audio]': 'id,basename,link',
-      },
-    );
+    final query = {
+      'filter[has]': 'resources',
+      'filter[site]': 'AniList',
+      'filter[external_id]': '$id',
+      'include':
+          'animethemes.animethemeentries.videos.audio,'
+          'animethemes.song.artists',
+      'fields[video]': 'id,basename,link,tags,resolution,nc,source',
+      'fields[audio]': 'id,basename,link',
+    };
+    final net = find<NetworkManager>();
+    var res = await net.get('https://api.animethemes.moe/anime', query: query);
+    for (
+      var attempt = 1;
+      attempt <= 2 && _transient(res.statusCode);
+      attempt++
+    ) {
+      await Future<void>.delayed(Duration(seconds: 2 * attempt));
+      res = await net.get('https://api.animethemes.moe/anime', query: query);
+    }
     if (!res.isOk) throw StateError('AnimeThemes HTTP ${res.statusCode}');
     final data = res.data;
     if (data is! Map) return null;

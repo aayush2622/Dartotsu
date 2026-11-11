@@ -118,6 +118,46 @@ class SyncPairRow extends StatelessWidget {
   }
 }
 
+class SyncRemovalRow extends StatelessWidget {
+  final SyncItem item;
+  final String Function(String?) statusLabel;
+
+  const SyncRemovalRow({
+    super.key,
+    required this.item,
+    required this.statusLabel,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final scheme = context.colorScheme;
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 3, horizontal: Dimens.gapSm),
+      child: ThemedContainer(
+        blur: false,
+        borderRadius: BorderRadius.circular(20),
+        padding: const EdgeInsetsDirectional.fromSTEB(14, 8, 10, 8),
+        child: Row(
+          children: [
+            Expanded(
+              child: _Side(item: item, statusLabel: statusLabel),
+            ),
+            SizedBox(
+              width: 34,
+              child: Icon(
+                Icons.delete_outline_rounded,
+                size: 20,
+                color: scheme.error,
+              ),
+            ),
+            Expanded(child: _Note(label: getString.syncDeletedNote)),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _Note extends StatelessWidget {
   final String label;
 

@@ -11,6 +11,7 @@ import '../../../Widgets/Components/ScrollConfig.dart';
 import 'Components/SyncHeader.dart';
 import 'Components/SyncOverview.dart';
 import 'Components/SyncPairRow.dart';
+import 'Data/SyncModels.dart';
 import 'SyncState.dart';
 
 class SyncScreen extends StatefulWidget {
@@ -53,7 +54,8 @@ class _SyncScreenState extends BaseScreen<SyncScreen>
     final plan = state.plan;
     final service = state.selectedService;
     final target = state.current;
-    final pairs = state.pairs;
+    final removals = state.showingRemovals ? state.removals : null;
+    final pairs = removals == null ? state.pairs : const <SyncPair>[];
     final error = state.controller.error.value;
     final header = SliverToBoxAdapter(child: SyncHeader(state: state));
     if (plan == null) {
@@ -81,7 +83,19 @@ class _SyncScreenState extends BaseScreen<SyncScreen>
           SliverToBoxAdapter(
             child: SyncOverview(state: state, service: service, target: target),
           ),
-        if (pairs.isEmpty)
+        if (removals != null)
+          SliverFixedExtentList(
+            itemExtent: 92,
+            delegate: SliverChildBuilderDelegate(
+              childCount: removals.length,
+              (context, i) => SyncRemovalRow(
+                key: ValueKey(removals[i].id),
+                item: removals[i],
+                statusLabel: state.statusLabel,
+              ),
+            ),
+          )
+        else if (pairs.isEmpty)
           SliverToBoxAdapter(
             child: Padding(
               padding: EdgeInsets.all(Dimens.gapXl),

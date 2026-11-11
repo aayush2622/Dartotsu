@@ -7271,6 +7271,12 @@ abstract class AppLocalizations {
   /// **'Also add entries the other service doesn\'t have yet'**
   String get syncAddMissingDesc;
 
+  /// No description provided for @syncServiceOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Sync with {name}'**
+  String syncServiceOn(String name);
+
   /// No description provided for @syncDelete.
   ///
   /// In en, this message translates to:
@@ -7300,6 +7306,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Delete'**
   String get syncDeleteAction;
+
+  /// No description provided for @syncToDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'To delete'**
+  String get syncToDelete;
+
+  /// No description provided for @syncDeletedNote.
+  ///
+  /// In en, this message translates to:
+  /// **'Will be deleted'**
+  String get syncDeletedNote;
 
   /// No description provided for @syncWillRemove.
   ///
@@ -12796,6 +12814,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Download'**
   String get downloadTitle;
+
+  /// No description provided for @downloadMetaOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Metadata only'**
+  String get downloadMetaOnly;
+
+  /// No description provided for @downloadMetaFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t create the title folder'**
+  String get downloadMetaFailed;
+
+  /// No description provided for @downloadMetaSaved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved. Put your files in {path}'**
+  String downloadMetaSaved(String path);
 
   /// No description provided for @downloadAlready.
   ///

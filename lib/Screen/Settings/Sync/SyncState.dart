@@ -40,7 +40,7 @@ class SyncState extends ScreenState {
       final all = targets;
       if (next.index < all.length && all[next.index].id != selected.value) {
         selected.value = all[next.index].id;
-        filter.value = SyncStatus.outdated;
+        showFilter(SyncStatus.outdated);
       }
     });
     tabs?.dispose();
@@ -51,6 +51,17 @@ class SyncState extends ScreenState {
 
   final selected = Live<String?>(null);
   final filter = Live<SyncStatus?>(SyncStatus.outdated);
+  final removing = false.live;
+
+  List<SyncItem> get removals =>
+      PrefName.syncDelete.rx.value ? current?.removals ?? const [] : const [];
+
+  bool get showingRemovals => removing.value && removals.isNotEmpty;
+
+  void showFilter(SyncStatus? status) {
+    removing.value = false;
+    filter.value = status;
+  }
 
   String get mainId => controller.mainId;
 
@@ -137,7 +148,7 @@ class SyncState extends ScreenState {
 
   int pendingOf(String id) {
     final t = plan?.targets[id];
-    if (t == null) return 0;
+    if (t == null || !candidates.any((s) => s.id == id)) return 0;
     PrefName.syncAddMissing.rx.value;
     return t.pairs.where(controller.isWanted).length +
         (PrefName.syncDelete.rx.value ? t.removals.length : 0);
@@ -147,14 +158,14 @@ class SyncState extends ScreenState {
     if (controller.busy) return;
     PrefName.syncMain.rx.value = id;
     selected.value = null;
-    filter.value = SyncStatus.outdated;
+    showFilter(SyncStatus.outdated);
   }
 
   void setType(bool anime) {
     if (controller.busy) return;
     controller.anime.value = anime;
     selected.value = null;
-    filter.value = SyncStatus.outdated;
+    showFilter(SyncStatus.outdated);
   }
 
   Future<void> fetch() => controller.fetch();

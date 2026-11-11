@@ -153,7 +153,8 @@ Widget? _serviceTrailing(
     final plugin = m.plugin as DownloadablePlugin;
     final remove = IconButton(
       icon: const Icon(Icons.delete, size: 18),
-      onPressed: () => showDeleteDialog(context, plugin, m.name),
+      onPressed: () =>
+          showDeleteDialog(context, plugin, m.name, manager: m as Extension),
     );
     if (!plugin.updateAvailable.value) return remove;
     return Row(

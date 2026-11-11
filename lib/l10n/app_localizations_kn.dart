@@ -3996,6 +3996,11 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಇನ್ನೊಂದು ಸರ್ವಿಸ್‌ನಲ್ಲಿ ಇನ್ನೂ ಇಲ್ಲದ ಎಂಟ್ರಿಗಳನ್ನೂ ಸೇರಿಸು';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -4018,6 +4023,12 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7155,6 +7166,17 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get downloadTitle => 'ಡೌನ್‌ಲೋಡ್';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => 'ಈಗಾಗಲೇ ಡೌನ್‌ಲೋಡ್ ಆಗಿದೆ ಅಥವಾ ಕ್ಯೂನಲ್ಲಿದೆ';

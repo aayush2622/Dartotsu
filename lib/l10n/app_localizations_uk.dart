@@ -4004,6 +4004,11 @@ class AppLocalizationsUk extends AppLocalizations {
       'Також додавати записи, яких ще немає в іншому сервісі';
 
   @override
+  String syncServiceOn(String name) {
+    return 'Sync with $name';
+  }
+
+  @override
   String get syncDelete => 'Delete what the main service doesn\'t have';
 
   @override
@@ -4026,6 +4031,12 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get syncDeleteAction => 'Delete';
+
+  @override
+  String get syncToDelete => 'To delete';
+
+  @override
+  String get syncDeletedNote => 'Will be deleted';
 
   @override
   String syncWillRemove(int count, String name) {
@@ -7172,6 +7183,17 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get downloadTitle => 'Завантажити';
+
+  @override
+  String get downloadMetaOnly => 'Metadata only';
+
+  @override
+  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+
+  @override
+  String downloadMetaSaved(String path) {
+    return 'Saved. Put your files in $path';
+  }
 
   @override
   String get downloadAlready => 'Уже завантажено або в черзі';

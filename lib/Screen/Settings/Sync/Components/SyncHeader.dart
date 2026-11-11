@@ -206,6 +206,7 @@ class SyncHeader extends StatelessWidget {
       AppSheet(
         title: getString.syncMainService,
         child: ListView.builder(
+          shrinkWrap: true,
           padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
           itemCount: entries.length,
           itemBuilder: (sheet, i) => SheetTile(
@@ -276,6 +277,20 @@ class SyncHeader extends StatelessWidget {
             AppSegment('skip', label: getString.syncPrivateModeSkip),
           ],
         ),
+        for (final service in state.controller.signedIn)
+          SwitchListTile(
+            contentPadding: EdgeInsets.zero,
+            secondary: loadSvg(service.iconPath, width: 22, height: 22),
+            title: Text(getString.syncServiceOn(service.name)),
+            value: !PrefName.syncDisabled.rx.value.contains(service.id),
+            onChanged: (on) {
+              final off = [...PrefName.syncDisabled.rx.value]
+                ..remove(service.id);
+              if (!on) off.add(service.id);
+              PrefName.syncDisabled.rx.value = off;
+              state.controller.changes.fire();
+            },
+          ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(getString.syncDelete),

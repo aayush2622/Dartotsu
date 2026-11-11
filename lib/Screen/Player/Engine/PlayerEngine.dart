@@ -571,6 +571,26 @@ class PlayerEngine {
     return null;
   }
 
+  Future<void> logDecoder() async {
+    final mpv = native;
+    if (mpv == null || _disposed) return;
+    try {
+      final values = <String>[];
+      for (final name in const [
+        'video-codec',
+        'hwdec',
+        'hwdec-current',
+        'current-vo',
+        'video-params/w',
+        'video-params/h',
+        'container-fps',
+      ]) {
+        values.add('$name=${await mpv.getProperty(name)}');
+      }
+      logger('Video: ${values.join(', ')}', tag: 'PLAYER');
+    } catch (_) {}
+  }
+
   Timer? _redrawTimer;
 
   Future<void> redraw() async {

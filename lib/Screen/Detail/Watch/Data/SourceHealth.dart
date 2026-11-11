@@ -100,18 +100,19 @@ class SourceHealth {
 
   static Future<SourceProbe> _get(Uri uri) async {
     try {
-      final res = await find<NetworkManager>().get(
-        uri.toString(),
-        decodeJson: false,
-      );
+      final res = await find<NetworkManager>()
+          .get(uri.toString(), decodeJson: false)
+          .timeout(const Duration(seconds: 25));
       final mitigated = res.headers.entries.any(
         (e) => e.key.toLowerCase() == 'cf-mitigated',
       );
       final body = res.data is String ? res.data as String : '';
+      final blockedStatus = const {403, 429, 503}.contains(res.statusCode);
       final challenge =
           mitigated ||
-          body.contains('Just a moment') ||
-          body.contains('challenge-platform');
+          (blockedStatus &&
+              (body.contains('Just a moment') ||
+                  body.contains('challenge-platform')));
       if (res.statusCode < 400 && !challenge) {
         return SourceProbe(ProbeResult.ok, res.statusCode);
       }

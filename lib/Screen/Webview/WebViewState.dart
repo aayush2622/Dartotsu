@@ -31,11 +31,17 @@ class WebViewState extends ScreenState {
 
   final cookieManager = find<NetworkManager>().cookieManager;
 
-  Future<void> _captureRealUserAgent() async {
-    if (PrefName.fetchedUserAgent.value.isNotEmpty) return;
+  Future<void> _alignUserAgent() async {
+    final custom = PrefName.customUserAgent.value;
     try {
+      if (custom.isNotEmpty) {
+        await controller.setUserAgent(custom);
+        return;
+      }
       final ua = await controller.getUserAgent();
-      if (ua == null || ua.isEmpty) return;
+      if (ua == null || ua.isEmpty || ua == PrefName.fetchedUserAgent.value) {
+        return;
+      }
       PrefName.fetchedUserAgent.value = ua;
       find<NetworkManager>().reinitialize();
     } catch (e, st) {
@@ -91,9 +97,7 @@ class WebViewState extends ScreenState {
         },
       ),
     );
-    unawaited(_captureRealUserAgent());
-    final custom = PrefName.customUserAgent.value;
-    if (custom.isNotEmpty) await c.setUserAgent(custom);
+    await _alignUserAgent();
     await _injectFont();
     await cookieManager.applyCookiesToWebView();
     final target = webUrl(initialUrl);

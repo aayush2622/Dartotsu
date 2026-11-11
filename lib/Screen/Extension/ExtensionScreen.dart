@@ -1,4 +1,3 @@
-
 import 'package:dartotsu_extension_bridge/Extensions/DownloadablePlugin.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ import '../../Widgets/Components/AppBars.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/LoadSvg.dart';
 import '../../Widgets/Components/ThemedContainer.dart';
+import '../../Api/Services/Extension/Services.dart';
 import 'ExtensionList.dart';
 import 'ExtensionTestScreen.dart';
 import '../../Core/Downloads/DownloadPrefs.dart';
@@ -296,16 +296,34 @@ class ExtensionScreenState extends BaseScreen<ExtensionScreen>
   }
 }
 
+Future<void> _leaveDeleted(Extension deleted) async {
+  final manager = find<ExtensionManager>();
+  for (final type in ItemType.values) {
+    if (manager.current[type] != deleted) continue;
+    final next = manager.managers
+        .where(
+          (e) =>
+              e != deleted &&
+              e.supports(type) &&
+              (e.plugin == null || e.plugin!.installed.value),
+        )
+        .firstOrNull;
+    if (next != null) await setExtensionService(type, next.id);
+  }
+}
+
 void showDeleteDialog(
   BuildContext context,
   DownloadablePlugin plugin,
-  String name,
-) {
+  String name, {
+  Extension? manager,
+}) {
   AlertDialogBuilder(context)
     ..setTitle(getString.deletePluginTitle(name))
     ..setMessage(getString.deletePluginMessage)
     ..setPositiveButton(getString.yes, () async {
       await plugin.delete();
+      if (manager != null) await _leaveDeleted(manager);
       snackString(getString.pluginDeleted(name));
     })
     ..setNegativeButton(getString.no, () {})

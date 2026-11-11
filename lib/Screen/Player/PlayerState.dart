@@ -418,6 +418,7 @@ class PlayerState extends ScreenState {
   }
 
   Future<void> _matchDisplay() async {
+    unawaited(engine.logDecoder());
     final fps = await engine.videoFps();
     if (fps != null) await matchRefreshRate(fps);
   }
