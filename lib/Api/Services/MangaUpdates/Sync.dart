@@ -24,6 +24,12 @@ class MangaUpdatesSync extends SyncAdapter {
   bool get syncsRepeat => false;
 
   @override
+  int get batchSize => 25;
+
+  @override
+  int get requestsPerBatch => 2;
+
+  @override
   List<SyncLimit> get limits => const [SyncLimit(10, Duration(minutes: 1))];
 
   @override
@@ -50,18 +56,21 @@ class MangaUpdatesSync extends SyncAdapter {
   @override
   Future<int> write(List<SyncOp> batch, {required bool anime}) async {
     try {
-      await mutations.saveEntries([
+      return await mutations.saveEntries([
         for (final op in batch)
           (
             op.want.toMedia(anime: anime, idOverride: op.targetId)
               ..userListId = op.have?.listId,
             op.existsHint,
+            op.want.score > 0 &&
+                (op.have == null ||
+                    (op.want.score / 10).round() !=
+                        (op.have!.score / 10).round()),
           ),
       ]);
     } on MangaUpdatesException catch (e) {
       throw syncError(e, status: e.status);
     }
-    return batch.length;
   }
 
   @override

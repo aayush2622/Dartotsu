@@ -470,7 +470,7 @@ class MangaUpdatesQueries extends Queries {
       'PLANNING': getString.planning,
       'COMPLETED': getString.completed,
       'PAUSED': getString.paused,
-      'DROPPED': getString.dropped,
+      'DROPPED': getString.unfinished,
     });
   }
 

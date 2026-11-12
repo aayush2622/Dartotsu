@@ -79,44 +79,53 @@ class MangaUpdatesMutations extends Mutations {
     await _rate(media, id);
   }
 
-  Future<void> saveEntries(List<(Media, bool?)> items) async {
-    final adds = <(Media, int)>[];
-    final updates = <(Media, int, bool?)>[];
-    for (final (media, exists) in items) {
+  Future<int> saveEntries(List<(Media, bool?, bool)> items) async {
+    final adds = <(Media, int, bool)>[];
+    final updates = <(Media, int, bool?, bool)>[];
+    for (final (media, exists, rate) in items) {
       final id = _idOf(media);
       if (id == null) continue;
       if (exists == false) {
-        adds.add((media, id));
+        adds.add((media, id, rate));
       } else {
-        updates.add((media, id, exists));
+        updates.add((media, id, exists, rate));
       }
     }
+    var requests = 0;
     if (adds.isNotEmpty) {
+      requests++;
       await client.post('/lists/series', [
-        for (final (media, id) in adds) _entry(media, id),
+        for (final (media, id, _) in adds) _entry(media, id),
       ]);
     }
     var updated = true;
     if (updates.isNotEmpty) {
+      requests++;
       try {
         await client.post('/lists/series/update', [
-          for (final (media, id, _) in updates) _entry(media, id),
+          for (final (media, id, _, _) in updates) _entry(media, id),
         ]);
       } on MangaUpdatesException catch (e) {
         if (!_missing(e)) rethrow;
         updated = false;
-        for (final (media, _, exists) in updates) {
+        for (final (media, _, exists, _) in updates) {
+          requests++;
           await saveEntry(media, exists: exists);
         }
       }
     }
-    for (final (media, id) in adds) {
+    for (final (media, id, rate) in adds) {
+      if (!rate) continue;
+      requests++;
       await _rate(media, id);
     }
-    if (!updated) return;
-    for (final (media, id, _) in updates) {
+    if (!updated) return requests;
+    for (final (media, id, _, rate) in updates) {
+      if (!rate) continue;
+      requests++;
       await _rate(media, id);
     }
+    return requests;
   }
 
   @override

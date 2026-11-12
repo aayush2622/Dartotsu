@@ -12,7 +12,7 @@ class MangaUpdatesListEditorView extends ListEditorScreenView {
     'PLANNING': getString.planToRead,
     'COMPLETED': getString.completed,
     'PAUSED': getString.onHold,
-    'DROPPED': getString.dropped,
+    'DROPPED': getString.unfinished,
   };
 
   @override
