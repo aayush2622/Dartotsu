@@ -217,6 +217,7 @@ Map<String, dynamic> _encodeLibrary(Map<String, Object> args) => {
   'removed': args['removed'],
   'lang': args['lang'],
   'facts': args['facts'] == true,
+  'dates': true,
   'items': {
     for (final e in (args['library'] as Map<String, Media>).entries)
       e.key: jsonDecode(jsonEncode(e.value.toJson())),
@@ -269,7 +270,9 @@ class SimklQueries extends Queries {
       final items = await compute(_decodeLibrary, raw);
       _seen = _Activity('${raw['all']}', '${raw['removed']}');
       _facts = raw['facts'] == true;
-      if (raw['lang'] != SimklPref.titleLanguage.value) {
+      if (raw['lang'] != SimklPref.titleLanguage.value ||
+          raw['full'] != true ||
+          raw['dates'] != true) {
         _seen = null;
         _facts = false;
         return null;
@@ -300,10 +303,10 @@ class SimklQueries extends Queries {
     }
   }
 
-  Map<String, String> get _titleQuery =>
-      SimklPref.titleLanguage.value == 'romaji'
-      ? const {}
-      : const {'language': 'en'};
+  Map<String, String> get _titleQuery => {
+    if (SimklPref.titleLanguage.value != 'romaji') 'language': 'en',
+    'extended': 'full',
+  };
 
   void invalidateLibrary({bool full = false}) {
     if (full) _seen = null;

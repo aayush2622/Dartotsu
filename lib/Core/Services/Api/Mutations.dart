@@ -33,6 +33,8 @@ void clearListEntry(Media media) {
   media.userScore = null;
   media.userRepeat = 0;
   media.userUpdatedAt = null;
+  media.userAddedAt = null;
+  media.userWatchedAt = null;
   media.userStartedAt = null;
   media.userCompletedAt = null;
 }

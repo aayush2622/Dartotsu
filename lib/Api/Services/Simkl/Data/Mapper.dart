@@ -339,9 +339,9 @@ Media? mapSimklListEntry(Map<String, dynamic> e, SimklKind kind) {
   final watched = _int(e['watched_episodes_count']);
   final total = _int(e['total_episodes_count']);
   final rating = _int(e['user_rating']);
-  final touched = DateTime.tryParse(
-    '${e['last_watched_at'] ?? e['added_to_watchlist_at'] ?? ''}',
-  );
+  final added = DateTime.tryParse('${e['added_to_watchlist_at'] ?? ''}');
+  final watchedAt = DateTime.tryParse('${e['last_watched_at'] ?? ''}');
+  final touched = watchedAt ?? added;
   media
     ..userStatus = simklStatusIn(e['status'] as String?)
     ..userProgress = watched ?? (e['status'] == 'completed' ? 1 : 0)
@@ -349,8 +349,15 @@ Media? mapSimklListEntry(Map<String, dynamic> e, SimklKind kind) {
     ..userUpdatedAt = touched == null
         ? null
         : touched.millisecondsSinceEpoch ~/ 1000
+    ..userAddedAt = added == null ? null : added.millisecondsSinceEpoch ~/ 1000
+    ..userWatchedAt = watchedAt == null
+        ? null
+        : watchedAt.millisecondsSinceEpoch ~/ 1000
     ..userListId = 1;
-  if (total != null && total > 0) media.anime?.totalEpisodes = total;
+  final known = media.anime?.totalEpisodes ?? 0;
+  if (known <= 0 && total != null && total > 0) {
+    media.anime?.totalEpisodes = total;
+  }
   media.malId = _int((node['ids'] as Map?)?['mal']);
   return media;
 }

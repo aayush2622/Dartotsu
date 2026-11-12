@@ -129,16 +129,20 @@ SyncTargetPlan planWith({
     pairs.add(pair);
   }
   final extra = target.where((t) => !matched.contains(t.id)).toList();
-  return SyncTargetPlan(
-    pairs,
-    onlyInTarget: extra.length,
-    removals: collectRemovals && main.isNotEmpty
-        ? [
-            for (final t in extra)
-              if (t.ids.keys.any((k) => k != spec.key)) t,
-          ]
-        : null,
-  );
+  List<SyncItem>? removals;
+  if (collectRemovals && main.isNotEmpty) {
+    final unknown = [
+      for (final p in pairs)
+        if (p.targetId == null) p.main,
+    ];
+    removals = [
+      for (final t in extra)
+        if (t.ids.keys.any((k) => k != spec.key) &&
+            unknown.every((m) => m.ids.keys.any(t.ids.containsKey)))
+          t,
+    ];
+  }
+  return SyncTargetPlan(pairs, onlyInTarget: extra.length, removals: removals);
 }
 
 /// Whether two entries carry a different id for the same service, which makes

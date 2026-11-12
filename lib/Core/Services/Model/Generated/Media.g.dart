@@ -32,6 +32,8 @@ Media _$MediaFromJson(Map<String, dynamic> json) => Media(
   userScore: (json['userScore'] as num?)?.toInt() ?? 0,
   userRepeat: (json['userRepeat'] as num?)?.toInt() ?? 0,
   userUpdatedAt: (json['userUpdatedAt'] as num?)?.toInt(),
+  userAddedAt: (json['userAddedAt'] as num?)?.toInt(),
+  userWatchedAt: (json['userWatchedAt'] as num?)?.toInt(),
   userStartedAt: json['userStartedAt'] == null
       ? null
       : Date.fromJson(json['userStartedAt'] as Map<String, dynamic>),
@@ -90,6 +92,8 @@ Map<String, dynamic> _$MediaToJson(Media instance) => <String, dynamic>{
   'userScore': instance.userScore,
   'userRepeat': instance.userRepeat,
   'userUpdatedAt': instance.userUpdatedAt,
+  'userAddedAt': instance.userAddedAt,
+  'userWatchedAt': instance.userWatchedAt,
   'userStartedAt': instance.userStartedAt,
   'userCompletedAt': instance.userCompletedAt,
   'status': instance.status,

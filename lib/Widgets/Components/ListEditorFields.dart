@@ -214,6 +214,50 @@ class ListDatesField extends StatelessWidget {
   );
 }
 
+class ListInfoDatesField extends StatelessWidget {
+  final int? added;
+  final int? watched;
+
+  const ListInfoDatesField({super.key, this.added, this.watched});
+
+  static Date? _date(int? seconds) {
+    if (seconds == null) return null;
+    final at = DateTime.fromMillisecondsSinceEpoch(seconds * 1000);
+    return Date(year: at.year, month: at.month, day: at.day);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final tiles = [
+      (getString.listDateAdded, _date(added)),
+      (getString.listDateLastWatched, _date(watched)),
+    ].where((t) => t.$2 != null).toList();
+    if (tiles.isEmpty) return const SizedBox.shrink();
+    return ListEditorPad(
+      child: Row(
+        children: [
+          for (var i = 0; i < tiles.length; i++) ...[
+            if (i > 0) SizedBox(width: Dimens.gapSm),
+            Expanded(
+              child: InputDecorator(
+                decoration: InputDecoration(
+                  labelText: tiles[i].$1,
+                  prefixIcon: const Icon(Icons.history_rounded),
+                ),
+                child: Text(
+                  tiles[i].$2!.getFormattedDate() ?? '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
 class _DateTile extends StatelessWidget {
   final String label;
   final Live<Date?> date;

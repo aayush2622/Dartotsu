@@ -6,6 +6,8 @@ extension MediaListEntry on Media {
     userProgress = from.userProgress;
     userScore = from.userScore;
     userUpdatedAt = from.userUpdatedAt;
+    userAddedAt = from.userAddedAt;
+    userWatchedAt = from.userWatchedAt;
     userListId = from.userListId;
   }
 }

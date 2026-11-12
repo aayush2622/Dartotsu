@@ -46,6 +46,8 @@ class Media {
   int? userScore;
   int userRepeat;
   int? userUpdatedAt;
+  int? userAddedAt;
+  int? userWatchedAt;
   Date? userStartedAt;
   Date? userCompletedAt;
 
@@ -116,6 +118,8 @@ class Media {
     this.userScore = 0,
     this.userRepeat = 0,
     this.userUpdatedAt,
+    this.userAddedAt,
+    this.userWatchedAt,
     this.userStartedAt,
     this.userCompletedAt,
     this.status,

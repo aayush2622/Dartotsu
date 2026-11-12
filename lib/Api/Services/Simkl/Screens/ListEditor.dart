@@ -39,6 +39,13 @@ class SimklListEditorView extends ListEditorScreenView {
           ListProgressField(draft: draft, total: media.totalUnits),
         ),
       ScreenWidget.extra(ListScoreField(draft: draft)),
+      if (media.userStatus != null)
+        ScreenWidget.extra(
+          ListInfoDatesField(
+            added: media.userAddedAt,
+            watched: media.userWatchedAt,
+          ),
+        ),
     ];
   }
 }
