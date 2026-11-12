@@ -237,6 +237,11 @@ class SimklQueries extends Queries {
 
   _Activity? _seen;
   bool _facts = false;
+  DateTime? _factsTried;
+
+  bool get _factsDue =>
+      _factsTried == null ||
+      DateTime.now().difference(_factsTried!) > const Duration(hours: 6);
 
   late final _library = LibraryCache<Map<String, Media>>(
     load: _sync,
@@ -318,7 +323,7 @@ class SimklQueries extends Queries {
     final before = _seen;
     if (previous == null || before == null) return _fullSync(now);
     if (now.all == before.all) {
-      if (_facts) return _publish(previous, persist: false);
+      if (_facts || !_factsDue) return _publish(previous, persist: false);
       return _publish(await _withFacts(previous));
     }
     var library = previous;
@@ -352,21 +357,19 @@ class SimklQueries extends Queries {
   }
 
   Future<Map<String, Media>> _fullSync(_Activity now) async {
-    final fetched = await Future.wait([
-      for (final type in const ['shows', 'movies', 'anime'])
-        client.getBody('/sync/all-items/$type', query: _titleQuery),
-      _factsBody(),
-    ]);
     final library = <String, Media>{};
-    for (final body in fetched.take(3)) {
-      library.addAll(await compute(parseSimklLibrary, body as String));
+    for (final type in const ['shows', 'movies', 'anime']) {
+      final body = await client.getBody(
+        '/sync/all-items/$type',
+        query: _titleQuery,
+      );
+      library.addAll(await compute(parseSimklLibrary, body));
     }
-    _keepFacts(library, fetched[3]);
+    _keepFacts(library, await _factsBody());
     _seen = now;
     return _publish(library);
   }
 
-  /// Community rating and release status. Not on `/sync/all-items`.
   Future<Object?> _factsBody() async {
     try {
       return await client.get(
@@ -378,6 +381,7 @@ class SimklQueries extends Queries {
           ) ??
           const [];
     } catch (e, st) {
+      _factsTried = DateTime.now();
       logError('Queries', e, st);
       return null;
     }

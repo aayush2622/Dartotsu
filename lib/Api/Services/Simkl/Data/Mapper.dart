@@ -355,9 +355,6 @@ Media? mapSimklListEntry(Map<String, dynamic> e, SimklKind kind) {
   return media;
 }
 
-/// Stamps community score and release status from `GET /ratings/all`.
-/// `/sync/all-items` does not carry either. Returns false when [body] is not
-/// a ratings list, so the caller can retry.
 bool applySimklFacts(Map<String, Media> library, Object? body) {
   if (body is! List) return false;
   for (final raw in body) {
