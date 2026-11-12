@@ -51,12 +51,6 @@ jobs:
       - name: Install the iOS Rust target
         run: rustup target add aarch64-apple-ios
 
-      - name: Patch fl_pip for the non-optional FlutterEngine
-        run: |
-          for f in "$PUB_CACHE"/hosted/pub.dev/fl_pip-*/ios/Classes/PiPHelper.swift; do
-            sed -i '' 's/let engine = flController.engine$/let engine: FlutterEngine? = flController.engine/' "$f"
-          done
-
       - name: Build iOS
         run: |
           flutter build ios --release --no-codesign
