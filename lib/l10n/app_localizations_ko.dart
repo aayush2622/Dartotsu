@@ -3217,6 +3217,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dropped => '중단';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => '예정';
 
   @override

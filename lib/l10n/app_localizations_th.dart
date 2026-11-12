@@ -3246,6 +3246,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get dropped => 'ทิ้งกลางคัน';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'วางแผนไว้';
 
   @override

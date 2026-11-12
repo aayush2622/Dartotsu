@@ -3253,6 +3253,9 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dropped => 'বাদ দিয়েছি';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'প্ল্যান করা';
 
   @override

@@ -3272,6 +3272,9 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dropped => 'Gedropt';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Gepland';
 
   @override

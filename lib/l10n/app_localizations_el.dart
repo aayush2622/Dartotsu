@@ -3286,6 +3286,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dropped => 'Εγκαταλείφθηκε';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Σχεδιασμένο';
 
   @override

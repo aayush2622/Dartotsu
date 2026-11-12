@@ -3255,6 +3255,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get dropped => 'رها شده';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'تو برنامه';
 
   @override

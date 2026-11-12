@@ -3278,6 +3278,9 @@ class AppLocalizationsSi extends AppLocalizations {
   String get dropped => 'නැවැත්වූ';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ප්ලෑන් කරපු';
 
   @override

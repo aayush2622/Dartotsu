@@ -3247,6 +3247,9 @@ class AppLocalizationsNe extends AppLocalizations {
   String get dropped => 'छोडेको';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'योजनामा';
 
   @override

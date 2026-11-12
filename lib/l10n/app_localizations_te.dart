@@ -3276,6 +3276,9 @@ class AppLocalizationsTe extends AppLocalizations {
   String get dropped => 'డ్రాప్ చేశాను';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ప్లాన్‌లో';
 
   @override

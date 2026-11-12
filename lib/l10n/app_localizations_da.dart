@@ -3267,6 +3267,9 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dropped => 'Droppet';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Planlagt';
 
   @override

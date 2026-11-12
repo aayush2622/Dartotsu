@@ -233,6 +233,7 @@ class SyncPair {
   final bool dates;
   final bool repeat;
   final bool privacy;
+  final Set<String> noProgress;
 
   SyncPair({
     required this.main,
@@ -244,12 +245,24 @@ class SyncPair {
     this.dates = false,
     this.repeat = false,
     this.privacy = false,
+    this.noProgress = const {},
   });
 
   SyncItem get want {
-    final total = target?.total;
-    final full = main.status == 'COMPLETED' && total != null && total > 0;
-    return full ? main.withProgress(total) : main;
+    final t = target;
+    final total = t?.total;
+    var progress = main.progress;
+    if (total != null && total > 0) {
+      progress = main.status == 'COMPLETED'
+          ? total
+          : progress > total
+          ? total
+          : progress;
+    }
+    if (noProgress.contains(syncCanonStatus(main.status))) {
+      progress = t?.progress ?? 0;
+    }
+    return progress == main.progress ? main : main.withProgress(progress);
   }
 
   bool get pending =>
@@ -285,6 +298,7 @@ class SyncPair {
     if (dates) 'dt': true,
     if (repeat) 'rp': true,
     if (privacy) 'pv': true,
+    if (noProgress.isNotEmpty) 'np': noProgress.toList(),
   };
 
   factory SyncPair.fromJson(Map<String, dynamic> j, List<SyncItem> mains) {
@@ -304,6 +318,7 @@ class SyncPair {
       dates: j['dt'] == true,
       repeat: j['rp'] == true,
       privacy: j['pv'] == true,
+      noProgress: {for (final s in (j['np'] as List?) ?? const []) '$s'},
     );
   }
 }
@@ -424,6 +439,15 @@ class SyncLimit {
   final Duration per;
 
   const SyncLimit(this.requests, this.per);
+}
+
+class SyncPartial implements Exception {
+  final String message;
+
+  SyncPartial(this.message);
+
+  @override
+  String toString() => message;
 }
 
 class SyncRateLimited implements Exception {

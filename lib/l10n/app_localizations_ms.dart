@@ -3267,6 +3267,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get dropped => 'Ditinggalkan';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Dirancang';
 
   @override

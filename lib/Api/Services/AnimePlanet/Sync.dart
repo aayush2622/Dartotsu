@@ -25,6 +25,9 @@ class AnimePlanetSync extends SyncAdapter {
   bool get syncsDates => false;
 
   @override
+  Set<String> get statusesWithoutProgress => const {'PLANNING'};
+
+  @override
   int get requestsPerBatch => 4;
 
   @override
@@ -81,7 +84,7 @@ class AnimePlanetSync extends SyncAdapter {
         if (slug == null) {
           throw AnimePlanetException('No Anime-Planet page for ${op.targetId}');
         }
-        await mutations.saveEntry(
+        final kept = await mutations.saveEntry(
           op.want.toMedia(
             anime: anime,
             idOverride: '${anime ? 'anime' : 'manga'}/$slug',
@@ -89,6 +92,7 @@ class AnimePlanetSync extends SyncAdapter {
           exists: op.existsHint,
         );
         used += requestsPerBatch;
+        if (kept != null) throw SyncPartial(kept);
       }
     } on AnimePlanetException catch (e) {
       throw syncError(e, status: e.status);

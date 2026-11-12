@@ -3248,6 +3248,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get dropped => 'متروك';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'مخطط له';
 
   @override

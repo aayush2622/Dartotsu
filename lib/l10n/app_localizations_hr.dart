@@ -3275,6 +3275,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get dropped => 'Odustao';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Planirano';
 
   @override

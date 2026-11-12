@@ -3258,6 +3258,9 @@ class AppLocalizationsMr extends AppLocalizations {
   String get dropped => 'सोडून दिलं';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ठरवलेलं';
 
   @override

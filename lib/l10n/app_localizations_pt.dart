@@ -3277,6 +3277,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get dropped => 'Abandonado';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Planejado';
 
   @override

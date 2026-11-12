@@ -3266,6 +3266,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get dropped => 'Покинуто';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Заплановано';
 
   @override

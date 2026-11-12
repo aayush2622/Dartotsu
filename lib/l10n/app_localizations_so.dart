@@ -3286,6 +3286,9 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dropped => 'La joojiyay';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'La qorsheeyay';
 
   @override

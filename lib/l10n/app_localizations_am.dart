@@ -3230,6 +3230,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get dropped => 'የተተወ';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'የታቀደ';
 
   @override

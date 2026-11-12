@@ -3218,6 +3218,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dropped => '中断';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => '予定';
 
   @override

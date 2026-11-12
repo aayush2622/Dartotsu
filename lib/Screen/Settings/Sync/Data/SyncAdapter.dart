@@ -15,6 +15,8 @@ abstract class SyncAdapter {
 
   bool get syncsPrivate => false;
 
+  Set<String> get statusesWithoutProgress => const {};
+
   List<SyncLimit> get limits;
 
   int get requestsPerBatch => 1;

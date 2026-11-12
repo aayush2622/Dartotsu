@@ -3279,6 +3279,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get dropped => 'Walioacha';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Zilizopangwa';
 
   @override

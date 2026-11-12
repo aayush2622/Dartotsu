@@ -3271,6 +3271,9 @@ class AppLocalizationsOr extends AppLocalizations {
   String get dropped => 'ଛାଡ଼ିଦେଇଛି';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ଯୋଜନାରେ';
 
   @override

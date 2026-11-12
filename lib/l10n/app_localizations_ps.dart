@@ -3261,6 +3261,9 @@ class AppLocalizationsPs extends AppLocalizations {
   String get dropped => 'پرېښودل شوي';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'پلان شوي';
 
   @override

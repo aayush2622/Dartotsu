@@ -3269,6 +3269,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dropped => 'Bırakıldı';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Planlandı';
 
   @override

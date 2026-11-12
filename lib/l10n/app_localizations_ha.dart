@@ -3267,6 +3267,9 @@ class AppLocalizationsHa extends AppLocalizations {
   String get dropped => 'An bar';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'A shirye';
 
   @override

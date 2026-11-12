@@ -3289,6 +3289,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get dropped => 'ഉപേക്ഷിച്ചു';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'പ്ലാൻ ചെയ്തത്';
 
   @override

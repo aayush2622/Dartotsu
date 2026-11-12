@@ -214,24 +214,34 @@ class AnimePlanetMutations extends Mutations {
   }
 
   @override
-  Future<void> saveEntry(Media media, {bool? exists}) async {
+  Future<String?> saveEntry(Media media, {bool? exists}) async {
     final (kind, id) = await _target(media);
-    await _call('/api/list/status/$kind/$id/${_statusId(media.userStatus)}');
+    var status = media.userStatus;
+    String? kept;
+    try {
+      await _call('/api/list/status/$kind/$id/${_statusId(status)}');
+    } on AnimePlanetException catch (e) {
+      final releasing = e.message.toLowerCase().contains('still releasing');
+      if (status != 'COMPLETED' || !releasing) rethrow;
+      kept = e.message;
+      status = 'CURRENT';
+      await _call('/api/list/status/$kind/$id/${_statusId(status)}');
+    }
     final progress = media.userProgress;
-    if (progress != null && (progress > 0 || exists == true)) {
+    final hasProgress = status != 'PLANNING' && status != 'WONT';
+    if (hasProgress && progress != null && (progress > 0 || exists == true)) {
       await _call(
         '/api/list/update/$kind/$id/$progress${kind == 'manga' ? '/0' : ''}',
       );
     }
-    if (kind == 'anime' &&
-        media.userStatus == 'COMPLETED' &&
-        media.userRepeat > 0) {
+    if (kind == 'anime' && status == 'COMPLETED' && media.userRepeat > 0) {
       await _call('/api/list/times/$kind/$id/${media.userRepeat + 1}');
     }
     final score = media.userScore;
     if (score != null && (score > 0 || exists == true)) {
       await _call('/api/list/rate/$kind/$id/${_stars(score)}');
     }
+    return kept;
   }
 
   @override

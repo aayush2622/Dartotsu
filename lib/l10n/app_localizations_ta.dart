@@ -3277,6 +3277,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get dropped => 'டிராப் பண்ணவங்க';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ப்ளான் பண்ணவங்க';
 
   @override

@@ -980,6 +980,12 @@ class SyncController extends AppController {
       for (final p in batch) {
         _done(p);
       }
+    } on SyncPartial catch (e) {
+      _budget.stamp(id, adapter.requestsPerBatch);
+      for (final p in batch) {
+        setSkipped(id, p, true);
+        p.error = e.message;
+      }
     } on SyncRateLimited {
       _budget.stamp(id, adapter.requestsPerBatch);
       rethrow;

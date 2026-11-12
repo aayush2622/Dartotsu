@@ -6047,6 +6047,12 @@ abstract class AppLocalizations {
   /// **'Dropped'**
   String get dropped;
 
+  /// No description provided for @unfinished.
+  ///
+  /// In en, this message translates to:
+  /// **'Unfinished'**
+  String get unfinished;
+
   /// No description provided for @planned.
   ///
   /// In en, this message translates to:

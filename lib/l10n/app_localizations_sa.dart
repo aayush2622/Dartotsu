@@ -3264,6 +3264,9 @@ class AppLocalizationsSa extends AppLocalizations {
   String get dropped => 'परित्यक्तम्';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'योजितम्';
 
   @override

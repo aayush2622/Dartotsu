@@ -3276,6 +3276,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get dropped => 'ಕೈಬಿಟ್ಟಿದ್ದು';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'ಯೋಜಿಸಿದ್ದು';
 
   @override

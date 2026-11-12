@@ -3264,6 +3264,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get dropped => 'Bỏ dở';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Dự định';
 
   @override

@@ -3269,6 +3269,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get dropped => 'Di-drop';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'Direncanakan';
 
   @override

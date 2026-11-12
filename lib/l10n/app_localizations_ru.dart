@@ -3274,6 +3274,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dropped => 'Брошено';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => 'В планах';
 
   @override

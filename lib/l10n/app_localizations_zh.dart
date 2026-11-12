@@ -3214,6 +3214,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dropped => '抛弃';
 
   @override
+  String get unfinished => 'Unfinished';
+
+  @override
   String get planned => '计划中';
 
   @override
