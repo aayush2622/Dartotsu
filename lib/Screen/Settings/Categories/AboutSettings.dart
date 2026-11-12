@@ -13,7 +13,6 @@ import '../Developer/DeveloperPage.dart';
 import 'UpdateSettings.dart';
 import '../Widgets/DonateSheet.dart';
 import '../Forks/ForksPage.dart';
-import '../Shortcuts/ShortcutsScreen.dart';
 import '../../../Core/State/State.dart';
 
 final settingsAppVersion = ''.live;
@@ -39,13 +38,6 @@ List<Setting> aboutSettings(BuildContext context) => [
     icon: Icons.call_split_rounded,
     isActivity: true,
     onClick: () => navigateToPage(context, const ForksPage()),
-  ),
-  Setting.normal(
-    name: getString.settingsShortcuts,
-    description: getString.settingsShortcutsDesc,
-    icon: Icons.keyboard_rounded,
-    isActivity: true,
-    onClick: () => navigateToPage(context, const ShortcutsScreen()),
   ),
   Setting.normal(
     name: getString.logFile,

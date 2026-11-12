@@ -12515,6 +12515,54 @@ abstract class AppLocalizations {
   /// **'Keep playing in a small window when you leave the app'**
   String get playerAutoPipDesc;
 
+  /// No description provided for @playerPipPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get playerPipPlay;
+
+  /// No description provided for @playerPipPause.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get playerPipPause;
+
+  /// No description provided for @playerPipPrevious.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous episode'**
+  String get playerPipPrevious;
+
+  /// No description provided for @playerPipNext.
+  ///
+  /// In en, this message translates to:
+  /// **'Next episode'**
+  String get playerPipNext;
+
+  /// No description provided for @playerPipBack.
+  ///
+  /// In en, this message translates to:
+  /// **'Rewind'**
+  String get playerPipBack;
+
+  /// No description provided for @playerPipForward.
+  ///
+  /// In en, this message translates to:
+  /// **'Forward'**
+  String get playerPipForward;
+
+  /// No description provided for @listDateAdded.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to list'**
+  String get listDateAdded;
+
+  /// No description provided for @listDateLastWatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Last watched'**
+  String get listDateLastWatched;
+
   /// No description provided for @playerAutoPlaying.
   ///
   /// In en, this message translates to:

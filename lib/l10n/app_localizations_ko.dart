@@ -6839,6 +6839,30 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerAutoPipDesc => '앱을 나가도 작은 창으로 계속 재생해요';
 
   @override
+  String get playerPipPlay => 'Play';
+
+  @override
+  String get playerPipPause => 'Pause';
+
+  @override
+  String get playerPipPrevious => 'Previous episode';
+
+  @override
+  String get playerPipNext => 'Next episode';
+
+  @override
+  String get playerPipBack => 'Rewind';
+
+  @override
+  String get playerPipForward => 'Forward';
+
+  @override
+  String get listDateAdded => 'Added to list';
+
+  @override
+  String get listDateLastWatched => 'Last watched';
+
+  @override
   String playerAutoPlaying(String title) {
     return '다음으로 $title을(를) 재생해요…';
   }

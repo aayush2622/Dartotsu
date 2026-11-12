@@ -1,6 +1,4 @@
 PODS:
-  - fl_pip (0.0.1):
-    - Flutter
   - Flutter (1.0.0)
   - flutter_qjs (0.0.1):
     - Flutter
@@ -12,7 +10,6 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
-  - fl_pip (from `.symlinks/plugins/fl_pip/ios`)
   - Flutter (from `Flutter`)
   - flutter_qjs (from `.symlinks/plugins/flutter_qjs/ios`)
   - install_plugin (from `.symlinks/plugins/install_plugin/ios`)
@@ -20,8 +17,6 @@ DEPENDENCIES:
   - rhttp (from `.symlinks/plugins/rhttp/ios`)
 
 EXTERNAL SOURCES:
-  fl_pip:
-    :path: ".symlinks/plugins/fl_pip/ios"
   Flutter:
     :path: Flutter
   flutter_qjs:
@@ -34,7 +29,6 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/rhttp/ios"
 
 SPEC CHECKSUMS:
-  fl_pip: 8161c3d6fb04a73d698d7a80c1bf83cd046d738a
   Flutter: 71a624a5bc0c04062bf19101d501e466baf2fb47
   flutter_qjs: 24afb6e1b95cb2e5ffd8b9053eb7618459c42837
   install_plugin: e17e38d6f504857748a3ec1299d8a2bbeeeea854

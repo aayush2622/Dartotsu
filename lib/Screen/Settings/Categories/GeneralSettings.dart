@@ -15,6 +15,8 @@ import '../../../Utils/Functions/LinkSettings.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
 import '../../Lock/PasscodeSheets.dart';
 import '../Widgets/Backup/BackupSheet.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
+import '../Shortcuts/ShortcutsScreen.dart';
 import '../Widgets/SettingRows.dart';
 import '../../../Core/State/State.dart';
 
@@ -53,6 +55,13 @@ List<Setting> generalSettings(BuildContext context) => [
     icon: Icons.link_rounded,
     isVisible: canOpenLinkSettings,
     onClick: openLinkSettings,
+  ),
+  Setting.normal(
+    name: getString.settingsShortcuts,
+    description: getString.settingsShortcutsDesc,
+    icon: Icons.keyboard_rounded,
+    isActivity: true,
+    onClick: () => navigateToPage(context, const ShortcutsScreen()),
   ),
   Setting.header(getString.generalSectionSecurity),
   Setting.switchType(

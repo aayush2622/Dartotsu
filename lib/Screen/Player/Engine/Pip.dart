@@ -1,75 +1,87 @@
 import 'dart:io';
 
-import 'package:fl_pip/fl_pip.dart';
+import 'package:flutter/services.dart';
 
 import '../../../Logger.dart';
+import 'PipConfig.dart';
 
 class PlayerPip {
   PlayerPip._();
 
+  static const _channel = MethodChannel('dartotsu/pip');
+
   static void Function(bool active)? _onChanged;
-  static bool _mobileAvailable = false;
-  static bool _armed = false;
-  static Rational _ratio = const Rational.landscape();
+  static void Function(String id)? _onAction;
+  static void Function()? _onDismissed;
+  static bool _available = false;
+  static PipConfig? _sent;
 
-  static bool get isMobile => Platform.isAndroid || Platform.isIOS;
+  static bool get supported => Platform.isAndroid && _available;
 
-  static bool get supported => isMobile && _mobileAvailable;
-
-  static void _statusChanged() {
-    final status = FlPiP().status.value?.status;
-    if (status == null) return;
-    _onChanged?.call(status == PiPStatus.enabled);
+  static Future<void> init({
+    required void Function(bool active) onChanged,
+    required void Function(String id) onAction,
+    required void Function() onDismissed,
+  }) async {
+    _onChanged = onChanged;
+    _onAction = onAction;
+    _onDismissed = onDismissed;
+    if (!Platform.isAndroid) return;
+    _channel.setMethodCallHandler(_handle);
+    try {
+      _available = await _channel.invokeMethod<bool>('available') ?? false;
+    } on Object catch (e, st) {
+      logError('PlayerPip', e, st, 'availability check failed');
+    }
   }
 
-  static Future<void> init(void Function(bool active) onChanged) async {
-    _onChanged = onChanged;
-    if (!isMobile) return;
-    FlPiP().status.removeListener(_statusChanged);
-    FlPiP().status.addListener(_statusChanged);
-    try {
-      _mobileAvailable = await FlPiP().isAvailable;
-    } catch (e, st) {
-      logError('PlayerPip', e, st, 'availability check failed');
+  static Future<void> _handle(MethodCall call) async {
+    switch (call.method) {
+      case 'state':
+        _onChanged?.call(call.arguments == true);
+      case 'action':
+        final id = call.arguments;
+        if (id is String) _onAction?.call(id);
+      case 'dismissed':
+        _onDismissed?.call();
     }
   }
 
   static void detach() {
     _onChanged = null;
-    if (!isMobile) return;
-    FlPiP().status.removeListener(_statusChanged);
+    _onAction = null;
+    _onDismissed = null;
+    _sent = null;
+    if (Platform.isAndroid) _channel.setMethodCallHandler(null);
   }
 
-  static Rational _rational(int width, int height) {
-    if (width <= 0 || height <= 0) return const Rational.landscape();
-    final ratio = width / height;
-    if (ratio < 0.42 || ratio > 2.38) return const Rational.landscape();
-    return Rational(width, height);
-  }
-
-  static FlPiPAndroidConfig _android({required bool whenBackground}) =>
-      FlPiPAndroidConfig(
-        aspectRatio: _ratio,
-        enabledWhenBackground: whenBackground,
-      );
-
-  static FlPiPiOSConfig _ios({required bool whenBackground}) => FlPiPiOSConfig(
-    enabledWhenBackground: whenBackground,
-    enableControls: true,
-    enablePlayback: true,
-  );
-
-  static Future<bool> enter({int width = 16, int height = 9}) async {
+  static Future<void> configure(PipConfig config) async {
+    if (!supported || config == _sent) return;
+    _sent = config;
     try {
-      if (isMobile) {
-        _ratio = _rational(width, height);
-        _armed = false;
-        return await FlPiP().enable(
-          android: _android(whenBackground: false),
-          ios: _ios(whenBackground: false),
-        );
-      }
-      return false;
+      await _channel.invokeMethod<void>('configure', config.toMap());
+    } on Object catch (e, st) {
+      _sent = null;
+      logError('PlayerPip', e, st, 'configure failed');
+    }
+  }
+
+  static Future<void> disarm() async {
+    if (!supported) return;
+    _sent = PipConfig.idle;
+    try {
+      await _channel.invokeMethod<void>('configure', PipConfig.idle.toMap());
+    } on Object catch (e, st) {
+      logError('PlayerPip', e, st, 'disarm failed');
+    }
+  }
+
+  static Future<bool> enter(PipConfig config) async {
+    if (!supported) return false;
+    _sent = config;
+    try {
+      return await _channel.invokeMethod<bool>('enter', config.toMap()) ??
+          false;
     } on Object catch (e, st) {
       logError('PlayerPip', e, st, 'enter failed');
       return false;
@@ -77,40 +89,11 @@ class PlayerPip {
   }
 
   static Future<void> exit() async {
+    if (!supported) return;
     try {
-      if (isMobile) await FlPiP().disable();
+      await _channel.invokeMethod<void>('exit');
     } on Object catch (e, st) {
       logError('PlayerPip', e, st, 'exit failed');
     }
-  }
-
-  static Future<void> setAuto(bool on) async {
-    if (!isMobile || !_mobileAvailable) return;
-    final active = FlPiP().status.value?.status == PiPStatus.enabled;
-    if (active) return;
-    try {
-      if (on) {
-        _armed = true;
-        await FlPiP().enable(
-          android: _android(whenBackground: true),
-          ios: _ios(whenBackground: true),
-        );
-      } else if (_armed) {
-        _armed = false;
-        await FlPiP().disable();
-      }
-    } on Object catch (e, st) {
-      logError('PlayerPip', e, st, 'setAuto failed');
-    }
-  }
-
-  static Future<void> setRatio(int width, int height) async {
-    final next = _rational(width, height);
-    if (next.numerator == _ratio.numerator &&
-        next.denominator == _ratio.denominator) {
-      return;
-    }
-    _ratio = next;
-    if (_armed) await setAuto(true);
   }
 }

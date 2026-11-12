@@ -26,8 +26,9 @@ import 'Engine/IntroDb.dart';
 import 'Engine/LocalPlayback.dart';
 import 'Engine/MpvFiles.dart';
 import 'Engine/Pip.dart';
+import 'Engine/PipConfig.dart';
 import 'Engine/StreamFeed.dart';
-import 'Engine/TrackPick.dart';
+import 'Engine/TrackSelector.dart';
 import 'Engine/SeekPreview.dart';
 import 'Engine/PlayRequest.dart';
 import 'Engine/ColorPresets.dart';
@@ -346,35 +347,80 @@ class PlayerState extends ScreenState {
     if (!_closed && !engine.playing.value) unawaited(engine.play());
   }
 
+  Rect? Function()? videoRect;
+
   Future<void> _initPip() async {
-    await PlayerPip.init((active) {
-      if (_closed) return;
-      pip.value = active;
-      if (active) {
-        controlsVisible.value = false;
-        commentsOpen.value = false;
-        chatOpen.value = false;
-        panel.value = false;
-      }
-    });
+    await PlayerPip.init(
+      onChanged: (active) {
+        if (_closed) return;
+        pip.value = active;
+        if (active) {
+          controlsVisible.value = false;
+          commentsOpen.value = false;
+          chatOpen.value = false;
+          panel.value = false;
+        }
+      },
+      onAction: _pipAction,
+      onDismissed: () {
+        if (!_closed && !cast.active) unawaited(engine.pause());
+      },
+    );
+    syncPip();
+  }
+
+  void _pipAction(String id) {
+    if (_closed) return;
+    final step = Duration(seconds: settings.seekDuration);
+    switch (id) {
+      case 'toggle':
+        unawaited(togglePlayback());
+      case 'previous':
+        openPrevious();
+      case 'next':
+        openNext();
+      case 'back':
+        seekBy(-step);
+      case 'forward':
+        seekBy(step);
+    }
+  }
+
+  PipConfig _pipConfig() {
+    final video = engine.player.state;
+    final playing = isPlaying;
+    return PipConfig(
+      width: video.width ?? 16,
+      height: video.height ?? 9,
+      rect: videoRect?.call(),
+      auto: settings.autoPip,
+      playing: playing,
+      actions: [
+        hasPrevious
+            ? PipAction('previous', getString.playerPipPrevious)
+            : PipAction('back', getString.playerPipBack),
+        PipAction(
+          'toggle',
+          playing ? getString.playerPipPause : getString.playerPipPlay,
+        ),
+        hasNext
+            ? PipAction('next', getString.playerPipNext)
+            : PipAction('forward', getString.playerPipForward),
+      ],
+    );
+  }
+
+  void syncPip() {
+    if (_closed || !PlayerPip.supported) return;
+    unawaited(PlayerPip.configure(_pipConfig()));
   }
 
   Future<void> enterPip() async {
     if (!PlayerPip.supported || pip.value) return;
-    final state = engine.player.state;
-    await PlayerPip.enter(width: state.width ?? 16, height: state.height ?? 9);
+    await PlayerPip.enter(_pipConfig());
   }
 
   Future<void> exitPip() => PlayerPip.exit();
-
-  void _syncPipRatio() {
-    final state = engine.player.state;
-    final width = state.width;
-    final height = state.height;
-    if (width != null && height != null && width > 0 && height > 0) {
-      unawaited(PlayerPip.setRatio(width, height));
-    }
-  }
 
   void previewTo(Duration? at) {
     previewAt.value = at;
@@ -407,12 +453,14 @@ class PlayerState extends ScreenState {
     _rateSub = engine.rate.listen((_) => _anchorPresence());
     _fpsSub?.dispose();
     _fpsSub = engine.videoHeight.listen((h) {
-      if (h != null) unawaited(_matchDisplay());
+      if (h == null) return;
+      syncPip();
+      unawaited(_matchDisplay());
     });
     _playingSub = engine.playing.listen((playing) {
       _anchorPresence();
       _scheduleHide();
-      unawaited(PlayerPip.setAuto(playing && settings.autoPip));
+      syncPip();
     });
     mediaSession.rebind();
   }
@@ -504,7 +552,7 @@ class PlayerState extends ScreenState {
     if (Platform.isAndroid) unawaited(applyRefreshRate());
     _saveProgress(force: true);
     _commitWatched();
-    unawaited(PlayerPip.setAuto(false));
+    unawaited(PlayerPip.disarm());
     PlayerPip.detach();
     unawaited(seekPreview.dispose());
     unawaited(mediaSession.dispose());
@@ -801,9 +849,15 @@ class PlayerState extends ScreenState {
         ),
     ];
     stamps.value = own;
-    await _pickDefaultSubtitle(chosen);
+    unawaited(
+      TrackSelector(
+        engine,
+        settings,
+        () => _closed || generation != _generation,
+      ).run(chosen),
+    );
     unawaited(_verifyAudio(generation));
-    _syncPipRatio();
+    syncPip();
     final skipMedia = request.media;
     final skipService = request.service;
     var malId = skipMedia?.malId;
@@ -847,67 +901,6 @@ class PlayerState extends ScreenState {
     }
   }
 
-  Future<void> _pickDefaultSubtitle(v.Video chosen) async {
-    unawaited(_pickDefaultAudio(_generation));
-    if (!settings.showSubtitle) {
-      await engine.noSubtitle();
-      return;
-    }
-    final priority = languageList(settings.subtitleLanguage);
-    final external = _externalSubtitle(chosen);
-    if (external?.file != null) {
-      await engine.addSubtitle(
-        external!.file!,
-        external.label ?? (priority.firstOrNull ?? ''),
-      );
-      return;
-    }
-    unawaited(_pickEmbeddedSubtitle(_generation, priority, chosen));
-  }
-
-  Future<void> _pickEmbeddedSubtitle(
-    int generation,
-    List<String> priority,
-    v.Video chosen,
-  ) async {
-    for (var i = 0; i < 60 && engine.subtitleTracks.value.isEmpty; i++) {
-      await Future<void>.delayed(const Duration(milliseconds: 250));
-      if (_closed || generation != _generation) return;
-    }
-    if (_closed || generation != _generation) return;
-    final tracks = engine.subtitleTracks.value;
-    final embedded = tracks.isEmpty
-        ? null
-        : pickTrack(tracks, priority, avoidSigns: true);
-    if (embedded != null) {
-      if (engine.activeSubtitle.value != embedded.id) {
-        await engine.setSubtitle(embedded.id);
-      }
-      return;
-    }
-    final fallback = _firstExternalSubtitle(chosen);
-    if (fallback?.file != null && tracks.isEmpty) {
-      await engine.addSubtitle(
-        fallback!.file!,
-        fallback.label ?? (priority.firstOrNull ?? ''),
-      );
-    } else if (tracks.isNotEmpty && engine.activeSubtitle.value == null) {
-      final first =
-          tracks.where((t) => !labelIsSigns(t.label)).firstOrNull ??
-          tracks.first;
-      await engine.setSubtitle(first.id);
-    }
-  }
-
-  v.Track? _firstExternalSubtitle(v.Video chosen) {
-    final tracks = [
-      for (final t in chosen.subtitles ?? const <v.Track>[])
-        if (t.file != null && t.file!.isNotEmpty) t,
-    ];
-    return tracks.where((t) => !labelIsSigns(t.label ?? '')).firstOrNull ??
-        tracks.firstOrNull;
-  }
-
   Future<void> _verifyAudio(int generation) async {
     for (var attempt = 0; attempt < 3; attempt++) {
       await Future<void>.delayed(const Duration(milliseconds: 2000));
@@ -930,52 +923,6 @@ class PlayerState extends ScreenState {
       if (!silent) return;
       final wanted = tracks.where((t) => t.id == aid).followedBy(tracks).first;
       await engine.reselectAudio(wanted.id);
-    }
-  }
-
-  v.Track? _externalSubtitle(v.Video chosen) {
-    final tracks = [
-      for (final t in chosen.subtitles ?? const <v.Track>[])
-        if (t.file != null && t.file!.isNotEmpty) t,
-    ];
-    for (final wanted in languageList(settings.subtitleLanguage)) {
-      final matcher = languageMatcher(wanted);
-      if (matcher == null) continue;
-      final found = tracks
-          .where((t) => matcher.matches(title: t.label))
-          .toList();
-      if (found.isEmpty) continue;
-      return found.where((t) => !labelIsSigns(t.label ?? '')).firstOrNull ??
-          found.first;
-    }
-    return null;
-  }
-
-  Future<List<PlayerTrack>> _settledTracks(
-    int generation,
-    Live<List<PlayerTrack>> source,
-  ) async {
-    var stable = 0;
-    var seen = -1;
-    for (var i = 0; i < 60; i++) {
-      final tracks = source.value;
-      stable = tracks.length == seen ? stable + 1 : 0;
-      seen = tracks.length;
-      if (tracks.isNotEmpty && stable >= 6) return tracks;
-      await Future<void>.delayed(const Duration(milliseconds: 250));
-      if (_closed || generation != _generation) return const [];
-    }
-    return source.value;
-  }
-
-  Future<void> _pickDefaultAudio(int generation) async {
-    final tracks = await _settledTracks(generation, engine.audioTracks);
-    if (tracks.isEmpty || _closed || generation != _generation) return;
-    final priority = languageList(settings.audioLanguage);
-    final pick = priority.isEmpty ? null : pickTrack(tracks, priority);
-    final target = pick ?? tracks.first;
-    if (engine.activeAudio.value != target.id) {
-      await engine.setAudio(target.id);
     }
   }
 
@@ -1257,7 +1204,7 @@ class PlayerState extends ScreenState {
           CastSubtitle(t.file!, t.label ?? 'Subtitles'),
     ];
     final wanted = settings.showSubtitle && chosen != null
-        ? _externalSubtitle(chosen)
+        ? TrackSelector.preferredExternal(chosen, settings.subtitleLanguage)
         : null;
     final active = wanted == null
         ? null

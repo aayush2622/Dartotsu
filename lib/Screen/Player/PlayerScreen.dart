@@ -46,6 +46,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     with ScreenStateHost<PlayerScreen, PlayerState> {
   final _videoKey = GlobalKey();
   Orientation? _orientation;
+  Size? _stageSize;
   Offset _holdStart = Offset.zero;
   bool _edgeDrag = false;
   Offset? _lastTapDown;
@@ -57,6 +58,7 @@ class _PlayerScreenState extends State<PlayerScreen>
   void initState() {
     super.initState();
     FocusManager.instance.addListener(_guardFocus);
+    state.videoRect = _videoRect;
     state.askStream = (list) =>
         showStreamSheet(context, state, list, selected: -1);
     state.askPendingStream = (feed) =>
@@ -67,6 +69,19 @@ class _PlayerScreenState extends State<PlayerScreen>
   void dispose() {
     FocusManager.instance.removeListener(_guardFocus);
     super.dispose();
+  }
+
+  Rect? _videoRect() {
+    final box = _videoKey.currentContext?.findRenderObject();
+    if (box is! RenderBox || !box.attached || !box.hasSize) return null;
+    final ratio = View.of(context).devicePixelRatio;
+    final origin = box.localToGlobal(Offset.zero);
+    return Rect.fromLTWH(
+      origin.dx * ratio,
+      origin.dy * ratio,
+      box.size.width * ratio,
+      box.size.height * ratio,
+    );
   }
 
   void _guardFocus() {
@@ -198,8 +213,15 @@ class _PlayerScreenState extends State<PlayerScreen>
     final video = KeyedSubtree(
       key: _videoKey,
       child: LayoutBuilder(
-        builder: (context, box) =>
-            Watch(() => _video(context, box.maxWidth, compact: compact)),
+        builder: (context, box) {
+          if (box.biggest != _stageSize) {
+            _stageSize = box.biggest;
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) => mounted ? state.syncPip() : null,
+            );
+          }
+          return Watch(() => _video(context, box.maxWidth, compact: compact));
+        },
       ),
     );
     return Watch(
@@ -765,6 +787,17 @@ class _PlayerScreenState extends State<PlayerScreen>
 
   String? _lastSubtitle;
 
+  static final _digits = {
+    for (var i = 0; i < 10; i++) ...{
+      LogicalKeyboardKey.findKeyByKeyId(LogicalKeyboardKey.digit0.keyId + i)!:
+          i,
+      LogicalKeyboardKey.findKeyByKeyId(LogicalKeyboardKey.numpad0.keyId + i)!:
+          i,
+    },
+  };
+
+  static int? _digitOf(LogicalKeyboardKey key) => _digits[key];
+
   bool _key(KeyEvent event) {
     if (event is KeyUpEvent || !state.ownsKeys) return false;
     final typing =
@@ -774,7 +807,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     if (typing) return false;
     final action = KeyBindings.match(BindingGroup.player, event);
     if (action == null) {
-      final digit = int.tryParse(event.logicalKey.keyLabel);
+      final digit = _digitOf(event.logicalKey);
       final total = state.duration;
       if (digit == null || !KeyBindings.enabled(BindingGroup.player)) {
         return false;
@@ -804,9 +837,9 @@ class _PlayerScreenState extends State<PlayerScreen>
       case 'playerSeekBackLong':
         state.seekBy(const Duration(seconds: -30));
       case 'playerFrameForward':
-        unawaited(engine.command(['frame-step']));
+        unawaited(_frameStep('frame-step'));
       case 'playerFrameBack':
-        unawaited(engine.command(['frame-back-step']));
+        unawaited(_frameStep('frame-back-step'));
       case 'playerVolumeUp':
         state.changeVolume(0.05, keyboard: true);
       case 'playerVolumeDown':
@@ -851,17 +884,31 @@ class _PlayerScreenState extends State<PlayerScreen>
     snackString('${next}x');
   }
 
+  Future<void> _frameStep(String command) async {
+    final engine = state.engine;
+    await engine.command([command]);
+    await Future<void>.delayed(const Duration(milliseconds: 200));
+    engine.buffering.value = false;
+  }
+
   void _toggleSubtitle() {
     final engine = state.engine;
     final active = engine.activeSubtitle.value;
     if (active != null) {
       _lastSubtitle = active;
+      engine.activeSubtitle.value = null;
       unawaited(engine.noSubtitle());
+      snackString(getString.off);
       return;
     }
     final tracks = engine.subtitleTracks.value;
-    final id = _lastSubtitle ?? (tracks.isEmpty ? null : tracks.first.id);
-    if (id != null) unawaited(engine.setSubtitle(id));
+    if (tracks.isEmpty) return;
+    final id = tracks.any((t) => t.id == _lastSubtitle)
+        ? _lastSubtitle!
+        : tracks.first.id;
+    engine.activeSubtitle.value = id;
+    unawaited(engine.setSubtitle(id));
+    snackString(tracks.firstWhere((t) => t.id == id).label);
   }
 
   void _cycleSubtitle() {
@@ -870,11 +917,14 @@ class _PlayerScreenState extends State<PlayerScreen>
     if (tracks.isEmpty) return;
     final at = tracks.indexWhere((t) => t.id == engine.activeSubtitle.value);
     if (at == tracks.length - 1) {
+      _lastSubtitle = engine.activeSubtitle.value;
+      engine.activeSubtitle.value = null;
       unawaited(engine.noSubtitle());
       snackString(getString.off);
       return;
     }
     final next = tracks[at + 1];
+    engine.activeSubtitle.value = next.id;
     unawaited(engine.setSubtitle(next.id));
     snackString(next.label);
   }
@@ -885,6 +935,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     if (tracks.length < 2) return;
     final at = tracks.indexWhere((t) => t.id == engine.activeAudio.value);
     final next = tracks[(at + 1) % tracks.length];
+    engine.activeAudio.value = next.id;
     unawaited(engine.setAudio(next.id));
     snackString(next.label);
   }

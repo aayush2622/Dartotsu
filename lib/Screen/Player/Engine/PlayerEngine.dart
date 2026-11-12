@@ -571,6 +571,16 @@ class PlayerEngine {
     return null;
   }
 
+  Future<String?> currentTrack(String property) async {
+    final mpv = native;
+    if (mpv == null || _disposed) return null;
+    try {
+      return await mpv.getProperty(property);
+    } catch (_) {
+      return null;
+    }
+  }
+
   Future<void> logDecoder() async {
     final mpv = native;
     if (mpv == null || _disposed) return;

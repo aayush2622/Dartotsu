@@ -7007,6 +7007,30 @@ class AppLocalizationsIt extends AppLocalizations {
       'Continua a riprodurre in una finestra piccola quando esci dall\'app';
 
   @override
+  String get playerPipPlay => 'Play';
+
+  @override
+  String get playerPipPause => 'Pause';
+
+  @override
+  String get playerPipPrevious => 'Previous episode';
+
+  @override
+  String get playerPipNext => 'Next episode';
+
+  @override
+  String get playerPipBack => 'Rewind';
+
+  @override
+  String get playerPipForward => 'Forward';
+
+  @override
+  String get listDateAdded => 'Added to list';
+
+  @override
+  String get listDateLastWatched => 'Last watched';
+
+  @override
   String playerAutoPlaying(String title) {
     return 'Prossimo: $title…';
   }
