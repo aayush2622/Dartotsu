@@ -216,6 +216,7 @@ Map<String, dynamic> _encodeLibrary(Map<String, Object> args) => {
   'all': args['all'],
   'removed': args['removed'],
   'lang': args['lang'],
+  'facts': args['facts'] == true,
   'items': {
     for (final e in (args['library'] as Map<String, Media>).entries)
       e.key: jsonDecode(jsonEncode(e.value.toJson())),
@@ -235,6 +236,12 @@ class SimklQueries extends Queries {
   SimklQueries(this.client, {required this.refreshUser, this.onEpisodes});
 
   _Activity? _seen;
+  bool _facts = false;
+  DateTime? _factsTried;
+
+  bool get _factsDue =>
+      _factsTried == null ||
+      DateTime.now().difference(_factsTried!) > const Duration(hours: 6);
 
   late final _library = LibraryCache<Map<String, Media>>(
     load: _sync,
@@ -246,6 +253,7 @@ class SimklQueries extends Queries {
 
   void clearLibrary() {
     _seen = null;
+    _facts = false;
     _library.clear();
     removeCustomData(_diskKey, location: PrefLocation.CACHE);
   }
@@ -260,8 +268,10 @@ class SimklQueries extends Queries {
     try {
       final items = await compute(_decodeLibrary, raw);
       _seen = _Activity('${raw['all']}', '${raw['removed']}');
+      _facts = raw['facts'] == true;
       if (raw['lang'] != SimklPref.titleLanguage.value) {
         _seen = null;
+        _facts = false;
         return null;
       }
       return items;
@@ -277,6 +287,7 @@ class SimklQueries extends Queries {
         'all': seen.all,
         'removed': seen.removed,
         'lang': SimklPref.titleLanguage.value,
+        'facts': _facts,
         'library': library,
       });
       saveCustomData<Map<String, dynamic>>(
@@ -311,7 +322,10 @@ class SimklQueries extends Queries {
     final now = await _activity();
     final before = _seen;
     if (previous == null || before == null) return _fullSync(now);
-    if (now.all == before.all) return _publish(previous, persist: false);
+    if (now.all == before.all) {
+      if (_facts || !_factsDue) return _publish(previous, persist: false);
+      return _publish(await _withFacts(previous));
+    }
     var library = previous;
     if (now.removed != before.removed) {
       final ids = await compute(
@@ -326,12 +340,20 @@ class SimklQueries extends Queries {
           if (ids.contains(e.key)) e.key: e.value,
       };
     }
-    final delta = await client.getBody(
-      '/sync/all-items',
-      query: {'date_from': before.all, ..._titleQuery},
-    );
+    final fetched = await Future.wait([
+      client.getBody(
+        '/sync/all-items',
+        query: {'date_from': before.all, ..._titleQuery},
+      ),
+      _factsBody(),
+    ]);
     _seen = now;
-    return _publish({...library, ...await compute(parseSimklLibrary, delta)});
+    library = {
+      ...library,
+      ...await compute(parseSimklLibrary, fetched[0] as String),
+    };
+    _keepFacts(library, fetched[1]);
+    return _publish(library);
   }
 
   Future<Map<String, Media>> _fullSync(_Activity now) async {
@@ -343,8 +365,35 @@ class SimklQueries extends Queries {
       );
       library.addAll(await compute(parseSimklLibrary, body));
     }
+    _keepFacts(library, await _factsBody());
     _seen = now;
     return _publish(library);
+  }
+
+  Future<Object?> _factsBody() async {
+    try {
+      return await client.get(
+            '/ratings/all',
+            query: const {
+              'user_watchlist': '1',
+              'fields': 'simkl,release_status',
+            },
+          ) ??
+          const [];
+    } catch (e, st) {
+      _factsTried = DateTime.now();
+      logError('Queries', e, st);
+      return null;
+    }
+  }
+
+  Future<Map<String, Media>> _withFacts(Map<String, Media> library) async {
+    _keepFacts(library, await _factsBody());
+    return library;
+  }
+
+  void _keepFacts(Map<String, Media> library, Object? body) {
+    _facts = applySimklFacts(library, body);
   }
 
   Map<String, Media> _publish(
