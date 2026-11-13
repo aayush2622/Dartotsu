@@ -32,6 +32,28 @@ class ListEditorDraft {
       if (e.value) e.key,
   ];
 
+  void Function() snapshot(Media media) {
+    final status = media.userStatus;
+    final progress = media.userProgress;
+    final score = media.userScore;
+    final isPrivate = media.isListPrivate;
+    final hidden = media.hiddenFromStatusLists;
+    final repeat = media.userRepeat;
+    final notes = media.notes;
+    final startedAt = media.userStartedAt;
+    final completedAt = media.userCompletedAt;
+    return () => media
+      ..userStatus = status
+      ..userProgress = progress
+      ..userScore = score
+      ..isListPrivate = isPrivate
+      ..hiddenFromStatusLists = hidden
+      ..userRepeat = repeat
+      ..notes = notes
+      ..userStartedAt = startedAt
+      ..userCompletedAt = completedAt;
+  }
+
   void applyTo(Media media) {
     media
       ..userStatus = status.value

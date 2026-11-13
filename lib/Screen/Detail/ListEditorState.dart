@@ -53,11 +53,17 @@ class ListEditorSession {
   }
 
   Future<void> save(BuildContext context) => _run(context, () async {
+    final undo = draft.snapshot(media);
     draft.applyTo(media);
-    await mutations.editList(
-      media,
-      customList: view.advanced ? draft.selectedCustomLists : null,
-    );
+    try {
+      await mutations.editList(
+        media,
+        customList: view.advanced ? draft.selectedCustomLists : null,
+      );
+    } catch (_) {
+      undo();
+      rethrow;
+    }
     find<SourceSubscriptions>().noteMedia(view.service, media);
     final sync = find<SyncController>();
     if (sync.instant && sync.canPush(view.service, media.isAnime)) {
