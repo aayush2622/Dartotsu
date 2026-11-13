@@ -1355,6 +1355,42 @@ abstract class AppLocalizations {
   /// **'Connected'**
   String get dcConnected;
 
+  /// No description provided for @dcConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
+  String get dcConnection;
+
+  /// No description provided for @dcMethodDesktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord desktop app'**
+  String get dcMethodDesktop;
+
+  /// No description provided for @dcMethodDesktopDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Used automatically when nothing else is connected. Discord has to be open on this computer.'**
+  String get dcMethodDesktopDesc;
+
+  /// No description provided for @dcMethodToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Account token'**
+  String get dcMethodToken;
+
+  /// No description provided for @dcInUse.
+  ///
+  /// In en, this message translates to:
+  /// **'In use'**
+  String get dcInUse;
+
+  /// No description provided for @dcRecommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get dcRecommended;
+
   /// No description provided for @dcConnecting.
   ///
   /// In en, this message translates to:

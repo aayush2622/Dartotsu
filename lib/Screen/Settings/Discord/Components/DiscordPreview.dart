@@ -1,6 +1,7 @@
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 
 import '../../../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../Api/Discord/DiscordAccount.dart';

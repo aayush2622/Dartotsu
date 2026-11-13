@@ -659,6 +659,25 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dcConnected => 'Connected';
 
   @override
+  String get dcConnection => 'Connection';
+
+  @override
+  String get dcMethodDesktop => 'Discord desktop app';
+
+  @override
+  String get dcMethodDesktopDesc =>
+      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+
+  @override
+  String get dcMethodToken => 'Account token';
+
+  @override
+  String get dcInUse => 'In use';
+
+  @override
+  String get dcRecommended => 'Recommended';
+
+  @override
   String get dcConnecting => 'Connecting…';
 
   @override
