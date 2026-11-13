@@ -23,7 +23,7 @@ Future<void> showPasscodeSetup(BuildContext context) {
       child: Watch(
         () => ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             padding: EdgeInsets.fromLTRB(
               Dimens.pagePad,
               0,
@@ -65,7 +65,7 @@ Future<void> showPasscodeSetup(BuildContext context) {
                 ),
               ],
             ),
-          )),
+          ),
         ),
       ),
     ),
@@ -81,7 +81,7 @@ Future<void> showPasscodeRemove(BuildContext context) {
       child: Watch(
         () => ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             padding: EdgeInsets.fromLTRB(
               Dimens.pagePad,
               0,
@@ -90,7 +90,7 @@ Future<void> showPasscodeRemove(BuildContext context) {
             ),
             child: PinPad(
               message: message.value,
-              matches: find<AppLock>().verify,
+              matches: find<AppLock>().shouldSubmit,
               onSubmit: (pin) {
                 final lock = find<AppLock>();
                 if (!lock.verify(pin)) {
@@ -102,7 +102,7 @@ Future<void> showPasscodeRemove(BuildContext context) {
                 return true;
               },
             ),
-          )),
+          ),
         ),
       ),
     ),

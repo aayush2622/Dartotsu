@@ -43,7 +43,7 @@ class _LockScreenState extends State<_LockScreen> {
   final _message = Live<String?>(null);
   Timer? _timer;
 
-  bool _matches(String pin) => find<AppLock>().verify(pin);
+  bool _matches(String pin) => find<AppLock>().shouldSubmit(pin);
 
   bool _submit(String pin) {
     final lock = find<AppLock>();

@@ -63,18 +63,25 @@ class AppLock extends AppController {
   String _hash(String salt, String pin) =>
       sha256.convert(utf8.encode('$salt:$pin')).toString();
 
+  List<String> get _stored => PrefName.appLockHash.value.split(':');
+
   bool verify(String pin) {
-    final stored = PrefName.appLockHash.value;
-    final at = stored.indexOf(':');
-    if (at < 0) return false;
-    return _hash(stored.substring(0, at), pin) == stored.substring(at + 1);
+    final parts = _stored;
+    if (parts.length < 2) return false;
+    return _hash(parts[0], pin) == parts[1];
+  }
+
+  bool shouldSubmit(String pin) {
+    final parts = _stored;
+    final length = parts.length > 2 ? int.tryParse(parts[2]) : null;
+    return length == null ? verify(pin) : pin.length == length;
   }
 
   void set(String pin) {
     final salt = base64Url.encode(
       List<int>.generate(12, (_) => Random.secure().nextInt(256)),
     );
-    PrefName.appLockHash.value = '$salt:${_hash(salt, pin)}';
+    PrefName.appLockHash.value = '$salt:${_hash(salt, pin)}:${pin.length}';
   }
 
   void clear() {
