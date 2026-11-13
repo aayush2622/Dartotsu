@@ -1,4 +1,5 @@
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 import 'package:flutter/material.dart';
 
 import '../../Api/Services/Extension/LocalSource.dart';
@@ -110,8 +111,8 @@ Future<void> _read(BuildContext context, LocalTitle title, int index) async {
               name: u.name,
               url: u.path,
             ),
-            number: u.number % 1 == 0 ? '${u.number.toInt()}' : '${u.number}',
-            key: u.number % 1 == 0 ? '${u.number.toInt()}' : '${u.number}',
+            number: unitKeyOf(u.number),
+            key: unitKeyOf(u.number),
             value: u.number,
             title: u.name,
           ),

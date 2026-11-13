@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:dartotsu_extension_bridge/downloads.dart';
+import 'package:dartotsu_extension_bridge/toolkit.dart';
 import 'package:dartotsu_extension_bridge/Models/SourceFilter.dart';
 import 'package:path/path.dart' as p;
 
@@ -75,9 +76,7 @@ class LocalSource extends Source implements SourceMethods {
         DEpisode(
           url: u.path,
           name: u.name,
-          episodeNumber: u.number % 1 == 0
-              ? '${u.number.toInt()}'
-              : '${u.number}',
+          episodeNumber: unitKeyOf(u.number),
           scanlator: u.group,
           dateUpload: u.modified == 0 ? null : '${u.modified}',
         ),

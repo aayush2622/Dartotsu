@@ -12,9 +12,7 @@ class DownloadBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Watch(() {
-    final task = find<DownloadEngine>().tasks
-        .where((t) => t.id == id)
-        .firstOrNull;
+    final task = find<DownloadEngine>().taskById(id);
     if (task == null) return const SizedBox.shrink();
     final scheme = context.colorScheme;
     final state = task.state.value;

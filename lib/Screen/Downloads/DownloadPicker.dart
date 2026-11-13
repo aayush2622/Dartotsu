@@ -93,13 +93,16 @@ Future<void> downloadUnits(
   if (dash) {
     final mode = await chooseHlsMode(live());
     if (mode == HlsMode.cancel) return;
+    if (mode == HlsMode.folder) {
+      return snackString(getString.downloadHlsNeedsFfmpeg);
+    }
     try {
       final manifest = await loadDash(video.url, headers: video.headers);
       if (manifest.protected) {
-        throw const DashUnsupported('This stream is DRM protected');
+        throw DashUnsupported(getString.downloadDashDrm);
       }
       if (manifest.videos.isEmpty) {
-        throw const DashUnsupported('The DASH manifest has no video');
+        throw DashUnsupported(getString.downloadDashNoVideo);
       }
       final sorted = [...manifest.videos]
         ..sort((a, b) => b.bandwidth.compareTo(a.bandwidth));
