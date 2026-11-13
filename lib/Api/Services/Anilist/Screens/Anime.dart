@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Model/SearchResults.dart';
@@ -47,10 +48,10 @@ class AnilistAnimeFeed extends AnilistTypeFeed {
   }
 
   @override
-  int typeOf(String title) => switch (title) {
-    'Trending Now' => 1,
-    'Popular Anime' => 3,
-    _ => 0,
+  SectionLayout typeOf(String title) => switch (title) {
+    'Trending Now' => SectionLayout.carousel,
+    'Popular Anime' => SectionLayout.banner,
+    _ => SectionLayout.shelf,
   };
 
   @override

@@ -1,3 +1,4 @@
+import '../../../Model/SectionLayout.dart';
 import '../../../Logger.dart';
 
 import 'dart:convert';
@@ -90,11 +91,12 @@ class FeedScreenView {
 
   /// How the list called [title] renders (see `ScreenWidget.sectionType`).
   /// Also used to paint the cached lists before the first fetch lands.
-  int sectionType(MediaType type, String title) => 0;
+  SectionLayout sectionType(MediaType type, String title) =>
+      SectionLayout.shelf;
 
   /// The section types the enabled rows will have, in order, so the loading
   /// skeleton can match the feed. Empty = a generic skeleton.
-  List<int> skeleton(MediaType type) => const [];
+  List<SectionLayout> skeleton(MediaType type) => const [];
 
   Stream<List<ScreenWidget>> screenStream(MediaType type) async* {
     final anime = type.isVideo;

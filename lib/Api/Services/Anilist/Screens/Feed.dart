@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Model/SearchResults.dart';
@@ -9,9 +10,7 @@ import 'Manga.dart';
 abstract class AnilistTypeFeed {
   MediaType get type;
 
-  /// How the list called [title] renders: 0 card shelf, 1 carousel, 2 list
-  /// rows, 3 banner rows.
-  int typeOf(String title) => 0;
+  SectionLayout typeOf(String title) => SectionLayout.shelf;
 
   /// The query that fetches further pages of [title]; null = no paging.
   SearchResults? sectionQuery(SearchResults base, String title);
@@ -33,10 +32,11 @@ class AnilistFeedView extends FeedScreenView {
   AnilistTypeFeed _of(MediaType type) => type.isVideo ? _anime : _manga;
 
   @override
-  int sectionType(MediaType type, String title) => _of(type).typeOf(title);
+  SectionLayout sectionType(MediaType type, String title) =>
+      _of(type).typeOf(title);
 
   @override
-  List<int> skeleton(MediaType type) => [
+  List<SectionLayout> skeleton(MediaType type) => [
     for (final t in anilistAuth.queries.browseTitles(anime: type.isVideo))
       _of(type).typeOf(t),
   ];

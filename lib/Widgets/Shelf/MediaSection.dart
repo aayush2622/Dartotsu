@@ -1,3 +1,5 @@
+import '../../Model/SectionLayout.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -13,7 +15,7 @@ import 'MediaRows.dart';
 import 'CardShelfState.dart';
 
 class MediaSectionData {
-  final int type;
+  final SectionLayout type;
   final String? title;
   final IconData? trailingIcon;
 
@@ -81,7 +83,7 @@ class MediaSectionData {
   });
 
   const MediaSectionData.loading()
-    : type = 0,
+    : type = SectionLayout.shelf,
       loading = true,
       title = null,
       trailingIcon = null,
@@ -226,9 +228,9 @@ class MediaSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (data.type == 1) return MediaCarousel(data: data);
-    if (data.type == 2) return _rows(context, banner: false);
-    if (data.type == 3) return _rows(context, banner: true);
+    if (data.type == SectionLayout.carousel) return MediaCarousel(data: data);
+    if (data.type == SectionLayout.rows) return _rows(context, banner: false);
+    if (data.type == SectionLayout.banner) return _rows(context, banner: true);
     final open = _openShelf(context);
     return CardShelf(
       title: data.title == null ? null : sectionLabel(data.title!),

@@ -1,3 +1,5 @@
+import '../../Model/SectionLayout.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -114,19 +116,18 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
                             ),
                             onPressed: () => unawaited(state.searchByBarcode()),
                           ),
-                        if (state.canSearchImage)
-                          IconButton(
-                            tooltip:
-                                state.type.value == SearchType.MANGA ||
-                                    state.type.value == SearchType.NOVEL
-                                ? getString.sauceTooltip
-                                : getString.imageSearchTooltip,
-                            icon: Icon(
-                              Icons.image_search_rounded,
-                              color: scheme.onSurface,
-                            ),
-                            onPressed: () => unawaited(state.searchByImage()),
+                        IconButton(
+                          tooltip:
+                              state.type.value == SearchType.MANGA ||
+                                  state.type.value == SearchType.NOVEL
+                              ? getString.sauceTooltip
+                              : getString.imageSearchTooltip,
+                          icon: Icon(
+                            Icons.image_search_rounded,
+                            color: scheme.onSurface,
                           ),
+                          onPressed: () => unawaited(state.searchByImage()),
+                        ),
                         Icon(Icons.search_rounded, color: scheme.onSurface),
                       ],
                     ),
@@ -465,7 +466,9 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
     );
   }
 
-  static const _shelf = MediaSection(data: MediaSectionData(type: 0));
+  static const _shelf = MediaSection(
+    data: MediaSectionData(type: SectionLayout.shelf),
+  );
 
   Widget _card(Object item, {bool skeleton = false}) {
     if (item is Media) {
@@ -642,12 +645,7 @@ class _SearchScreenState extends BaseScreen<SearchScreen>
             child: GridView.builder(
               controller: state.scroll,
               padding: padding,
-              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-                mainAxisExtent: style.itemHeightFor(context),
-                crossAxisSpacing: Dimens.cardGap,
-                mainAxisSpacing: Dimens.gap,
-              ),
+              gridDelegate: style.posterGrid(context),
               itemCount: children.length,
               itemBuilder: (_, i) =>
                   Align(alignment: Alignment.topCenter, child: children[i]),

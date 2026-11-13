@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../Auth.dart';
@@ -8,13 +9,17 @@ class SimklFeedView extends FeedScreenView {
   SimklFeedView(super.service);
 
   @override
-  int sectionType(MediaType type, String title) {
-    if (title.startsWith('Most Watched') || title == 'Most Popular') return 3;
-    return title == 'Trending Now' || title == 'Trending Movies Today' ? 1 : 0;
+  SectionLayout sectionType(MediaType type, String title) {
+    if (title.startsWith('Most Watched') || title == 'Most Popular') {
+      return SectionLayout.banner;
+    }
+    return title == 'Trending Now' || title == 'Trending Movies Today'
+        ? SectionLayout.carousel
+        : SectionLayout.shelf;
   }
 
   @override
-  List<int> skeleton(MediaType type) => [
+  List<SectionLayout> skeleton(MediaType type) => [
     for (final s in simklLayoutSections(type)) sectionType(type, s.title),
   ];
 

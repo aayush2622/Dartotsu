@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Model/SearchResults.dart';
 import 'Feed.dart';
@@ -7,10 +8,10 @@ class AnilistMangaFeed extends AnilistTypeFeed {
   MediaType get type => MediaType.manga;
 
   @override
-  int typeOf(String title) => switch (title) {
-    'Trending Now' => 1,
-    'Popular Manga' => 3,
-    _ => 0,
+  SectionLayout typeOf(String title) => switch (title) {
+    'Trending Now' => SectionLayout.carousel,
+    'Popular Manga' => SectionLayout.banner,
+    _ => SectionLayout.shelf,
   };
 
   @override

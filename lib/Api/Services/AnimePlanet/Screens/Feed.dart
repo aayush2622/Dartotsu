@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../AnimePlanetService.dart';
 import '../Queries.dart';
@@ -8,11 +9,11 @@ class AnimePlanetFeedView extends FeedScreenView {
   AnimePlanetQueries get _queries => animePlanetQueries;
 
   @override
-  int sectionType(MediaType type, String title) =>
-      title == 'Trending Now' ? 1 : 0;
+  SectionLayout sectionType(MediaType type, String title) =>
+      title == 'Trending Now' ? SectionLayout.carousel : SectionLayout.shelf;
 
   @override
-  List<int> skeleton(MediaType type) => [
+  List<SectionLayout> skeleton(MediaType type) => [
     for (final s in animePlanetSectionsShown(type)) sectionType(type, s.title),
   ];
 

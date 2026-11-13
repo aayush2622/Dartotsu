@@ -182,12 +182,7 @@ class _StackScreenState extends BaseScreen<StackScreen>
                 Dimens.gapXl * 3,
               ),
               sliver: SliverGrid(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-                  mainAxisExtent: style.itemHeightFor(context),
-                  crossAxisSpacing: Dimens.cardGap,
-                  mainAxisSpacing: Dimens.gap,
-                ),
+                gridDelegate: style.posterGrid(context),
                 delegate: SliverChildBuilderDelegate(
                   childCount: loading && entries.isEmpty ? 9 : entries.length,
                   (context, i) {

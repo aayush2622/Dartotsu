@@ -1,3 +1,5 @@
+import '../../Model/SectionLayout.dart';
+
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -28,12 +30,13 @@ class ScreenWidgetList extends StatefulWidget {
   final void Function(Media media, String? heroTag)? onMediaTap;
   final void Function(Media media)? onMediaLongPress;
   final Stream<Object?>? reloadOn;
-  final int Function(String title)? sectionTypeOf;
+  final SectionLayout Function(String title)? sectionTypeOf;
   final bool Function(String title)? isHidden;
   final List<FeedChip> chips;
   final Future<List<Media>?> Function(FeedChip chip)? onChip;
-  final List<int> skeleton;
+  final List<SectionLayout> skeleton;
   final bool verticalTail;
+  final Future<void> Function()? onPull;
 
   const ScreenWidgetList({
     super.key,
@@ -49,6 +52,7 @@ class ScreenWidgetList extends StatefulWidget {
     this.onChip,
     this.skeleton = const [],
     this.verticalTail = false,
+    this.onPull,
   });
 
   @override
@@ -73,8 +77,14 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
     verticalTail: widget.verticalTail,
   );
 
-  List<int> get _skeleton =>
-      widget.skeleton.isEmpty ? const [0, 0, 0, 0] : widget.skeleton;
+  List<SectionLayout> get _skeleton => widget.skeleton.isEmpty
+      ? const [
+          SectionLayout.shelf,
+          SectionLayout.shelf,
+          SectionLayout.shelf,
+          SectionLayout.shelf,
+        ]
+      : widget.skeleton;
 
   String get _heroPrefix => widget.cacheId ?? identityHashCode(this).toString();
 
@@ -142,7 +152,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
 
   Widget _list(BuildContext context) {
     return RefreshIndicator(
-      onRefresh: state.pull,
+      onRefresh: () => Future.wait([state.pull(), ?widget.onPull?.call()]),
       child: Watch(() {
         final list = state.current;
         final empty = list.isEmpty;
@@ -161,10 +171,13 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
             children: [
               if (widget.header != null)
                 SliverToBoxAdapter(child: widget.header!),
-              if (showSkeleton && _skeleton.contains(1))
+              if (showSkeleton && _skeleton.contains(SectionLayout.carousel))
                 const SliverToBoxAdapter(
                   child: MediaSection(
-                    data: MediaSectionData(type: 1, loading: true),
+                    data: MediaSectionData(
+                      type: SectionLayout.carousel,
+                      loading: true,
+                    ),
                   ),
                 ),
               for (final item in list.where((e) => e.isCarousel))
@@ -173,11 +186,14 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
                     key: ValueKey('spotlight-${item.title}'),
                     child: state.chipLoading.value
                         ? const MediaSection(
-                            data: MediaSectionData(type: 1, loading: true),
+                            data: MediaSectionData(
+                              type: SectionLayout.carousel,
+                              loading: true,
+                            ),
                           )
                         : MediaSection(
                             data: MediaSectionData(
-                              type: 1,
+                              type: SectionLayout.carousel,
                               title: item.title,
                               mediaList: (state.chipMedia.value ?? item.media!)
                                   .take(10)
@@ -194,7 +210,14 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
               SliverToBoxAdapter(child: _chipRow()),
               const SliverToBoxAdapter(child: SizedBox(height: 8)),
               if (showSkeleton)
-                for (var i = 0; i < _skeleton.where((t) => t != 1).length; i++)
+                for (
+                  var i = 0;
+                  i <
+                      _skeleton
+                          .where((t) => t != SectionLayout.carousel)
+                          .length;
+                  i++
+                )
                   SliverToBoxAdapter(
                     key: ValueKey('skeleton-$i'),
                     child: const MediaSection(data: MediaSectionData.loading()),
@@ -249,7 +272,7 @@ class _ScreenWidgetListState extends State<ScreenWidgetList>
   List<Widget> _paged(ScreenWidget item) {
     final title = item.title!;
     final media = item.media!;
-    final banner = item.sectionType == 3;
+    final banner = item.sectionType == SectionLayout.banner;
     state.tailTitle = state.tailDone.contains(title) ? null : title;
     return [
       SliverToBoxAdapter(

@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/LayoutPref.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
@@ -10,11 +11,11 @@ class MangaUpdatesFeedView extends FeedScreenView {
   MangaUpdatesFeedView(super.service);
 
   @override
-  int sectionType(MediaType type, String title) =>
-      title == 'Trending Now' ? 1 : 0;
+  SectionLayout sectionType(MediaType type, String title) =>
+      title == 'Trending Now' ? SectionLayout.carousel : SectionLayout.shelf;
 
   @override
-  List<int> skeleton(MediaType type) => [
+  List<SectionLayout> skeleton(MediaType type) => [
     for (final s in applyLayout(
       mangaUpdatesSectionsFor(type),
       (s) => s.title,
@@ -42,9 +43,8 @@ class MangaUpdatesFeedView extends FeedScreenView {
     return sectionWidgets(
       queries.browseJobsFor(type),
       build: (title, media) {
-        final section = mangaUpdatesSectionsFor(
-          type,
-        ).firstWhere((s) => s.title == title);
+        final section = mangaUpdatesSectionsFor(type)
+            .firstWhere((s) => s.title == title);
         return ScreenWidget.media(
           title,
           media,

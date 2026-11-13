@@ -1,3 +1,5 @@
+import '../../Model/SectionLayout.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/Model/Media.dart';
@@ -87,7 +89,7 @@ class ScreenWidgetView extends StatelessWidget {
 
   Widget _media() {
     final data = MediaSectionData(
-      type: 0,
+      type: SectionLayout.shelf,
       title: item.title,
       mediaList: item.media,
       heroPrefix: heroPrefix,

@@ -10,32 +10,15 @@ extension CardStyleMetrics on CardStyle {
 
   double get imageHeight => itemWidth * aspect;
 
-  /// Height reserved below the poster for the caption — one info line for
-  /// media, a two-line role/VA line for people (labelMedium, ~18px/line).
-  double get _captionHeight => preset == 'people'
-      ? 38
-      : mayShowInfo
-      ? 20
-      : 0;
-
-  /// bodyLarge reserves 24px per line, an upper bound for the font's own line
-  /// height.
-  double get _titleHeight => lines * 24;
+  SliverGridDelegate posterGrid(BuildContext context) =>
+      SliverGridDelegateWithMaxCrossAxisExtent(
+        maxCrossAxisExtent: itemWidth + Dimens.cardGap + 6,
+        mainAxisExtent: itemHeightFor(context),
+        crossAxisSpacing: Dimens.cardGap,
+        mainAxisSpacing: Dimens.gap,
+      );
 
   /// Height a horizontal shelf must reserve for one card in this style.
-  double get itemHeight {
-    switch (mode) {
-      case CardMode.onCard:
-        return imageHeight + 6;
-      case CardMode.normal:
-        return imageHeight + 7 + _titleHeight + _captionHeight + 6;
-      case CardMode.inCard:
-        // poster + progress bar + a padded text block on the same card surface
-        // (top padding leaves room for the score badge straddling the seam)
-        return imageHeight + 4 + 13 + _titleHeight + _captionHeight + 9 + 6;
-    }
-  }
-
   double itemHeightFor(BuildContext context) {
     final text = Theme.of(context).textTheme;
     final scaler = MediaQuery.textScalerOf(context);

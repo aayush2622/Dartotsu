@@ -248,12 +248,7 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen>
           Dimens.pagePad,
           Dimens.gapXl,
         ),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-          mainAxisExtent: style.itemHeightFor(context),
-          crossAxisSpacing: Dimens.cardGap,
-          mainAxisSpacing: Dimens.gap,
-        ),
+        gridDelegate: style.posterGrid(context),
         physics: const AlwaysScrollableScrollPhysics(),
         itemCount: children.length,
         itemBuilder: (_, i) =>

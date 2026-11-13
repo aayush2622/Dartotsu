@@ -1,3 +1,5 @@
+import '../../../Model/SectionLayout.dart';
+
 import 'package:flutter/widgets.dart';
 
 import '../../../Model/Setting.dart';
@@ -42,16 +44,14 @@ class ScreenWidget {
   final Future<List<Media>?> Function(int page)? onLoadMore;
   final MediaSection Function(MediaSectionData data)? section;
 
-  /// How a media section renders: 0 card shelf, 1 carousel, 2 list rows,
-  /// 3 banner rows (see `MediaSection`).
-  final int sectionType;
+  final SectionLayout sectionType;
 
   const ScreenWidget.media(
     this.title,
     this.media, {
     this.onLoadMore,
     this.section,
-    this.sectionType = 0,
+    this.sectionType = SectionLayout.shelf,
   }) : type = ScreenWidgetType.media,
        settings = null,
        characters = null,
@@ -68,7 +68,7 @@ class ScreenWidget {
       widget = null,
       onLoadMore = null,
       section = null,
-      sectionType = 0;
+      sectionType = SectionLayout.shelf;
 
   const ScreenWidget.staff(this.title, this.staff)
     : type = ScreenWidgetType.staff,
@@ -79,7 +79,7 @@ class ScreenWidget {
       widget = null,
       onLoadMore = null,
       section = null,
-      sectionType = 0;
+      sectionType = SectionLayout.shelf;
 
   const ScreenWidget.data(this.title, this.data)
     : type = ScreenWidgetType.data,
@@ -90,7 +90,7 @@ class ScreenWidget {
       widget = null,
       onLoadMore = null,
       section = null,
-      sectionType = 0;
+      sectionType = SectionLayout.shelf;
 
   const ScreenWidget.settings(this.title, this.settings)
     : type = ScreenWidgetType.settings,
@@ -101,7 +101,7 @@ class ScreenWidget {
       widget = null,
       onLoadMore = null,
       section = null,
-      sectionType = 0;
+      sectionType = SectionLayout.shelf;
 
   const ScreenWidget.extra(this.widget)
     : type = ScreenWidgetType.extra,
@@ -113,11 +113,12 @@ class ScreenWidget {
       data = null,
       onLoadMore = null,
       section = null,
-      sectionType = 0;
+      sectionType = SectionLayout.shelf;
 
   bool get isMedia => type == ScreenWidgetType.media;
 
-  bool get isCarousel => sectionType == 1;
+  bool get isCarousel => sectionType == SectionLayout.carousel;
 
-  bool get isRows => sectionType == 2 || sectionType == 3;
+  bool get isRows =>
+      sectionType == SectionLayout.rows || sectionType == SectionLayout.banner;
 }

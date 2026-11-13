@@ -75,12 +75,7 @@ class _ShelfScreenState extends BaseScreen<ShelfScreen>
               Dimens.pagePad,
               Dimens.gapXl,
             ),
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-              mainAxisExtent: style.itemHeightFor(context),
-              crossAxisSpacing: Dimens.cardGap,
-              mainAxisSpacing: Dimens.gap,
-            ),
+            gridDelegate: style.posterGrid(context),
             itemCount: state.items.length + (state.loading.value ? tail : 0),
             itemBuilder: (context, i) {
               if (i >= state.items.length) {

@@ -1,3 +1,4 @@
+import '../../../../Model/SectionLayout.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/LayoutPref.dart';
@@ -10,15 +11,15 @@ class MalFeedView extends FeedScreenView {
   MalFeedView(super.service);
 
   @override
-  int sectionType(MediaType type, String title) => switch (title) {
-    'Trending Now' => 1,
-    'Most Popular' => 3,
-    'Upcoming' || 'Top Novels' => 2,
-    _ => 0,
+  SectionLayout sectionType(MediaType type, String title) => switch (title) {
+    'Trending Now' => SectionLayout.carousel,
+    'Most Popular' => SectionLayout.banner,
+    'Upcoming' || 'Top Novels' => SectionLayout.rows,
+    _ => SectionLayout.shelf,
   };
 
   @override
-  List<int> skeleton(MediaType type) => [
+  List<SectionLayout> skeleton(MediaType type) => [
     for (final s in applyLayout(
       malSections(anime: type.isVideo),
       (s) => s.title,

@@ -1,3 +1,5 @@
+import '../../Model/SectionLayout.dart';
+
 import 'dart:async';
 
 import 'package:collection/collection.dart';
@@ -19,7 +21,7 @@ class ScreenWidgetListState extends ScreenState {
   final Stream<List<ScreenWidget>> Function() loader;
   final String? cacheId;
   final Stream<Object?>? reloadOn;
-  final int Function(String title)? sectionTypeOf;
+  final SectionLayout Function(String title)? sectionTypeOf;
   final bool Function(String title)? isHiddenFn;
   final List<FeedChip> chips;
   final Future<List<Media>?> Function(FeedChip chip)? onChipFn;
@@ -41,13 +43,17 @@ class ScreenWidgetListState extends ScreenState {
   bool dirty = false;
   bool tailReady = false;
 
-  int typeFor(String title) {
-    final raw = types[title] ?? 0;
-    if (raw == 1) return 1;
-    if (!verticalTail || !tailReady) return 0;
-    final last = order.lastWhereOrNull((t) => (types[t] ?? 0) != 1);
-    if (title != last) return 0;
-    return raw == 3 ? 3 : 2;
+  SectionLayout typeFor(String title) {
+    final raw = types[title] ?? SectionLayout.shelf;
+    if (raw == SectionLayout.carousel) return raw;
+    if (!verticalTail || !tailReady) return SectionLayout.shelf;
+    final last = order.lastWhereOrNull(
+      (t) => (types[t] ?? SectionLayout.shelf) != SectionLayout.carousel,
+    );
+    if (title != last) return SectionLayout.shelf;
+    return raw == SectionLayout.banner
+        ? SectionLayout.banner
+        : SectionLayout.rows;
   }
 
   late final SectionCache? cache = cacheId == null
@@ -109,7 +115,7 @@ class ScreenWidgetListState extends ScreenState {
   final mediaByTitle = <String, List<Media>>{};
   final pages = <String, int>{};
   final sectionBuilders = <String, MediaSection Function(MediaSectionData)>{};
-  final types = <String, int>{};
+  final types = <String, SectionLayout>{};
   final loadMoreFns = <String, Future<List<Media>?> Function(int)>{};
   final tailDone = <String>{};
   bool tailLoading = false;
@@ -133,7 +139,7 @@ class ScreenWidgetListState extends ScreenState {
     mediaByTitle.addAll(cached);
     order.addAll(cached.keys);
     for (final title in cached.keys) {
-      types[title] = sectionTypeOf?.call(title) ?? 0;
+      types[title] = sectionTypeOf?.call(title) ?? SectionLayout.shelf;
     }
     current.value = [
       for (final e in cached.entries)
@@ -150,11 +156,18 @@ class ScreenWidgetListState extends ScreenState {
     }
   }
 
-  Future<void> refresh() async {
-    if (refreshing) {
+  Future<void>? _running;
+
+  Future<void> refresh() {
+    final running = _running;
+    if (running != null) {
       queued = true;
-      return;
+      return running;
     }
+    return _running = _refresh();
+  }
+
+  Future<void> _refresh() async {
     refreshing = true;
     error.value = null;
     List<ScreenWidget>? last;
@@ -173,6 +186,7 @@ class ScreenWidgetListState extends ScreenState {
       if (current.isEmpty) error.value = e.toString();
     } finally {
       refreshing = false;
+      _running = null;
       if (queued && mounted) {
         queued = false;
         unawaited(refresh());

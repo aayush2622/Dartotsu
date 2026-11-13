@@ -1,3 +1,4 @@
+import '../../Model/SectionLayout.dart';
 import '../../Utils/Extensions/StringExtensions.dart';
 
 import 'package:flutter/material.dart';
@@ -215,7 +216,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
 
         return ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(24, 4, 24, 24),
             child: SizedBox(
               width: double.infinity,
@@ -240,7 +241,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
                 ],
               ),
             ),
-          )),
+          ),
         );
       }),
     ),
@@ -337,12 +338,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
           Dimens.pagePad,
           Dimens.gapXl,
         ),
-        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-          mainAxisExtent: style.itemHeightFor(context),
-          crossAxisSpacing: Dimens.cardGap,
-          mainAxisSpacing: Dimens.gap,
-        ),
+        gridDelegate: style.posterGrid(context),
         itemCount: media.length,
         itemBuilder: (_, i) => Align(
           alignment: Alignment.topCenter,
@@ -354,7 +350,9 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     return skeleton ? Skeletonizer(child: scrolling) : scrolling;
   }
 
-  static const _shelf = MediaSection(data: MediaSectionData(type: 0));
+  static const _shelf = MediaSection(
+    data: MediaSectionData(type: SectionLayout.shelf),
+  );
 
   Widget _card(Media media, int index, {required bool skeleton}) {
     final tag = 'list:${media.id}';

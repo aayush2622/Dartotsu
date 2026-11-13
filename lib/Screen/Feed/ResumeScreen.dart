@@ -56,12 +56,7 @@ class _ResumeScreenState extends BaseScreen<ResumeScreen>
             Dimens.pagePad,
             Dimens.gapXl,
           ),
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-            maxCrossAxisExtent: style.itemWidth + Dimens.cardGap + 6,
-            mainAxisExtent: style.itemHeightFor(context),
-            crossAxisSpacing: Dimens.cardGap,
-            mainAxisSpacing: Dimens.gap,
-          ),
+          gridDelegate: style.posterGrid(context),
           itemCount: entries.length,
           itemBuilder: (context, i) {
             final entry = entries[i];
