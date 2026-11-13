@@ -48,5 +48,5 @@ class LocalMutations extends Mutations {
     _signal();
   }
 
-  void _signal() => tryFind<RefreshController>()?.all();
+  void _signal() => findBuilt<RefreshController>()?.all();
 }

@@ -133,7 +133,7 @@ class PendingWrites extends AppController {
     }
     entries.refresh();
     _persist();
-    tryFind<RefreshController>()?.all();
+    findBuilt<RefreshController>()?.all();
   }
 
   PendingWrite? of(String serviceId, String mediaId) =>
@@ -204,7 +204,7 @@ class PendingWrites extends AppController {
     }
     if (sent > 0) {
       snackString(getString.offlineSynced(sent));
-      tryFind<RefreshController>()?.all();
+      findBuilt<RefreshController>()?.all();
     }
   }
 

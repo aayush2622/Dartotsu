@@ -31,7 +31,7 @@ class MangaBakaSettingsView extends SettingsScreenView {
         isChecked: MangaBakaPref.hideNsfw.rx.value,
         onSwitchChange: (v) {
           MangaBakaPref.hideNsfw.rx.value = v;
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
         },
       ),
       Setting.header(getString.feedLayout),

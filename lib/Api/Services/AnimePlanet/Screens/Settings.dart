@@ -73,7 +73,7 @@ class AnimePlanetSettingsView extends SettingsScreenView {
           animePlanetAuth.client.clear();
           animePlanetQueries.invalidateLibrary();
           await animePlanetAuth.refreshUser();
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
           snackString(getString.refresh);
         },
       ),

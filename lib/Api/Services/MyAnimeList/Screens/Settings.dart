@@ -30,7 +30,7 @@ class MalSettingsView extends SettingsScreenView {
         isChecked: MalPref.hideNsfw.rx.value,
         onSwitchChange: (v) {
           MalPref.hideNsfw.rx.value = v;
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
         },
       ),
       Setting.header(getString.feedLayout),

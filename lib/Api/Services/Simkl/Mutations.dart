@@ -192,6 +192,6 @@ class SimklMutations extends Mutations {
 
   void _done() {
     queries.invalidateLibrary();
-    tryFind<RefreshController>()?.all();
+    findBuilt<RefreshController>()?.all();
   }
 }

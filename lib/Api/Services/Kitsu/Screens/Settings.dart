@@ -33,7 +33,7 @@ class KitsuSettingsView extends SettingsScreenView {
         isChecked: KitsuPref.hideNsfw.rx.value,
         onSwitchChange: (v) {
           KitsuPref.hideNsfw.rx.value = v;
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
         },
       ),
       Setting.header(getString.sectionExperimental),

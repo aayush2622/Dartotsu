@@ -244,12 +244,9 @@ void applySystemBarStyle({required bool isDark}) {
 /// Work that can safely run after the first frame.
 Future<void> _postInit(List<String> args) async {
   installDownloadLinks();
-  IdMapper.warm();
   find<OfflineMode>();
   find<DownloadEngine>();
-  find<ActivityAlerts>().start();
-  find<CommentAlerts>().start();
-  find<SourceAlerts>().start();
+  find<SettingsSync>().start();
   HomeWidgetSync.start();
   installPlayerLinks();
   installReaderLinks();
@@ -260,11 +257,17 @@ Future<void> _postInit(List<String> args) async {
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     DeepLink.initVideoIntentListener(args);
   }
+  await Future<void>.delayed(_backgroundDelay);
+  IdMapper.warm();
+  find<ActivityAlerts>().start();
+  find<CommentAlerts>().start();
+  find<SourceAlerts>().start();
   unawaited(find<AppUpdater>().checkForUpdate());
   find<SyncController>().startAuto();
-  find<SettingsSync>().start();
   find<DiscordPresenceController>().start();
 }
+
+const _backgroundDelay = Duration(seconds: 4);
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});

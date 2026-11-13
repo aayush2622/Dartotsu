@@ -99,7 +99,7 @@ Widget _serviceTile(
       enabled: installed && !selected,
       onTap: () {
         unawaited(setExtensionService(type, m.id));
-        tryFind<RefreshController>()?.all();
+        findBuilt<RefreshController>()?.all();
       },
       leading: Container(
         width: 36,

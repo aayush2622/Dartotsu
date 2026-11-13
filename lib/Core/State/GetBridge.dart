@@ -3,16 +3,17 @@ import 'package:get/get.dart';
 /// Interop with GetX, which the extension bridge package still uses for its
 /// own observables and registry. Nothing else in the app touches GetX.
 
-/// Reads of a GetX observable made while a [ForeignScope] is active are
-/// recorded here instead of going to GetX's own widgets.
+/// Reads of a GetX observable made between [ForeignProbe.enter] and
+/// [ForeignProbe.leave] are recorded instead of going to GetX's own widgets.
 class _Probe implements RxInterface<dynamic> {
-  static ForeignScope? active;
-
   @override
   bool get canUpdate => true;
 
   @override
-  void addListener(GetStream<dynamic> rxGetx) => active?._add(rxGetx);
+  void addListener(GetStream<dynamic> rxGetx) {
+    final reads = ForeignProbe._reads ??= <GetStream<dynamic>>[];
+    if (!reads.contains(rxGetx)) reads.add(rxGetx);
+  }
 
   @override
   void close() {}
@@ -28,27 +29,36 @@ class _Probe implements RxInterface<dynamic> {
 
 final _probe = _Probe();
 
-/// Tracks the GetX observables one build reads and rebuilds when they change.
-class ForeignScope {
-  Set<GetStream<dynamic>>? _read;
-  final _subs = <GetStream<dynamic>, LightSubscription<dynamic>>{};
-  RxInterface<dynamic>? _prevProxy;
-  ForeignScope? _prevActive;
+typedef ForeignReads = List<GetStream<dynamic>>;
 
-  void _add(GetStream<dynamic> stream) => (_read ??= {}).add(stream);
+/// Brackets one build. Nothing is allocated unless the build reads a GetX
+/// observable.
+class ForeignProbe {
+  static final _proxies = <RxInterface<dynamic>?>[];
+  static final _outer = <ForeignReads?>[];
+  static ForeignReads? _reads;
 
-  void begin() {
-    _read = null;
-    _prevProxy = RxInterface.proxy;
-    _prevActive = _Probe.active;
+  static void enter() {
+    _proxies.add(RxInterface.proxy);
+    _outer.add(_reads);
     RxInterface.proxy = _probe;
-    _Probe.active = this;
+    _reads = null;
   }
 
-  void end(void Function() onChange) {
-    RxInterface.proxy = _prevProxy;
-    _Probe.active = _prevActive;
-    final read = _read;
+  static ForeignReads? leave() {
+    final reads = _reads;
+    RxInterface.proxy = _proxies.removeLast();
+    _reads = _outer.removeLast();
+    return reads;
+  }
+}
+
+/// The GetX observables one widget's build reads, and the subscriptions that
+/// rebuild it when they change.
+class ForeignScope {
+  final _subs = <GetStream<dynamic>, LightSubscription<dynamic>>{};
+
+  void update(ForeignReads? read, void Function() onChange) {
     if (read == null) {
       if (_subs.isNotEmpty) dispose();
       return;

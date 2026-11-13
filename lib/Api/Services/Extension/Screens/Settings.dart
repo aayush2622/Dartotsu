@@ -65,7 +65,7 @@ class ExtensionSettingsView extends SettingsScreenView {
       isChecked: extensionHideNsfwPref.rx.value,
       onSwitchChange: (v) {
         extensionHideNsfwPref.rx.value = v;
-        tryFind<RefreshController>()?.all();
+        findBuilt<RefreshController>()?.all();
       },
     ),
     Setting.header(getString.sectionBrowse),

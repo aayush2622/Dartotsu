@@ -37,7 +37,7 @@ class SimklSettingsView extends SettingsScreenView {
         onPick: (v) {
           SimklPref.titleLanguage.rx.value = v;
           simklAuth.queries.invalidateLibrary(full: true);
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
         },
       ),
       Setting.switchType(

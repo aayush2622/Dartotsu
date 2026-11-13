@@ -85,7 +85,7 @@ class AnilistSettingsView extends SettingsScreenView {
         isChecked: AnilistPref.excludeList.rx.value,
         onSwitchChange: (v) {
           AnilistPref.excludeList.rx.value = v;
-          tryFind<RefreshController>()?.all();
+          findBuilt<RefreshController>()?.all();
         },
       ),
       Setting.header(getString.sectionPrivacy),

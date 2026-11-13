@@ -100,6 +100,6 @@ class MalMutations extends Mutations {
 
   void _done() {
     onChanged();
-    tryFind<RefreshController>()?.all();
+    findBuilt<RefreshController>()?.all();
   }
 }

@@ -475,7 +475,7 @@ class SyncController extends AppController {
       resumeAt.clear();
       _saveNow();
       _notify();
-      tryFind<RefreshController>()?.all();
+      findBuilt<RefreshController>()?.all();
     }
   }
 

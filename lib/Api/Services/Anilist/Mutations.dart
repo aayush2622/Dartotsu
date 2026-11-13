@@ -91,4 +91,4 @@ class AnilistMutations extends Mutations {
 }
 
 /// Tell every subscribed screen to revalidate after a successful write.
-void _signalRefresh() => tryFind<RefreshController>()?.all();
+void _signalRefresh() => findBuilt<RefreshController>()?.all();

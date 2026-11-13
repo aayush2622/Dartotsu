@@ -83,7 +83,7 @@ class AnimePlanetMutations extends Mutations {
 
   void _done() {
     queries.invalidateLibrary();
-    tryFind<RefreshController>()?.all();
+    findBuilt<RefreshController>()?.all();
   }
 
   final _choices = <String, List<AnimePlanetListChoice>>{};
