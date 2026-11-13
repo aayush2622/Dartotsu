@@ -174,7 +174,7 @@ class _SourceFilterSheetState extends State<SourceFilterSheet> {
         Expanded(
           child: ScrollConfig(
             context,
-            child: ScrollConfig(context, child: SingleChildScrollView(
+            child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
               child: Watch(() {
                 _tick.track();
@@ -183,7 +183,7 @@ class _SourceFilterSheetState extends State<SourceFilterSheet> {
                   children: [for (final f in _working) _filter(context, f)],
                 );
               }),
-            )),
+            ),
           ),
         ),
         Padding(

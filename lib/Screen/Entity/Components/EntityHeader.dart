@@ -105,10 +105,10 @@ class EntityHeaderDelegate extends SliverPersistentHeaderDelegate {
                         Expanded(
                           child: ScrollConfig(
                             context,
-                            child: ScrollConfig(context, child: SingleChildScrollView(
+                            child: SingleChildScrollView(
                               physics: const NeverScrollableScrollPhysics(),
                               child: _info(context, profile),
-                            )),
+                            ),
                           ),
                         ),
                       ],

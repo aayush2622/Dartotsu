@@ -23,7 +23,7 @@ class _ServiceSettingsBodyState extends State<ServiceSettingsBody> {
   Widget build(BuildContext context) {
     return ScrollConfig(
       context,
-      child: ScrollConfig(context, child: SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: EdgeInsets.only(top: Dimens.gap, bottom: Dimens.gapXl),
         child: Watch(() {
           _anchor.value;
@@ -34,7 +34,7 @@ class _ServiceSettingsBodyState extends State<ServiceSettingsBody> {
             ],
           );
         }),
-      )),
+      ),
     );
   }
 }

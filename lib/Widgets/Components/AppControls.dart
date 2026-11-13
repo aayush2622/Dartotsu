@@ -244,7 +244,7 @@ class AppChoiceChips<T> extends StatelessWidget {
         horizontalEdge: DpadEdgeBehavior.stop,
         child: ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
               children: [
@@ -254,7 +254,7 @@ class AppChoiceChips<T> extends StatelessWidget {
                 ],
               ],
             ),
-          )),
+          ),
         ),
       );
     }

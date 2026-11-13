@@ -22,12 +22,12 @@ Future<Color?> showColorPickerDialog(
       .setCustomView(
         ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             child: ColorPickerView(
               initial: initialColor,
               onChanged: (color) => selectedColor = color,
             ),
-          )),
+          ),
         ),
       )
       .setNeutralButton(

@@ -77,7 +77,7 @@ class _BarcodeSheetState extends State<BarcodeSheet>
       heightFactor: camera != null ? 0.85 : null,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(
             Dimens.pagePad,
             0,
@@ -151,7 +151,7 @@ class _BarcodeSheetState extends State<BarcodeSheet>
               ],
             ],
           ),
-        )),
+        ),
       ),
     );
   }

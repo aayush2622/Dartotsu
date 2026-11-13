@@ -629,7 +629,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
     return Center(
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -699,7 +699,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                 ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }
@@ -716,7 +716,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
         ),
         child: ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             child: a.html == null || a.html!.trim().isEmpty
                 ? MarkupText(
                     text: a.text ?? '',
@@ -735,7 +735,7 @@ class _StoryGroupPageState extends State<_StoryGroupPage>
                     ),
                     linkCard: aniLinkCards(widget.service),
                   ),
-          )),
+          ),
         ),
       ),
     );

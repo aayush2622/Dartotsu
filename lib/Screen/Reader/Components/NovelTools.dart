@@ -381,7 +381,7 @@ Future<void> showHighlightSheet(
       child: Watch(
         () => ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(24, 0, 24, 24),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -467,7 +467,7 @@ Future<void> showHighlightSheet(
                 ),
               ],
             ),
-          )),
+          ),
         ),
       ),
     ),

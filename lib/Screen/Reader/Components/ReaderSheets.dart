@@ -35,7 +35,7 @@ Future<void> showReaderOptions(BuildContext context, ReaderState state) =>
         heightFactor: 0.85,
         child: ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
             child: Builder(
               builder: (sheet) => Watch(() {
@@ -60,7 +60,7 @@ Future<void> showReaderOptions(BuildContext context, ReaderState state) =>
                 );
               }),
             ),
-          )),
+          ),
         ),
       ),
     );

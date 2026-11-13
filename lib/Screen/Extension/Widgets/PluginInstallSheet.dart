@@ -56,7 +56,7 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
     child: Watch(
       () => ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(
             Dimens.pagePad,
             Dimens.gapSm,
@@ -74,7 +74,7 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
               _actions(context),
             ],
           ),
-        )),
+        ),
       ),
     ),
   );
@@ -207,7 +207,7 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
         constraints: const BoxConstraints(maxHeight: 180),
         child: ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -228,7 +228,7 @@ class _PluginInstallSheetState extends State<PluginInstallSheet>
                 ],
               ],
             ),
-          )),
+          ),
         ),
       ),
     );

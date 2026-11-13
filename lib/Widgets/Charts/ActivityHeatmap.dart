@@ -157,7 +157,7 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
         const SizedBox(height: 14),
         ScrollConfig(
           context,
-          child: ScrollConfig(context, child: SingleChildScrollView(
+          child: SingleChildScrollView(
             controller: _scroll,
             scrollDirection: Axis.horizontal,
             child: MouseRegion(
@@ -194,7 +194,7 @@ class _ActivityHeatmapState extends State<ActivityHeatmap> {
                 ),
               ),
             ),
-          )),
+          ),
         ),
         const SizedBox(height: 8),
         Row(

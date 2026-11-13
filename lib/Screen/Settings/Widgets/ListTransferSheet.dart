@@ -57,7 +57,7 @@ class _ImportSheetState extends State<_ImportSheet>
       title: getString.importLists,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: Dimens.sheetInsets,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -143,7 +143,7 @@ class _ImportSheetState extends State<_ImportSheet>
               ],
             ],
           ),
-        )),
+        ),
       ),
     );
   }
@@ -234,7 +234,7 @@ class _ExportSheetState extends State<_ExportSheet>
       title: getString.exportLists,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -291,7 +291,7 @@ class _ExportSheetState extends State<_ExportSheet>
                 ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

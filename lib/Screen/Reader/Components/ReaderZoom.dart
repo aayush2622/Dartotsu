@@ -164,13 +164,13 @@ class _ReaderZoomState extends State<ReaderZoom>
     child: Watch(
       () => ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           scrollDirection: axis,
           physics: _pinching.value
               ? const NeverScrollableScrollPhysics()
               : null,
           child: image,
-        )),
+        ),
       ),
     ),
   );

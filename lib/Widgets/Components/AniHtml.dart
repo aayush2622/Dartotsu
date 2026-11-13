@@ -257,10 +257,10 @@ class _AniHtmlState extends State<AniHtml> {
                     children: [
                       ScrollConfig(
                         context,
-                        child: ScrollConfig(context, child: SingleChildScrollView(
+                        child: SingleChildScrollView(
                           physics: const NeverScrollableScrollPhysics(),
                           child: body,
-                        )),
+                        ),
                       ),
                       PositionedDirectional(
                         start: 0,

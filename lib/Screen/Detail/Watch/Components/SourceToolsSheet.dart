@@ -392,32 +392,29 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
     title: widget.source.name,
     child: ScrollConfig(
       context,
-      child: ScrollConfig(
-        context,
-        child: SingleChildScrollView(
-          padding: EdgeInsets.fromLTRB(
-            Dimens.pagePad,
-            0,
-            Dimens.pagePad,
-            Dimens.gapLg,
-          ),
-          child: Watch(() {
-            final h = state.health.value;
-            return Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _hero(context, h),
-                if (h.url != null) ...[
-                  _label(context, getString.watchSectionSession),
-                  ..._session(context, h),
-                ],
-                _label(context, getString.watchSectionTools),
-                ..._tools(context, h),
-              ],
-            );
-          }),
+      child: SingleChildScrollView(
+        padding: EdgeInsets.fromLTRB(
+          Dimens.pagePad,
+          0,
+          Dimens.pagePad,
+          Dimens.gapLg,
         ),
+        child: Watch(() {
+          final h = state.health.value;
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _hero(context, h),
+              if (h.url != null) ...[
+                _label(context, getString.watchSectionSession),
+                ..._session(context, h),
+              ],
+              _label(context, getString.watchSectionTools),
+              ..._tools(context, h),
+            ],
+          );
+        }),
       ),
     ),
   );

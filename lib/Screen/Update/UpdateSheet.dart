@@ -47,7 +47,7 @@ class UpdateSheet extends StatelessWidget {
     child: Watch(
       () => ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(
             Dimens.pagePad,
             Dimens.gapSm,
@@ -66,7 +66,7 @@ class UpdateSheet extends StatelessWidget {
               _actions(context),
             ],
           ),
-        )),
+        ),
       ),
     ),
   );

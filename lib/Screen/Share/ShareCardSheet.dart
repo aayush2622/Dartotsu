@@ -107,7 +107,7 @@ class _ShareCardSheetState extends State<ShareCardSheet>
       title: state.isList ? getString.shareCardList : getString.shareCard,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: EdgeInsets.fromLTRB(
             Dimens.pagePad,
             0,
@@ -162,7 +162,7 @@ class _ShareCardSheetState extends State<ShareCardSheet>
               ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

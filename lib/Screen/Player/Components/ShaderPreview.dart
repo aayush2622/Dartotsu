@@ -604,7 +604,7 @@ class _ShaderPreviewState extends State<ShaderPreview> {
             const SizedBox(height: 8),
             ScrollConfig(
               context,
-              child: ScrollConfig(context, child: SingleChildScrollView(
+              child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
@@ -628,7 +628,7 @@ class _ShaderPreviewState extends State<ShaderPreview> {
                     ),
                   ],
                 ),
-              )),
+              ),
             ),
             if (_adjust.value) ...[
               const SizedBox(height: 4),

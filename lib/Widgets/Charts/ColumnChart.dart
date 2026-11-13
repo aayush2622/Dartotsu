@@ -91,10 +91,10 @@ class _ColumnChartState extends State<ColumnChart> {
         return width > box.maxWidth
             ? ScrollConfig(
                 context,
-                child: ScrollConfig(context, child: SingleChildScrollView(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: chart,
-                )),
+                ),
               )
             : chart;
       },

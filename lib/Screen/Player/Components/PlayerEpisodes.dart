@@ -171,7 +171,7 @@ class _PlayerOptionsSheet extends StatelessWidget {
     title: getString.watchOptions,
     child: ScrollConfig(
       context,
-      child: ScrollConfig(context, child: SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(
           Dimens.pagePad,
           0,
@@ -236,7 +236,7 @@ class _PlayerOptionsSheet extends StatelessWidget {
             ],
           );
         }),
-      )),
+      ),
     ),
   );
 }

@@ -34,7 +34,7 @@ class _LoginViewState extends State<LoginView>
     return Center(
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 380),
@@ -141,7 +141,7 @@ class _LoginViewState extends State<LoginView>
               );
             }),
           ),
-        )),
+        ),
       ),
     );
   }

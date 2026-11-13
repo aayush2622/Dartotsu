@@ -82,7 +82,7 @@ class _ChapterListState extends State<ChapterList> {
     final description = watchShowDescriptionPref.rx.value;
     return ScrollConfig(
       context,
-      child: ScrollConfig(context, child: SingleChildScrollView(
+      child: SingleChildScrollView(
         controller: _scroll,
         padding: EdgeInsets.fromLTRB(
           Dimens.pagePad,
@@ -131,7 +131,7 @@ class _ChapterListState extends State<ChapterList> {
             ),
           ],
         ),
-      )),
+      ),
     );
   }
 }

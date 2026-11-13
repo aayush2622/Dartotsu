@@ -67,7 +67,7 @@ class _ActivityComposerState extends State<ActivityComposer>
       ),
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -158,7 +158,7 @@ class _ActivityComposerState extends State<ActivityComposer>
               ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }

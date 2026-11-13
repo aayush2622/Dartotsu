@@ -73,7 +73,7 @@ class _StacksScreenState extends BaseScreen<StacksScreen>
               alignment: AlignmentDirectional.centerStart,
               child: ScrollConfig(
                 context,
-                child: ScrollConfig(context, child: SingleChildScrollView(
+                child: SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: AppChoiceChips<StackScope>(
                     value: state.scope.value,
@@ -82,7 +82,7 @@ class _StacksScreenState extends BaseScreen<StacksScreen>
                       for (final s in scopes) AppSegment(s, label: _label(s)),
                     ],
                   ),
-                )),
+                ),
               ),
             ),
           ),

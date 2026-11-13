@@ -219,7 +219,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }) => LayoutBuilder(
     builder: (context, box) => ScrollConfig(
       context,
-      child: ScrollConfig(context, child: SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: ConstrainedBox(
           constraints: BoxConstraints(minHeight: box.maxHeight - 32),
@@ -257,7 +257,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
             ),
           ),
         ),
-      )),
+      ),
     ),
   );
 
