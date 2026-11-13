@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FLUTTER_VERSION: 3.47.4
+  FLUTTER_VERSION: 3.50.0
 
 jobs:
   prune_caches:
@@ -30,14 +30,14 @@ jobs:
       - name: Prune stale Actions caches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FLUTTER_VERSION: "3.47.4"
+          FLUTTER_VERSION: "3.50.0"
         run: bash scripts/ci/prune-actions-cache.sh
 
   build_android:
     needs: prune_caches
     uses: ./.github/workflows/build-android.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: false
       publish-mode: artifact
       universal-name: Universal
@@ -51,7 +51,7 @@ jobs:
     needs: prune_caches
     uses: ./.github/workflows/build-windows.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: false
       publish-mode: artifact
     secrets:
@@ -63,7 +63,7 @@ jobs:
     needs: prune_caches
     uses: ./.github/workflows/build-linux.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: false
       publish-mode: artifact
       zip-name-prefix: Dartotsu_LinuxZip
@@ -75,7 +75,7 @@ jobs:
     needs: prune_caches
     uses: ./.github/workflows/build-ios.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: false
       publish-mode: artifact
     secrets:
@@ -85,7 +85,7 @@ jobs:
     needs: prune_caches
     uses: ./.github/workflows/build-macos.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: false
       publish-mode: artifact
     secrets:

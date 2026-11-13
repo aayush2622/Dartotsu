@@ -5,7 +5,7 @@
 set -euo pipefail
 
 repo="${GITHUB_REPOSITORY:?}"
-keep_version="${FLUTTER_VERSION:-3.47.4}"
+keep_version="${FLUTTER_VERSION:-3.50.0}"
 
 caches=$(gh api "/repos/${repo}/actions/caches?per_page=100")
 count=$(echo "$caches" | jq '.actions_caches | length')

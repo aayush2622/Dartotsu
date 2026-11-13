@@ -35,7 +35,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  FLUTTER_VERSION: 3.47.4
+  FLUTTER_VERSION: 3.50.0
 
 jobs:
   prune_caches:
@@ -51,7 +51,7 @@ jobs:
       - name: Prune stale Actions caches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          FLUTTER_VERSION: "3.47.4"
+          FLUTTER_VERSION: "3.50.0"
         run: bash scripts/ci/prune-actions-cache.sh
 
   build_android:
@@ -61,7 +61,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'android' || inputs.build_targets == 'all'))
     uses: ./.github/workflows/build-android.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
       universal-name: universal
@@ -80,7 +80,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'windows' || inputs.build_targets == 'all'))
     uses: ./.github/workflows/build-windows.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
     secrets:
@@ -97,7 +97,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'linux' || inputs.build_targets == 'all'))
     uses: ./.github/workflows/build-linux.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
       zip-name-prefix: Dartotsu_Linux
@@ -113,7 +113,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'ios' || inputs.build_targets == 'all'))
     uses: ./.github/workflows/build-ios.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
     secrets:
@@ -128,7 +128,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && (inputs.build_targets == 'macos' || inputs.build_targets == 'all'))
     uses: ./.github/workflows/build-macos.yml
     with:
-      flutter-version: "3.47.4"
+      flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
       publish-mode: gdrive
     secrets:
