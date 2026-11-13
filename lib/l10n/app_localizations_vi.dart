@@ -3269,6 +3269,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String get season => 'Mùa';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Phát sóng';
 
   @override
@@ -6318,6 +6324,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get readerResetDesc => 'Về mặc định';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Cỡ chữ';
 
   @override
@@ -6532,6 +6541,9 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Chủ đề';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Kho extension anime';

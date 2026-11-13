@@ -6053,6 +6053,18 @@ abstract class AppLocalizations {
   /// **'Season'**
   String get season;
 
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @filterAny.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get filterAny;
+
   /// No description provided for @broadcast.
   ///
   /// In en, this message translates to:
@@ -11423,6 +11435,12 @@ abstract class AppLocalizations {
   /// **'Back to the defaults'**
   String get readerResetDesc;
 
+  /// No description provided for @readerResetConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset every reader setting to its default?'**
+  String get readerResetConfirm;
+
   /// No description provided for @novelSize.
   ///
   /// In en, this message translates to:
@@ -11806,6 +11824,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Theme'**
   String get dantotsuTheme;
+
+  /// No description provided for @themePickerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get themePickerTitle;
 
   /// No description provided for @dantotsuReposAnime.
   ///

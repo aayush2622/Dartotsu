@@ -3281,6 +3281,12 @@ class AppLocalizationsKn extends AppLocalizations {
   String get season => 'ಸೀಸನ್';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'ಪ್ರಸಾರ';
 
   @override
@@ -6341,6 +6347,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get readerResetDesc => 'ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರಳು';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'ಪಠ್ಯ ಗಾತ್ರ';
 
   @override
@@ -6556,6 +6565,9 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'ಥೀಮ್';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'ಆನಿಮೆ ಎಕ್ಸ್‌ಟೆನ್ಶನ್ ರೆಪೊಸಿಟರಿಗಳು';

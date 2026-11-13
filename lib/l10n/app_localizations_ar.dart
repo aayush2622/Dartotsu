@@ -3253,6 +3253,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get season => 'الموسم';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'البث';
 
   @override
@@ -6320,6 +6326,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get readerResetDesc => 'رجوع إلى الافتراضي';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'حجم النص';
 
   @override
@@ -6533,6 +6542,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'السمة';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'مستودعات إضافات الأنمي';

@@ -83,7 +83,7 @@ class _FilterBodyState extends State<_FilterBody>
                   ..._dropRows([
                     if (s.sources.isNotEmpty)
                       _drop(
-                        'Source',
+                        getString.source,
                         Icons.auto_stories_rounded,
                         s.sources,
                         state.source.value,
@@ -91,7 +91,7 @@ class _FilterBodyState extends State<_FilterBody>
                       ),
                     if (s.formats.isNotEmpty)
                       _drop(
-                        'Format',
+                        getString.format,
                         Icons.category_rounded,
                         s.formats,
                         state.format.value,
@@ -99,7 +99,7 @@ class _FilterBodyState extends State<_FilterBody>
                       ),
                     if (s.statuses.isNotEmpty)
                       _drop(
-                        'Status',
+                        getString.status,
                         Icons.sensors_rounded,
                         s.statuses,
                         state.status.value,
@@ -107,7 +107,7 @@ class _FilterBodyState extends State<_FilterBody>
                       ),
                     if (s.season)
                       _drop(
-                        'Season',
+                        getString.season,
                         Icons.wb_sunny_rounded,
                         const ['WINTER', 'SPRING', 'SUMMER', 'FALL'],
                         state.season.value,
@@ -115,7 +115,7 @@ class _FilterBodyState extends State<_FilterBody>
                       ),
                     if (s.year)
                       _drop(
-                        'Year',
+                        getString.year,
                         Icons.calendar_month_rounded,
                         years,
                         state.year.value?.toString(),
@@ -320,7 +320,7 @@ class _FilterBodyState extends State<_FilterBody>
       ),
   ];
 
-  static const _any = '— Any —';
+  String get _any => '— ${getString.filterAny} —';
 
   Widget _drop(
     String hint,

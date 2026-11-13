@@ -3284,6 +3284,12 @@ class AppLocalizationsSw extends AppLocalizations {
   String get season => 'Msimu';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Matangazo';
 
   @override
@@ -6362,6 +6368,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get readerResetDesc => 'Rudi kwenye chaguomsingi';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Ukubwa wa maandishi';
 
   @override
@@ -6577,6 +6586,9 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Mandhari';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Hazina za viendelezi vya anime';

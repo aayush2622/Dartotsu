@@ -6,6 +6,7 @@ import '../../Reader/Engine/VolumeKeys.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/Setting.dart';
 import '../../../Core/ThemeManager/language.dart';
+import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/ChoiceSheet.dart';
 import '../Widgets/SettingRows.dart';
 import '../Widgets/SettingsGroup.dart';
@@ -503,13 +504,19 @@ List<Setting> novelReaderRows(
 void _updateReader(void Function(ReaderSettings s) change) =>
     ReaderPrefs.update(change);
 
-List<Setting> _readerReset() => [
+List<Setting> _readerReset(BuildContext context) => [
   const Setting.header(''),
   Setting.normal(
     name: getString.readerReset,
     description: getString.readerResetDesc,
     icon: Icons.restart_alt_rounded,
-    onClick: ReaderPrefs.reset,
+    onClick: () =>
+        AlertDialogBuilder(context)
+            .setTitle(getString.readerReset)
+            .setMessage(getString.readerResetConfirm)
+            .setNegativeButton(getString.cancel, null)
+            .setPositiveButton(getString.reset, ReaderPrefs.reset)
+            .show(),
   ),
 ];
 
@@ -519,7 +526,7 @@ List<Setting> mangaReaderSettings(BuildContext context) => [
     settings: ReaderPrefs.global.value,
     update: _updateReader,
   ),
-  ..._readerReset(),
+  ..._readerReset(context),
 ];
 
 List<Setting> novelReaderSettings(BuildContext context) => [
@@ -528,7 +535,7 @@ List<Setting> novelReaderSettings(BuildContext context) => [
     settings: ReaderPrefs.global.value,
     update: _updateReader,
   ),
-  ..._readerReset(),
+  ..._readerReset(context),
 ];
 
 Map<String, SectionStyle> get mangaReaderSectionIcons => {

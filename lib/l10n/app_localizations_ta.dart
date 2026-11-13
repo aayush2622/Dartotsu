@@ -3282,6 +3282,12 @@ class AppLocalizationsTa extends AppLocalizations {
   String get season => 'சீசன்';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'பிராட்காஸ்ட்';
 
   @override
@@ -6355,6 +6361,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get readerResetDesc => 'டீஃபால்ட்ஸ்க்கு திரும்பு';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'டெக்ஸ்ட் சைஸ்';
 
   @override
@@ -6570,6 +6579,9 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'தீம்';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'அனிமே எக்ஸ்டென்ஷன் ரெப்போசிட்டரீஸ்';

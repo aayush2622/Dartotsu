@@ -3294,6 +3294,12 @@ class AppLocalizationsMl extends AppLocalizations {
   String get season => 'സീസൺ';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'ബ്രോഡ്കാസ്റ്റ്';
 
   @override
@@ -6377,6 +6383,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get readerResetDesc => 'ഡിഫോൾട്ടിലേക്ക് തിരിച്ചു പോകൂ';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'ടെക്സ്റ്റ് വലുപ്പം';
 
   @override
@@ -6591,6 +6600,9 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'തീം';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'അനിമെ എക്സ്റ്റൻഷൻ റിപ്പോസിറ്ററികൾ';

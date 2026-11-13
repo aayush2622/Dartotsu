@@ -3222,6 +3222,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get season => '시즌';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => '방송';
 
   @override
@@ -6216,6 +6222,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerResetDesc => '기본값으로 되돌려요';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => '글자 크기';
 
   @override
@@ -6427,6 +6436,9 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get dantotsuTheme => '테마';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => '애니 확장 프로그램 저장소';

@@ -3274,6 +3274,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get season => 'Musim';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Siaran';
 
   @override
@@ -6336,6 +6342,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get readerResetDesc => 'Kembali ke bawaan';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Ukuran teks';
 
   @override
@@ -6550,6 +6559,9 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Tema';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Repositori ekstensi anime';

@@ -3264,6 +3264,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get season => 'Season';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Broadcast';
 
   @override
@@ -6321,6 +6327,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get readerResetDesc => 'Back to the defaults';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Text size';
 
   @override
@@ -6535,6 +6544,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Theme';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Anime extension repositories';

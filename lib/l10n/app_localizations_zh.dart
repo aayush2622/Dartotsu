@@ -3219,6 +3219,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get season => '季度';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => '播出时间';
 
   @override
@@ -6207,6 +6213,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get readerResetDesc => '恢复默认值';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => '文字大小';
 
   @override
@@ -6418,6 +6427,9 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get dantotsuTheme => '主题';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => '动画扩展仓库';

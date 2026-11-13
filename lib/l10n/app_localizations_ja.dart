@@ -3223,6 +3223,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get season => 'シーズン';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => '放送';
 
   @override
@@ -6213,6 +6219,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get readerResetDesc => 'デフォルトに戻す';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => '文字サイズ';
 
   @override
@@ -6425,6 +6434,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'テーマ';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'アニメ拡張機能のリポジトリ';

@@ -3271,6 +3271,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get season => 'Сезон';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Мовлення';
 
   @override
@@ -6359,6 +6365,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get readerResetDesc => 'Повернути типові';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Розмір тексту';
 
   @override
@@ -6573,6 +6582,9 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Тема';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Репозиторії розширень аніме';

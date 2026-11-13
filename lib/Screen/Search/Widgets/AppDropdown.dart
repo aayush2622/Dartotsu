@@ -68,6 +68,7 @@ class _AppDropdownState extends State<AppDropdown> {
                 ? Icon(widget.prefixIcon, size: 20)
                 : null,
             hintText: widget.hintText,
+            label: widget.labelText == null ? null : Text(widget.labelText!),
             textStyle: theme.textTheme.labelLarge,
             inputDecorationTheme: InputDecorationTheme(
               filled: true,

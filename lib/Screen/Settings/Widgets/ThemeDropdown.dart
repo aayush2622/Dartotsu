@@ -68,7 +68,7 @@ class _ThemePickerSheet extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(24, 0, 24, 16),
                 child: Text(
-                  'Theme',
+                  getString.themePickerTitle,
                   style: context.textTheme.titleMedium,
                   textAlign: TextAlign.center,
                 ),

@@ -3291,6 +3291,12 @@ class AppLocalizationsSo extends AppLocalizations {
   String get season => 'Xilli';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Baahinta';
 
   @override
@@ -6361,6 +6367,9 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readerResetDesc => 'Ku noqo kuwa caadiga ah';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Cabbirka qoraalka';
 
   @override
@@ -6575,6 +6584,9 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Qaab';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Kaydka kordhinta anime';

@@ -3272,6 +3272,12 @@ class AppLocalizationsHa extends AppLocalizations {
   String get season => 'Kaka';
 
   @override
+  String get year => 'Year';
+
+  @override
+  String get filterAny => 'Any';
+
+  @override
   String get broadcast => 'Watsawa';
 
   @override
@@ -6335,6 +6341,9 @@ class AppLocalizationsHa extends AppLocalizations {
   String get readerResetDesc => 'Koma zuwa tsoho';
 
   @override
+  String get readerResetConfirm => 'Reset every reader setting to its default?';
+
+  @override
   String get novelSize => 'Girman rubutu';
 
   @override
@@ -6550,6 +6559,9 @@ class AppLocalizationsHa extends AppLocalizations {
 
   @override
   String get dantotsuTheme => 'Jigo';
+
+  @override
+  String get themePickerTitle => 'Theme';
 
   @override
   String get dantotsuReposAnime => 'Wuraren ajiyar extension na anime';
