@@ -140,11 +140,6 @@ dev_dependencies:
 dependency_overrides:
   collection: ^1.19.1
   wakelock_plus: ^1.8.2
-  # medz/wasd#173: its enum dot shorthands crash the Dart 3.14 analyzer
-  wasd:
-    git:
-      url: https://github.com/aayush2622/wasd.git
-      ref: dartotsu/0.6.1-analyzer-fix
   # language version 2.19 makes the Dart 3.14 compiler reject its const Column
   precached_network_image:
     path: third_party/precached_network_image

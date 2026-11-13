@@ -647,7 +647,7 @@ defines `handleError(e, st, {softCrash})` (called from the zone handler in `main
   There is no `build.yaml`.
 - New user-facing strings → `app_en.arb` (+ `flutter gen-l10n`); use `getString.key` (never `const` around it; parameters get ICU placeholders, counts use `plural`). Section titles that double as identifiers (`'Trending Now'`, `'Continue Watching'`, …) stay English in the data layer and are translated at render time by `sectionLabel()` (`Core/Services/SectionTitles.dart`) — add a key + a case there for a new title. Locale files other than `app_en.arb` fall back to English for keys they lack.
 - `media_kit` and `media_kit_video` (from `github.com/Predidit/media-kit`, which bundles libmpv through a Dart build hook, so there are no `media_kit_libs_*` packages; `wakelock_plus` is overridden because that fork pins 1.3.3) and `flutter_discord_rpc_fork` are git deps; `flutter_web_auth_2`
-  is a personal fork. `dependency_overrides` pins `collection` and `wakelock_plus`, takes `media_kit` from its git repo and takes `wasd` (a bridge dependency) from the fork `aayush2622/wasd`, branch `dartotsu/0.6.1-analyzer-fix` (v0.6.1 plus the one-line fix from medz/wasd#173: the enum dot shorthands in `lib/src/wasm/table.dart` are written out, because the Dart 3.14 analyzer crashes on them with `UnknownInferredType`, which made `flutter analyze` die for everything that imports the bridge); drop the override once #173 is released on pub.dev. Treat `pubspec.yaml`
+  is a personal fork. `dependency_overrides` pins `collection` and `wakelock_plus`, takes `media_kit` from its git repo. Treat `pubspec.yaml`
   changes as high-risk.
 - Tests: the `test/` folder was deleted; there is no test suite (`flutter_test` is still a dev dependency).
 

@@ -77,10 +77,10 @@ packages:
     dependency: "direct main"
     description:
       name: archive
-      sha256: "4bb7d60637561012df2a7b04e48bcc2485e849e81048dc075a6d45b95c342910"
+      sha256: "2fda90592c0afd219c5e285618a98da835cd10df38372666093d25dfe457a2d0"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.7.1"
   args:
     dependency: transitive
     description:
@@ -342,7 +342,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "351d7a1233008b3681042fe4edc886e22354f13a"
+      resolved-ref: "12e7e2689632c388e3ab4ea1c09cecf646823f0f"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -2020,14 +2020,13 @@ packages:
     source: hosted
     version: "1.7.0"
   wasd:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "."
-      ref: "dartotsu/0.6.1-analyzer-fix"
-      resolved-ref: bc05339e45d2218fb66cd6cc6c409065dcbb9b4b
-      url: "https://github.com/aayush2622/wasd.git"
-    source: git
-    version: "0.6.1"
+      name: wasd
+      sha256: "6fa724497d811dc20097c4a8f5ba51ea01ba6fcb429f5be80dfbe6aa1c00e98d"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.2"
   watcher:
     dependency: transitive
     description:
