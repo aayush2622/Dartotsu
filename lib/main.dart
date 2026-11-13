@@ -55,6 +55,8 @@ import 'Screen/Player/Engine/PlayerSupport.dart';
 import 'Screen/Player/PlayerLauncher.dart';
 import 'Screen/Reader/LocalBook.dart';
 import 'Utils/Functions/SnackBar.dart';
+import 'Screen/Player/Engine/PipWindow.dart';
+import 'Utils/Functions/Windowing.dart';
 import 'Widgets/Components/ScrollConfig.dart';
 import 'l10n/app_localizations.dart';
 import 'Core/SettingsSync/SettingsSync.dart';
@@ -63,6 +65,7 @@ import 'Core/State/State.dart';
 void main(List<String> args) async {
   await runZonedGuarded(
     () async {
+      enableWindowing();
       WidgetsFlutterBinding.ensureInitialized();
       PaintingBinding.instance.imageCache
         ..maximumSizeBytes =
@@ -313,7 +316,10 @@ class _MyAppState extends State<MyApp> {
       1100,
     );
     applySystemBarStyle(isDark: _theme.isDarkModeActive);
-    return LockOverlay(child: _dpadWrap(context, child));
+    return ViewAnchor(
+      view: PipWindow.view(),
+      child: LockOverlay(child: _dpadWrap(context, child)),
+    );
   }
 
   @override

@@ -12641,6 +12641,18 @@ abstract class AppLocalizations {
   /// **'Forward'**
   String get playerPipForward;
 
+  /// No description provided for @playerPipRestore.
+  ///
+  /// In en, this message translates to:
+  /// **'Back to the player'**
+  String get playerPipRestore;
+
+  /// No description provided for @playerPipActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Playing in a small window'**
+  String get playerPipActive;
+
   /// No description provided for @listDateAdded.
   ///
   /// In en, this message translates to:

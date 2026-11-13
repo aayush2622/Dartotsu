@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import '../../Api/Discord/DiscordPresence.dart';
 import '../../Api/Discord/PresenceScope.dart';
 import 'Engine/ColorPresets.dart';
 import 'Engine/PlayRequest.dart';
+import 'Engine/Pip.dart';
 import '../../Core/Shortcuts/KeyBindings.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -155,6 +157,7 @@ class _PlayerScreenState extends State<PlayerScreen>
   }
 
   Widget _pip(BuildContext context) {
+    if (!Platform.isAndroid) return _pipPlaceholder(context);
     final engine = state.engine;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -186,6 +189,34 @@ class _PlayerScreenState extends State<PlayerScreen>
       ),
     );
   }
+
+  Widget _pipPlaceholder(BuildContext context) => Scaffold(
+    backgroundColor: Colors.black,
+    body: Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.picture_in_picture_alt_rounded,
+            size: 48,
+            color: Colors.white54,
+          ),
+          SizedBox(height: Dimens.gap),
+          Text(
+            getString.playerPipActive,
+            style: context.textTheme.titleMedium?.copyWith(
+              color: Colors.white70,
+            ),
+          ),
+          SizedBox(height: Dimens.gapLg),
+          FilledButton.tonal(
+            onPressed: () => unawaited(PlayerPip.exit()),
+            child: Text(getString.playerPipRestore),
+          ),
+        ],
+      ),
+    ),
+  );
 
   Widget _fullscreen(BuildContext context) => LayoutBuilder(
     builder: (context, box) => Watch(() {

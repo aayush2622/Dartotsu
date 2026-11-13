@@ -3624,6 +3624,8 @@
   "playerPipPause": "Pause",
   "playerPipBack": "Rewind",
   "playerPipForward": "Forward",
+  "playerPipRestore": "Back to the player",
+  "playerPipActive": "Playing in a small window",
   "listDateAdded": "Added to list",
   "listDateLastWatched": "Last watched",
   "playerAutoPlaying": "Playing {title} next…",

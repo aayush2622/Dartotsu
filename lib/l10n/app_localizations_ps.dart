@@ -7016,6 +7016,12 @@ class AppLocalizationsPs extends AppLocalizations {
   String get playerPipForward => 'Forward';
 
   @override
+  String get playerPipRestore => 'Back to the player';
+
+  @override
+  String get playerPipActive => 'Playing in a small window';
+
+  @override
   String get listDateAdded => 'Added to list';
 
   @override

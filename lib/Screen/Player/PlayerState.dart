@@ -167,6 +167,7 @@ class PlayerState extends ScreenState {
 
   final progressTick = 0.live;
   final pip = false.live;
+  final pipHover = false.live;
 
   final nextCountdown = Live<int?>(null);
   Timer? _countdownTimer;
@@ -411,7 +412,7 @@ class PlayerState extends ScreenState {
   }
 
   void syncPip() {
-    if (_closed || !PlayerPip.supported) return;
+    if (_closed || !Platform.isAndroid || !PlayerPip.supported) return;
     unawaited(PlayerPip.configure(_pipConfig()));
   }
 

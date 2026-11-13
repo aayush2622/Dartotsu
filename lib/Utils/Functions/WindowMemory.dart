@@ -21,6 +21,7 @@ class WindowMemory {
 
   Timer? _timer;
   bool _ready = false;
+  bool suspended = false;
 
   Future<void> restore() async {
     if (!supported) return;
@@ -98,7 +99,7 @@ class WindowMemory {
 
   Future<void> _save() async {
     final window = appWindow;
-    if (window == null) return;
+    if (window == null || suspended) return;
     try {
       if (window.isFullScreen || window.isMinimized) return;
       final maximized = window.isMaximized;
