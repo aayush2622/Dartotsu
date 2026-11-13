@@ -7,7 +7,6 @@ import 'Screens/Calendar.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Entity.dart';
 import 'Screens/Feed.dart';
-import 'Screens/Home.dart';
 import 'Screens/Search.dart';
 import 'Screens/Notifications.dart';
 import 'Screens/Settings.dart';
@@ -52,7 +51,13 @@ class KitsuService extends MediaService {
   List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
 
   @override
-  HomeScreenView get homeView => KitsuHomeView(this);
+  HomeScreenView get homeView => QueriesHomeView(
+    this,
+    () => kitsuAuth.queries,
+    hidden: (t) =>
+        t == kHiddenMediaTitle &&
+        KitsuPref.homeLayout.value[kHiddenMediaTitle] != true,
+  );
 
   @override
   FeedScreenView get feedView => KitsuFeedView(this);

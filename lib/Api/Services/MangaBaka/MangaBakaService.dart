@@ -6,7 +6,6 @@ import '../../../Core/SourceAlerts/SubCalendar.dart';
 import 'Auth.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
-import 'Screens/Home.dart';
 import 'Screens/News.dart';
 import 'Screens/Search.dart';
 import 'Screens/Settings.dart';
@@ -52,7 +51,13 @@ class MangaBakaService extends MediaService {
   List<MediaType> get feedTypes => const [MediaType.manga, MediaType.novel];
 
   @override
-  HomeScreenView get homeView => MangaBakaHomeView(this);
+  HomeScreenView get homeView => QueriesHomeView(
+    this,
+    () => mangaBakaAuth.queries,
+    hidden: (t) =>
+        t == kHiddenMediaTitle &&
+        MangaBakaPref.homeLayout.value[kHiddenMediaTitle] != true,
+  );
 
   @override
   CalendarScreenView get calendarView => const SubscriptionCalendarView(

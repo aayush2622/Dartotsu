@@ -18,7 +18,6 @@ import 'Screens/Detail.dart';
 import 'Screens/Entity.dart';
 import 'Screens/Settings.dart';
 import 'Screens/Feed.dart';
-import 'Screens/Home.dart';
 import 'Screens/Search.dart';
 
 const animePlanetServiceId = 'animeplanet';
@@ -75,7 +74,8 @@ class AnimePlanetService extends MediaService {
   ServiceAuth get auth => animePlanetAuth;
 
   @override
-  HomeScreenView get homeView => AnimePlanetHomeView(this);
+  HomeScreenView get homeView =>
+      QueriesHomeView(this, () => animePlanetQueries);
 
   @override
   Queries get getQueries => animePlanetQueries;

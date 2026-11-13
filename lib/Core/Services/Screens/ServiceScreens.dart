@@ -71,6 +71,22 @@ class HomeScreenView {
   bool isHiddenSection(String title) => false;
 }
 
+class QueriesHomeView extends HomeScreenView {
+  final Queries Function() queries;
+  final bool Function(String title)? hidden;
+
+  QueriesHomeView(super.service, this.queries, {this.hidden});
+
+  @override
+  Stream<List<ScreenWidget>> screenStream() {
+    if (!service.isLoggedIn) return super.screenStream();
+    return sectionWidgets(queries().homeJobs(), build: ScreenWidget.media);
+  }
+
+  @override
+  bool isHiddenSection(String title) => hidden?.call(title) ?? false;
+}
+
 class FeedChip {
   final String id;
   final String label;

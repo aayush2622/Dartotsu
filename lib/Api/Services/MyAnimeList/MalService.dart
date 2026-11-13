@@ -4,7 +4,6 @@ import '../../../Core/Services/MediaService.dart';
 import '../../../Core/State/State.dart';
 import 'Auth.dart';
 import 'Screens/Entity.dart';
-import 'Screens/Home.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Search.dart';
 import 'Screens/Detail.dart';
@@ -48,7 +47,7 @@ class MalService extends MediaService {
   List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
 
   @override
-  HomeScreenView get homeView => MalHomeView(this);
+  HomeScreenView get homeView => QueriesHomeView(this, () => malAuth.queries);
 
   @override
   FeedScreenView get feedView => MalFeedView(this);

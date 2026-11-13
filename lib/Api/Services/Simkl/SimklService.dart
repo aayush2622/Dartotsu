@@ -3,7 +3,6 @@ import '../../../Core/State/State.dart';
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
 import 'Prefs.dart';
-import 'Screens/Home.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Search.dart';
 import 'Screens/Detail.dart';
@@ -64,7 +63,7 @@ class SimklService extends MediaService {
       : type.label;
 
   @override
-  HomeScreenView get homeView => SimklHomeView(this);
+  HomeScreenView get homeView => QueriesHomeView(this, () => simklAuth.queries);
 
   @override
   FeedScreenView get feedView => SimklFeedView(this);

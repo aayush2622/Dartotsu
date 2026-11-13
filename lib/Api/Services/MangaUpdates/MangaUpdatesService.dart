@@ -6,7 +6,6 @@ import '../../../Screen/Settings/Sync/Data/SyncAdapter.dart';
 import 'Auth.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
-import 'Screens/Home.dart';
 import 'Screens/Search.dart';
 import 'Screens/Settings.dart';
 import 'Sync.dart';
@@ -16,7 +15,8 @@ const mangaUpdatesServiceId = 'mangaupdates';
 class MangaUpdatesService extends MediaService {
   @override
   bool isHiddenMedia(Media media) =>
-      super.isHiddenMedia(media) || (media.isAdult && MangaUpdatesPref.hideNsfw.value);
+      super.isHiddenMedia(media) ||
+      (media.isAdult && MangaUpdatesPref.hideNsfw.value);
 
   @override
   String get id => mangaUpdatesServiceId;
@@ -48,7 +48,8 @@ class MangaUpdatesService extends MediaService {
   List<MediaType> get feedTypes => const [MediaType.manga, MediaType.novel];
 
   @override
-  HomeScreenView get homeView => MangaUpdatesHomeView(this);
+  HomeScreenView get homeView =>
+      QueriesHomeView(this, () => mangaUpdatesAuth.queries);
 
   @override
   FeedScreenView get feedView => MangaUpdatesFeedView(this);
