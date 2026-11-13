@@ -1,5 +1,6 @@
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 
+import '../../../../Utils/Animation/WidgetAnimations.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../Api/Discord/DiscordAccount.dart';
@@ -220,7 +221,7 @@ class _Avatar extends StatelessWidget {
             end: 0,
             bottom: 0,
             child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
+              duration: animDuration(200),
               width: dot,
               height: dot,
               decoration: BoxDecoration(

@@ -2,6 +2,8 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
+import '../../Core/State/State.dart';
+
 class GlassStyle {
   GlassStyle._();
 
@@ -46,7 +48,7 @@ class _GlassBlurState extends State<GlassBlur> {
   final _slot = GlobalKey();
   Animation<double>? _animation;
   Animation<double>? _secondary;
-  bool _settled = true;
+  final _settled = true.live;
 
   @override
   void didChangeDependencies() {
@@ -61,7 +63,7 @@ class _GlassBlurState extends State<GlassBlur> {
     _secondary = secondary;
     animation?.addStatusListener(_onStatus);
     secondary?.addStatusListener(_onStatus);
-    _settled = _isSettled();
+    _settled.value = _isSettled();
   }
 
   bool _isSettled() =>
@@ -70,7 +72,7 @@ class _GlassBlurState extends State<GlassBlur> {
 
   void _onStatus(AnimationStatus status) {
     final settled = _isSettled();
-    if (settled != _settled && mounted) setState(() => _settled = settled);
+    if (mounted) _settled.value = settled;
   }
 
   @override
@@ -83,10 +85,13 @@ class _GlassBlurState extends State<GlassBlur> {
   @override
   Widget build(BuildContext context) {
     final child = KeyedSubtree(key: _slot, child: widget.child);
-    if (!_settled) return child;
-    return BackdropGroup.of(context) != null
-        ? BackdropFilter.grouped(filter: GlassStyle.filter, child: child)
-        : BackdropFilter(filter: GlassStyle.filter, child: child);
+    final grouped = BackdropGroup.of(context) != null;
+    return Watch(() {
+      if (!_settled.value) return child;
+      return grouped
+          ? BackdropFilter.grouped(filter: GlassStyle.filter, child: child)
+          : BackdropFilter(filter: GlassStyle.filter, child: child);
+    });
   }
 }
 

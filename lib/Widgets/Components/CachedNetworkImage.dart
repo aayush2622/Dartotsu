@@ -29,9 +29,21 @@ Widget cachedNetworkImage({
     }
     return SizedBox(width: width, height: height);
   }
+  final ratio = PlatformDispatcher.instance.views.isEmpty
+      ? 2.0
+      : PlatformDispatcher.instance.views.first.devicePixelRatio.clamp(
+          1.0,
+          3.0,
+        );
+  final decodeWidth =
+      cacheWidth ??
+      ((width != null && width.isFinite)
+          ? (width * ratio).ceil()
+          : (height != null && height.isFinite ? null : _maxDecode));
   if (File(imageUrl).isAbsolute) {
     return Image.file(
       File(imageUrl),
+      cacheWidth: decodeWidth,
       fit: fit,
       width: width,
       height: height,
@@ -52,17 +64,6 @@ Widget cachedNetworkImage({
           errorWidget ?? (context, url, error) => const SizedBox.shrink(),
     );
   }
-  final ratio = PlatformDispatcher.instance.views.isEmpty
-      ? 2.0
-      : PlatformDispatcher.instance.views.first.devicePixelRatio.clamp(
-          1.0,
-          3.0,
-        );
-  final decodeWidth =
-      cacheWidth ??
-      ((width != null && width.isFinite)
-          ? (width * ratio).ceil()
-          : (height != null && height.isFinite ? null : _maxDecode));
   return CachedNetworkImage(
     filterQuality: FilterQuality.low,
     imageUrl: imageUrl,

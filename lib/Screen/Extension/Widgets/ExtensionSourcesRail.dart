@@ -84,6 +84,8 @@ class ExtensionSourcesRail extends StatelessWidget {
                 color: scheme.surfaceContainerHighest,
                 child: cachedNetworkImage(
                   imageUrl: source.iconUrl ?? '',
+                  width: 48,
+                  height: 48,
                   fit: BoxFit.cover,
                   errorWidget: (_, _, _) => Icon(
                     Icons.extension_rounded,

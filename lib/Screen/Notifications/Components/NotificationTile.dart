@@ -63,6 +63,8 @@ class NotificationTile extends StatelessWidget {
                               )
                             : cachedNetworkImage(
                                 imageUrl: item.imageUrl,
+                                width: 44,
+                                height: 58,
                                 fit: BoxFit.cover,
                               ),
                       ),

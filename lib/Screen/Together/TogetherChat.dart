@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
@@ -129,7 +130,7 @@ class _TogetherComposerState extends State<TogetherComposer> {
       if (mounted && scroll != null && scroll.hasClients) {
         scroll.animateTo(
           scroll.position.maxScrollExtent + 80,
-          duration: const Duration(milliseconds: 160),
+          duration: animDuration(160),
           curve: Curves.easeOut,
         );
       }

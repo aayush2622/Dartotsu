@@ -47,6 +47,8 @@ class ForkTile extends StatelessWidget {
                     ? ColoredBox(color: scheme.surfaceContainerHighest)
                     : cachedNetworkImage(
                         imageUrl: fork.ownerAvatar,
+                        width: 36,
+                        height: 36,
                         fit: BoxFit.cover,
                         placeholder: (_, _) =>
                             ColoredBox(color: scheme.surfaceContainerHighest),

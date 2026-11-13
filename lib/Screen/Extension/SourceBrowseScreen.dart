@@ -80,6 +80,8 @@ class _SourceBrowseScreenState extends BaseScreen<SourceBrowseScreen>
                 height: 34,
                 child: cachedNetworkImage(
                   imageUrl: widget.source.iconUrl ?? '',
+                  width: 34,
+                  height: 34,
                   fit: BoxFit.cover,
                   errorWidget: (_, _, _) => ColoredBox(
                     color: scheme.secondaryContainer,

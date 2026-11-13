@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../Widgets/Components/Clickable.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/CardStyle.dart';
@@ -352,7 +353,11 @@ class BadgeTray extends StatelessWidget {
       },
       feedback: _flying(m),
       childWhenDragging: Opacity(opacity: 0.4, child: body),
-      child: GestureDetector(onTap: () => editor.toggle(m, !on), child: body),
+      child: Clickable(
+        press: false,
+        onTap: () => editor.toggle(m, !on),
+        child: body,
+      ),
     );
   }
 }

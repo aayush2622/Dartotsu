@@ -46,7 +46,12 @@ class HeaderAvatar extends StatelessWidget {
                   size: size * 0.5,
                 ),
               )
-            : cachedNetworkImage(imageUrl: url, fit: BoxFit.cover),
+            : cachedNetworkImage(
+                imageUrl: url,
+                width: size,
+                height: size,
+                fit: BoxFit.cover,
+              ),
       ),
     );
     final badged = badge <= 0

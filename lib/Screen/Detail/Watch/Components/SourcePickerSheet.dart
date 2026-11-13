@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import '../../../../Widgets/Components/Clickable.dart';
+
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +61,7 @@ class _SourcePickerState extends State<_SourcePicker> {
     if (!mounted || run != _run) return;
     selected.value = extensionServiceFor(widget.type)?.id;
     loading.value = false;
-    tryFind<RefreshController>()?.all();
+    findBuilt<RefreshController>()?.all();
   }
 
   @override
@@ -71,8 +73,8 @@ class _SourcePickerState extends State<_SourcePicker> {
     child: Row(
       children: [
         for (final service in services)
-          GestureDetector(
-            behavior: HitTestBehavior.opaque,
+          Clickable(
+            press: false,
             onTap: () => unawaited(_select(service.id)),
             child: AppTab(
               label: service.name,
@@ -164,6 +166,8 @@ class _SourcePickerState extends State<_SourcePicker> {
               height: 36,
               child: cachedNetworkImage(
                 imageUrl: s.iconUrl ?? '',
+                width: 36,
+                height: 36,
                 fit: BoxFit.cover,
                 errorWidget: (_, _, _) => Icon(
                   s is LocalSource

@@ -58,7 +58,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                       trailing: extensionSettingsButton(context, service),
                       onTap: () {
                         unawaited(setExtensionService(type, service.id));
-                        tryFind<RefreshController>()?.all();
+                        findBuilt<RefreshController>()?.all();
                       },
                     ),
                   ),
@@ -88,7 +88,7 @@ class ExtensionServiceSheet extends StatelessWidget {
                             value: isSourceLoaded(type, source),
                             onChanged: (v) {
                               setSourceLoaded(type, source, v);
-                              tryFind<RefreshController>()?.all();
+                              findBuilt<RefreshController>()?.all();
                             },
                             title: Text(
                               source.name ?? '',
@@ -102,6 +102,8 @@ class ExtensionServiceSheet extends StatelessWidget {
                                 height: 28,
                                 child: cachedNetworkImage(
                                   imageUrl: source.iconUrl ?? '',
+                                  width: 28,
+                                  height: 28,
                                   fit: BoxFit.cover,
                                   errorWidget: (_, _, _) => Icon(
                                     Icons.extension_rounded,

@@ -271,6 +271,8 @@ class _SourceTile extends StatelessWidget {
               height: 38,
               child: cachedNetworkImage(
                 imageUrl: source.iconUrl ?? '',
+                width: 38,
+                height: 38,
                 fit: BoxFit.cover,
                 errorWidget: (_, _, _) => ColoredBox(
                   color: scheme.secondaryContainer,

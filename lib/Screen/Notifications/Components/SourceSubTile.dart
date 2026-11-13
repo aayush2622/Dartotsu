@@ -202,6 +202,8 @@ class SourceSubTile extends StatelessWidget {
                                 )
                               : cachedNetworkImage(
                                   imageUrl: cover,
+                                  width: 44,
+                                  height: 58,
                                   fit: BoxFit.cover,
                                 ),
                         ),

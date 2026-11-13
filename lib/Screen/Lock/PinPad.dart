@@ -124,7 +124,7 @@ class _PinPadState extends State<PinPad> {
     return TweenAnimationBuilder<double>(
       key: ValueKey(_shake.value),
       tween: Tween(begin: _shake.value == 0 ? 0 : 1, end: 0),
-      duration: const Duration(milliseconds: 420),
+      duration: animDuration(420),
       builder: (context, t, child) => Transform.translate(
         offset: Offset(math.sin(t * math.pi * 6) * 12 * t, 0),
         child: child,
@@ -137,10 +137,10 @@ class _PinPadState extends State<PinPad> {
             for (var i = 0; i < count; i++)
               AnimatedScale(
                 scale: i < length ? 1.15 : 1,
-                duration: const Duration(milliseconds: 140),
+                duration: animDuration(140),
                 curve: Curves.easeOutBack,
                 child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 160),
+                  duration: animDuration(160),
                   margin: EdgeInsets.symmetric(horizontal: Dimens.gapXs + 3),
                   width: 16,
                   height: 16,
