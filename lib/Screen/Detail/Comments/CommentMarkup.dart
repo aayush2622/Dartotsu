@@ -1,19 +1,24 @@
 import '../../../Utils/Lru.dart';
 
-final _quoteMark = RegExp(r'^>\s?');
+final _quoteMark = RegExp(r'^&gt;\s?');
 final _codeSlot = RegExp('\u0000(\\d+)\u0000');
 
 final _code = RegExp(r'`([^`\n]+)`');
-final _image = RegExp(r'!\[[^\]]*\]\(([^)\s]+)\)');
-final _link = RegExp(r'\[([^\]]+)\]\(([^)\s]+)\)');
+final _image = RegExp(r'!\[[^\]]*\]\((https?://[^)\s]+)\)');
+final _link = RegExp(r'\[([^\]]+)\]\((https?://[^)\s]+)\)');
 final _bold = RegExp(r'\*\*(.+?)\*\*|__(.+?)__', dotAll: true);
 final _strike = RegExp(r'~~(.+?)~~', dotAll: true);
 final _italic = RegExp(r'(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])');
 final _spoiler = RegExp(r'\|\|(.+?)\|\|', dotAll: true);
-final _bare = RegExp(r'(?<![="\x27>])(https?://[^\s<>)"]+)');
+final _bare = RegExp(
+  r'(?<![="\x27>])(https?://(?:(?!&quot;|&lt;|&gt;)[^\s<>)"])+)',
+);
 
-String _escape(String s) =>
-    s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+String _escape(String s) => s
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
 
 final _cache = Lru<String, String>(400);
 
@@ -25,7 +30,7 @@ String _commentHtml(String raw) {
     codes.add('<code>${_escape(m[1]!)}</code>');
     return '\u0000${codes.length - 1}\u0000';
   });
-  text = text
+  text = _escape(text)
       .replaceAllMapped(_image, (m) => '<img src="${m[1]}"/>')
       .replaceAllMapped(_link, (m) => '<a href="${m[2]}">${m[1]}</a>')
       .replaceAllMapped(_bare, (m) => '<a href="${m[1]}">${m[1]}</a>')
@@ -46,7 +51,7 @@ String _commentHtml(String raw) {
 
   final lines = text.split('\n');
   for (final (i, line) in lines.indexed) {
-    if (line.startsWith('>')) {
+    if (line.startsWith('&gt;')) {
       quote.add(line.replaceFirst(_quoteMark, ''));
       continue;
     }
