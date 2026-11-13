@@ -6484,6 +6484,14 @@ class AppLocalizationsKo extends AppLocalizations {
       '친구가 보낸 방 링크를 붙여넣으세요. 바로 참가하고, 친구가 재생을 시작하면 플레이어가 열려요.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => '내 이름';
 
   @override

@@ -6636,6 +6636,14 @@ class AppLocalizationsSw extends AppLocalizations {
       'Bandika kiungo cha chumba ulichotumiwa na rafiki yako. Unajiunga mara moja na kicheza kinafunguka wanapoanza kutazama.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Jina lako';
 
   @override

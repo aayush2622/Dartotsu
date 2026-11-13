@@ -23,25 +23,30 @@ class TogetherStream {
     if (uri == null || !(uri.scheme == 'http' || uri.scheme == 'https')) {
       return false;
     }
-    final host = uri.host;
+    final host = uri.host.toLowerCase();
     return host.isNotEmpty &&
         host != 'localhost' &&
-        !RegExp(r'^(127\.|10\.|192\.168\.|0\.0\.0\.0)').hasMatch(host);
+        !host.endsWith('.local') &&
+        !host.endsWith('.localhost') &&
+        !RegExp(
+          r'^(127\.|10\.|192\.168\.|0\.0\.0\.0|169\.254\.|172\.(1[6-9]|2\d|3[01])\.|::1$|\[?f[cd][0-9a-f]{2}:|\[?fe80:)',
+        ).hasMatch(host);
   }
+
+  static List<v.Track>? _remoteTracks(List<v.Track>? list) =>
+      list?.where((t) => t.file != null && _remote(t.file!)).toList();
 
   static bool shareable(String url) => _remote(url);
 
   static TogetherStream? from(String name, v.Video video) {
     if (!_remote(video.url)) return null;
-    List<v.Track>? tracks(List<v.Track>? list) =>
-        list?.where((t) => t.file != null && _remote(t.file!)).toList();
     final shared = v.Video(
       video.title,
       video.url.trim(),
       video.quality,
       headers: video.headers,
-      subtitles: tracks(video.subtitles),
-      audios: tracks(video.audios),
+      subtitles: _remoteTracks(video.subtitles),
+      audios: _remoteTracks(video.audios),
     );
     var stream = TogetherStream(idOf(shared.url), name, shared);
     if (stream.encode().length > _maxEncoded) {
@@ -71,13 +76,17 @@ class TogetherStream {
 
   static TogetherStream? decode(String payload) {
     try {
-      final json =
-          jsonDecode(utf8.decode(gzip.decode(base64Url.decode(payload))))
-              as Map;
+      final json = jsonDecode(
+        utf8.decode(gzip.decode(base64Url.decode(payload))),
+      ) as Map;
       final video = v.Video.fromJson(
         Map<String, dynamic>.from(json['v'] as Map),
       );
       if ('${json['i']}' != idOf(video.url.trim())) return null;
+      if (!_remote(video.url)) return null;
+      video
+        ..subtitles = _remoteTracks(video.subtitles)
+        ..audios = _remoteTracks(video.audios);
       return TogetherStream('${json['i']}', '${json['n']}', video);
     } catch (_) {
       return null;

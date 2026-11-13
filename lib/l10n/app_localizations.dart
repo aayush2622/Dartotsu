@@ -11915,6 +11915,18 @@ abstract class AppLocalizations {
   /// **'Paste the room link your friend sent you. You join straight away and the player opens when they start watching.'**
   String get togetherIntro;
 
+  /// No description provided for @togetherLinkConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.'**
+  String togetherLinkConfirm(String room);
+
+  /// No description provided for @togetherJoin.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get togetherJoin;
+
   /// No description provided for @togetherName.
   ///
   /// In en, this message translates to:

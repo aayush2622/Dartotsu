@@ -6643,6 +6643,14 @@ class AppLocalizationsRu extends AppLocalizations {
       'Вставь ссылку на комнату, которую прислал друг. Ты сразу подключишься, а плеер откроется, когда он начнёт смотреть.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Твоё имя';
 
   @override

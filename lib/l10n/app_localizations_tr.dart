@@ -6611,6 +6611,14 @@ class AppLocalizationsTr extends AppLocalizations {
       'Arkadaşının gönderdiği oda bağlantısını yapıştır. Hemen katılırsın ve izlemeye başladıklarında oynatıcı açılır.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Adın';
 
   @override

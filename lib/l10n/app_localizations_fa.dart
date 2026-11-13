@@ -6580,6 +6580,14 @@ class AppLocalizationsFa extends AppLocalizations {
       'لینک اتاقی که دوستت فرستاده رو بچسبون. همون لحظه وصل می‌شی و وقتی تماشا رو شروع کردن پخش‌کننده باز می‌شه.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'اسم تو';
 
   @override

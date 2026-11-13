@@ -6474,6 +6474,14 @@ class AppLocalizationsZh extends AppLocalizations {
   String get togetherIntro => '粘贴朋友发给你的房间链接。你会马上加入，对方开始播放时播放器会自动打开。';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => '你的名字';
 
   @override

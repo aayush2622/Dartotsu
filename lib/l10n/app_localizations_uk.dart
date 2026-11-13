@@ -6633,6 +6633,14 @@ class AppLocalizationsUk extends AppLocalizations {
       'Встав посилання на кімнату, яке надіслав друг. Ти одразу приєднаєшся, а плеєр відкриється, коли вони почнуть дивитись.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Твоє ім\'я';
 
   @override

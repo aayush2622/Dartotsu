@@ -6608,6 +6608,14 @@ class AppLocalizationsSa extends AppLocalizations {
       'तव मित्रेण प्रेषितं कक्ष-लिङ्कं स्थापय। त्वं तत्क्षणं संयुज्यसे, सः पश्यति चेत् प्लेयर् उद्घाट्यते।';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'तव नाम';
 
   @override

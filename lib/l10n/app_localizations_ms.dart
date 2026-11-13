@@ -6609,6 +6609,14 @@ class AppLocalizationsMs extends AppLocalizations {
       'Tampal pautan bilik yang kawan awak hantar. Awak terus sertai dan pemain terbuka bila mereka mula menonton.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Nama awak';
 
   @override

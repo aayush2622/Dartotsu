@@ -6650,6 +6650,14 @@ class AppLocalizationsEl extends AppLocalizations {
       'Επικόλλησε τον σύνδεσμο δωματίου που σου έστειλε ο φίλος σου. Μπαίνεις αμέσως και το πρόγραμμα ανοίγει όταν αρχίσουν να βλέπουν.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Το όνομά σου';
 
   @override

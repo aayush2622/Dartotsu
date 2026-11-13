@@ -6591,6 +6591,14 @@ class AppLocalizationsVi extends AppLocalizations {
       'Dán link phòng bạn bè gửi. Bạn vào ngay và trình phát sẽ mở khi họ bắt đầu xem.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Tên của bạn';
 
   @override

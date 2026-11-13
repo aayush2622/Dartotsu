@@ -6523,6 +6523,14 @@ class AppLocalizationsAm extends AppLocalizations {
       'ጓደኛህ የላከልህን የክፍል ሊንክ ለጥፍ። ወዲያውኑ ትቀላቀላለህ እና እነሱ መመልከት ሲጀምሩ ማጫወቻው ይከፈታል።';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'ስምህ';
 
   @override

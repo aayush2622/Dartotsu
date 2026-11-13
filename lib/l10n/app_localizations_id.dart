@@ -6610,6 +6610,14 @@ class AppLocalizationsId extends AppLocalizations {
       'Tempel tautan room yang dikirim temanmu. Kamu langsung bergabung dan pemutar terbuka saat mereka mulai menonton.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Namamu';
 
   @override

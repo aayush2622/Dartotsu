@@ -6640,6 +6640,14 @@ class AppLocalizationsFil extends AppLocalizations {
       'I-paste ang room link na ipinadala ng kaibigan mo. Agad kang sasali at magbubukas ang player kapag nagsimula na silang manood.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Pangalan mo';
 
   @override

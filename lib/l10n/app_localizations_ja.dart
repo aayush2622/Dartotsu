@@ -6482,6 +6482,14 @@ class AppLocalizationsJa extends AppLocalizations {
       '友達から届いたルームのリンクを貼り付けてね。すぐ参加して、友達が再生を始めるとプレイヤーが開くよ。';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'あなたの名前';
 
   @override

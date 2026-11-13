@@ -6616,6 +6616,14 @@ class AppLocalizationsKn extends AppLocalizations {
       'ನಿನ್ನ ಸ್ನೇಹಿತ ಕಳಿಸಿದ ರೂಮ್ ಲಿಂಕ್ ಪೇಸ್ಟ್ ಮಾಡು. ನೀನು ತಕ್ಷಣ ಸೇರುತ್ತೀಯ ಮತ್ತು ಅವರು ನೋಡಲು ಶುರು ಮಾಡಿದಾಗ ಪ್ಲೇಯರ್ ತೆರೆಯುತ್ತದೆ.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'ನಿನ್ನ ಹೆಸರು';
 
   @override

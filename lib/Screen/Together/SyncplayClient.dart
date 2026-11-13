@@ -233,18 +233,6 @@ class SyncplayClient implements TogetherBackend {
     },
   });
 
-  void changeRoom(String room, {String password = ''}) {
-    _room = room;
-    _send({
-      'Set': {
-        'room': {
-          'name': room,
-          if (password.isNotEmpty) 'password': hashPassword(password),
-        },
-      },
-    });
-  }
-
   @override
   void chat(String message) => _send({'Chat': message});
 

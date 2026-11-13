@@ -6635,6 +6635,14 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ku dheji xiriirka qolka saaxiibkaa kuu soo diray. Isla markiiba ayaad ku biirtaa ciyaartoygana wuu furmaa marka ay bilaabaan daawashada.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Magacaaga';
 
   @override

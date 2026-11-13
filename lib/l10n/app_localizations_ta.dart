@@ -6630,6 +6630,14 @@ class AppLocalizationsTa extends AppLocalizations {
       'உன் ஃப்ரெண்ட் அனுப்பின ரூம் லிங்கை பேஸ்ட் பண்ணு. உடனே ஜாயின் ஆயிடுவ, அவங்க பாக்க ஆரம்பிச்சதும் பிளேயர் ஓபன் ஆகும்.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'உன் பேரு';
 
   @override

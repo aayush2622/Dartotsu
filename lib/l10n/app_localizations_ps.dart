@@ -6591,6 +6591,14 @@ class AppLocalizationsPs extends AppLocalizations {
       'هغه د خونې لینک پیسټ کړه چې ملګري دې درلیږلی. ته سمدلاسه ګډون کوې او کله چې هغوی کتل پیل کړي پلیر پرانیستل کېږي.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'ستا نوم';
 
   @override

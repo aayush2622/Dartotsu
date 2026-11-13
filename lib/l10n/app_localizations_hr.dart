@@ -6630,6 +6630,14 @@ class AppLocalizationsHr extends AppLocalizations {
       'Zalijepi poveznicu sobe koju ti je prijatelj poslao. Odmah se pridružiš, a player se otvara kad oni počnu gledati.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Tvoje ime';
 
   @override

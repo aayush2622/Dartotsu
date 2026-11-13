@@ -6582,6 +6582,14 @@ class AppLocalizationsBn extends AppLocalizations {
       'বন্ধুর পাঠানো রুমের লিংক পেস্ট করো। সাথে সাথে জয়েন হয়ে যাবে আর ওরা দেখা শুরু করলে প্লেয়ার খুলবে।';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'তোমার নাম';
 
   @override

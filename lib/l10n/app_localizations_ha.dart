@@ -6610,6 +6610,14 @@ class AppLocalizationsHa extends AppLocalizations {
       'Manna hanyar ɗakin da abokinka ya aiko. Za ka shiga nan take kuma mai kunnawa zai buɗe idan sun fara kallo.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Sunanka';
 
   @override

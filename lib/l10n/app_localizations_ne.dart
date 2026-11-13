@@ -6566,6 +6566,14 @@ class AppLocalizationsNe extends AppLocalizations {
       'साथीले पठाएको रुम लिङ्क पेस्ट गर। तिमी तुरुन्तै सामेल हुन्छौ र उनीहरूले हेर्न थालेपछि प्लेयर खुल्छ।';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'तिम्रो नाम';
 
   @override

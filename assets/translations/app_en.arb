@@ -3336,6 +3336,15 @@
   "kitsuGraphqlDetailDesc": "Load a title with its characters, staff and your entry in one request",
   "togetherTitle": "Watch together",
   "togetherIntro": "Paste the room link your friend sent you. You join straight away and the player opens when they start watching.",
+  "togetherLinkConfirm": "Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.",
+  "@togetherLinkConfirm": {
+    "placeholders": {
+      "room": {
+        "type": "String"
+      }
+    }
+  },
+  "togetherJoin": "Join",
   "togetherName": "Your name",
   "togetherConnecting": "Connecting…",
   "togetherLeave": "Leave room",

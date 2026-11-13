@@ -6594,6 +6594,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Paste the room link your friend sent you. You join straight away and the player opens when they start watching.';
 
   @override
+  String togetherLinkConfirm(String room) {
+    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+  }
+
+  @override
+  String get togetherJoin => 'Join';
+
+  @override
   String get togetherName => 'Your name';
 
   @override
