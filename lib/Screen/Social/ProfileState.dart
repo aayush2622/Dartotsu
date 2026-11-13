@@ -1,5 +1,6 @@
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class ProfileState extends ScreenState {
   StreamSubscription<SocialUser?>? _userSub;
   Future<SocialProfile?> bundle = Future.value();
   Future<SocialProfile?>? _cachedBundle;
+  final bundleVersion = 0.live;
 
   SocialScreenView get view => service.socialView!;
 
@@ -115,10 +117,15 @@ class ProfileState extends ScreenState {
         name: id == null && seed.id.isEmpty ? name : null,
       );
       final network = pending.catchError((_) => null);
+      final fromCache = _cachedBundle != null;
       bundle = _cachedBundle ?? network;
       _cachedBundle = null;
       final result = await pending;
       if (!mounted) return;
+      if (fromCache && result != null) {
+        bundle = Future.value(result);
+        bundleVersion.value++;
+      }
       if (result == null) {
         failed.value = true;
         snackString(getString.userNotFound);

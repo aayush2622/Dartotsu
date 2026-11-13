@@ -1,5 +1,6 @@
 import 'Components/ProfileSkeleton.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
@@ -181,7 +182,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
     final stats = state.hasActivity ? 2 : 1;
     if (index == 0) {
       return ProfileInfoTab(
-        key: const ValueKey('profile-info'),
+        key: ValueKey('profile-info-${state.bundleVersion.value}'),
         service: widget.service,
         user: state.user.value,
         userId: userId,
@@ -199,7 +200,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
       );
     }
     return ProfileStatsTab(
-      key: ValueKey('profile-stats$stats'),
+      key: ValueKey('profile-stats$stats-${state.bundleVersion.value}'),
       service: widget.service,
       userId: userId,
       bundle: state.bundle,
