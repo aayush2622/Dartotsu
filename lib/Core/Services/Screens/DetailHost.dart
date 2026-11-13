@@ -1,7 +1,9 @@
+import '../MediaService.dart';
 import '../Model/Media.dart';
 import '../../State/State.dart';
 
 class DetailHost {
+  final MediaService service;
   final Live<Media> media;
   final String? heroTag;
   final void Function(Media media, String? heroTag) open;
@@ -12,6 +14,7 @@ class DetailHost {
   bool cached;
 
   DetailHost({
+    required this.service,
     required Media media,
     required this.loading,
     required this.heroTag,

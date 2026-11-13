@@ -458,10 +458,8 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
               onLongPress: () {
                 HapticFeedback.mediumImpact();
                 (m.isAnime ? trackAnimePref : trackMangaPref).value = 'ask';
-                final service =
-                    find<MediaServiceController>().currentService.value;
-                MediaRecords.of(service, m).trackChoice = null;
-                MediaRecords.save(service, m);
+                MediaRecords.of(host.service, m).trackChoice = null;
+                MediaRecords.save(host.service, m);
                 snackString(getString.trackProgressReset);
               },
               icon: Icon(

@@ -24,8 +24,7 @@ class ReviewsState extends ScreenState {
   var _page = 0;
   var _hasMore = true;
 
-  MediaService get service =>
-      find<MediaServiceController>().currentService.value;
+  MediaService get service => view.service;
 
   @override
   void onInit() => unawaited(more());

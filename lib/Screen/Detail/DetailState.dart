@@ -50,6 +50,7 @@ class DetailState extends ScreenState {
   });
 
   late final DetailHost host = DetailHost(
+    service: view.service,
     media: media,
     loading: true.live,
     heroTag: heroTag,
@@ -183,7 +184,11 @@ class DetailState extends ScreenState {
     );
   }
 
+  int _loadRun = 0;
+
   Future<void> load({bool force = false}) async {
+    final run = ++_loadRun;
+    var stale = false;
     final cached = force ? null : DetailCache.get(cacheKey);
     host.cached = cached != null;
     if (cached != null) host.update(cached);
@@ -207,43 +212,49 @@ class DetailState extends ScreenState {
     }
     try {
       await for (final list in view.screenStream(host)) {
+        if (run != _loadRun) {
+          stale = true;
+          break;
+        }
         widgets.value = list;
       }
     } catch (e) {
       failed = true;
-      error.value = e.toString();
+      if (run == _loadRun) error.value = e.toString();
     } finally {
-      if (!failed) {
-        final pending = find<PendingWrites>();
-        if (pending.of(view.service.id, host.media.value.id) != null) {
-          pending.overlay(view.service.id, host.media.value);
-          host.media.refresh();
-        }
-        final downloads = find<DownloadEngine>();
-        if (downloads.hasDownloads(view.service.id, host.media.value.id)) {
-          unawaited(
-            downloads.refreshSnapshot(view.service.id, host.media.value),
-          );
-        }
-        DetailCache.put(cacheKey, host.media.value);
-        find<SourceSubscriptions>().noteMedia(view.service, host.media.value);
-        unawaited(_loadFavourite());
-        ResumeStore.noteProgress(
-          view.service,
-          host.media.value,
-          host.media.value.userProgress,
-        );
+      if (!stale && run == _loadRun) _finishLoad(failed);
+    }
+  }
+
+  void _finishLoad(bool failed) {
+    if (!failed) {
+      final pending = find<PendingWrites>();
+      if (pending.of(view.service.id, host.media.value.id) != null) {
+        pending.overlay(view.service.id, host.media.value);
+        host.media.refresh();
       }
-      host.loading.value = false;
-      ready.value = true;
-      if (usingKeyboard && !_focusedOnce) {
-        _focusedOnce = true;
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          if (mounted && actionFocus.canRequestFocus) {
-            actionFocus.requestFocus();
-          }
-        });
+      final downloads = find<DownloadEngine>();
+      if (downloads.hasDownloads(view.service.id, host.media.value.id)) {
+        unawaited(downloads.refreshSnapshot(view.service.id, host.media.value));
       }
+      DetailCache.put(cacheKey, host.media.value);
+      find<SourceSubscriptions>().noteMedia(view.service, host.media.value);
+      unawaited(_loadFavourite());
+      ResumeStore.noteProgress(
+        view.service,
+        host.media.value,
+        host.media.value.userProgress,
+      );
+    }
+    host.loading.value = false;
+    ready.value = true;
+    if (usingKeyboard && !_focusedOnce) {
+      _focusedOnce = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted && actionFocus.canRequestFocus) {
+          actionFocus.requestFocus();
+        }
+      });
     }
   }
 

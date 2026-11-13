@@ -13,20 +13,22 @@ class MangaForecasts {
 
   static final _lives = <String, Live<MuForecast?>>{};
 
-  static Live<MuForecast?>? of(Media media) {
+  static Live<MuForecast?>? of(Media media, MediaService service) {
     if (media.manga == null || media.status != 'RELEASING') return null;
-    final service = find<MediaServiceController>().currentService.value;
     final key = '${service.id}/${media.id}';
     final existing = _lives[key];
     if (existing != null) return existing;
     final live = Live<MuForecast?>(null);
     _lives[key] = live;
-    unawaited(_load(media, live));
+    unawaited(_load(media, service, live));
     return live;
   }
 
-  static Future<void> _load(Media media, Live<MuForecast?> live) async {
-    final service = find<MediaServiceController>().currentService.value;
+  static Future<void> _load(
+    Media media,
+    MediaService service,
+    Live<MuForecast?> live,
+  ) async {
     final record = MediaRecords.of(service, media);
     try {
       final info = await MangaUpdates.lookup(

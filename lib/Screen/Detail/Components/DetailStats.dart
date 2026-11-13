@@ -52,7 +52,7 @@ class DetailStats extends StatelessWidget {
     final m = host.media.value;
     final items = this.items?.call(m) ?? _items(m);
     final airing = _airingIn(m);
-    final forecast = MangaForecasts.of(m)?.value;
+    final forecast = MangaForecasts.of(m, host.service)?.value;
     if (items.isEmpty && airing == null && forecast == null) {
       return const SizedBox.shrink();
     }

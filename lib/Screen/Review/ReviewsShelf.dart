@@ -9,7 +9,6 @@ import '../../Widgets/Shelf/ShelfFrame.dart';
 import 'ReviewCard.dart';
 import 'ReviewScreen.dart';
 import 'ReviewsScreen.dart';
-import '../../Core/State/State.dart';
 
 class ReviewsShelf extends StatelessWidget {
   final Media media;
@@ -26,7 +25,7 @@ class ReviewsShelf extends StatelessWidget {
   Widget build(BuildContext context) {
     final shown = (media.review ?? const <Review>[]).take(3).toList();
     if (shown.isEmpty) return const SizedBox.shrink();
-    final service = find<MediaServiceController>().currentService.value;
+    final service = view.service;
     return ShelfFrame(
       title: getString.reviewsTitle,
       onTitleTap: () => _openAll(context),
