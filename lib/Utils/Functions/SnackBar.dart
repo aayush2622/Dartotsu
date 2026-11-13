@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import '../../Widgets/Components/ThemedContainer.dart';
@@ -7,6 +9,7 @@ import 'CopyToClip.dart';
 import '../../Core/State/State.dart';
 
 OverlayEntry? _snackOverlay;
+Timer? _snackTimer;
 void snackString(
   String? message, {
   String? clipboard,
@@ -20,6 +23,7 @@ void snackString(
 
   final theme = Theme.of(context);
 
+  _snackTimer?.cancel();
   _snackOverlay?.remove();
   _snackOverlay = null;
 
@@ -129,7 +133,7 @@ void snackString(
 
   overlayState.insert(_snackOverlay!);
 
-  Future.delayed(const Duration(seconds: 4), () {
+  _snackTimer = Timer(const Duration(seconds: 4), () {
     _snackOverlay?.remove();
     _snackOverlay = null;
   });

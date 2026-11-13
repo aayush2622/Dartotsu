@@ -2,7 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
 import '../../Core/State/State.dart';
+import '../../Logger.dart';
 
 class ShelfCardItem {
   final String id;
@@ -90,14 +92,20 @@ class CardShelfState {
   ) async {
     isLoadingMore.value = true;
     overscrollProgress.value = 0.0;
-    final newItems = await onLoadMore?.call();
-    if (newItems != null) {
-      items.value = _dedupe([...items, ...newItems]);
-    } else {
+    try {
+      final newItems = await onLoadMore?.call();
+      if (newItems != null) {
+        items.value = _dedupe([...items, ...newItems]);
+      } else {
+        canLoadMore.value = false;
+      }
+    } catch (e, st) {
+      logError('CardShelfState', e, st);
       canLoadMore.value = false;
+    } finally {
+      overscrollProgress.value = 0.0;
+      isLoadingMore.value = false;
     }
-    overscrollProgress.value = 0.0;
-    isLoadingMore.value = false;
   }
 
   void updateItems(List<ShelfCardItem>? next) {

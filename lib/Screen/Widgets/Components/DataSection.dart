@@ -22,18 +22,29 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 const kStatusRowLabel = 'Status';
 
-class DataSection extends StatelessWidget {
+class DataSection extends StatefulWidget {
   final String? title;
   final ScreenData data;
+
+  const DataSection({super.key, this.title, required this.data});
+
+  @override
+  State<DataSection> createState() => _DataSectionState();
+}
+
+class _DataSectionState extends State<DataSection> {
   final _expanded = false.live;
 
-  DataSection({super.key, this.title, required this.data});
+  String? get title => widget.title;
+  ScreenData get data => widget.data;
 
   MediaService get _service =>
       find<MediaServiceController>().currentService.value;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => Watch(() => _build(context));
+
+  Widget _build(BuildContext context) {
     final text = data.text?.trim() ?? '';
     final spoken = data.html != null && data.html!.trim().isNotEmpty
         ? data.html!.stripHtml.trim()
@@ -104,7 +115,7 @@ class DataSection extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 4),
-        if (label == kStatusRowLabel)
+        if (label == kStatusRowLabel || label == getString.status)
           StatusChip(status: value)
         else if (data.onRowTap[label] case final tap?)
           Clickable(

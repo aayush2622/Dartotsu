@@ -1,5 +1,3 @@
-import 'package:collection/collection.dart';
-
 import 'dart:async';
 
 import 'package:flutter/services.dart';
@@ -40,13 +38,17 @@ String? webUrl(String? raw) {
   return uri.scheme == 'http' || uri.scheme == 'https' ? value : null;
 }
 
+Future<String>? _envFile;
+
 Future<String?> loadEnv(String prop) async {
   try {
-    final envString = await rootBundle.loadString('.env');
-    final env = envString
-        .split('\n')
-        .firstWhereOrNull((element) => element.startsWith(prop));
-    return env?.split('=')[1].trim();
+    final envString = await (_envFile ??= rootBundle.loadString('.env'));
+    for (final line in envString.split('\n')) {
+      final parts = line.split('=');
+      if (parts.length < 2 || parts[0].trim() != prop) continue;
+      return parts[1].trim();
+    }
+    return null;
   } catch (e) {
     return null;
   }
