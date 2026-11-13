@@ -30,6 +30,10 @@ class ExtensionListItem {
     : this._(isHeader: false, source: source);
 }
 
+bool matchesSourceFilter(Source source, String term, Set<String> languages) =>
+    (source.name?.toLowerCase().contains(term) ?? false) &&
+    (languages.isEmpty || languages.contains(source.lang?.toLowerCase()));
+
 class ExtensionListState extends ScreenState {
   final ItemType itemType;
   final bool isInstalled;
@@ -179,16 +183,9 @@ class ExtensionListState extends ScreenState {
   List<Source> filteredInstalled() {
     final installed = applySavedOrder(dedupeById(bridgeState.installed.value));
 
-    return installed.where((source) {
-      final matchesSearch =
-          source.name?.toLowerCase().contains(searchTerm) ?? false;
-
-      final matchesLanguage =
-          selectedLanguages.isEmpty ||
-          selectedLanguages.contains(source.lang?.toLowerCase());
-
-      return matchesSearch && matchesLanguage;
-    }).toList();
+    return installed
+        .where((s) => matchesSourceFilter(s, searchTerm, selectedLanguages))
+        .toList();
   }
 
   List<ExtensionListItem> filteredAvailable() {

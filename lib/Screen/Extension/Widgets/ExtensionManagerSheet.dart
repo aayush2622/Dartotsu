@@ -11,6 +11,7 @@ import '../../../Api/Services/Extension/Services.dart';
 import '../../../Core/Downloads/DownloadPrefs.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../Widgets/Components/CustomBottomDialog.dart';
@@ -96,7 +97,10 @@ Widget _serviceTile(
       radius: radius,
       selected: selected,
       enabled: installed && !selected,
-      onTap: () => unawaited(setExtensionService(type, m.id)),
+      onTap: () {
+        unawaited(setExtensionService(type, m.id));
+        tryFind<RefreshController>()?.all();
+      },
       leading: Container(
         width: 36,
         height: 36,

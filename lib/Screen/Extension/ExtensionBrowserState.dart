@@ -14,6 +14,7 @@ import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/ScreenState.dart';
+import 'ExtensionListState.dart';
 
 class ExtensionBrowserState extends ScreenState {
   static const tabOrder = [ItemType.anime, ItemType.manga, ItemType.novel];
@@ -96,14 +97,17 @@ class ExtensionBrowserState extends ScreenState {
   int count(ItemType type, {required bool installed}) {
     final state = manager[type].state(type);
     final list = installed ? state.installed.value : state.available.value;
-    final query = searchQuery.value;
-    return list.where((source) {
-      final matchesSearch = source.name?.toLowerCase().contains(query) ?? false;
-      final matchesLanguage =
-          state.selectedLanguages.isEmpty ||
-          state.selectedLanguages.contains(source.lang?.toLowerCase());
-      return matchesSearch && matchesLanguage;
-    }).length;
+    final query = searchQuery.value.trim().toLowerCase();
+    final installedIds = installed
+        ? const <String?>{}
+        : {for (final s in state.installed.value) s.id};
+    return list
+        .where(
+          (source) =>
+              !installedIds.contains(source.id) &&
+              matchesSourceFilter(source, query, state.selectedLanguages),
+        )
+        .length;
   }
 
   void chooseLanguages() {

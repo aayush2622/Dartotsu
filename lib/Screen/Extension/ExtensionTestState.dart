@@ -87,6 +87,7 @@ class ExtensionTestState extends ScreenState {
 
   Future<void> runOne(Source source) async {
     if (reportOf(source).running) return;
+    _stop = false;
     await _test(source);
   }
 

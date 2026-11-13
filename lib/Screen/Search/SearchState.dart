@@ -1,6 +1,7 @@
 import 'Components/BarcodeSheet.dart';
 import 'Components/SauceSheet.dart';
 import '../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -69,8 +70,6 @@ class SearchState extends ScreenState {
   Timer? debounce;
   bool hasMore = true;
 
-  bool get canSearchImage => true;
-
   bool get _imageIsManga =>
       type.value == SearchType.MANGA || type.value == SearchType.NOVEL;
 
@@ -128,8 +127,12 @@ class SearchState extends ScreenState {
     _ => true,
   };
 
-  MediaType get mediaType =>
-      type.value == SearchType.ANIME ? MediaType.anime : MediaType.manga;
+  MediaType get mediaType => switch (type.value) {
+    SearchType.ANIME => MediaType.anime,
+    SearchType.MOVIES => MediaType.movie,
+    SearchType.SERIES => MediaType.series,
+    _ => MediaType.manga,
+  };
 
   SearchFilterSpec get spec =>
       isMedia ? view.filters(mediaType) : SearchFilterSpec.none;
@@ -172,7 +175,11 @@ class SearchState extends ScreenState {
     });
   }
 
+  int _generation = 0;
+
   void restart() {
+    _generation++;
+    loading.value = false;
     query.value.page = 1;
     hasMore = true;
     failed.value = false;
@@ -193,17 +200,20 @@ class SearchState extends ScreenState {
     if (loading.value || !hasMore || !hasCriteria) return;
     loading.value = true;
     failed.value = false;
+    final generation = _generation;
     try {
       final res = await view.search(query.value);
+      if (generation != _generation) return;
       query.value.page = (query.value.page ?? 1) + 1;
       hasMore = res?.hasNextPage ?? false;
       if (res != null) items.addAll(pick(res));
     } catch (e, st) {
+      if (generation != _generation) return;
       logError('SearchState', e, st);
       hasMore = false;
       failed.value = true;
     } finally {
-      loading.value = false;
+      if (generation == _generation) loading.value = false;
     }
   }
 

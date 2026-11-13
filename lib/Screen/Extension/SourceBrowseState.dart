@@ -95,7 +95,11 @@ class SourceBrowseState extends ScreenState {
     controller.dispose();
   }
 
+  int _generation = 0;
+
   void reload() {
+    _generation++;
+    loading.value = false;
     _page = 1;
     _hasMore = true;
     error.value = null;
@@ -106,6 +110,7 @@ class SourceBrowseState extends ScreenState {
   Future<void> fetch() async {
     if (loading.value || !_hasMore) return;
     loading.value = true;
+    final generation = _generation;
     try {
       if (!searching.value &&
           !filtering.value &&
@@ -129,14 +134,16 @@ class SourceBrowseState extends ScreenState {
           ? await methods.getLatestUpdates(_page)
           : await methods.getPopular(_page);
 
+      if (generation != _generation) return;
       items.addAll(pages.toMedia(isAnime: anime, source: source));
       _hasMore = pages.hasNextPage;
       _page++;
     } catch (e) {
+      if (generation != _generation) return;
       _hasMore = false;
       if (items.isEmpty) error.value = e.toString();
     } finally {
-      loading.value = false;
+      if (generation == _generation) loading.value = false;
     }
   }
 
