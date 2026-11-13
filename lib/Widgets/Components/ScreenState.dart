@@ -6,8 +6,22 @@ import '../../Core/State/State.dart';
 
 abstract class ScreenState extends AppController {
   State? _host;
+  bool _started = false;
+  bool _released = false;
 
-  BuildContext get context => _host!.context;
+  BuildContext get context => (_host?.context ?? appContext)!;
+
+  bool get keepAlive => false;
+
+  bool get detached => _started && _host == null && !_released;
+
+  void onDetach() {}
+
+  void closeDetached() {
+    if (!detached) return;
+    _released = true;
+    onClose();
+  }
 
   bool get mounted => _host?.mounted ?? false;
 
@@ -28,15 +42,21 @@ mixin ScreenStateHost<W extends StatefulWidget, S extends ScreenState>
   @override
   void initState() {
     super.initState();
-    state
-      .._host = this
-      ..onInit();
+    state._host = this;
+    if (state._started) return;
+    state._started = true;
+    state.onInit();
   }
 
   @override
   void dispose() {
-    state.onClose();
-    state._host = null;
+    if (state.keepAlive) {
+      state._host = null;
+      state.onDetach();
+    } else {
+      state.onClose();
+      state._host = null;
+    }
     super.dispose();
   }
 }

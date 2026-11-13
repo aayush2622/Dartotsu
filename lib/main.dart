@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
-import 'package:media_kit/media_kit.dart';
 import 'package:sizer/sizer.dart';
 import 'package:rhttp/rhttp.dart';
 
@@ -25,6 +24,8 @@ import 'Api/Updater/AppUpdater.dart';
 import 'Core/Downloads/DownloadEngine.dart';
 import 'Core/NetworkManager/NetworkManager.dart';
 import 'Core/Offline/OfflineMode.dart';
+import 'Core/Desktop/TrayController.dart';
+import 'Core/Input/GamepadNav.dart';
 import 'Core/Preferences/PrefManager.dart';
 import 'Core/Preferences/StorageManager.dart';
 import 'Core/ThemeManager/DynamicColorScheme.dart';
@@ -51,7 +52,6 @@ import 'Screen/Detail/Comments/Data/CommentAlerts.dart';
 import 'Core/Services/ActivityAlerts.dart';
 import 'Core/HomeWidget/HomeWidgetSync.dart';
 import 'Core/SourceAlerts/SourceAlerts.dart';
-import 'Screen/Player/Engine/PlayerSupport.dart';
 import 'Screen/Player/PlayerLauncher.dart';
 import 'Screen/Reader/LocalBook.dart';
 import 'Utils/Functions/SnackBar.dart';
@@ -211,15 +211,7 @@ Future<void> init(List<String> args) async {
 
   await WindowMemory.instance.restore();
 
-  _stage = 'media kit';
   unawaited(applyRefreshRate());
-  try {
-    MediaKit.ensureInitialized();
-  } catch (e, st) {
-    PlayerSupport.available = false;
-    PlayerSupport.failure = '$e';
-    logger('Player unavailable: $e\n$st', logLevel: LogLevel.error);
-  }
   applySystemBarStyle(isDark: false);
 
   WidgetsBinding.instance.addPostFrameCallback(
@@ -268,6 +260,8 @@ Future<void> _postInit(List<String> args) async {
   unawaited(find<AppUpdater>().checkForUpdate());
   find<SyncController>().startAuto();
   find<DiscordPresenceController>().start();
+  find<TrayController>().start();
+  find<GamepadNav>().start();
 }
 
 const _backgroundDelay = Duration(seconds: 4);

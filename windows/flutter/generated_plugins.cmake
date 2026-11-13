@@ -10,15 +10,16 @@ list(APPEND FLUTTER_PLUGIN_LIST
   flutter_media_session
   flutter_qjs
   flutter_tts
+  gamepads_windows
   isar_community_flutter_libs
-  dartotsu_extension_bridge
   local_auth_windows
+  media_kit_video
+  dartotsu_extension_bridge
   permission_handler_windows
   screen_brightness_windows
   url_launcher_windows
   share_plus
   volume_controller
-  media_kit_video
   webview_all_windows
   window_to_front
 )

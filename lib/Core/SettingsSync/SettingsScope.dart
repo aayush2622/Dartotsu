@@ -130,6 +130,8 @@ class SettingsScope {
     'proxyUrl',
     'verifyTls',
     'windowState',
+    'closeAction',
+    'gamepadNav',
     'highRefreshRate',
     'useMaterialYou',
     'useDifferentCacheManager',

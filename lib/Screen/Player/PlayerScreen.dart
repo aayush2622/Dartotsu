@@ -1,10 +1,13 @@
+import 'package:dartotsu_extension_bridge/player.dart';
+
 import 'dart:async';
 import 'dart:io';
 
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    show Mpv;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
 import '../../Api/Discord/PresenceScope.dart';
@@ -27,6 +30,7 @@ import '../../Widgets/Components/ScreenState.dart';
 import 'Components/EpisodePanel.dart';
 import 'Components/PlayerActions.dart';
 import 'Components/PlayerControls.dart';
+import 'Components/PlayerDownload.dart';
 import '../Settings/Layout/BarLayout.dart';
 import 'Components/PlayerEpisodes.dart';
 import 'Components/PlayerIndicators.dart';
@@ -37,15 +41,41 @@ import 'PlayerState.dart';
 
 class PlayerScreen extends StatefulWidget {
   final PlayRequest request;
+  final PlayerState? adopt;
 
-  const PlayerScreen({super.key, required this.request});
+  const PlayerScreen({super.key, required this.request, this.adopt});
 
   @override
   State<PlayerScreen> createState() => _PlayerScreenState();
 }
 
-class _PlayerScreenState extends State<PlayerScreen>
-    with ScreenStateHost<PlayerScreen, PlayerState> {
+class _PlayerScreenState extends State<PlayerScreen> {
+  @override
+  void initState() {
+    super.initState();
+    unawaited(Mpv.ensure());
+  }
+
+  @override
+  Widget build(BuildContext context) => Watch(
+    () => Mpv.ready
+        ? PlayerPage(request: widget.request, adopt: widget.adopt)
+        : const PlayerDownloadView(),
+  );
+}
+
+class PlayerPage extends StatefulWidget {
+  final PlayRequest request;
+  final PlayerState? adopt;
+
+  const PlayerPage({super.key, required this.request, this.adopt});
+
+  @override
+  State<PlayerPage> createState() => _PlayerPageState();
+}
+
+class _PlayerPageState extends State<PlayerPage>
+    with ScreenStateHost<PlayerPage, PlayerState> {
   final _videoKey = GlobalKey();
   Orientation? _orientation;
   Size? _stageSize;
@@ -54,12 +84,13 @@ class _PlayerScreenState extends State<PlayerScreen>
   Offset? _lastTapDown;
 
   @override
-  PlayerState buildState() => PlayerState(widget.request);
+  PlayerState buildState() => widget.adopt ?? PlayerState(widget.request);
 
   @override
   void initState() {
     super.initState();
     FocusManager.instance.addListener(_guardFocus);
+    PlayerState.current = state;
     state.videoRect = _videoRect;
     state.askStream = (list) =>
         showStreamSheet(context, state, list, selected: -1);

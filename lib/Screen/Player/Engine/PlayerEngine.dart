@@ -1,9 +1,9 @@
+import 'package:dartotsu_extension_bridge/player.dart';
+
 import 'dart:async';
 import 'dart:typed_data';
 import 'dart:io';
 
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:path/path.dart' as p;
 
 import '../../../Logger.dart';

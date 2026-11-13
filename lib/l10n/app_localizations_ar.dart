@@ -8702,6 +8702,92 @@ class AppLocalizationsAr extends AppLocalizations {
   String get droppedManga => 'Dropped manga';
 
   @override
+  String get generalSectionDesktop => 'Desktop';
+
+  @override
+  String get closeAction => 'When the window is closed';
+
+  @override
+  String get closeActionQuit => 'Quit the app';
+
+  @override
+  String get closeActionWhenBusy =>
+      'Keep running in the tray while something is running';
+
+  @override
+  String get closeActionAlways => 'Always keep running in the tray';
+
+  @override
+  String get closeActionNoTray =>
+      'The system tray is not available here, so the app quits when closed';
+
+  @override
+  String get gamepadNav => 'Gamepad navigation';
+
+  @override
+  String get gamepadNavDesc =>
+      'Move around the app and control the player with a game controller';
+
+  @override
+  String get trayShow => 'Show Dartotsu';
+
+  @override
+  String get trayQuit => 'Quit';
+
+  @override
+  String get trayIdle => 'Nothing running';
+
+  @override
+  String trayDownloading(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Downloading $count items',
+      one: 'Downloading $count item',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get traySyncing => 'Syncing your lists';
+
+  @override
+  String get trayUpdating => 'Updating the app';
+
+  @override
+  String get trayPlaying => 'Playing in a small window';
+
+  @override
+  String get playerDownloadTitle => 'Downloading the player';
+
+  @override
+  String get playerDownloadBody =>
+      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+
+  @override
+  String get playerDownloadStarting => 'Starting the download…';
+
+  @override
+  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+
+  @override
+  String get playerDownloadFailedBody =>
+      'Check your connection and try again. The download picks up where it stopped.';
+
+  @override
+  String get playerDownloadRetry => 'Try again';
+
+  @override
+  String get playerDownloadCopy => 'Copy details';
+
+  @override
+  String get removePlayerTitle => 'Remove the player?';
+
+  @override
+  String get removePlayerMessage =>
+      'Videos can\'t play until the player is downloaded again.';
+
+  @override
   String get trailerLoading => 'Loading the trailer…';
 
   @override

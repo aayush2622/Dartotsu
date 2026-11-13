@@ -1,10 +1,11 @@
+import 'package:dartotsu_extension_bridge/player.dart';
+
 // ignore_for_file: implementation_imports, invalid_use_of_internal_member
 import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/_window.dart' as fw;
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:screen_retriever/screen_retriever.dart';
 import 'package:window_manager/window_manager.dart';
 import 'package:window_manager/windowing.dart' show nativeWindowOf;
@@ -13,9 +14,11 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Logger.dart';
 import '../../../Utils/Functions/AppWindow.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/WindowMemory.dart';
 import '../../../Utils/Functions/Windowing.dart';
 import '../Components/PlayerSubtitleView.dart';
+import '../PlayerScreen.dart';
 import '../PlayerState.dart';
 import 'HyprlandPip.dart';
 
@@ -47,6 +50,8 @@ class PipWindow {
 
   static bool get active => controller.peek != null;
 
+  static bool holds(PlayerState state) => active && identical(_state, state);
+
   static Future<bool> open(PlayerState state, double aspect) async {
     if (active) return true;
     if (!supported) return false;
@@ -76,7 +81,7 @@ class PipWindow {
     }
   }
 
-  static void close() {
+  static void close({bool release = true}) {
     final window = controller.peek;
     if (window == null) return;
     try {
@@ -84,15 +89,36 @@ class PipWindow {
     } on Object catch (e, st) {
       logError('PlayerPip', e, st, 'pip window failed to close');
     }
-    _released();
+    _released(release: release);
   }
 
-  static void _released() {
+  static void restore() {
+    final state = _state;
+    final context = appContext;
+    if (state == null || context == null || !state.detached) {
+      close();
+      return;
+    }
+    close(release: false);
+    appWindow
+      ?..show()
+      ..focus();
+    unawaited(
+      navigateToPage(
+        context,
+        PlayerScreen(request: state.request, adopt: state),
+      ),
+    );
+  }
+
+  static void _released({bool release = true}) {
     if (controller.peek == null && _state == null) return;
+    final state = _state;
     controller.value = null;
     _state = null;
     WindowMemory.instance.suspended = false;
     onClosed?.call();
+    if (release) state?.closeDetached();
   }
 
   static void drag() {
@@ -239,7 +265,7 @@ class _PipContent extends StatelessWidget {
                       _button(
                         Icons.open_in_full_rounded,
                         getString.playerPipRestore,
-                        PipWindow.close,
+                        PipWindow.restore,
                       ),
                     ],
                   ),

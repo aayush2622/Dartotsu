@@ -4,6 +4,8 @@ import 'Screen/Together/TogetherController.dart';
 import 'dart:async';
 
 import 'Api/Discord/BaseDiscordRPC.dart';
+import 'Core/Desktop/TrayController.dart';
+import 'Core/Input/GamepadNav.dart';
 import 'Api/Discord/DiscordAccount.dart';
 import 'Api/Discord/DiscordRpcRouter.dart';
 import 'Api/Discord/DiscordPresenceController.dart';
@@ -135,5 +137,7 @@ class DI {
     lazyPut<DiscordRpcRouter>(DiscordRpcRouter.new);
     lazyPut<BaseDiscordRPC>(() => find<DiscordRpcRouter>());
     lazyPut<DiscordAccount>(DiscordAccount.new);
+    lazyPut<TrayController>(TrayController.new);
+    lazyPut<GamepadNav>(GamepadNav.new);
   }
 }

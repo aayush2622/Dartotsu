@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'package:dartotsu_extension_bridge/AddonManager.dart';
 import 'package:dartotsu_extension_bridge/Engines/TorrentEngine/TorrServerAddon.dart';
 

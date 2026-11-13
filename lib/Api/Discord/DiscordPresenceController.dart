@@ -7,6 +7,7 @@ import 'package:window_manager/window_manager.dart';
 import '../../Core/Preferences/Incognito.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Utils/Functions/AppWindow.dart';
+import '../../Core/Desktop/TrayController.dart';
 import 'BaseDiscordRPC.dart';
 import 'DiscordPresence.dart';
 import 'DiscordRpcRouter.dart';
@@ -119,6 +120,7 @@ class DiscordPresenceController extends AppController
 
   Future<void> _onWindow(WindowEvent event) async {
     if (event is! WindowCloseRequestedEvent || _exiting) return;
+    if (findBuilt<TrayController>()?.willHide ?? false) return;
     _exiting = true;
     _debounce?.cancel();
     final request = event.request;

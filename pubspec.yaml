@@ -64,18 +64,9 @@ dependencies:
   intl: any
 
   # Platform Specific
-  media_kit:
-    git:
-      url: https://github.com/Predidit/media-kit.git
-      ref: main
-      path: ./media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/Predidit/media-kit.git
-      ref: main
-      path: ./media_kit_video
-
   window_manager: ^0.7.0
+  nativeapi: ^0.6.0
+  gamepads: ^0.1.15
   screen_retriever: ^0.4.0
   dbus: ^0.8.0
   permission_handler: ^13.0.2
@@ -139,20 +130,14 @@ dev_dependencies:
 
 dependency_overrides:
   collection: ^1.19.1
-  wakelock_plus: ^1.8.2
   # language version 2.19 makes the Dart 3.14 compiler reject its const Column
   precached_network_image:
     path: third_party/precached_network_image
-  media_kit:
-    git:
-      url: https://github.com/Predidit/media-kit.git
-      ref: main
-      path: ./media_kit
-  media_kit_video:
-    git:
-      url: https://github.com/Predidit/media-kit.git
-      ref: main
-      path: ./media_kit_video
+
+hooks:
+  user_defines:
+    dartotsu_extension_bridge:
+      source: external
 
 flutter:
   uses-material-design: true

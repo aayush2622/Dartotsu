@@ -4645,6 +4645,37 @@
   "onHoldManga": "On hold manga",
   "droppedAnime": "Dropped anime",
   "droppedManga": "Dropped manga",
+  "generalSectionDesktop": "Desktop",
+  "closeAction": "When the window is closed",
+  "closeActionQuit": "Quit the app",
+  "closeActionWhenBusy": "Keep running in the tray while something is running",
+  "closeActionAlways": "Always keep running in the tray",
+  "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
+  "gamepadNav": "Gamepad navigation",
+  "gamepadNavDesc": "Move around the app and control the player with a game controller",
+  "trayShow": "Show Dartotsu",
+  "trayQuit": "Quit",
+  "trayIdle": "Nothing running",
+  "trayDownloading": "{count, plural, one{Downloading {count} item} other{Downloading {count} items}}",
+  "@trayDownloading": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "traySyncing": "Syncing your lists",
+  "trayUpdating": "Updating the app",
+  "trayPlaying": "Playing in a small window",
+  "playerDownloadTitle": "Downloading the player",
+  "playerDownloadBody": "Dartotsu fetches its video engine once. Playback starts as soon as it is ready.",
+  "playerDownloadStarting": "Starting the download…",
+  "playerDownloadFailedTitle": "Couldn't get the player",
+  "playerDownloadFailedBody": "Check your connection and try again. The download picks up where it stopped.",
+  "playerDownloadRetry": "Try again",
+  "playerDownloadCopy": "Copy details",
+  "removePlayerTitle": "Remove the player?",
+  "removePlayerMessage": "Videos can't play until the player is downloaded again.",
   "trailerLoading": "Loading the trailer…",
   "trailerFailed": "Could not play the trailer here, opening it in the browser"
 }

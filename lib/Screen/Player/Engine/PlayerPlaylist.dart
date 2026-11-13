@@ -40,12 +40,14 @@ bool isVideoPath(String path) =>
     videoExtensions.contains(p.extension(path).toLowerCase());
 
 int naturalCompare(String a, String b) {
-  final left = RegExp(
-    r'\d+|\D+',
-  ).allMatches(a.toLowerCase()).map((m) => m[0]!).toList();
-  final right = RegExp(
-    r'\d+|\D+',
-  ).allMatches(b.toLowerCase()).map((m) => m[0]!).toList();
+  final left = RegExp(r'\d+|\D+')
+      .allMatches(a.toLowerCase())
+      .map((m) => m[0]!)
+      .toList();
+  final right = RegExp(r'\d+|\D+')
+      .allMatches(b.toLowerCase())
+      .map((m) => m[0]!)
+      .toList();
   for (var i = 0; i < left.length && i < right.length; i++) {
     final x = left[i];
     final y = right[i];

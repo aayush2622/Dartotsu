@@ -27,6 +27,7 @@ import 'Engine/LocalPlayback.dart';
 import 'Engine/MpvFiles.dart';
 import 'Engine/Pip.dart';
 import 'Engine/PipConfig.dart';
+import 'Engine/PipWindow.dart';
 import 'Engine/StreamFeed.dart';
 import 'Engine/TrackSelector.dart';
 import 'Engine/SeekPreview.dart';
@@ -58,6 +59,7 @@ bool get supportsBrightness => !Platform.isLinux || _linuxBacklight;
 
 class PlayerState extends ScreenState {
   static int openCount = 0;
+  static PlayerState? current;
 
   final PlayRequest request;
 
@@ -283,8 +285,29 @@ class PlayerState extends ScreenState {
   }
 
   @override
+  bool get keepAlive => PipWindow.holds(this);
+
+  @override
+  void onDetach() {
+    if (identical(current, this)) current = null;
+    askStream = null;
+    askPendingStream = null;
+    videoRect = null;
+    controlsVisible.value = false;
+    commentsOpen.value = false;
+    chatOpen.value = false;
+    panel.value = false;
+    if (!isMobilePlatform && fullscreen.value) {
+      fullscreen.value = false;
+      unawaited(setDesktopFullscreen(false));
+    }
+  }
+
+  @override
   void onInit() {
+    PipWindow.close();
     openCount++;
+    current = this;
     settings = _effective();
     engine = PlayerEngine(settings);
     unawaited(SeekPreview.sweep());
@@ -359,6 +382,7 @@ class PlayerState extends ScreenState {
         pip.value = active;
         _pipPending = false;
         if (active) {
+          if (!Platform.isAndroid) pop();
           _blurTimer?.cancel();
           if (_pausedByBlur) {
             _pausedByBlur = false;
@@ -516,6 +540,7 @@ class PlayerState extends ScreenState {
   @override
   void onClose() {
     openCount--;
+    if (identical(current, this)) current = null;
     _closed = true;
     _feed?.cancel();
     _feedWatch?.dispose();
@@ -680,7 +705,13 @@ class PlayerState extends ScreenState {
       if (sheet != null && chosen != null) await _confirmTracking();
       if (generation != _generation) return;
       if (chosen == null) {
-        if (engine.duration.value == Duration.zero) pop();
+        if (engine.duration.value == Duration.zero) {
+          if (detached) {
+            PipWindow.close();
+          } else {
+            pop();
+          }
+        }
         loading.value = false;
         return;
       }
@@ -722,7 +753,7 @@ class PlayerState extends ScreenState {
         if (best != null) return best;
       }
     }
-    return askStream?.call(list);
+    return askStream?.call(list) ?? (detached ? 0 : null);
   }
 
   Future<int?> Function(List<v.Video> list)? askStream;

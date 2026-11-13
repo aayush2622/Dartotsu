@@ -44,10 +44,18 @@ List<Setting> addonSettings(BuildContext context) {
 
           if (addon.hasUpdate.value) return run(addon.update);
           if (!addon.installed.value) return run(addon.install);
-          if (addon.id != 'jvm') return run(addon.uninstall);
+          final (title, message) = switch (addon.id) {
+            'jvm' => (getString.removeJvmTitle, getString.removeJvmMessage),
+            'mpv' => (
+              getString.removePlayerTitle,
+              getString.removePlayerMessage,
+            ),
+            _ => (null, null),
+          };
+          if (title == null || message == null) return run(addon.uninstall);
           final dialog = AlertDialogBuilder(context)
-            ..setTitle(getString.removeJvmTitle)
-            ..setMessage(getString.removeJvmMessage)
+            ..setTitle(title)
+            ..setMessage(message)
             ..setPositiveButton(
               getString.yes,
               () => unawaited(run(addon.uninstall)),

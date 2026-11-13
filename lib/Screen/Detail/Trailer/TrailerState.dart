@@ -1,7 +1,9 @@
+import 'package:dartotsu_extension_bridge/player.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    show Mpv;
+
 import 'dart:async';
 
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 
 import '../../../Core/State/State.dart';
@@ -67,6 +69,11 @@ class TrailerState extends ScreenState {
     started.value = true;
     loading.value = true;
     failed.value = false;
+    if (!await Mpv.ensureIfInstalled()) {
+      loading.value = false;
+      failed.value = true;
+      return;
+    }
     final yt = YoutubeExplode();
     try {
       final manifest = await yt.videos.streamsClient.getManifest(videoId);

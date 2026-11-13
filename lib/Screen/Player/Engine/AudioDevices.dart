@@ -1,6 +1,8 @@
-import 'dart:convert';
+import 'package:dartotsu_extension_bridge/player.dart';
+import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
+    show Mpv;
 
-import 'package:media_kit/media_kit.dart';
+import 'dart:convert';
 
 import '../../../Logger.dart';
 import 'PlayerSupport.dart';
@@ -15,7 +17,9 @@ class AudioDevice {
 }
 
 Future<List<AudioDevice>> listAudioDevices() async {
-  if (!PlayerSupport.available) return const [];
+  if (!PlayerSupport.available || !await Mpv.ensureIfInstalled()) {
+    return const [];
+  }
   final player = Player(
     configuration: const PlayerConfiguration(
       logLevel: MPVLogLevel.error,

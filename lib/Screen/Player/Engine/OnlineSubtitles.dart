@@ -153,9 +153,10 @@ Future<String?> openSubtitlesHash(String path) async {
 
       await chunk(0);
       await chunk(size - 65536);
-      return BigInt.from(
-        hash,
-      ).toUnsigned(64).toRadixString(16).padLeft(16, '0');
+      return BigInt.from(hash)
+          .toUnsigned(64)
+          .toRadixString(16)
+          .padLeft(16, '0');
     } finally {
       await raf.close();
     }

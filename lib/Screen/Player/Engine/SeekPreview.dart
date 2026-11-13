@@ -1,9 +1,8 @@
+import 'package:dartotsu_extension_bridge/player.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:media_kit/media_kit.dart';
-import 'package:media_kit_video/media_kit_video.dart';
 
 import '../../../Core/Preferences/StorageManager.dart';
 import '../../../Core/State/State.dart';

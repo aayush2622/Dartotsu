@@ -15479,6 +15479,150 @@ abstract class AppLocalizations {
   /// **'Dropped manga'**
   String get droppedManga;
 
+  /// No description provided for @generalSectionDesktop.
+  ///
+  /// In en, this message translates to:
+  /// **'Desktop'**
+  String get generalSectionDesktop;
+
+  /// No description provided for @closeAction.
+  ///
+  /// In en, this message translates to:
+  /// **'When the window is closed'**
+  String get closeAction;
+
+  /// No description provided for @closeActionQuit.
+  ///
+  /// In en, this message translates to:
+  /// **'Quit the app'**
+  String get closeActionQuit;
+
+  /// No description provided for @closeActionWhenBusy.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep running in the tray while something is running'**
+  String get closeActionWhenBusy;
+
+  /// No description provided for @closeActionAlways.
+  ///
+  /// In en, this message translates to:
+  /// **'Always keep running in the tray'**
+  String get closeActionAlways;
+
+  /// No description provided for @closeActionNoTray.
+  ///
+  /// In en, this message translates to:
+  /// **'The system tray is not available here, so the app quits when closed'**
+  String get closeActionNoTray;
+
+  /// No description provided for @gamepadNav.
+  ///
+  /// In en, this message translates to:
+  /// **'Gamepad navigation'**
+  String get gamepadNav;
+
+  /// No description provided for @gamepadNavDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Move around the app and control the player with a game controller'**
+  String get gamepadNavDesc;
+
+  /// No description provided for @trayShow.
+  ///
+  /// In en, this message translates to:
+  /// **'Show Dartotsu'**
+  String get trayShow;
+
+  /// No description provided for @trayQuit.
+  ///
+  /// In en, this message translates to:
+  /// **'Quit'**
+  String get trayQuit;
+
+  /// No description provided for @trayIdle.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing running'**
+  String get trayIdle;
+
+  /// No description provided for @trayDownloading.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, one{Downloading {count} item} other{Downloading {count} items}}'**
+  String trayDownloading(int count);
+
+  /// No description provided for @traySyncing.
+  ///
+  /// In en, this message translates to:
+  /// **'Syncing your lists'**
+  String get traySyncing;
+
+  /// No description provided for @trayUpdating.
+  ///
+  /// In en, this message translates to:
+  /// **'Updating the app'**
+  String get trayUpdating;
+
+  /// No description provided for @trayPlaying.
+  ///
+  /// In en, this message translates to:
+  /// **'Playing in a small window'**
+  String get trayPlaying;
+
+  /// No description provided for @playerDownloadTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Downloading the player'**
+  String get playerDownloadTitle;
+
+  /// No description provided for @playerDownloadBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.'**
+  String get playerDownloadBody;
+
+  /// No description provided for @playerDownloadStarting.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting the download…'**
+  String get playerDownloadStarting;
+
+  /// No description provided for @playerDownloadFailedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t get the player'**
+  String get playerDownloadFailedTitle;
+
+  /// No description provided for @playerDownloadFailedBody.
+  ///
+  /// In en, this message translates to:
+  /// **'Check your connection and try again. The download picks up where it stopped.'**
+  String get playerDownloadFailedBody;
+
+  /// No description provided for @playerDownloadRetry.
+  ///
+  /// In en, this message translates to:
+  /// **'Try again'**
+  String get playerDownloadRetry;
+
+  /// No description provided for @playerDownloadCopy.
+  ///
+  /// In en, this message translates to:
+  /// **'Copy details'**
+  String get playerDownloadCopy;
+
+  /// No description provided for @removePlayerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove the player?'**
+  String get removePlayerTitle;
+
+  /// No description provided for @removePlayerMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Videos can\'t play until the player is downloaded again.'**
+  String get removePlayerMessage;
+
   /// No description provided for @trailerLoading.
   ///
   /// In en, this message translates to:

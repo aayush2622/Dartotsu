@@ -6,11 +6,12 @@ list(APPEND FLUTTER_PLUGIN_LIST
   app_links_linux
   dynamic_color
   flutter_qjs
+  gamepads_linux
   isar_community_flutter_libs
+  media_kit_video
   dartotsu_extension_bridge
   url_launcher_linux
   volume_controller
-  media_kit_video
   webview_all_linux
   window_to_front
 )

@@ -2,6 +2,8 @@ part of 'PrefManager.dart';
 
 enum UpdateChannel { stable, prerelease, alpha }
 
+enum CloseAction { quit, whenBusy, always }
+
 class PrefName {
   PrefName._();
 
@@ -63,6 +65,13 @@ class PrefName {
   static const appLocale = Pref('appLocale', 'en', PrefLocation.COMMON);
   static const customPath = Pref('customPath', '', PrefLocation.COMMON);
   static const windowState = Pref('windowState', '', PrefLocation.COMMON);
+  static final closeAction = enumPref(
+    'closeAction',
+    CloseAction.whenBusy,
+    CloseAction.values,
+    PrefLocation.COMMON,
+  );
+  static const gamepadNav = Pref('gamepadNav', true, PrefLocation.COMMON);
   static const hasCompletedOnboarding = Pref(
     'hasCompletedOnboarding',
     false,

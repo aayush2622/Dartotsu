@@ -342,7 +342,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "12e7e2689632c388e3ab4ea1c09cecf646823f0f"
+      resolved-ref: "22268d542f8e855ee08f7738701ba356846e0a82"
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -754,6 +754,62 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.0"
+  gamepads:
+    dependency: "direct main"
+    description:
+      name: gamepads
+      sha256: "40b0992bb88155242d30aa929e2c922846f496b1c95df91c9444c824135a5b26"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.15"
+  gamepads_android:
+    dependency: transitive
+    description:
+      name: gamepads_android
+      sha256: "8a1fdda0478232ebe05ce70d0ddd350056a45a92b209baec122577d0acc9461f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.12"
+  gamepads_darwin:
+    dependency: transitive
+    description:
+      name: gamepads_darwin
+      sha256: ab7d2c8ee84ffc989a8c942204c1bc2d6c6585dfa640a30c5e72ef5e4cdf8c91
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
+  gamepads_linux:
+    dependency: transitive
+    description:
+      name: gamepads_linux
+      sha256: "7177a3a24aeb41f7bcb273621a0cc8f46b97e198d1d624c04d43af74faca84a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
+  gamepads_platform_interface:
+    dependency: transitive
+    description:
+      name: gamepads_platform_interface
+      sha256: "51b243f64c3d02900ac37eef0ed0177710ef5b0a1265dbf46bb93ca0f4200f17"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.4"
+  gamepads_web:
+    dependency: transitive
+    description:
+      name: gamepads_web
+      sha256: "5ceaa635cdba536f1ee2b650227c39f5e4a8b1ec6588b00ea0ea6e7291d8e62e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3"
+  gamepads_windows:
+    dependency: transitive
+    description:
+      name: gamepads_windows
+      sha256: e4e2b40a26d07983e2142069dc78c24f90afc1546c57408111a2a20ebf8c923a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.3"
   get:
     dependency: "direct main"
     description:
@@ -1106,22 +1162,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
-  media_kit:
-    dependency: "direct main"
-    description:
-      path: media_kit
-      ref: main
-      resolved-ref: cd75bcfe94ba45ebb6f6b940c68e072d079aee14
-      url: "https://github.com/Predidit/media-kit.git"
-    source: git
-    version: "1.1.11"
   media_kit_video:
-    dependency: "direct main"
+    dependency: transitive
     description:
-      path: media_kit_video
-      ref: main
-      resolved-ref: cd75bcfe94ba45ebb6f6b940c68e072d079aee14
-      url: "https://github.com/Predidit/media-kit.git"
+      path: "third_party/media_kit_video"
+      ref: "22268d542f8e855ee08f7738701ba356846e0a82"
+      resolved-ref: "22268d542f8e855ee08f7738701ba356846e0a82"
+      url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "1.2.5"
   meta:
@@ -1157,7 +1204,7 @@ packages:
     source: hosted
     version: "0.19.6"
   nativeapi:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: nativeapi
       sha256: c71a5e10aacd177fe1c3eef279179beeba6fd08132f0d36e0a7e081e13906749
@@ -1851,14 +1898,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.9"
-  universal_platform:
-    dependency: transitive
-    description:
-      name: universal_platform
-      sha256: "64e16458a0ea9b99260ceb5467a214c1f298d647c659af1bff6d3bf82536b1ec"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.0"
   uri_parser:
     dependency: transitive
     description:
@@ -2003,14 +2042,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
-  wakelock_plus_ohos:
-    dependency: transitive
-    description:
-      name: wakelock_plus_ohos
-      sha256: b22af297411555b5ec0fe43ec2960cd5f019dd23b83853214ebe6dcc97b337bd
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   wakelock_plus_platform_interface:
     dependency: transitive
     description:

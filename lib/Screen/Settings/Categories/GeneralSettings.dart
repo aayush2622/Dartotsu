@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
+import '../../../Core/Desktop/TrayController.dart';
+import '../../../Core/Input/GamepadNav.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Security/AppLock.dart';
 import '../../../Core/Security/Biometric.dart';
@@ -63,6 +65,31 @@ List<Setting> generalSettings(BuildContext context) => [
     isActivity: true,
     onClick: () => navigateToPage(context, const ShortcutsScreen()),
   ),
+  if (hasTray || hasGamepadNav) ...[
+    Setting.header(getString.generalSectionDesktop),
+    choiceSetting<CloseAction>(
+      context,
+      name: getString.closeAction,
+      icon: Icons.minimize_rounded,
+      value: PrefName.closeAction.rx.value,
+      values: CloseAction.values,
+      label: (v) => switch (v) {
+        CloseAction.quit => getString.closeActionQuit,
+        CloseAction.whenBusy => getString.closeActionWhenBusy,
+        CloseAction.always => getString.closeActionAlways,
+      },
+      onPick: (v) => PrefName.closeAction.rx.value = v,
+      isVisible: hasTray,
+    ),
+    Setting.switchType(
+      name: getString.gamepadNav,
+      description: getString.gamepadNavDesc,
+      icon: Icons.sports_esports_rounded,
+      isChecked: PrefName.gamepadNav.rx.value,
+      onSwitchChange: (v) => PrefName.gamepadNav.rx.value = v,
+      isVisible: hasGamepadNav,
+    ),
+  ],
   Setting.header(getString.generalSectionSecurity),
   Setting.switchType(
     name: getString.appLock,
