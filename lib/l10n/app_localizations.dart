@@ -15569,6 +15569,24 @@ abstract class AppLocalizations {
   /// **'Playing in a small window'**
   String get trayPlaying;
 
+  /// No description provided for @traySearch.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get traySearch;
+
+  /// No description provided for @trayPauseDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause downloads'**
+  String get trayPauseDownloads;
+
+  /// No description provided for @trayResumeDownloads.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume downloads'**
+  String get trayResumeDownloads;
+
   /// No description provided for @playerDownloadTitle.
   ///
   /// In en, this message translates to:

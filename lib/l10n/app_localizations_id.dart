@@ -8774,6 +8774,15 @@ class AppLocalizationsId extends AppLocalizations {
   String get trayPlaying => 'Playing in a small window';
 
   @override
+  String get traySearch => 'Search';
+
+  @override
+  String get trayPauseDownloads => 'Pause downloads';
+
+  @override
+  String get trayResumeDownloads => 'Resume downloads';
+
+  @override
   String get playerDownloadTitle => 'Downloading the player';
 
   @override

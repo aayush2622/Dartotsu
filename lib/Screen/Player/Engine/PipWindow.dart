@@ -14,11 +14,9 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Logger.dart';
 import '../../../Utils/Functions/AppWindow.dart';
-import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Utils/Functions/WindowMemory.dart';
 import '../../../Utils/Functions/Windowing.dart';
 import '../Components/PlayerSubtitleView.dart';
-import '../PlayerScreen.dart';
 import '../PlayerState.dart';
 import 'HyprlandPip.dart';
 
@@ -50,7 +48,7 @@ class PipWindow {
 
   static bool get active => controller.peek != null;
 
-  static bool holds(PlayerState state) => active && identical(_state, state);
+  static PlayerState? get state => active ? _state : null;
 
   static Future<bool> open(PlayerState state, double aspect) async {
     if (active) return true;
@@ -81,7 +79,7 @@ class PipWindow {
     }
   }
 
-  static void close({bool release = true}) {
+  static void close() {
     final window = controller.peek;
     if (window == null) return;
     try {
@@ -89,36 +87,22 @@ class PipWindow {
     } on Object catch (e, st) {
       logError('PlayerPip', e, st, 'pip window failed to close');
     }
-    _released(release: release);
+    _released();
   }
 
   static void restore() {
-    final state = _state;
-    final context = appContext;
-    if (state == null || context == null || !state.detached) {
-      close();
-      return;
-    }
-    close(release: false);
+    close();
     appWindow
       ?..show()
       ..focus();
-    unawaited(
-      navigateToPage(
-        context,
-        PlayerScreen(request: state.request, adopt: state),
-      ),
-    );
   }
 
-  static void _released({bool release = true}) {
+  static void _released() {
     if (controller.peek == null && _state == null) return;
-    final state = _state;
     controller.value = null;
     _state = null;
     WindowMemory.instance.suspended = false;
     onClosed?.call();
-    if (release) state?.closeDetached();
   }
 
   static void drag() {

@@ -15,6 +15,7 @@ import '../../Logger.dart';
 import '../../Screen/Player/Engine/PipWindow.dart';
 import '../../Screen/Settings/Sync/Data/SyncController.dart';
 import '../../Api/Updater/AppUpdater.dart';
+import '../../Utils/Functions/AppRouteLinks.dart';
 import '../../Utils/Functions/AppWindow.dart';
 import '../Downloads/DownloadEngine.dart';
 import '../Downloads/DownloadTask.dart';
@@ -28,6 +29,9 @@ class TrayController extends AppController {
   native.MenuItem? _status;
   native.MenuItem? _show;
   native.MenuItem? _quit;
+  native.MenuItem? _transfers;
+  native.MenuItem? _playback;
+  final _shown = <native.MenuItem, (String, bool)>{};
   native.ListenerId? _trayListener;
   native.ListenerId? _windowListener;
   Disposer? _prefWatch;
@@ -109,11 +113,24 @@ class TrayController extends AppController {
         native.MenuItemType.normal,
       )?..isEnabled = false;
       _quit = _item(getString.trayQuit, () => unawaited(quit()));
+      _transfers = _item(getString.trayPauseDownloads, _toggleTransfers);
+      _playback = _item(getString.playerPipPause, _togglePlayback);
       menu
         ..addItem(_show)
         ..addItem(_status)
         ..addSeparator()
+        ..addItem(_route(getString.continueWatching, 'continue'))
+        ..addItem(_route(getString.traySearch, 'search'))
+        ..addItem(_route(getString.downloadsTitle, 'downloads'))
+        ..addItem(_route(getString.calendarTitle, 'calendar'))
+        ..addSeparator()
+        ..addItem(_transfers)
+        ..addItem(_playback)
+        ..addSeparator()
         ..addItem(_quit);
+      menu.addListener((event) {
+        if (event is native.MenuOpenedEvent) _refresh();
+      });
       if (icon != null) tray.icon = icon;
       tray
         ..setTooltip('Dartotsu')
@@ -147,7 +164,50 @@ class TrayController extends AppController {
     return item;
   }
 
+  native.MenuItem? _route(String label, String route) => _item(label, () {
+    _reveal();
+    final context = appContext;
+    if (context == null) return;
+    unawaited(AppRouteLinks().handle(context, Uri.parse(appRouteLink(route))));
+  });
+
+  bool get _downloadsRunning =>
+      findBuilt<DownloadEngine>()?.tasks.any((t) => t.isActive) ?? false;
+
+  bool get _downloadsPaused =>
+      findBuilt<DownloadEngine>()?.tasks.any(
+        (t) => t.state.value == DownloadState.paused,
+      ) ??
+      false;
+
+  void _toggleTransfers() {
+    final engine = findBuilt<DownloadEngine>();
+    if (engine == null) return;
+    if (_downloadsRunning) {
+      engine.pauseAll();
+    } else {
+      engine.resumeAll();
+    }
+    _refresh();
+  }
+
+  void _togglePlayback() {
+    final player = PipWindow.state;
+    if (player == null) return;
+    unawaited(player.togglePlayback());
+    Timer(const Duration(milliseconds: 300), _refresh);
+  }
+
+  void _set(native.MenuItem? item, String label, {required bool enabled}) {
+    if (item == null || _shown[item] == (label, enabled)) return;
+    _shown[item] = (label, enabled);
+    item
+      ..label = label
+      ..isEnabled = enabled;
+  }
+
   void _dropTray() {
+    _shown.clear();
     final tray = _tray;
     _tray = null;
     if (tray == null) return;
@@ -237,6 +297,20 @@ class TrayController extends AppController {
   void _refresh() {
     final lines = activity();
     _status?.label = lines.isEmpty ? getString.trayIdle : lines.join(' · ');
+    final running = _downloadsRunning;
+    _set(
+      _transfers,
+      running ? getString.trayPauseDownloads : getString.trayResumeDownloads,
+      enabled: running || _downloadsPaused,
+    );
+    final player = PipWindow.state;
+    _set(
+      _playback,
+      player?.isPlaying ?? false
+          ? getString.playerPipPause
+          : getString.playerPipPlay,
+      enabled: player != null,
+    );
   }
 
   void _toggle() {
