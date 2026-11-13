@@ -22,7 +22,9 @@ class SourceSubscriptions extends AppController {
   Timer? _saveTimer;
 
   @override
-  void onInit() {
+  void onInit() => reload();
+
+  void reload() {
     final raw = PrefManager.getCustomVal<Map>(_key);
     if (raw == null) return;
     subs.value = [
@@ -272,11 +274,6 @@ class SourceSubscriptions extends AppController {
     }
     if (!any) return;
     notices.refresh();
-    _scheduleSave();
-  }
-
-  void clearNotices() {
-    notices.clear();
     _scheduleSave();
   }
 }

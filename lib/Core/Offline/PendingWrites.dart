@@ -218,7 +218,12 @@ class PendingWrites extends AppController {
       case PendingKind.delete:
         await api.deleteFromList(media);
       case PendingKind.edit:
-        await api.saveEntry(media);
+        final custom = write.customList;
+        if (custom == null) {
+          await api.saveEntry(media);
+        } else {
+          await api.editList(media, customList: custom);
+        }
       case PendingKind.progress:
         final remote = await service.getQueries?.getMedia(media.id);
         final target = write.progress ?? 0;

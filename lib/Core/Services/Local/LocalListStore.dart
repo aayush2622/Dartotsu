@@ -14,6 +14,8 @@ class LocalListStore {
 
   static final Map<String, List<Media>> _decoded = {};
 
+  static void reloadAll() => _decoded.clear();
+
   String get _key => 'localList/$serviceId';
 
   List<Media> read() => _decoded[_key] ??= _load();

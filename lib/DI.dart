@@ -68,6 +68,8 @@ class DI {
       ResumeStore.reload,
       () => tryFind<PendingWrites>()?.reload(),
       () => tryFind<DownloadEngine>()?.reload(),
+      () => tryFind<SourceSubscriptions>()?.reload(),
+      LocalListStore.reloadAll,
       () => tryFind<NetworkManager>()?.cookieManager.reload(),
     ]);
     // Eager — used during startup / must observe every error.
