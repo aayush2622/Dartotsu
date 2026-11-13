@@ -218,6 +218,9 @@ jobs:
           PKGVER="${VERSION#v}"
           PKGVER="${PKGVER//-/_}"
 
+          # Host libs only. The AppImage bundles libmpv.so.2, so do not depend on
+          # mpv. gtk3/webkit2gtk-4.1 pull the GTK/WebKit tree; the rest are NEEDED
+          # by the bundled libmpv and are not pulled by those two.
           cat > PKGBUILD << EOF
           # Maintainer: ${MAINTAINER}
           _pkgname=dartotsu
@@ -230,10 +233,10 @@ jobs:
           url="https://github.com/aayush2622/\${_PkgName}"
           license=('GPL-3.0-or-later')
           provides=(\${_pkgname}=\${pkgver})
-          depends=('libepoxy' 'gdk-pixbuf2' 'pango' 'webkit2gtk-4.1' 'harfbuzz' 'libsoup3' 'glibc' 'fontconfig' 'cairo' 'hicolor-icon-theme' 'glib2' 'gcc-libs' 'mpv' 'zlib-ng-compat' 'gtk3' 'at-spi2-core' 'libsecret')
+          depends=('gtk3' 'webkit2gtk-4.1' 'alsa-lib' 'gnutls' 'hicolor-icon-theme' 'libarchive' 'libpulse' 'libunwind' 'libva' 'libvdpau' 'libxss' 'libxv')
           conflicts=(dartotsu)
-          _appimage="\${_PkgName}-\${pkgver}.AppImage"
-          source=("\${_appimage}::https://github.com/${REPO}/releases/download/${VERSION}/${APPIMAGE_NAME}"
+          _appimage="${APPIMAGE_NAME}"
+          source=("\${_appimage}::https://github.com/${REPO}/releases/download/${VERSION}/\${_appimage}"
                   "LICENSE-\${pkgver}.md::https://raw.githubusercontent.com/${REPO}/refs/tags/${VERSION}/LICENSE.md")
           noextract=(\${_appimage})
           sha256sums=('${HASH}' 'SKIP')
