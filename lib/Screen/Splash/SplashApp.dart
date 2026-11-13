@@ -45,53 +45,56 @@ class _SplashAppState extends State<SplashApp>
               builder: (context, _) {
                 final breathe = math.sin(_c.value * 2 * math.pi);
                 final scale = (0.8 + 0.2 * entrance) * (1 + 0.025 * breathe);
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Opacity(
-                      opacity: entrance.clamp(0.0, 1.0),
-                      child: Transform.scale(
-                        scale: scale,
-                        child: ClipOval(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Image.asset(
-                            'assets/images/logo.png',
-                            width: 144,
-                            height: 144,
-                            fit: BoxFit.cover,
-                            cacheWidth: 432,
-                            filterQuality: FilterQuality.medium,
+                return FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Opacity(
+                        opacity: entrance.clamp(0.0, 1.0),
+                        child: Transform.scale(
+                          scale: scale,
+                          child: ClipOval(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Image.asset(
+                              'assets/images/logo.png',
+                              width: 144,
+                              height: 144,
+                              fit: BoxFit.cover,
+                              cacheWidth: 432,
+                              filterQuality: FilterQuality.medium,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 36),
-                    SizedBox(
-                      width: 120,
-                      height: 3,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(2),
-                        child: Stack(
-                          children: [
-                            ColoredBox(
-                              color: _accent.withValues(alpha: 0.2),
-                              child: const SizedBox.expand(),
-                            ),
-                            Align(
-                              alignment: Alignment(-1 + 2 * _c.value, 0),
-                              child: const FractionallySizedBox(
-                                widthFactor: 0.4,
-                                child: ColoredBox(
-                                  color: _accent,
-                                  child: SizedBox.expand(),
+                      const SizedBox(height: 36),
+                      SizedBox(
+                        width: 120,
+                        height: 3,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(2),
+                          child: Stack(
+                            children: [
+                              ColoredBox(
+                                color: _accent.withValues(alpha: 0.2),
+                                child: const SizedBox.expand(),
+                              ),
+                              Align(
+                                alignment: Alignment(-1 + 2 * _c.value, 0),
+                                child: const FractionallySizedBox(
+                                  widthFactor: 0.4,
+                                  child: ColoredBox(
+                                    color: _accent,
+                                    child: SizedBox.expand(),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               },
             ),
