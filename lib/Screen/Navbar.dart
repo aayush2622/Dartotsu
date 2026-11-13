@@ -36,13 +36,7 @@ class _FloatingBottomNavBarState extends State<FloatingBottomNavBar> {
 
   final hoveredIndex = (-1).live;
 
-  List<NavItem> get _items {
-    final service = _services.currentService.value;
-    if (!widget.standalone && service is NavBarProvider) {
-      return (service as NavBarProvider).navBarItems;
-    }
-    return widget.items;
-  }
+  List<NavItem> get _items => widget.items;
 
   @override
   Widget build(BuildContext context) {
