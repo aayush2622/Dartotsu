@@ -1,3 +1,4 @@
+import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
 
@@ -12,7 +13,7 @@ const kAnilistHomeSections = <String, bool>{
   'Planned Manga': true,
   'Recommended': true,
   'Missing Sequel': false,
-  'Hidden Media': false,
+  kHiddenMediaTitle: false,
 };
 
 const kAnilistAnimeSections = <String, bool>{

@@ -1,3 +1,4 @@
+import 'Api/SectionJobs.dart';
 import '../ThemeManager/LanguageSwitcher.dart';
 import 'Screens/ServiceScreens.dart' show localSectionPrefix;
 
@@ -16,7 +17,7 @@ String _sectionLabel(String title) => switch (title) {
   'Planned Manga' => getString.plannedManga,
   'Completed Anime' => getString.completedAnime,
   'Completed Manga' => getString.completedManga,
-  'Hidden Media' => getString.hiddenMedia,
+  kHiddenMediaTitle => getString.hiddenMedia,
   'Recent Updates' => getString.recentUpdates,
   'Trending Now' => getString.trendingNow,
   'Rising' => getString.rising,

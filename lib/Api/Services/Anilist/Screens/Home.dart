@@ -17,8 +17,8 @@ class AnilistHomeView extends HomeScreenView {
 
   @override
   bool isHiddenSection(String title) =>
-      title == 'Hidden Media' &&
-      AnilistPref.homeLayout.value['Hidden Media'] != true;
+      title == kHiddenMediaTitle &&
+      AnilistPref.homeLayout.value[kHiddenMediaTitle] != true;
 
   @override
   Future<List<String?>> bannerImages() => anilistAuth.queries.getBannerImages();

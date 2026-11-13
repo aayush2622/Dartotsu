@@ -7,7 +7,7 @@ extension on AnilistQueries {
 
     final layout = AnilistPref.homeLayout.value;
     final sections = layout.entries
-        .where((e) => e.value && e.key != 'Hidden Media')
+        .where((e) => e.value && e.key != kHiddenMediaTitle)
         .map((e) => e.key)
         .where((s) => _homeFragments(s, id) != null)
         .toList();
@@ -22,7 +22,7 @@ extension on AnilistQueries {
       final gql = wanted.expand((s) => _homeFragments(s, id)!).join('\n');
       final chunk = await _parseSections('{$gql}', wanted);
 
-      for (final media in chunk.remove('Hidden Media') ?? const <Media>[]) {
+      for (final media in chunk.remove(kHiddenMediaTitle) ?? const <Media>[]) {
         hidden[media.id] = media;
       }
       if (hidden.isNotEmpty) {
@@ -30,7 +30,7 @@ extension on AnilistQueries {
           ...anilistContinueOrder.read(anime: true),
           ...anilistContinueOrder.read(anime: false),
         };
-        chunk['Hidden Media'] = hidden.values.toList()
+        chunk[kHiddenMediaTitle] = hidden.values.toList()
           ..sort(
             (a, b) => _lastModified(b, touched) - _lastModified(a, touched),
           );
@@ -137,7 +137,7 @@ Map<String, List<Media>> _parseHome(Map<String, dynamic> args) {
     out[section] = keep(media);
   }
 
-  if (hidden.isNotEmpty) out['Hidden Media'] = hidden;
+  if (hidden.isNotEmpty) out[kHiddenMediaTitle] = hidden;
   return anilistNonEmpty(out);
 }
 

@@ -751,21 +751,19 @@ class KitsuQueries extends Queries {
               ...await pick(true, {status}),
               ...await pick(false, {status}),
             ];
-            return items.isEmpty ? <String, List<Media>>{} : {title: items};
+            return titledSection(title, items);
           },
         ),
       if (hide)
         (
-          'Hidden Media',
+          kHiddenMediaTitle,
           () async {
             final items = [
               for (final anime in [true, false])
                 for (final m in await library(anime: anime))
                   if (m.isAdult) m,
             ];
-            return items.isEmpty
-                ? <String, List<Media>>{}
-                : {'Hidden Media': items};
+            return titledSection(kHiddenMediaTitle, items);
           },
         ),
     ];

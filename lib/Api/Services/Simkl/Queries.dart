@@ -536,7 +536,7 @@ class SimklQueries extends Queries {
           title,
           () async {
             final items = _byStatus((await library()).values, status);
-            return items.isEmpty ? <String, List<Media>>{} : {title: items};
+            return titledSection(title, items);
           },
         ),
     ];

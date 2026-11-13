@@ -365,7 +365,7 @@ class MangaBakaQueries extends Queries {
     ];
     SectionJob job(String title, Set<String> statuses) => () async {
       final items = await pick(statuses);
-      return items.isEmpty ? <String, List<Media>>{} : {title: items};
+      return titledSection(title, items);
     };
     final jobs = <(String, SectionJob)>[
       ('Continue Reading', job('Continue Reading', {'CURRENT', 'REPEATING'})),
@@ -374,15 +374,13 @@ class MangaBakaQueries extends Queries {
       ('Dropped', job('Dropped', {'DROPPED'})),
       if (hide)
         (
-          'Hidden Media',
+          kHiddenMediaTitle,
           () async {
             final items = [
               for (final m in await library())
                 if (m.isAdult) m,
             ];
-            return items.isEmpty
-                ? <String, List<Media>>{}
-                : {'Hidden Media': items};
+            return titledSection(kHiddenMediaTitle, items);
           },
         ),
     ];

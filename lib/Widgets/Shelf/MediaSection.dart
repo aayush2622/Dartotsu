@@ -1,3 +1,4 @@
+import '../../Core/Services/Api/SectionJobs.dart';
 import '../../Model/SectionLayout.dart';
 
 import 'dart:async';
@@ -110,7 +111,7 @@ class MediaSection extends StatelessWidget {
   static const _unreadSections = {
     'Continue Watching',
     'Continue Reading',
-    'Hidden Media',
+    kHiddenMediaTitle,
   };
 
   static bool _showsUnread(String? title) => _unreadSections.contains(title);

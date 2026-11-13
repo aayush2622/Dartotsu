@@ -1,3 +1,4 @@
+import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
 
@@ -8,7 +9,7 @@ const kKitsuHomeSections = <String, bool>{
   'Planned Manga': true,
   'On Hold': true,
   'Dropped': true,
-  'Hidden Media': false,
+  kHiddenMediaTitle: false,
 };
 
 const kKitsuAnimeSections = <String, bool>{

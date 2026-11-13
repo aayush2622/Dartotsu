@@ -283,7 +283,7 @@ class AnimePlanetQueries extends Queries {
         for (final m in await library(anime: anime))
           if (statuses.contains(m.userStatus)) m,
       ];
-      return items.isEmpty ? <String, List<Media>>{} : {title: items};
+      return titledSection(title, items);
     };
     final jobs = [
       (

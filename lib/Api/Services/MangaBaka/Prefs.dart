@@ -7,7 +7,7 @@ const kMangaBakaHomeSections = <String, bool>{
   'Planned Manga': true,
   'On Hold': true,
   'Dropped': true,
-  'Hidden Media': false,
+  kHiddenMediaTitle: false,
 };
 
 const kMangaBakaMangaSections = <String, bool>{
