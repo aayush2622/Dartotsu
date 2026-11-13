@@ -1,14 +1,16 @@
 import '../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
 import '../../Core/State/State.dart';
+import '../../Widgets/Components/PagedList.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'SocialNavigation.dart';
 
-class GroupsState extends ScreenState {
+class GroupsState extends ScreenState with PagedFields<SocialGroup> {
   final MediaService service;
 
   GroupsState(this.service);
@@ -20,13 +22,20 @@ class GroupsState extends ScreenState {
       (service.isLoggedIn ? GroupScope.joined : GroupScope.popular).live;
   final category = Live<String?>(null);
   final categories = <GroupCategory>[].liveList;
-  final items = <SocialGroup>[].liveList;
-  final loading = false.live;
-  final failed = false.live;
-  final first = true.live;
-  final hasNext = true.live;
-  int _page = 1;
-  int _run = 0;
+  @override
+  late final list = PagedList<SocialGroup>(
+    tag: 'GroupsState',
+    idOf: (g) => g.id,
+    fetch: (page) async {
+      final result = await view.groups(
+        scope.value,
+        query: controller.text,
+        categoryId: scope.value == GroupScope.joined ? null : category.value,
+        page: page,
+      );
+      return (items: result.items, hasNext: result.hasNext);
+    },
+  );
   Timer? _debounce;
 
   static final placeholder = SocialGroup(
@@ -74,43 +83,6 @@ class GroupsState extends ScreenState {
       const Duration(milliseconds: 450),
       () => unawaited(load(reset: true)),
     );
-  }
-
-  Future<void> load({bool reset = false}) async {
-    if (reset) {
-      _run++;
-      items.clear();
-      _page = 1;
-      hasNext.value = true;
-      failed.value = false;
-      first.value = true;
-      loading.value = false;
-    }
-    if (loading.value || !hasNext.value) return;
-    final run = _run;
-    loading.value = true;
-    try {
-      final page = await view.groups(
-        scope.value,
-        query: controller.text,
-        categoryId: scope.value == GroupScope.joined ? null : category.value,
-        page: _page,
-      );
-      if (run != _run) return;
-      final known = {for (final g in items) g.id};
-      items.addAll(page.items.where((g) => !known.contains(g.id)));
-      hasNext.value = page.hasNext;
-      if (page.hasNext) _page++;
-      failed.value = false;
-    } catch (e, st) {
-      logError('GroupsState', e, st);
-      if (run == _run) failed.value = true;
-    } finally {
-      if (run == _run) {
-        loading.value = false;
-        first.value = false;
-      }
-    }
   }
 
   bool onScroll(ScrollNotification n) {
