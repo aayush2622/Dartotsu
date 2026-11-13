@@ -19,6 +19,7 @@ class NativeLogger : FlutterPlugin {
 
     private lateinit var channel: MethodChannel
     private var logThread: Thread? = null
+    @Volatile private var logProcess: Process? = null
     private val mainHandler = Handler(Looper.getMainLooper())
     private val appStartTime = System.currentTimeMillis()
 
@@ -80,6 +81,7 @@ class NativeLogger : FlutterPlugin {
                     )
                 )
 
+                logProcess = process
                 val reader = BufferedReader(InputStreamReader(process.inputStream))
                 var line: String? = null
 
@@ -169,6 +171,9 @@ class NativeLogger : FlutterPlugin {
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        channel.setMethodCallHandler(null)
+        logProcess?.destroy()
+        logProcess = null
         logThread?.interrupt()
         logThread = null
     }
