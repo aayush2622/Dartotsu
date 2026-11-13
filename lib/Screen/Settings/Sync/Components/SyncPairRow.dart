@@ -255,7 +255,7 @@ class _Side extends StatelessWidget {
                   Text(
                     '${item.progress}${total == null || total == 0 ? '' : '/$total'}'
                     '${item.score > 0 ? ' · ${(item.score / 10).round()}' : ''}',
-                    style: mark('progress'),
+                    style: mark(diffs.contains('score') ? 'score' : 'progress'),
                   ),
                   if (item.repeat > 0 || item.started?.year != null)
                     Text(
