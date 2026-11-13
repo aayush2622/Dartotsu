@@ -1478,7 +1478,7 @@ abstract class AppLocalizations {
   /// No description provided for @settingsSyncTitlesNote.
   ///
   /// In en, this message translates to:
-  /// **'Watch and read positions, the resume shelf, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.'**
+  /// **'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.'**
   String get settingsSyncTitlesNote;
 
   /// No description provided for @settingsSyncConnect.
@@ -3748,6 +3748,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Following'**
   String get following;
+
+  /// No description provided for @followsMutual.
+  ///
+  /// In en, this message translates to:
+  /// **'Mutual'**
+  String get followsMutual;
 
   /// No description provided for @homeSections.
   ///
@@ -12623,18 +12629,6 @@ abstract class AppLocalizations {
   /// **'Pause'**
   String get playerPipPause;
 
-  /// No description provided for @playerPipPrevious.
-  ///
-  /// In en, this message translates to:
-  /// **'Previous episode'**
-  String get playerPipPrevious;
-
-  /// No description provided for @playerPipNext.
-  ///
-  /// In en, this message translates to:
-  /// **'Next episode'**
-  String get playerPipNext;
-
   /// No description provided for @playerPipBack.
   ///
   /// In en, this message translates to:
@@ -13030,6 +13024,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The source for this episode is not installed'**
   String get downloadSourceMissing;
+
+  /// No description provided for @downloadDashDrm.
+  ///
+  /// In en, this message translates to:
+  /// **'This stream is DRM protected'**
+  String get downloadDashDrm;
+
+  /// No description provided for @downloadDashNoVideo.
+  ///
+  /// In en, this message translates to:
+  /// **'The DASH manifest has no video'**
+  String get downloadDashNoVideo;
 
   /// No description provided for @downloadWaitingConnection.
   ///

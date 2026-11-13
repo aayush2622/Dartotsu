@@ -732,7 +732,7 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
 
   @override
   String get settingsSyncConnect => 'Not connected';
@@ -2005,6 +2005,9 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get following => 'अनुसरन्';
+
+  @override
+  String get followsMutual => 'Mutual';
 
   @override
   String get homeSections => 'मुख्यपृष्ठ-विभागाः';
@@ -7026,12 +7029,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get playerPipPause => 'Pause';
 
   @override
-  String get playerPipPrevious => 'Previous episode';
-
-  @override
-  String get playerPipNext => 'Next episode';
-
-  @override
   String get playerPipBack => 'Rewind';
 
   @override
@@ -7271,6 +7268,12 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get downloadSourceMissing => 'अस्य एपिसोड्-स्रोतः न स्थापितः';
+
+  @override
+  String get downloadDashDrm => 'This stream is DRM protected';
+
+  @override
+  String get downloadDashNoVideo => 'The DASH manifest has no video';
 
   @override
   String get downloadWaitingConnection => 'संयोजनस्य प्रतीक्षा';
