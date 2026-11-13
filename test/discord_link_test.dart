@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:dartotsu/Api/Discord/DiscordRoute.dart';
 import 'package:dartotsu/Api/Discord/Linked/DiscordOAuth.dart';
+import 'package:dartotsu/Core/SettingsSync/SettingsScope.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -76,5 +77,18 @@ void main() {
       ),
       DiscordRoute.none,
     );
+  });
+
+  test('discord grants and sessions stay on the device', () {
+    for (final name in [
+      'DiscordLinkAccess',
+      'DiscordLinkRefresh',
+      'DiscordLinkExpiry',
+      'DiscordLinkSession',
+      'DiscordHeadlessSession',
+    ]) {
+      expect(SettingsScope.secret('PROTECTED/$name'), isFalse, reason: name);
+    }
+    expect(SettingsScope.secret('PROTECTED/DiscordToken'), isTrue);
   });
 }

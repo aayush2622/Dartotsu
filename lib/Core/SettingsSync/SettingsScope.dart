@@ -196,14 +196,19 @@ class SettingsScope {
     return null;
   }
 
-  static const _secretLocal = {'analyticsClientId', 'appLockBiometric'};
+  static const _secretLocal = {
+    'analyticsClientId',
+    'appLockBiometric',
+    'DiscordHeadlessSession',
+  };
 
   static bool secret(String storageKey) {
     if (!storageKey.startsWith('PROTECTED/')) return false;
     final name = nameOf(storageKey);
     return !_secretLocal.contains(name) &&
         !name.startsWith('settingsSync') &&
-        !name.startsWith('github');
+        !name.startsWith('github') &&
+        !name.startsWith('DiscordLink');
   }
 
   static String nameOf(String storageKey) =>
