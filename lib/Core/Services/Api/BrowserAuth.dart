@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -133,12 +134,54 @@ Future<String> _viaSession(String url, Uri callback, Duration timeout) async {
   }
 }
 
+class AuthCancelled implements Exception {
+  const AuthCancelled();
+
+  @override
+  String toString() => 'Sign-in cancelled';
+}
+
+Future<String?> _viaApp(String url, Uri callback, Duration timeout) async {
+  final link = Completer<String>();
+  _pendingLink = link;
+  _pendingRedirect = callback.toString();
+  Timer? grace;
+  final lifecycle = AppLifecycleListener(
+    onResume: () {
+      grace?.cancel();
+      grace = Timer(const Duration(seconds: 4), () {
+        if (!link.isCompleted) link.completeError(const AuthCancelled());
+      });
+    },
+  );
+  try {
+    final opened = await launchUrl(
+      Uri.parse(url),
+      mode: LaunchMode.externalNonBrowserApplication,
+    ).catchError((Object _) => false);
+    if (!opened) return null;
+    return await link.future.timeout(timeout);
+  } finally {
+    grace?.cancel();
+    lifecycle.dispose();
+    if (identical(_pendingLink, link)) {
+      _pendingLink = null;
+      _pendingRedirect = null;
+    }
+  }
+}
+
 Future<String> browserAuthenticate({
   required String url,
   required String redirect,
   Duration timeout = const Duration(minutes: 5),
-}) {
+  bool preferApp = false,
+}) async {
   final callback = Uri.parse(redirect);
   if (_desktop) return _viaLoopback(Uri.parse(url), callback, timeout);
+  if (preferApp) {
+    final result = await _viaApp(url, callback, timeout);
+    if (result != null) return result;
+  }
   return _viaSession(url, callback, timeout);
 }

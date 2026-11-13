@@ -34,6 +34,7 @@ class DiscordRpcRouter extends AppController implements BaseDiscordRPC {
     userToken: MobileTokenManager.saved,
     linked: DiscordLink.saved,
     live: PrefName.discordLive.value,
+    customName: PrefName.discordNameMode.rx.value != 'app',
   );
 
   BaseDiscordRPC? _pick() => switch (route) {

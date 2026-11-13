@@ -383,6 +383,7 @@
                 <data android:host="mal" />
                 <data android:host="simkl" />
                 <data android:host="mangabaka" />
+                <data android:host="discord" />
             </intent-filter>
 
         </activity>

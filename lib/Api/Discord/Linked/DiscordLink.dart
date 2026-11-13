@@ -88,15 +88,21 @@ class DiscordLink {
     discordLog(
       'connect: opening authorize redirect host=${Uri.parse(redirect).host}',
     );
-    final result = await browserAuthenticate(
-      url: discordAuthorizeUrl(
-        clientId: DiscordApp.linkedId,
+    final String result;
+    try {
+      result = await browserAuthenticate(
+        url: discordAuthorizeUrl(
+          clientId: DiscordApp.linkedId,
+          redirect: redirect,
+          challenge: pkceChallenge(verifier),
+          state: state,
+        ),
         redirect: redirect,
-        challenge: pkceChallenge(verifier),
-        state: state,
-      ),
-      redirect: redirect,
-    );
+        preferApp: true,
+      );
+    } on AuthCancelled {
+      throw DiscordLinkCancelled();
+    }
     final query = Uri.parse(result).queryParameters;
     final error = query['error'];
     discordLog(
