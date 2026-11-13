@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
-import '../../Utils/Extensions/ContextExtensions.dart';
 import '../Navbar.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../Settings/SubSettingsScreen.dart';
@@ -153,19 +152,7 @@ class _ProfileScreenState extends BaseScreen<ProfileScreen>
       ),
     );
 
-    return context.isPhone
-        ? Stack(
-            children: [
-              Positioned.fill(child: content),
-              nav,
-            ],
-          )
-        : Row(
-            children: [
-              SizedBox(width: 100, child: nav),
-              Expanded(child: content),
-            ],
-          );
+    return FloatingNavLayout(nav: nav, content: content);
   }
 
   VoidCallback? _accountOptions(BuildContext context) {

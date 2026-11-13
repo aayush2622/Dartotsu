@@ -142,19 +142,7 @@ class _DetailScreenState extends BaseScreen<DetailScreen>
     );
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: context.isPhone
-          ? Stack(
-              children: [
-                Positioned.fill(child: content),
-                nav,
-              ],
-            )
-          : Row(
-              children: [
-                SizedBox(width: 100, child: nav),
-                Expanded(child: content),
-              ],
-            ),
+      body: FloatingNavLayout(nav: nav, content: content),
     );
   }
 

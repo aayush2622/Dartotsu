@@ -152,19 +152,7 @@ class _GroupScreenState extends BaseScreen<GroupScreen>
           ),
         ],
       );
-      return context.isPhone
-          ? Stack(
-              children: [
-                Positioned.fill(child: content),
-                nav,
-              ],
-            )
-          : Row(
-              children: [
-                SizedBox(width: 100, child: nav),
-                Expanded(child: content),
-              ],
-            );
+      return FloatingNavLayout(nav: nav, content: content);
     });
   }
 

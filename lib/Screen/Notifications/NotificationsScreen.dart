@@ -1,5 +1,6 @@
 import '../Social/SocialNavigation.dart';
 import '../../Widgets/Components/AppControls.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -121,19 +122,7 @@ class _NotificationsScreenState extends BaseScreen<NotificationsScreen>
       ),
     );
 
-    return context.isPhone
-        ? Stack(
-            children: [
-              Positioned.fill(child: content),
-              nav,
-            ],
-          )
-        : Row(
-            children: [
-              SizedBox(width: 100, child: nav),
-              Expanded(child: content),
-            ],
-          );
+    return FloatingNavLayout(nav: nav, content: content);
   }
 
   EdgeInsets get _padding => EdgeInsets.fromLTRB(
