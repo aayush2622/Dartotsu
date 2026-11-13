@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
@@ -25,8 +26,12 @@ class GroupMembersState extends ScreenState {
   @override
   void onInit() => unawaited(load());
 
+  int _generation = 0;
+
   Future<void> load({bool reset = false}) async {
     if (reset) {
+      _generation++;
+      loading.value = false;
       users.clear();
       _page = 1;
       hasNext.value = true;
@@ -35,18 +40,21 @@ class GroupMembersState extends ScreenState {
     }
     if (loading.value || !hasNext.value) return;
     loading.value = true;
+    final generation = _generation;
     try {
       final page = await view.groupMembers(groupId, page: _page);
+      if (generation != _generation) return;
       final known = {for (final u in users) u.id};
       users.addAll(page.items.where((u) => !known.contains(u.id)));
       hasNext.value = page.hasNext;
       if (page.hasNext) _page++;
       failed.value = false;
     } catch (e, st) {
+      if (generation != _generation) return;
       logError('GroupMembersState', e, st);
       failed.value = true;
     }
-    if (mounted) {
+    if (mounted && generation == _generation) {
       loading.value = false;
       first.value = false;
     }

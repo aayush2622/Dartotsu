@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/widgets.dart';
@@ -51,9 +52,12 @@ class ActivityListState extends ScreenState {
       if (matches(a)) a,
   ];
 
+  int _generation = 0;
+
   Future<void> load({bool reset = false}) async {
-    if (loading.value) return;
+    if (loading.value && !reset) return;
     if (reset) {
+      _generation++;
       items.clear();
       page = 1;
       hasNext.value = true;
@@ -61,6 +65,7 @@ class ActivityListState extends ScreenState {
     }
     if (!hasNext.value) return;
     loading.value = true;
+    final generation = _generation;
     try {
       var pages = 0;
       final before = visible.length;
@@ -73,6 +78,7 @@ class ActivityListState extends ScreenState {
                 activityId: activityId,
                 page: page,
               );
+        if (generation != _generation) return;
         final known = {for (final a in items) a.id};
         items.addAll(result.items.where((a) => !known.contains(a.id)));
         hasNext.value = result.hasNext;
@@ -84,10 +90,11 @@ class ActivityListState extends ScreenState {
           visible.length == before);
       failed.value = false;
     } catch (e, st) {
+      if (generation != _generation) return;
       logError('ActivityListState', e, st);
       failed.value = true;
     }
-    if (mounted) {
+    if (mounted && generation == _generation) {
       loading.value = false;
       first.value = false;
     }
