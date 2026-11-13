@@ -47,14 +47,12 @@ dependencies:
   crypto: ^3.0.8
 
   # UI Components
-  introduction_screen: ^5.0.1
   flutter_animate: ^4.5.2
   cached_network_image: ^4.0.6
   flutter_cache_manager: ^3.5.0
   precached_network_image: ^1.4.1
   flutter_svg: ^2.3.2
   skeletonizer: ^3.0.0
-  blurbox: ^0.0.6
   markdown_widget: ^2.3.2+8
   dpad: ^3.3.0
   dynamic_color: ^2.1.0
