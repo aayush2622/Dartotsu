@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/BrowserAuth.dart';
+import '../../../Core/Services/Api/Pkce.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 import '../DiscordApp.dart';
@@ -83,9 +82,8 @@ class DiscordLink {
   }
 
   Future<void> connect() async {
-    final random = Random.secure();
-    final verifier = discordCodeVerifier(random);
-    final state = discordCodeVerifier(random, length: 32);
+    final verifier = randomToken(64);
+    final state = randomToken(32);
     final redirect = authRedirect('discord');
     discordLog(
       'connect: opening authorize redirect host=${Uri.parse(redirect).host}',
@@ -94,7 +92,7 @@ class DiscordLink {
       url: discordAuthorizeUrl(
         clientId: DiscordApp.linkedId,
         redirect: redirect,
-        challenge: discordCodeChallenge(verifier),
+        challenge: pkceChallenge(verifier),
         state: state,
       ),
       redirect: redirect,

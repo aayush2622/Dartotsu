@@ -1,21 +1,21 @@
-import 'dart:math';
-
 import 'package:dartotsu/Api/Discord/DiscordRoute.dart';
 import 'package:dartotsu/Api/Discord/Linked/DiscordOAuth.dart';
+import 'package:dartotsu/Core/Services/Api/Pkce.dart';
 import 'package:dartotsu/Core/SettingsSync/SettingsScope.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test('code challenge is the S256 digest without padding', () {
     expect(
-      discordCodeChallenge('verifier'),
+      pkceChallenge('verifier'),
       'iMnq5o6zALKXGivsnlom_0F5_WYda32GHkxlV7mq7hQ',
     );
   });
 
-  test('verifier uses the requested length', () {
-    expect(discordCodeVerifier(Random(1)).length, 64);
-    expect(discordCodeVerifier(Random(1), length: 43).length, 43);
+  test('random tokens use the requested length and url safe characters', () {
+    expect(randomToken(64).length, 64);
+    expect(randomToken(43).length, 43);
+    expect(RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(randomToken(64)), isTrue);
   });
 
   test('authorize url asks for the presence scopes and a consent screen', () {

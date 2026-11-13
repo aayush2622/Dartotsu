@@ -1,19 +1,4 @@
-import 'dart:convert';
-import 'dart:math';
-
-import 'package:crypto/crypto.dart';
-
 const discordLinkScopes = 'openid sdk.social_layer_presence';
-
-const _chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-
-String discordCodeVerifier(Random random, {int length = 64}) =>
-    List.generate(length, (_) => _chars[random.nextInt(_chars.length)]).join();
-
-String discordCodeChallenge(String verifier) {
-  final bytes = sha256.convert(utf8.encode(verifier)).bytes;
-  return base64UrlEncode(bytes).replaceAll('=', '');
-}
 
 String discordAuthorizeUrl({
   required String clientId,
