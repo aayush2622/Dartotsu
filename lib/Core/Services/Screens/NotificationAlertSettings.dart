@@ -40,7 +40,7 @@ List<Setting> notificationAlertSettings(
         onSliderChange: (v) => poll.rx.value = v,
       ),
     if (on && mutedPref != null && view.kinds.isNotEmpty) ...[
-      Setting.header(getString.notificationsNotifyAbout),
+      Setting.header('${getString.notificationsNotifyAbout} · $serviceName'),
       for (final kind in view.kinds)
         Setting.switchType(
           name: kind.label,
