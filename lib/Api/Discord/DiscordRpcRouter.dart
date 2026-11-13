@@ -20,12 +20,14 @@ class DiscordRpcRouter extends AppController implements BaseDiscordRPC {
       Platform.isWindows || Platform.isLinux || Platform.isMacOS;
 
   final _headless = MobileRPC();
-  late final _gateway = GatewayRPC()..onInit();
-  late final _linked = LinkedRPC()..onInit();
-  late final DesktopRPC? _desktop = isDesktop ? DesktopRPC() : null;
+  GatewayRPC? _gatewayRpc;
+  LinkedRPC? _linkedRpc;
+  DesktopRPC? _desktopRpc;
   BaseDiscordRPC? _current;
 
-  GatewayRPC get gatewayRpc => _gateway;
+  GatewayRPC get _gateway => _gatewayRpc ??= GatewayRPC()..onInit();
+  LinkedRPC get _linked => _linkedRpc ??= LinkedRPC()..onInit();
+  DesktopRPC? get _desktop => isDesktop ? (_desktopRpc ??= DesktopRPC()) : null;
 
   static DiscordRoute get route => discordRoute(
     desktop: isDesktop,
@@ -54,40 +56,42 @@ class DiscordRpcRouter extends AppController implements BaseDiscordRPC {
   @override
   Future<void> clear() async => _current?.clear();
 
-  /// Drop a session left behind by a kill that never reached [shutdown].
-  Future<void> sweep() => Future.wait([_linked.sweep(), _headless.sweep()]);
+  Future<void> sweep() => Future.wait([
+    if (DiscordLink.saved) _linked.sweep(),
+    if (MobileTokenManager.saved) _headless.sweep(),
+  ]);
 
-  /// Clear every transport. Called before the window actually closes, because
-  /// a headless session otherwise stays up for about 20 minutes.
   Future<void> shutdown() async {
     await Future.wait([
-      if (_desktop != null) _desktop.clear(),
-      _linked.clear(),
+      ?_desktopRpc?.clear(),
+      ?_linkedRpc?.clear(),
       _headless.clear(),
-      _gateway.clear(),
+      ?_gatewayRpc?.clear(),
     ]);
-    await _gateway.gateway.close();
+    await _gatewayRpc?.gateway.close();
     _current = null;
   }
 
   Future<void> logout() async {
-    await _gateway.gateway.close();
+    await _gatewayRpc?.gateway.close();
     await _headless.logout();
-    if (_current == _gateway || _current == _headless) _current = null;
+    if (identical(_current, _gatewayRpc) || identical(_current, _headless)) {
+      _current = null;
+    }
   }
 
   Future<void> unlink() async {
-    await _linked.clear();
+    await _linkedRpc?.clear();
     await DiscordLink().revoke();
-    if (_current == _linked) _current = null;
+    if (identical(_current, _linkedRpc)) _current = null;
   }
 
   @override
   void onClose() {
     unawaited(_headless.clear());
-    _gateway.onClose();
-    _linked.onClose();
-    _desktop?.onClose();
+    _gatewayRpc?.onClose();
+    _linkedRpc?.onClose();
+    _desktopRpc?.onClose();
     super.onClose();
   }
 }

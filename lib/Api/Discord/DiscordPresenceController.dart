@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
@@ -122,12 +121,16 @@ class DiscordPresenceController extends AppController
     if (event is! WindowCloseRequestedEvent || _exiting) return;
     _exiting = true;
     _debounce?.cancel();
+    final request = event.request;
+    final held = request.isCancelable && request.cancel();
     try {
       await find<DiscordRpcRouter>().shutdown().timeout(
         const Duration(seconds: 3),
       );
     } catch (e, st) {
       logError('DISCORD', e, st);
+    } finally {
+      if (held) appWindow?.close();
     }
   }
 

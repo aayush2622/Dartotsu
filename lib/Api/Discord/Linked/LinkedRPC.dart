@@ -11,8 +11,6 @@ import '../DiscordPresence.dart';
 import '../Mobile/TokenManager.dart';
 import 'DiscordLink.dart';
 
-/// Presence for a Connected App. The OAuth grant includes `activities.write`,
-/// so this uses headless sessions instead of a user-token gateway identify.
 class LinkedRPC extends AppController implements BaseDiscordRPC {
   static const _sessionKey = 'DiscordLinkSession';
 
