@@ -1,4 +1,5 @@
 import '../../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import '../../../Widgets/Components/ProfileCard.dart';
 import '../SocialNavigation.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import 'UserListSheet.dart';
 
 class UserCard extends StatefulWidget {
   final MediaService service;
@@ -52,12 +54,7 @@ class _UserCardState extends State<UserCard> {
     _version.fire();
   }
 
-  String get _relation {
-    if (_u.isFollowing && _u.isFollower) return 'Mutual';
-    if (_u.isFollowing) return getString.following;
-    if (_u.isFollower) return getString.followsYou;
-    return '';
-  }
+  String get _relation => followLabel(_u);
 
   @override
   Widget build(BuildContext context) => Watch(() => _build(context));

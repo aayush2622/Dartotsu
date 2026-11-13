@@ -11,15 +11,6 @@ import 'SourceSubTile.dart';
 
 String _ago(int at) => at <= 0 ? getString.sourceWhyNever : timeAgo(at ~/ 1000);
 
-String _in(int at) {
-  final left = at - DateTime.now().millisecondsSinceEpoch;
-  if (left <= 0) return getString.sourceSoon;
-  final hours = (left / 3600000).ceil();
-  return hours < 48
-      ? getString.sourceInHours(hours)
-      : getString.sourceInDays((hours / 24).ceil());
-}
-
 String _verdict(SourceSub s, SourceStatus status) {
   if (s.muted) return getString.sourceWhyVerdictMuted;
   if (s.health == SubHealth.missing || s.health == SubHealth.unreachable) {
@@ -43,7 +34,7 @@ Future<void> showSubDiagnosis(BuildContext context, SourceSub sub) {
   final rows = <(String, String)>[
     (getString.sourceWhyStatus, status.text),
     (getString.sourceWhyLastCheck, _ago(sub.lastChecked)),
-    (getString.sourceWhyNextCheck, _in(sub.nextCheckAt)),
+    (getString.sourceWhyNextCheck, sourceWhen(sub.nextCheckAt)),
     if (sub.lastValue > 0)
       (getString.sourceWhyNewest, unitLabel(sub.lastValue)),
     if (seen != null) (getString.sourceWhyProgress, '$seen'),

@@ -1,4 +1,5 @@
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -231,11 +232,6 @@ class NotificationsState extends ScreenState {
   bool canOpen(ServiceNotification n) => canOpenNotification(n);
 
   void open(NotificationFeed from, ServiceNotification n) {
-    final current = find<MediaServiceController>().currentService.value;
-    if (from.service.id != current.id) {
-      snackString(getString.notificationsOtherService(from.service.name));
-      return;
-    }
     openNotification(context, from.service, n);
   }
 

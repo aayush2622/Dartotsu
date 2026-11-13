@@ -11,8 +11,8 @@ import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 String followLabel(UserBrief user) {
-  if (user.isFollowing && user.isFollower) return 'Mutual';
-  if (user.isFollowing) return 'Following';
+  if (user.isFollowing && user.isFollower) return getString.followsMutual;
+  if (user.isFollowing) return getString.following;
   if (user.isFollower) return getString.followsYou;
   return '';
 }

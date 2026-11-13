@@ -34,7 +34,7 @@ bool isManagerActive(SourceSub sub) {
   return tryFind<ExtensionManager>()?.current[type]?.id == sub.managerId;
 }
 
-String _when(int at) {
+String sourceWhen(int at) {
   final left = at - DateTime.now().millisecondsSinceEpoch;
   if (left <= 0) return getString.sourceSoon;
   final hours = (left / 3600000).ceil();
@@ -91,7 +91,7 @@ SourceStatus describeSub(SourceSub s) {
       Icons.visibility_off_outlined,
     ),
     SkipReason.window => SourceStatus(
-      getString.sourceNextCheck(_when(s.nextCheckAt)),
+      getString.sourceNextCheck(sourceWhen(s.nextCheckAt)),
       Icons.schedule_rounded,
     ),
     null => SourceStatus(getString.sourceWaiting, Icons.schedule_rounded),
