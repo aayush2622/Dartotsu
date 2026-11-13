@@ -7,13 +7,13 @@
 #include "generated_plugin_registrant.h"
 
 #include <app_links_linux/app_links_plugin_linux.h>
-#include <dartotsu_extension_bridge/dartotsu_extension_bridge_plugin.h>
 #include <dynamic_color/dynamic_color_plugin.h>
 #include <flutter_qjs/flutter_qjs_plugin.h>
 #include <isar_community_flutter_libs/isar_flutter_libs_plugin.h>
-#include <media_kit_video/media_kit_video_plugin.h>
+#include <dartotsu_extension_bridge/dartotsu_extension_bridge_plugin.h>
 #include <url_launcher_linux/url_launcher_plugin.h>
 #include <volume_controller/volume_controller_plugin.h>
+#include <media_kit_video/media_kit_video_plugin.h>
 #include <webview_all_linux/webview_all_linux_plugin.h>
 #include <window_to_front/window_to_front_plugin.h>
 
@@ -21,9 +21,6 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) app_links_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "AppLinksPluginLinux");
   app_links_plugin_linux_register_with_registrar(app_links_linux_registrar);
-  g_autoptr(FlPluginRegistrar) dartotsu_extension_bridge_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "DartotsuExtensionBridgePlugin");
-  dartotsu_extension_bridge_plugin_register_with_registrar(dartotsu_extension_bridge_registrar);
   g_autoptr(FlPluginRegistrar) dynamic_color_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "DynamicColorPlugin");
   dynamic_color_plugin_register_with_registrar(dynamic_color_registrar);
@@ -33,15 +30,18 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) isar_community_flutter_libs_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "IsarFlutterLibsPlugin");
   isar_flutter_libs_plugin_register_with_registrar(isar_community_flutter_libs_registrar);
-  g_autoptr(FlPluginRegistrar) media_kit_video_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "MediaKitVideoPlugin");
-  media_kit_video_plugin_register_with_registrar(media_kit_video_registrar);
+  g_autoptr(FlPluginRegistrar) dartotsu_extension_bridge_registrar =
+      fl_plugin_registry_get_registrar_for_plugin(registry, "DartotsuExtensionBridgePlugin");
+  dartotsu_extension_bridge_plugin_register_with_registrar(dartotsu_extension_bridge_registrar);
   g_autoptr(FlPluginRegistrar) url_launcher_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "UrlLauncherPlugin");
   url_launcher_plugin_register_with_registrar(url_launcher_linux_registrar);
   g_autoptr(FlPluginRegistrar) volume_controller_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "VolumeControllerPlugin");
   volume_controller_plugin_register_with_registrar(volume_controller_registrar);
+  g_autoptr(FlPluginRegistrar) media_kit_video_registrar =
+      fl_plugin_registry_get_registrar_for_plugin(registry, "MediaKitVideoPlugin");
+  media_kit_video_plugin_register_with_registrar(media_kit_video_registrar);
   g_autoptr(FlPluginRegistrar) webview_all_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "WebviewAllLinuxPlugin");
   webview_all_linux_plugin_register_with_registrar(webview_all_linux_registrar);

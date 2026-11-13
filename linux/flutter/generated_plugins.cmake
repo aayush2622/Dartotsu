@@ -4,13 +4,13 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links_linux
-  dartotsu_extension_bridge
   dynamic_color
   flutter_qjs
   isar_community_flutter_libs
-  media_kit_video
+  dartotsu_extension_bridge
   url_launcher_linux
   volume_controller
+  media_kit_video
   webview_all_linux
   window_to_front
 )

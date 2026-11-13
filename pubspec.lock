@@ -29,10 +29,10 @@ packages:
     dependency: transitive
     description:
       name: android_file_picker
-      sha256: "04c1306eda42c23ecbf449c909f4fa05c5e66fc48cf5f994d8d08b9d45e5396b"
+      sha256: e7e02f9bab7e014e5b47e4cef135a8f5c66f5c14fd90986e415e758f6a1762e1
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.5"
+    version: "2.1.6"
   antlr4:
     dependency: transitive
     description:
@@ -77,10 +77,10 @@ packages:
     dependency: "direct main"
     description:
       name: archive
-      sha256: de5ac590b8155e4e676088d714bd41ea620449a6adc0f7950c5073874b287ddb
+      sha256: "4bb7d60637561012df2a7b04e48bcc2485e849e81048dc075a6d45b95c342910"
       url: "https://pub.dev"
     source: hosted
-    version: "4.6.0"
+    version: "4.7.0"
   args:
     dependency: transitive
     description:
@@ -173,26 +173,26 @@ packages:
     dependency: "direct main"
     description:
       name: cached_network_image
-      sha256: f865286d78afe21964f8a22f7e7e798ab6b0cceb6608effe4e31983776f4736f
+      sha256: "0cb71977516a1354434893163d74bf5f79b3055d1a7e936fb75095aef0d8a3a9"
       url: "https://pub.dev"
     source: hosted
-    version: "4.0.6"
+    version: "4.0.7"
   cached_network_image_platform_interface:
     dependency: transitive
     description:
       name: cached_network_image_platform_interface
-      sha256: "555e287d3882fbb36cde50d24214cb3f6a272d39c4386e8afe00cb188d35b285"
+      sha256: fc48eb93237498afdb88fb2273867e32ec27b01c365e5a19ccc0de5bb11dbccb
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.3"
+    version: "5.0.4"
   cached_network_image_web:
     dependency: transitive
     description:
       name: cached_network_image_web
-      sha256: "99ba26ba4de2fd5524b84a8c6f14931aaeb25d740a954e92d8249e7be6cd9e31"
+      sha256: f75209409e5a723054e5769e49df86f4f1e5c03eaf94aac69ccddfa00373380d
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.4"
+    version: "2.0.5"
   characters:
     dependency: transitive
     description:
@@ -229,10 +229,10 @@ packages:
     dependency: transitive
     description:
       name: cnativeapi
-      sha256: c43703998995e132b0656d2b8a95ed2bedc6b22ccee2c827bcdc075e0330e319
+      sha256: bcf1d65504a397cd1b1eeaea582baf08250f38d46074739fddb3c5437f1b9e06
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.10"
+    version: "0.6.0"
   code_assets:
     dependency: transitive
     description:
@@ -621,10 +621,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
-      sha256: "58f9ea245d7194363c05f7a012bbc73291736c2d8b5f555a8e0ea3f9121868b4"
+      sha256: fac349e7361f80591a0cedff03548f807282c9faee9fc6192763166e5f81def2
       url: "https://pub.dev"
     source: hosted
-    version: "23.0.1"
+    version: "23.0.2"
   flutter_local_notifications_linux:
     dependency: transitive
     description:
@@ -707,10 +707,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_svg
-      sha256: d02281c22cebba7aa7ac72e75978c946274c8c05f8623e9893e1f5f2eb951713
+      sha256: "455a22036f8d1b7c74f53283c8644d6af2f6f7c9ec72c7b06a2ff70fb3954a54"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.3"
+    version: "2.4.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -1010,6 +1010,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.1.0"
+  listen:
+    dependency: transitive
+    description:
+      name: listen
+      sha256: "47501a08016a43fcad79252439d723f50f14f88fa7bfd8a177e0a417e5c9e1f2"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   local_auth:
     dependency: "direct main"
     description:
@@ -1103,7 +1111,7 @@ packages:
     description:
       path: media_kit
       ref: main
-      resolved-ref: "83b7ca63772856e1ea0158916177e136f7b7b0be"
+      resolved-ref: cd75bcfe94ba45ebb6f6b940c68e072d079aee14
       url: "https://github.com/Predidit/media-kit.git"
     source: git
     version: "1.1.11"
@@ -1112,7 +1120,7 @@ packages:
     description:
       path: media_kit_video
       ref: main
-      resolved-ref: "83b7ca63772856e1ea0158916177e136f7b7b0be"
+      resolved-ref: cd75bcfe94ba45ebb6f6b940c68e072d079aee14
       url: "https://github.com/Predidit/media-kit.git"
     source: git
     version: "1.2.5"
@@ -1152,18 +1160,18 @@ packages:
     dependency: transitive
     description:
       name: nativeapi
-      sha256: "118045bb549cb6fabad472a3a22a537e7310bbf20097350f5027808b4a5853ce"
+      sha256: c71a5e10aacd177fe1c3eef279179beeba6fd08132f0d36e0a7e081e13906749
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.10"
+    version: "0.6.0"
   nativeapi_flutter:
     dependency: transitive
     description:
       name: nativeapi_flutter
-      sha256: "357a405c69212f5157da1bd3be183a53c2b841d0de0eb51f4a3947913712aec4"
+      sha256: "3709b58224473298349375c8a0404d19dc0b5f151397cae2f127fe49a3a1a491"
       url: "https://pub.dev"
     source: hosted
-    version: "0.5.10"
+    version: "0.6.0"
   nm:
     dependency: transitive
     description:
@@ -1184,10 +1192,10 @@ packages:
     dependency: transitive
     description:
       name: octo_image
-      sha256: "9c9e56f655c301fd2e6c26390461b4fbd23be861b29607c5e2e4d16e8231ce50"
+      sha256: "1eabd04ba4371863a91a063feba8069f0f15c4ad9d9a72fbcd3cab1ecd86ea6c"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.4"
+    version: "2.1.5"
   package_config:
     dependency: transitive
     description:
@@ -1280,34 +1288,34 @@ packages:
     dependency: transitive
     description:
       name: pdfium_dart
-      sha256: "3e250021b2f462058aae216837902fdc8b2cb7f0657e4ec2bc9ac541f960ff84"
+      sha256: caf60231f755418e66e76ad0699503b09b03bd8bd8949f1c7a532239c80d7531
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   pdfium_flutter:
     dependency: transitive
     description:
       name: pdfium_flutter
-      sha256: "4d18e6181aa87200750aa4fc607c870f957731b1de9252c2ea19627c19109388"
+      sha256: "4b98ef6d86ada59ad99abd07cf90871929fa733677d6fbcac83a4f575e759ac3"
       url: "https://pub.dev"
     source: hosted
-    version: "0.4.1"
+    version: "0.4.2"
   pdfrx:
     dependency: "direct main"
     description:
       name: pdfrx
-      sha256: b3bd49fd0918ba7f807ceb0860f4110c346fc70dd96bd68b992418cf17f97650
+      sha256: "98041d7076304542d047ada21cd759994ebb097a98f2949be79ddf07b13f006b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.12.0"
+    version: "2.12.1"
   pdfrx_engine:
     dependency: transitive
     description:
       name: pdfrx_engine
-      sha256: "4f86165b90c8ae7647747e2d2f9880727f0480caab976a712de1c95076c48762"
+      sha256: "67faaaac9de5d0e76c3f5742d943e13731c70a5e3fdabf59e0c9049b10a1c5da"
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.1"
+    version: "0.9.2"
   permission_handler:
     dependency: "direct main"
     description:
@@ -1407,10 +1415,9 @@ packages:
   precached_network_image:
     dependency: "direct main"
     description:
-      name: precached_network_image
-      sha256: afbf58a8baad5cd0982300f654e5c3989c9f82a9231a00862db8cc6e8dd352ad
-      url: "https://pub.dev"
-    source: hosted
+      path: "third_party/precached_network_image"
+      relative: true
+    source: path
     version: "1.4.1"
   process:
     dependency: transitive
@@ -1563,10 +1570,10 @@ packages:
     dependency: "direct main"
     description:
       name: screen_retriever
-      sha256: "84d3610070a2abbe9e86562b994d343822eefec828f24e5e88e636a63bddc15b"
+      sha256: "7e4916300cac6912ecf83890b7058aba86cffb4d5d48e1ff9c8cbb41e968a592"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.1"
+    version: "0.4.0"
   scroll_to_index:
     dependency: transitive
     description:
@@ -1603,18 +1610,18 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "33b38b07d9ac7d16aff0426c61418752fd3e7a8c7dc8be786c875d6ce673b002"
+      sha256: "137dedccacb394b8f470d6c9b435ffc3d33faaa6ce2949c4f54a61007d64396d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.4"
+    version: "2.5.5"
   shared_preferences_foundation:
     dependency: transitive
     description:
       name: shared_preferences_foundation
-      sha256: "4e396ac6f8751ab7d2d6e27f22f32c8350b07006028d534f5221503382f1fa69"
+      sha256: "89435cb71ecb1ad1bf29ef73a381f871a06f433d4182b7e2ba7243b02b2c544b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "2.6.2"
   shared_preferences_linux:
     dependency: transitive
     description:
@@ -1808,10 +1815,10 @@ packages:
     dependency: transitive
     description:
       name: test_api
-      sha256: "2a122cbe059f8b610d3a5415f42e255b6c17b1f21eee1d960f31080237fb4f11"
+      sha256: "0a10344e901e5b2e63819567951cb6a06673ed6b84f40462188ff5a0c41f371f"
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.12"
+    version: "0.7.14"
   time:
     dependency: transitive
     description:
@@ -1936,10 +1943,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics
-      sha256: fb6241e12737b9ac96fb799abc9af8fb7b76c66bb5e751cd99c1f94cbcd26b4a
+      sha256: "06081e4f2d8f17c306aa58989520694b463ad411bc7c7b93e76afa3e41ca17ac"
       url: "https://pub.dev"
     source: hosted
-    version: "1.2.7"
+    version: "1.3.1"
   vector_graphics_codec:
     dependency: transitive
     description:
@@ -1952,10 +1959,10 @@ packages:
     dependency: transitive
     description:
       name: vector_graphics_compiler
-      sha256: "7471171f129768c2e0398e91d39022cf47f03e1a541bb1737760bd1b9aed6c63"
+      sha256: "7d3d604c1ede26711f865f74e9273c5c5504ac449f3d92faa722878dbac88807"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.5"
+    version: "1.3.6"
   vector_math:
     dependency: transitive
     description:
@@ -2013,12 +2020,13 @@ packages:
     source: hosted
     version: "1.7.0"
   wasd:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
-      name: wasd
-      sha256: "1a468d070cc008b9864680805340562baab87987cbb0ae6f9a34311b092135f2"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: "dartotsu/0.6.1-analyzer-fix"
+      resolved-ref: bc05339e45d2218fb66cd6cc6c409065dcbb9b4b
+      url: "https://github.com/aayush2622/wasd.git"
+    source: git
     version: "0.6.1"
   watcher:
     dependency: transitive
@@ -2136,10 +2144,10 @@ packages:
     dependency: "direct main"
     description:
       name: window_manager
-      sha256: bdd6b1a2c1ce50f3bba7ffbaa0d5dc5feb6b6a24fd20269da4de90244f77a471
+      sha256: "43fc05da6cf670b456a758c88b60e2c1371fc32e1030aac308d0087d87c9368d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.7.0"
   window_to_front:
     dependency: transitive
     description:
@@ -2213,5 +2221,5 @@ packages:
     source: hosted
     version: "3.1.0"
 sdks:
-  dart: ">=3.13.0 <4.0.0"
-  flutter: ">=3.47.0"
+  dart: ">=3.14.0 <4.0.0"
+  flutter: ">=3.50.0"
