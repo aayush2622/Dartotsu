@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart' show compute;
+
 import '../Preferences/IsarDataClasses/KeyValue/KeyValues.dart';
 import '../Preferences/PrefManager.dart';
 import 'SettingsMerge.dart';
@@ -62,6 +64,10 @@ class SyncChannel {
 
   Map<String, int> stamps = {};
   Timer? timer;
+  Timer? _saveTimer;
+
+  static const _stampSaveDelay = Duration(seconds: 2);
+  static const _isolateFrom = 200;
 
   void load() {
     final stored = loadCustomData<String>(stampsKey);
@@ -70,18 +76,26 @@ class SyncChannel {
       ..removeWhere((key, _) => !syncable(key));
   }
 
-  void save() => saveCustomData(stampsKey, jsonEncode(stamps));
+  void save() {
+    _saveTimer?.cancel();
+    _saveTimer = null;
+    saveCustomData(stampsKey, jsonEncode(stamps));
+  }
+
+  void flush() {
+    if (_saveTimer != null) save();
+  }
 
   void stamp(String key) {
     stamps[key] = DateTime.now().millisecondsSinceEpoch;
-    save();
+    _saveTimer ??= Timer(_stampSaveDelay, save);
   }
 
   static bool _blank(Map<String, dynamic> json) => json['value'] == '';
 
-  Map<String, SyncEntry> local() {
+  Map<String, SyncEntry> local([Iterable<KeyValue>? scanned]) {
     final result = <String, SyncEntry>{};
-    for (final kv in PrefManager.allEntries()) {
+    for (final kv in scanned ?? PrefManager.allEntries()) {
       if (!includes(kv.key)) continue;
       final json = strip(kv.key, kv.toJson());
       result[kv.key] = SyncEntry(
@@ -96,8 +110,9 @@ class SyncChannel {
     return result;
   }
 
-  RemoteFile decode(String raw) {
-    final root = jsonDecode(raw) as Map<String, dynamic>;
+  RemoteFile decode(String raw) => _fromRoot(_parse(raw));
+
+  RemoteFile _fromRoot(Map<String, dynamic> root) {
     if (root['app'] != 'Dartotsu') {
       throw const FormatException('Not a Dartotsu settings file');
     }
@@ -128,24 +143,43 @@ class SyncChannel {
     );
   }
 
-  Future<RemoteFile> decodeAsync(String raw) async =>
-      decode(unseal == null ? raw : await unseal!(raw));
+  Future<RemoteFile> decodeAsync(String raw) async {
+    final text = unseal == null ? raw : await unseal!(raw);
+    final root = text.length > _isolateFrom * 256
+        ? await compute(_parse, text)
+        : _parse(text);
+    return _fromRoot(root);
+  }
 
   Future<String> encodeAsync(
     Map<String, SyncEntry> entries,
     int at,
     String device,
   ) async {
-    final plain = encode(entries, at, device);
+    final root = _root(entries, at, device);
+    final plain = entries.length > _isolateFrom
+        ? await compute(_encodeRoot, root)
+        : jsonEncode(root);
     return seal == null ? plain : seal!(plain);
   }
 
   String encode(Map<String, SyncEntry> entries, int at, String device) =>
-      jsonEncode({
-        'app': 'Dartotsu',
-        'device': device,
-        'platform': Platform.operatingSystem,
-        'at': at,
-        'entries': {for (final e in entries.entries) e.key: e.value.toJson()},
-      });
+      jsonEncode(_root(entries, at, device));
+
+  Map<String, dynamic> _root(
+    Map<String, SyncEntry> entries,
+    int at,
+    String device,
+  ) => {
+    'app': 'Dartotsu',
+    'device': device,
+    'platform': Platform.operatingSystem,
+    'at': at,
+    'entries': {for (final e in entries.entries) e.key: e.value.toJson()},
+  };
 }
+
+Map<String, dynamic> _parse(String raw) =>
+    jsonDecode(raw) as Map<String, dynamic>;
+
+String _encodeRoot(Map<String, dynamic> root) => jsonEncode(root);

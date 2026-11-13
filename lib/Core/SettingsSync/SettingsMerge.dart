@@ -37,12 +37,11 @@ class SettingsMerge {
 
 const tombstoneLife = Duration(days: 90);
 
-typedef Combine =
-    Map<String, dynamic>? Function(
-      String key,
-      SyncEntry local,
-      SyncEntry remote,
-    );
+typedef Combine = Map<String, dynamic>? Function(
+  String key,
+  SyncEntry local,
+  SyncEntry remote,
+);
 
 Map<String, dynamic>? _combined(
   Combine? combine,
@@ -50,7 +49,10 @@ Map<String, dynamic>? _combined(
   SyncEntry l,
   SyncEntry r,
 ) {
-  if (combine == null || l.deleted || r.deleted || l.sameValue(r)) return null;
+  if (combine == null || l.deleted || r.deleted || l.stamp == r.stamp) {
+    return null;
+  }
+  if (l.sameValue(r)) return null;
   return combine(key, l, r);
 }
 

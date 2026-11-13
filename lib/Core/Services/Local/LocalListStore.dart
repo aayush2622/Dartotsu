@@ -16,6 +16,7 @@ class LocalListStore {
   static final Map<String, List<Media>> _decoded = {};
 
   static final _adopted = <String>{};
+  static final _encoded = Expando<Map<String, dynamic>>('LocalListStore');
 
   static void reloadAll() => _decoded.clear();
 
@@ -59,6 +60,11 @@ class LocalListStore {
     return media;
   }
 
+  Map<String, dynamic> _encode(Media media) => _encoded[media] ??= {
+    'media': media.toJson(),
+    if (media.sourceData != null) 'source': media.sourceData!.toJson(),
+  };
+
   Map<String, int> _removed() {
     final raw = loadCustomData<Map<String, dynamic>>(_key)?['removed'];
     if (raw is! Map) return {};
@@ -84,13 +90,7 @@ class LocalListStore {
       ..addEntries([for (final id in removed) MapEntry(id, now)]);
     try {
       saveCustomData<Map<String, dynamic>>(_key, {
-        'items': [
-          for (final m in capped)
-            {
-              'media': m.toJson(),
-              if (m.sourceData != null) 'source': m.sourceData!.toJson(),
-            },
-        ],
+        'items': [for (final m in capped) _encode(m)],
         if (tombs.isNotEmpty) 'removed': tombs,
       });
     } catch (e) {
@@ -102,6 +102,7 @@ class LocalListStore {
   }
 
   void upsert(Media media) {
+    _encoded[media] = null;
     media.minimal = false;
     media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch;
     final items = read().toList()..removeWhere((m) => m.id == media.id);
@@ -120,6 +121,7 @@ class LocalListStore {
         result.add(media);
         added++;
       } else if (merge) {
+        _encoded[current] = null;
         if ((media.userProgress ?? 0) > (current.userProgress ?? 0)) {
           current.userProgress = media.userProgress;
           current.userStatus = media.userStatus ?? current.userStatus;

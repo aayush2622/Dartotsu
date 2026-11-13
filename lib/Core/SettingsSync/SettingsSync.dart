@@ -59,6 +59,7 @@ class SyncedSetting {
 class SettingsSync extends AppController with WidgetsBindingObserver {
   static const _deviceKey = '__settingsSyncDevice';
   static const _poll = Duration(minutes: 15);
+  static const _firstSyncDelay = Duration(seconds: 4);
 
   static final titleHooks = <void Function()>[];
   static final secretHooks = <void Function()>[];
@@ -167,7 +168,7 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
     ], _refresh);
     _localParts = PrefName.settingsSyncLocal.value.toSet();
     onChange(PrefName.settingsSyncLocal.rx, (_) => _partsChanged());
-    _refresh();
+    _refresh(firstRun: true);
   }
 
   Set<String> _localParts = {};
@@ -191,6 +192,7 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     for (final c in _channels) {
       c.timer?.cancel();
+      c.flush();
     }
     _poller?.cancel();
   }
@@ -200,11 +202,14 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
     if (state == AppLifecycleState.resumed && enabled) syncNow();
     if (state == AppLifecycleState.paused) {
       PrefManager.flush();
+      for (final c in _channels) {
+        c.flush();
+      }
       if (enabled) syncNow();
     }
   }
 
-  void _refresh() {
+  void _refresh({bool firstRun = false}) {
     _poller?.cancel();
     for (final c in _channels) {
       c.timer?.cancel();
@@ -220,7 +225,11 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
       phase.value = SettingsSyncPhase.idle;
     }
     _poller = Timer.periodic(_poll, (_) => syncNow());
-    syncNow();
+    if (firstRun) {
+      _settings.timer = Timer(_firstSyncDelay, syncNow);
+    } else {
+      syncNow();
+    }
   }
 
   void _changed(String key, bool deleted) {
@@ -362,12 +371,13 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
     SyncChannel channel,
     Map<String, String> files,
     int now,
+    List<KeyValue> scanned,
   ) async {
     final raw = files[channel.file];
     final data = raw == null
         ? RemoteFile.empty
         : await channel.decodeAsync(raw);
-    final local = channel.local();
+    final local = channel.local(scanned);
     final result = channel.secret
         ? mergeSecrets(local, data.entries, now)
         : mergeSettings(local, data.entries, now, combine: channel.combine);
@@ -465,16 +475,17 @@ class SettingsSync extends AppController with WidgetsBindingObserver {
       final files = await transport.readAll();
       final now = DateTime.now().millisecondsSinceEpoch;
       final writes = <String, String>{};
+      final scanned = PrefManager.allEntries();
       serverHasSecrets.value = files.containsKey(secretsFile);
       for (final channel in _channels) {
         if (!channel.active()) continue;
         if (!identical(channel, _secrets)) {
-          final content = await _syncChannel(channel, files, now);
+          final content = await _syncChannel(channel, files, now, scanned);
           if (content != null) writes[channel.file] = content;
           continue;
         }
         try {
-          final content = await _syncChannel(channel, files, now);
+          final content = await _syncChannel(channel, files, now, scanned);
           if (content != null) writes[channel.file] = content;
           secretsError.value = null;
         } on WrongPassphrase catch (e) {
