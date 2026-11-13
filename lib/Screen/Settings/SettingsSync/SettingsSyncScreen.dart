@@ -11,7 +11,6 @@ import '../../../Widgets/Components/ScrollConfig.dart';
 import 'Components/SyncAccountCard.dart';
 import 'Components/SyncCategoriesCard.dart';
 import 'Components/SyncSecretsCard.dart';
-import 'Components/SyncServerCard.dart';
 import 'Components/SyncStatusCard.dart';
 import 'SettingsSyncState.dart';
 
@@ -74,7 +73,6 @@ class _SettingsSyncScreenState extends BaseScreen<SettingsSyncScreen>
       SizedBox(height: Dimens.gap),
       SyncAccountCard(state: state),
       SizedBox(height: Dimens.gap),
-      SyncServerCard(state: state),
       SyncSecretsCard(state: state),
       SyncCategoriesCard(state: state),
     ],
@@ -92,7 +90,6 @@ class _SettingsSyncScreenState extends BaseScreen<SettingsSyncScreen>
             SizedBox(height: Dimens.gap),
             SyncAccountCard(state: state),
             SizedBox(height: Dimens.gap),
-            SyncServerCard(state: state),
             SyncSecretsCard(state: state),
           ],
         ),
