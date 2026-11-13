@@ -111,7 +111,9 @@ class WatchState extends ScreenState {
   @override
   void onInit() {
     settings.value = _record.watch.copy();
-    _progressSub = onChange(media, (_) => _pickChunk());
+    _progressSub = onChange(media, (_) {
+      if (!_chunkPinned) _pickChunk();
+    });
     _prefsSub = onAnyChange([
       watchChunkSizePref.rx,
       watchShowFillerPref.rx,
@@ -295,6 +297,7 @@ class WatchState extends ScreenState {
     if (src == null) return;
     final generation = ++_generation;
     _explicitPick = true;
+    _canFallback = false;
     SourceMatcher.save(service, src, current, picked);
     match.value = picked;
     status.value = getString.watchSelected(picked.title ?? '');
@@ -528,11 +531,6 @@ class WatchState extends ScreenState {
     _saveSettings();
     meta.value = const {};
     _derive();
-    await _loadMeta();
-  }
-
-  Future<void> reloadMeta() async {
-    EpisodeMetaService.clearCache();
     await _loadMeta();
   }
 
