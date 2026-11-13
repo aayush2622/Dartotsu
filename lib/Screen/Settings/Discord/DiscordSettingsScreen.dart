@@ -106,7 +106,7 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     state.track();
     final at = state.now.value;
     final profile = state.account.profile.value;
-    final status = state.signedIn
+    final status = state.account.tokenSaved.value
         ? DiscordStatus.of(PrefName.discordStatus.rx.value)
         : DiscordStatus.online;
     final samples = [
@@ -130,7 +130,8 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
         DiscordPreview(
           profile: profile,
           status: status,
-          customStatus: state.signedIn && PrefName.discordLive.rx.value
+          customStatus:
+              state.account.tokenSaved.value && PrefName.discordLive.rx.value
               ? PrefName.discordCustomStatus.rx.value
               : '',
           presence: PrefName.discordRpc.rx.value || state.sample.value != 3
@@ -157,12 +158,16 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     DiscordRoute.desktop => getString.dcRouteDesktop,
     DiscordRoute.headless => getString.dcRouteHeadless,
     DiscordRoute.gateway => getString.dcRouteGateway,
+    DiscordRoute.linked => getString.dcRouteLinked,
     DiscordRoute.none => getString.dcRouteNone,
   };
 
   Widget _account(BuildContext context) {
     final scheme = context.colorScheme;
     final signed = state.signedIn;
+    final linked = state.account.linked.value;
+    final token = state.account.tokenSaved.value;
+    final linking = state.linking.value;
     final profile = state.account.profile.value;
     final route = state.route;
     final desktop = DiscordRpcRouter.isDesktop;
@@ -181,7 +186,9 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
             ),
             title: Text(
               profile == null
-                  ? getString.discordTokenSaved
+                  ? (token
+                        ? getString.discordTokenSaved
+                        : getString.dcConnected)
                   : getString.dcSignedInAs(profile.displayName),
             ),
             subtitle: Text(_routeLabel(route)),
@@ -240,38 +247,68 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
           ),
         Padding(
           padding: const EdgeInsets.fromLTRB(16, 6, 16, 8),
-          child: Row(
+          child: Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            crossAxisAlignment: WrapCrossAlignment.center,
             children: [
-              if (signed)
+              if (!linked)
+                FilledButton.icon(
+                  onPressed: linking ? null : state.connect,
+                  icon: linking
+                      ? const SizedBox.square(
+                          dimension: 18,
+                          child: CircularProgressIndicator(strokeWidth: 2),
+                        )
+                      : const Icon(Icons.link_rounded),
+                  label: Text(getString.dcConnect),
+                )
+              else
+                OutlinedButton.icon(
+                  onPressed: state.disconnect,
+                  icon: const Icon(Icons.link_off_rounded),
+                  label: Text(getString.dcDisconnect),
+                ),
+              if (!token)
+                TextButton(
+                  onPressed: () => state.login(context),
+                  child: Text(getString.dcUseToken),
+                )
+              else
                 OutlinedButton.icon(
                   onPressed: state.signOut,
                   icon: const Icon(Icons.logout_rounded),
                   label: Text(getString.dcSignOut),
-                )
-              else
-                FilledButton.icon(
-                  onPressed: () => state.login(context),
-                  icon: const Icon(Icons.login_rounded),
-                  label: Text(getString.dcSignIn),
                 ),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
-          child: Text(
-            getString.dcTokenWarning,
-            style: context.textTheme.bodySmall?.copyWith(
-              color: scheme.onSurfaceVariant,
+        if (!linked)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 6),
+            child: Text(
+              getString.dcConnectDesc,
+              style: context.textTheme.bodySmall?.copyWith(
+                color: scheme.onSurfaceVariant,
+              ),
             ),
           ),
-        ),
+        if (!token)
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
+            child: Text(
+              getString.dcTokenWarning,
+              style: context.textTheme.bodySmall?.copyWith(
+                color: scheme.onSurfaceVariant,
+              ),
+            ),
+          ),
       ],
     );
   }
 
   Widget _status(BuildContext context) {
-    final signed = state.signedIn;
+    final token = state.account.tokenSaved.value;
     final live = PrefName.discordLive.rx.value;
     final current = DiscordStatus.of(PrefName.discordStatus.rx.value);
     final labels = {
@@ -283,8 +320,8 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     return DPanel(
       title: getString.dcStatusSection,
       icon: Icons.circle_rounded,
-      locked: !signed,
-      lockedNote: getString.dcAccountOnly,
+      locked: !token,
+      lockedNote: getString.dcStatusNeedsToken,
       children: [
         DToggle(
           title: getString.dcControlStatus,

@@ -6,6 +6,7 @@ import '../../../Api/Discord/DiscordAccount.dart';
 import '../../../Api/Discord/DiscordPresence.dart';
 import '../../../Api/Discord/DiscordPresenceController.dart';
 import '../../../Api/Discord/DiscordRpcRouter.dart';
+import '../../../Api/Discord/Linked/DiscordLink.dart';
 import '../../../Api/Discord/Mobile/TokenManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Anime.dart';
@@ -26,6 +27,7 @@ class DiscordSettingsState extends ScreenState {
 
   final account = find<DiscordAccount>();
   final presenceController = find<DiscordPresenceController>();
+  final linking = false.live;
 
   final now = DateTime.now().live;
   final sample = 0.live;
@@ -129,7 +131,8 @@ class DiscordSettingsState extends ScreenState {
   bool get signedIn => account.signedIn.value;
 
   DiscordRoute get route {
-    signedIn;
+    account.linked.value;
+    account.tokenSaved.value;
     PrefName.discordLive.rx.value;
     return DiscordRpcRouter.route;
   }
@@ -199,6 +202,7 @@ class DiscordSettingsState extends ScreenState {
     unawaited(
       navigateToPage(context, const DiscordLoginScreen()).then((_) {
         account.onSignedIn();
+        presenceController.resync();
         if (MobileTokenManager.saved) {
           snackString(getString.discordTokenSavedSnack);
         }
@@ -206,8 +210,34 @@ class DiscordSettingsState extends ScreenState {
     );
   }
 
+  Future<void> connect() async {
+    if (linking.value) return;
+    linking.value = true;
+    try {
+      await DiscordLink().connect();
+      account.onCredentialsChanged();
+      presenceController.resync();
+      snackString(getString.dcConnectedSnack);
+    } on DiscordLinkCancelled {
+      snackString(getString.loginCancelled);
+    } on DiscordLinkFailed catch (e) {
+      snackString(getString.loginFailed(e.message));
+    } catch (e) {
+      snackString(getString.dcConnectFailed);
+    } finally {
+      linking.value = false;
+    }
+  }
+
+  Future<void> disconnect() async {
+    await account.disconnect();
+    presenceController.resync();
+    snackString(getString.dcDisconnectedSnack);
+  }
+
   Future<void> signOut() async {
     await account.signOut();
+    presenceController.resync();
     snackString(getString.discordTokenRemovedSnack);
   }
 }

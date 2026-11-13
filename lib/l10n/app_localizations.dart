@@ -950,14 +950,56 @@ abstract class AppLocalizations {
   /// No description provided for @dcDesktopHint.
   ///
   /// In en, this message translates to:
-  /// **'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.'**
+  /// **'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.'**
   String get dcDesktopHint;
 
   /// No description provided for @dcMobileHint.
   ///
   /// In en, this message translates to:
-  /// **'Rich Presence on mobile runs through your Discord account. Sign in to start.'**
+  /// **'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.'**
   String get dcMobileHint;
+
+  /// No description provided for @dcConnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect Discord'**
+  String get dcConnect;
+
+  /// No description provided for @dcConnectDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.'**
+  String get dcConnectDesc;
+
+  /// No description provided for @dcConnectFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not connect Discord'**
+  String get dcConnectFailed;
+
+  /// No description provided for @dcConnectedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord connected'**
+  String get dcConnectedSnack;
+
+  /// No description provided for @dcDisconnect.
+  ///
+  /// In en, this message translates to:
+  /// **'Disconnect'**
+  String get dcDisconnect;
+
+  /// No description provided for @dcDisconnectedSnack.
+  ///
+  /// In en, this message translates to:
+  /// **'Discord disconnected'**
+  String get dcDisconnectedSnack;
+
+  /// No description provided for @dcUseToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Use a token instead'**
+  String get dcUseToken;
 
   /// No description provided for @dcRouteDesktop.
   ///
@@ -977,11 +1019,23 @@ abstract class AppLocalizations {
   /// **'Through your account, live'**
   String get dcRouteGateway;
 
+  /// No description provided for @dcRouteLinked.
+  ///
+  /// In en, this message translates to:
+  /// **'Connected app'**
+  String get dcRouteLinked;
+
   /// No description provided for @dcRouteNone.
   ///
   /// In en, this message translates to:
   /// **'Not connected'**
   String get dcRouteNone;
+
+  /// No description provided for @dcStatusNeedsToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs a Discord token. Connecting the app does not set your online status.'**
+  String get dcStatusNeedsToken;
 
   /// No description provided for @dcAccountOnly.
   ///

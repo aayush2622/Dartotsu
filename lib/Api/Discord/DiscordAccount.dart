@@ -7,7 +7,9 @@ import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/State/State.dart';
 import '../../Logger.dart';
+import 'DiscordPresenceController.dart';
 import 'DiscordRpcRouter.dart';
+import 'Linked/DiscordLink.dart';
 import 'Mobile/TokenManager.dart';
 
 enum DiscordStatus {
@@ -88,11 +90,17 @@ class DiscordAccount extends AppController {
 
   final profile = Live<DiscordProfile?>(null);
   final signedIn = false.live;
+  final linked = false.live;
+  final tokenSaved = false.live;
   final loading = false.live;
 
   @override
   void onInit() {
-    signedIn.value = MobileTokenManager.saved;
+    DiscordLink.onLost = () {
+      onCredentialsChanged();
+      tryFind<DiscordPresenceController>()?.resync();
+    };
+    _syncFlags();
     final raw = loadCustomData<String>(_cacheKey);
     if (raw != null && signedIn.value) {
       try {
@@ -102,33 +110,33 @@ class DiscordAccount extends AppController {
     if (signedIn.value) unawaited(refresh());
   }
 
-  void onSignedIn() {
-    signedIn.value = MobileTokenManager.saved;
-    unawaited(refresh());
+  void onSignedIn() => onCredentialsChanged();
+
+  void onCredentialsChanged() {
+    _syncFlags();
+    if (signedIn.value) {
+      unawaited(refresh());
+    } else {
+      profile.value = null;
+      removeCustomData(_cacheKey);
+    }
+  }
+
+  void _syncFlags() {
+    linked.value = DiscordLink.saved;
+    tokenSaved.value = MobileTokenManager.saved;
+    signedIn.value = linked.value || tokenSaved.value;
   }
 
   Future<void> refresh() async {
-    final token = MobileTokenManager().authToken;
-    if (token == null || token.isEmpty) return;
+    final header = await _authorization();
+    if (header == null) return;
     loading.value = true;
     try {
-      final res = await find<NetworkManager>().get(
-        'https://discord.com/api/v10/users/@me',
-        headers: {'Authorization': token},
-      );
-      if (res.statusCode == 200 && res.data is Map) {
-        final next = DiscordProfile.fromJson(
-          Map<String, dynamic>.from(res.data as Map),
-        );
-        profile.value = next;
-        saveCustomData<String>(_cacheKey, jsonEncode(next.toJson()));
-      } else {
-        logger(
-          'Discord profile: HTTP ${res.statusCode}',
-          logLevel: LogLevel.error,
-          tag: 'DISCORD',
-        );
-      }
+      final next = await _profile(header);
+      if (next == null) return;
+      profile.value = next;
+      saveCustomData<String>(_cacheKey, jsonEncode(next.toJson()));
     } catch (e) {
       logger(
         'Discord profile failed: $e',
@@ -140,11 +148,50 @@ class DiscordAccount extends AppController {
     }
   }
 
+  Future<String?> _authorization() async {
+    if (DiscordLink.saved) {
+      final access = await DiscordLink().accessToken();
+      if (access != null && access.isNotEmpty) return 'Bearer $access';
+    }
+    final user = MobileTokenManager().authToken;
+    if (user == null || user.isEmpty) return null;
+    return user;
+  }
+
+  Future<DiscordProfile?> _profile(String header) async {
+    final network = find<NetworkManager>();
+    final me = await network.get(
+      'https://discord.com/api/v10/users/@me',
+      headers: {'Authorization': header},
+    );
+    if (me.statusCode == 200 && me.data is Map) {
+      return DiscordProfile.fromJson(Map<String, dynamic>.from(me.data as Map));
+    }
+    final bearer = header.startsWith('Bearer ');
+    logger(
+      'Discord profile: HTTP ${me.statusCode}',
+      logLevel: bearer ? LogLevel.info : LogLevel.error,
+      tag: 'DISCORD',
+    );
+    if (!bearer) return null;
+    final oauth = await network.get(
+      'https://discord.com/api/v10/oauth2/@me',
+      headers: {'Authorization': header},
+    );
+    if (oauth.statusCode != 200 || oauth.data is! Map) return null;
+    final user = (oauth.data as Map)['user'];
+    if (user is! Map) return null;
+    return DiscordProfile.fromJson(Map<String, dynamic>.from(user));
+  }
+
   Future<void> signOut() async {
     await find<DiscordRpcRouter>().logout();
-    removeCustomData(_cacheKey);
-    profile.value = null;
-    signedIn.value = false;
     PrefName.discordLive.rx.value = false;
+    onCredentialsChanged();
+  }
+
+  Future<void> disconnect() async {
+    await find<DiscordRpcRouter>().unlink();
+    onCredentialsChanged();
   }
 }

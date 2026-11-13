@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
+import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../BaseDiscordRPC.dart';
@@ -10,6 +11,8 @@ import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 
 class MobileRPC extends AppController implements BaseDiscordRPC {
+  static const _sessionKey = 'DiscordHeadlessSession';
+
   final NetworkManager network = find();
   final MobileTokenManager tokenManager = MobileTokenManager();
   String? _sessionToken;
@@ -77,7 +80,7 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
           data: res.data,
         );
       }
-      _sessionToken = res.data['token'] as String?;
+      _remember(res.data['token'] as String?);
       discordLog(
         'show: presence set, session present=${_sessionToken != null}',
       );
@@ -112,6 +115,29 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
     return false;
   }
 
+  Future<void> sweep() async {
+    final saved = loadCustomData<String>(
+      _sessionKey,
+      location: PrefLocation.PROTECTED,
+    );
+    if (saved == null || saved.isEmpty || _sessionToken != null) return;
+    _sessionToken = saved;
+    await clear();
+  }
+
+  void _remember(String? token) {
+    _sessionToken = token;
+    if (token == null || token.isEmpty) {
+      removeCustomData(_sessionKey, location: PrefLocation.PROTECTED);
+      return;
+    }
+    saveCustomData<String>(
+      _sessionKey,
+      token,
+      location: PrefLocation.PROTECTED,
+    );
+  }
+
   @override
   Future<void> clear() async {
     final session = _sessionToken;
@@ -131,6 +157,7 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
         headers: {'Authorization': 'Bearer $token'},
         data: {'token': session},
       );
+      if (res.statusCode >= 200 && res.statusCode < 300) _remember(null);
       discordLog('clear: HTTP ${res.statusCode} body=${discordSafe(res.data)}');
     } catch (e) {
       discordLog('clear failed: $e', level: LogLevel.error);
