@@ -62,8 +62,6 @@ class DI {
       'READER/readerSettings': ReaderPrefs.reload,
     });
     PrefManager.restoreHooks.addAll([
-      PlayerPrefs.reload,
-      ReaderPrefs.reload,
       MediaRecords.reload,
       ResumeStore.reload,
       () => tryFind<PendingWrites>()?.reload(),

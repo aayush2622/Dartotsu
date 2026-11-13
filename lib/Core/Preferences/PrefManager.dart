@@ -272,9 +272,16 @@ class PrefManager {
     for (final e in entries) {
       _cache[e.key] = e.value;
     }
+    _applying = true;
+    try {
+      for (final e in entries) {
+        _reloadRx[e.key]?.call();
+        customReloaders[e.key]?.call();
+      }
+    } finally {
+      _applying = false;
+    }
     for (final e in entries) {
-      _reloadRx[e.key]?.call();
-      customReloaders[e.key]?.call();
       onLocalChange?.call(e.key, false);
     }
     for (final hook in restoreHooks) {
