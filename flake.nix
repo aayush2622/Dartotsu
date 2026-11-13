@@ -43,6 +43,7 @@
         let
           linkLibs = with pkgs; [
             gtk3
+            gdk-pixbuf
             glib
             pcre2
             libepoxy

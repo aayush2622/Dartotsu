@@ -10,57 +10,41 @@
   addDriverRunpath,
   glib-networking,
   gtk3,
+  gdk-pixbuf,
   glib,
-  zlib,
-  libdrm,
-  libgbm,
-  lcms2,
-  mesa,
-  fontconfig,
-  fribidi,
-  freetype,
+  pango,
+  cairo,
+  at-spi2-core,
   harfbuzz,
-  alsa-lib,
-  libpulseaudio,
-  wayland,
+  fontconfig,
+  freetype,
+  fribidi,
+  zlib,
+  libepoxy,
   libxkbcommon,
+  wayland,
   libx11,
   libxcb,
-  libxfixes,
   libxext,
+  libxfixes,
+  libxi,
   libxrandr,
   libxscrnsaver,
   libxv,
+  libdrm,
+  libgbm,
+  libglvnd,
   webkitgtk_4_1,
-  libseccomp,
-  gst_all_1,
-  libinput,
-  libxslt,
-  woff2,
-  libgcrypt,
-  libgpg-error,
-  libjxl,
-  libavif,
-  hyphen,
-  libsecret,
   libsoup_3,
-  at-spi2-core,
-  libepoxy,
-  systemd,
-  expat,
-  libwebp,
-  icu,
-  libjpeg,
-  libjpeg8,
-  libpng,
-  libxml2,
-  libtasn1,
-  sqlite,
-  mpv-unwrapped,
+  gnutls,
+  lcms2,
+  xz,
+  libarchive,
+  libunwind,
   libva,
   libvdpau,
-  libunwind,
-  libarchive,
+  libpulseaudio,
+  alsa-lib,
 }:
 {
   channel,
@@ -72,7 +56,6 @@ let
   suffix = lib.optionalString (channel != "stable") "-${channel}";
   exe = "dartotsu${suffix}";
   linkSchemes = import ./link-schemes.nix;
-  harfbuzzIcu = harfbuzz.override { withIcu = true; };
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "dartotsu${suffix}";
@@ -97,65 +80,48 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
+    stdenv.cc.cc.lib
+
     gtk3
+    gdk-pixbuf
     glib
-    zlib
-    libdrm
-    libgbm
-    lcms2
-    mesa
-    fontconfig
-    fribidi
-    freetype
+    pango
+    cairo
+    at-spi2-core
     harfbuzz
-    harfbuzzIcu
-    alsa-lib
-    libpulseaudio
-    wayland
+    fontconfig
+    freetype
+    fribidi
+    zlib
+    libepoxy
+
     libxkbcommon
+    wayland
     libx11
     libxcb
-    libxfixes
     libxext
+    libxfixes
+    libxi
     libxrandr
     libxscrnsaver
     libxv
-    stdenv.cc.cc.lib
+
+    libdrm
+    libgbm
+    libglvnd
 
     webkitgtk_4_1
-
-    libseccomp
-    gst_all_1.gstreamer
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-bad
-    libinput
-    libxslt
-    woff2
-    libgcrypt
-    libgpg-error
-    libjxl
-    libavif
-    hyphen
-    libsecret
     libsoup_3
-    at-spi2-core
-    libepoxy
-    systemd
-    expat
-    libwebp
-    icu
-    libjpeg
-    libjpeg8
-    libpng
-    libxml2
-    libtasn1
-    sqlite
 
-    mpv-unwrapped
+    gnutls
+    lcms2
+    xz
+    libarchive
+    libunwind
     libva
     libvdpau
-    libunwind
-    libarchive
+    libpulseaudio
+    alsa-lib
   ];
 
   autoPatchelfIgnoreMissingDeps = [ "libjvm.so" ];
