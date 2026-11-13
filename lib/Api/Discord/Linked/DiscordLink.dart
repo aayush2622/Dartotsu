@@ -25,17 +25,20 @@ class DiscordLinkFailed implements Exception {
   String toString() => message;
 }
 
-/// OAuth grant for the Connected Apps path. Stores a refresh token, never a
-/// user session token.
+class DiscordLinkRevoked extends DiscordLinkFailed {
+  DiscordLinkRevoked() : super('Discord access was revoked');
+}
+
 class DiscordLink {
   static const _accessKey = 'DiscordLinkAccess';
   static const _refreshKey = 'DiscordLinkRefresh';
   static const _expiryKey = 'DiscordLinkExpiry';
   static const _skew = Duration(seconds: 60);
 
-  NetworkManager get network => find();
+  static Future<String?>? _pending;
+  static void Function()? onLost;
 
-  Future<String?>? _pending;
+  NetworkManager get network => find();
 
   static String? _read(String key) {
     final value = loadCustomData<String>(key, location: PrefLocation.PROTECTED);
@@ -149,11 +152,22 @@ class DiscordLink {
 
   Future<String?> _refresh(String refresh) async {
     discordLog('refresh: requesting a new access token');
-    final grant = await _exchange({
-      'client_id': DiscordApp.linkedId,
-      'grant_type': 'refresh_token',
-      'refresh_token': refresh,
-    });
+    final DiscordOAuthGrant? grant;
+    try {
+      grant = await _exchange({
+        'client_id': DiscordApp.linkedId,
+        'grant_type': 'refresh_token',
+        'refresh_token': refresh,
+      });
+    } on DiscordLinkRevoked {
+      discordLog(
+        'refresh: grant revoked, disconnecting',
+        level: LogLevel.error,
+      );
+      _clear();
+      onLost?.call();
+      return null;
+    }
     if (grant == null) {
       discordLog('refresh failed', level: LogLevel.error);
       return null;
@@ -171,6 +185,9 @@ class DiscordLink {
       discordLog('token: HTTP ${res.statusCode} body=${discordSafe(res.data)}');
       if (res.statusCode != 200) {
         final data = res.data;
+        if (data is Map && data['error'] == 'invalid_grant') {
+          throw DiscordLinkRevoked();
+        }
         final description = data is Map
             ? data['error_description'] ?? data['error']
             : null;

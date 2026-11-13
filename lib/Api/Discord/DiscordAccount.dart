@@ -7,6 +7,7 @@ import '../../Core/NetworkManager/NetworkManager.dart';
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/State/State.dart';
 import '../../Logger.dart';
+import 'DiscordPresenceController.dart';
 import 'DiscordRpcRouter.dart';
 import 'Linked/DiscordLink.dart';
 import 'Mobile/TokenManager.dart';
@@ -95,6 +96,10 @@ class DiscordAccount extends AppController {
 
   @override
   void onInit() {
+    DiscordLink.onLost = () {
+      onCredentialsChanged();
+      tryFind<DiscordPresenceController>()?.resync();
+    };
     _syncFlags();
     final raw = loadCustomData<String>(_cacheKey);
     if (raw != null && signedIn.value) {
@@ -162,12 +167,13 @@ class DiscordAccount extends AppController {
     if (me.statusCode == 200 && me.data is Map) {
       return DiscordProfile.fromJson(Map<String, dynamic>.from(me.data as Map));
     }
+    final bearer = header.startsWith('Bearer ');
     logger(
       'Discord profile: HTTP ${me.statusCode}',
-      logLevel: LogLevel.error,
+      logLevel: bearer ? LogLevel.info : LogLevel.error,
       tag: 'DISCORD',
     );
-    if (!header.startsWith('Bearer ')) return null;
+    if (!bearer) return null;
     final oauth = await network.get(
       'https://discord.com/api/v10/oauth2/@me',
       headers: {'Authorization': header},
