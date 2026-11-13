@@ -4,7 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import 'ThemedContainer.dart';
-import '../../Utils/Functions/AppShortcuts.dart';
+import '../../Utils/Nav/KeyboardMode.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';

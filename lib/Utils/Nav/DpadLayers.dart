@@ -2,7 +2,7 @@ import '../Animation/WidgetAnimations.dart';
 
 import 'package:flutter/material.dart';
 
-import '../Functions/AppShortcuts.dart';
+import 'KeyboardMode.dart';
 import '../Functions/NavigateToScreen.dart';
 import 'DpadNav.dart';
 

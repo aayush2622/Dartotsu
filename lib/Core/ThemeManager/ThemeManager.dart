@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ClickCursor.dart';
-import '../../Utils/Functions/AppShortcuts.dart';
+import '../../Utils/Nav/KeyboardMode.dart';
 import 'GlassTheme.dart';
 import 'ThemeMode.dart';
 

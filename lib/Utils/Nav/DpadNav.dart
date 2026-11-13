@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import '../Extensions/ClickCursor.dart';
 
 import '../Extensions/ContextExtensions.dart';
-import '../Functions/AppShortcuts.dart';
+import 'KeyboardMode.dart';
 
 class DpadFocusable extends StatefulWidget {
   final Widget child;

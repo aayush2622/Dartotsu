@@ -41,6 +41,7 @@ import 'Screen/MainScreen.dart';
 import 'Screen/Onboarding/OnboardingScreen.dart';
 import 'Screen/Splash/SplashApp.dart';
 import 'Utils/Functions/AppShortcuts.dart';
+import 'Utils/Nav/KeyboardMode.dart';
 import 'Utils/Functions/AppRouteLinks.dart';
 import 'Utils/Functions/DeepLink.dart';
 import 'Utils/Functions/DisplayMode.dart';

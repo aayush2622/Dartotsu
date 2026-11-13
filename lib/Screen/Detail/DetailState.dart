@@ -25,7 +25,7 @@ import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Core/ThemeManager/ThemeController.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
-import '../../Utils/Functions/AppShortcuts.dart';
+import '../../Utils/Nav/KeyboardMode.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/ScreenState.dart';

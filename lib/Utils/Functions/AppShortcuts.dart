@@ -12,17 +12,10 @@ import '../../Screen/Feed/FeedNavigation.dart';
 import '../../Screen/Settings/SettingsScreen.dart';
 import '../../Screen/Settings/Shortcuts/ShortcutsScreen.dart';
 import '../Nav/DpadLayers.dart';
+import '../Nav/KeyboardMode.dart';
 import 'DesktopFullscreen.dart';
 import 'NavigateToScreen.dart';
 import 'SnackBar.dart';
-
-final _keyboardMode = false.live;
-
-bool get usingKeyboard => _keyboardMode.value;
-
-set usingKeyboard(bool value) {
-  if (_keyboardMode.value != value) _keyboardMode.value = value;
-}
 
 bool _typing() {
   final context = FocusManager.instance.primaryFocus?.context;
