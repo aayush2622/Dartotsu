@@ -321,20 +321,21 @@ class PlayerState extends ScreenState {
 
   AppLifecycleListener? _lifecycle;
   bool _pausedByBlur = false;
+  bool _pipPending = false;
 
   Timer? _blurTimer;
 
   void _blur() {
     if (_closed || !settings.pauseOnBlur || _pausedByBlur) return;
-    final wait = Platform.isAndroid && settings.autoPip
-        ? const Duration(milliseconds: 300)
+    final wait = Platform.isAndroid
+        ? const Duration(milliseconds: 500)
         : Duration.zero;
     _blurTimer?.cancel();
     _blurTimer = Timer(wait, _pauseForBlur);
   }
 
   void _pauseForBlur() {
-    if (_closed || pip.value || _pausedByBlur) return;
+    if (_closed || pip.value || _pipPending || _pausedByBlur) return;
     if (cast.active || !engine.playing.value) return;
     _pausedByBlur = true;
     unawaited(engine.pause());
@@ -351,10 +352,17 @@ class PlayerState extends ScreenState {
 
   Future<void> _initPip() async {
     await PlayerPip.init(
+      owner: this,
       onChanged: (active) {
         if (_closed) return;
         pip.value = active;
+        _pipPending = false;
         if (active) {
+          _blurTimer?.cancel();
+          if (_pausedByBlur) {
+            _pausedByBlur = false;
+            if (!engine.playing.value) unawaited(engine.play());
+          }
           controlsVisible.value = false;
           commentsOpen.value = false;
           chatOpen.value = false;
@@ -375,10 +383,6 @@ class PlayerState extends ScreenState {
     switch (id) {
       case 'toggle':
         unawaited(togglePlayback());
-      case 'previous':
-        openPrevious();
-      case 'next':
-        openNext();
       case 'back':
         seekBy(-step);
       case 'forward':
@@ -396,16 +400,12 @@ class PlayerState extends ScreenState {
       auto: settings.autoPip,
       playing: playing,
       actions: [
-        hasPrevious
-            ? PipAction('previous', getString.playerPipPrevious)
-            : PipAction('back', getString.playerPipBack),
+        PipAction('back', getString.playerPipBack),
         PipAction(
           'toggle',
           playing ? getString.playerPipPause : getString.playerPipPlay,
         ),
-        hasNext
-            ? PipAction('next', getString.playerPipNext)
-            : PipAction('forward', getString.playerPipForward),
+        PipAction('forward', getString.playerPipForward),
       ],
     );
   }
@@ -417,7 +417,9 @@ class PlayerState extends ScreenState {
 
   Future<void> enterPip() async {
     if (!PlayerPip.supported || pip.value) return;
-    await PlayerPip.enter(_pipConfig());
+    _pipPending = true;
+    final entered = await PlayerPip.enter(_pipConfig());
+    if (!entered) _pipPending = false;
   }
 
   void previewTo(Duration? at) {
@@ -471,13 +473,7 @@ class PlayerState extends ScreenState {
 
   Future<void> _watchRender(int generation) async {
     if (PlayerEngine.softwareRender || isMobilePlatform) return;
-    var waited = 0;
-    while (engine.duration.value == Duration.zero && waited < 300) {
-      await Future<void>.delayed(const Duration(milliseconds: 100));
-      waited++;
-      if (generation != _generation) return;
-    }
-    if (engine.duration.value == Duration.zero) return;
+    if (!await engine.untilLoaded(() => generation != _generation)) return;
     var rendered = false;
     unawaited(
       engine.video.waitUntilFirstFrameRendered.then((_) => rendered = true),
@@ -509,6 +505,7 @@ class PlayerState extends ScreenState {
     final old = engine;
     engine = PlayerEngine(settings);
     _bindEngine();
+    together.engineChanged(this);
     engineTick.value++;
     unawaited(old.dispose());
     await engine.configure();
@@ -550,8 +547,8 @@ class PlayerState extends ScreenState {
     if (Platform.isAndroid) unawaited(applyRefreshRate());
     _saveProgress(force: true);
     _commitWatched();
-    unawaited(PlayerPip.disarm());
-    PlayerPip.detach();
+    unawaited(PlayerPip.disarm(this));
+    PlayerPip.detach(this);
     unawaited(seekPreview.dispose());
     unawaited(mediaSession.dispose());
     unawaited(_snapshotAndDispose());
@@ -828,12 +825,10 @@ class PlayerState extends ScreenState {
   }
 
   Future<void> _afterOpen(v.Video chosen, int generation) async {
-    var waited = 0;
-    while (engine.duration.value == Duration.zero && waited < 150) {
-      await Future<void>.delayed(const Duration(milliseconds: 100));
-      waited++;
-      if (generation != _generation) return;
-    }
+    await engine.untilLoaded(
+      () => generation != _generation,
+      timeout: const Duration(seconds: 15),
+    );
     if (generation != _generation) return;
     final own = <SkipStamp>[
       for (final t
@@ -860,7 +855,8 @@ class PlayerState extends ScreenState {
     final skipMedia = request.media;
     final skipService = request.service;
     var malId = skipMedia?.malId;
-    if (own.isEmpty &&
+    if (!settings.disableSkips &&
+        own.isEmpty &&
         malId == null &&
         skipMedia != null &&
         skipService != null &&

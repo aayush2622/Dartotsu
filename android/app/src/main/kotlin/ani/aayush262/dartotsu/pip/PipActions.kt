@@ -13,12 +13,10 @@ import ani.aayush262.dartotsu.R
 
 internal const val PIP_ACTION = "ani.aayush262.dartotsu.PIP_ACTION"
 private const val EXTRA_ID = "id"
-private val KNOWN = listOf("toggle", "previous", "next", "back", "forward")
+private val KNOWN = listOf("toggle", "back", "forward")
 
 private fun iconFor(id: String, playing: Boolean): Int? = when (id) {
     "toggle" -> if (playing) R.drawable.ic_pip_pause else R.drawable.ic_pip_play
-    "previous" -> R.drawable.ic_pip_previous
-    "next" -> R.drawable.ic_pip_next
     "back" -> R.drawable.ic_pip_back
     "forward" -> R.drawable.ic_pip_forward
     else -> null

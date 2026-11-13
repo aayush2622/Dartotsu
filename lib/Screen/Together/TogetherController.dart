@@ -145,6 +145,10 @@ class TogetherController extends AppController {
     _checkFollow();
   }
 
+  void engineChanged(PlayerState player) {
+    if (identical(_player, player)) _bindEngine();
+  }
+
   void detach(PlayerState player) {
     if (!identical(_player, player)) return;
     _engineBinding?.dispose();

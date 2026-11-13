@@ -25,12 +25,7 @@ class TrackSelector {
     }
   }
 
-  Future<void> _timelineShown() async {
-    for (var i = 0; i < 300 && engine.duration.value <= Duration.zero; i++) {
-      if (cancelled()) return;
-      await Future<void>.delayed(const Duration(milliseconds: 100));
-    }
-  }
+  Future<void> _timelineShown() => engine.untilLoaded(cancelled);
 
   Future<void> _tracksSettled() async {
     var stable = 0;
@@ -53,14 +48,15 @@ class TrackSelector {
     final target =
         wanted ?? (engine.activeAudio.value == null ? tracks.first : null);
     if (target == null || engine.activeAudio.value == target.id) return;
-    engine.activeAudio.value = target.id;
-    await engine.setAudio(target.id);
+    await engine.chooseAudio(target.id);
     await _confirm('aid', target.id, () => engine.setAudio(target.id));
   }
 
   Future<void> _subtitle(v.Video video) async {
     if (!settings.showSubtitle) {
-      if (engine.activeSubtitle.value != null) await engine.noSubtitle();
+      if (engine.activeSubtitle.value != null) {
+        await engine.chooseSubtitle(null);
+      }
       return;
     }
     final embedded = engine.subtitleTracks.value;
@@ -111,8 +107,7 @@ class TrackSelector {
 
   Future<void> _useEmbedded(PlayerTrack track) async {
     if (engine.activeSubtitle.value == track.id) return;
-    engine.activeSubtitle.value = track.id;
-    await engine.setSubtitle(track.id);
+    await engine.chooseSubtitle(track.id);
     await _confirm('sid', track.id, () => engine.setSubtitle(track.id));
   }
 

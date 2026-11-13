@@ -887,20 +887,14 @@ class _PlayerScreenState extends State<PlayerScreen>
     snackString('${next}x');
   }
 
-  Future<void> _frameStep(String command) async {
-    final engine = state.engine;
-    await engine.command([command]);
-    await Future<void>.delayed(const Duration(milliseconds: 200));
-    engine.buffering.value = false;
-  }
+  Future<void> _frameStep(String command) => state.engine.frameStep(command);
 
   void _toggleSubtitle() {
     final engine = state.engine;
     final active = engine.activeSubtitle.value;
     if (active != null) {
       _lastSubtitle = active;
-      engine.activeSubtitle.value = null;
-      unawaited(engine.noSubtitle());
+      unawaited(engine.chooseSubtitle(null));
       snackString(getString.off);
       return;
     }
@@ -909,8 +903,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     final id = tracks.any((t) => t.id == _lastSubtitle)
         ? _lastSubtitle!
         : tracks.first.id;
-    engine.activeSubtitle.value = id;
-    unawaited(engine.setSubtitle(id));
+    unawaited(engine.chooseSubtitle(id));
     snackString(tracks.firstWhere((t) => t.id == id).label);
   }
 
@@ -921,14 +914,12 @@ class _PlayerScreenState extends State<PlayerScreen>
     final at = tracks.indexWhere((t) => t.id == engine.activeSubtitle.value);
     if (at == tracks.length - 1) {
       _lastSubtitle = engine.activeSubtitle.value;
-      engine.activeSubtitle.value = null;
-      unawaited(engine.noSubtitle());
+      unawaited(engine.chooseSubtitle(null));
       snackString(getString.off);
       return;
     }
     final next = tracks[at + 1];
-    engine.activeSubtitle.value = next.id;
-    unawaited(engine.setSubtitle(next.id));
+    unawaited(engine.chooseSubtitle(next.id));
     snackString(next.label);
   }
 
@@ -938,8 +929,7 @@ class _PlayerScreenState extends State<PlayerScreen>
     if (tracks.length < 2) return;
     final at = tracks.indexWhere((t) => t.id == engine.activeAudio.value);
     final next = tracks[(at + 1) % tracks.length];
-    engine.activeAudio.value = next.id;
-    unawaited(engine.setAudio(next.id));
+    unawaited(engine.chooseAudio(next.id));
     snackString(next.label);
   }
 }

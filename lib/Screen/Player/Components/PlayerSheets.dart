@@ -388,7 +388,7 @@ Widget _tracksList(
           title: Text(getString.playerSubtitlesOff),
           selected: active == null,
           onTap: () {
-            engine.noSubtitle();
+            unawaited(engine.chooseSubtitle(null));
             popPage(context);
           },
         ),
@@ -408,7 +408,9 @@ Widget _tracksList(
           title: Text(t.label),
           selected: active == t.id,
           onTap: () {
-            audio ? engine.setAudio(t.id) : engine.setSubtitle(t.id);
+            unawaited(
+              audio ? engine.chooseAudio(t.id) : engine.chooseSubtitle(t.id),
+            );
             popPage(context);
           },
         ),

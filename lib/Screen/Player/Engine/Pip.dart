@@ -13,16 +13,19 @@ class PlayerPip {
   static void Function(bool active)? _onChanged;
   static void Function(String id)? _onAction;
   static void Function()? _onDismissed;
+  static Object? _owner;
   static bool _available = false;
   static PipConfig? _sent;
 
   static bool get supported => Platform.isAndroid && _available;
 
   static Future<void> init({
+    required Object owner,
     required void Function(bool active) onChanged,
     required void Function(String id) onAction,
     required void Function() onDismissed,
   }) async {
+    _owner = owner;
     _onChanged = onChanged;
     _onAction = onAction;
     _onDismissed = onDismissed;
@@ -47,7 +50,9 @@ class PlayerPip {
     }
   }
 
-  static void detach() {
+  static void detach(Object owner) {
+    if (!identical(_owner, owner)) return;
+    _owner = null;
     _onChanged = null;
     _onAction = null;
     _onDismissed = null;
@@ -66,8 +71,8 @@ class PlayerPip {
     }
   }
 
-  static Future<void> disarm() async {
-    if (!supported) return;
+  static Future<void> disarm(Object owner) async {
+    if (!supported || !identical(_owner, owner)) return;
     _sent = PipConfig.idle;
     try {
       await _channel.invokeMethod<void>('configure', PipConfig.idle.toMap());
