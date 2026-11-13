@@ -342,7 +342,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: ebef448fd4d1c907a5b7467a12f3cc77395836e0
+      resolved-ref: f1dde7ab9379c9a6164f260e8ed0931b243ac422
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "0.0.5"
@@ -1166,8 +1166,8 @@ packages:
     dependency: transitive
     description:
       path: "third_party/media_kit_video"
-      ref: ebef448fd4d1c907a5b7467a12f3cc77395836e0
-      resolved-ref: ebef448fd4d1c907a5b7467a12f3cc77395836e0
+      ref: f1dde7ab9379c9a6164f260e8ed0931b243ac422
+      resolved-ref: f1dde7ab9379c9a6164f260e8ed0931b243ac422
       url: "https://github.com/aayush2622/DartotsuExtensionBridge.git"
     source: git
     version: "1.2.5"
