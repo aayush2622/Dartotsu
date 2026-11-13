@@ -11,10 +11,22 @@ class LocalListStore {
   const LocalListStore(this.serviceId);
 
   static const _cap = 3000;
+  static const _tombstoneLife = Duration(days: 90);
 
   static final Map<String, List<Media>> _decoded = {};
 
+  static final _adopted = <String>{};
+
   static void reloadAll() => _decoded.clear();
+
+  void adopt(LocalListStore old) {
+    if (!_adopted.add(old.serviceId)) return;
+    if (loadCustomData<Map<String, dynamic>>(old._key) == null) return;
+    addAll(old.read(), merge: true);
+    removeCustomData(old._key);
+    _decoded.remove(old._key);
+    ContinueOrder(serviceId).adopt(ContinueOrder(old.serviceId));
+  }
 
   String get _key => 'localList/$serviceId';
 
@@ -47,9 +59,29 @@ class LocalListStore {
     return media;
   }
 
-  void _write(List<Media> items) {
+  Map<String, int> _removed() {
+    final raw = loadCustomData<Map<String, dynamic>>(_key)?['removed'];
+    if (raw is! Map) return {};
+    final oldest =
+        DateTime.now().millisecondsSinceEpoch - _tombstoneLife.inMilliseconds;
+    return {
+      for (final e in raw.entries)
+        if (e.value is num && (e.value as num) > oldest)
+          '${e.key}': (e.value as num).toInt(),
+    };
+  }
+
+  void _write(
+    List<Media> items, {
+    Iterable<String> restored = const [],
+    Iterable<String> removed = const [],
+  }) {
     final capped = items.length > _cap ? items.sublist(0, _cap) : items;
     _decoded[_key] = capped;
+    final now = DateTime.now().millisecondsSinceEpoch;
+    final tombs = _removed()
+      ..removeWhere((id, _) => restored.contains(id))
+      ..addEntries([for (final id in removed) MapEntry(id, now)]);
     try {
       saveCustomData<Map<String, dynamic>>(_key, {
         'items': [
@@ -59,6 +91,7 @@ class LocalListStore {
               if (m.sourceData != null) 'source': m.sourceData!.toJson(),
             },
         ],
+        if (tombs.isNotEmpty) 'removed': tombs,
       });
     } catch (e) {
       logger(
@@ -72,7 +105,7 @@ class LocalListStore {
     media.minimal = false;
     media.userUpdatedAt = DateTime.now().millisecondsSinceEpoch;
     final items = read().toList()..removeWhere((m) => m.id == media.id);
-    _write([media, ...items]);
+    _write([media, ...items], restored: [media.id]);
   }
 
   int addAll(List<Media> incoming, {required bool merge}) {
@@ -103,7 +136,7 @@ class LocalListStore {
     }
     final all = [...result, ...byId.values]
       ..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
-    _write(all);
+    _write(all, restored: [for (final m in incoming) m.id]);
     return added;
   }
 
@@ -114,7 +147,7 @@ class LocalListStore {
   }
 
   void remove(String id) =>
-      _write(read().toList()..removeWhere((m) => m.id == id));
+      _write(read().toList()..removeWhere((m) => m.id == id), removed: [id]);
 
   Map<String, List<Media>> sections({bool? anime}) {
     final out = <String, List<Media>>{
@@ -161,14 +194,31 @@ class ContinueOrder {
     return {for (final e in raw.entries) e.key: e.value as int};
   }
 
-  void touch(String id, {required bool anime}) {
-    if (isIncognito) return;
-    final entries = read(anime: anime)
-      ..[id] = DateTime.now().millisecondsSinceEpoch;
+  void adopt(ContinueOrder old) {
+    for (final anime in [true, false]) {
+      final theirs = old.read(anime: anime);
+      if (theirs.isEmpty) continue;
+      final mine = read(anime: anime);
+      for (final e in theirs.entries) {
+        if (e.value > (mine[e.key] ?? 0)) mine[e.key] = e.value;
+      }
+      _save(anime, mine);
+      removeCustomData(old._key(anime));
+    }
+  }
+
+  void _save(bool anime, Map<String, int> entries) {
     final newest = entries.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
     saveCustomData<Map<String, dynamic>>(_key(anime), {
       for (final e in newest.take(_cap)) e.key: e.value,
     });
+  }
+
+  void touch(String id, {required bool anime}) {
+    if (isIncognito) return;
+    final entries = read(anime: anime)
+      ..[id] = DateTime.now().millisecondsSinceEpoch;
+    _save(anime, entries);
   }
 }

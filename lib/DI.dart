@@ -49,7 +49,12 @@ import 'Screen/Detail/Watch/Data/Media/ResumeStore.dart';
 /// Lazy (`lazyPut`): built on first `find<T>()`.
 class DI {
   static void init() {
-    SettingsSync.titleHooks.addAll([MediaRecords.reload, ResumeStore.reload]);
+    SettingsSync.titleHooks.addAll([
+      MediaRecords.reload,
+      ResumeStore.reload,
+      LocalListStore.reloadAll,
+      () => tryFind<RefreshController>()?.all(),
+    ]);
     SettingsSync.secretHooks.add(() {
       tryFind<DiscordAccount>()?.onSignedIn();
       for (final service in find<MediaServiceController>().services) {

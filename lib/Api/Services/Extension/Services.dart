@@ -223,11 +223,19 @@ void setSourceLoaded(ItemType type, Source source, bool loaded) {
   pref.rx.value = muted.toList();
 }
 
+const _desktopSuffix = '_desktop';
+
 LocalListStore extensionStore(ItemType type) {
-  final service = extensionServiceFor(type);
-  return LocalListStore(
-    service == null ? extensionServiceId : '$extensionServiceId/${service.id}',
-  );
+  final managerId = extensionServiceFor(type)?.id;
+  if (managerId == null) return const LocalListStore(extensionServiceId);
+  final shared = managerId.endsWith(_desktopSuffix)
+      ? managerId.substring(0, managerId.length - _desktopSuffix.length)
+      : managerId;
+  final store = LocalListStore('$extensionServiceId/$shared');
+  if (shared != managerId) {
+    store.adopt(LocalListStore('$extensionServiceId/$managerId'));
+  }
+  return store;
 }
 
 Future<void> ensureSourcesReady(ItemType type) async {

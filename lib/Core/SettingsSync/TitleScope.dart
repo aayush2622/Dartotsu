@@ -9,6 +9,8 @@ class TitleScope {
   static const resumeKey = 'OTHER/resume';
   static const _recordPrefix = 'OTHER/media/';
   static const _localPrefix = 'OTHER/media/local/';
+  static const _listPrefix = 'OTHER/localList/';
+  static const _orderPrefix = 'OTHER/continueOrder/';
 
   static const _recordLocal = {'matches', 'streams', 'tab'};
   static const _watchLocal = {'sourceId', 'sourceName', 'hiddenScanlators'};
@@ -22,8 +24,17 @@ class TitleScope {
 
   static bool isResume(String key) => key == resumeKey;
 
+  static const _listCap = 3000;
+  static const _orderCap = 100;
+
+  static bool isList(String key) => key.startsWith(_listPrefix);
+
+  static bool isOrder(String key) => key.startsWith(_orderPrefix);
+
   static bool syncable(String key) =>
       key == resumeKey ||
+      isList(key) ||
+      isOrder(key) ||
       (key.startsWith(_recordPrefix) && !key.startsWith(_localPrefix));
 
   static bool get enabled => PrefName.settingsSyncTitles.value;
@@ -67,7 +78,7 @@ class TitleScope {
 
   static Map<String, dynamic> strip(String key, Map<String, dynamic> json) {
     final value = json['value'];
-    if (value is! Map) return json;
+    if (value is! Map || isList(key) || isOrder(key)) return json;
     final map = value.cast<String, dynamic>();
     if (isResume(key)) {
       final items = map['items'];
@@ -99,7 +110,9 @@ class TitleScope {
 
   static KeyValue restore(String key, Map<String, dynamic> json) {
     final value = json['value'];
-    if (value is! Map) return KeyValue.fromJson(json);
+    if (value is! Map || isList(key) || isOrder(key)) {
+      return KeyValue.fromJson(json);
+    }
     final remote = value.cast<String, dynamic>();
     final local = PrefManager.getCustomVal<Map>(
       SettingsScope.nameOf(key),
@@ -171,6 +184,15 @@ class TitleScope {
     final l = _map(local.json!['value']);
     final r = _map(remote.json!['value']);
     final template = remote.stamp > local.stamp ? remote.json! : local.json!;
+    if (isList(key)) {
+      return {
+        ...template,
+        'value': {..._map(template['value']), ..._combineList(l, r)},
+      };
+    }
+    if (isOrder(key)) {
+      return {...template, 'value': _combineOrder(l, r)};
+    }
     if (isResume(key)) {
       return {
         ...template,
@@ -204,6 +226,64 @@ class TitleScope {
     return out;
   }
 
+  static Map<String, dynamic> _listMedia(Map<String, dynamic> item) =>
+      item['media'] is Map ? _map(item['media']) : item;
+
+  static Map<String, dynamic> _combineList(
+    Map<String, dynamic> local,
+    Map<String, dynamic> remote,
+  ) {
+    List<Map<String, dynamic>> items(Map<String, dynamic> m) => [
+      for (final item in (m['items'] as List? ?? const []))
+        if (item is Map) _map(item),
+    ];
+    String id(Map<String, dynamic> i) => '${_listMedia(i)['id']}';
+    int at(Map<String, dynamic> i) =>
+        (_listMedia(i)['userUpdatedAt'] as num?)?.toInt() ?? 0;
+
+    final newest = <String, Map<String, dynamic>>{};
+    for (final i in [...items(local), ...items(remote)]) {
+      final current = newest[id(i)];
+      if (current == null || at(i) > at(current)) newest[id(i)] = i;
+    }
+    final gone = <String, int>{};
+    for (final m in [local, remote]) {
+      for (final e in _map(m['removed']).entries) {
+        final t = (e.value as num?)?.toInt() ?? 0;
+        if (t > (gone[e.key] ?? -1)) gone[e.key] = t;
+      }
+    }
+    final kept = [
+      for (final e in newest.entries)
+        if ((gone[e.key] ?? -1) < at(e.value)) e.value,
+    ]..sort((x, y) => at(y).compareTo(at(x)));
+    final out = kept.take(_listCap).toList();
+    final live = {for (final i in out) id(i)};
+    return {
+      'items': out,
+      'removed': {
+        for (final e in gone.entries)
+          if (!live.contains(e.key)) e.key: e.value,
+      },
+    };
+  }
+
+  static Map<String, dynamic> _combineOrder(
+    Map<String, dynamic> local,
+    Map<String, dynamic> remote,
+  ) {
+    final merged = <String, int>{};
+    for (final map in [local, remote]) {
+      for (final e in map.entries) {
+        final at = (e.value as num?)?.toInt() ?? 0;
+        if (at > (merged[e.key] ?? 0)) merged[e.key] = at;
+      }
+    }
+    final newest = merged.entries.toList()
+      ..sort((a, b) => b.value.compareTo(a.value));
+    return {for (final e in newest.take(_orderCap)) e.key: e.value};
+  }
+
   static List<Map<String, dynamic>> _combineResume(
     Map<String, dynamic> local,
     Map<String, dynamic> remote,
@@ -234,8 +314,15 @@ class TitleScope {
     return out.take(resumeLimit).toList();
   }
 
-  static int recordCount(Map<String, SyncEntry> entries) =>
-      entries.entries.where((e) => !isResume(e.key) && !e.value.deleted).length;
+  static int recordCount(Map<String, SyncEntry> entries) => entries.entries
+      .where(
+        (e) =>
+            !isResume(e.key) &&
+            !isList(e.key) &&
+            !isOrder(e.key) &&
+            !e.value.deleted,
+      )
+      .length;
 
   static int resumeCount(Map<String, SyncEntry> entries) {
     final items = _map(entries[resumeKey]?.json?['value'])['items'];
