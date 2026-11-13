@@ -33,8 +33,6 @@ const playerChipOrder = [
 
 const playerFullscreenOnly = {'episodes', 'lock'};
 
-const playerCompactFixed = {'streams', 'quality', 'pip', 'fullscreen'};
-
 Future<void> openStreamPicker(BuildContext context, PlayerState state) =>
     state.whilePaused<void>(() async {
       if (!context.mounted) return;

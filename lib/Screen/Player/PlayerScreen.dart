@@ -96,7 +96,10 @@ class _PlayerScreenState extends State<PlayerScreen>
   }
 
   @override
-  Widget build(BuildContext context) => Watch(() => _build(context));
+  Widget build(BuildContext context) => Watch(() {
+    state.settingsVersion.value;
+    return _build(context);
+  });
 
   Widget _build(BuildContext context) {
     final request = widget.request;

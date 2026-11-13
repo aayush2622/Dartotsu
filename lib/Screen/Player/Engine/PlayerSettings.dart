@@ -16,6 +16,12 @@ class PlayerSettings {
 
   PlayerSettings copy() => PlayerSettings(_v);
 
+  void replaceWith(PlayerSettings other) {
+    _v
+      ..clear()
+      ..addAll(other._v);
+  }
+
   PlayerSettings merged(Map<String, Object?> overrides) =>
       PlayerSettings({..._v, ...overrides});
 

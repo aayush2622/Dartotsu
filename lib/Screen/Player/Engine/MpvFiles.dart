@@ -194,8 +194,6 @@ class MpvFiles {
 
   static Future<Directory> scriptsDir() => _sub('scripts');
 
-  static Future<Directory> scriptOptsDir() => _sub('script-opts');
-
   static Future<File> confFile() async {
     final file = File(p.join((await root()).path, 'mpv.conf'));
     if (!await file.exists()) await file.writeAsString('');

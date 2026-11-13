@@ -420,8 +420,6 @@ class PlayerState extends ScreenState {
     await PlayerPip.enter(_pipConfig());
   }
 
-  Future<void> exitPip() => PlayerPip.exit();
-
   void previewTo(Duration? at) {
     previewAt.value = at;
     if (at == null || !settings.seekPreview) {
@@ -766,6 +764,7 @@ class PlayerState extends ScreenState {
     int choice, {
     bool fromStart = false,
     Duration? startAt,
+    bool remember = true,
   }) async {
     if (choice < 0 || choice >= videos.length) return;
     final generation = _generation;
@@ -774,7 +773,7 @@ class PlayerState extends ScreenState {
     final switching = _watchDuration > Duration.zero && !loading.value;
     videoIndex.value = choice;
     final chosen = videos[choice];
-    rememberStream(chosen);
+    if (remember) rememberStream(chosen);
     loading.value = true;
     loadError.value = null;
     Duration start = Duration.zero;
@@ -955,7 +954,7 @@ class PlayerState extends ScreenState {
       if (_brokenStreams.contains(next)) continue;
       snackString(getString.playerStreamFailedNext);
       if (generation != _generation || _closed) return true;
-      await selectStream(next);
+      await selectStream(next, remember: false);
       return true;
     }
     return false;
@@ -1387,6 +1386,7 @@ class PlayerState extends ScreenState {
     } else {
       PlayerPrefs.update(change);
     }
+    settingsVersion.value++;
   }
 
   void setPerTitle(bool value) {
@@ -1398,7 +1398,7 @@ class PlayerState extends ScreenState {
       if (rec.player.isEmpty) rec.player = {'speed': settings.speed};
     } else {
       rec.player = {};
-      settings = PlayerPrefs.global.value.copy();
+      settings.replaceWith(PlayerPrefs.global.value);
       colorValues.value = settings.color;
     }
     MediaRecords.save(request.service!, request.media!);
