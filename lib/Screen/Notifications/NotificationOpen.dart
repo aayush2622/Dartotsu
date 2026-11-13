@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../Api/Services/Anilist/AnilistService.dart';
 import '../../Core/Services/MediaService.dart';
 import '../../Core/Services/Model/Anime.dart';
 import '../../Core/Services/Model/Manga.dart';
@@ -35,8 +36,9 @@ void openNotification(
         cover: n.imageUrl,
         anime: anime ? Anime() : null,
         manga: anime ? null : Manga(),
-        shareLink:
-            'https://anilist.co/${anime ? 'anime' : 'manga'}/${n.mediaId}',
+        shareLink: service.id == anilistServiceId
+            ? 'https://anilist.co/${anime ? 'anime' : 'manga'}/${n.mediaId}'
+            : '',
       ),
       view: service.detailView,
       mutations: service.getMutations,
