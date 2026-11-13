@@ -19,20 +19,8 @@ const _listTypeToStatus = {
   'unfinished': 'DROPPED',
 };
 
-const _statusToListType = {
-  'CURRENT': 'read',
-  'PLANNING': 'wish',
-  'COMPLETED': 'complete',
-  'PAUSED': 'hold',
-  'DROPPED': 'unfinished',
-  'REPEATING': 'read',
-};
-
 String mangaUpdatesStatusIn(String? type) =>
     _listTypeToStatus[type?.toLowerCase()] ?? 'CURRENT';
-
-String mangaUpdatesStatusOut(String? status) =>
-    _statusToListType[status] ?? 'read';
 
 String? _mediaStatus(Map<String, dynamic> s) {
   if (s['completed'] == true) return 'FINISHED';

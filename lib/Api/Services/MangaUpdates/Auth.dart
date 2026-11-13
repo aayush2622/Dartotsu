@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -31,10 +32,6 @@ class MangaUpdatesAuth extends AppController
 
   late final MangaUpdatesQueries queries = MangaUpdatesQueries(
     client,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
     onChapters: (chapters) {
       final current = user.value;
       if (current is MangaUpdatesUser && current.chaptersRead != chapters) {

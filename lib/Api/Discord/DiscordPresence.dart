@@ -400,8 +400,6 @@ class DiscordPresence {
     return out.take(2).toList();
   }
 
-  bool get isBrowsing => !live;
-
   @override
   bool operator ==(Object other) =>
       other is DiscordPresence &&

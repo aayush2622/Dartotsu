@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -34,14 +35,7 @@ class KitsuAuth extends AppController
 
   int? get _userId => user.value?.id;
 
-  late final KitsuQueries queries = KitsuQueries(
-    client,
-    userId: () => _userId,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
-  );
+  late final KitsuQueries queries = KitsuQueries(client, userId: () => _userId);
 
   late final KitsuMutations mutations = KitsuMutations(
     client,

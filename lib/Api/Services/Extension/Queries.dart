@@ -1,5 +1,6 @@
 import '../../../Screen/Extension/Data/SourceSearchFilters.dart';
 import '../../../Logger.dart';
+
 import 'package:collection/collection.dart';
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 
@@ -14,14 +15,11 @@ String _latestTitle(Source source) => 'Latest on ${source.name}';
 
 class ExtensionQueries extends Queries {
   @override
-  Future<bool> getUserData() async => false;
-
-  @override
   Future<Media?> getMedia(String id) async {
     for (final anime in const [true, false]) {
-      final found = extensionStore(
-        itemTypeFor(anime: anime),
-      ).read().firstWhereOrNull((m) => m.id == id);
+      final found = extensionStore(itemTypeFor(anime: anime))
+          .read()
+          .firstWhereOrNull((m) => m.id == id);
       if (found != null) return found;
     }
     return null;
@@ -31,9 +29,8 @@ class ExtensionQueries extends Queries {
   Future<Media?> mediaDetails(Media media) async {
     final source = media.sourceData;
     if (source == null) return media;
-    final detail = await liveSource(
-      source,
-    ).methods.getDetail(DMedia.withUrl(media.shareLink));
+    final detail = await liveSource(source).methods
+        .getDetail(DMedia.withUrl(media.shareLink));
     if (detail.description?.isNotEmpty == true) {
       media.description = detail.description;
     }

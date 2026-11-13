@@ -1,9 +1,8 @@
+import '../../../Core/Services/Api/Pkce.dart';
 import '../../../Logger.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
-import 'package:crypto/crypto.dart';
+import 'dart:async';
+
 import '../../../Core/Services/Api/BrowserAuth.dart';
 
 import '../../../Core/Preferences/PrefManager.dart';
@@ -44,10 +43,6 @@ class SimklAuth extends AppController
 
   late final SimklQueries queries = SimklQueries(
     client,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
     onEpisodes: (episodes) {
       final current = user.value;
       if (current is SimklUser && current.episodesWatched != episodes) {
@@ -95,11 +90,9 @@ class SimklAuth extends AppController
   }
 
   Future<bool> _login() async {
-    final verifier = _random(64);
-    final challenge = base64UrlEncode(
-      sha256.convert(utf8.encode(verifier)).bytes,
-    ).replaceAll('=', '');
-    final state = _random(24);
+    final verifier = randomToken(64);
+    final challenge = pkceChallenge(verifier);
+    final state = randomToken(24);
     final redirect = authRedirect('simkl');
     final result = await browserAuthenticate(
       url: Uri.parse('$simklWeb/oauth2/authorize')
@@ -219,12 +212,5 @@ class SimklAuth extends AppController
     user.value = null;
     queries.clearLibrary();
     PrefManager.removeCustomVal(_userCacheKey, location: PrefLocation.CACHE);
-  }
-
-  static String _random(int length) {
-    final random = Random.secure();
-    return base64UrlEncode(
-      List<int>.generate(length, (_) => random.nextInt(256)),
-    ).replaceAll('=', '').substring(0, length);
   }
 }

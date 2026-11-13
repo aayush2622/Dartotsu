@@ -1,5 +1,8 @@
+import '../../../Core/Services/Api/ListOverlay.dart';
 import '../../../Logger.dart';
+
 import 'package:flutter/foundation.dart';
+
 import 'dart:convert';
 import 'dart:async';
 
@@ -10,7 +13,6 @@ import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/LayoutPref.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
@@ -132,10 +134,9 @@ String? _searchStatus(String status) =>
 
 class MangaBakaQueries extends Queries {
   final MangaBakaClient client;
-  final Future<bool> Function() refreshUser;
   final void Function(int chapters)? onChapters;
 
-  MangaBakaQueries(this.client, {required this.refreshUser, this.onChapters});
+  MangaBakaQueries(this.client, {this.onChapters});
 
   late final MangaBakaCommunity community = MangaBakaCommunity(client);
 
@@ -156,19 +157,8 @@ class MangaBakaQueries extends Queries {
     ];
   }
 
-  Future<List<Media>> _withList(List<Media> items) async {
-    if (!client.hasToken || items.isEmpty) return items;
-    try {
-      final mine = {for (final m in await library()) m.id: m};
-      for (final m in items) {
-        final entry = mine[m.id];
-        if (entry != null) m.takeListEntry(entry);
-      }
-    } catch (e, st) {
-      logError('Queries', e, st);
-    }
-    return items;
-  }
+  Future<List<Media>> _withList(List<Media> items) async =>
+      client.hasToken ? overlayEntries(items, library) : items;
 
   Future<List<Media>> sectionPage(
     MangaBakaSection section, {
@@ -201,9 +191,6 @@ class MangaBakaQueries extends Queries {
     );
     return _withList(_media(body));
   }
-
-  @override
-  Future<bool> getUserData() async => refreshUser();
 
   late final _library = LibraryCache<List<Media>>(load: (_) => _loadLibrary());
 

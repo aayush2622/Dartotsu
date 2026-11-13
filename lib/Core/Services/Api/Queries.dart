@@ -5,8 +5,6 @@ import '../ServiceNotification.dart';
 import 'SectionJobs.dart';
 
 abstract class Queries {
-  Future<bool> getUserData();
-
   Future<Media?> getMedia(String id);
 
   Future<Media?> mediaDetails(Media media);

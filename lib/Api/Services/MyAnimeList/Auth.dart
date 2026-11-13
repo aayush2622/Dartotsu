@@ -1,9 +1,11 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
 import '../../../Core/Services/Api/BrowserAuth.dart';
+
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
@@ -33,14 +35,7 @@ class MalAuth extends AppController with SharedRefresh implements ServiceAuth {
 
   late final MalClient client = MalClient(() => token.value, _refresh);
 
-  late final MalQueries queries = MalQueries(
-    client,
-    tenrai,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
-  );
+  late final MalQueries queries = MalQueries(client, tenrai);
 
   late final MalMutations mutations = MalMutations(
     client,

@@ -1,3 +1,4 @@
+import '../../../Core/Services/Api/ListOverlay.dart';
 import '../../../Logger.dart';
 
 import 'dart:convert';
@@ -12,7 +13,6 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Character.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/Services/Model/Review.dart';
 import '../../../Model/SearchResults.dart';
 import '../../../Core/Services/LayoutPref.dart';
@@ -120,9 +120,8 @@ Map<String, String> get malSearchSorts => {
 class MalQueries extends Queries {
   final MalClient client;
   final TenraiClient tenrai;
-  final Future<bool> Function() refreshUser;
 
-  MalQueries(this.client, this.tenrai, {required this.refreshUser});
+  MalQueries(this.client, this.tenrai);
 
   Future<List<Media>> sectionPage(
     MalSection section,
@@ -141,20 +140,10 @@ class MalQueries extends Queries {
     return _withList(_tenraiMedia(data, anime), anime);
   }
 
-  Future<List<Media>> _withList(List<Media> items, bool anime) async {
-    if (!client.hasToken) return items;
-    try {
-      final mine = {for (final m in await library(anime: anime)) m.id: m};
-      for (final m in items) {
-        final entry = mine[m.id];
-        if (entry == null) continue;
-        m.takeListEntry(entry);
-      }
-    } catch (e, st) {
-      logError('Queries', e, st);
-    }
-    return items;
-  }
+  Future<List<Media>> _withList(List<Media> items, bool anime) async =>
+      client.hasToken
+      ? overlayEntries(items, () => library(anime: anime))
+      : items;
 
   List<Media> _tenraiMedia(Map<String, dynamic> data, bool anime) {
     final seen = <Object?>{};
@@ -217,9 +206,6 @@ class MalQueries extends Queries {
     );
     return _tenraiMedia(data, true);
   }
-
-  @override
-  Future<bool> getUserData() async => refreshUser();
 
   late final _libraries = {
     true: LibraryCache<List<Media>>(load: (_) => _loadLibrary(true)),

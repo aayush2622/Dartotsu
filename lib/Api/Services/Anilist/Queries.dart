@@ -1,4 +1,5 @@
 import '../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
@@ -27,7 +28,9 @@ import 'Prefs.dart';
 import 'AnilistService.dart';
 import 'Data/Media.dart';
 import 'MediaIndex/MediaIndexClient.dart';
+
 import 'package:collection/collection.dart';
+
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 
 part 'Queries/GetAnimeMangaListData.dart';
@@ -42,7 +45,6 @@ part 'Queries/GetMissingSequels.dart';
 part 'Queries/GetNotifications.dart';
 part 'Queries/GetReviews.dart';
 part 'Queries/GetSocialData.dart';
-part 'Queries/GetUserData.dart';
 part 'Queries/GetUserMediaList.dart';
 part 'Queries/Search.dart';
 
@@ -121,9 +123,6 @@ class AnilistQueries extends Queries {
 
   Future<List<Media>?> studioMedia(String id, bool main, int page) =>
       _studioMedia(id, main, page);
-
-  @override
-  Future<bool> getUserData() => _getUserData();
 
   @override
   Future<Media?> getMedia(String id) => _getMedia(id);

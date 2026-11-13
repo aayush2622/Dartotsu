@@ -1,9 +1,8 @@
+import '../../../Core/Services/Api/Pkce.dart';
 import '../../../Logger.dart';
-import 'dart:async';
-import 'dart:convert';
-import 'dart:math';
 
-import 'package:crypto/crypto.dart';
+import 'dart:async';
+
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
@@ -51,10 +50,6 @@ class MangaBakaAuth extends AppController
 
   late final MangaBakaQueries queries = MangaBakaQueries(
     client,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
     onChapters: (chapters) {
       final current = user.value;
       if (current is MangaBakaUser && current.chaptersRead != chapters) {
@@ -96,11 +91,9 @@ class MangaBakaAuth extends AppController
   @override
   Future<bool> login() async {
     try {
-      final verifier = _random(64);
-      final challenge = base64UrlEncode(
-        sha256.convert(utf8.encode(verifier)).bytes,
-      ).replaceAll('=', '');
-      final state = _random(16);
+      final verifier = randomToken(64);
+      final challenge = pkceChallenge(verifier);
+      final state = randomToken(16);
       final redirect = _redirect;
       final result = await browserAuthenticate(
         url: Uri.parse('$mangaBakaOAuth/authorize')
@@ -111,8 +104,7 @@ class MangaBakaAuth extends AppController
                 'response_type': 'code',
                 'code_challenge': challenge,
                 'code_challenge_method': 'S256',
-                'scope':
-                    'openid profile library.read library.write stack.read stack.write offline_access',
+                'scope': 'openid profile library.read library.write stack.read stack.write offline_access',
                 'state': state,
                 'prompt': 'consent',
               },
@@ -249,12 +241,5 @@ class MangaBakaAuth extends AppController
     rawProfile.value = const {};
     queries.clearLibrary();
     PrefManager.removeCustomVal(_userCacheKey, location: PrefLocation.CACHE);
-  }
-
-  static String _random(int length) {
-    final random = Random.secure();
-    return base64UrlEncode(
-      List<int>.generate(length, (_) => random.nextInt(256)),
-    ).replaceAll('=', '').substring(0, length);
   }
 }

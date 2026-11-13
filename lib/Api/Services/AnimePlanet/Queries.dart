@@ -1,3 +1,5 @@
+import '../../../Core/Services/Api/ListOverlay.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -7,7 +9,6 @@ import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/Model/CommunityList.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/Services/Model/Review.dart';
 import '../../../Core/Services/Screens/EntityHost.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -242,19 +243,8 @@ class AnimePlanetQueries extends Queries {
   Future<List<Media>> _withList(
     List<Media> items, {
     required bool anime,
-  }) async {
-    if (!loggedIn || items.isEmpty) return items;
-    try {
-      final mine = {for (final m in await library(anime: anime)) m.id: m};
-      for (final m in items) {
-        final entry = mine[m.id];
-        if (entry != null) m.takeListEntry(entry);
-      }
-    } catch (e, st) {
-      logError('AnimePlanet', e, st);
-    }
-    return items;
-  }
+  }) async =>
+      loggedIn ? overlayEntries(items, () => library(anime: anime)) : items;
 
   AnimePlanetFacets? _anime;
   AnimePlanetFacets? _manga;
@@ -320,9 +310,6 @@ class AnimePlanetQueries extends Queries {
         j.$2,
     ];
   }
-
-  @override
-  Future<bool> getUserData() async => loggedIn;
 
   @override
   Future<Media?> getMedia(String id) async {

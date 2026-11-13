@@ -1,3 +1,4 @@
+import '../../../Core/Services/Api/ListOverlay.dart';
 import '../../../Utils/Lru.dart';
 
 import 'dart:convert';
@@ -13,7 +14,6 @@ import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Character.dart';
 import '../../../Core/Services/Model/Media.dart';
-import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/Services/Model/MediaReaction.dart';
 import '../../../Core/Services/Model/Review.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -189,9 +189,8 @@ String? _searchStatus(String status) =>
 class KitsuQueries extends Queries {
   final KitsuClient client;
   final int? Function() userId;
-  final Future<bool> Function() refreshUser;
 
-  KitsuQueries(this.client, {required this.userId, required this.refreshUser});
+  KitsuQueries(this.client, {required this.userId});
 
   String _kind(bool anime) => anime ? 'anime' : 'manga';
 
@@ -209,19 +208,10 @@ class KitsuQueries extends Queries {
     ];
   }
 
-  Future<List<Media>> _withList(List<Media> items, bool anime) async {
-    if (!client.hasToken || items.isEmpty) return items;
-    try {
-      final mine = {for (final m in await library(anime: anime)) m.id: m};
-      for (final m in items) {
-        final entry = mine[m.id];
-        if (entry != null) m.takeListEntry(entry);
-      }
-    } catch (e, st) {
-      logError('Queries', e, st);
-    }
-    return items;
-  }
+  Future<List<Media>> _withList(List<Media> items, bool anime) async =>
+      client.hasToken
+      ? overlayEntries(items, () => library(anime: anime))
+      : items;
 
   Future<List<Media>> sectionPage(
     KitsuSection section,
@@ -284,9 +274,6 @@ class KitsuQueries extends Queries {
     );
     return _withList(_media(doc), false);
   }
-
-  @override
-  Future<bool> getUserData() async => refreshUser();
 
   late final _libraries = {
     true: LibraryCache<List<Media>>(load: (_) => _loadLibrary(true)),
