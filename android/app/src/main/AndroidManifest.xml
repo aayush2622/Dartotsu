@@ -294,6 +294,33 @@
                 <data android:pathPrefix="/series/" />
             </intent-filter>
 
+            <intent-filter android:label="Open in Dartotsu">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="anime-planet.com" />
+                <data android:host="www.anime-planet.com" />
+                <data android:pathPrefix="/anime/" />
+                <data android:pathPrefix="/manga/" />
+            </intent-filter>
+
+            <intent-filter android:label="Open in Dartotsu">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="https" />
+                <data android:scheme="http" />
+                <data android:host="mangaupdates.com" />
+                <data android:host="www.mangaupdates.com" />
+                <data android:pathPrefix="/series/" />
+            </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.SEND" />
                 <category android:name="android.intent.category.DEFAULT" />
