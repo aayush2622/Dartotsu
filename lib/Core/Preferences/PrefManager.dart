@@ -201,15 +201,6 @@ class PrefManager {
     if (rx is Live<T> && rx.value != value) rx.value = value;
   }
 
-  static void removeVal<T>(Pref<T> pref) {
-    _cache[pref.storageKey] = null;
-    _enqueue(pref.storageKey, null, delete: true);
-    onLocalChange?.call(pref.storageKey, true);
-
-    final rx = _rx[pref.storageKey];
-    if (rx is Live<T>) rx.value = pref.defaultValue;
-  }
-
   /// Shared [Live] for [pref]. Assigning to it persists automatically.
   static Live<T> watch<T>(Pref<T> pref) {
     final existing = _rx[pref.storageKey];

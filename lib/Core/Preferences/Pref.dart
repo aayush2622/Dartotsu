@@ -45,8 +45,6 @@ class Pref<T> {
 
   /// Shared reactive view. Assigning `pref.rx.value = x` persists automatically.
   Live<T> get rx => PrefManager.watch(this);
-
-  void remove() => PrefManager.removeVal(this);
 }
 
 /// An enum preference persisted by its `.name`.
