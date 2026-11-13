@@ -1,6 +1,9 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 
 import '../../Utils/Extensions/ContextExtensions.dart';
+import 'ScrollConfig.dart';
 import 'SheetDragScope.dart';
 import 'SheetHandle.dart';
 import 'ThemedContainer.dart';
@@ -10,6 +13,7 @@ class AppSheet extends StatelessWidget {
   final Widget? trailing;
   final Widget child;
   final double? heightFactor;
+  final bool expandable;
 
   const AppSheet({
     super.key,
@@ -17,11 +21,47 @@ class AppSheet extends StatelessWidget {
     this.trailing,
     required this.child,
     this.heightFactor,
+    this.expandable = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    final sheet = ClipRRect(
+    if (expandable) {
+      return DraggableScrollableSheet(
+        initialChildSize: 0.5,
+        minChildSize: 0.25,
+        maxChildSize: 1,
+        snap: true,
+        snapSizes: const [0.5],
+        builder: (context, controller) => _sheet(
+          context,
+          fill: true,
+          body: PrimaryScrollController(
+            controller: controller,
+            child: ScrollConfig(
+              context,
+              physics: const ClampingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+              child: child,
+            ),
+          ),
+        ),
+      );
+    }
+    final sheet = _sheet(context, fill: heightFactor != null, body: child);
+    final scoped = SheetDragScope(child: sheet);
+    return heightFactor == null
+        ? scoped
+        : FractionallySizedBox(heightFactor: heightFactor, child: scoped);
+  }
+
+  Widget _sheet(
+    BuildContext context, {
+    required bool fill,
+    required Widget body,
+  }) {
+    return ClipRRect(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(28)),
       child: ThemedContainer(
         blur: true,
@@ -30,12 +70,13 @@ class AppSheet extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.only(
             top: 12,
-            bottom: MediaQuery.viewInsetsOf(context).bottom,
+            bottom: math.max(
+              MediaQuery.viewInsetsOf(context).bottom,
+              MediaQuery.viewPaddingOf(context).bottom,
+            ),
           ),
           child: Column(
-            mainAxisSize: heightFactor == null
-                ? MainAxisSize.min
-                : MainAxisSize.max,
+            mainAxisSize: fill ? MainAxisSize.max : MainAxisSize.min,
             children: [
               const SheetHandle(),
               if (title != null)
@@ -55,15 +96,11 @@ class AppSheet extends StatelessWidget {
                     ],
                   ),
                 ),
-              Flexible(child: child),
+              Flexible(child: body),
             ],
           ),
         ),
       ),
     );
-    final scoped = SheetDragScope(child: sheet);
-    return heightFactor == null
-        ? scoped
-        : FractionallySizedBox(heightFactor: heightFactor, child: scoped);
   }
 }

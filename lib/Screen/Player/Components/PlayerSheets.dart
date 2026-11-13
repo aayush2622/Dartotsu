@@ -294,7 +294,7 @@ Future<void> showTracksSheet(
       context,
       AppSheet(
         title: audio ? getString.playerAudio : getString.playerSubtitles,
-        heightFactor: 0.7,
+        expandable: true,
         child: audio
             ? _tracksList(context, state, audio: true)
             : Watch(
@@ -328,7 +328,7 @@ Future<void> showTracksSheet(
 Widget _subtitleSettings(BuildContext context, PlayerState state) =>
     ScrollConfig(
       context,
-      child: ScrollConfig(context, child: SingleChildScrollView(
+      child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
         child: Watch(() {
           state.settingsVersion.value;
@@ -347,7 +347,7 @@ Widget _subtitleSettings(BuildContext context, PlayerState state) =>
             ),
           );
         }),
-      )),
+      ),
     );
 
 Widget _tracksList(
@@ -480,7 +480,7 @@ Future<void> showChaptersSheet(BuildContext context, PlayerState state) async {
         title: entries.isEmpty
             ? getString.playerNoChapters
             : getString.playerChapters,
-        heightFactor: 0.6,
+        expandable: true,
         child: ListView.builder(
           padding: const EdgeInsets.fromLTRB(16, 0, 16, 24),
           itemCount: entries.length,
@@ -565,10 +565,10 @@ Future<void> showPlayerOptions(BuildContext context, PlayerState state) =>
         context,
         AppSheet(
           title: getString.playerSettingsTitle,
-          heightFactor: 0.85,
+          expandable: true,
           child: ScrollConfig(
             context,
-            child: ScrollConfig(context, child: SingleChildScrollView(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
               child: Watch(() {
                 state.settingsVersion.value;
@@ -596,7 +596,7 @@ Future<void> showPlayerOptions(BuildContext context, PlayerState state) =>
                   ],
                 );
               }),
-            )),
+            ),
           ),
         ),
       ),
