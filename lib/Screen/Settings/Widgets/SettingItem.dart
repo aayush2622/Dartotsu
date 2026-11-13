@@ -1,4 +1,5 @@
 import '../../../Utils/Nav/DpadNav.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -180,6 +181,15 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
   late final _value = (widget.setting.initialValue ?? 0).toDouble().live;
 
   @override
+  void didUpdateWidget(SettingSliderItem old) {
+    super.didUpdateWidget(old);
+    final next = (widget.setting.initialValue ?? 0).toDouble();
+    if (widget.setting.initialValue != old.setting.initialValue) {
+      _value.value = next;
+    }
+  }
+
+  @override
   Widget build(BuildContext context) => Watch(() => _build(context));
 
   Widget _build(BuildContext context) {
@@ -202,9 +212,8 @@ class _SettingSliderItemState extends State<SettingSliderItem> {
             iconOnColor: widget.iconOnColor,
           ),
           SliderTheme(
-            data: SliderTheme.of(
-              context,
-            ).copyWith(tickMarkShape: SliderTickMarkShape.noTickMark),
+            data: SliderTheme.of(context)
+                .copyWith(tickMarkShape: SliderTickMarkShape.noTickMark),
             child: Slider(
               min: min,
               max: max,
@@ -240,6 +249,14 @@ class SettingInputBoxItem extends StatefulWidget {
 
 class _SettingInputBoxItemState extends State<SettingInputBoxItem> {
   late final _value = (widget.setting.initialValue ?? 0).live;
+
+  @override
+  void didUpdateWidget(SettingInputBoxItem old) {
+    super.didUpdateWidget(old);
+    if (widget.setting.initialValue != old.setting.initialValue) {
+      _value.value = widget.setting.initialValue ?? 0;
+    }
+  }
 
   void _step(int delta) {
     final s = widget.setting;

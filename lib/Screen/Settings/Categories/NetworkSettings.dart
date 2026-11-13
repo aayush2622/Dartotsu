@@ -1,8 +1,10 @@
 import '../../../Logger.dart';
 import '../../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
+
 import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/DnsManager.dart';
@@ -49,10 +51,7 @@ List<Setting> networkSettings(BuildContext context) {
           .setTitle(getString.clearCookies)
           .setMessage(getString.clearCookiesConfirm)
           .setNegativeButton(getString.cancel, null)
-          .setPositiveButton(
-            getString.clear,
-            () => network.cookieManager.clear(),
-          )
+          .setPositiveButton(getString.clear, network.cookieManager.deleteAll)
           .show(),
     ),
     Setting.header(getString.sectionDnsProxy),
@@ -168,8 +167,10 @@ _ParsedProxy _parseProxyUrl(String raw) {
       protocol: protocol,
       host: uri.host,
       port: uri.hasPort ? uri.port.toString() : '',
-      user: userInfo.isNotEmpty ? userInfo[0] : '',
-      pass: userInfo.length > 1 ? userInfo.sublist(1).join(':') : '',
+      user: userInfo.isNotEmpty ? Uri.decodeComponent(userInfo[0]) : '',
+      pass: userInfo.length > 1
+          ? Uri.decodeComponent(userInfo.sublist(1).join(':'))
+          : '',
     );
   } catch (e, st) {
     logError('NetworkSettings', e, st);
@@ -203,8 +204,10 @@ class _ProxySheetState extends State<_ProxySheet> {
     if (host.isEmpty) return '';
     final port = _port.text.trim();
     final user = _user.text.trim();
-    final pass = _pass.text.trim();
-    final auth = user.isEmpty ? '' : '$user${pass.isEmpty ? '' : ':$pass'}@';
+    final pass = _pass.text;
+    final auth = user.isEmpty
+        ? ''
+        : '${Uri.encodeComponent(user)}${pass.isEmpty ? '' : ':${Uri.encodeComponent(pass)}'}@';
     return '$_protocol://$auth$host${port.isEmpty ? '' : ':$port'}';
   }
 

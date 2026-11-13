@@ -41,7 +41,7 @@ class _Preview extends StatelessWidget {
       title: getString.syncPreviewTitle,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -90,7 +90,7 @@ class _Preview extends StatelessWidget {
               ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }
@@ -112,6 +112,7 @@ class _PairSheet extends StatelessWidget {
     'progress' => getString.syncChangeProgress,
     'score' => getString.syncChangeScore,
     'dates' => getString.syncChangeDates,
+    'private' => getString.syncPrivate,
     _ => getString.syncChangeRepeat,
   };
 
@@ -125,7 +126,7 @@ class _PairSheet extends StatelessWidget {
       title: pair.main.title,
       child: ScrollConfig(
         context,
-        child: ScrollConfig(context, child: SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(12, 0, 12, 20),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -176,7 +177,7 @@ class _PairSheet extends StatelessWidget {
                 ),
             ],
           ),
-        )),
+        ),
       ),
     );
   }
