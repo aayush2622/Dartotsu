@@ -320,7 +320,9 @@ class AnimePlanetQueries extends Queries {
         '/${ref.$1}/${ref.$2}',
         cache: const Duration(minutes: 5),
       );
-      return parseAnimePlanetDetail(body, ref.$1, ref.$2);
+      final media = parseAnimePlanetDetail(body, ref.$1, ref.$2);
+      if (media != null) await _withList([media], anime: ref.$1 == 'anime');
+      return media;
     } on AnimePlanetException catch (e) {
       if (e.status == 404 || e.status == 410) return null;
       rethrow;
