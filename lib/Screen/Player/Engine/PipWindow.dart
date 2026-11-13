@@ -232,7 +232,7 @@ class _PipContent extends StatelessWidget {
             child: Column(
               children: [
                 Align(
-                  alignment: Alignment.centerRight,
+                  alignment: AlignmentDirectional.centerEnd,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
