@@ -1,11 +1,16 @@
 import 'dart:async';
 
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../Core/Preferences/Incognito.dart';
 import '../../Core/Preferences/PrefManager.dart';
+import '../../Utils/Functions/AppWindow.dart';
 import 'BaseDiscordRPC.dart';
 import 'DiscordPresence.dart';
+import 'DiscordRpcRouter.dart';
 import '../../Core/State/State.dart';
 import '../../Logger.dart';
 
@@ -25,6 +30,8 @@ class DiscordPresenceController extends AppController
   bool _held = false;
   DateTime? _pausedAt;
   bool _started = false;
+  bool _exiting = false;
+  ListenerId? _windowListener;
 
   BaseDiscordRPC get _rpc => find<BaseDiscordRPC>();
 
@@ -32,6 +39,10 @@ class DiscordPresenceController extends AppController
     if (_started) return;
     _started = true;
     WidgetsBinding.instance.addObserver(this);
+    if (Platform.isLinux || Platform.isWindows || Platform.isMacOS) {
+      _windowListener = appWindow?.addListener(_onWindow);
+    }
+    unawaited(find<DiscordRpcRouter>().sweep());
     for (final pref in <Live>[
       PrefName.discordRpc.rx,
       PrefName.discordBrowsing.rx,
@@ -107,8 +118,25 @@ class DiscordPresenceController extends AppController
     }
   }
 
+  Future<void> _onWindow(WindowEvent event) async {
+    if (event is! WindowCloseRequestedEvent || _exiting) return;
+    _exiting = true;
+    _debounce?.cancel();
+    try {
+      await find<DiscordRpcRouter>().shutdown().timeout(
+        const Duration(seconds: 3),
+      );
+    } catch (e, st) {
+      logError('DISCORD', e, st);
+    }
+  }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.detached) {
+      _debounce?.cancel();
+      unawaited(find<DiscordRpcRouter>().shutdown());
+    }
     final hidden =
         state == AppLifecycleState.paused ||
         state == AppLifecycleState.hidden ||
@@ -136,6 +164,11 @@ class DiscordPresenceController extends AppController
     final shown = current;
     if (shown == null || !style.shows(shown.kind)) return null;
     return shown.styled(style);
+  }
+
+  void resync() {
+    _shown = null;
+    _schedule();
   }
 
   void _schedule() {
@@ -189,7 +222,11 @@ class DiscordPresenceController extends AppController
   @override
   void onClose() {
     _debounce?.cancel();
-    if (_started) WidgetsBinding.instance.removeObserver(this);
+    if (_started) {
+      WidgetsBinding.instance.removeObserver(this);
+      final listener = _windowListener;
+      if (listener != null) appWindow?.removeListener(listener);
+    }
     super.onClose();
   }
 }

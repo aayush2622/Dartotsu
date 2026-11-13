@@ -450,11 +450,33 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get dcDesktopHint =>
-      'Without signing in, Discord shows “Watching Dartotsu” through the desktop app. Sign in to name the activity after your title, set your status and use every option below.';
+      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
 
   @override
   String get dcMobileHint =>
-      'Rich Presence on mobile runs through your Discord account. Sign in to start.';
+      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+
+  @override
+  String get dcConnect => 'Connect Discord';
+
+  @override
+  String get dcConnectDesc =>
+      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+
+  @override
+  String get dcConnectFailed => 'Could not connect Discord';
+
+  @override
+  String get dcConnectedSnack => 'Discord connected';
+
+  @override
+  String get dcDisconnect => 'Disconnect';
+
+  @override
+  String get dcDisconnectedSnack => 'Discord disconnected';
+
+  @override
+  String get dcUseToken => 'Use a token instead';
 
   @override
   String get dcRouteDesktop => 'Through the Discord desktop app';
@@ -466,7 +488,14 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dcRouteGateway => 'Through your account, live';
 
   @override
+  String get dcRouteLinked => 'Connected app';
+
+  @override
   String get dcRouteNone => 'Not connected';
+
+  @override
+  String get dcStatusNeedsToken =>
+      'Needs a Discord token. Connecting the app does not set your online status.';
 
   @override
   String get dcAccountOnly => 'Needs a signed-in account';

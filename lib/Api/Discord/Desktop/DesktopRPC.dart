@@ -4,12 +4,13 @@ import 'package:dart_discord_presence/dart_discord_presence.dart'
     as discord_rpc;
 
 import '../BaseDiscordRPC.dart';
+import '../DiscordApp.dart';
 import '../DiscordPresence.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 
 class DesktopRPC extends AppController implements BaseDiscordRPC {
-  static const _appId = '1453704458012856401';
+  static const _appId = DiscordApp.desktopId;
   static const _minRetry = Duration(seconds: 10);
   static const _maxRetry = Duration(minutes: 5);
 
