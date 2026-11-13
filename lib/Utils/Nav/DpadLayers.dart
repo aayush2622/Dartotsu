@@ -67,19 +67,6 @@ class DpadColumn extends StatelessWidget {
   );
 }
 
-class DpadPanel extends StatelessWidget {
-  final Widget child;
-
-  const DpadPanel({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) => DpadRegion(
-    horizontalEdge: DpadEdgeBehavior.stop,
-    verticalEdge: DpadEdgeBehavior.stop,
-    child: child,
-  );
-}
-
 class DpadIcon extends StatelessWidget {
   final Widget child;
   final VoidCallback? onSelect;

@@ -87,12 +87,3 @@ Future<SyncPlanned> syncPlanAhead({
       ),
   }, winners.length);
 });
-
-Future<Map<String, int>> syncExpandIds(
-  Map<String, int> ids,
-  List<int> flat,
-  String prefer, {
-  bool anime = true,
-}) => Isolate.run(
-  () => SyncIdIndex(flat, anime: anime).expand(ids, prefer: prefer),
-);

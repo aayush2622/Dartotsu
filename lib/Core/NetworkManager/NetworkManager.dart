@@ -394,8 +394,6 @@ class NetworkManager extends AppController implements BridgeNetwork {
 
   CancelToken newCancelToken() => CancelToken();
 
-  bool isCancelError(Object e) => e is RhttpCancelException;
-
   static const _statusMessages = {
     200: 'OK',
     201: 'Created',

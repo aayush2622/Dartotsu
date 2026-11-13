@@ -62,16 +62,15 @@ class DlnaClient {
     );
   }
 
-  bool get hasVolume => volumeUrl != null;
-
   Future<double?> volume() async {
     final reply = await _rendered('GetVolume', '<Channel>Master</Channel>');
     if (reply == null) return null;
     try {
       final level = int.tryParse(
-        XmlDocument.parse(
-              reply,
-            ).findAllElements('CurrentVolume').firstOrNull?.innerText ??
+        XmlDocument.parse(reply)
+                .findAllElements('CurrentVolume')
+                .firstOrNull
+                ?.innerText ??
             '',
       );
       return level == null ? null : (level / 100).clamp(0.0, 1.0);
@@ -158,9 +157,10 @@ class DlnaClient {
     final info = await _call('GetTransportInfo');
     if (info == null) return '';
     try {
-      return XmlDocument.parse(
-            info,
-          ).findAllElements('CurrentTransportState').firstOrNull?.innerText ??
+      return XmlDocument.parse(info)
+              .findAllElements('CurrentTransportState')
+              .firstOrNull
+              ?.innerText ??
           '';
     } catch (_) {
       return '';

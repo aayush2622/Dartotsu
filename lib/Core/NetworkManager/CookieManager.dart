@@ -530,16 +530,6 @@ class CookieManager extends Interceptor {
     }).toList();
   }
 
-  bool hasCookie(String domain, String name) {
-    domain = normalizeDomain(domain);
-
-    return _allCookies.any(
-      (cookie) =>
-          cookie.name == name &&
-          domainMatches(domain, cookie.domain, cookie.hostOnly),
-    );
-  }
-
   StoredCookie? getCookie(String domain, String name) {
     domain = normalizeDomain(domain);
 

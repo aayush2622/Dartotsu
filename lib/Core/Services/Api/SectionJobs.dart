@@ -69,11 +69,6 @@ Stream<(int, SectionMap)> runSectionJobsIndexed(
   }
 }
 
-Stream<SectionMap> runSectionJobs(
-  List<SectionJob> jobs, {
-  bool parallel = true,
-}) => runSectionJobsIndexed(jobs, parallel: parallel).map((e) => e.$2);
-
 Stream<List<ScreenWidget>> sectionWidgets(
   List<SectionJob> jobs, {
   bool parallel = true,

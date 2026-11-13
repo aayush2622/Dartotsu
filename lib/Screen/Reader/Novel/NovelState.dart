@@ -1051,18 +1051,6 @@ class NovelState extends ScreenState {
     return _highlightIndex![block] ?? const [];
   }
 
-  List<NovelHighlight> get unitHighlights {
-    highlightTick.value;
-    return [
-      for (final h in record.highlights)
-        if (h.unit == unit.number) h,
-    ]..sort(
-      (a, b) => a.block != b.block
-          ? a.block.compareTo(b.block)
-          : a.start.compareTo(b.start),
-    );
-  }
-
   List<NovelHighlight> get allHighlights {
     highlightTick.value;
     return record.highlights.toList()..sort((a, b) => b.at.compareTo(a.at));

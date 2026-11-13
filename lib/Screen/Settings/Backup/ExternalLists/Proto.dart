@@ -186,12 +186,6 @@ class ProtoWriter {
     _out.add(data.buffer.asUint8List());
   }
 
-  void double64(int number, double value) {
-    _tag(number, 1);
-    final data = ByteData(8)..setFloat64(0, value, Endian.little);
-    _out.add(data.buffer.asUint8List());
-  }
-
   void message(int number, ProtoWriter message) {
     final bytes = message.toBytes();
     _tag(number, 2);

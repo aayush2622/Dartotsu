@@ -48,22 +48,6 @@ class SyncTarget {
   String targetId(int native) => '$prefix$native';
 }
 
-SyncTargetPlan planTarget({
-  required List<SyncItem> main,
-  required List<SyncItem> target,
-  required SyncAdapter adapter,
-  SyncAdapter? mainAdapter,
-  required bool anime,
-  required bool onlyForward,
-}) => planWith(
-  main: main,
-  target: target,
-  spec: SyncTarget.of(adapter, anime: anime),
-  mainDates: mainAdapter?.syncsDates ?? true,
-  mainRepeat: mainAdapter?.syncsRepeat ?? true,
-  onlyForward: onlyForward,
-);
-
 SyncTargetPlan planWith({
   required List<SyncItem> main,
   required List<SyncItem> target,

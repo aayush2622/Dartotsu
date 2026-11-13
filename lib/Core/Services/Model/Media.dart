@@ -180,13 +180,6 @@ class Media {
       shareLink: 'https://github.com/aayush2622/Dartotsu',
     );
   }
-
-  DMedia toDMedia() => DMedia(
-    title: name,
-    url: shareLink,
-    cover: cover,
-    description: description,
-  );
 }
 
 extension M on Pages {

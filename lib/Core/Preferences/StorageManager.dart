@@ -132,16 +132,6 @@ class StorageManager {
 
     return await manageStoragePermission.isGranted;
   }
-
-  static Future<bool> videoPermission() async {
-    if (!Platform.isAndroid) return true;
-    if (await Permission.videos.isDenied ||
-        await Permission.videos.isPermanentlyDenied) {
-      final state = await Permission.videos.request();
-      return state.isGranted;
-    }
-    return true;
-  }
 }
 
 extension StringPathExtension on String {
