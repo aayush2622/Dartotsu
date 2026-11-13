@@ -1,4 +1,5 @@
 import '../../Core/Downloads/DownloadEngine.dart';
+
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui' as ui;
@@ -124,11 +125,9 @@ class ReaderState extends ScreenState {
 
   WatchUnit get unit => units[chapter.clamp(0, units.length - 1)];
 
-  String get chapterLabel => unitLabel(unit, false);
-
   String get chapterTitle => unitTitle(unit, false);
 
-  String unitKey(WatchUnit u) => u.number;
+  String unitKey(WatchUnit u) => u.slot;
 
   void openPageSheet(BuildContext context, PageUrl page) {
     final found = items.whereType<ReaderPage>().where(
