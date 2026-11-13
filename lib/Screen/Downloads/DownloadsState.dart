@@ -107,7 +107,10 @@ class DownloadsState extends ScreenState {
     return out;
   }
 
+  int _measureRun = 0;
+
   Future<void> _measure() async {
+    final run = ++_measureRun;
     final paths = [
       for (final t in done)
         if (t.path != null) t.path!,
@@ -115,7 +118,7 @@ class DownloadsState extends ScreenState {
     final total = await Isolate.run(
       () => paths.fold<int>(0, (sum, path) => sum + pathSize(path)),
     );
-    bytes.value = total;
+    if (run == _measureRun) bytes.value = total;
   }
 
   Future<void> refresh() => engine.scanner.scan();

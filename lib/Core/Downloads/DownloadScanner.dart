@@ -84,7 +84,7 @@ class DownloadScanner {
         loose.add(LocalGroup(p.basename(root.path), root.path, rootFiles));
       }
       groups.value = loose;
-      engine.adoptScanned(found);
+      engine.adoptScanned(found, root.path);
       unawaited(LocalLibrary.refresh());
     } catch (e, st) {
       logError('DownloadScanner', e, st);
