@@ -1,5 +1,6 @@
 import '../../Core/Offline/OfflineMode.dart';
 import '../Downloads/Components/OfflineFeed.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Core/Services/MediaService.dart';
@@ -52,6 +53,7 @@ class HomeFeed extends StatelessWidget {
           ),
         ],
       ),
+      onPull: () => StoriesRow.reload(service),
       loader: signedIn ? view.screenStreamWithLocal : view.screenStream,
       isHidden: view.isHiddenSection,
       cacheId: id,

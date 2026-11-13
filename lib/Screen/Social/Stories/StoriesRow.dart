@@ -28,6 +28,12 @@ class StoriesRow extends StatefulWidget {
 
   const StoriesRow({super.key, required this.service});
 
+  static final _loaders = <String, Future<void> Function()>{};
+
+  static Future<void> reload(MediaService service) =>
+      _loaders['${service.id}:${service.auth?.user.value?.name}']?.call() ??
+      Future.value();
+
   @override
   State<StoriesRow> createState() => _StoriesRowState();
 }
@@ -43,6 +49,7 @@ class _StoriesRowState extends State<StoriesRow> {
 
   @override
   void dispose() {
+    StoriesRow._loaders.remove(_cacheKey);
     _scroll.dispose();
     super.dispose();
   }
@@ -77,6 +84,7 @@ class _StoriesRowState extends State<StoriesRow> {
   @override
   void initState() {
     super.initState();
+    StoriesRow._loaders[_cacheKey] = _load;
     final cached = _cache[_cacheKey];
     if (cached != null) {
       _groups.value = cached.groups;
