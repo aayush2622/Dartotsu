@@ -84,7 +84,7 @@ class EpisodeMetaService {
         final found = await provider.fetch(ids);
         if (found.isNotEmpty) {
           results[provider.id] = found;
-          break;
+          yield merge(results);
         }
       } catch (e) {
         logger(
@@ -100,14 +100,12 @@ class EpisodeMetaService {
       'Watch metadata ${ids.toJson()} -> ${{for (final e in results.entries) e.key: e.value.length}}',
       tag: 'WATCH',
     );
-    yield merge(results);
   }
 
   static Map<String, EpisodeMeta> merge(
-    Map<String, Map<String, EpisodeMeta>> results, {
-    List<String>? order,
-  }) {
-    order ??= ordered().map((p) => p.id).toList();
+    Map<String, Map<String, EpisodeMeta>> results,
+  ) {
+    final order = ordered().map((p) => p.id);
     final present = [
       for (final id in order)
         if (results[id] != null) results[id]!,
