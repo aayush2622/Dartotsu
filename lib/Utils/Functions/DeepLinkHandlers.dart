@@ -33,23 +33,11 @@ class ExtensionRepoLinks extends DeepLinkHandler {
       (m) => m.schemes.contains(uri.scheme.toLowerCase()),
     );
     final target = uri.queryParameters['url'] ?? uri.toString();
-    final accepted = Completer<bool>();
-    unawaited(
-      AlertDialogBuilder(context)
-          .setTitle(getString.addRepository)
-          .setMessage(getString.repoLinkConfirm(target))
-          .setPositiveButton(getString.addRepository, () {
-            if (!accepted.isCompleted) accepted.complete(true);
-          })
-          .setNegativeButton(getString.cancel, () {
-            if (!accepted.isCompleted) accepted.complete(false);
-          })
-          .setOnDismissListener(() {
-            if (!accepted.isCompleted) accepted.complete(false);
-          })
-          .show<void>(),
-    );
-    if (!await accepted.future) return;
+    final accepted = await AlertDialogBuilder(context)
+        .setTitle(getString.addRepository)
+        .setMessage(getString.repoLinkConfirm(target))
+        .confirm(getString.addRepository, getString.cancel);
+    if (!accepted) return;
     handler.handleSchemes(uri);
     snackString(getString.repoLinksAdded);
   }

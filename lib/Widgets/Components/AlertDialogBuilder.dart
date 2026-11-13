@@ -124,6 +124,19 @@ class AlertDialogBuilder {
     _isReorderableMultiSelectable = true;
   });
 
+  Future<bool> confirm(String positive, String negative) {
+    final done = Completer<bool>();
+    void answer(bool value) {
+      if (!done.isCompleted) done.complete(value);
+    }
+
+    setPositiveButton(positive, () => answer(true));
+    setNegativeButton(negative, () => answer(false));
+    setOnDismissListener(() => answer(false));
+    unawaited(show<void>());
+    return done.future;
+  }
+
   Future<T?> show<T>() {
     final theme = Theme.of(context).colorScheme;
 

@@ -11,32 +11,20 @@ Future<bool> confirmRemove(
   BuildContext context,
   DownloadEngine engine,
   DownloadTask task,
-) {
-  final done = Completer<bool>();
+) async {
   final name = '${task.mediaTitle} · ${unitBaseName(task)}';
-  unawaited(
-    AlertDialogBuilder(context)
-        .setTitle(
-          task.isDone ? getString.downloadDelete : getString.downloadCancel,
-        )
-        .setMessage(
-          task.isDone
-              ? getString.downloadDeleteConfirm(name)
-              : getString.downloadCancelConfirm(name),
-        )
-        .setPositiveButton(getString.delete, () {
-          if (!done.isCompleted) done.complete(true);
-          unawaited(engine.remove(task));
-        })
-        .setNegativeButton(getString.cancel, () {
-          if (!done.isCompleted) done.complete(false);
-        })
-        .setOnDismissListener(() {
-          if (!done.isCompleted) done.complete(false);
-        })
-        .show<void>(),
-  );
-  return done.future;
+  final confirmed = await AlertDialogBuilder(context)
+      .setTitle(
+        task.isDone ? getString.downloadDelete : getString.downloadCancel,
+      )
+      .setMessage(
+        task.isDone
+            ? getString.downloadDeleteConfirm(name)
+            : getString.downloadCancelConfirm(name),
+      )
+      .confirm(getString.delete, getString.cancel);
+  if (confirmed) unawaited(engine.remove(task));
+  return confirmed;
 }
 
 void confirmClearQueue(

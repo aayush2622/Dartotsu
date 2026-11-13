@@ -358,22 +358,12 @@ class CommentsState extends ScreenState {
 
   Future<bool> _rules() async {
     if (PrefName.commentsRulesSeen.value) return true;
-    final done = Completer<bool>();
-    unawaited(
-      AlertDialogBuilder(context)
-          .setTitle(getString.commentsRules)
-          .setMessage(getString.commentsRulesBody)
-          .setPositiveButton(getString.commentsRulesAccept, () {
-            PrefName.commentsRulesSeen.value = true;
-            done.complete(true);
-          })
-          .setNegativeButton(getString.cancel, () => done.complete(false))
-          .setOnDismissListener(() {
-            if (!done.isCompleted) done.complete(false);
-          })
-          .show<void>(),
-    );
-    return done.future;
+    final accepted = await AlertDialogBuilder(context)
+        .setTitle(getString.commentsRules)
+        .setMessage(getString.commentsRulesBody)
+        .confirm(getString.commentsRulesAccept, getString.cancel);
+    if (accepted) PrefName.commentsRulesSeen.value = true;
+    return accepted;
   }
 
   void showRules() {

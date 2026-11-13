@@ -75,25 +75,11 @@ class _ActivityCardState extends State<ActivityCard> {
   }
 
   Future<void> _delete() async {
-    final confirmed = Completer<bool>();
-    unawaited(
-      (AlertDialogBuilder(context)
-            ..setTitle(getString.deleteActivityConfirm)
-            ..setMessage(getString.cantBeUndone)
-            ..setNegativeButton(
-              getString.cancel,
-              () => confirmed.complete(false),
-            )
-            ..setPositiveButton(
-              getString.delete,
-              () => confirmed.complete(true),
-            )
-            ..setOnDismissListener(() {
-              if (!confirmed.isCompleted) confirmed.complete(false);
-            }))
-          .show(),
-    );
-    if (!await confirmed.future) return;
+    final confirmed = await AlertDialogBuilder(context)
+        .setTitle(getString.deleteActivityConfirm)
+        .setMessage(getString.cantBeUndone)
+        .confirm(getString.delete, getString.cancel);
+    if (!confirmed) return;
     final ok = await _view.deleteActivity(_a.id);
     if (!mounted) return;
     if (ok) {
