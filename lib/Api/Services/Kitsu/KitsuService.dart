@@ -76,7 +76,7 @@ class KitsuService extends MediaService {
   NotificationScreenView get notificationView => KitsuNotificationView();
 
   @override
-  SocialScreenView get socialView => KitsuSocialView(this);
+  late final SocialScreenView socialView = KitsuSocialView(this);
 
   @override
   Set<String> get linkHosts => const {'kitsu.io', 'kitsu.app'};

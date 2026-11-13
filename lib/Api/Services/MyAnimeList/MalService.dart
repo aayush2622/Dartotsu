@@ -69,7 +69,7 @@ class MalService extends MediaService {
   SettingsScreenView get settingsView => MalSettingsView();
 
   @override
-  SocialScreenView get socialView => MalSocialView(this);
+  late final SocialScreenView socialView = MalSocialView(this);
 
   @override
   Set<String> get linkHosts => const {'myanimelist.net', 'www.myanimelist.net'};
