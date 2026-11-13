@@ -1,3 +1,5 @@
+import '../../../Model/MediaType.dart';
+import 'Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
@@ -10,13 +12,8 @@ const kMangaUpdatesHomeSections = <String, bool>{
   kHiddenMediaTitle: false,
 };
 
-const kMangaUpdatesFeedSections = <String, bool>{
-  'Trending Now': true,
-  'Most Popular': true,
-  'Top Rated': true,
-  'Latest Releases': true,
-  'Top Manhwa': true,
-  'Top Manhua': true,
+final kMangaUpdatesFeedSections = {
+  for (final s in mangaUpdatesSectionsFor(MediaType.manga)) s.title: true,
 };
 
 class MangaUpdatesPref {

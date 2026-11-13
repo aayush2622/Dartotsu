@@ -10,7 +10,7 @@ class AnimePlanetFeedView extends FeedScreenView {
 
   @override
   SectionLayout sectionType(MediaType type, String title) =>
-      title == 'Trending Now' ? SectionLayout.carousel : SectionLayout.shelf;
+      trendingCarousel(title);
 
   @override
   List<SectionLayout> skeleton(MediaType type) => [

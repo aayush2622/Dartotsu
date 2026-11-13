@@ -1,3 +1,5 @@
+import '../../../Model/MediaType.dart';
+import 'Queries.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
 
@@ -12,19 +14,12 @@ const kAnimePlanetHomeSections = <String, bool>{
   'Dropped Manga': true,
 };
 
-const kAnimePlanetAnimeSections = <String, bool>{
-  'Trending Now': true,
-  'Popular This Season': true,
-  'Top Rated': true,
-  'Most Watched': true,
-  'Recently Added': true,
+final kAnimePlanetAnimeSections = {
+  for (final s in animePlanetSectionsFor(MediaType.anime)) s.title: true,
 };
 
-const kAnimePlanetMangaSections = <String, bool>{
-  'Trending Now': true,
-  'Top Rated': true,
-  'Most Read': true,
-  'Recently Added': true,
+final kAnimePlanetMangaSections = {
+  for (final s in animePlanetSectionsFor(MediaType.manga)) s.title: true,
 };
 
 class AnimePlanetPref {
