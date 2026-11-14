@@ -28,6 +28,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get kitsu => 'Kitsu';
 
   @override
+  String get comick => 'Comick';
+
+  @override
   String get mangaBaka => 'MangaBaka';
 
   @override
@@ -1861,6 +1864,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mangaBakaLoginFailed => 'MangaBaka login failed';
 
   @override
+  String get comickLoginFailed => 'Comick login failed';
+
+  @override
+  String get comickProfile => 'Comick profile';
+
+  @override
+  String get refreshFromComick => 'Refresh from Comick';
+
+  @override
   String get mangaBakaProfile => 'MangaBaka profile';
 
   @override
@@ -1927,6 +1939,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get mangaBakaAccountOptions => 'MangaBaka account options';
+
+  @override
+  String get comickAccountOptions => 'Comick account options';
+
+  @override
+  String get comickClientId => 'Comick Client ID';
+
+  @override
+  String get comickClientIdDesc =>
+      'Custom client ID registered on comick.dev';
 
   @override
   String get couldNotUpdateKitsuSettings =>

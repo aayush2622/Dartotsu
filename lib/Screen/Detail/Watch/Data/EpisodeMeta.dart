@@ -37,6 +37,7 @@ class MetaIds {
   int? simkl;
   int? mangabaka;
   int? mangaupdates;
+  int? comick;
   int? tvdb;
   int? tmdb;
   String? imdb;
@@ -49,6 +50,7 @@ class MetaIds {
     this.simkl,
     this.mangabaka,
     this.mangaupdates,
+    this.comick,
     this.tvdb,
     this.tmdb,
     this.imdb,
@@ -65,6 +67,7 @@ class MetaIds {
     'simkl' => simkl,
     'mangabaka' => mangabaka,
     'mangaupdates' => mangaupdates,
+    'comick' => comick,
     'tvdb' => tvdb,
     'tmdb' => tmdb,
     _ => null,
@@ -84,6 +87,8 @@ class MetaIds {
         mangabaka = value;
       case 'mangaupdates':
         mangaupdates = value;
+      case 'comick':
+        comick = value;
       case 'tvdb':
         tvdb = value;
       case 'tmdb':
@@ -98,6 +103,7 @@ class MetaIds {
     'simkl',
     'mangabaka',
     'mangaupdates',
+    'comick',
   ];
 
   Map<String, int> syncIds() => {
@@ -119,6 +125,7 @@ class MetaIds {
     simkl: simkl,
     mangabaka: mangabaka,
     mangaupdates: mangaupdates,
+    comick: comick,
     tvdb: tvdb,
     tmdb: tmdb,
     imdb: imdb,
@@ -132,6 +139,7 @@ class MetaIds {
     'simkl': simkl,
     if (mangabaka != null) 'mangabaka': mangabaka,
     if (mangaupdates != null) 'mangaupdates': mangaupdates,
+    if (comick != null) 'comick': comick,
     if (tvdb != null) 'tvdb': tvdb,
     if (tmdb != null) 'tmdb': tmdb,
     if (imdb != null) 'imdb': imdb,
@@ -145,6 +153,7 @@ class MetaIds {
         simkl: (json['simkl'] as num?)?.toInt(),
         mangabaka: (json['mangabaka'] as num?)?.toInt(),
         mangaupdates: (json['mangaupdates'] as num?)?.toInt(),
+        comick: (json['comick'] as num?)?.toInt(),
         tvdb: (json['tvdb'] as num?)?.toInt(),
         tmdb: (json['tmdb'] as num?)?.toInt(),
         imdb: json['imdb'] as String?,

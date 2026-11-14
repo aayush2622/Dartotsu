@@ -215,6 +215,12 @@ abstract class AppLocalizations {
   /// **'Kitsu'**
   String get kitsu;
 
+  /// No description provided for @comick.
+  ///
+  /// In en, this message translates to:
+  /// **'Comick'**
+  String get comick;
+
   /// No description provided for @mangaBaka.
   ///
   /// In en, this message translates to:
@@ -3485,6 +3491,24 @@ abstract class AppLocalizations {
   /// **'MangaBaka login failed'**
   String get mangaBakaLoginFailed;
 
+  /// No description provided for @comickLoginFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Comick login failed'**
+  String get comickLoginFailed;
+
+  /// No description provided for @comickProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Comick profile'**
+  String get comickProfile;
+
+  /// No description provided for @refreshFromComick.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh from Comick'**
+  String get refreshFromComick;
+
   /// No description provided for @mangaBakaProfile.
   ///
   /// In en, this message translates to:
@@ -3616,6 +3640,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'MangaBaka account options'**
   String get mangaBakaAccountOptions;
+
+  /// No description provided for @comickAccountOptions.
+  ///
+  /// In en, this message translates to:
+  /// **'Comick account options'**
+  String get comickAccountOptions;
+
+  /// No description provided for @comickClientId.
+  ///
+  /// In en, this message translates to:
+  /// **'Comick Client ID'**
+  String get comickClientId;
+
+  /// No description provided for @comickClientIdDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom client ID registered on comick.dev'**
+  String get comickClientIdDesc;
 
   /// No description provided for @couldNotUpdateKitsuSettings.
   ///
