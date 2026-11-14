@@ -18,7 +18,7 @@ import 'Mutations.dart';
 import 'Prefs.dart';
 import 'Queries.dart';
 
-const _defaultClientId = 'SGrUojDvbgqfhSCQbwfCjUPIccYMJdBH';
+const _defaultClientId = 'GcptsAwxpnQlFRazMbFEeoXHVyIFTmqF';
 
 String get _clientId {
   final custom = ComickPref.clientId.value.trim();
