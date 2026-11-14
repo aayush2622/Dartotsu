@@ -16,6 +16,7 @@ import '../../Utils/Functions/NavigateToScreen.dart';
 import '../MediaList/MediaListScreen.dart';
 import '../Social/SocialNavigation.dart';
 import 'Components/AccountSheet.dart';
+import 'Components/AvatarSwitcher.dart';
 import 'Components/HeaderAvatar.dart';
 import 'Components/HeaderBanner.dart';
 import 'Components/HeaderStatPill.dart';
@@ -27,6 +28,17 @@ class HomeHeader extends StatelessWidget {
   const HomeHeader({super.key});
 
   MediaServiceController get _controller => find();
+
+  void _step(int by) {
+    final current = _controller.currentService.peek;
+    final cycle = [
+      for (final s in _controller.services)
+        if (s.id == current.id || s.auth == null || s.auth!.isLoggedIn) s,
+    ];
+    if (cycle.length < 2) return;
+    final at = cycle.indexWhere((s) => s.id == current.id);
+    _controller.switchService(cycle[(at + by) % cycle.length].id);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -124,16 +136,20 @@ class HomeHeader extends StatelessWidget {
                       onPressed: () => openSearch(context, service),
                     ),
                   const SizedBox(width: 6),
-                  HeaderAvatar(
-                    url: user?.avatar,
-                    badge: user?.unreadNotifications ?? 0,
-                    onTap: () => showAccountSheet(context, _controller),
-                    onLongPress: user == null || service.socialView == null
-                        ? null
-                        : () {
-                            unawaited(HapticFeedback.mediumImpact());
-                            openProfile(context, service, id: '${user.id}');
-                          },
+                  AvatarSwitcher(
+                    id: service.id,
+                    onSwitch: _step,
+                    child: HeaderAvatar(
+                      url: user?.avatar,
+                      badge: user?.unreadNotifications ?? 0,
+                      onTap: () => showAccountSheet(context, _controller),
+                      onLongPress: user == null || service.socialView == null
+                          ? null
+                          : () {
+                              unawaited(HapticFeedback.mediumImpact());
+                              openProfile(context, service, id: '${user.id}');
+                            },
+                    ),
                   ),
                 ],
               ),
