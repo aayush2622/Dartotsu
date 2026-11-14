@@ -229,10 +229,10 @@ packages:
     dependency: transitive
     description:
       name: cnativeapi
-      sha256: bcf1d65504a397cd1b1eeaea582baf08250f38d46074739fddb3c5437f1b9e06
+      sha256: "510107ee007a7b4a01aa1eaec3ed097007d65760be6b272f093c4ca34a0d12ff"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   code_assets:
     dependency: transitive
     description:
@@ -910,10 +910,10 @@ packages:
     dependency: "direct main"
     description:
       name: image
-      sha256: "89ed75b2f8231fe676808c5564f9590d728024ded7ac782a7ed8474f1c95b72a"
+      sha256: bc13f61f0f5cb77936e78ae5dae3800f442718dac5d2bc4654f03c239230ed0c
       url: "https://pub.dev"
     source: hosted
-    version: "4.12.0"
+    version: "4.13.1"
   inno_bundle:
     dependency: "direct dev"
     description:
@@ -1207,18 +1207,18 @@ packages:
     dependency: "direct main"
     description:
       name: nativeapi
-      sha256: c71a5e10aacd177fe1c3eef279179beeba6fd08132f0d36e0a7e081e13906749
+      sha256: c0c566cf6788a6b6a32ce2666f02364b7fb50133f07a744bc1e793b5b8bb2c78
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   nativeapi_flutter:
     dependency: transitive
     description:
       name: nativeapi_flutter
-      sha256: "3709b58224473298349375c8a0404d19dc0b5f151397cae2f127fe49a3a1a491"
+      sha256: "3bb647f299932a4a19aa066051aabc6872f6876fa50c38a0ef132da414e9db26"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.0"
+    version: "0.6.1"
   nm:
     dependency: transitive
     description:
