@@ -8,8 +8,8 @@ import '../../../../Model/Setting.dart';
 import '../../../../Utils/Function.dart';
 import '../../../../Utils/Functions/RefreshController.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
+import '../../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../../Widgets/Components/HomeLayoutSheet.dart';
-import '../../../../Widgets/CustomDialog.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
 import '../Prefs.dart';
@@ -100,30 +100,21 @@ class ComickSettingsView extends SettingsScreenView {
 
   void _editClientId(BuildContext context) {
     final controller = TextEditingController(text: ComickPref.clientId.value);
-    customDialog(
-      context,
-      title: getString.comickClientId,
-      content: TextField(
-        controller: controller,
-        decoration: InputDecoration(
-          hintText: 'Enter registered Client ID',
-          labelText: getString.comickClientId,
+    AlertDialogBuilder(context)
+      ..setTitle(getString.comickClientId)
+      ..setCustomView(
+        TextField(
+          controller: controller,
+          decoration: InputDecoration(
+            labelText: getString.comickClientId,
+          ),
         ),
-      ),
-      actions: [
-        DialogAction(
-          text: getString.cancel,
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        DialogAction(
-          text: getString.save,
-          onPressed: () {
-            ComickPref.clientId.value = controller.text.trim();
-            Navigator.of(context).pop();
-            snackString(getString.saved);
-          },
-        ),
-      ],
-    );
+      )
+      ..setNegativeButton(getString.cancel, null)
+      ..setPositiveButton(getString.save, () {
+        ComickPref.clientId.value = controller.text.trim();
+        snackString(getString.saved);
+      })
+      ..show();
   }
 }
