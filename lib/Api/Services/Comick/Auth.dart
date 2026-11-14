@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:rhttp/rhttp.dart';
 
@@ -24,7 +25,9 @@ String get _clientId {
   return custom.isNotEmpty ? custom : _defaultClientId;
 }
 
-String get _redirect => authRedirect('comick-auth', scheme: 'app.dartotsu');
+String get _redirect => (Platform.isLinux || Platform.isWindows)
+    ? 'http://127.0.0.1:$kAuthPort/comick'
+    : 'app.dartotsu:/comick-auth';
 
 ComickAuth get comickAuth => find<ComickAuth>();
 
