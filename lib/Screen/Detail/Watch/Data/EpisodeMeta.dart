@@ -37,6 +37,7 @@ class MetaIds {
   int? simkl;
   int? mangabaka;
   int? mangaupdates;
+  int? trakt;
   int? tvdb;
   int? tmdb;
   String? imdb;
@@ -49,6 +50,7 @@ class MetaIds {
     this.simkl,
     this.mangabaka,
     this.mangaupdates,
+    this.trakt,
     this.tvdb,
     this.tmdb,
     this.imdb,
@@ -56,7 +58,7 @@ class MetaIds {
   });
 
   bool get known =>
-      anilist != null || mal != null || tvdb != null || imdb != null;
+      anilist != null || mal != null || tvdb != null || imdb != null || trakt != null;
 
   int? operator [](String key) => switch (key) {
     'anilist' => anilist,
@@ -65,6 +67,7 @@ class MetaIds {
     'simkl' => simkl,
     'mangabaka' => mangabaka,
     'mangaupdates' => mangaupdates,
+    'trakt' => trakt,
     'tvdb' => tvdb,
     'tmdb' => tmdb,
     _ => null,
@@ -84,6 +87,8 @@ class MetaIds {
         mangabaka = value;
       case 'mangaupdates':
         mangaupdates = value;
+      case 'trakt':
+        trakt = value;
       case 'tvdb':
         tvdb = value;
       case 'tmdb':
@@ -98,6 +103,7 @@ class MetaIds {
     'simkl',
     'mangabaka',
     'mangaupdates',
+    'trakt',
   ];
 
   Map<String, int> syncIds() => {
@@ -119,6 +125,7 @@ class MetaIds {
     simkl: simkl,
     mangabaka: mangabaka,
     mangaupdates: mangaupdates,
+    trakt: trakt,
     tvdb: tvdb,
     tmdb: tmdb,
     imdb: imdb,
@@ -132,6 +139,7 @@ class MetaIds {
     'simkl': simkl,
     if (mangabaka != null) 'mangabaka': mangabaka,
     if (mangaupdates != null) 'mangaupdates': mangaupdates,
+    if (trakt != null) 'trakt': trakt,
     if (tvdb != null) 'tvdb': tvdb,
     if (tmdb != null) 'tmdb': tmdb,
     if (imdb != null) 'imdb': imdb,
@@ -145,6 +153,7 @@ class MetaIds {
         simkl: (json['simkl'] as num?)?.toInt(),
         mangabaka: (json['mangabaka'] as num?)?.toInt(),
         mangaupdates: (json['mangaupdates'] as num?)?.toInt(),
+        trakt: (json['trakt'] as num?)?.toInt(),
         tvdb: (json['tvdb'] as num?)?.toInt(),
         tmdb: (json['tmdb'] as num?)?.toInt(),
         imdb: json['imdb'] as String?,

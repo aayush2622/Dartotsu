@@ -1,0 +1,158 @@
+import '../../../../Core/Services/MediaService.dart';
+import '../../../../Core/Services/Model/Social.dart';
+import '../../../../Logger.dart';
+import '../Auth.dart';
+import '../Data/User.dart';
+
+class TraktSocialView extends SocialScreenView {
+  TraktSocialView(super.service);
+
+  @override
+  bool get hasActivity => false;
+
+  @override
+  bool get hasGlobalFeed => false;
+
+  @override
+  bool get hasFollows => false;
+
+  @override
+  String? profileUrl(String name) {
+    if (name.isNotEmpty) return 'https://trakt.tv/users/$name';
+    final user = traktAuth.user.value;
+    return user is TraktUser ? user.profileUrl : 'https://trakt.tv';
+  }
+
+  Future<Map<String, dynamic>> _stats(String id) async {
+    try {
+      final data = await traktAuth.client.get('/users/$id/stats', auth: true);
+      return data is Map ? data.cast<String, dynamic>() : const {};
+    } catch (e, st) {
+      logError('TraktSocial.stats', e, st);
+      return const {};
+    }
+  }
+
+  Future<Map<String, dynamic>?> _profile(String id) async {
+    try {
+      final data =
+          await traktAuth.client.get('/users/$id?extended=full', auth: true);
+      return data is Map ? data.cast<String, dynamic>() : null;
+    } catch (e, st) {
+      logError('TraktSocial.profile', e, st);
+      return null;
+    }
+  }
+
+  int _int(Object? v) => (v as num?)?.toInt() ?? 0;
+
+  @override
+  Future<SocialUser?> profile({String? id, String? name}) async {
+    final me = currentUserId;
+    final currentUser = traktAuth.user.value as TraktUser?;
+    final target = id ??
+        (name != null && name.isNotEmpty
+            ? name
+            : (currentUser?.username ?? me ?? 'me'));
+
+    final (stats, user) = await (
+      _stats(target),
+      _profile(target),
+    ).wait;
+
+    final movies =
+        (stats['movies'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final shows =
+        (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final episodes =
+        (stats['episodes'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final network =
+        (stats['network'] as Map?)?.cast<String, dynamic>() ?? const {};
+
+    final username = user?['username'] as String? ?? name ?? target;
+    final displayName = user?['name'] as String? ?? username;
+    final about = user?['about'] as String?;
+    final avatar = (user?['images'] as Map?)?['avatar'] is Map
+        ? ((user!['images'] as Map)['avatar'] as Map)['full'] as String?
+        : null;
+
+    final moviesWatched = _int(movies['watched']);
+    final showsWatched = _int(shows['watched']);
+    final episodesWatched = _int(episodes['watched']);
+    final totalWatched = moviesWatched + showsWatched;
+    final minutesWatched = _int(stats['total_minutes']) > 0
+        ? _int(stats['total_minutes'])
+        : _int(movies['minutes']) + _int(episodes['minutes']);
+
+    return SocialUser(
+      id: target,
+      name: displayName,
+      avatar: avatar,
+      about: (about != null && about.isNotEmpty) ? about : null,
+      siteUrl: 'https://trakt.tv/users/$username',
+      followers: _int(network['followers']),
+      following: _int(network['following']),
+      animeCount: totalWatched,
+      episodesWatched: episodesWatched,
+      minutesWatched: minutesWatched,
+    );
+  }
+
+  @override
+  Future<UserStats?> stats(String userId) async {
+    final stats = await _stats(userId);
+    if (stats.isEmpty) return null;
+
+    final movies =
+        (stats['movies'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final shows =
+        (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final episodes =
+        (stats['episodes'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final ratings =
+        (stats['ratings'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final dist =
+        (ratings['distribution'] as Map?)?.cast<String, dynamic>() ?? const {};
+
+    final mediaEntries = [
+      if (_int(movies['watched']) > 0)
+        StatEntry(label: 'Movies Watched', count: _int(movies['watched'])),
+      if (_int(shows['watched']) > 0)
+        StatEntry(label: 'Shows Watched', count: _int(shows['watched'])),
+      if (_int(episodes['watched']) > 0)
+        StatEntry(label: 'Episodes Watched', count: _int(episodes['watched'])),
+      if (_int(movies['collected']) > 0)
+        StatEntry(label: 'Movies Collected', count: _int(movies['collected'])),
+      if (_int(shows['collected']) > 0)
+        StatEntry(label: 'Shows Collected', count: _int(shows['collected'])),
+    ];
+
+    final ratingEntries = [
+      for (var i = 10; i >= 1; i--)
+        if (_int(dist['$i']) > 0)
+          StatEntry(label: '$i ★', count: _int(dist['$i'])),
+    ];
+
+    final categories = [
+      if (mediaEntries.isNotEmpty)
+        StatCategory('media', 'Media', mediaEntries),
+      if (ratingEntries.isNotEmpty)
+        StatCategory('ratings', 'Ratings', ratingEntries),
+    ];
+
+    final totalWatched = _int(movies['watched']) + _int(shows['watched']);
+    final minutesWatched = _int(stats['total_minutes']) > 0
+        ? _int(stats['total_minutes'])
+        : _int(movies['minutes']) + _int(episodes['minutes']);
+
+    return UserStats(
+      anime: UserStatSet(
+        count: totalWatched,
+        minutesWatched: minutesWatched,
+        episodesWatched: _int(episodes['watched']),
+        categories: categories,
+      ),
+      manga: const UserStatSet(),
+    );
+  }
+}

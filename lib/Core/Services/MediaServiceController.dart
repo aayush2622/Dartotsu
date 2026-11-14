@@ -8,6 +8,7 @@ import '../../Api/Services/AnimePlanet/AnimePlanetService.dart';
 import '../../Api/Services/MangaUpdates/MangaUpdatesService.dart';
 import '../../Api/Services/MyAnimeList/MalService.dart';
 import '../../Api/Services/Simkl/SimklService.dart';
+import '../../Api/Services/Trakt/TraktService.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../Preferences/PrefManager.dart';
 import 'MediaService.dart';
@@ -37,6 +38,7 @@ class MediaServiceController extends AppController {
       AnilistService(),
       MalService(),
       SimklService(),
+      TraktService(),
       KitsuService(),
       MangaBakaService(),
       MangaUpdatesService(),

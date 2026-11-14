@@ -12,6 +12,7 @@ import 'Api/Discord/DiscordPresenceController.dart';
 import 'Api/Services/Anilist/Auth.dart';
 import 'Api/Services/MyAnimeList/Auth.dart';
 import 'Api/Services/Simkl/Auth.dart';
+import 'Api/Services/Trakt/Auth.dart';
 import 'Api/Services/Kitsu/Auth.dart';
 import 'Api/Services/MangaBaka/Auth.dart';
 import 'Api/Services/AnimePlanet/Auth.dart';
@@ -113,6 +114,7 @@ class DI {
     lazyPut<AnilistAuth>(AnilistAuth.new);
     lazyPut<MalAuth>(MalAuth.new);
     lazyPut<SimklAuth>(SimklAuth.new);
+    lazyPut<TraktAuth>(TraktAuth.new);
     lazyPut<KitsuAuth>(KitsuAuth.new);
     lazyPut<MangaBakaAuth>(MangaBakaAuth.new);
     lazyPut<MangaUpdatesAuth>(MangaUpdatesAuth.new);
