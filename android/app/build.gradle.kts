@@ -34,6 +34,10 @@ android {
         }
     }
 
+    androidResources {
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }
+
     buildFeatures {
         viewBinding = false
         dataBinding = false

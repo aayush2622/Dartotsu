@@ -55,7 +55,28 @@ StreamKind streamKindOf(v.Video video) {
   return StreamKind.other;
 }
 
+final _prefixed = RegExp(r'^(.{1,24}?)\s+-\s+(\S.*)$');
+
+void inferHosters(List<v.Video> list) {
+  if (list.length < 2 || list.any((video) => hosterOf(video) != null)) return;
+  final names = <String>[];
+  for (final video in list) {
+    final match = _prefixed.firstMatch(streamLabel(video));
+    if (match == null) return;
+    names.add(match.group(1)!.trim());
+  }
+  final counts = <String, int>{};
+  for (final name in names) {
+    counts[name] = (counts[name] ?? 0) + 1;
+  }
+  if (counts.length < 2 || counts.values.every((count) => count == 1)) return;
+  for (final (i, video) in list.indexed) {
+    video.hoster = names[i];
+  }
+}
+
 List<StreamGroup>? groupStreams(List<v.Video> list) {
+  inferHosters(list);
   if (list.any((video) => hosterOf(video) != null)) {
     final byHoster = <String, List<int>>{};
     for (final (i, video) in list.indexed) {

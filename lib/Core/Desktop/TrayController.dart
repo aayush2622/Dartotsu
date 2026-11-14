@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui' as ui;
 
 import 'package:dbus/dbus.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:nativeapi/nativeapi.dart' as native;
 import 'package:path_provider/path_provider.dart';
@@ -242,20 +243,38 @@ class TrayController extends AppController {
     }
   }
 
+  static const _iconSize = 96;
+
   Future<native.Image?> _icon() async {
     try {
       final dir = await getApplicationCacheDirectory();
-      final file = File('${dir.path}${Platform.pathSeparator}tray-icon.png');
+      final file = File(
+        '${dir.path}${Platform.pathSeparator}tray-icon-round.png',
+      );
       if (!await file.exists()) {
         final data = await rootBundle.load('assets/images/logo.png');
         final codec = await ui.instantiateImageCodec(
           data.buffer.asUint8List(),
-          targetWidth: 96,
-          targetHeight: 96,
+          targetWidth: _iconSize,
+          targetHeight: _iconSize,
         );
-        final image = (await codec.getNextFrame()).image;
-        final png = await image.toByteData(format: ui.ImageByteFormat.png);
-        image.dispose();
+        final logo = (await codec.getNextFrame()).image;
+        final recorder = ui.PictureRecorder();
+        const box = Rect.fromLTWH(0, 0, 96, 96);
+        Canvas(recorder)
+          ..clipPath(Path()..addOval(box))
+          ..drawImage(
+            logo,
+            Offset.zero,
+            Paint()..filterQuality = FilterQuality.high,
+          );
+        final round = await recorder.endRecording().toImage(
+          _iconSize,
+          _iconSize,
+        );
+        final png = await round.toByteData(format: ui.ImageByteFormat.png);
+        round.dispose();
+        logo.dispose();
         codec.dispose();
         if (png == null) return null;
         await file.create(recursive: true);
