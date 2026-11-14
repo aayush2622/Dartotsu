@@ -36,6 +36,7 @@ android {
 
     androidResources {
         ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:<dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"
+        localeFilters += listOf("am", "ar", "as", "bn", "da", "de", "el", "en", "es", "fa", "fil", "fr", "ha", "he", "hi", "hr", "id", "in", "it", "iw", "ja", "kn", "ko", "ml", "mr", "ms", "ne", "nl", "or", "pl", "ps", "pt", "ru", "sa", "si", "so", "sw", "ta", "te", "th", "tl", "tr", "uk", "vi", "zh")
     }
 
     buildFeatures {
