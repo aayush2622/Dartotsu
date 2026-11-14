@@ -209,6 +209,12 @@ abstract class AppLocalizations {
   /// **'Simkl'**
   String get simkl;
 
+  /// No description provided for @trakt.
+  ///
+  /// In en, this message translates to:
+  /// **'Trakt'**
+  String get trakt;
+
   /// No description provided for @kitsu.
   ///
   /// In en, this message translates to:
@@ -3791,6 +3797,12 @@ abstract class AppLocalizations {
   /// **'Simkl granted read-only access'**
   String get simklReadOnly;
 
+  /// No description provided for @traktReadOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'Trakt granted read-only access'**
+  String get traktReadOnly;
+
   /// No description provided for @incognitoEditsBlocked.
   ///
   /// In en, this message translates to:
@@ -4042,6 +4054,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Data and artwork provided by Simkl. View on Simkl'**
   String get simklAttribution;
+
+  /// No description provided for @traktProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Trakt profile'**
+  String get traktProfile;
+
+  /// No description provided for @refreshFromTrakt.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh from Trakt'**
+  String get refreshFromTrakt;
+
+  /// No description provided for @traktAttribution.
+  ///
+  /// In en, this message translates to:
+  /// **'Data and artwork provided by Trakt. View on Trakt'**
+  String get traktAttribution;
+
+  /// No description provided for @traktVip.
+  ///
+  /// In en, this message translates to:
+  /// **'VIP'**
+  String get traktVip;
+
+  /// No description provided for @traktVipMember.
+  ///
+  /// In en, this message translates to:
+  /// **'Trakt VIP Member'**
+  String get traktVipMember;
 
   /// No description provided for @onHold.
   ///
@@ -6311,6 +6353,24 @@ abstract class AppLocalizations {
   /// **'Born'**
   String get born;
 
+  /// No description provided for @died.
+  ///
+  /// In en, this message translates to:
+  /// **'Died'**
+  String get died;
+
+  /// No description provided for @birthplace.
+  ///
+  /// In en, this message translates to:
+  /// **'Birthplace'**
+  String get birthplace;
+
+  /// No description provided for @department.
+  ///
+  /// In en, this message translates to:
+  /// **'Department'**
+  String get department;
+
   /// No description provided for @website.
   ///
   /// In en, this message translates to:
@@ -6358,6 +6418,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Shows'**
   String get shows;
+
+  /// No description provided for @moviesWatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies Watched'**
+  String get moviesWatched;
+
+  /// No description provided for @showsWatched.
+  ///
+  /// In en, this message translates to:
+  /// **'Shows Watched'**
+  String get showsWatched;
+
+  /// No description provided for @moviesCollected.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies Collected'**
+  String get moviesCollected;
+
+  /// No description provided for @showsCollected.
+  ///
+  /// In en, this message translates to:
+  /// **'Shows Collected'**
+  String get showsCollected;
 
   /// No description provided for @rewatching.
   ///

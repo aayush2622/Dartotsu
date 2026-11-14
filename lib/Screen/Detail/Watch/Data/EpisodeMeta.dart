@@ -38,6 +38,7 @@ class MetaIds {
   int? mangabaka;
   int? mangaupdates;
   int? comick;
+  int? trakt;
   int? tvdb;
   int? tmdb;
   String? imdb;
@@ -51,6 +52,7 @@ class MetaIds {
     this.mangabaka,
     this.mangaupdates,
     this.comick,
+    this.trakt,
     this.tvdb,
     this.tmdb,
     this.imdb,
@@ -58,7 +60,7 @@ class MetaIds {
   });
 
   bool get known =>
-      anilist != null || mal != null || tvdb != null || imdb != null;
+      anilist != null || mal != null || tvdb != null || imdb != null || trakt != null;
 
   int? operator [](String key) => switch (key) {
     'anilist' => anilist,
@@ -68,6 +70,7 @@ class MetaIds {
     'mangabaka' => mangabaka,
     'mangaupdates' => mangaupdates,
     'comick' => comick,
+    'trakt' => trakt,
     'tvdb' => tvdb,
     'tmdb' => tmdb,
     _ => null,
@@ -89,6 +92,8 @@ class MetaIds {
         mangaupdates = value;
       case 'comick':
         comick = value;
+      case 'trakt':
+        trakt = value;
       case 'tvdb':
         tvdb = value;
       case 'tmdb':
@@ -104,6 +109,7 @@ class MetaIds {
     'mangabaka',
     'mangaupdates',
     'comick',
+    'trakt',
   ];
 
   Map<String, int> syncIds() => {
@@ -126,6 +132,7 @@ class MetaIds {
     mangabaka: mangabaka,
     mangaupdates: mangaupdates,
     comick: comick,
+    trakt: trakt,
     tvdb: tvdb,
     tmdb: tmdb,
     imdb: imdb,
@@ -140,6 +147,7 @@ class MetaIds {
     if (mangabaka != null) 'mangabaka': mangabaka,
     if (mangaupdates != null) 'mangaupdates': mangaupdates,
     if (comick != null) 'comick': comick,
+    if (trakt != null) 'trakt': trakt,
     if (tvdb != null) 'tvdb': tvdb,
     if (tmdb != null) 'tmdb': tmdb,
     if (imdb != null) 'imdb': imdb,
@@ -154,6 +162,7 @@ class MetaIds {
         mangabaka: (json['mangabaka'] as num?)?.toInt(),
         mangaupdates: (json['mangaupdates'] as num?)?.toInt(),
         comick: (json['comick'] as num?)?.toInt(),
+        trakt: (json['trakt'] as num?)?.toInt(),
         tvdb: (json['tvdb'] as num?)?.toInt(),
         tmdb: (json['tmdb'] as num?)?.toInt(),
         imdb: json['imdb'] as String?,
