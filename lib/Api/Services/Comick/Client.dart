@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
-
 import '../../../Core/NetworkManager/NetworkManager.dart';
+import '../../../Core/Services/Api/SharedRequests.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
-import '../../../Utils/Lru.dart';
 
 const comickHost = 'https://api.comick.dev';
 const comickOAuth = 'https://comick.dev/api/auth/oauth2';
@@ -23,25 +21,24 @@ class ComickException implements Exception {
 
 dynamic _body(NetworkResponse<dynamic> res) {
   final data = res.data;
-  final body = data is String && data.isNotEmpty ? _tryJson(data) : data;
-  return body;
-}
-
-Object? _tryJson(String text) {
+  if (data is! String || data.isEmpty) return data;
   try {
-    return jsonDecode(text);
+    return jsonDecode(data);
   } catch (e, st) {
     logError('ComickClient', e, st);
     return null;
   }
 }
 
-String _message(dynamic body, int status) {
-  if (body is Map) {
-    final msg = body['message'] ?? body['error'] ?? body['error_description'];
-    if (msg != null) return '$msg';
-  }
-  return 'HTTP $status';
+ComickException _failure(NetworkResponse<dynamic> res) {
+  final body = _body(res);
+  final message = body is Map
+      ? body['message'] ?? body['error'] ?? body['error_description']
+      : null;
+  return ComickException(
+    '${message ?? 'HTTP ${res.statusCode}'}',
+    res.statusCode,
+  );
 }
 
 class ComickClient {
@@ -54,8 +51,7 @@ class ComickClient {
 
   bool get hasToken => _token().isNotEmpty;
 
-  final _cache = Lru<String, (DateTime, dynamic)>(120);
-  final _inflight = <String, Future<dynamic>>{};
+  final _cache = ResponseCache(120);
 
   Map<String, String> _headers({bool json = false}) => {
     'Accept': 'application/json',
@@ -90,11 +86,8 @@ class ComickClient {
   }
 
   dynamic _checked(NetworkResponse<dynamic> res) {
-    final body = _body(res);
-    if (res.statusCode >= 400) {
-      throw ComickException(_message(body, res.statusCode), res.statusCode);
-    }
-    return body;
+    if (res.statusCode >= 400) throw _failure(res);
+    return _body(res);
   }
 
   Future<dynamic> get(
@@ -112,39 +105,11 @@ class ComickClient {
     final url = params.isEmpty
         ? _url(path)
         : '${_url(path)}?${params.join('&')}';
-    final key = '${hasToken ? 'u' : 'a'}|$url';
-    if (cache > Duration.zero) {
-      final hit = _cache[key];
-      if (hit != null && DateTime.now().difference(hit.$1) < cache) {
-        return Future.value(hit.$2);
-      }
-    }
-    return _inflight[key] ??= _send((h) => _net.get(url, headers: h))
-        .then((res) {
-          final data = _checked(res);
-          if (cache > Duration.zero) _cache[key] = (DateTime.now(), data);
-          return data;
-        })
-        .whenComplete(() {
-          _inflight.remove(key);
-        });
-  }
-
-  Future<R> getParsed<R>(
-    String path,
-    R Function(String body) parse, {
-    Map<String, String>? query,
-  }) async {
-    final res = await _send(
-      (h) => _net.get(_url(path), query: query, headers: h, decodeJson: false),
+    return _cache.fetch(
+      '${hasToken ? 'u' : 'a'}|$url',
+      () async => _checked(await _send((h) => _net.get(url, headers: h))),
+      ttl: cache,
     );
-    if (res.statusCode >= 400) {
-      throw ComickException(
-        _message(_body(res), res.statusCode),
-        res.statusCode,
-      );
-    }
-    return compute(parse, '${res.data}');
   }
 
   Future<dynamic> write(
@@ -154,7 +119,6 @@ class ComickClient {
   ) async {
     final res = await _send(
       (h) => switch (method) {
-        'POST' => _net.post(_url(path), data: jsonEncode(body), headers: h),
         'PATCH' => _net.patch(_url(path), data: jsonEncode(body), headers: h),
         _ => _net.put(_url(path), data: jsonEncode(body), headers: h),
       },
@@ -165,13 +129,7 @@ class ComickClient {
 
   Future<void> delete(String path) async {
     final res = await _send((h) => _net.delete(_url(path), headers: h));
-    if (res.statusCode >= 400 &&
-        res.statusCode != 404 &&
-        res.statusCode != 204) {
-      throw ComickException(
-        _message(_body(res), res.statusCode),
-        res.statusCode,
-      );
-    }
+    final gone = res.statusCode == 404 || res.statusCode == 204;
+    if (res.statusCode >= 400 && !gone) throw _failure(res);
   }
 }

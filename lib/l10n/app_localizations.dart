@@ -4211,6 +4211,18 @@ abstract class AppLocalizations {
   /// **'Data and artwork provided by Trakt. View on Trakt'**
   String get traktAttribution;
 
+  /// No description provided for @listsLiked.
+  ///
+  /// In en, this message translates to:
+  /// **'Liked'**
+  String get listsLiked;
+
+  /// No description provided for @listsYours.
+  ///
+  /// In en, this message translates to:
+  /// **'Yours'**
+  String get listsYours;
+
   /// No description provided for @traktVip.
   ///
   /// In en, this message translates to:

@@ -1,10 +1,8 @@
 import '../../../../Model/SectionLayout.dart';
-import '../../../../Core/Services/LayoutPref.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../Auth.dart';
-import '../Prefs.dart';
 import '../Queries.dart';
 
 class ComickFeedView extends FeedScreenView {
@@ -16,11 +14,7 @@ class ComickFeedView extends FeedScreenView {
 
   @override
   List<SectionLayout> skeleton(MediaType type) => [
-    for (final s in applyLayout(
-      comickSectionsFor(type),
-      (s) => s.title,
-      ComickPref.feedLayoutFor(type).value,
-    ))
+    for (final s in comickAuth.queries.shownSections(type))
       sectionType(type, s.title),
   ];
 

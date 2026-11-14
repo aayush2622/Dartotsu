@@ -4,6 +4,7 @@ import '../../../Core/Services/Api/LibrarySearch.dart';
 import '../../../Core/Services/Api/ListOverlay.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
+import '../../../Core/Services/Api/SharedRequests.dart';
 import '../../../Core/Services/LayoutPref.dart';
 import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Media.dart';
@@ -137,12 +138,15 @@ const _statuses = {
   'HIATUS': '4',
 };
 
+const _active = {'CURRENT', 'REPEATING'};
+
 const _countries = {'MANHWA': 'kr', 'MANHUA': 'cn'};
 
 class ComickQueries extends Queries {
   final ComickClient client;
+  final void Function(bool anime, int progress)? onProgress;
 
-  ComickQueries(this.client) {
+  ComickQueries(this.client, {this.onProgress}) {
     comickGenreNames = {
       for (final e
           in (loadCustomData<Map<String, dynamic>>(_genreIdKey) ?? const {})
@@ -187,13 +191,13 @@ class ComickQueries extends Queries {
         },
       );
       if (body is! Map) break;
-      for (final item in (body['data'] as List?) ?? const []) {
-        if (item is Map) {
-          out.add(mapComickLibraryEntry(item.cast<String, dynamic>()));
-        }
-      }
+      out.addAll(jsonRows(body['data']).map(mapComickLibraryEntry));
       cursor = body['next_cursor'] as String?;
     } while (cursor != null && cursor.isNotEmpty);
+    onProgress?.call(
+      anime,
+      out.fold(0, (sum, m) => sum + (m.userProgress ?? 0)),
+    );
     return out;
   }
 
@@ -220,9 +224,8 @@ class ComickQueries extends Queries {
         : null;
     final seen = <String>{};
     return [
-      for (final item in list ?? const [])
-        if (item is Map && seen.add('${item['hid'] ?? item['id']}'))
-          mapComickSearchItem(item.cast<String, dynamic>()),
+      for (final item in jsonRows(list))
+        if (seen.add('${item['hid'] ?? item['id']}')) mapComickSearchItem(item),
     ];
   }
 
@@ -265,11 +268,8 @@ class ComickQueries extends Queries {
       _schedule,
       cache: const Duration(minutes: 15),
     );
-    final entries = data is Map ? data['entries'] : null;
     final out = <CalendarEntry>[];
-    for (final e in entries is List ? entries : const []) {
-      if (e is! Map) continue;
-      final item = e.cast<String, dynamic>();
+    for (final item in jsonRows(data is Map ? data['entries'] : null)) {
       final slot = (item['schedule'] as Map?) ?? const {};
       final when = DateTime.tryParse('${slot['occurrenceAt'] ?? ''}');
       if (when == null) continue;
@@ -284,70 +284,57 @@ class ComickQueries extends Queries {
     return out;
   }
 
-  @override
-  List<SectionJob> homeJobs() {
-    if (!client.hasToken) return const [];
-    final hide = ComickPref.hideNsfw.value;
-
-    SectionJob job(String title, Set<String> statuses, {bool? anime}) =>
-        () async {
-          final out = <Media>[];
-          for (final isAnime in [
-            if (anime != false) true,
-            if (anime != true) false,
-          ]) {
-            out.addAll([
-              for (final m in await library(anime: isAnime))
-                if (statuses.contains(m.userStatus) && !(hide && m.isAdult)) m,
-            ]);
-          }
-          return titledSection(title, out);
-        };
-
-    final jobs = <(String, SectionJob)>[
-      (
-        'Continue Watching',
-        job('Continue Watching', {'CURRENT', 'REPEATING'}, anime: true),
-      ),
-      (
-        'Continue Reading',
-        job('Continue Reading', {'CURRENT', 'REPEATING'}, anime: false),
-      ),
-      ('Planned', job('Planned', {'PLANNING'})),
-      ('On Hold', job('On Hold', {'PAUSED'})),
-      ('Dropped', job('Dropped', {'DROPPED'})),
-      if (hide)
-        (
-          kHiddenMediaTitle,
-          () async => titledSection(kHiddenMediaTitle, [
-            for (final anime in [true, false])
-              for (final m in await library(anime: anime))
-                if (m.isAdult) m,
-          ]),
-        ),
-    ];
-    return [
-      for (final j in applyLayout(
-        jobs,
-        (j) => j.$1,
-        ComickPref.homeLayout.value,
-      ))
-        j.$2,
-    ];
-  }
+  List<ComickSection> shownSections(MediaType type) => applyLayout(
+    comickSectionsFor(type),
+    (s) => s.title,
+    ComickPref.feedLayoutFor(type).value,
+  );
 
   List<SectionJob> browseJobsFor(MediaType type) => [
-    for (final section in applyLayout(
-      comickSectionsFor(type),
-      (s) => s.title,
-      ComickPref.feedLayoutFor(type).value,
-    ))
+    for (final section in shownSections(type))
       () async => titledSection(section.title, await sectionPage(section)),
   ];
 
   @override
   List<SectionJob> browseJobs({required bool anime}) =>
       browseJobsFor(anime ? MediaType.anime : MediaType.manga);
+
+  @override
+  List<SectionJob> homeJobs() {
+    if (!client.hasToken) return const [];
+    final hide = ComickPref.hideNsfw.value;
+
+    Future<List<Media>> shelf(
+      Iterable<bool> kinds,
+      bool Function(Media) keep,
+    ) async => [
+      for (final anime in kinds)
+        for (final m in await library(anime: anime))
+          if (keep(m)) m,
+    ];
+
+    SectionJob job(String title, Set<String> statuses, {bool? anime}) =>
+        () async => titledSection(
+          title,
+          await shelf(
+            anime == null ? const [true, false] : [anime],
+            (m) => statuses.contains(m.userStatus) && !(hide && m.isAdult),
+          ),
+        );
+
+    return layoutJobs({
+      'Continue Watching': job('Continue Watching', _active, anime: true),
+      'Continue Reading': job('Continue Reading', _active, anime: false),
+      'Planned': job('Planned', {'PLANNING'}),
+      'On Hold': job('On Hold', {'PAUSED'}),
+      'Dropped': job('Dropped', {'DROPPED'}),
+      if (hide)
+        kHiddenMediaTitle: () async => titledSection(
+          kHiddenMediaTitle,
+          await shelf(const [true, false], (m) => m.isAdult),
+        ),
+    }, ComickPref.homeLayout.value);
+  }
 
   @override
   Future<Map<String, List<Media>>> getMediaLists({
@@ -408,9 +395,11 @@ class ComickQueries extends Queries {
     media ??= await _lookup(id, anime: anime, title: title);
     if (media == null) return null;
     if (client.hasToken) {
+      final id = media.id;
       final mine = (await library(anime: media.isAnime))
-          .where((m) => m.id == media!.id);
-      if (mine.isNotEmpty) media.takeListEntry(mine.first);
+          .where((m) => m.id == id)
+          .firstOrNull;
+      if (mine != null) media.takeListEntry(mine);
     }
     return media;
   }
@@ -508,40 +497,41 @@ class ComickQueries extends Queries {
       return true;
     }
     try {
-      final genres = await client.get(
-        '/genre/',
-        cache: const Duration(days: 7),
-      );
-      final slugs = {
-        for (final g in genres is List ? genres : const [])
-          if (g is Map && g['name'] is String && g['group'] != 'Format')
-            g['name'] as String: '${g['slug'] ?? _slug(g['name'] as String)}',
-      };
-      if (slugs.isNotEmpty) saveCustomData(_genreKey, slugs);
-      final ids = {
-        for (final g in genres is List ? genres : const [])
-          if (g is Map && g['id'] is num && g['name'] is String)
-            '${g['id']}': g['name'] as String,
-      };
-      if (ids.isNotEmpty) {
-        saveCustomData(_genreIdKey, ids);
-        comickGenreNames = {
-          for (final e in ids.entries) int.parse(e.key): e.value,
-        };
-      }
-
-      final tags = await client.get(
-        '/category/popular',
-        cache: const Duration(days: 7),
-      );
-      final names = [
-        for (final c in tags is List ? tags : const [])
-          if (c is Map && c['title'] is String) c['title'] as String,
-      ];
-      if (names.isNotEmpty) saveCustomData(_tagKey, names);
+      await _loadGenres();
+      await _loadTags();
     } catch (e, st) {
       logError('Queries', e, st);
     }
     return true;
+  }
+
+  Future<void> _loadGenres() async {
+    final genres = jsonRows(
+      await client.get('/genre/', cache: const Duration(days: 7)),
+    ).where((g) => g['name'] is String).toList();
+    final slugs = {
+      for (final g in genres)
+        if (g['group'] != 'Format')
+          g['name'] as String: '${g['slug'] ?? _slug(g['name'] as String)}',
+    };
+    if (slugs.isNotEmpty) saveCustomData(_genreKey, slugs);
+    final ids = {
+      for (final g in genres)
+        if (g['id'] is num) '${g['id']}': g['name'] as String,
+    };
+    if (ids.isEmpty) return;
+    saveCustomData(_genreIdKey, ids);
+    comickGenreNames = {for (final e in ids.entries) int.parse(e.key): e.value};
+  }
+
+  Future<void> _loadTags() async {
+    final tags = jsonRows(
+      await client.get('/category/popular', cache: const Duration(days: 7)),
+    );
+    final names = [
+      for (final c in tags)
+        if (c['title'] is String) c['title'] as String,
+    ];
+    if (names.isNotEmpty) saveCustomData(_tagKey, names);
   }
 }

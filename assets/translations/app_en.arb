@@ -965,6 +965,8 @@
   "dropRate": "Drop rate",
   "simklAttribution": "Data and artwork provided by Simkl. View on Simkl",
   "traktAttribution": "Data and artwork provided by Trakt. View on Trakt",
+  "listsLiked": "Liked",
+  "listsYours": "Yours",
   "traktVip": "VIP",
   "traktVipMember": "Trakt VIP Member",
   "onHold": "On hold",

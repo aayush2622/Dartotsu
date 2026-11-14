@@ -66,4 +66,31 @@ void main() {
     expect(TraktKind.movies.itemKey, 'movie');
     expect(TraktKind.shows.itemKey, 'show');
   });
+
+  test('a list row from trending, liked or my lists maps the same way', () {
+    final list = {
+      'name': 'Marvel',
+      'description': ' Every film ',
+      'item_count': 3,
+      'likes': 9,
+      'ids': {'trakt': 55, 'slug': 'marvel'},
+      'user': {
+        'username': 'ana',
+        'name': 'Ana',
+        'ids': {'slug': 'ana'},
+      },
+    };
+    final wrapped = mapTraktList({
+      'like_count': 12,
+      'list': list,
+    }, (n) => '$n!');
+    expect(wrapped!.id, '55');
+    expect(wrapped.author, 'Ana');
+    expect(wrapped.description, 'Every film');
+    expect(wrapped.count, '3!');
+    expect(wrapped.likes, 12);
+    final bare = mapTraktList(list, (n) => '$n!');
+    expect(bare!.likes, 9);
+    expect(mapTraktList({'name': 'x'}, (n) => '$n'), isNull);
+  });
 }

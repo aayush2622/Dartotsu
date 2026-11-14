@@ -7,6 +7,7 @@ import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/BrowserAuth.dart';
 import '../../../Core/Services/Api/Pkce.dart';
+import '../../../Core/Services/Api/SharedRequests.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -43,11 +44,22 @@ class ComickAuth extends AppController
 
   late final ComickClient client = ComickClient(() => token.value, _refresh);
 
-  late final ComickQueries queries = ComickQueries(client);
+  late final ComickQueries queries = ComickQueries(
+    client,
+    onProgress: (anime, progress) {
+      final current = user.value;
+      if (current is! ComickUser) return;
+      final known = anime ? current.episodesWatched : current.chaptersRead;
+      if (known == progress) return;
+      user.value = anime
+          ? current.copyWith(episodesWatched: progress)
+          : current.copyWith(chaptersRead: progress);
+    },
+  );
 
   late final ComickMutations mutations = ComickMutations(client, queries);
 
-  Completer<bool>? _refreshing;
+  final _refreshing = SingleFlight<bool>();
 
   @override
   bool get isLoggedIn => token.value.isNotEmpty;
@@ -145,29 +157,21 @@ class ComickAuth extends AppController
     return true;
   }
 
-  Future<bool> _refresh() async {
-    final pending = _refreshing;
-    if (pending != null) return pending.future;
+  Future<bool> _refresh() => _refreshing.run(() async {
     final refresh = ComickPref.refresh.value;
     if (refresh.isEmpty) return false;
-    final done = _refreshing = Completer<bool>();
     try {
-      final ok = await _exchange({
+      return await _exchange({
         'client_id': _clientId,
         'refresh_token': refresh,
         'grant_type': 'refresh_token',
         'resource': comickResource,
       });
-      done.complete(ok);
-      return ok;
     } catch (e, st) {
       logError('ComickAuth', e, st);
-      done.complete(false);
       return false;
-    } finally {
-      _refreshing = null;
     }
-  }
+  });
 
   @override
   Future<void> refreshUser() =>
@@ -183,17 +187,12 @@ class ComickAuth extends AppController
       final info = await client.get('/me');
       if (info is! Map) return;
       final uuid = info['id']?.toString() ?? '';
-      final username = info['username'] as String? ?? 'ComickReader';
-      final avatar = info['avatar_url'] as String?;
-
-      final previous = user.value is ComickUser
-          ? user.value as ComickUser
-          : null;
+      final previous = user.value;
       final parsed = ComickUser(
         id: uuid.hashCode.abs(),
         uuid: uuid,
-        name: username,
-        avatar: avatar ?? previous?.avatar,
+        name: info['username'] as String? ?? 'ComickReader',
+        avatar: info['avatar_url'] as String? ?? previous?.avatar,
         chaptersRead: previous?.chaptersRead ?? 0,
         episodesWatched: previous?.episodesWatched ?? 0,
       );

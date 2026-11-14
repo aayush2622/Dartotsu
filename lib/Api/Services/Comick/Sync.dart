@@ -32,9 +32,7 @@ class ComickSync extends SyncAdapter {
       final media = await queries.library(anime: anime);
       final out = <SyncItem>[];
       for (final m in media) {
-        final hid = comickExtras[m]?.hid.isNotEmpty == true
-            ? comickExtras[m]!.hid
-            : m.id;
+        final hid = comickHid(m);
         final k = _keyOf(hid);
         if (k == null) continue;
         _hids[k] = hid;

@@ -1,10 +1,8 @@
-import '../../../../Core/Services/LayoutPref.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Model/SectionLayout.dart';
 import '../Auth.dart';
-import '../Prefs.dart';
 import '../Queries.dart';
 
 class TraktFeedView extends FeedScreenView {
@@ -22,45 +20,40 @@ class TraktFeedView extends FeedScreenView {
 
   @override
   List<SectionLayout> skeleton(MediaType type) => [
-    for (final s in applyLayout(
-      traktSections(type),
-      (s) => s.title,
-      TraktPref.feedLayoutFor(type).value,
-    ))
+    for (final s in traktAuth.queries.shownSections(type))
       sectionType(type, s.title),
   ];
 
+  static const _chipSections = {
+    MediaType.movie: {
+      'trending': 'Trending Movies',
+      'popular': 'Popular Movies',
+      'anticipated': 'Anticipated Movies',
+    },
+    MediaType.series: {
+      'trending': 'Trending Shows',
+      'popular': 'Popular Shows',
+      'anime': 'Trending Anime',
+    },
+  };
+
   @override
-  List<FeedChip> chips(MediaType type) => type == MediaType.movie
-      ? [
-          FeedChip('trending', getString.trending),
-          FeedChip('popular', getString.popular),
-          FeedChip('anticipated', getString.anticipated),
-        ]
-      : [
-          FeedChip('trending', getString.trending),
-          FeedChip('popular', getString.popular),
-          FeedChip('anime', getString.anime),
-        ];
+  List<FeedChip> chips(MediaType type) => [
+    for (final id in _chipSections[type]?.keys ?? const <String>[])
+      FeedChip(id, switch (id) {
+        'trending' => getString.trending,
+        'popular' => getString.popular,
+        'anticipated' => getString.anticipated,
+        _ => getString.anime,
+      }),
+  ];
 
   @override
   Future<List<Media>?> chipMedia(MediaType type, FeedChip chip) async {
-    final movie = type == MediaType.movie;
-    final section = switch (chip.id) {
-      'popular' => TraktSection(
-        chip.label,
-        movie ? '/movies/popular' : '/shows/popular',
-      ),
-      'anticipated' => TraktSection(chip.label, '/movies/anticipated'),
-      'anime' => TraktSection(chip.label, '/shows/trending', const {
-        'genres': 'anime',
-      }),
-      _ => TraktSection(
-        chip.label,
-        movie ? '/movies/trending' : '/shows/trending',
-      ),
-    };
-    final items = await traktAuth.queries.sectionPage(section);
+    final title = _chipSections[type]?[chip.id];
+    final section = traktSections(type).where((s) => s.title == title);
+    if (section.isEmpty) return null;
+    final items = await traktAuth.queries.sectionPage(section.first);
     return items.take(15).toList();
   }
 

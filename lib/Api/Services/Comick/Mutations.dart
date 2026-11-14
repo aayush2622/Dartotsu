@@ -16,96 +16,74 @@ class ComickMutations extends Mutations {
 
   ComickMutations(this.client, this.queries);
 
-  static String _hid(Media media) {
-    final hid = comickExtras[media]?.hid;
-    return hid == null || hid.isEmpty ? media.id : hid;
-  }
-
   @override
   Future<void> editList(Media media, {List<String>? customList}) async {
     if (incognitoBlocksEdits) {
       snackString(getString.incognitoEditsBlocked);
       return;
     }
-    try {
-      await saveEntry(media);
-      _done();
-    } on ComickException catch (e) {
-      snackString(getString.serviceError(getString.comick, e.message));
-    }
+    await _run(() => saveEntry(media));
   }
 
   @override
-  Future<void> saveEntry(Media media, {bool? exists}) async {
+  Future<void> saveEntry(Media media, {bool? exists}) {
     final score = media.userScore ?? 0;
-    final ratingVal = score <= 0 ? null : (score / 10).round().clamp(1, 10);
-    final statusVal = comickStatusOut(media.userStatus);
-
-    final body = <String, dynamic>{
-      'status': statusVal,
-      'rating': ?ratingVal,
-      'progress': ?(media.userProgress == null
-          ? null
-          : {'number': '${media.userProgress}'}),
-    };
-
-    final hid = _hid(media);
-
-    final path = '/me/library/$hid';
-    try {
-      await client.write(exists == true ? 'PATCH' : 'PUT', path, body);
-    } on ComickException catch (e) {
-      if (e.status == 404 && exists == true) {
-        await client.write('PUT', path, body);
-      } else {
-        rethrow;
-      }
-    }
+    final progress = media.userProgress;
+    return _upsert(comickHid(media), {
+      'status': comickStatusOut(media.userStatus),
+      if (score > 0) 'rating': (score / 10).round().clamp(1, 10),
+      if (progress != null) 'progress': {'number': '$progress'},
+    }, patch: exists == true);
   }
 
   @override
-  Future<void> deleteFromList(Media media) async {
-    try {
-      final hid = _hid(media);
-      await client.delete('/me/library/$hid');
-      clearListEntry(media);
-      _done();
-    } on ComickException catch (e) {
-      snackString(getString.serviceError(getString.comick, e.message));
-    }
-  }
+  Future<void> deleteFromList(Media media) => _run(() async {
+    await client.delete('/me/library/${comickHid(media)}');
+    clearListEntry(media);
+  });
 
   @override
   Future<void> setProgress(Media media, int progress) async {
     if (incognitoBlocksEdits) return;
     final done = reachesEnd(media, progress);
-    final status = media.userStatus;
-    final hid = _hid(media);
-
-    final body = <String, dynamic>{
+    final started = media.userStatus != null && media.userStatus != 'PLANNING';
+    final entry = {
       'progress': {'number': '$progress'},
-      if (done)
-        'status': 2
-      else if (status == null || status == 'PLANNING')
-        'status': 1,
     };
-
-    try {
-      await client.write('PATCH', '/me/library/$hid', body);
-      _done();
-    } on ComickException catch (e) {
-      if (e.status == 404) {
-        body['status'] = done ? 2 : 1;
-        await client.write('PUT', '/me/library/$hid', body);
-        _done();
-      } else {
-        snackString(getString.serviceError(getString.comick, e.message));
-      }
-    }
+    await _run(
+      () => _upsert(
+        comickHid(media),
+        {...entry, if (done) 'status': 2 else if (!started) 'status': 1},
+        create: {...entry, 'status': done ? 2 : 1},
+      ),
+    );
   }
 
-  void _done() {
-    queries.invalidateLibrary();
-    findBuilt<RefreshController>()?.all();
+  Future<void> _upsert(
+    String hid,
+    Map<String, dynamic> body, {
+    Map<String, dynamic>? create,
+    bool patch = true,
+  }) async {
+    final path = '/me/library/$hid';
+    if (patch) {
+      try {
+        await client.write('PATCH', path, body);
+        return;
+      } on ComickException catch (e) {
+        if (e.status != 404) rethrow;
+      }
+    }
+    await client.write('PUT', path, create ?? body);
+  }
+
+  Future<void> _run(Future<void> Function() action) async {
+    try {
+      await action();
+      queries.invalidateLibrary();
+      findBuilt<RefreshController>()?.all();
+    } on ComickException catch (e) {
+      snackString(getString.serviceError(getString.comick, e.message));
+    }
   }
 }

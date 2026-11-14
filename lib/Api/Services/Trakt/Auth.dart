@@ -3,6 +3,7 @@ import 'dart:async';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/BrowserAuth.dart';
 import '../../../Core/Services/Api/Pkce.dart';
+import '../../../Core/Services/Api/SharedRequests.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -16,10 +17,6 @@ import 'Queries.dart';
 
 TraktAuth get traktAuth => find<TraktAuth>();
 
-const _defaultClientId = 'gMkRIMvbNw8ie4wGwQtT101vsenOVV4R0VGQu_AH_mw';
-
-String get _clientId => _defaultClientId;
-
 class TraktAuth extends AppController
     with SharedRefresh
     implements ServiceAuth {
@@ -30,11 +27,7 @@ class TraktAuth extends AppController
   @override
   final user = Live<ServiceUser?>(null);
 
-  late final TraktClient client = TraktClient(
-    () async => _clientId,
-    () => token.value,
-    _refresh,
-  );
+  late final TraktClient client = TraktClient(() => token.value, _refresh);
 
   late final TraktQueries queries = TraktQueries(
     client,
@@ -48,7 +41,7 @@ class TraktAuth extends AppController
 
   late final TraktMutations mutations = TraktMutations(client, queries);
 
-  Completer<bool>? _refreshing;
+  final _refreshing = SingleFlight<bool>();
 
   @override
   bool get isLoggedIn => token.value.isNotEmpty;
@@ -94,7 +87,7 @@ class TraktAuth extends AppController
     final authUrl = Uri.parse('$traktAuthUrl/oauth/authorize')
         .replace(
           queryParameters: {
-            'client_id': _clientId,
+            'client_id': traktClientId,
             'redirect_uri': redirect,
             'response_type': 'code',
             'state': state,
@@ -114,7 +107,7 @@ class TraktAuth extends AppController
 
     final data = await client.token('/oauth/token', {
       'code': params['code']!,
-      'client_id': _clientId,
+      'client_id': traktClientId,
       'code_verifier': verifier,
       'grant_type': 'authorization_code',
       'redirect_uri': redirect,
@@ -137,32 +130,23 @@ class TraktAuth extends AppController
     return true;
   }
 
-  Future<bool> _refresh() async {
-    final pending = _refreshing;
-    if (pending != null) return pending.future;
+  Future<bool> _refresh() => _refreshing.run(() async {
     final refresh = TraktPref.refresh.value;
     if (refresh.isEmpty) return false;
-
-    final done = _refreshing = Completer<bool>();
     try {
-      final redirect = authRedirect('trakt');
-      final data = await client.token('/oauth/token', {
-        'refresh_token': refresh,
-        'client_id': _clientId,
-        'grant_type': 'refresh_token',
-        'redirect_uri': redirect,
-      });
-      final ok = _store(data);
-      done.complete(ok);
-      return ok;
+      return _store(
+        await client.token('/oauth/token', {
+          'refresh_token': refresh,
+          'client_id': traktClientId,
+          'grant_type': 'refresh_token',
+          'redirect_uri': authRedirect('trakt'),
+        }),
+      );
     } catch (e, st) {
       logError('TraktAuth', e, st);
-      done.complete(false);
       return false;
-    } finally {
-      _refreshing = null;
     }
-  }
+  });
 
   @override
   Future<void> refreshUser() =>
@@ -173,15 +157,14 @@ class TraktAuth extends AppController
     try {
       final data = await client.get('/users/me', query: {'extended': 'full'});
       if (data is! Map) return;
-      final u = data.cast<String, dynamic>();
-
-      Map<String, dynamic>? stats;
+      Object? stats;
       try {
-        final statsData = await client.get('/users/me/stats');
-        if (statsData is Map) stats = statsData.cast<String, dynamic>();
+        stats = await client.get('/users/me/stats');
       } catch (_) {}
-
-      final traktUser = _mapUser(u, stats);
+      final traktUser = TraktUser.fromApi(
+        data.cast<String, dynamic>(),
+        stats is Map ? stats.cast<String, dynamic>() : null,
+      );
       user.value = traktUser;
       PrefManager.setCustomType(
         _userCacheKey,
@@ -192,36 +175,6 @@ class TraktAuth extends AppController
     } catch (e, st) {
       logError('TraktAuth', e, st);
     }
-  }
-
-  TraktUser _mapUser(Map<String, dynamic> u, Map<String, dynamic>? stats) {
-    final ids = (u['ids'] as Map?)?.cast<String, dynamic>() ?? const {};
-    final id = (ids['trakt'] as num?)?.toInt() ?? 0;
-    final username = u['username'] as String? ?? '$id';
-    final name = (u['name'] as String?)?.isNotEmpty == true
-        ? u['name'] as String
-        : username;
-
-    final images = u['images'] as Map?;
-    final avatar = (images?['avatar'] as Map?)?['full'] as String?;
-
-    final epStats = stats?['episodes'] as Map?;
-    final movieStats = stats?['movies'] as Map?;
-    final episodesWatched = (epStats?['watched'] as num?)?.toInt() ?? 0;
-    final moviesWatched = (movieStats?['watched'] as num?)?.toInt() ?? 0;
-
-    return TraktUser(
-      id: id,
-      name: name,
-      username: username,
-      avatar: avatar,
-      episodesWatched: episodesWatched,
-      moviesWatched: moviesWatched,
-      joinedAt: u['joined_at'] as String?,
-      location: u['location'] as String?,
-      about: u['about'] as String?,
-      vip: u['vip'] as bool? ?? false,
-    );
   }
 
   @override

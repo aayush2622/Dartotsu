@@ -60,17 +60,17 @@ class TraktMutations extends Mutations {
 
   TraktMutations(this.client, this.queries);
 
-  Map<String, Object> _entry(int id, [Map<String, Object>? extra]) => {
-    'ids': {'trakt': id},
-    ...?extra,
-  };
-
   Map<String, Object> _body(
     TraktKind kind,
     int id, [
     Map<String, Object>? extra,
   ]) => {
-    kind.syncKey: [_entry(id, extra)],
+    kind.syncKey: [
+      {
+        'ids': {'trakt': id},
+        ...?extra,
+      },
+    ],
   };
 
   Future<List<(int, int)>> _showEpisodes(int id) async =>
@@ -91,54 +91,71 @@ class TraktMutations extends Mutations {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return;
     final (kind, id) = ref;
-
-    try {
+    await _run(() async {
       final before = (await queries.library())[media.id];
-      final old = before?.userProgress ?? 0;
-      final progress = media.userProgress ?? 0;
-      final status = media.userStatus;
-      final score = ((media.userScore ?? 0) / 10).round().clamp(0, 10);
-      final oldScore = ((before?.userScore ?? 0) / 10).round();
-      final rate = score > 0 && score != oldScore;
+      await _saveStatus(kind, id, media, before);
+      await _saveRating(kind, id, media, before);
+    });
+  }
 
-      if (status == 'PLANNING') {
-        await client.post('/sync/watchlist', _body(kind, id));
+  Future<void> _saveStatus(
+    TraktKind kind,
+    int id,
+    Media media,
+    Media? before,
+  ) async {
+    final body = _body(kind, id);
+    final old = before?.userProgress ?? 0;
+    switch (media.userStatus) {
+      case 'PLANNING':
+        await client.post('/sync/watchlist', body);
         if (before?.userStatus == 'COMPLETED' || old > 0) {
-          await client.post('/sync/history/remove', _body(kind, id));
+          await client.post('/sync/history/remove', body);
         }
-      } else if (status == 'COMPLETED') {
-        await client.post('/sync/history', _body(kind, id));
-        await client.post('/sync/watchlist/remove', _body(kind, id));
-      } else {
-        // Watching / progress
-        await client.post('/sync/watchlist/remove', _body(kind, id));
-        if (kind == TraktKind.shows && progress != old) {
-          final all = await _showEpisodes(id);
-          final from = (progress < old ? progress : old).clamp(0, all.length);
-          final to = (progress < old ? old : progress).clamp(0, all.length);
-          if (to > from) {
-            final eps = all.sublist(from, to);
-            final endpoint = progress < old
-                ? '/sync/history/remove'
-                : '/sync/history';
-            await client.post(endpoint, {
-              'shows': [traktShowEpisodes(id, eps)],
-            });
-          }
-        } else if (kind == TraktKind.movies && progress > 0) {
-          await client.post('/sync/history', _body(kind, id));
-        }
-      }
+      case 'COMPLETED':
+        await client.post('/sync/history', body);
+        await client.post('/sync/watchlist/remove', body);
+      default:
+        await client.post('/sync/watchlist/remove', body);
+        await _saveProgress(kind, id, old, media.userProgress ?? 0);
+    }
+  }
 
-      if (rate) {
-        await client.post('/sync/ratings', _body(kind, id, {'rating': score}));
-      } else if (score == 0 && oldScore > 0) {
-        await client.post('/sync/ratings/remove', _body(kind, id));
-      }
+  Future<void> _saveProgress(
+    TraktKind kind,
+    int id,
+    int old,
+    int progress,
+  ) async {
+    if (kind == TraktKind.movies) {
+      if (progress > 0) await client.post('/sync/history', _body(kind, id));
+      return;
+    }
+    if (progress == old) return;
+    final all = await _showEpisodes(id);
+    final from = (progress < old ? progress : old).clamp(0, all.length);
+    final to = (progress < old ? old : progress).clamp(0, all.length);
+    if (to <= from) return;
+    await client.post(
+      progress < old ? '/sync/history/remove' : '/sync/history',
+      {
+        'shows': [traktShowEpisodes(id, all.sublist(from, to))],
+      },
+    );
+  }
 
-      _done();
-    } on TraktException catch (e) {
-      snackString(getString.serviceError(getString.trakt, e.message));
+  Future<void> _saveRating(
+    TraktKind kind,
+    int id,
+    Media media,
+    Media? before,
+  ) async {
+    final score = ((media.userScore ?? 0) / 10).round().clamp(0, 10);
+    final oldScore = ((before?.userScore ?? 0) / 10).round();
+    if (score > 0 && score != oldScore) {
+      await client.post('/sync/ratings', _body(kind, id, {'rating': score}));
+    } else if (score == 0 && oldScore > 0) {
+      await client.post('/sync/ratings/remove', _body(kind, id));
     }
   }
 
@@ -147,15 +164,12 @@ class TraktMutations extends Mutations {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return;
     final (kind, id) = ref;
-    try {
-      await client.post('/sync/history/remove', _body(kind, id));
-      await client.post('/sync/watchlist/remove', _body(kind, id));
-      await client.post('/sync/ratings/remove', _body(kind, id));
+    await _run(() async {
+      for (final endpoint in const ['history', 'watchlist', 'ratings']) {
+        await client.post('/sync/$endpoint/remove', _body(kind, id));
+      }
       clearListEntry(media);
-      _done();
-    } on TraktException catch (e) {
-      snackString(getString.serviceError(getString.trakt, e.message));
-    }
+    });
   }
 
   @override
@@ -166,8 +180,13 @@ class TraktMutations extends Mutations {
     snackString(getString.progressSet(progress));
   }
 
-  void _done() {
-    queries.invalidateLibrary();
-    findBuilt<RefreshController>()?.all();
+  Future<void> _run(Future<void> Function() action) async {
+    try {
+      await action();
+      queries.invalidateLibrary();
+      findBuilt<RefreshController>()?.all();
+    } on TraktException catch (e) {
+      snackString(getString.serviceError(getString.trakt, e.message));
+    }
   }
 }

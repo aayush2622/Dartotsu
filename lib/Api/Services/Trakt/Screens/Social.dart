@@ -1,5 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../../Core/Services/Api/SharedRequests.dart';
 import '../../../../Logger.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
@@ -12,9 +13,6 @@ class TraktSocialView extends SocialScreenView {
 
   @override
   bool get hasGlobalFeed => false;
-
-  @override
-  bool get hasFollows => false;
 
   @override
   String? profileUrl(String name) {
@@ -48,6 +46,69 @@ class TraktSocialView extends SocialScreenView {
 
   int _int(Object? v) => (v as num?)?.toInt() ?? 0;
 
+  UserBrief? _brief(Map<String, dynamic> row, {required bool following}) {
+    final user = (row['user'] as Map?)?.cast<String, dynamic>();
+    final slug = (user?['ids'] as Map?)?['slug'] as String?;
+    if (user == null || slug == null) return null;
+    final name = user['name'] as String?;
+    return UserBrief(
+      id: slug,
+      name: name == null || name.isEmpty ? '${user['username']}' : name,
+      avatar: ((user['images'] as Map?)?['avatar'] as Map?)?['full'] as String?,
+      isFollowing: following,
+    );
+  }
+
+  Future<Set<String>> _followedBy(String id) async {
+    final rows = jsonRows(await traktAuth.client.get('/users/$id/following'));
+    return {
+      for (final row in rows)
+        if (((row['user'] as Map?)?['ids'] as Map?)?['slug']
+            case final String s)
+          s,
+    };
+  }
+
+  @override
+  Future<UserPage> follows(
+    String userId, {
+    required bool followers,
+    int page = 1,
+  }) async {
+    if (page > 1) return const UserPage([]);
+    final rows = await traktAuth.client.get(
+      '/users/$userId/${followers ? 'followers' : 'following'}',
+      query: {'extended': 'full'},
+    );
+    final mine = canInteract ? await _followedBy('me') : const <String>{};
+    return UserPage([
+      for (final row in jsonRows(rows))
+        ?_brief(
+          row,
+          following: mine.contains(
+            ((row['user'] as Map?)?['ids'] as Map?)?['slug'],
+          ),
+        ),
+    ]);
+  }
+
+  @override
+  Future<bool?> toggleFollow(String userId) async {
+    if (!canInteract) return null;
+    try {
+      final following = (await _followedBy('me')).contains(userId);
+      if (following) {
+        await traktAuth.client.delete('/users/$userId/follow');
+      } else {
+        await traktAuth.client.post('/users/$userId/follow', const {});
+      }
+      return !following;
+    } catch (e, st) {
+      logError('TraktSocial.follow', e, st);
+      return null;
+    }
+  }
+
   @override
   Future<SocialUser?> profile({String? id, String? name}) async {
     final me = currentUserId;
@@ -58,7 +119,14 @@ class TraktSocialView extends SocialScreenView {
             ? name
             : (currentUser?.username ?? me ?? 'me'));
 
-    final (stats, user) = await (_stats(target), _profile(target)).wait;
+    final isMe = target == currentUser?.username || target == 'me';
+    final (stats, user, followed) = await (
+      _stats(target),
+      _profile(target),
+      canInteract && !isMe
+          ? _followedBy('me').catchError((_) => <String>{})
+          : Future.value(const <String>{}),
+    ).wait;
 
     final movies =
         (stats['movies'] as Map?)?.cast<String, dynamic>() ?? const {};
@@ -89,6 +157,7 @@ class TraktSocialView extends SocialScreenView {
       avatar: avatar,
       about: (about != null && about.isNotEmpty) ? about : null,
       siteUrl: 'https://trakt.tv/users/$username',
+      isFollowing: followed.contains(username),
       followers: _int(network['followers']),
       following: _int(network['following']),
       animeCount: totalWatched,

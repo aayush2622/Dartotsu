@@ -9,6 +9,7 @@ import 'Screens/Detail.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Search.dart';
 import 'Screens/Settings.dart';
+import 'Screens/Social.dart';
 import 'Sync.dart';
 
 const comickServiceId = 'comick';
@@ -71,6 +72,9 @@ class ComickService extends MediaService {
 
   @override
   SettingsScreenView get settingsView => ComickSettingsView();
+
+  @override
+  late final SocialScreenView socialView = ComickSocialView(this);
 
   @override
   Set<String> get linkHosts => const {

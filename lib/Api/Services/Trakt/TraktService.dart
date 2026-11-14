@@ -4,6 +4,7 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Screen/Settings/Sync/Data/SyncAdapter.dart';
 import 'Auth.dart';
 import 'Screens/Calendar.dart';
+import 'Screens/CommunityLists.dart';
 import 'Screens/Detail.dart';
 import 'Screens/Entity.dart';
 import 'Screens/Feed.dart';
@@ -66,6 +67,9 @@ class TraktService extends MediaService {
 
   @override
   EntityScreenView get entityView => TraktEntityView(this);
+
+  @override
+  CommunityListsView get communityListsView => TraktCommunityListsView(this);
 
   @override
   CalendarScreenView get calendarView => TraktCalendarView();

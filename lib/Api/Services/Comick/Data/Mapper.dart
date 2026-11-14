@@ -134,10 +134,8 @@ class ComickExtras {
   String slug = '';
   int? anilistId;
   int? malId;
-  int? kitsuId;
   int? mangabakaId;
   String? mangaUpdatesId;
-  String? lastReleasedNumber;
   String? translationStatus;
   double? bayesianRating;
   List<String> authors = const [];
@@ -146,6 +144,16 @@ class ComickExtras {
 }
 
 final comickExtras = Expando<ComickExtras>('comickExtras');
+
+String comickHid(Media media) {
+  final hid = comickExtras[media]?.hid;
+  return hid == null || hid.isEmpty ? media.id : hid;
+}
+
+(String, String) _identity(Map item) {
+  final hid = _s(item['hid']) ?? '${item['id'] ?? ''}';
+  return (hid, _s(item['slug']) ?? hid);
+}
 
 List<String> _names(Object? list) => [
   for (final a in (list as List?) ?? const [])
@@ -204,8 +212,7 @@ Media _build(
 }
 
 Media mapComickSearchItem(Map<String, dynamic> item) {
-  final hid = _s(item['hid']) ?? '${item['id'] ?? ''}';
-  final slug = _s(item['slug']) ?? hid;
+  final (hid, slug) = _identity(item);
   final anime = item['media_type'] == 'anime';
   final ext = (item['external_ids'] as Map?)?.cast<String, dynamic>() ?? {};
   final authors = _names(item['authors']);
@@ -232,8 +239,7 @@ Media mapComickSearchItem(Map<String, dynamic> item) {
 }
 
 Media mapComickLibraryEntry(Map<String, dynamic> item) {
-  final hid = _s(item['hid']) ?? '';
-  final slug = _s(item['slug']) ?? hid;
+  final (hid, slug) = _identity(item);
   final anime = item['media_type'] == 'anime';
   final rating = _i(item['rating']);
   final progress = item['progress'] as Map?;
@@ -255,15 +261,13 @@ Media mapComickLibraryEntry(Map<String, dynamic> item) {
     ..hid = hid
     ..slug = slug
     ..bayesianRating = _d(item['bayesian_rating'])
-    ..lastReleasedNumber = item['last_released_number']?.toString()
     ..translationStatus = item['translation_status']?.toString();
   return media;
 }
 
 Media mapComickComicDetail(Map<String, dynamic> data) {
   final comic = (data['comic'] as Map?)?.cast<String, dynamic>() ?? const {};
-  final hid = _s(comic['hid']) ?? '';
-  final slug = _s(comic['slug']) ?? hid;
+  final (hid, slug) = _identity(comic);
   final anime = comic['media_type'] == 'anime';
   final authors = _names(data['authors']);
   final links = (comic['links'] as Map?)?.cast<String, dynamic>() ?? const {};
@@ -290,7 +294,6 @@ Media mapComickComicDetail(Map<String, dynamic> data) {
     ..slug = slug
     ..anilistId = _i(links['al'])
     ..malId = _i(links['mal'])
-    ..kitsuId = _i(links['kt'])
     ..mangabakaId = _i(links['mb'])
     ..mangaUpdatesId = _s(links['mu'])
     ..bayesianRating = _d(comic['bayesian_rating'] ?? comic['rating'])
@@ -312,8 +315,7 @@ Media mapComickComicDetail(Map<String, dynamic> data) {
 }
 
 Media mapComickScheduleItem(Map<String, dynamic> item) {
-  final hid = _s(item['hid']) ?? '${item['id'] ?? ''}';
-  final slug = _s(item['slug']) ?? hid;
+  final (hid, slug) = _identity(item);
   final media = _build(item, hid: hid, slug: slug, anime: true);
   comickExtras[media] = ComickExtras()
     ..hid = hid

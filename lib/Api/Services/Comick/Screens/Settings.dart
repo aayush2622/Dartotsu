@@ -68,14 +68,13 @@ class ComickSettingsView extends SettingsScreenView {
         ),
       ),
       Setting.header(getString.account),
-      if (user is ComickUser) ...[
+      if (user is ComickUser)
         Setting.normal(
           name: getString.comickProfile,
           description: user.name,
           icon: Icons.person_outline_rounded,
           onClick: () => openLinkInBrowser(user.profileUrl),
         ),
-      ],
       Setting.normal(
         name: getString.comickClientId,
         description: ComickPref.clientId.value.isEmpty

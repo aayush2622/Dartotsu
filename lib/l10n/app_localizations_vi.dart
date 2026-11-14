@@ -2242,6 +2242,12 @@ class AppLocalizationsVi extends AppLocalizations {
       'Data and artwork provided by Trakt. View on Trakt';
 
   @override
+  String get listsLiked => 'Liked';
+
+  @override
+  String get listsYours => 'Yours';
+
+  @override
   String get traktVip => 'VIP';
 
   @override

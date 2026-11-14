@@ -1,4 +1,5 @@
 import '../../../../Core/Services/Model/Anime.dart';
+import '../../../../Core/Services/Model/CommunityList.dart';
 import '../../../../Core/Services/Model/Date.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/Services/Model/Studio.dart';
@@ -37,28 +38,20 @@ String traktHeadshot(Object id) =>
 String traktShareLink(TraktKind kind, Object id) =>
     'https://trakt.tv/${kind.path}/$id';
 
-String traktPosterUrl(TraktKind kind, int id, [String? explicit]) {
-  if (explicit != null && explicit.isNotEmpty) {
-    return explicit.startsWith('http') ? explicit : 'https://$explicit';
-  }
-  return 'https://media.trakt.tv/${kind.path}/$id/medium/poster.webp';
+String _artwork(String? explicit, String fallback) {
+  if (explicit == null || explicit.isEmpty) return fallback;
+  return explicit.startsWith('http') ? explicit : 'https://$explicit';
 }
 
-String traktFanartUrl(TraktKind kind, int id, [String? explicit]) {
-  if (explicit != null && explicit.isNotEmpty) {
-    return explicit.startsWith('http') ? explicit : 'https://$explicit';
-  }
-  return 'https://media.trakt.tv/${kind.path}/$id/full/fanart.webp';
-}
+String traktPosterUrl(TraktKind kind, int id, [String? explicit]) => _artwork(
+  explicit,
+  'https://media.trakt.tv/${kind.path}/$id/medium/poster.webp',
+);
 
-String? traktStatusIn(String? status) => switch (status?.toLowerCase()) {
-  'watching' || 'current' => 'CURRENT',
-  'plantowatch' || 'watchlist' => 'PLANNING',
-  'completed' || 'watched' => 'COMPLETED',
-  'paused' || 'hold' => 'PAUSED',
-  'dropped' => 'DROPPED',
-  _ => null,
-};
+String traktFanartUrl(TraktKind kind, int id, [String? explicit]) => _artwork(
+  explicit,
+  'https://media.trakt.tv/${kind.path}/$id/full/fanart.webp',
+);
 
 String? _airStatus(String? s) => switch (s?.toLowerCase()) {
   'ended' || 'released' || 'finished' => 'FINISHED',
@@ -237,4 +230,28 @@ TraktExtras _extrasOf(Map<String, dynamic> d, TraktKind kind, int traktId) {
         ),
       ('Trakt', 'https://trakt.tv/${kind.path}/${slug ?? traktId}'),
     ];
+}
+
+CommunityList? mapTraktList(
+  Map<String, dynamic> row,
+  String Function(int count) countLabel,
+) {
+  final list = (row['list'] as Map?)?.cast<String, dynamic>() ?? row;
+  final id = _int((list['ids'] as Map?)?['trakt']);
+  final name = list['name'] as String?;
+  if (id == null || name == null || name.isEmpty) return null;
+  final owner = (list['user'] as Map?)?.cast<String, dynamic>();
+  final description = (list['description'] as String?)?.trim();
+  final count = _int(list['item_count']) ?? 0;
+  return CommunityList(
+    id: '$id',
+    title: name,
+    author: '${owner?['name'] ?? owner?['username'] ?? ''}',
+    description: description == null || description.isEmpty
+        ? null
+        : description,
+    count: count == 0 ? '' : countLabel(count),
+    likes: _int(row['like_count'] ?? list['likes']) ?? 0,
+    url: 'https://trakt.tv/lists/$id',
+  );
 }

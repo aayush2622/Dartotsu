@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import '../LayoutPref.dart';
 import '../Model/Media.dart';
 import '../Screens/ScreenWidget.dart';
 import '../../../Logger.dart';
@@ -12,6 +13,14 @@ typedef SectionJob = Future<SectionMap> Function();
 
 SectionMap titledSection(String title, List<Media> items) =>
     items.isEmpty ? <String, List<Media>>{} : {title: items};
+
+List<SectionJob> layoutJobs(
+  Map<String, SectionJob> jobs,
+  Map<String, bool> layout,
+) => [
+  for (final e in applyLayout(jobs.entries.toList(), (e) => e.key, layout))
+    e.value,
+];
 
 /// True while the user's own pull-to-refresh is running, so a job that keeps
 /// its result for a while can fetch again.

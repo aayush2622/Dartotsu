@@ -37,7 +37,7 @@ class _CommunityListsScreenState extends BaseScreen<CommunityListsScreen>
     backgroundColor: Colors.transparent,
     appBar: AppScreenBar(
       title: getString.customLists,
-      actions: [Watch(_sortMenu)],
+      actions: [if (widget.view.sorts.length > 1) Watch(_sortMenu)],
       bottom: AppTabs(
         controller: state.tabs,
         items: [for (final (_, label) in widget.view.kinds) AppTabItem(label)],

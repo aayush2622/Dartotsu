@@ -72,6 +72,29 @@ class TraktUser implements ServiceUser {
     'vip': vip,
   };
 
+  factory TraktUser.fromApi(
+    Map<String, dynamic> user,
+    Map<String, dynamic>? stats,
+  ) {
+    final id = ((user['ids'] as Map?)?['trakt'] as num?)?.toInt() ?? 0;
+    final username = user['username'] as String? ?? '$id';
+    final name = user['name'] as String?;
+    return TraktUser(
+      id: id,
+      name: name == null || name.isEmpty ? username : name,
+      username: username,
+      avatar: ((user['images'] as Map?)?['avatar'] as Map?)?['full'] as String?,
+      episodesWatched:
+          ((stats?['episodes'] as Map?)?['watched'] as num?)?.toInt() ?? 0,
+      moviesWatched:
+          ((stats?['movies'] as Map?)?['watched'] as num?)?.toInt() ?? 0,
+      joinedAt: user['joined_at'] as String?,
+      location: user['location'] as String?,
+      about: user['about'] as String?,
+      vip: user['vip'] as bool? ?? false,
+    );
+  }
+
   factory TraktUser.fromJson(Map<String, dynamic> j) => TraktUser(
     id: (j['id'] as num).toInt(),
     name: (j['name'] as String?)?.isNotEmpty == true
