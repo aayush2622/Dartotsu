@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:math';
-
-import 'package:crypto/crypto.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/BrowserAuth.dart';
+import '../../../Core/Services/Api/Pkce.dart';
 import '../../../Core/Services/ServiceAuth.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -17,7 +15,6 @@ import 'Data/User.dart';
 import 'Mutations.dart';
 import 'Prefs.dart';
 import 'Queries.dart';
-import 'TraktStrings.dart';
 
 TraktAuth get traktAuth => find<TraktAuth>();
 
@@ -97,11 +94,9 @@ class TraktAuth extends AppController
   }
 
   Future<bool> _login() async {
-    final verifier = _random(64);
-    final challenge = base64UrlEncode(
-      sha256.convert(utf8.encode(verifier)).bytes,
-    ).replaceAll('=', '');
-    final state = _random(24);
+    final verifier = randomToken(64);
+    final challenge = pkceChallenge(verifier);
+    final state = randomToken(24);
     final redirect = authRedirect('trakt');
 
     final authUrl = Uri.parse('$traktAuthUrl/oauth/authorize').replace(
@@ -241,12 +236,5 @@ class TraktAuth extends AppController
     user.value = null;
     queries.clearLibrary();
     PrefManager.removeCustomData(_userCacheKey, location: PrefLocation.CACHE);
-  }
-
-  String _random(int length) {
-    const chars =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._~';
-    final r = Random.secure();
-    return List.generate(length, (_) => chars[r.nextInt(chars.length)]).join();
   }
 }

@@ -44,12 +44,13 @@ class TraktEntityView extends EntityScreenView {
         url: 'https://trakt.tv/people/${slug ?? id}',
         description: bio != null && bio.isNotEmpty ? bio : null,
         facts: [
-          if (birthday != null && birthday.isNotEmpty) ('Born', birthday),
-          if (death != null && death.isNotEmpty) ('Died', death),
+          if (birthday != null && birthday.isNotEmpty)
+            (getString.born, birthday),
+          if (death != null && death.isNotEmpty) (getString.died, death),
           if (birthplace != null && birthplace.isNotEmpty)
-            ('Birthplace', birthplace),
+            (getString.birthplace, birthplace),
           if (dept != null && dept.isNotEmpty)
-            ('Department', dept[0].toUpperCase() + dept.substring(1)),
+            (getString.department, dept[0].toUpperCase() + dept.substring(1)),
         ],
       );
       host.update(profile);

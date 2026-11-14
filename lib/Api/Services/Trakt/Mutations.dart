@@ -8,7 +8,6 @@ import '../../../Utils/Functions/SnackBar.dart';
 import 'Client.dart';
 import 'Data/Mapper.dart';
 import 'Queries.dart';
-import 'TraktStrings.dart';
 
 List<(int, int)> parseTraktShowEpisodes(Object? body) {
   if (body is! List) return const [];

@@ -10,7 +10,6 @@ import '../../../../Widgets/Components/HomeLayoutSheet.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
 import '../Prefs.dart';
-import '../TraktStrings.dart';
 
 String _shown(Pref<Map<String, bool>> pref) => getString.sectionsShown(
   pref.rx.value.values.where((v) => v).length,
@@ -96,8 +95,8 @@ class TraktSettingsView extends SettingsScreenView {
       info(getString.about, Icons.info_outline_rounded, user.about),
       if (user.vip)
         Setting.normal(
-          name: 'VIP',
-          description: 'Trakt VIP Member',
+          name: getString.traktVip,
+          description: getString.traktVipMember,
           icon: Icons.workspace_premium_outlined,
         ),
     ];

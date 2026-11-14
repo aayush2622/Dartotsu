@@ -591,7 +591,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
   }
 
   Widget _accounts(bool active) {
-    const services = ['AniList', 'MyAnimeList', 'Simkl', 'Kitsu', 'MangaBaka', 'Trakt'];
+    const services = ['AniList', 'MyAnimeList', 'Simkl', 'Kitsu', 'MangaBaka'];
     return _frame(
       active: active,
       icon: Icons.sync_rounded,

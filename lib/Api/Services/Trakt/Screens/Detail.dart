@@ -12,7 +12,6 @@ import '../../../../Utils/Function.dart';
 import '../../../../Widgets/Components/SectionCard.dart';
 import '../Auth.dart';
 import '../Data/Mapper.dart';
-import '../TraktStrings.dart';
 import 'ListEditor.dart';
 
 class TraktDetailView extends DetailScreenView {

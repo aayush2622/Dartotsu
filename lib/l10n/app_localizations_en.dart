@@ -25,6 +25,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get simkl => 'Simkl';
 
   @override
+  String get trakt => 'Trakt';
+
+  @override
   String get kitsu => 'Kitsu';
 
   @override
@@ -1997,6 +2000,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get simklReadOnly => 'Simkl granted read-only access';
 
   @override
+  String get traktReadOnly => 'Trakt granted read-only access';
+
+  @override
   String get incognitoEditsBlocked => 'Incognito: list edits are blocked';
 
   @override
@@ -2131,6 +2137,22 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get simklAttribution =>
       'Data and artwork provided by Simkl. View on Simkl';
+
+  @override
+  String get traktProfile => 'Trakt profile';
+
+  @override
+  String get refreshFromTrakt => 'Refresh from Trakt';
+
+  @override
+  String get traktAttribution =>
+      'Data and artwork provided by Trakt. View on Trakt';
+
+  @override
+  String get traktVip => 'VIP';
+
+  @override
+  String get traktVipMember => 'Trakt VIP Member';
 
   @override
   String get onHold => 'On hold';
@@ -3373,6 +3395,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get born => 'Born';
 
   @override
+  String get died => 'Died';
+
+  @override
+  String get birthplace => 'Birthplace';
+
+  @override
+  String get department => 'Department';
+
+  @override
   String get website => 'Website';
 
   @override
@@ -3395,6 +3426,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shows => 'Shows';
+
+  @override
+  String get moviesWatched => 'Movies Watched';
+
+  @override
+  String get showsWatched => 'Shows Watched';
+
+  @override
+  String get moviesCollected => 'Movies Collected';
+
+  @override
+  String get showsCollected => 'Shows Collected';
 
   @override
   String get rewatching => 'Rewatching';

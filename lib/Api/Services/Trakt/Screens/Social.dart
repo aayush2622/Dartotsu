@@ -1,5 +1,6 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Social.dart';
+import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Logger.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
@@ -116,15 +117,30 @@ class TraktSocialView extends SocialScreenView {
 
     final mediaEntries = [
       if (_int(movies['watched']) > 0)
-        StatEntry(label: 'Movies Watched', count: _int(movies['watched'])),
+        StatEntry(
+          label: getString.moviesWatched,
+          count: _int(movies['watched']),
+        ),
       if (_int(shows['watched']) > 0)
-        StatEntry(label: 'Shows Watched', count: _int(shows['watched'])),
+        StatEntry(
+          label: getString.showsWatched,
+          count: _int(shows['watched']),
+        ),
       if (_int(episodes['watched']) > 0)
-        StatEntry(label: 'Episodes Watched', count: _int(episodes['watched'])),
+        StatEntry(
+          label: getString.episodesWatched,
+          count: _int(episodes['watched']),
+        ),
       if (_int(movies['collected']) > 0)
-        StatEntry(label: 'Movies Collected', count: _int(movies['collected'])),
+        StatEntry(
+          label: getString.moviesCollected,
+          count: _int(movies['collected']),
+        ),
       if (_int(shows['collected']) > 0)
-        StatEntry(label: 'Shows Collected', count: _int(shows['collected'])),
+        StatEntry(
+          label: getString.showsCollected,
+          count: _int(shows['collected']),
+        ),
     ];
 
     final ratingEntries = [
@@ -135,9 +151,9 @@ class TraktSocialView extends SocialScreenView {
 
     final categories = [
       if (mediaEntries.isNotEmpty)
-        StatCategory('media', 'Media', mediaEntries),
+        StatCategory('media', getString.moviesAndSeries, mediaEntries),
       if (ratingEntries.isNotEmpty)
-        StatCategory('ratings', 'Ratings', ratingEntries),
+        StatCategory('ratings', getString.ratings, ratingEntries),
     ];
 
     final totalWatched = _int(movies['watched']) + _int(shows['watched']);

@@ -24,7 +24,6 @@ import 'Client.dart';
 import 'Data/Browse.dart';
 import 'Data/Mapper.dart';
 import 'Prefs.dart';
-import 'TraktStrings.dart';
 
 class TraktSection {
   final String title;
