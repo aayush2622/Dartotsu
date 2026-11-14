@@ -25,7 +25,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get simkl => 'Simkl';
 
   @override
+  String get trakt => 'Trakt';
+
+  @override
   String get kitsu => 'Kitsu';
+
+  @override
+  String get comick => 'Comick';
 
   @override
   String get mangaBaka => 'MangaBaka';
@@ -1875,6 +1881,84 @@ class AppLocalizationsTe extends AppLocalizations {
   String get mangaBakaLoginFailed => 'MangaBaka లాగిన్ ఫెయిలైంది';
 
   @override
+  String get comickLoginFailed => 'Comick login failed';
+
+  @override
+  String get tagline => 'Tagline';
+
+  @override
+  String get trending => 'Trending';
+
+  @override
+  String get anticipated => 'Anticipated';
+
+  @override
+  String get watchlist => 'Watchlist';
+
+  @override
+  String get recommendedShows => 'Recommended Shows';
+
+  @override
+  String get recommendedMovies => 'Recommended Movies';
+
+  @override
+  String get boxOffice => 'Box Office';
+
+  @override
+  String get popularMovies => 'Popular Movies';
+
+  @override
+  String get popularShows => 'Popular Shows';
+
+  @override
+  String get anticipatedMovies => 'Anticipated Movies';
+
+  @override
+  String get anticipatedShows => 'Anticipated Shows';
+
+  @override
+  String get trendingShows => 'Trending Shows';
+
+  @override
+  String get mostWatchedThisWeek => 'Most Watched This Week';
+
+  @override
+  String get sortMostViewed => 'Most viewed';
+
+  @override
+  String get sortMostFollowed => 'Most followed';
+
+  @override
+  String get sortLatestUpdates => 'Latest updates';
+
+  @override
+  String get translationStatusLabel => 'Translation';
+
+  @override
+  String get weeklySchedule => 'Weekly Schedule';
+
+  @override
+  String get mostFollowed => 'Most Followed';
+
+  @override
+  String get latestUpdates => 'Latest Updates';
+
+  @override
+  String get trendingAnime => 'Trending Anime';
+
+  @override
+  String get topRatedAnime => 'Top Rated Anime';
+
+  @override
+  String get mostFollowedAnime => 'Most Followed Anime';
+
+  @override
+  String get comickProfile => 'Comick profile';
+
+  @override
+  String get refreshFromComick => 'Refresh from Comick';
+
+  @override
   String get mangaBakaProfile => 'MangaBaka ప్రొఫైల్';
 
   @override
@@ -1943,6 +2027,15 @@ class AppLocalizationsTe extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka అకౌంట్ ఆప్షన్లు';
 
   @override
+  String get comickAccountOptions => 'Comick account options';
+
+  @override
+  String get comickClientId => 'Comick Client ID';
+
+  @override
+  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+
+  @override
   String get couldNotUpdateKitsuSettings =>
       'నీ Kitsu సెట్టింగ్స్ అప్‌డేట్ చేయలేకపోయాం';
 
@@ -2009,6 +2102,9 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get simklReadOnly => 'Simkl రీడ్-ఓన్లీ యాక్సెస్ ఇచ్చింది';
+
+  @override
+  String get traktReadOnly => 'Trakt granted read-only access';
 
   @override
   String get incognitoEditsBlocked =>
@@ -2133,7 +2229,13 @@ class AppLocalizationsTe extends AppLocalizations {
   String get simklProfile => 'Simkl ప్రొఫైల్';
 
   @override
+  String get traktProfile => 'Trakt profile';
+
+  @override
   String get refreshFromSimkl => 'Simkl నుండి రిఫ్రెష్ చెయ్యి';
+
+  @override
+  String get refreshFromTrakt => 'Refresh from Trakt';
 
   @override
   String get repullProfileLibrary => 'నీ ప్రొఫైల్, లైబ్రరీ మళ్ళీ తెచ్చుకో';
@@ -2147,6 +2249,16 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String get simklAttribution =>
       'డేటా, ఆర్ట్‌వర్క్ Simkl అందించింది. Simklలో చూడు';
+
+  @override
+  String get traktAttribution =>
+      'Data and artwork provided by Trakt. View on Trakt';
+
+  @override
+  String get traktVip => 'VIP';
+
+  @override
+  String get traktVipMember => 'Trakt VIP Member';
 
   @override
   String get onHold => 'ఆన్ హోల్డ్';
@@ -3390,6 +3502,15 @@ class AppLocalizationsTe extends AppLocalizations {
   String get born => 'పుట్టిన తేదీ';
 
   @override
+  String get died => 'Died';
+
+  @override
+  String get birthplace => 'Birthplace';
+
+  @override
+  String get department => 'Department';
+
+  @override
   String get website => 'వెబ్‌సైట్';
 
   @override
@@ -3412,6 +3533,18 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get shows => 'షోలు';
+
+  @override
+  String get moviesWatched => 'Movies Watched';
+
+  @override
+  String get showsWatched => 'Shows Watched';
+
+  @override
+  String get moviesCollected => 'Movies Collected';
+
+  @override
+  String get showsCollected => 'Shows Collected';
 
   @override
   String get rewatching => 'మళ్ళీ చూస్తున్నాను';

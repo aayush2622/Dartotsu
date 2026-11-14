@@ -1870,6 +1870,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get comickLoginFailed => 'Comick login failed';
 
   @override
+  String get tagline => 'Tagline';
+
+  @override
+  String get trending => 'Trending';
+
+  @override
+  String get anticipated => 'Anticipated';
+
+  @override
+  String get watchlist => 'Watchlist';
+
+  @override
+  String get recommendedShows => 'Recommended Shows';
+
+  @override
+  String get recommendedMovies => 'Recommended Movies';
+
+  @override
+  String get boxOffice => 'Box Office';
+
+  @override
+  String get popularMovies => 'Popular Movies';
+
+  @override
+  String get popularShows => 'Popular Shows';
+
+  @override
+  String get anticipatedMovies => 'Anticipated Movies';
+
+  @override
+  String get anticipatedShows => 'Anticipated Shows';
+
+  @override
+  String get trendingShows => 'Trending Shows';
+
+  @override
+  String get mostWatchedThisWeek => 'Most Watched This Week';
+
+  @override
+  String get sortMostViewed => 'Most viewed';
+
+  @override
+  String get sortMostFollowed => 'Most followed';
+
+  @override
+  String get sortLatestUpdates => 'Latest updates';
+
+  @override
+  String get translationStatusLabel => 'Translation';
+
+  @override
+  String get weeklySchedule => 'Weekly Schedule';
+
+  @override
+  String get mostFollowed => 'Most Followed';
+
+  @override
+  String get latestUpdates => 'Latest Updates';
+
+  @override
+  String get trendingAnime => 'Trending Anime';
+
+  @override
+  String get topRatedAnime => 'Top Rated Anime';
+
+  @override
+  String get mostFollowedAnime => 'Most Followed Anime';
+
+  @override
   String get comickProfile => 'Comick profile';
 
   @override
@@ -1950,8 +2019,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get comickClientId => 'Comick Client ID';
 
   @override
-  String get comickClientIdDesc =>
-      'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
 
   @override
   String get couldNotUpdateKitsuSettings =>
@@ -2145,7 +2213,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get simklProfile => 'Simkl profile';
 
   @override
+  String get traktProfile => 'Trakt profile';
+
+  @override
   String get refreshFromSimkl => 'Refresh from Simkl';
+
+  @override
+  String get refreshFromTrakt => 'Refresh from Trakt';
 
   @override
   String get repullProfileLibrary => 'Re-pull your profile and library';
@@ -2159,12 +2233,6 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get simklAttribution =>
       'Data and artwork provided by Simkl. View on Simkl';
-
-  @override
-  String get traktProfile => 'Trakt profile';
-
-  @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
 
   @override
   String get traktAttribution =>

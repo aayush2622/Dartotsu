@@ -1,6 +1,5 @@
 import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
-import '../../../../Core/Services/Screens/EntityHost.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Logger.dart';
 import '../Auth.dart';
@@ -15,8 +14,10 @@ class TraktEntityView extends EntityScreenView {
     if (id.isEmpty) return;
 
     try {
-      final personData = await traktAuth.client
-          .get('/people/$id?extended=full', auth: false);
+      final personData = await traktAuth.client.get(
+        '/people/$id?extended=full',
+        auth: false,
+      );
       if (personData is! Map) return;
       final person = personData.cast<String, dynamic>();
 
@@ -24,7 +25,8 @@ class TraktEntityView extends EntityScreenView {
       final slug = ids?['slug'] as String?;
       final traktId = ids?['trakt'];
       final name = person['name'] as String? ?? host.profile.value.name;
-      final bio = (person['biography'] as String?)?.trim() ??
+      final bio =
+          (person['biography'] as String?)?.trim() ??
           (person['summary'] as String?)?.trim();
       final birthday = person['birthday'] as String?;
       final death = person['death'] as String?;
@@ -60,10 +62,11 @@ class TraktEntityView extends EntityScreenView {
         _getCredits('/people/$id/shows?extended=full'),
       ).wait;
 
-      final (actingMovies, crewMovies) =
-          _extract(movieCredits, TraktKind.movies);
-      final (actingShows, crewShows) =
-          _extract(showCredits, TraktKind.shows);
+      final (actingMovies, crewMovies) = _extract(
+        movieCredits,
+        TraktKind.movies,
+      );
+      final (actingShows, crewShows) = _extract(showCredits, TraktKind.shows);
 
       final widgets = <ScreenWidget>[
         if (actingMovies.isNotEmpty)
@@ -110,7 +113,8 @@ class TraktEntityView extends EntityScreenView {
         final raw = item.cast<String, dynamic>();
         final media = mapTraktItem(raw, kind: kind);
         if (media == null || !seenActing.add(media.id)) continue;
-        final char = item['character'] as String? ??
+        final char =
+            item['character'] as String? ??
             (item['characters'] as List?)?.firstOrNull as String?;
         if (char != null && char.isNotEmpty) media.relation = char;
         acting.add(media);
@@ -132,7 +136,8 @@ class TraktEntityView extends EntityScreenView {
           final raw = item.cast<String, dynamic>();
           final media = mapTraktItem(raw, kind: kind);
           if (media == null || !seenCrew.add(media.id)) continue;
-          final job = item['job'] as String? ??
+          final job =
+              item['job'] as String? ??
               (item['jobs'] as List?)?.firstOrNull as String?;
           if (job != null && job.isNotEmpty) media.relation = job;
           deptMedia.add(media);

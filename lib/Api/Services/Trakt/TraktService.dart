@@ -1,5 +1,4 @@
 import '../../../Core/Services/MediaService.dart';
-import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Screen/Settings/Sync/Data/SyncAdapter.dart';
@@ -35,7 +34,7 @@ class TraktService extends MediaService {
   Mutations get apiMutations => _auth.mutations;
 
   @override
-  late final SyncAdapter syncAdapter = TraktSync(_auth.queries, _auth.client);
+  late final SyncAdapter syncAdapter = TraktSync();
 
   @override
   ServiceAuth get auth => _auth;
@@ -48,10 +47,10 @@ class TraktService extends MediaService {
 
   @override
   String feedLabel(MediaType type) => switch (type) {
-        MediaType.movie => getString.movies,
-        MediaType.series => getString.shows,
-        _ => type.label,
-      };
+    MediaType.movie => getString.movies,
+    MediaType.series => getString.shows,
+    _ => type.label,
+  };
 
   @override
   HomeScreenView get homeView => TraktHomeView(this);

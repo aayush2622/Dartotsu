@@ -25,7 +25,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get simkl => 'Simkl';
 
   @override
+  String get trakt => 'Trakt';
+
+  @override
   String get kitsu => 'Kitsu';
+
+  @override
+  String get comick => 'Comick';
 
   @override
   String get mangaBaka => 'MangaBaka';
@@ -1837,6 +1843,84 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mangaBakaLoginFailed => 'MangaBakaのログインに失敗';
 
   @override
+  String get comickLoginFailed => 'Comick login failed';
+
+  @override
+  String get tagline => 'Tagline';
+
+  @override
+  String get trending => 'Trending';
+
+  @override
+  String get anticipated => 'Anticipated';
+
+  @override
+  String get watchlist => 'Watchlist';
+
+  @override
+  String get recommendedShows => 'Recommended Shows';
+
+  @override
+  String get recommendedMovies => 'Recommended Movies';
+
+  @override
+  String get boxOffice => 'Box Office';
+
+  @override
+  String get popularMovies => 'Popular Movies';
+
+  @override
+  String get popularShows => 'Popular Shows';
+
+  @override
+  String get anticipatedMovies => 'Anticipated Movies';
+
+  @override
+  String get anticipatedShows => 'Anticipated Shows';
+
+  @override
+  String get trendingShows => 'Trending Shows';
+
+  @override
+  String get mostWatchedThisWeek => 'Most Watched This Week';
+
+  @override
+  String get sortMostViewed => 'Most viewed';
+
+  @override
+  String get sortMostFollowed => 'Most followed';
+
+  @override
+  String get sortLatestUpdates => 'Latest updates';
+
+  @override
+  String get translationStatusLabel => 'Translation';
+
+  @override
+  String get weeklySchedule => 'Weekly Schedule';
+
+  @override
+  String get mostFollowed => 'Most Followed';
+
+  @override
+  String get latestUpdates => 'Latest Updates';
+
+  @override
+  String get trendingAnime => 'Trending Anime';
+
+  @override
+  String get topRatedAnime => 'Top Rated Anime';
+
+  @override
+  String get mostFollowedAnime => 'Most Followed Anime';
+
+  @override
+  String get comickProfile => 'Comick profile';
+
+  @override
+  String get refreshFromComick => 'Refresh from Comick';
+
+  @override
   String get mangaBakaProfile => 'MangaBakaプロフィール';
 
   @override
@@ -1904,6 +1988,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBakaアカウントの設定';
 
   @override
+  String get comickAccountOptions => 'Comick account options';
+
+  @override
+  String get comickClientId => 'Comick Client ID';
+
+  @override
+  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+
+  @override
   String get couldNotUpdateKitsuSettings => 'Kitsuの設定を更新できなかったよ';
 
   @override
@@ -1968,6 +2061,9 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get simklReadOnly => 'Simklの読み取り専用アクセスを許可したよ';
+
+  @override
+  String get traktReadOnly => 'Trakt granted read-only access';
 
   @override
   String get incognitoEditsBlocked => 'シークレット：リストの編集はブロック中';
@@ -2089,7 +2185,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get simklProfile => 'Simklプロフィール';
 
   @override
+  String get traktProfile => 'Trakt profile';
+
+  @override
   String get refreshFromSimkl => 'Simklから更新';
+
+  @override
+  String get refreshFromTrakt => 'Refresh from Trakt';
 
   @override
   String get repullProfileLibrary => 'プロフィールとライブラリを取得し直す';
@@ -2102,6 +2204,16 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get simklAttribution => 'データとアートワークの提供元：Simkl。Simklで見る';
+
+  @override
+  String get traktAttribution =>
+      'Data and artwork provided by Trakt. View on Trakt';
+
+  @override
+  String get traktVip => 'VIP';
+
+  @override
+  String get traktVipMember => 'Trakt VIP Member';
 
   @override
   String get onHold => '保留中';
@@ -3332,6 +3444,15 @@ class AppLocalizationsJa extends AppLocalizations {
   String get born => '生年月日';
 
   @override
+  String get died => 'Died';
+
+  @override
+  String get birthplace => 'Birthplace';
+
+  @override
+  String get department => 'Department';
+
+  @override
   String get website => 'ウェブサイト';
 
   @override
@@ -3354,6 +3475,18 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shows => '番組';
+
+  @override
+  String get moviesWatched => 'Movies Watched';
+
+  @override
+  String get showsWatched => 'Shows Watched';
+
+  @override
+  String get moviesCollected => 'Movies Collected';
+
+  @override
+  String get showsCollected => 'Shows Collected';
 
   @override
   String get rewatching => '再視聴中';

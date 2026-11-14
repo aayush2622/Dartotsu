@@ -3,6 +3,7 @@ import '../../../Core/Services/LayoutPref.dart';
 import '../../../Core/Services/MediaService.dart';
 
 const kComickHomeSections = <String, bool>{
+  'Continue Watching': true,
   'Continue Reading': true,
   'Planned': true,
   'On Hold': true,
@@ -12,7 +13,7 @@ const kComickHomeSections = <String, bool>{
 
 const kComickMangaSections = <String, bool>{
   'Trending Now': true,
-  'Top Ranked': true,
+  'Top Rated': true,
   'Most Followed': true,
   'Latest Updates': true,
 };
@@ -20,7 +21,7 @@ const kComickMangaSections = <String, bool>{
 const kComickAnimeSections = <String, bool>{
   'Weekly Schedule': true,
   'Trending Anime': true,
-  'Top Ranked Anime': true,
+  'Top Rated Anime': true,
   'Most Followed Anime': true,
 };
 
@@ -28,11 +29,7 @@ class ComickPref {
   ComickPref._();
 
   static const token = Pref('comickToken', '', PrefLocation.PROTECTED);
-  static const refresh = Pref(
-    'comickRefreshToken',
-    '',
-    PrefLocation.PROTECTED,
-  );
+  static const refresh = Pref('comickRefreshToken', '', PrefLocation.PROTECTED);
   static const expiresAt = Pref<int>(
     'comickTokenExpires',
     0,
@@ -42,10 +39,7 @@ class ComickPref {
   static const clientId = Pref('comickClientId', '', PrefLocation.OTHER);
   static const hideNsfw = Pref('comickHideNsfw', true, PrefLocation.OTHER);
 
-  static final homeLayout = layoutPref(
-    'comickHomeLayout',
-    kComickHomeSections,
-  );
+  static final homeLayout = layoutPref('comickHomeLayout', kComickHomeSections);
   static final mangaLayout = layoutPref(
     'comickMangaLayout',
     kComickMangaSections,

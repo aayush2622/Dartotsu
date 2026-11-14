@@ -4,6 +4,7 @@ import '../../../../Core/Services/MediaService.dart';
 import '../../../../Core/Services/Model/Media.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Screen/Detail/Components/DetailSections.dart';
+import '../../../../Screen/Review/ReviewsShelf.dart';
 import '../../../../Screen/Detail/Components/DetailStats.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../../Utils/Extensions/IntExtensions.dart';
@@ -37,6 +38,7 @@ class TraktDetailView extends DetailScreenView {
 
     final characters = queries.characters(media);
     final staff = queries.staff(media);
+    final reviews = queries.getReviews(media.id);
 
     media.characters = await characters;
     host.update(media);
@@ -53,12 +55,9 @@ class TraktDetailView extends DetailScreenView {
       yield _build(host);
     }
 
-    final reviews = await queries.reviews(media);
-    if (reviews.isNotEmpty) {
-      media.review = reviews;
-      host.update(media);
-      yield _build(host);
-    }
+    media.review = (await reviews).take(3).toList();
+    host.update(media);
+    yield _build(host);
   }
 
   List<ScreenWidget> _build(DetailHost host) {
@@ -91,8 +90,9 @@ class TraktDetailView extends DetailScreenView {
         ScreenWidget.staff(getString.staff, m.staff),
       if ((m.recommendations ?? const []).isNotEmpty)
         ScreenWidget.media(getString.recommendations, m.recommendations),
-      if ((m.review ?? const []).isNotEmpty)
-        ScreenWidget.reviews(getString.reviews, m.review),
+      ScreenWidget.extra(
+        ReviewsShelf(key: ValueKey('reviews-${m.id}'), media: m, view: this),
+      ),
       ScreenWidget.extra(_Attribution(m.shareLink)),
     ];
   }
@@ -117,14 +117,13 @@ class TraktDetailView extends DetailScreenView {
     return [
       if (m.status != null) (getString.status, m.status!),
       if (m.format != null) (getString.format, m.format!),
-      if (m.countryOfOrigin != null)
-        (getString.countryOfOrigin, m.countryOfOrigin!),
+      if (m.countryOfOrigin != null) (getString.country, m.countryOfOrigin!),
       if (total != null && total > 0 && m.format != 'MOVIE')
-        (getString.totalEpisodes, '$total'),
+        (getString.episodes, '$total'),
       if (studio != null) (getString.network, studio),
       if (extras?.certification != null)
         (getString.certification, extras!.certification!),
-      if (extras?.airs != null) (getString.schedule, extras!.airs!),
+      if (extras?.airs != null) (getString.airs, extras!.airs!),
       if (extras?.tagline != null && extras!.tagline!.isNotEmpty)
         (getString.tagline, extras.tagline!),
       if (m.startDate?.getFormattedDate() != null)

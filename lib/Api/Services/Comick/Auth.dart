@@ -41,10 +41,7 @@ class ComickAuth extends AppController
   @override
   final user = Live<ServiceUser?>(null);
 
-  late final ComickClient client = ComickClient(
-    () => token.value,
-    _refresh,
-  );
+  late final ComickClient client = ComickClient(() => token.value, _refresh);
 
   late final ComickQueries queries = ComickQueries(client);
 
@@ -189,7 +186,9 @@ class ComickAuth extends AppController
       final username = info['username'] as String? ?? 'ComickReader';
       final avatar = info['avatar_url'] as String?;
 
-      final previous = user.value is ComickUser ? user.value as ComickUser : null;
+      final previous = user.value is ComickUser
+          ? user.value as ComickUser
+          : null;
       final parsed = ComickUser(
         id: uuid.hashCode.abs(),
         uuid: uuid,

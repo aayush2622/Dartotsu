@@ -383,7 +383,6 @@
                 <data android:host="mal" />
                 <data android:host="simkl" />
                 <data android:host="mangabaka" />
-                <data android:host="comick" />
                 <data android:host="discord" />
                 <data android:host="trakt" />
             </intent-filter>

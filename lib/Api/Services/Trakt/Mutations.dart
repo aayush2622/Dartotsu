@@ -2,6 +2,7 @@ import '../../../Core/Preferences/Incognito.dart';
 import '../../../Core/Services/Api/Mutations.dart';
 import '../../../Core/Services/Api/Progress.dart';
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Functions/RefreshController.dart';
 import '../../../Utils/Functions/SnackBar.dart';
@@ -64,17 +65,22 @@ class TraktMutations extends Mutations {
     ...?extra,
   };
 
-  Map<String, Object> _body(TraktKind kind, int id, [Map<String, Object>? extra]) => {
+  Map<String, Object> _body(
+    TraktKind kind,
+    int id, [
+    Map<String, Object>? extra,
+  ]) => {
     kind.syncKey: [_entry(id, extra)],
   };
 
-  Future<List<(int, int)>> _showEpisodes(int id) async => parseTraktShowEpisodes(
-    await client.get(
-      '/shows/$id/seasons',
-      query: {'extended': 'episodes'},
-      auth: false,
-    ),
-  );
+  Future<List<(int, int)>> _showEpisodes(int id) async =>
+      parseTraktShowEpisodes(
+        await client.get(
+          '/shows/$id/seasons',
+          query: {'extended': 'episodes'},
+          auth: false,
+        ),
+      );
 
   @override
   Future<void> editList(Media media, {List<String>? customList}) async {
@@ -112,7 +118,9 @@ class TraktMutations extends Mutations {
           final to = (progress < old ? old : progress).clamp(0, all.length);
           if (to > from) {
             final eps = all.sublist(from, to);
-            final endpoint = progress < old ? '/sync/history/remove' : '/sync/history';
+            final endpoint = progress < old
+                ? '/sync/history/remove'
+                : '/sync/history';
             await client.post(endpoint, {
               'shows': [traktShowEpisodes(id, eps)],
             });

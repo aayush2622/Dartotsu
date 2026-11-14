@@ -17,8 +17,10 @@ class ComickSearchView extends SearchScreenView {
   }
 
   @override
-  List<SearchType> get searchTypes =>
-      const [SearchType.MANGA, SearchType.ANIME];
+  List<SearchType> get searchTypes => const [
+    SearchType.MANGA,
+    SearchType.ANIME,
+  ];
 
   @override
   SearchFilterSpec filters(MediaType type) => SearchFilterSpec(

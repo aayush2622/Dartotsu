@@ -165,7 +165,9 @@ class ComickClient {
 
   Future<void> delete(String path) async {
     final res = await _send((h) => _net.delete(_url(path), headers: h));
-    if (res.statusCode >= 400 && res.statusCode != 404 && res.statusCode != 204) {
+    if (res.statusCode >= 400 &&
+        res.statusCode != 404 &&
+        res.statusCode != 204) {
       throw ComickException(
         _message(_body(res), res.statusCode),
         res.statusCode,

@@ -34,28 +34,12 @@ class ComickFeedView extends FeedScreenView {
       : const [];
 
   @override
-  Future<List<Media>?> chipMedia(MediaType type, FeedChip chip) async {
-    final country = switch (chip.id) {
-      'manhwa' => 'kr',
-      'manhua' => 'cn',
-      _ => 'jp',
-    };
-    final results = await comickAuth.queries.client.get(
-      '/v1.0/search/',
-      query: {
-        'country': country,
-        'media_type': 'manga',
-        'limit': '15',
-      },
-    );
-    if (results is List) {
-      return [
-        for (final item in results)
-          if (item is Map) mapComickSearchItem(item.cast<String, dynamic>())
-      ];
-    }
-    return null;
-  }
+  Future<List<Media>?> chipMedia(MediaType type, FeedChip chip) =>
+      comickAuth.queries.countryPicks(switch (chip.id) {
+        'manhwa' => 'kr',
+        'manhua' => 'cn',
+        _ => 'jp',
+      });
 
   @override
   Stream<List<ScreenWidget>> screenStream(MediaType type) {

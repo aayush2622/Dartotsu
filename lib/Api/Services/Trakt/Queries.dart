@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
@@ -8,10 +7,10 @@ import '../../../Core/Services/Api/LibraryCache.dart';
 import '../../../Core/Services/Api/LibrarySearch.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
+import '../../../Core/Services/LayoutPref.dart';
 import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Character.dart';
-import '../../../Core/Services/Model/Date.dart';
 import '../../../Core/Services/Model/Media.dart';
 import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/Services/Model/Review.dart';
@@ -21,77 +20,53 @@ import '../../../Logger.dart';
 import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
 import 'Client.dart';
-import 'Data/Browse.dart';
 import 'Data/Mapper.dart';
 import 'Prefs.dart';
+
+const traktPageSize = 20;
 
 class TraktSection {
   final String title;
   final String endpoint;
-  final Map<String, String>? query;
+  final Map<String, String> query;
 
-  const TraktSection(this.title, this.endpoint, [this.query]);
+  const TraktSection(this.title, this.endpoint, [this.query = const {}]);
+
+  bool get paged => endpoint != '/movies/boxoffice';
 }
 
-List<TraktSection> traktSections(MediaType type) {
-  if (type == MediaType.anime) {
-    return const [
-      TraktSection('Trending Anime', '/shows/trending', {'genres': 'anime'}),
-      TraktSection('Popular Anime Shows', '/shows/popular', {'genres': 'anime'}),
-      TraktSection('Popular Anime Movies', '/movies/popular', {'genres': 'anime'}),
-      TraktSection('Most Watched Anime', '/shows/watched/monthly', {'genres': 'anime'}),
-      TraktSection('Anticipated Anime', '/shows/anticipated', {'genres': 'anime'}),
-    ];
-  }
-  return const [
-    TraktSection('Trending Movies Today', '/movies/trending'),
-    TraktSection('Trending Shows Today', '/shows/trending'),
-    TraktSection('Trending Movies This Week', '/movies/trending'),
-    TraktSection('Trending Shows This Week', '/shows/trending'),
+List<TraktSection> traktSections(MediaType type) => switch (type) {
+  MediaType.movie => const [
+    TraktSection('Trending Movies', '/movies/trending'),
     TraktSection('Popular Movies', '/movies/popular'),
-    TraktSection('Popular Shows', '/shows/popular'),
     TraktSection('Anticipated Movies', '/movies/anticipated'),
+    TraktSection('Most Watched This Week', '/movies/watched/weekly'),
+    TraktSection('Most Watched Movies This Month', '/movies/watched/monthly'),
+    TraktSection('Box Office', '/movies/boxoffice'),
+  ],
+  _ => const [
+    TraktSection('Trending Shows', '/shows/trending'),
+    TraktSection('Popular Shows', '/shows/popular'),
     TraktSection('Anticipated Shows', '/shows/anticipated'),
-    TraktSection('Most Watched Movies', '/movies/watched/monthly'),
-    TraktSection('Most Watched Shows', '/shows/watched/monthly'),
-  ];
-}
+    TraktSection('Most Watched This Week', '/shows/watched/weekly'),
+    TraktSection('Most Watched Shows This Month', '/shows/watched/monthly'),
+    TraktSection('Trending Anime', '/shows/trending', {'genres': 'anime'}),
+    TraktSection('Popular Anime', '/shows/popular', {'genres': 'anime'}),
+  ],
+};
 
-List<TraktSection> traktLayoutSections(MediaType type) {
-  final pref = type == MediaType.anime
-      ? TraktPref.animeLayout
-      : TraktPref.movieLayout;
-  final active = pref.rx.value;
-  return [
-    for (final s in traktSections(type))
-      if (active[s.title] ?? false) s,
-  ];
-}
+const _searchEndpoints = {
+  'TRENDING_DESC': 'trending',
+  'POPULARITY_DESC': 'popular',
+};
 
 class _Activity {
   final String all;
-  final String? moviesWatchedAt;
-  final String? showsWatchedAt;
-  final String? watchlistAt;
 
-  const _Activity({
-    required this.all,
-    this.moviesWatchedAt,
-    this.showsWatchedAt,
-    this.watchlistAt,
-  });
+  const _Activity(this.all);
 
-  factory _Activity.fromJson(Map<String, dynamic> j) {
-    final movies = j['movies'] as Map?;
-    final shows = j['shows'] as Map?;
-    final watchlist = j['watchlist'] as Map?;
-    return _Activity(
-      all: '${j['all'] ?? ''}',
-      moviesWatchedAt: movies?['watched_at'] as String?,
-      showsWatchedAt: shows?['watched_at'] as String?,
-      watchlistAt: watchlist?['updated_at'] as String?,
-    );
-  }
+  factory _Activity.fromJson(Map<String, dynamic> j) =>
+      _Activity('${j['all'] ?? ''}');
 }
 
 Map<String, Media> _decodeLibrary(Map<String, dynamic> raw) => {
@@ -107,17 +82,24 @@ Map<String, dynamic> _encodeLibrary(Map<String, dynamic> args) => {
   },
 };
 
+int? _epoch(Object? iso) =>
+    iso is String ? DateTime.tryParse(iso)?.millisecondsSinceEpoch : null;
+
 List<Media> _byStatus(Iterable<Media> all, String status) => [
   for (final m in all)
     if (m.userStatus == status) m,
 ]..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
 
+Iterable<Map<String, dynamic>> _maps(Object? body) => [
+  for (final item in body is List ? body : const [])
+    if (item is Map) item.cast<String, dynamic>(),
+];
+
 class TraktQueries extends Queries {
   final TraktClient client;
-  final Future<bool> Function() refreshUser;
   final void Function(int episodes)? onEpisodes;
 
-  TraktQueries(this.client, {required this.refreshUser, this.onEpisodes});
+  TraktQueries(this.client, {this.onEpisodes});
 
   _Activity? _seen;
 
@@ -131,21 +113,23 @@ class TraktQueries extends Queries {
   void clearLibrary() {
     _seen = null;
     _library.clear();
-    PrefManager.removeCustomData(_diskKey, location: PrefLocation.CACHE);
+    removeCustomData(_diskKey, location: PrefLocation.CACHE);
   }
 
+  void invalidateLibrary() => _library.expire();
+
   Future<Map<String, Media>?> _readDisk() async {
-    final raw = PrefManager.loadCustomData<Map<String, dynamic>>(
+    final raw = loadCustomData<Map<String, dynamic>>(
       _diskKey,
       location: PrefLocation.CACHE,
     );
     if (raw == null || raw.isEmpty) return null;
     try {
       final items = await compute(_decodeLibrary, raw);
-      _seen = _Activity(all: '${raw['all']}');
+      _seen = _Activity('${raw['all']}');
       return items;
     } catch (e, st) {
-      logError('TraktQueries', e, st);
+      logError('Queries', e, st);
       return null;
     }
   }
@@ -156,17 +140,15 @@ class TraktQueries extends Queries {
         'all': seen.all,
         'library': library,
       });
-      PrefManager.saveCustomData<Map<String, dynamic>>(
+      saveCustomData<Map<String, dynamic>>(
         _diskKey,
         blob,
         location: PrefLocation.CACHE,
       );
     } catch (e, st) {
-      logError('TraktQueries', e, st);
+      logError('Queries', e, st);
     }
   }
-
-  void invalidateLibrary() => _library.expire();
 
   Future<Map<String, Media>> library() =>
       client.hasToken ? _library.get() : Future.value(const {});
@@ -184,189 +166,98 @@ class TraktQueries extends Queries {
     try {
       now = await _activity();
     } catch (e, st) {
-      logError('TraktQueries', e, st);
+      logError('Queries', e, st);
       return previous ?? const {};
     }
-
     final before = _seen;
     if (previous != null && before != null && now.all == before.all) {
       return _publish(previous, persist: false);
     }
-
     return _fullSync(now);
   }
 
+  Future<List<Map<String, dynamic>>> _rows(
+    String path, {
+    Map<String, String>? query,
+  }) async {
+    try {
+      return _maps(await client.get(path, query: query)).toList();
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
+      return const [];
+    }
+  }
+
   Future<Map<String, Media>> _fullSync(_Activity now) async {
+    const full = {'extended': 'full'};
+    final results = await Future.wait([
+      _rows('/sync/watched/movies', query: full),
+      _rows('/sync/watched/shows', query: full),
+      _rows('/sync/watchlist/movies', query: full),
+      _rows('/sync/watchlist/shows', query: full),
+      _rows('/sync/ratings/movies'),
+      _rows('/sync/ratings/shows'),
+    ]);
     final library = <String, Media>{};
 
-    // 1. Watched Movies
-    try {
-      final movies = await client.get(
-        '/sync/watched/movies',
-        query: {'extended': 'full'},
-      );
-      if (movies is List) {
-        for (final item in movies) {
-          if (item is! Map) continue;
-          final m = mapTraktItem(item.cast<String, dynamic>(), kind: TraktKind.movies);
-          if (m != null) {
-            final lastWatched = item['last_watched_at'] as String?;
-            final date = parseTraktDate(lastWatched);
-            m.userStatus = 'COMPLETED';
-            m.userProgress = 1;
-            m.userCompletedAt = date;
-            m.userUpdatedAt = lastWatched != null
-                ? DateTime.tryParse(lastWatched)?.millisecondsSinceEpoch
-                : null;
-            library[m.id] = m;
-          }
-        }
-      }
-    } catch (e, st) {
-      logError('TraktQueries.watchedMovies', e, st);
+    for (final item in results[0]) {
+      final m = mapTraktItem(item, kind: TraktKind.movies);
+      if (m == null) continue;
+      m
+        ..userStatus = 'COMPLETED'
+        ..userProgress = 1
+        ..userCompletedAt = parseTraktDate(item['last_watched_at'])
+        ..userUpdatedAt = _epoch(item['last_watched_at']);
+      library[m.id] = m;
     }
 
-    // 2. Watched Shows
-    try {
-      final shows = await client.get(
-        '/sync/watched/shows',
-        query: {'extended': 'full'},
-      );
-      if (shows is List) {
-        for (final item in shows) {
-          if (item is! Map) continue;
-          final m = mapTraktItem(item.cast<String, dynamic>(), kind: TraktKind.shows);
-          if (m != null) {
-            final seasons = item['seasons'] as List?;
-            var watchedEps = 0;
-            if (seasons != null) {
-              for (final s in seasons) {
-                if (s is Map && (s['number'] as num? ?? 0) > 0) {
-                  final eps = s['episodes'] as List?;
-                  if (eps != null) watchedEps += eps.length;
-                }
-              }
-            }
-            final total = m.anime?.totalEpisodes ?? 0;
-            final isCompleted = total > 0 && watchedEps >= total;
-            final lastWatched = item['last_watched_at'] as String?;
-            m.userStatus = isCompleted ? 'COMPLETED' : 'CURRENT';
-            m.userProgress = watchedEps;
-            m.userUpdatedAt = lastWatched != null
-                ? DateTime.tryParse(lastWatched)?.millisecondsSinceEpoch
-                : null;
-            library[m.id] = m;
-          }
+    for (final item in results[1]) {
+      final m = mapTraktItem(item, kind: TraktKind.shows);
+      if (m == null) continue;
+      var watched = 0;
+      for (final s in (item['seasons'] as List?) ?? const []) {
+        if (s is Map && ((s['number'] as num?) ?? 0) > 0) {
+          watched += ((s['episodes'] as List?) ?? const []).length;
         }
       }
-    } catch (e, st) {
-      logError('TraktQueries.watchedShows', e, st);
+      final total = m.anime?.totalEpisodes ?? 0;
+      final finished = m.status == 'FINISHED' || m.status == 'CANCELLED';
+      m
+        ..userStatus = finished && total > 0 && watched >= total
+            ? 'COMPLETED'
+            : 'CURRENT'
+        ..userProgress = watched
+        ..userUpdatedAt = _epoch(item['last_watched_at']);
+      library[m.id] = m;
     }
 
-    // 3. Watchlist Movies
-    try {
-      final watchlistMovies = await client.get(
-        '/sync/watchlist/movies',
-        query: {'extended': 'full'},
-      );
-      if (watchlistMovies is List) {
-        for (final item in watchlistMovies) {
-          if (item is! Map) continue;
-          final m = mapTraktItem(item.cast<String, dynamic>(), kind: TraktKind.movies);
-          if (m != null && !library.containsKey(m.id)) {
-            m.userStatus = 'PLANNING';
-            m.userProgress = 0;
-            final listedAt = item['listed_at'] as String?;
-            m.userUpdatedAt = listedAt != null
-                ? DateTime.tryParse(listedAt)?.millisecondsSinceEpoch
-                : null;
-            library[m.id] = m;
-          }
-        }
+    for (final (kind, rows) in [
+      (TraktKind.movies, results[2]),
+      (TraktKind.shows, results[3]),
+    ]) {
+      for (final item in rows) {
+        final m = mapTraktItem(item, kind: kind);
+        if (m == null || library.containsKey(m.id)) continue;
+        m
+          ..userStatus = 'PLANNING'
+          ..userProgress = 0
+          ..userUpdatedAt = _epoch(item['listed_at']);
+        library[m.id] = m;
       }
-    } catch (e, st) {
-      logError('TraktQueries.watchlistMovies', e, st);
     }
 
-    // 4. Watchlist Shows
-    try {
-      final watchlistShows = await client.get(
-        '/sync/watchlist/shows',
-        query: {'extended': 'full'},
-      );
-      if (watchlistShows is List) {
-        for (final item in watchlistShows) {
-          if (item is! Map) continue;
-          final m = mapTraktItem(item.cast<String, dynamic>(), kind: TraktKind.shows);
-          if (m != null && !library.containsKey(m.id)) {
-            m.userStatus = 'PLANNING';
-            m.userProgress = 0;
-            final listedAt = item['listed_at'] as String?;
-            m.userUpdatedAt = listedAt != null
-                ? DateTime.tryParse(listedAt)?.millisecondsSinceEpoch
-                : null;
-            library[m.id] = m;
-          }
+    for (final (kind, rows) in [
+      (TraktKind.movies, results[4]),
+      (TraktKind.shows, results[5]),
+    ]) {
+      for (final r in rows) {
+        final id = ((r[kind.itemKey] as Map?)?['ids'] as Map?)?['trakt'];
+        final rating = (r['rating'] as num?)?.toInt();
+        if (id != null && rating != null) {
+          library[traktMediaId(kind, id)]?.userScore = rating * 10;
         }
       }
-    } catch (e, st) {
-      logError('TraktQueries.watchlistShows', e, st);
     }
-
-    // 5. Ratings
-    try {
-      final movieRatings = await client.get('/sync/ratings/movies');
-      if (movieRatings is List) {
-        for (final r in movieRatings) {
-          if (r is! Map) continue;
-          final movie = r['movie'] as Map?;
-          final traktId = (movie?['ids'] as Map?)?['trakt'];
-          if (traktId != null) {
-            final key = traktMediaId(TraktKind.movies, traktId);
-            final score = ((r['rating'] as num?)?.toDouble() ?? 0) * 10;
-            library[key]?.userScore = score.round();
-          }
-        }
-      }
-
-      final showRatings = await client.get('/sync/ratings/shows');
-      if (showRatings is List) {
-        for (final r in showRatings) {
-          if (r is! Map) continue;
-          final show = r['show'] as Map?;
-          final traktId = (show?['ids'] as Map?)?['trakt'];
-          if (traktId != null) {
-            final key = traktMediaId(TraktKind.shows, traktId);
-            final score = ((r['rating'] as num?)?.toDouble() ?? 0) * 10;
-            library[key]?.userScore = score.round();
-          }
-        }
-      }
-    } catch (e, st) {
-      logError('TraktQueries.ratings', e, st);
-    }
-
-    // 6. Playback (Currently watching / scrobbling)
-    try {
-      final playback = await client.get('/sync/playback');
-      if (playback is List) {
-        for (final item in playback) {
-          if (item is! Map) continue;
-          final type = item['type'] as String?;
-          final kind = TraktKind.fromName(type);
-          if (kind == null) continue;
-          final target = (item[kind.syncKey == 'shows' ? 'show' : 'movie'] as Map?);
-          final id = (target?['ids'] as Map?)?['trakt'];
-          if (id != null) {
-            final key = traktMediaId(kind, id);
-            final existing = library[key];
-            if (existing != null) {
-              existing.userStatus = 'CURRENT';
-            }
-          }
-        }
-      }
-    } catch (_) {}
 
     _seen = now;
     return _publish(library);
@@ -396,6 +287,51 @@ class TraktQueries extends Queries {
     _library.expire();
   }
 
+  Future<List<Media>> _withList(List<Media> items) async {
+    if (!client.hasToken || items.isEmpty) return items;
+    try {
+      final mine = await library();
+      for (final m in items) {
+        final entry = mine[m.id];
+        if (entry != null) m.takeListEntry(entry);
+      }
+    } catch (e, st) {
+      logError('Queries', e, st);
+    }
+    return items;
+  }
+
+  List<Media> _media(Object? body, {TraktKind? kind}) => [
+    for (final item in _maps(body)) ?mapTraktItem(item, kind: kind),
+  ];
+
+  Future<List<Media>> sectionPage(TraktSection section, {int page = 1}) async {
+    if (!section.paged && page > 1) return const [];
+    final body = await client.get(
+      section.endpoint,
+      query: {
+        'extended': 'full',
+        ...section.query,
+        if (section.paged) ...{'page': '$page', 'limit': '$traktPageSize'},
+      },
+      auth: false,
+    );
+    return _withList(_media(body));
+  }
+
+  List<SectionJob> browseJobsFor(MediaType type) => [
+    for (final section in applyLayout(
+      traktSections(type),
+      (s) => s.title,
+      TraktPref.feedLayoutFor(type).value,
+    ))
+      () async => titledSection(section.title, await sectionPage(section)),
+  ];
+
+  @override
+  List<SectionJob> browseJobs({required bool anime}) =>
+      browseJobsFor(anime ? MediaType.series : MediaType.movie);
+
   @override
   List<SectionJob> homeJobs() {
     if (!client.hasToken) return const [];
@@ -405,220 +341,251 @@ class TraktQueries extends Queries {
       ('Watchlist', 'PLANNING'),
       ('Completed', 'COMPLETED'),
     ];
+    SectionJob recommended(String title, TraktKind kind) =>
+        () async => titledSection(
+          title,
+          await _withList(
+            _media(
+              await client.get(
+                '/recommendations/${kind.path}',
+                query: {
+                  'extended': 'full',
+                  'limit': '$traktPageSize',
+                  'ignore_watchlisted': 'true',
+                },
+              ),
+              kind: kind,
+            ),
+          ),
+        );
+
     final jobs = <(String, SectionJob)>[
       for (final (title, status) in lists)
         (
           title,
-          () async {
-            final items = _byStatus((await library()).values, status);
-            return items.isEmpty ? <String, List<Media>>{} : {title: items};
-          },
+          () async =>
+              titledSection(title, _byStatus((await library()).values, status)),
         ),
+      ('Recommended Shows', recommended('Recommended Shows', TraktKind.shows)),
+      (
+        'Recommended Movies',
+        recommended('Recommended Movies', TraktKind.movies),
+      ),
     ];
-    return jobs.map((e) => e.$2).toList();
+    return [
+      for (final j in applyLayout(
+        jobs,
+        (j) => j.$1,
+        TraktPref.homeLayout.value,
+      ))
+        j.$2,
+    ];
   }
 
-  Future<List<Media>> trending(TraktSection section) async {
+  @override
+  Future<Map<String, List<Media>>> getMediaLists({
+    required bool anime,
+    int? userId,
+    String? sortOrder,
+  }) async {
+    if (!anime) return {};
+    final all = (await library()).values.toList()
+      ..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
+    return groupByStatus(all, {
+      'CURRENT': getString.watching,
+      'PLANNING': getString.planToWatch,
+      'COMPLETED': getString.completed,
+    });
+  }
+
+  Future<Media?> _detail(TraktKind kind, int id) async {
+    final body = await client.get(
+      '/${kind.path}/$id',
+      query: {'extended': 'full,images'},
+      auth: false,
+    );
+    if (body is! Map) return null;
+    final media = mapTraktItem(body.cast<String, dynamic>(), kind: kind);
+    if (media == null) return null;
+    await _withList([media]);
+    return media;
+  }
+
+  @override
+  Future<Media?> getMedia(String id) async {
+    final ref = parseTraktMediaId(id);
+    if (ref == null) return null;
     try {
-      final res = await client.get(
-        section.endpoint,
-        query: {
-          'extended': 'full',
-          'limit': '20',
-          ...?section.query,
-        },
-        auth: false,
-      );
-      if (res is! List) return const [];
-      final out = <Media>[];
-      for (final item in res) {
-        if (item is Map) {
-          final m = mapTraktItem(item.cast<String, dynamic>());
-          if (m != null) out.add(m);
-        }
-      }
-      return out;
-    } catch (e, st) {
-      logError('TraktQueries.trending', e, st);
-      return const [];
+      return await _detail(ref.$1, ref.$2);
+    } on TraktException catch (e) {
+      if (e.status == 404) return null;
+      rethrow;
     }
   }
 
   @override
-  Future<SearchResults?> search(SearchResults q) async {
+  Future<Media?> mediaDetails(Media media) async {
     try {
-      final searchType = switch (q.type) {
-        MediaType.movie => 'movie',
-        MediaType.series => 'show',
-        MediaType.anime => 'show,movie',
-        _ => 'movie,show',
-      };
-      final genres = [
-        if (q.type == MediaType.anime) 'anime',
-        ...?q.genres?.map((g) => g.toLowerCase()),
-      ];
-      final queryParams = <String, String>{
-        'page': '${q.page ?? 1}',
-        'limit': '20',
-        'extended': 'full',
-        if (genres.isNotEmpty) 'genres': genres.join(','),
-        if ((q.seasonYear ?? q.startYear) != null)
-          'years': '${q.seasonYear ?? q.startYear}',
-      };
+      final full = await getMedia(media.id);
+      return full == null
+          ? media
+          : (full..cameFromContinue = media.cameFromContinue);
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
+      return media;
+    }
+  }
 
-      final term = q.search?.trim();
-      final String endpoint;
-      if (term != null && term.isNotEmpty) {
-        endpoint = '/search/$searchType';
-        queryParams['query'] = term;
-      } else {
-        endpoint = q.type == MediaType.movie ? '/movies/popular' : '/shows/popular';
-      }
-
-      final res = await client.get(
-        endpoint,
-        query: queryParams,
-        auth: false,
-      );
-
-      if (res is! List) {
-        return q
-          ..results = const []
-          ..hasNextPage = false;
-      }
-
-      final list = <Media>[];
-      for (final item in res) {
-        if (item is Map) {
-          final m = mapTraktItem(item.cast<String, dynamic>());
-          if (m != null) list.add(m);
-        }
-      }
-
-      // Attach user list status if logged in
-      if (client.hasToken) {
-        final lib = await library();
-        for (final m in list) {
-          final existing = lib[m.id];
-          if (existing != null) m.takeListEntry(existing);
-        }
-      }
-
-      return q
-        ..results = list
-        ..hasNextPage = list.length >= 20;
-    } catch (e, st) {
-      logError('TraktQueries.search', e, st);
-      return q
+  @override
+  Future<SearchResults?> search(SearchResults? results) async {
+    if (results == null) return null;
+    final kind = switch (results.type) {
+      SearchType.MOVIES => TraktKind.movies,
+      SearchType.SERIES => TraktKind.shows,
+      _ => null,
+    };
+    if (kind == null) {
+      return results
         ..results = const []
         ..hasNextPage = false;
     }
-  }
-
-  Future<Media?> mediaDetails(Media media) async {
-    final ref = parseTraktMediaId(media.id);
-    if (ref == null) return null;
-    final (kind, id) = ref;
-    try {
-      final data = await client.get(
-        '/${kind.path}/$id',
-        query: {'extended': 'full'},
-        auth: false,
+    if (results.onList == true) {
+      final mine = (await library()).values.where(
+        (m) => m.id.startsWith('${kind.path}/'),
       );
-      if (data is! Map) return null;
-      final full = mapTraktItem(data.cast<String, dynamic>(), kind: kind);
-      if (full == null) return null;
-
-      if (client.hasToken) {
-        final lib = await library();
-        final existing = lib[full.id];
-        if (existing != null) full.takeListEntry(existing);
-      }
-      return full;
-    } catch (e, st) {
-      logError('TraktQueries.mediaDetails', e, st);
-      return null;
+      return searchLibrary(mine.toList(), results);
     }
+    final term = results.search?.trim() ?? '';
+    final year = results.seasonYear ?? results.startYear;
+    final limit = (results.perPage ?? traktPageSize).clamp(1, 50);
+    final listing = _searchEndpoints[results.sort] ?? 'popular';
+    final body = await client.get(
+      term.isEmpty ? '/${kind.path}/$listing' : '/search/${kind.itemKey}',
+      query: {
+        'extended': 'full',
+        'page': '${results.page ?? 1}',
+        'limit': '$limit',
+        'query': ?(term.isEmpty ? null : term),
+        'genres': ?_genreFilter(results),
+        'years': ?(year == null ? null : '$year'),
+        'countries': ?_country(results),
+      },
+      auth: false,
+    );
+    final found = _media(body, kind: kind);
+    return results
+      ..results = await _withList(found)
+      ..hasNextPage = found.length >= limit;
   }
+
+  String? _country(SearchResults results) {
+    final code = results.countryOfOrigin?.toLowerCase();
+    return code == null || code.isEmpty ? null : code;
+  }
+
+  String? _genreFilter(SearchResults results) {
+    final genres = [
+      for (final g in results.genres ?? const <String>[])
+        g.toLowerCase().replaceAll(' ', '-'),
+    ];
+    return genres.isEmpty ? null : genres.join(',');
+  }
+
+  @override
+  Future<List<Media>> getCalendarData() async => [
+    for (final batch in await schedule().toList())
+      for (final e in batch) e.media,
+  ];
+
+  @override
+  Future<bool> getGenresAndTags() async => true;
 
   Future<List<Character>> characters(Media media) async {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return const [];
-    final (kind, id) = ref;
     try {
-      final data = await client.get('/${kind.path}/$id/people', auth: false);
-      if (data is! Map) return const [];
-      final cast = data['cast'] as List?;
-      if (cast == null) return const [];
+      final body = await client.get(
+        '/${ref.$1.path}/${ref.$2}/people',
+        auth: false,
+      );
       final out = <Character>[];
-      for (final c in cast) {
-        if (c is! Map) continue;
-        final person = c['person'] as Map?;
-        final charName = c['character'] as String? ?? '';
-        final personName = person?['name'] as String? ?? '';
+      for (final c in _maps(body is Map ? body['cast'] : null)) {
+        final person = (c['person'] as Map?)?.cast<String, dynamic>();
         final personId = (person?['ids'] as Map?)?['trakt'];
         if (personId == null) continue;
-
-        final headshot = 'https://media.trakt.tv/people/$personId/medium/headshot.webp';
+        final actor = '${person?['name'] ?? ''}';
+        final roles = [
+          for (final r in (c['characters'] as List?) ?? [c['character']])
+            if (r is String && r.isNotEmpty) r,
+        ];
         out.add(
           Character(
             id: '$personId',
-            name: charName.isNotEmpty ? charName : personName,
-            role: charName.isNotEmpty ? 'Played by $personName' : null,
-            image: headshot,
+            name: roles.isEmpty ? actor : roles.join(' / '),
+            role: roles.isEmpty ? null : actor,
+            image: traktHeadshot(personId),
             voiceActor: [
               Author(
                 id: '$personId',
-                name: personName,
-                image: headshot,
+                name: actor,
+                image: traktHeadshot(personId),
               ),
             ],
           ),
         );
       }
       return out;
-    } catch (e, st) {
-      logError('TraktQueries.characters', e, st);
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
       return const [];
     }
   }
 
+  static const _crewOrder = [
+    'created by',
+    'directing',
+    'writing',
+    'production',
+    'sound',
+    'art',
+  ];
+
   Future<List<Author>> staff(Media media) async {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return const [];
-    final (kind, id) = ref;
     try {
-      final data = await client.get('/${kind.path}/$id/people', auth: false);
-      if (data is! Map) return const [];
-      final crew = data['crew'] as Map?;
-      if (crew == null) return const [];
+      final body = await client.get(
+        '/${ref.$1.path}/${ref.$2}/people',
+        auth: false,
+      );
+      final crew = body is Map ? body['crew'] : null;
+      if (crew is! Map) return const [];
+      final seen = <Object>{};
       final out = <Author>[];
-
-      for (final dept in ['directing', 'writing', 'production', 'creator']) {
-        final members = crew[dept] as List?;
-        if (members == null) continue;
-        for (final m in members) {
-          if (m is! Map) continue;
-          final person = m['person'] as Map?;
+      for (final department in _crewOrder) {
+        for (final m in _maps(crew[department])) {
+          final person = (m['person'] as Map?)?.cast<String, dynamic>();
           final personId = (person?['ids'] as Map?)?['trakt'];
-          final name = person?['name'] as String?;
-          if (personId == null || name == null) continue;
-          final job = (m['jobs'] as List?)?.firstOrNull as String? ??
-              m['job'] as String? ??
-              dept;
+          final name = person?['name'];
+          if (personId == null || name is! String || !seen.add(personId)) {
+            continue;
+          }
+          final jobs = m['jobs'] as List?;
           out.add(
             Author(
               id: '$personId',
               name: name,
-              role: job,
-              image: 'https://media.trakt.tv/people/$personId/medium/headshot.webp',
+              role: jobs != null && jobs.isNotEmpty
+                  ? '${jobs.first}'
+                  : '${m['job'] ?? department}',
+              image: traktHeadshot(personId),
             ),
           );
         }
       }
-      return out;
-    } catch (e, st) {
-      logError('TraktQueries.staff', e, st);
+      return out.take(24).toList();
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
       return const [];
     }
   }
@@ -626,108 +593,92 @@ class TraktQueries extends Queries {
   Future<List<Media>> recommendations(Media media) async {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return const [];
-    final (kind, id) = ref;
     try {
-      final data = await client.get(
-        '/${kind.path}/$id/related',
+      final body = await client.get(
+        '/${ref.$1.path}/${ref.$2}/related',
         query: {'extended': 'full', 'limit': '15'},
         auth: false,
       );
-      if (data is! List) return const [];
-      final out = <Media>[];
-      for (final item in data) {
-        if (item is Map) {
-          final m = mapTraktItem(item.cast<String, dynamic>(), kind: kind);
-          if (m != null) out.add(m);
-        }
-      }
-      return out;
-    } catch (e, st) {
-      logError('TraktQueries.recommendations', e, st);
+      return await _withList(_media(body, kind: ref.$1));
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
       return const [];
     }
   }
 
-  Future<List<Review>> reviews(Media media) async {
-    final ref = parseTraktMediaId(media.id);
+  @override
+  Future<List<Review>> getReviews(String mediaId, {int page = 1}) async {
+    final ref = parseTraktMediaId(mediaId);
     if (ref == null) return const [];
-    final (kind, id) = ref;
     try {
-      final data = await client.get(
-        '/${kind.path}/$id/comments',
-        query: {'extended': 'full', 'limit': '15'},
+      final body = await client.get(
+        '/${ref.$1.path}/${ref.$2}/comments/likes',
+        query: {'page': '$page', 'limit': '10'},
         auth: false,
       );
-      if (data is! List) return const [];
-      final out = <Review>[];
-      for (final item in data) {
-        if (item is! Map) continue;
-        final commentId = (item['id'] as num?)?.toInt() ?? 0;
-        final body = item['comment'] as String? ?? '';
-        final score = (item['user_rating'] as num?)?.toInt();
-        final userMap = item['user'] as Map?;
-        final userName = userMap?['name'] as String? ??
-            userMap?['username'] as String? ??
-            'User';
-        final userAvatar =
-            ((userMap?['images'] as Map?)?['avatar'] as Map?)?['full'] as String?;
-        final createdAt = item['created_at'] != null
-            ? DateTime.tryParse('${item['created_at']}')?.millisecondsSinceEpoch
-            : null;
-
-        out.add(
-          Review(
-            id: commentId,
-            mediaId: id,
-            mediaType: kind.path,
-            body: body,
-            score: score != null ? score * 10 : null,
-            createdAt: createdAt,
-            user: User(
-              id: (userMap?['ids'] as Map?)?['trakt'] ?? 0,
-              name: userName,
-              avatar: userAvatar,
-            ),
-          ),
-        );
-      }
-      return out;
-    } catch (e, st) {
-      logError('TraktQueries.reviews', e, st);
+      return [
+        for (final item in _maps(body))
+          if (item['spoiler'] != true) _review(item, ref),
+      ];
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
       return const [];
     }
+  }
+
+  Review _review(Map<String, dynamic> item, (TraktKind, int) ref) {
+    final user = (item['user'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final rating = (item['user_rating'] as num?)?.toInt();
+    return Review(
+      id: (item['id'] as num?)?.toInt() ?? 0,
+      mediaId: ref.$2,
+      mediaType: ref.$1.path,
+      body: item['comment'] as String? ?? '',
+      score: rating == null ? null : rating * 10,
+      rating: (item['likes'] as num?)?.toInt(),
+      createdAt: _epoch(item['created_at']),
+      user: User(
+        id: ((user['ids'] as Map?)?['trakt'] as num?)?.toInt() ?? 0,
+        name: '${user['name'] ?? user['username'] ?? ''}',
+        pfp:
+            (((user['images'] as Map?)?['avatar']) as Map?)?['full'] as String?,
+      ),
+    );
   }
 
   Stream<List<CalendarEntry>> schedule() async* {
+    final now = DateTime.now();
+    final start =
+        '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
+    final scope = client.hasToken ? 'my' : 'all';
     try {
-      final now = DateTime.now();
-      final startDate =
-          '${now.year}-${now.month.toString().padLeft(2, '0')}-${now.day.toString().padLeft(2, '0')}';
-      final data = await client.get(
-        '/calendars/all/shows/$startDate/7',
+      final body = await client.get(
+        '/calendars/$scope/shows/$start/7',
         query: {'extended': 'full'},
-        auth: false,
+        auth: client.hasToken,
       );
-      if (data is! List) return;
       final out = <CalendarEntry>[];
-      for (final item in data) {
-        if (item is! Map) continue;
-        final showMap = item['show'] as Map?;
-        final episodeMap = item['episode'] as Map?;
-        if (showMap == null) continue;
-        final m = mapTraktItem(showMap.cast<String, dynamic>(), kind: TraktKind.shows);
-        if (m == null) continue;
-        final epNum = (episodeMap?['number'] as num?)?.toInt();
-        final firstAired = item['first_aired'] as String? ??
-            episodeMap?['first_aired'] as String?;
-        final dt = firstAired != null ? DateTime.tryParse(firstAired) : null;
-        if (dt != null) {
-          out.add(CalendarEntry(media: m, episode: epNum, airingAt: dt));
-        }
+      for (final item in _maps(body)) {
+        final show = (item['show'] as Map?)?.cast<String, dynamic>();
+        final episode = (item['episode'] as Map?)?.cast<String, dynamic>();
+        final at = DateTime.tryParse(
+          '${item['first_aired'] ?? episode?['first_aired'] ?? ''}',
+        );
+        final media = show == null
+            ? null
+            : mapTraktItem(show, kind: TraktKind.shows);
+        if (media == null || at == null) continue;
+        out.add(
+          CalendarEntry(
+            media: media,
+            episode: (episode?['number'] as num?)?.toInt(),
+            airingAt: at.toLocal(),
+          ),
+        );
       }
-      yield out;
-    } catch (e, st) {
-      logError('TraktQueries.schedule', e, st);
+      yield out..sort((a, b) => a.airingAt.compareTo(b.airingAt));
+    } on TraktException catch (e, st) {
+      logError('Queries', e, st);
     }
   }
 }

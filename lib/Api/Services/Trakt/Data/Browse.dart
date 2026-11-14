@@ -25,8 +25,6 @@ const traktGenres = [
 ];
 
 Map<String, String> get traktSearchSorts => {
-  'TRENDING_DESC': getString.sortTrending,
   'POPULARITY_DESC': getString.sortMostPopular,
-  'SCORE_DESC': getString.sortTopRated,
-  'START_DATE_DESC': getString.sortNewest,
+  'TRENDING_DESC': getString.sortTrending,
 };

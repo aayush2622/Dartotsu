@@ -44,10 +44,7 @@ class TraktUser implements ServiceUser {
 
   String get profileUrl => 'https://trakt.tv/users/$username';
 
-  TraktUser copyWith({
-    int? episodesWatched,
-    int? moviesWatched,
-  }) => TraktUser(
+  TraktUser copyWith({int? episodesWatched, int? moviesWatched}) => TraktUser(
     id: id,
     name: name,
     username: username,

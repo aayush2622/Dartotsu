@@ -58,8 +58,7 @@ class ComickSync extends SyncAdapter {
       _hids[native] ?? '$native';
 
   @override
-  int? nativeId(String id) =>
-      int.tryParse(id) ?? _keyOf(id);
+  int? nativeId(String id) => int.tryParse(id) ?? _keyOf(id);
 
   @override
   Future<int> write(List<SyncOp> batch, {required bool anime}) async {
@@ -85,67 +84,6 @@ class ComickSync extends SyncAdapter {
     SyncKey.mal: ?comickExtras[media]?.malId,
     SyncKey.mangabaka: ?comickExtras[media]?.mangabakaId,
   };
-
-  @override
-  bool get canResolve => true;
-
-  @override
-  List<String> get resolveKeys => const [SyncKey.mal, SyncKey.anilist];
-
-  @override
-  Future<(Map<int, int>, int)> resolve(List<int> mal, {required bool anime}) =>
-      resolveBy(SyncKey.mal, mal, anime: anime);
-
-  @override
-  Future<(Map<int, int>, int)> resolveBy(
-    String from,
-    List<int> ids, {
-    required bool anime,
-  }) async {
-    final out = <int, int>{};
-    var used = 0;
-    try {
-      for (final id in ids) {
-        used++;
-        try {
-          final results = await queries.client.get(
-            '/v1.0/search/',
-            query: {
-              'q': '$id',
-              'media_type': anime ? 'anime' : 'manga',
-              'limit': '5',
-            },
-          );
-          if (results is List) {
-            for (final r in results) {
-              if (r is Map) {
-                final ext = (r['external_ids'] as Map?)?.cast<String, dynamic>();
-                final matched = switch (from) {
-                  SyncKey.mal => ext?['myanimelist'] == '$id',
-                  SyncKey.anilist => ext?['anilist'] == '$id',
-                  _ => false,
-                };
-                if (matched) {
-                  final hid = r['hid'] as String? ?? '${r['id']}';
-                  final k = _keyOf(hid);
-                  if (k != null) {
-                    _hids[k] = hid;
-                    out[id] = k;
-                  }
-                  break;
-                }
-              }
-            }
-          }
-        } on ComickException catch (e) {
-          if (e.status != 404) rethrow;
-        }
-      }
-    } on ComickException catch (e) {
-      throw syncError(e, status: e.status);
-    }
-    return (out, used);
-  }
 
   @override
   Future<void> finish() async => queries.invalidateLibrary();

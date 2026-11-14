@@ -16,7 +16,8 @@ const comickServiceId = 'comick';
 class ComickService extends MediaService {
   @override
   bool isHiddenMedia(Media media) =>
-      super.isHiddenMedia(media) || (media.isAdult && ComickPref.hideNsfw.value);
+      super.isHiddenMedia(media) ||
+      (media.isAdult && ComickPref.hideNsfw.value);
 
   @override
   String get id => comickServiceId;
@@ -72,8 +73,12 @@ class ComickService extends MediaService {
   SettingsScreenView get settingsView => ComickSettingsView();
 
   @override
-  Set<String> get linkHosts =>
-      const {'comick.dev', 'comick.io', 'comick.app', 'comick.pictures'};
+  Set<String> get linkHosts => const {
+    'comick.dev',
+    'comick.io',
+    'comick.app',
+    'comick.pictures',
+  };
 
   @override
   AppLink? parseUri(Uri uri) {

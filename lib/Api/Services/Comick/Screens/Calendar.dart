@@ -1,5 +1,4 @@
 import '../../../../Core/Services/MediaService.dart';
-import '../../../../Core/Services/Model/Calendar.dart';
 import '../Auth.dart';
 
 class ComickCalendarView implements CalendarScreenView {

@@ -1,33 +1,32 @@
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
+import '../../../Model/MediaType.dart';
 
 const kTraktHomeSections = <String, bool>{
   'Continue Watching': true,
   'Watchlist': true,
-  'Watched Shows': true,
-  'Watched Movies': true,
-};
-
-const kTraktAnimeSections = <String, bool>{
-  'Trending Anime': true,
-  'Popular Anime Shows': true,
-  'Popular Anime Movies': true,
-  'Most Watched Anime': true,
-  'Anticipated Anime': true,
+  'Completed': false,
+  'Recommended Shows': true,
+  'Recommended Movies': false,
 };
 
 const kTraktMovieSections = <String, bool>{
-  'Trending Movies Today': true,
-  'Trending Shows Today': true,
-  'Trending Movies This Week': true,
-  'Trending Shows This Week': true,
+  'Trending Movies': true,
   'Popular Movies': true,
-  'Popular Shows': true,
-  'Most Watched Movies This Month': false,
-  'Most Watched Shows This Month': false,
   'Anticipated Movies': true,
-  'Anticipated Shows': true,
+  'Most Watched This Week': true,
+  'Most Watched Movies This Month': false,
   'Box Office': false,
+};
+
+const kTraktSeriesSections = <String, bool>{
+  'Trending Shows': true,
+  'Popular Shows': true,
+  'Anticipated Shows': true,
+  'Most Watched This Week': true,
+  'Most Watched Shows This Month': false,
+  'Trending Anime': true,
+  'Popular Anime': false,
 };
 
 class TraktPref {
@@ -42,12 +41,15 @@ class TraktPref {
   );
 
   static final homeLayout = layoutPref('traktHomeLayout', kTraktHomeSections);
-  static final animeLayout = layoutPref(
-    'traktAnimeLayout',
-    kTraktAnimeSections,
-  );
   static final movieLayout = layoutPref(
     'traktMovieLayout',
     kTraktMovieSections,
   );
+  static final seriesLayout = layoutPref(
+    'traktSeriesLayout',
+    kTraktSeriesSections,
+  );
+
+  static Pref<Map<String, bool>> feedLayoutFor(MediaType type) =>
+      type == MediaType.movie ? movieLayout : seriesLayout;
 }

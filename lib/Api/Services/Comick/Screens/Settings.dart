@@ -105,9 +105,7 @@ class ComickSettingsView extends SettingsScreenView {
       ..setCustomView(
         TextField(
           controller: controller,
-          decoration: InputDecoration(
-            labelText: getString.comickClientId,
-          ),
+          decoration: InputDecoration(labelText: getString.comickClientId),
         ),
       )
       ..setNegativeButton(getString.cancel, null)

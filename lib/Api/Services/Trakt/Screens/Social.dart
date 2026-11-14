@@ -1,5 +1,4 @@
 import '../../../../Core/Services/MediaService.dart';
-import '../../../../Core/Services/Model/Social.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Logger.dart';
 import '../Auth.dart';
@@ -36,8 +35,10 @@ class TraktSocialView extends SocialScreenView {
 
   Future<Map<String, dynamic>?> _profile(String id) async {
     try {
-      final data =
-          await traktAuth.client.get('/users/$id?extended=full', auth: true);
+      final data = await traktAuth.client.get(
+        '/users/$id?extended=full',
+        auth: true,
+      );
       return data is Map ? data.cast<String, dynamic>() : null;
     } catch (e, st) {
       logError('TraktSocial.profile', e, st);
@@ -51,20 +52,17 @@ class TraktSocialView extends SocialScreenView {
   Future<SocialUser?> profile({String? id, String? name}) async {
     final me = currentUserId;
     final currentUser = traktAuth.user.value as TraktUser?;
-    final target = id ??
+    final target =
+        id ??
         (name != null && name.isNotEmpty
             ? name
             : (currentUser?.username ?? me ?? 'me'));
 
-    final (stats, user) = await (
-      _stats(target),
-      _profile(target),
-    ).wait;
+    final (stats, user) = await (_stats(target), _profile(target)).wait;
 
     final movies =
         (stats['movies'] as Map?)?.cast<String, dynamic>() ?? const {};
-    final shows =
-        (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final shows = (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
     final episodes =
         (stats['episodes'] as Map?)?.cast<String, dynamic>() ?? const {};
     final network =
@@ -106,8 +104,7 @@ class TraktSocialView extends SocialScreenView {
 
     final movies =
         (stats['movies'] as Map?)?.cast<String, dynamic>() ?? const {};
-    final shows =
-        (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
+    final shows = (stats['shows'] as Map?)?.cast<String, dynamic>() ?? const {};
     final episodes =
         (stats['episodes'] as Map?)?.cast<String, dynamic>() ?? const {};
     final ratings =
@@ -122,10 +119,7 @@ class TraktSocialView extends SocialScreenView {
           count: _int(movies['watched']),
         ),
       if (_int(shows['watched']) > 0)
-        StatEntry(
-          label: getString.showsWatched,
-          count: _int(shows['watched']),
-        ),
+        StatEntry(label: getString.showsWatched, count: _int(shows['watched'])),
       if (_int(episodes['watched']) > 0)
         StatEntry(
           label: getString.episodesWatched,

@@ -46,6 +46,8 @@ class ComickDetailView extends DetailScreenView {
           ScreenData(chips: m.genres, onChipTap: host.search),
         ),
       ...linkChips(getString.links, extras?.links),
+      if ((m.recommendations ?? const []).isNotEmpty)
+        ScreenWidget.media(getString.recommendations, m.recommendations),
     ];
   }
 
@@ -79,7 +81,10 @@ class ComickDetailView extends DetailScreenView {
         (getString.artistsLabel, join(extras!.artists)),
       if (m.countryOfOrigin != null) (getString.country, m.countryOfOrigin!),
       if (extras?.translationStatus != null)
-        (getString.translationStatusLabel, extras!.translationStatus!.titleCase),
+        (
+          getString.translationStatusLabel,
+          extras!.translationStatus!.titleCase,
+        ),
       if (m.startDate?.getFormattedDate() != null)
         (getString.published, airedRange(m)),
     ];

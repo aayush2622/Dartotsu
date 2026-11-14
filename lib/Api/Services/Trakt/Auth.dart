@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:convert';
 
-import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/BrowserAuth.dart';
 import '../../../Core/Services/Api/Pkce.dart';
@@ -18,11 +16,9 @@ import 'Queries.dart';
 
 TraktAuth get traktAuth => find<TraktAuth>();
 
-const _defaultClientId =
-    'gMkRIMvbNw8ie4wGwQtT101vsenOVV4R0VGQu_AH_mw';
+const _defaultClientId = 'gMkRIMvbNw8ie4wGwQtT101vsenOVV4R0VGQu_AH_mw';
 
-String get _clientId =>
-    authClientId(mobile: _defaultClientId, desktop: _defaultClientId);
+String get _clientId => _defaultClientId;
 
 class TraktAuth extends AppController
     with SharedRefresh
@@ -42,10 +38,6 @@ class TraktAuth extends AppController
 
   late final TraktQueries queries = TraktQueries(
     client,
-    refreshUser: () async {
-      await refreshUser();
-      return user.value != null;
-    },
     onEpisodes: (episodes) {
       final current = user.value;
       if (current is TraktUser && current.episodesWatched != episodes) {
@@ -99,21 +91,20 @@ class TraktAuth extends AppController
     final state = randomToken(24);
     final redirect = authRedirect('trakt');
 
-    final authUrl = Uri.parse('$traktAuthUrl/oauth/authorize').replace(
-      queryParameters: {
-        'client_id': _clientId,
-        'redirect_uri': redirect,
-        'response_type': 'code',
-        'state': state,
-        'code_challenge': challenge,
-        'code_challenge_method': 'S256',
-      },
-    ).toString();
+    final authUrl = Uri.parse('$traktAuthUrl/oauth/authorize')
+        .replace(
+          queryParameters: {
+            'client_id': _clientId,
+            'redirect_uri': redirect,
+            'response_type': 'code',
+            'state': state,
+            'code_challenge': challenge,
+            'code_challenge_method': 'S256',
+          },
+        )
+        .toString();
 
-    final result = await browserAuthenticate(
-      url: authUrl,
-      redirect: redirect,
-    );
+    final result = await browserAuthenticate(url: authUrl, redirect: redirect);
 
     final params = Uri.parse(result).queryParameters;
     if (params['state'] != state || (params['code'] ?? '').isEmpty) {
@@ -174,7 +165,10 @@ class TraktAuth extends AppController
   }
 
   @override
-  Future<void> refreshUser() => executeShared(() async {
+  Future<void> refreshUser() =>
+      shareRefresh(_loadUser, key: TraktPref.token.value);
+
+  Future<void> _loadUser() async {
     if (!isLoggedIn) return;
     try {
       final data = await client.get('/users/me', query: {'extended': 'full'});
@@ -192,12 +186,13 @@ class TraktAuth extends AppController
       PrefManager.setCustomType(
         _userCacheKey,
         traktUser,
+        (v) => v.toJson(),
         location: PrefLocation.CACHE,
       );
     } catch (e, st) {
       logError('TraktAuth', e, st);
     }
-  });
+  }
 
   TraktUser _mapUser(Map<String, dynamic> u, Map<String, dynamic>? stats) {
     final ids = (u['ids'] as Map?)?.cast<String, dynamic>() ?? const {};
@@ -229,12 +224,13 @@ class TraktAuth extends AppController
     );
   }
 
-  Future<void> logout() async {
+  @override
+  void logout() {
     token.value = '';
     TraktPref.refresh.value = '';
     TraktPref.expiresAt.value = 0;
     user.value = null;
     queries.clearLibrary();
-    PrefManager.removeCustomData(_userCacheKey, location: PrefLocation.CACHE);
+    PrefManager.removeCustomVal(_userCacheKey, location: PrefLocation.CACHE);
   }
 }

@@ -31,25 +31,25 @@ class TraktSettingsView extends SettingsScreenView {
         onClick: () => showHomeLayoutSheet(context, pref: TraktPref.homeLayout),
       ),
       Setting.normal(
-        name: getString.labelSections(getString.anime),
-        description: _shown(TraktPref.animeLayout),
-        icon: Icons.movie_filter_rounded,
-        isActivity: true,
-        onClick: () => showHomeLayoutSheet(
-          context,
-          title: getString.labelSections(getString.anime),
-          pref: TraktPref.animeLayout,
-        ),
-      ),
-      Setting.normal(
-        name: getString.labelSections(getString.moviesAndSeries),
+        name: getString.labelSections(getString.movies),
         description: _shown(TraktPref.movieLayout),
         icon: Icons.theaters_rounded,
         isActivity: true,
         onClick: () => showHomeLayoutSheet(
           context,
-          title: getString.labelSections(getString.moviesAndSeries),
+          title: getString.labelSections(getString.movies),
           pref: TraktPref.movieLayout,
+        ),
+      ),
+      Setting.normal(
+        name: getString.labelSections(getString.shows),
+        description: _shown(TraktPref.seriesLayout),
+        icon: Icons.live_tv_rounded,
+        isActivity: true,
+        onClick: () => showHomeLayoutSheet(
+          context,
+          title: getString.labelSections(getString.shows),
+          pref: TraktPref.seriesLayout,
         ),
       ),
       Setting.header(getString.account),

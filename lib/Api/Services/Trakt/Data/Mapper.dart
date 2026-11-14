@@ -12,6 +12,8 @@ enum TraktKind {
 
   const TraktKind(this.path, this.syncKey);
 
+  String get itemKey => this == movies ? 'movie' : 'show';
+
   static TraktKind? fromName(String? name) => switch (name?.toLowerCase()) {
     'movie' || 'movies' => movies,
     'show' || 'shows' || 'tv' || 'series' => shows,
@@ -28,6 +30,9 @@ String traktMediaId(TraktKind kind, Object id) => '${kind.path}/$id';
   final n = int.tryParse(parts[1]);
   return kind == null || n == null ? null : (kind, n);
 }
+
+String traktHeadshot(Object id) =>
+    'https://media.trakt.tv/people/$id/medium/headshot.webp';
 
 String traktShareLink(TraktKind kind, Object id) =>
     'https://trakt.tv/${kind.path}/$id';
@@ -57,10 +62,7 @@ String? traktStatusIn(String? status) => switch (status?.toLowerCase()) {
 
 String? _airStatus(String? s) => switch (s?.toLowerCase()) {
   'ended' || 'released' || 'finished' => 'FINISHED',
-  'ongoing' ||
-  'airing' ||
-  'returning series' ||
-  'returning' => 'RELEASING',
+  'ongoing' || 'airing' || 'returning series' || 'returning' => 'RELEASING',
   'upcoming' ||
   'planned' ||
   'in production' ||
@@ -125,8 +127,7 @@ Media? mapTraktItem(Map<String, dynamic> raw, {TraktKind? kind}) {
   final year = _int(m['year']);
   final genres = [
     for (final g in (m['genres'] as List?) ?? const [])
-      if (g is String && g.isNotEmpty)
-        '${g[0].toUpperCase()}${g.substring(1)}',
+      if (g is String && g.isNotEmpty) '${g[0].toUpperCase()}${g.substring(1)}',
   ];
 
   final network = m['network'] as String?;

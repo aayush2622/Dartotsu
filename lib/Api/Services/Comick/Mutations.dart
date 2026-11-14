@@ -16,6 +16,11 @@ class ComickMutations extends Mutations {
 
   ComickMutations(this.client, this.queries);
 
+  static String _hid(Media media) {
+    final hid = comickExtras[media]?.hid;
+    return hid == null || hid.isEmpty ? media.id : hid;
+  }
+
   @override
   Future<void> editList(Media media, {List<String>? customList}) async {
     if (incognitoBlocksEdits) {
@@ -38,14 +43,13 @@ class ComickMutations extends Mutations {
 
     final body = <String, dynamic>{
       'status': statusVal,
-      if (ratingVal != null) 'rating': ratingVal,
-      if (media.userProgress != null)
-        'progress': {'number': '${media.userProgress}'},
+      'rating': ?ratingVal,
+      'progress': ?(media.userProgress == null
+          ? null
+          : {'number': '${media.userProgress}'}),
     };
 
-    final hid = comickExtras[media]?.hid.isNotEmpty == true
-        ? comickExtras[media]!.hid
-        : media.id;
+    final hid = _hid(media);
 
     final path = '/me/library/$hid';
     try {
@@ -62,9 +66,7 @@ class ComickMutations extends Mutations {
   @override
   Future<void> deleteFromList(Media media) async {
     try {
-      final hid = comickExtras[media]?.hid.isNotEmpty == true
-          ? comickExtras[media]!.hid
-          : media.id;
+      final hid = _hid(media);
       await client.delete('/me/library/$hid');
       clearListEntry(media);
       _done();
@@ -78,9 +80,7 @@ class ComickMutations extends Mutations {
     if (incognitoBlocksEdits) return;
     final done = reachesEnd(media, progress);
     final status = media.userStatus;
-    final hid = comickExtras[media]?.hid.isNotEmpty == true
-        ? comickExtras[media]!.hid
-        : media.id;
+    final hid = _hid(media);
 
     final body = <String, dynamic>{
       'progress': {'number': '$progress'},

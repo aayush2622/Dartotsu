@@ -1,9 +1,9 @@
 import '../../../Utils/Lru.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:rhttp/rhttp.dart';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/State/State.dart';
@@ -70,9 +70,7 @@ class TraktClient {
     final clientId = await _clientId();
     final version = await traktAppVersion();
     return {
-      'User-Agent': version.isEmpty
-          ? traktAppName
-          : '$traktAppName/$version',
+      'User-Agent': version.isEmpty ? traktAppName : '$traktAppName/$version',
       'trakt-api-version': '2',
       'trakt-api-key': clientId,
       if (json) 'Content-Type': 'application/json',

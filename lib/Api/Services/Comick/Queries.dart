@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/Api/LibraryCache.dart';
 import '../../../Core/Services/Api/LibrarySearch.dart';
@@ -7,8 +5,11 @@ import '../../../Core/Services/Api/ListOverlay.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
 import '../../../Core/Services/LayoutPref.dart';
+import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Media.dart';
+import '../../../Core/Services/Model/MediaListEntry.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Logger.dart';
 import '../../../Model/MediaType.dart';
 import '../../../Model/SearchResults.dart';
 import 'Client.dart';
@@ -23,372 +24,524 @@ class ComickSection {
   final Map<String, String> query;
 
   const ComickSection(this.title, this.endpoint, this.query);
+
+  bool get anime => query['media_type'] == 'anime';
+
+  bool get paged => endpoint == '/v1.0/search/';
 }
 
+const _schedule = '/anime/schedule';
+
 const comickMangaSections = [
-  ComickSection('Trending Now', '/top', {'type': 'trending', 'day': '7', 'media_type': 'manga'}),
-  ComickSection('Top Ranked', '/top', {'type': 'rank', 'day': '30', 'media_type': 'manga'}),
-  ComickSection('Most Followed', '/top', {'type': 'follow', 'day': '30', 'media_type': 'manga'}),
-  ComickSection('Latest Updates', '/v1.0/search/', {'sort': 'uploaded', 'media_type': 'manga'}),
+  ComickSection('Trending Now', '/top', {
+    'type': 'trending',
+    'day': '7',
+    'media_type': 'manga',
+  }),
+  ComickSection('Top Rated', '/v1.0/search/', {
+    'sort': 'rating',
+    'media_type': 'manga',
+  }),
+  ComickSection('Most Followed', '/top', {
+    'type': 'follow',
+    'day': '30',
+    'media_type': 'manga',
+  }),
+  ComickSection('Latest Updates', '/v1.0/search/', {
+    'sort': 'uploaded',
+    'media_type': 'manga',
+  }),
 ];
 
 const comickAnimeSections = [
-  ComickSection('Weekly Schedule', '/anime/schedule', {}),
-  ComickSection('Trending Anime', '/top', {'type': 'trending', 'day': '7', 'media_type': 'anime'}),
-  ComickSection('Top Ranked Anime', '/top', {'type': 'rank', 'day': '30', 'media_type': 'anime'}),
-  ComickSection('Most Followed Anime', '/top', {'type': 'follow', 'day': '30', 'media_type': 'anime'}),
+  ComickSection('Weekly Schedule', _schedule, {'media_type': 'anime'}),
+  ComickSection('Trending Anime', '/top', {
+    'type': 'trending',
+    'day': '7',
+    'media_type': 'anime',
+  }),
+  ComickSection('Top Rated Anime', '/v1.0/search/', {
+    'sort': 'rating',
+    'media_type': 'anime',
+  }),
+  ComickSection('Most Followed Anime', '/top', {
+    'type': 'follow',
+    'day': '30',
+    'media_type': 'anime',
+  }),
 ];
 
 List<ComickSection> comickSectionsFor(MediaType type) =>
     type == MediaType.anime ? comickAnimeSections : comickMangaSections;
 
-const comickSearchSorts = [
-  'trending',
-  'view',
-  'rating',
-  'follow',
-  'uploaded',
-  'created_at',
-];
+Map<String, String> get comickSearchSorts => {
+  'user_follow_count': getString.sortMostFollowed,
+  'rating': getString.sortTopRated,
+  'view': getString.sortMostViewed,
+  'uploaded': getString.sortLatestUpdates,
+  'created_at': getString.sortNewest,
+};
 
 const _genreKey = 'comick_genres';
+const _genreIdKey = 'comick_genre_ids';
 const _tagKey = 'comick_tags';
 
 const _fallbackGenres = [
-  '4-Koma', 'Action', 'Adaptation', 'Adult', 'Adventure', 'Aliens', 'Animals',
-  'Anthology', 'Comedy', 'Cooking', 'Crime', 'Crossdressing', 'Delinquents',
-  'Demons', 'Drama', 'Ecchi', 'Fantasy', 'Gender Bender', 'Ghosts', 'Gore',
-  'Harem', 'Historical', 'Horror', 'Isekai', 'Josei', 'Magic', 'Magical Girls',
-  'Martial Arts', 'Mecha', 'Medical', 'Military', 'Monster Girls', 'Monsters',
-  'Music', 'Mystery', 'Ninja', 'Office Workers', 'Philosophical', 'Police',
-  'Post-Apocalyptic', 'Psychological', 'Reincarnation', 'Reverse Harem',
-  'Romance', 'Samurai', 'School Life', 'Sci-Fi', 'Seinen', 'Shoujo',
-  'Shoujo Ai', 'Shounen', 'Shounen Ai', 'Slice of Life', 'Smut', 'Sports',
-  'Super Power', 'Superhero', 'Supernatural', 'Survival', 'Thriller',
-  'Time Travel', 'Traditional Games', 'Tragedy', 'Vampires', 'Video Games',
-  'Villainess', 'Virtual Reality', 'Zombies'
+  'Action',
+  'Adventure',
+  'Comedy',
+  'Drama',
+  'Ecchi',
+  'Fantasy',
+  'Harem',
+  'Historical',
+  'Horror',
+  'Isekai',
+  'Josei',
+  'Martial Arts',
+  'Mecha',
+  'Mystery',
+  'Psychological',
+  'Romance',
+  'School Life',
+  'Sci-Fi',
+  'Seinen',
+  'Shoujo',
+  'Shounen',
+  'Slice of Life',
+  'Sports',
+  'Supernatural',
+  'Thriller',
+  'Tragedy',
 ];
 
-List<String> comickGenres() =>
-    loadCustomData<List<String>>(_genreKey) ?? _fallbackGenres;
+String _slug(String name) =>
+    name.toLowerCase().trim().replaceAll(RegExp(r'[\s_]+'), '-');
 
-List<String> comickTags() =>
-    loadCustomData<List<String>>(_tagKey) ?? const [];
+Map<String, String> comickGenreSlugs() {
+  final saved = loadCustomData<Map<String, dynamic>>(_genreKey);
+  if (saved == null || saved.isEmpty) {
+    return {for (final g in _fallbackGenres) g: _slug(g)};
+  }
+  return {for (final e in saved.entries) e.key: '${e.value}'};
+}
+
+List<String> comickGenres() => comickGenreSlugs().keys.toList();
+
+List<String> comickTags() => loadCustomData<List<String>>(_tagKey) ?? const [];
+
+const _statuses = {
+  'RELEASING': '1',
+  'FINISHED': '2',
+  'CANCELLED': '3',
+  'HIATUS': '4',
+};
+
+const _countries = {'MANHWA': 'kr', 'MANHUA': 'cn'};
 
 class ComickQueries extends Queries {
   final ComickClient client;
 
-  ComickQueries(this.client);
-
-  late final _library = {
-    true: LibraryCache<List<Media>>(load: (_) => _loadLibrary(anime: true)),
-    false: LibraryCache<List<Media>>(load: (_) => _loadLibrary(anime: false)),
-  };
-
-  void clearLibrary() {
-    _library[true]?.invalidate();
-    _library[false]?.invalidate();
+  ComickQueries(this.client) {
+    comickGenreNames = {
+      for (final e
+          in (loadCustomData<Map<String, dynamic>>(_genreIdKey) ?? const {})
+              .entries)
+        ?int.tryParse(e.key): '${e.value}',
+    };
   }
 
-  void invalidateLibrary() => clearLibrary();
+  late final _manga = LibraryCache<List<Media>>(
+    load: (_) => _loadLibrary(anime: false),
+  );
+
+  late final _anime = LibraryCache<List<Media>>(
+    load: (_) => _loadLibrary(anime: true),
+  );
+
+  LibraryCache<List<Media>> _cache(bool anime) => anime ? _anime : _manga;
+
+  void invalidateLibrary() {
+    _manga.expire();
+    _anime.expire();
+  }
+
+  void clearLibrary() {
+    _manga.clear();
+    _anime.clear();
+  }
 
   Future<List<Media>> library({bool anime = false}) =>
-      _library[anime]!.get(force: false);
+      client.hasToken ? _cache(anime).get() : Future.value(const []);
 
   Future<List<Media>> _loadLibrary({required bool anime}) async {
-    if (!client.hasToken) return const [];
     final out = <Media>[];
     String? cursor;
-    var first = true;
-    while (first || cursor != null) {
-      first = false;
-      final query = <String, String>{
-        'media_type': anime ? 'anime' : 'manga',
-        'limit': '100',
-        if (cursor != null) 'cursor': cursor,
-      };
-      final body = await client.get('/me/library', query: query);
+    do {
+      final body = await client.get(
+        '/me/library',
+        query: {
+          'media_type': anime ? 'anime' : 'manga',
+          'limit': '100',
+          'cursor': ?cursor,
+        },
+      );
       if (body is! Map) break;
-      final data = body['data'] as List?;
-      if (data != null) {
-        for (final item in data) {
-          if (item is Map) {
-            out.add(mapComickLibraryEntry(item.cast<String, dynamic>()));
-          }
+      for (final item in (body['data'] as List?) ?? const []) {
+        if (item is Map) {
+          out.add(mapComickLibraryEntry(item.cast<String, dynamic>()));
         }
       }
       cursor = body['next_cursor'] as String?;
+    } while (cursor != null && cursor.isNotEmpty);
+    return out;
+  }
+
+  Future<List<Media>> _withList(List<Media> items, {bool anime = false}) =>
+      client.hasToken
+      ? overlayEntries(items, () => library(anime: anime))
+      : Future.value(items);
+
+  List<Media> _visible(List<Media> items) => ComickPref.hideNsfw.value
+      ? [
+          for (final m in items)
+            if (!m.isAdult) m,
+        ]
+      : items;
+
+  List<Media> _media(Object? body, {String? day}) {
+    final list = body is List
+        ? body
+        : body is Map
+        ? (body['data'] ??
+                  body[day] ??
+                  body.values.whereType<List>().firstOrNull)
+              as List?
+        : null;
+    final seen = <String>{};
+    return [
+      for (final item in list ?? const [])
+        if (item is Map && seen.add('${item['hid'] ?? item['id']}'))
+          mapComickSearchItem(item.cast<String, dynamic>()),
+    ];
+  }
+
+  Future<List<Media>> sectionPage(ComickSection section, {int page = 1}) async {
+    if (section.endpoint == _schedule) {
+      if (page > 1) return const [];
+      return _withList([
+        for (final e in await schedule()) e.media,
+      ], anime: true);
+    }
+    final body = await client.get(
+      section.endpoint,
+      query: {
+        ...section.query,
+        if (section.paged) ...{'page': '$page', 'limit': '$comickPageSize'},
+      },
+      cache: const Duration(minutes: 10),
+    );
+    var items = _media(body, day: section.query['day']);
+    if (!section.paged) {
+      final from = (page - 1) * comickPageSize;
+      items = from >= items.length
+          ? const []
+          : items.sublist(from, (from + comickPageSize).clamp(0, items.length));
+    }
+    return _withList(_visible(items), anime: section.anime);
+  }
+
+  Future<List<Media>> countryPicks(String country) async {
+    final body = await client.get(
+      '/v1.0/search/',
+      query: {'country': country, 'media_type': 'manga', 'limit': '15'},
+      cache: const Duration(minutes: 10),
+    );
+    return _withList(_visible(_media(body)));
+  }
+
+  Future<List<CalendarEntry>> schedule() async {
+    final data = await client.get(
+      _schedule,
+      cache: const Duration(minutes: 15),
+    );
+    final entries = data is Map ? data['entries'] : null;
+    final out = <CalendarEntry>[];
+    for (final e in entries is List ? entries : const []) {
+      if (e is! Map) continue;
+      final item = e.cast<String, dynamic>();
+      final slot = (item['schedule'] as Map?) ?? const {};
+      final when = DateTime.tryParse('${slot['occurrenceAt'] ?? ''}');
+      if (when == null) continue;
+      out.add(
+        CalendarEntry(
+          media: mapComickScheduleItem(item),
+          episode: (slot['episode'] as num?)?.toInt(),
+          airingAt: when.toLocal(),
+        ),
+      );
     }
     return out;
   }
 
-  Future<List<Media>> _withList(List<Media> items, {bool anime = false}) async =>
-      client.hasToken ? overlayEntries(items, () => library(anime: anime)) : items;
-
   @override
-  Future<Map<String, List<Media>>> initHomePage() async {
-    final out = <String, List<Media>>{};
-    if (client.hasToken) {
-      final userManga = await library(anime: false);
-      final current = userManga.where((m) => m.userStatus == 'CURRENT').toList();
-      final planning = userManga.where((m) => m.userStatus == 'PLANNING').toList();
-      final paused = userManga.where((m) => m.userStatus == 'PAUSED').toList();
-      final dropped = userManga.where((m) => m.userStatus == 'DROPPED').toList();
+  List<SectionJob> homeJobs() {
+    if (!client.hasToken) return const [];
+    final hide = ComickPref.hideNsfw.value;
 
-      if (current.isNotEmpty) out['Continue Reading'] = current;
-      if (planning.isNotEmpty) out['Planned'] = planning;
-      if (paused.isNotEmpty) out['On Hold'] = paused;
-      if (dropped.isNotEmpty) out['Dropped'] = dropped;
-    }
+    SectionJob job(String title, Set<String> statuses, {bool? anime}) =>
+        () async {
+          final out = <Media>[];
+          for (final isAnime in [
+            if (anime != false) true,
+            if (anime != true) false,
+          ]) {
+            out.addAll([
+              for (final m in await library(anime: isAnime))
+                if (statuses.contains(m.userStatus) && !(hide && m.isAdult)) m,
+            ]);
+          }
+          return titledSection(title, out);
+        };
 
-    try {
-      final top = await client.get('/top', query: {'type': 'trending', 'day': '7', 'media_type': 'manga'});
-      if (top is List) {
-        final media = [
-          for (final item in top)
-            if (item is Map) mapComickSearchItem(item.cast<String, dynamic>())
-        ];
-        if (media.isNotEmpty) out['Trending Now'] = await _withList(media);
-      }
-    } catch (_) {}
-
-    try {
-      final ranked = await client.get('/top', query: {'type': 'rank', 'day': '30', 'media_type': 'manga'});
-      if (ranked is List) {
-        final media = [
-          for (final item in ranked)
-            if (item is Map) mapComickSearchItem(item.cast<String, dynamic>())
-        ];
-        if (media.isNotEmpty) out['Top Ranked'] = await _withList(media);
-      }
-    } catch (_) {}
-
-    return out;
+    final jobs = <(String, SectionJob)>[
+      (
+        'Continue Watching',
+        job('Continue Watching', {'CURRENT', 'REPEATING'}, anime: true),
+      ),
+      (
+        'Continue Reading',
+        job('Continue Reading', {'CURRENT', 'REPEATING'}, anime: false),
+      ),
+      ('Planned', job('Planned', {'PLANNING'})),
+      ('On Hold', job('On Hold', {'PAUSED'})),
+      ('Dropped', job('Dropped', {'DROPPED'})),
+      if (hide)
+        (
+          kHiddenMediaTitle,
+          () async => titledSection(kHiddenMediaTitle, [
+            for (final anime in [true, false])
+              for (final m in await library(anime: anime))
+                if (m.isAdult) m,
+          ]),
+        ),
+    ];
+    return [
+      for (final j in applyLayout(
+        jobs,
+        (j) => j.$1,
+        ComickPref.homeLayout.value,
+      ))
+        j.$2,
+    ];
   }
 
-  @override
-  Future<Map<String, List<Media>>> getMangaList() async {
-    final jobs = browseJobsFor(MediaType.manga);
-    final results = await Future.wait(jobs.map((j) => j.run()));
-    return {
-      for (var i = 0; i < jobs.length; i++)
-        if (results[i].isNotEmpty) jobs[i].title: results[i],
-    };
-  }
-
-  @override
-  Future<Map<String, List<Media>>> getAnimeList() async {
-    final jobs = browseJobsFor(MediaType.anime);
-    final results = await Future.wait(jobs.map((j) => j.run()));
-    return {
-      for (var i = 0; i < jobs.length; i++)
-        if (results[i].isNotEmpty) jobs[i].title: results[i],
-    };
-  }
-
-  List<SectionJob<Media>> browseJobsFor(MediaType type) => [
-    for (final s in applyLayout(
+  List<SectionJob> browseJobsFor(MediaType type) => [
+    for (final section in applyLayout(
       comickSectionsFor(type),
       (s) => s.title,
       ComickPref.feedLayoutFor(type).value,
     ))
-      SectionJob(title: s.title, run: () => sectionPage(s, page: 1)),
+      () async => titledSection(section.title, await sectionPage(section)),
   ];
 
-  Future<List<Media>> sectionPage(
-    ComickSection section, {
-    int page = 1,
-  }) async {
-    final isAnime = section.query['media_type'] == 'anime';
-    if (section.endpoint == '/anime/schedule') {
-      if (page > 1) return const [];
-      final data = await client.get('/anime/schedule', cache: const Duration(minutes: 15));
-      if (data is Map && data['entries'] is List) {
-        final media = [
-          for (final e in (data['entries'] as List))
-            if (e is Map) mapComickScheduleItem(e.cast<String, dynamic>())
-        ];
-        return _withList(media, anime: true);
-      }
-      return const [];
-    }
-
-    final query = {
-      ...section.query,
-      if (section.endpoint == '/v1.0/search/') ...{
-        'page': '$page',
-        'limit': '$comickPageSize',
-      },
-    };
-
-    final body = await client.get(
-      section.endpoint,
-      query: query,
-      cache: const Duration(minutes: 10),
-    );
-
-    final list = body is List ? body : (body is Map ? (body['data'] as List?) : null);
-    if (list == null) return const [];
-
-    final media = [
-      for (final item in list)
-        if (item is Map) mapComickSearchItem(item.cast<String, dynamic>())
-    ];
-
-    return _withList(media, anime: isAnime);
-  }
+  @override
+  List<SectionJob> browseJobs({required bool anime}) =>
+      browseJobsFor(anime ? MediaType.anime : MediaType.manga);
 
   @override
   Future<Map<String, List<Media>>> getMediaLists({
-    bool anime = false,
-    String? userId,
+    required bool anime,
+    int? userId,
+    String? sortOrder,
   }) async {
-    final list = await library(anime: anime);
-    final out = <String, List<Media>>{
-      'CURRENT': [],
-      'COMPLETED': [],
-      'PAUSED': [],
-      'DROPPED': [],
-      'PLANNING': [],
-    };
-    for (final m in list) {
-      final s = m.userStatus;
-      if (s != null && out.containsKey(s)) {
-        out[s]!.add(m);
-      }
+    final all = await library(anime: anime);
+    return groupByStatus(all, {
+      'CURRENT': anime ? getString.watching : getString.reading,
+      'PLANNING': getString.planning,
+      'COMPLETED': getString.completed,
+      'PAUSED': getString.paused,
+      'DROPPED': getString.dropped,
+    });
+  }
+
+  Future<Media?> _lookup(
+    String key, {
+    required bool anime,
+    String? title,
+  }) async {
+    final text = title ?? key.replaceAll('-', ' ');
+    final body = await client.get(
+      '/v1.0/search/',
+      query: {
+        'q': text,
+        'media_type': anime ? 'anime' : 'manga',
+        'limit': '20',
+      },
+      cache: const Duration(minutes: 10),
+    );
+    for (final media in _media(body)) {
+      final extras = comickExtras[media];
+      if (media.id == key || extras?.slug == key) return media;
     }
-    return out;
+    return null;
+  }
+
+  Future<Media?> _detail(
+    String id, {
+    required bool anime,
+    String? title,
+  }) async {
+    Media? media;
+    try {
+      final body = await client.get(
+        '/v1.0/comic/$id/',
+        query: {'media_type': anime ? 'anime' : 'manga'},
+        cache: const Duration(minutes: 10),
+      );
+      if (body is Map && body['comic'] is Map) {
+        media = mapComickComicDetail(body.cast<String, dynamic>());
+      }
+    } on ComickException catch (e) {
+      if (e.status != 404 && e.status != 403) rethrow;
+    }
+    media ??= await _lookup(id, anime: anime, title: title);
+    if (media == null) return null;
+    if (client.hasToken) {
+      final mine = (await library(anime: media.isAnime))
+          .where((m) => m.id == media!.id);
+      if (mine.isNotEmpty) media.takeListEntry(mine.first);
+    }
+    return media;
   }
 
   @override
-  Future<Media?> getMedia(String id, {bool anime = false}) async {
-    try {
-      final comic = await client.get('/v1.0/comic/$id/', query: {'media_type': anime ? 'anime' : 'manga'});
-      if (comic is Map && comic['comic'] is Map) {
-        return mapComickComicDetail(comic.cast<String, dynamic>());
+  Future<Media?> getMedia(String id) async {
+    for (final anime in [false, true]) {
+      try {
+        final media = await _detail(id, anime: anime);
+        if (media != null && media.isAnime == anime) return media;
+      } on ComickException catch (e) {
+        if (e.status != 404) rethrow;
       }
-    } catch (_) {}
-
-    try {
-      final results = await client.get('/v1.0/search/', query: {'q': id, 'limit': '1'});
-      if (results is List && results.isNotEmpty && results.first is Map) {
-        return mapComickSearchItem((results.first as Map).cast<String, dynamic>());
-      }
-    } catch (_) {}
-
+    }
     return null;
   }
 
   @override
   Future<Media?> mediaDetails(Media media) async {
-    final extras = comickExtras[media];
-    final slug = extras?.slug.isNotEmpty == true ? extras!.slug : media.id;
-    final isAnime = media.isAnime;
-
+    final slug = comickExtras[media]?.slug;
     try {
-      final comic = await client.get(
-        '/v1.0/comic/$slug/',
-        query: {'media_type': isAnime ? 'anime' : 'manga'},
-        cache: const Duration(minutes: 10),
+      final full = await _detail(
+        slug == null || slug.isEmpty ? media.id : slug,
+        anime: media.isAnime,
+        title: media.name,
       );
-      if (comic is Map && comic['comic'] is Map) {
-        final full = mapComickComicDetail(comic.cast<String, dynamic>());
-        return full;
-      }
-    } catch (_) {}
-
-    return media;
+      if (full == null) return media;
+      return full
+        ..cameFromContinue = media.cameFromContinue
+        ..relations = media.relations;
+    } on ComickException catch (e, st) {
+      logError('Queries', e, st);
+      return media;
+    }
   }
 
   @override
-  Future<SearchResults?> search(SearchResults query) async {
-    final isAnime = query.type == SearchType.ANIME;
-    final params = <String, String>{
-      'media_type': isAnime ? 'anime' : 'manga',
-      'limit': '$comickPageSize',
-      'page': '${query.page ?? 1}',
-      if (query.query.isNotEmpty) 'q': query.query,
-      if (query.sort != null && query.sort!.isNotEmpty) 'sort': query.sort!,
-      if (query.status != null)
-        'status': switch (query.status) {
-          'RELEASING' => '1',
-          'FINISHED' => '2',
-          'CANCELLED' => '3',
-          'HIATUS' => '4',
-          _ => '',
-        },
-      if (query.country != null) 'country': query.country!.toLowerCase(),
-    };
-
-    final body = await client.get('/v1.0/search/', query: params);
-    if (body is! List) return query;
-
-    final media = [
-      for (final item in body)
-        if (item is Map) mapComickSearchItem(item.cast<String, dynamic>())
-    ];
-
-    final withLists = await _withList(media, anime: isAnime);
-    return SearchResults(
-      page: query.page,
-      query: query.query,
-      type: query.type,
-      sort: query.sort,
-      format: query.format,
-      status: query.status,
-      country: query.country,
-      results: withLists,
-      hasNextPage: media.length >= comickPageSize,
+  Future<SearchResults?> search(SearchResults? results) async {
+    if (results == null) return null;
+    final anime = results.type == SearchType.ANIME;
+    if (!anime && results.type != SearchType.MANGA) {
+      return results
+        ..results = const []
+        ..hasNextPage = false;
+    }
+    if (results.onList == true) {
+      return searchLibrary(await library(anime: anime), results);
+    }
+    final slugs = comickGenreSlugs();
+    final text = results.search?.trim() ?? '';
+    final country =
+        results.countryOfOrigin ?? _countries[results.format?.toUpperCase()];
+    final limit = (results.perPage ?? comickPageSize).clamp(1, 50);
+    final multi = <String, List<String>>{
+      'genres': [
+        for (final g in results.genres ?? const <String>[])
+          slugs[g] ?? _slug(g),
+      ],
+      'excludes': [
+        for (final g in results.excludedGenres ?? const <String>[])
+          slugs[g] ?? _slug(g),
+      ],
+      'tags': [for (final t in results.tags ?? const <String>[]) _slug(t)],
+    }..removeWhere((_, v) => v.isEmpty);
+    final body = await client.get(
+      '/v1.0/search/',
+      query: {
+        'media_type': anime ? 'anime' : 'manga',
+        'limit': '$limit',
+        'page': '${results.page ?? 1}',
+        'q': ?(text.isEmpty ? null : text),
+        'sort': ?results.sort,
+        'status':
+            ?_statuses[results.status?.toUpperCase().replaceAll(' ', '_')],
+        'country': ?country?.toLowerCase(),
+      },
+      multi: multi,
     );
+    final found = _media(body);
+    final shown = results.isAdult == true ? found : _visible(found);
+    return results
+      ..results = await _withList(shown, anime: anime)
+      ..hasNextPage = found.length >= limit;
   }
 
   @override
-  Future<List<Media>> getCalendarData() async {
-    try {
-      final data = await client.get('/anime/schedule', cache: const Duration(minutes: 15));
-      if (data is Map && data['entries'] is List) {
-        final out = <Media>[];
-        for (final e in (data['entries'] as List)) {
-          if (e is Map) {
-            final m = mapComickScheduleItem(e.cast<String, dynamic>());
-            final occurrence = (e['schedule'] as Map?)?['occurrenceAt'] as String?;
-            if (occurrence != null) {
-              final epoch = DateTime.tryParse(occurrence)?.millisecondsSinceEpoch;
-              if (epoch != null) {
-                m.relation = '1,${epoch ~/ 1000}';
-              }
-            }
-            out.add(m);
-          }
-        }
-        return _withList(out, anime: true);
-      }
-    } catch (_) {}
-    return const [];
-  }
+  Future<List<Media>> getCalendarData() async => [
+    for (final e in await schedule()) e.media,
+  ];
 
   @override
-  Future<void> getGenresAndTags() async {
+  Future<bool> getGenresAndTags() async {
+    if (loadCustomData<Map<String, dynamic>>(_genreKey) != null &&
+        loadCustomData<List<String>>(_tagKey) != null) {
+      return true;
+    }
     try {
-      final genresData = await client.get('/genre/', cache: const Duration(days: 7));
-      if (genresData is List) {
-        final names = [
-          for (final g in genresData)
-            if (g is Map && g['name'] is String) g['name'] as String
-        ];
-        if (names.isNotEmpty) setCustomData(_genreKey, names);
+      final genres = await client.get(
+        '/genre/',
+        cache: const Duration(days: 7),
+      );
+      final slugs = {
+        for (final g in genres is List ? genres : const [])
+          if (g is Map && g['name'] is String && g['group'] != 'Format')
+            g['name'] as String: '${g['slug'] ?? _slug(g['name'] as String)}',
+      };
+      if (slugs.isNotEmpty) saveCustomData(_genreKey, slugs);
+      final ids = {
+        for (final g in genres is List ? genres : const [])
+          if (g is Map && g['id'] is num && g['name'] is String)
+            '${g['id']}': g['name'] as String,
+      };
+      if (ids.isNotEmpty) {
+        saveCustomData(_genreIdKey, ids);
+        comickGenreNames = {
+          for (final e in ids.entries) int.parse(e.key): e.value,
+        };
       }
-    } catch (_) {}
 
-    try {
-      final catsData = await client.get('/category/popular', cache: const Duration(days: 7));
-      if (catsData is List) {
-        final tags = [
-          for (final c in catsData)
-            if (c is Map && c['title'] is String) c['title'] as String
-        ];
-        if (tags.isNotEmpty) setCustomData(_tagKey, tags);
-      }
-    } catch (_) {}
+      final tags = await client.get(
+        '/category/popular',
+        cache: const Duration(days: 7),
+      );
+      final names = [
+        for (final c in tags is List ? tags : const [])
+          if (c is Map && c['title'] is String) c['title'] as String,
+      ];
+      if (names.isNotEmpty) saveCustomData(_tagKey, names);
+    } catch (e, st) {
+      logError('Queries', e, st);
+    }
+    return true;
   }
 }
