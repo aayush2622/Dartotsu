@@ -157,7 +157,7 @@ class SyncHeader extends StatelessWidget {
   Widget _icon(BuildContext context, String id, double size, Color color) {
     final service = id == syncAheadId
         ? null
-        : state.candidates.firstWhere((c) => c.id == id).iconPath;
+        : state.controller.signedIn.firstWhere((c) => c.id == id).iconPath;
     return service == null
         ? Icon(Icons.swap_vert_rounded, size: size, color: color)
         : loadSvg(service, width: size, height: size, color: color);
@@ -200,34 +200,59 @@ class SyncHeader extends StatelessWidget {
     BuildContext context,
     Map<String, String> names,
   ) async {
-    final entries = names.entries.toList();
+    final services = state.controller.signedIn;
+    final ahead = names.containsKey(syncAheadId);
     final picked = await showCustomBottomDialog<String>(
       context,
       AppSheet(
         title: getString.syncMainService,
-        child: ListView.builder(
-          shrinkWrap: true,
-          padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
-          itemCount: entries.length,
-          itemBuilder: (sheet, i) => SheetTile(
-            tinted: true,
-            radius: groupedRadius(i, entries.length),
-            selected: entries[i].key == state.mainId,
-            leading: _icon(
-              sheet,
-              entries[i].key,
-              28,
-              entries[i].key == state.mainId
-                  ? sheet.colorScheme.onPrimaryContainer
-                  : sheet.colorScheme.onSurfaceVariant,
-            ),
-            title: Text(entries[i].value),
-            onTap: () => popPage(sheet, entries[i].key),
-          ),
-        ),
+        child: Watch(() {
+          final off = PrefName.syncDisabled.rx.value;
+          final entries = [
+            if (ahead) (syncAheadId, getString.syncAhead),
+            for (final s in services) (s.id, s.name),
+          ];
+          return ListView.builder(
+            shrinkWrap: true,
+            padding: const EdgeInsets.fromLTRB(16, 4, 16, 24),
+            itemCount: entries.length,
+            itemBuilder: (sheet, i) {
+              final (id, name) = entries[i];
+              final enabled = id == syncAheadId || !off.contains(id);
+              return SheetTile(
+                tinted: true,
+                radius: groupedRadius(i, entries.length),
+                selected: id == state.mainId,
+                leading: _icon(
+                  sheet,
+                  id,
+                  28,
+                  id == state.mainId
+                      ? sheet.colorScheme.onPrimaryContainer
+                      : sheet.colorScheme.onSurfaceVariant,
+                ),
+                title: Text(name),
+                trailing: id == syncAheadId
+                    ? null
+                    : Switch(
+                        value: enabled,
+                        onChanged: (on) => _setEnabled(id, on),
+                      ),
+                onTap: enabled ? () => popPage(sheet, id) : null,
+              );
+            },
+          );
+        }),
       ),
     );
     if (picked != null) state.setMain(picked);
+  }
+
+  void _setEnabled(String id, bool on) {
+    final off = [...PrefName.syncDisabled.rx.value]..remove(id);
+    if (!on) off.add(id);
+    PrefName.syncDisabled.rx.value = off;
+    state.controller.changes.fire();
   }
 
   Widget _options() => Watch(
@@ -277,20 +302,6 @@ class SyncHeader extends StatelessWidget {
             AppSegment('skip', label: getString.syncPrivateModeSkip),
           ],
         ),
-        for (final service in state.controller.signedIn)
-          SwitchListTile(
-            contentPadding: EdgeInsets.zero,
-            secondary: loadSvg(service.iconPath, width: 22, height: 22),
-            title: Text(getString.syncServiceOn(service.name)),
-            value: !PrefName.syncDisabled.rx.value.contains(service.id),
-            onChanged: (on) {
-              final off = [...PrefName.syncDisabled.rx.value]
-                ..remove(service.id);
-              if (!on) off.add(service.id);
-              PrefName.syncDisabled.rx.value = off;
-              state.controller.changes.fire();
-            },
-          ),
         SwitchListTile(
           contentPadding: EdgeInsets.zero,
           title: Text(getString.syncDelete),
