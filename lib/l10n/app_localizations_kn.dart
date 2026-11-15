@@ -281,6 +281,17 @@ class AppLocalizationsKn extends AppLocalizations {
   String get selectMediaService => 'ಮೀಡಿಯಾ ಸರ್ವಿಸ್ ಆಯ್ಕೆ ಮಾಡು';
 
   @override
+  String get manageServices => 'Media services';
+
+  @override
+  String get manageServicesDesc =>
+      'Reorder the services and choose which ones show in the picker';
+
+  @override
+  String get manageServicesHint =>
+      'Drag to reorder, switch off the ones you don\'t use';
+
+  @override
   String get pickColor => 'ಬಣ್ಣ ಆರಿಸು';
 
   @override
@@ -2131,6 +2142,9 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get followsMutual => 'Mutual';
+
+  @override
+  String get followsNotMutual => 'Not mutual';
 
   @override
   String get homeSections => 'ಹೋಮ್ ವಿಭಾಗಗಳು';

@@ -283,6 +283,17 @@ class AppLocalizationsSi extends AppLocalizations {
   String get selectMediaService => 'මීඩියා සර්විස් එක තෝරන්න';
 
   @override
+  String get manageServices => 'Media services';
+
+  @override
+  String get manageServicesDesc =>
+      'Reorder the services and choose which ones show in the picker';
+
+  @override
+  String get manageServicesHint =>
+      'Drag to reorder, switch off the ones you don\'t use';
+
+  @override
   String get pickColor => 'පාටක් තෝරන්න';
 
   @override
@@ -2132,6 +2143,9 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get followsMutual => 'Mutual';
+
+  @override
+  String get followsNotMutual => 'Not mutual';
 
   @override
   String get homeSections => 'හෝම් සෙක්ෂන්ස්';

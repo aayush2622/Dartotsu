@@ -647,6 +647,24 @@ abstract class AppLocalizations {
   /// **'Select Media Service'**
   String get selectMediaService;
 
+  /// No description provided for @manageServices.
+  ///
+  /// In en, this message translates to:
+  /// **'Media services'**
+  String get manageServices;
+
+  /// No description provided for @manageServicesDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Reorder the services and choose which ones show in the picker'**
+  String get manageServicesDesc;
+
+  /// No description provided for @manageServicesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Drag to reorder, switch off the ones you don\'t use'**
+  String get manageServicesHint;
+
   /// No description provided for @pickColor.
   ///
   /// In en, this message translates to:
@@ -3982,6 +4000,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Mutual'**
   String get followsMutual;
+
+  /// No description provided for @followsNotMutual.
+  ///
+  /// In en, this message translates to:
+  /// **'Not mutual'**
+  String get followsNotMutual;
 
   /// No description provided for @homeSections.
   ///

@@ -32,7 +32,7 @@ class HomeHeader extends StatelessWidget {
   void _step(int by) {
     final current = _controller.currentService.peek;
     final cycle = [
-      for (final s in _controller.services)
+      for (final s in _controller.shown)
         if (s.id == current.id || s.auth == null || s.auth!.isLoggedIn) s,
     ];
     if (cycle.length < 2) return;

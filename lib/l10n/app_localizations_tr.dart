@@ -282,6 +282,17 @@ class AppLocalizationsTr extends AppLocalizations {
   String get selectMediaService => 'Medya servisini seç';
 
   @override
+  String get manageServices => 'Media services';
+
+  @override
+  String get manageServicesDesc =>
+      'Reorder the services and choose which ones show in the picker';
+
+  @override
+  String get manageServicesHint =>
+      'Drag to reorder, switch off the ones you don\'t use';
+
+  @override
   String get pickColor => 'Bir renk seç';
 
   @override
@@ -2127,6 +2138,9 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get followsMutual => 'Mutual';
+
+  @override
+  String get followsNotMutual => 'Not mutual';
 
   @override
   String get homeSections => 'Ana sayfa bölümleri';

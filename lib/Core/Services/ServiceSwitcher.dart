@@ -26,7 +26,7 @@ void serviceSwitcher(BuildContext context) {
         padding: const EdgeInsets.fromLTRB(12, 12, 12, 4),
         child: Column(
           children: [
-            for (final service in mediaServices.services)
+            for (final service in mediaServices.shown)
               _ServiceRow(
                 service: service,
                 selected: mediaServices.currentService.value.id == service.id,

@@ -282,6 +282,17 @@ class AppLocalizationsTe extends AppLocalizations {
   String get selectMediaService => 'మీడియా సర్వీస్ ఎంచుకో';
 
   @override
+  String get manageServices => 'Media services';
+
+  @override
+  String get manageServicesDesc =>
+      'Reorder the services and choose which ones show in the picker';
+
+  @override
+  String get manageServicesHint =>
+      'Drag to reorder, switch off the ones you don\'t use';
+
+  @override
   String get pickColor => 'ఒక రంగు ఎంచుకో';
 
   @override
@@ -2134,6 +2145,9 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get followsMutual => 'Mutual';
+
+  @override
+  String get followsNotMutual => 'Not mutual';
 
   @override
   String get homeSections => 'హోమ్ సెక్షన్లు';

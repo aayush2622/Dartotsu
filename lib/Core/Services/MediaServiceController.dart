@@ -53,6 +53,45 @@ class MediaServiceController extends AppController {
     );
   }
 
+  List<MediaService> get ordered {
+    final order = {
+      for (final (i, id) in PrefName.serviceOrder.rx.value.indexed) id: i,
+    };
+    final base = {for (final (i, s) in services.indexed) s.id: i};
+    return services.toList()..sort(
+      (a, b) => (order[a.id] ?? 1000 + base[a.id]!).compareTo(
+        order[b.id] ?? 1000 + base[b.id]!,
+      ),
+    );
+  }
+
+  List<MediaService> get shown {
+    final hidden = PrefName.servicesHidden.rx.value;
+    final list = ordered.where((s) => !hidden.contains(s.id)).toList();
+    return list.isEmpty ? ordered.take(1).toList() : list;
+  }
+
+  bool isShown(String id) => shown.any((s) => s.id == id);
+
+  void reorderServices(int from, int to) {
+    final list = ordered.map((s) => s.id).toList();
+    if (to > from) to -= 1;
+    list.insert(to, list.removeAt(from));
+    PrefName.serviceOrder.rx.value = list;
+  }
+
+  void setServiceShown(String id, bool on) {
+    final hidden = [...PrefName.servicesHidden.rx.value]..remove(id);
+    if (!on) {
+      if (shown.length < 2 && isShown(id)) return;
+      hidden.add(id);
+    }
+    PrefName.servicesHidden.rx.value = hidden;
+    if (!on && currentService.value.id == id) {
+      switchService(shown.first.id);
+    }
+  }
+
   void switchService(String id) {
     final next = _byId(id);
     if (next == null) {

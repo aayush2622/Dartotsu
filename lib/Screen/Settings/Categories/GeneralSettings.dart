@@ -19,6 +19,7 @@ import '../../Lock/PasscodeSheets.dart';
 import '../Widgets/Backup/BackupSheet.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../Shortcuts/ShortcutsScreen.dart';
+import '../Widgets/ServicesSheet.dart';
 import '../Widgets/SettingRows.dart';
 import '../../../Core/State/State.dart';
 
@@ -36,6 +37,17 @@ List<Setting> generalSettings(BuildContext context) => [
       find<LocaleController>().code.value.toUpperCase(),
     ),
     onClick: () => showCustomBottomDialog<void>(context, const LanguageSheet()),
+  ),
+  Setting.normal(
+    name: getString.manageServices,
+    description: getString.manageServicesDesc,
+    icon: Icons.layers_rounded,
+    trailing: Icon(
+      Icons.chevron_right_rounded,
+      size: 18,
+      color: context.colorScheme.onSurfaceVariant,
+    ),
+    onClick: () => showServicesSheet(context),
   ),
   Setting.slider(
     name: getString.animationSpeed,

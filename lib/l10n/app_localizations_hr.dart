@@ -285,6 +285,17 @@ class AppLocalizationsHr extends AppLocalizations {
   String get selectMediaService => 'Odaberi medijski servis';
 
   @override
+  String get manageServices => 'Media services';
+
+  @override
+  String get manageServicesDesc =>
+      'Reorder the services and choose which ones show in the picker';
+
+  @override
+  String get manageServicesHint =>
+      'Drag to reorder, switch off the ones you don\'t use';
+
+  @override
   String get pickColor => 'Odaberi boju';
 
   @override
@@ -2130,6 +2141,9 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get followsMutual => 'Mutual';
+
+  @override
+  String get followsNotMutual => 'Not mutual';
 
   @override
   String get homeSections => 'Sekcije početne';

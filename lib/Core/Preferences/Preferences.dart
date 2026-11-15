@@ -182,6 +182,16 @@ class PrefName {
     PrefLocation.COMMON,
   );
   static const syncDelete = Pref('syncDelete', false, PrefLocation.COMMON);
+  static const serviceOrder = Pref<List<String>>(
+    'serviceOrder',
+    <String>[],
+    PrefLocation.COMMON,
+  );
+  static const servicesHidden = Pref<List<String>>(
+    'servicesHidden',
+    <String>[],
+    PrefLocation.COMMON,
+  );
   static const syncDisabled = Pref<List<String>>(
     'syncDisabled',
     <String>[],
