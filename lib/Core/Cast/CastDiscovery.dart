@@ -55,12 +55,24 @@ class CastDiscovery {
     }
   }
 
+  static void _send(
+    RawDatagramSocket socket,
+    List<int> data,
+    String address,
+    int port,
+  ) {
+    try {
+      socket.send(data, InternetAddress(address), port);
+    } on SocketException catch (_) {}
+  }
+
   Future<void> _mdns(List<void Function()> resend) async {
     final socket = await _socket();
     if (socket == null) return;
-    void ask() => socket.send(
+    void ask() => _send(
+      socket,
       _mdnsQuery('_googlecast._tcp.local'),
-      InternetAddress('224.0.0.251'),
+      '224.0.0.251',
       5353,
     );
     ask();
@@ -117,11 +129,12 @@ class CastDiscovery {
         'roku:ecp',
         'urn:schemas-upnp-org:device:MediaRenderer:1',
       ]) {
-        socket.send(
+        _send(
+          socket,
           utf8.encode(
             'M-SEARCH * HTTP/1.1\r\nHOST: 239.255.255.250:1900\r\nMAN: "ssdp:discover"\r\nMX: 3\r\nST: $target\r\n\r\n',
           ),
-          InternetAddress('239.255.255.250'),
+          '239.255.255.250',
           1900,
         );
       }
