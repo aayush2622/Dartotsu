@@ -10,7 +10,9 @@ class ComickFeedView extends FeedScreenView {
 
   @override
   SectionLayout sectionType(MediaType type, String title) =>
-      trendingCarousel(title);
+      comickAuth.queries.shownSections(type).firstOrNull?.title == title
+      ? SectionLayout.carousel
+      : SectionLayout.shelf;
 
   @override
   List<SectionLayout> skeleton(MediaType type) => [

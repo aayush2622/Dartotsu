@@ -47,7 +47,7 @@ class ComickService extends MediaService {
   ServiceAuth get auth => _auth;
 
   @override
-  List<MediaType> get feedTypes => const [MediaType.manga, MediaType.anime];
+  List<MediaType> get feedTypes => const [MediaType.anime, MediaType.manga];
 
   @override
   HomeScreenView get homeView => QueriesHomeView(

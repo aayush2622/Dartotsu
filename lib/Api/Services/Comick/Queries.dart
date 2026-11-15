@@ -55,12 +55,12 @@ const comickMangaSections = [
 ];
 
 const comickAnimeSections = [
-  ComickSection('Weekly Schedule', _schedule, {'media_type': 'anime'}),
   ComickSection('Trending Anime', '/top', {
     'type': 'trending',
     'day': '7',
     'media_type': 'anime',
   }),
+  ComickSection('Weekly Schedule', _schedule, {'media_type': 'anime'}),
   ComickSection('Top Rated Anime', '/v1.0/search/', {
     'sort': 'rating',
     'media_type': 'anime',

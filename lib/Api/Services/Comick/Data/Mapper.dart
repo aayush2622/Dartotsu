@@ -257,9 +257,14 @@ Media mapComickLibraryEntry(Map<String, dynamic> item) {
         ..userProgress = _d(progress?['number'])?.toInt()
         ..userScore = rating != null && rating > 0 ? rating * 10 : 0;
 
+  final ext = (item['external_ids'] as Map?)?.cast<String, dynamic>() ?? {};
   comickExtras[media] = ComickExtras()
     ..hid = hid
     ..slug = slug
+    ..anilistId = _i(ext['anilist'])
+    ..malId = _i(ext['myanimelist'])
+    ..mangabakaId = _i(ext['mangabaka'])
+    ..mangaUpdatesId = _s(ext['mangaupdates'])
     ..bayesianRating = _d(item['bayesian_rating'])
     ..translationStatus = item['translation_status']?.toString();
   return media;

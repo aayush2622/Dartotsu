@@ -19,8 +19,8 @@ const kComickMangaSections = <String, bool>{
 };
 
 const kComickAnimeSections = <String, bool>{
-  'Weekly Schedule': true,
   'Trending Anime': true,
+  'Weekly Schedule': true,
   'Top Rated Anime': true,
   'Most Followed Anime': true,
 };

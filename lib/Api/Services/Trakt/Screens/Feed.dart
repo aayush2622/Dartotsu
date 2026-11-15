@@ -9,14 +9,10 @@ class TraktFeedView extends FeedScreenView {
   TraktFeedView(super.service);
 
   @override
-  SectionLayout sectionType(MediaType type, String title) {
-    if (title.startsWith('Most Watched') || title == 'Box Office') {
-      return SectionLayout.banner;
-    }
-    return title.startsWith('Trending')
-        ? SectionLayout.carousel
-        : SectionLayout.shelf;
-  }
+  SectionLayout sectionType(MediaType type, String title) =>
+      traktAuth.queries.shownSections(type).firstOrNull?.title == title
+      ? SectionLayout.carousel
+      : SectionLayout.shelf;
 
   @override
   List<SectionLayout> skeleton(MediaType type) => [
