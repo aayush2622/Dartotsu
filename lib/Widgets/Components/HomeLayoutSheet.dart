@@ -15,8 +15,14 @@ import 'HomeLayoutState.dart';
 class HomeLayoutSheet extends StatefulWidget {
   final String? title;
   final Pref<Map<String, bool>> pref;
+  final ({String label, Pref<bool> pref})? toggle;
 
-  const HomeLayoutSheet({super.key, this.title, required this.pref});
+  const HomeLayoutSheet({
+    super.key,
+    this.title,
+    required this.pref,
+    this.toggle,
+  });
 
   @override
   State<HomeLayoutSheet> createState() => _HomeLayoutSheetState();
@@ -26,6 +32,47 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet>
     with ScreenStateHost<HomeLayoutSheet, HomeLayoutState> {
   @override
   HomeLayoutState buildState() => HomeLayoutState(widget.pref);
+
+  Widget _pinned(
+    BuildContext context,
+    ({String label, Pref<bool> pref}) toggle,
+  ) => Watch(() {
+    final scheme = context.colorScheme;
+    final glass = find<ThemeController>().useGlassMode.value;
+    final on = toggle.pref.rx.value;
+    return Padding(
+      padding: EdgeInsets.fromLTRB(Dimens.pagePad, 0, Dimens.pagePad, 8),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(Dimens.radius),
+        child: Material(
+          color: glass
+              ? scheme.surface.withValues(alpha: 0.28)
+              : scheme.surfaceContainerLow,
+          child: ListTile(
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 2,
+            ),
+            leading: Icon(
+              Icons.amp_stories_rounded,
+              color: scheme.onSurfaceVariant,
+            ),
+            title: Text(
+              toggle.label,
+              style: context.textTheme.bodyLarge?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            trailing: Switch(
+              value: on,
+              onChanged: (v) => toggle.pref.rx.value = v,
+            ),
+            onTap: () => toggle.pref.rx.value = !on,
+          ),
+        ),
+      ),
+    );
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +93,7 @@ class _HomeLayoutSheetState extends State<HomeLayoutSheet>
               ),
             ),
           ),
+          if (widget.toggle != null) _pinned(context, widget.toggle!),
           Flexible(
             child: Watch(() {
               final glass = find<ThemeController>().useGlassMode.value;
@@ -128,10 +176,11 @@ Future<void> showHomeLayoutSheet(
   BuildContext context, {
   String? title,
   required Pref<Map<String, bool>> pref,
+  ({String label, Pref<bool> pref})? toggle,
 }) => showCustomBottomDialog<void>(
   context,
   FractionallySizedBox(
     heightFactor: 0.8,
-    child: HomeLayoutSheet(title: title, pref: pref),
+    child: HomeLayoutSheet(title: title, pref: pref, toggle: toggle),
   ),
 );

@@ -38,11 +38,17 @@ class HomeFeed extends StatelessWidget {
         children: [
           const HomeHeader(),
           if (!signedIn && service.auth != null) LoginPrompt(service: service),
-          if (signedIn && (service.socialView?.hasStories ?? false))
-            StoriesRow(
-              key: ValueKey('stories-${service.id}'),
-              service: service,
-            ),
+          Watch(
+            () =>
+                signedIn &&
+                    (service.socialView?.hasStories ?? false) &&
+                    (view.storiesPref?.rx.value ?? true)
+                ? StoriesRow(
+                    key: ValueKey('stories-${service.id}'),
+                    service: service,
+                  )
+                : const SizedBox.shrink(),
+          ),
           Watch(
             () => watchResumeShelfPref.rx.value
                 ? ResumeShelf(

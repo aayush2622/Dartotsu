@@ -1,5 +1,6 @@
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Functions/LinkSettings.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../../../Core/Services/MediaService.dart';
@@ -56,8 +57,11 @@ class AnilistSettingsView extends SettingsScreenView {
         icon: Icons.dashboard_customize_rounded,
         isActivity: true,
         isVisible: auth.isLoggedIn,
-        onClick: () =>
-            showHomeLayoutSheet(context, pref: AnilistPref.homeLayout),
+        onClick: () => showHomeLayoutSheet(
+          context,
+          pref: AnilistPref.homeLayout,
+          toggle: (label: getString.stories, pref: AnilistPref.showStories),
+        ),
       ),
       for (final (label, pref, icon) in [
         (getString.anime, AnilistPref.animeLayout, Icons.movie_filter_rounded),

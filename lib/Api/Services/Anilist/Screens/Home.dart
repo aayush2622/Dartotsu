@@ -1,9 +1,13 @@
+import '../../../../Core/Preferences/Pref.dart';
 import '../../../../Core/Services/MediaService.dart';
 import '../Auth.dart';
 import '../Prefs.dart';
 
 class AnilistHomeView extends HomeScreenView {
   AnilistHomeView(super.service);
+
+  @override
+  Pref<bool>? get storiesPref => AnilistPref.showStories;
 
   @override
   Stream<List<ScreenWidget>> screenStream() {

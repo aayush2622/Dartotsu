@@ -34,6 +34,8 @@ class HomeScreenView {
 
   HomeScreenView(this.service);
 
+  Pref<bool>? get storiesPref => null;
+
   Future<SectionMap> localSections() async {
     final anime = service.localStore(anime: true);
     final manga = service.localStore(anime: false);

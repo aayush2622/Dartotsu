@@ -63,6 +63,12 @@ class AnilistPref {
     kAnilistHomeSections,
   );
 
+  static const showStories = Pref(
+    'anilistShowStories',
+    true,
+    PrefLocation.OTHER,
+  );
+
   static final animeLayout = _layoutPref(
     'anilistAnimeLayout',
     kAnilistAnimeSections,
