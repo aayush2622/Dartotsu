@@ -1,9 +1,21 @@
 import 'package:rhttp/rhttp.dart';
 
 final _target = RegExp(r'/(?:anime|tv|movies)/(\d+)');
+final _animeTarget = RegExp(r'/anime/(\d+)');
 
-Future<int?> simklIdFromRedirect({int? mal, int? anilist, int? kitsu}) async {
-  final query = mal != null
+Future<int?> simklIdFromRedirect({
+  int? mal,
+  int? anilist,
+  int? kitsu,
+  String? imdb,
+  int? tvdb,
+  bool animeOnly = false,
+}) async {
+  final query = imdb != null
+      ? {'imdb': imdb}
+      : tvdb != null
+      ? {'tvdb': '$tvdb'}
+      : mal != null
       ? {'mal': '$mal'}
       : anilist != null
       ? {'anilist': '$anilist'}
@@ -20,6 +32,8 @@ Future<int?> simklIdFromRedirect({int? mal, int? anilist, int? kitsu}) async {
     ),
   );
   final location = res.headerMapList['location']?.firstOrNull;
-  final match = location == null ? null : _target.firstMatch(location);
+  final match = location == null
+      ? null
+      : (animeOnly ? _animeTarget : _target).firstMatch(location);
   return int.tryParse(match?.group(1) ?? '');
 }

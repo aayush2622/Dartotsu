@@ -18,6 +18,7 @@ class SyncTarget {
   final bool syncsRepeat;
   final bool syncsPrivate;
   final Set<String> noProgress;
+  final Map<String, String> statusFold;
   final String prefix;
 
   const SyncTarget({
@@ -28,6 +29,7 @@ class SyncTarget {
     required this.syncsRepeat,
     this.syncsPrivate = false,
     this.noProgress = const {},
+    this.statusFold = const {},
     required this.prefix,
   });
 
@@ -41,6 +43,7 @@ class SyncTarget {
       syncsRepeat: adapter.syncsRepeat,
       syncsPrivate: adapter.syncsPrivate,
       noProgress: adapter.statusesWithoutProgress,
+      statusFold: adapter.statusFold,
       prefix: sample.substring(0, sample.length - 1),
     );
   }
@@ -96,6 +99,7 @@ SyncTargetPlan planWith({
       repeat: spec.syncsRepeat && mainRepeat,
       privacy: spec.syncsPrivate,
       noProgress: spec.noProgress,
+      statusFold: spec.statusFold,
       main: m,
       targetId: targetId,
       target: shared ? null : found,

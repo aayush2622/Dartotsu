@@ -17,6 +17,8 @@ abstract class SyncAdapter {
 
   Set<String> get statusesWithoutProgress => const {};
 
+  Map<String, String> get statusFold => const {};
+
   List<SyncLimit> get limits;
 
   int get requestsPerBatch => 1;

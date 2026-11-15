@@ -88,14 +88,17 @@ class TraktMutations extends Mutations {
       snackString(getString.incognitoEditsBlocked);
       return;
     }
+    await _run(() => saveEntry(media));
+  }
+
+  @override
+  Future<void> saveEntry(Media media, {bool? exists}) async {
     final ref = parseTraktMediaId(media.id);
     if (ref == null) return;
     final (kind, id) = ref;
-    await _run(() async {
-      final before = (await queries.library())[media.id];
-      await _saveStatus(kind, id, media, before);
-      await _saveRating(kind, id, media, before);
-    });
+    final before = (await queries.library())[media.id];
+    await _saveStatus(kind, id, media, before);
+    await _saveRating(kind, id, media, before);
   }
 
   Future<void> _saveStatus(

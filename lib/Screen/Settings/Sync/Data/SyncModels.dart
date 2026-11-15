@@ -15,7 +15,14 @@ class SyncKey {
   static const animeplanet = 'animeplanet';
   static const comick = 'comick';
   static const trakt = 'trakt';
+  static const imdb = 'imdb';
+  static const tvdb = 'tvdb';
 }
+
+int? imdbNumber(String? imdb) =>
+    imdb == null ? null : int.tryParse(imdb.replaceFirst('tt', ''));
+
+String imdbLabel(int number) => 'tt${number.toString().padLeft(7, '0')}';
 
 int syncSlugKey(String slug) {
   var h = 0x84222325cbf29ce;
@@ -236,6 +243,7 @@ class SyncPair {
   final bool repeat;
   final bool privacy;
   final Set<String> noProgress;
+  final Map<String, String> statusFold;
 
   SyncPair({
     required this.main,
@@ -248,7 +256,13 @@ class SyncPair {
     this.repeat = false,
     this.privacy = false,
     this.noProgress = const {},
+    this.statusFold = const {},
   });
+
+  String _canon(String? status) {
+    final canon = syncCanonStatus(status);
+    return statusFold[canon] ?? canon;
+  }
 
   SyncItem get want {
     final t = target;
@@ -276,7 +290,7 @@ class SyncPair {
     final t = target;
     if (t == null) return const [];
     return [
-      if (syncCanonStatus(main.status) != syncCanonStatus(t.status)) 'status',
+      if (_canon(main.status) != _canon(t.status)) 'status',
       if (main.progress != t.progress && want.progress != t.progress)
         'progress',
       if (main.score > 0 && (main.score / 10).round() != (t.score / 10).round())
@@ -301,6 +315,7 @@ class SyncPair {
     if (repeat) 'rp': true,
     if (privacy) 'pv': true,
     if (noProgress.isNotEmpty) 'np': noProgress.toList(),
+    if (statusFold.isNotEmpty) 'sf': statusFold,
   };
 
   factory SyncPair.fromJson(Map<String, dynamic> j, List<SyncItem> mains) {
@@ -321,6 +336,10 @@ class SyncPair {
       repeat: j['rp'] == true,
       privacy: j['pv'] == true,
       noProgress: {for (final s in (j['np'] as List?) ?? const []) '$s'},
+      statusFold: {
+        for (final e in ((j['sf'] as Map?) ?? const {}).entries)
+          '${e.key}': '${e.value}',
+      },
     );
   }
 }

@@ -35,7 +35,11 @@ class TraktService extends MediaService {
   Mutations get apiMutations => _auth.mutations;
 
   @override
-  late final SyncAdapter syncAdapter = TraktSync();
+  late final SyncAdapter syncAdapter = TraktSync(
+    _auth.queries,
+    _auth.mutations,
+    _auth.client,
+  );
 
   @override
   ServiceAuth get auth => _auth;

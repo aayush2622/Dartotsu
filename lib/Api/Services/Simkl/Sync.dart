@@ -57,7 +57,11 @@ class SimklSync extends SyncAdapter {
       return [
         for (final m in all.values)
           if (parseSimklMediaId(m.id) case (SimklKind.anime, final id))
-            SyncItem.fromMedia(m, {SyncKey.simkl: id, SyncKey.mal: ?m.malId}),
+            SyncItem.fromMedia(m, {
+              SyncKey.simkl: id,
+              SyncKey.mal: ?m.malId,
+              ...simklForeignIds(m),
+            }),
       ];
     } on SimklException catch (e) {
       throw syncError(e, status: e.status);
@@ -111,6 +115,31 @@ class SimklSync extends SyncAdapter {
   bool get canResolve => true;
 
   @override
+  List<String> get resolveKeys => const [SyncKey.mal, SyncKey.imdb];
+
+  @override
+  Future<(Map<int, int>, int)> resolveBy(
+    String from,
+    List<int> ids, {
+    required bool anime,
+  }) async {
+    if (from != SyncKey.imdb) return super.resolveBy(from, ids, anime: anime);
+    final out = <int, int>{};
+    for (final id in ids) {
+      try {
+        final found = await simklIdFromRedirect(
+          imdb: imdbLabel(id),
+          animeOnly: true,
+        );
+        if (found != null) out[id] = found;
+      } catch (e) {
+        throw syncError(e);
+      }
+    }
+    return (out, ids.length);
+  }
+
+  @override
   Future<(Map<int, int>, int)> resolve(
     List<int> mal, {
     required bool anime,
@@ -131,6 +160,15 @@ class SimklSync extends SyncAdapter {
 
   @override
   Future<void> finish() async => queries.invalidateLibrary(full: true);
+}
+
+Map<String, int> simklForeignIds(Media media) {
+  final extras = simklExtras[media];
+  final imdb = imdbNumber(extras?.imdbId);
+  return {
+    SyncKey.imdb: ?imdb,
+    if (media.format != 'MOVIE') SyncKey.tvdb: ?extras?.tvdbId,
+  };
 }
 
 String? simklNotFound(Object? answer) {
