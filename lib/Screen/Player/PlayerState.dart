@@ -1150,6 +1150,14 @@ class PlayerState extends ScreenState {
     final rec = record;
     final service = request.service;
     final media = request.media;
+    final wantsSnapshot =
+        rec != null &&
+        service != null &&
+        media != null &&
+        rec.saveProgress &&
+        !isIncognito &&
+        engine.duration.value > Duration.zero;
+    await engine.silence(stop: !wantsSnapshot);
     try {
       if (rec != null &&
           service != null &&
@@ -1177,6 +1185,7 @@ class PlayerState extends ScreenState {
     } catch (e) {
       logger('Player snapshot failed: $e', tag: 'PLAYER');
     }
+    await engine.silence();
     await engine.dispose();
   }
 

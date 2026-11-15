@@ -110,6 +110,7 @@ class PlayerEngine {
 
   final _subs = <StreamSubscription<Object?>>[];
   bool _disposed = false;
+  bool _closing = false;
   bool _torrent = false;
 
   static const _softwareKey = 'playerSoftwareRender';
@@ -674,6 +675,7 @@ class PlayerEngine {
     String? title,
     bool autoplay = true,
   }) async {
+    if (_closing) return;
     error.value = null;
     var target = url;
     if (isTorrentSource(url)) {
@@ -722,10 +724,15 @@ class PlayerEngine {
     } catch (e) {
       logger('mpv user-agent failed: $e', tag: 'MPV');
     }
+    if (_closing) return;
     await player.open(
       Media(target, start: start, httpHeaders: sent.isEmpty ? null : sent),
       play: autoplay,
     );
+    if (_closing) {
+      await silence();
+      return;
+    }
     _watchChapters();
   }
 
@@ -898,8 +905,19 @@ class PlayerEngine {
 
   Future<void> command(List<String> args) async => native?.command(args);
 
+  Future<void> silence({bool stop = true}) async {
+    _closing = true;
+    try {
+      await player.pause();
+      if (stop) await player.stop();
+    } catch (e) {
+      logger('Player silence failed: $e', tag: 'PLAYER');
+    }
+  }
+
   Future<void> dispose() async {
     _disposed = true;
+    _closing = true;
     _redrawTimer?.cancel();
     for (final s in _subs) {
       unawaited(s.cancel());
