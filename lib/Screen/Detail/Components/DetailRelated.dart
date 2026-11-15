@@ -7,7 +7,10 @@ import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../../Utils/Extensions/ClickCursor.dart';
+import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../../../Widgets/Components/Clickable.dart';
+import '../../WatchOrder/WatchOrderScreen.dart';
 
 List<ScreenWidget> prequelSequelWidgets(DetailHost host, Media m) {
   Media? find(String label) {
@@ -39,17 +42,58 @@ class DetailRelated extends StatelessWidget {
 
   const DetailRelated(this.host, {this.prequel, this.sequel, super.key});
 
+  bool get _hasWatchOrder {
+    final media = host.media.value;
+    const liveAction = ['movies/', 'tv/', 'shows/'];
+    return media.isAnime && !liveAction.any(media.id.startsWith);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Dimens.pagePad),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (prequel != null)
-            Expanded(child: _card(context, getString.prequel, prequel!)),
-          if (prequel != null && sequel != null) SizedBox(width: Dimens.gap),
-          if (sequel != null)
-            Expanded(child: _card(context, getString.sequel, sequel!)),
+          Row(
+            children: [
+              if (prequel != null)
+                Expanded(child: _card(context, getString.prequel, prequel!)),
+              if (prequel != null && sequel != null)
+                SizedBox(width: Dimens.gap),
+              if (sequel != null)
+                Expanded(child: _card(context, getString.sequel, sequel!)),
+            ],
+          ),
+          if (_hasWatchOrder) ...[
+            SizedBox(height: Dimens.gapSm),
+            ActionChip(
+              mouseCursor: kClickCursor,
+              avatar: Icon(
+                Icons.account_tree_rounded,
+                size: 18,
+                color: context.colorScheme.primary,
+              ),
+              label: Text(getString.watchOrder),
+              labelStyle: context.textTheme.labelLarge?.copyWith(
+                color: context.colorScheme.primary,
+                fontWeight: FontWeight.w700,
+              ),
+              color: WidgetStatePropertyAll(
+                context.colorScheme.primary.withValues(alpha: 0.18),
+              ),
+              side: BorderSide(
+                color: context.colorScheme.primary.withValues(alpha: 0.6),
+              ),
+              onPressed: () => navigateToPage(
+                context,
+                WatchOrderScreen(
+                  service: host.service,
+                  media: host.media.value,
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
