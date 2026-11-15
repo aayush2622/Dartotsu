@@ -433,6 +433,7 @@ class _WatchSectionState extends State<WatchSection>
       context,
       type: state.itemType,
       current: current,
+      media: state.current,
     );
     state.refreshSources();
     if (picked == null || picked.id == current?.id) return;

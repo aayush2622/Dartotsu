@@ -13,6 +13,8 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/KeyboardMode.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
+import '../../Api/Services/Extension/SourceTags.dart';
+import '../Detail/Watch/Components/SourceTagsSheet.dart';
 import 'SourcePreferenceScreen.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../../Widgets/Components/CachedNetworkImage.dart';
@@ -285,7 +287,10 @@ class _ExtensionListState extends State<ExtensionList>
                 fontWeight: FontWeight.bold,
               ),
             ),
-            subtitle: _buildSubtitle(source),
+            subtitle: Watch(() => _buildSubtitle(source)),
+            onLongPress: source.id == null
+                ? null
+                : () => showSourceTagsSheet(context, source),
             // `installProgress` is read deep inside _buildTrailing, which is
             // invoked lazily by the list/sliver machinery in its own build
             // pass - separate from, and later than, the synchronous callback
@@ -362,6 +367,13 @@ class _ExtensionListState extends State<ExtensionList>
               '18+',
               background: theme.errorContainer.withValues(alpha: .35),
               foreground: theme.error,
+            ),
+
+          for (final tag in sourceTagsOf(source))
+            chip(
+              sourceTagLabel(tag),
+              background: theme.tertiaryContainer.withValues(alpha: .5),
+              foreground: theme.onTertiaryContainer,
             ),
         ],
       ),
@@ -545,7 +557,7 @@ class _SourceCardShellState extends State<_SourceCardShell> {
           if (mounted) _focused.value = focused;
         },
         child: Watch(
-          () => Container(
+          () => Material(
             color: highlighted
                 ? scheme.secondaryContainer
                 : find<ThemeController>().useGlassMode.value

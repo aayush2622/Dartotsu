@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 
 import '../../../../Api/Services/Extension/LocalSource.dart';
 import '../../../../Api/Services/Extension/Services.dart';
+import '../../../../Api/Services/Extension/SourceTags.dart';
+import '../../../../Core/Services/Model/Media.dart';
+import 'SourceTagsSheet.dart';
 import '../../../../Core/State/State.dart';
 import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Utils/Extensions/ContextExtensions.dart';
@@ -25,20 +28,26 @@ Future<Source?> showSourcePicker(
   BuildContext context, {
   required ItemType type,
   required Source? current,
+  Media? media,
 }) => showCustomBottomDialog<Source>(
   context,
   AppSheet(
     title: getString.watchSource,
     heightFactor: 0.8,
-    child: _SourcePicker(type: type, current: current),
+    child: _SourcePicker(type: type, current: current, media: media),
   ),
 );
 
 class _SourcePicker extends StatefulWidget {
   final ItemType type;
   final Source? current;
+  final Media? media;
 
-  const _SourcePicker({required this.type, required this.current});
+  const _SourcePicker({
+    required this.type,
+    required this.current,
+    required this.media,
+  });
 
   @override
   State<_SourcePicker> createState() => _SourcePickerState();
@@ -104,7 +113,12 @@ class _SourcePickerState extends State<_SourcePicker> {
   Widget _list(BuildContext context) {
     final scheme = context.colorScheme;
     final names = <String, int>{};
-    final all = watchSources(widget.type);
+    final media = widget.media;
+    final ranked = media == null
+        ? null
+        : rankedSourcesFor(watchSources(widget.type), media, type: widget.type);
+    final hidden = {for (final s in ranked?.hidden ?? const <Source>[]) s.id};
+    final all = ranked?.all ?? watchSources(widget.type);
     for (final s in all) {
       names[s.name ?? ''] = (names[s.name ?? ''] ?? 0) + 1;
     }
@@ -180,13 +194,34 @@ class _SourcePickerState extends State<_SourcePicker> {
             ),
           ),
           title: Text(s.name ?? ''),
-          subtitle: (s.lang ?? '').isEmpty
+          subtitle: _subtitle(s, hidden.contains(s.id)),
+          trailing: s is LocalSource
               ? null
-              : Text((s.lang ?? '').toUpperCase()),
+              : IconButton(
+                  tooltip: getString.sourceTags,
+                  icon: Icon(
+                    sourceTagsOf(s).isEmpty
+                        ? Icons.sell_outlined
+                        : Icons.sell_rounded,
+                    color: sourceTagsOf(s).isEmpty
+                        ? scheme.onSurfaceVariant
+                        : scheme.primary,
+                  ),
+                  onPressed: () => showSourceTagsSheet(context, s),
+                ),
           onTap: () => popPage(context, s),
         );
       },
     );
+  }
+
+  Widget? _subtitle(Source s, bool hidden) {
+    final parts = [
+      if ((s.lang ?? '').isNotEmpty) (s.lang ?? '').toUpperCase(),
+      for (final tag in sourceTagsOf(s)) sourceTagLabel(tag),
+      if (hidden) getString.sourceHiddenByTags,
+    ];
+    return parts.isEmpty ? null : Text(parts.join(' · '));
   }
 
   Widget _build(BuildContext context) => Column(

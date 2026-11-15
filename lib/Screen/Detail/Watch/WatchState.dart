@@ -15,6 +15,7 @@ import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/foundation.dart';
 
 import '../../../Api/Services/Extension/Services.dart';
+import '../../../Api/Services/Extension/SourceTags.dart';
 import 'Data/Media/MediaRecord.dart';
 import 'Data/Media/ResumeStore.dart';
 import '../../Player/Engine/PlayRequest.dart';
@@ -158,7 +159,7 @@ class WatchState extends ScreenState {
     }
     await ensureSourcesReady(itemType);
     if (generation != _generation) return;
-    final list = watchSources(itemType);
+    final list = _rankedSources();
     sources.value = list;
     if (list.isEmpty) {
       source.value = null;
@@ -540,8 +541,11 @@ class WatchState extends ScreenState {
 
   void refreshSources() {
     if (fixedSource) return;
-    sources.value = watchSources(itemType);
+    sources.value = _rankedSources();
   }
+
+  List<Source> _rankedSources() =>
+      rankedSourcesFor(watchSources(itemType), current, type: itemType).shown;
 
   void _setEpisodes(List<DEpisode> list) {
     episodes.value = list;
