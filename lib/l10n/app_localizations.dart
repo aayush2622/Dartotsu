@@ -809,6 +809,48 @@ abstract class AppLocalizations {
   /// **'Custom storage path'**
   String get customPath;
 
+  /// No description provided for @stories.
+  ///
+  /// In en, this message translates to:
+  /// **'Stories'**
+  String get stories;
+
+  /// No description provided for @watchOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch order'**
+  String get watchOrder;
+
+  /// No description provided for @watchOrderOpenSite.
+  ///
+  /// In en, this message translates to:
+  /// **'Open on chiaki.site'**
+  String get watchOrderOpenSite;
+
+  /// No description provided for @watchOrderUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'No watch order was found for this title'**
+  String get watchOrderUnavailable;
+
+  /// No description provided for @watchOrderOpenFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t open that title'**
+  String get watchOrderOpenFailed;
+
+  /// No description provided for @watchOrderCurrent.
+  ///
+  /// In en, this message translates to:
+  /// **'You are here'**
+  String get watchOrderCurrent;
+
+  /// No description provided for @watchOrderCredit.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch orders by chiaki.site'**
+  String get watchOrderCredit;
+
   /// No description provided for @customPathDesc.
   ///
   /// In en, this message translates to:
@@ -9670,6 +9712,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Source'**
   String get watchSource;
+
+  /// No description provided for @sourceTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get sourceTags;
+
+  /// No description provided for @sourceTagsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.'**
+  String get sourceTagsHint;
+
+  /// No description provided for @sourceTagAnime.
+  ///
+  /// In en, this message translates to:
+  /// **'Anime'**
+  String get sourceTagAnime;
+
+  /// No description provided for @sourceTagMovies.
+  ///
+  /// In en, this message translates to:
+  /// **'Movies & Series'**
+  String get sourceTagMovies;
+
+  /// No description provided for @sourceTagAdult.
+  ///
+  /// In en, this message translates to:
+  /// **'18+'**
+  String get sourceTagAdult;
+
+  /// No description provided for @sourceHiddenByTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden by tags'**
+  String get sourceHiddenByTags;
 
   /// No description provided for @watchOptions.
   ///
