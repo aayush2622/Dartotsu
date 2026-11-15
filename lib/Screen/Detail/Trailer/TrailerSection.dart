@@ -101,13 +101,14 @@ class _TrailerSectionState extends State<TrailerSection>
       child: Video(
         controller: video,
         fit: BoxFit.contain,
-        controls: (video) => Watch(() => _controls(context, video)),
+        controls: (video) =>
+            Builder(builder: (c) => Watch(() => _controls(c, video))),
       ),
     );
   }
 
   Widget _controls(BuildContext context, VideoState video) {
-    final full = video.isFullscreen();
+    final full = isFullscreen(context);
     return Stack(
       fit: StackFit.expand,
       children: [
