@@ -1,4 +1,5 @@
 import '../../Logger.dart';
+
 import 'dart:async';
 import 'dart:math' as math;
 
@@ -11,6 +12,8 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'Components/UserCard.dart';
+
+enum FollowFilter { all, mutual, notMutual }
 
 class FollowState extends ScreenState {
   final MediaService service;
@@ -28,6 +31,7 @@ class FollowState extends ScreenState {
   final users = Live<List<UserBrief>?>(null);
   final failed = false.live;
   final query = ''.live;
+  final filter = FollowFilter.all.live;
   late final wide =
       (PrefManager.getCustomVal<bool>('followWide') ?? false).live;
   final hasNext = true.live;
@@ -48,12 +52,28 @@ class FollowState extends ScreenState {
   List<UserBrief> get visible {
     final all = users.value ?? List.generate(8, (_) => _placeholder);
     final q = query.value.trim().toLowerCase();
-    return q.isEmpty
-        ? all
-        : [
-            for (final u in all)
-              if (u.name.toLowerCase().contains(q)) u,
-          ];
+    final f = filter.value;
+    if (q.isEmpty && f == FollowFilter.all) return all;
+    return [
+      for (final u in all)
+        if ((q.isEmpty || u.name.toLowerCase().contains(q)) && _passes(u, f)) u,
+    ];
+  }
+
+  bool get canFilter => service.socialView?.canInteract ?? false;
+
+  bool get filtering =>
+      query.value.trim().isNotEmpty || filter.value != FollowFilter.all;
+
+  bool _passes(UserBrief u, FollowFilter f) => switch (f) {
+    FollowFilter.all => true,
+    FollowFilter.mutual => u.isFollowing && u.isFollower,
+    FollowFilter.notMutual => !(u.isFollowing && u.isFollower),
+  };
+
+  void setFilter(FollowFilter v) {
+    filter.value = v;
+    if (v != FollowFilter.all) unawaited(more());
   }
 
   @override
@@ -99,7 +119,7 @@ class FollowState extends ScreenState {
     } finally {
       if (mounted) loadingMore.value = false;
     }
-    if (mounted && query.value.trim().isNotEmpty && hasNext.value) {
+    if (mounted && filtering && hasNext.value) {
       unawaited(more());
     }
   }

@@ -4,6 +4,7 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../Core/Services/MediaService.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Widgets/Components/AppBars.dart';
+import '../../Widgets/Components/AppControls.dart';
 import '../../Widgets/Components/BaseScreen.dart';
 import '../../Widgets/Components/EmptyState.dart';
 import '../../Widgets/Components/ScrollConfig.dart';
@@ -45,7 +46,6 @@ class _FollowScreenState extends BaseScreen<FollowScreen>
   Widget buildContent(BuildContext context) {
     final title = state.title;
     final loading = state.loading;
-    final q = state.query.value.trim().toLowerCase();
     final users = state.visible;
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -89,11 +89,36 @@ class _FollowScreenState extends BaseScreen<FollowScreen>
                     ),
                   ),
                 ),
+                if (state.canFilter)
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(
+                      Dimens.pagePad,
+                      0,
+                      Dimens.pagePad,
+                      Dimens.gapSm,
+                    ),
+                    child: AppChoiceChips<FollowFilter>(
+                      scrollable: true,
+                      value: state.filter.value,
+                      onChanged: state.setFilter,
+                      options: [
+                        AppSegment(FollowFilter.all, label: getString.all),
+                        AppSegment(
+                          FollowFilter.mutual,
+                          label: getString.followsMutual,
+                        ),
+                        AppSegment(
+                          FollowFilter.notMutual,
+                          label: getString.followsNotMutual,
+                        ),
+                      ],
+                    ),
+                  ),
                 Expanded(
                   child: !loading && users.isEmpty
                       ? EmptyState(
                           icon: Icons.group_outlined,
-                          title: q.isEmpty
+                          title: !state.filtering
                               ? getString.nobodyHereYet
                               : getString.noMatches,
                         )
