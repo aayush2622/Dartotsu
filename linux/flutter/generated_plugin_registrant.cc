@@ -8,6 +8,7 @@
 
 #include <app_links_linux/app_links_plugin_linux.h>
 #include <dynamic_color/dynamic_color_plugin.h>
+#include <flutter_media_session/flutter_media_session_plugin.h>
 #include <flutter_qjs/flutter_qjs_plugin.h>
 #include <gamepads_linux/gamepads_linux_plugin.h>
 #include <isar_community_flutter_libs/isar_flutter_libs_plugin.h>
@@ -25,6 +26,9 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) dynamic_color_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "DynamicColorPlugin");
   dynamic_color_plugin_register_with_registrar(dynamic_color_registrar);
+  g_autoptr(FlPluginRegistrar) flutter_media_session_registrar =
+      fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterMediaSessionPlugin");
+  flutter_media_session_plugin_register_with_registrar(flutter_media_session_registrar);
   g_autoptr(FlPluginRegistrar) flutter_qjs_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "FlutterQjsPlugin");
   flutter_qjs_plugin_register_with_registrar(flutter_qjs_registrar);

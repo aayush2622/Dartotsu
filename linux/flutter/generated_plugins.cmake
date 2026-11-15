@@ -5,6 +5,7 @@
 list(APPEND FLUTTER_PLUGIN_LIST
   app_links_linux
   dynamic_color
+  flutter_media_session
   flutter_qjs
   gamepads_linux
   isar_community_flutter_libs
