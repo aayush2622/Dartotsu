@@ -356,11 +356,39 @@ class _FilterBodyState extends State<_FilterBody>
               return FilterChip(
                 mouseCursor: kClickCursor,
                 label: Text(o.titleCase),
+                labelStyle: TextStyle(
+                  fontWeight: on || excluded ? FontWeight.w700 : null,
+                  color: excluded
+                      ? scheme.onErrorContainer
+                      : on
+                      ? scheme.onPrimaryContainer
+                      : scheme.onSurfaceVariant,
+                ),
                 avatar: excluded
-                    ? Icon(Icons.block_rounded, size: 16, color: scheme.error)
+                    ? Icon(
+                        Icons.block_rounded,
+                        size: 16,
+                        color: scheme.onErrorContainer,
+                      )
+                    : on
+                    ? Icon(
+                        Icons.check_rounded,
+                        size: 16,
+                        color: scheme.onPrimaryContainer,
+                      )
                     : null,
                 selected: on || excluded,
-                selectedColor: excluded ? scheme.errorContainer : null,
+                backgroundColor: scheme.surfaceContainerHigh,
+                selectedColor: excluded
+                    ? scheme.errorContainer
+                    : scheme.primaryContainer,
+                side: BorderSide(
+                  color: excluded
+                      ? scheme.error.withValues(alpha: 0.5)
+                      : on
+                      ? scheme.primary.withValues(alpha: 0.5)
+                      : scheme.outlineVariant,
+                ),
                 showCheckmark: false,
                 onSelected: (_) {
                   if (on) {

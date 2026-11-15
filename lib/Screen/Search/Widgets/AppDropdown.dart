@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppDropdown extends StatefulWidget {
+import '../../../Utils/Extensions/ContextExtensions.dart';
+import '../../../Utils/Extensions/StringExtensions.dart';
+import '../../../Utils/Nav/DpadNav.dart';
+import '../../../Widgets/Components/ChoiceSheet.dart';
+
+class AppDropdown extends StatelessWidget {
   final String? value;
   final List<String> options;
   final ValueChanged<String?>? onChanged;
@@ -26,109 +31,99 @@ class AppDropdown extends StatefulWidget {
     this.hintText,
   });
 
-  @override
-  State<AppDropdown> createState() => _AppDropdownState();
-}
+  static String display(String option) =>
+      option == option.toUpperCase() && option.contains(RegExp('[A-Z]'))
+      ? option.titleCase
+      : option;
 
-class _AppDropdownState extends State<AppDropdown> {
-  final _trailingFocus = FocusNode(
-    canRequestFocus: true,
-    descendantsAreTraversable: false,
-  );
-
-  @override
-  void dispose() {
-    _trailingFocus.dispose();
-    super.dispose();
+  Future<void> _pick(BuildContext context) async {
+    final current = options.contains(value) ? value : null;
+    final picked = await showChoiceSheet<String>(
+      context,
+      title: labelText ?? hintText ?? '',
+      icon: prefixIcon,
+      selected: current ?? '',
+      options: [for (final o in options) ChoiceOption(o, display(o))],
+    );
+    if (picked != null) onChanged?.call(picked);
   }
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final options = widget.options;
-
+    final scheme = context.colorScheme;
+    final shown = options.contains(value) ? value : null;
+    final isDefault = shown == null || shown == options.firstOrNull;
+    final radius = BorderRadius.circular(borderRadius);
     return Padding(
-      padding: widget.padding,
-      child: MouseRegion(
-        cursor: SystemMouseCursors.click,
-        child: GestureDetector(
-          onLongPress: widget.onLongPress,
-          child: DropdownMenu(
-            requestFocusOnTap: true,
-            enableSearch: false,
-            enableFilter: false,
-            keyboardType: TextInputType.none,
-            initialSelection: options.contains(widget.value)
-                ? widget.value
-                : null,
-            expandedInsets: EdgeInsets.zero,
-            menuHeight: 300,
-            leadingIcon: widget.prefixIcon != null
-                ? Icon(widget.prefixIcon, size: 20)
-                : null,
-            hintText: widget.hintText,
-            label: widget.labelText == null ? null : Text(widget.labelText!),
-            textStyle: theme.textTheme.labelLarge,
-            inputDecorationTheme: InputDecorationTheme(
-              filled: true,
-              fillColor: theme.cardColor,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 14,
-              ),
-              border: _border(colorScheme, false),
-              focusedBorder: _border(colorScheme, true),
-            ),
-            menuStyle: MenuStyle(
-              padding: const WidgetStatePropertyAll(
-                EdgeInsetsGeometry.symmetric(vertical: 6),
-              ),
-              elevation: const WidgetStatePropertyAll(6),
-              backgroundColor: WidgetStatePropertyAll(theme.cardColor),
-              shape: WidgetStatePropertyAll(
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-              ),
-            ),
-            onSelected: (v) {
-              widget.onChanged?.call(v);
-              FocusManager.instance.primaryFocus?.unfocus();
-            },
-            trailingIconFocusNode: _trailingFocus,
-            dropdownMenuEntries: options
-                .map(
-                  (e) => DropdownMenuEntry(
-                    value: e,
-                    label: e,
-                    style: ButtonStyle(
-                      padding: WidgetStateProperty.all(
-                        const EdgeInsets.symmetric(horizontal: 16),
-                      ),
-                      textStyle: WidgetStateProperty.resolveWith(
-                        (states) => theme.textTheme.labelMedium?.copyWith(
-                          color: states.contains(WidgetState.selected)
-                              ? colorScheme.primary
-                              : colorScheme.onSurface,
+      padding: padding,
+      child: DpadTap(
+        borderRadius: radius,
+        onTap: onChanged == null ? null : () => _pick(context),
+        onLongPress: onLongPress,
+        child: Container(
+          constraints: const BoxConstraints(minHeight: 52),
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          decoration: BoxDecoration(
+            color: isDefault
+                ? Theme.of(context).cardColor
+                : scheme.secondaryContainer,
+            borderRadius: radius,
+            border: Border.all(color: borderColor ?? Colors.transparent),
+          ),
+          child: Row(
+            children: [
+              if (prefixIcon != null) ...[
+                Icon(
+                  prefixIcon,
+                  size: 20,
+                  color: isDefault
+                      ? scheme.onSurfaceVariant
+                      : scheme.onSecondaryContainer,
+                ),
+                const SizedBox(width: 10),
+              ],
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (labelText != null)
+                      Text(
+                        labelText!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.textTheme.labelSmall?.copyWith(
+                          color: isDefault
+                              ? scheme.onSurfaceVariant
+                              : scheme.onSecondaryContainer.withValues(
+                                  alpha: 0.8,
+                                ),
                         ),
                       ),
+                    Text(
+                      shown == null ? (hintText ?? '') : display(shown),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: context.textTheme.labelLarge?.copyWith(
+                        fontWeight: isDefault ? null : FontWeight.w700,
+                        color: isDefault
+                            ? scheme.onSurface
+                            : scheme.onSecondaryContainer,
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
+                  ],
+                ),
+              ),
+              Icon(
+                Icons.unfold_more_rounded,
+                size: 20,
+                color: isDefault
+                    ? scheme.onSurfaceVariant
+                    : scheme.onSecondaryContainer,
+              ),
+            ],
           ),
         ),
-      ),
-    );
-  }
-
-  OutlineInputBorder _border(ColorScheme scheme, bool focused) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(widget.borderRadius),
-      borderSide: BorderSide(
-        color: focused
-            ? scheme.primary
-            : (widget.borderColor ?? Colors.transparent),
-        width: focused ? 1.5 : 1,
       ),
     );
   }
