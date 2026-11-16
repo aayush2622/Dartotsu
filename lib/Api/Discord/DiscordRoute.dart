@@ -2,8 +2,9 @@ enum DiscordRoute { none, desktop, headless, gateway, linked }
 
 String discordActivityNameMode({
   required bool userToken,
+  required bool linked,
   required String preference,
-}) => userToken ? preference : 'app';
+}) => userToken || linked ? preference : 'app';
 
 DiscordRoute discordRoute({
   required bool desktop,

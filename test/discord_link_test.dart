@@ -51,18 +51,30 @@ void main() {
     expect(DiscordOAuthGrant.parse('nope'), isNull);
   });
 
-  test('connected apps always use the registered activity name', () {
+  test('connected apps can change the activity name', () {
     expect(
-      discordActivityNameMode(userToken: false, preference: 'title'),
-      'app',
+      discordActivityNameMode(
+        userToken: false,
+        linked: true,
+        preference: 'title',
+      ),
+      'title',
     );
     expect(
-      discordActivityNameMode(userToken: false, preference: 'custom'),
-      'app',
-    );
-    expect(
-      discordActivityNameMode(userToken: true, preference: 'custom'),
+      discordActivityNameMode(
+        userToken: false,
+        linked: true,
+        preference: 'custom',
+      ),
       'custom',
+    );
+    expect(
+      discordActivityNameMode(
+        userToken: false,
+        linked: false,
+        preference: 'custom',
+      ),
+      'app',
     );
   });
 

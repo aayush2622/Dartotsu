@@ -588,10 +588,6 @@ class AppLocalizationsHa extends AppLocalizations {
   String get dcActivityName => 'Activity name';
 
   @override
-  String get dcNameNeedsToken =>
-      'Needs a Discord token. Connected apps always use the Dartotsu name.';
-
-  @override
   String get dcNameApp => 'Dartotsu';
 
   @override

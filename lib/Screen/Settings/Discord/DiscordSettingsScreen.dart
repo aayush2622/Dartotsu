@@ -273,7 +273,7 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
               ignoring: !canCustomizeName,
               child: DLabeled(
                 title: getString.dcActivityName,
-                subtitle: canCustomizeName ? null : getString.dcNameNeedsToken,
+                subtitle: canCustomizeName ? null : getString.dcAccountOnly,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
