@@ -209,8 +209,8 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
 
   Widget _activity(BuildContext context) {
     final on = PrefName.discordRpc.rx.value;
-    final signed = state.signedIn;
-    final nameMode = PrefName.discordNameMode.rx.value;
+    final canCustomizeName = state.canCustomizeActivityName;
+    final nameMode = state.activityNameMode;
     return DPanel(
       title: getString.dcActivitySection,
       icon: Icons.sports_esports_rounded,
@@ -268,12 +268,12 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
             ),
           ),
           Opacity(
-            opacity: signed ? 1 : 0.45,
+            opacity: canCustomizeName ? 1 : 0.45,
             child: IgnorePointer(
-              ignoring: !signed,
+              ignoring: !canCustomizeName,
               child: DLabeled(
                 title: getString.dcActivityName,
-                subtitle: signed ? null : getString.dcAccountOnly,
+                subtitle: canCustomizeName ? null : getString.dcNameNeedsToken,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

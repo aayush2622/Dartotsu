@@ -253,6 +253,7 @@
   "dcListening": "Listening",
   "dcCompeting": "Competing",
   "dcActivityName": "Activity name",
+  "dcNameNeedsToken": "Needs a Discord token. Connected apps always use the Dartotsu name.",
   "dcNameApp": "Dartotsu",
   "dcNameTitle": "Title",
   "dcNameCustom": "Custom",

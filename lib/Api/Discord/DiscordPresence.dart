@@ -1,5 +1,6 @@
 import '../../Core/Preferences/PrefManager.dart';
 import '../../Core/Services/Model/Media.dart';
+import 'DiscordRoute.dart';
 import 'Mobile/TokenManager.dart';
 
 const discordLogo =
@@ -66,7 +67,10 @@ class PresenceStyle {
     timer: PrefName.discordTimer.value,
     hideTitles: PrefName.discordHideTitles.value,
     activity: PrefName.discordActivity.value,
-    nameMode: MobileTokenManager.saved ? PrefName.discordNameMode.value : 'app',
+    nameMode: discordActivityNameMode(
+      userToken: MobileTokenManager.saved,
+      preference: PrefName.discordNameMode.value,
+    ),
     customName: PrefName.discordCustomName.value,
     statusDisplay: PrefName.discordStatusDisplay.value,
     detailsTemplate: PrefName.discordDetailsTemplate.value,

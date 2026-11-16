@@ -1205,6 +1205,12 @@ abstract class AppLocalizations {
   /// **'Activity name'**
   String get dcActivityName;
 
+  /// No description provided for @dcNameNeedsToken.
+  ///
+  /// In en, this message translates to:
+  /// **'Needs a Discord token. Connected apps always use the Dartotsu name.'**
+  String get dcNameNeedsToken;
+
   /// No description provided for @dcNameApp.
   ///
   /// In en, this message translates to:

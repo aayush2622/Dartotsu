@@ -51,6 +51,21 @@ void main() {
     expect(DiscordOAuthGrant.parse('nope'), isNull);
   });
 
+  test('connected apps always use the registered activity name', () {
+    expect(
+      discordActivityNameMode(userToken: false, preference: 'title'),
+      'app',
+    );
+    expect(
+      discordActivityNameMode(userToken: false, preference: 'custom'),
+      'app',
+    );
+    expect(
+      discordActivityNameMode(userToken: true, preference: 'custom'),
+      'custom',
+    );
+  });
+
   test('route prefers a live user token, then the linked app', () {
     expect(
       discordRoute(desktop: true, userToken: true, linked: true, live: true),

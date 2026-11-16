@@ -130,6 +130,13 @@ class DiscordSettingsState extends ScreenState {
 
   bool get signedIn => account.signedIn.value;
 
+  bool get canCustomizeActivityName => account.tokenSaved.value;
+
+  String get activityNameMode => discordActivityNameMode(
+    userToken: canCustomizeActivityName,
+    preference: PrefName.discordNameMode.rx.value,
+  );
+
   DiscordRoute get route {
     account.linked.value;
     account.tokenSaved.value;
