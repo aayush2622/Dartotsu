@@ -3,12 +3,15 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
 import 'package:xml/xml.dart';
 
 import 'CastDevice.dart';
 import 'CastHttp.dart';
 
 class CastDiscovery {
+  static const _network = MethodChannel('dartotsu/network');
+
   final void Function(CastDevice device) onDevice;
   final _sockets = <RawDatagramSocket>[];
   final _resolving = <String>{};
@@ -17,23 +20,44 @@ class CastDiscovery {
 
   Future<void> run({Duration window = const Duration(seconds: 5)}) async {
     stop();
+    final multicastLocked = await _acquireMulticastLock();
     final resend = <void Function()>[];
-    await Future.wait([_mdns(resend), _ssdp(resend)]);
-    final rounds = <Timer>[
-      for (final delay in const [1200, 2600])
-        Timer(Duration(milliseconds: delay), () {
-          for (final send in resend) {
-            try {
-              send();
-            } catch (_) {}
-          }
-        }),
-    ];
-    await Future<void>.delayed(window);
-    for (final timer in rounds) {
-      timer.cancel();
+    final rounds = <Timer>[];
+    try {
+      await Future.wait([_mdns(resend), _ssdp(resend)]);
+      rounds.addAll([
+        for (final delay in const [1200, 2600])
+          Timer(Duration(milliseconds: delay), () {
+            for (final send in resend) {
+              try {
+                send();
+              } catch (_) {}
+            }
+          }),
+      ]);
+      await Future<void>.delayed(window);
+    } finally {
+      for (final timer in rounds) {
+        timer.cancel();
+      }
+      stop();
+      if (multicastLocked) await _releaseMulticastLock();
     }
-    stop();
+  }
+
+  static Future<bool> _acquireMulticastLock() async {
+    if (!Platform.isAndroid) return false;
+    try {
+      return await _network.invokeMethod<bool>('acquireMulticastLock') ?? false;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  static Future<void> _releaseMulticastLock() async {
+    try {
+      await _network.invokeMethod<void>('releaseMulticastLock');
+    } catch (_) {}
   }
 
   void stop() {
@@ -95,7 +119,7 @@ class CastDiscovery {
           protocol: CastProtocol.chromecast,
         ),
       );
-    });
+    }, onError: (_, __) {});
   }
 
   static String? _mdnsName(String raw) {
@@ -162,7 +186,7 @@ class CastDiscovery {
           _resolving.add(location)) {
         unawaited(_renderer(location, host));
       }
-    });
+    }, onError: (_, __) {});
   }
 
   Future<void> _roku(String host) async {
