@@ -531,10 +531,7 @@ Future<void> showPictureSheet(BuildContext context, PlayerState state) =>
             frame: frame,
             capturing: capturing,
             onColor: state.setColor,
-            onSave: (processed) => state.saveFrame(
-              processed ? null : frame.value,
-              processed: processed,
-            ),
+            onSave: (processed) => state.saveFrame(processed: processed),
             problem: state.engine.shaderProblem,
             onPick: (profile, name, custom) =>
                 state.setShaderMode(profile, name, custom: custom),

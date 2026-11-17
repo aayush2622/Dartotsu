@@ -54,8 +54,10 @@ class DiscordGateway {
   };
 
   Future<bool> _connect() {
+    if (connected) return Future.value(true);
     final running = _ready;
     if (running != null) return running.future;
+    _retry?.cancel();
     final ready = _ready = Completer<bool>();
     _closing = false;
     state.value = GatewayState.connecting;
@@ -67,13 +69,21 @@ class DiscordGateway {
     try {
       final socket = await WebSocket.connect(_url)
           .timeout(const Duration(seconds: 15));
+      if (_closing) {
+        unawaited(socket.close(1000).catchError((_) => null));
+        state.value = GatewayState.idle;
+        if (!ready.isCompleted) ready.complete(false);
+        return;
+      }
       _socket = socket;
       _sequence = null;
       _acked = true;
       socket.listen(
-        (data) => _onMessage(data, ready),
-        onDone: () => _onClosed(ready),
-        onError: (_) => _onClosed(ready),
+        (data) {
+          if (identical(socket, _socket)) _onMessage(data, ready);
+        },
+        onDone: () => _onClosed(socket, ready),
+        onError: (_) => _onClosed(socket, ready),
         cancelOnError: true,
       );
     } catch (e) {
@@ -130,10 +140,9 @@ class DiscordGateway {
 
   void _startBeat(int interval) {
     _beat?.cancel();
-    Timer(
+    _beat = Timer(
       Duration(milliseconds: (interval * Random().nextDouble()).round()),
       () {
-        if (_socket == null) return;
         _heartbeat();
         _beat = Timer.periodic(Duration(milliseconds: interval), (_) {
           if (!_acked) {
@@ -157,8 +166,12 @@ class DiscordGateway {
     } catch (_) {}
   }
 
-  void _onClosed(Completer<bool> ready) {
-    final code = _socket?.closeCode;
+  void _onClosed(WebSocket socket, Completer<bool> ready) {
+    if (!identical(socket, _socket)) {
+      if (_closing && !ready.isCompleted) ready.complete(false);
+      return;
+    }
+    final code = socket.closeCode;
     _beat?.cancel();
     _socket = null;
     if (_closing) {
@@ -183,7 +196,7 @@ class DiscordGateway {
     final wait = _backoff;
     _backoff = Duration(seconds: min(_backoff.inSeconds * 2, 300));
     _retry = Timer(wait, () {
-      if (!_closing && _activities.isNotEmpty || _status != 'online') {
+      if (!_closing && (_activities.isNotEmpty || _status != 'online')) {
         unawaited(_connect());
       }
     });
@@ -193,6 +206,8 @@ class DiscordGateway {
     _beat?.cancel();
     final socket = _socket;
     _socket = null;
+    final pending = _ready;
+    if (pending != null && !pending.isCompleted) pending.complete(false);
     state.value = GatewayState.connecting;
     unawaited(socket?.close(4000).catchError((_) => null));
     _retry?.cancel();

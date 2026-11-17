@@ -1,10 +1,9 @@
-import 'dart:io';
-
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../BaseDiscordRPC.dart';
+import '../DiscordActivity.dart';
 import '../DiscordPresence.dart';
 import 'TokenManager.dart';
 import '../../../Core/State/State.dart';
@@ -18,34 +17,15 @@ class MobileRPC extends AppController implements BaseDiscordRPC {
   String? _sessionToken;
   String? _warnedToken;
 
-  static final _platform = Platform.isIOS
-      ? 'ios'
-      : Platform.isAndroid
-      ? 'android'
-      : 'desktop';
-
   Map<String, dynamic> _payload(DiscordPresence p) => {
     'activities': [
-      {
-        'application_id': MobileTokenManager.applicationId,
-        'name': p.name,
-        'details': p.details,
-        'state': ?p.state,
-        'type': p.type.code,
-        if (p.statusDisplay != 0) 'status_display_type': p.statusDisplay,
-        'platform': _platform,
-        if (p.start != null)
-          'timestamps': {'start': p.start, if (p.end != null) 'end': p.end},
-        'assets': {
-          'large_image': p.largeImage,
-          'large_text': p.largeText,
-          'small_image': p.smallImage,
-          'small_text': p.smallText,
-        },
-        'buttons': [
-          for (final b in p.buttons) {'label': b.label, 'url': b.url},
-        ],
-      },
+      discordActivityJson(
+        p,
+        applicationId: MobileTokenManager.applicationId,
+        platform: discordPlatform,
+        largeImage: p.largeImage,
+        smallImage: p.smallImage,
+      ),
     ],
     if (_sessionToken != null) 'token': _sessionToken,
   };

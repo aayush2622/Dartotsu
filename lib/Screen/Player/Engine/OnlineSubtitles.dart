@@ -10,6 +10,7 @@ import '../../../Core/State/State.dart';
 
 const _base = 'https://rest.opensubtitles.org/search';
 const _agent = 'TemporaryUserAgent';
+const _limit = Duration(seconds: 10);
 
 class SubtitleLanguage {
   final String code;
@@ -106,9 +107,11 @@ Future<String?> imdbIdFor(String title, {int? year, bool movie = false}) async {
   String? found;
   try {
     final kind = movie ? 'movie' : 'series';
-    final res = await find<NetworkManager>().get(
-      'https://v3-cinemeta.strem.io/catalog/$kind/top/search=${Uri.encodeComponent(title)}.json',
-    );
+    final res = await find<NetworkManager>()
+        .get(
+          'https://v3-cinemeta.strem.io/catalog/$kind/top/search=${Uri.encodeComponent(title)}.json',
+        )
+        .timeout(_limit);
     final metas = res.data is Map ? (res.data as Map)['metas'] : null;
     if (metas is List) {
       final wanted = _norm(title);
@@ -170,10 +173,9 @@ bool _mentionsEpisode(String name, int episode) =>
     RegExp('(?<![0-9])0*$episode(?![0-9])').hasMatch(name);
 
 Future<List<dynamic>> _fetch(String path) async {
-  final res = await find<NetworkManager>().get(
-    '$_base/$path',
-    headers: {'User-Agent': _agent},
-  );
+  final res = await find<NetworkManager>()
+      .get('$_base/$path', headers: {'User-Agent': _agent})
+      .timeout(_limit);
   final data = res.data;
   if (data is List) return data;
   throw StateError('OpenSubtitles answered ${res.statusCode}');
@@ -231,15 +233,17 @@ Future<List<OnlineSubtitle>> searchOnlineSubtitles({
     }
   }
 
-  if (filePath != null && File(filePath).existsSync()) {
+  Future<void> byHash() async {
+    if (filePath == null || !File(filePath).existsSync()) return;
     final hash = await openSubtitlesHash(filePath);
-    if (hash != null) {
-      final size = await File(filePath).length();
-      await attempt('moviebytesize-$size/moviehash-$hash/$lang', hash: true);
-    }
+    if (hash == null) return;
+    final size = await File(filePath).length();
+    await attempt('moviebytesize-$size/moviehash-$hash/$lang', hash: true);
   }
-  final imdb = await imdbIdFor(imdbTitle ?? query, year: year, movie: movie);
-  if (imdb != null) {
+
+  Future<void> stremio() async {
+    final imdb = await imdbIdFor(imdbTitle ?? query, year: year, movie: movie);
+    if (imdb == null) return;
     final seasons = movie
         ? const <int>[0]
         : [if (season != null && season > 1) season, 1];
@@ -248,9 +252,9 @@ Future<List<OnlineSubtitle>> searchOnlineSubtitles({
           ? 'movie/$imdb.json'
           : 'series/$imdb:$s:${episode ?? 1}.json';
       try {
-        final res = await find<NetworkManager>().get(
-          'https://opensubtitles-v3.strem.io/subtitles/$path',
-        );
+        final res = await find<NetworkManager>()
+            .get('https://opensubtitles-v3.strem.io/subtitles/$path')
+            .timeout(_limit);
         final rows = res.data is Map ? (res.data as Map)['subtitles'] : null;
         if (rows is List) {
           for (final row in rows) {
@@ -285,10 +289,13 @@ Future<List<OnlineSubtitle>> searchOnlineSubtitles({
       }
     }
   }
-  if (episode != null) {
-    await attempt('episode-$episode/$q/season-1/$lang');
-  }
-  await attempt('$q/$lang');
+
+  await Future.wait([
+    byHash(),
+    stremio(),
+    if (episode != null) attempt('episode-$episode/$q/season-1/$lang'),
+    attempt('$q/$lang'),
+  ]);
   if (found.isEmpty && failure != null) throw failure!;
 
   final list = found.values.toList()

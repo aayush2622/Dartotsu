@@ -1,11 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 
 import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 import '../BaseDiscordRPC.dart';
+import '../DiscordActivity.dart';
 import '../DiscordApp.dart';
 import '../DiscordPresence.dart';
 import '../Mobile/TokenManager.dart';
@@ -19,45 +19,31 @@ class LinkedRPC extends AppController implements BaseDiscordRPC {
   String? _session;
   DiscordPresence? _last;
   Timer? _heartbeat;
-
-  static final _platform = Platform.isIOS
-      ? 'ios'
-      : Platform.isAndroid
-      ? 'android'
-      : 'desktop';
+  Future<void> _queue = Future.value();
 
   Map<String, dynamic> _payload(DiscordPresence p) => {
     'activities': [
-      {
-        'application_id': DiscordApp.linkedId,
-        'name': p.name,
-        'type': p.type.code,
-        'platform': _platform,
-        'details': p.details,
-        if (p.state != null) 'state': p.state,
-        if (p.statusDisplay != 0) 'status_display_type': p.statusDisplay,
-        if (p.start != null || p.end != null)
-          'timestamps': {
-            if (p.start != null) 'start': p.start,
-            if (p.end != null) 'end': p.end,
-          },
-        'assets': {
-          if (p.largeImage != null) 'large_image': p.largeImage,
-          if (p.largeText != null) 'large_text': p.largeText,
-          if (p.smallImage != null) 'small_image': p.smallImage,
-          if (p.smallText != null) 'small_text': p.smallText,
-        },
-        if (p.buttons.isNotEmpty)
-          'buttons': [
-            for (final b in p.buttons.take(2)) {'label': b.label, 'url': b.url},
-          ],
-      },
+      discordActivityJson(
+        p,
+        applicationId: DiscordApp.linkedId,
+        platform: discordPlatform,
+        largeImage: p.largeImage,
+        smallImage: p.smallImage,
+      ),
     ],
     if (_session != null) 'token': _session,
   };
 
+  Future<T> _serial<T>(Future<T> Function() job) {
+    final run = _queue.then((_) => job());
+    _queue = run.then((_) {}, onError: (_) {});
+    return run;
+  }
+
   @override
-  Future<bool> show(DiscordPresence presence, {bool retry = true}) async {
+  Future<bool> show(DiscordPresence presence) => _serial(() => _show(presence));
+
+  Future<bool> _show(DiscordPresence presence, {bool retry = true}) async {
     if (!DiscordLink.saved) {
       discordLog('linked show skipped: not connected');
       return false;
@@ -88,7 +74,7 @@ class LinkedRPC extends AppController implements BaseDiscordRPC {
       if (res.statusCode == 401 && retry) {
         _session = null;
         link.dropAccess();
-        return await show(presence, retry: false);
+        return await _show(presence, retry: false);
       }
       if (res.statusCode == 202 && retry) {
         final data = res.data;
@@ -98,7 +84,7 @@ class LinkedRPC extends AppController implements BaseDiscordRPC {
         await Future<void>.delayed(
           Duration(milliseconds: wait.clamp(0, 15000)),
         );
-        return await show(presence, retry: false);
+        return await _show(presence, retry: false);
       }
       if (res.statusCode != 200 || res.data is! Map) return false;
       _remember(res.data['token'] as String?);
@@ -110,13 +96,19 @@ class LinkedRPC extends AppController implements BaseDiscordRPC {
     }
   }
 
-  void _arm() {
+  void _arm([Duration after = const Duration(minutes: 9)]) {
     _heartbeat?.cancel();
-    _heartbeat = Timer(const Duration(minutes: 9), () {
-      final last = _last;
-      if (last != null) unawaited(show(last));
-    });
+    _heartbeat = Timer(after, () => unawaited(_refresh()));
   }
+
+  Future<void> _refresh() => _serial(() async {
+    final last = _last;
+    if (last == null) return;
+    final shown = await _show(last);
+    if (!shown && _last != null && DiscordLink.saved) {
+      _arm(const Duration(minutes: 1));
+    }
+  });
 
   Future<void> sweep() async {
     final saved = loadCustomData<String>(
@@ -142,7 +134,9 @@ class LinkedRPC extends AppController implements BaseDiscordRPC {
   }
 
   @override
-  Future<void> clear() async {
+  Future<void> clear() => _serial(_clear);
+
+  Future<void> _clear() async {
     _heartbeat?.cancel();
     _heartbeat = null;
     final session = _session;

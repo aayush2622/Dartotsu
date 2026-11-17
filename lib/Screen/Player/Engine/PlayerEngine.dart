@@ -459,9 +459,12 @@ class PlayerEngine {
     return png.length < pixels / 64;
   }
 
-  Future<Uint8List?> captureFrame({bool plain = false}) async {
+  Future<Uint8List?> captureFrame({
+    bool plain = false,
+    bool subtitles = false,
+  }) async {
     final mpv = native;
-    if (!plain || mpv == null) return _capture();
+    if (!plain || mpv == null) return _capture(subtitles: subtitles);
     String active = '';
     try {
       active = await mpv.getProperty('glsl-shaders');
@@ -469,7 +472,7 @@ class PlayerEngine {
         await mpv.setProperty('glsl-shaders', '');
         await Future<void>.delayed(const Duration(milliseconds: 80));
       }
-      return await _capture();
+      return await _capture(subtitles: subtitles);
     } finally {
       if (active.isNotEmpty) {
         try {
@@ -481,10 +484,35 @@ class PlayerEngine {
     }
   }
 
-  Future<Uint8List?> _capture() async {
+  Future<Uint8List?> _capture({bool subtitles = false}) async {
+    final mpv = native;
+    final drawn = subtitles && mpv != null && !assActive.value;
+    if (drawn) {
+      try {
+        await mpv.setProperty('sub-visibility', 'yes');
+        await Future<void>.delayed(const Duration(milliseconds: 60));
+      } catch (e) {
+        logger('mpv sub-visibility failed: $e', tag: 'MPV');
+      }
+    }
+    try {
+      return await _grab(subtitles: subtitles);
+    } finally {
+      if (drawn) {
+        try {
+          await mpv.setProperty('sub-visibility', 'no');
+        } catch (_) {}
+      }
+    }
+  }
+
+  Future<Uint8List?> _grab({required bool subtitles}) async {
     Uint8List? shot;
     try {
-      shot = await player.screenshot(format: 'image/png');
+      shot = await player.screenshot(
+        format: 'image/png',
+        includeLibassSubtitles: subtitles,
+      );
     } catch (e) {
       logger('mpv screenshot failed: $e', tag: 'MPV');
     }
@@ -506,7 +534,10 @@ class PlayerEngine {
       for (final hw in const ['no', 'mediacodec-copy']) {
         await mpv.setProperty('hwdec', hw);
         await _redecode(mpv, at);
-        final copy = await player.screenshot(format: 'image/png');
+        final copy = await player.screenshot(
+          format: 'image/png',
+          includeLibassSubtitles: subtitles,
+        );
         logger(
           'Frame capture ($hw): ${copy?.length ?? 0} bytes, '
           '${_blankFrame(copy) ? 'blank' : 'ok'}',

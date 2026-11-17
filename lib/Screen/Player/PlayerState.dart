@@ -1238,9 +1238,14 @@ class PlayerState extends ScreenState {
     return ok;
   }
 
-  Future<void> saveFrame(Uint8List? original, {required bool processed}) async {
+  Future<void> saveFrame({required bool processed}) async {
     try {
-      final bytes = processed ? await engine.captureFrame() : original;
+      final subtitles =
+          settings.showSubtitle && engine.activeSubtitle.value != null;
+      final bytes = await engine.captureFrame(
+        plain: !processed,
+        subtitles: subtitles,
+      );
       if (bytes == null) throw StateError('no frame');
       final at = engine.position.value.inSeconds;
       final name = '${item.title} ${at}s'.replaceAll(

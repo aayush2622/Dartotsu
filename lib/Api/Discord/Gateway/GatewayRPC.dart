@@ -5,12 +5,14 @@ import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
 import '../BaseDiscordRPC.dart';
+import '../DiscordActivity.dart';
 import '../DiscordPresence.dart';
 import '../Mobile/TokenManager.dart';
 import 'DiscordGateway.dart';
 
 class GatewayRPC extends AppController implements BaseDiscordRPC {
-  final _assets = <String, String>{};
+  final _assets = <String, Future<String?>>{};
+  final _watchers = <Disposer>[];
   late final DiscordGateway gateway = DiscordGateway(
     token: () => MobileTokenManager().authToken ?? '',
     onRejected: () => discordLog('gateway: token rejected'),
@@ -28,7 +30,7 @@ class GatewayRPC extends AppController implements BaseDiscordRPC {
       PrefName.discordStatus.rx,
       PrefName.discordCustomStatus.rx,
     ]) {
-      onChange(pref, (_) => unawaited(_push()));
+      _watchers.add(onChange(pref, (_) => unawaited(_push())));
     }
   }
 
@@ -73,40 +75,31 @@ class GatewayRPC extends AppController implements BaseDiscordRPC {
   }
 
   Future<Map<String, Object?>> _activity(DiscordPresence p) async {
-    final large = await _asset(p.largeImage);
-    final small = await _asset(p.smallImage);
-    return {
-      'name': p.name,
-      'type': p.type.code,
-      'application_id': MobileTokenManager.applicationId,
-      'details': p.details,
-      if (p.state != null) 'state': p.state,
-      if (p.statusDisplay != 0) 'status_display_type': p.statusDisplay,
-      if (p.start != null || p.end != null)
-        'timestamps': {
-          if (p.start != null) 'start': p.start,
-          if (p.end != null) 'end': p.end,
-        },
-      'assets': {
-        'large_image': ?large,
-        'large_text': ?p.largeText,
-        'small_image': ?small,
-        'small_text': ?p.smallText,
-      },
-      if (p.buttons.isNotEmpty) ...{
-        'buttons': [for (final b in p.buttons.take(2)) b.label],
-        'metadata': {
-          'button_urls': [for (final b in p.buttons.take(2)) b.url],
-        },
-      },
-    };
+    final [large, small] = await Future.wait([
+      _asset(p.largeImage),
+      _asset(p.smallImage),
+    ]);
+    return discordActivityJson(
+      p,
+      applicationId: MobileTokenManager.applicationId,
+      largeImage: large,
+      smallImage: small,
+      buttonUrlsInMetadata: true,
+    );
   }
 
-  Future<String?> _asset(String? url) async {
-    if (url == null || url.isEmpty) return null;
-    if (!url.startsWith('http')) return url;
-    final known = _assets[url];
-    if (known != null) return known;
+  Future<String?> _asset(String? url) {
+    if (url == null || url.isEmpty) return Future.value();
+    if (!url.startsWith('http')) return Future.value(url);
+    if (_assets.length > 200) _assets.remove(_assets.keys.first);
+    final lookup = _assets[url] ??= _lookup(url);
+    return lookup.then((value) {
+      if (value == null) _assets.remove(url);
+      return value;
+    });
+  }
+
+  Future<String?> _lookup(String url) async {
     try {
       final res = await find<NetworkManager>().post(
         'https://discord.com/api/v9/applications/'
@@ -119,7 +112,7 @@ class GatewayRPC extends AppController implements BaseDiscordRPC {
       final data = res.data;
       if (res.statusCode == 200 && data is List && data.isNotEmpty) {
         final path = (data.first as Map)['external_asset_path'] as String?;
-        if (path != null) return _assets[url] = 'mp:$path';
+        if (path != null) return 'mp:$path';
       }
     } catch (e) {
       logger('Discord asset lookup failed: $e', tag: 'DISCORD');
@@ -129,6 +122,9 @@ class GatewayRPC extends AppController implements BaseDiscordRPC {
 
   @override
   void onClose() {
+    for (final watcher in _watchers) {
+      watcher.dispose();
+    }
     unawaited(gateway.close());
     super.onClose();
   }

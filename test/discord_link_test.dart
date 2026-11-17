@@ -1,3 +1,5 @@
+import 'package:dartotsu/Api/Discord/DiscordActivity.dart';
+import 'package:dartotsu/Api/Discord/DiscordPresence.dart';
 import 'package:dartotsu/Api/Discord/DiscordRoute.dart';
 import 'package:dartotsu/Api/Discord/Linked/DiscordOAuth.dart';
 import 'package:dartotsu/Core/Services/Api/Pkce.dart';
@@ -117,5 +119,56 @@ void main() {
       expect(SettingsScope.secret('PROTECTED/$name'), isFalse, reason: name);
     }
     expect(SettingsScope.secret('PROTECTED/DiscordToken'), isTrue);
+  });
+
+  test('activity payload omits empty fields and caps the buttons', () {
+    final plain = discordActivityJson(
+      const DiscordPresence(details: 'Watching', largeImage: null, buttons: []),
+      applicationId: '1',
+    );
+    expect(plain['application_id'], '1');
+    expect(plain['details'], 'Watching');
+    expect(plain.containsKey('state'), isFalse);
+    expect(plain.containsKey('platform'), isFalse);
+    expect(plain.containsKey('timestamps'), isFalse);
+    expect(plain.containsKey('buttons'), isFalse);
+    expect(plain['assets'], isEmpty);
+
+    final full = discordActivityJson(
+      const DiscordPresence(
+        details: 'Reading',
+        state: 'Chapter 3',
+        start: 10,
+        buttons: [
+          PresenceButton('a', 'https://a'),
+          PresenceButton('b', 'https://b'),
+          PresenceButton('c', 'https://c'),
+        ],
+      ),
+      applicationId: '1',
+      platform: 'android',
+      largeImage: 'big',
+    );
+    expect(full['state'], 'Chapter 3');
+    expect(full['platform'], 'android');
+    expect(full['timestamps'], {'start': 10});
+    expect((full['assets'] as Map)['large_image'], 'big');
+    expect((full['buttons'] as List).length, 2);
+    expect((full['buttons'] as List).first, {'label': 'a', 'url': 'https://a'});
+  });
+
+  test('gateway activities send button labels and urls separately', () {
+    final activity = discordActivityJson(
+      const DiscordPresence(
+        details: 'Watching',
+        buttons: [PresenceButton('a', 'https://a')],
+      ),
+      applicationId: '1',
+      buttonUrlsInMetadata: true,
+    );
+    expect(activity['buttons'], ['a']);
+    expect(activity['metadata'], {
+      'button_urls': ['https://a'],
+    });
   });
 }
