@@ -52,6 +52,17 @@ class ReaderState extends ScreenState {
   Future<void> Function(double fraction)? scroller;
   void Function(double pixels)? nudger;
   final autoScrolling = false.live;
+  final autoPaused = false.live;
+  int _touches = 0;
+
+  bool get touching => _touches > 0;
+
+  void touchDown() => _touches++;
+
+  void touchUp() {
+    if (_touches > 0) _touches--;
+  }
+
   Timer? _autoTimer;
 
   Timer? _saveTimer;
@@ -154,10 +165,34 @@ class ReaderState extends ScreenState {
     return settings..autoMode = _autoMode;
   }
 
-  String get _autoMode => autoReaderMode(
-    format: request.media.format,
-    country: request.media.countryOfOrigin,
-  );
+  String? _detected;
+  var _tall = 0;
+  var _regular = 0;
+  final _probed = <String>{};
+
+  String get _autoMode =>
+      _detected ??
+      autoReaderMode(
+        format: request.media.format,
+        country: request.media.countryOfOrigin,
+        labels: [...request.media.genres, ...request.media.tags],
+      );
+
+  void _probe(String url, double aspect) {
+    if (_closed || !_probed.add(url)) return;
+    if (aspect >= 2.2) {
+      _tall++;
+    } else {
+      _regular++;
+    }
+    if (_tall < 2 || _tall < _regular) return;
+    ReaderImageLoader.aspectProbe = null;
+    _detected = 'webtoon';
+    settings.autoMode = 'webtoon';
+    settingsVersion.value++;
+    _rebuild();
+    generation.value++;
+  }
 
   @override
   void onInit() {
@@ -165,12 +200,18 @@ class ReaderState extends ScreenState {
     _first = request.pages;
     perTitle.value = record.reader.isNotEmpty;
     _applySystem();
+    if (settings.mode == 'auto' && !settings.scrolls) {
+      ReaderImageLoader.aspectProbe = _probe;
+    }
     unawaited(_open(request.index).then((_) => _extend()));
   }
 
   @override
   void onClose() {
     _closed = true;
+    if (ReaderImageLoader.aspectProbe == _probe) {
+      ReaderImageLoader.aspectProbe = null;
+    }
     find<DownloadEngine>().sweepFinished();
     ReaderImageLoader.cancelAll();
     _saveTimer?.cancel();
@@ -632,7 +673,9 @@ class ReaderState extends ScreenState {
     if (settings.scrolls) spreads.value = false;
     _rebuild();
     if (settings.mode != before) generation.value++;
-    if (autoScrolling.value) setAutoScroll(true, hide: false);
+    if (autoScrolling.value && !autoPaused.value) {
+      setAutoScroll(true, hide: false);
+    }
   }
 
   void setPerTitle(bool value) {
@@ -664,6 +707,7 @@ class ReaderState extends ScreenState {
   }
 
   void move(int direction) {
+    if (controlsVisible.value) return;
     if (settings.scrolls) {
       unawaited(scroller?.call(0.85 * direction) ?? Future.value());
     } else {
@@ -673,8 +717,19 @@ class ReaderState extends ScreenState {
 
   void toggleAutoScroll() => setAutoScroll(!autoScrolling.value);
 
+  void toggleAutoPause() {
+    if (!autoScrolling.value) return;
+    if (autoPaused.value) {
+      setAutoScroll(true, hide: false);
+    } else {
+      _autoTimer?.cancel();
+      autoPaused.value = true;
+    }
+  }
+
   void setAutoScroll(bool on, {bool hide = true}) {
     _autoTimer?.cancel();
+    autoPaused.value = false;
     autoScrolling.value = on;
     if (!on) return;
     if (hide) hideControls();
@@ -684,10 +739,9 @@ class ReaderState extends ScreenState {
       final pixels = (20 + speed * 25) * frame.inMilliseconds / 1000;
       _autoTimer = Timer.periodic(frame, (_) => nudger?.call(pixels));
     } else {
-      _autoTimer = Timer.periodic(
-        Duration(seconds: 12 - speed),
-        (_) => step(1),
-      );
+      _autoTimer = Timer.periodic(Duration(seconds: 12 - speed), (_) {
+        if (!touching) step(1);
+      });
     }
   }
 

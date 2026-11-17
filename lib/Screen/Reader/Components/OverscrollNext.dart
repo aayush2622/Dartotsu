@@ -17,7 +17,7 @@ class _OverscrollNextState extends State<OverscrollNext> {
   double _pulledBack = 0;
 
   bool _onScroll(ScrollNotification n) {
-    if (n.depth != 0) return false;
+    if (n.depth != 0 || widget.state.controlsVisible.value) return false;
     if (n is OverscrollNotification) {
       if (n.overscroll < 0 && n.metrics.extentBefore == 0) {
         _pulledBack += -n.overscroll;

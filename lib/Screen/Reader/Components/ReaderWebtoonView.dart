@@ -156,8 +156,9 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
   }
 
   void _nudge(double pixels) {
-    if (!_controller.hasClients) return;
+    if (!_controller.hasClients || state.touching) return;
     final position = _controller.position;
+    if (position.isScrollingNotifier.value) return;
     final target = (_controller.offset + pixels)
         .clamp(position.minScrollExtent, position.maxScrollExtent)
         .toDouble();

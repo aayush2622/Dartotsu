@@ -169,9 +169,16 @@ class _ReaderScreenState extends State<ReaderScreen>
       onLongPress: settings.longPressSave ? state.openPageSheet : null,
       child: view,
     );
-    return filter == null
+    final shown = filter == null
         ? scoped
         : ColorFiltered(colorFilter: filter, child: scoped);
+    return Listener(
+      behavior: HitTestBehavior.translucent,
+      onPointerDown: (_) => state.touchDown(),
+      onPointerUp: (_) => state.touchUp(),
+      onPointerCancel: (_) => state.touchUp(),
+      child: shown,
+    );
   }
 
   Widget _taps(ReaderSettings settings, Widget child) => LayoutBuilder(

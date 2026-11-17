@@ -69,7 +69,74 @@ class ReaderControls extends StatelessWidget {
             ),
           ),
         ),
+        if (state.autoScrolling.value && !visible) _autoBar(context),
       ],
+    );
+  }
+
+  Widget _autoBar(BuildContext context) {
+    final scheme = context.colorScheme;
+    final paused = state.autoPaused.value;
+    final speed = state.settings.autoScrollSpeed.clamp(1, 10);
+    void set(int v) =>
+        state.updateSettings((s) => s.autoScrollSpeed = v.clamp(1, 10));
+
+    Widget button(IconData icon, VoidCallback onTap, {bool filled = false}) =>
+        IconButton(
+          onPressed: onTap,
+          color: filled ? scheme.onPrimary : Colors.white,
+          style: IconButton.styleFrom(
+            backgroundColor: filled ? scheme.primary : Colors.transparent,
+          ),
+          icon: Icon(icon),
+        );
+
+    return PositionedDirectional(
+      start: 16,
+      end: 16,
+      bottom:
+          12 +
+          MediaQuery.paddingOf(context).bottom +
+          (state.settings.pageNumber ? 28 : 0),
+      child: Center(
+        child: Material(
+          color: Color.alphaBlend(
+            Colors.white.withValues(alpha: 0.14),
+            Colors.black,
+          ),
+          elevation: 3,
+          borderRadius: BorderRadius.circular(32),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                button(
+                  paused ? Icons.play_arrow_rounded : Icons.pause_rounded,
+                  state.toggleAutoPause,
+                  filled: true,
+                ),
+                const SizedBox(width: 4),
+                button(Icons.remove_rounded, () => set(speed - 1)),
+                SizedBox(
+                  width: 48,
+                  child: Text(
+                    '$speed',
+                    textAlign: TextAlign.center,
+                    style: context.textTheme.labelLarge?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                button(Icons.add_rounded, () => set(speed + 1)),
+                const SizedBox(width: 4),
+                button(Icons.close_rounded, () => state.setAutoScroll(false)),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 

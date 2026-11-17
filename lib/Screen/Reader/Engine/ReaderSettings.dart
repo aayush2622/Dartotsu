@@ -16,9 +16,19 @@ const novelThemes = ['theme', 'light', 'sepia', 'dark', 'black'];
 bool isScrollMode(String mode) =>
     mode == 'webtoon' || mode == 'continuous' || mode == 'vertical-scroll';
 
-String autoReaderMode({String? format, String? country}) {
+final _longStrip = RegExp(
+  r'manhwa|manhua|webtoon|long strip',
+  caseSensitive: false,
+);
+
+String autoReaderMode({
+  String? format,
+  String? country,
+  Iterable<String> labels = const [],
+}) {
   final kind = (format ?? '').toUpperCase();
   if (kind == 'MANHWA' || kind == 'MANHUA') return 'webtoon';
+  if (labels.any(_longStrip.hasMatch)) return 'webtoon';
   final origin = (country ?? '').toUpperCase();
   return origin == 'KR' || origin == 'CN' ? 'webtoon' : 'rtl';
 }

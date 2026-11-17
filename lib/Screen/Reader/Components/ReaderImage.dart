@@ -111,7 +111,11 @@ class _ReaderImageState extends State<ReaderImage> {
   void _syncSize() {
     _detachSize();
     _natural = null;
-    if (widget.onSize == null) return;
+    if (widget.onSize == null &&
+        widget.fit != BoxFit.fitWidth &&
+        ReaderImageLoader.aspectProbe == null) {
+      return;
+    }
     final stream = _baseProvider(context)
         .resolve(createLocalImageConfiguration(context));
     late final ImageStreamListener listener;
@@ -134,14 +138,21 @@ class _ReaderImageState extends State<ReaderImage> {
 
   void _emitSize() {
     final natural = _natural;
-    final report = widget.onSize;
-    if (natural == null || report == null || !mounted) return;
+    if (natural == null || !mounted) return;
+    if (natural.width > 0) {
+      ReaderImageLoader.aspectProbe?.call(
+        widget.page.url,
+        natural.height / natural.width,
+      );
+    }
     final rect = crop.value?.rect;
-    report(
-      rect == null
-          ? natural
-          : Size(natural.width * rect.width, natural.height * rect.height),
-    );
+    final shown = rect == null
+        ? natural
+        : Size(natural.width * rect.width, natural.height * rect.height);
+    if (widget.fit == BoxFit.fitWidth && shown.width > 0) {
+      ReaderImageLoader.noteAspect(widget.page.url, shown.height / shown.width);
+    }
+    widget.onSize?.call(shown);
   }
 
   ImageProvider _baseProvider(BuildContext context) {
@@ -423,9 +434,24 @@ class _ReaderImageState extends State<ReaderImage> {
     );
   }
 
-  Widget _box(Widget child) => SizedBox(
-    width: widget.width ?? double.infinity,
-    height: widget.height ?? widget.placeholderHeight,
-    child: Center(child: child),
+  Widget _box(Widget child) => LayoutBuilder(
+    builder: (context, box) {
+      final given = widget.width;
+      final width = given != null && given.isFinite ? given : box.maxWidth;
+      final aspect = widget.fit == BoxFit.fitWidth
+          ? ReaderImageLoader.aspectOf(widget.page.url) ??
+                ReaderImageLoader.averageAspect
+          : null;
+      final height =
+          widget.height ??
+          (aspect != null && width.isFinite
+              ? width * aspect
+              : widget.placeholderHeight);
+      return SizedBox(
+        width: widget.width ?? double.infinity,
+        height: height,
+        child: Center(child: child),
+      );
+    },
   );
 }

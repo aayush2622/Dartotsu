@@ -52,6 +52,24 @@ class ReaderImageLoader {
 
   static String? errorOf(PageUrl page) => _errors[page.url];
 
+  static final _aspects = <String, double>{};
+  static final _recent = <double>[];
+
+  static void Function(String url, double aspect)? aspectProbe;
+
+  static double? aspectOf(String url) => _aspects[url];
+
+  static double? get averageAspect =>
+      _recent.isEmpty ? null : _recent.reduce((a, b) => a + b) / _recent.length;
+
+  static void noteAspect(String url, double aspect) {
+    if (!aspect.isFinite || aspect <= 0) return;
+    if (_aspects.length > 4000) _aspects.remove(_aspects.keys.first);
+    _aspects[url] = aspect;
+    _recent.add(aspect);
+    if (_recent.length > 12) _recent.removeAt(0);
+  }
+
   static bool _local(String url) =>
       !url.startsWith('http') && File(url).isAbsolute;
 
