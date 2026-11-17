@@ -17,7 +17,7 @@ dependencies:
 
   flutter_localizations:
     sdk: flutter
-  archive: ^4.6.0
+  archive: ^4.7.1
   firebase_core: ^5.1.0
   firebase_crashlytics: ^6.0.1
   firebase_analytics: ^13.0.1
@@ -41,7 +41,7 @@ dependencies:
   isar_community_flutter_libs: ^3.4.1
   path_provider: ^2.1.6
   path: ^1.9.1
-  image: ^4.12.0
+  image: ^4.13.1
   google_fonts: ^9.0.0
   cryptography: ^2.9.0
   crypto: ^3.0.8
@@ -65,14 +65,14 @@ dependencies:
 
   # Platform Specific
   window_manager: ^0.7.0
-  nativeapi: ^0.6.0
+  nativeapi: ^0.6.1
   gamepads: ^0.1.15
   screen_retriever: ^0.4.0
   dbus: ^0.8.0
   permission_handler: ^13.0.2
   flutter_local_notifications: ^23.0.2
   wakelock_plus: ^1.8.2
-  flutter_media_session: ^3.1.0
+  flutter_media_session: ^3.2.0
   volume_controller: ^3.7.1
   screen_brightness:
     git:
@@ -90,11 +90,11 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.3.0
   package_info_plus: ^10.2.2
-  file_picker: ^13.3.2
+  file_picker: ^13.3.3
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.4.12
+  webview_all: ^1.5.0
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -113,7 +113,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.5.0
   local_auth: ^3.0.2
-  pdfrx: ^2.12.0
+  pdfrx: ^2.12.1
   youtube_explode_dart: ^3.1.0
 
 # Development dependencies
