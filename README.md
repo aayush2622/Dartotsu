@@ -158,6 +158,12 @@ The full project guide lives on **DeepWiki**.
   <img src="https://img.shields.io/badge/DeepWiki-blueviolet?label=View%20on&style=for-the-badge&logo=read-the-docs&logoColor=white" alt="DeepWiki" />
 </a>
 
+## Trakt
+
+Dartotsu uses Trakt but is not endorsed or certified by Trakt.
+
+Movies and series data, and your Trakt library, come from the Trakt API when you connect your account. Read how your data is handled in the [privacy policy](PRIVACY.md).
+
 ## Help translate
 
 Dartotsu is translated by volunteers. If you speak another language, you can help in a few minutes, no coding needed.
