@@ -102,8 +102,16 @@ Stream<List<ScreenWidget>> sectionWidgets(
 List<ScreenWidget> _built(
   List<SectionMap?> slots,
   ScreenWidget Function(String title, List<Media> media) build,
-) => [
-  for (final slot in slots)
-    if (slot != null)
-      for (final e in slot.entries) build(e.key, e.value),
-];
+) {
+  final merged = <String, List<Media>>{};
+  for (final slot in slots) {
+    if (slot == null) continue;
+    for (final e in slot.entries) {
+      final known = merged[e.key];
+      if (known == null || known.length < e.value.length) {
+        merged[e.key] = e.value;
+      }
+    }
+  }
+  return [for (final e in merged.entries) build(e.key, e.value)];
+}
