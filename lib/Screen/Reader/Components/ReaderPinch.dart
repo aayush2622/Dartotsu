@@ -12,6 +12,7 @@ class ReaderPinch extends StatefulWidget {
   final double maxScale;
   final double minScale;
   final bool pan;
+  final bool doubleTap;
   final Duration? settle;
 
   const ReaderPinch({
@@ -22,6 +23,7 @@ class ReaderPinch extends StatefulWidget {
     this.maxScale = 4,
     this.minScale = 0.5,
     this.pan = true,
+    this.doubleTap = false,
     this.settle,
   });
 
@@ -41,11 +43,18 @@ class _ReaderPinchState extends State<ReaderPinch>
   Offset _anchor = Offset.zero;
   double _fromScale = 1;
   Offset _fromShift = Offset.zero;
+  double _toScale = 1;
+  Offset _toShift = Offset.zero;
+  Offset _tapDown = Offset.zero;
+  Duration _tapDownAt = Duration.zero;
+  Offset? _lastTap;
+  Duration _lastTapAt = Duration.zero;
+  bool _multi = false;
   late final AnimationController _anim = AnimationController(vsync: this)
     ..addListener(() {
       final t = Curves.easeOutCubic.transform(_anim.value);
-      _scale.value = _fromScale + (1 - _fromScale) * t;
-      _shift.value = Offset.lerp(_fromShift, Offset.zero, t)!;
+      _scale.value = _fromScale + (_toScale - _fromScale) * t;
+      _shift.value = Offset.lerp(_fromShift, _toShift, t)!;
     })
     ..addStatusListener((status) {
       if (status == AnimationStatus.completed) _report();
@@ -57,11 +66,37 @@ class _ReaderPinchState extends State<ReaderPinch>
     super.dispose();
   }
 
-  void _settle() {
+  void _animateTo(double scale, Offset shift) {
     _fromScale = _scale.value;
     _fromShift = _shift.value;
+    _toScale = scale;
+    _toShift = shift;
     _anim.duration = widget.settle ?? animDuration(220);
     _anim.forward(from: 0);
+  }
+
+  void _settle() => _animateTo(1, Offset.zero);
+
+  void _toggle(Offset at) {
+    _anim.stop();
+    if (_scale.value > 1.02) return _settle();
+    final s = math.min(2.5, widget.maxScale);
+    _animateTo(s, _clamp(at * (1 - s), s));
+    _zoomed = true;
+    widget.onZoom?.call(true);
+  }
+
+  void _tapped(PointerUpEvent e) {
+    final last = _lastTap;
+    if (last != null &&
+        e.timeStamp - _lastTapAt < const Duration(milliseconds: 300) &&
+        (e.localPosition - last).distance < 48) {
+      _lastTap = null;
+      _toggle(e.localPosition);
+      return;
+    }
+    _lastTap = e.localPosition;
+    _lastTapAt = e.timeStamp;
   }
 
   (Offset, double) _pair() {
@@ -95,7 +130,16 @@ class _ReaderPinchState extends State<ReaderPinch>
 
   void _down(PointerDownEvent e) {
     _points[e.pointer] = e.localPosition;
-    if (_points.length >= 2) _begin();
+    if (_points.length == 1) {
+      _multi = false;
+      _tapDown = e.localPosition;
+      _tapDownAt = e.timeStamp;
+    }
+    if (_points.length >= 2) {
+      _multi = true;
+      _lastTap = null;
+      _begin();
+    }
   }
 
   void _move(PointerMoveEvent e) {
@@ -116,7 +160,15 @@ class _ReaderPinchState extends State<ReaderPinch>
   }
 
   void _up(PointerEvent e) {
+    final tap =
+        widget.doubleTap &&
+        e is PointerUpEvent &&
+        !_multi &&
+        _points.length == 1 &&
+        (e.localPosition - _tapDown).distance < 18 &&
+        e.timeStamp - _tapDownAt < const Duration(milliseconds: 300);
     if (_points.remove(e.pointer) == null) return;
+    if (tap) _tapped(e);
     if (_points.length >= 2) {
       _begin();
     } else {

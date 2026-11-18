@@ -160,6 +160,7 @@ class _ReaderZoomState extends State<ReaderZoom>
   Widget _pinch(Axis axis, Widget image) => ReaderPinch(
     pinching: _pinching,
     onZoom: widget.onZoom,
+    doubleTap: widget.doubleTap,
     pan: axis == Axis.vertical,
     child: Watch(
       () => ScrollConfig(

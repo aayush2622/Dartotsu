@@ -222,7 +222,7 @@ class ReaderState extends ScreenState {
     _flushProgress();
     unawaited(snapshot());
     unawaited(setWakelock(false));
-    SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+    SystemChrome.setPreferredOrientations(const <DeviceOrientation>[]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 
@@ -248,7 +248,7 @@ class ReaderState extends ScreenState {
         DeviceOrientation.landscapeLeft,
         DeviceOrientation.landscapeRight,
       ],
-      _ => DeviceOrientation.values,
+      _ => const <DeviceOrientation>[],
     });
   }
 

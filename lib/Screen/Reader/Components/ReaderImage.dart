@@ -50,6 +50,7 @@ class ReaderCropScope extends InheritedWidget {
 class ReaderImage extends StatefulWidget {
   final PageUrl page;
   final BoxFit fit;
+  final Alignment alignment;
   final double? width;
   final double? height;
   final double placeholderHeight;
@@ -59,6 +60,7 @@ class ReaderImage extends StatefulWidget {
     super.key,
     required this.page,
     this.fit = BoxFit.contain,
+    this.alignment = Alignment.center,
     this.width,
     this.height,
     this.placeholderHeight = 480,
@@ -299,6 +301,7 @@ class _ReaderImageState extends State<ReaderImage> {
       key: ValueKey('${widget.page.url}#${attempt.value}'),
       image: provider,
       fit: rect == null ? widget.fit : BoxFit.fill,
+      alignment: rect == null ? widget.alignment : Alignment.center,
       width: rect == null ? widget.width : info!.width,
       height: rect == null ? widget.height : info!.height,
       gaplessPlayback: true,
@@ -325,6 +328,7 @@ class _ReaderImageState extends State<ReaderImage> {
     return _press(
       FittedBox(
         fit: widget.fit,
+        alignment: widget.alignment,
         child: ClipRect(
           child: Align(
             alignment: Alignment(

@@ -33,6 +33,8 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
   String? _anchorId;
   double _anchorTop = 0;
   double? _lastPixels;
+  Duration _lastStamp = Duration.zero;
+  double _velocity = 0;
   final _pinching = false.live;
 
   ReaderState get state => widget.state;
@@ -40,8 +42,10 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
   @override
   void initState() {
     super.initState();
-    final first = state.items.firstOrNull;
-    _anchor = first == null ? '' : _id(first);
+    final items = state.items;
+    final at = state.current.peek;
+    final start = at >= 0 && at < items.length ? items[at] : items.firstOrNull;
+    _anchor = start == null ? '' : _id(start);
     _controller.addListener(_scan);
     state.jumper = _jump;
     state.scroller = _scrollBy;
@@ -57,31 +61,37 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
     SchedulerBinding.instance.addPostFrameCallback((_) => _holdAnchor());
     if (_jumping || !_controller.hasClients) {
       _lastPixels = null;
+      _anchorId = null;
       return;
     }
     final box = _view.currentContext?.findRenderObject();
     if (box is! RenderBox || !box.hasSize) return;
     final position = _controller.position;
-    if (_lastPixels != null && position.pixels == _lastPixels) {
-      final id = _anchorId;
-      final rb = id == null
-          ? null
-          : _keys[id]?.currentContext?.findRenderObject();
-      if (rb is RenderBox && rb.attached && rb.hasSize) {
-        final delta =
-            rb.localToGlobal(Offset.zero, ancestor: box).dy - _anchorTop;
-        if (delta.abs() > 0.5) {
-          final target = (position.pixels + delta).clamp(
-            position.minScrollExtent,
-            position.maxScrollExtent,
-          );
-          _controller.jumpTo(target.toDouble());
-          _lastPixels = _controller.position.pixels;
-        }
-      }
-      return;
+    final last = _lastPixels;
+    final stamp = SchedulerBinding.instance.currentSystemFrameTimeStamp;
+    final elapsed = (stamp - _lastStamp).inMicroseconds;
+    if (last != null && elapsed > 0 && elapsed < 100000) {
+      _velocity = (position.pixels - last) * 1000000 / elapsed;
     }
+    _lastStamp = stamp;
     _lastPixels = position.pixels;
+    final id = _anchorId;
+    final held = id == null
+        ? null
+        : _keys[id]?.currentContext?.findRenderObject();
+    if (last != null && held is RenderBox && held.attached && held.hasSize) {
+      final top = held.localToGlobal(Offset.zero, ancestor: box).dy;
+      final expected = _anchorTop - (position.pixels - last);
+      final shift = top - expected;
+      if (shift.abs() > 0.5 && !_pinching.value) {
+        _correct(position, shift);
+        _lastPixels = position.pixels;
+        _anchorTop = expected;
+      } else {
+        _anchorTop = top;
+      }
+      if (_anchorTop + held.size.height > 1) return;
+    }
     for (final item in state.items) {
       final id = _id(item);
       final rb = _keys[id]?.currentContext?.findRenderObject();
@@ -92,6 +102,25 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
         _anchorTop = top;
         return;
       }
+    }
+    _anchorId = null;
+  }
+
+  void _correct(ScrollPosition position, double shift) {
+    final target = (position.pixels + shift)
+        .clamp(position.minScrollExtent, position.maxScrollExtent)
+        .toDouble();
+    if ((target - position.pixels).abs() < 0.5) return;
+    if (!position.isScrollingNotifier.value) {
+      position.jumpTo(target);
+      return;
+    }
+    final velocity = _velocity;
+    position.setPixels(target);
+    if (!state.touching &&
+        velocity.abs() > 50 &&
+        position is ScrollPositionWithSingleContext) {
+      position.goBallistic(velocity);
     }
   }
 
@@ -262,6 +291,7 @@ class _ReaderWebtoonViewState extends State<ReaderWebtoonView> {
     final pinching = _pinching.value;
     return ReaderPinch(
       pinching: _pinching,
+      doubleTap: state.settings.doubleTapZoom,
       child: OverscrollNext(
         state: state,
         child: CustomScrollView(

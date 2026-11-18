@@ -82,15 +82,19 @@ class _ReaderPagedViewState extends State<ReaderPagedView> {
         return ReaderGapView(state: state, gap: gap, fill: true);
       case ReaderSpread spread:
         final pair = [spread.first, spread.second];
+        final ordered = settings.reversed ? pair.reversed.toList() : pair;
         return Row(
           children: [
-            for (final p in settings.reversed ? pair.reversed : pair)
+            for (var n = 0; n < ordered.length; n++)
               Expanded(
                 child: ReaderImage(
-                  key: ValueKey('${p.chapter}-${p.page}'),
-                  page: p.url,
+                  key: ValueKey('${ordered[n].chapter}-${ordered[n].page}'),
+                  page: ordered[n].url,
                   width: double.infinity,
                   height: double.infinity,
+                  alignment: n == 0
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
                 ),
               ),
           ],
