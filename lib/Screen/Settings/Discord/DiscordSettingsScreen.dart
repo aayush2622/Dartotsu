@@ -166,7 +166,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     };
     return DPanel(
       title: getString.dcStatusSection,
-      icon: Icons.circle_rounded,
       locked: !token,
       lockedNote: getString.dcStatusNeedsToken,
       children: [
@@ -213,7 +212,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     final nameMode = state.activityNameMode;
     return DPanel(
       title: getString.dcActivitySection,
-      icon: Icons.sports_esports_rounded,
       children: [
         DToggle(
           title: getString.discordRichPresence,
@@ -309,7 +307,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     final scheme = context.colorScheme;
     return DPanel(
       title: getString.dcTextSection,
-      icon: Icons.text_fields_rounded,
       children: [
         DLabeled(
           title: getString.dcDetails,
@@ -386,7 +383,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     final on = PrefName.discordImages.rx.value;
     return DPanel(
       title: getString.dcImagesSection,
-      icon: Icons.image_rounded,
       children: [
         DToggle(
           title: getString.discordCovers,
@@ -429,7 +425,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     final on = PrefName.discordButtons.rx.value;
     return DPanel(
       title: getString.dcButtonsSection,
-      icon: Icons.smart_button_rounded,
       children: [
         DToggle(
           title: getString.discordButtons,
@@ -477,7 +472,6 @@ class _DiscordSettingsScreenState extends BaseScreen<DiscordSettingsScreen>
     final hide = PrefName.discordHideTitles.rx.value;
     return DPanel(
       title: getString.dcPrivacySection,
-      icon: Icons.visibility_off_rounded,
       children: [
         DToggle(
           title: getString.discordHideTitles,

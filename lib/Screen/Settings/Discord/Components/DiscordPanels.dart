@@ -7,7 +7,6 @@ import '../../../../Widgets/Components/SectionCard.dart';
 
 class DPanel extends StatelessWidget {
   final String title;
-  final IconData icon;
   final List<Widget> children;
   final bool locked;
   final String? lockedNote;
@@ -16,11 +15,10 @@ class DPanel extends StatelessWidget {
   const DPanel({
     super.key,
     required this.title,
-    required this.icon,
     required this.children,
     this.locked = false,
     this.lockedNote,
-    this.divided = true,
+    this.divided = false,
   });
 
   @override
@@ -28,80 +26,56 @@ class DPanel extends StatelessWidget {
     final scheme = context.colorScheme;
     return Padding(
       padding: EdgeInsets.only(bottom: Dimens.gap),
-      child: SectionCard(
-        padding: EdgeInsets.zero,
-        child: Material(
-          type: MaterialType.transparency,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _PanelHeader(icon: icon, title: title),
-              if (locked && lockedNote != null) _LockedNote(lockedNote!),
-              Opacity(
-                opacity: locked ? 0.45 : 1,
-                child: IgnorePointer(
-                  ignoring: locked,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      for (var i = 0; i < children.length; i++) ...[
-                        if (divided && i > 0)
-                          Divider(
-                            height: 1,
-                            indent: Dimens.cardPad,
-                            endIndent: Dimens.cardPad,
-                            color: scheme.outlineVariant.withValues(
-                              alpha: 0.25,
-                            ),
-                          ),
-                        children[i],
-                      ],
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: Dimens.gapSm),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _PanelHeader extends StatelessWidget {
-  final IconData icon;
-  final String title;
-
-  const _PanelHeader({required this.icon, required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Padding(
-      padding: EdgeInsetsDirectional.fromSTEB(
-        Dimens.cardPad,
-        Dimens.gap,
-        Dimens.cardPad,
-        Dimens.gapSm,
-      ),
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
-            width: 34,
-            height: 34,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: scheme.primaryContainer,
+          Padding(
+            padding: EdgeInsetsDirectional.fromSTEB(
+              Dimens.cardPad,
+              Dimens.gapXs,
+              Dimens.cardPad,
+              Dimens.gapSm,
             ),
-            child: Icon(icon, size: 18, color: scheme.onPrimaryContainer),
-          ),
-          SizedBox(width: Dimens.gapSm),
-          Expanded(
             child: Text(
               title,
-              style: context.textTheme.titleMedium?.copyWith(
-                fontWeight: FontWeight.w700,
+              style: context.textTheme.titleSmall?.copyWith(
+                color: scheme.primary,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          SectionCard(
+            padding: EdgeInsets.symmetric(vertical: Dimens.gapXs),
+            child: Material(
+              type: MaterialType.transparency,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  if (locked && lockedNote != null) _LockedNote(lockedNote!),
+                  Opacity(
+                    opacity: locked ? 0.45 : 1,
+                    child: IgnorePointer(
+                      ignoring: locked,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          for (var i = 0; i < children.length; i++) ...[
+                            if (divided && i > 0)
+                              Divider(
+                                height: 1,
+                                indent: Dimens.cardPad,
+                                endIndent: Dimens.cardPad,
+                                color: scheme.outlineVariant.withValues(
+                                  alpha: 0.4,
+                                ),
+                              ),
+                            children[i],
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -121,15 +95,15 @@ class _LockedNote extends StatelessWidget {
     final scheme = context.colorScheme;
     return Container(
       margin: EdgeInsets.fromLTRB(
-        Dimens.cardPad,
-        0,
-        Dimens.cardPad,
+        Dimens.gapSm,
+        Dimens.gapXs,
+        Dimens.gapSm,
         Dimens.gapSm,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
       decoration: BoxDecoration(
-        color: scheme.onSurface.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(14),
+        color: scheme.secondaryContainer.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Row(
         children: [

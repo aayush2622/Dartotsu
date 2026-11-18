@@ -347,10 +347,13 @@ class _Activity extends StatelessWidget {
                             shape: BoxShape.circle,
                             border: Border.all(color: _D.panel, width: 3),
                           ),
-                          clipBehavior: Clip.antiAlias,
-                          child: cachedNetworkImage(
-                            imageUrl: p.smallImage,
-                            fit: BoxFit.cover,
+                          child: ClipOval(
+                            child: cachedNetworkImage(
+                              imageUrl: p.smallImage,
+                              width: 20,
+                              height: 20,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                         ),
                       ),

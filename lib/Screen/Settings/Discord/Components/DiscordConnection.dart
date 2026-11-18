@@ -36,7 +36,6 @@ class DiscordConnection extends StatelessWidget {
     final desktop = DiscordRpcRouter.isDesktop;
     return DPanel(
       title: getString.dcConnection,
-      icon: Icons.hub_rounded,
       divided: false,
       children: [
         _Identity(state: state, route: _routeLabel(route), active: route),
@@ -120,26 +119,37 @@ class _Identity extends StatelessWidget {
     final name = profile?.displayName ?? '';
     final title = profile != null
         ? getString.dcSignedInAs(name)
-        : account.linked.value
+        : connected
         ? getString.dcConnected
-        : account.tokenSaved.value
-        ? getString.discordTokenSaved
         : getString.dcRouteNone;
-    return Container(
-      margin: EdgeInsets.fromLTRB(
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
         Dimens.cardPad,
-        0,
-        Dimens.cardPad,
+        Dimens.gapXs,
         Dimens.gapSm,
-      ),
-      padding: EdgeInsets.all(Dimens.gap),
-      decoration: BoxDecoration(
-        color: scheme.onSurface.withValues(alpha: 0.05),
-        borderRadius: BorderRadius.circular(20),
+        Dimens.gapSm,
       ),
       child: Row(
         children: [
-          UserAvatar(url: profile?.avatarUrl(96), name: name, size: 48),
+          if (profile != null)
+            UserAvatar(url: profile.avatarUrl(96), name: name, size: 48)
+          else
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: connected
+                    ? scheme.primaryContainer
+                    : scheme.surfaceContainerHighest,
+              ),
+              child: Icon(
+                connected ? Icons.check_rounded : Icons.link_off_rounded,
+                color: connected
+                    ? scheme.onPrimaryContainer
+                    : scheme.onSurfaceVariant,
+              ),
+            ),
           SizedBox(width: Dimens.gap),
           Expanded(
             child: Column(
@@ -149,45 +159,28 @@ class _Identity extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: context.textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.w700,
+                  style: context.textTheme.titleMedium,
+                ),
+                if (connected)
+                  Text(
+                    route,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      color: scheme.onSurfaceVariant,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  children: [
-                    AnimatedContainer(
-                      duration: animDuration(200),
-                      width: 8,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: connected
-                            ? scheme.primary
-                            : scheme.onSurfaceVariant,
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    Flexible(
-                      child: Text(
-                        route,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: scheme.onSurfaceVariant,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
               ],
             ),
           ),
           if (signed)
             account.loading.value
-                ? const SizedBox.square(
-                    dimension: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                ? const Padding(
+                    padding: EdgeInsets.all(12),
+                    child: SizedBox.square(
+                      dimension: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
                   )
                 : IconButton(
                     icon: const Icon(Icons.refresh_rounded),
@@ -219,30 +212,28 @@ class _Method extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scheme = context.colorScheme;
-    return Padding(
+    final label = context.textTheme.labelMedium;
+    return AnimatedContainer(
+      duration: animDuration(200),
+      margin: EdgeInsets.symmetric(horizontal: Dimens.gapSm, vertical: 2),
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.cardPad,
-        vertical: Dimens.gapSm,
+        horizontal: Dimens.gap,
+        vertical: Dimens.gap,
+      ),
+      decoration: BoxDecoration(
+        color: active
+            ? scheme.secondaryContainer.withValues(alpha: 0.55)
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          AnimatedContainer(
-            duration: animDuration(200),
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: active
-                  ? scheme.primaryContainer
-                  : scheme.onSurface.withValues(alpha: 0.06),
-            ),
+          Padding(
+            padding: const EdgeInsets.only(top: 2),
             child: Icon(
               icon,
-              size: 20,
-              color: active
-                  ? scheme.onPrimaryContainer
-                  : scheme.onSurfaceVariant,
+              color: active ? scheme.primary : scheme.onSurfaceVariant,
             ),
           ),
           SizedBox(width: Dimens.gap),
@@ -250,14 +241,30 @@ class _Method extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 4,
-                  crossAxisAlignment: WrapCrossAlignment.center,
+                Row(
                   children: [
-                    Text(title, style: context.textTheme.bodyLarge),
-                    if (active) _Tag(getString.dcInUse, filled: true),
-                    if (!active && tag != null) _Tag(tag!),
+                    Flexible(
+                      child: Text(title, style: context.textTheme.titleSmall),
+                    ),
+                    if (active) ...[
+                      const SizedBox(width: 8),
+                      Icon(
+                        Icons.check_circle_rounded,
+                        size: 16,
+                        color: scheme.primary,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        getString.dcInUse,
+                        style: label?.copyWith(color: scheme.primary),
+                      ),
+                    ] else if (tag != null) ...[
+                      const SizedBox(width: 8),
+                      Text(
+                        tag!,
+                        style: label?.copyWith(color: scheme.tertiary),
+                      ),
+                    ],
                   ],
                 ),
                 const SizedBox(height: 2),
@@ -268,7 +275,7 @@ class _Method extends StatelessWidget {
                   ),
                 ),
                 if (actions.isNotEmpty) ...[
-                  SizedBox(height: Dimens.gapSm),
+                  SizedBox(height: Dimens.gap),
                   DpadRow(
                     child: Wrap(
                       spacing: Dimens.gapSm,
@@ -281,34 +288,6 @@ class _Method extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _Tag extends StatelessWidget {
-  final String text;
-  final bool filled;
-
-  const _Tag(this.text, {this.filled = false});
-
-  @override
-  Widget build(BuildContext context) {
-    final scheme = context.colorScheme;
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-      decoration: BoxDecoration(
-        color: filled
-            ? scheme.primaryContainer
-            : scheme.onSurface.withValues(alpha: 0.07),
-        borderRadius: BorderRadius.circular(99),
-      ),
-      child: Text(
-        text,
-        style: context.textTheme.labelSmall?.copyWith(
-          color: filled ? scheme.onPrimaryContainer : scheme.onSurfaceVariant,
-          fontWeight: FontWeight.w600,
-        ),
       ),
     );
   }
