@@ -267,6 +267,17 @@ class _Slide extends StatelessWidget {
               ),
             ),
           ),
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: 4,
+            child: ColoredBox(
+              color: glass
+                  ? scheme.scrim.withValues(alpha: 0.8)
+                  : scheme.surface,
+            ),
+          ),
           Padding(
             padding: EdgeInsets.fromLTRB(
               Dimens.cardPad,
