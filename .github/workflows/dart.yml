@@ -29,6 +29,19 @@ on:
         required: false
         type: boolean
         default: false
+      pipeline:
+        description: "Pipeline version: v1-gdrive (existing) or v2-streamlined (new direct)"
+        required: false
+        type: choice
+        default: "v1-gdrive"
+        options:
+          - "v1-gdrive"
+          - "v2-streamlined"
+      dry_run:
+        description: "Dry run for v2 pipeline (skips GitHub release, Discord, Nix push)"
+        required: false
+        type: boolean
+        default: true
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -63,7 +76,7 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: gdrive
+      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
       universal-name: universal
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
@@ -82,7 +95,7 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: gdrive
+      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       PFX_FILE: ${{ secrets.PFX_FILE }}
@@ -99,7 +112,7 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: gdrive
+      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
       zip-name-prefix: Dartotsu_Linux
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
@@ -115,7 +128,7 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: gdrive
+      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
@@ -130,7 +143,7 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: gdrive
+      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
@@ -141,6 +154,7 @@ jobs:
     timeout-minutes: 15
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     if: |
+      (github.event_name == 'push' || inputs.pipeline != 'v2-streamlined') &&
       github.ref == 'refs/heads/main' &&
       github.event_name != 'pull_request' &&
       always() &&
@@ -238,6 +252,7 @@ jobs:
     needs:
       [build_android, build_windows, build_linux, build_ios, build_macos, sendMessage]
     if: |
+      (github.event_name == 'push' || inputs.pipeline != 'v2-streamlined') &&
       github.ref == 'refs/heads/main' &&
       github.event_name != 'pull_request' &&
       always() &&
@@ -270,3 +285,210 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/grayankit/Dartotsu-Downloader/actions/workflows/main.yml/dispatches \
             -d "$body"
+
+  publish_alpha:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
+    if: |
+      github.event_name == 'workflow_dispatch' &&
+      inputs.pipeline == 'v2-streamlined' &&
+      always() &&
+      !contains(needs.*.result, 'failure') &&
+      !contains(needs.*.result, 'cancelled') &&
+      (needs.build_android.result == 'success' ||
+       needs.build_windows.result == 'success' ||
+       needs.build_linux.result == 'success' ||
+       needs.build_ios.result == 'success' ||
+       needs.build_macos.result == 'success')
+    permissions:
+      contents: read
+      actions: read
+    outputs:
+      alpha_version: ${{ steps.nix_hash.outputs.alpha_version }}
+      alpha_url: ${{ steps.nix_hash.outputs.alpha_url }}
+      alpha_hash: ${{ steps.nix_hash.outputs.alpha_hash }}
+      commit_logs: ${{ steps.commit_logs.outputs.commit_logs }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Download last SHA artifact
+        uses: dawidd6/action-download-artifact@v6
+        with:
+          workflow: dart.yml
+          name: last-sha
+        continue-on-error: true
+
+      - name: Get Commits Since Last Run
+        id: commit_logs
+        run: |
+          if [ -f last_sha.txt ]; then
+            LAST_SHA=$(cat last_sha.txt)
+          else
+            LAST_SHA=$(git rev-list --max-parents=0 HEAD)
+          fi
+          echo "Commits since $LAST_SHA:"
+          COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
+          COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
+          COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
+          COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
+          echo "COMMIT_LOG=${COMMIT_LOGS}" >> $GITHUB_ENV
+          echo "$COMMIT_LOGS"
+          echo "commit_logs=${COMMIT_LOGS}" >> "$GITHUB_OUTPUT"
+        continue-on-error: true
+
+      - name: Save Current SHA for Next Run
+        if: inputs.dry_run != true
+        run: echo ${{ github.sha }} > last_sha.txt
+
+      - name: Upload Current SHA as Artifact
+        if: inputs.dry_run != true
+        uses: actions/upload-artifact@v4
+        with:
+          name: last-sha
+          path: last_sha.txt
+
+      - name: Download all build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: raw-artifacts
+          merge-multiple: true
+
+      - name: Prepare and normalize release artifacts
+        id: prep_artifacts
+        run: |
+          mkdir -p release-assets
+          find raw-artifacts -type f
+
+          TAG="${GITHUB_SHA:0:7}"
+          echo "TAG=${TAG}" >> $GITHUB_ENV
+
+          # Windows installer -> Dartotsu_windows.exe
+          win_installer=$(find raw-artifacts -type f -name "*Installer.exe" | head -n1)
+          if [ -n "$win_installer" ]; then
+            cp "$win_installer" release-assets/Dartotsu_windows.exe
+            echo "win_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_windows.exe" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Linux zip -> Dartotsu_linux.zip
+          linux_zip=$(find raw-artifacts -type f -name "Dartotsu_Linux_*.zip" | head -n1)
+          if [ -n "$linux_zip" ]; then
+            cp "$linux_zip" release-assets/Dartotsu_linux.zip
+            echo "linux_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_linux.zip" >> "$GITHUB_OUTPUT"
+          fi
+
+          # Android APKs
+          apk_universal=$(find raw-artifacts -type f -name "Dartotsu_Android_universal_*.apk" | head -n1)
+          if [ -n "$apk_universal" ]; then
+            cp "$apk_universal" release-assets/Dartotsu_main.apk
+            echo "apk_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_main.apk" >> "$GITHUB_OUTPUT"
+          fi
+
+          for apk in raw-artifacts/Dartotsu_Android_*.apk; do
+            if [ -f "$apk" ]; then
+              base=$(basename "$apk")
+              cp "$apk" "release-assets/$base"
+            fi
+          done
+
+          # macOS DMG
+          macos_dmg=$(find raw-artifacts -type f -name "Dartotsu-macos-*.dmg" | head -n1)
+          if [ -n "$macos_dmg" ]; then
+            cp "$macos_dmg" release-assets/Dartotsu-macos-main.dmg
+            echo "macos_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu-macos-main.dmg" >> "$GITHUB_OUTPUT"
+          fi
+
+          # iOS IPA
+          ios_ipa=$(find raw-artifacts -type f -name "Dartotsu-iOS-*.ipa" | head -n1)
+          if [ -n "$ios_ipa" ]; then
+            cp "$ios_ipa" release-assets/Dartotsu-iOS-main.ipa
+            echo "ios_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu-iOS-main.ipa" >> "$GITHUB_OUTPUT"
+          fi
+
+          echo "=== Normalized Release Assets ==="
+          ls -lh release-assets
+
+      - name: Install Nix
+        if: hashFiles('release-assets/Dartotsu_linux.zip') != ''
+        uses: DeterminateSystems/nix-installer-action@main
+
+      - name: Calculate Nix SRI Hash
+        id: nix_hash
+        if: hashFiles('release-assets/Dartotsu_linux.zip') != ''
+        run: |
+          set -euo pipefail
+          TAG="${GITHUB_SHA:0:7}"
+          zip_path="$PWD/release-assets/Dartotsu_linux.zip"
+
+          base32_hash="$(nix-prefetch-url --unpack --type sha256 "file://${zip_path}" 2>/dev/null | tail -n1)"
+          sri_hash="$(nix hash to-sri --type sha256 "$base32_hash" 2>/dev/null || nix hash convert --hash-algo sha256 --to sri "$base32_hash")"
+          alpha_url="https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_linux.zip"
+
+          echo "Computed SRI Hash: ${sri_hash}"
+          echo "alpha_version=${TAG}" >> "$GITHUB_OUTPUT"
+          echo "alpha_url=${alpha_url}" >> "$GITHUB_OUTPUT"
+          echo "alpha_hash=${sri_hash}" >> "$GITHUB_OUTPUT"
+
+      - name: Publish Release to grayankit/Dartotsu-Downloader
+        env:
+          GH_TOKEN: ${{ secrets.DOWNLOADER_TRIGGER_TOKEN_SHEBY }}
+          TAG: ${{ env.TAG }}
+          COMMIT_LOG: ${{ env.COMMIT_LOG }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          BODY=$(printf "## Alpha release for %s\n\n%b" "$TAG" "${COMMIT_LOG//'%0A'/$'\n'}")
+
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "[DRY RUN] Would create/update release $TAG on grayankit/Dartotsu-Downloader with assets:"
+            ls -lh release-assets
+            echo "[DRY RUN] Release body preview:"
+            echo "$BODY"
+          else
+            echo "Publishing release $TAG to grayankit/Dartotsu-Downloader..."
+            gh release view "$TAG" --repo grayankit/Dartotsu-Downloader >/dev/null 2>&1 || \
+              gh release create "$TAG" --repo grayankit/Dartotsu-Downloader --title "$TAG" --notes "$BODY" --prerelease
+
+            gh release upload "$TAG" release-assets/* --repo grayankit/Dartotsu-Downloader --clobber
+            echo "Release $TAG published successfully."
+          fi
+
+      - name: Discord Notification
+        if: inputs.dry_run != true || inputs.ping_discord == true
+        env:
+          COMMIT_LOG: ${{ env.COMMIT_LOG }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          PING_VARIABLE: ${{ inputs.ping_discord && '<@&1434448534450606090>' || 'noPing' }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          APK_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_link }}
+          WINDOWS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.win_link }}
+          LINUX_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.linux_link }}
+          IOS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.ios_link }}
+          MACOS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.macos_link }}
+          DRY_RUN: ${{ inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            echo "[DRY RUN] Would send Discord notifications:"
+            echo "APK Link: ${APK_DOWNLOAD_LINK:-none}"
+            echo "Windows Link: ${WINDOWS_DOWNLOAD_LINK:-none}"
+            echo "Linux Link: ${LINUX_DOWNLOAD_LINK:-none}"
+            echo "iOS Link: ${IOS_DOWNLOAD_LINK:-none}"
+            echo "macOS Link: ${MACOS_DOWNLOAD_LINK:-none}"
+          else
+            bash scripts/ci/discord_alpha_embed.sh
+            bash scripts/ci/discord_alpha_links.sh
+          fi
+
+  update_nix_alpha:
+    needs: [publish_alpha]
+    if: inputs.dry_run != true && needs.publish_alpha.outputs.alpha_hash != ''
+    permissions:
+      contents: write
+    uses: ./.github/workflows/update-nix-channels.yml
+    with:
+      alpha_version: ${{ needs.publish_alpha.outputs.alpha_version }}
+      alpha_url: ${{ needs.publish_alpha.outputs.alpha_url }}
+      alpha_hash: ${{ needs.publish_alpha.outputs.alpha_hash }}
