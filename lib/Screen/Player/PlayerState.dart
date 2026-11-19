@@ -174,6 +174,7 @@ class PlayerState extends ScreenState {
   final nextCountdown = Live<int?>(null);
   Timer? _countdownTimer;
   final metaLoading = false.live;
+  final descriptionOpen = false.live;
   int _metaGeneration = 0;
   StreamSubscription<Map<String, EpisodeMeta>>? _metaSub;
 

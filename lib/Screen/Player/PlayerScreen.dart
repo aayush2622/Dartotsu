@@ -21,6 +21,7 @@ import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
 import '../../Utils/Functions/SnackBar.dart';
+import '../../Utils/Nav/DpadNav.dart';
 import '../Settings/Categories/AddonSettings.dart';
 import '../Settings/SubSettingsScreen.dart';
 import '../../Utils/Extensions/Responsive.dart';
@@ -30,6 +31,7 @@ import '../../Widgets/Components/ScreenState.dart';
 import 'Components/EpisodePanel.dart';
 import 'Components/PlayerActions.dart';
 import 'Components/PlayerControls.dart';
+import 'Components/PlayerDescription.dart';
 import 'Components/PlayerDownload.dart';
 import '../Settings/Layout/BarLayout.dart';
 import 'Components/PlayerEpisodes.dart';
@@ -377,6 +379,17 @@ class _PlayerPageState extends State<PlayerPage>
   Widget _heading(BuildContext context, ColorScheme scheme) {
     final item = state.item;
     final media = widget.request.media;
+    final description = PlayerDescription.of(state);
+    final open = state.descriptionOpen.value && !description.isEmpty;
+    final title = Text(
+      item.title,
+      maxLines: open ? null : 2,
+      overflow: open ? null : TextOverflow.ellipsis,
+      style: context.textTheme.titleMedium?.copyWith(
+        fontWeight: FontWeight.w600,
+        height: 1.2,
+      ),
+    );
     return Padding(
       padding: EdgeInsets.fromLTRB(
         Dimens.pagePad,
@@ -387,15 +400,29 @@ class _PlayerPageState extends State<PlayerPage>
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            item.title,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: context.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.w600,
-              height: 1.2,
+          if (description.isEmpty)
+            title
+          else
+            DpadTap(
+              ripple: false,
+              borderRadius: Dimens.borderSm,
+              onTap: () => state.descriptionOpen.value = !open,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: title),
+                  SizedBox(width: Dimens.gapSm),
+                  AnimatedRotation(
+                    turns: open ? 0.5 : 0,
+                    duration: animDuration(220),
+                    child: Icon(
+                      Icons.keyboard_arrow_down_rounded,
+                      color: scheme.onSurfaceVariant,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
           if ((media?.mainName ?? item.subtitle) != null) ...[
             SizedBox(height: Dimens.gapXs),
             Text(
@@ -408,6 +435,7 @@ class _PlayerPageState extends State<PlayerPage>
               ),
             ),
           ],
+          PlayerDescriptionBox(description: description, open: open),
         ],
       ),
     );
