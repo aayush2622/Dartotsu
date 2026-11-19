@@ -2370,6 +2370,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get trailer => 'Tráiler';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Título copiado';
 
   @override

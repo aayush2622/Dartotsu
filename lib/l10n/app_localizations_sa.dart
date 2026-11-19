@@ -2352,6 +2352,9 @@ class AppLocalizationsSa extends AppLocalizations {
   String get trailer => 'ट्रेलर्';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'शीर्षकं प्रतिलिखितम्';
 
   @override

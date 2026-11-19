@@ -4421,6 +4421,12 @@ abstract class AppLocalizations {
   /// **'Trailer'**
   String get trailer;
 
+  /// No description provided for @trailerQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Trailer quality'**
+  String get trailerQuality;
+
   /// No description provided for @titleCopied.
   ///
   /// In en, this message translates to:

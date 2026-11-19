@@ -2362,6 +2362,9 @@ class AppLocalizationsSw extends AppLocalizations {
   String get trailer => 'Trela';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Kichwa kimenakiliwa';
 
   @override

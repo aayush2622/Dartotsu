@@ -2368,6 +2368,9 @@ class AppLocalizationsMl extends AppLocalizations {
   String get trailer => 'ട്രെയിലർ';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'ടൈറ്റിൽ കോപ്പി ചെയ്തു';
 
   @override

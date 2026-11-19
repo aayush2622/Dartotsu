@@ -2317,6 +2317,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get trailer => '예고편';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => '제목을 복사했어요';
 
   @override

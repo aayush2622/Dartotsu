@@ -2315,6 +2315,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get trailer => '预告片';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => '已复制标题';
 
   @override

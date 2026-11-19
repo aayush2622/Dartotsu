@@ -2340,6 +2340,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get trailer => 'الإعلان';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'تم نسخ العنوان';
 
   @override

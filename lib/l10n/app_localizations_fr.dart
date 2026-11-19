@@ -2369,6 +2369,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get trailer => 'Bande-annonce';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Titre copié';
 
   @override

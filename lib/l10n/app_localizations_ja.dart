@@ -2318,6 +2318,9 @@ class AppLocalizationsJa extends AppLocalizations {
   String get trailer => '予告編';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'タイトルをコピーしたよ';
 
   @override

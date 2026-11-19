@@ -2352,6 +2352,9 @@ class AppLocalizationsMs extends AppLocalizations {
   String get trailer => 'Treler';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Tajuk disalin';
 
   @override

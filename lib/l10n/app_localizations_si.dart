@@ -2362,6 +2362,9 @@ class AppLocalizationsSi extends AppLocalizations {
   String get trailer => 'ට්‍රේලර්';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'ටයිටල් එක කොපි වුණා';
 
   @override

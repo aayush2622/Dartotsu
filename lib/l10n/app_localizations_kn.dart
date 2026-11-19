@@ -2362,6 +2362,9 @@ class AppLocalizationsKn extends AppLocalizations {
   String get trailer => 'ಟ್ರೈಲರ್';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಆಯ್ತು';
 
   @override

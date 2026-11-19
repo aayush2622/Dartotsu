@@ -2347,6 +2347,9 @@ class AppLocalizationsHi extends AppLocalizations {
   String get trailer => 'ट्रेलर';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'टाइटल कॉपी हो गया';
 
   @override

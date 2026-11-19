@@ -12,6 +12,7 @@ import '../../../Widgets/Components/AppControls.dart';
 import '../../../Utils/Functions/NavigateToScreen.dart';
 import '../SubSettingsScreen.dart';
 import '../Widgets/SegmentedSetting.dart';
+import '../Widgets/SettingRows.dart';
 import '../../Together/TogetherSheet.dart';
 import 'PlayerSettings.dart';
 import 'ReaderSettings.dart';
@@ -131,6 +132,16 @@ List<Setting> _sharedRows(BuildContext context) => [
 ];
 
 List<Setting> _animeExtras(BuildContext context) => [
+  Setting.header(getString.trailer),
+  choiceSetting<int>(
+    context,
+    name: getString.trailerQuality,
+    icon: Icons.high_quality_rounded,
+    value: trailerQualityPref.rx.value,
+    values: const [1080, 720, 480, 360],
+    label: (v) => '${v}p',
+    onPick: (v) => trailerQualityPref.rx.value = v,
+  ),
   Setting.header(getString.watchSettingsLayout),
   Setting.switchType(
     name: getString.watchShowFiller,

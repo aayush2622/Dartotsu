@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Utils/Animation/WidgetAnimations.dart';
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Utils/Extensions/Responsive.dart';
 import '../../../Widgets/Components/AppSpinner.dart';
@@ -109,27 +110,38 @@ class _TrailerSectionState extends State<TrailerSection>
 
   Widget _controls(BuildContext context, VideoState video) {
     final full = isFullscreen(context);
-    return Stack(
-      fit: StackFit.expand,
-      children: [
-        Clickable(onTap: state.toggle, child: const SizedBox.expand()),
-        if (!state.playing.value)
-          IgnorePointer(
-            child: Center(
-              child: Icon(
-                Icons.play_circle_fill_rounded,
-                size: 56,
-                color: Colors.white.withValues(alpha: 0.9),
+    final visible = state.controlsVisible.value || !state.playing.value;
+    return MouseRegion(
+      onHover: (_) => state.reveal(),
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          Clickable(onTap: state.tapSurface, child: const SizedBox.expand()),
+          if (!state.playing.value)
+            IgnorePointer(
+              child: Center(
+                child: Icon(
+                  Icons.play_circle_fill_rounded,
+                  size: 56,
+                  color: Colors.white.withValues(alpha: 0.9),
+                ),
+              ),
+            ),
+          PositionedDirectional(
+            start: 0,
+            end: 0,
+            bottom: 0,
+            child: IgnorePointer(
+              ignoring: !visible,
+              child: AnimatedOpacity(
+                opacity: visible ? 1 : 0,
+                duration: animDuration(200),
+                child: _bar(context, video, full),
               ),
             ),
           ),
-        PositionedDirectional(
-          start: 0,
-          end: 0,
-          bottom: 0,
-          child: _bar(context, video, full),
-        ),
-      ],
+        ],
+      ),
     );
   }
 

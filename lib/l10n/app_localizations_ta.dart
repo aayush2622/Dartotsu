@@ -2361,6 +2361,9 @@ class AppLocalizationsTa extends AppLocalizations {
   String get trailer => 'டிரெய்லர்';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'டைட்டில் காப்பி ஆயிடுச்சு';
 
   @override

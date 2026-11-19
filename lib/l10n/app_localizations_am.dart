@@ -2327,6 +2327,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get trailer => 'ትሬለር';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'ርዕሱ ተቀድቷል';
 
   @override

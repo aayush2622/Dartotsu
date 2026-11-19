@@ -2361,6 +2361,9 @@ class AppLocalizationsHr extends AppLocalizations {
   String get trailer => 'Trailer';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Naslov kopiran';
 
   @override

@@ -2355,6 +2355,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get trailer => 'Трейлер';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Назву скопійовано';
 
   @override

@@ -2349,6 +2349,9 @@ class AppLocalizationsPs extends AppLocalizations {
   String get trailer => 'تریلر';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'سرلیک کاپي شو';
 
   @override

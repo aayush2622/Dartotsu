@@ -2343,6 +2343,9 @@ class AppLocalizationsFa extends AppLocalizations {
   String get trailer => 'تریلر';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'عنوان کپی شد';
 
   @override

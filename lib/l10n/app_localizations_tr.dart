@@ -2356,6 +2356,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get trailer => 'Fragman';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'Başlık kopyalandı';
 
   @override

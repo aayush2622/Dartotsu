@@ -25,6 +25,8 @@ const watchMarkOnLongPressPref = Pref(
   PrefLocation.OTHER,
 );
 
+const trailerQualityPref = Pref('trailerQuality', 1080, PrefLocation.OTHER);
+
 const watchResumeShelfPref = Pref('watchResumeShelf', true, PrefLocation.OTHER);
 
 const aniSkipSubmitterPref = Pref('aniSkipSubmitter', '', PrefLocation.OTHER);

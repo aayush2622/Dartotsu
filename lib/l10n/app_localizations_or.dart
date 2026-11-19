@@ -2353,6 +2353,9 @@ class AppLocalizationsOr extends AppLocalizations {
   String get trailer => 'ଟ୍ରେଲର୍';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'ଶୀର୍ଷକ କପି ହେଲା';
 
   @override

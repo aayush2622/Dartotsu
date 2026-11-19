@@ -2336,6 +2336,9 @@ class AppLocalizationsTh extends AppLocalizations {
   String get trailer => 'ตัวอย่าง';
 
   @override
+  String get trailerQuality => 'Trailer quality';
+
+  @override
   String get titleCopied => 'คัดลอกชื่อแล้ว';
 
   @override
