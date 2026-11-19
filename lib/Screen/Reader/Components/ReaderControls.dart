@@ -330,13 +330,18 @@ class ReaderControls extends StatelessWidget {
                     Expanded(
                       child: count < 2
                           ? const SizedBox.shrink()
-                          : SeekProgressBar(
-                              value: (page.clamp(0, count - 1) + 1) / count,
-                              step: 1 / count,
-                              onChanged: (f) => state.go(
-                                state.flatIndexOf(
-                                  state.chapter,
-                                  (f * count).floor().clamp(0, count - 1),
+                          : Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 8,
+                              ),
+                              child: SeekProgressBar(
+                                value: (page.clamp(0, count - 1) + 1) / count,
+                                step: 1 / count,
+                                onChanged: (f) => state.go(
+                                  state.flatIndexOf(
+                                    state.chapter,
+                                    (f * count).floor().clamp(0, count - 1),
+                                  ),
                                 ),
                               ),
                             ),

@@ -906,11 +906,14 @@ class _NovelScreenState extends State<NovelScreen>
                         style: context.textTheme.labelLarge,
                       ),
                       Expanded(
-                        child: SeekProgressBar(
-                          value: fraction.clamp(0.0, 1.0),
-                          activeColor: foreground,
-                          trackColor: foreground.withValues(alpha: 0.2),
-                          onChanged: state.seekTo,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: SeekProgressBar(
+                            value: fraction.clamp(0.0, 1.0),
+                            activeColor: foreground,
+                            trackColor: foreground.withValues(alpha: 0.2),
+                            onChanged: state.seekTo,
+                          ),
                         ),
                       ),
                       Text(
