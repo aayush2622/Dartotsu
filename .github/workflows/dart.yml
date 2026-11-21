@@ -29,19 +29,11 @@ on:
         required: false
         type: boolean
         default: false
-      pipeline:
-        description: "Pipeline version: v1-gdrive (existing) or v2-streamlined (new direct)"
-        required: false
-        type: choice
-        default: "v1-gdrive"
-        options:
-          - "v1-gdrive"
-          - "v2-streamlined"
       dry_run:
-        description: "Dry run for v2 pipeline (skips GitHub release, Discord, Nix push)"
+        description: "Dry run? (Skip GitHub release, Discord, Nix push)"
         required: false
         type: boolean
-        default: true
+        default: false
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -76,15 +68,13 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
+      publish-mode: artifact
       universal-name: universal
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       APK_SIGN: ${{ secrets.APK_SIGN }}
       KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
       KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-      GOOGLE_FOLDER_ANDROID: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
-      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
 
   build_windows:
     needs: prune_caches
@@ -95,13 +85,11 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
+      publish-mode: artifact
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
       PFX_FILE: ${{ secrets.PFX_FILE }}
       PFX_PASSWORD: ${{ secrets.PFX_PASSWORD }}
-      GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
-      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
 
   build_linux:
     needs: prune_caches
@@ -112,12 +100,10 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
+      publish-mode: artifact
       zip-name-prefix: Dartotsu_Linux
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
-      GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
-      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
 
   build_ios:
     needs: prune_caches
@@ -128,11 +114,9 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
+      publish-mode: artifact
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
-      GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
-      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
 
   build_macos:
     needs: prune_caches
@@ -143,156 +127,17 @@ jobs:
     with:
       flutter-version: "3.50.0"
       clean-build: ${{ github.event_name == 'workflow_dispatch' && inputs.clean_build || false }}
-      publish-mode: ${{ github.event_name == 'workflow_dispatch' && inputs.pipeline == 'v2-streamlined' && 'artifact' || 'gdrive' }}
+      publish-mode: artifact
     secrets:
       FLUTTER_VERSION: ${{ secrets.FLUTTER_VERSION }}
-      GOOGLE_FOLDER_MAIN: ${{ secrets.GOOGLE_FOLDER_MAIN }}
-      GOOGLE_KEY: ${{ secrets.GOOGLE_KEY }}
-
-  sendMessage:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs: [build_android, build_windows, build_linux, build_ios, build_macos]
-    if: |
-      (github.event_name == 'push' || inputs.pipeline != 'v2-streamlined') &&
-      github.ref == 'refs/heads/main' &&
-      github.event_name != 'pull_request' &&
-      always() &&
-      !contains(needs.*.result, 'failure') &&
-      !contains(needs.*.result, 'cancelled') &&
-      (needs.build_android.result == 'success' ||
-       needs.build_windows.result == 'success' ||
-       needs.build_linux.result == 'success' ||
-       needs.build_ios.result == 'success' ||
-       needs.build_macos.result == 'success')
-    permissions:
-      contents: read
-      pull-requests: read
-      actions: read
-    outputs:
-      commit_logs: ${{ steps.set_output.outputs.commit_logs }}
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Download last SHA artifact
-        uses: dawidd6/action-download-artifact@v6
-        with:
-          workflow: dart.yml
-          name: last-sha
-        continue-on-error: true
-
-      - name: Get Commits Since Last Run
-        run: |
-          if [ -f last_sha.txt ]; then
-            LAST_SHA=$(cat last_sha.txt)
-          else
-            LAST_SHA=$(git rev-list --max-parents=0 HEAD)
-          fi
-          echo "Commits since $LAST_SHA:"
-          COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
-          COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
-          COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
-          COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
-          echo "COMMIT_LOG=${COMMIT_LOGS}" >> $GITHUB_ENV
-          echo "$COMMIT_LOGS"
-          echo "$COMMIT_LOGS" > commit_log.txt
-        continue-on-error: true
-
-      - name: Save Current SHA for Next Run
-        run: echo ${{ github.sha }} > last_sha.txt
-
-      - name: Set output
-        id: set_output
-        env:
-          COMMIT_LOG: ${{ env.COMMIT_LOG }}
-        run: echo "commit_logs=${COMMIT_LOG}" >> "$GITHUB_OUTPUT"
-
-      - name: Check for Ping
-        env:
-          HEAD_MSG: ${{ github.event.head_commit.message }}
-          PING_INPUT: ${{ inputs.ping_discord }}
-        run: |
-          if [[ "${HEAD_MSG,,}" == *"[ping]"* ]] || [[ "$PING_INPUT" == "true" ]]; then
-            echo "PING_VARIABLE=<@&1434448534450606090>" >> $GITHUB_ENV
-          else
-            echo "PING_VARIABLE=noPing" >> $GITHUB_ENV
-          fi
-
-      - name: Discord alpha embed
-        env:
-          COMMIT_LOG: ${{ env.COMMIT_LOG }}
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          PING_VARIABLE: ${{ env.PING_VARIABLE }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-        run: bash scripts/ci/discord_alpha_embed.sh
-
-      - name: Upload Current SHA as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: last-sha
-          path: last_sha.txt
-
-      - name: Discord download links
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          GOOGLE_FOLDER_ANDROID: ${{ secrets.GOOGLE_FOLDER_ANDROID }}
-          APK_DOWNLOAD_LINK: ${{ needs.build_android.outputs.apk_link }}
-          WINDOWS_DOWNLOAD_LINK: ${{ needs.build_windows.outputs.zip_link }}
-          LINUX_DOWNLOAD_LINK: ${{ needs.build_linux.outputs.zip_link }}
-          IOS_DOWNLOAD_LINK: ${{ needs.build_ios.outputs.ipa_link }}
-          MACOS_DOWNLOAD_LINK: ${{ needs.build_macos.outputs.dmg_link }}
-        run: bash scripts/ci/discord_alpha_links.sh
-
-  trigger_downloader:
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    needs:
-      [build_android, build_windows, build_linux, build_ios, build_macos, sendMessage]
-    if: |
-      (github.event_name == 'push' || inputs.pipeline != 'v2-streamlined') &&
-      github.ref == 'refs/heads/main' &&
-      github.event_name != 'pull_request' &&
-      always() &&
-      !contains(needs.*.result, 'failure') &&
-      !contains(needs.*.result, 'cancelled') &&
-      (needs.build_android.result == 'success' ||
-       needs.build_windows.result == 'success' ||
-       needs.build_linux.result == 'success' ||
-       needs.build_ios.result == 'success' ||
-       needs.build_macos.result == 'success')
-    steps:
-      - name: Trigger Dartotsu-Downloader workflow
-        env:
-          TOKEN: ${{ secrets.DOWNLOADER_TRIGGER_TOKEN_SHEBY }}
-          COMMIT_SHA: ${{ github.sha }}
-          COMMIT_LOGS: ${{ needs.sendMessage.outputs.commit_logs }}
-          ANDROID: ${{ needs.build_android.result }}
-          WINDOWS: ${{ needs.build_windows.result }}
-          LINUX: ${{ needs.build_linux.result }}
-          IOS: ${{ needs.build_ios.result }}
-          MACOS: ${{ needs.build_macos.result }}
-        run: |
-          body=$(jq -n \
-            --arg sha "$COMMIT_SHA" --arg logs "$COMMIT_LOGS" \
-            --arg android "$ANDROID" --arg windows "$WINDOWS" --arg linux "$LINUX" \
-            --arg ios "$IOS" --arg macos "$MACOS" \
-            '{ref:"main", inputs:{commit_sha:$sha, commit_logs:$logs, build_android:$android, build_windows:$windows, build_linux:$linux, build_ios:$ios, build_macos:$macos}}')
-          curl -X POST \
-            -H "Authorization: token $TOKEN" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/grayankit/Dartotsu-Downloader/actions/workflows/main.yml/dispatches \
-            -d "$body"
 
   publish_alpha:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     needs: [build_android, build_windows, build_linux, build_ios, build_macos]
     if: |
-      github.event_name == 'workflow_dispatch' &&
-      inputs.pipeline == 'v2-streamlined' &&
+      github.ref == 'refs/heads/main' &&
+      github.event_name != 'pull_request' &&
       always() &&
       !contains(needs.*.result, 'failure') &&
       !contains(needs.*.result, 'cancelled') &&
@@ -341,11 +186,11 @@ jobs:
         continue-on-error: true
 
       - name: Save Current SHA for Next Run
-        if: inputs.dry_run != true
+        if: github.event_name == 'push' || inputs.dry_run != true
         run: echo ${{ github.sha }} > last_sha.txt
 
       - name: Upload Current SHA as Artifact
-        if: inputs.dry_run != true
+        if: github.event_name == 'push' || inputs.dry_run != true
         uses: actions/upload-artifact@v4
         with:
           name: last-sha
@@ -437,7 +282,7 @@ jobs:
           GH_TOKEN: ${{ secrets.DOWNLOADER_TRIGGER_TOKEN_SHEBY }}
           TAG: ${{ env.TAG }}
           COMMIT_LOG: ${{ env.COMMIT_LOG }}
-          DRY_RUN: ${{ inputs.dry_run }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
         run: |
           set -euo pipefail
           BODY=$(printf "## Alpha release for %s\n\n%b" "$TAG" "${COMMIT_LOG//'%0A'/$'\n'}")
@@ -457,18 +302,18 @@ jobs:
           fi
 
       - name: Discord Notification
-        if: inputs.dry_run != true || inputs.ping_discord == true
+        if: github.event_name == 'push' || inputs.dry_run != true || inputs.ping_discord == true
         env:
           COMMIT_LOG: ${{ env.COMMIT_LOG }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          PING_VARIABLE: ${{ inputs.ping_discord && '<@&1434448534450606090>' || 'noPing' }}
+          PING_VARIABLE: ${{ (github.event_name == 'workflow_dispatch' && inputs.ping_discord) && '<@&1434448534450606090>' || 'noPing' }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           APK_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_link }}
           WINDOWS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.win_link }}
           LINUX_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.linux_link }}
           IOS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.ios_link }}
           MACOS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.macos_link }}
-          DRY_RUN: ${{ inputs.dry_run }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || false }}
         run: |
           if [ "$DRY_RUN" = "true" ]; then
             echo "[DRY RUN] Would send Discord notifications:"
@@ -479,12 +324,17 @@ jobs:
             echo "macOS Link: ${MACOS_DOWNLOAD_LINK:-none}"
           else
             bash scripts/ci/discord_alpha_embed.sh
+            sleep 2
             bash scripts/ci/discord_alpha_links.sh
           fi
 
   update_nix_alpha:
     needs: [publish_alpha]
-    if: inputs.dry_run != true && needs.publish_alpha.outputs.alpha_hash != ''
+    if: |
+      always() &&
+      needs.publish_alpha.result == 'success' &&
+      (github.event_name == 'push' || inputs.dry_run != true) &&
+      needs.publish_alpha.outputs.alpha_hash != ''
     permissions:
       contents: write
     uses: ./.github/workflows/update-nix-channels.yml
