@@ -48,6 +48,24 @@ class CastService extends AppController {
 
   bool get active => device.value != null;
 
+  bool get sharing => !active && _proxy.running;
+
+  Future<({String url, List<String> subtitles})?> share({
+    required String url,
+    Map<String, String>? headers,
+    List<CastSubtitle> subtitles = const [],
+  }) async {
+    if (active) return null;
+    try {
+      await _proxy.start(video: url, headers: headers, subtitles: subtitles);
+      return (url: _proxy.videoUrl!, subtitles: _proxy.subtitleUrls);
+    } catch (e, st) {
+      logError('Cast', e, st);
+      await _proxy.stop();
+      return null;
+    }
+  }
+
   @override
   void onClose() {
     unawaited(stop());
@@ -447,9 +465,9 @@ class CastService extends AppController {
     );
   }
 
-  Future<void> _rokuKey(CastDevice target, String key) => castPost(
-    'http://${target.host}:${target.port}/keypress/$key',
-  ).then((_) {});
+  Future<void> _rokuKey(CastDevice target, String key) =>
+      castPost('http://${target.host}:${target.port}/keypress/$key')
+          .then((_) {});
 
   Future<Duration> stop() async {
     final target = device.value;

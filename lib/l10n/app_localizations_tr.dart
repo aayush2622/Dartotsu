@@ -8507,6 +8507,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get externalMpv => 'Open in mpv';
 
   @override
+  String get externalWebVideoCast => 'Web Video Cast';
+
+  @override
+  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+
+  @override
   String get externalFailed =>
       'Couldn\'t open the stream. Is the player installed?';
 

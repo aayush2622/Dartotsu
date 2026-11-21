@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 
@@ -112,6 +113,17 @@ class _CastPanelState extends State<_CastPanel> {
                 color: scheme.onSurfaceVariant,
               ),
             ),
+          ),
+        if (Platform.isAndroid)
+          SheetTile(
+            tinted: true,
+            leading: Icon(Icons.cast_connected_rounded, color: scheme.primary),
+            title: Text(getString.externalWebVideoCast),
+            subtitle: Text(getString.castViaAppHint),
+            onTap: () {
+              Navigator.of(context).pop();
+              unawaited(state.castWithWebVideoCast());
+            },
           ),
         if (!searching)
           Align(

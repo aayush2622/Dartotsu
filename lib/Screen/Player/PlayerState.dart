@@ -42,6 +42,7 @@ import '../../Core/Preferences/StorageManager.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
+import '../../Utils/Functions/ExternalPlayer.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'PlayerMediaSession.dart';
@@ -529,7 +530,7 @@ class PlayerState extends ScreenState {
     _closed = true;
     _feed?.cancel();
     _feedWatch?.dispose();
-    if (cast.active) unawaited(cast.stop());
+    if (cast.active || cast.sharing) unawaited(cast.stop());
     _castPositionSub?.dispose();
     _castEndedSub?.dispose();
     _blurTimer?.cancel();
@@ -1268,6 +1269,30 @@ class PlayerState extends ScreenState {
     } catch (e, st) {
       logError('PlayerState', e, st);
       snackString(getString.playerPictureSaveFailed);
+    }
+  }
+
+  Future<void> castWithWebVideoCast() async {
+    final list = videos.toList();
+    final at = videoIndex.value;
+    final chosen = at >= 0 && at < list.length ? list[at] : null;
+    final url = engine.previewTarget ?? chosen?.url;
+    if (url == null) return;
+    await engine.pause();
+    final ok = await openInWebVideoCast(
+      v.Video(
+        item.title,
+        url,
+        chosen?.quality ?? '',
+        headers: engine.previewHeaders.isNotEmpty
+            ? engine.previewHeaders
+            : chosen?.headers,
+        subtitles: chosen?.subtitles,
+      ),
+    );
+    if (!ok) {
+      snackString(getString.externalFailed);
+      if (!_closed) await engine.play();
     }
   }
 

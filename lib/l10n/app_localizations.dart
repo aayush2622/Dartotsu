@@ -15119,6 +15119,18 @@ abstract class AppLocalizations {
   /// **'Open in mpv'**
   String get externalMpv;
 
+  /// No description provided for @externalWebVideoCast.
+  ///
+  /// In en, this message translates to:
+  /// **'Web Video Cast'**
+  String get externalWebVideoCast;
+
+  /// No description provided for @castViaAppHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Send the stream to the Web Video Cast app'**
+  String get castViaAppHint;
+
   /// No description provided for @externalFailed.
   ///
   /// In en, this message translates to:

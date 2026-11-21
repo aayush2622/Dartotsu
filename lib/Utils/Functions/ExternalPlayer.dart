@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../Core/Cast/CastService.dart';
+import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
 import '../../Widgets/Components/ChoiceSheet.dart';
@@ -13,7 +15,9 @@ import 'SnackBar.dart';
 
 const _channel = MethodChannel('dartotsu/external');
 
-enum _External { copy, chooser, vlc, mpv }
+const webVideoCastPackage = 'com.instantbits.cast.webvideo';
+
+enum _External { copy, chooser, webVideoCast, vlc, mpv }
 
 Future<bool> _has(String name) async {
   try {
@@ -111,9 +115,10 @@ Future<bool> _openVlc(v.Video video) async {
   ]);
 }
 
-Future<bool> _openChooser(v.Video video) async {
+Future<bool> _openChooser(v.Video video, {String? package}) async {
   try {
     final ok = await _channel.invokeMethod<bool>('openVideo', {
+      'package': package,
       'url': video.url,
       'title': video.title ?? '',
       'headers': video.headers ?? const <String, String>{},
@@ -125,6 +130,44 @@ Future<bool> _openChooser(v.Video video) async {
     logger('External chooser failed: $e', logLevel: LogLevel.error);
     return false;
   }
+}
+
+Future<bool> webVideoCastInstalled() async {
+  if (!Platform.isAndroid) return false;
+  try {
+    return await _channel.invokeMethod<bool>('isInstalled', {
+          'package': webVideoCastPackage,
+        }) ??
+        false;
+  } catch (_) {
+    return false;
+  }
+}
+
+Future<bool> openInWebVideoCast(v.Video video) async {
+  final headers = video.headers ?? const <String, String>{};
+  final tracks = _subtitles(video);
+  var shared = video;
+  if (headers.isNotEmpty || tracks.isNotEmpty) {
+    final proxy = await find<CastService>().share(
+      url: video.url,
+      headers: headers,
+      subtitles: [
+        for (final t in tracks) CastSubtitle(t.file!, t.label ?? 'Subtitles'),
+      ],
+    );
+    if (proxy == null) return false;
+    shared = v.Video(
+      video.title,
+      proxy.url,
+      video.quality,
+      subtitles: [
+        for (final (i, t) in tracks.indexed)
+          v.Track(file: proxy.subtitles[i], label: t.label),
+      ],
+    );
+  }
+  return _openChooser(shared, package: webVideoCastPackage);
 }
 
 Future<void> showExternalPlayerSheet(
@@ -148,6 +191,12 @@ Future<void> showExternalPlayerSheet(
           getString.externalChooser,
           icon: Icons.open_in_new_rounded,
         ),
+      if (Platform.isAndroid)
+        ChoiceOption(
+          _External.webVideoCast,
+          getString.externalWebVideoCast,
+          icon: Icons.cast_connected_rounded,
+        ),
       if (desktop || Platform.isIOS)
         ChoiceOption(
           _External.vlc,
@@ -169,6 +218,7 @@ Future<void> showExternalPlayerSheet(
       return true;
     }(),
     _External.chooser => await _openChooser(video),
+    _External.webVideoCast => await openInWebVideoCast(video),
     _External.vlc => await _openVlc(video),
     _External.mpv => await _openMpv(video),
   };

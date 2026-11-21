@@ -4488,6 +4488,8 @@
   "externalChooser": "Open in another app",
   "externalVlc": "Open in VLC",
   "externalMpv": "Open in mpv",
+  "externalWebVideoCast": "Web Video Cast",
+  "castViaAppHint": "Send the stream to the Web Video Cast app",
   "externalFailed": "Couldn't open the stream. Is the player installed?",
   "addonInstalled": "Installed",
   "loadFailedActivity": "Couldn't load activity",
