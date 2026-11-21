@@ -18,9 +18,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   archive: ^4.7.1
-  firebase_core: ^5.1.0
-  firebase_crashlytics: ^6.0.1
-  firebase_analytics: ^13.0.1
+  firebase_core: ^5.2.0
+  firebase_crashlytics: ^6.1.0
+  firebase_analytics: ^13.1.0
   # State Management
   get: ^4.7.3
 
@@ -57,7 +57,7 @@ dependencies:
   dpad: ^3.3.0
   dynamic_color: ^2.1.0
   # dynamic_color 2.x exposes material_ui's ColorScheme; see Core/ThemeManager/DynamicColorScheme.dart
-  material_ui: ^1.11.0
+  material_ui: ^1.11.1
 
   # UI Enhancements
   html: ^0.15.7
@@ -70,9 +70,9 @@ dependencies:
   screen_retriever: ^0.4.0
   dbus: ^0.8.0
   permission_handler: ^13.0.2
-  flutter_local_notifications: ^23.0.2
+  flutter_local_notifications: ^23.0.3
   wakelock_plus: ^1.8.2
-  flutter_media_session: ^3.2.0
+  flutter_media_session: ^3.2.1
   volume_controller: ^3.7.1
   screen_brightness:
     git:
@@ -90,11 +90,11 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.3.0
   package_info_plus: ^10.2.2
-  file_picker: ^13.3.3
+  file_picker: ^13.4.0
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.5.0
+  webview_all: ^1.5.1
   flutter_web_auth_2:
     #path : ../flutter_web_auth/flutter_web_auth_2
     git:
@@ -113,7 +113,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.5.0
   local_auth: ^3.0.2
-  pdfrx: ^2.12.1
+  pdfrx: ^3.0.2
   youtube_explode_dart: ^3.1.0
 
 # Development dependencies
