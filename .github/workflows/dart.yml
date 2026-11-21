@@ -293,9 +293,11 @@ jobs:
             echo "[DRY RUN] Release body preview:"
             echo "$BODY"
           else
-            echo "Publishing release $TAG to grayankit/Dartotsu-Downloader..."
-            gh release view "$TAG" --repo grayankit/Dartotsu-Downloader >/dev/null 2>&1 || \
-              gh release create "$TAG" --repo grayankit/Dartotsu-Downloader --title "$TAG" --notes "$BODY" --prerelease
+            if gh release view "$TAG" --repo grayankit/Dartotsu-Downloader >/dev/null 2>&1; then
+              gh release edit "$TAG" --repo grayankit/Dartotsu-Downloader --title "$TAG" --notes "$BODY" --latest --prerelease=false
+            else
+              gh release create "$TAG" --repo grayankit/Dartotsu-Downloader --title "$TAG" --notes "$BODY" --latest
+            fi
 
             gh release upload "$TAG" release-assets/* --repo grayankit/Dartotsu-Downloader --clobber
             echo "Release $TAG published successfully."
