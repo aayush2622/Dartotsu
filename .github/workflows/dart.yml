@@ -226,9 +226,33 @@ jobs:
           fi
 
           # Android APKs
+          apk_arm64=$(find raw-artifacts -type f -name "Dartotsu_Android_arm64-v8a_*.apk" | head -n1)
+          if [ -n "$apk_arm64" ]; then
+            base_arm64=$(basename "$apk_arm64")
+            cp "$apk_arm64" "release-assets/$base_arm64"
+            echo "apk_arm64_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_arm64}" >> "$GITHUB_OUTPUT"
+          fi
+
+          apk_armv7=$(find raw-artifacts -type f -name "Dartotsu_Android_armeabi-v7a_*.apk" | head -n1)
+          if [ -n "$apk_armv7" ]; then
+            base_armv7=$(basename "$apk_armv7")
+            cp "$apk_armv7" "release-assets/$base_armv7"
+            echo "apk_armv7_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_armv7}" >> "$GITHUB_OUTPUT"
+          fi
+
+          apk_x86_64=$(find raw-artifacts -type f -name "Dartotsu_Android_x86_64_*.apk" | head -n1)
+          if [ -n "$apk_x86_64" ]; then
+            base_x86_64=$(basename "$apk_x86_64")
+            cp "$apk_x86_64" "release-assets/$base_x86_64"
+            echo "apk_x86_64_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_x86_64}" >> "$GITHUB_OUTPUT"
+          fi
+
           apk_universal=$(find raw-artifacts -type f -name "Dartotsu_Android_universal_*.apk" | head -n1)
           if [ -n "$apk_universal" ]; then
+            base_universal=$(basename "$apk_universal")
+            cp "$apk_universal" "release-assets/$base_universal"
             cp "$apk_universal" release-assets/Dartotsu_main.apk
+            echo "apk_universal_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_universal}" >> "$GITHUB_OUTPUT"
             echo "apk_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_main.apk" >> "$GITHUB_OUTPUT"
           fi
 
@@ -310,6 +334,10 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           PING_VARIABLE: ${{ (github.event_name == 'workflow_dispatch' && inputs.ping_discord) && '<@&1434448534450606090>' || 'noPing' }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          APK_ARM64_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_arm64_link }}
+          APK_ARMV7_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_armv7_link }}
+          APK_X86_64_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_x86_64_link }}
+          APK_UNIVERSAL_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_universal_link }}
           APK_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_link }}
           WINDOWS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.win_link }}
           LINUX_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.linux_link }}
@@ -319,7 +347,10 @@ jobs:
         run: |
           if [ "$DRY_RUN" = "true" ]; then
             echo "[DRY RUN] Would send Discord notifications:"
-            echo "APK Link: ${APK_DOWNLOAD_LINK:-none}"
+            echo "APK arm64 Link: ${APK_ARM64_DOWNLOAD_LINK:-none}"
+            echo "APK armv7 Link: ${APK_ARMV7_DOWNLOAD_LINK:-none}"
+            echo "APK x86_64 Link: ${APK_X86_64_DOWNLOAD_LINK:-none}"
+            echo "APK Universal Link: ${APK_UNIVERSAL_DOWNLOAD_LINK:-none}"
             echo "Windows Link: ${WINDOWS_DOWNLOAD_LINK:-none}"
             echo "Linux Link: ${LINUX_DOWNLOAD_LINK:-none}"
             echo "iOS Link: ${IOS_DOWNLOAD_LINK:-none}"
