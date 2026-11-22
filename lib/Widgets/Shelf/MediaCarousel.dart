@@ -12,6 +12,7 @@ import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Extensions/Responsive.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
+import '../Components/ScrimOverlay.dart';
 import '../Components/ScrollConfig.dart';
 import 'MediaSection.dart';
 import '../../Core/State/State.dart';
@@ -118,6 +119,7 @@ class _MediaCarouselState extends State<MediaCarousel> {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(Dimens.radius),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         child: SizedBox(
           height: _height,
           child: Stack(
@@ -141,6 +143,7 @@ class _MediaCarouselState extends State<MediaCarousel> {
                       horizontalEdge: DpadEdgeBehavior.stop,
                       child: PageView.builder(
                         controller: _controller,
+                        clipBehavior: Clip.none,
                         onPageChanged: (p) => _page.value = p % items.length,
                         itemBuilder: (context, page) {
                           final index = page % items.length;
@@ -237,6 +240,7 @@ class _Slide extends StatelessWidget {
       onTap: () => onTap(tag),
       child: Stack(
         fit: StackFit.expand,
+        clipBehavior: Clip.none,
         children: [
           cachedNetworkImage(
             imageUrl: media.banner ?? media.cover,
@@ -244,38 +248,25 @@ class _Slide extends StatelessWidget {
             placeholder: (_, _) =>
                 ColoredBox(color: scheme.surfaceContainerHigh),
           ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: glass
-                    ? [
-                        Colors.transparent,
-                        scheme.scrim.withValues(alpha: 0.35),
-                        scheme.scrim.withValues(alpha: 0.8),
-                      ]
-                    : [
-                        scheme.surface.withValues(alpha: 0.1),
-                        scheme.surface.withValues(alpha: 0.55),
-                        scheme.surface,
-                        scheme.surface,
-                      ],
-                stops: glass
-                    ? const [0.0, 0.55, 1.0]
-                    : const [0.0, 0.55, 0.9, 1.0],
-              ),
-            ),
-          ),
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 4,
-            child: ColoredBox(
-              color: glass
-                  ? scheme.scrim.withValues(alpha: 0.8)
-                  : scheme.surface,
+          ScrimOverlay(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: glass
+                  ? [
+                      Colors.transparent,
+                      scheme.scrim.withValues(alpha: 0.35),
+                      scheme.scrim.withValues(alpha: 0.8),
+                    ]
+                  : [
+                      scheme.surface.withValues(alpha: 0.1),
+                      scheme.surface.withValues(alpha: 0.55),
+                      scheme.surface,
+                      scheme.surface,
+                    ],
+              stops: glass
+                  ? const [0.0, 0.55, 1.0]
+                  : const [0.0, 0.55, 0.9, 1.0],
             ),
           ),
           Padding(

@@ -57,14 +57,18 @@ class ContinueCard extends StatelessWidget {
         borderRadius: Dimens.borderSm,
         child: Stack(
           children: [
-            Positioned.fill(child: ColoredBox(color: scheme.primaryContainer)),
-            if (background != null)
-              Positioned.fill(
-                child: cachedNetworkImage(
-                  imageUrl: background,
-                  fit: BoxFit.cover,
-                ),
-              ),
+            Positioned.fill(
+              child: background == null
+                  ? ColoredBox(color: scheme.primaryContainer)
+                  : cachedNetworkImage(
+                      imageUrl: background,
+                      fit: BoxFit.cover,
+                      placeholder: (_, _) =>
+                          ColoredBox(color: scheme.primaryContainer),
+                      errorWidget: (_, _, _) =>
+                          ColoredBox(color: scheme.primaryContainer),
+                    ),
+            ),
             Positioned.fill(
               child: DecoratedBox(
                 decoration: BoxDecoration(

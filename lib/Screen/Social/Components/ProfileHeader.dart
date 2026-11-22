@@ -20,6 +20,7 @@ import '../../../Widgets/Components/CachedNetworkImage.dart';
 import '../../../Widgets/Components/UserAvatar.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../../../Widgets/Components/ScrimOverlay.dart';
 
 const _toolbarHeight = 56.0;
 
@@ -367,6 +368,7 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
     final surface = context.colorScheme.surface;
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         PositionedDirectional(
           start: -40,
@@ -388,13 +390,11 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
             ),
           ),
         ),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [surface.withValues(alpha: 0.3), surface],
-            ),
+        ScrimOverlay(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [surface.withValues(alpha: 0.3), surface],
           ),
         ),
       ],

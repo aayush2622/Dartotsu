@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ContextExtensions.dart';
 import '../../../Widgets/Components/CachedNetworkImage.dart';
+import '../../../Widgets/Components/ScrimOverlay.dart';
 
 class HeaderBanner extends StatelessWidget {
   final String url;
@@ -16,6 +17,7 @@ class HeaderBanner extends StatelessWidget {
     return ClipRect(
       child: Stack(
         fit: StackFit.expand,
+        clipBehavior: Clip.none,
         children: [
           RepaintBoundary(
             child: ImageFiltered(
@@ -27,13 +29,11 @@ class HeaderBanner extends StatelessWidget {
               ),
             ),
           ),
-          DecoratedBox(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [surface.withValues(alpha: 0.25), surface],
-              ),
+          ScrimOverlay(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [surface.withValues(alpha: 0.25), surface],
             ),
           ),
         ],

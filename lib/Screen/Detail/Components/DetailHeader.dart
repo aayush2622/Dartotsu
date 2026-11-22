@@ -22,6 +22,7 @@ import '../Watch/Data/WatchPrefs.dart';
 import '../../../Utils/Functions/SnackBar.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../Widgets/Components/AppSpinner.dart';
+import '../../../Widgets/Components/ScrimOverlay.dart';
 
 const _toolbarHeight = 56.0;
 const _actionsHeight = 68.0;
@@ -310,22 +311,21 @@ class DetailHeaderDelegate extends SliverPersistentHeaderDelegate {
     final url = m.banner ?? m.cover;
     return Stack(
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       children: [
         url != null
             ? cachedNetworkImage(imageUrl: url, fit: BoxFit.cover)
             : ColoredBox(color: scheme.surfaceContainerHigh),
-        DecoratedBox(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              stops: const [0.0, 0.45, 1.0],
-              colors: [
-                scheme.surface.withValues(alpha: 0.1),
-                scheme.surface.withValues(alpha: 0.5),
-                scheme.surface,
-              ],
-            ),
+        ScrimOverlay(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: const [0.0, 0.45, 1.0],
+            colors: [
+              scheme.surface.withValues(alpha: 0.1),
+              scheme.surface.withValues(alpha: 0.5),
+              scheme.surface,
+            ],
           ),
         ),
       ],

@@ -111,9 +111,17 @@ class DetailRelated extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              ColoredBox(color: scheme.surfaceContainerHigh),
-              if (image != null)
-                cachedNetworkImage(imageUrl: image, fit: BoxFit.cover),
+              if (image == null)
+                ColoredBox(color: scheme.surfaceContainerHigh)
+              else
+                cachedNetworkImage(
+                  imageUrl: image,
+                  fit: BoxFit.cover,
+                  placeholder: (_, _) =>
+                      ColoredBox(color: scheme.surfaceContainerHigh),
+                  errorWidget: (_, _, _) =>
+                      ColoredBox(color: scheme.surfaceContainerHigh),
+                ),
               DecoratedBox(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(

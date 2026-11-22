@@ -16,6 +16,7 @@ import '../../Utils/Nav/DpadNav.dart';
 import '../Components/CachedNetworkImage.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
+import '../Components/ScrimOverlay.dart';
 
 class MediaRowFacts {
   final Media media;
@@ -538,19 +539,18 @@ class MediaBannerTile extends StatelessWidget {
               height: thumbH * 0.8,
               child: Stack(
                 fit: StackFit.expand,
+                clipBehavior: Clip.none,
                 children: [
                   cachedNetworkImage(
                     imageUrl: media.banner ?? media.cover,
                     fit: BoxFit.cover,
                     placeholder: (_, _) => const SizedBox.shrink(),
                   ),
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [fill.withValues(alpha: 0.2), fill],
-                      ),
+                  ScrimOverlay(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [fill.withValues(alpha: 0.2), fill],
                     ),
                   ),
                 ],
