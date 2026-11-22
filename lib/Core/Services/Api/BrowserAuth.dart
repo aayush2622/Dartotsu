@@ -33,20 +33,18 @@ const _donePage =
 <body style="font-family:sans-serif;text-align:center;margin-top:20vh">
 <p>Signed in. You can close this tab and return to Dartotsu.</p>''';
 
-Future<HttpServer> _bind() async {
-  try {
-    return await HttpServer.bind(
-      InternetAddress.loopbackIPv6,
-      kAuthPort,
-      v6Only: false,
-    );
-  } on SocketException {
-    return HttpServer.bind(InternetAddress.loopbackIPv4, kAuthPort);
-  }
+Future<List<HttpServer>> _bind() async {
+  final v4 = await HttpServer.bind(InternetAddress.loopbackIPv4, kAuthPort);
+  final v6 = await HttpServer.bind(
+    InternetAddress.loopbackIPv6,
+    kAuthPort,
+    v6Only: true,
+  ).then<HttpServer?>((server) => server, onError: (Object _) => null);
+  return [v4, ?v6];
 }
 
 Future<String> _viaLoopback(Uri url, Uri callback, Duration timeout) async {
-  final server = await _bind();
+  final servers = await _bind();
   final done = Completer<String>();
 
   void respond(HttpRequest request, String body) {
@@ -56,7 +54,7 @@ Future<String> _viaLoopback(Uri url, Uri callback, Duration timeout) async {
     unawaited(request.response.close());
   }
 
-  final sub = server.listen((request) {
+  void handle(HttpRequest request) {
     final uri = request.uri;
     if (uri.path != callback.path) {
       request.response.statusCode = HttpStatus.notFound;
@@ -70,7 +68,9 @@ Future<String> _viaLoopback(Uri url, Uri callback, Duration timeout) async {
     if (!done.isCompleted) {
       done.complete(callback.replace(query: uri.query).toString());
     }
-  });
+  }
+
+  final subs = [for (final server in servers) server.listen(handle)];
 
   try {
     if (!await launchUrl(url, mode: LaunchMode.externalApplication)) {
@@ -86,8 +86,12 @@ Future<String> _viaLoopback(Uri url, Uri callback, Duration timeout) async {
     }
     return result;
   } finally {
-    await sub.cancel();
-    await server.close(force: true);
+    for (final sub in subs) {
+      await sub.cancel();
+    }
+    for (final server in servers) {
+      await server.close(force: true);
+    }
   }
 }
 
