@@ -165,18 +165,43 @@ jobs:
         with:
           workflow: dart.yml
           name: last-sha
+          search_artifacts: true
         continue-on-error: true
 
       - name: Get Commits Since Last Run
         id: commit_logs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          LAST_SHA=""
           if [ -f last_sha.txt ]; then
-            LAST_SHA=$(cat last_sha.txt)
-          else
-            LAST_SHA=$(git rev-list --max-parents=0 HEAD)
+            candidate=$(tr -d '[:space:]' < last_sha.txt)
+            if [ -n "$candidate" ] && git cat-file -e "${candidate}^{commit}" 2>/dev/null; then
+              LAST_SHA="$candidate"
+            fi
           fi
+
+          if [ -z "$LAST_SHA" ]; then
+            echo "last_sha.txt not found or invalid; falling back to latest release tag on grayankit/Dartotsu-Downloader"
+            latest_tag=$(gh release list --repo grayankit/Dartotsu-Downloader --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || true)
+            if [ -n "$latest_tag" ] && git cat-file -e "${latest_tag}^{commit}" 2>/dev/null; then
+              LAST_SHA="$latest_tag"
+            fi
+          fi
+
+          if [ -z "$LAST_SHA" ]; then
+            echo "Falling back to HEAD~1"
+            LAST_SHA=$(git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD | tail -n 1)
+          fi
+
+          echo "Determined previous build SHA: $LAST_SHA"
           echo "Commits since $LAST_SHA:"
-          COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
+          COMMIT_LOGS=$(git log "$LAST_SHA..HEAD" --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)")
+          
+          if [ -z "$COMMIT_LOGS" ]; then
+            COMMIT_LOGS=$(git log -1 --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)")
+          fi
+
           COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
@@ -330,6 +355,7 @@ jobs:
       - name: Discord Notification
         if: github.event_name == 'push' || inputs.dry_run != true || inputs.ping_discord == true
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_LOG: ${{ env.COMMIT_LOG }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           PING_VARIABLE: ${{ (github.event_name == 'workflow_dispatch' && inputs.ping_discord) && '<@&1434448534450606090>' || 'noPing' }}
