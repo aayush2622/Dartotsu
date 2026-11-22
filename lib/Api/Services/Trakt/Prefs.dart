@@ -40,6 +40,8 @@ class TraktPref {
     PrefLocation.PROTECTED,
   );
 
+  static const clientId = Pref('traktClientId', '', PrefLocation.OTHER);
+
   static final homeLayout = layoutPref('traktHomeLayout', kTraktHomeSections);
   static final movieLayout = layoutPref(
     'traktMovieLayout',

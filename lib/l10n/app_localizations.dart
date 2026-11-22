@@ -3863,6 +3863,36 @@ abstract class AppLocalizations {
   /// **'Custom client ID registered on comick.dev'**
   String get comickClientIdDesc;
 
+  /// No description provided for @traktClientId.
+  ///
+  /// In en, this message translates to:
+  /// **'Trakt Client ID'**
+  String get traktClientId;
+
+  /// No description provided for @traktClientIdDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with your own Trakt app instead of the built-in one'**
+  String get traktClientIdDesc;
+
+  /// No description provided for @traktCreateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Create a Trakt app'**
+  String get traktCreateApp;
+
+  /// No description provided for @traktCreateAppDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Opens your apps on trakt.tv'**
+  String get traktCreateAppDesc;
+
+  /// No description provided for @traktRedirectHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'On trakt.tv/oauth/applications create an app and add these Redirect URIs, one per line:\n\n{uris}\n\nThen paste its Client ID here, save and sign in again.'**
+  String traktRedirectHelp(String uris);
+
   /// No description provided for @couldNotUpdateKitsuSettings.
   ///
   /// In en, this message translates to:

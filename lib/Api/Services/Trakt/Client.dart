@@ -7,11 +7,17 @@ import '../../../Core/NetworkManager/NetworkManager.dart';
 import '../../../Core/Services/Api/SharedRequests.dart';
 import '../../../Core/State/State.dart';
 import '../../../Logger.dart';
+import 'Prefs.dart';
 
 const traktApi = 'https://api.trakt.tv';
 const traktAuthUrl = 'https://auth.trakt.tv';
 const traktAppName = 'Dartotsu';
-const traktClientId = 'gMkRIMvbNw8ie4wGwQtT101vsenOVV4R0VGQu_AH_mw';
+const _defaultClientId = 'gMkRIMvbNw8ie4wGwQtT101vsenOVV4R0VGQu_AH_mw';
+
+String get traktClientId {
+  final custom = TraktPref.clientId.value.trim();
+  return custom.isNotEmpty ? custom : _defaultClientId;
+}
 
 String _appVersion = '';
 

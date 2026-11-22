@@ -6,10 +6,14 @@ import '../../../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../../../Model/Setting.dart';
 import '../../../../Utils/Function.dart';
 import '../../../../Utils/Functions/SnackBar.dart';
+import '../../../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../../../Widgets/Components/HomeLayoutSheet.dart';
 import '../Auth.dart';
 import '../Data/User.dart';
 import '../Prefs.dart';
+
+const _appsUrl = 'https://trakt.tv/oauth/applications';
+const _redirects = 'dartotsu://trakt\nhttp://localhost:43721/trakt';
 
 String _shown(Pref<Map<String, bool>> pref) => getString.sectionsShown(
   pref.rx.value.values.where((v) => v).length,
@@ -62,6 +66,21 @@ class TraktSettingsView extends SettingsScreenView {
         ),
       if (user is TraktUser) ..._details(user),
       Setting.normal(
+        name: getString.traktClientId,
+        description: TraktPref.clientId.value.isEmpty
+            ? getString.traktClientIdDesc
+            : TraktPref.clientId.value,
+        icon: Icons.key_rounded,
+        onClick: () =>
+            _edit(context, getString.traktClientId, TraktPref.clientId),
+      ),
+      Setting.normal(
+        name: getString.traktCreateApp,
+        description: getString.traktCreateAppDesc,
+        icon: Icons.open_in_new_rounded,
+        onClick: () => openLinkInBrowser(_appsUrl),
+      ),
+      Setting.normal(
         name: getString.refreshFromTrakt,
         description: getString.repullProfileLibrary,
         icon: Icons.refresh_rounded,
@@ -100,5 +119,31 @@ class TraktSettingsView extends SettingsScreenView {
           icon: Icons.workspace_premium_outlined,
         ),
     ];
+  }
+
+  void _edit(BuildContext context, String title, Pref<String> pref) {
+    final controller = TextEditingController(text: pref.value);
+    AlertDialogBuilder(context)
+      ..setTitle(title)
+      ..setCustomView(
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SelectableText(getString.traktRedirectHelp(_redirects)),
+            const SizedBox(height: 16),
+            TextField(
+              controller: controller,
+              decoration: InputDecoration(labelText: title),
+            ),
+          ],
+        ),
+      )
+      ..setNegativeButton(getString.cancel, null)
+      ..setPositiveButton(getString.save, () {
+        pref.rx.value = controller.text.trim();
+        snackString(getString.saved);
+      })
+      ..show();
   }
 }
