@@ -2,6 +2,7 @@ import 'package:dartotsu_extension_bridge/player.dart';
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math' as math;
 
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart'
     show Mpv;
@@ -269,7 +270,7 @@ class _PlayerPageState extends State<PlayerPage>
     builder: (context, box) => Watch(() {
       final wide = box.maxWidth;
       if (state.panelWidth.value == 0) {
-        state.panelWidth.value = (wide / 3).clamp(280.0, wide);
+        state.panelWidth.value = (wide / 3).clamp(math.min(280.0, wide), wide);
       }
       final panel = state.panel.value;
       return Row(
@@ -277,10 +278,11 @@ class _PlayerPageState extends State<PlayerPage>
           Expanded(child: _stage(context, compact: false)),
           if (panel)
             GestureDetector(
-              onHorizontalDragUpdate: (d) => state.panelWidth.value =
-                  (state.panelWidth.value - d.delta.dx).clamp(250.0, wide),
+              onHorizontalDragUpdate: (d) =>
+                  state.panelWidth.value = (state.panelWidth.value - d.delta.dx)
+                      .clamp(math.min(250.0, wide), wide),
               child: SizedBox(
-                width: state.panelWidth.value,
+                width: math.min(state.panelWidth.value, wide),
                 height: box.maxHeight,
                 child: EpisodePanel(state: state),
               ),
