@@ -124,37 +124,36 @@ class AppLocalizationsKo extends AppLocalizations {
   String get appLockDesc => '앱을 열거나 한참 뒤에 돌아올 때 비밀번호를 물어봐요';
 
   @override
-  String get appLockBiometric => 'Unlock with biometrics';
+  String get appLockBiometric => '생체 인식으로 잠금 해제';
 
   @override
-  String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+  String get appLockBiometricDesc => '비밀번호를 입력하는 대신 지문이나 얼굴을 사용하세요.';
 
   @override
-  String get appLockBiometricReason => 'Unlock Dartotsu';
+  String get appLockBiometricReason => '다르토츠 잠금 해제';
 
   @override
-  String get appLockDelay => 'Lock when idle';
+  String get appLockDelay => '유휴 상태일 때 잠금';
 
   @override
-  String get appLockDelayAlways => 'Always';
+  String get appLockDelayAlways => '항상';
 
   @override
-  String get appLockDelayNever => 'Never';
+  String get appLockDelayNever => '절대로';
 
   @override
   String appLockDelayAfter(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count minutes',
-      one: '1 minute',
+      other: '$count분',
+      one: '1분',
     );
-    return 'After $_temp0';
+    return '후에 $_temp0';
   }
 
   @override
-  String get appLockUseBiometric => 'Use biometrics';
+  String get appLockUseBiometric => '생체 인식 사용';
 
   @override
   String get appLockUnlock => '비밀번호를 입력하세요';
@@ -196,30 +195,30 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count updates available',
-      one: '1 update available',
+      other: '$count 업데이트 가능',
+      one: '업데이트 1개 사용 가능',
     );
     return '$_temp0';
   }
 
   @override
-  String get updateAll => 'Update all';
+  String get updateAll => '모두 업데이트';
 
   @override
   String extensionsUpdated(int done, int total) {
-    return '$done of $total extensions updated';
+    return '$total 확장 프로그램 중 $done이 업데이트되었습니다.';
   }
 
   @override
-  String get updateConflictTitle => 'Update not installed';
+  String get updateConflictTitle => '업데이트가 설치되지 않았습니다.';
 
   @override
   String updateConflictBody(String names) {
-    return '$names could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?';
+    return '$names은(는) 기존 버전 위에 설치할 수 없습니다. 이는 일반적으로 설치된 복사본이 다르게 서명되었음을 의미합니다. 제거하고 새 버전을 설치하시겠습니까?';
   }
 
   @override
-  String get updateConflictAction => 'Uninstall and reinstall';
+  String get updateConflictAction => '제거 및 재설치';
 
   @override
   String get noSourceSettings => '이 소스에는 설정이 없어요';
@@ -234,7 +233,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get addRepository => '저장소 추가';
 
   @override
-  String get importRepositoryFile => 'Import a file';
+  String get importRepositoryFile => '파일 가져오기';
 
   @override
   String get pluginRepoUpdated => '플러그인 저장소를 업데이트했어요';
@@ -279,15 +278,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get selectMediaService => '미디어 서비스 선택';
 
   @override
-  String get manageServices => 'Media services';
+  String get manageServices => '미디어 서비스';
 
   @override
-  String get manageServicesDesc =>
-      'Reorder the services and choose which ones show in the picker';
+  String get manageServicesDesc => '서비스 순서를 변경하고 선택기에 표시할 서비스를 선택하세요.';
 
   @override
-  String get manageServicesHint =>
-      'Drag to reorder, switch off the ones you don\'t use';
+  String get manageServicesHint => '드래그하여 재정렬하고, 사용하지 않는 항목을 끄세요.';
 
   @override
   String get pickColor => '색상 고르기';
@@ -330,7 +327,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsNetwork => '네트워크';
 
   @override
-  String get settingsNetworkDesc => '유저 에이전트, 인증서, DNS, 프록시';
+  String get settingsNetworkDesc => '사용자 에이전트, 인증서, DNS 및 프록시';
 
   @override
   String get settingsAccountDesc => '트래킹 서비스와 로그인';
@@ -366,25 +363,25 @@ class AppLocalizationsKo extends AppLocalizations {
   String get customPath => '사용자 지정 저장 경로';
 
   @override
-  String get stories => 'Stories';
+  String get stories => '스토리';
 
   @override
-  String get watchOrder => 'Watch order';
+  String get watchOrder => '시계 주문';
 
   @override
-  String get watchOrderOpenSite => 'Open on chiaki.site';
+  String get watchOrderOpenSite => 'chiaki.site에서 열기';
 
   @override
-  String get watchOrderUnavailable => 'No watch order was found for this title';
+  String get watchOrderUnavailable => '이 타이틀에 대한 시계 주문을 찾을 수 없습니다.';
 
   @override
-  String get watchOrderOpenFailed => 'Couldn\'t open that title';
+  String get watchOrderOpenFailed => '해당 제목을 열 수 없습니다.';
 
   @override
-  String get watchOrderCurrent => 'You are here';
+  String get watchOrderCurrent => '당신은 여기에 있습니다';
 
   @override
-  String get watchOrderCredit => 'Watch orders by chiaki.site';
+  String get watchOrderCredit => 'chiaki.site의 주문 보기';
 
   @override
   String get customPathDesc => '앱 데이터를 보관하는 위치예요. 길게 누르면 초기화돼요';
@@ -399,441 +396,436 @@ class AppLocalizationsKo extends AppLocalizations {
   String get differentCacheManagerDesc => '이미지에 다른 캐시 매니저 사용';
 
   @override
-  String get settingsSync => 'Sync settings';
+  String get settingsSync => '동기화 설정';
 
   @override
   String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+      '모든 장치에서 설정을 동일하게 유지하십시오. GitHub 계정의 비공개 Gist에 저장됩니다.';
 
   @override
-  String get settingsSyncSwitch => 'Sync on change';
+  String get settingsSyncSwitch => '변경 시 동기화';
 
   @override
   String get settingsSyncModeGithub => 'GitHub';
 
   @override
-  String get settingsSyncSignIn => 'Sign in with GitHub';
+  String get settingsSyncSignIn => 'GitHub로 로그인';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+  String get settingsSyncSignInDesc => '설정은 계정의 비공개 요점에 저장됩니다.';
 
   @override
-  String get settingsSyncToken => 'Use a personal access token';
+  String get settingsSyncToken => '개인 액세스 토큰 사용';
 
   @override
   String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+      'Gist 권한만으로 github.com/settings/tokens에서 토큰을 생성하세요.';
 
   @override
-  String get settingsSyncTokenField => 'Token';
+  String get settingsSyncTokenField => '토큰';
 
   @override
   String settingsSyncSignedIn(Object user) {
-    return 'Signed in as $user';
+    return '$user(으)로 로그인됨';
   }
 
   @override
-  String get settingsSyncSignOut => 'Sign out';
+  String get settingsSyncSignOut => '로그아웃';
 
   @override
   String settingsSyncCode(Object code) {
-    return 'Enter $code on GitHub';
+    return 'GitHub에 $code을 입력하세요.';
   }
 
   @override
   String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+      '브라우저에 GitHub 페이지가 열렸습니다. 코드를 복사하려면 탭하고, 취소하려면 길게 탭하세요.';
 
   @override
-  String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+  String get settingsSyncSignInFailed => 'GitHub에 로그인할 수 없습니다.';
 
   @override
-  String get dcPreview => 'Preview';
+  String get dcPreview => '미리보기';
 
   @override
-  String get dcSampleWatching => 'Watching';
+  String get dcSampleWatching => '시청 중';
 
   @override
-  String get dcSampleReading => 'Reading';
+  String get dcSampleReading => '독서';
 
   @override
-  String get dcSampleBrowsing => 'Browsing';
+  String get dcSampleBrowsing => '찾아보기';
 
   @override
-  String get dcSampleLive => 'Right now';
+  String get dcSampleLive => '지금 당장';
 
   @override
   String get dcLiveNothing =>
-      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+      '지금은 아무것도 표시되지 않습니다. 타이틀을 열고 에피소드나 챕터를 시작하면 여기에 표시됩니다.';
 
   @override
-  String get dcMemberList => 'In the member list';
+  String get dcMemberList => '회원 목록에서';
 
   @override
-  String get dcAccount => 'Account';
+  String get dcAccount => '계정';
 
   @override
-  String get dcSignIn => 'Sign in with Discord';
+  String get dcSignIn => '디스코드로 로그인';
 
   @override
-  String get dcSignOut => 'Sign out';
+  String get dcSignOut => '로그아웃';
 
   @override
   String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
+      '연결하지 않으면 Discord는 데스크톱 앱을 통해 \"Dartotsu 시청 중\"을 표시합니다. 모바일을 포함하여 제목 뒤에 활동 이름을 지정하려면 Discord를 연결하세요.';
 
   @override
   String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+      'Discord를 연결하여 보고 있는 내용이나 읽고 있는 내용을 표시해 보세요. 계정 토큰이 아닌 Discord의 승인 페이지를 사용합니다.';
 
   @override
-  String get dcConnect => 'Connect Discord';
+  String get dcConnect => '디스코드 연결';
 
   @override
   String get dcConnectDesc =>
-      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+      'Discord의 승인 페이지를 열고 승인된 앱 아래에 Dartotsu를 추가합니다. Discord에서 귀하의 현재 상태를 업데이트하라고 요청합니다. 계정 토큰이 아닌 새로 고침 토큰만 저장됩니다.';
 
   @override
-  String get dcConnectFailed => 'Could not connect Discord';
+  String get dcConnectFailed => '디스코드를 연결할 수 없습니다';
 
   @override
-  String get dcConnectedSnack => 'Discord connected';
+  String get dcConnectedSnack => '디스코드 연결됨';
 
   @override
-  String get dcDisconnect => 'Disconnect';
+  String get dcDisconnect => '연결 끊기';
 
   @override
-  String get dcDisconnectedSnack => 'Discord disconnected';
+  String get dcDisconnectedSnack => '디스코드 연결이 끊어졌습니다';
 
   @override
-  String get dcUseToken => 'Use a token instead';
+  String get dcUseToken => '대신 토큰을 사용하세요';
 
   @override
-  String get dcRouteDesktop => 'Through the Discord desktop app';
+  String get dcRouteDesktop => 'Discord 데스크톱 앱을 통해';
 
   @override
-  String get dcRouteHeadless => 'Through your account';
+  String get dcRouteHeadless => '귀하의 계정을 통해';
 
   @override
-  String get dcRouteGateway => 'Through your account, live';
+  String get dcRouteGateway => '귀하의 계정을 통해 실시간으로';
 
   @override
-  String get dcRouteLinked => 'Connected app';
+  String get dcRouteLinked => '연결된 앱';
 
   @override
-  String get dcRouteNone => 'Not connected';
+  String get dcRouteNone => '연결되지 않음';
 
   @override
   String get dcStatusNeedsToken =>
-      'Needs a Discord token. Connecting the app does not set your online status.';
+      'Discord 토큰이 필요합니다. 앱을 연결해도 온라인 상태가 설정되지 않습니다.';
 
   @override
-  String get dcAccountOnly => 'Needs a signed-in account';
+  String get dcAccountOnly => '로그인된 계정이 필요합니다';
 
   @override
-  String get dcStatusSection => 'Status';
+  String get dcStatusSection => '상태';
 
   @override
-  String get dcControlStatus => 'Control my status';
+  String get dcControlStatus => '내 상태 제어';
 
   @override
   String get dcControlStatusDesc =>
-      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+      'Rich Presence가 켜져 있는 동안 Discord에 대한 실시간 연결을 유지하므로 Dartotsu가 상태를 설정할 수 있습니다.';
 
   @override
-  String get dcStatusOnline => 'Online';
+  String get dcStatusOnline => '온라인';
 
   @override
-  String get dcStatusIdle => 'Idle';
+  String get dcStatusIdle => '유휴';
 
   @override
-  String get dcStatusDnd => 'Do not disturb';
+  String get dcStatusDnd => '방해하지 마세요';
 
   @override
-  String get dcStatusInvisible => 'Invisible';
+  String get dcStatusInvisible => '보이지 않는';
 
   @override
-  String get dcCustomStatus => 'Custom status';
+  String get dcCustomStatus => '맞춤 상태';
 
   @override
-  String get dcCustomStatusHint => 'What are you up to?';
+  String get dcCustomStatusHint => '무슨 일을 하고 있나요?';
 
   @override
-  String get dcActivitySection => 'Activity';
+  String get dcActivitySection => '활동';
 
   @override
-  String get dcShowWatching => 'Show while watching';
+  String get dcShowWatching => '시청하면서 보여주기';
 
   @override
-  String get dcShowReading => 'Show while reading';
+  String get dcShowReading => '읽는 동안 표시';
 
   @override
-  String get dcListening => 'Listening';
+  String get dcListening => '듣기';
 
   @override
-  String get dcCompeting => 'Competing';
+  String get dcCompeting => '경쟁 중';
 
   @override
-  String get dcActivityName => 'Activity name';
+  String get dcActivityName => '활동명';
 
   @override
   String get dcNameApp => 'Dartotsu';
 
   @override
-  String get dcNameTitle => 'Title';
+  String get dcNameTitle => '제목';
 
   @override
-  String get dcNameCustom => 'Custom';
+  String get dcNameCustom => '맞춤';
 
   @override
-  String get dcCustomNameHint => 'Name shown after “Watching”';
+  String get dcCustomNameHint => '\'Watching\' 뒤에 표시되는 이름';
 
   @override
-  String get dcStatusText => 'Status text';
+  String get dcStatusText => '상태 텍스트';
 
   @override
-  String get dcStatusTextDesc => 'What the member list shows next to your name';
+  String get dcStatusTextDesc => '귀하의 이름 옆에 회원 목록이 표시되는 내용';
 
   @override
-  String get dcDisplayName => 'Name';
+  String get dcDisplayName => '이름';
 
   @override
-  String get dcDisplayState => 'State';
+  String get dcDisplayState => '상태';
 
   @override
-  String get dcDisplayDetails => 'Details';
+  String get dcDisplayDetails => '세부정보';
 
   @override
-  String get dcTextSection => 'Text';
+  String get dcTextSection => '텍스트';
 
   @override
-  String get dcDetails => 'Top line';
+  String get dcDetails => '상위 라인';
 
   @override
-  String get dcState => 'Bottom line';
+  String get dcState => '결론';
 
   @override
-  String get dcTemplateHint => 'Empty uses the default';
+  String get dcTemplateHint => '비어 있으면 기본값을 사용합니다.';
 
   @override
-  String get dcVariables => 'Tap to insert a value';
+  String get dcVariables => '값을 삽입하려면 탭하세요.';
 
   @override
-  String get dcImagesSection => 'Images';
+  String get dcImagesSection => '이미지';
 
   @override
-  String get dcLargeImage => 'Large image';
+  String get dcLargeImage => '큰 이미지';
 
   @override
-  String get dcLargeAuto => 'Auto';
+  String get dcLargeAuto => '자동';
 
   @override
-  String get dcLargeCover => 'Cover';
+  String get dcLargeCover => '표지';
 
   @override
-  String get dcLargeLogo => 'Logo';
+  String get dcLargeLogo => '로고';
 
   @override
-  String get dcSmallImage => 'Small image';
+  String get dcSmallImage => '작은 이미지';
 
   @override
-  String get dcSmallAuto => 'Logo';
+  String get dcSmallAuto => '로고';
 
   @override
-  String get dcSmallNone => 'None';
+  String get dcSmallNone => '없음';
 
   @override
-  String get dcTimerStyle => 'Timer style';
+  String get dcTimerStyle => '타이머 스타일';
 
   @override
-  String get dcTimerAuto => 'Auto';
+  String get dcTimerAuto => '자동';
 
   @override
-  String get dcTimerElapsed => 'Elapsed';
+  String get dcTimerElapsed => '경과됨';
 
   @override
-  String get dcTimerRemaining => 'Remaining';
+  String get dcTimerRemaining => '남은';
 
   @override
-  String get dcButtonsSection => 'Buttons';
+  String get dcButtonsSection => '버튼';
 
   @override
-  String get dcButtonMedia => 'Link to the title';
+  String get dcButtonMedia => '제목 링크';
 
   @override
-  String get dcButtonApp => 'Link to Dartotsu';
+  String get dcButtonApp => '다르토츠 바로가기';
 
   @override
-  String get dcButtonCustom => 'Custom button';
+  String get dcButtonCustom => '맞춤 버튼';
 
   @override
-  String get dcButtonLabel => 'Label';
+  String get dcButtonLabel => '라벨';
 
   @override
-  String get dcButtonUrl => 'Link';
+  String get dcButtonUrl => '링크';
 
   @override
-  String get dcPrivacySection => 'Privacy';
+  String get dcPrivacySection => '개인 정보 보호';
 
   @override
-  String get dcPrivateText => 'Private text';
+  String get dcPrivateText => '비공개 텍스트';
 
   @override
-  String get dcPrivateHint => 'Something private';
+  String get dcPrivateHint => '개인적인 것';
 
   @override
   String get dcTokenWarning =>
-      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+      '로그인하면 계정 토큰이 사용됩니다. Discord의 규칙은 이를 권장하지 않으므로 위험을 감수하고 사용하세요.';
 
   @override
-  String get dcConnected => 'Connected';
+  String get dcConnected => '연결됨';
 
   @override
-  String get dcConnection => 'Connection';
+  String get dcConnection => '연결';
 
   @override
-  String get dcMethodDesktop => 'Discord desktop app';
+  String get dcMethodDesktop => 'Discord 데스크톱 앱';
 
   @override
   String get dcMethodDesktopDesc =>
-      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+      '아무것도 연결되지 않은 경우 자동으로 사용됩니다. 이 컴퓨터에서 Discord가 열려 있어야 합니다.';
 
   @override
-  String get dcMethodToken => 'Account token';
+  String get dcMethodToken => '계정 토큰';
 
   @override
-  String get dcInUse => 'In use';
+  String get dcInUse => '사용 중';
 
   @override
-  String get dcRecommended => 'Recommended';
+  String get dcRecommended => '추천';
 
   @override
-  String get dcConnecting => 'Connecting…';
+  String get dcConnecting => '연결 중…';
 
   @override
-  String get dcDisconnected => 'Not connected';
+  String get dcDisconnected => '연결되지 않음';
 
   @override
   String dcSignedInAs(String name) {
-    return 'Signed in as $name';
+    return '$name(으)로 로그인됨';
   }
 
   @override
-  String get settingsSyncOn => 'On';
+  String get settingsSyncOn => '켜짐';
 
   @override
-  String get settingsSyncCustom => 'Custom';
+  String get settingsSyncCustom => '맞춤';
 
   @override
-  String get settingsSyncChangedHeader => 'Changed settings';
+  String get settingsSyncChangedHeader => '변경된 설정';
 
   @override
-  String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+  String get settingsSyncNoneChanged => '아직 아무것도 변경하지 않았으므로 동기화할 항목이 없습니다.';
 
   @override
   String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+      '변경한 설정만 저장됩니다. 다른 모든 항목은 모든 장치에서 기본값을 사용합니다. 클라우드 아이콘은 서버에 이미 있는 내용을 보여줍니다.';
 
   @override
   String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+      '동기화되지 않습니다. 이는 이 장치에 유지되며 서버 복사본은 그대로 유지됩니다.';
 
   @override
   String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+      '장치당. 끄기는 각 기기의 고유한 가치를 유지하므로 휴대폰과 TV는 다를 수 있습니다.';
 
   @override
-  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+  String get settingsSyncPartSubtitles => '자막 크기 및 색상';
 
   @override
-  String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+  String get settingsSyncPartSubtitlesDesc => '크기, 무게, 색상 및 위치';
 
   @override
-  String get settingsSyncPartPictureColors => 'Picture colours';
+  String get settingsSyncPartPictureColors => '그림 색상';
 
   @override
-  String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+  String get settingsSyncPartPictureColorsDesc => '밝기, 대비, 채도, 감마, 색조 및 HDR';
 
   @override
-  String get settingsSyncPartPalette => 'Theme colours';
+  String get settingsSyncPartPalette => '테마 색상';
 
   @override
-  String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+  String get settingsSyncPartPaletteDesc => '테마, 강조 색상 및 OLED 블랙';
 
   @override
-  String get settingsSyncCatOther => 'Watch, read and services';
+  String get settingsSyncCatOther => '보고, 읽고, 서비스를 받으세요';
 
   @override
-  String get settingsSyncTitles => 'Watch progress and titles';
+  String get settingsSyncTitles => '진행 상황 및 제목 보기';
 
   @override
   String settingsSyncTitlesCount(Object records, Object resume) {
-    return '$records titles and $resume resume entries on the server';
+    return '서버의 $records 제목 및 $resume 이력서 항목';
   }
 
   @override
-  String get settingsSyncTitlesNone => 'Nothing uploaded yet';
+  String get settingsSyncTitlesNone => '아직 업로드된 항목이 없습니다.';
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      '위치, 이력서 선반, 로컬 목록, 북마크, 하이라이트 및 제목별 옵션을 보고 읽을 수 있습니다. 소스 일치 및 스트림은 확장 프로그램에 따라 달라지므로 각 장치에 유지됩니다. 타이틀은 최대 45초마다 업로드됩니다.';
 
   @override
-  String get settingsSyncConnect => 'Not connected';
+  String get settingsSyncConnect => '연결되지 않음';
 
   @override
   String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+      '모든 장치에서 설정을 동일하게 유지하려면 GitHub에 로그인하세요.';
 
   @override
-  String get settingsSyncFailedTitle => 'Sync failed';
+  String get settingsSyncFailedTitle => '동기화 실패';
 
   @override
-  String get settingsSyncPaused => 'Paused';
+  String get settingsSyncPaused => '일시중지됨';
 
   @override
   String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+      '이 기능이 꺼져 있는 동안에는 아무것도 업로드되거나 다운로드되지 않습니다.';
 
   @override
-  String get settingsSyncUpToDate => 'Up to date';
+  String get settingsSyncUpToDate => '최신';
 
   @override
-  String get settingsSyncRetry => 'Retry';
+  String get settingsSyncRetry => '재시도';
 
   @override
-  String get settingsSyncAccount => 'GitHub account';
+  String get settingsSyncAccount => 'GitHub 계정';
 
   @override
   String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+      '귀하의 데이터는 귀하 자신의 계정에 있는 비공개 요점으로 이동됩니다.';
 
   @override
-  String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
+  String get settingsSyncWaiting => 'GitHub에서 승인을 기다리는 중';
 
   @override
-  String get settingsSyncCopyCode => 'Tap the code to copy it';
+  String get settingsSyncCopyCode => '코드를 탭하여 복사하세요.';
 
   @override
-  String get settingsSyncCancel => 'Cancel';
+  String get settingsSyncCancel => '취소';
 
   @override
-  String get settingsSyncStatSettings => 'Settings';
+  String get settingsSyncStatSettings => '설정';
 
   @override
-  String get settingsSyncStatTitles => 'Titles';
+  String get settingsSyncStatTitles => '제목';
 
   @override
-  String get settingsSyncStatShelf => 'Resume';
+  String get settingsSyncStatShelf => '이력서';
 
   @override
   String settingsSyncUploaded(Object time, Object device) {
-    return 'Uploaded $time from $device';
+    return '$device에서 $time을(를) 업로드했습니다.';
   }
 
   @override
@@ -841,121 +833,120 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count changed',
-      one: '1 changed',
-      zero: 'Nothing changed yet',
+      other: '$count 변경됨',
+      one: '1개 변경됨',
+      zero: '아직 아무것도 바뀌지 않았습니다',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncSecrets => 'Accounts and passwords';
+  String get settingsSyncSecrets => '계정 및 비밀번호';
 
   @override
   String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+      '로그인(AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API 키 및 앱 잠금을 기기 간에 동기화하세요. 장치에 남아 있는 암호로 암호화되므로 GitHub에서는 이를 볼 수 없습니다.';
 
   @override
-  String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
+  String get settingsSyncSecretsOn => '계정이 동기화되고 암호화됩니다.';
 
   @override
-  String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+  String get settingsSyncSecretsOnDesc => '한 장치에서 로그아웃해도 다른 장치에서는 로그아웃되지 않습니다.';
 
   @override
   String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+      '암호가 더 이상 서버의 암호와 일치하지 않습니다. 계정을 계속 동기화하려면 다시 입력하세요.';
 
   @override
-  String get settingsSyncPassphraseSet => 'Set a passphrase';
+  String get settingsSyncPassphraseSet => '암호 설정';
 
   @override
-  String get settingsSyncPassphraseEnter => 'Enter your passphrase';
+  String get settingsSyncPassphraseEnter => '암호를 입력하세요';
 
   @override
-  String get settingsSyncPassphraseField => 'Passphrase';
+  String get settingsSyncPassphraseField => '암호';
 
   @override
-  String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
+  String get settingsSyncPassphraseConfirm => '암호를 반복하세요';
 
   @override
   String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+      '6자 이상의 암호를 선택하세요. 귀하의 장치 외에는 어디에도 저장되지 않으며 복구할 수 없습니다. 잊어버린 경우 서버 복사본을 삭제하고 다시 시작하세요.';
 
   @override
   String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+      '다른 장치에서 선택한 암호를 입력하세요. 이 기기의 계정은 동기화된 계정으로 대체됩니다.';
 
   @override
-  String get settingsSyncPassphraseWrong => 'Wrong passphrase';
+  String get settingsSyncPassphraseWrong => '잘못된 암호';
 
   @override
-  String get settingsSyncPassphraseMismatch => 'The passphrases do not match';
+  String get settingsSyncPassphraseMismatch => '암호가 일치하지 않습니다.';
 
   @override
-  String get settingsSyncPassphraseShort => 'Use at least 6 characters';
+  String get settingsSyncPassphraseShort => '6자 이상 사용하세요.';
 
   @override
-  String get settingsSyncSecretsStop => 'Stop syncing accounts';
+  String get settingsSyncSecretsStop => '계정 동기화 중지';
 
   @override
-  String get settingsSyncSecretsDelete => 'Delete from GitHub';
+  String get settingsSyncSecretsDelete => 'GitHub에서 삭제';
 
   @override
   String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+      '그러면 요점에서 암호화된 계정 파일이 제거됩니다. 다른 장치에서는 로그인이 유지되며 새 암호를 설정할 수 있습니다.';
 
   @override
-  String get settingsSyncWhat => 'What to sync';
+  String get settingsSyncWhat => '동기화할 항목';
 
   @override
-  String get settingsSyncServer => 'On the server';
+  String get settingsSyncServer => '서버에서';
 
   @override
-  String get settingsSyncServerEmpty => 'Nothing uploaded yet';
+  String get settingsSyncServerEmpty => '아직 업로드된 항목이 없습니다.';
 
   @override
   String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count settings, uploaded $time from $device';
+    return '$count 설정, $device에서 $time 업로드됨';
   }
 
   @override
-  String get settingsSyncThisDevice => 'this device';
+  String get settingsSyncThisDevice => '이 장치';
 
   @override
   String settingsSyncCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count settings on the server',
-      one: '1 setting on the server',
-      zero: 'Nothing on the server',
+      other: '$count 서버의 설정',
+      one: '서버의 설정 1개',
+      zero: '서버에 아무것도 없습니다',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncNow => 'Sync now';
+  String get settingsSyncNow => '지금 동기화';
 
   @override
-  String get settingsSyncRunning => 'Syncing…';
+  String get settingsSyncRunning => '동기화 중…';
 
   @override
-  String get settingsSyncNever => 'Not synced yet';
+  String get settingsSyncNever => '아직 동기화되지 않음';
 
   @override
   String settingsSyncLast(Object time) {
-    return 'Last synced $time';
+    return '마지막 동기화 $time';
   }
 
   @override
   String settingsSyncFailed(Object error) {
-    return 'Sync failed: $error';
+    return '동기화 실패: $error';
   }
 
   @override
   String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+      '어디에서나 동일하게 작동하는 설정만 동기화됩니다. 계정, 토큰, 폴더, 확장 프로그램, 알림, Discord, 업데이트 및 창 크기는 각 장치에 유지됩니다.';
 
   @override
   String get backupAndRestore => '백업 및 복원';
@@ -973,11 +964,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get loadExtensionsIcon => '확장 프로그램 아이콘 불러오기';
 
   @override
-  String get autoUpdateRuntimes => 'Update extension runtimes automatically';
+  String get autoUpdateRuntimes => '확장 런타임을 자동으로 업데이트';
 
   @override
   String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+      '백그라운드에서 새로운 Aniyomi, CloudStream 및 기타 런타임 버전을 다운로드하세요. 끄면 대신 관리자 옆에 업데이트 아이콘이 나타납니다.';
 
   @override
   String get loadExtensionsIconDesc => '확장 프로그램 목록에 소스 아이콘 표시';
@@ -1022,15 +1013,14 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get backupPasswordRequired => 'Password (required for account data)';
+  String get backupPasswordRequired => '비밀번호(계정 데이터에 필요)';
 
   @override
   String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+      '계정 데이터를 백업하려면 비밀번호를 설정하거나 선택을 취소하세요.';
 
   @override
-  String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+  String get backupProtectedSkipped => '이 백업에는 비밀번호가 없으므로 계정 데이터를 건너뛰었습니다.';
 
   @override
   String get backupPassword => '비밀번호 (선택)';
@@ -1149,63 +1139,63 @@ class AppLocalizationsKo extends AppLocalizations {
   String get logFileDesc => '앱 로그를 공유하거나, Linux에서는 경로를 복사해요';
 
   @override
-  String get logDelete => 'Delete log files';
+  String get logDelete => '로그 파일 삭제';
 
   @override
-  String get logDeleteDesc => 'Clear the saved app logs to free up space';
+  String get logDeleteDesc => '저장된 앱 로그를 지워 공간을 확보하세요.';
 
   @override
   String logDeleted(String size) {
-    return 'Deleted $size of logs';
+    return '로그의 $size을(를) 삭제했습니다.';
   }
 
   @override
-  String get missingSequel => 'Missing Sequel';
+  String get missingSequel => '누락된 속편';
 
   @override
-  String get rising => 'Rising';
+  String get rising => '상승';
 
   @override
-  String get stacks => 'Stacks';
+  String get stacks => '스택';
 
   @override
-  String get stacksAll => 'All';
+  String get stacksAll => '모두';
 
   @override
-  String get stacksFeatured => 'Featured';
+  String get stacksFeatured => '추천';
 
   @override
-  String get stacksMine => 'Yours';
+  String get stacksMine => '너의 것';
 
   @override
-  String get stacksSaved => 'Saved';
+  String get stacksSaved => '저장됨';
 
   @override
-  String get stacksFollowing => 'Following';
+  String get stacksFollowing => '팔로잉';
 
   @override
-  String get stacksEmpty => 'No stacks here yet';
+  String get stacksEmpty => '아직 스택이 없습니다.';
 
   @override
-  String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
+  String get stacksSignIn => '스택을 보려면 MangaBaka에 로그인하세요.';
 
   @override
   String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+      '스택에 새로운 권한이 필요합니다. 허용하려면 MangaBaka에 다시 로그인하세요.';
 
   @override
-  String get stacksSignInAgain => 'Sign in again';
+  String get stacksSignInAgain => '다시 로그인';
 
   @override
-  String get stacksCouldntLoad => 'Couldn\'t load the stacks';
+  String get stacksCouldntLoad => '스택을 로드할 수 없습니다.';
 
   @override
   String stackSeriesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count series',
-      one: '1 series',
+      other: '$count 시리즈',
+      one: '시리즈 1개',
     );
     return '$_temp0';
   }
@@ -1215,48 +1205,48 @@ class AppLocalizationsKo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count saves',
-      one: '1 save',
+      other: '$count 저장',
+      one: '1번 저장',
     );
     return '$_temp0';
   }
 
   @override
   String stackBy(String name) {
-    return 'by $name';
+    return '작성자: $name';
   }
 
   @override
-  String get stackSpoilers => 'Spoilers';
+  String get stackSpoilers => '스포일러';
 
   @override
-  String get stackEmptyEntries => 'This stack is empty';
+  String get stackEmptyEntries => '이 스택은 비어 있습니다.';
 
   @override
-  String get stackSave => 'Save stack';
+  String get stackSave => '스택 저장';
 
   @override
-  String get stackUnsave => 'Remove from saved';
+  String get stackUnsave => '저장된 항목에서 삭제';
 
   @override
-  String get stackSavedToast => 'Saved to your stacks';
+  String get stackSavedToast => '스택에 저장됨';
 
   @override
-  String get stackRemovedToast => 'Removed from your saved stacks';
+  String get stackRemovedToast => '저장된 스택에서 삭제되었습니다.';
 
   @override
   String userStacks(String name) {
-    return 'Stacks by $name';
+    return '$name별 스택';
   }
 
   @override
-  String get newsTitle => 'News';
+  String get newsTitle => '뉴스';
 
   @override
-  String get newsEmpty => 'No news right now';
+  String get newsEmpty => '지금은 소식이 없습니다';
 
   @override
-  String get newsCouldntLoad => 'Couldn\'t load the news';
+  String get newsCouldntLoad => '뉴스를 로드할 수 없습니다.';
 
   @override
   String get logFileCopied => '로그 경로를 복사했어요';
@@ -1287,11 +1277,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get followCoverDesc => '색상이 배경을 따라가고, 상세 페이지에서는 커버를 따라가요';
 
   @override
-  String get followCoverMediaOnly => 'Only for media';
+  String get followCoverMediaOnly => '미디어에만 해당';
 
   @override
   String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+      '미디어 페이지의 표지만 따르고 다른 모든 페이지에서는 일반 색상을 유지합니다.';
 
   @override
   String get cardStyle => '카드 스타일';
@@ -1327,7 +1317,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get defaultFont => '기본';
 
   @override
-  String get materialYou => 'Material You';
+  String get materialYou => '재료 당신';
 
   @override
   String get materialYouDesc => '시스템의 다이내믹 컬러';
@@ -1387,7 +1377,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get checkNow => '지금 확인';
 
   @override
-  String get userAgent => 'User-Agent';
+  String get userAgent => '사용자 에이전트';
 
   @override
   String get settingDefault => '기본';
@@ -1467,7 +1457,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get imageTitleCover => '커버';
 
   @override
-  String get imageTitlePage => 'Page';
+  String get imageTitlePage => '페이지';
 
   @override
   String get imageTitleBanner => '배너';
@@ -1498,16 +1488,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get discordDesc => '커뮤니티와 지원';
 
   @override
-  String get supportDeveloper => 'Support the developer';
+  String get supportDeveloper => '개발자 지원';
 
   @override
-  String get buyMeCoffee => 'Buy me a coffee';
+  String get buyMeCoffee => '나에게 커피를 사다';
 
   @override
   String get upiId => 'UPI ID';
 
   @override
-  String get upiCopied => 'UPI ID copied';
+  String get upiCopied => 'UPI ID가 복사되었습니다.';
 
   @override
   String get donateDesc => '개발 후원';
@@ -1522,7 +1512,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get contributorsLoadFailed => '기여자를 불러오지 못했어요';
 
   @override
-  String get forks => 'Forks';
+  String get forks => '포크';
 
   @override
   String get forksDesc => 'Dartotsu를 기반으로 만든 프로젝트';
@@ -1562,7 +1552,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get onboardingLanguageBody =>
-      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+      'Dartotsu가 표시되는 언어를 선택하세요. 나중에 설정에서 변경할 수 있습니다.';
 
   @override
   String get onboardingPaletteTitle => '나만의 앱 만들기';
@@ -1663,24 +1653,24 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String calendarChapter(int n) {
-    return 'Chapter $n';
+    return '$n 장';
   }
 
   @override
-  String get calendarExpected => 'Expected';
+  String get calendarExpected => '예상';
 
   @override
-  String get castReceiverFailed => 'The Chromecast did not start its player';
+  String get castReceiverFailed => 'Chromecast가 플레이어를 시작하지 않았습니다.';
 
   @override
-  String get castPlaybackFailed => 'The device could not play this stream';
+  String get castPlaybackFailed => '기기에서 이 스트림을 재생할 수 없습니다.';
 
   @override
-  String get shortcutNothingToContinue => 'Nothing to continue yet';
+  String get shortcutNothingToContinue => '아직 계속할 항목이 없습니다.';
 
   @override
   String shortcutNoCalendar(String service) {
-    return '$service has no calendar';
+    return '$service에는 달력이 없습니다';
   }
 
   @override
@@ -1704,7 +1694,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get linkSettingsFailed => '시스템 설정을 열 수 없어요';
 
   @override
-  String get discordRichPresence => 'Rich Presence';
+  String get discordRichPresence => '풍부한 존재감';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1833,7 +1823,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord 토큰을 삭제했어요';
 
   @override
-  String get discordRichPresenceRow => 'Discord Rich Presence';
+  String get discordRichPresenceRow => '불일치의 풍부한 존재';
 
   @override
   String get discordRichPresenceRowOn => '켜짐 · 탭해서 모양 변경';
@@ -1874,82 +1864,82 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mangaBakaLoginFailed => 'MangaBaka 로그인에 실패했어요';
 
   @override
-  String get comickLoginFailed => 'Comick login failed';
+  String get comickLoginFailed => '코믹 로그인 실패';
 
   @override
-  String get tagline => 'Tagline';
+  String get tagline => '태그라인';
 
   @override
-  String get trending => 'Trending';
+  String get trending => '인기 급상승';
 
   @override
-  String get anticipated => 'Anticipated';
+  String get anticipated => '예상됨';
 
   @override
-  String get watchlist => 'Watchlist';
+  String get watchlist => '관심 목록';
 
   @override
-  String get recommendedShows => 'Recommended Shows';
+  String get recommendedShows => '추천 공연';
 
   @override
-  String get recommendedMovies => 'Recommended Movies';
+  String get recommendedMovies => '추천 영화';
 
   @override
-  String get boxOffice => 'Box Office';
+  String get boxOffice => '매표소';
 
   @override
-  String get popularMovies => 'Popular Movies';
+  String get popularMovies => '인기 영화';
 
   @override
-  String get popularShows => 'Popular Shows';
+  String get popularShows => '인기 프로그램';
 
   @override
-  String get anticipatedMovies => 'Anticipated Movies';
+  String get anticipatedMovies => '기대되는 영화';
 
   @override
-  String get anticipatedShows => 'Anticipated Shows';
+  String get anticipatedShows => '예상되는 쇼';
 
   @override
-  String get trendingShows => 'Trending Shows';
+  String get trendingShows => '인기 프로그램';
 
   @override
-  String get mostWatchedThisWeek => 'Most Watched This Week';
+  String get mostWatchedThisWeek => '이번 주에 가장 많이 본 동영상';
 
   @override
-  String get sortMostViewed => 'Most viewed';
+  String get sortMostViewed => '가장 많이 본';
 
   @override
-  String get sortMostFollowed => 'Most followed';
+  String get sortMostFollowed => '가장 많이 팔로우된 사람';
 
   @override
-  String get sortLatestUpdates => 'Latest updates';
+  String get sortLatestUpdates => '최신 업데이트';
 
   @override
-  String get translationStatusLabel => 'Translation';
+  String get translationStatusLabel => '번역';
 
   @override
-  String get weeklySchedule => 'Weekly Schedule';
+  String get weeklySchedule => '주간 일정';
 
   @override
-  String get mostFollowed => 'Most Followed';
+  String get mostFollowed => '최다 팔로우';
 
   @override
-  String get latestUpdates => 'Latest Updates';
+  String get latestUpdates => '최신 업데이트';
 
   @override
-  String get trendingAnime => 'Trending Anime';
+  String get trendingAnime => '인기 애니메이션';
 
   @override
-  String get topRatedAnime => 'Top Rated Anime';
+  String get topRatedAnime => '최고 평점 애니메이션';
 
   @override
-  String get mostFollowedAnime => 'Most Followed Anime';
+  String get mostFollowedAnime => '가장 많이 팔로우된 애니메이션';
 
   @override
-  String get comickProfile => 'Comick profile';
+  String get comickProfile => '코믹 프로필';
 
   @override
-  String get refreshFromComick => 'Refresh from Comick';
+  String get refreshFromComick => 'Comick에서 새로 고침';
 
   @override
   String get mangaBakaProfile => 'MangaBaka 프로필';
@@ -1958,25 +1948,25 @@ class AppLocalizationsKo extends AppLocalizations {
   String get refreshFromMangaBaka => 'MangaBaka에서 새로고침';
 
   @override
-  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+  String get mangaUpdatesLoginTitle => 'MangaUpdates에 로그인';
 
   @override
-  String get mangaUpdatesProfile => 'MangaUpdates profile';
+  String get mangaUpdatesProfile => '만화업데이트 프로필';
 
   @override
-  String get mangaUpdatesAnimeStart => 'Anime adaptation starts';
+  String get mangaUpdatesAnimeStart => '애니메이션 각색 시작';
 
   @override
-  String get mangaUpdatesAnimeEnd => 'Anime adaptation ends';
+  String get mangaUpdatesAnimeEnd => '애니메이션 각색 종료';
 
   @override
-  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+  String get refreshFromMangaUpdates => '만화 업데이트에서 새로 고침';
 
   @override
-  String get usernameOnly => 'Username';
+  String get usernameOnly => '사용자 이름';
 
   @override
-  String get releases => 'Releases';
+  String get releases => '릴리스';
 
   @override
   String get artistsLabel => '아티스트';
@@ -2007,7 +1997,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get hideNsfwSourcesDesc =>
-      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+      '피드와 소스 선택기에서 18세 이상으로 표시된 소스를 숨깁니다. 설치된 상태로 유지됩니다.';
 
   @override
   String get hideNsfwDesc => '성인 작품을 피드와 검색에서 빼고, 내 성인 작품은 숨긴 미디어에 모아둬요.';
@@ -2019,13 +2009,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka 계정 옵션';
 
   @override
-  String get comickAccountOptions => 'Comick account options';
+  String get comickAccountOptions => '코믹 계정 옵션';
 
   @override
-  String get comickClientId => 'Comick Client ID';
+  String get comickClientId => '코믹 클라이언트 ID';
 
   @override
-  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc => 'comick.dev에 등록된 사용자 정의 클라이언트 ID';
 
   @override
   String get couldNotUpdateKitsuSettings => 'Kitsu 설정을 업데이트하지 못했어요';
@@ -2094,7 +2084,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get simklReadOnly => 'Simkl이 읽기 전용 접근을 허용했어요';
 
   @override
-  String get traktReadOnly => 'Trakt granted read-only access';
+  String get traktReadOnly => 'Trakt에 읽기 전용 액세스 권한이 부여됨';
 
   @override
   String get incognitoEditsBlocked => '시크릿 모드: 리스트 편집이 막혀 있어요';
@@ -2121,10 +2111,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get following => '팔로잉';
 
   @override
-  String get followsMutual => 'Mutual';
+  String get followsMutual => '상호';
 
   @override
-  String get followsNotMutual => 'Not mutual';
+  String get followsNotMutual => '상호적이지 않음';
 
   @override
   String get homeSections => '홈 섹션';
@@ -2148,7 +2138,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get addList => '리스트 추가';
 
   @override
-  String get voiceActors => 'Voice actors';
+  String get voiceActors => '성우';
 
   @override
   String voiceActorsIn(String name) {
@@ -2180,10 +2170,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get prequelSequel => '프리퀄 & 시퀄';
 
   @override
-  String get prequel => 'Prequel';
+  String get prequel => '전편';
 
   @override
-  String get sequel => 'Sequel';
+  String get sequel => '속편';
 
   @override
   String get previousSeason => '이전 시즌';
@@ -2219,13 +2209,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get simklProfile => 'Simkl 프로필';
 
   @override
-  String get traktProfile => 'Trakt profile';
+  String get traktProfile => '트랙트 프로필';
 
   @override
   String get refreshFromSimkl => 'Simkl에서 새로고침';
 
   @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
+  String get refreshFromTrakt => 'Trakt에서 새로 고침';
 
   @override
   String get repullProfileLibrary => '프로필과 라이브러리를 다시 가져와요';
@@ -2240,20 +2230,19 @@ class AppLocalizationsKo extends AppLocalizations {
   String get simklAttribution => '데이터와 아트워크 제공: Simkl. Simkl에서 보기';
 
   @override
-  String get traktAttribution =>
-      'Data and artwork provided by Trakt. View on Trakt';
+  String get traktAttribution => 'Trakt에서 제공하는 데이터 및 삽화. Trakt에서 보기';
 
   @override
-  String get listsLiked => 'Liked';
+  String get listsLiked => '좋아요를 누른';
 
   @override
-  String get listsYours => 'Yours';
+  String get listsYours => '너의 것';
 
   @override
   String get traktVip => 'VIP';
 
   @override
-  String get traktVipMember => 'Trakt VIP Member';
+  String get traktVipMember => '트랙트 VIP 회원';
 
   @override
   String get onHold => '보류 중';
@@ -2280,11 +2269,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get moviesAndSeries => '영화 & 시리즈';
 
   @override
-  String get simklMoviesOnly => 'Movies & series only';
+  String get simklMoviesOnly => '영화 및 시리즈만';
 
   @override
   String get simklMoviesOnlyDesc =>
-      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+      '애니메이션 탭을 대체합니다. 영화를 먼저 표시한 다음 몇 개의 애니메이션 행으로 표시합니다.';
 
   @override
   String get trackingOnly => '트래킹 전용';
@@ -2317,7 +2306,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get trailer => '예고편';
 
   @override
-  String get trailerQuality => 'Trailer quality';
+  String get trailerQuality => '예고편 품질';
 
   @override
   String get titleCopied => '제목을 복사했어요';
@@ -2332,8 +2321,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get copyTitle => '제목 복사';
 
   @override
-  String get detailStale =>
-      'AniList could not be reached. This is saved information and may be outdated.';
+  String get detailStale => 'AniList에 연결할 수 없습니다. 이는 저장된 정보이므로 오래된 정보일 수 있습니다.';
 
   @override
   String get copyLink => '링크 복사';
@@ -2374,48 +2362,48 @@ class AppLocalizationsKo extends AppLocalizations {
   String get popular => '인기';
 
   @override
-  String get allCustomLists => 'All custom lists';
+  String get allCustomLists => '모든 맞춤 목록';
 
   @override
-  String get simklTitleLanguage => 'Anime title language';
+  String get simklTitleLanguage => '애니메이션 제목 언어';
 
   @override
-  String get titleLanguageEnglish => 'English';
+  String get titleLanguageEnglish => '영어';
 
   @override
-  String get titleLanguageRomaji => 'Romaji';
+  String get titleLanguageRomaji => '로마자';
 
   @override
-  String get simklListsTrending => 'Trending';
+  String get simklListsTrending => '인기 급상승';
 
   @override
-  String get simklListsMostLiked => 'Most liked';
+  String get simklListsMostLiked => '가장 좋아하는';
 
   @override
-  String get simklListsMostFollowed => 'Most followed';
+  String get simklListsMostFollowed => '가장 많이 팔로우된 사람';
 
   @override
-  String get simklListsOfficial => 'Official';
+  String get simklListsOfficial => '공식';
 
   @override
   String simklListTitles(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
+      other: '$count 제목',
+      one: '타이틀 1개',
     );
     return '$_temp0';
   }
 
   @override
-  String get people => 'People';
+  String get people => '사람';
 
   @override
-  String get mostComments => 'Most comments';
+  String get mostComments => '댓글이 가장 많음';
 
   @override
-  String get alphabetical => 'Alphabetical';
+  String get alphabetical => '알파벳순';
 
   @override
   String get latest => '최신';
@@ -2512,7 +2500,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get listOnly => '리스트만';
 
   @override
-  String get notInList => 'Not In List';
+  String get notInList => '목록에 없음';
 
   @override
   String get filter => '필터';
@@ -2629,21 +2617,20 @@ class AppLocalizationsKo extends AppLocalizations {
   String get refresh => '새로고침';
 
   @override
-  String get animePlanetRank => 'Rank';
+  String get animePlanetRank => '순위';
 
   @override
-  String get animePlanetMagazine => 'Magazine';
+  String get animePlanetMagazine => '잡지';
 
   @override
-  String get animePlanetRefreshLists => 'Refresh your lists';
+  String get animePlanetRefreshLists => '목록 새로고침';
 
   @override
-  String get animePlanetRefreshListsDesc =>
-      'Read your Anime-Planet lists again';
+  String get animePlanetRefreshListsDesc => 'Anime-Planet 목록을 다시 읽어보세요.';
 
   @override
   String get animePlanetLocalNote =>
-      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
+      'Anime-Planet 계정에 대한 변경 사항을 저장하려면 로그인하세요. 그때까지는 이 기기에 남아있습니다';
 
   @override
   String get share => '공유';
@@ -3146,14 +3133,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readingTabDesc => '세 번째 탭에 보여줄 확장 프로그램';
 
   @override
-  String get firstTab => 'First tab';
+  String get firstTab => '첫 번째 탭';
 
   @override
   String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+      '첫 번째 탭에 표시되는 확장 프로그램입니다. 여기에서 만화를 선택하고 읽기 탭에서 소설을 선택하여 바에서 애니메이션을 삭제하세요.';
 
   @override
-  String get novelExtensions => 'Novel Extensions';
+  String get novelExtensions => '소설 확장';
 
   @override
   String get defaultFeed => '기본 피드';
@@ -3400,10 +3387,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get season => '시즌';
 
   @override
-  String get year => 'Year';
+  String get year => '연도';
 
   @override
-  String get filterAny => 'Any';
+  String get filterAny => '모두';
 
   @override
   String get broadcast => '방송';
@@ -3430,7 +3417,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dropped => '중단';
 
   @override
-  String get unfinished => 'Unfinished';
+  String get unfinished => '미완성';
 
   @override
   String get planned => '예정';
@@ -3487,13 +3474,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get born => '출생';
 
   @override
-  String get died => 'Died';
+  String get died => '사망';
 
   @override
-  String get birthplace => 'Birthplace';
+  String get birthplace => '출생지';
 
   @override
-  String get department => 'Department';
+  String get department => '부서';
 
   @override
   String get website => '웹사이트';
@@ -3520,16 +3507,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shows => '프로그램';
 
   @override
-  String get moviesWatched => 'Movies Watched';
+  String get moviesWatched => '본 영화';
 
   @override
-  String get showsWatched => 'Shows Watched';
+  String get showsWatched => '시청한 프로그램';
 
   @override
-  String get moviesCollected => 'Movies Collected';
+  String get moviesCollected => '수집된 영화';
 
   @override
-  String get showsCollected => 'Shows Collected';
+  String get showsCollected => '수집된 프로그램';
 
   @override
   String get rewatching => '다시 보는 중';
@@ -3614,7 +3601,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get sortNewest => '최신순';
 
   @override
-  String get sortAz => '가나다순';
+  String get sortAz => 'A~Z';
 
   @override
   String get sortMostFavourited => '즐겨찾기 많은 순';
@@ -3829,7 +3816,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String repoLinkConfirm(String url) {
-    return 'Add this repository?\n\n$url\n\nOnly add repositories from sources you trust.';
+    return '이 저장소를 추가하시겠습니까?\n\n$url\n\n신뢰할 수 있는 소스의 저장소만 추가하세요.';
   }
 
   @override
@@ -4078,7 +4065,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String updatePluginTitle(String name) {
-    return 'Update $name';
+    return '$name 업데이트';
   }
 
   @override
@@ -4171,42 +4158,42 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String syncServiceOn(String name) {
-    return 'Sync with $name';
+    return '$name과 동기화';
   }
 
   @override
-  String get syncDelete => 'Delete what the main service doesn\'t have';
+  String get syncDelete => '주요 서비스에 없는 것을 삭제하세요.';
 
   @override
   String get syncDeleteDesc =>
-      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+      '기본 목록에 없는 다른 서비스에서 항목을 제거합니다. 제목과 일치할 수 있는 항목만 제거되므로 Simkl 영화 및 시리즈와 같은 항목은 그대로 유지됩니다.';
 
   @override
-  String get syncDeleteTitle => 'Delete entries?';
+  String get syncDeleteTitle => '항목을 삭제하시겠습니까?';
 
   @override
   String syncDeleteConfirm(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries',
-      one: '1 entry',
+      other: '$count 항목',
+      one: '항목 1개',
     );
-    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+    return '$_temp0 기본 목록에 없는 서비스는 다른 서비스에서 삭제됩니다. 이 작업은 취소할 수 없습니다.';
   }
 
   @override
-  String get syncDeleteAction => 'Delete';
+  String get syncDeleteAction => '삭제';
 
   @override
-  String get syncToDelete => 'To delete';
+  String get syncToDelete => '삭제하려면';
 
   @override
-  String get syncDeletedNote => 'Will be deleted';
+  String get syncDeletedNote => '삭제됩니다';
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count will be deleted from $name';
+    return '$count이(가) $name에서 삭제됩니다.';
   }
 
   @override
@@ -4216,52 +4203,52 @@ class AppLocalizationsKo extends AppLocalizations {
   String get syncOnlyForwardDesc => '이미 더 앞서 있는 서비스의 진행도는 낮추지 않아요';
 
   @override
-  String get animePlanetWontWatch => 'Won\'t watch';
+  String get animePlanetWontWatch => '시청하지 않음';
 
   @override
-  String get animePlanetWontRead => 'Won\'t read';
+  String get animePlanetWontRead => '읽지 않음';
 
   @override
-  String get animePlanetAlreadyOnList => 'Already on this list';
+  String get animePlanetAlreadyOnList => '이미 이 목록에 있습니다';
 
   @override
-  String get animePlanetNewList => 'New list name';
+  String get animePlanetNewList => '새 목록 이름';
 
   @override
-  String get syncPrivate => 'Private entries';
+  String get syncPrivate => '비공개 항목';
 
   @override
   String get syncPrivateDesc =>
-      'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly';
+      '비공개로 유지하는 항목으로 무엇을 해야 할까요? 비공개 옵션이 있는 서비스는 비공개로 설정됩니다. 다른 사람들은 공개적으로 보여줄 것입니다.';
 
   @override
-  String get syncPrivateModeAsk => 'Ask';
+  String get syncPrivateModeAsk => '물어보세요';
 
   @override
-  String get syncPrivateModeSync => 'Sync them';
+  String get syncPrivateModeSync => '동기화';
 
   @override
-  String get syncPrivateModeSkip => 'Skip them';
+  String get syncPrivateModeSkip => '건너뛰세요';
 
   @override
-  String get syncPrivateTitle => 'Private entries';
+  String get syncPrivateTitle => '비공개 항목';
 
   @override
   String syncPrivateAsk(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries are private',
-      one: '1 entry is private',
+      other: '$count 항목은 비공개입니다.',
+      one: '항목 1개는 비공개입니다.',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
+    return '$_temp0. 비공개 옵션이 있는 서비스(AniList, Kitsu, MangaBaka)는 비공개로 설정됩니다. 다른 서비스에는 비공개 옵션이 없으며 공개적으로 표시됩니다. 동기화하시겠습니까? 귀하의 답변은 기억됩니다. 동기화 옵션에서 변경하세요.';
   }
 
   @override
-  String get syncPrivateInclude => 'Sync them';
+  String get syncPrivateInclude => '동기화';
 
   @override
-  String get syncPrivateSkip => 'Skip them';
+  String get syncPrivateSkip => '건너뛰세요';
 
   @override
   String get syncFetch => '가져오기';
@@ -4368,7 +4355,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String syncRemoved(String services) {
-    return 'Removed from $services';
+    return '$services에서 삭제됨';
   }
 
   @override
@@ -4779,7 +4766,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get trendzCredit => 'AniTrendz의 주간 차트';
 
   @override
-  String get trendzNew => 'NEW';
+  String get trendzNew => '새로운';
 
   @override
   String get trendzEmpty => '차트가 비어 있어요';
@@ -4855,7 +4842,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get imageSearchEmpty => '일치하는 결과가 없어요';
 
   @override
-  String get imageSearchAdult => '18+';
+  String get imageSearchAdult => '18세 이상';
 
   @override
   String imageSearchEpisode(String number) {
@@ -4961,7 +4948,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get groupsPrivacyClosed => '비공개';
 
   @override
-  String get groupsAdult => '18+';
+  String get groupsAdult => '18세 이상';
 
   @override
   String get groupsRoleAdmin => '관리자';
@@ -5311,23 +5298,23 @@ class AppLocalizationsKo extends AppLocalizations {
   String get watchSource => '소스';
 
   @override
-  String get sourceTags => 'Tags';
+  String get sourceTags => '태그';
 
   @override
   String get sourceTagsHint =>
-      'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.';
+      '이 소스의 용도를 태그하세요. 제목에는 먼저 태그가 지정된 소스가 나열되고 그 다음에는 태그가 지정되지 않은 소스가 나열됩니다. 18개 이상의 소스는 성인용 타이틀에만 표시됩니다.';
 
   @override
-  String get sourceTagAnime => 'Anime';
+  String get sourceTagAnime => '애니메이션';
 
   @override
-  String get sourceTagMovies => 'Movies & Series';
+  String get sourceTagMovies => '영화 및 시리즈';
 
   @override
-  String get sourceTagAdult => '18+';
+  String get sourceTagAdult => '18세 이상';
 
   @override
-  String get sourceHiddenByTags => 'Hidden by tags';
+  String get sourceHiddenByTags => '태그로 숨김';
 
   @override
   String get watchOptions => '옵션';
@@ -5449,87 +5436,82 @@ class AppLocalizationsKo extends AppLocalizations {
   String get watchCookiesCleared => '쿠키를 지웠어요';
 
   @override
-  String get watchFailTimeout => 'The check didn\'t finish in time';
+  String get watchFailTimeout => '수표가 시간 내에 완료되지 않았습니다.';
 
   @override
   String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+      '사이트에서 이 장치를 차단했습니다(액세스가 거부되었습니다). 수표는 도움이 되지 않습니다';
 
   @override
-  String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+  String get watchFailTurnstile => '이 검사에는 백그라운드 솔버가 수행할 수 없는 탭이 필요합니다.';
 
   @override
-  String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+  String get watchFailLoad => '페이지가 로드되지 않았습니다. 연결 및 사이트 주소를 확인하세요';
 
   @override
-  String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+  String get watchFailRejected => '사이트는 방금 제공한 승인을 거부했습니다. 다시 시도하거나 쿠키를 삭제하세요.';
 
   @override
-  String get watchFailDismissed => 'The check was closed before it finished';
+  String get watchFailDismissed => '수표가 완료되기 전에 종료되었습니다.';
 
   @override
-  String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+  String get watchFailCooldown => '당신은 조금 전에 수표를 닫았습니다. 다시 시도하려면 해결을 누르세요.';
 
   @override
-  String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+  String get watchFailQuiet => '수표에는 귀하가 필요하며 앱은 자체적으로 작동했습니다.';
 
   @override
-  String get watchFailWebView => 'The background web view couldn\'t start';
+  String get watchFailWebView => '백그라운드 웹 보기를 시작할 수 없습니다.';
 
   @override
-  String get watchFailUnavailable => 'There is no screen to show the check on';
+  String get watchFailUnavailable => '수표를 표시하는 화면이 없습니다.';
 
   @override
-  String get watchStatusReady => 'Ready';
+  String get watchStatusReady => '준비';
 
   @override
-  String get watchStatusChallenge => 'Cloudflare check needed';
+  String get watchStatusChallenge => 'Cloudflare 확인 필요';
 
   @override
-  String get watchStatusBlocked => 'Blocked by the site';
+  String get watchStatusBlocked => '사이트에서 차단됨';
 
   @override
-  String get watchStatusOffline => 'Can\'t reach the site';
+  String get watchStatusOffline => '사이트에 접속할 수 없습니다';
 
   @override
-  String get watchStatusUntested => 'Not tested yet';
+  String get watchStatusUntested => '아직 테스트되지 않음';
 
   @override
-  String get watchStatusTesting => 'Testing the connection…';
+  String get watchStatusTesting => '연결 테스트 중…';
 
   @override
-  String get watchStatusSolving => 'Passing the Cloudflare check…';
+  String get watchStatusSolving => 'Cloudflare 검사 통과…';
 
   @override
   String watchSolvedBackground(int seconds) {
-    return 'Cloudflare check passed in the background ($seconds s)';
+    return 'Cloudflare 검사가 백그라운드에서 통과되었습니다($seconds s).';
   }
 
   @override
-  String get watchSolvedByUser => 'Cloudflare check passed';
+  String get watchSolvedByUser => 'Cloudflare 검사 통과';
 
   @override
   String watchClearanceIssued(String time) {
-    return 'earned $time';
+    return '$time 획득';
   }
 
   @override
   String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+      '다른 사용자 에이전트를 통해 허가를 얻었으므로 전송되지 않습니다. 새 연결을 얻으려면 연결을 테스트하세요.';
 
   @override
-  String get watchSectionConnection => 'Connection';
+  String get watchSectionConnection => '연결';
 
   @override
-  String get watchSectionSession => 'Session';
+  String get watchSectionSession => '세션';
 
   @override
-  String get watchSectionTools => 'Tools';
+  String get watchSectionTools => '도구';
 
   @override
   String get watchMetaSource => '에피소드 상세 정보 출처';
@@ -5568,18 +5550,16 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerSpeed => '재생 속도';
 
   @override
-  String get localSource => 'Local files';
+  String get localSource => '로컬 파일';
 
   @override
-  String get localMissing =>
-      'This file or folder is no longer in your Local folder';
+  String get localMissing => '이 파일 또는 폴더는 더 이상 로컬 폴더에 없습니다.';
 
   @override
-  String get playerStickyStage => 'Sticky video';
+  String get playerStickyStage => '끈적한 비디오';
 
   @override
-  String get playerStickyStageDesc =>
-      'Keep the video fixed at the top while you scroll the episodes and comments below';
+  String get playerStickyStageDesc => '아래 에피소드와 댓글을 스크롤하는 동안 동영상을 상단에 고정하세요.';
 
   @override
   String get playerCursedSpeed => '추가 속도';
@@ -5648,11 +5628,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerAutoSkipDesc => 'AniSkip과 스트림 타임스탬프를 사용해서 시작하자마자 넘어가요';
 
   @override
-  String get playerDisableSkips => 'Disable skips';
+  String get playerDisableSkips => '건너뛰기 비활성화';
 
   @override
   String get playerDisableSkipsDesc =>
-      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
+      '플레이어에 AniSkip 또는 스트림 타임스탬프, 챕터 표시 또는 건너뛰기 제출이 없습니다.';
 
   @override
   String get playerSkipOnce => '한 번만 건너뛰기';
@@ -5716,13 +5696,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerSubtitleOutline => '자막 외곽선';
 
   @override
-  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+  String get playerSubtitleOutlineWidth => '자막 개요 너비';
 
   @override
-  String get playerSubtitlePreview => 'Subtitle preview';
+  String get playerSubtitlePreview => '자막 미리보기';
 
   @override
-  String get playerSubtitlePreviewText => 'Subtitle preview text';
+  String get playerSubtitlePreviewText => '자막 미리보기 텍스트';
 
   @override
   String get playerLibass => 'libass 사용';
@@ -5755,26 +5735,25 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerShadersDownload => 'Anime4K 다운로드';
 
   @override
-  String get playerPictureSave => 'Save this frame';
+  String get playerPictureSave => '이 프레임을 저장하세요';
 
   @override
-  String get playerPictureOriginal => 'Original';
+  String get playerPictureOriginal => '원본';
 
   @override
-  String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+  String get playerPictureOriginalDesc => '셰이더나 색상 없이 비디오에 있는 프레임입니다.';
 
   @override
-  String get playerPictureProcessed => 'With shaders and colors';
+  String get playerPictureProcessed => '셰이더와 색상';
 
   @override
-  String get playerPictureProcessedDesc => 'The frame as you see it now';
+  String get playerPictureProcessedDesc => '지금 보시는 프레임은';
 
   @override
-  String get playerPictureSaved => 'Frame saved';
+  String get playerPictureSaved => '프레임이 저장되었습니다';
 
   @override
-  String get playerPictureSaveFailed => 'Could not save the frame';
+  String get playerPictureSaveFailed => '프레임을 저장할 수 없습니다.';
 
   @override
   String get playerShadersPreview => '이 프레임으로 미리보기';
@@ -5844,14 +5823,14 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+      '셰이더에는 하드웨어 렌더링이 필요하고 플레이어는 소프트웨어 렌더링을 사용하고 있습니다. 플레이어 설정에서 소프트웨어 렌더링을 끄세요.';
 
   @override
-  String get playerSoftwareRender => 'Software rendering';
+  String get playerSoftwareRender => '소프트웨어 렌더링';
 
   @override
   String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+      '검은색 영상에만 해당됩니다. 셰이더는 작동하지 않습니다. 다음에 플레이어가 열릴 때 적용됩니다.';
 
   @override
   String get playerShadersCustomFiles => '내 셰이더';
@@ -6066,30 +6045,30 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerQuality => '화질';
 
   @override
-  String get streamGroupSub => 'Sub';
+  String get streamGroupSub => '서브';
 
   @override
-  String get streamGroupHardSub => 'Hard Sub';
+  String get streamGroupHardSub => '하드 서브';
 
   @override
-  String get streamGroupSoftSub => 'Soft Sub';
+  String get streamGroupSoftSub => '소프트 서브';
 
   @override
-  String get streamGroupDub => 'Dub';
+  String get streamGroupDub => '더빙';
 
   @override
-  String get streamGroupRaw => 'Raw';
+  String get streamGroupRaw => '원시';
 
   @override
-  String get streamGroupOther => 'Other';
+  String get streamGroupOther => '기타';
 
   @override
   String streamsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count streams',
-      one: '1 stream',
+      other: '$count 스트림',
+      one: '스트림 1개',
     );
     return '$_temp0';
   }
@@ -6098,8 +6077,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerStreams => '스트림';
 
   @override
-  String get playerStreamFailedNext =>
-      'That stream won\'t play, trying the next one';
+  String get playerStreamFailedNext => '해당 스트림이 재생되지 않습니다. 다음 스트림을 시도해 보세요.';
 
   @override
   String get playerAutoSelect => '스트림 자동 선택';
@@ -6163,11 +6141,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerFailed => '이 챕터를 열 수 없어요';
 
   @override
-  String get readerOpenBook => 'Open a book';
+  String get readerOpenBook => '책을 펴세요';
 
   @override
-  String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+  String get readerOpenBookDesc => '파일에서 epub(소설 리더) 또는 PDF(만화 리더)를 읽습니다.';
 
   @override
   String get readerNoText => '이 챕터에는 텍스트가 없어요';
@@ -6194,7 +6171,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerMode => '읽기 모드';
 
   @override
-  String get readerModeAuto => 'Auto (by series type)';
+  String get readerModeAuto => '자동(시리즈별)';
 
   @override
   String get readerModeRtl => '오른쪽에서 왼쪽';
@@ -6326,22 +6303,22 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerFilterSepia => '세피아';
 
   @override
-  String get readerFilterQuality => 'Image filter quality';
+  String get readerFilterQuality => '이미지 필터 품질';
 
   @override
-  String get readerFilterQualityNone => 'None (Nearest neighbor)';
+  String get readerFilterQualityNone => '없음(가장 가까운 이웃)';
 
   @override
-  String get readerFilterQualityLow => 'Low (Bilinear)';
+  String get readerFilterQualityLow => '낮음(이중선형)';
 
   @override
-  String get readerFilterQualityMedium => 'Medium (Trilinear)';
+  String get readerFilterQualityMedium => '중간(삼선형)';
 
   @override
-  String get readerFilterQualityHigh => 'High (Bicubic)';
+  String get readerFilterQualityHigh => '높음(바이큐빅)';
 
   @override
-  String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
+  String get readerFilterQualityLanczos => 'Lanczos (러스트 고품질)';
 
   @override
   String get readerDim => '어둡게';
@@ -6368,11 +6345,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerCropBordersDesc => '페이지의 빈 흰색·검은색 여백을 잘라내요';
 
   @override
-  String get readerLongPressSave => 'Hold a page to save it';
+  String get readerLongPressSave => '저장하려면 페이지를 길게 누르세요.';
 
   @override
-  String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+  String get readerLongPressSaveDesc => '페이지를 길게 눌러 저장, 공유, 복사 옵션을 엽니다.';
 
   @override
   String get readerVolumeKeys => '볼륨 키로 페이지 넘기기';
@@ -6440,7 +6416,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get readerResetDesc => '기본값으로 되돌려요';
 
   @override
-  String get readerResetConfirm => 'Reset every reader setting to its default?';
+  String get readerResetConfirm => '모든 리더 설정을 기본값으로 재설정하시겠습니까?';
 
   @override
   String get novelSize => '글자 크기';
@@ -6496,87 +6472,87 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String trackProgressAnimeLocal(String name) {
-    return 'Save your progress on $name to your list on this device as you watch?';
+    return '시청하는 동안 $name의 진행 상황을 이 기기의 목록에 저장하시겠습니까?';
   }
 
   @override
   String trackProgressMangaLocal(String name) {
-    return 'Save your progress on $name to your list on this device when you finish a chapter?';
+    return '챕터를 완료하면 $name의 진행 상황을 이 장치의 목록에 저장하시겠습니까?';
   }
 
   @override
-  String get downloadClearQueue => 'Clear queue';
+  String get downloadClearQueue => '대기열 지우기';
 
   @override
   String downloadClearQueueConfirm(int count) {
-    return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+    return '대기열에 있는 모든 $count 다운로드를 취소하시겠습니까? 이미 다운로드한 내용은 삭제됩니다.';
   }
 
   @override
   String downloadSelectedCount(int count) {
-    return '$count selected';
+    return '$count 선택됨';
   }
 
   @override
-  String get downloadSelectAll => 'Select all';
+  String get downloadSelectAll => '모두 선택';
 
   @override
-  String get downloadDeleteSelected => 'Delete selected';
+  String get downloadDeleteSelected => '선택 항목 삭제';
 
   @override
   String downloadDeleteSelectedConfirm(int count) {
-    return 'Delete $count downloads? Their files are removed from the device.';
+    return '$count 다운로드를 삭제하시겠습니까? 해당 파일이 장치에서 제거됩니다.';
   }
 
   @override
-  String get castTitle => 'Cast to device';
+  String get castTitle => '기기로 전송';
 
   @override
-  String get castSearching => 'Looking for devices on your network…';
+  String get castSearching => '네트워크에서 장치를 찾는 중…';
 
   @override
   String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+      '기기를 찾을 수 없습니다. TV나 Chromecast가 동일한 Wi-Fi에 연결되어 있는지 확인한 후 다시 검색하세요.';
 
   @override
-  String get castRefresh => 'Search again';
+  String get castRefresh => '다시 검색';
 
   @override
-  String get castFailed => 'Could not start casting';
+  String get castFailed => '전송을 시작할 수 없습니다.';
 
   @override
-  String get castStop => 'Stop casting';
+  String get castStop => '전송 중지';
 
   @override
   String castNowCasting(String name) {
-    return 'Casting to $name';
+    return '$name로 캐스팅 중';
   }
 
   @override
-  String get castProtocolChromecast => 'Chromecast';
+  String get castProtocolChromecast => '크롬캐스트';
 
   @override
-  String get castProtocolDlna => 'DLNA / Smart TV';
+  String get castProtocolDlna => 'DLNA/스마트 TV';
 
   @override
-  String get castProtocolRoku => 'Roku';
+  String get castProtocolRoku => '로쿠';
 
   @override
-  String get castRokuNote => 'Roku can\'t report or change the position';
+  String get castRokuNote => 'Roku는 위치를 보고하거나 변경할 수 없습니다.';
 
   @override
-  String get castControls => 'Controls';
+  String get castControls => '컨트롤';
 
   @override
-  String get castVolume => 'TV volume';
+  String get castVolume => 'TV 볼륨';
 
   @override
   String castSkipPart(String name) {
-    return 'Skip $name';
+    return '건너뛰기 $name';
   }
 
   @override
-  String get trackProgressRememberSeries => 'Remember for this series';
+  String get trackProgressRememberSeries => '이 시리즈를 기억하세요';
 
   @override
   String get trackProgressYes => '저장';
@@ -6656,7 +6632,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dantotsuTheme => '테마';
 
   @override
-  String get themePickerTitle => 'Theme';
+  String get themePickerTitle => '테마';
 
   @override
   String get dantotsuReposAnime => '애니 확장 프로그램 저장소';
@@ -6715,11 +6691,11 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String togetherLinkConfirm(String room) {
-    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+    return '$room 방에 참여하시겠습니까? 호스트는 재생할 항목을 선택하고 시청을 시작하면 플레이어가 자동으로 열립니다.';
   }
 
   @override
-  String get togetherJoin => 'Join';
+  String get togetherJoin => '가입';
 
   @override
   String get togetherName => '내 이름';
@@ -6743,11 +6719,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get togetherCopyInvite => '초대 복사';
 
   @override
-  String get togetherShareInvite => 'Share invite';
+  String get togetherShareInvite => '초대 공유';
 
   @override
   String togetherShareText(String link) {
-    return 'Watch with me on Dartotsu: $link';
+    return 'Dartotsu에서 저와 함께 시청하세요: $link';
   }
 
   @override
@@ -6900,71 +6876,68 @@ class AppLocalizationsKo extends AppLocalizations {
       '왼쪽이나 오른쪽을 탭하면 한 페이지씩 스크롤되고, 가운데를 탭하면 컨트롤이 나와요';
 
   @override
-  String get novelPaged => 'Page turning';
+  String get novelPaged => '페이지 넘기기';
 
   @override
-  String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+  String get novelPagedDesc => '장을 페이지로 나누고 스크롤하는 대신 스와이프하거나 탭하여 페이지를 넘깁니다.';
 
   @override
   String novelPageOf(int current, int total) {
-    return 'Page $current of $total';
+    return '$total의 $current 페이지';
   }
 
   @override
-  String get novelPaginating => 'Laying out pages';
+  String get novelPaginating => '페이지 레이아웃';
 
   @override
-  String get novelTools => 'Contents, search and highlights';
+  String get novelTools => '콘텐츠, 검색 및 하이라이트';
 
   @override
-  String get novelContents => 'Contents';
+  String get novelContents => '목차';
 
   @override
-  String get novelContentsEmpty => 'This chapter has no headings';
+  String get novelContentsEmpty => '이 장에는 제목이 없습니다.';
 
   @override
-  String get novelSearch => 'Search';
+  String get novelSearch => '검색';
 
   @override
-  String get novelSearchHint => 'Search in this chapter';
+  String get novelSearchHint => '이 장에서 검색';
 
   @override
-  String get novelSearchNone => 'No matches';
+  String get novelSearchNone => '일치하는 항목 없음';
 
   @override
   String novelSearchCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count matches',
-      one: '1 match',
+      other: '$count 일치',
+      one: '1경기',
     );
     return '$_temp0';
   }
 
   @override
-  String get novelHighlights => 'Highlights';
+  String get novelHighlights => '하이라이트';
 
   @override
-  String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+  String get novelHighlightsEmpty => '일부 텍스트를 선택하고 강조 표시를 탭하여 여기에 유지하세요.';
 
   @override
-  String get novelHighlight => 'Highlight';
+  String get novelHighlight => '하이라이트';
 
   @override
-  String get novelHighlightNote => 'Note';
+  String get novelHighlightNote => '참고';
 
   @override
-  String get novelHighlightNoteHint => 'Add a note';
+  String get novelHighlightNoteHint => '메모 추가';
 
   @override
-  String get novelHighlightRemove => 'Remove highlight';
+  String get novelHighlightRemove => '하이라이트 제거';
 
   @override
-  String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+  String get novelHighlightFailed => '선택 항목을 텍스트와 일치시킬 수 없습니다.';
 
   @override
   String novelMinutesLeft(int count) {
@@ -7029,39 +7002,39 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerChapters => '챕터';
 
   @override
-  String get playerSkipSubmit => 'Submit skip times';
+  String get playerSkipSubmit => '건너뛰기 시간 제출';
 
   @override
   String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+      '이 에피소드에서 오프닝, 엔딩 또는 요약이 시작하고 끝나는 위치를 표시하고 AniSkip과 공유하여 모든 사람이 건너뛰기 버튼을 얻을 수 있도록 하세요.';
 
   @override
-  String get playerSkipStart => 'Start';
+  String get playerSkipStart => '시작';
 
   @override
-  String get playerSkipEnd => 'End';
+  String get playerSkipEnd => '종료';
 
   @override
-  String get playerSkipUseNow => 'Use current position';
+  String get playerSkipUseNow => '현재 위치 사용';
 
   @override
-  String get playerSkipSend => 'Submit to AniSkip';
+  String get playerSkipSend => 'AniSkip에 제출';
 
   @override
-  String get playerSkipSent => 'Skip times submitted to AniSkip, thank you';
+  String get playerSkipSent => 'AniSkip에 제출된 건너뛰기 시간, 감사합니다.';
 
   @override
   String playerSkipFailed(String error) {
-    return 'AniSkip refused the skip times: $error';
+    return 'AniSkip이 건너뛰기 시간을 거부했습니다: $error';
   }
 
   @override
   String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+      '비디오 플레이어는 이 장치에서 실행할 수 없습니다(안드로이드 버전이 번들 플레이어 라이브러리에 비해 너무 오래되었습니다). 세부정보를 복사하려면 탭하세요.';
 
   @override
   String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+      '이 타이틀에는 MyAnimeList ID가 없으므로 AniSkip에서 사용할 수 없습니다.';
 
   @override
   String get playerNoChapters => '챕터 없음';
@@ -7109,28 +7082,28 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerAutoPipDesc => '앱을 나가도 작은 창으로 계속 재생해요';
 
   @override
-  String get playerPipPlay => 'Play';
+  String get playerPipPlay => '플레이';
 
   @override
-  String get playerPipPause => 'Pause';
+  String get playerPipPause => '일시중지';
 
   @override
-  String get playerPipBack => 'Rewind';
+  String get playerPipBack => '되감기';
 
   @override
-  String get playerPipForward => 'Forward';
+  String get playerPipForward => '앞으로';
 
   @override
-  String get playerPipRestore => 'Back to the player';
+  String get playerPipRestore => '플레이어로 돌아가기';
 
   @override
-  String get playerPipActive => 'Playing in a small window';
+  String get playerPipActive => '작은 창가에서 놀다';
 
   @override
-  String get listDateAdded => 'Added to list';
+  String get listDateAdded => '목록에 추가됨';
 
   @override
-  String get listDateLastWatched => 'Last watched';
+  String get listDateLastWatched => '마지막 시청';
 
   @override
   String playerAutoPlaying(String title) {
@@ -7246,72 +7219,71 @@ class AppLocalizationsKo extends AppLocalizations {
   String get downloadsTitle => '다운로드';
 
   @override
-  String get widgetContinue => 'Continue';
+  String get widgetContinue => '계속';
 
   @override
-  String get widgetReleases => 'Releasing soon';
+  String get widgetReleases => '곧 출시';
 
   @override
-  String get widgetMore => 'Also in progress';
+  String get widgetMore => '또한 진행 중';
 
   @override
-  String get widgetNothing => 'Nothing to continue yet';
+  String get widgetNothing => '아직 계속할 항목이 없습니다.';
 
   @override
-  String get downloadStorageTitle => 'Storage';
+  String get downloadStorageTitle => '저장';
 
   @override
   String downloadStorageSummary(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count downloads',
-      one: '1 download',
+      other: '$count 다운로드',
+      one: '1 다운로드',
     );
     return '$_temp0 · $size';
   }
 
   @override
   String downloadStorageWatched(String size) {
-    return '$size already watched or read';
+    return '$size 이미 시청했거나 읽었습니다';
   }
 
   @override
-  String get downloadFreeUp => 'Free up space';
+  String get downloadFreeUp => '여유 공간 확보';
 
   @override
   String downloadFreeUpConfirm(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count watched downloads',
-      one: '1 watched download',
+      other: '$count 시청한 다운로드 수',
+      one: '다운로드 1회 시청',
     );
-    return 'Delete $_temp0 and free $size?';
+    return '삭제 $_temp0 그리고 무료 $size?';
   }
 
   @override
   String downloadFreed(String size) {
-    return 'Freed $size';
+    return '해방됨 $size';
   }
 
   @override
-  String get downloadDeleteWatched => 'Delete watched';
+  String get downloadDeleteWatched => '시청 삭제';
 
   @override
-  String get downloadDeleteAll => 'Delete all';
+  String get downloadDeleteAll => '모두 삭제';
 
   @override
   String downloadDeleteAllConfirm(String title) {
-    return 'Delete every download of $title?';
+    return '$title 다운로드를 모두 삭제하시겠습니까?';
   }
 
   @override
-  String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+  String get downloadNothingWatched => '완료한 항목이 다운로드되지 않습니다.';
 
   @override
-  String get downloadStorageEmpty => 'No downloads are using space';
+  String get downloadStorageEmpty => '다운로드가 공간을 사용하고 있지 않습니다.';
 
   @override
   String get downloadsOpenDesc => '대기열과 이 기기에 저장된 모든 항목을 봐요';
@@ -7320,14 +7292,14 @@ class AppLocalizationsKo extends AppLocalizations {
   String get downloadTitle => '다운로드';
 
   @override
-  String get downloadMetaOnly => 'Metadata only';
+  String get downloadMetaOnly => '메타데이터만';
 
   @override
-  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+  String get downloadMetaFailed => '제목 폴더를 생성할 수 없습니다';
 
   @override
   String downloadMetaSaved(String path) {
-    return 'Saved. Put your files in $path';
+    return '저장되었습니다. 파일을 $path에 넣으세요';
   }
 
   @override
@@ -7359,10 +7331,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get downloadSourceMissing => '이 에피소드의 소스가 설치되어 있지 않아요';
 
   @override
-  String get downloadDashDrm => 'This stream is DRM protected';
+  String get downloadDashDrm => '';
 
   @override
-  String get downloadDashNoVideo => 'The DASH manifest has no video';
+  String get downloadDashNoVideo => 'DASH 매니페스트에 비디오가 없습니다.';
 
   @override
   String get downloadWaitingConnection => '연결을 기다리는 중';
@@ -7833,1038 +7805,1011 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String sourceNotifyOn(String source) {
-    return 'You\'ll be told when $source has something new';
+    return '$source에 새로운 소식이 있으면 알려드리겠습니다.';
   }
 
   @override
-  String get sourceNotifyOff => 'Release notifications off';
+  String get sourceNotifyOff => '출시 알림 꺼짐';
 
   @override
-  String get sourceNotifyNeedsSource => 'Pick a source with a match first';
+  String get sourceNotifyNeedsSource => '먼저 일치하는 소스를 선택하세요.';
 
   @override
   String sourceNotifyAllOut(int count) {
-    return 'Everything ($count) is already out, nothing to wait for';
+    return '모든 것($count)이 이미 종료되었으므로 기다릴 것이 없습니다.';
   }
 
   @override
-  String get sourceNotifyTooltipOn => 'Stop release notifications';
+  String get sourceNotifyTooltipOn => '출시 알림 중지';
 
   @override
-  String get sourceNotifyTooltipOff => 'Notify me about new releases';
+  String get sourceNotifyTooltipOff => '새 릴리스에 대해 알림';
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return 'Episode $number is out on $source';
+    return '에피소드 $number이 $source에 공개되었습니다';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return 'Episodes $from–$to are out on $source';
+    return '에피소드 $from~$to은 $source에 공개됩니다.';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'Chapter $number is out on $source';
+    return '$number 장은 $source에 있습니다.';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'Chapters $from–$to are out on $source';
+    return '$from~$to 장은 $source에 있습니다.';
   }
 
   @override
   String sourceFoundSummary(int count) {
-    return '$count titles have something new';
+    return '$count 제목에 새로운 내용이 있습니다.';
   }
 
   @override
-  String get navSources => 'Sources';
+  String get navSources => '출처';
 
   @override
   String sourceInactiveOpen(String manager) {
-    return 'This source belongs to $manager, which isn\'t the active extension service';
+    return '이 소스는 활성 확장 서비스가 아닌 $manager에 속합니다.';
   }
 
   @override
-  String get sourceAlertsHeader => 'Release notifications';
+  String get sourceAlertsHeader => '출시 알림';
 
   @override
-  String get sourceAlertsSwitch => 'Check subscribed titles';
+  String get sourceAlertsSwitch => '구독한 타이틀 확인';
 
   @override
-  String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+  String get sourceAlertsSwitchDesc => '앱이 열릴 때마다 타이틀에 대해 벨을 켰습니다.';
 
   @override
-  String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
+  String get sourceSkipUnstarted => '시작하지 않은 타이틀 건너뛰기';
 
   @override
-  String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+  String get sourceSkipUnstartedDesc => '아직 시청하거나 읽은 항목이 없지만 에피소드가 이미 존재합니다.';
 
   @override
-  String get sourceSkipUnseen => 'Skip while you have unseen episodes';
+  String get sourceSkipUnseen => '보지 않은 에피소드가 있는 동안 건너뛰세요';
 
   @override
-  String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+  String get sourceSkipUnseenDesc => '아직 따라잡을 수 있는 에피소드가 공개되어 있습니다.';
 
   @override
-  String get sourceManage => 'Subscriptions';
+  String get sourceManage => '구독';
 
   @override
   String sourceManageDesc(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
-      zero: 'No titles',
+      other: '$count 제목',
+      one: '타이틀 1개',
+      zero: '제목 없음',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceCheckNow => 'Check now';
+  String get sourceCheckNow => '지금 확인하세요';
 
   @override
-  String get sourceCheckNowDesc => 'Ignores the schedule and the skip rules';
+  String get sourceCheckNowDesc => '일정 및 건너뛰기 규칙을 무시합니다.';
 
   @override
-  String get sourceChecking => 'Checking…';
+  String get sourceChecking => '확인 중…';
 
   @override
   String sourceCheckResult(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles have something new',
-      one: '1 title has something new',
-      zero: 'Nothing new',
+      other: '$count 제목에 새로운 내용이 있습니다.',
+      one: '제목 1개에 새로운 내용이 있습니다.',
+      zero: '새로운 것은 없다',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceEmpty => 'No subscriptions yet';
+  String get sourceEmpty => '아직 구독이 없습니다';
 
   @override
   String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+      '새로운 에피소드에 대해 알아보려면 타이틀 에피소드 위에 있는 종 모양 아이콘을 탭하세요.';
 
   @override
-  String get sourceAll => 'All';
+  String get sourceAll => '모두';
 
   @override
   String sourceInactive(String manager) {
-    return 'Inactive: $manager';
+    return '비활성: $manager';
   }
 
   @override
   String sourceMissingDesc(String source) {
-    return '$source isn\'t installed in this extension service';
+    return '$source은(는) 이 확장 서비스에 설치되어 있지 않습니다.';
   }
 
   @override
-  String get sourceUnreachable => 'Source isn\'t responding';
+  String get sourceUnreachable => '소스가 응답하지 않습니다.';
 
   @override
-  String get sourceFinished => 'Finished';
+  String get sourceFinished => '완료';
 
   @override
-  String get sourceSkippedCompleted => 'Skipped: completed';
+  String get sourceSkippedCompleted => '건너뛰었음: 완료됨';
 
   @override
-  String get sourceSkippedUnstarted => 'Skipped: not started';
+  String get sourceSkippedUnstarted => '건너뛰었습니다: 시작되지 않았습니다.';
 
   @override
-  String get sourceSkippedUnseen => 'Skipped: unseen episodes';
+  String get sourceSkippedUnseen => '건너뛰기: 보지 않은 에피소드';
 
   @override
-  String get sourceWaiting => 'Waiting for the next release';
+  String get sourceWaiting => '다음 릴리스를 기다리고 있습니다';
 
   @override
   String sourceNextCheck(String when) {
-    return 'Next check $when';
+    return '다음 확인 $when';
   }
 
   @override
-  String get sourceSoon => 'soon';
+  String get sourceSoon => '곧';
 
   @override
   String sourceInHours(int count) {
-    return 'in ${count}h';
+    return '${count}h에서';
   }
 
   @override
   String sourceInDays(int count) {
-    return 'in ${count}d';
+    return '${count}d에서';
   }
 
   @override
   String sourceLatest(String number) {
-    return 'Latest: $number';
+    return '최신: $number';
   }
 
   @override
-  String get sourceMute => 'Mute';
+  String get sourceMute => '음소거';
 
   @override
-  String get sourceUnmute => 'Unmute';
+  String get sourceUnmute => '음소거 해제';
 
   @override
-  String get sourceMuted => 'Muted';
+  String get sourceMuted => '음소거됨';
 
   @override
-  String get sourceUnsubscribe => 'Unsubscribe';
+  String get sourceUnsubscribe => '구독 취소';
 
   @override
-  String get sourcePickAnother => 'Pick another source';
+  String get sourcePickAnother => '다른 소스를 선택하세요';
 
   @override
-  String get sourceOpenExtensions => 'Open extensions';
+  String get sourceOpenExtensions => '확장 프로그램 열기';
 
   @override
-  String get sourceNoticesEmpty => 'No release notices yet';
+  String get sourceNoticesEmpty => '아직 출시 공지가 없습니다';
 
   @override
-  String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+  String get sourceNoticesEmptyMessage => '구독한 타이틀의 새 에피소드와 챕터가 여기에 표시됩니다.';
 
   @override
-  String get sourceOpenTitle => 'Open title';
+  String get sourceOpenTitle => '제목 열기';
 
   @override
-  String get extensionsLoading => 'Loading extensions…';
+  String get extensionsLoading => '확장 프로그램 로드 중…';
 
   @override
-  String get updateWhatsNew => 'What\'s new';
+  String get updateWhatsNew => '새로운 소식';
 
   @override
-  String get updateLater => 'Later';
+  String get updateLater => '나중에';
 
   @override
-  String get updateSkipVersion => 'Skip this version';
+  String get updateSkipVersion => '이 버전 건너뛰기';
 
   @override
-  String get updatePreparing => 'Preparing…';
+  String get updatePreparing => '준비 중…';
 
   @override
-  String get updateDownloading => 'Downloading';
+  String get updateDownloading => '다운로드 중';
 
   @override
-  String get updateInstalling => 'Installing…';
+  String get updateInstalling => '설치 중…';
 
   @override
   String updateSizeOf(String done, String total) {
-    return '$done of $total';
+    return '$total 중 $done';
   }
 
   @override
   String updateSpeed(String speed) {
-    return '$speed/s';
+    return '$speed/초';
   }
 
   @override
   String updateReleased(String date) {
-    return 'Released $date';
+    return '$date 출시됨';
   }
 
   @override
-  String get updateNoAsset => 'This release has no download for your device';
+  String get updateNoAsset => '이 릴리스에는 귀하의 기기에 다운로드할 수 있는 항목이 없습니다.';
 
   @override
-  String get updateUpToDate => 'You\'re on the latest version';
+  String get updateUpToDate => '최신 버전을 사용 중입니다.';
 
   @override
   String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+      'iOS 빌드는 App Store에 없습니다. 릴리스 페이지에서 .ipa를 가져와 AltStore 또는 SideStore로 사이드로드합니다.';
 
   @override
-  String get updateOpenedBrowser => 'Check your browser';
+  String get updateOpenedBrowser => '브라우저를 확인하세요';
 
   @override
-  String get updateTryAgain => 'Try again';
+  String get updateTryAgain => '다시 시도하세요';
 
   @override
-  String get settingsNotifications => 'Notifications';
+  String get settingsNotifications => '알림';
 
   @override
-  String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+  String get settingsNotificationsDesc => '목록, 새 에피소드 및 챕터, 댓글 답변에 대한 알림';
 
   @override
-  String get settingsAboutUpdates => 'About & updates';
+  String get settingsAboutUpdates => '정보 및 업데이트';
 
   @override
-  String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+  String get settingsAboutUpdatesDesc => '앱 업데이트, 버전, 로그, 링크 및 지원';
 
   @override
-  String get settingsGroupAccount => 'Your account';
+  String get settingsGroupAccount => '귀하의 계정';
 
   @override
-  String get settingsGroupContent => 'Content';
+  String get settingsGroupContent => '내용';
 
   @override
-  String get settingsGroupApp => 'App';
+  String get settingsGroupApp => '앱';
 
   @override
-  String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+  String get settingsAnimeDesc => '플레이어, 자막, 건너뛰기, 에피소드 목록 및 에피소드 세부정보';
 
   @override
-  String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+  String get settingsMangaDesc => '리더 모드, 컨트롤, 디스플레이 및 장 추적';
 
   @override
-  String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+  String get settingsNovelDesc => '텍스트, 페이지 넘기기, 번역 및 소리내어 읽기';
 
   @override
-  String get settingsLocalPlay => 'Local play';
+  String get settingsLocalPlay => '로컬 플레이';
 
   @override
-  String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+  String get settingsLocalPlayDesc => '파일, 폴더, 네트워크 스트림 및 토렌트를 재생하거나 책을 엽니다.';
 
   @override
-  String get settingsLocalPlayVideo => 'Video';
+  String get settingsLocalPlayVideo => '비디오';
 
   @override
-  String get settingsLocalPlayBooks => 'Books';
+  String get settingsLocalPlayBooks => '책';
 
   @override
-  String get settingsWatchSections => 'Sections';
+  String get settingsWatchSections => '섹션';
 
   @override
-  String get settingsSectionLists => 'Episode and chapter lists';
+  String get settingsSectionLists => '에피소드 및 챕터 목록';
 
   @override
-  String get settingsSectionProgress => 'Progress tracking';
+  String get settingsSectionProgress => '진행 상황 추적';
 
   @override
   String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+      'Stable은 테스트된 릴리스입니다. 시험판 및 알파는 새로운 기능을 더 빨리 제공하지만 중단될 수 있음';
 
   @override
-  String get checkNowDesc => 'Look for a newer version right away';
+  String get checkNowDesc => '즉시 최신 버전을 찾아보세요.';
 
   @override
-  String get generalSectionBasics => 'Language & behaviour';
+  String get generalSectionBasics => '언어 및 행동';
 
   @override
-  String get generalSectionSecurity => 'Security';
+  String get generalSectionSecurity => '보안';
 
   @override
-  String get generalSectionPrivacy => 'Privacy';
+  String get generalSectionPrivacy => '개인 정보 보호';
 
   @override
   String notificationsOtherService(String service) {
-    return 'Switch to $service to open this';
+    return '이것을 열려면 $service로 전환하세요';
   }
 
   @override
-  String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+  String get secPlayerPlayback => '기본 속도, 자동 재생, 비디오 맞춤, 방향 및 PIP(화면 속 화면)';
 
   @override
-  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+  String get secPlayerSkip => '오프닝, 엔딩, 요약을 자동으로 건너뛰세요';
 
   @override
-  String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+  String get secPlayerControls => '스와이프, 홀드, 탭 동작을 통해 미리보기를 탐색하세요.';
 
   @override
-  String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+  String get secPlayerSubtitles => '언어, 모양 및 자막 렌더링';
 
   @override
-  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+  String get secPlayerShaders => '애니메이션 업스케일링 및 나만의 셰이더';
 
   @override
   String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+      '디코더, 비디오 및 오디오 출력, 버퍼링. 재생에 문제가 있는 경우에만 이를 변경하세요.';
 
   @override
-  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+  String get secPlayerMpv => 'mpv.conf, 스크립트 및 고급 조정';
 
   @override
-  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+  String get secAnimeList => '필러 에피소드 및 시청하지 않은 미리보기 이미지';
 
   @override
-  String get secProgress =>
-      'When your watched or read progress is saved to your list';
+  String get secProgress => '시청 또는 읽기 진행 상황이 목록에 저장되는 경우';
 
   @override
-  String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+  String get secAnimeDetails => '에피소드 제목, 미리보기 이미지, 요약의 출처';
 
   @override
-  String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+  String get secReaderReading => '읽기 모드, 페이지 넘기기, 확대/축소 및 다음 장';
 
   @override
-  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+  String get secReaderControls => '탭 영역, 볼륨 키 및 자동 스크롤';
 
   @override
-  String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+  String get secReaderDisplay => '배경, 밝기, 전체 화면 및 페이지 번호';
 
   @override
-  String get secNovelText => 'Font, size, spacing, margins and page turning';
+  String get secNovelText => '글꼴, 크기, 간격, 여백 및 페이지 넘김';
 
   @override
-  String get secNovelTranslate => 'Translate chapters while you read';
+  String get secNovelTranslate => '읽는 동안 장을 번역하세요';
 
   @override
-  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+  String get secNovelSpeech => '소리내어 읽기 위한 음성, 속도 및 음높이';
 
   @override
-  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+  String get secNotifyAbout => '알림을 보낼 활동 종류를 선택하세요.';
 
   @override
-  String get layoutTitle => 'Layout';
+  String get layoutTitle => '레이아웃';
 
   @override
-  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+  String get layoutDesc => '막대의 버튼 선택, 이동 및 숨기기';
 
   @override
   String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+      '버튼을 드래그하여 이동합니다(터치 스크린을 먼저 길게 누르세요). 하나를 탭하여 잘라내거나 이동하거나 숨기세요.';
 
   @override
   String layoutDropInto(String zone) {
-    return 'Drop in: $zone';
+    return '방문: $zone';
   }
 
   @override
   String layoutCutting(String name) {
-    return 'Moving $name. Press a paste button to place it';
+    return '$name 이동 중입니다. 붙여넣기 버튼을 눌러 붙여넣으세요';
   }
 
   @override
-  String get layoutTitleFixed => 'Title';
+  String get layoutTitleFixed => '제목';
 
   @override
-  String get layoutZoneTopStart => 'Top bar, before the title';
+  String get layoutZoneTopStart => '상단 표시줄, 제목 앞';
 
   @override
-  String get layoutZoneTopEnd => 'Top bar, after the title';
+  String get layoutZoneTopEnd => '제목 뒤의 상단 표시줄';
 
   @override
-  String get layoutZoneBottomStart => 'Bottom bar, left';
+  String get layoutZoneBottomStart => '하단 바, 왼쪽';
 
   @override
-  String get layoutZoneBottomEnd => 'Bottom bar, right';
+  String get layoutZoneBottomEnd => '하단 바, 오른쪽';
 
   @override
-  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+  String get layoutZoneSecondRow => '숨김: 일반 보기의 두 번째 행';
 
   @override
-  String get layoutZoneOverflow => 'Hidden: in the more menu';
+  String get layoutZoneOverflow => '숨김: 더보기 메뉴에서';
 
   @override
-  String get layoutEmptyZone => 'Drop buttons here';
+  String get layoutEmptyZone => '여기에 버튼을 놓으세요';
 
   @override
-  String get layoutCut => 'Cut';
+  String get layoutCut => '컷';
 
   @override
-  String get layoutPaste => 'Paste here';
+  String get layoutPaste => '여기에 붙여넣으세요';
 
   @override
-  String get layoutHide => 'Hide';
+  String get layoutHide => '숨기기';
 
   @override
   String layoutMoveTo(String zone) {
-    return 'Move to $zone';
+    return '$zone로 이동';
   }
 
   @override
-  String get layoutReset => 'Reset to default';
+  String get layoutReset => '기본값으로 재설정';
 
   @override
-  String get layoutMore => 'More';
+  String get layoutMore => '더보기';
 
   @override
-  String get sourceWhyAction => 'Why no alert?';
+  String get sourceWhyAction => '왜 경고가 없나요?';
 
   @override
-  String get sourceWhyStatus => 'Status';
+  String get sourceWhyStatus => '상태';
 
   @override
-  String get sourceWhyLastCheck => 'Last checked';
+  String get sourceWhyLastCheck => '마지막 확인';
 
   @override
-  String get sourceWhyNever => 'Not yet';
+  String get sourceWhyNever => '아직은 아님';
 
   @override
-  String get sourceWhyNextCheck => 'Next check';
+  String get sourceWhyNextCheck => '다음 확인';
 
   @override
-  String get sourceWhyNewest => 'Newest at the source';
+  String get sourceWhyNewest => '소스의 최신';
 
   @override
-  String get sourceWhyProgress => 'Your progress';
+  String get sourceWhyProgress => '귀하의 진행 상황';
 
   @override
-  String get sourceWhyListStatus => 'List status';
+  String get sourceWhyListStatus => '목록 상태';
 
   @override
-  String get sourceWhyFailures => 'Failed checks in a row';
+  String get sourceWhyFailures => '연속으로 실패한 검사';
 
   @override
-  String get sourceWhyLastRelease => 'Last new release seen';
+  String get sourceWhyLastRelease => '마지막으로 본 새 릴리스';
 
   @override
   String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+      '소스에 새 릴리스가 나열되고 다음 확인이 실행되자마자 여기에 새 릴리스가 나타납니다.';
 
   @override
   String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+      '출처는 이미 귀하의 진행 상황보다 앞서 있으므로 이에 대해 한 번 들었습니다. 다음 알림을 받으려면 해당 내용을 읽거나 지켜보세요.';
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+      '이 제목은 위의 규칙에 따라 건너뜁니다. 알림 설정에서 변경하거나 지금 확인을 사용하여 실행하세요.';
 
   @override
-  String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+  String get sourceWhyVerdictBroken => '소스에 접근할 수 없거나 소스가 삭제되어 아무것도 확인되지 않습니다.';
 
   @override
-  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+  String get sourceWhyVerdictMuted => '이 구독은 음소거되었습니다.';
 
   @override
-  String get externalPlayerTitle => 'Open stream elsewhere';
+  String get externalPlayerTitle => '다른 곳에서 오픈 스트림';
 
   @override
-  String get externalCopyUrl => 'Copy stream link';
+  String get externalCopyUrl => '스트림 링크 복사';
 
   @override
-  String get externalCopied => 'Stream link copied';
+  String get externalCopied => '스트림 링크가 복사되었습니다.';
 
   @override
-  String get externalChooser => 'Open in another app';
+  String get externalChooser => '다른 앱에서 열기';
 
   @override
-  String get externalVlc => 'Open in VLC';
+  String get externalVlc => 'VLC에서 열기';
 
   @override
-  String get externalMpv => 'Open in mpv';
+  String get externalMpv => 'mpv로 열기';
 
   @override
-  String get externalWebVideoCast => 'Web Video Cast';
+  String get externalWebVideoCast => '웹 비디오 캐스트';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'Web Video Cast 앱으로 스트림 보내기';
 
   @override
-  String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+  String get externalFailed => '스트림을 열 수 없습니다. 플레이어가 설치되어 있나요?';
 
   @override
-  String get addonInstalled => 'Installed';
+  String get addonInstalled => '설치됨';
 
   @override
-  String get loadFailedActivity => 'Couldn\'t load activity';
+  String get loadFailedActivity => '활동을 로드할 수 없습니다.';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+  String get loadFailedFavourites => '즐겨찾기를 로드할 수 없습니다. 재시도';
 
   @override
-  String get loadFailedStats => 'Couldn\'t load stats';
+  String get loadFailedStats => '통계를 로드할 수 없습니다.';
 
   @override
-  String get loadFailedReplies => 'Couldn\'t load replies';
+  String get loadFailedReplies => '답글을 로드할 수 없습니다.';
 
   @override
-  String get cantBeUndone => 'This can\'t be undone.';
+  String get cantBeUndone => '이 작업은 취소할 수 없습니다.';
 
   @override
-  String get searchTags => 'Search tags';
+  String get searchTags => '태그 검색';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => '스포일러입니다. 보려면 탭하세요.';
 
   @override
-  String get mediaVideo => 'Video';
+  String get mediaVideo => '비디오';
 
   @override
-  String get notificationSomeone => 'Someone';
+  String get notificationSomeone => '누군가';
 
   @override
-  String get notificationATitle => 'a title';
+  String get notificationATitle => '제목';
 
   @override
-  String get notificationAddedDetail => 'Was added to AniList';
+  String get notificationAddedDetail => 'AniList에 추가되었습니다';
 
   @override
-  String get updateNoReleases => 'No releases found';
+  String get updateNoReleases => '릴리스를 찾을 수 없습니다.';
 
   @override
-  String get updateInvalidResponse => 'Invalid update response';
+  String get updateInvalidResponse => '잘못된 업데이트 응답';
 
   @override
-  String get commentsRateLimited => 'Rate limited';
+  String get commentsRateLimited => '요금 제한';
 
   @override
-  String get commentsConnectFailed => 'Failed to connect';
+  String get commentsConnectFailed => '연결하지 못했습니다.';
 
   @override
-  String get dnsNoRecords => 'No A records returned';
+  String get dnsNoRecords => '반환된 A 레코드가 없습니다.';
 
   @override
-  String get importTokenRejected => 'Token rejected';
+  String get importTokenRejected => '토큰이 거부됨';
 
   @override
-  String get developerRoleLead => 'Lead Developer';
+  String get developerRoleLead => '수석 개발자';
 
   @override
-  String get developerRoleModerator => 'Discord Moderator';
+  String get developerRoleModerator => '디스코드 중재자';
 
   @override
   String extensionManagerTitle(String type) {
-    return '$type manager';
+    return '$type 관리자';
   }
 
   @override
   String extensionsOfType(String type) {
-    return '$type extensions';
+    return '$type 확장';
   }
 
   @override
   String extensionSettingsTitle(String name) {
-    return '$name settings';
+    return '$name 설정';
   }
 
   @override
   String extensionNoSettings(String name) {
-    return '$name doesn\'t provide any settings.';
+    return '$name은 어떤 설정도 제공하지 않습니다.';
   }
 
   @override
   String notificationAired(String episode, String title) {
-    return 'Episode $episode of $title aired';
+    return '$title의 $episode 에피소드가 방송되었습니다.';
   }
 
   @override
   String notificationAiredDetail(String episode) {
-    return 'Episode $episode aired';
+    return '에피소드 $episode 방영';
   }
 
   @override
   String notificationAdded(String title) {
-    return '$title was added to AniList';
+    return '$title이(가) AniList에 추가되었습니다';
   }
 
   @override
   String updateNotFound(String message) {
-    return 'Update server couldn\'t find that release: $message';
+    return '업데이트 서버가 해당 릴리스를 찾을 수 없습니다: $message';
   }
 
   @override
-  String get installStepJre => 'Java runtime';
+  String get installStepJre => '자바 런타임';
 
   @override
-  String get installStepCore => 'Runtime core';
+  String get installStepCore => '런타임 코어';
 
   @override
   String installStepsProgress(int current, int total) {
-    return 'Step $current of $total';
+    return '$total의 $current 단계';
   }
 
   @override
-  String get stepWaiting => 'Waiting';
+  String get stepWaiting => '대기 중';
 
   @override
-  String get stepChecking => 'Checking…';
+  String get stepChecking => '확인 중…';
 
   @override
-  String get stepUpToDate => 'Up to date';
+  String get stepUpToDate => '최신';
 
   @override
   String stepUpToDateWith(String detail) {
-    return 'Up to date · $detail';
+    return '최신 · $detail';
   }
 
   @override
-  String get stepWillInstall => 'Will be installed';
+  String get stepWillInstall => '설치 예정';
 
   @override
-  String get stepWillUpdate => 'Will be updated';
+  String get stepWillUpdate => '업데이트 예정';
 
   @override
   String stepWillUpdateTo(String version) {
-    return 'Will be updated to $version';
+    return '$version으로 업데이트됩니다';
   }
 
   @override
-  String get stepInstalled => 'Installed';
+  String get stepInstalled => '설치됨';
 
   @override
-  String get stepNotNeeded => 'Not needed here';
+  String get stepNotNeeded => '여기서는 필요하지 않습니다';
 
   @override
-  String get stepFailed => 'Failed';
+  String get stepFailed => '실패';
 
   @override
   String stepFailedWith(String reason) {
-    return 'Failed: $reason';
+    return '실패: $reason';
   }
 
   @override
   String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+      '이는 Java 런타임 및 공유 런타임 코어에서 실행됩니다. 먼저 설치되고 변경되면 업데이트됩니다.';
 
   @override
-  String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+  String get installRuntimeNewer => '이 관리자가 실행되는 런타임에 업데이트가 있습니다.';
 
   @override
-  String get removeJvmTitle => 'Remove the Java runtime?';
+  String get removeJvmTitle => 'Java 런타임을 제거하시겠습니까?';
 
   @override
   String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+      '데스크탑 확장 관리자는 다시 설치될 때까지 작동을 중지합니다. 다음에 설치하거나 열 때 다시 다운로드됩니다.';
 
   @override
-  String get runtimePreparing => 'Preparing the runtime…';
+  String get runtimePreparing => '런타임 준비 중…';
 
   @override
-  String get calendarAll => 'All';
+  String get calendarAll => '모두';
 
   @override
-  String get calendarAnime => 'Anime';
+  String get calendarAnime => '애니메이션';
 
   @override
-  String get calendarManga => 'Manga';
+  String get calendarManga => '만화';
 
   @override
-  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+  String get readerCloudflare => '브라우저에서 열기(Cloudflare 확인)';
 
   @override
   String get badgeBoardHint =>
-      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+      '배지를 첫 번째 카드의 모서리로 드래그하거나 이미 있는 배지를 드래그하여 이동하세요. 배지는 장소를 바꾸므로 겹치는 부분이 없습니다. 아래 배지를 탭하여 켜거나 끄세요.';
 
   @override
-  String get statusAuto => 'Auto';
+  String get statusAuto => '자동';
 
   @override
-  String get unreadCounter => 'Unread counter';
+  String get unreadCounter => '읽지 않은 카운터';
 
   @override
-  String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+  String get unreadCounterDesc => '포스터에 남은 에피소드나 챕터 수 표시';
 
   @override
-  String get settingsShortcuts => 'Keyboard shortcuts';
+  String get settingsShortcuts => '키보드 단축키';
 
   @override
-  String get settingsShortcutsDesc => 'See, change and turn off every key';
+  String get settingsShortcutsDesc => '모든 키를 확인하고 변경하고 끄세요.';
 
   @override
-  String get shortcutGroupApp => 'App';
+  String get shortcutGroupApp => '앱';
 
   @override
-  String get shortcutGroupPlayer => 'Video player';
+  String get shortcutGroupPlayer => '비디오 플레이어';
 
   @override
-  String get shortcutGroupReader => 'Reader';
+  String get shortcutGroupReader => '리더';
 
   @override
-  String get shortcutsEnableApp => 'App shortcuts';
+  String get shortcutsEnableApp => '앱 바로가기';
 
   @override
-  String get shortcutsEnablePlayer => 'Player shortcuts';
+  String get shortcutsEnablePlayer => '플레이어 단축키';
 
   @override
-  String get shortcutsEnableReader => 'Reader shortcuts';
+  String get shortcutsEnableReader => '리더 단축키';
 
   @override
-  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+  String get shortcutsEnableDesc => '이 그룹의 모든 키를 켜거나 끕니다.';
 
   @override
-  String get shortcutNotSet => 'Not set';
+  String get shortcutNotSet => '설정되지 않음';
 
   @override
-  String get shortcutAddKey => 'Add a key';
+  String get shortcutAddKey => '키 추가';
 
   @override
-  String get shortcutResetOne => 'Reset to default';
+  String get shortcutResetOne => '기본값으로 재설정';
 
   @override
-  String get shortcutClearKeys => 'Remove all keys';
+  String get shortcutClearKeys => '모든 키 제거';
 
   @override
-  String get shortcutResetAll => 'Reset all shortcuts';
+  String get shortcutResetAll => '모든 단축키 재설정';
 
   @override
-  String get shortcutResetAllDesc => 'Put every key back to its default';
+  String get shortcutResetAllDesc => '모든 키를 기본값으로 되돌립니다.';
 
   @override
-  String get shortcutPress => 'Press the key or combination you want';
+  String get shortcutPress => '원하는 키나 조합을 누르세요';
 
   @override
-  String get shortcutPressHint =>
-      'Each combination can only belong to one action, so taking one moves it.';
+  String get shortcutPressHint => '각 조합은 하나의 작업에만 속할 수 있으므로 하나를 선택하면 이동됩니다.';
 
   @override
-  String get shortcutSeekPercent => 'Jump to a point of the video';
+  String get shortcutSeekPercent => '영상의 특정 지점으로 이동';
 
   @override
   String get shortcutSeekPercentKeys => '0 – 9';
 
   @override
-  String get shortcutAppBack => 'Go back';
+  String get shortcutAppBack => '돌아가기';
 
   @override
-  String get shortcutAppFullscreen => 'Toggle fullscreen';
+  String get shortcutAppFullscreen => '전체 화면 전환';
 
   @override
-  String get shortcutAppGlass => 'Toggle glass mode';
+  String get shortcutAppGlass => '유리 모드 전환';
 
   @override
-  String get shortcutAppMaterialYou => 'Toggle Material You';
+  String get shortcutAppMaterialYou => '당신의 자료를 전환하세요';
 
   @override
-  String get shortcutAppDark => 'Toggle dark mode';
+  String get shortcutAppDark => '어두운 모드 전환';
 
   @override
-  String get shortcutAppOled => 'Toggle OLED black';
+  String get shortcutAppOled => 'OLED 검정색 전환';
 
   @override
-  String get shortcutAppSearch => 'Open search';
+  String get shortcutAppSearch => '검색 열기';
 
   @override
-  String get shortcutAppSettings => 'Open settings';
+  String get shortcutAppSettings => '설정 열기';
 
   @override
-  String get shortcutAppDownloads => 'Open downloads';
+  String get shortcutAppDownloads => '다운로드 열기';
 
   @override
-  String get shortcutAppNotifications => 'Open notifications';
+  String get shortcutAppNotifications => '알림 열기';
 
   @override
-  String get shortcutAppIncognito => 'Toggle incognito';
+  String get shortcutAppIncognito => '시크릿 모드 전환';
 
   @override
-  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+  String get shortcutAppShortcuts => '키보드 단축키 표시';
 
   @override
-  String get shortcutPlayerPlayPause => 'Play or pause';
+  String get shortcutPlayerPlayPause => '재생 또는 일시중지';
 
   @override
-  String get shortcutPlayerSeekForward => 'Seek forward';
+  String get shortcutPlayerSeekForward => '앞으로 탐색';
 
   @override
-  String get shortcutPlayerSeekBack => 'Seek back';
+  String get shortcutPlayerSeekBack => '뒤로 탐색';
 
   @override
-  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+  String get shortcutPlayerSeekForwardLong => '30초 앞으로 탐색';
 
   @override
-  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+  String get shortcutPlayerSeekBackLong => '30초 뒤로 탐색';
 
   @override
-  String get shortcutPlayerFrameForward => 'Next frame';
+  String get shortcutPlayerFrameForward => '다음 프레임';
 
   @override
-  String get shortcutPlayerFrameBack => 'Previous frame';
+  String get shortcutPlayerFrameBack => '이전 프레임';
 
   @override
-  String get shortcutPlayerVolumeUp => 'Volume up';
+  String get shortcutPlayerVolumeUp => '볼륨 업';
 
   @override
-  String get shortcutPlayerVolumeDown => 'Volume down';
+  String get shortcutPlayerVolumeDown => '볼륨 낮추기';
 
   @override
-  String get shortcutPlayerMute => 'Mute';
+  String get shortcutPlayerMute => '음소거';
 
   @override
-  String get shortcutPlayerFullscreen => 'Fullscreen';
+  String get shortcutPlayerFullscreen => '전체 화면';
 
   @override
-  String get shortcutPlayerNext => 'Next episode';
+  String get shortcutPlayerNext => '다음 에피소드';
 
   @override
-  String get shortcutPlayerPrevious => 'Previous episode';
+  String get shortcutPlayerPrevious => '이전 에피소드';
 
   @override
-  String get shortcutPlayerSkip => 'Skip intro or ending';
+  String get shortcutPlayerSkip => '소개 또는 끝 건너뛰기';
 
   @override
-  String get shortcutPlayerPanel => 'Episode list';
+  String get shortcutPlayerPanel => '에피소드 목록';
 
   @override
-  String get shortcutPlayerSpeedUp => 'Faster playback';
+  String get shortcutPlayerSpeedUp => '더 빠른 재생';
 
   @override
-  String get shortcutPlayerSpeedDown => 'Slower playback';
+  String get shortcutPlayerSpeedDown => '느린 재생';
 
   @override
-  String get shortcutPlayerSpeedReset => 'Normal speed';
+  String get shortcutPlayerSpeedReset => '정상 속도';
 
   @override
-  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+  String get shortcutPlayerSubtitleToggle => '자막 켜기 또는 끄기';
 
   @override
-  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+  String get shortcutPlayerSubtitleCycle => '다음 자막 트랙';
 
   @override
-  String get shortcutPlayerAudioCycle => 'Next audio track';
+  String get shortcutPlayerAudioCycle => '다음 오디오 트랙';
 
   @override
-  String get shortcutPlayerStreamCycle => 'Next stream';
+  String get shortcutPlayerStreamCycle => '다음 스트림';
 
   @override
-  String get shortcutPlayerFit => 'Change video fit';
+  String get shortcutPlayerFit => '비디오 맞춤 변경';
 
   @override
-  String get shortcutReaderRight => 'Page to the right';
+  String get shortcutReaderRight => '오른쪽 페이지';
 
   @override
-  String get shortcutReaderLeft => 'Page to the left';
+  String get shortcutReaderLeft => '왼쪽 페이지';
 
   @override
-  String get shortcutReaderNextPage => 'Next page';
+  String get shortcutReaderNextPage => '다음 페이지';
 
   @override
-  String get shortcutReaderPreviousPage => 'Previous page';
+  String get shortcutReaderPreviousPage => '이전 페이지';
 
   @override
-  String get shortcutReaderControls => 'Show or hide controls';
+  String get shortcutReaderControls => '컨트롤 표시 또는 숨기기';
 
   @override
-  String get shortcutReaderNextChapter => 'Next chapter';
+  String get shortcutReaderNextChapter => '다음 장';
 
   @override
-  String get shortcutReaderPreviousChapter => 'Previous chapter';
+  String get shortcutReaderPreviousChapter => '이전 장';
 
   @override
   String shortcutTaken(String action) {
-    return 'Taken from $action';
+    return '$action에서 가져옴';
   }
 
   @override
-  String get incognitoTurnedOn => 'Incognito mode on';
+  String get incognitoTurnedOn => '시크릿 모드 켜짐';
 
   @override
-  String get incognitoTurnedOff => 'Incognito mode off';
+  String get incognitoTurnedOff => '시크릿 모드 꺼짐';
 
   @override
-  String get onHoldAnime => 'On hold anime';
+  String get onHoldAnime => '애니메이션 보류 중';
 
   @override
-  String get onHoldManga => 'On hold manga';
+  String get onHoldManga => '보류중인 만화';
 
   @override
-  String get droppedAnime => 'Dropped anime';
+  String get droppedAnime => '떨어진 애니메이션';
 
   @override
-  String get droppedManga => 'Dropped manga';
+  String get droppedManga => '떨어진 만화';
 
   @override
-  String get generalSectionDesktop => 'Desktop';
+  String get generalSectionDesktop => '데스크탑';
 
   @override
-  String get closeAction => 'When the window is closed';
+  String get closeAction => '창문이 닫힐 때';
 
   @override
-  String get closeActionQuit => 'Quit the app';
+  String get closeActionQuit => '앱을 종료하세요';
 
   @override
-  String get closeActionWhenBusy =>
-      'Keep running in the tray while something is running';
+  String get closeActionWhenBusy => '뭔가가 실행되는 동안 트레이에서 계속 실행';
 
   @override
-  String get closeActionAlways => 'Always keep running in the tray';
+  String get closeActionAlways => '항상 트레이에서 계속 실행';
 
   @override
-  String get closeActionNoTray =>
-      'The system tray is not available here, so the app quits when closed';
+  String get closeActionNoTray => '여기서는 시스템 트레이를 사용할 수 없으므로 닫으면 앱이 종료됩니다.';
 
   @override
-  String get gamepadNav => 'Gamepad navigation';
+  String get gamepadNav => '게임패드 탐색';
 
   @override
-  String get gamepadNavDesc =>
-      'Move around the app and control the player with a game controller';
+  String get gamepadNavDesc => '게임 컨트롤러로 앱 주위를 이동하고 플레이어를 제어하세요.';
 
   @override
-  String get trayShow => 'Show Dartotsu';
+  String get trayShow => '다르토츠 보여주기';
 
   @override
-  String get trayQuit => 'Quit';
+  String get trayQuit => '종료';
 
   @override
-  String get trayIdle => 'Nothing running';
+  String get trayIdle => '실행 중인 항목이 없습니다.';
 
   @override
   String trayDownloading(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Downloading $count items',
-      one: 'Downloading $count item',
+      other: '$count 항목 다운로드 중',
+      one: '$count 항목 다운로드 중',
     );
     return '$_temp0';
   }
 
   @override
-  String get traySyncing => 'Syncing your lists';
+  String get traySyncing => '목록 동기화 중';
 
   @override
-  String get trayUpdating => 'Updating the app';
+  String get trayUpdating => '앱 업데이트 중';
 
   @override
-  String get trayPlaying => 'Playing in a small window';
+  String get trayPlaying => '작은 창가에서 놀다';
 
   @override
-  String get traySearch => 'Search';
+  String get traySearch => '검색';
 
   @override
-  String get trayPauseDownloads => 'Pause downloads';
+  String get trayPauseDownloads => '다운로드 일시중지';
 
   @override
-  String get trayResumeDownloads => 'Resume downloads';
+  String get trayResumeDownloads => '다운로드 재개';
 
   @override
-  String get playerDownloadTitle => 'Downloading the player';
+  String get playerDownloadTitle => '플레이어 다운로드 중';
 
   @override
   String get playerDownloadBody =>
-      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+      'Dartotsu는 비디오 엔진을 한 번 가져옵니다. 준비가 완료되면 재생이 시작됩니다.';
 
   @override
-  String get playerDownloadStarting => 'Starting the download…';
+  String get playerDownloadStarting => '다운로드 시작 중…';
 
   @override
-  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+  String get playerDownloadFailedTitle => '플레이어를 가져올 수 없습니다.';
 
   @override
   String get playerDownloadFailedBody =>
-      'Check your connection and try again. The download picks up where it stopped.';
+      '연결을 확인하고 다시 시도하세요. 다운로드가 중지된 위치부터 시작됩니다.';
 
   @override
-  String get playerDownloadRetry => 'Try again';
+  String get playerDownloadRetry => '다시 시도하세요';
 
   @override
-  String get playerDownloadCopy => 'Copy details';
+  String get playerDownloadCopy => '세부정보 복사';
 
   @override
-  String get removePlayerTitle => 'Remove the player?';
+  String get removePlayerTitle => '플레이어를 삭제하시겠습니까?';
 
   @override
-  String get removePlayerMessage =>
-      'Videos can\'t play until the player is downloaded again.';
+  String get removePlayerMessage => '플레이어를 다시 다운로드할 때까지 동영상을 재생할 수 없습니다.';
 
   @override
-  String get trailerLoading => 'Loading the trailer…';
+  String get trailerLoading => '예고편 로드 중…';
 
   @override
-  String get trailerFailed =>
-      'Could not play the trailer here, opening it in the browser';
+  String get trailerFailed => '여기에서는 예고편을 재생할 수 없습니다. 브라우저에서 여세요.';
 }

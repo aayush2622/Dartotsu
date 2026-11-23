@@ -4,8 +4,11 @@
     "anilist": "AniList",
     "mal": "MyAnimeList",
     "simkl": "Simkl",
+    "trakt": "Trakt",
     "kitsu": "Kitsu",
+    "comick": "Comick",
     "mangaBaka": "MangaBaka",
+    "mangaUpdates": "MangaUpdates",
     "discord": "Discord",
     "loadMore": "Pakia zaidi",
     "login": "Ingia",
@@ -26,12 +29,71 @@
     "install": "Sakinisha",
     "update": "Sasisha",
     "uninstall": "Ondoa",
+    "updateInstallCancelled": "Usakinishaji umeghairiwa. Kama Android ilisema programu inagongana na iliyosakinishwa, sahihi ni tofauti: ondoa toleo la sasa kwanza, kisha sakinisha sasisho",
+    "updateInstallFailed": "Sasisho limeshindwa: {error}",
+    "appLock": "Kufuli ya programu",
+    "appLockDesc": "Omba nambari ya siri programu inapofunguliwa au ukirudi baada ya muda",
+    "appLockBiometric": "Fungua kwa kutumia bayometriki",
+    "appLockBiometricDesc": "Tumia alama ya vidole au uso wako badala ya kuandika nambari ya siri",
+    "appLockBiometricReason": "Fungua Dartotsu",
+    "appLockDelay": "Funga wakati wa kufanya kazi",
+    "appLockDelayAlways": "Daima",
+    "appLockDelayNever": "Kamwe",
+    "appLockDelayAfter": "Baada ya {count, plural, =1{Dakika 1} other{Dakika {count}}}",
+    "@appLockDelayAfter": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockUseBiometric": "Tumia bayometriki",
+    "appLockUnlock": "Weka nambari yako ya siri",
+    "appLockWrong": "Nambari ya siri si sahihi",
+    "appLockWait": "Umejaribu mara nyingi, subiri sekunde {seconds}",
+    "appLockNew": "Chagua nambari ya siri",
+    "appLockNewHint": "Tarakimu 4 hadi 8",
+    "appLockConfirm": "Iweke tena",
+    "appLockMismatch": "Nambari za siri hazifanani",
+    "appLockOn": "Nambari ya siri imewekwa",
+    "appLockRemoveTitle": "Weka nambari yako ya siri ili kuzima kufuli",
     "installFailed": "Kusakinisha kumeshindwa",
     "updateFailed": "Kusasisha kumeshindwa",
+    "extensionUpdates": "{count, plural, =1{Sasisho 1 linapatikana} other{_P0__ masasisho yanapatikana}}",
+    "@extensionUpdates": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updateAll": "Sasisha zote",
+    "extensionsUpdated": "{done} kati ya {total} viendelezi vimesasishwa",
+    "@extensionsUpdated": {
+        "placeholders": {
+            "done": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "updateConflictTitle": "Sasisho halijasakinishwa",
+    "updateConflictBody": "{names} haikuweza kusakinishwa juu ya toleo lililopo. Kwa kawaida hii inamaanisha kuwa nakala iliyosakinishwa ilitiwa saini kwa njia tofauti. Uiondoe na usakinishe toleo jipya?",
+    "@updateConflictBody": {
+        "placeholders": {
+            "names": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictAction": "Sanidua na usakinishe upya",
     "noSourceSettings": "Chanzo hiki hakina mipangilio yoyote",
     "addPluginRepository": "Ongeza hazina ya programu jalizi",
     "pluginIndexUrlHint": "URL ya faharasa ya programu jalizi",
     "addRepository": "Ongeza hazina",
+    "importRepositoryFile": "Ingiza faili",
     "pluginRepoUpdated": "Hazina ya programu jalizi imesasishwa",
     "pluginRepoUpdateFailed": "Imeshindwa kuonyesha upya hazina ya programu jalizi",
     "ok": "Sawa",
@@ -46,6 +108,9 @@
     "resolving": "Inatatua…",
     "none": "Hakuna",
     "selectMediaService": "Chagua huduma ya media",
+    "manageServices": "Huduma za vyombo vya habari",
+    "manageServicesDesc": "Panga upya huduma na uchague zipi zitaonyeshwa kwenye kiteua",
+    "manageServicesHint": "Buruta ili kupanga upya, zima ambazo hutumii",
     "pickColor": "Chagua rangi",
     "colorPickerCustom": "Maalum",
     "colorPickerTransparent": "Uwazi",
@@ -57,6 +122,8 @@
     "settingsAppearanceDesc": "Mandhari, rangi, hali ya kioo",
     "settingsGeneral": "Jumla",
     "settingsGeneralDesc": "Lugha na tabia ya programu",
+    "settingsNetwork": "Mtandao",
+    "settingsNetworkDesc": "Wakala wa mtumiaji, vyeti, DNS na proksi",
     "settingsAccountDesc": "Huduma ya ufuatiliaji na kuingia",
     "settingsUpdates": "Masasisho",
     "amoledBlack": "Nyeusi ya AMOLED",
@@ -68,15 +135,235 @@
     "settingsExtensionsDesc": "Wasimamizi wa vyanzo, hazina na chaguo za viendelezi",
     "settingsAddons": "Viongezi",
     "customPath": "Njia maalum ya hifadhi",
+    "stories": "Hadithi",
+    "watchOrder": "Agizo la kutazama",
+    "watchOrderOpenSite": "Fungua kwenye chiaki.site",
+    "watchOrderUnavailable": "Hakuna agizo la saa lililopatikana kwa mada hii",
+    "watchOrderOpenFailed": "Haikuweza kufungua kichwa hicho",
+    "watchOrderCurrent": "Uko hapa",
+    "watchOrderCredit": "Tazama maagizo kutoka kwa chiaki.site",
     "customPathDesc": "Mahali data ya programu inahifadhiwa. Bonyeza kwa muda mrefu kuweka upya",
     "selectDirectory": "Chagua folda",
     "differentCacheManager": "Akiba mbadala ya picha",
     "differentCacheManagerDesc": "Tumia kidhibiti tofauti cha akiba kwa picha",
+    "settingsSync": "Mipangilio ya kusawazisha",
+    "settingsSyncDesc": "Weka mipangilio yako sawa kwenye kila kifaa. Zimehifadhiwa katika wazo la kibinafsi katika akaunti yako ya GitHub",
+    "settingsSyncSwitch": "Sawazisha kwenye mabadiliko",
+    "settingsSyncModeGithub": "GitHub",
+    "settingsSyncSignIn": "Ingia ukitumia GitHub",
+    "settingsSyncSignInDesc": "Mipangilio huhifadhiwa katika dhana ya faragha katika akaunti yako",
+    "settingsSyncToken": "Tumia tokeni ya ufikiaji wa kibinafsi",
+    "settingsSyncTokenDesc": "Unda moja kwenye github.com/settings/tokens kwa ruhusa ya kiini pekee",
+    "settingsSyncTokenField": "Ishara",
+    "settingsSyncSignedIn": "Umeingia kama {user}",
+    "@settingsSyncSignedIn": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "settingsSyncSignOut": "Ondoka",
+    "settingsSyncCode": "Ingiza {code} kwenye GitHub",
+    "@settingsSyncCode": {
+        "placeholders": {
+            "code": {}
+        }
+    },
+    "settingsSyncCodeDesc": "Ukurasa wa GitHub ulifunguliwa kwenye kivinjari chako. Gusa ili unakili msimbo, au uguse na ushikilie ili kughairi.",
+    "settingsSyncSignInFailed": "Haikuweza kuingia kwenye GitHub",
+    "dcPreview": "Hakiki",
+    "dcSampleWatching": "Kuangalia",
+    "dcSampleReading": "Kusoma",
+    "dcSampleBrowsing": "Inavinjari",
+    "dcSampleLive": "Hivi sasa",
+    "dcLiveNothing": "Hakuna kinachoonyeshwa kwa sasa. Fungua kichwa, anza kipindi au sura na itaonekana hapa.",
+    "dcMemberList": "Katika orodha ya wanachama",
+    "dcAccount": "Akaunti",
+    "dcSignIn": "Ingia kwa kutumia Discord",
+    "dcSignOut": "Ondoka",
+    "dcDesktopHint": "Bila kuunganisha, Discord huonyesha \"Kutazama Dartotsu\" kupitia programu ya eneo-kazi. Unganisha Discord ili kutaja shughuli baada ya jina lako, ikiwa ni pamoja na kwenye simu ya mkononi.",
+    "dcMobileHint": "Unganisha Discord ili kuonyesha kile unachotazama au kusoma. Inatumia ukurasa wa kuidhinisha wa Discord, si tokeni ya akaunti yako.",
+    "dcConnect": "Unganisha Discord",
+    "dcConnectDesc": "Hufungua ukurasa wa kuidhinisha wa Discord na kuongeza Dartotsu chini ya Programu Zilizoidhinishwa. Discord inaomba kusasisha uwepo wako. Tokeni ya kuonyesha upya pekee ndiyo imehifadhiwa, si tokeni ya akaunti yako.",
+    "dcConnectFailed": "Haikuweza kuunganisha Discord",
+    "dcConnectedSnack": "Discord imeunganishwa",
+    "dcDisconnect": "Tenganisha",
+    "dcDisconnectedSnack": "Discord imetenganishwa",
+    "dcUseToken": "Tumia tokeni badala yake",
+    "dcRouteDesktop": "Kupitia programu ya eneo-kazi la Discord",
+    "dcRouteHeadless": "Kupitia akaunti yako",
+    "dcRouteGateway": "Kupitia akaunti yako, moja kwa moja",
+    "dcRouteLinked": "Programu iliyounganishwa",
+    "dcRouteNone": "Haijaunganishwa",
+    "dcStatusNeedsToken": "Inahitaji tokeni ya Discord. Kuunganisha programu hakuweki hali yako ya mtandaoni.",
+    "dcAccountOnly": "Inahitaji akaunti iliyoingia",
+    "dcStatusSection": "Hali",
+    "dcControlStatus": "Dhibiti hali yangu",
+    "dcControlStatusDesc": "Huweka muunganisho wa moja kwa moja kwa Discord wakati Rich Presence imewashwa, ili Dartotsu iweze kuweka hali yako.",
+    "dcStatusOnline": "Mtandaoni",
+    "dcStatusIdle": "Bila kufanya kitu",
+    "dcStatusDnd": "Usisumbue",
+    "dcStatusInvisible": "Isiyoonekana",
+    "dcCustomStatus": "Hali maalum",
+    "dcCustomStatusHint": "Unafanya nini?",
+    "dcActivitySection": "Shughuli",
+    "dcShowWatching": "Onyesha huku ukitazama",
+    "dcShowReading": "Onyesha wakati wa kusoma",
+    "dcListening": "Kusikiliza",
+    "dcCompeting": "Kushindana",
+    "dcActivityName": "Jina la shughuli",
+    "dcNameApp": "Dartotsu",
+    "dcNameTitle": "Kichwa",
+    "dcNameCustom": "Desturi",
+    "dcCustomNameHint": "Jina linaloonyeshwa baada ya \"Kutazama\"",
+    "dcStatusText": "Maandishi ya hali",
+    "dcStatusTextDesc": "Kile ambacho orodha ya wanachama inaonyesha karibu na jina lako",
+    "dcDisplayName": "Jina",
+    "dcDisplayState": "Jimbo",
+    "dcDisplayDetails": "Maelezo",
+    "dcTextSection": "Maandishi",
+    "dcDetails": "Mstari wa juu",
+    "dcState": "Mstari wa chini",
+    "dcTemplateHint": "Empty hutumia chaguo-msingi",
+    "dcVariables": "Gusa ili uweke thamani",
+    "dcImagesSection": "Picha",
+    "dcLargeImage": "Picha kubwa",
+    "dcLargeAuto": "Otomatiki",
+    "dcLargeCover": "Jalada",
+    "dcLargeLogo": "Nembo",
+    "dcSmallImage": "Picha ndogo",
+    "dcSmallAuto": "Nembo",
+    "dcSmallNone": "Hakuna",
+    "dcTimerStyle": "Mtindo wa kipima muda",
+    "dcTimerAuto": "Otomatiki",
+    "dcTimerElapsed": "Iliyopita",
+    "dcTimerRemaining": "Iliyosalia",
+    "dcButtonsSection": "Vifungo",
+    "dcButtonMedia": "Unganisha kwa kichwa",
+    "dcButtonApp": "Unganisha na Dartotsu",
+    "dcButtonCustom": "Kitufe maalum",
+    "dcButtonLabel": "Lebo",
+    "dcButtonUrl": "Kiungo",
+    "dcPrivacySection": "Faragha",
+    "dcPrivateText": "Maandishi ya kibinafsi",
+    "dcPrivateHint": "Kitu cha faragha",
+    "dcTokenWarning": "Kuingia hutumia tokeni ya akaunti yako. Sheria za Discord hukatisha tamaa hii, kwa hivyo itumie kwa hatari yako mwenyewe.",
+    "dcConnected": "Imeunganishwa",
+    "dcConnection": "Muunganisho",
+    "dcMethodDesktop": "Programu ya kompyuta ya mezani ya Discord",
+    "dcMethodDesktopDesc": "Inatumika kiotomatiki wakati hakuna kitu kingine kimeunganishwa. Discord lazima iwe wazi kwenye kompyuta hii.",
+    "dcMethodToken": "Ishara ya akaunti",
+    "dcInUse": "Inatumika",
+    "dcRecommended": "Imependekezwa",
+    "dcConnecting": "Inaunganisha...",
+    "dcDisconnected": "Haijaunganishwa",
+    "dcSignedInAs": "Umeingia kama {name}",
+    "@dcSignedInAs": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsSyncOn": "Washa",
+    "settingsSyncCustom": "Desturi",
+    "settingsSyncChangedHeader": "Mipangilio iliyobadilishwa",
+    "settingsSyncNoneChanged": "Bado haujabadilisha yoyote kati ya hizi, kwa hivyo hakuna chochote cha kusawazisha.",
+    "settingsSyncChangedOnly": "Mipangilio uliyobadilisha pekee ndiyo huhifadhiwa. Kila kitu kingine hutumia chaguo-msingi chake kwenye kila kifaa. Ikoni ya wingu inaonyesha kile ambacho tayari kiko kwenye seva.",
+    "settingsSyncOffCategory": "Sio kusawazisha. Hizi hukaa kwenye kifaa hiki na nakala ya seva imesalia jinsi ilivyo.",
+    "settingsSyncPartsNote": "Kwa kila kifaa. Kizima huhifadhi thamani ya kila kifaa, kwa hivyo simu na TV zinaweza kutofautiana.",
+    "settingsSyncPartSubtitles": "Ukubwa wa manukuu na rangi",
+    "settingsSyncPartSubtitlesDesc": "Ukubwa, uzito, rangi na msimamo",
+    "settingsSyncPartPictureColors": "Rangi za picha",
+    "settingsSyncPartPictureColorsDesc": "Mwangaza, tofauti, kueneza, gamma, hue na HDR",
+    "settingsSyncPartPalette": "Rangi za mandhari",
+    "settingsSyncPartPaletteDesc": "Mandhari, rangi ya lafudhi na OLED nyeusi",
+    "settingsSyncCatOther": "Tazama, soma na huduma",
+    "settingsSyncTitles": "Tazama maendeleo na mada",
+    "settingsSyncTitlesCount": "{records} vyeo na {resume} rejea maingizo kwenye seva",
+    "@settingsSyncTitlesCount": {
+        "placeholders": {
+            "records": {},
+            "resume": {}
+        }
+    },
+    "settingsSyncTitlesNone": "Bado hakuna kilichopakiwa",
+    "settingsSyncTitlesNote": "Tazama na usome nafasi, rafu ya wasifu, orodha za karibu nawe, alamisho, vivutio na chaguo za kila kichwa. Chanzo vinavyolingana na mitiririko hukaa kwenye kila kifaa kwa sababu hutegemea viendelezi vyako. Mada hupakia kila baada ya sekunde 45.",
+    "settingsSyncConnect": "Haijaunganishwa",
+    "settingsSyncConnectDesc": "Ingia ukitumia GitHub ili kuweka mipangilio yako sawa kwenye kila kifaa.",
+    "settingsSyncFailedTitle": "Usawazishaji haukufaulu",
+    "settingsSyncPaused": "Imesitishwa",
+    "settingsSyncPausedDesc": "Hakuna kinachopakiwa au kupakuliwa wakati hii imezimwa.",
+    "settingsSyncUpToDate": "Imesasishwa",
+    "settingsSyncRetry": "Jaribu tena",
+    "settingsSyncAccount": "Akaunti ya GitHub",
+    "settingsSyncAccountDesc": "Data yako huenda kwa kidokezo cha faragha katika akaunti yako mwenyewe.",
+    "settingsSyncWaiting": "Inakusubiri uidhinishe kwenye GitHub",
+    "settingsSyncCopyCode": "Gusa msimbo ili uinakili",
+    "settingsSyncCancel": "Ghairi",
+    "settingsSyncStatSettings": "Mipangilio",
+    "settingsSyncStatTitles": "Majina",
+    "settingsSyncStatShelf": "Endelea",
+    "settingsSyncUploaded": "Imepakiwa {time} kutoka {device}",
+    "@settingsSyncUploaded": {
+        "placeholders": {
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncChanged": "{count, plural, =0{Hakuna kilichobadilika bado} =1{1 imebadilishwa} other{{count} imebadilishwa}}",
+    "settingsSyncSecrets": "Akaunti na nywila",
+    "settingsSyncSecretsDesc": "Sawazisha kuingia kwako (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), funguo za API na kufunga programu kati ya vifaa vyako. Zimesimbwa kwa njia fiche kwa kaulisiri ambayo hukaa kwenye vifaa vyako, kwa hivyo GitHub haizioni kamwe.",
+    "settingsSyncSecretsOn": "Akaunti husawazishwa na kusimbwa kwa njia fiche",
+    "settingsSyncSecretsOnDesc": "Kuondoka kwenye akaunti kwenye kifaa kimoja hakukuondoi kwenye vingine.",
+    "settingsSyncSecretsBroken": "Kaulisiri hailingani tena na ile iliyo kwenye seva. Ingize tena ili uendelee kusawazisha akaunti.",
+    "settingsSyncPassphraseSet": "Weka neno la siri",
+    "settingsSyncPassphraseEnter": "Weka kaulisiri yako",
+    "settingsSyncPassphraseField": "Nenosiri",
+    "settingsSyncPassphraseConfirm": "Rudia neno la siri",
+    "settingsSyncPassphraseNew": "Chagua kaulisiri ya angalau vibambo 6. Haijahifadhiwa popote lakini vifaa vyako na haiwezi kurejeshwa. Ukisahau, futa nakala ya seva na uanze tena.",
+    "settingsSyncPassphraseExisting": "Weka kaulisiri uliyochagua kwenye kifaa chako kingine. Akaunti kwenye kifaa hiki itabadilishwa na zilizosawazishwa.",
+    "settingsSyncPassphraseWrong": "Nenosiri lisilo sahihi",
+    "settingsSyncPassphraseMismatch": "Manenosiri hayalingani",
+    "settingsSyncPassphraseShort": "Tumia angalau vibambo 6",
+    "settingsSyncSecretsStop": "Acha kusawazisha akaunti",
+    "settingsSyncSecretsDelete": "Futa kutoka kwa GitHub",
+    "settingsSyncSecretsDeleteMessage": "Hii huondoa faili ya akaunti iliyosimbwa kwa njia fiche kutoka kwa kiini chako. Vifaa vingine huhifadhi kuingia kwao na vinaweza kuweka kaulisiri mpya.",
+    "settingsSyncWhat": "Nini cha kusawazisha",
+    "settingsSyncServer": "Kwenye seva",
+    "settingsSyncServerEmpty": "Bado hakuna kilichopakiwa",
+    "settingsSyncServerInfo": "{count} mipangilio, imepakiwa {time} kutoka {device}",
+    "@settingsSyncServerInfo": {
+        "placeholders": {
+            "count": {},
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncThisDevice": "kifaa hiki",
+    "settingsSyncCount": "{count, plural, =0{Hakuna chochote kwenye seva} =1{Mpangilio 1 kwenye seva} other{{count} mipangilio kwenye seva}}",
+    "settingsSyncNow": "Sawazisha sasa",
+    "settingsSyncRunning": "Inasawazisha...",
+    "settingsSyncNever": "Bado haijasawazishwa",
+    "settingsSyncLast": "Ilisawazishwa mwisho {time}",
+    "@settingsSyncLast": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "settingsSyncFailed": "Usawazishaji haukufaulu: {error}",
+    "@settingsSyncFailed": {
+        "placeholders": {
+            "error": {}
+        }
+    },
+    "settingsSyncScope": "Mipangilio inayofanya kazi sawa kila mahali pekee ndiyo inasawazishwa. Akaunti, tokeni, folda, viendelezi, arifa, Discord, masasisho na ukubwa wa dirisha hukaa kwenye kila kifaa.",
     "backupAndRestore": "Hifadhi nakala na kurejesha",
     "backupAndRestoreDesc": "Hifadhi au pakia mapendeleo yako",
     "backup": "Nakala rudufu",
     "restore": "Rejesha",
     "loadExtensionsIcon": "Pakia aikoni za viendelezi",
+    "autoUpdateRuntimes": "Sasisha muda wa matumizi wa viendelezi kiotomatiki",
+    "autoUpdateRuntimesDesc": "Pakua Aniyomi mpya, CloudStream na matoleo mengine ya wakati wa utekelezaji chinichini. Imezimwa, ikoni ya sasisho inaonekana karibu na msimamizi badala yake.",
     "loadExtensionsIconDesc": "Onyesha aikoni za vyanzo kwenye orodha za viendelezi",
     "sectionStorage": "Hifadhi",
     "sectionManagers": "Wasimamizi",
@@ -89,6 +376,9 @@
     "backupSelectAll": "Chagua zote",
     "backupClearAll": "Futa",
     "backupKeys": "Mipangilio {count}",
+    "backupPasswordRequired": "Nenosiri (linahitajika kwa data ya akaunti)",
+    "backupProtectedNeedsPassword": "Weka nenosiri ili kuhifadhi nakala ya data ya akaunti, au uondoe tiki",
+    "backupProtectedSkipped": "Hifadhi rudufu hii haina nenosiri, kwa hivyo data ya akaunti yake ilirukwa",
     "backupPassword": "Nenosiri (hiari)",
     "backupPasswordHint": "Acha wazi kutumia chaguomsingi",
     "backupSensitive": "Inajumuisha tokeni za kuingia. Weka faili hii siri",
@@ -125,6 +415,70 @@
     "backupCatOtherDesc": "Mpangilio wa milisho, orodha na chaguo za huduma",
     "logFile": "Faili ya kumbukumbu",
     "logFileDesc": "Shiriki kumbukumbu za programu, au nakili njia yake kwenye Linux",
+    "logDelete": "Futa faili za kumbukumbu",
+    "logDeleteDesc": "Futa kumbukumbu za programu zilizohifadhiwa ili upate nafasi",
+    "logDeleted": "{size} ya kumbukumbu imefutwa",
+    "@logDeleted": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "missingSequel": "Muendelezo unaokosa",
+    "rising": "Kupanda",
+    "stacks": "Rafu",
+    "stacksAll": "Wote",
+    "stacksFeatured": "Iliyoangaziwa",
+    "stacksMine": "Wako",
+    "stacksSaved": "Imehifadhiwa",
+    "stacksFollowing": "Kufuatia",
+    "stacksEmpty": "Bado hakuna rafu hapa",
+    "stacksSignIn": "Ingia katika MangaBaka ili kuona rafu zako",
+    "stacksScopeNeeded": "Rafu zako zinahitaji ruhusa mpya. Ingia kwenye MangaBaka tena ili kuiruhusu.",
+    "stacksSignInAgain": "Ingia tena",
+    "stacksCouldntLoad": "Haikuweza kupakia rafu",
+    "stackSeriesCount": "{count, plural, =1{1 mfululizo} other{{count} mfululizo}}",
+    "@stackSeriesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackSavesCount": "{count, plural, =1{1 hifadhi} other{{count} huhifadhi}}",
+    "@stackSavesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackBy": "na {name}",
+    "@stackBy": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "stackSpoilers": "Waharibifu",
+    "stackEmptyEntries": "Rafu hii haina chochote",
+    "stackSave": "Hifadhi rafu",
+    "stackUnsave": "Ondoa kutoka kwa kuhifadhiwa",
+    "stackSavedToast": "Imehifadhiwa kwenye rafu zako",
+    "stackRemovedToast": "Imeondolewa kwenye rafu ulizohifadhi",
+    "userStacks": "Rafu na {name}",
+    "@userStacks": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "newsTitle": "Habari",
+    "newsEmpty": "Hakuna habari kwa sasa",
+    "newsCouldntLoad": "Haikuweza kupakia habari",
     "logFileCopied": "Njia ya kumbukumbu imenakiliwa",
     "donateSheetTitle": "Unafurahia Dartotsu?",
     "donateSheetMessage": "Dartotsu inaundwa na kutunzwa na mtu mmoja. Kama inakusaidia, fikiria kuunga mkono maendeleo yake.",
@@ -134,6 +488,8 @@
     "glassBackgroundHint": "Kiungo cha picha (acha wazi kutumia bango lako)",
     "followCover": "Fuata jalada",
     "followCoverDesc": "Rangi hufuata mandharinyuma, na jalada kwenye kurasa za maelezo",
+    "followCoverMediaOnly": "Kwa vyombo vya habari pekee",
+    "followCoverMediaOnlyDesc": "Fuata tu jalada kwenye kurasa za media, kila mahali pengine huweka rangi za kawaida",
     "cardStyle": "Mtindo wa kadi",
     "cardStyleDesc": "Mahali pa kichwa, ukubwa, maendeleo na beji",
     "customFont": "Fonti",
@@ -145,7 +501,7 @@
     "browseGoogleFonts": "Vinjari Google Fonts…",
     "searchGoogleFonts": "Tafuta Google Fonts",
     "defaultFont": "Chaguomsingi",
-    "materialYou": "Material You",
+    "materialYou": "Nyenzo Wewe",
     "materialYouDesc": "Rangi zinazobadilika kutoka kwenye mfumo",
     "jsonTheme": "Faili ya mandhari maalum",
     "jsonThemeDesc": "Rangi za moja kwa moja kutoka ~/.config/dartotsu/theme.json (skripti yako, au marekebisho yako mwenyewe)",
@@ -164,10 +520,10 @@
     "preRelease": "Toleo la awali",
     "alpha": "Alfa",
     "checkNow": "Angalia sasa",
-    "userAgent": "User-Agent",
+    "userAgent": "Mtumiaji-Wakala",
     "settingDefault": "Chaguomsingi",
     "currentlyUsing": "Kwa sasa: {value}",
-    "dnsOverHttps": "DNS-over-HTTPS",
+    "dnsOverHttps": "DNS-juu-HTTPS",
     "dnsDefault": "Chaguomsingi (Cloudflare)",
     "proxy": "Proksi",
     "proxyProtocol": "Aina",
@@ -188,6 +544,7 @@
     "imageSavedTo": "Imehifadhiwa kwenye {path}",
     "imageActionFailed": "Imeshindwa kupakua picha",
     "imageTitleCover": "Jalada",
+    "imageTitlePage": "Ukurasa",
     "imageTitleBanner": "Bango",
     "imageTitleAvatar": "Picha ya wasifu",
     "verifyTls": "Thibitisha vyeti",
@@ -197,11 +554,15 @@
     "gitHub": "GitHub",
     "gitHubDesc": "Msimbo, matatizo na matoleo",
     "discordDesc": "Jumuiya na msaada",
+    "supportDeveloper": "Saidia msanidi programu",
+    "buyMeCoffee": "Ninunulie kahawa",
+    "upiId": "Kitambulisho cha UPI",
+    "upiCopied": "Kitambulisho cha UPI kimenakiliwa",
     "donateDesc": "Unga mkono maendeleo",
     "contributors": "Wachangiaji",
     "contributorsDesc": "Watu walioijenga Dartotsu",
     "contributorsLoadFailed": "Imeshindwa kupakia wachangiaji",
-    "forks": "Forks",
+    "forks": "Uma",
     "forksDesc": "Miradi iliyojengwa juu ya Dartotsu",
     "forksEmpty": "Hakuna foki zilizopatikana",
     "sectionColors": "Rangi",
@@ -214,6 +575,7 @@
     "onboardingBack": "Rudi",
     "onboardingNext": "Mbele",
     "onboardingSkip": "Ruka",
+    "onboardingLanguageBody": "Chagua lugha ambayo Dartotsu inaonyeshwa. Unaweza kuibadilisha baadaye katika Mipangilio.",
     "onboardingPaletteTitle": "Ifanye yako",
     "onboardingPaletteBody": "Chagua rangi. Kila rangi ya msisitizo, kuanzia kadi hadi kicheza, itaifuata.",
     "themeModeAuto": "Otomatiki",
@@ -245,13 +607,33 @@
     "calendarToday": "Leo",
     "calendarEmpty": "Hakuna kinachoonyeshwa siku hii",
     "calendarFailed": "Imeshindwa kupakia ratiba",
+    "calendarChapter": "Sura ya {n}",
+    "@calendarChapter": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarExpected": "Inatarajiwa",
+    "castReceiverFailed": "Chromecast haikuanzisha kichezaji chake",
+    "castPlaybackFailed": "Kifaa hakikuweza kucheza mtiririko huu",
+    "shortcutNothingToContinue": "Bado hakuna cha kuendelea",
+    "shortcutNoCalendar": "{service} haina kalenda",
+    "@shortcutNoCalendar": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
     "calendarEpisode": "Kipindi {n}",
     "shareAnalytics": "Shiriki data ya matumizi bila kujulikana",
     "shareAnalyticsDesc": "Idadi ya watumiaji na ripoti za hitilafu bila kujulikana. Hakuna akaunti wala data binafsi",
     "linkOpenAnilist": "Fungua viungo vya AniList kwenye Dartotsu",
     "linkOpenAnilistDesc": "Washa ushughulikiaji wa viungo ili viungo vya anilist.co vifungue programu",
     "linkSettingsFailed": "Imeshindwa kufungua mipangilio ya mfumo",
-    "discordRichPresence": "Rich Presence",
+    "discordRichPresence": "Uwepo Tajiri",
     "discordRichPresenceTokenDesc": "Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji tokeni yako ya Discord.",
     "discordRichPresenceDesktopDesc": "Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji programu ya Discord ya kompyuta iwe inafanya kazi.",
     "discordBrowsing": "Onyesha shughuli za kuvinjari",
@@ -259,8 +641,8 @@
     "discordLookHeader": "Mwonekano wa presence",
     "discordActivityType": "Aina ya shughuli",
     "discordActivityTypeDesc": "Jinsi Discord inavyoandika: \"Watching …\" au \"Playing …\". Otomatiki hutumia Watching kwa anime na Playing kwa vingine vyote.",
-    "discordWatching": "Watching",
-    "discordPlaying": "Playing",
+    "discordWatching": "Kuangalia",
+    "discordPlaying": "Inacheza",
     "discordCovers": "Onyesha majalada",
     "discordCoversDesc": "Picha ya jalada na aikoni ya Dartotsu kwenye kadi.",
     "discordTimer": "Onyesha kipima muda",
@@ -293,7 +675,7 @@
     "discordTokenNotSet": "Haijawekwa. Gusa kuongeza.",
     "discordTokenSavedSnack": "Tokeni ya Discord imehifadhiwa",
     "discordTokenRemovedSnack": "Tokeni ya Discord imeondolewa",
-    "discordRichPresenceRow": "Discord Rich Presence",
+    "discordRichPresenceRow": "Discord Tajiri Uwepo",
     "discordRichPresenceRowOn": "Imewashwa · gusa kubadilisha mwonekano",
     "discordRichPresenceRowOff": "Onyesha unachofanya kwenye wasifu wako wa Discord",
     "loginCancelled": "Kuingia kumeghairiwa",
@@ -306,8 +688,41 @@
     "password": "Nenosiri",
     "kitsuProfile": "Wasifu wa Kitsu",
     "mangaBakaLoginFailed": "Kuingia kwenye MangaBaka kumeshindwa",
+    "comickLoginFailed": "Imeshindwa kuingia katika ucheshi",
+    "tagline": "Mstari wa tagi",
+    "trending": "Zinazovuma",
+    "anticipated": "Inatarajiwa",
+    "watchlist": "Orodha ya maangalizi",
+    "recommendedShows": "Vipindi Vinavyopendekezwa",
+    "recommendedMovies": "Filamu Zinazopendekezwa",
+    "boxOffice": "Ofisi ya sanduku",
+    "popularMovies": "Filamu Maarufu",
+    "popularShows": "Vipindi Maarufu",
+    "anticipatedMovies": "Filamu Zinazotarajiwa",
+    "anticipatedShows": "Maonyesho Yanayotarajiwa",
+    "trendingShows": "Maonyesho Yanayovuma",
+    "mostWatchedThisWeek": "Zilizotazamwa Zaidi Wiki Hii",
+    "sortMostViewed": "Iliyotazamwa zaidi",
+    "sortMostFollowed": "Wengi walifuata",
+    "sortLatestUpdates": "Sasisho za hivi punde",
+    "translationStatusLabel": "Tafsiri",
+    "weeklySchedule": "Ratiba ya Wiki",
+    "mostFollowed": "Inayofuatwa Zaidi",
+    "latestUpdates": "Sasisho za Hivi Punde",
+    "trendingAnime": "Wahusika Wanaovuma",
+    "topRatedAnime": "Wahusika Waliokadiriwa Juu",
+    "mostFollowedAnime": "Wahusika Waliofuatwa Zaidi",
+    "comickProfile": "Wasifu wa vichekesho",
+    "refreshFromComick": "Onyesha upya kutoka kwa Comick",
     "mangaBakaProfile": "Wasifu wa MangaBaka",
     "refreshFromMangaBaka": "Onyesha upya kutoka MangaBaka",
+    "mangaUpdatesLoginTitle": "Ingia kwenye MangaUpdates",
+    "mangaUpdatesProfile": "Wasifu wa MangaUsasisho",
+    "mangaUpdatesAnimeStart": "Urekebishaji wa uhuishaji huanza",
+    "mangaUpdatesAnimeEnd": "Urekebishaji wa anime unaisha",
+    "refreshFromMangaUpdates": "Onyesha upya kutoka MangaUpdates",
+    "usernameOnly": "Jina la mtumiaji",
+    "releases": "Matoleo",
     "artistsLabel": "Wasanii",
     "authorsLabel": "Waandishi",
     "publishersLabel": "Wachapishaji",
@@ -317,8 +732,13 @@
     "noLabel": "Hapana",
     "ratingSteps": "Hatua za ukadiriaji",
     "hideNsfw": "Ficha NSFW",
+    "hideNsfwSourcesDesc": "Ficha vyanzo vilivyotiwa alama 18+ kutoka kwa milisho na kiteua chanzo. Wanakaa imewekwa.",
     "hideNsfwDesc": "Weka vichwa vya watu wazima nje ya milisho na utafutaji, na orodhesha vipengee vyako vya watu wazima chini ya Media Iliyofichwa.",
     "kitsuAccountOptions": "Chaguo za akaunti ya Kitsu",
+    "mangaBakaAccountOptions": "Chaguo za akaunti ya MangaBaka",
+    "comickAccountOptions": "Chaguo za akaunti ya Comick",
+    "comickClientId": "Kitambulisho cha Mteja wa Comick",
+    "comickClientIdDesc": "Kitambulisho maalum cha mteja kilichosajiliwa kwenye comick.dev",
     "couldNotUpdateKitsuSettings": "Imeshindwa kusasisha mipangilio yako ya Kitsu",
     "titleCanonical": "Rasmi",
     "titleRomanized": "Kirumi",
@@ -341,12 +761,15 @@
     "accountDetails": "Maelezo ya akaunti",
     "refreshFromKitsu": "Onyesha upya kutoka Kitsu",
     "simklReadOnly": "Simkl imepewa ufikiaji wa kusoma tu",
+    "traktReadOnly": "Trakt ilitoa ufikiaji wa kusoma pekee",
     "incognitoEditsBlocked": "Fiche: mabadiliko ya orodha yamezuiwa",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Fiche: maendeleo hayajahifadhiwa",
     "progressSet": "Maendeleo yamewekwa kuwa {progress}",
     "removedFromList": "{title} imeondolewa kwenye orodha yako",
     "following": "Unafuata",
+    "followsMutual": "Kuheshimiana",
+    "followsNotMutual": "Sio kuheshimiana",
     "homeSections": "Sehemu za Mwanzo",
     "homeSectionsHint": "Buruta kupanga upya. Sehemu zilizofichwa hazipakuliwi kamwe.",
     "customListDeleteFailed": "Imeshindwa kufuta orodha maalum",
@@ -354,6 +777,7 @@
     "customListsSaved": "Orodha maalum zimehifadhiwa",
     "listName": "Jina la orodha",
     "addList": "Ongeza orodha",
+    "voiceActors": "Waigizaji wa sauti",
     "voiceActorsIn": "Waigizaji sauti · {name}",
     "animeAppearances": "Kuonekana kwenye anime",
     "mangaAppearances": "Kuonekana kwenye manga",
@@ -363,6 +787,8 @@
     "mainProductions": "Kazi kuu",
     "otherWorks": "Kazi nyingine",
     "prequelSequel": "Awali na Mfululizo",
+    "prequel": "Prequel",
+    "sequel": "Mwendelezo",
     "previousSeason": "Msimu uliopita",
     "thisSeason": "Msimu huu",
     "nextSeason": "Msimu ujao",
@@ -374,11 +800,18 @@
     "repullProfileCounts": "Vuta upya wasifu na idadi zako",
     "refreshed": "Imeonyeshwa upya",
     "simklProfile": "Wasifu wa Simkl",
+    "traktProfile": "Wasifu wa trakt",
     "refreshFromSimkl": "Onyesha upya kutoka Simkl",
+    "refreshFromTrakt": "Onyesha upya kutoka Trakt",
     "repullProfileLibrary": "Vuta upya wasifu na maktaba yako",
     "simklSignInToSearch": "Ingia kwenye Simkl ili kutafuta",
     "dropRate": "Kiwango cha kuacha",
     "simklAttribution": "Data na picha zimetolewa na Simkl. Tazama kwenye Simkl",
+    "traktAttribution": "Data na kazi ya sanaa iliyotolewa na Trakt. Tazama kwenye Trakt",
+    "listsLiked": "Imependeza",
+    "listsYours": "Wako",
+    "traktVip": "VIP",
+    "traktVipMember": "Trakt VIP Mwanachama",
     "onHold": "Imesimamishwa",
     "scoredBy": "Imepigiwa alama na",
     "planToWatch": "Napanga kutazama",
@@ -387,6 +820,8 @@
     "timesReread": "Mara za kusoma tena",
     "comments": "Maoni",
     "moviesAndSeries": "Filamu na Mfululizo",
+    "simklMoviesOnly": "Filamu na mfululizo pekee",
+    "simklMoviesOnlyDesc": "Hubadilisha kichupo cha Wahusika: Filamu kwanza, kisha Vipindi vilivyo na safu mlalo kadhaa za uhuishaji",
     "trackingOnly": "Ufuatiliaji tu",
     "signedIn": "Umeingia",
     "searchLanguage": "Lugha ya utafutaji",
@@ -397,19 +832,41 @@
     "details": "Maelezo",
     "addToList": "Ongeza kwenye orodha",
     "trailer": "Trela",
+    "trailerQuality": "Ubora wa trela",
     "titleCopied": "Kichwa kimenakiliwa",
     "linkCopied": "Kiungo kimenakiliwa",
     "watchTrailer": "Tazama trela",
     "copyTitle": "Nakili kichwa",
+    "detailStale": "AniList haikuweza kufikiwa. Haya ni maelezo yaliyohifadhiwa na huenda yamepitwa na wakati.",
     "copyLink": "Nakili kiungo",
     "openInBrowser": "Fungua kwenye kivinjari",
     "viewOnSource": "Tazama kwenye {source}",
     "episodeAirsIn": "Kipindi {ep} kitaonyeshwa baada ya {time}",
     "nextEpisodeIn": "Kipindi kijacho baada ya {time}",
+    "chapterExpectedIn": "Sura ya {chapter} inatarajiwa baada ya takriban {time}",
     "logPathCopied": "Njia ya faili ya kumbukumbu imenakiliwa kwenye ubao wa kunakili",
     "animeSource": "Chanzo cha anime",
     "mangaSource": "Chanzo cha manga",
     "popular": "Maarufu",
+    "allCustomLists": "Orodha zote maalum",
+    "simklTitleLanguage": "Lugha ya kichwa cha wahusika",
+    "titleLanguageEnglish": "Kiingereza",
+    "titleLanguageRomaji": "Romaji",
+    "simklListsTrending": "Zinazovuma",
+    "simklListsMostLiked": "Iliyopendwa zaidi",
+    "simklListsMostFollowed": "Wengi walifuata",
+    "simklListsOfficial": "Rasmi",
+    "simklListTitles": "{count, plural, =1{1 kichwa} other{{count} vyeo}}",
+    "@simklListTitles": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "people": "Watu",
+    "mostComments": "Maoni mengi",
+    "alphabetical": "Kialfabeti",
     "latest": "Mpya zaidi",
     "saved": "Zilizohifadhiwa",
     "nothingMatched": "Hakuna kilichopatikana",
@@ -440,6 +897,7 @@
     "nothingNew": "Hakuna kipya",
     "thisWeek": "Wiki hii",
     "listOnly": "Orodha tu",
+    "notInList": "Sio Katika Orodha",
     "filter": "Chuja",
     "searchResults": "Matokeo ya utafutaji",
     "recentSearches": "Utafutaji wa hivi karibuni",
@@ -478,6 +936,11 @@
     "done": "Imekamilika",
     "searchOrEnterUrl": "Tafuta au weka URL",
     "refresh": "Onyesha upya",
+    "animePlanetRank": "Cheo",
+    "animePlanetMagazine": "Jarida",
+    "animePlanetRefreshLists": "Onyesha upya orodha zako",
+    "animePlanetRefreshListsDesc": "Soma orodha zako za Anime-Sayari tena",
+    "animePlanetLocalNote": "Ingia ili kuhifadhi mabadiliko kwenye akaunti yako ya Anime-Planet. Hadi wakati huo wanakaa kwenye kifaa hiki",
     "share": "Shiriki",
     "characters": "Wahusika",
     "staff": "Wafanyakazi",
@@ -518,7 +981,7 @@
     "writeMessageHint": "Andika ujumbe…",
     "shareSomethingHint": "Shiriki kitu…",
     "all": "Zote",
-    "anime": "Anime",
+    "anime": "Wahusika",
     "manga": "Manga",
     "count": "Idadi",
     "hoursWatched": "Saa zilizotazamwa",
@@ -599,6 +1062,8 @@
     "sectionPrivacy": "Faragha",
     "hidePrivateEntries": "Ficha vipengee vya faragha",
     "hidePrivateEntriesDesc": "Weka vipengee vilivyowekwa faragha kwenye AniList nje ya mlisho",
+    "anilistExcludeList": "Ficha orodha yako",
+    "anilistExcludeListDesc": "Usionyeshe kwenye kurasa za anime na manga vitu vilivyo tayari kwenye AniList yako",
     "anilistProfile": "Wasifu wa AniList",
     "refreshFromAnilist": "Onyesha upya kutoka AniList",
     "couldNotUpdateAnilistSettings": "Imeshindwa kusasisha mipangilio ya AniList",
@@ -634,6 +1099,9 @@
     "sectionBrowse": "Vinjari",
     "readingTab": "Kichupo cha kusoma",
     "readingTabDesc": "Ni viendelezi gani kichupo cha tatu kinaonyesha",
+    "firstTab": "Tabo ya kwanza",
+    "firstTabDesc": "Ambayo upanuzi kichupo cha kwanza inaonyesha. Chagua manga hapa na riwaya kwenye kichupo cha kusoma ili kuacha anime kutoka kwa upau",
+    "novelExtensions": "Viendelezi vya Riwaya",
     "defaultFeed": "Mlisho chaguomsingi",
     "defaultFeedDesc": "Orodha gani chanzo kinafunguka nayo",
     "noServiceSupports": "Hakuna huduma inayotumia {type}",
@@ -701,6 +1169,8 @@
     "studio": "Studio",
     "serialization": "Uchapishaji wa mfululizo",
     "season": "Msimu",
+    "year": "Mwaka",
+    "filterAny": "Yoyote",
     "broadcast": "Matangazo",
     "aired": "Ilionyeshwa",
     "published": "Ilichapishwa",
@@ -709,6 +1179,7 @@
     "watching": "Wanatazama",
     "reading": "Wanasoma",
     "dropped": "Walioacha",
+    "unfinished": "Haijakamilika",
     "planned": "Zilizopangwa",
     "trailers": "Trela",
     "ratings": "Ukadiriaji",
@@ -727,6 +1198,9 @@
     "tags": "Lebo",
     "author": "Mwandishi",
     "born": "Alizaliwa",
+    "died": "Alikufa",
+    "birthplace": "Mahali pa kuzaliwa",
+    "department": "Idara",
     "website": "Tovuti",
     "established": "Ilianzishwa",
     "manhwa": "Manhwa",
@@ -735,6 +1209,10 @@
     "thisMonth": "Mwezi huu",
     "movies": "Filamu",
     "shows": "Vipindi vya TV",
+    "moviesWatched": "Filamu Zilizotazamwa",
+    "showsWatched": "Vipindi Vilivyotazamwa",
+    "moviesCollected": "Filamu Zimekusanywa",
+    "showsCollected": "Maonyesho Yamekusanywa",
     "rewatching": "Naangalia tena",
     "rereading": "Nasoma tena",
     "watchedStatus": "Vilivyotazamwa",
@@ -823,6 +1301,14 @@
     "trendingThisWeek": "Zinazovuma wiki hii",
     "mostWatchedThisMonth": "Zilizotazamwa zaidi mwezi huu",
     "repoLinksAdded": "Viungo vya hazina vimeongezwa!",
+    "repoLinkConfirm": "Ungependa kuongeza hazina hii?\n\n{url}\n\nOngeza hazina kutoka kwa vyanzo unavyoamini pekee.",
+    "@repoLinkConfirm": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
     "errorGettingAnilistData": "Hitilafu ya kupata data kutoka AniList.",
     "navInfo": "TAARIFA",
     "navComments": "MAONI",
@@ -884,6 +1370,14 @@
     "installPluginTitle": "Sakinisha {name}",
     "sizeLabel": "Ukubwa: {size}",
     "installedState": "Imesakinishwa",
+    "updatePluginTitle": "Sasisha {name}",
+    "@updatePluginTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "errorLabel": "Hitilafu:",
     "stackTraceDetails": "Maelezo (Stack Trace)",
     "shareLogFile": "Shiriki faili ya kumbukumbu",
@@ -894,6 +1388,12 @@
     "alreadyThere": " · {count} tayari zipo",
     "airingNow": "Zinaonyeshwa sasa",
     "topRatedMovies": "Filamu zilizokadiriwa juu",
+    "koreanDramas": "Tamthilia za Kikorea",
+    "chineseDramas": "Tamthilia za Kichina",
+    "japaneseDramas": "Tamthilia za Kijapani",
+    "thaiDramas": "Tamthilia za Kithai",
+    "turkishDramas": "Tamthilia za Kituruki",
+    "miniSeries": "Mfululizo mfupi",
     "topRatedShows": "Vipindi vilivyokadiriwa juu",
     "recommendedSection": "Zinazopendekezwa",
     "syncRow": "Sawazisha orodha",
@@ -905,8 +1405,61 @@
     "syncAutoDesc": "Pakua na sawazisha chinichini programu inapofunguliwa na kila dakika 30",
     "syncAddMissing": "Ongeza vipengee vinavyokosekana",
     "syncAddMissingDesc": "Ongeza pia vipengee ambavyo huduma nyingine haina bado",
+    "syncServiceOn": "Sawazisha na {name}",
+    "@syncServiceOn": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "syncDelete": "Futa kile ambacho huduma kuu haina",
+    "syncDeleteDesc": "Ondoa maingizo kutoka kwa huduma zingine ambazo haziko kwenye orodha kuu. Maingizo yanayoweza kulinganishwa na mada pekee ndiyo yanaondolewa, kwa hivyo mambo kama vile filamu na mfululizo wa Simkl husalia",
+    "syncDeleteTitle": "Ungependa kufuta maingizo?",
+    "syncDeleteConfirm": "{count, plural, =1{1 ingizo} other{{count} maingizo}} ambazo haziko kwenye orodha yako kuu zitafutwa kutoka kwa huduma zingine. Hili haliwezi kutenduliwa.",
+    "@syncDeleteConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncDeleteAction": "Futa",
+    "syncToDelete": "Ili kufuta",
+    "syncDeletedNote": "Itafutwa",
+    "syncWillRemove": "{count} itafutwa kutoka {name}",
+    "@syncWillRemove": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "syncOnlyForward": "Weka maendeleo ya mbele zaidi",
     "syncOnlyForwardDesc": "Usipunguze maendeleo ya huduma ambayo tayari iko mbele",
+    "animePlanetWontWatch": "Sitatazama",
+    "animePlanetWontRead": "Sitasoma",
+    "animePlanetAlreadyOnList": "Tayari kwenye orodha hii",
+    "animePlanetNewList": "Jina la orodha mpya",
+    "syncPrivate": "Maingizo ya kibinafsi",
+    "syncPrivateDesc": "Nini cha kufanya na maingizo unayoweka faragha. Huduma iliyo na chaguo la kibinafsi huwafanya kuwa wa faragha; wengine wangezionyesha hadharani",
+    "syncPrivateModeAsk": "Uliza",
+    "syncPrivateModeSync": "Sawazisha",
+    "syncPrivateModeSkip": "Ruka yao",
+    "syncPrivateTitle": "Maingizo ya kibinafsi",
+    "syncPrivateAsk": "{count, plural, =1{Ingizo 1 ni la faragha} other{{count} maingizo ni ya faragha}}. Huduma zilizo na chaguo la kibinafsi (AniList, Kitsu, MangaBaka) zitazipata kama za kibinafsi; huduma zingine hazina chaguo la kibinafsi na zingezionyesha hadharani. Je, ungependa kuzipatanisha? Jibu lako linakumbukwa; ibadilishe chini ya chaguzi za Usawazishaji.",
+    "@syncPrivateAsk": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncPrivateInclude": "Sawazisha",
+    "syncPrivateSkip": "Ruka yao",
     "syncFetch": "Pakua",
     "syncFetchAgain": "Pakua tena",
     "syncAll": "Sawazisha zote",
@@ -937,6 +1490,14 @@
     "syncService": "Sawazisha {service} ({count})",
     "syncOnEdit": "Sawazisha mabadiliko papo hapo",
     "syncOnEditDesc": "Tuma kila sasisho la maendeleo na mabadiliko ya orodha kwenye huduma zako nyingine mara moja",
+    "syncRemoved": "Imeondolewa kutoka {services}",
+    "@syncRemoved": {
+        "placeholders": {
+            "services": {
+                "type": "String"
+            }
+        }
+    },
     "syncPushed": "Imesawazishwa kwenye {services}",
     "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "Kikomo cha maombi, jaribu tena baada ya muda mfupi",
@@ -1056,7 +1617,7 @@
     "sauceEmpty": "Hakuna kinacholingana",
     "sauceTooltip": "Tafuta chanzo cha ukurasa wa manga au kazi ya sanaa",
     "trendzTitle": "Chati za anime",
-    "trendzAnime": "Anime",
+    "trendzAnime": "Wahusika",
     "trendzFemale": "Wahusika wa kike",
     "trendzMale": "Wahusika wa kiume",
     "trendzCouple": "Wapenzi",
@@ -1213,6 +1774,12 @@
     "watchSearchAgain": "Tafuta tena",
     "watchSearchSource": "Tafuta {source}",
     "watchSource": "Chanzo",
+    "sourceTags": "Lebo",
+    "sourceTagsHint": "Tag chanzo hiki ni cha nini. Kichwa kinaorodhesha vyanzo vilivyotambulishwa kwanza, kisha visivyo na lebo. Vyanzo 18+ vinaonyesha majina ya watu wazima pekee.",
+    "sourceTagAnime": "Wahusika",
+    "sourceTagMovies": "Filamu na Mfululizo",
+    "sourceTagAdult": "18+",
+    "sourceHiddenByTags": "Imefichwa na lebo",
     "watchOptions": "Chaguo",
     "watchReverse": "Geuza mpangilio",
     "watchScanlators": "Vikundi",
@@ -1225,8 +1792,8 @@
     "watchMarkUnwatched": "Weka hujatazama",
     "watchMarkRead": "Weka umesoma",
     "watchMarkUnread": "Weka hujasoma",
-    "watchFiller": "Filler",
-    "watchRecap": "Recap",
+    "watchFiller": "Kijazaji",
+    "watchRecap": "Muhtasari",
     "watchNoEpisodes": "Hakuna vipindi vilivyopatikana",
     "watchNoChapters": "Hakuna sura zilizopatikana",
     "watchSourceTools": "Zana za chanzo",
@@ -1247,6 +1814,44 @@
     "watchProbeFailed": "Tovuti haikuweza kufikiwa",
     "watchClearCookies": "Futa vidakuzi vya tovuti hii",
     "watchCookiesCleared": "Vidakuzi vimefutwa",
+    "watchFailTimeout": "Cheki haikuisha kwa wakati",
+    "watchFailBlocked": "Tovuti ilizuia kifaa hiki (ufikiaji umekataliwa). Cheki haitasaidia",
+    "watchFailTurnstile": "Ukaguzi huu unahitaji mguso ambao kisuluhishi cha usuli hakiwezi kufanya",
+    "watchFailLoad": "Ukurasa haukupakiwa. Angalia muunganisho na anwani ya tovuti",
+    "watchFailRejected": "Tovuti ilikataa kibali ambacho kilitoa tu. Jaribu tena au futa vidakuzi",
+    "watchFailDismissed": "Cheki ilifungwa kabla haijakamilika",
+    "watchFailCooldown": "Ulifunga hundi muda mfupi uliopita. Bonyeza Tatua ili ujaribu tena",
+    "watchFailQuiet": "Hundi inakuhitaji, na programu ilikuwa ikifanya kazi yenyewe",
+    "watchFailWebView": "Mwonekano wa usuli wa wavuti haukuweza kuanza",
+    "watchFailUnavailable": "Hakuna skrini ya kuonyesha kuangalia",
+    "watchStatusReady": "Tayari",
+    "watchStatusChallenge": "Ukaguzi wa Cloudflare unahitajika",
+    "watchStatusBlocked": "Imezuiwa na tovuti",
+    "watchStatusOffline": "Haiwezi kufikia tovuti",
+    "watchStatusUntested": "Bado haijajaribiwa",
+    "watchStatusTesting": "Inajaribu muunganisho...",
+    "watchStatusSolving": "Inapitisha ukaguzi wa Cloudflare…",
+    "watchSolvedBackground": "Ukaguzi wa Cloudflare umepitishwa chinichini ({seconds} s)",
+    "@watchSolvedBackground": {
+        "placeholders": {
+            "seconds": {
+                "type": "int"
+            }
+        }
+    },
+    "watchSolvedByUser": "Ukaguzi wa Cloudflare umepita",
+    "watchClearanceIssued": "umepata {time}",
+    "@watchClearanceIssued": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "watchClearanceStale": "Kibali kilipatikana na wakala mwingine wa mtumiaji, kwa hivyo hakijatumwa. Jaribu muunganisho ili upate mpya",
+    "watchSectionConnection": "Muunganisho",
+    "watchSectionSession": "Kikao",
+    "watchSectionTools": "Zana",
     "watchMetaSource": "Maelezo ya kipindi kutoka",
     "watchMetaAuto": "Otomatiki",
     "watchMetaOff": "Zima",
@@ -1259,6 +1864,10 @@
     "playerSectionEngine": "Injini",
     "playerSectionMpv": "mpv",
     "playerSpeed": "Kasi ya kucheza",
+    "localSource": "Faili za ndani",
+    "localMissing": "Faili au folda hii haipo tena kwenye folda yako ya Karibu Nawe",
+    "playerStickyStage": "Video ya kunata",
+    "playerStickyStageDesc": "Weka video sawa juu wakati unasogeza vipindi na maoni hapa chini",
     "playerCursedSpeed": "Kasi za ziada",
     "playerCursedSpeedDesc": "Ongeza kasi hadi 10x kwenye orodha",
     "playerResize": "Hali ya kubadilisha ukubwa",
@@ -1281,6 +1890,8 @@
     "playerAutoSkipEnding": "Ruka nyimbo za mwisho",
     "playerAutoSkipRecap": "Ruka recap",
     "playerAutoSkipDesc": "Ruka mara tu inapoanza, kwa kutumia AniSkip na muda wa stream",
+    "playerDisableSkips": "Lemaza kuruka",
+    "playerDisableSkipsDesc": "Hakuna AniSkip au mihuri ya muda ya mtiririko, alama za sura au ruka mawasilisho katika kichezaji",
     "playerSkipOnce": "Ruka mara moja tu",
     "playerSkipOnceDesc": "Usiruke sehemu ile ile tena ukirudi nyuma ndani yake",
     "playerAdjustBrightness": "Ishara ya mwangaza",
@@ -1301,6 +1912,9 @@
     "playerSubtitleColor": "Rangi ya manukuu",
     "playerSubtitleBackground": "Usuli wa manukuu",
     "playerSubtitleOutline": "Mstari wa nje wa manukuu",
+    "playerSubtitleOutlineWidth": "Upana wa muhtasari wa manukuu",
+    "playerSubtitlePreview": "Onyesho la kukagua manukuu",
+    "playerSubtitlePreviewText": "Maandishi ya onyesho la kukagua manukuu",
     "playerLibass": "Tumia libass",
     "playerLibassDesc": "Onyesha manukuu ya .ass yenye mitindo. Ukubwa, rangi na fonti za hapo juu hazitumiki tena",
     "playerShaders": "Shader",
@@ -1310,13 +1924,20 @@
     "playerShadersMissing": "Anime4K haijasakinishwa",
     "playerShadersMissingDesc": "Pakua kifurushi cha shader cha Anime4K (takriban MB 0.8) ili kutumia hali zilizojengewa ndani.",
     "playerShadersDownload": "Pakua Anime4K",
+    "playerPictureSave": "Hifadhi fremu hii",
+    "playerPictureOriginal": "Asili",
+    "playerPictureOriginalDesc": "Fremu kama video inayo, bila vivuli au rangi",
+    "playerPictureProcessed": "Na vivuli na rangi",
+    "playerPictureProcessedDesc": "Sura kama unavyoiona sasa",
+    "playerPictureSaved": "Fremu imehifadhiwa",
+    "playerPictureSaveFailed": "Haikuweza kuhifadhi fremu",
     "playerShadersPreview": "Hakiki kwenye fremu hii",
     "playerShadersUse": "Tumia hii",
     "playerPicture": "Picha",
     "playerColors": "Rangi",
     "playerColorDefault": "Chaguomsingi",
     "playerColorVivid": "Angavu",
-    "playerColorPop": "Anime pop",
+    "playerColorPop": "Wahusika wa pop",
     "playerColorSoft": "Laini",
     "playerColorCinematic": "Sinema",
     "playerColorBright": "Mwanga",
@@ -1332,6 +1953,9 @@
     "playerColorAdjust": "Rekebisha",
     "playerShadersOriginal": "Asili",
     "playerShadersPreviewFailed": "Imeshindwa kunasa fremu ya kuhakiki",
+    "playerShadersSoftware": "Vivuli vinahitaji uwasilishaji wa maunzi, na kichezaji kinatumia uonyeshaji wa programu. Zima utoaji wa Programu katika mipangilio ya Kichezaji.",
+    "playerSoftwareRender": "Utoaji wa programu",
+    "playerSoftwareRenderDesc": "Kwa video nyeusi pekee. Shaders haifanyi kazi nayo. Inatumika wakati mwingine mchezaji anafungua",
     "playerShadersCustomFiles": "Shader zako",
     "playerShadersCustom": "Shader maalum",
     "playerShadersImport": "Ingiza .glsl",
@@ -1380,7 +2004,7 @@
     "playerScale": "Kipanua ukubwa",
     "playerCscale": "Kipanua chroma",
     "playerDscale": "Kipunguza ukubwa",
-    "playerToneMapping": "Tone mapping",
+    "playerToneMapping": "Ramani ya toni",
     "playerTargetPeak": "Kilele lengwa",
     "playerOpenFiles": "Fungua faili za video",
     "playerOpenFilesDesc": "Cheza faili kutoka kifaa hiki",
@@ -1401,7 +2025,22 @@
     "playerResetConfirm": "Kuweka upya mipangilio yote ya kicheza?",
     "playerResetDone": "Mipangilio ya kicheza imewekwa upya",
     "playerQuality": "Ubora",
+    "streamGroupSub": "Ndogo",
+    "streamGroupHardSub": "Sub Sub",
+    "streamGroupSoftSub": "Sub Sub",
+    "streamGroupDub": "Dub",
+    "streamGroupRaw": "Mbichi",
+    "streamGroupOther": "Nyingine",
+    "streamsCount": "{count, plural, =1{1 mkondo} other{{count} mitiririko}}",
+    "@streamsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "playerStreams": "Stream",
+    "playerStreamFailedNext": "Mtiririko huo hautacheza, ukijaribu inayofuata",
     "playerAutoSelect": "Chagua stream kiotomatiki",
     "playerAutoSelectDesc": "Chagua stream inayofanana zaidi na chaguo lako la mwisho kwa kichwa hiki",
     "playerLoadingStreams": "Inatafuta stream…",
@@ -1422,6 +2061,8 @@
     "readerFirstChapter": "Hii ni sura ya kwanza",
     "readerLastChapter": "Umefika mwisho wa zote",
     "readerFailed": "Imeshindwa kufungua sura hii",
+    "readerOpenBook": "Fungua kitabu",
+    "readerOpenBookDesc": "Soma epub (kisoma riwaya) au PDF (kisomaji cha manga) kutoka kwa faili zako",
     "readerNoText": "Sura hii haina maandishi",
     "readerPerTitle": "Kwa kichwa hiki tu",
     "readerPerTitleDesc": "Weka mipangilio hii ya msomaji kwa kichwa hiki tu",
@@ -1430,6 +2071,7 @@
     "readerSectionDisplay": "Onyesho",
     "readerSectionNovel": "Riwaya",
     "readerMode": "Hali ya kusoma",
+    "readerModeAuto": "Otomatiki (kwa aina ya mfululizo)",
     "readerModeRtl": "Kulia kwenda kushoto",
     "readerModeLtr": "Kushoto kwenda kulia",
     "readerModeVertical": "Kurasa wima",
@@ -1473,6 +2115,12 @@
     "readerFilterGrayscale": "Rangi za kijivu",
     "readerFilterInvert": "Geuza",
     "readerFilterSepia": "Sepia",
+    "readerFilterQuality": "Ubora wa kichujio cha picha",
+    "readerFilterQualityNone": "Hakuna (Jirani wa karibu)",
+    "readerFilterQualityLow": "Chini (Bilinear)",
+    "readerFilterQualityMedium": "Wastani (Trilinear)",
+    "readerFilterQualityHigh": "Juu (Bicubic)",
+    "readerFilterQualityLanczos": "Lanczos (Ubora wa juu wa kutu)",
     "readerDim": "Punguza mwanga",
     "readerDimDesc": "Weka kurasa giza zaidi",
     "readerPageNumber": "Namba ya ukurasa",
@@ -1481,6 +2129,8 @@
     "readerFullscreenDesc": "Ficha pau za mfumo",
     "readerCropBorders": "Kata pembezoni",
     "readerCropBordersDesc": "Punguza pambizo tupu nyeupe au nyeusi kutoka kurasa",
+    "readerLongPressSave": "Shikilia ukurasa ili kuuhifadhi",
+    "readerLongPressSaveDesc": "Bonyeza ukurasa kwa muda mrefu ili kufungua chaguo za kuhifadhi, kushiriki na kunakili",
     "readerVolumeKeys": "Vitufe vya sauti hugeuza kurasa",
     "readerVolumeKeysDesc": "Sauti chini inasonga mbele, sauti juu inarudi nyuma",
     "readerBookmarks": "Alamisho",
@@ -1502,6 +2152,7 @@
     "readerSaveProgressDesc": "Kumbuka ukurasa wako na uweke sura alama kuwa zimesomwa",
     "readerReset": "Weka upya mipangilio ya msomaji",
     "readerResetDesc": "Rudi kwenye chaguomsingi",
+    "readerResetConfirm": "Ungependa kuweka upya kila mpangilio wa msomaji kwa chaguomsingi?",
     "novelSize": "Ukubwa wa maandishi",
     "novelFont": "Fonti",
     "novelLineHeight": "Urefu wa mstari",
@@ -1518,6 +2169,78 @@
     "trackProgressTitle": "Kuhifadhi maendeleo?",
     "trackProgressAnime": "Kufuatilia {name} kwenye orodha yako unapotazama? Chagua \"Kifaa hiki tu\" kuweka ndani, au Hapana kutohifadhi chochote.",
     "trackProgressManga": "Kufuatilia {name} kwenye orodha yako ukimaliza sura? Chagua \"Kifaa hiki tu\" kuweka ndani, au Hapana kutohifadhi chochote.",
+    "trackProgressAnimeLocal": "Je, ungependa kuhifadhi maendeleo yako kwenye {name} kwenye orodha yako kwenye kifaa hiki unapotazama?",
+    "@trackProgressAnimeLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressMangaLocal": "Je, ungependa kuhifadhi maendeleo yako kwenye {name} kwenye orodha yako kwenye kifaa hiki ukimaliza sura?",
+    "@trackProgressMangaLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadClearQueue": "Futa foleni",
+    "downloadClearQueueConfirm": "Ungependa kughairi {count} vipakuliwa vyote kwenye foleni? Kilichokuwa tayari kupakuliwa kinafutwa.",
+    "@downloadClearQueueConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectedCount": "{count} imechaguliwa",
+    "@downloadSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectAll": "Chagua zote",
+    "downloadDeleteSelected": "Futa iliyochaguliwa",
+    "downloadDeleteSelectedConfirm": "Ungependa kufuta {count} vipakuliwa? Faili zao huondolewa kwenye kifaa.",
+    "@downloadDeleteSelectedConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "castTitle": "Tuma kwenye kifaa",
+    "castSearching": "Inatafuta vifaa kwenye mtandao wako...",
+    "castNoDevices": "Hakuna vifaa vilivyopatikana. Hakikisha TV au Chromecast iko kwenye Wi-Fi sawa, kisha utafute tena.",
+    "castRefresh": "Tafuta tena",
+    "castFailed": "Haikuweza kuanza kutuma",
+    "castStop": "Acha kutuma",
+    "castNowCasting": "Inatuma kwa {name}",
+    "@castNowCasting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "castProtocolChromecast": "Chromecast",
+    "castProtocolDlna": "DLNA / Smart TV",
+    "castProtocolRoku": "Roku",
+    "castRokuNote": "Roku haiwezi kuripoti au kubadilisha msimamo",
+    "castControls": "Vidhibiti",
+    "castVolume": "Sauti ya TV",
+    "castSkipPart": "Ruka {name}",
+    "@castSkipPart": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressRememberSeries": "Kumbuka kwa mfululizo huu",
     "trackProgressYes": "Hifadhi",
     "trackProgressReset": "Swali la kuhifadhi maendeleo limewekwa upya kwa aina hii, litauliza tena",
     "trackProgressNo": "Hapana",
@@ -1543,6 +2266,7 @@
     "dantotsuMal": "Kuingia kwa MyAnimeList",
     "dantotsuDiscord": "Tokeni ya Discord Rich Presence",
     "dantotsuTheme": "Mandhari",
+    "themePickerTitle": "Mandhari",
     "dantotsuReposAnime": "Hazina za viendelezi vya anime",
     "dantotsuReposManga": "Hazina za viendelezi vya manga",
     "dantotsuReposNovel": "Hazina za viendelezi vya riwaya",
@@ -1561,6 +2285,15 @@
     "kitsuGraphqlDetailDesc": "Pakia kichwa pamoja na wahusika, wafanyakazi na kipengee chako kwa ombi moja",
     "togetherTitle": "Tazama pamoja",
     "togetherIntro": "Bandika kiungo cha chumba ulichotumiwa na rafiki yako. Unajiunga mara moja na kicheza kinafunguka wanapoanza kutazama.",
+    "togetherLinkConfirm": "Jiunge na chumba {room}? Mwenyeji huchagua kinachochezwa na mchezaji hufungua peke yake anapoanza kutazama.",
+    "@togetherLinkConfirm": {
+        "placeholders": {
+            "room": {
+                "type": "String"
+            }
+        }
+    },
+    "togetherJoin": "Jiunge",
     "togetherName": "Jina lako",
     "togetherConnecting": "Inaunganisha…",
     "togetherLeave": "Ondoka chumbani",
@@ -1568,6 +2301,15 @@
     "togetherNoChat": "Bado hakuna ujumbe",
     "togetherChatHint": "Ujumbe",
     "togetherCopyInvite": "Nakili mwaliko",
+    "togetherShareInvite": "Shiriki mwaliko",
+    "togetherShareText": "Tazama pamoja nami kwenye Dartotsu: {link}",
+    "@togetherShareText": {
+        "placeholders": {
+            "link": {
+                "type": "String"
+            }
+        }
+    },
     "togetherInviteCopied": "Seva na chumba vimenakiliwa",
     "togetherConnectionLost": "Muunganisho umepotea",
     "togetherConnectedTo": "Umeunganishwa kwenye {room}",
@@ -1610,6 +2352,41 @@
     "novelSpeakNext": "Mstari unaofuata",
     "novelTapPaging": "Gusa kingo kugeuza ukurasa",
     "novelTapPagingDesc": "Gusa upande wa kushoto au kulia kusogeza ukurasa, katikati huonyesha vidhibiti",
+    "novelPaged": "Kugeuza ukurasa",
+    "novelPagedDesc": "Gawanya sura katika kurasa na utelezeshe kidole au uguse ili kuzigeuza badala ya kutembeza",
+    "novelPageOf": "Ukurasa {current} wa {total}",
+    "@novelPageOf": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "novelPaginating": "Kuweka kurasa",
+    "novelTools": "Yaliyomo, utafutaji na mambo muhimu",
+    "novelContents": "Yaliyomo",
+    "novelContentsEmpty": "Sura hii haina vichwa",
+    "novelSearch": "Tafuta",
+    "novelSearchHint": "Tafuta katika sura hii",
+    "novelSearchNone": "Hakuna zinazolingana",
+    "novelSearchCount": "{count, plural, =1{1 mechi} other{{count} inalingana}}",
+    "@novelSearchCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "novelHighlights": "Vivutio",
+    "novelHighlightsEmpty": "Chagua baadhi ya maandishi na uguse Angazia ili uyaweke hapa",
+    "novelHighlight": "Angazia",
+    "novelHighlightNote": "Kumbuka",
+    "novelHighlightNoteHint": "Ongeza dokezo",
+    "novelHighlightRemove": "Ondoa kivutio",
+    "novelHighlightFailed": "Haikuweza kulinganisha uteuzi huo na maandishi",
     "novelMinutesLeft": "Dakika {count} zimebaki",
     "novelBold": "Maandishi mazito",
     "novelBoldDesc": "Tumia unene mkubwa zaidi",
@@ -1628,6 +2405,23 @@
     "playerAddSubtitle": "Ongeza faili ya manukuu",
     "playerAddAudio": "Ongeza faili ya sauti",
     "playerChapters": "Sura",
+    "playerSkipSubmit": "Wasilisha nyakati za kuruka",
+    "playerSkipSubmitDesc": "Weka alama mahali ufunguzi, mwisho au muhtasari unapoanzia na kumalizika katika kipindi hiki na ukishiriki na AniSkip, ili kila mtu apate kitufe cha kuruka.",
+    "playerSkipStart": "Anza",
+    "playerSkipEnd": "Mwisho",
+    "playerSkipUseNow": "Tumia nafasi ya sasa",
+    "playerSkipSend": "Peana kwa AniSkip",
+    "playerSkipSent": "Ruka nyakati zilizowasilishwa kwa AniSkip, asante",
+    "playerSkipFailed": "AniSkip alikataa nyakati za kuruka: {error}",
+    "@playerSkipFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "playerUnsupported": "Kicheza video hakiwezi kufanya kazi kwenye kifaa hiki (toleo lake la Android ni nzee kwa maktaba ya kicheza vifurushi). Gusa ili kunakili maelezo.",
+    "playerSkipNoMal": "Kichwa hiki hakina kitambulisho cha MyAnimeList, AniSkip haiwezi kukipokea",
     "playerNoChapters": "Hakuna sura",
     "playerTimestamp": "Muhuri wa muda",
     "playerAutoPlayDelay": "Hesabu ya kipindi kijacho",
@@ -1641,15 +2435,29 @@
     "playerPip": "Picha ndani ya picha",
     "playerAutoPip": "Picha ndani ya picha unapotoka",
     "playerAutoPipDesc": "Endelea kucheza kwenye dirisha dogo unapotoka kwenye programu",
+    "playerPipPlay": "Cheza",
+    "playerPipPause": "Sitisha",
+    "playerPipBack": "Rudisha nyuma",
+    "playerPipForward": "Mbele",
+    "playerPipRestore": "Rudi kwa mchezaji",
+    "playerPipActive": "Kucheza kwenye dirisha dogo",
+    "listDateAdded": "Imeongezwa kwenye orodha",
+    "listDateLastWatched": "Mara ya mwisho kutazamwa",
     "playerAutoPlaying": "Inacheza {title} inayofuata…",
     "playerShadersFailed": "Imeshindwa kusakinisha shader: {error}",
     "playerChapter": "Sura {number}",
     "playerPerTitle": "Kwa kichwa hiki tu",
     "playerPerTitleDesc": "Weka chaguo hizi kwa kichwa hiki na usiguse chaguomsingi zako",
+    "playerSwapGestures": "Badilisha pande za kutelezesha",
+    "playerSwapGesturesDesc": "Mwangaza kushoto na sauti kulia",
+    "playerOpenBig": "Fungua kwa mwonekano mkubwa",
+    "playerOpenBigDesc": "Anza kicheza skrini nzima badala ya kuonyesha orodha ya vipindi",
+    "playerPauseOnBlur": "Sitisha ukiwa nje ya programu",
+    "playerPauseOnBlurDesc": "Sitisha programu inapofunikwa, kama paneli ya arifa, na uendelee ukirudi",
     "playerAudioOutput": "Pato la sauti",
     "fontAppDefault": "Fonti ya programu",
     "fontImport": "Ingiza fonti",
-    "fontSample": "The quick brown fox jumps over the lazy dog",
+    "fontSample": "Mbweha wa kahawia haraka anaruka juu ya mbwa mvivu",
     "playerSubtitleDelay": "Kuchelewa kwa manukuu",
     "playerAudioDelay": "Kuchelewa kwa sauti",
     "playerDelayReset": "Weka upya",
@@ -1668,8 +2476,74 @@
     "settingsDownloads": "Upakuaji",
     "settingsDownloadsDesc": "Vipindi vya nje ya mtandao, foleni na hali ya nje ya mtandao",
     "downloadsTitle": "Upakuaji",
+    "widgetContinue": "Endelea",
+    "widgetReleases": "Inatoa hivi karibuni",
+    "widgetMore": "Pia inaendelea",
+    "widgetNothing": "Bado hakuna cha kuendelea",
+    "downloadStorageTitle": "Hifadhi",
+    "downloadStorageSummary": "{count, plural, =1{Pakua 1} other{{count} vipakuliwa}} · {size}",
+    "@downloadStorageSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadStorageWatched": "{size} tayari imetazama au kusoma",
+    "@downloadStorageWatched": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreeUp": "Toa nafasi",
+    "downloadFreeUpConfirm": "Futa {count, plural, =1{Kipakuliwa 1 kilitazamwa} other{{count} ulitazama vipakuliwa}} na bila malipo {size}?",
+    "@downloadFreeUpConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreed": "Imeachiliwa {size}",
+    "@downloadFreed": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadDeleteWatched": "Futa iliyotazamwa",
+    "downloadDeleteAll": "Futa zote",
+    "downloadDeleteAllConfirm": "Ungependa kufuta kila upakuaji wa {title}?",
+    "@downloadDeleteAllConfirm": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadNothingWatched": "Hakuna kitu ambacho umemaliza kinapakuliwa",
+    "downloadStorageEmpty": "Hakuna vipakuliwa vinavyotumia nafasi",
     "downloadsOpenDesc": "Ona foleni na kila kitu kilichohifadhiwa kwenye kifaa hiki",
     "downloadTitle": "Pakua",
+    "downloadMetaOnly": "Metadata pekee",
+    "downloadMetaFailed": "Haikuweza kuunda folda ya kichwa",
+    "downloadMetaSaved": "Imehifadhiwa. Weka faili zako katika {path}",
+    "@downloadMetaSaved": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
     "downloadAlready": "Tayari imepakuliwa au iko kwenye foleni",
     "downloadPickStream": "Pakua stream ipi?",
     "downloadPickSubtitle": "Pakua manukuu yapi?",
@@ -1679,6 +2553,8 @@
     "downloadNoSubtitle": "Hakuna manukuu",
     "downloadHlsNeedsFfmpeg": "Stream hii ni orodha ya kucheza ya HLS. Kuipakua kunahitaji kiongezi cha FFmpeg.",
     "downloadSourceMissing": "Chanzo cha kipindi hiki hakijasakinishwa",
+    "downloadDashDrm": "Mtiririko huu umelindwa na DRM",
+    "downloadDashNoVideo": "Faili ya maelezo ya DASH haina video",
     "downloadWaitingConnection": "Inasubiri muunganisho",
     "downloadSubtitles": "Manukuu",
     "downloadDownloaded": "Imepakuliwa",
@@ -1808,312 +2684,27 @@
     "onboardingFeatureSync": "Weka orodha zikiwa zimesawazishwa",
     "onboardingFeatureSyncDesc": "Nakili orodha yako kwenye huduma zote, au acha iliyo mbele ishinde.",
     "onboardingServices": "Inafanya kazi na",
-    "updateInstallCancelled": "Usakinishaji umeghairiwa. Kama Android ilisema programu inagongana na iliyosakinishwa, sahihi ni tofauti: ondoa toleo la sasa kwanza, kisha sakinisha sasisho",
-    "updateInstallFailed": "Sasisho limeshindwa: {error}",
-    "appLock": "Kufuli ya programu",
-    "appLockDesc": "Omba nambari ya siri programu inapofunguliwa au ukirudi baada ya muda",
-    "appLockUnlock": "Weka nambari yako ya siri",
-    "appLockWrong": "Nambari ya siri si sahihi",
-    "appLockWait": "Umejaribu mara nyingi, subiri sekunde {seconds}",
-    "appLockNew": "Chagua nambari ya siri",
-    "appLockNewHint": "Tarakimu 4 hadi 8",
-    "appLockConfirm": "Iweke tena",
-    "appLockMismatch": "Nambari za siri hazifanani",
-    "appLockOn": "Nambari ya siri imewekwa",
-    "appLockRemoveTitle": "Weka nambari yako ya siri ili kuzima kufuli",
-    "settingsNetwork": "Mtandao",
-    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
-    "mangaBakaAccountOptions": "Chaguo za akaunti ya MangaBaka",
-    "chapterExpectedIn": "Sura ya {chapter} inatarajiwa baada ya takriban {time}",
-    "anilistExcludeList": "Ficha orodha yako",
-    "anilistExcludeListDesc": "Usionyeshe kwenye kurasa za anime na manga vitu vilivyo tayari kwenye AniList yako",
-    "koreanDramas": "Tamthilia za Kikorea",
-    "chineseDramas": "Tamthilia za Kichina",
-    "japaneseDramas": "Tamthilia za Kijapani",
-    "thaiDramas": "Tamthilia za Kithai",
-    "turkishDramas": "Tamthilia za Kituruki",
-    "miniSeries": "Mfululizo mfupi",
-    "playerSwapGestures": "Badilisha pande za kutelezesha",
-    "playerSwapGesturesDesc": "Mwangaza kushoto na sauti kulia",
-    "playerOpenBig": "Fungua kwa mwonekano mkubwa",
-    "playerOpenBigDesc": "Anza kicheza skrini nzima badala ya kuonyesha orodha ya vipindi",
-    "playerPauseOnBlur": "Sitisha ukiwa nje ya programu",
-    "playerPauseOnBlurDesc": "Sitisha programu inapofunikwa, kama paneli ya arifa, na uendelee ukirudi",
-    "notificationAired": "Episode {episode} of {title} aired",
-    "@notificationAired": {
+    "sourceNotifyOn": "Utaambiwa {source} itakapokuwa na kitu kipya",
+    "@sourceNotifyOn": {
         "placeholders": {
-            "episode": {
-                "type": "String"
-            },
-            "title": {
+            "source": {
                 "type": "String"
             }
         }
     },
-    "playerDownloadCopy": "Copy details",
-    "playerPipRestore": "Back to the player",
-    "dcDisplayDetails": "Details",
-    "dcLargeCover": "Cover",
-    "settingsSyncTitles": "Watch progress and titles",
-    "updateLater": "Later",
-    "dcConnectedSnack": "Discord connected",
-    "downloadDeleteSelectedConfirm": "Delete {count} downloads? Their files are removed from the device.",
-    "@downloadDeleteSelectedConfirm": {
+    "sourceNotifyOff": "Arifa za kutolewa zimezimwa",
+    "sourceNotifyNeedsSource": "Chagua chanzo chenye mechi kwanza",
+    "sourceNotifyAllOut": "Kila kitu ({count}) tayari kimetoka, hakuna cha kusubiri",
+    "@sourceNotifyAllOut": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "dcMethodToken": "Account token",
-    "shortcutPlayerFrameBack": "Previous frame",
-    "stacks": "Stacks",
-    "addonInstalled": "Installed",
-    "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
-    "@streamsCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncCode": "Enter {code} on GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "alphabetical": "Alphabetical",
-    "settingsMangaDesc": "Reader mode, controls, display and chapter tracking",
-    "sourceWhyNewest": "Newest at the source",
-    "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.",
-    "simklTitleLanguage": "Anime title language",
-    "readerModeAuto": "Auto (by series type)",
-    "settingsSyncSecretsBroken": "The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.",
-    "stackSavesCount": "{count, plural, =1{1 save} other{{count} saves}}",
-    "@stackSavesCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "stepWillUpdate": "Will be updated",
-    "trayUpdating": "Updating the app",
-    "updatePreparing": "Preparing…",
-    "syncWillRemove": "{count} will be deleted from {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "popularShows": "Popular Shows",
-    "playerPipActive": "Playing in a small window",
-    "dcDisplayName": "Name",
-    "playerDownloadFailedBody": "Check your connection and try again. The download picks up where it stopped.",
-    "settingsSyncServerInfo": "{count} settings, uploaded {time} from {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
-    "updateSkipVersion": "Skip this version",
-    "dcConnected": "Connected",
-    "dcStatusTextDesc": "What the member list shows next to your name",
-    "followsNotMutual": "Not mutual",
-    "castProtocolDlna": "DLNA / Smart TV",
-    "layoutDropInto": "Drop in: {zone}",
-    "@layoutDropInto": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "dcButtonCustom": "Custom button",
-    "dcSmallAuto": "Logo",
-    "backupProtectedSkipped": "This backup has no password, so its account data was skipped",
-    "settingsSyncPartPictureColorsDesc": "Brightness, contrast, saturation, gamma, hue and HDR",
-    "manageServicesDesc": "Reorder the services and choose which ones show in the picker",
-    "settingsLocalPlayBooks": "Books",
-    "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
-    "sourceMute": "Mute",
-    "sourceAlertsHeader": "Release notifications",
-    "settingsSyncPausedDesc": "Nothing is uploaded or downloaded while this is off.",
-    "sourceSoon": "soon",
-    "dcPrivateHint": "Something private",
-    "dcSampleLive": "Right now",
-    "castReceiverFailed": "The Chromecast did not start its player",
-    "settingsLocalPlayVideo": "Video",
-    "widgetReleases": "Releasing soon",
-    "playerDownloadFailedTitle": "Couldn't get the player",
-    "downloadStorageTitle": "Storage",
-    "updateNotFound": "Update server couldn't find that release: {message}",
-    "@updateNotFound": {
-        "placeholders": {
-            "message": {
-                "type": "String"
-            }
-        }
-    },
-    "syncDeleteAction": "Delete",
-    "sourcePickAnother": "Pick another source",
-    "watchSectionTools": "Tools",
-    "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.",
-    "downloadDashNoVideo": "The DASH manifest has no video",
-    "missingSequel": "Missing Sequel",
-    "settingsSyncChanged": "{count, plural, =0{Nothing changed yet} =1{1 changed} other{{count} changed}}",
-    "settingsSyncSecretsStop": "Stop syncing accounts",
-    "shortcutPlayerSpeedDown": "Slower playback",
-    "dcRecommended": "Recommended",
-    "sourceNextCheck": "Next check {when}",
-    "@sourceNextCheck": {
-        "placeholders": {
-            "when": {
-                "type": "String"
-            }
-        }
-    },
-    "castSearching": "Looking for devices on your network…",
-    "watchOrderOpenSite": "Open on chiaki.site",
-    "shortcutPlayerSubtitleCycle": "Next subtitle track",
-    "loadFailedActivity": "Couldn't load activity",
-    "shortcutPlayerFrameForward": "Next frame",
-    "sourceHiddenByTags": "Hidden by tags",
-    "downloadSelectAll": "Select all",
-    "downloadDashDrm": "This stream is DRM protected",
-    "anticipatedShows": "Anticipated Shows",
-    "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.",
-    "developerRoleModerator": "Discord Moderator",
-    "trending": "Trending",
-    "stacksFeatured": "Featured",
-    "layoutCutting": "Moving {name}. Press a paste button to place it",
-    "@layoutCutting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutClearKeys": "Remove all keys",
-    "sortMostViewed": "Most viewed",
-    "sourceSkipUnseen": "Skip while you have unseen episodes",
-    "sourceWhyNever": "Not yet",
-    "shortcutPlayerPrevious": "Previous episode",
-    "shortcutPlayerSpeedReset": "Normal speed",
-    "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.",
-    "layoutZoneSecondRow": "Hidden: second row in normal view",
-    "playerStreamFailedNext": "That stream won't play, trying the next one",
-    "dcListening": "Listening",
-    "closeActionQuit": "Quit the app",
-    "playerSkipStart": "Start",
-    "shortcutPlayerSubtitleToggle": "Subtitles on or off",
-    "newsEmpty": "No news right now",
-    "settingsSyncChangedHeader": "Changed settings",
-    "settingsSectionProgress": "Progress tracking",
-    "updateAll": "Update all",
-    "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
-    "animePlanetRank": "Rank",
-    "settingsSyncSignOut": "Sign out",
-    "settingsShortcuts": "Keyboard shortcuts",
-    "sourceNoticesEmpty": "No release notices yet",
-    "settingsSyncOn": "On",
-    "department": "Department",
-    "playerSoftwareRender": "Software rendering",
-    "detailStale": "AniList could not be reached. This is saved information and may be outdated.",
-    "simklMoviesOnly": "Movies & series only",
-    "settingsSyncConnectDesc": "Sign in with GitHub to keep your settings the same on every device.",
-    "moviesCollected": "Movies Collected",
-    "readerResetConfirm": "Reset every reader setting to its default?",
-    "layoutReset": "Reset to default",
-    "sourceNotifyTooltipOn": "Stop release notifications",
-    "unreadCounter": "Unread counter",
-    "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
-    "watchStatusChallenge": "Cloudflare check needed",
-    "dcRouteNone": "Not connected",
-    "settingsSyncStatShelf": "Resume",
-    "stories": "Stories",
-    "dcUseToken": "Use a token instead",
-    "stackSpoilers": "Spoilers",
-    "playerSkipSend": "Submit to AniSkip",
-    "shortcutPlayerSeekForwardLong": "Seek forward 30 seconds",
-    "stepUpToDateWith": "Up to date · {detail}",
-    "@stepUpToDateWith": {
-        "placeholders": {
-            "detail": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeDetails": "Where episode titles, thumbnails and summaries come from",
-    "sourceChecking": "Checking…",
-    "settingsSyncCancel": "Cancel",
-    "animePlanetRefreshLists": "Refresh your lists",
-    "sourceNotifyNeedsSource": "Pick a source with a match first",
-    "mediaVideo": "Video",
-    "sourceUnreachable": "Source isn't responding",
-    "dcStatusIdle": "Idle",
-    "sourceTagAnime": "Anime",
-    "novelPaginating": "Laying out pages",
-    "stacksSignInAgain": "Sign in again",
-    "topRatedAnime": "Top Rated Anime",
-    "playerSkipEnd": "End",
-    "dcTimerAuto": "Auto",
-    "settingsSyncSwitch": "Sync on change",
-    "onHoldManga": "On hold manga",
-    "widgetMore": "Also in progress",
-    "downloadStorageEmpty": "No downloads are using space",
-    "shortcutNoCalendar": "{service} has no calendar",
-    "@shortcutNoCalendar": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
-    "sortMostFollowed": "Most followed",
-    "settingsSyncNoneChanged": "You haven't changed any of these yet, so there is nothing to sync.",
-    "watchFailRejected": "The site rejected the clearance it just gave. Try again or clear the cookies",
-    "sourceSkippedUnstarted": "Skipped: not started",
-    "shortcutReaderPreviousPage": "Previous page",
-    "closeActionAlways": "Always keep running in the tray",
-    "layoutZoneTopEnd": "Top bar, after the title",
-    "watchOrderOpenFailed": "Couldn't open that title",
-    "watchSolvedBackground": "Cloudflare check passed in the background ({seconds} s)",
-    "@watchSolvedBackground": {
-        "placeholders": {
-            "seconds": {
-                "type": "int"
-            }
-        }
-    },
-    "syncPrivateInclude": "Sync them",
-    "recommendedShows": "Recommended Shows",
-    "castPlaybackFailed": "The device could not play this stream",
-    "layoutZoneBottomEnd": "Bottom bar, right",
-    "settingsSyncServer": "On the server",
-    "listDateAdded": "Added to list",
-    "settingsSyncSignIn": "Sign in with GitHub",
-    "dcDisconnectedSnack": "Discord disconnected",
-    "dcPrivateText": "Private text",
-    "sourceFinished": "Finished",
-    "playerSubtitlePreviewText": "Subtitle preview text",
-    "trayResumeDownloads": "Resume downloads",
-    "settingsSyncFailedTitle": "Sync failed",
-    "appLockBiometricReason": "Unlock Dartotsu",
-    "settingsWatchSections": "Sections",
-    "settingsSyncPartPictureColors": "Picture colours",
-    "playerPipPause": "Pause",
-    "dcStatusOnline": "Online",
-    "sourceFoundEpisode": "Episode {number} is out on {source}",
+    "sourceNotifyTooltipOn": "Acha arifa za kutolewa",
+    "sourceNotifyTooltipOff": "Niarifu kuhusu matoleo mapya",
+    "sourceFoundEpisode": "Kipindi {number} kitatoka kwenye {source}",
     "@sourceFoundEpisode": {
         "placeholders": {
             "number": {
@@ -2124,636 +2715,7 @@
             }
         }
     },
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.",
-    "playerShadersSoftware": "Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.",
-    "castVolume": "TV volume",
-    "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
-    "@updateConflictBody": {
-        "placeholders": {
-            "names": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreed": "Freed {size}",
-    "@downloadFreed": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsLocalPlayDesc": "Play files, folders, network streams and torrents, or open a book",
-    "playerSkipSubmit": "Submit skip times",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.",
-    "simklListsMostLiked": "Most liked",
-    "dcRouteGateway": "Through your account, live",
-    "extensionSettingsTitle": "{name} settings",
-    "@extensionSettingsTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyStatus": "Status",
-    "sourceWhyNextCheck": "Next check",
-    "logDeleteDesc": "Clear the saved app logs to free up space",
-    "unfinished": "Unfinished",
-    "stackSave": "Save stack",
-    "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
-    "sourceTagMovies": "Movies & Series",
-    "dcConnect": "Connect Discord",
-    "syncPrivateSkip": "Skip them",
-    "settingsShortcutsDesc": "See, change and turn off every key",
-    "refreshFromMangaUpdates": "Refresh from MangaUpdates",
-    "sourceUnmute": "Unmute",
-    "dcNameApp": "Dartotsu",
-    "playerDisableSkipsDesc": "No AniSkip or stream timestamps, chapter marks or skip submissions in the player",
-    "settingsSyncChangedOnly": "Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.",
-    "novelHighlightNote": "Note",
-    "layoutHide": "Hide",
-    "secReaderControls": "Tap zones, volume keys and auto scroll",
-    "releases": "Releases",
-    "settingsSyncPassphraseNew": "Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.",
-    "sourceUnsubscribe": "Unsubscribe",
-    "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.",
-    "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked.",
-    "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
-    "dcStatusNeedsToken": "Needs a Discord token. Connecting the app does not set your online status.",
-    "themePickerTitle": "Theme",
-    "downloadMetaFailed": "Couldn't create the title folder",
-    "novelTools": "Contents, search and highlights",
-    "supportDeveloper": "Support the developer",
-    "anticipatedMovies": "Anticipated Movies",
-    "downloadFreeUp": "Free up space",
-    "readerFilterQualityLow": "Low (Bilinear)",
-    "stackUnsave": "Remove from saved",
-    "settingsSyncCatOther": "Watch, read and services",
-    "dcTextSection": "Text",
-    "syncPrivateModeSync": "Sync them",
-    "shortcutReaderNextChapter": "Next chapter",
-    "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
-    "installStepJre": "Java runtime",
-    "dcRouteDesktop": "Through the Discord desktop app",
-    "trendingShows": "Trending Shows",
-    "sourceInDays": "in {count}d",
-    "@sourceInDays": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "watchlist": "Watchlist",
-    "stackEmptyEntries": "This stack is empty",
-    "settingsSyncNow": "Sync now",
-    "secNotifyAbout": "Pick which kinds of activity send an alert",
-    "allCustomLists": "All custom lists",
-    "watchOrderCredit": "Watch orders by chiaki.site",
-    "settingsSyncPassphraseSet": "Set a passphrase",
-    "developerRoleLead": "Lead Developer",
-    "readerFilterQualityMedium": "Medium (Trilinear)",
-    "trailerLoading": "Loading the trailer…",
-    "shortcutAppGlass": "Toggle glass mode",
-    "settingsSyncPartPaletteDesc": "Theme, accent colour and OLED black",
-    "externalCopyUrl": "Copy stream link",
-    "generalSectionDesktop": "Desktop",
-    "updateNoAsset": "This release has no download for your device",
-    "died": "Died",
-    "castRokuNote": "Roku can't report or change the position",
-    "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
-    "@novelSearchCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "dcCustomNameHint": "Name shown after “Watching”",
-    "shortcutPlayerAudioCycle": "Next audio track",
-    "incognitoTurnedOff": "Incognito mode off",
-    "readerLongPressSave": "Hold a page to save it",
-    "dcSmallNone": "None",
-    "watchSectionConnection": "Connection",
-    "comick": "Comick",
-    "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
-    "@downloadClearQueueConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceTagsHint": "Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.",
-    "dcButtonsSection": "Buttons",
-    "shortcutPlayerFullscreen": "Fullscreen",
-    "novelSearch": "Search",
-    "shortcutAppOled": "Toggle OLED black",
-    "sequel": "Sequel",
-    "readerCloudflare": "Open in browser (Cloudflare check)",
-    "dcSampleReading": "Reading",
-    "downloadDeleteWatched": "Delete watched",
-    "animePlanetRefreshListsDesc": "Read your Anime-Planet lists again",
-    "trayPlaying": "Playing in a small window",
-    "sourceMuted": "Muted",
-    "watchFailCooldown": "You closed the check a moment ago. Press Solve it to try again",
-    "watchStatusOffline": "Can't reach the site",
-    "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
-    "@repoLinkConfirm": {
-        "placeholders": {
-            "url": {
-                "type": "String"
-            }
-        }
-    },
-    "stepFailed": "Failed",
-    "mostWatchedThisWeek": "Most Watched This Week",
-    "comickLoginFailed": "Comick login failed",
-    "shortcutPlayerSeekForward": "Seek forward",
-    "settingsSyncSecretsDelete": "Delete from GitHub",
-    "settingsSyncPassphraseField": "Passphrase",
-    "dcInUse": "In use",
-    "watchFailUnavailable": "There is no screen to show the check on",
-    "layoutZoneOverflow": "Hidden: in the more menu",
-    "year": "Year",
-    "stepChecking": "Checking…",
-    "extensionManagerTitle": "{type} manager",
-    "@extensionManagerTitle": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "readerFilterQualityNone": "None (Nearest neighbor)",
-    "shortcutPlayerSpeedUp": "Faster playback",
-    "mostFollowedAnime": "Most Followed Anime",
-    "shortcutAppIncognito": "Toggle incognito",
-    "sourceNotifyOff": "Release notifications off",
-    "novelHighlightFailed": "Couldn't match that selection to the text",
-    "titleLanguageRomaji": "Romaji",
-    "dcState": "Bottom line",
-    "togetherShareText": "Watch with me on Dartotsu: {link}",
-    "@togetherShareText": {
-        "placeholders": {
-            "link": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeList": "Filler episodes and unwatched thumbnails",
-    "sourceSkipUnstarted": "Skip titles you haven't started",
-    "showsWatched": "Shows Watched",
-    "animePlanetWontWatch": "Won't watch",
-    "animePlanetAlreadyOnList": "Already on this list",
-    "shortcutPlayerFit": "Change video fit",
-    "castTitle": "Cast to device",
-    "updatePluginTitle": "Update {name}",
-    "@updatePluginTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcNameTitle": "Title",
-    "importRepositoryFile": "Import a file",
-    "sourceAlertsSwitch": "Check subscribed titles",
-    "shortcutAppSearch": "Open search",
-    "trakt": "Trakt",
-    "playerSkipUseNow": "Use current position",
-    "notificationSomeone": "Someone",
-    "navSources": "Sources",
-    "dcDetails": "Top line",
-    "downloadDeleteAll": "Delete all",
-    "generalSectionPrivacy": "Privacy",
-    "recommendedMovies": "Recommended Movies",
-    "syncPrivateTitle": "Private entries",
-    "shortcutAppMaterialYou": "Toggle Material You",
-    "newsCouldntLoad": "Couldn't load the news",
-    "updateDownloading": "Downloading",
-    "playerSkipSent": "Skip times submitted to AniSkip, thank you",
-    "watchFailQuiet": "The check needs you, and the app was working on its own",
-    "sourceWhyLastRelease": "Last new release seen",
-    "updateOpenedBrowser": "Check your browser",
-    "syncPrivate": "Private entries",
-    "shortcutNotSet": "Not set",
-    "dcConnection": "Connection",
-    "sourceAll": "All",
-    "dcAccount": "Account",
-    "people": "People",
-    "togetherJoin": "Join",
-    "mostComments": "Most comments",
-    "localSource": "Local files",
-    "animePlanetLocalNote": "Sign in to save changes to your Anime-Planet account. Until then they stay on this device",
-    "secPlayerSkip": "Skip openings, endings and recaps automatically",
-    "settingsSyncTitlesNone": "Nothing uploaded yet",
-    "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
-    "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
-    "shortcutReaderLeft": "Page to the left",
-    "calendarExpected": "Expected",
-    "externalChooser": "Open in another app",
-    "settingsNovelDesc": "Text, page turning, translation and read aloud",
-    "importTokenRejected": "Token rejected",
-    "settingsSyncTitlesCount": "{records} titles and {resume} resume entries on the server",
-    "@settingsSyncTitlesCount": {
-        "placeholders": {
-            "records": {},
-            "resume": {}
-        }
-    },
-    "settingsSyncPartSubtitlesDesc": "Size, weight, colours and position",
-    "backupProtectedNeedsPassword": "Set a password to back up account data, or untick it",
-    "dcAccountOnly": "Needs a signed-in account",
-    "appLockUseBiometric": "Use biometrics",
-    "settingsSyncStatSettings": "Settings",
-    "secProgress": "When your watched or read progress is saved to your list",
-    "dcTemplateHint": "Empty uses the default",
-    "shortcutReaderNextPage": "Next page",
-    "syncToDelete": "To delete",
-    "syncPrivateModeAsk": "Ask",
-    "externalFailed": "Couldn't open the stream. Is the player installed?",
-    "spoilerTapToView": " Spoiler, tap to view ",
-    "playerSubtitleOutlineWidth": "Subtitle outline width",
-    "stepFailedWith": "Failed: {reason}",
-    "@stepFailedWith": {
-        "placeholders": {
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "dcActivityName": "Activity name",
-    "layoutCut": "Cut",
-    "loadFailedFavourites": "Couldn't load favourites. Retry",
-    "extensionsLoading": "Loading extensions…",
-    "gamepadNavDesc": "Move around the app and control the player with a game controller",
-    "settingsSyncSecrets": "Accounts and passwords",
-    "settingsSyncDesc": "Keep your settings the same on every device. They are stored in a private gist in your GitHub account",
-    "stackRemovedToast": "Removed from your saved stacks",
-    "togetherShareInvite": "Share invite",
-    "updateUpToDate": "You're on the latest version",
-    "dcRouteLinked": "Connected app",
-    "readerOpenBookDesc": "Read an epub (novel reader) or a PDF (manga reader) from your files",
-    "shortcutPlayerSeekBack": "Seek back",
-    "settingsSyncPassphraseExisting": "Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.",
-    "settingsSyncSecretsOnDesc": "Signing out on one device does not sign you out on the others.",
-    "downloadMetaSaved": "Saved. Put your files in {path}",
-    "@downloadMetaSaved": {
-        "placeholders": {
-            "path": {
-                "type": "String"
-            }
-        }
-    },
-    "streamGroupHardSub": "Hard Sub",
-    "settingsSync": "Sync settings",
-    "shortcutGroupApp": "App",
-    "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
-    "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
-    "@sourceNotifyAllOut": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castProtocolRoku": "Roku",
-    "dcPreview": "Preview",
-    "shortcutTaken": "Taken from {action}",
-    "@shortcutTaken": {
-        "placeholders": {
-            "action": {
-                "type": "String"
-            }
-        }
-    },
-    "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
-    "watchStatusTesting": "Testing the connection…",
-    "shortcutResetOne": "Reset to default",
-    "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
-    "mangaUpdates": "MangaUpdates",
-    "traktVipMember": "Trakt VIP Member",
-    "manageServices": "Media services",
-    "shortcutSeekPercentKeys": "0 – 9",
-    "manageServicesHint": "Drag to reorder, switch off the ones you don't use",
-    "sortLatestUpdates": "Latest updates",
-    "layoutMore": "More",
-    "calendarAll": "All",
-    "settingsSyncAccount": "GitHub account",
-    "dcSignOut": "Sign out",
-    "shortcutResetAllDesc": "Put every key back to its default",
-    "installStepCore": "Runtime core",
-    "shortcutsEnableReader": "Reader shortcuts",
-    "shortcutPlayerSkip": "Skip intro or ending",
-    "shortcutPressHint": "Each combination can only belong to one action, so taking one moves it.",
-    "layoutPaste": "Paste here",
-    "externalVlc": "Open in VLC",
-    "secNovelText": "Font, size, spacing, margins and page turning",
-    "shortcutPlayerSeekBackLong": "Seek back 30 seconds",
-    "settingsGroupAccount": "Your account",
-    "stepWillInstall": "Will be installed",
-    "shortcutPlayerPanel": "Episode list",
-    "userStacks": "Stacks by {name}",
-    "@userStacks": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "trayIdle": "Nothing running",
-    "animePlanetNewList": "New list name",
-    "settingsSyncCount": "{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}",
-    "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
-    "@downloadStorageSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "runtimePreparing": "Preparing the runtime…",
-    "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs.",
-    "dcButtonUrl": "Link",
-    "trayPauseDownloads": "Pause downloads",
-    "castNowCasting": "Casting to {name}",
-    "@castNowCasting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
-    "stacksEmpty": "No stacks here yet",
-    "settingsGroupApp": "App",
-    "secReaderReading": "Reading mode, page turning, zoom and next chapter",
-    "sourceFoundSummary": "{count} titles have something new",
-    "@sourceFoundSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncSignInFailed": "Could not sign in to GitHub",
-    "simklListsMostFollowed": "Most followed",
-    "dcSampleBrowsing": "Browsing",
-    "mangaUpdatesAnimeEnd": "Anime adaptation ends",
-    "buyMeCoffee": "Buy me a coffee",
-    "simklMoviesOnlyDesc": "Replaces the Anime tab: Movies first, then Shows with a couple of anime rows",
-    "dcSignedInAs": "Signed in as {name}",
-    "@dcSignedInAs": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncSignInDesc": "Settings are stored in a private gist in your account",
-    "logDelete": "Delete log files",
-    "settingsSyncLast": "Last synced {time}",
-    "@settingsSyncLast": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "dcSampleWatching": "Watching",
-    "notificationsOtherService": "Switch to {service} to open this",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "watchOrderCurrent": "You are here",
-    "playerPictureOriginal": "Original",
-    "updateTryAgain": "Try again",
-    "togetherLinkConfirm": "Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.",
-    "@togetherLinkConfirm": {
-        "placeholders": {
-            "room": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
-    "birthplace": "Birthplace",
-    "sourceInactive": "Inactive: {manager}",
-    "@sourceInactive": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "comickProfile": "Comick profile",
-    "traySearch": "Search",
-    "dcPrivacySection": "Privacy",
-    "shortcutAppSettings": "Open settings",
-    "dcTokenWarning": "Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.",
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
-    "shortcutSeekPercent": "Jump to a point of the video",
-    "downloadMetaOnly": "Metadata only",
-    "layoutZoneBottomStart": "Bottom bar, left",
-    "watchClearanceIssued": "earned {time}",
-    "@watchClearanceIssued": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksSignIn": "Sign in to MangaBaka to see your stacks",
-    "simklListTitles": "{count, plural, =1{1 title} other{{count} titles}}",
-    "@simklListTitles": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "firstTab": "First tab",
-    "dcDisconnect": "Disconnect",
-    "animePlanetWontRead": "Won't read",
-    "dcMethodDesktopDesc": "Used automatically when nothing else is connected. Discord has to be open on this computer.",
-    "droppedManga": "Dropped manga",
-    "syncDelete": "Delete what the main service doesn't have",
-    "secNovelTranslate": "Translate chapters while you read",
-    "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
-    "streamGroupOther": "Other",
-    "dcMemberList": "In the member list",
-    "settingsSyncServerEmpty": "Nothing uploaded yet",
-    "updateSizeOf": "{done} of {total}",
-    "@updateSizeOf": {
-        "placeholders": {
-            "done": {
-                "type": "String"
-            },
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "droppedAnime": "Dropped anime",
-    "followCoverMediaOnly": "Only for media",
-    "layoutEmptyZone": "Drop buttons here",
-    "removePlayerMessage": "Videos can't play until the player is downloaded again.",
-    "trailerFailed": "Could not play the trailer here, opening it in the browser",
-    "simklListsOfficial": "Official",
-    "settingsSyncConnect": "Not connected",
-    "extensionsUpdated": "{done} of {total} extensions updated",
-    "@extensionsUpdated": {
-        "placeholders": {
-            "done": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "syncDeleteTitle": "Delete entries?",
-    "dcVariables": "Tap to insert a value",
-    "watchStatusBlocked": "Blocked by the site",
-    "playerStickyStageDesc": "Keep the video fixed at the top while you scroll the episodes and comments below",
-    "dcCustomStatusHint": "What are you up to?",
-    "checkNowDesc": "Look for a newer version right away",
-    "shortcutPlayerMute": "Mute",
-    "novelHighlightRemove": "Remove highlight",
-    "shortcutPlayerVolumeDown": "Volume down",
-    "dcConnectFailed": "Could not connect Discord",
-    "appLockDelay": "Lock when idle",
-    "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
-    "syncPrivateModeSkip": "Skip them",
-    "playerPictureProcessedDesc": "The frame as you see it now",
-    "settingsSyncPassphraseConfirm": "Repeat the passphrase",
-    "dcDisplayState": "State",
-    "syncRemoved": "Removed from {services}",
-    "@syncRemoved": {
-        "placeholders": {
-            "services": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutReaderPreviousChapter": "Previous chapter",
-    "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
-    "@sourceCheckResult": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "secPlayerEngine": "Decoder, video and audio output, buffering. Only change these if playback has problems",
-    "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
-    "settingsSyncWhat": "What to sync",
-    "filterAny": "Any",
-    "updateInvalidResponse": "Invalid update response",
-    "settingsSyncRetry": "Retry",
-    "layoutTitle": "Layout",
-    "streamGroupSub": "Sub",
-    "extensionsOfType": "{type} extensions",
-    "@extensionsOfType": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "playerDownloadRetry": "Try again",
-    "autoUpdateRuntimes": "Update extension runtimes automatically",
-    "dcButtonMedia": "Link to the title",
-    "syncServiceOn": "Sync with {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "widgetNothing": "Nothing to continue yet",
-    "streamGroupSoftSub": "Soft Sub",
-    "statusAuto": "Auto",
-    "novelHighlights": "Highlights",
-    "downloadDeleteAllConfirm": "Delete every download of {title}?",
-    "@downloadDeleteAllConfirm": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
-    "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
-    "shortcutsEnableDesc": "Turn every key in this group on or off",
-    "dcTimerStyle": "Timer style",
-    "secReaderDisplay": "Background, brightness, fullscreen and page number",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.",
-    "sourceLatest": "Latest: {number}",
-    "@sourceLatest": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartPalette": "Theme colours",
-    "watchSectionSession": "Session",
-    "listsYours": "Yours",
-    "settingsSyncNever": "Not synced yet",
-    "notInList": "Not In List",
-    "closeActionWhenBusy": "Keep running in the tray while something is running",
-    "stepWillUpdateTo": "Will be updated to {version}",
-    "@stepWillUpdateTo": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadNothingWatched": "Nothing you have finished is downloaded",
-    "comickClientIdDesc": "Custom client ID registered on comick.dev",
-    "mostFollowed": "Most Followed",
-    "dcLargeImage": "Large image",
-    "shortcutPlayerPlayPause": "Play or pause",
-    "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
-    "@trackProgressMangaLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
-    "@downloadFreeUpConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "calendarAnime": "Anime",
-    "externalPlayerTitle": "Open stream elsewhere",
-    "commentsConnectFailed": "Failed to connect",
-    "sourceWaiting": "Waiting for the next release",
-    "calendarManga": "Manga",
-    "novelContentsEmpty": "This chapter has no headings",
-    "settingsSyncThisDevice": "this device",
-    "syncDeletedNote": "Will be deleted",
-    "trendingAnime": "Trending Anime",
-    "settingsSyncPartSubtitles": "Subtitle size and colours",
-    "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
+    "sourceFoundEpisodes": "Vipindi {from}–{to} vinatoka kwenye {source}",
     "@sourceFoundEpisodes": {
         "placeholders": {
             "from": {
@@ -2767,10 +2729,7 @@
             }
         }
     },
-    "voiceActors": "Voice actors",
-    "tagline": "Tagline",
-    "gamepadNav": "Gamepad navigation",
-    "sourceFoundChapter": "Chapter {number} is out on {source}",
+    "sourceFoundChapter": "Sura ya {number} itatoka kwenye {source}",
     "@sourceFoundChapter": {
         "placeholders": {
             "number": {
@@ -2781,379 +2740,7 @@
             }
         }
     },
-    "extensionNoSettings": "{name} doesn't provide any settings.",
-    "@extensionNoSettings": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailDismissed": "The check was closed before it finished",
-    "castFailed": "Could not start casting",
-    "novelHighlight": "Highlight",
-    "notificationAdded": "{title} was added to AniList",
-    "@notificationAdded": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "dcSignIn": "Sign in with Discord",
-    "watchFailTurnstile": "This check needs a tap that the background solver can't do",
-    "stackSavedToast": "Saved to your stacks",
-    "layoutMoveTo": "Move to {zone}",
-    "@layoutMoveTo": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksCouldntLoad": "Couldn't load the stacks",
-    "installStepsProgress": "Step {current} of {total}",
-    "@installStepsProgress": {
-        "placeholders": {
-            "current": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "watchStatusUntested": "Not tested yet",
-    "prequel": "Prequel",
-    "dcStatusInvisible": "Invisible",
-    "usernameOnly": "Username",
-    "updateWhatsNew": "What's new",
-    "followsMutual": "Mutual",
-    "boxOffice": "Box Office",
-    "dcShowWatching": "Show while watching",
-    "settingsSyncFailed": "Sync failed: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
-        }
-    },
-    "loadFailedReplies": "Couldn't load replies",
-    "dcActivitySection": "Activity",
-    "widgetContinue": "Continue",
-    "weeklySchedule": "Weekly Schedule",
-    "readerFilterQualityHigh": "High (Bicubic)",
-    "novelExtensions": "Novel Extensions",
-    "secPlayerMpv": "mpv.conf, scripts and advanced tuning",
-    "generalSectionSecurity": "Security",
-    "settingsSyncStatTitles": "Titles",
-    "externalMpv": "Open in mpv",
-    "dcLargeLogo": "Logo",
-    "imageTitlePage": "Page",
-    "stacksFollowing": "Following",
-    "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
-    "dcControlStatus": "Control my status",
-    "notificationAddedDetail": "Was added to AniList",
-    "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
-    "@sourceManageDesc": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "installRuntimeNewer": "The runtime this manager runs on has an update.",
-    "watchSolvedByUser": "Cloudflare check passed",
-    "settingsSyncSecretsOn": "Accounts are synced and encrypted",
-    "dcImagesSection": "Images",
-    "anticipated": "Anticipated",
-    "watchOrderUnavailable": "No watch order was found for this title",
-    "secNovelSpeech": "Voice, speed and pitch for read aloud",
-    "updateConflictAction": "Uninstall and reinstall",
-    "dcMethodDesktop": "Discord desktop app",
-    "dcLargeAuto": "Auto",
-    "settingsSyncUploaded": "Uploaded {time} from {device}",
-    "@settingsSyncUploaded": {
-        "placeholders": {
-            "time": {},
-            "device": {}
-        }
-    },
-    "streamGroupRaw": "Raw",
-    "dcShowReading": "Show while reading",
-    "settingsGroupContent": "Content",
-    "castProtocolChromecast": "Chromecast",
-    "dcControlStatusDesc": "Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.",
-    "novelSearchHint": "Search in this chapter",
-    "backupPasswordRequired": "Password (required for account data)",
-    "settingsSyncCopyCode": "Tap the code to copy it",
-    "dcConnecting": "Connecting…",
-    "shortcutPlayerNext": "Next episode",
-    "novelHighlightNoteHint": "Add a note",
-    "settingsSectionLists": "Episode and chapter lists",
-    "playerPictureSave": "Save this frame",
-    "sourceWhyLastCheck": "Last checked",
-    "shortcutResetAll": "Reset all shortcuts",
-    "playerPipBack": "Rewind",
-    "updateInstalling": "Installing…",
-    "animePlanetMagazine": "Magazine",
-    "dcSmallImage": "Small image",
-    "externalCopied": "Stream link copied",
-    "shortcutNothingToContinue": "Nothing to continue yet",
-    "traktVip": "VIP",
-    "removeJvmTitle": "Remove the Java runtime?",
-    "playerDisableSkips": "Disable skips",
-    "secPlayerShaders": "Anime upscaling and your own shaders",
-    "notificationATitle": "a title",
-    "layoutTitleFixed": "Title",
-    "sourceManage": "Subscriptions",
-    "settingsAnimeDesc": "Player, subtitles, skipping, episode list and episode details",
-    "mangaUpdatesProfile": "MangaUpdates profile",
-    "listsLiked": "Liked",
-    "titleLanguageEnglish": "English",
-    "castStop": "Stop casting",
-    "localMissing": "This file or folder is no longer in your Local folder",
-    "dcCustomStatus": "Custom status",
-    "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
-    "settingsSyncWaiting": "Waiting for you to approve on GitHub",
-    "settingsSyncOffCategory": "Not syncing. These stay on this device and the server copy is left as it is.",
-    "settingsSyncPassphraseShort": "Use at least 6 characters",
-    "dcDisconnected": "Not connected",
-    "sourceSkippedCompleted": "Skipped: completed",
-    "shortcutAppDark": "Toggle dark mode",
-    "dcButtonApp": "Link to Dartotsu",
-    "stackBy": "by {name}",
-    "@stackBy": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailBlocked": "The site blocked this device (access denied). A check won't help",
-    "trayQuit": "Quit",
-    "newsTitle": "News",
-    "sourceTagAdult": "18+",
-    "sourceInHours": "in {count}h",
-    "@sourceInHours": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castSkipPart": "Skip {name}",
-    "@castSkipPart": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchStatusReady": "Ready",
-    "sourceOpenExtensions": "Open extensions",
-    "trackProgressRememberSeries": "Remember for this series",
-    "calendarChapter": "Chapter {n}",
-    "@calendarChapter": {
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
-    "downloadSelectedCount": "{count} selected",
-    "@downloadSelectedCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "loadFailedStats": "Couldn't load stats",
-    "stepInstalled": "Installed",
-    "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
-    "@appLockDelayAfter": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "showsCollected": "Shows Collected",
-    "dcTimerRemaining": "Remaining",
-    "shortcutReaderControls": "Show or hide controls",
-    "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
-    "settingsLocalPlay": "Local play",
-    "trayDownloading": "{count, plural, one{Downloading {count} item} other{Downloading {count} items}}",
-    "@trayDownloading": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "readerOpenBook": "Open a book",
-    "commentsRateLimited": "Rate limited",
-    "castRefresh": "Search again",
-    "generalSectionBasics": "Language & behaviour",
-    "removePlayerTitle": "Remove the player?",
-    "settingsSyncTokenField": "Token",
-    "searchTags": "Search tags",
-    "watchStatusSolving": "Passing the Cloudflare check…",
-    "castControls": "Controls",
-    "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
-    "listDateLastWatched": "Last watched",
-    "moviesWatched": "Movies Watched",
-    "shortcutAppDownloads": "Open downloads",
-    "settingsSyncAccountDesc": "Your data goes to a private gist in your own account.",
-    "settingsSyncSecretsDesc": "Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.",
-    "playerDownloadStarting": "Starting the download…",
-    "cantBeUndone": "This can't be undone.",
-    "watchFailLoad": "The page didn't load. Check the connection and the site address",
-    "shortcutReaderRight": "Page to the right",
-    "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
-    "@extensionUpdates": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
-    "updateReleased": "Released {date}",
-    "@updateReleased": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "comickAccountOptions": "Comick account options",
-    "playerPipForward": "Forward",
-    "installNeedsRuntime": "It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.",
-    "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
-    "streamGroupDub": "Dub",
-    "traktAttribution": "Data and artwork provided by Trakt. View on Trakt",
-    "downloadStorageWatched": "{size} already watched or read",
-    "@downloadStorageWatched": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksMine": "Yours",
-    "dcButtonLabel": "Label",
-    "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
-    "@sourceInactiveOpen": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutAppBack": "Go back",
-    "layoutZoneTopStart": "Top bar, before the title",
-    "latestUpdates": "Latest Updates",
-    "playerDownloadBody": "Dartotsu fetches its video engine once. Playback starts as soon as it is ready.",
-    "settingsSyncCustom": "Custom",
-    "trayShow": "Show Dartotsu",
-    "settingsSyncPassphraseEnter": "Enter your passphrase",
-    "notificationAiredDetail": "Episode {episode} aired",
-    "@notificationAiredDetail": {
-        "placeholders": {
-            "episode": {
-                "type": "String"
-            }
-        }
-    },
-    "playerStickyStage": "Sticky video",
-    "stacksSaved": "Saved",
-    "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.",
-    "@syncPrivateAsk": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "playerPictureSaveFailed": "Could not save the frame",
-    "sourceTags": "Tags",
-    "settingsSyncPassphraseWrong": "Wrong passphrase",
-    "shortcutPlayerVolumeUp": "Volume up",
-    "traktReadOnly": "Trakt granted read-only access",
-    "onHoldAnime": "On hold anime",
-    "shortcutAddKey": "Add a key",
-    "downloadDeleteSelected": "Delete selected",
-    "sourceWhyAction": "Why no alert?",
-    "shortcutsEnableApp": "App shortcuts",
-    "updateSpeed": "{speed}/s",
-    "@updateSpeed": {
-        "placeholders": {
-            "speed": {
-                "type": "String"
-            }
-        }
-    },
-    "updateNoReleases": "No releases found",
-    "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
-    "simklListsTrending": "Trending",
-    "stepNotNeeded": "Not needed here",
-    "dnsNoRecords": "No A records returned",
-    "mangaUpdatesAnimeStart": "Anime adaptation starts",
-    "appLockDelayNever": "Never",
-    "playerPictureSaved": "Frame saved",
-    "settingsSyncRunning": "Syncing…",
-    "dcNameCustom": "Custom",
-    "unreadCounterDesc": "Show how many episodes or chapters are left on posters",
-    "settingsAboutUpdatesDesc": "App updates, version, logs, links and support",
-    "settingsSyncPaused": "Paused",
-    "onboardingLanguageBody": "Choose the language Dartotsu is shown in. You can change it later in Settings.",
-    "sourceMissingDesc": "{source} isn't installed in this extension service",
-    "@sourceMissingDesc": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartsNote": "Per device. Off keeps each device's own value, so a phone and a TV can differ.",
-    "stepWaiting": "Waiting",
-    "readerFilterQuality": "Image filter quality",
-    "comickClientId": "Comick Client ID",
-    "settingsSyncTitlesNote": "Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.",
-    "hideNsfwSourcesDesc": "Hide sources marked 18+ from the feeds and the source picker. They stay installed.",
-    "sourceWhyFailures": "Failed checks in a row",
-    "dcStatusDnd": "Do not disturb",
-    "shortcutAppShortcuts": "Show keyboard shortcuts",
-    "shortcutAppFullscreen": "Toggle fullscreen",
-    "appLockDelayAlways": "Always",
-    "stacksAll": "All",
-    "watchFailTimeout": "The check didn't finish in time",
-    "shortcutPlayerStreamCycle": "Next stream",
-    "settingsSyncUpToDate": "Up to date",
-    "dcCompeting": "Competing",
-    "rising": "Rising",
-    "sourceNotifyOn": "You'll be told when {source} has something new",
-    "@sourceNotifyOn": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.",
-    "upiId": "UPI ID",
-    "updateConflictTitle": "Update not installed",
-    "sourceNotifyTooltipOff": "Notify me about new releases",
-    "sourceCheckNow": "Check now",
-    "shortcutPress": "Press the key or combination you want",
-    "sourceWhyVerdictMuted": "This subscription is muted.",
-    "sourceWhyProgress": "Your progress",
-    "translationStatusLabel": "Translation",
-    "traktProfile": "Trakt profile",
-    "playerDownloadTitle": "Downloading the player",
-    "watchFailWebView": "The background web view couldn't start",
-    "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
+    "sourceFoundChapters": "Sura {from}–{to} zinatoka kwenye {source}",
     "@sourceFoundChapters": {
         "placeholders": {
             "from": {
@@ -3167,37 +2754,358 @@
             }
         }
     },
-    "settingsNotificationsDesc": "Alerts for your lists, new episodes and chapters, and comment replies",
-    "traySyncing": "Syncing your lists",
-    "upiCopied": "UPI ID copied",
-    "settingsSyncTokenDesc": "Create one at github.com/settings/tokens with only the gist permission",
-    "settingsSyncPassphraseMismatch": "The passphrases do not match",
-    "shortcutAppNotifications": "Open notifications",
-    "logDeleted": "Deleted {size} of logs",
-    "@logDeleted": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "appLockBiometric": "Unlock with biometrics",
-    "dcStatusText": "Status text",
-    "dcStatusSection": "Status",
-    "shortcutGroupPlayer": "Video player",
-    "sourceWhyListStatus": "List status",
-    "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
-    "@stackSeriesCount": {
+    "sourceFoundSummary": "{count} mada zina kitu kipya",
+    "@sourceFoundSummary": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "settingsSyncToken": "Use a personal access token",
-    "incognitoTurnedOn": "Incognito mode on",
-    "novelPageOf": "Page {current} of {total}",
-    "@novelPageOf": {
+    "navSources": "Vyanzo",
+    "sourceInactiveOpen": "Chanzo hiki ni cha {manager}, ambayo si huduma ya kiendelezi inayotumika",
+    "@sourceInactiveOpen": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceAlertsHeader": "Arifa za kutolewa",
+    "sourceAlertsSwitch": "Angalia mada ulizojisajili",
+    "sourceAlertsSwitchDesc": "Mara moja kila wakati programu inapofungua, kwa mada uliwasha kengele",
+    "sourceSkipUnstarted": "Ruka mada ambazo hujaanza",
+    "sourceSkipUnstartedDesc": "Bado hakuna kilichotazamwa au kusomwa, lakini vipindi tayari vipo",
+    "sourceSkipUnseen": "Ruka huku una vipindi visivyoonekana",
+    "sourceSkipUnseenDesc": "Bado umetoa vipindi ili uendelee",
+    "sourceManage": "Usajili",
+    "sourceManageDesc": "{count, plural, =0{Hakuna majina} =1{1 kichwa} other{{count} vyeo}}",
+    "@sourceManageDesc": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceCheckNow": "Angalia sasa",
+    "sourceCheckNowDesc": "Inapuuza ratiba na sheria za kuruka",
+    "sourceChecking": "Inaangalia...",
+    "sourceCheckResult": "{count, plural, =0{Hakuna jipya} =1{Kichwa 1 kina kitu kipya} other{{count} mada zina kitu kipya}}",
+    "@sourceCheckResult": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceEmpty": "Bado hakuna usajili",
+    "sourceEmptyMessage": "Gonga kengele juu ya vipindi vya mada ili kuambiwa kuhusu vipya",
+    "sourceAll": "Wote",
+    "sourceInactive": "Haitumiki: {manager}",
+    "@sourceInactive": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMissingDesc": "{source} haijasakinishwa katika huduma hii ya kiendelezi",
+    "@sourceMissingDesc": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceUnreachable": "Chanzo hakijibu",
+    "sourceFinished": "Imekamilika",
+    "sourceSkippedCompleted": "Imerukwa: imekamilika",
+    "sourceSkippedUnstarted": "Imeruka: haijaanza",
+    "sourceSkippedUnseen": "Imerukwa: vipindi visivyoonekana",
+    "sourceWaiting": "Inasubiri toleo lijalo",
+    "sourceNextCheck": "Angalia inayofuata {when}",
+    "@sourceNextCheck": {
+        "placeholders": {
+            "when": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceSoon": "hivi karibuni",
+    "sourceInHours": "katika {count}h",
+    "@sourceInHours": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceInDays": "katika {count}d",
+    "@sourceInDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceLatest": "Hivi karibuni: {number}",
+    "@sourceLatest": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMute": "Nyamazisha",
+    "sourceUnmute": "Rejesha sauti",
+    "sourceMuted": "Imenyamazishwa",
+    "sourceUnsubscribe": "Jiondoe",
+    "sourcePickAnother": "Chagua chanzo kingine",
+    "sourceOpenExtensions": "Fungua viendelezi",
+    "sourceNoticesEmpty": "Bado hakuna arifa za kutolewa",
+    "sourceNoticesEmptyMessage": "Vipindi na sura mpya kutoka kwa mada ulizofuatilia zitaonekana hapa",
+    "sourceOpenTitle": "Fungua kichwa",
+    "extensionsLoading": "Inapakia viendelezi...",
+    "updateWhatsNew": "Nini kipya",
+    "updateLater": "Baadaye",
+    "updateSkipVersion": "Ruka toleo hili",
+    "updatePreparing": "Inatayarisha...",
+    "updateDownloading": "Inapakua",
+    "updateInstalling": "Inasakinisha...",
+    "updateSizeOf": "{done} ya {total}",
+    "@updateSizeOf": {
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "updateSpeed": "{speed}/s",
+    "@updateSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            }
+        }
+    },
+    "updateReleased": "Imetolewa {date}",
+    "@updateReleased": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNoAsset": "Toleo hili halina upakuaji wa kifaa chako",
+    "updateUpToDate": "Uko kwenye toleo jipya zaidi",
+    "updateIosHint": "Miundo ya iOS haipo kwenye Duka la Programu. Nyakua .ipa kutoka kwa ukurasa wa kutolewa na uipakue kando na AltStore au SideStore",
+    "updateOpenedBrowser": "Angalia kivinjari chako",
+    "updateTryAgain": "Jaribu tena",
+    "settingsNotifications": "Arifa",
+    "settingsNotificationsDesc": "Arifa za orodha zako, vipindi na sura mpya na majibu ya maoni",
+    "settingsAboutUpdates": "Kuhusu & masasisho",
+    "settingsAboutUpdatesDesc": "Masasisho ya programu, toleo, kumbukumbu, viungo na usaidizi",
+    "settingsGroupAccount": "Akaunti yako",
+    "settingsGroupContent": "Maudhui",
+    "settingsGroupApp": "Programu",
+    "settingsAnimeDesc": "Mchezaji, manukuu, kuruka, orodha ya vipindi na maelezo ya kipindi",
+    "settingsMangaDesc": "Hali ya msomaji, vidhibiti, onyesho na ufuatiliaji wa sura",
+    "settingsNovelDesc": "Maandishi, kugeuza ukurasa, kutafsiri na kusoma kwa sauti",
+    "settingsLocalPlay": "Mchezo wa ndani",
+    "settingsLocalPlayDesc": "Cheza faili, folda, mitiririko ya mtandao na mitoko, au ufungue kitabu",
+    "settingsLocalPlayVideo": "Video",
+    "settingsLocalPlayBooks": "Vitabu",
+    "settingsWatchSections": "Sehemu",
+    "settingsSectionLists": "Vipindi na orodha za sura",
+    "settingsSectionProgress": "Ufuatiliaji wa maendeleo",
+    "updateChannelDesc": "Imara ni toleo lililojaribiwa. Toleo la awali na Alpha hupata vipengele vipya mapema lakini huenda kikavunjika",
+    "checkNowDesc": "Tafuta toleo jipya mara moja",
+    "generalSectionBasics": "Lugha na tabia",
+    "generalSectionSecurity": "Usalama",
+    "generalSectionPrivacy": "Faragha",
+    "notificationsOtherService": "Badili hadi {service} ili ufungue hii",
+    "@notificationsOtherService": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
+    "secPlayerPlayback": "Kasi chaguomsingi, uchezaji kiotomatiki, kutoshea video, mwelekeo na picha kwenye picha",
+    "secPlayerSkip": "Ruka fursa, miisho na urejeshaji kiotomatiki",
+    "secPlayerControls": "Telezesha kidole, shikilia na uguse ishara na utafute onyesho la kukagua",
+    "secPlayerSubtitles": "Lugha, mwonekano na tafsiri ya manukuu",
+    "secPlayerShaders": "Uboreshaji wa uhuishaji na vivuli vyako mwenyewe",
+    "secPlayerEngine": "Avkodare, pato la video na sauti, kuakibisha. Badilisha hizi tu ikiwa uchezaji una matatizo",
+    "secPlayerMpv": "mpv.conf, hati na urekebishaji wa hali ya juu",
+    "secAnimeList": "Vipindi vya kujaza na vijipicha visivyotazamwa",
+    "secProgress": "Wakati maendeleo yako ya kutazamwa au kusoma yanahifadhiwa kwenye orodha yako",
+    "secAnimeDetails": "Ambapo vichwa vya vipindi, vijipicha na muhtasari hutoka",
+    "secReaderReading": "Hali ya kusoma, kugeuza ukurasa, kukuza na sura inayofuata",
+    "secReaderControls": "Gusa kanda, vitufe vya sauti na usogeza kiotomatiki",
+    "secReaderDisplay": "Mandharinyuma, mwangaza, skrini nzima na nambari ya ukurasa",
+    "secNovelText": "Fonti, saizi, nafasi, pambizo na kugeuza ukurasa",
+    "secNovelTranslate": "Tafsiri sura unaposoma",
+    "secNovelSpeech": "Sauti, kasi na sauti ya kusomwa kwa sauti",
+    "secNotifyAbout": "Chagua ni aina gani ya shughuli tuma arifa",
+    "layoutTitle": "Mpangilio",
+    "layoutDesc": "Chagua, songa na ufiche vifungo kwenye baa",
+    "layoutHint": "Buruta kitufe ili kuisogeza (shika kwanza kwenye skrini ya kugusa). Gonga moja ili kuikata, kusogeza au kuificha",
+    "layoutDropInto": "Ingia: {zone}",
+    "@layoutDropInto": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutCutting": "Inasonga {name}. Bonyeza kitufe cha kubandika ili kuiweka",
+    "@layoutCutting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutTitleFixed": "Kichwa",
+    "layoutZoneTopStart": "Upau wa juu, kabla ya kichwa",
+    "layoutZoneTopEnd": "Upau wa juu, baada ya kichwa",
+    "layoutZoneBottomStart": "Upau wa chini, kushoto",
+    "layoutZoneBottomEnd": "Upau wa chini, kulia",
+    "layoutZoneSecondRow": "Imefichwa: safu mlalo ya pili katika mwonekano wa kawaida",
+    "layoutZoneOverflow": "Imefichwa: kwenye menyu zaidi",
+    "layoutEmptyZone": "Dondosha vitufe hapa",
+    "layoutCut": "Kata",
+    "layoutPaste": "Bandika hapa",
+    "layoutHide": "Ficha",
+    "layoutMoveTo": "Hamisha hadi {zone}",
+    "@layoutMoveTo": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutReset": "Weka upya kwa chaguomsingi",
+    "layoutMore": "Zaidi",
+    "sourceWhyAction": "Kwa nini hakuna tahadhari?",
+    "sourceWhyStatus": "Hali",
+    "sourceWhyLastCheck": "Mara ya mwisho kuangaliwa",
+    "sourceWhyNever": "Bado",
+    "sourceWhyNextCheck": "Cheki inayofuata",
+    "sourceWhyNewest": "Mpya zaidi kwenye chanzo",
+    "sourceWhyProgress": "Maendeleo yako",
+    "sourceWhyListStatus": "Hali ya orodha",
+    "sourceWhyFailures": "Imeshindwa kufanya ukaguzi mfululizo",
+    "sourceWhyLastRelease": "Toleo jipya la mwisho limeonekana",
+    "sourceWhyVerdictNew": "Toleo jipya linaonekana hapa punde tu chanzo likiliorodhesha na ukaguzi unaofuata ufanyike.",
+    "sourceWhyVerdictAhead": "Chanzo tayari kiko mbele ya maendeleo yako, kwa hivyo uliambiwa kuihusu mara moja. Isome au itazame ili kupata arifa inayofuata.",
+    "sourceWhyVerdictSkipped": "Kichwa hiki kimerukwa na sheria zilizo hapo juu. Zibadilishe katika mipangilio ya arifa, au tumia Angalia sasa ili kuiendesha hata hivyo.",
+    "sourceWhyVerdictBroken": "Chanzo hakiwezi kufikiwa au kimeondolewa, kwa hivyo hakuna kinachoangaliwa.",
+    "sourceWhyVerdictMuted": "Usajili huu umenyamazishwa.",
+    "externalPlayerTitle": "Fungua mkondo mahali pengine",
+    "externalCopyUrl": "Nakili kiungo cha mtiririko",
+    "externalCopied": "Kiungo cha mtiririko kimenakiliwa",
+    "externalChooser": "Fungua katika programu nyingine",
+    "externalVlc": "Fungua katika VLC",
+    "externalMpv": "Fungua katika mpv",
+    "externalWebVideoCast": "Tuma Video ya Wavuti",
+    "castViaAppHint": "Tuma mtiririko kwa programu ya Kutuma Video kwenye Wavuti",
+    "externalFailed": "Haikuweza kufungua mtiririko. Je, kichezaji kimewekwa?",
+    "addonInstalled": "Imesakinishwa",
+    "loadFailedActivity": "Haikuweza kupakia shughuli",
+    "loadFailedFavourites": "Haikuweza kupakia vipendwa. Jaribu tena",
+    "loadFailedStats": "Haikuweza kupakia takwimu",
+    "loadFailedReplies": "Haikuweza kupakia majibu",
+    "cantBeUndone": "Hili haliwezi kutenduliwa.",
+    "searchTags": "Tafuta vitambulisho",
+    "spoilerTapToView": "Mharibifu, gusa ili kutazama",
+    "mediaVideo": "Video",
+    "notificationSomeone": "Mtu fulani",
+    "notificationATitle": "cheo",
+    "notificationAddedDetail": "Iliongezwa kwa AniList",
+    "updateNoReleases": "Hakuna matoleo yaliyopatikana",
+    "updateInvalidResponse": "Jibu batili la sasisho",
+    "commentsRateLimited": "Kiwango kikomo",
+    "commentsConnectFailed": "Imeshindwa kuunganisha",
+    "dnsNoRecords": "Hakuna rekodi A zilizorejeshwa",
+    "importTokenRejected": "Ishara imekataliwa",
+    "developerRoleLead": "Msanidi Kiongozi",
+    "developerRoleModerator": "Msimamizi wa Discord",
+    "extensionManagerTitle": "{type} meneja",
+    "@extensionManagerTitle": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionsOfType": "{type} viendelezi",
+    "@extensionsOfType": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionSettingsTitle": "{name} mipangilio",
+    "@extensionSettingsTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionNoSettings": "{name} haitoi mipangilio yoyote.",
+    "@extensionNoSettings": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAired": "Kipindi {episode} cha {title} kilipeperushwa",
+    "@notificationAired": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            },
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAiredDetail": "Kipindi {episode} kilipeperushwa",
+    "@notificationAiredDetail": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAdded": "{title} iliongezwa kwa AniList",
+    "@notificationAdded": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNotFound": "Seva ya sasisho haikuweza kupata toleo hilo: {message}",
+    "@updateNotFound": {
+        "placeholders": {
+            "message": {
+                "type": "String"
+            }
+        }
+    },
+    "installStepJre": "Wakati wa utekelezaji wa Java",
+    "installStepCore": "Kiini cha wakati wa kukimbia",
+    "installStepsProgress": "Hatua {current} ya {total}",
+    "@installStepsProgress": {
         "placeholders": {
             "current": {
                 "type": "int"
@@ -3207,68 +3115,160 @@
             }
         }
     },
-    "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
-    "watchOrder": "Watch order",
-    "settingsNotifications": "Notifications",
-    "syncDeleteConfirm": "{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.",
-    "@syncDeleteConfirm": {
+    "stepWaiting": "Kusubiri",
+    "stepChecking": "Inaangalia...",
+    "stepUpToDate": "Imesasishwa",
+    "stepUpToDateWith": "Imesasishwa · {detail}",
+    "@stepUpToDateWith": {
+        "placeholders": {
+            "detail": {
+                "type": "String"
+            }
+        }
+    },
+    "stepWillInstall": "Itasakinishwa",
+    "stepWillUpdate": "Itasasishwa",
+    "stepWillUpdateTo": "Itasasishwa hadi {version}",
+    "@stepWillUpdateTo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "stepInstalled": "Imesakinishwa",
+    "stepNotNeeded": "Haihitajiki hapa",
+    "stepFailed": "Imeshindwa",
+    "stepFailedWith": "Imeshindwa: {reason}",
+    "@stepFailedWith": {
+        "placeholders": {
+            "reason": {
+                "type": "String"
+            }
+        }
+    },
+    "installNeedsRuntime": "Inatumika kwenye wakati wa utekelezaji wa Java na msingi wa wakati wa kukimbia ulioshirikiwa. Zimesakinishwa kwanza, na kusasishwa ikiwa zimebadilika.",
+    "installRuntimeNewer": "Muda wa utekelezaji wa msimamizi huyu una sasisho.",
+    "removeJvmTitle": "Ungependa kuondoa muda wa utekelezaji wa Java?",
+    "removeJvmMessage": "Vidhibiti vya viendelezi vya eneo-kazi huacha kufanya kazi hadi kisakinishwe tena. Inapakuliwa tena wakati ujao unaposakinisha au kufungua moja.",
+    "runtimePreparing": "Inatayarisha wakati wa utekelezaji...",
+    "calendarAll": "Wote",
+    "calendarAnime": "Wahusika",
+    "calendarManga": "Manga",
+    "readerCloudflare": "Fungua kwenye kivinjari (angalia Cloudflare)",
+    "badgeBoardHint": "Buruta beji kwenye kona ya kadi ya kwanza, au buruta beji tayari juu yake ili kuisogeza. Beji hubadilishana mahali, ili zisiwahi kupishana. Gonga beji hapa chini ili kuiwasha au kuzima.",
+    "statusAuto": "Otomatiki",
+    "unreadCounter": "Kaunta ambayo haijasomwa",
+    "unreadCounterDesc": "Onyesha ni vipindi au sura ngapi zimesalia kwenye mabango",
+    "settingsShortcuts": "Njia za mkato za kibodi",
+    "settingsShortcutsDesc": "Tazama, badilisha na uzime kila ufunguo",
+    "shortcutGroupApp": "Programu",
+    "shortcutGroupPlayer": "Kicheza video",
+    "shortcutGroupReader": "Msomaji",
+    "shortcutsEnableApp": "Njia za mkato za programu",
+    "shortcutsEnablePlayer": "Njia za mkato za mchezaji",
+    "shortcutsEnableReader": "Njia za mkato za msomaji",
+    "shortcutsEnableDesc": "Washa au uzime kila ufunguo katika kikundi hiki",
+    "shortcutNotSet": "Haijawekwa",
+    "shortcutAddKey": "Ongeza ufunguo",
+    "shortcutResetOne": "Weka upya kwa chaguomsingi",
+    "shortcutClearKeys": "Ondoa funguo zote",
+    "shortcutResetAll": "Weka upya njia zote za mkato",
+    "shortcutResetAllDesc": "Rudisha kila ufunguo kwa msingi wake",
+    "shortcutPress": "Bonyeza kitufe au mchanganyiko unaotaka",
+    "shortcutPressHint": "Kila mchanganyiko unaweza tu kuwa wa hatua moja, hivyo kuchukua moja kuisogeza.",
+    "shortcutSeekPercent": "Ruka hadi kwenye sehemu ya video",
+    "shortcutSeekPercentKeys": "0-9",
+    "shortcutAppBack": "Rudi nyuma",
+    "shortcutAppFullscreen": "Geuza skrini nzima",
+    "shortcutAppGlass": "Geuza hali ya kioo",
+    "shortcutAppMaterialYou": "Geuza Nyenzo Wewe",
+    "shortcutAppDark": "Geuza hali ya giza",
+    "shortcutAppOled": "Washa OLED nyeusi",
+    "shortcutAppSearch": "Fungua utafutaji",
+    "shortcutAppSettings": "Fungua mipangilio",
+    "shortcutAppDownloads": "Fungua vipakuliwa",
+    "shortcutAppNotifications": "Fungua arifa",
+    "shortcutAppIncognito": "Geuza hali fiche",
+    "shortcutAppShortcuts": "Onyesha njia za mkato za kibodi",
+    "shortcutPlayerPlayPause": "Cheza au sitisha",
+    "shortcutPlayerSeekForward": "Tafuta mbele",
+    "shortcutPlayerSeekBack": "Tafuta nyuma",
+    "shortcutPlayerSeekForwardLong": "Songa mbele kwa sekunde 30",
+    "shortcutPlayerSeekBackLong": "Tafuta nyuma kwa sekunde 30",
+    "shortcutPlayerFrameForward": "Fremu inayofuata",
+    "shortcutPlayerFrameBack": "Fremu iliyotangulia",
+    "shortcutPlayerVolumeUp": "Kuongeza sauti",
+    "shortcutPlayerVolumeDown": "Kupunguza sauti",
+    "shortcutPlayerMute": "Nyamazisha",
+    "shortcutPlayerFullscreen": "Skrini nzima",
+    "shortcutPlayerNext": "Kipindi kinachofuata",
+    "shortcutPlayerPrevious": "Kipindi kilichotangulia",
+    "shortcutPlayerSkip": "Ruka utangulizi au mwisho",
+    "shortcutPlayerPanel": "Orodha ya vipindi",
+    "shortcutPlayerSpeedUp": "Uchezaji wa haraka zaidi",
+    "shortcutPlayerSpeedDown": "Uchezaji wa polepole",
+    "shortcutPlayerSpeedReset": "Kasi ya kawaida",
+    "shortcutPlayerSubtitleToggle": "Manukuu yamewashwa au yamezimwa",
+    "shortcutPlayerSubtitleCycle": "Wimbo unaofuata wa manukuu",
+    "shortcutPlayerAudioCycle": "Wimbo unaofuata wa sauti",
+    "shortcutPlayerStreamCycle": "Mtiririko unaofuata",
+    "shortcutPlayerFit": "Badilisha kifafa cha video",
+    "shortcutReaderRight": "Ukurasa wa kulia",
+    "shortcutReaderLeft": "Ukurasa wa kushoto",
+    "shortcutReaderNextPage": "Ukurasa unaofuata",
+    "shortcutReaderPreviousPage": "Ukurasa uliotangulia",
+    "shortcutReaderControls": "Onyesha au ufiche vidhibiti",
+    "shortcutReaderNextChapter": "Sura inayofuata",
+    "shortcutReaderPreviousChapter": "Sura iliyotangulia",
+    "shortcutTaken": "Imechukuliwa kutoka {action}",
+    "@shortcutTaken": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "incognitoTurnedOn": "Hali fiche imewashwa",
+    "incognitoTurnedOff": "Hali fiche imezimwa",
+    "onHoldAnime": "Shikilia anime",
+    "onHoldManga": "Shikilia manga",
+    "droppedAnime": "Anime iliyoanguka",
+    "droppedManga": "Imeshuka manga",
+    "generalSectionDesktop": "Eneo-kazi",
+    "closeAction": "Wakati dirisha imefungwa",
+    "closeActionQuit": "Acha programu",
+    "closeActionWhenBusy": "Endelea kukimbia kwenye trei wakati kitu kinaendelea",
+    "closeActionAlways": "Daima endelea kukimbia kwenye tray",
+    "closeActionNoTray": "Trei ya mfumo haipatikani hapa, kwa hivyo programu hujizima ikifungwa",
+    "gamepadNav": "Urambazaji wa gamepad",
+    "gamepadNavDesc": "Sogeza karibu na programu na udhibiti mchezaji ukitumia kidhibiti cha mchezo",
+    "trayShow": "Onyesha Dartotsu",
+    "trayQuit": "Acha",
+    "trayIdle": "Hakuna kinachoendelea",
+    "trayDownloading": "{count, plural, one{Inapakua kipengee {count}} other{Inapakua vipengee {count}}}",
+    "@trayDownloading": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "secPlayerSubtitles": "Languages, appearance and subtitle rendering",
-    "settingsSyncModeGithub": "GitHub",
-    "playerSubtitlePreview": "Subtitle preview",
-    "sourceSkippedUnseen": "Skipped: unseen episodes",
-    "shortcutsEnablePlayer": "Player shortcuts",
-    "updateChannelDesc": "Stable is the tested release. Pre-release and Alpha get new features sooner but may break",
-    "shortcutGroupReader": "Reader",
-    "playerSkipFailed": "AniSkip refused the skip times: {error}",
-    "@playerSkipFailed": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "closeAction": "When the window is closed",
-    "settingsSyncSignedIn": "Signed in as {user}",
-    "@settingsSyncSignedIn": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "popularMovies": "Popular Movies",
-    "dcTimerElapsed": "Elapsed",
-    "layoutDesc": "Choose, move and hide the buttons on the bars",
-    "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
-    "refreshFromComick": "Refresh from Comick",
-    "refreshFromTrakt": "Refresh from Trakt",
-    "downloadClearQueue": "Clear queue",
-    "stepUpToDate": "Up to date",
-    "playerPictureProcessed": "With shaders and colors",
-    "novelContents": "Contents",
-    "sourceEmpty": "No subscriptions yet",
-    "settingsAboutUpdates": "About & updates",
-    "novelSearchNone": "No matches",
-    "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
-    "@trackProgressAnimeLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcRouteHeadless": "Through your account",
-    "novelPaged": "Page turning",
-    "sourceOpenTitle": "Open title",
-    "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
-    "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
-    "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
-    "playerPipPlay": "Play",
-    "castViaAppHint": "Send the stream to the Web Video Cast app",
-    "externalWebVideoCast": "Web Video Cast",
-    "trailerQuality": "Trailer quality"
+    "traySyncing": "Inasawazisha orodha zako",
+    "trayUpdating": "Inasasisha programu",
+    "trayPlaying": "Kucheza kwenye dirisha dogo",
+    "traySearch": "Tafuta",
+    "trayPauseDownloads": "Sitisha upakuaji",
+    "trayResumeDownloads": "Endelea kupakua",
+    "playerDownloadTitle": "Inapakua kicheza",
+    "playerDownloadBody": "Dartotsu huchota injini yake ya video mara moja. Uchezaji huanza mara tu iko tayari.",
+    "playerDownloadStarting": "Inaanzisha upakuaji...",
+    "playerDownloadFailedTitle": "Haikuweza kupata mchezaji",
+    "playerDownloadFailedBody": "Angalia muunganisho wako na ujaribu tena. Upakuaji unaanza pale uliposimama.",
+    "playerDownloadRetry": "Jaribu tena",
+    "playerDownloadCopy": "Nakili maelezo",
+    "removePlayerTitle": "Ungependa kuondoa mchezaji?",
+    "removePlayerMessage": "Video haziwezi kucheza hadi kichezaji kipakuliwe tena.",
+    "trailerLoading": "Inapakia trela...",
+    "trailerFailed": "Haikuweza kucheza trela hapa, kuifungua kwenye kivinjari"
 }

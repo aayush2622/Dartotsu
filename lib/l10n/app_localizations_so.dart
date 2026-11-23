@@ -128,37 +128,37 @@ class AppLocalizationsSo extends AppLocalizations {
       'Weydii passcode marka app-ka la furo ama marka aad dib ugu soo noqoto ka dib mudo';
 
   @override
-  String get appLockBiometric => 'Unlock with biometrics';
+  String get appLockBiometric => 'Ku fur qalabka biometrics';
 
   @override
   String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+      'Isticmaal farahaaga ama wajigaaga intii aad ka qori lahayd lambarka sirta ah';
 
   @override
-  String get appLockBiometricReason => 'Unlock Dartotsu';
+  String get appLockBiometricReason => 'Fur Dartotsu';
 
   @override
-  String get appLockDelay => 'Lock when idle';
+  String get appLockDelay => 'Quful marka aan shaqayn';
 
   @override
-  String get appLockDelayAlways => 'Always';
+  String get appLockDelayAlways => 'Had iyo jeer';
 
   @override
-  String get appLockDelayNever => 'Never';
+  String get appLockDelayNever => 'Marna';
 
   @override
   String appLockDelayAfter(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count minutes',
-      one: '1 minute',
+      other: '$count daqiiqo',
+      one: '1 daqiiqo',
     );
-    return 'After $_temp0';
+    return 'Kadib $_temp0';
   }
 
   @override
-  String get appLockUseBiometric => 'Use biometrics';
+  String get appLockUseBiometric => 'Isticmaal biometrics';
 
   @override
   String get appLockUnlock => 'Geli passcode-kaaga';
@@ -201,30 +201,30 @@ class AppLocalizationsSo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count updates available',
-      one: '1 update available',
+      other: '$count wararka waa la heli karaa',
+      one: '1 update la heli karo',
     );
     return '$_temp0';
   }
 
   @override
-  String get updateAll => 'Update all';
+  String get updateAll => 'Cusbooneysii dhammaan';
 
   @override
   String extensionsUpdated(int done, int total) {
-    return '$done of $total extensions updated';
+    return '$done ee $total kordhinta waa la cusboonaysiiyay';
   }
 
   @override
-  String get updateConflictTitle => 'Update not installed';
+  String get updateConflictTitle => 'Cusboonaysiinta lama rakibin';
 
   @override
   String updateConflictBody(String names) {
-    return '$names could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?';
+    return '$names laguma rakibi karo nooca jira. Tani waxay badanaa ka dhigan tahay nuqulka la rakibay si ka duwan ayaa loo saxiixay. Ka saar oo rakib nooca cusub?';
   }
 
   @override
-  String get updateConflictAction => 'Uninstall and reinstall';
+  String get updateConflictAction => 'Ka saar oo dib u rakib';
 
   @override
   String get noSourceSettings => 'Isha dejimo ma leh';
@@ -239,7 +239,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get addRepository => 'Ku dar kayd';
 
   @override
-  String get importRepositoryFile => 'Import a file';
+  String get importRepositoryFile => 'Soo deji feyl';
 
   @override
   String get pluginRepoUpdated => 'Kaydka plugin-ka waa la cusboonaysiiyay';
@@ -285,15 +285,15 @@ class AppLocalizationsSo extends AppLocalizations {
   String get selectMediaService => 'Dooro adeegga warbaahinta';
 
   @override
-  String get manageServices => 'Media services';
+  String get manageServices => 'Adeegyada warbaahinta';
 
   @override
   String get manageServicesDesc =>
-      'Reorder the services and choose which ones show in the picker';
+      'Dib u habayso adeegyada oo dooro kuwa ka muuqda soo-dooriyaha';
 
   @override
   String get manageServicesHint =>
-      'Drag to reorder, switch off the ones you don\'t use';
+      'Jiid si aad dib u dalbato, dami kuwa aadan isticmaalin';
 
   @override
   String get pickColor => 'Dooro midab';
@@ -336,7 +336,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get settingsNetwork => 'Shabakadda';
 
   @override
-  String get settingsNetworkDesc => 'User agent, shahaadooyin, DNS iyo proxy';
+  String get settingsNetworkDesc =>
+      'Wakiilka isticmaalaha, shahaadooyinka, DNS iyo wakiil';
 
   @override
   String get settingsAccountDesc => 'Adeegga la socodka iyo gelitaanka';
@@ -375,25 +376,26 @@ class AppLocalizationsSo extends AppLocalizations {
   String get customPath => 'Waddo kaydin gaar ah';
 
   @override
-  String get stories => 'Stories';
+  String get stories => 'Sheekooyin';
 
   @override
-  String get watchOrder => 'Watch order';
+  String get watchOrder => 'Daawo amarka';
 
   @override
-  String get watchOrderOpenSite => 'Open on chiaki.site';
+  String get watchOrderOpenSite => 'Ka fur chiaki.site';
 
   @override
-  String get watchOrderUnavailable => 'No watch order was found for this title';
+  String get watchOrderUnavailable =>
+      'Dalab daawasho ah looma helin cinwaankan';
 
   @override
-  String get watchOrderOpenFailed => 'Couldn\'t open that title';
+  String get watchOrderOpenFailed => 'Ma furi karin ciwaankaas';
 
   @override
-  String get watchOrderCurrent => 'You are here';
+  String get watchOrderCurrent => 'halkan ayaad joogtaa';
 
   @override
-  String get watchOrderCredit => 'Watch orders by chiaki.site';
+  String get watchOrderCredit => 'Daawo amarada chiaki.site';
 
   @override
   String get customPathDesc =>
@@ -410,441 +412,443 @@ class AppLocalizationsSo extends AppLocalizations {
       'Isticmaal maareeye cache oo kale sawirrada';
 
   @override
-  String get settingsSync => 'Sync settings';
+  String get settingsSync => 'Isku xidhka dejinta';
 
   @override
   String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+      'Dejintaada isku mid ku dhig qalab kasta. Waxay ku kaydsan yihiin xog gaar ah akoonkaaga GitHub';
 
   @override
-  String get settingsSyncSwitch => 'Sync on change';
+  String get settingsSyncSwitch => 'Isku hagaaji isbeddelka';
 
   @override
   String get settingsSyncModeGithub => 'GitHub';
 
   @override
-  String get settingsSyncSignIn => 'Sign in with GitHub';
+  String get settingsSyncSignIn => 'Ku soo gal GitHub';
 
   @override
   String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+      'Dejinta waxaa lagu kaydiyaa qoraal gaar ah oo ku jira akoonkaaga';
 
   @override
-  String get settingsSyncToken => 'Use a personal access token';
+  String get settingsSyncToken =>
+      'Isticmaal calaamad gelitaanka shakhsi ahaaneed';
 
   @override
   String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+      'Mid ka samee github.com/settings/tokens adiga oo haysta ogolaanshaha gunta oo kaliya';
 
   @override
   String get settingsSyncTokenField => 'Token';
 
   @override
   String settingsSyncSignedIn(Object user) {
-    return 'Signed in as $user';
+    return 'U soo galay sida $user';
   }
 
   @override
-  String get settingsSyncSignOut => 'Sign out';
+  String get settingsSyncSignOut => 'Saxiix';
 
   @override
   String settingsSyncCode(Object code) {
-    return 'Enter $code on GitHub';
+    return 'Geli $code GitHub';
   }
 
   @override
   String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+      'Bogga GitHub ayaa ka furmay biraawsarkaaga. Taabo si aad koodhka koobiyayso, ama taabo oo hayso si aad u tirtirto.';
 
   @override
-  String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+  String get settingsSyncSignInFailed => 'Ma soo geli karo GitHub';
 
   @override
-  String get dcPreview => 'Preview';
+  String get dcPreview => 'Horudhac';
 
   @override
-  String get dcSampleWatching => 'Watching';
+  String get dcSampleWatching => 'Daawashada';
 
   @override
-  String get dcSampleReading => 'Reading';
+  String get dcSampleReading => 'Akhriska';
 
   @override
-  String get dcSampleBrowsing => 'Browsing';
+  String get dcSampleBrowsing => 'Daalacashada';
 
   @override
-  String get dcSampleLive => 'Right now';
+  String get dcSampleLive => 'Hadda';
 
   @override
   String get dcLiveNothing =>
-      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+      'Ma jiraan wax muuqda hadda Fur ciwaan, bilow dhacdo ama cutub wayna ka muuqataa halkan.';
 
   @override
-  String get dcMemberList => 'In the member list';
+  String get dcMemberList => 'Liiska xubnaha';
 
   @override
-  String get dcAccount => 'Account';
+  String get dcAccount => 'Xisaab';
 
   @override
-  String get dcSignIn => 'Sign in with Discord';
+  String get dcSignIn => 'Ku soo gal Discord';
 
   @override
-  String get dcSignOut => 'Sign out';
+  String get dcSignOut => 'Saxiix';
 
   @override
   String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
+      'Iyadoo aan la xidhin, Discord waxay ku tusinaysaa \"Daawashada Dartotsu\" iyada oo loo marayo abka miiska. Connect Discord si aad hawsha ugu magacowdo ciwaankaga, ay ku jirto mobaylka.';
 
   @override
   String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+      'Connect Discord si aad u muujiso waxaad daawanayso ama akhrinayso. Waxay adeegsataa bogga oggolaanshaha Discord, ee maaha calaamada akoonkaaga.';
 
   @override
-  String get dcConnect => 'Connect Discord';
+  String get dcConnect => 'Isku xirka Discord';
 
   @override
   String get dcConnectDesc =>
-      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+      'Fura bogga oggolaanshaha Discord oo ku dara Dartotsu hoosta Apps Idman. Discord waxay ku weyddiistaa inay cusboonaysiiso joogitaankaaga. Kaliya calaamad cusub ayaa la kaydiyay, maaha calaamada akoonkaaga.';
 
   @override
-  String get dcConnectFailed => 'Could not connect Discord';
+  String get dcConnectFailed => 'Lama xiriirin karo Discord';
 
   @override
-  String get dcConnectedSnack => 'Discord connected';
+  String get dcConnectedSnack => 'Khilaaf ayaa ku xiran';
 
   @override
-  String get dcDisconnect => 'Disconnect';
+  String get dcDisconnect => 'Xiriirka ka jar';
 
   @override
-  String get dcDisconnectedSnack => 'Discord disconnected';
+  String get dcDisconnectedSnack => 'Khilaafku wuu go\'ay';
 
   @override
-  String get dcUseToken => 'Use a token instead';
+  String get dcUseToken => 'Isticmaal calaamad';
 
   @override
-  String get dcRouteDesktop => 'Through the Discord desktop app';
+  String get dcRouteDesktop => 'Iyadoo loo marayo barnaamijka Discord desktop';
 
   @override
-  String get dcRouteHeadless => 'Through your account';
+  String get dcRouteHeadless => 'Iyada oo loo marayo akoonkaaga';
 
   @override
-  String get dcRouteGateway => 'Through your account, live';
+  String get dcRouteGateway => 'Iyada oo loo marayo akoonkaaga, ku noolow';
 
   @override
-  String get dcRouteLinked => 'Connected app';
+  String get dcRouteLinked => 'Abka ku xidhan';
 
   @override
-  String get dcRouteNone => 'Not connected';
+  String get dcRouteNone => 'Ma xidhna';
 
   @override
   String get dcStatusNeedsToken =>
-      'Needs a Discord token. Connecting the app does not set your online status.';
+      'Wuxuu u baahan yahay calaamad Discord. Ku xidhida abka ma dhigayso heerkaaga onlaynka ah.';
 
   @override
-  String get dcAccountOnly => 'Needs a signed-in account';
+  String get dcAccountOnly => 'Wuxuu u baahan yahay akoon lagu soo galay';
 
   @override
-  String get dcStatusSection => 'Status';
+  String get dcStatusSection => 'Xaalada';
 
   @override
-  String get dcControlStatus => 'Control my status';
+  String get dcControlStatus => 'Xakamee xaaladayda';
 
   @override
   String get dcControlStatusDesc =>
-      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+      'Waxay ku haysaa xidhiidhka tooska ah ee Discord inta joogitaanka qanigu daaran yahay, markaa Dartotsu wuxuu dejin karaa heerkaaga.';
 
   @override
   String get dcStatusOnline => 'Online';
 
   @override
-  String get dcStatusIdle => 'Idle';
+  String get dcStatusIdle => 'Iidle';
 
   @override
-  String get dcStatusDnd => 'Do not disturb';
+  String get dcStatusDnd => 'Ha dhibin';
 
   @override
-  String get dcStatusInvisible => 'Invisible';
+  String get dcStatusInvisible => 'Aan la arki karin';
 
   @override
-  String get dcCustomStatus => 'Custom status';
+  String get dcCustomStatus => 'Xaaladda gaarka ah';
 
   @override
-  String get dcCustomStatusHint => 'What are you up to?';
+  String get dcCustomStatusHint => 'maxaad wadaa';
 
   @override
-  String get dcActivitySection => 'Activity';
+  String get dcActivitySection => 'Dhaqdhaqaaqa';
 
   @override
-  String get dcShowWatching => 'Show while watching';
+  String get dcShowWatching => 'Muuji adigoo daawanaya';
 
   @override
-  String get dcShowReading => 'Show while reading';
+  String get dcShowReading => 'Muuji inta aad wax akhrinayso';
 
   @override
-  String get dcListening => 'Listening';
+  String get dcListening => 'Dhagaysi';
 
   @override
-  String get dcCompeting => 'Competing';
+  String get dcCompeting => 'tartamaya';
 
   @override
-  String get dcActivityName => 'Activity name';
+  String get dcActivityName => 'Magaca hawsha';
 
   @override
   String get dcNameApp => 'Dartotsu';
 
   @override
-  String get dcNameTitle => 'Title';
+  String get dcNameTitle => 'Ciwaanka';
 
   @override
-  String get dcNameCustom => 'Custom';
+  String get dcNameCustom => 'Caadiyan';
 
   @override
-  String get dcCustomNameHint => 'Name shown after “Watching”';
+  String get dcCustomNameHint => 'Magaca la muujiyay ka dib \"Daawashada\"';
 
   @override
-  String get dcStatusText => 'Status text';
+  String get dcStatusText => 'Qoraalka xaaladda';
 
   @override
-  String get dcStatusTextDesc => 'What the member list shows next to your name';
+  String get dcStatusTextDesc =>
+      'Waxa liiska xubnaha ka tusinaya magacaaga agtiisa';
 
   @override
-  String get dcDisplayName => 'Name';
+  String get dcDisplayName => 'Magaca';
 
   @override
-  String get dcDisplayState => 'State';
+  String get dcDisplayState => 'Gobolka';
 
   @override
-  String get dcDisplayDetails => 'Details';
+  String get dcDisplayDetails => 'Faahfaahin';
 
   @override
-  String get dcTextSection => 'Text';
+  String get dcTextSection => 'Qoraal';
 
   @override
-  String get dcDetails => 'Top line';
+  String get dcDetails => 'Khadka sare';
 
   @override
-  String get dcState => 'Bottom line';
+  String get dcState => 'Gunta hoose';
 
   @override
-  String get dcTemplateHint => 'Empty uses the default';
+  String get dcTemplateHint => 'Madhan waxay isticmaashaa sida caadiga ah';
 
   @override
-  String get dcVariables => 'Tap to insert a value';
+  String get dcVariables => 'Taabo si aad u geliso qiime';
 
   @override
-  String get dcImagesSection => 'Images';
+  String get dcImagesSection => 'Sawirada';
 
   @override
-  String get dcLargeImage => 'Large image';
+  String get dcLargeImage => 'Sawir weyn';
 
   @override
-  String get dcLargeAuto => 'Auto';
+  String get dcLargeAuto => 'Baabuur';
 
   @override
-  String get dcLargeCover => 'Cover';
+  String get dcLargeCover => 'Dabool';
 
   @override
   String get dcLargeLogo => 'Logo';
 
   @override
-  String get dcSmallImage => 'Small image';
+  String get dcSmallImage => 'Sawir yar';
 
   @override
   String get dcSmallAuto => 'Logo';
 
   @override
-  String get dcSmallNone => 'None';
+  String get dcSmallNone => 'Midna';
 
   @override
-  String get dcTimerStyle => 'Timer style';
+  String get dcTimerStyle => 'Habka saacada';
 
   @override
-  String get dcTimerAuto => 'Auto';
+  String get dcTimerAuto => 'Baabuur';
 
   @override
-  String get dcTimerElapsed => 'Elapsed';
+  String get dcTimerElapsed => 'Dhacay';
 
   @override
-  String get dcTimerRemaining => 'Remaining';
+  String get dcTimerRemaining => 'Haraaga';
 
   @override
-  String get dcButtonsSection => 'Buttons';
+  String get dcButtonsSection => 'Badhamada';
 
   @override
-  String get dcButtonMedia => 'Link to the title';
+  String get dcButtonMedia => 'Xidhiidhka cinwaanka';
 
   @override
-  String get dcButtonApp => 'Link to Dartotsu';
+  String get dcButtonApp => 'Isku xirka Dartotsu';
 
   @override
-  String get dcButtonCustom => 'Custom button';
+  String get dcButtonCustom => 'badhanka gaarka ah';
 
   @override
-  String get dcButtonLabel => 'Label';
+  String get dcButtonLabel => 'Summada';
 
   @override
-  String get dcButtonUrl => 'Link';
+  String get dcButtonUrl => 'Xiriirinta';
 
   @override
-  String get dcPrivacySection => 'Privacy';
+  String get dcPrivacySection => 'Qarsoodi';
 
   @override
-  String get dcPrivateText => 'Private text';
+  String get dcPrivateText => 'Qoraal gaar ah';
 
   @override
-  String get dcPrivateHint => 'Something private';
+  String get dcPrivateHint => 'Wax gaar ah';
 
   @override
   String get dcTokenWarning =>
-      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+      'Soo gelida waxay isticmaashaa calaamada akoonkaaga Xeerarka Discord ayaa tan niyadda ka dhigaya, markaa u isticmaal khatartaada.';
 
   @override
-  String get dcConnected => 'Connected';
+  String get dcConnected => 'Ku xidhan';
 
   @override
-  String get dcConnection => 'Connection';
+  String get dcConnection => 'Isku xirka';
 
   @override
   String get dcMethodDesktop => 'Discord desktop app';
 
   @override
   String get dcMethodDesktopDesc =>
-      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+      'Si toos ah ayaa loo istcimaalaa marka aan wax kale lagu xirin. Khilaafku waa inuu ka furnaa kombayutarkan.';
 
   @override
-  String get dcMethodToken => 'Account token';
+  String get dcMethodToken => 'Calaamada xisaabta';
 
   @override
-  String get dcInUse => 'In use';
+  String get dcInUse => 'La isticmaalo';
 
   @override
-  String get dcRecommended => 'Recommended';
+  String get dcRecommended => 'lagu taliyay';
 
   @override
-  String get dcConnecting => 'Connecting…';
+  String get dcConnecting => 'Isku xidhka…';
 
   @override
-  String get dcDisconnected => 'Not connected';
+  String get dcDisconnected => 'Ma xidhna';
 
   @override
   String dcSignedInAs(String name) {
-    return 'Signed in as $name';
+    return 'U soo galay sida $name';
   }
 
   @override
-  String get settingsSyncOn => 'On';
+  String get settingsSyncOn => 'Daar';
 
   @override
-  String get settingsSyncCustom => 'Custom';
+  String get settingsSyncCustom => 'Caadiyan';
 
   @override
-  String get settingsSyncChangedHeader => 'Changed settings';
+  String get settingsSyncChangedHeader => 'Goobaha la bedelay';
 
   @override
   String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+      'Weli ma aadan beddelin mid ka mid ah kuwan, marka ma jiraan wax la isku dhejiyo.';
 
   @override
   String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+      'Dejinta kaliya ee aad bedeshay ayaa lagu kaydiyaa Wax kasta oo kale waxay u isticmaalaan sida caadiga ah qalab kasta. Astaanta daruurtu waxay muujinaysaa waxa horeba ugu jiray serfarka';
 
   @override
   String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+      'Iskuma toosin Kuwani waxay ku sii jiraan qalabkan oo nuqul ka mid ah server-ka ayaa loo daayaa sidiisa.';
 
   @override
   String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+      'Qalabkiiba Off waxay ilaalinaysaa qalab kasta qiimahiisa, sidaa awgeed taleefoonka iyo TV-ga way kala duwanaan karaan.';
 
   @override
-  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+  String get settingsSyncPartSubtitles => 'cabbir hoosaadka iyo midabada';
 
   @override
   String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+      'Cabbirka, miisaanka, midabada iyo booska';
 
   @override
-  String get settingsSyncPartPictureColors => 'Picture colours';
+  String get settingsSyncPartPictureColors => 'midabada sawirka';
 
   @override
   String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+      'Iftiin, isbarbardhig, dhereg, gamma, midab iyo HDR';
 
   @override
-  String get settingsSyncPartPalette => 'Theme colours';
+  String get settingsSyncPartPalette => 'Midabada mawduuca';
 
   @override
   String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+      'Mawduuca, midabka lahjadda iyo OLED madow';
 
   @override
-  String get settingsSyncCatOther => 'Watch, read and services';
+  String get settingsSyncCatOther => 'Daawo, akhriso iyo adeegyo';
 
   @override
-  String get settingsSyncTitles => 'Watch progress and titles';
+  String get settingsSyncTitles => 'Daawo horumarka iyo ciwaanada';
 
   @override
   String settingsSyncTitlesCount(Object records, Object resume) {
-    return '$records titles and $resume resume entries on the server';
+    return '$records ciwaanada iyo $resume dib u bilaaba galida serfarka';
   }
 
   @override
-  String get settingsSyncTitlesNone => 'Nothing uploaded yet';
+  String get settingsSyncTitlesNone => 'Wax wali lama soo galin';
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      'Daawo oo akhri jagooyinka, shelf resume, liisaska deegaankaaga, bookmarks, waxyaabaha muhiimka ah iyo doorashada cinwaan kasta. Tabarbarrada isha iyo durdurrada waxay ku sii jiraan qalab kasta sababtoo ah waxay ku xidhan yihiin kordhintaada. Cinwaanadu waxay soo geliyaan ugu badnaan 45 ilbiriqsi kasta.';
 
   @override
-  String get settingsSyncConnect => 'Not connected';
+  String get settingsSyncConnect => 'Ma xidhna';
 
   @override
   String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+      'Ku soo gal GitHub si aad u ilaaliso dejintaada isku mid qalab kasta.';
 
   @override
-  String get settingsSyncFailedTitle => 'Sync failed';
+  String get settingsSyncFailedTitle => 'Isku xidhka ayaa fashilmay';
 
   @override
-  String get settingsSyncPaused => 'Paused';
+  String get settingsSyncPaused => 'Hakin';
 
   @override
   String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+      'Ma jiraan wax la soo geliyo ama la soo dejiyo inta ay tani maqan tahay.';
 
   @override
-  String get settingsSyncUpToDate => 'Up to date';
+  String get settingsSyncUpToDate => 'Ilaa hadda';
 
   @override
-  String get settingsSyncRetry => 'Retry';
+  String get settingsSyncRetry => 'Isku day';
 
   @override
-  String get settingsSyncAccount => 'GitHub account';
+  String get settingsSyncAccount => 'Koontada GitHub';
 
   @override
   String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+      'Xogtaadu waxay ku socotaa xog gaar ah oo ku jirta akoonkaaga.';
 
   @override
-  String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
+  String get settingsSyncWaiting => 'Adigoo ku sugaya inaad ku ogolaato GitHub';
 
   @override
-  String get settingsSyncCopyCode => 'Tap the code to copy it';
+  String get settingsSyncCopyCode => 'Taabo koodka si aad u koobiyeeyso';
 
   @override
-  String get settingsSyncCancel => 'Cancel';
+  String get settingsSyncCancel => 'Jooji';
 
   @override
-  String get settingsSyncStatSettings => 'Settings';
+  String get settingsSyncStatSettings => 'Dejinta';
 
   @override
-  String get settingsSyncStatTitles => 'Titles';
+  String get settingsSyncStatTitles => 'Cinwaanada';
 
   @override
-  String get settingsSyncStatShelf => 'Resume';
+  String get settingsSyncStatShelf => 'Dib u bilaw';
 
   @override
   String settingsSyncUploaded(Object time, Object device) {
-    return 'Uploaded $time from $device';
+    return 'La soo galiyay $time $device';
   }
 
   @override
@@ -852,121 +856,122 @@ class AppLocalizationsSo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count changed',
-      one: '1 changed',
-      zero: 'Nothing changed yet',
+      other: '$count ayaa isbedelay',
+      one: '1 bedelay',
+      zero: 'Wali waxba isma bedelin',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncSecrets => 'Accounts and passwords';
+  String get settingsSyncSecrets => 'Xisaabaadka iyo furaha sirta ah';
 
   @override
   String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+      'Isku hagaaji geliyaashaada (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), furayaasha API iyo qufulka abka ee aaladahaaga. Waxaa lagu sir ah erayga sirta ah ee ku sii jira qalabkaaga, markaa GitHub waligiis ma arko.';
 
   @override
-  String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
+  String get settingsSyncSecretsOn =>
+      'Akoonada waa la is waafajiyay oo waa la siray';
 
   @override
   String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+      'Ka bixida hal qalab kuma saarayso kuwa kale.';
 
   @override
   String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+      'Erayada sirta ah kuma eka kuwa ku jira server-ka. Geli mar kale si aad u sii wadato xisaab xidhka';
 
   @override
-  String get settingsSyncPassphraseSet => 'Set a passphrase';
+  String get settingsSyncPassphraseSet => 'Deji jumlad sir ah';
 
   @override
-  String get settingsSyncPassphraseEnter => 'Enter your passphrase';
+  String get settingsSyncPassphraseEnter => 'Geli eraygaaga sirta ah';
 
   @override
-  String get settingsSyncPassphraseField => 'Passphrase';
+  String get settingsSyncPassphraseField => 'Sifeynta';
 
   @override
-  String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
+  String get settingsSyncPassphraseConfirm => 'Ku celi erayga sirta ah';
 
   @override
   String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+      'Dooro jumlad sir ah oo ka kooban ugu yaraan 6 xaraf. Meelna laguma kaydiyo laakiin qalabkaaga lamana soo celin karo. Haddii aad illowdo, tirtir nuqulka serverka oo dib u bilow.';
 
   @override
   String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+      'Geli erayga sirta ah ee aad ku dooratay qalabkaaga kale. Xisaabaadka qalabkan waxa lagu bedeli doonaa kuwa la isku dhejiyay.';
 
   @override
-  String get settingsSyncPassphraseWrong => 'Wrong passphrase';
+  String get settingsSyncPassphraseWrong => 'Erayada sirta ah ee khaldan';
 
   @override
-  String get settingsSyncPassphraseMismatch => 'The passphrases do not match';
+  String get settingsSyncPassphraseMismatch => 'Erayada sirta ah kuma eka';
 
   @override
-  String get settingsSyncPassphraseShort => 'Use at least 6 characters';
+  String get settingsSyncPassphraseShort => 'Isticmaal ugu yaraan 6 xaraf';
 
   @override
-  String get settingsSyncSecretsStop => 'Stop syncing accounts';
+  String get settingsSyncSecretsStop => 'Jooji xisaabinta xisaabaadka';
 
   @override
-  String get settingsSyncSecretsDelete => 'Delete from GitHub';
+  String get settingsSyncSecretsDelete => 'Ka tirtir GitHub';
 
   @override
   String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+      'Tani waxay ka saartaa faylka xisaabtaada sirta ah. Aaladaha kale waxay xafidaan soo gelitaankooda waxayna dejin karaan jumlad sir ah oo cusub.';
 
   @override
-  String get settingsSyncWhat => 'What to sync';
+  String get settingsSyncWhat => 'Maxaa la isku waafajiyaa';
 
   @override
-  String get settingsSyncServer => 'On the server';
+  String get settingsSyncServer => 'On server-ka';
 
   @override
-  String get settingsSyncServerEmpty => 'Nothing uploaded yet';
+  String get settingsSyncServerEmpty => 'Wax wali lama soo galin';
 
   @override
   String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count settings, uploaded $time from $device';
+    return '$count, laga soo raray $time $device';
   }
 
   @override
-  String get settingsSyncThisDevice => 'this device';
+  String get settingsSyncThisDevice => 'qalabkan';
 
   @override
   String settingsSyncCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count settings on the server',
-      one: '1 setting on the server',
-      zero: 'Nothing on the server',
+      other: '$count dejinta server-ka',
+      one: '1 dejinta on server-ka',
+      zero: 'Ma jiraan wax ku jira server-ka',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncNow => 'Sync now';
+  String get settingsSyncNow => 'Isku xidh hadda';
 
   @override
-  String get settingsSyncRunning => 'Syncing…';
+  String get settingsSyncRunning => 'Isku xidhka…';
 
   @override
-  String get settingsSyncNever => 'Not synced yet';
+  String get settingsSyncNever => 'Weli lama isku dhejin';
 
   @override
   String settingsSyncLast(Object time) {
-    return 'Last synced $time';
+    return 'Markii ugu dambeysay ee la isku dhejiyay $time';
   }
 
   @override
   String settingsSyncFailed(Object error) {
-    return 'Sync failed: $error';
+    return 'Isku xidhka ayaa fashilmay: $error';
   }
 
   @override
   String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+      'Keliya goobaha ku shaqeeya meel kasta waa la isku dhejiyay. Xisaabaadka, calaamadaha, faylalka, kordhinta, ogaysiisyada, Discord, cusboonaysiinta iyo cabbirka daaqada waxay ku sii sugnaan doonaan qalab kasta.';
 
   @override
   String get backupAndRestore => 'Kaydinta iyo soo celinta';
@@ -984,11 +989,12 @@ class AppLocalizationsSo extends AppLocalizations {
   String get loadExtensionsIcon => 'Soo rar astaamaha kordhinta';
 
   @override
-  String get autoUpdateRuntimes => 'Update extension runtimes automatically';
+  String get autoUpdateRuntimes =>
+      'Si otomaatig ah u cusboonaysii wakhti kordhinta';
 
   @override
   String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+      'Soo deji Aniyomi, CloudStream iyo noocyo runtime kale oo gadaal ah. Demin, summada cusboonaysiinta ayaa u muuqata maamulaha agtiisa.';
 
   @override
   String get loadExtensionsIconDesc =>
@@ -1034,15 +1040,16 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String get backupPasswordRequired => 'Password (required for account data)';
+  String get backupPasswordRequired =>
+      'Furaha (loo baahan yahay xogta xisaabta)';
 
   @override
   String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+      'Deji furaha sirta ah si aad u kaydiso xogta akoontada, ama ka furto';
 
   @override
   String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+      'Kaydkani malaha furaha sirta ah, markaa xogta akoonkeeda waa la booday';
 
   @override
   String get backupPassword => 'Erayga sirta (ikhtiyaari)';
@@ -1171,63 +1178,64 @@ class AppLocalizationsSo extends AppLocalizations {
       'La wadaag log-ka app-ka, ama koobi waddadiisa Linux';
 
   @override
-  String get logDelete => 'Delete log files';
+  String get logDelete => 'Tirtir faylasha log';
 
   @override
-  String get logDeleteDesc => 'Clear the saved app logs to free up space';
+  String get logDeleteDesc =>
+      'Nadiifi diiwaanka abka ee la keydiyay si aad meel bannaan uga soo baxdo';
 
   @override
   String logDeleted(String size) {
-    return 'Deleted $size of logs';
+    return 'La tirtiray $size ee diiwaannada';
   }
 
   @override
-  String get missingSequel => 'Missing Sequel';
+  String get missingSequel => 'Taxanaha Maqan';
 
   @override
-  String get rising => 'Rising';
+  String get rising => 'Kaca';
 
   @override
-  String get stacks => 'Stacks';
+  String get stacks => 'Duubista';
 
   @override
-  String get stacksAll => 'All';
+  String get stacksAll => 'Dhammaan';
 
   @override
-  String get stacksFeatured => 'Featured';
+  String get stacksFeatured => 'Sifaysan';
 
   @override
-  String get stacksMine => 'Yours';
+  String get stacksMine => 'Adaa leh';
 
   @override
-  String get stacksSaved => 'Saved';
+  String get stacksSaved => 'Badbaadiyay';
 
   @override
-  String get stacksFollowing => 'Following';
+  String get stacksFollowing => 'Daba gal';
 
   @override
-  String get stacksEmpty => 'No stacks here yet';
+  String get stacksEmpty => 'Weli halkan wax xidhmo ah ma jiraan';
 
   @override
-  String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
+  String get stacksSignIn => 'Gal MangaBaka si aad u aragto xirmooyinkaaga';
 
   @override
   String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+      'Xirmooyinkaagu waxay u baahan yihiin ogolaansho cusub. Mar kale soo gal MangaBaka si aad u ogolaato.';
 
   @override
-  String get stacksSignInAgain => 'Sign in again';
+  String get stacksSignInAgain => 'Mar kale soo gal';
 
   @override
-  String get stacksCouldntLoad => 'Couldn\'t load the stacks';
+  String get stacksCouldntLoad => 'Waa la rari waayay xirmooyinka';
 
   @override
   String stackSeriesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count series',
-      one: '1 series',
+      other: '$count taxane',
+      one: '1 taxane',
     );
     return '$_temp0';
   }
@@ -1237,8 +1245,8 @@ class AppLocalizationsSo extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count saves',
-      one: '1 save',
+      other: '$count kaydiya',
+      one: '1 badbaadin',
     );
     return '$_temp0';
   }
@@ -1249,36 +1257,36 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String get stackSpoilers => 'Spoilers';
+  String get stackSpoilers => 'Qaswadayaasha';
 
   @override
-  String get stackEmptyEntries => 'This stack is empty';
+  String get stackEmptyEntries => 'Xidhmadani waa faaruq';
 
   @override
-  String get stackSave => 'Save stack';
+  String get stackSave => 'Kaydi raso';
 
   @override
-  String get stackUnsave => 'Remove from saved';
+  String get stackUnsave => 'Ka saar kaydinta';
 
   @override
-  String get stackSavedToast => 'Saved to your stacks';
+  String get stackSavedToast => 'Lagu keydiyay xirmooyinkaaga';
 
   @override
-  String get stackRemovedToast => 'Removed from your saved stacks';
+  String get stackRemovedToast => 'Laga saaray xidhmooyinkaagii kaydsanaa';
 
   @override
   String userStacks(String name) {
-    return 'Stacks by $name';
+    return 'Isku dhafka $name';
   }
 
   @override
-  String get newsTitle => 'News';
+  String get newsTitle => 'Wararka';
 
   @override
-  String get newsEmpty => 'No news right now';
+  String get newsEmpty => 'Hadda war ma jiro';
 
   @override
-  String get newsCouldntLoad => 'Couldn\'t load the news';
+  String get newsCouldntLoad => 'Ma rari karo warka';
 
   @override
   String get logFileCopied => 'Waddada log-ka waa la koobiyay';
@@ -1312,11 +1320,11 @@ class AppLocalizationsSo extends AppLocalizations {
       'Midabadu waxay raacaan gadaasha, iyo daboolka boggaga faahfaahinta';
 
   @override
-  String get followCoverMediaOnly => 'Only for media';
+  String get followCoverMediaOnly => 'Warbaahinta kaliya';
 
   @override
   String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+      'Kaliya raac daboolka boggaga warbaahinta, meel kasta oo kale waxay ilaalisaa midabada caadiga ah';
 
   @override
   String get cardStyle => 'Qaabka kaarka';
@@ -1353,7 +1361,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get defaultFont => 'Caadi';
 
   @override
-  String get materialYou => 'Material You';
+  String get materialYou => 'Qalabka Adiga';
 
   @override
   String get materialYouDesc => 'Midab firfircoon oo nidaamka ka yimaada';
@@ -1407,13 +1415,13 @@ class AppLocalizationsSo extends AppLocalizations {
   String get preRelease => 'Hore-sii-deyn';
 
   @override
-  String get alpha => 'Alpha';
+  String get alpha => 'Alfa';
 
   @override
   String get checkNow => 'Hadda hubi';
 
   @override
-  String get userAgent => 'User-Agent';
+  String get userAgent => 'Isticmaalaha-Wakiilka';
 
   @override
   String get settingDefault => 'Caadi';
@@ -1430,13 +1438,13 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dnsDefault => 'Caadi (Cloudflare)';
 
   @override
-  String get proxy => 'Proxy';
+  String get proxy => 'Wakiil';
 
   @override
   String get proxyProtocol => 'Nooc';
 
   @override
-  String get proxyHost => 'Host';
+  String get proxyHost => 'Martigeliyaha';
 
   @override
   String get proxyPort => 'Deked';
@@ -1494,10 +1502,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get imageTitleCover => 'Dabool';
 
   @override
-  String get imageTitlePage => 'Page';
+  String get imageTitlePage => 'Bogga';
 
   @override
-  String get imageTitleBanner => 'Banner';
+  String get imageTitleBanner => 'Calan';
 
   @override
   String get imageTitleAvatar => 'Sawirka profile-ka';
@@ -1526,16 +1534,16 @@ class AppLocalizationsSo extends AppLocalizations {
   String get discordDesc => 'Bulshada iyo caawimaadda';
 
   @override
-  String get supportDeveloper => 'Support the developer';
+  String get supportDeveloper => 'Taageer horumariyaha';
 
   @override
-  String get buyMeCoffee => 'Buy me a coffee';
+  String get buyMeCoffee => 'I soo iibso qaxwo';
 
   @override
-  String get upiId => 'UPI ID';
+  String get upiId => 'Aqoonsiga UPI';
 
   @override
-  String get upiCopied => 'UPI ID copied';
+  String get upiCopied => 'Aqoonsiga UPI waa la guuriyay';
 
   @override
   String get donateDesc => 'Taageer horumarinta';
@@ -1551,7 +1559,7 @@ class AppLocalizationsSo extends AppLocalizations {
       'Gacan-ka-geystayaasha lama soo rari karo';
 
   @override
-  String get forks => 'Forks';
+  String get forks => 'Fargeeto';
 
   @override
   String get forksDesc => 'Mashaariicda lagu dhisay Dartotsu';
@@ -1591,7 +1599,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get onboardingLanguageBody =>
-      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+      'Dooro luqadda Dartotsu lagu muujiyay. Waxaad ka beddeli kartaa hadhow gudaha Settings.';
 
   @override
   String get onboardingPaletteTitle => 'Ka dhig mid kaaga ah';
@@ -1698,24 +1706,24 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String calendarChapter(int n) {
-    return 'Chapter $n';
+    return 'Cutubka $n';
   }
 
   @override
-  String get calendarExpected => 'Expected';
+  String get calendarExpected => 'La filayo';
 
   @override
-  String get castReceiverFailed => 'The Chromecast did not start its player';
+  String get castReceiverFailed => 'Chromecast-ku ma bilaabin ciyaartoygiisa';
 
   @override
-  String get castPlaybackFailed => 'The device could not play this stream';
+  String get castPlaybackFailed => 'Qalabku ma daari karo qulqulkan';
 
   @override
-  String get shortcutNothingToContinue => 'Nothing to continue yet';
+  String get shortcutNothingToContinue => 'Wax wali socda ma jiraan';
 
   @override
   String shortcutNoCalendar(String service) {
-    return '$service has no calendar';
+    return '$service malaha jadwal';
   }
 
   @override
@@ -1743,7 +1751,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get linkSettingsFailed => 'Dejimaha nidaamka lama furi karo';
 
   @override
-  String get discordRichPresence => 'Rich Presence';
+  String get discordRichPresence => 'Joogitaanka qani';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1771,10 +1779,10 @@ class AppLocalizationsSo extends AppLocalizations {
       'Sida Discord u qorto: \"Watching …\" ama \"Playing …\". Toos waxay u isticmaashaa Watching anime iyo Playing wax kasta oo kale.';
 
   @override
-  String get discordWatching => 'Watching';
+  String get discordWatching => 'Daawashada';
 
   @override
-  String get discordPlaying => 'Playing';
+  String get discordPlaying => 'Ciyaarta';
 
   @override
   String get discordCovers => 'Muuji dabooleyaasha';
@@ -1878,7 +1886,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token-ka Discord waa la saaray';
 
   @override
-  String get discordRichPresenceRow => 'Discord Rich Presence';
+  String get discordRichPresenceRow => 'Joogitaanka hodanka ah ee Discord';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -1922,82 +1930,82 @@ class AppLocalizationsSo extends AppLocalizations {
   String get mangaBakaLoginFailed => 'Galitaanka MangaBaka wuu fashilmay';
 
   @override
-  String get comickLoginFailed => 'Comick login failed';
+  String get comickLoginFailed => 'Soo gelida majaajilada ayaa guuldareystay';
 
   @override
   String get tagline => 'Tagline';
 
   @override
-  String get trending => 'Trending';
+  String get trending => 'La daalacanayo';
 
   @override
-  String get anticipated => 'Anticipated';
+  String get anticipated => 'La filayo';
 
   @override
-  String get watchlist => 'Watchlist';
+  String get watchlist => 'Liiska daawashada';
 
   @override
-  String get recommendedShows => 'Recommended Shows';
+  String get recommendedShows => 'Bandhigyada lagu taliyay';
 
   @override
-  String get recommendedMovies => 'Recommended Movies';
+  String get recommendedMovies => 'Aflaanta lagu taliyay';
 
   @override
-  String get boxOffice => 'Box Office';
+  String get boxOffice => 'Xafiiska sanduuqa';
 
   @override
-  String get popularMovies => 'Popular Movies';
+  String get popularMovies => 'Filimada caanka ah';
 
   @override
-  String get popularShows => 'Popular Shows';
+  String get popularShows => 'Bandhigyada caanka ah';
 
   @override
-  String get anticipatedMovies => 'Anticipated Movies';
+  String get anticipatedMovies => 'Filimada la filayo';
 
   @override
-  String get anticipatedShows => 'Anticipated Shows';
+  String get anticipatedShows => 'Bandhigyada La Filayo';
 
   @override
-  String get trendingShows => 'Trending Shows';
+  String get trendingShows => 'Bandhigyada Isbadalaya';
 
   @override
-  String get mostWatchedThisWeek => 'Most Watched This Week';
+  String get mostWatchedThisWeek => 'Inta badan la daawado todobaadkan';
 
   @override
-  String get sortMostViewed => 'Most viewed';
+  String get sortMostViewed => 'Inta badan la daawado';
 
   @override
-  String get sortMostFollowed => 'Most followed';
+  String get sortMostFollowed => 'Badi way raaceen';
 
   @override
-  String get sortLatestUpdates => 'Latest updates';
+  String get sortLatestUpdates => 'Wararkii ugu dambeeyay';
 
   @override
-  String get translationStatusLabel => 'Translation';
+  String get translationStatusLabel => 'Turjumaada';
 
   @override
-  String get weeklySchedule => 'Weekly Schedule';
+  String get weeklySchedule => 'Jadwalka toddobaadlaha ah';
 
   @override
-  String get mostFollowed => 'Most Followed';
+  String get mostFollowed => 'Inta Badan La Raaco';
 
   @override
-  String get latestUpdates => 'Latest Updates';
+  String get latestUpdates => 'Wararkii U Danbeeyay';
 
   @override
-  String get trendingAnime => 'Trending Anime';
+  String get trendingAnime => 'Anime Trending';
 
   @override
-  String get topRatedAnime => 'Top Rated Anime';
+  String get topRatedAnime => 'Anime ee ugu Sareeya';
 
   @override
-  String get mostFollowedAnime => 'Most Followed Anime';
+  String get mostFollowedAnime => 'Anime inta badan la raaco';
 
   @override
-  String get comickProfile => 'Comick profile';
+  String get comickProfile => 'Muuqaalka majaajilada';
 
   @override
-  String get refreshFromComick => 'Refresh from Comick';
+  String get refreshFromComick => 'Ka cusboonaysii Comick';
 
   @override
   String get mangaBakaProfile => 'Profile-ka MangaBaka';
@@ -2006,25 +2014,25 @@ class AppLocalizationsSo extends AppLocalizations {
   String get refreshFromMangaBaka => 'Ka cusboonaysii MangaBaka';
 
   @override
-  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+  String get mangaUpdatesLoginTitle => 'Soo gal MangaUpdates';
 
   @override
   String get mangaUpdatesProfile => 'MangaUpdates profile';
 
   @override
-  String get mangaUpdatesAnimeStart => 'Anime adaptation starts';
+  String get mangaUpdatesAnimeStart => 'La qabsiga anime ayaa bilaabmaya';
 
   @override
-  String get mangaUpdatesAnimeEnd => 'Anime adaptation ends';
+  String get mangaUpdatesAnimeEnd => 'La qabsiga anime wuu dhamaanayaa';
 
   @override
-  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+  String get refreshFromMangaUpdates => 'Ka cusboonaysii MangaUpdates';
 
   @override
-  String get usernameOnly => 'Username';
+  String get usernameOnly => 'Magaca isticmaale';
 
   @override
-  String get releases => 'Releases';
+  String get releases => 'Siidaynta';
 
   @override
   String get artistsLabel => 'Farshaxanno';
@@ -2055,7 +2063,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get hideNsfwSourcesDesc =>
-      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+      'Ka qari ilaha lagu calaamadeeyay 18+ quudinta iyo cidda soo xushay. Way ku rakiban yihiin.';
 
   @override
   String get hideNsfwDesc =>
@@ -2068,13 +2076,14 @@ class AppLocalizationsSo extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Doorashooyinka akoonka MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Comick account options';
+  String get comickAccountOptions => 'Ikhtiyaarada koontada Comick';
 
   @override
-  String get comickClientId => 'Comick Client ID';
+  String get comickClientId => 'Aqoonsiga Macmiilka ee Comick';
 
   @override
-  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc =>
+      'Aqoonsiga macmiilka gaarka ah ee ka diiwaan gashan comick.dev';
 
   @override
   String get couldNotUpdateKitsuSettings =>
@@ -2145,7 +2154,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get simklReadOnly => 'Simkl waxaa la siiyay gelitaan akhris-kaliya ah';
 
   @override
-  String get traktReadOnly => 'Trakt granted read-only access';
+  String get traktReadOnly => 'Trakt waxa la siiyay marin-akhris-kaliya';
 
   @override
   String get incognitoEditsBlocked =>
@@ -2173,10 +2182,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get following => 'La raacayo';
 
   @override
-  String get followsMutual => 'Mutual';
+  String get followsMutual => 'Labada dhinac';
 
   @override
-  String get followsNotMutual => 'Not mutual';
+  String get followsNotMutual => 'Aan wadaagin';
 
   @override
   String get homeSections => 'Qaybaha Guriga';
@@ -2201,7 +2210,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get addList => 'Ku dar liis';
 
   @override
-  String get voiceActors => 'Voice actors';
+  String get voiceActors => 'Jilayaasha codka';
 
   @override
   String voiceActorsIn(String name) {
@@ -2233,10 +2242,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get prequelSequel => 'Hore & Xiga';
 
   @override
-  String get prequel => 'Prequel';
+  String get prequel => 'Hordhac';
 
   @override
-  String get sequel => 'Sequel';
+  String get sequel => 'Taxane';
 
   @override
   String get previousSeason => 'Xilli hore';
@@ -2279,7 +2288,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get refreshFromSimkl => 'Ka cusboonaysii Simkl';
 
   @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
+  String get refreshFromTrakt => 'Ka cusboonaysii Trakt';
 
   @override
   String get repullProfileLibrary =>
@@ -2297,19 +2306,19 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get traktAttribution =>
-      'Data and artwork provided by Trakt. View on Trakt';
+      'Xogta iyo farshaxanka uu bixiyay Trakt. Ka eeg Trakt';
 
   @override
-  String get listsLiked => 'Liked';
+  String get listsLiked => 'Jeclahay';
 
   @override
-  String get listsYours => 'Yours';
+  String get listsYours => 'Adaa leh';
 
   @override
   String get traktVip => 'VIP';
 
   @override
-  String get traktVipMember => 'Trakt VIP Member';
+  String get traktVipMember => 'Trakt VIP Xubinta';
 
   @override
   String get onHold => 'La hakiyay';
@@ -2336,11 +2345,11 @@ class AppLocalizationsSo extends AppLocalizations {
   String get moviesAndSeries => 'Aflaamta & Taxanayaasha';
 
   @override
-  String get simklMoviesOnly => 'Movies & series only';
+  String get simklMoviesOnly => 'Filimada & Taxanaha kaliya';
 
   @override
   String get simklMoviesOnlyDesc =>
-      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+      'Wuxuu ku beddelaa tab Anime: Filimada marka hore, ka dibna wuxuu ku muujiyaa dhowr saf oo anime ah';
 
   @override
   String get trackingOnly => 'La socod oo keliya';
@@ -2373,7 +2382,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get trailer => 'Trailer';
 
   @override
-  String get trailerQuality => 'Trailer quality';
+  String get trailerQuality => 'Tayada filimka';
 
   @override
   String get titleCopied => 'Ciwaanka waa la koobiyay';
@@ -2389,7 +2398,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get detailStale =>
-      'AniList could not be reached. This is saved information and may be outdated.';
+      'AniList lama heli karo Tani waa macluumaadka la keydiyay waxaana laga yaabaa inay duugowday.';
 
   @override
   String get copyLink => 'Koobi xiriirka';
@@ -2430,48 +2439,48 @@ class AppLocalizationsSo extends AppLocalizations {
   String get popular => 'Caan ah';
 
   @override
-  String get allCustomLists => 'All custom lists';
+  String get allCustomLists => 'Dhammaan liisaska gaarka ah';
 
   @override
-  String get simklTitleLanguage => 'Anime title language';
+  String get simklTitleLanguage => 'Luuqadda cinwaanka Anime';
 
   @override
-  String get titleLanguageEnglish => 'English';
+  String get titleLanguageEnglish => 'Ingiriis';
 
   @override
   String get titleLanguageRomaji => 'Romaji';
 
   @override
-  String get simklListsTrending => 'Trending';
+  String get simklListsTrending => 'La daalacanayo';
 
   @override
-  String get simklListsMostLiked => 'Most liked';
+  String get simklListsMostLiked => 'Inta badan la jeclaaday';
 
   @override
-  String get simklListsMostFollowed => 'Most followed';
+  String get simklListsMostFollowed => 'Badi way raaceen';
 
   @override
-  String get simklListsOfficial => 'Official';
+  String get simklListsOfficial => 'Rasmi ah';
 
   @override
   String simklListTitles(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
+      other: '$count cinwaano',
+      one: '1 ciwaan',
     );
     return '$_temp0';
   }
 
   @override
-  String get people => 'People';
+  String get people => 'Dadka';
 
   @override
-  String get mostComments => 'Most comments';
+  String get mostComments => 'Inta badan faallooyinka';
 
   @override
-  String get alphabetical => 'Alphabetical';
+  String get alphabetical => 'Alifbeeto';
 
   @override
   String get latest => 'Ugu dambeeyay';
@@ -2571,7 +2580,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get listOnly => 'Liis kaliya';
 
   @override
-  String get notInList => 'Not In List';
+  String get notInList => 'Aan Liiska ku jirin';
 
   @override
   String get filter => 'Shaandhee';
@@ -2688,21 +2697,21 @@ class AppLocalizationsSo extends AppLocalizations {
   String get refresh => 'Cusboonaysii';
 
   @override
-  String get animePlanetRank => 'Rank';
+  String get animePlanetRank => 'Darajo';
 
   @override
-  String get animePlanetMagazine => 'Magazine';
+  String get animePlanetMagazine => 'Joornaal';
 
   @override
-  String get animePlanetRefreshLists => 'Refresh your lists';
+  String get animePlanetRefreshLists => 'Dib u cusboonaysii liiskaaga';
 
   @override
   String get animePlanetRefreshListsDesc =>
-      'Read your Anime-Planet lists again';
+      'Akhri liiskaaga Anime-Planet mar kale';
 
   @override
   String get animePlanetLocalNote =>
-      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
+      'Soo gal si aad u kaydiso isbeddelada koontadaada Anime-Planet Ilaa markaas waxay ku sii jirayaan qalabkan';
 
   @override
   String get share => 'La wadaag';
@@ -3213,14 +3222,14 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readingTabDesc => 'Kordhinta tab-ka saddexaad muujiyo';
 
   @override
-  String get firstTab => 'First tab';
+  String get firstTab => 'Tab ugu horeysay';
 
   @override
   String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+      'Waa kuwee kordhinta tab ugu horeysay muujinaysaa. Halkan ka dooro manga iyo sheeko cusub tab akhriska si aad anime uga soo riddo baarka';
 
   @override
-  String get novelExtensions => 'Novel Extensions';
+  String get novelExtensions => 'Kordhinta Novel';
 
   @override
   String get defaultFeed => 'Feed caadi ah';
@@ -3469,10 +3478,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get season => 'Xilli';
 
   @override
-  String get year => 'Year';
+  String get year => 'Sannadka';
 
   @override
-  String get filterAny => 'Any';
+  String get filterAny => 'Mid kasta';
 
   @override
   String get broadcast => 'Baahinta';
@@ -3499,7 +3508,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dropped => 'La joojiyay';
 
   @override
-  String get unfinished => 'Unfinished';
+  String get unfinished => 'Ma dhammayn';
 
   @override
   String get planned => 'La qorsheeyay';
@@ -3556,16 +3565,16 @@ class AppLocalizationsSo extends AppLocalizations {
   String get born => 'Dhashay';
 
   @override
-  String get died => 'Died';
+  String get died => 'dhintay';
 
   @override
-  String get birthplace => 'Birthplace';
+  String get birthplace => 'Goobta dhalashada';
 
   @override
-  String get department => 'Department';
+  String get department => 'Waaxda';
 
   @override
-  String get website => 'Website';
+  String get website => 'Mareegta';
 
   @override
   String get established => 'La aasaasay';
@@ -3589,16 +3598,16 @@ class AppLocalizationsSo extends AppLocalizations {
   String get shows => 'Bandhigyada';
 
   @override
-  String get moviesWatched => 'Movies Watched';
+  String get moviesWatched => 'Filimada La Daawaday';
 
   @override
-  String get showsWatched => 'Shows Watched';
+  String get showsWatched => 'Bandhigyo La Daawaday';
 
   @override
-  String get moviesCollected => 'Movies Collected';
+  String get moviesCollected => 'Filimada la ururiyay';
 
   @override
-  String get showsCollected => 'Shows Collected';
+  String get showsCollected => 'Bandhigyada la ururiyay';
 
   @override
   String get rewatching => 'Dib u daawanaya';
@@ -3903,7 +3912,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String repoLinkConfirm(String url) {
-    return 'Add this repository?\n\n$url\n\nOnly add repositories from sources you trust.';
+    return 'Kudar kaydkan?\n\n$url\n\nKaliya ku dar bakhaarrada ilaha aad ku kalsoon tahay.';
   }
 
   @override
@@ -4068,7 +4077,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get profile => 'Profile';
 
   @override
-  String get feed => 'Feed';
+  String get feed => 'Quudinta';
 
   @override
   String get stats => 'Tirakoob';
@@ -4155,7 +4164,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String updatePluginTitle(String name) {
-    return 'Update $name';
+    return 'Cusbooneysii $name';
   }
 
   @override
@@ -4250,42 +4259,42 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String syncServiceOn(String name) {
-    return 'Sync with $name';
+    return 'Ku xidh $name';
   }
 
   @override
-  String get syncDelete => 'Delete what the main service doesn\'t have';
+  String get syncDelete => 'Tirtir waxa aanu lahayn adeegga ugu muhiimsan';
 
   @override
   String get syncDeleteDesc =>
-      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+      'Ka saar gelinta adeegyada kale ee aan ku jirin liiska ugu muhiimsan. Keliya waxa la geliyaa ee la mid ah ciwaanka ayaa meesha laga saaray, si ay waxyaabaha ay ka midka yihiin filimada Simkl iyo taxanaha sii joogaan';
 
   @override
-  String get syncDeleteTitle => 'Delete entries?';
+  String get syncDeleteTitle => 'Tir tir gelinta?';
 
   @override
   String syncDeleteConfirm(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries',
-      one: '1 entry',
+      other: '$count gelida',
+      one: '1 gelid',
     );
-    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+    return '$_temp0 kuwa aan ku jirin liiskaaga ugu muhiimsan waa laga tirtiri doonaa adeegyada kale. Tan lama celin karo.';
   }
 
   @override
-  String get syncDeleteAction => 'Delete';
+  String get syncDeleteAction => 'Tirtir';
 
   @override
-  String get syncToDelete => 'To delete';
+  String get syncToDelete => 'Si loo tirtiro';
 
   @override
-  String get syncDeletedNote => 'Will be deleted';
+  String get syncDeletedNote => 'Waa la tirtiri doonaa';
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count will be deleted from $name';
+    return '$count waa laga tirtiri doonaa $name';
   }
 
   @override
@@ -4296,52 +4305,52 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ha yareynin horumarka adeeg hore u sii socda';
 
   @override
-  String get animePlanetWontWatch => 'Won\'t watch';
+  String get animePlanetWontWatch => 'Ma daawan doono';
 
   @override
-  String get animePlanetWontRead => 'Won\'t read';
+  String get animePlanetWontRead => 'Ma akhrin doono';
 
   @override
-  String get animePlanetAlreadyOnList => 'Already on this list';
+  String get animePlanetAlreadyOnList => 'Durba liiskan';
 
   @override
-  String get animePlanetNewList => 'New list name';
+  String get animePlanetNewList => 'Magaca liiska cusub';
 
   @override
-  String get syncPrivate => 'Private entries';
+  String get syncPrivate => 'Gelida gaarka ah';
 
   @override
   String get syncPrivateDesc =>
-      'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly';
+      'Waxa aad ku samaynayso qoraalada aad si gaar ah u ilaaliso. Adeeg leh ikhtiyaar gaar ah ayaa ka dhigaya kuwo gaar ah; qaar kalena si cad ayay u tusi lahaayeen';
 
   @override
-  String get syncPrivateModeAsk => 'Ask';
+  String get syncPrivateModeAsk => 'Waydii';
 
   @override
-  String get syncPrivateModeSync => 'Sync them';
+  String get syncPrivateModeSync => 'Isku hagaaji';
 
   @override
-  String get syncPrivateModeSkip => 'Skip them';
+  String get syncPrivateModeSkip => 'Ka bood iyaga';
 
   @override
-  String get syncPrivateTitle => 'Private entries';
+  String get syncPrivateTitle => 'Gelida gaarka ah';
 
   @override
   String syncPrivateAsk(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries are private',
-      one: '1 entry is private',
+      other: '$count waxyaabaha la galiyo waa kuwo gaar ah',
+      one: '1 gelitaanka waa mid gaar ah',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
+    return '$_temp0. Adeegyada leh ikhtiyaar gaar ah (AniList, Kitsu, MangaBaka) waxay u heli doonaan si gaar ah; Adeegyada kale ma laha ikhtiyaar gaar ah waxayna u tusi lahaayeen si guud. Isku xidh iyaga? Jawaabtaada waa la xusuustaa; ku beddel ikhtiyaarka Sync.';
   }
 
   @override
-  String get syncPrivateInclude => 'Sync them';
+  String get syncPrivateInclude => 'Isku hagaaji';
 
   @override
-  String get syncPrivateSkip => 'Skip them';
+  String get syncPrivateSkip => 'Ka bood iyaga';
 
   @override
   String get syncFetch => 'Soo qaad';
@@ -4449,7 +4458,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String syncRemoved(String services) {
-    return 'Removed from $services';
+    return 'Laga saaray $services';
   }
 
   @override
@@ -5434,19 +5443,19 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get sourceTagsHint =>
-      'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.';
+      'Tag waxa ishani loogu talagalay. Cinwaanku wuxuu taxayaa ilaha lagu calaamadeeyay marka hore, ka dibna kuwa aan la taaban. 18+ ilo ayaa kaliya muujinaya cinwaanada dadka waaweyn.';
 
   @override
   String get sourceTagAnime => 'Anime';
 
   @override
-  String get sourceTagMovies => 'Movies & Series';
+  String get sourceTagMovies => 'Filimada & Taxanaha';
 
   @override
   String get sourceTagAdult => '18+';
 
   @override
-  String get sourceHiddenByTags => 'Hidden by tags';
+  String get sourceHiddenByTags => 'Qarsoon by tags';
 
   @override
   String get watchOptions => 'Ikhtiyaarro';
@@ -5485,10 +5494,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get watchMarkUnread => 'Ku calaamadee aan la akhrin';
 
   @override
-  String get watchFiller => 'Filler';
+  String get watchFiller => 'Buuxiyaha';
 
   @override
-  String get watchRecap => 'Recap';
+  String get watchRecap => 'Dib u soo koobid';
 
   @override
   String get watchNoEpisodes => 'Dhacdo lama helin';
@@ -5569,87 +5578,90 @@ class AppLocalizationsSo extends AppLocalizations {
   String get watchCookiesCleared => 'Cookies-ka waa la nadiifiyay';
 
   @override
-  String get watchFailTimeout => 'The check didn\'t finish in time';
+  String get watchFailTimeout =>
+      'Jeeggu kuma dhammaanin waqtigii loogu talagalay';
 
   @override
   String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+      'Goobtu waxay xannibtay aaladdan (gelitaanka waa la diiday). Jeeggu waxba tari maayo';
 
   @override
   String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+      'Jeeggani wuxuu u baahan yahay tuubo oo uusan samayn karin cidda wax xalisa';
 
   @override
   String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+      'Boggu ma shubin Hubi xidhiidhka iyo cinwaanka goobta';
 
   @override
   String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+      'Goobtu way diiday ogolaanshaha ay hadda bixisay. Isku day marlabaad ama nadiifi cookies-ka';
 
   @override
-  String get watchFailDismissed => 'The check was closed before it finished';
+  String get watchFailDismissed =>
+      'Jeeggu waa la xidhay ka hor inta aanu dhammaan';
 
   @override
   String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+      'Waxaad xidhay jeegga wax yar ka hor. Taabo xal si aad mar kale isugu daydo';
 
   @override
   String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+      'Jeeggu adiga ayuu kuu baahan yahay, abkana iskii ayuu u shaqaynayay';
 
   @override
-  String get watchFailWebView => 'The background web view couldn\'t start';
+  String get watchFailWebView =>
+      'Aragtida shabakadeed ee dambe way bilaaban kartaa';
 
   @override
-  String get watchFailUnavailable => 'There is no screen to show the check on';
+  String get watchFailUnavailable => 'Ma jirto shaashad muujinaysa jeeggu';
 
   @override
-  String get watchStatusReady => 'Ready';
+  String get watchStatusReady => 'Diyaarsan';
 
   @override
-  String get watchStatusChallenge => 'Cloudflare check needed';
+  String get watchStatusChallenge => 'Hubinta Cloudflare ayaa loo baahan yahay';
 
   @override
-  String get watchStatusBlocked => 'Blocked by the site';
+  String get watchStatusBlocked => 'Waxaa xannibay goobta';
 
   @override
-  String get watchStatusOffline => 'Can\'t reach the site';
+  String get watchStatusOffline => 'Ma gaadhi karo goobta';
 
   @override
-  String get watchStatusUntested => 'Not tested yet';
+  String get watchStatusUntested => 'Weli lama tijaabin';
 
   @override
-  String get watchStatusTesting => 'Testing the connection…';
+  String get watchStatusTesting => 'Tijaabi xidhiidhka…';
 
   @override
-  String get watchStatusSolving => 'Passing the Cloudflare check…';
+  String get watchStatusSolving => 'Gudbinaya hubinta Cloudflare…';
 
   @override
   String watchSolvedBackground(int seconds) {
-    return 'Cloudflare check passed in the background ($seconds s)';
+    return 'Jeega Cloudflare ayaa laga dhex maray gadaasha ($seconds s)';
   }
 
   @override
-  String get watchSolvedByUser => 'Cloudflare check passed';
+  String get watchSolvedByUser => 'Jeega Cloudflare waa la dhaafay';
 
   @override
   String watchClearanceIssued(String time) {
-    return 'earned $time';
+    return 'kasbaday $time';
   }
 
   @override
   String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+      'Ogolaanshaha waxaa lagu kasbaday wakiilka isticmaale kale, markaa lama dirin. Tijaabi xidhiidhka si aad mid cusub u hesho';
 
   @override
-  String get watchSectionConnection => 'Connection';
+  String get watchSectionConnection => 'Isku xirka';
 
   @override
-  String get watchSectionSession => 'Session';
+  String get watchSectionSession => 'Casharka';
 
   @override
-  String get watchSectionTools => 'Tools';
+  String get watchSectionTools => 'Qalabka';
 
   @override
   String get watchMetaSource => 'Faahfaahinta dhacdada ka timid';
@@ -5688,18 +5700,18 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerSpeed => 'Xawaaraha ciyaarista';
 
   @override
-  String get localSource => 'Local files';
+  String get localSource => 'Faylasha deegaanka';
 
   @override
   String get localMissing =>
-      'This file or folder is no longer in your Local folder';
+      'Faylkan ama galkan hadda kuma jiro galka degaankaaga';
 
   @override
-  String get playerStickyStage => 'Sticky video';
+  String get playerStickyStage => 'Muuqaal dhejis ah';
 
   @override
   String get playerStickyStageDesc =>
-      'Keep the video fixed at the top while you scroll the episodes and comments below';
+      'Fiidiyowga ha ahaado mid meel sare ku yaal inta aad ka rogto qaybaha iyo faallooyinka hoose';
 
   @override
   String get playerCursedSpeed => 'Xawaaraha dheeraadka ah';
@@ -5771,11 +5783,11 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ka bood isla marka uu bilaabmo, adigoo isticmaalaya AniSkip iyo waqtiyada stream-ka';
 
   @override
-  String get playerDisableSkips => 'Disable skips';
+  String get playerDisableSkips => 'Dami boodboodka';
 
   @override
   String get playerDisableSkipsDesc =>
-      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
+      'Ma jiro AniSkip ama qulqulka timestamps, calamadaha cutubka ama ka boodi soo gudbinta ee ciyaaryahanka';
 
   @override
   String get playerSkipOnce => 'Mar keliya ka bood';
@@ -5842,13 +5854,13 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerSubtitleOutline => 'Xariiqda tarjumaadaha';
 
   @override
-  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+  String get playerSubtitleOutlineWidth => 'Balaadhka dulmar-hoosaadka';
 
   @override
-  String get playerSubtitlePreview => 'Subtitle preview';
+  String get playerSubtitlePreview => 'Horudhac-hoosaadka';
 
   @override
-  String get playerSubtitlePreviewText => 'Subtitle preview text';
+  String get playerSubtitlePreviewText => 'Qoraal horudhac-hoosaad ah';
 
   @override
   String get playerLibass => 'Isticmaal libass';
@@ -5881,26 +5893,26 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerShadersDownload => 'Soo deji Anime4K';
 
   @override
-  String get playerPictureSave => 'Save this frame';
+  String get playerPictureSave => 'Keydi jirkan';
 
   @override
-  String get playerPictureOriginal => 'Original';
+  String get playerPictureOriginal => 'Asalka';
 
   @override
   String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+      'Qaabka sida muuqaalku u leeyahay, iyada oo aan lahayn hadh ama midabyo';
 
   @override
-  String get playerPictureProcessed => 'With shaders and colors';
+  String get playerPictureProcessed => 'Iyada oo hadhka iyo midabada';
 
   @override
-  String get playerPictureProcessedDesc => 'The frame as you see it now';
+  String get playerPictureProcessedDesc => 'Qaabka sida aad hadda u aragto';
 
   @override
-  String get playerPictureSaved => 'Frame saved';
+  String get playerPictureSaved => 'Qaabka la keydiyay';
 
   @override
-  String get playerPictureSaveFailed => 'Could not save the frame';
+  String get playerPictureSaveFailed => 'Ma kaydin karayn jir';
 
   @override
   String get playerShadersPreview => 'Ku hordhac frame-kan';
@@ -5971,14 +5983,14 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+      'Shaders waxay u baahan yihiin samaynta qalabka, ciyaartoyguna waxa uu isticmaalayaa samaynta software. Dami soo-bandhigista Software-ka ee goobaha Ciyaartoyga.';
 
   @override
-  String get playerSoftwareRender => 'Software rendering';
+  String get playerSoftwareRender => 'Soo saarista software';
 
   @override
   String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+      'Kaliya muuqaal madow. Shaders kuma shaqeeyaan. Codsada marka xigta uu ciyaaryahanku furmo';
 
   @override
   String get playerShadersCustomFiles => 'Shaders-kaaga';
@@ -6134,7 +6146,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerDscale => 'Hoos-u-dhige';
 
   @override
-  String get playerToneMapping => 'Tone mapping';
+  String get playerToneMapping => 'Khariidaynta codka';
 
   @override
   String get playerTargetPeak => 'Ugu sarreeya bartilmaameedka';
@@ -6203,27 +6215,27 @@ class AppLocalizationsSo extends AppLocalizations {
   String get streamGroupSub => 'Sub';
 
   @override
-  String get streamGroupHardSub => 'Hard Sub';
+  String get streamGroupHardSub => 'Sub adag';
 
   @override
-  String get streamGroupSoftSub => 'Soft Sub';
+  String get streamGroupSoftSub => 'Sub jilicsan';
 
   @override
   String get streamGroupDub => 'Dub';
 
   @override
-  String get streamGroupRaw => 'Raw';
+  String get streamGroupRaw => 'Ceyriin';
 
   @override
-  String get streamGroupOther => 'Other';
+  String get streamGroupOther => 'Mid kale';
 
   @override
   String streamsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count streams',
-      one: '1 stream',
+      other: '$count durdurrada',
+      one: '1 durdur',
     );
     return '$_temp0';
   }
@@ -6233,7 +6245,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get playerStreamFailedNext =>
-      'That stream won\'t play, trying the next one';
+      'Socodkaasi ma ciyaari doono, isagoo isku dayaya kan ku xiga';
 
   @override
   String get playerAutoSelect => 'Dooro stream si toos ah';
@@ -6298,11 +6310,11 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readerFailed => 'Cutubkan lama furi karo';
 
   @override
-  String get readerOpenBook => 'Open a book';
+  String get readerOpenBook => 'Buug fur';
 
   @override
   String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+      'Akhri epub (akhriiyaha sheeko cusub) ama PDF (manga reader) ee faylalkaaga';
 
   @override
   String get readerNoText => 'Cutubkan qoraal ma leh';
@@ -6330,7 +6342,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readerMode => 'Habka akhriska';
 
   @override
-  String get readerModeAuto => 'Auto (by series type)';
+  String get readerModeAuto => 'Auto (nooca taxane ah)';
 
   @override
   String get readerModeRtl => 'Midig ilaa bidix';
@@ -6462,25 +6474,26 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readerFilterInvert => 'Rog';
 
   @override
-  String get readerFilterSepia => 'Sepia';
+  String get readerFilterSepia => 'Sebiya';
 
   @override
-  String get readerFilterQuality => 'Image filter quality';
+  String get readerFilterQuality => 'Tayada filtarrada sawirka';
 
   @override
-  String get readerFilterQualityNone => 'None (Nearest neighbor)';
+  String get readerFilterQualityNone => 'Midna (deriska ugu dhow)';
 
   @override
-  String get readerFilterQualityLow => 'Low (Bilinear)';
+  String get readerFilterQualityLow => 'Hoose (Bilinear)';
 
   @override
-  String get readerFilterQualityMedium => 'Medium (Trilinear)';
+  String get readerFilterQualityMedium => 'Dhexdhexaad (Trilinear)';
 
   @override
-  String get readerFilterQualityHigh => 'High (Bicubic)';
+  String get readerFilterQualityHigh => 'Sare (Bicubic)';
 
   @override
-  String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
+  String get readerFilterQualityLanczos =>
+      'Lanczos (Tayo sare leh oo miridhku)';
 
   @override
   String get readerDim => 'Madoobee';
@@ -6509,11 +6522,11 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ka jar baaxadaha madhan ee cad ama madow boggaga';
 
   @override
-  String get readerLongPressSave => 'Hold a page to save it';
+  String get readerLongPressSave => 'Qabo bog si aad u kaydiso';
 
   @override
   String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+      'Taabo bogga si aad u furto kaydinta, wadaagto oo koobiyo doorashooyinka';
 
   @override
   String get readerVolumeKeys => 'Furayaasha codku wuxuu rogaa boggaga';
@@ -6585,7 +6598,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get readerResetDesc => 'Ku noqo kuwa caadiga ah';
 
   @override
-  String get readerResetConfirm => 'Reset every reader setting to its default?';
+  String get readerResetConfirm =>
+      'Dib u dajin kasta oo akhriste dejintiisa u dhigma?';
 
   @override
   String get novelSize => 'Cabbirka qoraalka';
@@ -6612,7 +6626,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get novelThemeLight => 'Iftiin';
 
   @override
-  String get novelThemeSepia => 'Sepia';
+  String get novelThemeSepia => 'Sebiya';
 
   @override
   String get novelThemeDark => 'Mugdi';
@@ -6641,60 +6655,60 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String trackProgressAnimeLocal(String name) {
-    return 'Save your progress on $name to your list on this device as you watch?';
+    return 'Ku keydi horumarkaaga $name liiskaaga qalabkan markaad daawato?';
   }
 
   @override
   String trackProgressMangaLocal(String name) {
-    return 'Save your progress on $name to your list on this device when you finish a chapter?';
+    return 'Ku keydi horumarkaaga $name liiskaaga qalabkan marka aad dhammayso cutubka?';
   }
 
   @override
-  String get downloadClearQueue => 'Clear queue';
+  String get downloadClearQueue => 'Safka cad';
 
   @override
   String downloadClearQueueConfirm(int count) {
-    return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+    return 'Jooji dhammaan $count soo dejinta safka ku jira? Wixii horay loo soo dejiyay waa la tirtiray.';
   }
 
   @override
   String downloadSelectedCount(int count) {
-    return '$count selected';
+    return '$count la doortay';
   }
 
   @override
-  String get downloadSelectAll => 'Select all';
+  String get downloadSelectAll => 'Dhammaan dooro';
 
   @override
-  String get downloadDeleteSelected => 'Delete selected';
+  String get downloadDeleteSelected => 'Tirtir la doortay';
 
   @override
   String downloadDeleteSelectedConfirm(int count) {
-    return 'Delete $count downloads? Their files are removed from the device.';
+    return 'Ma tirtirtaa $count soo dejinta? Faylalkooda waa laga saaray aaladda.';
   }
 
   @override
-  String get castTitle => 'Cast to device';
+  String get castTitle => 'Ku tuur qalabka';
 
   @override
-  String get castSearching => 'Looking for devices on your network…';
+  String get castSearching => 'Raadinta aaladaha shabakadaada…';
 
   @override
   String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+      'Qalab lama helin Hubi in TV-ga ama Chromecast-ku ku yaal isla Wi-Fi, ka dibna raadi mar kale.';
 
   @override
-  String get castRefresh => 'Search again';
+  String get castRefresh => 'Mar labaad raadi';
 
   @override
-  String get castFailed => 'Could not start casting';
+  String get castFailed => 'Ma bilaabi karayn jilista';
 
   @override
-  String get castStop => 'Stop casting';
+  String get castStop => 'Jooji tuurista';
 
   @override
   String castNowCasting(String name) {
-    return 'Casting to $name';
+    return 'Ku duubida $name';
   }
 
   @override
@@ -6707,21 +6721,21 @@ class AppLocalizationsSo extends AppLocalizations {
   String get castProtocolRoku => 'Roku';
 
   @override
-  String get castRokuNote => 'Roku can\'t report or change the position';
+  String get castRokuNote => 'Roku ma warbixin karo mana bedeli karo booska';
 
   @override
-  String get castControls => 'Controls';
+  String get castControls => 'Xakamaynta';
 
   @override
-  String get castVolume => 'TV volume';
+  String get castVolume => 'Mugga TV-ga';
 
   @override
   String castSkipPart(String name) {
-    return 'Skip $name';
+    return 'Ka bood $name';
   }
 
   @override
-  String get trackProgressRememberSeries => 'Remember for this series';
+  String get trackProgressRememberSeries => 'Xusuusnow taxanahan';
 
   @override
   String get trackProgressYes => 'Kaydi';
@@ -6786,7 +6800,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dantotsuGroupExtensions => 'Kordhin';
 
   @override
-  String get dantotsuGroupApp => 'App';
+  String get dantotsuGroupApp => 'App-ka';
 
   @override
   String get dantotsuGroupPlayer => 'Ciyaaraha';
@@ -6804,7 +6818,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dantotsuTheme => 'Qaab';
 
   @override
-  String get themePickerTitle => 'Theme';
+  String get themePickerTitle => 'Dulucda';
 
   @override
   String get dantotsuReposAnime => 'Kaydka kordhinta anime';
@@ -6866,11 +6880,11 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String togetherLinkConfirm(String room) {
-    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+    return 'Ku biir qolka $room? Martigeliyaha ayaa dooranaya waxa ciyaaraya, ciyaaryahankuna iskii ayuu u furaa marka ay bilaabaan daawashada.';
   }
 
   @override
-  String get togetherJoin => 'Join';
+  String get togetherJoin => 'Ku biir';
 
   @override
   String get togetherName => 'Magacaaga';
@@ -6894,11 +6908,11 @@ class AppLocalizationsSo extends AppLocalizations {
   String get togetherCopyInvite => 'Koobi casuumaadda';
 
   @override
-  String get togetherShareInvite => 'Share invite';
+  String get togetherShareInvite => 'La wadaag martiqaad';
 
   @override
   String togetherShareText(String link) {
-    return 'Watch with me on Dartotsu: $link';
+    return 'ila daawo Dartotsu: $link';
   }
 
   @override
@@ -7055,71 +7069,71 @@ class AppLocalizationsSo extends AppLocalizations {
       'Taabo dhinaca bidix ama midig si aad bog u dhaqaajiso, dhexdu waxay muujisaa xakamaynta';
 
   @override
-  String get novelPaged => 'Page turning';
+  String get novelPaged => 'Bogga leexashada';
 
   @override
   String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+      'U kala qaybi cutubka bogag oo ku dhufo ama taabo si aad u rogto halkii aad ka rogi lahayd';
 
   @override
   String novelPageOf(int current, int total) {
-    return 'Page $current of $total';
+    return 'Bogga $current ee $total';
   }
 
   @override
-  String get novelPaginating => 'Laying out pages';
+  String get novelPaginating => 'Dejinta bogag';
 
   @override
-  String get novelTools => 'Contents, search and highlights';
+  String get novelTools => 'Nuxurka, raadinta iyo waxyaabaha muhiimka ah';
 
   @override
-  String get novelContents => 'Contents';
+  String get novelContents => 'Nuxurka';
 
   @override
-  String get novelContentsEmpty => 'This chapter has no headings';
+  String get novelContentsEmpty => 'Cutubkani ma laha cinwaano';
 
   @override
-  String get novelSearch => 'Search';
+  String get novelSearch => 'Raadi';
 
   @override
-  String get novelSearchHint => 'Search in this chapter';
+  String get novelSearchHint => 'Ka raadi cutubkan';
 
   @override
-  String get novelSearchNone => 'No matches';
+  String get novelSearchNone => 'Ma jiro tabarro';
 
   @override
   String novelSearchCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count matches',
-      one: '1 match',
+      other: '$count kulan',
+      one: '1 ciyaar',
     );
     return '$_temp0';
   }
 
   @override
-  String get novelHighlights => 'Highlights';
+  String get novelHighlights => 'Tilmaamaha';
 
   @override
   String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+      'Dooro qoraal oo taabo Highlight si aad halkan ugu hayso';
 
   @override
-  String get novelHighlight => 'Highlight';
+  String get novelHighlight => 'Iftiimin';
 
   @override
-  String get novelHighlightNote => 'Note';
+  String get novelHighlightNote => 'Ogow';
 
   @override
-  String get novelHighlightNoteHint => 'Add a note';
+  String get novelHighlightNoteHint => 'Ku dar qoraal';
 
   @override
-  String get novelHighlightRemove => 'Remove highlight';
+  String get novelHighlightRemove => 'Ka saar iftiiminta';
 
   @override
   String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+      'Waa la waafajin kari waayay doorashadaas qoraalka';
 
   @override
   String novelMinutesLeft(int count) {
@@ -7184,39 +7198,40 @@ class AppLocalizationsSo extends AppLocalizations {
   String get playerChapters => 'Cutubyo';
 
   @override
-  String get playerSkipSubmit => 'Submit skip times';
+  String get playerSkipSubmit => 'Soo gudbi waqtiyada boodada';
 
   @override
   String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+      'Calaamadee meesha furitaanka, ku dhamaanaysa ama dib u koobista ay ka bilaabato kuna dhamaato qaybtan lana wadaag AniSkip, si qof kastaa u helo badhanka boodada.';
 
   @override
-  String get playerSkipStart => 'Start';
+  String get playerSkipStart => 'Bilow';
 
   @override
-  String get playerSkipEnd => 'End';
+  String get playerSkipEnd => 'Dhammaad';
 
   @override
-  String get playerSkipUseNow => 'Use current position';
+  String get playerSkipUseNow => 'Isticmaal booska hadda jira';
 
   @override
-  String get playerSkipSend => 'Submit to AniSkip';
+  String get playerSkipSend => 'U gudbi AniSkip';
 
   @override
-  String get playerSkipSent => 'Skip times submitted to AniSkip, thank you';
+  String get playerSkipSent =>
+      'Waqtiyada boodboodka waxaa loo gudbiyay AniSkip, mahadsanid';
 
   @override
   String playerSkipFailed(String error) {
-    return 'AniSkip refused the skip times: $error';
+    return 'AniSkip wuu diiday waqtiyada boodada: $error';
   }
 
   @override
   String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+      'Ciyaartoyga muuqaalku kuma shaqayn karo qalabkan (nooca Android-kiisa aad buu u da\'weyn yahay maktabadda ciyaartoyga ee la isku xidho). Taabo si aad u koobiyeeyso faahfaahinta';
 
   @override
   String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+      'Magacani malaha aqoonsiga MyAnimeList, AniSkip ma qaadan karo';
 
   @override
   String get playerNoChapters => 'Cutub ma jiro';
@@ -7266,28 +7281,28 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ku sii ciyaar daaqad yar marka aad app-ka ka baxdo';
 
   @override
-  String get playerPipPlay => 'Play';
+  String get playerPipPlay => 'Ciyaar';
 
   @override
-  String get playerPipPause => 'Pause';
+  String get playerPipPause => 'Jooji';
 
   @override
-  String get playerPipBack => 'Rewind';
+  String get playerPipBack => 'Dib u celi';
 
   @override
-  String get playerPipForward => 'Forward';
+  String get playerPipForward => 'Horey';
 
   @override
-  String get playerPipRestore => 'Back to the player';
+  String get playerPipRestore => 'Ku laabo ciyaaryahanka';
 
   @override
-  String get playerPipActive => 'Playing in a small window';
+  String get playerPipActive => 'Ku ciyaarista daaqad yar';
 
   @override
-  String get listDateAdded => 'Added to list';
+  String get listDateAdded => 'Lagu daray liiska';
 
   @override
-  String get listDateLastWatched => 'Last watched';
+  String get listDateLastWatched => 'Daawashada ugu dambeysay';
 
   @override
   String playerAutoPlaying(String title) {
@@ -7341,7 +7356,8 @@ class AppLocalizationsSo extends AppLocalizations {
   String get fontImport => 'Soo geli far-qoraal';
 
   @override
-  String get fontSample => 'The quick brown fox jumps over the lazy dog';
+  String get fontSample =>
+      'Dawacadii degdega ahayd ee maariinka ahayd ayaa ka booday eeyga caajiska ah';
 
   @override
   String get playerSubtitleDelay => 'Daahista tarjumaadaha';
@@ -7406,72 +7422,72 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadsTitle => 'Soo dejinta';
 
   @override
-  String get widgetContinue => 'Continue';
+  String get widgetContinue => 'Sii wad';
 
   @override
-  String get widgetReleases => 'Releasing soon';
+  String get widgetReleases => 'Soo daaya dhawaan';
 
   @override
-  String get widgetMore => 'Also in progress';
+  String get widgetMore => 'Sidoo kale waxaa socda';
 
   @override
-  String get widgetNothing => 'Nothing to continue yet';
+  String get widgetNothing => 'Wax wali socda ma jiraan';
 
   @override
-  String get downloadStorageTitle => 'Storage';
+  String get downloadStorageTitle => 'Kaydinta';
 
   @override
   String downloadStorageSummary(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count downloads',
-      one: '1 download',
+      other: '$count soo dajis',
+      one: '1 soo dejiso',
     );
     return '$_temp0 · $size';
   }
 
   @override
   String downloadStorageWatched(String size) {
-    return '$size already watched or read';
+    return '$size horay u daawaday ama akhriyay';
   }
 
   @override
-  String get downloadFreeUp => 'Free up space';
+  String get downloadFreeUp => 'Meel bannaan sii';
 
   @override
   String downloadFreeUpConfirm(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count watched downloads',
-      one: '1 watched download',
+      other: '$count daawaday soo dejinta',
+      one: '1 daawo download',
     );
-    return 'Delete $_temp0 and free $size?';
+    return 'Tirtir $_temp0 iyo bilaash $size?';
   }
 
   @override
   String downloadFreed(String size) {
-    return 'Freed $size';
+    return 'La sii daayay $size';
   }
 
   @override
-  String get downloadDeleteWatched => 'Delete watched';
+  String get downloadDeleteWatched => 'Tirtir la daawaday';
 
   @override
-  String get downloadDeleteAll => 'Delete all';
+  String get downloadDeleteAll => 'Tirtir dhammaan';
 
   @override
   String downloadDeleteAllConfirm(String title) {
-    return 'Delete every download of $title?';
+    return 'Ma tirtirtaa soo dejin kasta oo $title ah?';
   }
 
   @override
-  String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+  String get downloadNothingWatched => 'Wax aad dhammaysay lama soo dejiyo';
 
   @override
-  String get downloadStorageEmpty => 'No downloads are using space';
+  String get downloadStorageEmpty =>
+      'Wax soo dejisasho ah ma isticmaalayaan meel bannaan';
 
   @override
   String get downloadsOpenDesc =>
@@ -7481,14 +7497,14 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadTitle => 'Soo deji';
 
   @override
-  String get downloadMetaOnly => 'Metadata only';
+  String get downloadMetaOnly => 'Xogta badan oo kaliya';
 
   @override
-  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+  String get downloadMetaFailed => 'Waa la samayn kari waayay galka cinwaanka';
 
   @override
   String downloadMetaSaved(String path) {
-    return 'Saved. Put your files in $path';
+    return 'Badbaadiyay Geli faylashaada $path';
   }
 
   @override
@@ -7521,10 +7537,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadSourceMissing => 'Isha dhacdadan lama rakibin';
 
   @override
-  String get downloadDashDrm => 'This stream is DRM protected';
+  String get downloadDashDrm => 'Socodkan waa la ilaaliyay DRM';
 
   @override
-  String get downloadDashNoVideo => 'The DASH manifest has no video';
+  String get downloadDashNoVideo => 'Muujinta DASH ma laha muuqaal';
 
   @override
   String get downloadWaitingConnection => 'Isku-xirka waa la sugayaa';
@@ -7536,7 +7552,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadDownloaded => 'La soo dejiyay';
 
   @override
-  String get downloadOffline => 'Offline';
+  String get downloadOffline => 'offline';
 
   @override
   String get downloadDelete => 'Tir soo dejinta';
@@ -7673,7 +7689,7 @@ class AppLocalizationsSo extends AppLocalizations {
       'Wuxuu u keydiyaa stream-ka, tayada, tarjumaadda iyo waqtiyada booditaanka sida fayl .json ah oo yar';
 
   @override
-  String get offlineHeader => 'Offline';
+  String get offlineHeader => 'offline';
 
   @override
   String get offlineModeDesc =>
@@ -7732,7 +7748,7 @@ class AppLocalizationsSo extends AppLocalizations {
       'Dhacdadan lama soo dejin, sidaas darteed offline lama heli karo';
 
   @override
-  String get offlineModeChip => 'Offline';
+  String get offlineModeChip => 'offline';
 
   @override
   String get downloadNextChapter => 'Cutubka xiga';
@@ -7820,7 +7836,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadPlayLocalDesc => 'Faylka ku kaydsan qalabkan';
 
   @override
-  String get downloadPlayStream => 'Stream online';
+  String get downloadPlayStream => 'Ku shub online';
 
   @override
   String get downloadPlayStreamDesc => 'Ka soo rar dhacdada isha';
@@ -7910,7 +7926,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String downloadSwarm(int seeds, int peers) {
-    return '$seeds seeds · $peers peers';
+    return '$seeds abuur · $peers asxaabta';
   }
 
   @override
@@ -8015,232 +8031,235 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String sourceNotifyOn(String source) {
-    return 'You\'ll be told when $source has something new';
+    return 'Waxaa laguu sheegi doonaa marka $source hesho wax cusub';
   }
 
   @override
-  String get sourceNotifyOff => 'Release notifications off';
+  String get sourceNotifyOff => 'Ogeysiisyada siideynta waa dansan yihiin';
 
   @override
-  String get sourceNotifyNeedsSource => 'Pick a source with a match first';
+  String get sourceNotifyNeedsSource => 'Marka hore dooro il kabriid leh';
 
   @override
   String sourceNotifyAllOut(int count) {
-    return 'Everything ($count) is already out, nothing to wait for';
+    return 'Wax walba ($count) mar horeba waa maqan yihiin, ma jiraan wax la sugo';
   }
 
   @override
-  String get sourceNotifyTooltipOn => 'Stop release notifications';
+  String get sourceNotifyTooltipOn => 'Jooji ogeysiisyada sii deynta';
 
   @override
-  String get sourceNotifyTooltipOff => 'Notify me about new releases';
+  String get sourceNotifyTooltipOff => 'I ogeysii siideynaha cusub';
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return 'Episode $number is out on $source';
+    return 'Dhacdada $number waxay soo baxaysaa $source';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return 'Episodes $from–$to are out on $source';
+    return 'Qaybaha $from-$to waxay ka baxeen $source';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'Chapter $number is out on $source';
+    return 'Cutubka $number wuxuu soo baxay $source';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'Chapters $from–$to are out on $source';
+    return 'Cutubyada $from–$to waxay ku yaalaan $source';
   }
 
   @override
   String sourceFoundSummary(int count) {
-    return '$count titles have something new';
+    return '$count cinwaanadu waxay leeyihiin wax cusub';
   }
 
   @override
-  String get navSources => 'Sources';
+  String get navSources => 'Ilaha';
 
   @override
   String sourceInactiveOpen(String manager) {
-    return 'This source belongs to $manager, which isn\'t the active extension service';
+    return 'Ishan waxaa iska leh $manager, oo aan ahayn adeegga fidinta firfircoon';
   }
 
   @override
-  String get sourceAlertsHeader => 'Release notifications';
+  String get sourceAlertsHeader => 'Ogeysiisyada sii daaya';
 
   @override
-  String get sourceAlertsSwitch => 'Check subscribed titles';
+  String get sourceAlertsSwitch => 'Hubi cinwaanada la diiwaan galiyay';
 
   @override
   String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+      'Mar kasta oo appku furmo, cinwaannada waxaad shiday gambaleelka';
 
   @override
-  String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
+  String get sourceSkipUnstarted => 'Ka bood cinwaanada aadan bilaabin';
 
   @override
   String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+      'Weli ma jiraan wax la daawaday ama la akhriyay, laakiin qaybo hore ayaa jiray';
 
   @override
-  String get sourceSkipUnseen => 'Skip while you have unseen episodes';
+  String get sourceSkipUnseen =>
+      'Ka bood inta aad leedahay dhacdooyin aan la arkin';
 
   @override
   String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+      'Wali waxaad sii daysay qaybo si aad ula socoto';
 
   @override
-  String get sourceManage => 'Subscriptions';
+  String get sourceManage => 'Isdiiwaangelinta';
 
   @override
   String sourceManageDesc(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
-      zero: 'No titles',
+      other: '$count cinwaano',
+      one: '1 ciwaan',
+      zero: 'Magacyo ma leh',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceCheckNow => 'Check now';
+  String get sourceCheckNow => 'Hubi hadda';
 
   @override
-  String get sourceCheckNowDesc => 'Ignores the schedule and the skip rules';
+  String get sourceCheckNowDesc =>
+      'Waxay iska indha tirtay jadwalka iyo xeerarka ka boodada';
 
   @override
-  String get sourceChecking => 'Checking…';
+  String get sourceChecking => 'Hubinta…';
 
   @override
   String sourceCheckResult(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles have something new',
-      one: '1 title has something new',
-      zero: 'Nothing new',
+      other: '$count cinwaanadu waxay leeyihiin wax cusub',
+      one: '1 cinwaan wax cusub buu leeyahay',
+      zero: 'Wax cusub ma jiraan',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceEmpty => 'No subscriptions yet';
+  String get sourceEmpty => 'Wali ma jiro rukunsad';
 
   @override
   String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+      'Taabo gambaleelka kore ee qaybaha ciwaanka si loogu sheego kuwa cusub';
 
   @override
-  String get sourceAll => 'All';
+  String get sourceAll => 'Dhammaan';
 
   @override
   String sourceInactive(String manager) {
-    return 'Inactive: $manager';
+    return 'Firfircoon: $manager';
   }
 
   @override
   String sourceMissingDesc(String source) {
-    return '$source isn\'t installed in this extension service';
+    return '$source laguma rakibin adeegan fidinta';
   }
 
   @override
-  String get sourceUnreachable => 'Source isn\'t responding';
+  String get sourceUnreachable => 'Isha kama jawaabayso';
 
   @override
-  String get sourceFinished => 'Finished';
+  String get sourceFinished => 'Dhammaatay';
 
   @override
-  String get sourceSkippedCompleted => 'Skipped: completed';
+  String get sourceSkippedCompleted => 'La booday: la dhameeyay';
 
   @override
-  String get sourceSkippedUnstarted => 'Skipped: not started';
+  String get sourceSkippedUnstarted => 'La booday: lama bilaabin';
 
   @override
-  String get sourceSkippedUnseen => 'Skipped: unseen episodes';
+  String get sourceSkippedUnseen => 'La booday: dhacdooyin aan la arag';
 
   @override
-  String get sourceWaiting => 'Waiting for the next release';
+  String get sourceWaiting => 'Sugaya sii deynta soo socota';
 
   @override
   String sourceNextCheck(String when) {
-    return 'Next check $when';
+    return 'Jeegaga xiga $when';
   }
 
   @override
-  String get sourceSoon => 'soon';
+  String get sourceSoon => 'dhawaan';
 
   @override
   String sourceInHours(int count) {
-    return 'in ${count}h';
+    return 'gudaha ${count}h';
   }
 
   @override
   String sourceInDays(int count) {
-    return 'in ${count}d';
+    return 'gudaha ${count}d';
   }
 
   @override
   String sourceLatest(String number) {
-    return 'Latest: $number';
+    return 'Ugu dambeeyay: $number';
   }
 
   @override
-  String get sourceMute => 'Mute';
+  String get sourceMute => 'aamus';
 
   @override
-  String get sourceUnmute => 'Unmute';
+  String get sourceUnmute => 'Codka ka qaad';
 
   @override
-  String get sourceMuted => 'Muted';
+  String get sourceMuted => 'la aamusay';
 
   @override
-  String get sourceUnsubscribe => 'Unsubscribe';
+  String get sourceUnsubscribe => 'Is-diiwaangelinta';
 
   @override
-  String get sourcePickAnother => 'Pick another source';
+  String get sourcePickAnother => 'Dooro ilo kale';
 
   @override
-  String get sourceOpenExtensions => 'Open extensions';
+  String get sourceOpenExtensions => 'Kordhinta furan';
 
   @override
-  String get sourceNoticesEmpty => 'No release notices yet';
+  String get sourceNoticesEmpty =>
+      'Weli wax ogeysiis ah oo la sii daayo ma jiraan';
 
   @override
   String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+      'Qaybaha cusub iyo cutubyada cinwaanada aad isdiiwaangelisay ayaa halkan ka muuqda';
 
   @override
-  String get sourceOpenTitle => 'Open title';
+  String get sourceOpenTitle => 'Cinwaanka furan';
 
   @override
-  String get extensionsLoading => 'Loading extensions…';
+  String get extensionsLoading => 'Kordhinta kordhinta…';
 
   @override
-  String get updateWhatsNew => 'What\'s new';
+  String get updateWhatsNew => 'Maxaa cusub';
 
   @override
-  String get updateLater => 'Later';
+  String get updateLater => 'Ka dib';
 
   @override
-  String get updateSkipVersion => 'Skip this version';
+  String get updateSkipVersion => 'Ka bood noocaan';
 
   @override
-  String get updatePreparing => 'Preparing…';
+  String get updatePreparing => 'Diyaarinta…';
 
   @override
-  String get updateDownloading => 'Downloading';
+  String get updateDownloading => 'Soo dejinta';
 
   @override
-  String get updateInstalling => 'Installing…';
+  String get updateInstalling => 'Rakibaya…';
 
   @override
   String updateSizeOf(String done, String total) {
-    return '$done of $total';
+    return '$done ee $total';
   }
 
   @override
@@ -8250,473 +8269,479 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String updateReleased(String date) {
-    return 'Released $date';
+    return 'La sii daayay $date';
   }
 
   @override
-  String get updateNoAsset => 'This release has no download for your device';
+  String get updateNoAsset =>
+      'Siideyntani wax soo dejin ah uma laha qalabkaaga';
 
   @override
-  String get updateUpToDate => 'You\'re on the latest version';
+  String get updateUpToDate => 'Waxaad ku jirtaa nooca ugu dambeeyay';
 
   @override
   String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+      'Dhismayaasha iOS kuma jiraan App Store Ka soo qaad .ipa bogga siideynta oo ku dheji AltStore ama SideStore';
 
   @override
-  String get updateOpenedBrowser => 'Check your browser';
+  String get updateOpenedBrowser => 'Hubi browserkaaga';
 
   @override
-  String get updateTryAgain => 'Try again';
+  String get updateTryAgain => 'Isku day mar kale';
 
   @override
-  String get settingsNotifications => 'Notifications';
+  String get settingsNotifications => 'Ogeysiisyada';
 
   @override
   String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+      'Ogeysiisyada liisaskaada, cutubyada cusub iyo cutubyada, iyo jawaabaha faallooyinka';
 
   @override
-  String get settingsAboutUpdates => 'About & updates';
+  String get settingsAboutUpdates => 'Ku saabsan & cusbooneysiinta';
 
   @override
   String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+      'Cusboonaysiinta abka, nooca, diiwaanka, xiriirinta iyo taageerada';
 
   @override
-  String get settingsGroupAccount => 'Your account';
+  String get settingsGroupAccount => 'Koontadaada';
 
   @override
-  String get settingsGroupContent => 'Content';
+  String get settingsGroupContent => 'Nuxurka';
 
   @override
-  String get settingsGroupApp => 'App';
+  String get settingsGroupApp => 'App-ka';
 
   @override
   String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+      'Ciyaartoyga, qoraal-hoosaadyada, boodada, liiska dhacdooyinka iyo faahfaahinta dhacdada';
 
   @override
   String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+      'Habka akhristaha, kontaroolada, soo bandhigida iyo dabagalka cutubka';
 
   @override
   String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+      'Qoraal, rogid bogga, tarjumid oo kor u akhri';
 
   @override
-  String get settingsLocalPlay => 'Local play';
+  String get settingsLocalPlay => 'Ciyaarta maxaliga ah';
 
   @override
   String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+      'Daar faylalka, galalka, shabakadaha durdurrada iyo durdurrada, ama fur buug';
 
   @override
   String get settingsLocalPlayVideo => 'Video';
 
   @override
-  String get settingsLocalPlayBooks => 'Books';
+  String get settingsLocalPlayBooks => 'Buugaag';
 
   @override
-  String get settingsWatchSections => 'Sections';
+  String get settingsWatchSections => 'Qaybaha';
 
   @override
-  String get settingsSectionLists => 'Episode and chapter lists';
+  String get settingsSectionLists => 'Liiska cutubka iyo cutubka';
 
   @override
-  String get settingsSectionProgress => 'Progress tracking';
+  String get settingsSectionProgress => 'Dabagalka horumarka';
 
   @override
   String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+      'Deggan waa siidaynta la tijaabiyay. Siideynta ka hor iyo Alpha waxay helayaan sifooyin cusub isla markiiba laakiin way jabi karaan';
 
   @override
-  String get checkNowDesc => 'Look for a newer version right away';
+  String get checkNowDesc => 'Isla markiiba raadi nooc cusub';
 
   @override
-  String get generalSectionBasics => 'Language & behaviour';
+  String get generalSectionBasics => 'Luuqadda & dhaqanka';
 
   @override
-  String get generalSectionSecurity => 'Security';
+  String get generalSectionSecurity => 'Amniga';
 
   @override
-  String get generalSectionPrivacy => 'Privacy';
+  String get generalSectionPrivacy => 'Qarsoodi';
 
   @override
   String notificationsOtherService(String service) {
-    return 'Switch to $service to open this';
+    return 'U beddel $service si aad tan u furto';
   }
 
   @override
   String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+      'Xawaaraha caadiga ah, ciyaarta tooska ah, fiidyaha ku haboon, hanuuninta iyo sawirka sawirka';
 
   @override
-  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+  String get secPlayerSkip =>
+      'Si otomaatig ah uga bood furitaanka, dhammaadka iyo soo koobida';
 
   @override
   String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+      'Tuur, qabo oo taabo dhaqdhaqaaqyada oo raadi dulmar';
 
   @override
   String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+      'Luuqadaha, muuqaalka iyo samaynta qoraal hoosaadka';
 
   @override
-  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+  String get secPlayerShaders => 'Anime upscaling iyo hadh adiga kuu gaar ah';
 
   @override
   String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+      'Decoder, soo saarista muuqaal iyo maqal, kaydin Kaliya beddel kuwan haddii dib-u-ciyaartu ay dhibaato leedahay';
 
   @override
-  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+  String get secPlayerMpv => 'mpv.conf, qoraalo iyo hagaajin horumarsan';
 
   @override
-  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+  String get secAnimeList => 'Qaybaha buuxinta iyo thumbnails aan la daawan';
 
   @override
   String get secProgress =>
-      'When your watched or read progress is saved to your list';
+      'Marka horumarkaaga la daawado ama akhriyay lagu kaydiyo liiskaaga';
 
   @override
   String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+      'Halka ciwaanada dhacdada, sawir-gacmeedka iyo koobani ay ka yimaadeen';
 
   @override
   String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+      'Habka wax-akhriska, rogid bogga, soo-dhoweynta iyo cutubka xiga';
 
   @override
-  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+  String get secReaderControls =>
+      'Taabo aagagga, furayaasha mugga iyo is-rog-rogid otomaatig ah';
 
   @override
   String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+      'Dhabarka dambe, dhalaalka, shaashadda buuxda iyo lambarka bogga';
 
   @override
-  String get secNovelText => 'Font, size, spacing, margins and page turning';
+  String get secNovelText =>
+      'Farta, cabbirka, kala dheeraynta, xad-dhaafka iyo bogga rogidda';
 
   @override
-  String get secNovelTranslate => 'Translate chapters while you read';
+  String get secNovelTranslate => 'Turjun cutubyada markaad wax akhrinayso';
 
   @override
-  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+  String get secNovelSpeech => 'Codka, xawaaraha iyo codka kor loogu akhriyo';
 
   @override
-  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+  String get secNotifyAbout => 'Dooro nooca nashaadaadka soo diri digniinta';
 
   @override
-  String get layoutTitle => 'Layout';
+  String get layoutTitle => 'Qaabka';
 
   @override
-  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+  String get layoutDesc => 'Dooro, dhaqaaq oo qari badhamada baararka';
 
   @override
   String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+      'Jiid badhan si aad u dhaqaajiso (marka hore ku qabo shaashadda taabashada). Taabo mid si aad u jarto, u dhaqaaqdo ama u qariso';
 
   @override
   String layoutDropInto(String zone) {
-    return 'Drop in: $zone';
+    return 'Soo geli: $zone';
   }
 
   @override
   String layoutCutting(String name) {
-    return 'Moving $name. Press a paste button to place it';
+    return 'guuraya $name. Riix badhanka dhejiska si aad u dhigto';
   }
 
   @override
-  String get layoutTitleFixed => 'Title';
+  String get layoutTitleFixed => 'Ciwaanka';
 
   @override
-  String get layoutZoneTopStart => 'Top bar, before the title';
+  String get layoutZoneTopStart => 'Bar sare, ka hor cinwaanka';
 
   @override
-  String get layoutZoneTopEnd => 'Top bar, after the title';
+  String get layoutZoneTopEnd => 'Bar sare, ka dib horyaalka';
 
   @override
-  String get layoutZoneBottomStart => 'Bottom bar, left';
+  String get layoutZoneBottomStart => 'Barta hoose, bidix';
 
   @override
-  String get layoutZoneBottomEnd => 'Bottom bar, right';
+  String get layoutZoneBottomEnd => 'Barta hoose, midig';
 
   @override
-  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+  String get layoutZoneSecondRow =>
+      'Qarsoon: safka labaad ee muuqaalka caadiga ah';
 
   @override
-  String get layoutZoneOverflow => 'Hidden: in the more menu';
+  String get layoutZoneOverflow => 'Qarsoon: menu ka badan';
 
   @override
-  String get layoutEmptyZone => 'Drop buttons here';
+  String get layoutEmptyZone => 'Ku rid badhamada halkan';
 
   @override
-  String get layoutCut => 'Cut';
+  String get layoutCut => 'jar';
 
   @override
-  String get layoutPaste => 'Paste here';
+  String get layoutPaste => 'Halkan ku dheji';
 
   @override
-  String get layoutHide => 'Hide';
+  String get layoutHide => 'Qari';
 
   @override
   String layoutMoveTo(String zone) {
-    return 'Move to $zone';
+    return 'U dhaqaaq $zone';
   }
 
   @override
-  String get layoutReset => 'Reset to default';
+  String get layoutReset => 'Dib u deji si aan caadi ahayn';
 
   @override
-  String get layoutMore => 'More';
+  String get layoutMore => 'Wax badan';
 
   @override
-  String get sourceWhyAction => 'Why no alert?';
+  String get sourceWhyAction => 'Waa maxay sababta digtoonaan la\'aan?';
 
   @override
-  String get sourceWhyStatus => 'Status';
+  String get sourceWhyStatus => 'Xaalada';
 
   @override
-  String get sourceWhyLastCheck => 'Last checked';
+  String get sourceWhyLastCheck => 'Markii u dambaysay ee la hubiyay';
 
   @override
-  String get sourceWhyNever => 'Not yet';
+  String get sourceWhyNever => 'Wali maaha';
 
   @override
-  String get sourceWhyNextCheck => 'Next check';
+  String get sourceWhyNextCheck => 'Jeegaga xiga';
 
   @override
-  String get sourceWhyNewest => 'Newest at the source';
+  String get sourceWhyNewest => 'Ugu cusub isha';
 
   @override
-  String get sourceWhyProgress => 'Your progress';
+  String get sourceWhyProgress => 'Horumarkaaga';
 
   @override
-  String get sourceWhyListStatus => 'List status';
+  String get sourceWhyListStatus => 'Heerka liiska';
 
   @override
-  String get sourceWhyFailures => 'Failed checks in a row';
+  String get sourceWhyFailures => 'Jeegaga fashilmay ee isku xiga';
 
   @override
-  String get sourceWhyLastRelease => 'Last new release seen';
+  String get sourceWhyLastRelease =>
+      'Siidaynta cusub ee u dambaysay ee la arkay';
 
   @override
   String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+      'Siidaynta cusub ayaa halkan ka soo baxaysa isla marka isha ay taxdo oo jeeggu socdo.';
 
   @override
   String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+      'Isha ayaa horuumarkaaga ka horraysa, sidaas darteed hal mar ayaa laguu sheegay. Akhri ama u fiirso si aad u hesho digniinta xigta.';
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+      'Magacan waxaa ka booday xeerarka sare. Ku beddel goobaha ogeysiinta, ama isticmaal Check hadda si aad u socodsiiso si kastaba.';
 
   @override
   String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+      'Isha lama heli karo ama lama saari karo, markaa waxba lama hubinayo.';
 
   @override
-  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+  String get sourceWhyVerdictMuted => 'Diiwaangelintan waa la damiyay';
 
   @override
-  String get externalPlayerTitle => 'Open stream elsewhere';
+  String get externalPlayerTitle => 'Meel kale ka fur qulqulka';
 
   @override
-  String get externalCopyUrl => 'Copy stream link';
+  String get externalCopyUrl => 'Nuqul ka samee isku xirka qulqulka';
 
   @override
-  String get externalCopied => 'Stream link copied';
+  String get externalCopied => 'Isku xirka qulqulka waa la guuriyay';
 
   @override
-  String get externalChooser => 'Open in another app';
+  String get externalChooser => 'Ku fur app kale';
 
   @override
-  String get externalVlc => 'Open in VLC';
+  String get externalVlc => 'Ku fur VLC';
 
   @override
-  String get externalMpv => 'Open in mpv';
+  String get externalMpv => 'Ku fur mpv';
 
   @override
-  String get externalWebVideoCast => 'Web Video Cast';
+  String get externalWebVideoCast => 'Shabakadda Fiidiyowga';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'U dir qulqulka abka Webka Fiidiyowga';
 
   @override
   String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+      'Waa la furi waayay qulqulka Ciyaartoyga ma rakibay?';
 
   @override
-  String get addonInstalled => 'Installed';
+  String get addonInstalled => 'La rakibay';
 
   @override
-  String get loadFailedActivity => 'Couldn\'t load activity';
+  String get loadFailedActivity => 'Ma rari karo hawsha';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+  String get loadFailedFavourites => 'Waa la rari karaaya dookhyada Isku day';
 
   @override
-  String get loadFailedStats => 'Couldn\'t load stats';
+  String get loadFailedStats => 'Waa la rari waayay xisaabaadka';
 
   @override
-  String get loadFailedReplies => 'Couldn\'t load replies';
+  String get loadFailedReplies => 'Waa la rari waayay jawaabaha';
 
   @override
-  String get cantBeUndone => 'This can\'t be undone.';
+  String get cantBeUndone => 'Tan lama celin karo';
 
   @override
-  String get searchTags => 'Search tags';
+  String get searchTags => 'Raadi tags';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => 'Qaswadayaasha, taabo si aad u aragto';
 
   @override
   String get mediaVideo => 'Video';
 
   @override
-  String get notificationSomeone => 'Someone';
+  String get notificationSomeone => 'Qof';
 
   @override
-  String get notificationATitle => 'a title';
+  String get notificationATitle => 'cinwaan';
 
   @override
-  String get notificationAddedDetail => 'Was added to AniList';
+  String get notificationAddedDetail => 'Waxaa lagu daray AniList';
 
   @override
-  String get updateNoReleases => 'No releases found';
+  String get updateNoReleases => 'Wax sii dayn ah lama helin';
 
   @override
-  String get updateInvalidResponse => 'Invalid update response';
+  String get updateInvalidResponse => 'Jawaab cusboonaysiin aan sax ahayn';
 
   @override
-  String get commentsRateLimited => 'Rate limited';
+  String get commentsRateLimited => 'Qiimaha xaddidan';
 
   @override
-  String get commentsConnectFailed => 'Failed to connect';
+  String get commentsConnectFailed => 'Ku guuldareystay in la isku xiro';
 
   @override
-  String get dnsNoRecords => 'No A records returned';
+  String get dnsNoRecords => 'Ma jiro diiwaan A oo soo laabtay';
 
   @override
-  String get importTokenRejected => 'Token rejected';
+  String get importTokenRejected => 'Token waa la diiday';
 
   @override
-  String get developerRoleLead => 'Lead Developer';
+  String get developerRoleLead => 'Horumariyaha hogaanka';
 
   @override
-  String get developerRoleModerator => 'Discord Moderator';
+  String get developerRoleModerator => 'Dhexdhexaadiyaha khilaafka';
 
   @override
   String extensionManagerTitle(String type) {
-    return '$type manager';
+    return '$type maamulaha';
   }
 
   @override
   String extensionsOfType(String type) {
-    return '$type extensions';
+    return '$type kordhin';
   }
 
   @override
   String extensionSettingsTitle(String name) {
-    return '$name settings';
+    return '$name dejinta';
   }
 
   @override
   String extensionNoSettings(String name) {
-    return '$name doesn\'t provide any settings.';
+    return '$name ma bixiso wax dejin';
   }
 
   @override
   String notificationAired(String episode, String title) {
-    return 'Episode $episode of $title aired';
+    return 'Qeybta $episode ee $title ayaa la sii daayay';
   }
 
   @override
   String notificationAiredDetail(String episode) {
-    return 'Episode $episode aired';
+    return 'Dhacdada $episode ayaa la sii daayay';
   }
 
   @override
   String notificationAdded(String title) {
-    return '$title was added to AniList';
+    return '$title ayaa lagu daray AniList';
   }
 
   @override
   String updateNotFound(String message) {
-    return 'Update server couldn\'t find that release: $message';
+    return 'Cusbooneysii seerfarku wuu heli waayay sii-deynta: $message';
   }
 
   @override
   String get installStepJre => 'Java runtime';
 
   @override
-  String get installStepCore => 'Runtime core';
+  String get installStepCore => 'Xudunta Runtime';
 
   @override
   String installStepsProgress(int current, int total) {
-    return 'Step $current of $total';
+    return 'Tallaabada $current ee $total';
   }
 
   @override
-  String get stepWaiting => 'Waiting';
+  String get stepWaiting => 'Sugitaanka';
 
   @override
-  String get stepChecking => 'Checking…';
+  String get stepChecking => 'Hubinta…';
 
   @override
-  String get stepUpToDate => 'Up to date';
+  String get stepUpToDate => 'Ilaa hadda';
 
   @override
   String stepUpToDateWith(String detail) {
-    return 'Up to date · $detail';
+    return 'Ilaa hadda · $detail';
   }
 
   @override
-  String get stepWillInstall => 'Will be installed';
+  String get stepWillInstall => 'waa lagu rakibi doonaa';
 
   @override
-  String get stepWillUpdate => 'Will be updated';
+  String get stepWillUpdate => 'waa la cusbooneysiin doonaa';
 
   @override
   String stepWillUpdateTo(String version) {
-    return 'Will be updated to $version';
+    return 'Waxaa loo cusboonaysiin doonaa $version';
   }
 
   @override
-  String get stepInstalled => 'Installed';
+  String get stepInstalled => 'La rakibay';
 
   @override
-  String get stepNotNeeded => 'Not needed here';
+  String get stepNotNeeded => 'Looma baahna halkan';
 
   @override
-  String get stepFailed => 'Failed';
+  String get stepFailed => 'Fashilmay';
 
   @override
   String stepFailedWith(String reason) {
-    return 'Failed: $reason';
+    return 'Fashilmay: $reason';
   }
 
   @override
   String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+      'Waxay ku shaqeysaa wakhtiga runtime Java iyo runtime-ga la wadaago. Marka hore waa la rakibaa, waana la cusboonaysiiyaa haddii ay isbeddelaan.';
 
   @override
   String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+      'Wakhtiga runtime ee maamulahani ku shaqeeyo ayaa leh wax cusub';
 
   @override
-  String get removeJvmTitle => 'Remove the Java runtime?';
+  String get removeJvmTitle => 'Ka saar wakhtiga runtime Java?';
 
   @override
   String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+      'Maareeyayaasha fidinta Desktop-ka waxay joojiyaan shaqada ilaa dib loo rakibo. Waa la soo dejisan doonaa mar kale marka xigta ee aad rakibto ama furto mid.';
 
   @override
-  String get runtimePreparing => 'Preparing the runtime…';
+  String get runtimePreparing => 'Diyaarinta wakhtiga runtu…';
 
   @override
-  String get calendarAll => 'All';
+  String get calendarAll => 'Dhammaan';
 
   @override
   String get calendarAnime => 'Anime';
@@ -8725,328 +8750,329 @@ class AppLocalizationsSo extends AppLocalizations {
   String get calendarManga => 'Manga';
 
   @override
-  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+  String get readerCloudflare => 'Ku fur browserka (Cloudflare check)';
 
   @override
   String get badgeBoardHint =>
-      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+      'Ku jiid calaamad gees ka mid ah kaadhka koowaad, ama ku jiid calaamad hore si aad u dhaqaajiso. Calaamaduhu way beddelaan meelo, si aan midna waligiis isu dulmarin. Taabo calaamada hoose si aad u damiso ama u damiso';
 
   @override
-  String get statusAuto => 'Auto';
+  String get statusAuto => 'Baabuur';
 
   @override
-  String get unreadCounter => 'Unread counter';
+  String get unreadCounter => 'Miisaanka aan la akhriyin';
 
   @override
   String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+      'Muuji inta qaybood ama cutubyada ku hadhay boodhadhka';
 
   @override
-  String get settingsShortcuts => 'Keyboard shortcuts';
+  String get settingsShortcuts => 'Gaabyada kiiboodhka';
 
   @override
-  String get settingsShortcutsDesc => 'See, change and turn off every key';
+  String get settingsShortcutsDesc => 'Eeg, beddel oo dami fure kasta';
 
   @override
-  String get shortcutGroupApp => 'App';
+  String get shortcutGroupApp => 'App-ka';
 
   @override
-  String get shortcutGroupPlayer => 'Video player';
+  String get shortcutGroupPlayer => 'Ciyaartoyga fiidiyowga';
 
   @override
-  String get shortcutGroupReader => 'Reader';
+  String get shortcutGroupReader => 'Akhriste';
 
   @override
-  String get shortcutsEnableApp => 'App shortcuts';
+  String get shortcutsEnableApp => 'Hababka abka';
 
   @override
-  String get shortcutsEnablePlayer => 'Player shortcuts';
+  String get shortcutsEnablePlayer => 'Jidadka gaaban ee ciyaartoyga';
 
   @override
-  String get shortcutsEnableReader => 'Reader shortcuts';
+  String get shortcutsEnableReader => 'Akhristaha gaabin';
 
   @override
-  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+  String get shortcutsEnableDesc => 'Furaha kooxdan daar ama dami';
 
   @override
-  String get shortcutNotSet => 'Not set';
+  String get shortcutNotSet => 'Lama dejin';
 
   @override
-  String get shortcutAddKey => 'Add a key';
+  String get shortcutAddKey => 'Ku dar furaha';
 
   @override
-  String get shortcutResetOne => 'Reset to default';
+  String get shortcutResetOne => 'Dib u deji si aan caadi ahayn';
 
   @override
-  String get shortcutClearKeys => 'Remove all keys';
+  String get shortcutClearKeys => 'Ka saar dhammaan furayaasha';
 
   @override
-  String get shortcutResetAll => 'Reset all shortcuts';
+  String get shortcutResetAll => 'Dib u habayn dhammaan jid-gooyooyinka';
 
   @override
-  String get shortcutResetAllDesc => 'Put every key back to its default';
+  String get shortcutResetAllDesc => 'Fure kasta dib ugu celi asligiisii';
 
   @override
-  String get shortcutPress => 'Press the key or combination you want';
+  String get shortcutPress => 'Riix furaha ama isku dhafka aad rabto';
 
   @override
   String get shortcutPressHint =>
-      'Each combination can only belong to one action, so taking one moves it.';
+      'Isku darka kasta wuxuu ka mid noqon karaa hal fal oo kaliya, markaa qaadashada mid ayaa dhaqaaqeysa.';
 
   @override
-  String get shortcutSeekPercent => 'Jump to a point of the video';
+  String get shortcutSeekPercent => 'U bood barta muuqaalka';
 
   @override
   String get shortcutSeekPercentKeys => '0 – 9';
 
   @override
-  String get shortcutAppBack => 'Go back';
+  String get shortcutAppBack => 'Ku noqo';
 
   @override
-  String get shortcutAppFullscreen => 'Toggle fullscreen';
+  String get shortcutAppFullscreen => 'Beddel shaashada buuxda';
 
   @override
-  String get shortcutAppGlass => 'Toggle glass mode';
+  String get shortcutAppGlass => 'Beddel qaabka dhalada';
 
   @override
-  String get shortcutAppMaterialYou => 'Toggle Material You';
+  String get shortcutAppMaterialYou => 'Bedel Adiga';
 
   @override
-  String get shortcutAppDark => 'Toggle dark mode';
+  String get shortcutAppDark => 'Beddel qaabka mugdiga';
 
   @override
-  String get shortcutAppOled => 'Toggle OLED black';
+  String get shortcutAppOled => 'Bedeli OLED madow';
 
   @override
-  String get shortcutAppSearch => 'Open search';
+  String get shortcutAppSearch => 'Raadin fur';
 
   @override
-  String get shortcutAppSettings => 'Open settings';
+  String get shortcutAppSettings => 'Dejinta fur';
 
   @override
-  String get shortcutAppDownloads => 'Open downloads';
+  String get shortcutAppDownloads => 'Fur soo dejinta';
 
   @override
-  String get shortcutAppNotifications => 'Open notifications';
+  String get shortcutAppNotifications => 'Ogeysiisyada fur';
 
   @override
-  String get shortcutAppIncognito => 'Toggle incognito';
+  String get shortcutAppIncognito => 'Beddel qarsoodiga';
 
   @override
-  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+  String get shortcutAppShortcuts => 'Muuji furayaasha kiiboodhka';
 
   @override
-  String get shortcutPlayerPlayPause => 'Play or pause';
+  String get shortcutPlayerPlayPause => 'Ciyaar ama hakad';
 
   @override
-  String get shortcutPlayerSeekForward => 'Seek forward';
+  String get shortcutPlayerSeekForward => 'Horay u raadi';
 
   @override
-  String get shortcutPlayerSeekBack => 'Seek back';
+  String get shortcutPlayerSeekBack => 'Dib u raadi';
 
   @override
-  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+  String get shortcutPlayerSeekForwardLong => 'Horay u raadi 30 ilbiriqsi';
 
   @override
-  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+  String get shortcutPlayerSeekBackLong => 'Dib u raadi 30 ilbiriqsi';
 
   @override
-  String get shortcutPlayerFrameForward => 'Next frame';
+  String get shortcutPlayerFrameForward => 'jir xiga';
 
   @override
-  String get shortcutPlayerFrameBack => 'Previous frame';
+  String get shortcutPlayerFrameBack => 'jir hore';
 
   @override
-  String get shortcutPlayerVolumeUp => 'Volume up';
+  String get shortcutPlayerVolumeUp => 'Kor u qaad';
 
   @override
-  String get shortcutPlayerVolumeDown => 'Volume down';
+  String get shortcutPlayerVolumeDown => 'Hoos u dhig';
 
   @override
-  String get shortcutPlayerMute => 'Mute';
+  String get shortcutPlayerMute => 'aamus';
 
   @override
-  String get shortcutPlayerFullscreen => 'Fullscreen';
+  String get shortcutPlayerFullscreen => 'Shaashad buuxda';
 
   @override
-  String get shortcutPlayerNext => 'Next episode';
+  String get shortcutPlayerNext => 'Qaybta xigta';
 
   @override
-  String get shortcutPlayerPrevious => 'Previous episode';
+  String get shortcutPlayerPrevious => 'Dhacdo hore';
 
   @override
-  String get shortcutPlayerSkip => 'Skip intro or ending';
+  String get shortcutPlayerSkip => 'Ka bood horudhaca ama dhammaanaya';
 
   @override
-  String get shortcutPlayerPanel => 'Episode list';
+  String get shortcutPlayerPanel => 'Liiska dhacdooyinka';
 
   @override
-  String get shortcutPlayerSpeedUp => 'Faster playback';
+  String get shortcutPlayerSpeedUp => 'Dib u soo celin degdeg ah';
 
   @override
-  String get shortcutPlayerSpeedDown => 'Slower playback';
+  String get shortcutPlayerSpeedDown => 'Dib u ciyaar si tartiib ah';
 
   @override
-  String get shortcutPlayerSpeedReset => 'Normal speed';
+  String get shortcutPlayerSpeedReset => 'Xawaaraha caadiga ah';
 
   @override
-  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+  String get shortcutPlayerSubtitleToggle =>
+      'Qoraal-hoosaadyada waa daaran ama dami';
 
   @override
-  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+  String get shortcutPlayerSubtitleCycle => 'Dabaqa hoose ee xiga';
 
   @override
-  String get shortcutPlayerAudioCycle => 'Next audio track';
+  String get shortcutPlayerAudioCycle => 'track audio xiga';
 
   @override
-  String get shortcutPlayerStreamCycle => 'Next stream';
+  String get shortcutPlayerStreamCycle => 'durdurka xiga';
 
   @override
-  String get shortcutPlayerFit => 'Change video fit';
+  String get shortcutPlayerFit => 'Beddel ku habboonaanta muuqaalka';
 
   @override
-  String get shortcutReaderRight => 'Page to the right';
+  String get shortcutReaderRight => 'Bogga dhanka midig';
 
   @override
-  String get shortcutReaderLeft => 'Page to the left';
+  String get shortcutReaderLeft => 'Bogga bidixda';
 
   @override
-  String get shortcutReaderNextPage => 'Next page';
+  String get shortcutReaderNextPage => 'Bogga xiga';
 
   @override
-  String get shortcutReaderPreviousPage => 'Previous page';
+  String get shortcutReaderPreviousPage => 'Boggii hore';
 
   @override
-  String get shortcutReaderControls => 'Show or hide controls';
+  String get shortcutReaderControls => 'Muuji ama qari kontaroolada';
 
   @override
-  String get shortcutReaderNextChapter => 'Next chapter';
+  String get shortcutReaderNextChapter => 'Cutubka Xiga';
 
   @override
-  String get shortcutReaderPreviousChapter => 'Previous chapter';
+  String get shortcutReaderPreviousChapter => 'Cutubkii hore';
 
   @override
   String shortcutTaken(String action) {
-    return 'Taken from $action';
+    return 'Waxaa laga soo qaatay $action';
   }
 
   @override
-  String get incognitoTurnedOn => 'Incognito mode on';
+  String get incognitoTurnedOn => 'Qaabka qarsoon ayaa shiran';
 
   @override
-  String get incognitoTurnedOff => 'Incognito mode off';
+  String get incognitoTurnedOff => 'Qaabka qarsoon ayaa dansan';
 
   @override
-  String get onHoldAnime => 'On hold anime';
+  String get onHoldAnime => 'Anime la hayo';
 
   @override
-  String get onHoldManga => 'On hold manga';
+  String get onHoldManga => 'Manga la hayo';
 
   @override
-  String get droppedAnime => 'Dropped anime';
+  String get droppedAnime => 'Anime la tuuray';
 
   @override
-  String get droppedManga => 'Dropped manga';
+  String get droppedManga => 'Manga la tuuray';
 
   @override
   String get generalSectionDesktop => 'Desktop';
 
   @override
-  String get closeAction => 'When the window is closed';
+  String get closeAction => 'Markay daaqaddu xidhan tahay';
 
   @override
-  String get closeActionQuit => 'Quit the app';
+  String get closeActionQuit => 'Jooji abka';
 
   @override
   String get closeActionWhenBusy =>
-      'Keep running in the tray while something is running';
+      'Ku dhex orod saxaaradda inta ay wax socdaan';
 
   @override
-  String get closeActionAlways => 'Always keep running in the tray';
+  String get closeActionAlways => 'Had iyo jeer ku sii ordi saxanka';
 
   @override
   String get closeActionNoTray =>
-      'The system tray is not available here, so the app quits when closed';
+      'Saxanka nidaamka halkan lagama heli karo, marka abka wuu joogsadaa marka la xidho';
 
   @override
   String get gamepadNav => 'Gamepad navigation';
 
   @override
   String get gamepadNavDesc =>
-      'Move around the app and control the player with a game controller';
+      'Ku wareeg abka oo ku maamul ciyaartoyga leh koontaroolaha ciyaarta';
 
   @override
-  String get trayShow => 'Show Dartotsu';
+  String get trayShow => 'Muuji Dartotsu';
 
   @override
-  String get trayQuit => 'Quit';
+  String get trayQuit => 'Jooji';
 
   @override
-  String get trayIdle => 'Nothing running';
+  String get trayIdle => 'Wax socda ma jiraan';
 
   @override
   String trayDownloading(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Downloading $count items',
-      one: 'Downloading $count item',
+      other: 'Soo dejinta $count walxaha',
+      one: 'Soo dejinta $count shayga',
     );
     return '$_temp0';
   }
 
   @override
-  String get traySyncing => 'Syncing your lists';
+  String get traySyncing => 'Isku-dubarid liiskaaga';
 
   @override
-  String get trayUpdating => 'Updating the app';
+  String get trayUpdating => 'Cusbooneysiinta abka';
 
   @override
-  String get trayPlaying => 'Playing in a small window';
+  String get trayPlaying => 'Ku ciyaarista daaqad yar';
 
   @override
-  String get traySearch => 'Search';
+  String get traySearch => 'Raadi';
 
   @override
-  String get trayPauseDownloads => 'Pause downloads';
+  String get trayPauseDownloads => 'Jooji soo dejinta';
 
   @override
-  String get trayResumeDownloads => 'Resume downloads';
+  String get trayResumeDownloads => 'Dib u bilaw soo dajisyada';
 
   @override
-  String get playerDownloadTitle => 'Downloading the player';
+  String get playerDownloadTitle => 'Soo dejinta ciyaaryahanka';
 
   @override
   String get playerDownloadBody =>
-      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+      'Dartotsu wuxuu soo qaadaa matoorka muuqaalkiisa hal mar. Dib-u-ciyaartu waxay bilaabataa isla marka ay diyaar noqoto.';
 
   @override
-  String get playerDownloadStarting => 'Starting the download…';
+  String get playerDownloadStarting => 'Bilaabida soo dejinta';
 
   @override
-  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+  String get playerDownloadFailedTitle => 'Way heli kari wayday ciyaartoyga';
 
   @override
   String get playerDownloadFailedBody =>
-      'Check your connection and try again. The download picks up where it stopped.';
+      'Hubi xidhiidhkaaga oo isku day mar kale. Soodejintu waxay ka qaadaysaa meeshii ay ku joogsatay.';
 
   @override
-  String get playerDownloadRetry => 'Try again';
+  String get playerDownloadRetry => 'Isku day mar kale';
 
   @override
-  String get playerDownloadCopy => 'Copy details';
+  String get playerDownloadCopy => 'Koobi faahfaahinta';
 
   @override
-  String get removePlayerTitle => 'Remove the player?';
+  String get removePlayerTitle => 'Ka saar ciyaaryahanka?';
 
   @override
   String get removePlayerMessage =>
-      'Videos can\'t play until the player is downloaded again.';
+      'Fiidiyowyadu ma ciyaari karaan ilaa ciyaaryahanka mar kale la soo dejiyo.';
 
   @override
-  String get trailerLoading => 'Loading the trailer…';
+  String get trailerLoading => 'Soo raraysa trailer-ka…';
 
   @override
   String get trailerFailed =>
-      'Could not play the trailer here, opening it in the browser';
+      'Ma awoodin in uu ku ciyaaro trailer-ka halkan, isaga oo ka furay browserka';
 }

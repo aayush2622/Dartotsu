@@ -127,37 +127,37 @@ class AppLocalizationsMr extends AppLocalizations {
       'अ‍ॅप उघडताना किंवा थोड्या वेळाने परत आल्यावर पासकोड विचारेल';
 
   @override
-  String get appLockBiometric => 'Unlock with biometrics';
+  String get appLockBiometric => 'बायोमेट्रिक्ससह अनलॉक करा';
 
   @override
   String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+      'पासकोड टाइप करण्याऐवजी तुमचे फिंगरप्रिंट किंवा चेहरा वापरा';
 
   @override
-  String get appLockBiometricReason => 'Unlock Dartotsu';
+  String get appLockBiometricReason => 'डार्टोत्सु अनलॉक करा';
 
   @override
-  String get appLockDelay => 'Lock when idle';
+  String get appLockDelay => 'निष्क्रिय असताना लॉक करा';
 
   @override
-  String get appLockDelayAlways => 'Always';
+  String get appLockDelayAlways => 'नेहमी';
 
   @override
-  String get appLockDelayNever => 'Never';
+  String get appLockDelayNever => 'कधीच नाही';
 
   @override
   String appLockDelayAfter(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count minutes',
-      one: '1 minute',
+      other: '$count मिनिटे',
+      one: '1 मिनिट',
     );
-    return 'After $_temp0';
+    return 'नंतर $_temp0';
   }
 
   @override
-  String get appLockUseBiometric => 'Use biometrics';
+  String get appLockUseBiometric => 'बायोमेट्रिक्स वापरा';
 
   @override
   String get appLockUnlock => 'तुमचा पासकोड टाका';
@@ -199,30 +199,30 @@ class AppLocalizationsMr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count updates available',
-      one: '1 update available',
+      other: '$count अद्यतने उपलब्ध',
+      one: '1 अपडेट उपलब्ध',
     );
     return '$_temp0';
   }
 
   @override
-  String get updateAll => 'Update all';
+  String get updateAll => 'सर्व अपडेट करा';
 
   @override
   String extensionsUpdated(int done, int total) {
-    return '$done of $total extensions updated';
+    return '$total पैकी $done विस्तार अद्यतनित केले';
   }
 
   @override
-  String get updateConflictTitle => 'Update not installed';
+  String get updateConflictTitle => 'अद्यतन स्थापित केले नाही';
 
   @override
   String updateConflictBody(String names) {
-    return '$names could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?';
+    return '$names विद्यमान आवृत्तीवर स्थापित करणे शक्य नाही. याचा अर्थ सहसा स्थापित प्रत वेगळ्या पद्धतीने स्वाक्षरी केली गेली होती. ते विस्थापित करून नवीन आवृत्ती स्थापित करायची?';
   }
 
   @override
-  String get updateConflictAction => 'Uninstall and reinstall';
+  String get updateConflictAction => 'विस्थापित करा आणि पुन्हा स्थापित करा';
 
   @override
   String get noSourceSettings => 'या सोर्सला कोणत्याही सेटिंग्ज नाहीत';
@@ -237,7 +237,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get addRepository => 'रिपॉझिटरी जोड';
 
   @override
-  String get importRepositoryFile => 'Import a file';
+  String get importRepositoryFile => 'फाइल आयात करा';
 
   @override
   String get pluginRepoUpdated => 'प्लगिन रिपॉझिटरी अपडेट झाली';
@@ -282,15 +282,15 @@ class AppLocalizationsMr extends AppLocalizations {
   String get selectMediaService => 'मीडिया सर्व्हिस निवड';
 
   @override
-  String get manageServices => 'Media services';
+  String get manageServices => 'मीडिया सेवा';
 
   @override
   String get manageServicesDesc =>
-      'Reorder the services and choose which ones show in the picker';
+      'सेवांची पुनर्क्रमण करा आणि निवडक मध्ये कोणती दाखवायची ते निवडा';
 
   @override
   String get manageServicesHint =>
-      'Drag to reorder, switch off the ones you don\'t use';
+      'पुनर्क्रमित करण्यासाठी ड्रॅग करा, तुम्ही वापरत नसलेले बंद करा';
 
   @override
   String get pickColor => 'रंग निवड';
@@ -333,7 +333,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get settingsNetwork => 'नेटवर्क';
 
   @override
-  String get settingsNetworkDesc => 'युजर एजंट, सर्टिफिकेट्स, DNS आणि प्रॉक्सी';
+  String get settingsNetworkDesc =>
+      'वापरकर्ता एजंट, प्रमाणपत्रे, DNS आणि प्रॉक्सी';
 
   @override
   String get settingsAccountDesc => 'ट्रॅकिंग सर्व्हिस आणि साइन-इन';
@@ -371,25 +372,26 @@ class AppLocalizationsMr extends AppLocalizations {
   String get customPath => 'कस्टम स्टोरेज पाथ';
 
   @override
-  String get stories => 'Stories';
+  String get stories => 'कथा';
 
   @override
-  String get watchOrder => 'Watch order';
+  String get watchOrder => 'ऑर्डर पहा';
 
   @override
-  String get watchOrderOpenSite => 'Open on chiaki.site';
+  String get watchOrderOpenSite => 'chiaki.site वर उघडा';
 
   @override
-  String get watchOrderUnavailable => 'No watch order was found for this title';
+  String get watchOrderUnavailable =>
+      'या शीर्षकासाठी कोणतीही घड्याळाची ऑर्डर आढळली नाही';
 
   @override
-  String get watchOrderOpenFailed => 'Couldn\'t open that title';
+  String get watchOrderOpenFailed => 'ते शीर्षक उघडू शकलो नाही';
 
   @override
-  String get watchOrderCurrent => 'You are here';
+  String get watchOrderCurrent => 'आपण येथे आहात';
 
   @override
-  String get watchOrderCredit => 'Watch orders by chiaki.site';
+  String get watchOrderCredit => 'chiaki.site द्वारे ऑर्डर पहा';
 
   @override
   String get customPathDesc =>
@@ -405,441 +407,440 @@ class AppLocalizationsMr extends AppLocalizations {
   String get differentCacheManagerDesc => 'इमेजसाठी वेगळा कॅश मॅनेजर वापर';
 
   @override
-  String get settingsSync => 'Sync settings';
+  String get settingsSync => 'सिंक सेटिंग्ज';
 
   @override
   String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+      'प्रत्येक डिव्हाइसवर तुमची सेटिंग्ज समान ठेवा. ते तुमच्या GitHub खात्यामध्ये खाजगी सारांशात साठवले जातात';
 
   @override
-  String get settingsSyncSwitch => 'Sync on change';
+  String get settingsSyncSwitch => 'बदलावर समक्रमित करा';
 
   @override
   String get settingsSyncModeGithub => 'GitHub';
 
   @override
-  String get settingsSyncSignIn => 'Sign in with GitHub';
+  String get settingsSyncSignIn => 'GitHub सह साइन इन करा';
 
   @override
   String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+      'सेटिंग्ज तुमच्या खात्यात खाजगी सारांशात संग्रहित केल्या जातात';
 
   @override
-  String get settingsSyncToken => 'Use a personal access token';
+  String get settingsSyncToken => 'वैयक्तिक प्रवेश टोकन वापरा';
 
   @override
   String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+      'github.com/settings/tokens वर फक्त थोडक्यात परवानगी घेऊन एक तयार करा';
 
   @override
-  String get settingsSyncTokenField => 'Token';
+  String get settingsSyncTokenField => 'टोकन';
 
   @override
   String settingsSyncSignedIn(Object user) {
-    return 'Signed in as $user';
+    return '$user म्हणून साइन इन केले';
   }
 
   @override
-  String get settingsSyncSignOut => 'Sign out';
+  String get settingsSyncSignOut => 'साइन आउट करा';
 
   @override
   String settingsSyncCode(Object code) {
-    return 'Enter $code on GitHub';
+    return 'GitHub वर $code प्रविष्ट करा';
   }
 
   @override
   String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+      'GitHub पृष्ठ तुमच्या ब्राउझरमध्ये उघडले. कोड कॉपी करण्यासाठी टॅप करा किंवा रद्द करण्यासाठी टॅप करा आणि धरून ठेवा.';
 
   @override
-  String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+  String get settingsSyncSignInFailed => 'GitHub मध्ये साइन इन करू शकलो नाही';
 
   @override
-  String get dcPreview => 'Preview';
+  String get dcPreview => 'पूर्वावलोकन';
 
   @override
-  String get dcSampleWatching => 'Watching';
+  String get dcSampleWatching => 'पहात आहे';
 
   @override
-  String get dcSampleReading => 'Reading';
+  String get dcSampleReading => 'वाचन';
 
   @override
-  String get dcSampleBrowsing => 'Browsing';
+  String get dcSampleBrowsing => 'ब्राउझिंग';
 
   @override
-  String get dcSampleLive => 'Right now';
+  String get dcSampleLive => 'आत्ता';
 
   @override
   String get dcLiveNothing =>
-      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+      'सध्या काहीही दिसत नाही. शीर्षक उघडा, एक भाग किंवा अध्याय सुरू करा आणि तो येथे दिसेल.';
 
   @override
-  String get dcMemberList => 'In the member list';
+  String get dcMemberList => 'सदस्य यादीत';
 
   @override
-  String get dcAccount => 'Account';
+  String get dcAccount => 'खाते';
 
   @override
-  String get dcSignIn => 'Sign in with Discord';
+  String get dcSignIn => 'Discord सह साइन इन करा';
 
   @override
-  String get dcSignOut => 'Sign out';
+  String get dcSignOut => 'साइन आउट करा';
 
   @override
   String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
+      'कनेक्ट न करता, डिस्कॉर्ड डेस्कटॉप ॲपद्वारे “वॉचिंग डार्टोत्सु” दाखवते. मोबाइलसह, तुमच्या शीर्षकाला नाव देण्यासाठी Discord कनेक्ट करा.';
 
   @override
   String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+      'तुम्ही काय पहात आहात किंवा वाचत आहात हे दाखवण्यासाठी Discord कनेक्ट करा. हे Discord चे अधिकृत पृष्ठ वापरते, तुमचे खाते टोकन नाही.';
 
   @override
-  String get dcConnect => 'Connect Discord';
+  String get dcConnect => 'डिस्कॉर्ड कनेक्ट करा';
 
   @override
   String get dcConnectDesc =>
-      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+      'Discord चे अधिकृत पृष्ठ उघडते आणि अधिकृत ॲप्स अंतर्गत Dartotsu जोडते. Discord तुमची उपस्थिती अद्यतनित करण्यास सांगते. फक्त रिफ्रेश टोकन जतन केले जाते, तुमचे खाते टोकन नाही.';
 
   @override
-  String get dcConnectFailed => 'Could not connect Discord';
+  String get dcConnectFailed => 'Discord कनेक्ट करू शकलो नाही';
 
   @override
-  String get dcConnectedSnack => 'Discord connected';
+  String get dcConnectedSnack => 'मतभेद जोडले गेले';
 
   @override
-  String get dcDisconnect => 'Disconnect';
+  String get dcDisconnect => 'डिस्कनेक्ट करा';
 
   @override
-  String get dcDisconnectedSnack => 'Discord disconnected';
+  String get dcDisconnectedSnack => 'मतभेद डिस्कनेक्ट झाले';
 
   @override
-  String get dcUseToken => 'Use a token instead';
+  String get dcUseToken => 'त्याऐवजी टोकन वापरा';
 
   @override
-  String get dcRouteDesktop => 'Through the Discord desktop app';
+  String get dcRouteDesktop => 'डिस्कॉर्ड डेस्कटॉप ॲपद्वारे';
 
   @override
-  String get dcRouteHeadless => 'Through your account';
+  String get dcRouteHeadless => 'तुमच्या खात्याद्वारे';
 
   @override
-  String get dcRouteGateway => 'Through your account, live';
+  String get dcRouteGateway => 'आपल्या खात्याद्वारे, थेट';
 
   @override
-  String get dcRouteLinked => 'Connected app';
+  String get dcRouteLinked => 'कनेक्ट केलेले ॲप';
 
   @override
-  String get dcRouteNone => 'Not connected';
+  String get dcRouteNone => 'जोडलेले नाही';
 
   @override
   String get dcStatusNeedsToken =>
-      'Needs a Discord token. Connecting the app does not set your online status.';
+      'डिसकॉर्ड टोकन आवश्यक आहे. ॲप कनेक्ट केल्याने तुमची ऑनलाइन स्थिती सेट होत नाही.';
 
   @override
-  String get dcAccountOnly => 'Needs a signed-in account';
+  String get dcAccountOnly => 'साइन इन केलेले खाते आवश्यक आहे';
 
   @override
-  String get dcStatusSection => 'Status';
+  String get dcStatusSection => 'स्थिती';
 
   @override
-  String get dcControlStatus => 'Control my status';
+  String get dcControlStatus => 'माझी स्थिती नियंत्रित करा';
 
   @override
   String get dcControlStatusDesc =>
-      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+      'रिच प्रेझेन्स चालू असताना Discord शी थेट कनेक्शन ठेवते, त्यामुळे Dartotsu तुमची स्थिती सेट करू शकते.';
 
   @override
-  String get dcStatusOnline => 'Online';
+  String get dcStatusOnline => 'ऑनलाइन';
 
   @override
-  String get dcStatusIdle => 'Idle';
+  String get dcStatusIdle => 'निष्क्रिय';
 
   @override
-  String get dcStatusDnd => 'Do not disturb';
+  String get dcStatusDnd => 'त्रास देऊ नका';
 
   @override
-  String get dcStatusInvisible => 'Invisible';
+  String get dcStatusInvisible => 'अदृश्य';
 
   @override
-  String get dcCustomStatus => 'Custom status';
+  String get dcCustomStatus => 'सानुकूल स्थिती';
 
   @override
-  String get dcCustomStatusHint => 'What are you up to?';
+  String get dcCustomStatusHint => 'आपण काय करत आहात?';
 
   @override
-  String get dcActivitySection => 'Activity';
+  String get dcActivitySection => 'क्रियाकलाप';
 
   @override
-  String get dcShowWatching => 'Show while watching';
+  String get dcShowWatching => 'पाहताना दाखवा';
 
   @override
-  String get dcShowReading => 'Show while reading';
+  String get dcShowReading => 'वाचताना दाखवा';
 
   @override
-  String get dcListening => 'Listening';
+  String get dcListening => 'ऐकत आहे';
 
   @override
-  String get dcCompeting => 'Competing';
+  String get dcCompeting => 'स्पर्धा करत आहे';
 
   @override
-  String get dcActivityName => 'Activity name';
+  String get dcActivityName => 'क्रियाकलाप नाव';
 
   @override
   String get dcNameApp => 'Dartotsu';
 
   @override
-  String get dcNameTitle => 'Title';
+  String get dcNameTitle => 'शीर्षक';
 
   @override
-  String get dcNameCustom => 'Custom';
+  String get dcNameCustom => 'सानुकूल';
 
   @override
-  String get dcCustomNameHint => 'Name shown after “Watching”';
+  String get dcCustomNameHint => 'नाव \"पाहणे\" नंतर दाखवले आहे';
 
   @override
-  String get dcStatusText => 'Status text';
+  String get dcStatusText => 'स्थिती मजकूर';
 
   @override
-  String get dcStatusTextDesc => 'What the member list shows next to your name';
+  String get dcStatusTextDesc => 'तुमच्या नावापुढे सदस्य यादी काय दाखवते';
 
   @override
-  String get dcDisplayName => 'Name';
+  String get dcDisplayName => 'नाव';
 
   @override
-  String get dcDisplayState => 'State';
+  String get dcDisplayState => 'राज्य';
 
   @override
-  String get dcDisplayDetails => 'Details';
+  String get dcDisplayDetails => 'तपशील';
 
   @override
-  String get dcTextSection => 'Text';
+  String get dcTextSection => 'मजकूर';
 
   @override
-  String get dcDetails => 'Top line';
+  String get dcDetails => 'शीर्ष ओळ';
 
   @override
-  String get dcState => 'Bottom line';
+  String get dcState => 'तळ ओळ';
 
   @override
-  String get dcTemplateHint => 'Empty uses the default';
+  String get dcTemplateHint => 'रिक्त डीफॉल्ट वापरते';
 
   @override
-  String get dcVariables => 'Tap to insert a value';
+  String get dcVariables => 'मूल्य घालण्यासाठी टॅप करा';
 
   @override
-  String get dcImagesSection => 'Images';
+  String get dcImagesSection => 'प्रतिमा';
 
   @override
-  String get dcLargeImage => 'Large image';
+  String get dcLargeImage => 'मोठी प्रतिमा';
 
   @override
-  String get dcLargeAuto => 'Auto';
+  String get dcLargeAuto => 'ऑटो';
 
   @override
-  String get dcLargeCover => 'Cover';
+  String get dcLargeCover => 'कव्हर';
 
   @override
-  String get dcLargeLogo => 'Logo';
+  String get dcLargeLogo => 'लोगो';
 
   @override
-  String get dcSmallImage => 'Small image';
+  String get dcSmallImage => 'लहान प्रतिमा';
 
   @override
-  String get dcSmallAuto => 'Logo';
+  String get dcSmallAuto => 'लोगो';
 
   @override
-  String get dcSmallNone => 'None';
+  String get dcSmallNone => 'काहीही नाही';
 
   @override
-  String get dcTimerStyle => 'Timer style';
+  String get dcTimerStyle => 'टाइमर शैली';
 
   @override
-  String get dcTimerAuto => 'Auto';
+  String get dcTimerAuto => 'ऑटो';
 
   @override
-  String get dcTimerElapsed => 'Elapsed';
+  String get dcTimerElapsed => 'निघून गेले';
 
   @override
-  String get dcTimerRemaining => 'Remaining';
+  String get dcTimerRemaining => 'बाकी';
 
   @override
-  String get dcButtonsSection => 'Buttons';
+  String get dcButtonsSection => 'बटणे';
 
   @override
-  String get dcButtonMedia => 'Link to the title';
+  String get dcButtonMedia => 'शीर्षकाची लिंक';
 
   @override
-  String get dcButtonApp => 'Link to Dartotsu';
+  String get dcButtonApp => 'डार्टोत्सुशी लिंक';
 
   @override
-  String get dcButtonCustom => 'Custom button';
+  String get dcButtonCustom => 'सानुकूल बटण';
 
   @override
-  String get dcButtonLabel => 'Label';
+  String get dcButtonLabel => 'लेबल';
 
   @override
-  String get dcButtonUrl => 'Link';
+  String get dcButtonUrl => 'दुवा';
 
   @override
-  String get dcPrivacySection => 'Privacy';
+  String get dcPrivacySection => 'गोपनीयता';
 
   @override
-  String get dcPrivateText => 'Private text';
+  String get dcPrivateText => 'खाजगी मजकूर';
 
   @override
-  String get dcPrivateHint => 'Something private';
+  String get dcPrivateHint => 'खाजगी काहीतरी';
 
   @override
   String get dcTokenWarning =>
-      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+      'साइन इन करणे तुमचे खाते टोकन वापरते. डिसकॉर्डचे नियम याला परावृत्त करतात, त्यामुळे ते तुमच्या स्वत:च्या जोखमीवर वापरा.';
 
   @override
-  String get dcConnected => 'Connected';
+  String get dcConnected => 'जोडलेले';
 
   @override
-  String get dcConnection => 'Connection';
+  String get dcConnection => 'जोडणी';
 
   @override
-  String get dcMethodDesktop => 'Discord desktop app';
+  String get dcMethodDesktop => 'डिस्कॉर्ड डेस्कटॉप ॲप';
 
   @override
   String get dcMethodDesktopDesc =>
-      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+      'इतर काहीही कनेक्ट केलेले नसताना स्वयंचलितपणे वापरले जाते. या संगणकावर डिसॉर्ड उघडणे आवश्यक आहे.';
 
   @override
-  String get dcMethodToken => 'Account token';
+  String get dcMethodToken => 'खाते टोकन';
 
   @override
-  String get dcInUse => 'In use';
+  String get dcInUse => 'वापरात आहे';
 
   @override
-  String get dcRecommended => 'Recommended';
+  String get dcRecommended => 'शिफारस केली';
 
   @override
-  String get dcConnecting => 'Connecting…';
+  String get dcConnecting => 'कनेक्ट करत आहे...';
 
   @override
-  String get dcDisconnected => 'Not connected';
+  String get dcDisconnected => 'जोडलेले नाही';
 
   @override
   String dcSignedInAs(String name) {
-    return 'Signed in as $name';
+    return '$name म्हणून साइन इन केले';
   }
 
   @override
-  String get settingsSyncOn => 'On';
+  String get settingsSyncOn => 'चालू';
 
   @override
-  String get settingsSyncCustom => 'Custom';
+  String get settingsSyncCustom => 'सानुकूल';
 
   @override
-  String get settingsSyncChangedHeader => 'Changed settings';
+  String get settingsSyncChangedHeader => 'सेटिंग्ज बदलल्या';
 
   @override
   String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+      'तुम्ही अद्याप यापैकी काहीही बदललेले नाही, त्यामुळे समक्रमित करण्यासाठी काहीही नाही.';
 
   @override
   String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+      'फक्त तुम्ही बदललेल्या सेटिंग्ज साठवल्या जातात. इतर सर्व काही प्रत्येक डिव्हाइसवर त्याचे डीफॉल्ट वापरते. क्लाउड चिन्ह सर्व्हरवर आधीपासूनच काय आहे ते दर्शविते.';
 
   @override
   String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+      'सिंक होत नाही. ते या डिव्हाइसवर राहतात आणि सर्व्हरची प्रत आहे तशीच ठेवली जाते.';
 
   @override
   String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+      'प्रति उपकरण. बंद प्रत्येक डिव्हाइसचे स्वतःचे मूल्य ठेवते, म्हणून फोन आणि टीव्ही भिन्न असू शकतात.';
 
   @override
-  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+  String get settingsSyncPartSubtitles => 'उपशीर्षक आकार आणि रंग';
 
   @override
-  String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+  String get settingsSyncPartSubtitlesDesc => 'आकार, वजन, रंग आणि स्थान';
 
   @override
-  String get settingsSyncPartPictureColors => 'Picture colours';
+  String get settingsSyncPartPictureColors => 'चित्र रंग';
 
   @override
   String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+      'ब्राइटनेस, कॉन्ट्रास्ट, सॅच्युरेशन, गॅमा, ह्यू आणि HDR';
 
   @override
-  String get settingsSyncPartPalette => 'Theme colours';
+  String get settingsSyncPartPalette => 'थीम रंग';
 
   @override
-  String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+  String get settingsSyncPartPaletteDesc => 'थीम, उच्चारण रंग आणि OLED काळा';
 
   @override
-  String get settingsSyncCatOther => 'Watch, read and services';
+  String get settingsSyncCatOther => 'पहा, वाचा आणि सेवा';
 
   @override
-  String get settingsSyncTitles => 'Watch progress and titles';
+  String get settingsSyncTitles => 'प्रगती आणि शीर्षके पहा';
 
   @override
   String settingsSyncTitlesCount(Object records, Object resume) {
-    return '$records titles and $resume resume entries on the server';
+    return 'सर्व्हरवर $records शीर्षके आणि $resume रेझ्युमे एंट्री';
   }
 
   @override
-  String get settingsSyncTitlesNone => 'Nothing uploaded yet';
+  String get settingsSyncTitlesNone => 'अद्याप काहीही अपलोड केलेले नाही';
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      'पोझिशन्स, रेझ्युमे शेल्फ, तुमच्या स्थानिक याद्या, बुकमार्क, हायलाइट्स आणि प्रति-शीर्षक पर्याय पहा आणि वाचा. स्त्रोत जुळण्या आणि प्रवाह प्रत्येक डिव्हाइसवर राहतात कारण ते तुमच्या विस्तारांवर अवलंबून असतात. जास्तीत जास्त प्रत्येक ४५ सेकंदांनी शीर्षके अपलोड होतात.';
 
   @override
-  String get settingsSyncConnect => 'Not connected';
+  String get settingsSyncConnect => 'जोडलेले नाही';
 
   @override
   String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+      'प्रत्येक डिव्हाइसवर तुमची सेटिंग्ज समान ठेवण्यासाठी GitHub सह साइन इन करा.';
 
   @override
-  String get settingsSyncFailedTitle => 'Sync failed';
+  String get settingsSyncFailedTitle => 'सिंक अयशस्वी';
 
   @override
-  String get settingsSyncPaused => 'Paused';
+  String get settingsSyncPaused => 'विराम दिला';
 
   @override
   String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+      'हे बंद असताना काहीही अपलोड किंवा डाउनलोड केले जात नाही.';
 
   @override
-  String get settingsSyncUpToDate => 'Up to date';
+  String get settingsSyncUpToDate => 'अद्ययावत';
 
   @override
-  String get settingsSyncRetry => 'Retry';
+  String get settingsSyncRetry => 'पुन्हा प्रयत्न करा';
 
   @override
-  String get settingsSyncAccount => 'GitHub account';
+  String get settingsSyncAccount => 'GitHub खाते';
 
   @override
   String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+      'तुमचा डेटा तुमच्या स्वतःच्या खात्यातील खाजगी सारांशात जातो.';
 
   @override
-  String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
+  String get settingsSyncWaiting =>
+      'GitHub वर तुम्ही मंजूर होण्याची वाट पाहत आहे';
 
   @override
-  String get settingsSyncCopyCode => 'Tap the code to copy it';
+  String get settingsSyncCopyCode => 'कोड कॉपी करण्यासाठी त्यावर टॅप करा';
 
   @override
-  String get settingsSyncCancel => 'Cancel';
+  String get settingsSyncCancel => 'रद्द करा';
 
   @override
-  String get settingsSyncStatSettings => 'Settings';
+  String get settingsSyncStatSettings => 'सेटिंग्ज';
 
   @override
-  String get settingsSyncStatTitles => 'Titles';
+  String get settingsSyncStatTitles => 'शीर्षके';
 
   @override
-  String get settingsSyncStatShelf => 'Resume';
+  String get settingsSyncStatShelf => 'पुन्हा सुरू करा';
 
   @override
   String settingsSyncUploaded(Object time, Object device) {
-    return 'Uploaded $time from $device';
+    return '$device कडून $time अपलोड केले';
   }
 
   @override
@@ -847,121 +848,123 @@ class AppLocalizationsMr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count changed',
-      one: '1 changed',
-      zero: 'Nothing changed yet',
+      other: '$count बदलले',
+      one: '1 बदलला',
+      zero: 'अजून काहीही बदलले नाही',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncSecrets => 'Accounts and passwords';
+  String get settingsSyncSecrets => 'खाती आणि पासवर्ड';
 
   @override
   String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+      'तुमचे साइन-इन (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API की आणि तुमच्या डिव्हाइस दरम्यान ॲप लॉक सिंक करा. ते सांकेतिक वाक्यांशासह कूटबद्ध केलेले आहेत जे तुमच्या डिव्हाइसवर राहतात, त्यामुळे GitHub त्यांना कधीही पाहत नाही.';
 
   @override
-  String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
+  String get settingsSyncSecretsOn => 'खाती समक्रमित आणि कूटबद्ध आहेत';
 
   @override
   String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+      'एका डिव्हाइसवर साइन आउट केल्याने तुम्हाला इतर डिव्हाइसवरून साइन आउट होत नाही.';
 
   @override
   String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+      'सांकेतिक वाक्यांश यापुढे सर्व्हरवरील एकाशी जुळत नाही. खाती सिंक करत राहण्यासाठी ते पुन्हा एंटर करा.';
 
   @override
-  String get settingsSyncPassphraseSet => 'Set a passphrase';
+  String get settingsSyncPassphraseSet => 'सांकेतिक वाक्यांश सेट करा';
 
   @override
-  String get settingsSyncPassphraseEnter => 'Enter your passphrase';
+  String get settingsSyncPassphraseEnter =>
+      'तुमचा सांकेतिक वाक्यांश प्रविष्ट करा';
 
   @override
-  String get settingsSyncPassphraseField => 'Passphrase';
+  String get settingsSyncPassphraseField => 'सांकेतिक वाक्यांश';
 
   @override
-  String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
+  String get settingsSyncPassphraseConfirm =>
+      'सांकेतिक वाक्यांशाची पुनरावृत्ती करा';
 
   @override
   String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+      'किमान 6 वर्णांचा सांकेतिक वाक्यांश निवडा. ते कोठेही संग्रहित केलेले नाही परंतु तुमचे डिव्हाइस आणि पुनर्प्राप्त केले जाऊ शकत नाही. तुम्ही ते विसरल्यास, सर्व्हरची प्रत हटवा आणि पुन्हा सुरू करा.';
 
   @override
   String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+      'तुम्ही तुमच्या इतर डिव्हाइसवर निवडलेला सांकेतिक वाक्यांश एंटर करा. या डिव्हाइसवरील खाती सिंक केलेली खाती बदलली जातील.';
 
   @override
-  String get settingsSyncPassphraseWrong => 'Wrong passphrase';
+  String get settingsSyncPassphraseWrong => 'चुकीचा सांकेतिक वाक्यांश';
 
   @override
-  String get settingsSyncPassphraseMismatch => 'The passphrases do not match';
+  String get settingsSyncPassphraseMismatch => 'सांकेतिक वाक्यांश जुळत नाहीत';
 
   @override
-  String get settingsSyncPassphraseShort => 'Use at least 6 characters';
+  String get settingsSyncPassphraseShort => 'किमान 6 वर्ण वापरा';
 
   @override
-  String get settingsSyncSecretsStop => 'Stop syncing accounts';
+  String get settingsSyncSecretsStop => 'खाती समक्रमित करणे थांबवा';
 
   @override
-  String get settingsSyncSecretsDelete => 'Delete from GitHub';
+  String get settingsSyncSecretsDelete => 'GitHub वरून हटवा';
 
   @override
   String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+      'हे तुमच्या सारांशातून एन्क्रिप्टेड खाती फाइल काढून टाकते. इतर डिव्हाइस त्यांचे साइन-इन ठेवतात आणि नवीन सांकेतिक वाक्यांश सेट करू शकतात.';
 
   @override
-  String get settingsSyncWhat => 'What to sync';
+  String get settingsSyncWhat => 'काय सिंक करायचे';
 
   @override
-  String get settingsSyncServer => 'On the server';
+  String get settingsSyncServer => 'सर्व्हरवर';
 
   @override
-  String get settingsSyncServerEmpty => 'Nothing uploaded yet';
+  String get settingsSyncServerEmpty => 'अद्याप काहीही अपलोड केलेले नाही';
 
   @override
   String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count settings, uploaded $time from $device';
+    return '$count सेटिंग्ज, $device कडून $time अपलोड केले';
   }
 
   @override
-  String get settingsSyncThisDevice => 'this device';
+  String get settingsSyncThisDevice => 'हे उपकरण';
 
   @override
   String settingsSyncCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count settings on the server',
-      one: '1 setting on the server',
-      zero: 'Nothing on the server',
+      other: 'सर्व्हरवरील $count सेटिंग्ज',
+      one: 'सर्व्हरवर 1 सेटिंग',
+      zero: 'सर्व्हरवर काहीही नाही',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncNow => 'Sync now';
+  String get settingsSyncNow => 'आता सिंक करा';
 
   @override
-  String get settingsSyncRunning => 'Syncing…';
+  String get settingsSyncRunning => 'सिंक करत आहे...';
 
   @override
-  String get settingsSyncNever => 'Not synced yet';
+  String get settingsSyncNever => 'अद्याप समक्रमित नाही';
 
   @override
   String settingsSyncLast(Object time) {
-    return 'Last synced $time';
+    return 'शेवटचे समक्रमित $time';
   }
 
   @override
   String settingsSyncFailed(Object error) {
-    return 'Sync failed: $error';
+    return 'समक्रमण अयशस्वी: $error';
   }
 
   @override
   String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+      'फक्त सर्वत्र समान कार्य करणाऱ्या सेटिंग्ज समक्रमित केल्या जातात. खाती, टोकन, फोल्डर, विस्तार, सूचना, डिस्कॉर्ड, अद्यतने आणि विंडो आकार प्रत्येक डिव्हाइसवर राहतात.';
 
   @override
   String get backupAndRestore => 'बॅकअप आणि रिस्टोअर';
@@ -979,11 +982,11 @@ class AppLocalizationsMr extends AppLocalizations {
   String get loadExtensionsIcon => 'एक्स्टेंशन आयकॉन्स लोड कर';
 
   @override
-  String get autoUpdateRuntimes => 'Update extension runtimes automatically';
+  String get autoUpdateRuntimes => 'एक्स्टेंशन रनटाइम आपोआप अपडेट करा';
 
   @override
   String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+      'बॅकग्राउंडमध्ये नवीन Aniyomi, CloudStream आणि इतर रनटाइम आवृत्त्या डाउनलोड करा. बंद, त्याऐवजी व्यवस्थापकाच्या शेजारी एक अद्यतन चिन्ह दिसते.';
 
   @override
   String get loadExtensionsIconDesc =>
@@ -1029,15 +1032,15 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
-  String get backupPasswordRequired => 'Password (required for account data)';
+  String get backupPasswordRequired => 'पासवर्ड (खाते डेटासाठी आवश्यक)';
 
   @override
   String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+      'खाते डेटाचा बॅकअप घेण्यासाठी पासवर्ड सेट करा किंवा त्यावर खूण करा';
 
   @override
   String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+      'या बॅकअपला पासवर्ड नाही, त्यामुळे त्याचा खाते डेटा वगळण्यात आला';
 
   @override
   String get backupPassword => 'पासवर्ड (ऐच्छिक)';
@@ -1159,63 +1162,65 @@ class AppLocalizationsMr extends AppLocalizations {
       'अ‍ॅप लॉग शेअर कर, किंवा Linux वर त्याचा पाथ कॉपी कर';
 
   @override
-  String get logDelete => 'Delete log files';
+  String get logDelete => 'लॉग फाइल्स हटवा';
 
   @override
-  String get logDeleteDesc => 'Clear the saved app logs to free up space';
+  String get logDeleteDesc =>
+      'जागा मोकळी करण्यासाठी सेव्ह केलेले ॲप लॉग साफ करा';
 
   @override
   String logDeleted(String size) {
-    return 'Deleted $size of logs';
+    return 'लॉगचे $size हटवले';
   }
 
   @override
-  String get missingSequel => 'Missing Sequel';
+  String get missingSequel => 'गहाळ सिक्वेल';
 
   @override
-  String get rising => 'Rising';
+  String get rising => 'उगवतो';
 
   @override
-  String get stacks => 'Stacks';
+  String get stacks => 'स्टॅक';
 
   @override
-  String get stacksAll => 'All';
+  String get stacksAll => 'सर्व';
 
   @override
-  String get stacksFeatured => 'Featured';
+  String get stacksFeatured => 'वैशिष्ट्यीकृत';
 
   @override
-  String get stacksMine => 'Yours';
+  String get stacksMine => 'तुमचा';
 
   @override
-  String get stacksSaved => 'Saved';
+  String get stacksSaved => 'जतन केले';
 
   @override
-  String get stacksFollowing => 'Following';
+  String get stacksFollowing => 'खालील';
 
   @override
-  String get stacksEmpty => 'No stacks here yet';
+  String get stacksEmpty => 'येथे अद्याप कोणतेही स्टॅक नाहीत';
 
   @override
-  String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
+  String get stacksSignIn =>
+      'तुमचे स्टॅक पाहण्यासाठी MangaBaka मध्ये साइन इन करा';
 
   @override
   String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+      'तुमच्या स्टॅकला नवीन परवानगीची आवश्यकता आहे. मंगाबाकाला परवानगी देण्यासाठी पुन्हा साइन इन करा.';
 
   @override
-  String get stacksSignInAgain => 'Sign in again';
+  String get stacksSignInAgain => 'पुन्हा साइन इन करा';
 
   @override
-  String get stacksCouldntLoad => 'Couldn\'t load the stacks';
+  String get stacksCouldntLoad => 'स्टॅक लोड करू शकलो नाही';
 
   @override
   String stackSeriesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count series',
-      one: '1 series',
+      other: '$count मालिका',
+      one: '1 मालिका',
     );
     return '$_temp0';
   }
@@ -1225,48 +1230,48 @@ class AppLocalizationsMr extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count saves',
-      one: '1 save',
+      other: '$count वाचवतो',
+      one: '1 बचत',
     );
     return '$_temp0';
   }
 
   @override
   String stackBy(String name) {
-    return 'by $name';
+    return '$name द्वारे';
   }
 
   @override
-  String get stackSpoilers => 'Spoilers';
+  String get stackSpoilers => 'स्पॉयलर';
 
   @override
-  String get stackEmptyEntries => 'This stack is empty';
+  String get stackEmptyEntries => 'हा स्टॅक रिकामा आहे';
 
   @override
-  String get stackSave => 'Save stack';
+  String get stackSave => 'स्टॅक जतन करा';
 
   @override
-  String get stackUnsave => 'Remove from saved';
+  String get stackUnsave => 'जतन मधून काढा';
 
   @override
-  String get stackSavedToast => 'Saved to your stacks';
+  String get stackSavedToast => 'तुमच्या स्टॅकमध्ये सेव्ह केले';
 
   @override
-  String get stackRemovedToast => 'Removed from your saved stacks';
+  String get stackRemovedToast => 'तुमच्या सेव्ह केलेल्या स्टॅकमधून काढले';
 
   @override
   String userStacks(String name) {
-    return 'Stacks by $name';
+    return '$name द्वारे स्टॅक';
   }
 
   @override
-  String get newsTitle => 'News';
+  String get newsTitle => 'बातम्या';
 
   @override
-  String get newsEmpty => 'No news right now';
+  String get newsEmpty => 'सध्या कोणतीही बातमी नाही';
 
   @override
-  String get newsCouldntLoad => 'Couldn\'t load the news';
+  String get newsCouldntLoad => 'बातम्या लोड करू शकलो नाही';
 
   @override
   String get logFileCopied => 'लॉग पाथ कॉपी झाला';
@@ -1298,11 +1303,11 @@ class AppLocalizationsMr extends AppLocalizations {
       'रंग बॅकग्राउंडला फॉलो करतात, आणि डिटेल पेजवर कव्हरला';
 
   @override
-  String get followCoverMediaOnly => 'Only for media';
+  String get followCoverMediaOnly => 'फक्त मीडियासाठी';
 
   @override
   String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+      'फक्त मीडिया पृष्ठांवर कव्हरचे अनुसरण करा, इतर सर्वत्र सामान्य रंग ठेवतात';
 
   @override
   String get cardStyle => 'कार्ड स्टाइल';
@@ -1338,7 +1343,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get defaultFont => 'डिफॉल्ट';
 
   @override
-  String get materialYou => 'Material You';
+  String get materialYou => 'साहित्य आपण';
 
   @override
   String get materialYouDesc => 'सिस्टममधून डायनॅमिक रंग';
@@ -1398,7 +1403,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get checkNow => 'आत्ता तपास';
 
   @override
-  String get userAgent => 'User-Agent';
+  String get userAgent => 'वापरकर्ता-एजंट';
 
   @override
   String get settingDefault => 'डिफॉल्ट';
@@ -1409,7 +1414,7 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-over-HTTPS';
+  String get dnsOverHttps => 'DNS-ओव्हर-HTTPS';
 
   @override
   String get dnsDefault => 'डिफॉल्ट (Cloudflare)';
@@ -1479,7 +1484,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get imageTitleCover => 'कव्हर';
 
   @override
-  String get imageTitlePage => 'Page';
+  String get imageTitlePage => 'पान';
 
   @override
   String get imageTitleBanner => 'बॅनर';
@@ -1511,16 +1516,16 @@ class AppLocalizationsMr extends AppLocalizations {
   String get discordDesc => 'कम्युनिटी आणि सपोर्ट';
 
   @override
-  String get supportDeveloper => 'Support the developer';
+  String get supportDeveloper => 'विकासकाला सपोर्ट करा';
 
   @override
-  String get buyMeCoffee => 'Buy me a coffee';
+  String get buyMeCoffee => 'मला एक कॉफी विकत दे';
 
   @override
-  String get upiId => 'UPI ID';
+  String get upiId => 'UPI आयडी';
 
   @override
-  String get upiCopied => 'UPI ID copied';
+  String get upiCopied => 'UPI आयडी कॉपी केला';
 
   @override
   String get donateDesc => 'डेव्हलपमेंटला सपोर्ट कर';
@@ -1535,7 +1540,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get contributorsLoadFailed => 'कॉन्ट्रिब्युटर्स लोड करता आले नाहीत';
 
   @override
-  String get forks => 'Forks';
+  String get forks => 'काटे';
 
   @override
   String get forksDesc => 'Dartotsu वर बनवलेले प्रोजेक्ट्स';
@@ -1575,7 +1580,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get onboardingLanguageBody =>
-      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+      'Dartotsu दाखवलेली भाषा निवडा. तुम्ही ती नंतर सेटिंग्जमध्ये बदलू शकता.';
 
   @override
   String get onboardingPaletteTitle => 'तुझ्या आवडीचं बनव';
@@ -1681,24 +1686,24 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String calendarChapter(int n) {
-    return 'Chapter $n';
+    return 'धडा $n';
   }
 
   @override
-  String get calendarExpected => 'Expected';
+  String get calendarExpected => 'अपेक्षित';
 
   @override
-  String get castReceiverFailed => 'The Chromecast did not start its player';
+  String get castReceiverFailed => 'Chromecast ने त्याचा प्लेअर सुरू केला नाही';
 
   @override
-  String get castPlaybackFailed => 'The device could not play this stream';
+  String get castPlaybackFailed => 'डिव्हाइस हा प्रवाह प्ले करू शकत नाही';
 
   @override
-  String get shortcutNothingToContinue => 'Nothing to continue yet';
+  String get shortcutNothingToContinue => 'अद्याप सुरू ठेवण्यासाठी काहीही नाही';
 
   @override
   String shortcutNoCalendar(String service) {
-    return '$service has no calendar';
+    return '$service मध्ये कोणतेही कॅलेंडर नाही';
   }
 
   @override
@@ -1724,7 +1729,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get linkSettingsFailed => 'सिस्टम सेटिंग्ज उघडता आल्या नाहीत';
 
   @override
-  String get discordRichPresence => 'Rich Presence';
+  String get discordRichPresence => 'समृद्ध उपस्थिती';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1857,7 +1862,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord टोकन काढला';
 
   @override
-  String get discordRichPresenceRow => 'Discord Rich Presence';
+  String get discordRichPresenceRow => 'डिसॉर्ड रिच प्रेझेन्स';
 
   @override
   String get discordRichPresenceRowOn => 'चालू · लूक बदलायला टॅप कर';
@@ -1900,82 +1905,82 @@ class AppLocalizationsMr extends AppLocalizations {
   String get mangaBakaLoginFailed => 'MangaBaka लॉगिन फेल झालं';
 
   @override
-  String get comickLoginFailed => 'Comick login failed';
+  String get comickLoginFailed => 'कॉमिक लॉगिन अयशस्वी';
 
   @override
-  String get tagline => 'Tagline';
+  String get tagline => 'टॅगलाइन';
 
   @override
-  String get trending => 'Trending';
+  String get trending => 'ट्रेंडिंग';
 
   @override
-  String get anticipated => 'Anticipated';
+  String get anticipated => 'अपेक्षित';
 
   @override
-  String get watchlist => 'Watchlist';
+  String get watchlist => 'वॉचलिस्ट';
 
   @override
-  String get recommendedShows => 'Recommended Shows';
+  String get recommendedShows => 'शिफारस केलेले शो';
 
   @override
-  String get recommendedMovies => 'Recommended Movies';
+  String get recommendedMovies => 'शिफारस केलेले चित्रपट';
 
   @override
-  String get boxOffice => 'Box Office';
+  String get boxOffice => 'बॉक्स ऑफिस';
 
   @override
-  String get popularMovies => 'Popular Movies';
+  String get popularMovies => 'लोकप्रिय चित्रपट';
 
   @override
-  String get popularShows => 'Popular Shows';
+  String get popularShows => 'लोकप्रिय शो';
 
   @override
-  String get anticipatedMovies => 'Anticipated Movies';
+  String get anticipatedMovies => 'अपेक्षित चित्रपट';
 
   @override
-  String get anticipatedShows => 'Anticipated Shows';
+  String get anticipatedShows => 'अपेक्षित शो';
 
   @override
-  String get trendingShows => 'Trending Shows';
+  String get trendingShows => 'ट्रेंडिंग शो';
 
   @override
-  String get mostWatchedThisWeek => 'Most Watched This Week';
+  String get mostWatchedThisWeek => 'या आठवड्यात सर्वाधिक पाहिलेले';
 
   @override
-  String get sortMostViewed => 'Most viewed';
+  String get sortMostViewed => 'सर्वाधिक पाहिले';
 
   @override
-  String get sortMostFollowed => 'Most followed';
+  String get sortMostFollowed => 'सर्वाधिक फॉलो केले';
 
   @override
-  String get sortLatestUpdates => 'Latest updates';
+  String get sortLatestUpdates => 'नवीनतम अद्यतने';
 
   @override
-  String get translationStatusLabel => 'Translation';
+  String get translationStatusLabel => 'भाषांतर';
 
   @override
-  String get weeklySchedule => 'Weekly Schedule';
+  String get weeklySchedule => 'साप्ताहिक वेळापत्रक';
 
   @override
-  String get mostFollowed => 'Most Followed';
+  String get mostFollowed => 'सर्वाधिक फॉलो केलेले';
 
   @override
-  String get latestUpdates => 'Latest Updates';
+  String get latestUpdates => 'नवीनतम अद्यतने';
 
   @override
-  String get trendingAnime => 'Trending Anime';
+  String get trendingAnime => 'ट्रेंडिंग ॲनिम';
 
   @override
-  String get topRatedAnime => 'Top Rated Anime';
+  String get topRatedAnime => 'शीर्ष रेट केलेले ॲनिमे';
 
   @override
-  String get mostFollowedAnime => 'Most Followed Anime';
+  String get mostFollowedAnime => 'सर्वाधिक फॉलो केलेले ॲनिमे';
 
   @override
-  String get comickProfile => 'Comick profile';
+  String get comickProfile => 'कॉमिक प्रोफाइल';
 
   @override
-  String get refreshFromComick => 'Refresh from Comick';
+  String get refreshFromComick => 'Comick वरून रिफ्रेश करा';
 
   @override
   String get mangaBakaProfile => 'MangaBaka प्रोफाइल';
@@ -1984,25 +1989,25 @@ class AppLocalizationsMr extends AppLocalizations {
   String get refreshFromMangaBaka => 'MangaBaka वरून रिफ्रेश कर';
 
   @override
-  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+  String get mangaUpdatesLoginTitle => 'MangaUpdates मध्ये साइन इन करा';
 
   @override
-  String get mangaUpdatesProfile => 'MangaUpdates profile';
+  String get mangaUpdatesProfile => 'MangaUpdates प्रोफाइल';
 
   @override
-  String get mangaUpdatesAnimeStart => 'Anime adaptation starts';
+  String get mangaUpdatesAnimeStart => 'ॲनिमेचे रुपांतर सुरू होते';
 
   @override
-  String get mangaUpdatesAnimeEnd => 'Anime adaptation ends';
+  String get mangaUpdatesAnimeEnd => 'ॲनिम रुपांतर समाप्त होते';
 
   @override
-  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+  String get refreshFromMangaUpdates => 'MangaUpdates वरून रिफ्रेश करा';
 
   @override
-  String get usernameOnly => 'Username';
+  String get usernameOnly => 'वापरकर्तानाव';
 
   @override
-  String get releases => 'Releases';
+  String get releases => 'सोडते';
 
   @override
   String get artistsLabel => 'आर्टिस्ट्स';
@@ -2033,7 +2038,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get hideNsfwSourcesDesc =>
-      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+      'फीड आणि सोर्स पिकरमधून 18+ चिन्हांकित स्त्रोत लपवा. ते स्थापित राहतात.';
 
   @override
   String get hideNsfwDesc =>
@@ -2046,13 +2051,14 @@ class AppLocalizationsMr extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka अकाउंट पर्याय';
 
   @override
-  String get comickAccountOptions => 'Comick account options';
+  String get comickAccountOptions => 'कॉमिक खाते पर्याय';
 
   @override
-  String get comickClientId => 'Comick Client ID';
+  String get comickClientId => 'कॉमिक क्लायंट आयडी';
 
   @override
-  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc =>
+      'comick.dev वर सानुकूल क्लायंट आयडी नोंदणीकृत आहे';
 
   @override
   String get couldNotUpdateKitsuSettings =>
@@ -2123,7 +2129,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get simklReadOnly => 'Simkl ला फक्त-वाचन अ‍ॅक्सेस दिला';
 
   @override
-  String get traktReadOnly => 'Trakt granted read-only access';
+  String get traktReadOnly => 'Trakt ने केवळ-वाचनीय प्रवेश मंजूर केला';
 
   @override
   String get incognitoEditsBlocked => 'इन्कॉग्निटो: लिस्ट एडिट्स ब्लॉक आहेत';
@@ -2151,10 +2157,10 @@ class AppLocalizationsMr extends AppLocalizations {
   String get following => 'फॉलो करतोय';
 
   @override
-  String get followsMutual => 'Mutual';
+  String get followsMutual => 'परस्पर';
 
   @override
-  String get followsNotMutual => 'Not mutual';
+  String get followsNotMutual => 'परस्पर नाही';
 
   @override
   String get homeSections => 'होम सेक्शन्स';
@@ -2179,7 +2185,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get addList => 'लिस्ट जोड';
 
   @override
-  String get voiceActors => 'Voice actors';
+  String get voiceActors => 'आवाज कलाकार';
 
   @override
   String voiceActorsIn(String name) {
@@ -2211,10 +2217,10 @@ class AppLocalizationsMr extends AppLocalizations {
   String get prequelSequel => 'प्रीक्वेल आणि सीक्वेल';
 
   @override
-  String get prequel => 'Prequel';
+  String get prequel => 'प्रीक्वेल';
 
   @override
-  String get sequel => 'Sequel';
+  String get sequel => 'सिक्वेल';
 
   @override
   String get previousSeason => 'मागचा सीझन';
@@ -2250,13 +2256,13 @@ class AppLocalizationsMr extends AppLocalizations {
   String get simklProfile => 'Simkl प्रोफाइल';
 
   @override
-  String get traktProfile => 'Trakt profile';
+  String get traktProfile => 'ट्रॅक प्रोफाइल';
 
   @override
   String get refreshFromSimkl => 'Simkl वरून रिफ्रेश कर';
 
   @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
+  String get refreshFromTrakt => 'Trakt वरून रिफ्रेश करा';
 
   @override
   String get repullProfileLibrary => 'तुझं प्रोफाइल आणि लायब्ररी पुन्हा घे';
@@ -2272,19 +2278,19 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get traktAttribution =>
-      'Data and artwork provided by Trakt. View on Trakt';
+      'Trakt द्वारे प्रदान केलेला डेटा आणि कलाकृती. Trakt वर पहा';
 
   @override
-  String get listsLiked => 'Liked';
+  String get listsLiked => 'आवडले';
 
   @override
-  String get listsYours => 'Yours';
+  String get listsYours => 'तुमचा';
 
   @override
-  String get traktVip => 'VIP';
+  String get traktVip => 'व्हीआयपी';
 
   @override
-  String get traktVipMember => 'Trakt VIP Member';
+  String get traktVipMember => 'Trakt VIP सदस्य';
 
   @override
   String get onHold => 'ऑन होल्ड';
@@ -2311,11 +2317,11 @@ class AppLocalizationsMr extends AppLocalizations {
   String get moviesAndSeries => 'मूव्हीज आणि सीरिज';
 
   @override
-  String get simklMoviesOnly => 'Movies & series only';
+  String get simklMoviesOnly => 'फक्त चित्रपट आणि मालिका';
 
   @override
   String get simklMoviesOnlyDesc =>
-      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+      'ॲनिम टॅब पुनर्स्थित करते: प्रथम चित्रपट, नंतर काही ॲनिम पंक्तीसह शो';
 
   @override
   String get trackingOnly => 'फक्त ट्रॅकिंग';
@@ -2348,7 +2354,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get trailer => 'ट्रेलर';
 
   @override
-  String get trailerQuality => 'Trailer quality';
+  String get trailerQuality => 'ट्रेलर गुणवत्ता';
 
   @override
   String get titleCopied => 'टायटल कॉपी झालं';
@@ -2364,7 +2370,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get detailStale =>
-      'AniList could not be reached. This is saved information and may be outdated.';
+      'ॲनिलिस्टपर्यंत पोहोचता आले नाही. ही माहिती जतन केलेली आहे आणि ती जुनी असू शकते.';
 
   @override
   String get copyLink => 'लिंक कॉपी कर';
@@ -2405,48 +2411,48 @@ class AppLocalizationsMr extends AppLocalizations {
   String get popular => 'लोकप्रिय';
 
   @override
-  String get allCustomLists => 'All custom lists';
+  String get allCustomLists => 'सर्व सानुकूल सूची';
 
   @override
-  String get simklTitleLanguage => 'Anime title language';
+  String get simklTitleLanguage => 'ॲनिमे शीर्षक भाषा';
 
   @override
-  String get titleLanguageEnglish => 'English';
+  String get titleLanguageEnglish => 'इंग्रजी';
 
   @override
-  String get titleLanguageRomaji => 'Romaji';
+  String get titleLanguageRomaji => 'रोमाजी';
 
   @override
-  String get simklListsTrending => 'Trending';
+  String get simklListsTrending => 'ट्रेंडिंग';
 
   @override
-  String get simklListsMostLiked => 'Most liked';
+  String get simklListsMostLiked => 'सर्वाधिक आवडले';
 
   @override
-  String get simklListsMostFollowed => 'Most followed';
+  String get simklListsMostFollowed => 'सर्वाधिक फॉलो केले';
 
   @override
-  String get simklListsOfficial => 'Official';
+  String get simklListsOfficial => 'अधिकृत';
 
   @override
   String simklListTitles(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
+      other: '$count शीर्षके',
+      one: '1 शीर्षक',
     );
     return '$_temp0';
   }
 
   @override
-  String get people => 'People';
+  String get people => 'लोक';
 
   @override
-  String get mostComments => 'Most comments';
+  String get mostComments => 'बहुतेक टिप्पण्या';
 
   @override
-  String get alphabetical => 'Alphabetical';
+  String get alphabetical => 'वर्णक्रमानुसार';
 
   @override
   String get latest => 'ताजं';
@@ -2546,7 +2552,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get listOnly => 'फक्त लिस्ट';
 
   @override
-  String get notInList => 'Not In List';
+  String get notInList => 'यादीत नाही';
 
   @override
   String get filter => 'फिल्टर';
@@ -2663,21 +2669,21 @@ class AppLocalizationsMr extends AppLocalizations {
   String get refresh => 'रिफ्रेश';
 
   @override
-  String get animePlanetRank => 'Rank';
+  String get animePlanetRank => 'रँक';
 
   @override
-  String get animePlanetMagazine => 'Magazine';
+  String get animePlanetMagazine => 'मासिक';
 
   @override
-  String get animePlanetRefreshLists => 'Refresh your lists';
+  String get animePlanetRefreshLists => 'तुमच्या याद्या रिफ्रेश करा';
 
   @override
   String get animePlanetRefreshListsDesc =>
-      'Read your Anime-Planet lists again';
+      'तुमच्या ॲनिम-प्लॅनेट याद्या पुन्हा वाचा';
 
   @override
   String get animePlanetLocalNote =>
-      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
+      'तुमच्या Anime-Planet खात्यातील बदल सेव्ह करण्यासाठी साइन इन करा. तोपर्यंत ते या उपकरणावरच राहतात';
 
   @override
   String get share => 'शेअर';
@@ -3186,14 +3192,14 @@ class AppLocalizationsMr extends AppLocalizations {
   String get readingTabDesc => 'तिसऱ्या टॅबमध्ये कोणते एक्स्टेंशन्स दिसावेत';
 
   @override
-  String get firstTab => 'First tab';
+  String get firstTab => 'पहिला टॅब';
 
   @override
   String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+      'पहिला टॅब कोणता विस्तार दाखवतो. बारमधून ॲनिम सोडण्यासाठी येथे मंगा आणि वाचन टॅबवर कादंबरी निवडा';
 
   @override
-  String get novelExtensions => 'Novel Extensions';
+  String get novelExtensions => 'कादंबरी विस्तार';
 
   @override
   String get defaultFeed => 'डिफॉल्ट फीड';
@@ -3441,10 +3447,10 @@ class AppLocalizationsMr extends AppLocalizations {
   String get season => 'सीझन';
 
   @override
-  String get year => 'Year';
+  String get year => 'वर्ष';
 
   @override
-  String get filterAny => 'Any';
+  String get filterAny => 'कोणतीही';
 
   @override
   String get broadcast => 'ब्रॉडकास्ट';
@@ -3471,7 +3477,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get dropped => 'सोडून दिलं';
 
   @override
-  String get unfinished => 'Unfinished';
+  String get unfinished => 'अपूर्ण';
 
   @override
   String get planned => 'ठरवलेलं';
@@ -3528,13 +3534,13 @@ class AppLocalizationsMr extends AppLocalizations {
   String get born => 'जन्म';
 
   @override
-  String get died => 'Died';
+  String get died => 'मरण पावला';
 
   @override
-  String get birthplace => 'Birthplace';
+  String get birthplace => 'जन्मस्थान';
 
   @override
-  String get department => 'Department';
+  String get department => 'विभाग';
 
   @override
   String get website => 'वेबसाइट';
@@ -3561,16 +3567,16 @@ class AppLocalizationsMr extends AppLocalizations {
   String get shows => 'शोज';
 
   @override
-  String get moviesWatched => 'Movies Watched';
+  String get moviesWatched => 'चित्रपट पाहिले';
 
   @override
-  String get showsWatched => 'Shows Watched';
+  String get showsWatched => 'शो पाहिला';
 
   @override
-  String get moviesCollected => 'Movies Collected';
+  String get moviesCollected => 'संग्रहित चित्रपट';
 
   @override
-  String get showsCollected => 'Shows Collected';
+  String get showsCollected => 'संकलित शो';
 
   @override
   String get rewatching => 'पुन्हा बघतोय';
@@ -3655,7 +3661,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get sortNewest => 'नवीन';
 
   @override
-  String get sortAz => 'A–Z';
+  String get sortAz => 'A-Z';
 
   @override
   String get sortMostFavourited => 'सर्वात जास्त आवडलेले';
@@ -3875,7 +3881,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String repoLinkConfirm(String url) {
-    return 'Add this repository?\n\n$url\n\nOnly add repositories from sources you trust.';
+    return 'हे भांडार जोडायचे?\n\n$url\n\nफक्त तुमचा विश्वास असलेल्या स्त्रोतांकडून भांडार जोडा.';
   }
 
   @override
@@ -4127,7 +4133,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String updatePluginTitle(String name) {
-    return 'Update $name';
+    return 'अद्यतन $name';
   }
 
   @override
@@ -4223,42 +4229,42 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String syncServiceOn(String name) {
-    return 'Sync with $name';
+    return '$name सह समक्रमित करा';
   }
 
   @override
-  String get syncDelete => 'Delete what the main service doesn\'t have';
+  String get syncDelete => 'मुख्य सेवेमध्ये काय नाही ते हटवा';
 
   @override
   String get syncDeleteDesc =>
-      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+      'मुख्य सूचीमध्ये नसलेल्या इतर सेवांमधून नोंदी काढून टाका. केवळ शीर्षकाशी जुळणाऱ्या नोंदी काढून टाकल्या जातात, त्यामुळे Simkl चित्रपट आणि मालिका यासारख्या गोष्टी कायम राहतात';
 
   @override
-  String get syncDeleteTitle => 'Delete entries?';
+  String get syncDeleteTitle => 'नोंदी हटवायच्या?';
 
   @override
   String syncDeleteConfirm(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries',
-      one: '1 entry',
+      other: '$count नोंदी',
+      one: '1 प्रवेश',
     );
-    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+    return '$_temp0 जे तुमच्या मुख्य यादीत नाहीत ते इतर सेवांमधून हटवले जातील. हे पूर्ववत केले जाऊ शकत नाही.';
   }
 
   @override
-  String get syncDeleteAction => 'Delete';
+  String get syncDeleteAction => 'हटवा';
 
   @override
-  String get syncToDelete => 'To delete';
+  String get syncToDelete => 'हटवणे';
 
   @override
-  String get syncDeletedNote => 'Will be deleted';
+  String get syncDeletedNote => 'हटवले जाईल';
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count will be deleted from $name';
+    return '$count $name मधून हटविले जाईल';
   }
 
   @override
@@ -4269,52 +4275,52 @@ class AppLocalizationsMr extends AppLocalizations {
       'आधीच पुढे असलेल्या सर्व्हिसचा प्रोग्रेस कमी करू नको';
 
   @override
-  String get animePlanetWontWatch => 'Won\'t watch';
+  String get animePlanetWontWatch => 'पाहणार नाही';
 
   @override
-  String get animePlanetWontRead => 'Won\'t read';
+  String get animePlanetWontRead => 'वाचणार नाही';
 
   @override
-  String get animePlanetAlreadyOnList => 'Already on this list';
+  String get animePlanetAlreadyOnList => 'आधीच या यादीत';
 
   @override
-  String get animePlanetNewList => 'New list name';
+  String get animePlanetNewList => 'नवीन यादी नाव';
 
   @override
-  String get syncPrivate => 'Private entries';
+  String get syncPrivate => 'खाजगी नोंदी';
 
   @override
   String get syncPrivateDesc =>
-      'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly';
+      'तुम्ही खाजगी ठेवता त्या नोंदींचे काय करायचे. खाजगी पर्याय असलेली सेवा त्यांना खाजगी मिळते; इतर त्यांना सार्वजनिकरित्या दाखवतील';
 
   @override
-  String get syncPrivateModeAsk => 'Ask';
+  String get syncPrivateModeAsk => 'विचारा';
 
   @override
-  String get syncPrivateModeSync => 'Sync them';
+  String get syncPrivateModeSync => 'त्यांना समक्रमित करा';
 
   @override
-  String get syncPrivateModeSkip => 'Skip them';
+  String get syncPrivateModeSkip => 'त्यांना वगळा';
 
   @override
-  String get syncPrivateTitle => 'Private entries';
+  String get syncPrivateTitle => 'खाजगी नोंदी';
 
   @override
   String syncPrivateAsk(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries are private',
-      one: '1 entry is private',
+      other: '$count नोंदी खाजगी आहेत',
+      one: '1 प्रवेश खाजगी आहे',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
+    return '$_temp0. खाजगी पर्याय (AniList, Kitsu, MangaBaka) असलेल्या सेवा त्या खाजगी म्हणून मिळतील; इतर सेवांना कोणताही खाजगी पर्याय नाही आणि त्या सार्वजनिकपणे दाखवल्या जातील. ते समक्रमित करायचे? तुमचे उत्तर लक्षात आहे; ते सिंक पर्यायांखाली बदला.';
   }
 
   @override
-  String get syncPrivateInclude => 'Sync them';
+  String get syncPrivateInclude => 'त्यांना समक्रमित करा';
 
   @override
-  String get syncPrivateSkip => 'Skip them';
+  String get syncPrivateSkip => 'त्यांना वगळा';
 
   @override
   String get syncFetch => 'फेच';
@@ -4423,7 +4429,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String syncRemoved(String services) {
-    return 'Removed from $services';
+    return '$services वरून काढले';
   }
 
   @override
@@ -4923,7 +4929,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get imageSearchEmpty => 'काहीही जुळलं नाही';
 
   @override
-  String get imageSearchAdult => '18+';
+  String get imageSearchAdult => '१८+';
 
   @override
   String imageSearchEpisode(String number) {
@@ -5033,7 +5039,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get groupsPrivacyClosed => 'बंद';
 
   @override
-  String get groupsAdult => '18+';
+  String get groupsAdult => '१८+';
 
   @override
   String get groupsRoleAdmin => 'अ‍ॅडमिन';
@@ -5401,23 +5407,23 @@ class AppLocalizationsMr extends AppLocalizations {
   String get watchSource => 'सोर्स';
 
   @override
-  String get sourceTags => 'Tags';
+  String get sourceTags => 'टॅग्ज';
 
   @override
   String get sourceTagsHint =>
-      'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.';
+      'टॅग करा हा स्रोत कशासाठी आहे. शीर्षक प्रथम त्याच्यासाठी टॅग केलेले स्त्रोत सूचीबद्ध करते, नंतर टॅग न केलेले. 18+ स्रोत फक्त प्रौढ शीर्षकांसाठी दाखवतात.';
 
   @override
-  String get sourceTagAnime => 'Anime';
+  String get sourceTagAnime => 'ॲनिमी';
 
   @override
-  String get sourceTagMovies => 'Movies & Series';
+  String get sourceTagMovies => 'चित्रपट आणि मालिका';
 
   @override
-  String get sourceTagAdult => '18+';
+  String get sourceTagAdult => '१८+';
 
   @override
-  String get sourceHiddenByTags => 'Hidden by tags';
+  String get sourceHiddenByTags => 'टॅगद्वारे लपलेले';
 
   @override
   String get watchOptions => 'ऑप्शन्स';
@@ -5540,87 +5546,86 @@ class AppLocalizationsMr extends AppLocalizations {
   String get watchCookiesCleared => 'कुकीज क्लिअर झाल्या';
 
   @override
-  String get watchFailTimeout => 'The check didn\'t finish in time';
+  String get watchFailTimeout => 'चेक वेळेत पूर्ण झाला नाही';
 
   @override
   String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+      'साइटने हे डिव्हाइस अवरोधित केले (प्रवेश नाकारला). चेक मदत करणार नाही';
 
   @override
   String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+      'या चेकला टॅप आवश्यक आहे जे बॅकग्राउंड सॉल्व्हर करू शकत नाही';
 
   @override
   String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+      'पृष्ठ लोड झाले नाही. कनेक्शन आणि साइट पत्ता तपासा';
 
   @override
   String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+      'साइटने नुकतीच दिलेली मंजुरी नाकारली. पुन्हा प्रयत्न करा किंवा कुकीज साफ करा';
 
   @override
-  String get watchFailDismissed => 'The check was closed before it finished';
+  String get watchFailDismissed => 'धनादेश पूर्ण होण्यापूर्वीच बंद करण्यात आला';
 
   @override
   String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+      'तुम्ही काही क्षणापूर्वी चेक बंद केला. पुन्हा प्रयत्न करण्यासाठी ते सोडवा दाबा';
 
   @override
-  String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+  String get watchFailQuiet => 'चेकला तुमची गरज आहे आणि ॲप स्वतःच काम करत होता';
 
   @override
-  String get watchFailWebView => 'The background web view couldn\'t start';
+  String get watchFailWebView => 'पार्श्वभूमी वेब दृश्य सुरू होऊ शकले नाही';
 
   @override
-  String get watchFailUnavailable => 'There is no screen to show the check on';
+  String get watchFailUnavailable => 'चेक ऑन दाखवण्यासाठी स्क्रीन नाही';
 
   @override
-  String get watchStatusReady => 'Ready';
+  String get watchStatusReady => 'तयार';
 
   @override
-  String get watchStatusChallenge => 'Cloudflare check needed';
+  String get watchStatusChallenge => 'क्लाउडफ्लेअर तपासणी आवश्यक आहे';
 
   @override
-  String get watchStatusBlocked => 'Blocked by the site';
+  String get watchStatusBlocked => 'साइटद्वारे अवरोधित';
 
   @override
-  String get watchStatusOffline => 'Can\'t reach the site';
+  String get watchStatusOffline => 'साइटवर पोहोचू शकत नाही';
 
   @override
-  String get watchStatusUntested => 'Not tested yet';
+  String get watchStatusUntested => 'अजून चाचणी झालेली नाही';
 
   @override
-  String get watchStatusTesting => 'Testing the connection…';
+  String get watchStatusTesting => 'कनेक्शनची चाचणी करत आहे...';
 
   @override
-  String get watchStatusSolving => 'Passing the Cloudflare check…';
+  String get watchStatusSolving => 'Cloudflare चेक पास करत आहे...';
 
   @override
   String watchSolvedBackground(int seconds) {
-    return 'Cloudflare check passed in the background ($seconds s)';
+    return 'क्लाउडफ्लेअर चेक पार्श्वभूमीत पास झाला ($seconds s)';
   }
 
   @override
-  String get watchSolvedByUser => 'Cloudflare check passed';
+  String get watchSolvedByUser => 'क्लाउडफ्लेअर चेक पास झाला';
 
   @override
   String watchClearanceIssued(String time) {
-    return 'earned $time';
+    return 'कमावले $time';
   }
 
   @override
   String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+      'मंजुरी दुसऱ्या वापरकर्ता एजंटसह मिळवली होती, म्हणून ती पाठविली जात नाही. नवीन मिळवण्यासाठी कनेक्शनची चाचणी घ्या';
 
   @override
-  String get watchSectionConnection => 'Connection';
+  String get watchSectionConnection => 'जोडणी';
 
   @override
-  String get watchSectionSession => 'Session';
+  String get watchSectionSession => 'सत्र';
 
   @override
-  String get watchSectionTools => 'Tools';
+  String get watchSectionTools => 'साधने';
 
   @override
   String get watchMetaSource => 'एपिसोड डिटेल्स कुठून';
@@ -5659,18 +5664,18 @@ class AppLocalizationsMr extends AppLocalizations {
   String get playerSpeed => 'प्लेबॅक स्पीड';
 
   @override
-  String get localSource => 'Local files';
+  String get localSource => 'स्थानिक फाइल्स';
 
   @override
   String get localMissing =>
-      'This file or folder is no longer in your Local folder';
+      'ही फाइल किंवा फोल्डर यापुढे तुमच्या स्थानिक फोल्डरमध्ये नाही';
 
   @override
-  String get playerStickyStage => 'Sticky video';
+  String get playerStickyStage => 'चिकट व्हिडिओ';
 
   @override
   String get playerStickyStageDesc =>
-      'Keep the video fixed at the top while you scroll the episodes and comments below';
+      'तुम्ही खालील भाग आणि टिप्पण्या स्क्रोल करत असताना व्हिडिओ शीर्षस्थानी स्थिर ठेवा';
 
   @override
   String get playerCursedSpeed => 'जास्तीचे स्पीड्स';
@@ -5742,11 +5747,11 @@ class AppLocalizationsMr extends AppLocalizations {
       'सुरू होताच उडी मार, AniSkip आणि स्ट्रीम टाइमस्टॅम्प्स वापरून';
 
   @override
-  String get playerDisableSkips => 'Disable skips';
+  String get playerDisableSkips => 'वगळणे अक्षम करा';
 
   @override
   String get playerDisableSkipsDesc =>
-      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
+      'प्लेअरमध्ये ॲनीस्किप किंवा स्ट्रीम टाइमस्टॅम्प, चॅप्टर मार्क्स किंवा सबमिशन वगळू नका';
 
   @override
   String get playerSkipOnce => 'फक्त एकदाच स्किप कर';
@@ -5813,13 +5818,13 @@ class AppLocalizationsMr extends AppLocalizations {
   String get playerSubtitleOutline => 'सबटायटल आउटलाइन';
 
   @override
-  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+  String get playerSubtitleOutlineWidth => 'उपशीर्षक बाह्यरेखा रुंदी';
 
   @override
-  String get playerSubtitlePreview => 'Subtitle preview';
+  String get playerSubtitlePreview => 'उपशीर्षक पूर्वावलोकन';
 
   @override
-  String get playerSubtitlePreviewText => 'Subtitle preview text';
+  String get playerSubtitlePreviewText => 'उपशीर्षक पूर्वावलोकन मजकूर';
 
   @override
   String get playerLibass => 'libass वापर';
@@ -5852,26 +5857,26 @@ class AppLocalizationsMr extends AppLocalizations {
   String get playerShadersDownload => 'Anime4K डाउनलोड कर';
 
   @override
-  String get playerPictureSave => 'Save this frame';
+  String get playerPictureSave => 'ही फ्रेम जतन करा';
 
   @override
-  String get playerPictureOriginal => 'Original';
+  String get playerPictureOriginal => 'मूळ';
 
   @override
   String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+      'व्हिडिओमध्ये शेडर्स किंवा रंग नसलेली फ्रेम आहे';
 
   @override
-  String get playerPictureProcessed => 'With shaders and colors';
+  String get playerPictureProcessed => 'शेडर्स आणि रंगांसह';
 
   @override
-  String get playerPictureProcessedDesc => 'The frame as you see it now';
+  String get playerPictureProcessedDesc => 'तुम्ही आता पाहता तशी फ्रेम';
 
   @override
-  String get playerPictureSaved => 'Frame saved';
+  String get playerPictureSaved => 'फ्रेम सेव्ह केली';
 
   @override
-  String get playerPictureSaveFailed => 'Could not save the frame';
+  String get playerPictureSaveFailed => 'फ्रेम सेव्ह करू शकलो नाही';
 
   @override
   String get playerShadersPreview => 'या फ्रेमवर प्रीव्ह्यू बघ';
@@ -5941,14 +5946,14 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+      'शेडर्सला हार्डवेअर रेंडरिंग आवश्यक आहे आणि प्लेअर सॉफ्टवेअर रेंडरिंग वापरत आहे. Player सेटिंग्जमध्ये सॉफ्टवेअर रेंडरिंग बंद करा.';
 
   @override
-  String get playerSoftwareRender => 'Software rendering';
+  String get playerSoftwareRender => 'सॉफ्टवेअर प्रस्तुतीकरण';
 
   @override
   String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+      'फक्त काळ्या व्हिडिओसाठी. शेडर्स त्याच्यासोबत काम करत नाहीत. पुढील वेळी खेळाडू उघडेल तेव्हा लागू होईल';
 
   @override
   String get playerShadersCustomFiles => 'तुझे शेडर्स';
@@ -6168,30 +6173,30 @@ class AppLocalizationsMr extends AppLocalizations {
   String get playerQuality => 'क्वालिटी';
 
   @override
-  String get streamGroupSub => 'Sub';
+  String get streamGroupSub => 'उप';
 
   @override
-  String get streamGroupHardSub => 'Hard Sub';
+  String get streamGroupHardSub => 'हार्ड सब';
 
   @override
-  String get streamGroupSoftSub => 'Soft Sub';
+  String get streamGroupSoftSub => 'मऊ उप';
 
   @override
-  String get streamGroupDub => 'Dub';
+  String get streamGroupDub => 'डब';
 
   @override
-  String get streamGroupRaw => 'Raw';
+  String get streamGroupRaw => 'कच्चा';
 
   @override
-  String get streamGroupOther => 'Other';
+  String get streamGroupOther => 'इतर';
 
   @override
   String streamsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count streams',
-      one: '1 stream',
+      other: '$count प्रवाह',
+      one: '1 प्रवाह',
     );
     return '$_temp0';
   }
@@ -6201,7 +6206,7 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get playerStreamFailedNext =>
-      'That stream won\'t play, trying the next one';
+      'तो प्रवाह चालणार नाही, पुढचा प्रयत्न करा';
 
   @override
   String get playerAutoSelect => 'स्ट्रीम ऑटो निवड';
@@ -6266,11 +6271,11 @@ class AppLocalizationsMr extends AppLocalizations {
   String get readerFailed => 'हा चॅप्टर उघडता आला नाही';
 
   @override
-  String get readerOpenBook => 'Open a book';
+  String get readerOpenBook => 'एक पुस्तक उघडा';
 
   @override
   String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+      'तुमच्या फाइल्समधून एक epub (नॉव्हेल रीडर) किंवा PDF (मंगा रीडर) वाचा';
 
   @override
   String get readerNoText => 'या चॅप्टरमध्ये मजकूर नाही';
@@ -6297,7 +6302,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get readerMode => 'रीडिंग मोड';
 
   @override
-  String get readerModeAuto => 'Auto (by series type)';
+  String get readerModeAuto => 'ऑटो (मालिका प्रकारानुसार)';
 
   @override
   String get readerModeRtl => 'उजवीकडून डावीकडे';
@@ -6430,22 +6435,22 @@ class AppLocalizationsMr extends AppLocalizations {
   String get readerFilterSepia => 'सेपिया';
 
   @override
-  String get readerFilterQuality => 'Image filter quality';
+  String get readerFilterQuality => 'प्रतिमा फिल्टर गुणवत्ता';
 
   @override
-  String get readerFilterQualityNone => 'None (Nearest neighbor)';
+  String get readerFilterQualityNone => 'काहीही नाही (जवळचे शेजारी)';
 
   @override
-  String get readerFilterQualityLow => 'Low (Bilinear)';
+  String get readerFilterQualityLow => 'कमी (द्विरेखीय)';
 
   @override
-  String get readerFilterQualityMedium => 'Medium (Trilinear)';
+  String get readerFilterQualityMedium => 'मध्यम (त्रिरेखीय)';
 
   @override
-  String get readerFilterQualityHigh => 'High (Bicubic)';
+  String get readerFilterQualityHigh => 'उच्च (बायक्यूबिक)';
 
   @override
-  String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
+  String get readerFilterQualityLanczos => 'Lanczos (गंज उच्च दर्जाचे)';
 
   @override
   String get readerDim => 'डिम';
@@ -6473,11 +6478,11 @@ class AppLocalizationsMr extends AppLocalizations {
       'पानांमधले रिकामे पांढरे किंवा काळे मार्जिन कापून टाक';
 
   @override
-  String get readerLongPressSave => 'Hold a page to save it';
+  String get readerLongPressSave => 'एक पृष्ठ जतन करण्यासाठी धरा';
 
   @override
   String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+      'सेव्ह, शेअर आणि कॉपी पर्याय उघडण्यासाठी पेज दाबून ठेवा';
 
   @override
   String get readerVolumeKeys => 'व्हॉल्यूम की ने पान पलट';
@@ -6548,7 +6553,8 @@ class AppLocalizationsMr extends AppLocalizations {
   String get readerResetDesc => 'डिफॉल्टवर परत';
 
   @override
-  String get readerResetConfirm => 'Reset every reader setting to its default?';
+  String get readerResetConfirm =>
+      'प्रत्येक वाचक सेटिंग त्याच्या डीफॉल्टवर रीसेट करायची?';
 
   @override
   String get novelSize => 'मजकूर साइज';
@@ -6604,87 +6610,88 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String trackProgressAnimeLocal(String name) {
-    return 'Save your progress on $name to your list on this device as you watch?';
+    return 'तुम्ही पहात असताना $name वरील तुमची प्रगती या डिव्हाइसवरील तुमच्या सूचीमध्ये सेव्ह करायची?';
   }
 
   @override
   String trackProgressMangaLocal(String name) {
-    return 'Save your progress on $name to your list on this device when you finish a chapter?';
+    return '$name वरील तुमची प्रगती या डिव्हाइसवरील तुमच्या सूचीमध्ये जतन करा जेव्हा तुम्ही एक अध्याय पूर्ण करता?';
   }
 
   @override
-  String get downloadClearQueue => 'Clear queue';
+  String get downloadClearQueue => 'रांग साफ करा';
 
   @override
   String downloadClearQueueConfirm(int count) {
-    return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+    return 'रांगेतील सर्व $count डाउनलोड रद्द करायचे? जे आधीच डाउनलोड केले होते ते हटवले आहे.';
   }
 
   @override
   String downloadSelectedCount(int count) {
-    return '$count selected';
+    return '$count निवडले';
   }
 
   @override
-  String get downloadSelectAll => 'Select all';
+  String get downloadSelectAll => 'सर्व निवडा';
 
   @override
-  String get downloadDeleteSelected => 'Delete selected';
+  String get downloadDeleteSelected => 'निवडलेले हटवा';
 
   @override
   String downloadDeleteSelectedConfirm(int count) {
-    return 'Delete $count downloads? Their files are removed from the device.';
+    return '$count डाउनलोड हटवायचे? त्यांच्या फायली डिव्हाइसमधून काढल्या जातात.';
   }
 
   @override
-  String get castTitle => 'Cast to device';
+  String get castTitle => 'डिव्हाइसवर कास्ट करा';
 
   @override
-  String get castSearching => 'Looking for devices on your network…';
+  String get castSearching => 'तुमच्या नेटवर्कवर डिव्हाइस शोधत आहे...';
 
   @override
   String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+      'कोणतीही उपकरणे आढळली नाहीत. टीव्ही किंवा Chromecast एकाच वाय-फाय वर असल्याची खात्री करा, नंतर पुन्हा शोधा.';
 
   @override
-  String get castRefresh => 'Search again';
+  String get castRefresh => 'पुन्हा शोधा';
 
   @override
-  String get castFailed => 'Could not start casting';
+  String get castFailed => 'कास्ट करणे सुरू करू शकलो नाही';
 
   @override
-  String get castStop => 'Stop casting';
+  String get castStop => 'कास्ट करणे थांबवा';
 
   @override
   String castNowCasting(String name) {
-    return 'Casting to $name';
+    return '$name वर कास्ट करत आहे';
   }
 
   @override
   String get castProtocolChromecast => 'Chromecast';
 
   @override
-  String get castProtocolDlna => 'DLNA / Smart TV';
+  String get castProtocolDlna => 'DLNA / स्मार्ट टीव्ही';
 
   @override
-  String get castProtocolRoku => 'Roku';
+  String get castProtocolRoku => 'रोकू';
 
   @override
-  String get castRokuNote => 'Roku can\'t report or change the position';
+  String get castRokuNote =>
+      'Roku तक्रार करू शकत नाही किंवा स्थिती बदलू शकत नाही';
 
   @override
-  String get castControls => 'Controls';
+  String get castControls => 'नियंत्रणे';
 
   @override
-  String get castVolume => 'TV volume';
+  String get castVolume => 'टीव्ही व्हॉल्यूम';
 
   @override
   String castSkipPart(String name) {
-    return 'Skip $name';
+    return 'वगळा $name';
   }
 
   @override
-  String get trackProgressRememberSeries => 'Remember for this series';
+  String get trackProgressRememberSeries => 'या मालिकेसाठी लक्षात ठेवा';
 
   @override
   String get trackProgressYes => 'सेव्ह';
@@ -6768,7 +6775,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get dantotsuTheme => 'थीम';
 
   @override
-  String get themePickerTitle => 'Theme';
+  String get themePickerTitle => 'थीम';
 
   @override
   String get dantotsuReposAnime => 'अ‍ॅनिमे एक्स्टेंशन रिपॉझिटरीज';
@@ -6829,11 +6836,11 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String togetherLinkConfirm(String room) {
-    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+    return 'खोलीत सामील व्हा $room? यजमान काय खेळते ते निवडतो आणि जेव्हा ते पाहणे सुरू करतात तेव्हा खेळाडू स्वतःच उघडतो.';
   }
 
   @override
-  String get togetherJoin => 'Join';
+  String get togetherJoin => 'सामील व्हा';
 
   @override
   String get togetherName => 'तुझं नाव';
@@ -6857,11 +6864,11 @@ class AppLocalizationsMr extends AppLocalizations {
   String get togetherCopyInvite => 'इन्व्हाइट कॉपी कर';
 
   @override
-  String get togetherShareInvite => 'Share invite';
+  String get togetherShareInvite => 'आमंत्रण शेअर करा';
 
   @override
   String togetherShareText(String link) {
-    return 'Watch with me on Dartotsu: $link';
+    return 'डार्टोत्सु वर माझ्यासोबत पहा: $link';
   }
 
   @override
@@ -7016,71 +7023,70 @@ class AppLocalizationsMr extends AppLocalizations {
       'पान स्क्रोल करायला डाव्या किंवा उजव्या बाजूला टॅप कर, मधला भाग कंट्रोल्स दाखवतो';
 
   @override
-  String get novelPaged => 'Page turning';
+  String get novelPaged => 'पान उलटत आहे';
 
   @override
   String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+      'अध्याय पृष्ठांमध्ये विभाजित करा आणि स्क्रोल करण्याऐवजी ते चालू करण्यासाठी स्वाइप करा किंवा टॅप करा';
 
   @override
   String novelPageOf(int current, int total) {
-    return 'Page $current of $total';
+    return 'पृष्ठ $current पैकी $total';
   }
 
   @override
-  String get novelPaginating => 'Laying out pages';
+  String get novelPaginating => 'पृष्ठे घालणे';
 
   @override
-  String get novelTools => 'Contents, search and highlights';
+  String get novelTools => 'सामग्री, शोध आणि हायलाइट';
 
   @override
-  String get novelContents => 'Contents';
+  String get novelContents => 'सामग्री';
 
   @override
-  String get novelContentsEmpty => 'This chapter has no headings';
+  String get novelContentsEmpty => 'या प्रकरणाला कोणतेही शीर्षक नाही';
 
   @override
-  String get novelSearch => 'Search';
+  String get novelSearch => 'शोधा';
 
   @override
-  String get novelSearchHint => 'Search in this chapter';
+  String get novelSearchHint => 'या अध्यायात शोधा';
 
   @override
-  String get novelSearchNone => 'No matches';
+  String get novelSearchNone => 'कोणतेही सामने नाहीत';
 
   @override
   String novelSearchCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count matches',
-      one: '1 match',
+      other: '$count जुळते',
+      one: '1 सामना',
     );
     return '$_temp0';
   }
 
   @override
-  String get novelHighlights => 'Highlights';
+  String get novelHighlights => 'हायलाइट्स';
 
   @override
   String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+      'काही मजकूर निवडा आणि तो येथे ठेवण्यासाठी हायलाइट टॅप करा';
 
   @override
-  String get novelHighlight => 'Highlight';
+  String get novelHighlight => 'हायलाइट करा';
 
   @override
-  String get novelHighlightNote => 'Note';
+  String get novelHighlightNote => 'नोंद';
 
   @override
-  String get novelHighlightNoteHint => 'Add a note';
+  String get novelHighlightNoteHint => 'एक टीप जोडा';
 
   @override
-  String get novelHighlightRemove => 'Remove highlight';
+  String get novelHighlightRemove => 'हायलाइट काढा';
 
   @override
-  String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+  String get novelHighlightFailed => 'ती निवड मजकुराशी जुळवू शकलो नाही';
 
   @override
   String novelMinutesLeft(int count) {
@@ -7145,39 +7151,39 @@ class AppLocalizationsMr extends AppLocalizations {
   String get playerChapters => 'चॅप्टर्स';
 
   @override
-  String get playerSkipSubmit => 'Submit skip times';
+  String get playerSkipSubmit => 'वगळण्याच्या वेळा सबमिट करा';
 
   @override
   String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+      'या एपिसोडमध्ये ओपनिंग, एंडिंग किंवा रिकॅप कुठे सुरू होतो आणि संपतो ते चिन्हांकित करा आणि ते AniSkip सोबत शेअर करा, जेणेकरून प्रत्येकाला स्किप बटण मिळेल.';
 
   @override
-  String get playerSkipStart => 'Start';
+  String get playerSkipStart => 'सुरू करा';
 
   @override
-  String get playerSkipEnd => 'End';
+  String get playerSkipEnd => 'शेवट';
 
   @override
-  String get playerSkipUseNow => 'Use current position';
+  String get playerSkipUseNow => 'वर्तमान स्थिती वापरा';
 
   @override
-  String get playerSkipSend => 'Submit to AniSkip';
+  String get playerSkipSend => 'AniSkip वर सबमिट करा';
 
   @override
-  String get playerSkipSent => 'Skip times submitted to AniSkip, thank you';
+  String get playerSkipSent => 'AniSkip ला सबमिट केलेल्या वेळा वगळा, धन्यवाद';
 
   @override
   String playerSkipFailed(String error) {
-    return 'AniSkip refused the skip times: $error';
+    return 'AniSkip ने वगळण्याच्या वेळा नाकारल्या: $error';
   }
 
   @override
   String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+      'व्हिडिओ प्लेयर या डिव्हाइसवर चालू शकत नाही (बंडल केलेल्या प्लेअर लायब्ररीसाठी त्याची Android आवृत्ती खूप जुनी आहे). तपशील कॉपी करण्यासाठी टॅप करा.';
 
   @override
   String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+      'या शीर्षकाला MyAnimeList id नाही, AniSkip घेऊ शकत नाही';
 
   @override
   String get playerNoChapters => 'चॅप्टर्स नाहीत';
@@ -7227,28 +7233,28 @@ class AppLocalizationsMr extends AppLocalizations {
       'अ‍ॅप सोडलंस तरी छोट्या विंडोत प्ले होत राहू दे';
 
   @override
-  String get playerPipPlay => 'Play';
+  String get playerPipPlay => 'खेळा';
 
   @override
-  String get playerPipPause => 'Pause';
+  String get playerPipPause => 'विराम द्या';
 
   @override
-  String get playerPipBack => 'Rewind';
+  String get playerPipBack => 'रिवाइंड करा';
 
   @override
-  String get playerPipForward => 'Forward';
+  String get playerPipForward => 'पुढे';
 
   @override
-  String get playerPipRestore => 'Back to the player';
+  String get playerPipRestore => 'खेळाडूकडे परत जा';
 
   @override
-  String get playerPipActive => 'Playing in a small window';
+  String get playerPipActive => 'छोट्या खिडकीत खेळत आहे';
 
   @override
-  String get listDateAdded => 'Added to list';
+  String get listDateAdded => 'सूचीमध्ये जोडले';
 
   @override
-  String get listDateLastWatched => 'Last watched';
+  String get listDateLastWatched => 'शेवटचे पाहिले';
 
   @override
   String playerAutoPlaying(String title) {
@@ -7303,7 +7309,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get fontImport => 'फॉन्ट इम्पोर्ट कर';
 
   @override
-  String get fontSample => 'The quick brown fox jumps over the lazy dog';
+  String get fontSample => 'झटपट तपकिरी कोल्हा आळशी कुत्र्यावर उडी मारतो';
 
   @override
   String get playerSubtitleDelay => 'सबटायटल डिले';
@@ -7367,72 +7373,72 @@ class AppLocalizationsMr extends AppLocalizations {
   String get downloadsTitle => 'डाउनलोड्स';
 
   @override
-  String get widgetContinue => 'Continue';
+  String get widgetContinue => 'चालू ठेवा';
 
   @override
-  String get widgetReleases => 'Releasing soon';
+  String get widgetReleases => 'लवकरच रिलीज होत आहे';
 
   @override
-  String get widgetMore => 'Also in progress';
+  String get widgetMore => 'तसेच प्रगतीपथावर आहे';
 
   @override
-  String get widgetNothing => 'Nothing to continue yet';
+  String get widgetNothing => 'अद्याप सुरू ठेवण्यासाठी काहीही नाही';
 
   @override
-  String get downloadStorageTitle => 'Storage';
+  String get downloadStorageTitle => 'स्टोरेज';
 
   @override
   String downloadStorageSummary(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count downloads',
-      one: '1 download',
+      other: '$count डाउनलोड',
+      one: '1 डाउनलोड',
     );
     return '$_temp0 · $size';
   }
 
   @override
   String downloadStorageWatched(String size) {
-    return '$size already watched or read';
+    return '$size आधीच पाहिले किंवा वाचले आहे';
   }
 
   @override
-  String get downloadFreeUp => 'Free up space';
+  String get downloadFreeUp => 'जागा मोकळी करा';
 
   @override
   String downloadFreeUpConfirm(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count watched downloads',
-      one: '1 watched download',
+      other: '$count नी डाउनलोड पाहिले',
+      one: '1 डाउनलोड पाहिले',
     );
-    return 'Delete $_temp0 and free $size?';
+    return 'हटवा $_temp0 आणि मोफत $size?';
   }
 
   @override
   String downloadFreed(String size) {
-    return 'Freed $size';
+    return 'मुक्त केले $size';
   }
 
   @override
-  String get downloadDeleteWatched => 'Delete watched';
+  String get downloadDeleteWatched => 'पाहिलेले हटवा';
 
   @override
-  String get downloadDeleteAll => 'Delete all';
+  String get downloadDeleteAll => 'सर्व हटवा';
 
   @override
   String downloadDeleteAllConfirm(String title) {
-    return 'Delete every download of $title?';
+    return '$title चे प्रत्येक डाउनलोड हटवायचे?';
   }
 
   @override
   String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+      'तुम्ही पूर्ण केलेले काहीही डाउनलोड केलेले नाही';
 
   @override
-  String get downloadStorageEmpty => 'No downloads are using space';
+  String get downloadStorageEmpty => 'कोणतेही डाउनलोड जागा वापरत नाहीत';
 
   @override
   String get downloadsOpenDesc => 'रांग आणि या डिव्हाइसवर सेव्ह केलेलं सगळं बघ';
@@ -7441,14 +7447,14 @@ class AppLocalizationsMr extends AppLocalizations {
   String get downloadTitle => 'डाउनलोड';
 
   @override
-  String get downloadMetaOnly => 'Metadata only';
+  String get downloadMetaOnly => 'फक्त मेटाडेटा';
 
   @override
-  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+  String get downloadMetaFailed => 'शीर्षक फोल्डर तयार करू शकलो नाही';
 
   @override
   String downloadMetaSaved(String path) {
-    return 'Saved. Put your files in $path';
+    return 'जतन केले. तुमच्या फाइल्स $path मध्ये ठेवा';
   }
 
   @override
@@ -7480,10 +7486,10 @@ class AppLocalizationsMr extends AppLocalizations {
   String get downloadSourceMissing => 'या एपिसोडचा सोर्स इन्स्टॉल केलेला नाही';
 
   @override
-  String get downloadDashDrm => 'This stream is DRM protected';
+  String get downloadDashDrm => 'हा प्रवाह DRM संरक्षित आहे';
 
   @override
-  String get downloadDashNoVideo => 'The DASH manifest has no video';
+  String get downloadDashNoVideo => 'DASH मॅनिफेस्टमध्ये कोणताही व्हिडिओ नाही';
 
   @override
   String get downloadWaitingConnection => 'कनेक्शनची वाट बघतोय';
@@ -7972,232 +7978,233 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String sourceNotifyOn(String source) {
-    return 'You\'ll be told when $source has something new';
+    return '$source कडे काहीतरी नवीन असेल तेव्हा तुम्हाला सांगितले जाईल';
   }
 
   @override
-  String get sourceNotifyOff => 'Release notifications off';
+  String get sourceNotifyOff => 'रिलीझ सूचना बंद';
 
   @override
-  String get sourceNotifyNeedsSource => 'Pick a source with a match first';
+  String get sourceNotifyNeedsSource => 'प्रथम जुळणीसह स्रोत निवडा';
 
   @override
   String sourceNotifyAllOut(int count) {
-    return 'Everything ($count) is already out, nothing to wait for';
+    return 'सर्व काही ($count) आधीच संपले आहे, प्रतीक्षा करण्यासारखे काहीही नाही';
   }
 
   @override
-  String get sourceNotifyTooltipOn => 'Stop release notifications';
+  String get sourceNotifyTooltipOn => 'रिलीझ सूचना थांबवा';
 
   @override
-  String get sourceNotifyTooltipOff => 'Notify me about new releases';
+  String get sourceNotifyTooltipOff => 'नवीन प्रकाशनांबद्दल मला सूचित करा';
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return 'Episode $number is out on $source';
+    return 'भाग $number $source रोजी बाहेर आहे';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return 'Episodes $from–$to are out on $source';
+    return 'भाग $from–$to $source रोजी बाहेर आहेत';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'Chapter $number is out on $source';
+    return 'धडा $number $source रोजी बाहेर आहे';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'Chapters $from–$to are out on $source';
+    return 'अध्याय $from–$to $source रोजी संपले आहेत';
   }
 
   @override
   String sourceFoundSummary(int count) {
-    return '$count titles have something new';
+    return '$count शीर्षकांमध्ये काहीतरी नवीन आहे';
   }
 
   @override
-  String get navSources => 'Sources';
+  String get navSources => 'स्रोत';
 
   @override
   String sourceInactiveOpen(String manager) {
-    return 'This source belongs to $manager, which isn\'t the active extension service';
+    return 'हा स्रोत $manager चा आहे, जो सक्रिय विस्तार सेवा नाही';
   }
 
   @override
-  String get sourceAlertsHeader => 'Release notifications';
+  String get sourceAlertsHeader => 'रिलीझ सूचना';
 
   @override
-  String get sourceAlertsSwitch => 'Check subscribed titles';
+  String get sourceAlertsSwitch => 'सदस्यता घेतलेली शीर्षके तपासा';
 
   @override
   String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+      'प्रत्येक वेळी ॲप उघडल्यानंतर, शीर्षकांसाठी तुम्ही बेल चालू केली';
 
   @override
-  String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
+  String get sourceSkipUnstarted => 'तुम्ही सुरू न केलेली शीर्षके वगळा';
 
   @override
   String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+      'अद्याप काहीही पाहिले किंवा वाचले नाही, परंतु भाग आधीच अस्तित्वात आहेत';
 
   @override
-  String get sourceSkipUnseen => 'Skip while you have unseen episodes';
+  String get sourceSkipUnseen => 'तुमच्याकडे न पाहिलेले भाग असताना वगळा';
 
   @override
   String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+      'तुम्ही अद्याप पकडण्यासाठी भाग रिलीज केले आहेत';
 
   @override
-  String get sourceManage => 'Subscriptions';
+  String get sourceManage => 'सदस्यता';
 
   @override
   String sourceManageDesc(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
-      zero: 'No titles',
+      other: '$count शीर्षके',
+      one: '1 शीर्षक',
+      zero: 'शीर्षके नाहीत',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceCheckNow => 'Check now';
+  String get sourceCheckNow => 'आता तपासा';
 
   @override
-  String get sourceCheckNowDesc => 'Ignores the schedule and the skip rules';
+  String get sourceCheckNowDesc =>
+      'वेळापत्रक आणि वगळण्याच्या नियमांकडे दुर्लक्ष करते';
 
   @override
-  String get sourceChecking => 'Checking…';
+  String get sourceChecking => 'तपासत आहे...';
 
   @override
   String sourceCheckResult(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles have something new',
-      one: '1 title has something new',
-      zero: 'Nothing new',
+      other: '$count शीर्षकांमध्ये काहीतरी नवीन आहे',
+      one: '1 शीर्षकामध्ये काहीतरी नवीन आहे',
+      zero: 'नवीन काही नाही',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceEmpty => 'No subscriptions yet';
+  String get sourceEmpty => 'अद्याप सदस्यता नाहीत';
 
   @override
   String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+      'नवीन भागांबद्दल सांगण्यासाठी शीर्षकाच्या भागांवरील घंटी टॅप करा';
 
   @override
-  String get sourceAll => 'All';
+  String get sourceAll => 'सर्व';
 
   @override
   String sourceInactive(String manager) {
-    return 'Inactive: $manager';
+    return 'निष्क्रिय: $manager';
   }
 
   @override
   String sourceMissingDesc(String source) {
-    return '$source isn\'t installed in this extension service';
+    return 'या विस्तार सेवेमध्ये $source स्थापित केलेले नाही';
   }
 
   @override
-  String get sourceUnreachable => 'Source isn\'t responding';
+  String get sourceUnreachable => 'स्रोत प्रतिसाद देत नाही';
 
   @override
-  String get sourceFinished => 'Finished';
+  String get sourceFinished => 'संपले';
 
   @override
-  String get sourceSkippedCompleted => 'Skipped: completed';
+  String get sourceSkippedCompleted => 'वगळले: पूर्ण झाले';
 
   @override
-  String get sourceSkippedUnstarted => 'Skipped: not started';
+  String get sourceSkippedUnstarted => 'वगळले: सुरू झाले नाही';
 
   @override
-  String get sourceSkippedUnseen => 'Skipped: unseen episodes';
+  String get sourceSkippedUnseen => 'वगळले: न पाहिलेले भाग';
 
   @override
-  String get sourceWaiting => 'Waiting for the next release';
+  String get sourceWaiting => 'पुढील प्रकाशनाची वाट पाहत आहे';
 
   @override
   String sourceNextCheck(String when) {
-    return 'Next check $when';
+    return 'पुढील चेक $when';
   }
 
   @override
-  String get sourceSoon => 'soon';
+  String get sourceSoon => 'लवकरच';
 
   @override
   String sourceInHours(int count) {
-    return 'in ${count}h';
+    return '${count}h मध्ये';
   }
 
   @override
   String sourceInDays(int count) {
-    return 'in ${count}d';
+    return '${count}d मध्ये';
   }
 
   @override
   String sourceLatest(String number) {
-    return 'Latest: $number';
+    return 'नवीनतम: $number';
   }
 
   @override
-  String get sourceMute => 'Mute';
+  String get sourceMute => 'नि:शब्द करा';
 
   @override
-  String get sourceUnmute => 'Unmute';
+  String get sourceUnmute => 'अनम्यूट करा';
 
   @override
-  String get sourceMuted => 'Muted';
+  String get sourceMuted => 'निःशब्द';
 
   @override
-  String get sourceUnsubscribe => 'Unsubscribe';
+  String get sourceUnsubscribe => 'सदस्यत्व रद्द करा';
 
   @override
-  String get sourcePickAnother => 'Pick another source';
+  String get sourcePickAnother => 'दुसरा स्रोत निवडा';
 
   @override
-  String get sourceOpenExtensions => 'Open extensions';
+  String get sourceOpenExtensions => 'विस्तार उघडा';
 
   @override
-  String get sourceNoticesEmpty => 'No release notices yet';
+  String get sourceNoticesEmpty => 'अद्याप कोणत्याही रिलीझ नोटिस नाहीत';
 
   @override
   String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+      'तुमच्या सदस्यता घेतलेल्या शीर्षकांमध्ये नवीन भाग आणि प्रकरणे येथे दर्शविले जातात';
 
   @override
-  String get sourceOpenTitle => 'Open title';
+  String get sourceOpenTitle => 'शीर्षक उघडा';
 
   @override
-  String get extensionsLoading => 'Loading extensions…';
+  String get extensionsLoading => 'विस्तार लोड करत आहे...';
 
   @override
-  String get updateWhatsNew => 'What\'s new';
+  String get updateWhatsNew => 'नवीन काय आहे';
 
   @override
-  String get updateLater => 'Later';
+  String get updateLater => 'नंतर';
 
   @override
-  String get updateSkipVersion => 'Skip this version';
+  String get updateSkipVersion => 'ही आवृत्ती वगळा';
 
   @override
-  String get updatePreparing => 'Preparing…';
+  String get updatePreparing => 'तयारी करत आहे...';
 
   @override
-  String get updateDownloading => 'Downloading';
+  String get updateDownloading => 'डाउनलोड करत आहे';
 
   @override
-  String get updateInstalling => 'Installing…';
+  String get updateInstalling => 'स्थापित करत आहे...';
 
   @override
   String updateSizeOf(String done, String total) {
-    return '$done of $total';
+    return '$total पैकी $done';
   }
 
   @override
@@ -8207,803 +8214,802 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String updateReleased(String date) {
-    return 'Released $date';
+    return 'रिलीझ $date';
   }
 
   @override
-  String get updateNoAsset => 'This release has no download for your device';
+  String get updateNoAsset =>
+      'या रिलीझमध्ये तुमच्या डिव्हाइससाठी कोणतेही डाउनलोड नाही';
 
   @override
-  String get updateUpToDate => 'You\'re on the latest version';
+  String get updateUpToDate => 'तुम्ही नवीनतम आवृत्तीवर आहात';
 
   @override
   String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+      'iOS बिल्ड ॲप स्टोअरवर नाहीत. प्रकाशन पृष्ठावरून .ipa घ्या आणि ते AltStore किंवा SideStore सह साइडलोड करा';
 
   @override
-  String get updateOpenedBrowser => 'Check your browser';
+  String get updateOpenedBrowser => 'तुमचा ब्राउझर तपासा';
 
   @override
-  String get updateTryAgain => 'Try again';
+  String get updateTryAgain => 'पुन्हा प्रयत्न करा';
 
   @override
-  String get settingsNotifications => 'Notifications';
+  String get settingsNotifications => 'सूचना';
 
   @override
   String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+      'तुमच्या याद्या, नवीन भाग आणि अध्याय आणि टिप्पणी प्रत्युत्तरांसाठी सूचना';
 
   @override
-  String get settingsAboutUpdates => 'About & updates';
+  String get settingsAboutUpdates => 'बद्दल आणि अद्यतने';
 
   @override
   String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+      'ॲप अद्यतने, आवृत्ती, लॉग, दुवे आणि समर्थन';
 
   @override
-  String get settingsGroupAccount => 'Your account';
+  String get settingsGroupAccount => 'तुमचे खाते';
 
   @override
-  String get settingsGroupContent => 'Content';
+  String get settingsGroupContent => 'सामग्री';
 
   @override
-  String get settingsGroupApp => 'App';
+  String get settingsGroupApp => 'ॲप';
 
   @override
   String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+      'प्लेअर, उपशीर्षके, वगळणे, भाग सूची आणि भाग तपशील';
 
   @override
   String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+      'वाचक मोड, नियंत्रणे, प्रदर्शन आणि अध्याय ट्रॅकिंग';
 
   @override
   String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+      'मजकूर, पृष्ठ बदलणे, भाषांतर करा आणि मोठ्याने वाचा';
 
   @override
-  String get settingsLocalPlay => 'Local play';
+  String get settingsLocalPlay => 'स्थानिक नाटक';
 
   @override
   String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+      'फाइल्स, फोल्डर्स, नेटवर्क प्रवाह आणि टॉरेंट प्ले करा किंवा पुस्तक उघडा';
 
   @override
-  String get settingsLocalPlayVideo => 'Video';
+  String get settingsLocalPlayVideo => 'व्हिडिओ';
 
   @override
-  String get settingsLocalPlayBooks => 'Books';
+  String get settingsLocalPlayBooks => 'पुस्तके';
 
   @override
-  String get settingsWatchSections => 'Sections';
+  String get settingsWatchSections => 'विभाग';
 
   @override
-  String get settingsSectionLists => 'Episode and chapter lists';
+  String get settingsSectionLists => 'भाग आणि धडा याद्या';
 
   @override
-  String get settingsSectionProgress => 'Progress tracking';
+  String get settingsSectionProgress => 'प्रगती ट्रॅकिंग';
 
   @override
   String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+      'स्थिर हे चाचणी केलेले प्रकाशन आहे. प्री-रिलीझ आणि अल्फाला नवीन वैशिष्ट्ये लवकर मिळतात परंतु ते खंडित होऊ शकतात';
 
   @override
-  String get checkNowDesc => 'Look for a newer version right away';
+  String get checkNowDesc => 'ताबडतोब नवीन आवृत्ती पहा';
 
   @override
-  String get generalSectionBasics => 'Language & behaviour';
+  String get generalSectionBasics => 'भाषा आणि वर्तन';
 
   @override
-  String get generalSectionSecurity => 'Security';
+  String get generalSectionSecurity => 'सुरक्षा';
 
   @override
-  String get generalSectionPrivacy => 'Privacy';
+  String get generalSectionPrivacy => 'गोपनीयता';
 
   @override
   String notificationsOtherService(String service) {
-    return 'Switch to $service to open this';
+    return 'हे उघडण्यासाठी $service वर स्विच करा';
   }
 
   @override
   String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+      'डीफॉल्ट गती, ऑटो प्ले, व्हिडिओ फिट, अभिमुखता आणि चित्रात चित्र';
 
   @override
-  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+  String get secPlayerSkip => 'ओपनिंग्स, एंडिंग्स आणि रिकॅप्स आपोआप वगळा';
 
   @override
   String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+      'स्वाइप करा, धरून ठेवा आणि जेश्चर टॅप करा आणि पूर्वावलोकन शोधा';
 
   @override
-  String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+  String get secPlayerSubtitles => 'भाषा, स्वरूप आणि उपशीर्षक प्रस्तुतीकरण';
 
   @override
-  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+  String get secPlayerShaders => 'ॲनिम अपस्केलिंग आणि तुमचे स्वतःचे शेडर्स';
 
   @override
   String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+      'डीकोडर, व्हिडिओ आणि ऑडिओ आउटपुट, बफरिंग. प्लेबॅकमध्ये समस्या असल्यासच हे बदला';
 
   @override
-  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+  String get secPlayerMpv => 'mpv.conf, स्क्रिप्ट आणि प्रगत ट्यूनिंग';
 
   @override
-  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+  String get secAnimeList => 'फिलर भाग आणि न पाहिलेले लघुप्रतिमा';
 
   @override
   String get secProgress =>
-      'When your watched or read progress is saved to your list';
+      'जेव्हा तुमची पाहिली किंवा वाचलेली प्रगती तुमच्या सूचीमध्ये सेव्ह केली जाते';
 
   @override
   String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+      'भागाची शीर्षके, लघुप्रतिमा आणि सारांश कुठून येतात';
 
   @override
-  String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+  String get secReaderReading => 'वाचन मोड, पृष्ठ बदलणे, झूम आणि पुढील अध्याय';
 
   @override
-  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+  String get secReaderControls => 'झोन, व्हॉल्यूम की आणि ऑटो स्क्रोल टॅप करा';
 
   @override
   String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+      'पार्श्वभूमी, चमक, पूर्ण स्क्रीन आणि पृष्ठ क्रमांक';
 
   @override
-  String get secNovelText => 'Font, size, spacing, margins and page turning';
+  String get secNovelText => 'फॉन्ट, आकार, अंतर, समास आणि पृष्ठ बदलणे';
 
   @override
-  String get secNovelTranslate => 'Translate chapters while you read';
+  String get secNovelTranslate => 'तुम्ही वाचत असताना अध्यायांचे भाषांतर करा';
 
   @override
-  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+  String get secNovelSpeech => 'मोठ्याने वाचण्यासाठी आवाज, वेग आणि खेळपट्टी';
 
   @override
-  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+  String get secNotifyAbout =>
+      'कोणत्या प्रकारची ॲक्टिव्हिटी सूचना पाठवते ते निवडा';
 
   @override
-  String get layoutTitle => 'Layout';
+  String get layoutTitle => 'मांडणी';
 
   @override
-  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+  String get layoutDesc => 'बारवरील बटणे निवडा, हलवा आणि लपवा';
 
   @override
   String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+      'ते हलविण्यासाठी बटण ड्रॅग करा (टच स्क्रीनवर प्रथम धरा). कापण्यासाठी, हलविण्यासाठी किंवा लपवण्यासाठी एकावर टॅप करा';
 
   @override
   String layoutDropInto(String zone) {
-    return 'Drop in: $zone';
+    return 'ड्रॉप इन: $zone';
   }
 
   @override
   String layoutCutting(String name) {
-    return 'Moving $name. Press a paste button to place it';
+    return 'हलवित आहे $name. ते ठेवण्यासाठी पेस्ट बटण दाबा';
   }
 
   @override
-  String get layoutTitleFixed => 'Title';
+  String get layoutTitleFixed => 'शीर्षक';
 
   @override
-  String get layoutZoneTopStart => 'Top bar, before the title';
+  String get layoutZoneTopStart => 'शीर्ष पट्टी, शीर्षकाच्या आधी';
 
   @override
-  String get layoutZoneTopEnd => 'Top bar, after the title';
+  String get layoutZoneTopEnd => 'शीर्ष बार, शीर्षक नंतर';
 
   @override
-  String get layoutZoneBottomStart => 'Bottom bar, left';
+  String get layoutZoneBottomStart => 'तळ बार, डावीकडे';
 
   @override
-  String get layoutZoneBottomEnd => 'Bottom bar, right';
+  String get layoutZoneBottomEnd => 'तळ बार, उजवीकडे';
 
   @override
-  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+  String get layoutZoneSecondRow => 'लपलेले: सामान्य दृश्यात दुसरी पंक्ती';
 
   @override
-  String get layoutZoneOverflow => 'Hidden: in the more menu';
+  String get layoutZoneOverflow => 'लपवलेले: अधिक मेनूमध्ये';
 
   @override
-  String get layoutEmptyZone => 'Drop buttons here';
+  String get layoutEmptyZone => 'येथे बटणे ड्रॉप करा';
 
   @override
-  String get layoutCut => 'Cut';
+  String get layoutCut => 'कट';
 
   @override
-  String get layoutPaste => 'Paste here';
+  String get layoutPaste => 'येथे पेस्ट करा';
 
   @override
-  String get layoutHide => 'Hide';
+  String get layoutHide => 'लपवा';
 
   @override
   String layoutMoveTo(String zone) {
-    return 'Move to $zone';
+    return '$zone वर हलवा';
   }
 
   @override
-  String get layoutReset => 'Reset to default';
+  String get layoutReset => 'डीफॉल्टवर रीसेट करा';
 
   @override
-  String get layoutMore => 'More';
+  String get layoutMore => 'अधिक';
 
   @override
-  String get sourceWhyAction => 'Why no alert?';
+  String get sourceWhyAction => 'अलर्ट का नाही?';
 
   @override
-  String get sourceWhyStatus => 'Status';
+  String get sourceWhyStatus => 'स्थिती';
 
   @override
-  String get sourceWhyLastCheck => 'Last checked';
+  String get sourceWhyLastCheck => 'शेवटचे तपासले';
 
   @override
-  String get sourceWhyNever => 'Not yet';
+  String get sourceWhyNever => 'अजून नाही';
 
   @override
-  String get sourceWhyNextCheck => 'Next check';
+  String get sourceWhyNextCheck => 'पुढील तपासा';
 
   @override
-  String get sourceWhyNewest => 'Newest at the source';
+  String get sourceWhyNewest => 'स्त्रोतावर सर्वात नवीन';
 
   @override
-  String get sourceWhyProgress => 'Your progress';
+  String get sourceWhyProgress => 'तुमची प्रगती';
 
   @override
-  String get sourceWhyListStatus => 'List status';
+  String get sourceWhyListStatus => 'सूची स्थिती';
 
   @override
-  String get sourceWhyFailures => 'Failed checks in a row';
+  String get sourceWhyFailures => 'एका ओळीत अयशस्वी चेक';
 
   @override
-  String get sourceWhyLastRelease => 'Last new release seen';
+  String get sourceWhyLastRelease => 'शेवटचे नवीन रिलीझ पाहिले';
 
   @override
   String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+      'स्रोताने त्याची यादी केल्यावर आणि पुढील चेक रन होताच एक नवीन प्रकाशन येथे दिसते.';
 
   @override
   String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+      'स्त्रोत आधीच तुमच्या प्रगतीच्या पुढे आहे, म्हणून तुम्हाला एकदा त्याबद्दल सांगितले होते. पुढील सूचना मिळविण्यासाठी ते वाचा किंवा पहा.';
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+      'हे शीर्षक वरील नियमांद्वारे वगळले आहे. त्यांना सूचना सेटिंग्जमध्ये बदला किंवा तरीही ते चालवण्यासाठी आता तपासा वापरा.';
 
   @override
   String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+      'स्त्रोतापर्यंत पोहोचता येत नाही किंवा काढले गेले आहे, त्यामुळे काहीही तपासले जात नाही.';
 
   @override
-  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+  String get sourceWhyVerdictMuted => 'ही सदस्यता नि:शब्द केली आहे.';
 
   @override
-  String get externalPlayerTitle => 'Open stream elsewhere';
+  String get externalPlayerTitle => 'इतरत्र प्रवाह उघडा';
 
   @override
-  String get externalCopyUrl => 'Copy stream link';
+  String get externalCopyUrl => 'स्ट्रीम लिंक कॉपी करा';
 
   @override
-  String get externalCopied => 'Stream link copied';
+  String get externalCopied => 'स्ट्रीम लिंक कॉपी केली';
 
   @override
-  String get externalChooser => 'Open in another app';
+  String get externalChooser => 'दुसऱ्या ॲपमध्ये उघडा';
 
   @override
-  String get externalVlc => 'Open in VLC';
+  String get externalVlc => 'VLC मध्ये उघडा';
 
   @override
-  String get externalMpv => 'Open in mpv';
+  String get externalMpv => 'mpv मध्ये उघडा';
 
   @override
-  String get externalWebVideoCast => 'Web Video Cast';
+  String get externalWebVideoCast => 'वेब व्हिडिओ कास्ट';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'वेब व्हिडिओ कास्ट ॲपवर प्रवाह पाठवा';
 
   @override
-  String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+  String get externalFailed => 'प्रवाह उघडू शकलो नाही. प्लेअर स्थापित आहे का?';
 
   @override
-  String get addonInstalled => 'Installed';
+  String get addonInstalled => 'स्थापित केले';
 
   @override
-  String get loadFailedActivity => 'Couldn\'t load activity';
+  String get loadFailedActivity => 'क्रियाकलाप लोड करू शकलो नाही';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+  String get loadFailedFavourites =>
+      'आवडी लोड करू शकलो नाही. पुन्हा प्रयत्न करा';
 
   @override
-  String get loadFailedStats => 'Couldn\'t load stats';
+  String get loadFailedStats => 'आकडेवारी लोड करू शकलो नाही';
 
   @override
-  String get loadFailedReplies => 'Couldn\'t load replies';
+  String get loadFailedReplies => 'प्रत्युत्तरे लोड करू शकलो नाही';
 
   @override
-  String get cantBeUndone => 'This can\'t be undone.';
+  String get cantBeUndone => 'हे पूर्ववत केले जाऊ शकत नाही.';
 
   @override
-  String get searchTags => 'Search tags';
+  String get searchTags => 'टॅग शोधा';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => 'स्पॉयलर, पाहण्यासाठी टॅप करा';
 
   @override
-  String get mediaVideo => 'Video';
+  String get mediaVideo => 'व्हिडिओ';
 
   @override
-  String get notificationSomeone => 'Someone';
+  String get notificationSomeone => 'कोणीतरी';
 
   @override
-  String get notificationATitle => 'a title';
+  String get notificationATitle => 'एक शीर्षक';
 
   @override
-  String get notificationAddedDetail => 'Was added to AniList';
+  String get notificationAddedDetail => 'AniList मध्ये जोडले गेले';
 
   @override
-  String get updateNoReleases => 'No releases found';
+  String get updateNoReleases => 'कोणतेही प्रकाशन आढळले नाही';
 
   @override
-  String get updateInvalidResponse => 'Invalid update response';
+  String get updateInvalidResponse => 'अवैध अद्यतन प्रतिसाद';
 
   @override
-  String get commentsRateLimited => 'Rate limited';
+  String get commentsRateLimited => 'दर मर्यादित';
 
   @override
-  String get commentsConnectFailed => 'Failed to connect';
+  String get commentsConnectFailed => 'कनेक्ट करण्यात अयशस्वी';
 
   @override
-  String get dnsNoRecords => 'No A records returned';
+  String get dnsNoRecords => 'कोणतेही A रेकॉर्ड परत आले नाहीत';
 
   @override
-  String get importTokenRejected => 'Token rejected';
+  String get importTokenRejected => 'टोकन नाकारले';
 
   @override
-  String get developerRoleLead => 'Lead Developer';
+  String get developerRoleLead => 'लीड डेव्हलपर';
 
   @override
-  String get developerRoleModerator => 'Discord Moderator';
+  String get developerRoleModerator => 'डिसॉर्ड मॉडरेटर';
 
   @override
   String extensionManagerTitle(String type) {
-    return '$type manager';
+    return '$type व्यवस्थापक';
   }
 
   @override
   String extensionsOfType(String type) {
-    return '$type extensions';
+    return '$type विस्तार';
   }
 
   @override
   String extensionSettingsTitle(String name) {
-    return '$name settings';
+    return '$name सेटिंग्ज';
   }
 
   @override
   String extensionNoSettings(String name) {
-    return '$name doesn\'t provide any settings.';
+    return '$name कोणतीही सेटिंग प्रदान करत नाही.';
   }
 
   @override
   String notificationAired(String episode, String title) {
-    return 'Episode $episode of $title aired';
+    return '$title चा भाग $episode प्रसारित झाला';
   }
 
   @override
   String notificationAiredDetail(String episode) {
-    return 'Episode $episode aired';
+    return 'भाग $episode प्रसारित';
   }
 
   @override
   String notificationAdded(String title) {
-    return '$title was added to AniList';
+    return '$title AniList मध्ये जोडले गेले';
   }
 
   @override
   String updateNotFound(String message) {
-    return 'Update server couldn\'t find that release: $message';
+    return 'अद्यतन सर्व्हरला ते प्रकाशन सापडले नाही: $message';
   }
 
   @override
-  String get installStepJre => 'Java runtime';
+  String get installStepJre => 'जावा रनटाइम';
 
   @override
-  String get installStepCore => 'Runtime core';
+  String get installStepCore => 'रनटाइम कोर';
 
   @override
   String installStepsProgress(int current, int total) {
-    return 'Step $current of $total';
+    return 'पायरी $current पैकी $total';
   }
 
   @override
-  String get stepWaiting => 'Waiting';
+  String get stepWaiting => 'वाट पाहत आहे';
 
   @override
-  String get stepChecking => 'Checking…';
+  String get stepChecking => 'तपासत आहे...';
 
   @override
-  String get stepUpToDate => 'Up to date';
+  String get stepUpToDate => 'अद्ययावत';
 
   @override
   String stepUpToDateWith(String detail) {
-    return 'Up to date · $detail';
+    return 'अद्ययावत · $detail';
   }
 
   @override
-  String get stepWillInstall => 'Will be installed';
+  String get stepWillInstall => 'स्थापित केले जातील';
 
   @override
-  String get stepWillUpdate => 'Will be updated';
+  String get stepWillUpdate => 'अपडेट केले जाईल';
 
   @override
   String stepWillUpdateTo(String version) {
-    return 'Will be updated to $version';
+    return '$version वर अद्यतनित केले जाईल';
   }
 
   @override
-  String get stepInstalled => 'Installed';
+  String get stepInstalled => 'स्थापित केले';
 
   @override
-  String get stepNotNeeded => 'Not needed here';
+  String get stepNotNeeded => 'इथे गरज नाही';
 
   @override
-  String get stepFailed => 'Failed';
+  String get stepFailed => 'अयशस्वी';
 
   @override
   String stepFailedWith(String reason) {
-    return 'Failed: $reason';
+    return 'अयशस्वी: $reason';
   }
 
   @override
   String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+      'हे Java रनटाइम आणि शेअर केलेल्या रनटाइम कोरवर चालते. ते प्रथम स्थापित केले जातात आणि ते बदलल्यास अद्यतनित केले जातात.';
 
   @override
   String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+      'हा व्यवस्थापक ज्या रनटाइमवर चालतो त्यात अपडेट आहे.';
 
   @override
-  String get removeJvmTitle => 'Remove the Java runtime?';
+  String get removeJvmTitle => 'Java रनटाइम काढायचा?';
 
   @override
   String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+      'डेस्कटॉप विस्तार व्यवस्थापक ते पुन्हा स्थापित होईपर्यंत कार्य करणे थांबवतात. पुढच्या वेळी तुम्ही इंस्टॉल करता किंवा उघडता तेव्हा ते पुन्हा डाउनलोड केले जाते.';
 
   @override
-  String get runtimePreparing => 'Preparing the runtime…';
+  String get runtimePreparing => 'रनटाइम तयार करत आहे...';
 
   @override
-  String get calendarAll => 'All';
+  String get calendarAll => 'सर्व';
 
   @override
-  String get calendarAnime => 'Anime';
+  String get calendarAnime => 'ॲनिमी';
 
   @override
-  String get calendarManga => 'Manga';
+  String get calendarManga => 'मंगा';
 
   @override
-  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+  String get readerCloudflare => 'ब्राउझरमध्ये उघडा (क्लाउडफ्लेअर चेक)';
 
   @override
   String get badgeBoardHint =>
-      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+      'पहिल्या कार्डच्या एका कोपऱ्यावर बॅज ड्रॅग करा किंवा तो हलवण्यासाठी आधीपासून असलेला बॅज ड्रॅग करा. बॅज ठिकाणे अदलाबदल करतात, त्यामुळे कोणीही कधीही ओव्हरलॅप होत नाही. तो चालू किंवा बंद करण्यासाठी खालील बॅजवर टॅप करा.';
 
   @override
-  String get statusAuto => 'Auto';
+  String get statusAuto => 'ऑटो';
 
   @override
-  String get unreadCounter => 'Unread counter';
+  String get unreadCounter => 'न वाचलेले काउंटर';
 
   @override
   String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+      'पोस्टरवर किती भाग किंवा अध्याय बाकी आहेत ते दर्शवा';
 
   @override
-  String get settingsShortcuts => 'Keyboard shortcuts';
+  String get settingsShortcuts => 'कीबोर्ड शॉर्टकट';
 
   @override
-  String get settingsShortcutsDesc => 'See, change and turn off every key';
+  String get settingsShortcutsDesc => 'प्रत्येक की पहा, बदला आणि बंद करा';
 
   @override
-  String get shortcutGroupApp => 'App';
+  String get shortcutGroupApp => 'ॲप';
 
   @override
-  String get shortcutGroupPlayer => 'Video player';
+  String get shortcutGroupPlayer => 'व्हिडिओ प्लेयर';
 
   @override
-  String get shortcutGroupReader => 'Reader';
+  String get shortcutGroupReader => 'वाचक';
 
   @override
-  String get shortcutsEnableApp => 'App shortcuts';
+  String get shortcutsEnableApp => 'ॲप शॉर्टकट';
 
   @override
-  String get shortcutsEnablePlayer => 'Player shortcuts';
+  String get shortcutsEnablePlayer => 'प्लेअर शॉर्टकट';
 
   @override
-  String get shortcutsEnableReader => 'Reader shortcuts';
+  String get shortcutsEnableReader => 'वाचक शॉर्टकट';
 
   @override
-  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+  String get shortcutsEnableDesc => 'या गटातील प्रत्येक की चालू किंवा बंद करा';
 
   @override
-  String get shortcutNotSet => 'Not set';
+  String get shortcutNotSet => 'सेट नाही';
 
   @override
-  String get shortcutAddKey => 'Add a key';
+  String get shortcutAddKey => 'एक कळ जोडा';
 
   @override
-  String get shortcutResetOne => 'Reset to default';
+  String get shortcutResetOne => 'डीफॉल्टवर रीसेट करा';
 
   @override
-  String get shortcutClearKeys => 'Remove all keys';
+  String get shortcutClearKeys => 'सर्व कळा काढा';
 
   @override
-  String get shortcutResetAll => 'Reset all shortcuts';
+  String get shortcutResetAll => 'सर्व शॉर्टकट रीसेट करा';
 
   @override
-  String get shortcutResetAllDesc => 'Put every key back to its default';
+  String get shortcutResetAllDesc => 'प्रत्येक की त्याच्या डीफॉल्टवर परत ठेवा';
 
   @override
-  String get shortcutPress => 'Press the key or combination you want';
+  String get shortcutPress => 'तुम्हाला हवी असलेली कळ किंवा संयोजन दाबा';
 
   @override
   String get shortcutPressHint =>
-      'Each combination can only belong to one action, so taking one moves it.';
+      'प्रत्येक संयोजन फक्त एका क्रियेशी संबंधित असू शकते, म्हणून एक घेतल्याने ती हलते.';
 
   @override
-  String get shortcutSeekPercent => 'Jump to a point of the video';
+  String get shortcutSeekPercent => 'व्हिडिओच्या एका बिंदूवर जा';
 
   @override
-  String get shortcutSeekPercentKeys => '0 – 9';
+  String get shortcutSeekPercentKeys => '० - ९';
 
   @override
-  String get shortcutAppBack => 'Go back';
+  String get shortcutAppBack => 'परत जा';
 
   @override
-  String get shortcutAppFullscreen => 'Toggle fullscreen';
+  String get shortcutAppFullscreen => 'फुलस्क्रीन टॉगल करा';
 
   @override
-  String get shortcutAppGlass => 'Toggle glass mode';
+  String get shortcutAppGlass => 'ग्लास मोड टॉगल करा';
 
   @override
-  String get shortcutAppMaterialYou => 'Toggle Material You';
+  String get shortcutAppMaterialYou => 'टॉगल मटेरियल तुम्ही';
 
   @override
-  String get shortcutAppDark => 'Toggle dark mode';
+  String get shortcutAppDark => 'गडद मोड टॉगल करा';
 
   @override
-  String get shortcutAppOled => 'Toggle OLED black';
+  String get shortcutAppOled => 'OLED ब्लॅक टॉगल करा';
 
   @override
-  String get shortcutAppSearch => 'Open search';
+  String get shortcutAppSearch => 'शोध उघडा';
 
   @override
-  String get shortcutAppSettings => 'Open settings';
+  String get shortcutAppSettings => 'सेटिंग्ज उघडा';
 
   @override
-  String get shortcutAppDownloads => 'Open downloads';
+  String get shortcutAppDownloads => 'डाउनलोड उघडा';
 
   @override
-  String get shortcutAppNotifications => 'Open notifications';
+  String get shortcutAppNotifications => 'सूचना उघडा';
 
   @override
-  String get shortcutAppIncognito => 'Toggle incognito';
+  String get shortcutAppIncognito => 'गुप्त टॉगल करा';
 
   @override
-  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+  String get shortcutAppShortcuts => 'कीबोर्ड शॉर्टकट दाखवा';
 
   @override
-  String get shortcutPlayerPlayPause => 'Play or pause';
+  String get shortcutPlayerPlayPause => 'खेळा किंवा विराम द्या';
 
   @override
-  String get shortcutPlayerSeekForward => 'Seek forward';
+  String get shortcutPlayerSeekForward => 'पुढे शोधा';
 
   @override
-  String get shortcutPlayerSeekBack => 'Seek back';
+  String get shortcutPlayerSeekBack => 'मागे घ्या';
 
   @override
-  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+  String get shortcutPlayerSeekForwardLong => '30 सेकंद पुढे जा';
 
   @override
-  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+  String get shortcutPlayerSeekBackLong => '30 सेकंद मागे घ्या';
 
   @override
-  String get shortcutPlayerFrameForward => 'Next frame';
+  String get shortcutPlayerFrameForward => 'पुढील फ्रेम';
 
   @override
-  String get shortcutPlayerFrameBack => 'Previous frame';
+  String get shortcutPlayerFrameBack => 'मागील फ्रेम';
 
   @override
-  String get shortcutPlayerVolumeUp => 'Volume up';
+  String get shortcutPlayerVolumeUp => 'आवाज वाढवा';
 
   @override
-  String get shortcutPlayerVolumeDown => 'Volume down';
+  String get shortcutPlayerVolumeDown => 'आवाज कमी करा';
 
   @override
-  String get shortcutPlayerMute => 'Mute';
+  String get shortcutPlayerMute => 'नि:शब्द करा';
 
   @override
-  String get shortcutPlayerFullscreen => 'Fullscreen';
+  String get shortcutPlayerFullscreen => 'फुलस्क्रीन';
 
   @override
-  String get shortcutPlayerNext => 'Next episode';
+  String get shortcutPlayerNext => 'पुढचा भाग';
 
   @override
-  String get shortcutPlayerPrevious => 'Previous episode';
+  String get shortcutPlayerPrevious => 'मागील भाग';
 
   @override
-  String get shortcutPlayerSkip => 'Skip intro or ending';
+  String get shortcutPlayerSkip => 'परिचय किंवा शेवट वगळा';
 
   @override
-  String get shortcutPlayerPanel => 'Episode list';
+  String get shortcutPlayerPanel => 'भाग सूची';
 
   @override
-  String get shortcutPlayerSpeedUp => 'Faster playback';
+  String get shortcutPlayerSpeedUp => 'जलद प्लेबॅक';
 
   @override
-  String get shortcutPlayerSpeedDown => 'Slower playback';
+  String get shortcutPlayerSpeedDown => 'हळू प्लेबॅक';
 
   @override
-  String get shortcutPlayerSpeedReset => 'Normal speed';
+  String get shortcutPlayerSpeedReset => 'सामान्य गती';
 
   @override
-  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+  String get shortcutPlayerSubtitleToggle => 'उपशीर्षके चालू किंवा बंद';
 
   @override
-  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+  String get shortcutPlayerSubtitleCycle => 'पुढील उपशीर्षक ट्रॅक';
 
   @override
-  String get shortcutPlayerAudioCycle => 'Next audio track';
+  String get shortcutPlayerAudioCycle => 'पुढील ऑडिओ ट्रॅक';
 
   @override
-  String get shortcutPlayerStreamCycle => 'Next stream';
+  String get shortcutPlayerStreamCycle => 'पुढील प्रवाह';
 
   @override
-  String get shortcutPlayerFit => 'Change video fit';
+  String get shortcutPlayerFit => 'व्हिडिओ फिट बदला';
 
   @override
-  String get shortcutReaderRight => 'Page to the right';
+  String get shortcutReaderRight => 'उजवीकडे पृष्ठ';
 
   @override
-  String get shortcutReaderLeft => 'Page to the left';
+  String get shortcutReaderLeft => 'डावीकडे पृष्ठ';
 
   @override
-  String get shortcutReaderNextPage => 'Next page';
+  String get shortcutReaderNextPage => 'पुढील पान';
 
   @override
-  String get shortcutReaderPreviousPage => 'Previous page';
+  String get shortcutReaderPreviousPage => 'मागील पृष्ठ';
 
   @override
-  String get shortcutReaderControls => 'Show or hide controls';
+  String get shortcutReaderControls => 'नियंत्रणे दाखवा किंवा लपवा';
 
   @override
-  String get shortcutReaderNextChapter => 'Next chapter';
+  String get shortcutReaderNextChapter => 'पुढचा अध्याय';
 
   @override
-  String get shortcutReaderPreviousChapter => 'Previous chapter';
+  String get shortcutReaderPreviousChapter => 'मागील प्रकरण';
 
   @override
   String shortcutTaken(String action) {
-    return 'Taken from $action';
+    return '$action वरून घेतलेले';
   }
 
   @override
-  String get incognitoTurnedOn => 'Incognito mode on';
+  String get incognitoTurnedOn => 'गुप्त मोड चालू आहे';
 
   @override
-  String get incognitoTurnedOff => 'Incognito mode off';
+  String get incognitoTurnedOff => 'गुप्त मोड बंद';
 
   @override
-  String get onHoldAnime => 'On hold anime';
+  String get onHoldAnime => 'ऑन होल्ड ॲनिम';
 
   @override
-  String get onHoldManga => 'On hold manga';
+  String get onHoldManga => 'ऑन होल्ड मंगा';
 
   @override
-  String get droppedAnime => 'Dropped anime';
+  String get droppedAnime => 'ॲनिम टाकला';
 
   @override
-  String get droppedManga => 'Dropped manga';
+  String get droppedManga => 'मंगा टाकला';
 
   @override
-  String get generalSectionDesktop => 'Desktop';
+  String get generalSectionDesktop => 'डेस्कटॉप';
 
   @override
-  String get closeAction => 'When the window is closed';
+  String get closeAction => 'जेव्हा खिडकी बंद असते';
 
   @override
-  String get closeActionQuit => 'Quit the app';
+  String get closeActionQuit => 'ॲप सोडा';
 
   @override
-  String get closeActionWhenBusy =>
-      'Keep running in the tray while something is running';
+  String get closeActionWhenBusy => 'ट्रे मध्ये काहीतरी चालू असताना चालू ठेवा';
 
   @override
-  String get closeActionAlways => 'Always keep running in the tray';
+  String get closeActionAlways => 'ट्रे मध्ये नेहमी चालू ठेवा';
 
   @override
   String get closeActionNoTray =>
-      'The system tray is not available here, so the app quits when closed';
+      'सिस्टीम ट्रे येथे उपलब्ध नाही, त्यामुळे ॲप बंद झाल्यावर बंद होतो';
 
   @override
-  String get gamepadNav => 'Gamepad navigation';
+  String get gamepadNav => 'गेमपॅड नेव्हिगेशन';
 
   @override
   String get gamepadNavDesc =>
-      'Move around the app and control the player with a game controller';
+      'ॲपभोवती फिरा आणि गेम कंट्रोलरसह प्लेअर नियंत्रित करा';
 
   @override
-  String get trayShow => 'Show Dartotsu';
+  String get trayShow => 'डार्टोत्सु दाखवा';
 
   @override
-  String get trayQuit => 'Quit';
+  String get trayQuit => 'सोडा';
 
   @override
-  String get trayIdle => 'Nothing running';
+  String get trayIdle => 'काहीही चालत नाही';
 
   @override
   String trayDownloading(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Downloading $count items',
-      one: 'Downloading $count item',
+      other: '$count आयटम डाउनलोड करत आहे',
+      one: '$count आयटम डाउनलोड करत आहे',
     );
     return '$_temp0';
   }
 
   @override
-  String get traySyncing => 'Syncing your lists';
+  String get traySyncing => 'तुमच्या याद्या समक्रमित करत आहे';
 
   @override
-  String get trayUpdating => 'Updating the app';
+  String get trayUpdating => 'ॲप अपडेट करत आहे';
 
   @override
-  String get trayPlaying => 'Playing in a small window';
+  String get trayPlaying => 'छोट्या खिडकीत खेळत आहे';
 
   @override
-  String get traySearch => 'Search';
+  String get traySearch => 'शोधा';
 
   @override
-  String get trayPauseDownloads => 'Pause downloads';
+  String get trayPauseDownloads => 'डाउनलोड थांबवा';
 
   @override
-  String get trayResumeDownloads => 'Resume downloads';
+  String get trayResumeDownloads => 'डाउनलोड पुन्हा सुरू करा';
 
   @override
-  String get playerDownloadTitle => 'Downloading the player';
+  String get playerDownloadTitle => 'प्लेअर डाउनलोड करत आहे';
 
   @override
   String get playerDownloadBody =>
-      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+      'डार्टोत्सु एकदा त्याचे व्हिडिओ इंजिन आणते. ते तयार होताच प्लेबॅक सुरू होते.';
 
   @override
-  String get playerDownloadStarting => 'Starting the download…';
+  String get playerDownloadStarting => 'डाउनलोड सुरू करत आहे...';
 
   @override
-  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+  String get playerDownloadFailedTitle => 'खेळाडू मिळू शकला नाही';
 
   @override
   String get playerDownloadFailedBody =>
-      'Check your connection and try again. The download picks up where it stopped.';
+      'तुमचे कनेक्शन तपासा आणि पुन्हा प्रयत्न करा. ते जिथे थांबले तिथे डाउनलोड सुरू होते.';
 
   @override
-  String get playerDownloadRetry => 'Try again';
+  String get playerDownloadRetry => 'पुन्हा प्रयत्न करा';
 
   @override
-  String get playerDownloadCopy => 'Copy details';
+  String get playerDownloadCopy => 'तपशील कॉपी करा';
 
   @override
-  String get removePlayerTitle => 'Remove the player?';
+  String get removePlayerTitle => 'प्लेअर काढायचा?';
 
   @override
   String get removePlayerMessage =>
-      'Videos can\'t play until the player is downloaded again.';
+      'प्लेअर पुन्हा डाउनलोड होईपर्यंत व्हिडिओ प्ले होऊ शकत नाहीत.';
 
   @override
-  String get trailerLoading => 'Loading the trailer…';
+  String get trailerLoading => 'ट्रेलर लोड करत आहे...';
 
   @override
   String get trailerFailed =>
-      'Could not play the trailer here, opening it in the browser';
+      'ब्राउझरमध्ये उघडून, येथे ट्रेलर प्ले करू शकलो नाही';
 }
