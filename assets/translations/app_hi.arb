@@ -3003,7 +3003,7 @@
     "sourceWhyLastRelease": "अंतिम नई रिलीज़ देखी गई",
     "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs।",
     "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert।",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway।",
+    "sourceWhyVerdictSkipped": "यह शीर्षक ऊपर के नियमों में छोड़ दिया गया है। सूचनाओं की सेटिंग में इन्हें बदलें, या फिर भी जाँचने के लिए 'अभी जाँचें' का उपयोग करें।",
     "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked।",
     "sourceWhyVerdictMuted": "This subscription is muted।",
     "externalPlayerTitle": "स्ट्रीम कहीं और खोलें",

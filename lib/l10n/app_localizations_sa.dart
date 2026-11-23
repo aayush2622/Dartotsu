@@ -8503,7 +8503,7 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'उपरिष्टाद् नियमैः एतत् उपाधिं लङ्घितम् अस्ति । सूचनासेटिंग्स् मध्ये तान् परिवर्तयन्तु, अथवा तथापि चालयितुं Check now इत्यस्य उपयोगं कुर्वन्तु ।';
+      'उपरिष्टाद् नियमैः एतत् शीर्षकं लङ्घितम् अस्ति । सूचनासेटिङ्ग्स् मध्ये तान् परिवर्तयन्तु, अथवा तथापि परीक्षार्थं "अधुना परीक्ष्यताम्" इत्यस्य उपयोगं कुरुत ।';
 
   @override
   String get sourceWhyVerdictBroken =>
@@ -8528,7 +8528,7 @@ class AppLocalizationsSa extends AppLocalizations {
   String get externalVlc => 'VLC मध्ये उद्घाटितम्';
 
   @override
-  String get externalMpv => 'open in mpv';
+  String get externalMpv => 'mpv मध्ये उद्घाटयतु';
 
   @override
   String get externalWebVideoCast => 'वेब विडियो कास्ट';

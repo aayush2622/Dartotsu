@@ -8453,7 +8453,7 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway।';
+      'এই শিরোনামটি উপরের নিয়মগুলিতে এড়িয়ে যাওয়া হয়েছে। বিজ্ঞপ্তি সেটিংসে এগুলো পরিবর্তন করুন, অথবা যেকোনোভাবে চালাতে \'এখনই পরীক্ষা করুন\' ব্যবহার করুন।';
 
   @override
   String get sourceWhyVerdictBroken =>

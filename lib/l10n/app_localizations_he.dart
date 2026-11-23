@@ -8404,7 +8404,7 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'הכללים שלמעלה מדלגים על כותרת זו. שנה אותם בהגדרות ההתראה, או השתמש ב- Check now כדי להפעיל אותו בכל זאת.';
+      'הכללים שלמעלה מדלגים על כותרת זו. שנה אותם בהגדרות ההתראות, או השתמש ב"בדוק עכשיו" כדי להפעיל אותה בכל זאת.';
 
   @override
   String get sourceWhyVerdictBroken =>
@@ -8435,10 +8435,10 @@ class AppLocalizationsHe extends AppLocalizations {
   String get externalWebVideoCast => 'קאסט וידאו באינטרנט';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'שלח את הזרם לאפליקציית Web Video Cast';
 
   @override
-  String get externalFailed => 'Couldn\'t open the stream. האם הנגן מותקן?';
+  String get externalFailed => 'לא ניתן היה לפתוח את הזרם. האם הנגן מותקן?';
 
   @override
   String get addonInstalled => 'מותקן';
@@ -8447,7 +8447,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get loadFailedActivity => 'לא ניתן היה לטעון את הפעילות';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. נסה שוב';
+  String get loadFailedFavourites => 'לא ניתן היה לטעון את המועדפים. נסה שוב';
 
   @override
   String get loadFailedStats => 'לא ניתן היה לטעון נתונים סטטיסטיים';

@@ -8566,7 +8566,7 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'Αυτός ο τίτλος παραλείπεται από τους παραπάνω κανόνες. Αλλάξτε τα στις ρυθμίσεις ειδοποιήσεων ή χρησιμοποιήστε το Check now για να το εκτελέσετε ούτως ή άλλως.';
+      'Αυτός ο τίτλος παραλείπεται από τους παραπάνω κανόνες. Αλλάξτε τους στις ρυθμίσεις ειδοποιήσεων ή χρησιμοποιήστε το «Έλεγχος τώρα» για να τον ελέγξετε οπωσδήποτε.';
 
   @override
   String get sourceWhyVerdictBroken =>

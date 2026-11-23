@@ -8471,7 +8471,7 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway।';
+      'यह शीर्षक ऊपर के नियमों में छोड़ दिया गया है। सूचनाओं की सेटिंग में इन्हें बदलें, या फिर भी जाँचने के लिए \'अभी जाँचें\' का उपयोग करें।';
 
   @override
   String get sourceWhyVerdictBroken =>

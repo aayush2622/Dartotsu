@@ -3003,7 +3003,7 @@
     "sourceWhyLastRelease": "সর্বশেষ নতুন রিলিজ দেখা গেছে",
     "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs।",
     "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert।",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway।",
+    "sourceWhyVerdictSkipped": "এই শিরোনামটি উপরের নিয়মগুলিতে এড়িয়ে যাওয়া হয়েছে। বিজ্ঞপ্তি সেটিংসে এগুলো পরিবর্তন করুন, অথবা যেকোনোভাবে চালাতে 'এখনই পরীক্ষা করুন' ব্যবহার করুন।",
     "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked।",
     "sourceWhyVerdictMuted": "This subscription is muted।",
     "externalPlayerTitle": "অন্য কোথাও ওপেন স্ট্রিম",
