@@ -241,6 +241,30 @@ Media mapMangaBakaSeries(Map<String, dynamic> s) {
   return media;
 }
 
+Media mapMangaBakaRecommendation(Map<String, dynamic> r) {
+  final titles = (r['titles'] as List?) ?? const [];
+  final main = _primary(titles);
+  final english = _english(titles) ?? main;
+  final score = (r['score'] as num?)?.toDouble();
+  final id = r['id'];
+  final type = (r['media_type'] as String?) ?? 'manga';
+  final publishedYear = (r['published_year'] as num?)?.toInt();
+
+  final media = Media(
+    id: '$id',
+    name: english,
+    nameRomaji: main,
+    cover: _cover(r['cover_image'] ?? r['cover']),
+    isAdult: false,
+    meanScore: score == null || score <= 0 ? null : score.round(),
+    format: type.toUpperCase(),
+    shareLink: (r['canonical_url'] as String?) ?? mangaBakaShareLink(id),
+    startDate: publishedYear != null ? Date(year: publishedYear) : null,
+  );
+  mangaBakaExtras[media] = MangaBakaExtras();
+  return media;
+}
+
 void applyMangaBakaEntry(Media media, Map<String, dynamic> e, int scale) {
   final rating = (e['rating'] as num?)?.toDouble() ?? 0;
   media

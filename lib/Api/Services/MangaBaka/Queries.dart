@@ -192,6 +192,33 @@ class MangaBakaQueries extends Queries {
     return _withList(_media(body));
   }
 
+  Future<List<Media>> recommendations({int limit = 13}) async {
+    if (!client.hasToken) return const [];
+    try {
+      final body = await client.get(
+        '/my/series/recommendations',
+        query: {
+          'limit': '$limit',
+          'page': '1',
+          'sort_by': 'relevance_desc',
+        },
+        multi: _nsfwFilter,
+      );
+      final results = (body['results'] as List?) ?? const [];
+      if (results.isEmpty) return const [];
+      final seen = <String>{};
+      final items = [
+        for (final r in results)
+          if (r is Map && seen.add('${r['id']}'))
+            mapMangaBakaRecommendation(r.cast<String, dynamic>()),
+      ];
+      return await _withList(items);
+    } catch (e, st) {
+      logError('MangaBakaQueries.recommendations', e, st);
+      return const [];
+    }
+  }
+
   late final _library = LibraryCache<List<Media>>(load: (_) => _loadLibrary());
 
   Future<List<Media>> library() =>
@@ -369,6 +396,13 @@ class MangaBakaQueries extends Queries {
     };
     final jobs = <(String, SectionJob)>[
       ('Continue Reading', job('Continue Reading', {'CURRENT', 'REPEATING'})),
+      (
+        'Recommended',
+        () async {
+          final items = await recommendations();
+          return titledSection('Recommended', items);
+        },
+      ),
       ('Planned Manga', job('Planned Manga', {'PLANNING'})),
       ('On Hold', job('On Hold', {'PAUSED'})),
       ('Dropped', job('Dropped', {'DROPPED'})),
