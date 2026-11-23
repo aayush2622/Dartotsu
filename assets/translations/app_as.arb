@@ -254,7 +254,7 @@
     "dcMethodToken": "একাউণ্ট টোকেন",
     "dcInUse": "ব্যৱহাৰত",
     "dcRecommended": "পৰামৰ্শ দিয়া হৈছে",
-    "dcConnecting": "সংযোগ...",
+    "dcConnecting": "সংযোগ…",
     "dcDisconnected": "সংযোগ কৰা হোৱা নাই",
     "dcSignedInAs": "{name} হিচাপে চাইন ইন কৰা হৈছে",
     "@dcSignedInAs": {
@@ -301,7 +301,7 @@
     "settingsSyncCopyCode": "ইয়াক কপি কৰিবলৈ ক'ডটো টেপ কৰক",
     "settingsSyncCancel": "বাতিল কৰক",
     "settingsSyncStatSettings": "ছেটিংছ",
-    "settingsSyncStatTitles": "শিৰোনাম",
+    "settingsSyncStatTitles": "শিৰোনামসমূহ",
     "settingsSyncStatShelf": "ৰিজ্যুম কৰক",
     "settingsSyncUploaded": "{device} ৰ পৰা {time} আপলোড কৰা হৈছে",
     "@settingsSyncUploaded": {
@@ -342,7 +342,7 @@
     "settingsSyncThisDevice": "এই ডিভাইচটো",
     "settingsSyncCount": "{count, plural, =0{চাৰ্ভাৰত একো নাই} =1{চাৰ্ভাৰত 1 ছেটিং} other{চাৰ্ভাৰত {count} সংহতিসমূহ}}",
     "settingsSyncNow": "এতিয়া ছিঙ্ক কৰক",
-    "settingsSyncRunning": "ছিংকিং...",
+    "settingsSyncRunning": "ছিংকিং…",
     "settingsSyncNever": "এতিয়াও ছিংক কৰা হোৱা নাই",
     "settingsSyncLast": "শেষত সিঙ্ক কৰা হৈছে {time}",
     "@settingsSyncLast": {
@@ -1098,7 +1098,7 @@
     "exportListsDesc": "Aniyomi, Mihon বা Kotatsu বেকআপলৈ",
     "sectionBrowse": "ব্ৰাউজ",
     "readingTab": "পঢ়াৰ টেব",
-    "readingTabDesc": "তৃতীয় টেবে কোনবোৰ এক্সটেনছন দেখুৱাব",
+    "readingTabDesc": "শেষৰ টেবে কোনবোৰ এক্সটেনচন দেখুৱায়",
     "firstTab": "প্ৰথম টেব",
     "firstTabDesc": "প্ৰথম টেবে কোনবোৰ এক্সটেনচন দেখুৱায়। ইয়াত মাংগা বাছি লওক আৰু বাৰৰ পৰা এনিমে ড্ৰপ কৰিবলৈ পঢ়া টেবত উপন্যাস বাছি লওক",
     "novelExtensions": "উপন্যাস সম্প্ৰসাৰণ",
@@ -1300,8 +1300,8 @@
     "mostWatchedShowsMonth": "এই মাহত আটাইতকৈ বেছি চোৱা শ্ব’",
     "trendingThisWeek": "এই সপ্তাহত ট্ৰেণ্ডিং",
     "mostWatchedThisMonth": "এই মাহত আটাইতকৈ বেছি চোৱা",
-    "repoLinksAdded": "ৰিপো লিংক সফলভাৱে যোগ হৈছে!",
-    "repoLinkConfirm": "এই ভঁৰাল যোগ কৰক?\n\n__পি০__\n\nকেৱল আপুনি বিশ্বাস কৰা উৎসৰ পৰা ভঁৰাল যোগ কৰক।",
+    "repoLinksAdded": "ৰেপো লিংক যোগ কৰা হৈছে",
+    "repoLinkConfirm": "এই ভঁৰাল যোগ কৰক?\n\n{url}\n\nকেৱল আপুনি বিশ্বাস কৰা উৎসৰ পৰা ভঁৰাল যোগ কৰক।",
     "@repoLinkConfirm": {
         "placeholders": {
             "url": {
@@ -1427,7 +1427,7 @@
     "syncDeleteAction": "মচি পেলাওক",
     "syncToDelete": "মচি পেলাবলৈ",
     "syncDeletedNote": "ডিলিট কৰা হ'ব",
-    "syncWillRemove": "{count} {name} ৰ পৰা মচি পেলোৱা হব।",
+    "syncWillRemove": "{count} ৰ পৰা {name} মচি পেলোৱা হব",
     "@syncWillRemove": {
         "placeholders": {
             "count": {
@@ -1572,7 +1572,7 @@
     "commentsViewReplies": "{count}টা উত্তৰ চোৱা",
     "commentsHideReplies": "উত্তৰ লুকুওৱা",
     "commentsLoadMore": "অধিক মন্তব্য লোড কৰা",
-    "commentsEmpty": "এতিয়াও কোনো মন্তব্য নাই। প্ৰথমজন হোৱা!",
+    "commentsEmpty": "এতিয়াও কোনো মন্তব্য নাই",
     "commentsEmptyFiltered": "এই ফিল্টাৰৰ বাবে কোনো মন্তব্য নাই",
     "commentsSignIn": "মন্তব্য পঢ়িবলৈ আৰু লিখিবলৈ AniList-ত ছাইন ইন কৰা",
     "commentsSignInMessage": "মন্তব্য সকলো ছাৰ্ভিচৰ মাজত শ্বেয়াৰ কৰা হয় আৰু তোমাৰ AniList একাউণ্ট ব্যৱহাৰ কৰে।",
@@ -1722,7 +1722,7 @@
     "reactionsPost": "পোষ্ট",
     "reactionsFailed": "ৰিএক্সন আপডেট কৰিব পৰা নগল",
     "settingsWatch": "চোৱা আৰু পঢ়া",
-    "settingsWatchDesc": "পৰ্বৰ তালিকা, উৎস মিলোৱা আৰু পৰ্বৰ বিৱৰণ",
+    "settingsWatchDesc": "এনিমে, মাংগা আৰু উপন্যাস বিকল্প, স্থানীয় খেল আৰু অংশীদাৰী অবিকল্পিত",
     "watchSettingsLayout": "পৰ্বৰ তালিকা",
     "watchSettingsSources": "উৎস",
     "watchSettingsMetadata": "পৰ্বৰ বিৱৰণ",
@@ -1829,8 +1829,8 @@
     "watchStatusBlocked": "চাইটৰ দ্বাৰা ব্লক কৰা হৈছে",
     "watchStatusOffline": "ছাইটত উপস্থিত হ’ব পৰা নাই",
     "watchStatusUntested": "এতিয়াও পৰীক্ষা কৰা হোৱা নাই",
-    "watchStatusTesting": "সংযোগ পৰীক্ষণ...",
-    "watchStatusSolving": "ক্লাউডফ্লেয়াৰ চেক পাছ কৰি...",
+    "watchStatusTesting": "সংযোগ পৰীক্ষণ…",
+    "watchStatusSolving": "ক্লাউডফ্লেয়াৰ চেক পাছ কৰি…",
     "watchSolvedBackground": "ক্লাউডফ্লেয়াৰ পৰীক্ষা পটভূমিত পাছ কৰা হৈছে ({seconds} s)",
     "@watchSolvedBackground": {
         "placeholders": {
@@ -2213,7 +2213,7 @@
         }
     },
     "castTitle": "ডিভাইচলৈ কাষ্ট কৰক",
-    "castSearching": "আপোনাৰ নেটৱৰ্কত ডিভাইচ বিচাৰিছে...",
+    "castSearching": "আপোনাৰ নেটৱৰ্কত ডিভাইচ বিচাৰিছে…",
     "castNoDevices": "কোনো ডিভাইচ পোৱা নগ'ল। টিভি বা Chromecast একেটা ৱাই-ফাইত থকাটো নিশ্চিত কৰক, তাৰ পিছত পুনৰ সন্ধান কৰক।",
     "castRefresh": "আকৌ বিচাৰিব",
     "castFailed": "কাষ্টিং আৰম্ভ কৰিব পৰা নগ’ল",
@@ -2481,7 +2481,7 @@
     "widgetMore": "লগতে চলি আছে",
     "widgetNothing": "এতিয়াও আগবাঢ়িবলৈ একো নাই",
     "downloadStorageTitle": "সংৰক্ষণ",
-    "downloadStorageSummary": "{count, plural, =1{১ ডাউনলোড} other{{count} ডাউনলোড হয়}} · __পি০__",
+    "downloadStorageSummary": "{count, plural, =1{১ ডাউনলোড} other{{count} ডাউনলোড হয়}} {size}",
     "@downloadStorageSummary": {
         "placeholders": {
             "count": {
@@ -2536,7 +2536,7 @@
     "downloadTitle": "ডাউনলোড",
     "downloadMetaOnly": "কেৱল মেটাডাটা",
     "downloadMetaFailed": "শিৰোনাম ফোল্ডাৰ সৃষ্টি কৰিব পৰা নগ'ল",
-    "downloadMetaSaved": "সংৰক্ষণ কৰা হৈছে। আপোনাৰ ফাইলসমূহ {path} ত ৰাখক।",
+    "downloadMetaSaved": "সংৰক্ষণ কৰা হৈছে। আপোনাৰ ফাইলসমূহ {path} ত ৰাখক",
     "@downloadMetaSaved": {
         "placeholders": {
             "path": {
@@ -2546,7 +2546,7 @@
     },
     "downloadAlready": "আগতেই ডাউনলোড হৈছে বা কিউত আছে",
     "downloadPickStream": "কোনটো ষ্ট্ৰীম ডাউনলোড কৰিবা?",
-    "downloadPickSubtitle": "কোনটো ছাবটাইটেল ডাউনলোড কৰিবা?",
+    "downloadPickSubtitle": "কোনবোৰ ছাবটাইটেল ডাউনলোড কৰক?",
     "downloadPickAudio": "কোনটো অডিঅ’ ট্ৰেক ডাউনলোড কৰিবা?",
     "downloadNoAudio": "অতিৰিক্ত অডিঅ’ নাই",
     "downloadAudio": "অডিঅ’",
@@ -2704,7 +2704,7 @@
     },
     "sourceNotifyTooltipOn": "মুক্তিৰ জাননীসমূহ বন্ধ কৰক",
     "sourceNotifyTooltipOff": "নতুন মুক্তিৰ বিষয়ে মোক অৱগত কৰক",
-    "sourceFoundEpisode": "{number} খণ্ডটো {source} ত ওলাইছে।",
+    "sourceFoundEpisode": "{number} খণ্ডটো {source} ত ওলাইছে",
     "@sourceFoundEpisode": {
         "placeholders": {
             "number": {
@@ -2715,7 +2715,7 @@
             }
         }
     },
-    "sourceFoundEpisodes": "{from}–{to} খণ্ডবোৰ {source} ত ওলাইছে।",
+    "sourceFoundEpisodes": "{from}–{to} খণ্ডবোৰ {source} ত ওলাইছে",
     "@sourceFoundEpisodes": {
         "placeholders": {
             "from": {
@@ -2729,7 +2729,7 @@
             }
         }
     },
-    "sourceFoundChapter": "অধ্যায় {number} {source} ত ওলাইছে।",
+    "sourceFoundChapter": "অধ্যায় {number} {source} ত ওলাইছে",
     "@sourceFoundChapter": {
         "placeholders": {
             "number": {
@@ -2740,7 +2740,7 @@
             }
         }
     },
-    "sourceFoundChapters": "অধ্যায় {from}–{to} {source} ত বাহিৰত আছে।",
+    "sourceFoundChapters": "অধ্যায় {from}–{to} {source} ত বাহিৰত আছে",
     "@sourceFoundChapters": {
         "placeholders": {
             "from": {
@@ -2789,7 +2789,7 @@
     },
     "sourceCheckNow": "এতিয়াই পৰীক্ষা কৰক",
     "sourceCheckNowDesc": "সূচী আৰু এৰি যোৱাৰ নিয়মসমূহ আওকাণ কৰে",
-    "sourceChecking": "চেক কৰি আছে...",
+    "sourceChecking": "চেক কৰি আছে…",
     "sourceCheckResult": "{count, plural, =0{নতুন একো নাই} =1{১ টা শিৰোনামত নতুন কিবা এটা আছে} other{{count} শিৰোনামবোৰত নতুন কিবা এটা আছে}}",
     "@sourceCheckResult": {
         "placeholders": {
@@ -2865,13 +2865,13 @@
     "sourceNoticesEmpty": "এতিয়াও কোনো মুক্তিৰ জাননী নাই",
     "sourceNoticesEmptyMessage": "আপোনাৰ চাবস্ক্ৰাইব কৰা শিৰোনামৰ পৰা নতুন খণ্ড আৰু অধ্যায় ইয়াত দেখা যায়",
     "sourceOpenTitle": "মুকলি শিৰোনাম",
-    "extensionsLoading": "লোডিং এক্সটেনচন...",
+    "extensionsLoading": "লোডিং এক্সটেনচন…",
     "updateWhatsNew": "নতুন কি",
     "updateLater": "পিছত",
     "updateSkipVersion": "এই সংস্কৰণ এৰি দিয়ক",
-    "updatePreparing": "প্ৰস্তুতি...",
+    "updatePreparing": "প্ৰস্তুতি…",
     "updateDownloading": "ডাউনলোড কৰা হৈছে",
-    "updateInstalling": "ইনস্টল...",
+    "updateInstalling": "ইনস্টল…",
     "updateSizeOf": "{total} ৰ {done}",
     "@updateSizeOf": {
         "placeholders": {
@@ -2883,7 +2883,7 @@
             }
         }
     },
-    "updateSpeed": "__পি০__/ছ",
+    "updateSpeed": "{speed}/ছ",
     "@updateSpeed": {
         "placeholders": {
             "speed": {
@@ -2981,7 +2981,7 @@
     "layoutCut": "কাটি পেলাওক",
     "layoutPaste": "ইয়াত পেষ্ট কৰক",
     "layoutHide": "লুকুৱাই ৰাখক",
-    "layoutMoveTo": "{zone} লৈ যাওক।",
+    "layoutMoveTo": "{zone} লৈ যাওক",
     "@layoutMoveTo": {
         "placeholders": {
             "zone": {
@@ -3116,7 +3116,7 @@
         }
     },
     "stepWaiting": "অপেক্ষা কৰি আছে",
-    "stepChecking": "চেক কৰি আছে...",
+    "stepChecking": "চেক কৰি আছে…",
     "stepUpToDate": "আপ টু ডেট",
     "stepUpToDateWith": "শেহতীয়াকৈ · {detail}",
     "@stepUpToDateWith": {
@@ -3128,7 +3128,7 @@
     },
     "stepWillInstall": "ইনষ্টল কৰা হ’ব",
     "stepWillUpdate": "আপডেট কৰা হ'ব",
-    "stepWillUpdateTo": "{version} লৈ আপডেট কৰা হ'ব।",
+    "stepWillUpdateTo": "{version} লৈ আপডেট কৰা হ'ব",
     "@stepWillUpdateTo": {
         "placeholders": {
             "version": {
@@ -3151,7 +3151,7 @@
     "installRuntimeNewer": "এই ব্যৱস্থাপকে চলোৱা চলনসময়ৰ এটা আপডেইট আছে।",
     "removeJvmTitle": "জাভা চলনসময় আঁতৰাবনে?",
     "removeJvmMessage": "ডেস্কটপ সম্প্ৰসাৰণ ব্যৱস্থাপকসমূহে ইয়াক পুনৰ সংস্থাপন নকৰালৈকে কাম কৰা বন্ধ কৰে। পৰৱৰ্তী সময়ত আপুনি এটা ইনষ্টল বা খোলাৰ সময়ত ইয়াক পুনৰ ডাউনলোড কৰা হয়।",
-    "runtimePreparing": "ৰানটাইম প্ৰস্তুত কৰা হৈছে...",
+    "runtimePreparing": "ৰানটাইম প্ৰস্তুত কৰা হৈছে…",
     "calendarAll": "সকলো",
     "calendarAnime": "এনিমে",
     "calendarManga": "মাংগা",
@@ -3221,7 +3221,7 @@
     "shortcutReaderControls": "নিয়ন্ত্ৰণসমূহ দেখুৱাওক বা লুকুৱাওক",
     "shortcutReaderNextChapter": "পৰৱৰ্তী অধ্যায়",
     "shortcutReaderPreviousChapter": "পূৰ্বৰ অধ্যায়",
-    "shortcutTaken": "{action} ৰ পৰা লোৱা হৈছে।",
+    "shortcutTaken": "{action} ৰ পৰা লোৱা হৈছে",
     "@shortcutTaken": {
         "placeholders": {
             "action": {
@@ -3262,13 +3262,13 @@
     "trayResumeDownloads": "ডাউনলোডসমূহ পুনৰ আৰম্ভ কৰক",
     "playerDownloadTitle": "প্লেয়াৰ ডাউনলোড কৰা হৈছে",
     "playerDownloadBody": "ডাৰ্টটছুৱে এবাৰ নিজৰ ভিডিঅ’ ইঞ্জিন আনে। প্লেবেক ৰেডি হোৱাৰ লগে লগে আৰম্ভ হয়।",
-    "playerDownloadStarting": "ডাউনলোড আৰম্ভ...",
+    "playerDownloadStarting": "ডাউনলোড আৰম্ভ…",
     "playerDownloadFailedTitle": "খেলুৱৈজনক পাব পৰা নাছিল",
     "playerDownloadFailedBody": "আপোনাৰ সংযোগ পৰীক্ষা কৰক আৰু পুনৰ চেষ্টা কৰক। ডাউনলোডটো য’ত ৰৈছিল তাতেই উঠি যায়।",
     "playerDownloadRetry": "আকৌ এবাৰ চেষ্টা কৰক",
     "playerDownloadCopy": "বিৱৰণ কপি কৰক",
     "removePlayerTitle": "খেলুৱৈক আঁতৰাই পেলাব?",
     "removePlayerMessage": "প্লেয়াৰটো পুনৰ ডাউনলোড নোহোৱালৈকে ভিডিঅ’বোৰ চলিব নোৱাৰিব।",
-    "trailerLoading": "ট্ৰেইলাৰ লোড কৰা হৈছে...",
+    "trailerLoading": "ট্ৰেইলাৰ লোড কৰা হৈছে…",
     "trailerFailed": "ইয়াত ট্ৰেইলাৰটো বজাব পৰা নগ’ল, ব্ৰাউজাৰত খুলিলে"
 }
