@@ -4,8 +4,11 @@
     "anilist": "AniList",
     "mal": "MyAnimeList",
     "simkl": "Simkl",
+    "trakt": "Trakt",
     "kitsu": "Kitsu",
+    "comick": "Comick",
     "mangaBaka": "MangaBaka",
+    "mangaUpdates": "MangaUpdates",
     "discord": "Discord",
     "loadMore": "Загрузить ещё",
     "login": "Войти",
@@ -26,15 +29,74 @@
     "install": "Установить",
     "update": "Обновить",
     "uninstall": "Удалить",
+    "updateInstallCancelled": "Установка отменена. Если Android написал, что приложение конфликтует с установленным, значит подпись отличается: сначала удали текущую версию, потом установи обновление",
+    "updateInstallFailed": "Не удалось обновить: {error}",
+    "appLock": "Блокировка приложения",
+    "appLockDesc": "Спрашивать код при открытии приложения или возвращении в него спустя время",
+    "appLockBiometric": "Разблокировка с помощью биометрии",
+    "appLockBiometricDesc": "Используйте свой отпечаток пальца или лицо вместо ввода пароля.",
+    "appLockBiometricReason": "Разблокировать Дартоцу",
+    "appLockDelay": "Блокировка при простое",
+    "appLockDelayAlways": "Всегда",
+    "appLockDelayNever": "Никогда",
+    "appLockDelayAfter": "После {count, plural, =1{1 минута} other{{count} минут}}",
+    "@appLockDelayAfter": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockUseBiometric": "Используйте биометрию",
+    "appLockUnlock": "Введи код",
+    "appLockWrong": "Неверный код",
+    "appLockWait": "Слишком много попыток, подожди {seconds} с",
+    "appLockNew": "Придумай код",
+    "appLockNewHint": "От 4 до 8 цифр",
+    "appLockConfirm": "Введи ещё раз",
+    "appLockMismatch": "Коды не совпадают",
+    "appLockOn": "Код установлен",
+    "appLockRemoveTitle": "Введи код, чтобы отключить блокировку",
     "installFailed": "Не удалось установить",
     "updateFailed": "Не удалось обновить",
+    "extensionUpdates": "{count, plural, =1{доступно 1 обновление} other{Доступно {count} обновлений}}",
+    "@extensionUpdates": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updateAll": "Обновить все",
+    "extensionsUpdated": "Обновлено расширение {done} из {total}.",
+    "@extensionsUpdated": {
+        "placeholders": {
+            "done": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "updateConflictTitle": "Обновление не установлено",
+    "updateConflictBody": "{names} не удалось установить поверх существующей версии. Обычно это означает, что установленная копия подписана по-другому. Удалить его и установить новую версию?",
+    "@updateConflictBody": {
+        "placeholders": {
+            "names": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictAction": "Удалить и переустановить",
     "noSourceSettings": "У источника нет настроек",
     "addPluginRepository": "Добавить репозиторий плагинов",
     "pluginIndexUrlHint": "URL индекса плагинов",
     "addRepository": "Добавить репозиторий",
+    "importRepositoryFile": "Импортировать файл",
     "pluginRepoUpdated": "Репозиторий плагинов обновлён",
     "pluginRepoUpdateFailed": "Не удалось обновить репозиторий плагинов",
-    "ok": "OK",
+    "ok": "ОК",
     "cancel": "Отмена",
     "yes": "Да",
     "no": "Нет",
@@ -46,6 +108,9 @@
     "resolving": "Определяю…",
     "none": "Нет",
     "selectMediaService": "Выбери медиасервис",
+    "manageServices": "Медиа-услуги",
+    "manageServicesDesc": "Измените порядок услуг и выберите, какие из них будут отображаться в средстве выбора.",
+    "manageServicesHint": "Перетащите, чтобы изменить порядок, отключите те, которые вы не используете",
     "pickColor": "Выбери цвет",
     "colorPickerCustom": "Свой",
     "colorPickerTransparent": "Прозрачный",
@@ -57,6 +122,8 @@
     "settingsAppearanceDesc": "Тема, цвета, стеклянный режим",
     "settingsGeneral": "Общие",
     "settingsGeneralDesc": "Язык и поведение",
+    "settingsNetwork": "Сеть",
+    "settingsNetworkDesc": "Пользовательский агент, сертификаты, DNS и прокси",
     "settingsAccountDesc": "Сервис учёта и вход",
     "settingsUpdates": "Обновления",
     "amoledBlack": "Чёрный AMOLED",
@@ -68,15 +135,235 @@
     "settingsExtensionsDesc": "Менеджеры источников, репозитории и настройки расширений",
     "settingsAddons": "Дополнения",
     "customPath": "Свой путь хранения",
+    "stories": "Истории",
+    "watchOrder": "Порядок просмотра",
+    "watchOrderOpenSite": "Открыть на сайте chiaki.site",
+    "watchOrderUnavailable": "Для этого названия не найден порядок просмотра.",
+    "watchOrderOpenFailed": "Не удалось открыть этот заголовок",
+    "watchOrderCurrent": "Вы здесь",
+    "watchOrderCredit": "Посмотреть заказы от chiaki.site",
     "customPathDesc": "Где хранятся данные приложения. Долгое нажатие — сброс",
     "selectDirectory": "Выбрать папку",
     "differentCacheManager": "Другой кэш изображений",
     "differentCacheManagerDesc": "Использовать другой менеджер кэша для изображений",
+    "settingsSync": "Синхронизировать настройки",
+    "settingsSyncDesc": "Сохраняйте настройки одинаковыми на всех устройствах. Они хранятся в личном списке в вашей учетной записи GitHub.",
+    "settingsSyncSwitch": "Синхронизировать при изменении",
+    "settingsSyncModeGithub": "GitHub",
+    "settingsSyncSignIn": "Войдите с помощью GitHub",
+    "settingsSyncSignInDesc": "Настройки хранятся в личном списке вашего аккаунта.",
+    "settingsSyncToken": "Используйте токен личного доступа",
+    "settingsSyncTokenDesc": "Создайте его на github.com/settings/tokens только с разрешением gist.",
+    "settingsSyncTokenField": "Токен",
+    "settingsSyncSignedIn": "Вошёл как {user}",
+    "@settingsSyncSignedIn": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "settingsSyncSignOut": "Выйти",
+    "settingsSyncCode": "Введите {code} на GitHub.",
+    "@settingsSyncCode": {
+        "placeholders": {
+            "code": {}
+        }
+    },
+    "settingsSyncCodeDesc": "Страница GitHub открылась в вашем браузере. Нажмите, чтобы скопировать код, или нажмите и удерживайте, чтобы отменить.",
+    "settingsSyncSignInFailed": "Не удалось войти в GitHub",
+    "dcPreview": "Предварительный просмотр",
+    "dcSampleWatching": "Смотрю",
+    "dcSampleReading": "Чтение",
+    "dcSampleBrowsing": "Просмотр",
+    "dcSampleLive": "Прямо сейчас",
+    "dcLiveNothing": "Сейчас ничего не показывает. Откройте заголовок, начните серию или главу, и она появится здесь.",
+    "dcMemberList": "В списке участников",
+    "dcAccount": "Аккаунт",
+    "dcSignIn": "Войти через Дискорд",
+    "dcSignOut": "Выйти",
+    "dcDesktopHint": "Без подключения Discord отображает «Смотрю Дартоцу» через настольное приложение. Подключите Discord, чтобы назвать занятие в честь своего названия, в том числе на мобильном устройстве.",
+    "dcMobileHint": "Подключите Discord, чтобы показать, что вы смотрите или читаете. Он использует страницу авторизации Discord, а не токен вашей учетной записи.",
+    "dcConnect": "Подключить Дискорд",
+    "dcConnectDesc": "Открывает страницу авторизации Discord и добавляет Dartotsu в раздел «Авторизованные приложения». Discord просит обновить ваше присутствие. Сохраняется только токен обновления, а не токен вашей учетной записи.",
+    "dcConnectFailed": "Не удалось подключить Discord",
+    "dcConnectedSnack": "Дискорд подключен",
+    "dcDisconnect": "Отключить",
+    "dcDisconnectedSnack": "Дискорд отключен",
+    "dcUseToken": "Вместо этого используйте токен",
+    "dcRouteDesktop": "Через настольное приложение Discord",
+    "dcRouteHeadless": "Через ваш аккаунт",
+    "dcRouteGateway": "Через свой аккаунт живите",
+    "dcRouteLinked": "Подключенное приложение",
+    "dcRouteNone": "Не подключено",
+    "dcStatusNeedsToken": "Нужен токен Discord. Подключение приложения не устанавливает ваш онлайн-статус.",
+    "dcAccountOnly": "Требуется вход в учетную запись",
+    "dcStatusSection": "Статус",
+    "dcControlStatus": "Контролировать мой статус",
+    "dcControlStatusDesc": "Поддерживает живое соединение с Discord, пока включена функция Rich Presence, поэтому Дартоцу может установить ваш статус.",
+    "dcStatusOnline": "Онлайн",
+    "dcStatusIdle": "Простой",
+    "dcStatusDnd": "Не беспокоить",
+    "dcStatusInvisible": "Невидимый",
+    "dcCustomStatus": "Пользовательский статус",
+    "dcCustomStatusHint": "Что ты задумал?",
+    "dcActivitySection": "Активность",
+    "dcShowWatching": "Показывать во время просмотра",
+    "dcShowReading": "Показывать во время чтения",
+    "dcListening": "Прослушивание",
+    "dcCompeting": "Конкуренция",
+    "dcActivityName": "Название действия",
+    "dcNameApp": "Dartotsu",
+    "dcNameTitle": "Название",
+    "dcNameCustom": "Пользовательский",
+    "dcCustomNameHint": "Имя отображается после «Просмотр»",
+    "dcStatusText": "Текст статуса",
+    "dcStatusTextDesc": "Что отображается в списке участников рядом с вашим именем",
+    "dcDisplayName": "Имя",
+    "dcDisplayState": "Государство",
+    "dcDisplayDetails": "Подробности",
+    "dcTextSection": "Текст",
+    "dcDetails": "Верхняя линия",
+    "dcState": "Итог",
+    "dcTemplateHint": "Пустой использует значение по умолчанию",
+    "dcVariables": "Нажмите, чтобы вставить значение",
+    "dcImagesSection": "Изображения",
+    "dcLargeImage": "Большое изображение",
+    "dcLargeAuto": "Авто",
+    "dcLargeCover": "Обложка",
+    "dcLargeLogo": "Логотип",
+    "dcSmallImage": "Маленькое изображение",
+    "dcSmallAuto": "Логотип",
+    "dcSmallNone": "Нет",
+    "dcTimerStyle": "Стиль таймера",
+    "dcTimerAuto": "Авто",
+    "dcTimerElapsed": "Прошедшее",
+    "dcTimerRemaining": "Осталось",
+    "dcButtonsSection": "Кнопки",
+    "dcButtonMedia": "Ссылка на заголовок",
+    "dcButtonApp": "Ссылка на Дартоцу",
+    "dcButtonCustom": "Пользовательская кнопка",
+    "dcButtonLabel": "Этикетка",
+    "dcButtonUrl": "Ссылка",
+    "dcPrivacySection": "Конфиденциальность",
+    "dcPrivateText": "Частное сообщение",
+    "dcPrivateHint": "Что-то личное",
+    "dcTokenWarning": "Для входа в систему используется токен вашей учетной записи. Правила Discord запрещают это, поэтому используйте это на свой страх и риск.",
+    "dcConnected": "Подключено",
+    "dcConnection": "Подключение",
+    "dcMethodDesktop": "Десктопное приложение Discord",
+    "dcMethodDesktopDesc": "Используется автоматически, когда больше ничего не подключено. На этом компьютере должен быть открыт Discord.",
+    "dcMethodToken": "Токен аккаунта",
+    "dcInUse": "В использовании",
+    "dcRecommended": "Рекомендуется",
+    "dcConnecting": "Подключение…",
+    "dcDisconnected": "Не подключено",
+    "dcSignedInAs": "Вошёл как {name}",
+    "@dcSignedInAs": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsSyncOn": "Вкл.",
+    "settingsSyncCustom": "Пользовательский",
+    "settingsSyncChangedHeader": "Изменены настройки",
+    "settingsSyncNoneChanged": "Вы еще ничего из этого не меняли, поэтому синхронизировать нечего.",
+    "settingsSyncChangedOnly": "Сохраняются только измененные вами настройки. Все остальное использует настройки по умолчанию на каждом устройстве. Значок облака показывает, что уже есть на сервере.",
+    "settingsSyncOffCategory": "Не синхронизируется. Они остаются на этом устройстве, а серверная копия остается без изменений.",
+    "settingsSyncPartsNote": "За устройство. При выключении сохраняется собственное значение каждого устройства, поэтому телефон и телевизор могут отличаться.",
+    "settingsSyncPartSubtitles": "Размер и цвета субтитров",
+    "settingsSyncPartSubtitlesDesc": "Размер, вес, цвета и расположение",
+    "settingsSyncPartPictureColors": "Цвета изображения",
+    "settingsSyncPartPictureColorsDesc": "Яркость, контрастность, насыщенность, гамма, оттенок и HDR",
+    "settingsSyncPartPalette": "Цвета темы",
+    "settingsSyncPartPaletteDesc": "Тема, акцентный цвет и черный OLED",
+    "settingsSyncCatOther": "Смотрите, читайте и сервисы",
+    "settingsSyncTitles": "Следите за прогрессом и титулами",
+    "settingsSyncTitlesCount": "{records} заголовков и {resume} записей резюме на сервере",
+    "@settingsSyncTitlesCount": {
+        "placeholders": {
+            "records": {},
+            "resume": {}
+        }
+    },
+    "settingsSyncTitlesNone": "Еще ничего не загружено",
+    "settingsSyncTitlesNote": "Смотрите и читайте позиции, полку резюме, ваши местные списки, закладки, основные моменты и параметры для каждого заголовка. Соответствие источников и потоки остаются на каждом устройстве, поскольку они зависят от ваших расширений. Заголовки загружаются не чаще, чем каждые 45 секунд.",
+    "settingsSyncConnect": "Не подключено",
+    "settingsSyncConnectDesc": "Войдите в систему с помощью GitHub, чтобы настройки были одинаковыми на всех устройствах.",
+    "settingsSyncFailedTitle": "Синхронизация не удалась",
+    "settingsSyncPaused": "Приостановлено",
+    "settingsSyncPausedDesc": "Пока этот параметр выключен, ничего не загружается и не загружается.",
+    "settingsSyncUpToDate": "Актуально",
+    "settingsSyncRetry": "Повторить попытку",
+    "settingsSyncAccount": "Аккаунт GitHub",
+    "settingsSyncAccountDesc": "Ваши данные попадают в личный кабинет вашего аккаунта.",
+    "settingsSyncWaiting": "Жду вашего одобрения на GitHub",
+    "settingsSyncCopyCode": "Нажмите на код, чтобы скопировать его",
+    "settingsSyncCancel": "Отмена",
+    "settingsSyncStatSettings": "Настройки",
+    "settingsSyncStatTitles": "Титулы",
+    "settingsSyncStatShelf": "Резюме",
+    "settingsSyncUploaded": "Загружено {time} с {device}",
+    "@settingsSyncUploaded": {
+        "placeholders": {
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncChanged": "{count, plural, =0{Еще ничего не изменилось} =1{1 изменено} other{{count} изменено}}",
+    "settingsSyncSecrets": "Учетные записи и пароли",
+    "settingsSyncSecretsDesc": "Синхронизируйте свои входы (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), ключи API и блокировку приложений между вашими устройствами. Они зашифрованы кодовой фразой, которая остается на ваших устройствах, поэтому GitHub их никогда не видит.",
+    "settingsSyncSecretsOn": "Аккаунты синхронизируются и шифруются",
+    "settingsSyncSecretsOnDesc": "Выход из системы на одном устройстве не означает выхода из системы на других.",
+    "settingsSyncSecretsBroken": "Парольная фраза больше не соответствует фразе на сервере. Введите его еще раз, чтобы продолжить синхронизацию учетных записей.",
+    "settingsSyncPassphraseSet": "Установить парольную фразу",
+    "settingsSyncPassphraseEnter": "Введите свою парольную фразу",
+    "settingsSyncPassphraseField": "Парольная фраза",
+    "settingsSyncPassphraseConfirm": "Повторите парольную фразу",
+    "settingsSyncPassphraseNew": "Выберите парольную фразу длиной не менее 6 символов. Он не хранится нигде, кроме ваших устройств, и не может быть восстановлен. Если вы его забудете, удалите копию сервера и начните заново.",
+    "settingsSyncPassphraseExisting": "Введите парольную фразу, которую вы выбрали на другом устройстве. Аккаунты на этом устройстве будут заменены синхронизированными.",
+    "settingsSyncPassphraseWrong": "Неверный пароль",
+    "settingsSyncPassphraseMismatch": "Парольные фразы не совпадают",
+    "settingsSyncPassphraseShort": "Используйте не менее 6 символов",
+    "settingsSyncSecretsStop": "Прекратить синхронизацию учетных записей",
+    "settingsSyncSecretsDelete": "Удалить из GitHub",
+    "settingsSyncSecretsDeleteMessage": "Это удалит зашифрованный файл учетных записей из вашего списка. Другие устройства сохраняют свои входы в систему и могут установить новую парольную фразу.",
+    "settingsSyncWhat": "Что синхронизировать",
+    "settingsSyncServer": "На сервере",
+    "settingsSyncServerEmpty": "Еще ничего не загружено",
+    "settingsSyncServerInfo": "Настройки {count}, загруженные {time} из {device}",
+    "@settingsSyncServerInfo": {
+        "placeholders": {
+            "count": {},
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncThisDevice": "это устройство",
+    "settingsSyncCount": "{count, plural, =0{На сервере ничего} =1{1 настройка на сервере} other{Настройки {count} на сервере}}",
+    "settingsSyncNow": "Синхронизировать сейчас",
+    "settingsSyncRunning": "Синхронизация…",
+    "settingsSyncNever": "Еще не синхронизировано",
+    "settingsSyncLast": "Последняя синхронизация {time}",
+    "@settingsSyncLast": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "settingsSyncFailed": "Синхронизация не удалась: {error}",
+    "@settingsSyncFailed": {
+        "placeholders": {
+            "error": {}
+        }
+    },
+    "settingsSyncScope": "Синхронизируются только те настройки, которые везде работают одинаково. Учетные записи, токены, папки, расширения, уведомления, Discord, обновления и размер окна остаются на каждом устройстве.",
     "backupAndRestore": "Резервная копия и восстановление",
     "backupAndRestoreDesc": "Сохрани или загрузи свои настройки",
     "backup": "Резервная копия",
     "restore": "Восстановить",
     "loadExtensionsIcon": "Загружать иконки расширений",
+    "autoUpdateRuntimes": "Автоматическое обновление среды выполнения расширений",
+    "autoUpdateRuntimesDesc": "Загрузите новые Aniyomi, CloudStream и другие версии среды выполнения в фоновом режиме. Вместо этого рядом с менеджером появляется значок обновления.",
     "loadExtensionsIconDesc": "Показывать иконки источников в списках расширений",
     "sectionStorage": "Хранилище",
     "sectionManagers": "Менеджеры",
@@ -89,6 +376,9 @@
     "backupSelectAll": "Выбрать всё",
     "backupClearAll": "Очистить",
     "backupKeys": "Настроек: {count}",
+    "backupPasswordRequired": "Пароль (необходим для данных аккаунта)",
+    "backupProtectedNeedsPassword": "Установите пароль для резервного копирования данных учетной записи или снимите его.",
+    "backupProtectedSkipped": "Эта резервная копия не имеет пароля, поэтому данные ее учетной записи были пропущены.",
     "backupPassword": "Пароль (необязательно)",
     "backupPasswordHint": "Оставь пустым, чтобы использовать стандартный",
     "backupSensitive": "Включает токены входа. Не показывай этот файл другим",
@@ -125,6 +415,70 @@
     "backupCatOtherDesc": "Раскладка лент, списки и настройки сервисов",
     "logFile": "Файл логов",
     "logFileDesc": "Поделись логом приложения или скопируй путь к нему в Linux",
+    "logDelete": "Удалить файлы журналов",
+    "logDeleteDesc": "Очистите сохраненные журналы приложений, чтобы освободить место.",
+    "logDeleted": "Удален {size} журналов.",
+    "@logDeleted": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "missingSequel": "Отсутствует продолжение",
+    "rising": "Восходящий",
+    "stacks": "Стеки",
+    "stacksAll": "Все",
+    "stacksFeatured": "Рекомендуемые",
+    "stacksMine": "Ваш",
+    "stacksSaved": "Сохранено",
+    "stacksFollowing": "Следование",
+    "stacksEmpty": "Здесь пока нет стопок",
+    "stacksSignIn": "Войдите в MangaBaka, чтобы увидеть свои стеки.",
+    "stacksScopeNeeded": "Вашим стекам нужно новое разрешение. Войдите в MangaBaka еще раз, чтобы разрешить это.",
+    "stacksSignInAgain": "Войдите снова",
+    "stacksCouldntLoad": "Не удалось загрузить стопки",
+    "stackSeriesCount": "{count, plural, =1{1 серия} other{серия {count}}}",
+    "@stackSeriesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackSavesCount": "{count, plural, =1{1 сохранение} other{{count} сохраняет}}",
+    "@stackSavesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackBy": "от {name}",
+    "@stackBy": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "stackSpoilers": "Спойлеры",
+    "stackEmptyEntries": "Этот стек пуст",
+    "stackSave": "Сохранить стек",
+    "stackUnsave": "Удалить из сохраненных",
+    "stackSavedToast": "Сохранено в ваших стопках",
+    "stackRemovedToast": "Удалено из ваших сохраненных стопок.",
+    "userStacks": "Стеки от {name}",
+    "@userStacks": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "newsTitle": "Новости",
+    "newsEmpty": "Сейчас новостей нет",
+    "newsCouldntLoad": "Не удалось загрузить новость",
     "logFileCopied": "Путь к логу скопирован",
     "donateSheetTitle": "Нравится Dartotsu?",
     "donateSheetMessage": "Dartotsu делает и поддерживает один человек. Если приложение тебе полезно, поддержи разработку.",
@@ -134,6 +488,8 @@
     "glassBackgroundHint": "Ссылка на картинку (пусто — твой баннер)",
     "followCover": "Следовать обложке",
     "followCoverDesc": "Цвета подстраиваются под фон, а на страницах тайтлов — под обложку",
+    "followCoverMediaOnly": "Только для СМИ",
+    "followCoverMediaOnlyDesc": "Следите только за обложкой на страницах СМИ, везде остальные сохраняют нормальные цвета.",
     "cardStyle": "Стиль карточек",
     "cardStyleDesc": "Положение названия, размер, прогресс и значки",
     "customFont": "Шрифт",
@@ -145,7 +501,7 @@
     "browseGoogleFonts": "Обзор Google Fonts…",
     "searchGoogleFonts": "Поиск по Google Fonts",
     "defaultFont": "По умолчанию",
-    "materialYou": "Material You",
+    "materialYou": "Материальный ты",
     "materialYouDesc": "Динамические цвета системы",
     "jsonTheme": "Файл своей темы",
     "jsonThemeDesc": "Живые цвета из ~/.config/dartotsu/theme.json (свой скрипт или ручные правки)",
@@ -164,7 +520,7 @@
     "preRelease": "Пре-релиз",
     "alpha": "Альфа",
     "checkNow": "Проверить сейчас",
-    "userAgent": "User-Agent",
+    "userAgent": "Пользовательский агент",
     "settingDefault": "По умолчанию",
     "currentlyUsing": "Сейчас: {value}",
     "dnsOverHttps": "DNS-over-HTTPS",
@@ -188,6 +544,7 @@
     "imageSavedTo": "Сохранено: {path}",
     "imageActionFailed": "Не удалось скачать изображение",
     "imageTitleCover": "Обложка",
+    "imageTitlePage": "Страница",
     "imageTitleBanner": "Баннер",
     "imageTitleAvatar": "Фото профиля",
     "verifyTls": "Проверять сертификаты",
@@ -197,11 +554,15 @@
     "gitHub": "GitHub",
     "gitHubDesc": "Исходники, issues и релизы",
     "discordDesc": "Сообщество и поддержка",
+    "supportDeveloper": "Поддержите разработчика",
+    "buyMeCoffee": "Купи мне кофе",
+    "upiId": "идентификатор УПИ",
+    "upiCopied": "Идентификатор UPI скопирован.",
     "donateDesc": "Поддержать разработку",
     "contributors": "Участники",
     "contributorsDesc": "Люди, которые сделали Dartotsu",
     "contributorsLoadFailed": "Не удалось загрузить участников",
-    "forks": "Forks",
+    "forks": "Вилки",
     "forksDesc": "Проекты на основе Dartotsu",
     "forksEmpty": "Форков не найдено",
     "sectionColors": "Цвета",
@@ -214,6 +575,7 @@
     "onboardingBack": "Назад",
     "onboardingNext": "Далее",
     "onboardingSkip": "Пропустить",
+    "onboardingLanguageBody": "Выберите язык, на котором отображается Дартоцу. Вы можете изменить его позже в настройках.",
     "onboardingPaletteTitle": "Сделай под себя",
     "onboardingPaletteBody": "Выбери палитру. Все акценты, от карточек до плеера, подстроятся под неё.",
     "themeModeAuto": "Авто",
@@ -245,13 +607,33 @@
     "calendarToday": "Сегодня",
     "calendarEmpty": "В этот день ничего не выходит",
     "calendarFailed": "Не удалось загрузить расписание",
+    "calendarChapter": "Глава {n}",
+    "@calendarChapter": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarExpected": "Ожидается",
+    "castReceiverFailed": "Chromecast не запустил плеер",
+    "castPlaybackFailed": "Устройство не смогло воспроизвести этот поток",
+    "shortcutNothingToContinue": "Продолжать пока нечего",
+    "shortcutNoCalendar": "У {service} нет календаря",
+    "@shortcutNoCalendar": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
     "calendarEpisode": "Серия {n}",
     "shareAnalytics": "Делиться анонимной статистикой",
     "shareAnalyticsDesc": "Анонимное число пользователей и отчёты о сбоях. Без аккаунта и личных данных",
     "linkOpenAnilist": "Открывать ссылки AniList в Dartotsu",
     "linkOpenAnilistDesc": "Включи обработку ссылок, чтобы ссылки anilist.co открывались в приложении",
     "linkSettingsFailed": "Не удалось открыть настройки системы",
-    "discordRichPresence": "Rich Presence",
+    "discordRichPresence": "Богатое присутствие",
     "discordRichPresenceTokenDesc": "Показывать в профиле Discord, чем ты занят. Нужен твой токен Discord.",
     "discordRichPresenceDesktopDesc": "Показывать в профиле Discord, чем ты занят. Нужно, чтобы был запущен десктопный Discord.",
     "discordBrowsing": "Показывать активность в приложении",
@@ -293,7 +675,7 @@
     "discordTokenNotSet": "Не задан. Нажми, чтобы добавить.",
     "discordTokenSavedSnack": "Токен Discord сохранён",
     "discordTokenRemovedSnack": "Токен Discord удалён",
-    "discordRichPresenceRow": "Discord Rich Presence",
+    "discordRichPresenceRow": "Богатое присутствие Discord",
     "discordRichPresenceRowOn": "Вкл. · нажми, чтобы поменять вид",
     "discordRichPresenceRowOff": "Показывать в профиле Discord, чем ты занят",
     "loginCancelled": "Вход отменён",
@@ -306,8 +688,41 @@
     "password": "Пароль",
     "kitsuProfile": "Профиль Kitsu",
     "mangaBakaLoginFailed": "Не удалось войти в MangaBaka",
+    "comickLoginFailed": "Не удалось войти в Comick",
+    "tagline": "Слоган",
+    "trending": "Тенденции",
+    "anticipated": "Ожидаемый",
+    "watchlist": "Список наблюдения",
+    "recommendedShows": "Рекомендуемые шоу",
+    "recommendedMovies": "Рекомендуемые фильмы",
+    "boxOffice": "Касса",
+    "popularMovies": "Популярные фильмы",
+    "popularShows": "Популярные шоу",
+    "anticipatedMovies": "Ожидаемые фильмы",
+    "anticipatedShows": "Ожидаемые шоу",
+    "trendingShows": "Популярные шоу",
+    "mostWatchedThisWeek": "Самые просматриваемые на этой неделе",
+    "sortMostViewed": "Самые просматриваемые",
+    "sortMostFollowed": "Больше всего подписчиков",
+    "sortLatestUpdates": "Последние обновления",
+    "translationStatusLabel": "Перевод",
+    "weeklySchedule": "Еженедельный график",
+    "mostFollowed": "Самые популярные",
+    "latestUpdates": "Последние обновления",
+    "trendingAnime": "Трендовое аниме",
+    "topRatedAnime": "Аниме с самым высоким рейтингом",
+    "mostFollowedAnime": "Самое популярное аниме",
+    "comickProfile": "Комический профиль",
+    "refreshFromComick": "Обновление из комикса",
     "mangaBakaProfile": "Профиль MangaBaka",
     "refreshFromMangaBaka": "Обновить из MangaBaka",
+    "mangaUpdatesLoginTitle": "Войдите в MangaUpdates",
+    "mangaUpdatesProfile": "Профиль MangaUpdates",
+    "mangaUpdatesAnimeStart": "Начало аниме-адаптации",
+    "mangaUpdatesAnimeEnd": "Аниме-адаптация завершилась",
+    "refreshFromMangaUpdates": "Обновление из MangaUpdates",
+    "usernameOnly": "Имя пользователя",
+    "releases": "Релизы",
     "artistsLabel": "Художники",
     "authorsLabel": "Авторы",
     "publishersLabel": "Издатели",
@@ -317,8 +732,13 @@
     "noLabel": "Нет",
     "ratingSteps": "Шаги оценки",
     "hideNsfw": "Скрывать NSFW",
+    "hideNsfwSourcesDesc": "Скрыть источники с пометкой 18+ из каналов и средства выбора источников. Они остаются установленными.",
     "hideNsfwDesc": "Убирает взрослые тайтлы из лент и поиска, а твои взрослые записи — в «Скрытое».",
     "kitsuAccountOptions": "Настройки аккаунта Kitsu",
+    "mangaBakaAccountOptions": "Настройки аккаунта MangaBaka",
+    "comickAccountOptions": "Параметры аккаунта комикса",
+    "comickClientId": "Идентификатор клиента комикса",
+    "comickClientIdDesc": "Пользовательский идентификатор клиента, зарегистрированный на сайте comick.dev.",
     "couldNotUpdateKitsuSettings": "Не удалось обновить настройки Kitsu",
     "titleCanonical": "Канонические",
     "titleRomanized": "Ромадзи",
@@ -341,12 +761,15 @@
     "accountDetails": "Данные аккаунта",
     "refreshFromKitsu": "Обновить из Kitsu",
     "simklReadOnly": "Simkl дал доступ только на чтение",
+    "traktReadOnly": "Trakt предоставил доступ только для чтения",
     "incognitoEditsBlocked": "Инкогнито: правки списка заблокированы",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Инкогнито: прогресс не сохранён",
     "progressSet": "Прогресс: {progress}",
     "removedFromList": "{title} удалён из твоего списка",
     "following": "Подписки",
+    "followsMutual": "Взаимный",
+    "followsNotMutual": "Не взаимно",
     "homeSections": "Разделы главной",
     "homeSectionsHint": "Перетащи, чтобы изменить порядок. Скрытые разделы не загружаются.",
     "customListDeleteFailed": "Не удалось удалить свой список",
@@ -354,6 +777,7 @@
     "customListsSaved": "Свои списки сохранены",
     "listName": "Название списка",
     "addList": "Добавить список",
+    "voiceActors": "Актеры озвучивания",
     "voiceActorsIn": "Сейю · {name}",
     "animeAppearances": "Роли в аниме",
     "mangaAppearances": "Роли в манге",
@@ -363,6 +787,8 @@
     "mainProductions": "Основные работы",
     "otherWorks": "Другие работы",
     "prequelSequel": "Приквел и сиквел",
+    "prequel": "Приквел",
+    "sequel": "Продолжение",
     "previousSeason": "Прошлый сезон",
     "thisSeason": "Этот сезон",
     "nextSeason": "Следующий сезон",
@@ -374,11 +800,18 @@
     "repullProfileCounts": "Заново подтянуть профиль и счётчики",
     "refreshed": "Обновлено",
     "simklProfile": "Профиль Simkl",
+    "traktProfile": "Профиль Тракта",
     "refreshFromSimkl": "Обновить из Simkl",
+    "refreshFromTrakt": "Обновление с Тракта",
     "repullProfileLibrary": "Заново подтянуть профиль и библиотеку",
     "simklSignInToSearch": "Войди в Simkl, чтобы искать",
     "dropRate": "Доля бросивших",
     "simklAttribution": "Данные и арты предоставлены Simkl. Открыть в Simkl",
+    "traktAttribution": "Данные и иллюстрации предоставлены Trakt. Посмотреть на Тракте",
+    "listsLiked": "Понравилось",
+    "listsYours": "Ваш",
+    "traktVip": "VIP",
+    "traktVipMember": "VIP-участник Тракта",
     "onHold": "Отложено",
     "scoredBy": "Оценили",
     "planToWatch": "В планах (смотреть)",
@@ -387,6 +820,8 @@
     "timesReread": "Раз перечитано",
     "comments": "Комментарии",
     "moviesAndSeries": "Фильмы и сериалы",
+    "simklMoviesOnly": "Только фильмы и сериалы",
+    "simklMoviesOnlyDesc": "Заменяет вкладку «Аниме»: сначала «Фильмы», затем «Показы» с парой строк аниме.",
     "trackingOnly": "Только учёт",
     "signedIn": "Вход выполнен",
     "searchLanguage": "Язык поиска",
@@ -397,19 +832,41 @@
     "details": "Подробности",
     "addToList": "Добавить в список",
     "trailer": "Трейлер",
+    "trailerQuality": "Качество прицепа",
     "titleCopied": "Название скопировано",
     "linkCopied": "Ссылка скопирована",
     "watchTrailer": "Смотреть трейлер",
     "copyTitle": "Копировать название",
+    "detailStale": "Не удалось связаться с AniList. Это сохраненная информация и может быть устаревшей.",
     "copyLink": "Копировать ссылку",
     "openInBrowser": "Открыть в браузере",
     "viewOnSource": "Смотреть на {source}",
     "episodeAirsIn": "Серия {ep} выйдет через {time}",
     "nextEpisodeIn": "Следующая серия через {time}",
+    "chapterExpectedIn": "Глава {chapter} выйдет примерно через {time}",
     "logPathCopied": "Путь к файлу логов скопирован в буфер",
     "animeSource": "Источник аниме",
     "mangaSource": "Источник манги",
     "popular": "Популярное",
+    "allCustomLists": "Все пользовательские списки",
+    "simklTitleLanguage": "Язык названия аниме",
+    "titleLanguageEnglish": "английский",
+    "titleLanguageRomaji": "Ромаджи",
+    "simklListsTrending": "Тенденции",
+    "simklListsMostLiked": "Больше всего понравилось",
+    "simklListsMostFollowed": "Больше всего подписчиков",
+    "simklListsOfficial": "Официальный",
+    "simklListTitles": "{count, plural, =1{1 титул} other{{count} названия}}",
+    "@simklListTitles": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "people": "Люди",
+    "mostComments": "Большинство комментариев",
+    "alphabetical": "Алфавитный",
     "latest": "Новое",
     "saved": "Сохранённое",
     "nothingMatched": "Ничего не найдено",
@@ -440,6 +897,7 @@
     "nothingNew": "Нового нет",
     "thisWeek": "На этой неделе",
     "listOnly": "Только список",
+    "notInList": "Нет в списке",
     "filter": "Фильтр",
     "searchResults": "Результаты поиска",
     "recentSearches": "Недавние запросы",
@@ -478,6 +936,11 @@
     "done": "Готово",
     "searchOrEnterUrl": "Поиск или URL",
     "refresh": "Обновить",
+    "animePlanetRank": "Ранг",
+    "animePlanetMagazine": "Журнал",
+    "animePlanetRefreshLists": "Обновите свои списки",
+    "animePlanetRefreshListsDesc": "Прочтите свои списки Anime-Planet еще раз.",
+    "animePlanetLocalNote": "Войдите, чтобы сохранить изменения в своей учетной записи Anime-Planet. До тех пор они остаются на этом устройстве.",
     "share": "Поделиться",
     "characters": "Персонажи",
     "staff": "Команда",
@@ -599,6 +1062,8 @@
     "sectionPrivacy": "Приватность",
     "hidePrivateEntries": "Скрывать приватные записи",
     "hidePrivateEntriesDesc": "Не показывать в ленте записи, помеченные приватными в AniList",
+    "anilistExcludeList": "Скрыть мой список",
+    "anilistExcludeListDesc": "Не показывать на страницах аниме и манги тайтлы, которые уже есть в твоём AniList",
     "anilistProfile": "Профиль AniList",
     "refreshFromAnilist": "Обновить из AniList",
     "couldNotUpdateAnilistSettings": "Не удалось обновить настройки AniList",
@@ -634,6 +1099,9 @@
     "sectionBrowse": "Обзор",
     "readingTab": "Вкладка чтения",
     "readingTabDesc": "Какие расширения показывает третья вкладка",
+    "firstTab": "Первая вкладка",
+    "firstTabDesc": "Какие расширения показывает первая вкладка. Выберите мангу здесь и роман на вкладке чтения, чтобы удалить аниме из панели.",
+    "novelExtensions": "Новые расширения",
     "defaultFeed": "Лента по умолчанию",
     "defaultFeedDesc": "С какого списка открывается источник",
     "noServiceSupports": "Ни один сервис не поддерживает: {type}",
@@ -701,6 +1169,8 @@
     "studio": "Студия",
     "serialization": "Журнал",
     "season": "Сезон",
+    "year": "Год",
+    "filterAny": "Любой",
     "broadcast": "Трансляция",
     "aired": "Выходило",
     "published": "Опубликовано",
@@ -709,6 +1179,7 @@
     "watching": "Смотрю",
     "reading": "Читаю",
     "dropped": "Брошено",
+    "unfinished": "Незаконченный",
     "planned": "В планах",
     "trailers": "Трейлеры",
     "ratings": "Оценки",
@@ -727,6 +1198,9 @@
     "tags": "Теги",
     "author": "Автор",
     "born": "Родился",
+    "died": "Умер",
+    "birthplace": "Место рождения",
+    "department": "Отдел",
     "website": "Сайт",
     "established": "Основано",
     "manhwa": "Манхва",
@@ -735,6 +1209,10 @@
     "thisMonth": "В этом месяце",
     "movies": "Фильмы",
     "shows": "Сериалы",
+    "moviesWatched": "Просмотренные фильмы",
+    "showsWatched": "Просмотренные сериалы",
+    "moviesCollected": "Коллекция фильмов",
+    "showsCollected": "Собраны шоу",
     "rewatching": "Пересматриваю",
     "rereading": "Перечитываю",
     "watchedStatus": "Просмотрено",
@@ -760,7 +1238,7 @@
     "sortMostPopular": "Самые популярные",
     "sortTrending": "В тренде",
     "sortNewest": "Новые",
-    "sortAz": "A–Z",
+    "sortAz": "А – Я",
     "sortMostFavourited": "Чаще всего в избранном",
     "anyCountry": "Любая страна",
     "orderScore": "Оценка",
@@ -823,6 +1301,14 @@
     "trendingThisWeek": "В тренде на этой неделе",
     "mostWatchedThisMonth": "Самое просматриваемое за месяц",
     "repoLinksAdded": "Ссылки на репозиторий добавлены!",
+    "repoLinkConfirm": "Добавить этот репозиторий?\n\n{url}\n\nДобавляйте репозитории только из источников, которым вы доверяете.",
+    "@repoLinkConfirm": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
     "errorGettingAnilistData": "Ошибка при получении данных из AniList.",
     "navInfo": "ИНФО",
     "navComments": "КОММЕНТАРИИ",
@@ -884,6 +1370,14 @@
     "installPluginTitle": "Установить {name}",
     "sizeLabel": "Размер: {size}",
     "installedState": "Установлено",
+    "updatePluginTitle": "Обновить {name}",
+    "@updatePluginTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "errorLabel": "Ошибка:",
     "stackTraceDetails": "Подробности (стек вызовов)",
     "shareLogFile": "Поделиться файлом логов",
@@ -894,6 +1388,12 @@
     "alreadyThere": " · уже было: {count}",
     "airingNow": "Сейчас выходит",
     "topRatedMovies": "Лучшие фильмы по оценкам",
+    "koreanDramas": "Корейские дорамы",
+    "chineseDramas": "Китайские дорамы",
+    "japaneseDramas": "Японские дорамы",
+    "thaiDramas": "Тайские дорамы",
+    "turkishDramas": "Турецкие сериалы",
+    "miniSeries": "Мини-сериалы",
     "topRatedShows": "Лучшие сериалы по оценкам",
     "recommendedSection": "Рекомендуем",
     "syncRow": "Синхронизация списков",
@@ -905,8 +1405,61 @@
     "syncAutoDesc": "Загружать и синхронизировать в фоне при запуске приложения и каждые 30 минут",
     "syncAddMissing": "Добавлять недостающие записи",
     "syncAddMissingDesc": "Добавлять и записи, которых в другом сервисе ещё нет",
+    "syncServiceOn": "Синхронизировать с {name}",
+    "@syncServiceOn": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "syncDelete": "Удалить то, чего нет в основном сервисе",
+    "syncDeleteDesc": "Удалите записи из других сервисов, которых нет в основном списке. Удалены только записи, которые могут быть сопоставлены с заголовком, поэтому такие вещи, как фильмы и сериалы Simkl, остаются.",
+    "syncDeleteTitle": "Удалить записи?",
+    "syncDeleteConfirm": "{count, plural, =1{1 запись} other{{count} записи}} которых нет в вашем основном списке, они будут удалены из других сервисов. Это невозможно отменить.",
+    "@syncDeleteConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncDeleteAction": "Удалить",
+    "syncToDelete": "Чтобы удалить",
+    "syncDeletedNote": "Будет удалено",
+    "syncWillRemove": "{count} будет удален из {name}.",
+    "@syncWillRemove": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "syncOnlyForward": "Сохранять больший прогресс",
     "syncOnlyForwardDesc": "Не уменьшать прогресс в сервисе, где он уже больше",
+    "animePlanetWontWatch": "не буду смотреть",
+    "animePlanetWontRead": "не буду читать",
+    "animePlanetAlreadyOnList": "Уже в этом списке",
+    "animePlanetNewList": "Новое имя списка",
+    "syncPrivate": "Частные записи",
+    "syncPrivateDesc": "Что делать с записями, которые вы держите в секрете. Служба с приватной опцией делает их конфиденциальными; другие бы показали их публично",
+    "syncPrivateModeAsk": "Спросить",
+    "syncPrivateModeSync": "Синхронизируйте их",
+    "syncPrivateModeSkip": "Пропустить их",
+    "syncPrivateTitle": "Частные записи",
+    "syncPrivateAsk": "{count, plural, =1{1 запись закрытая} other{Записи {count} являются частными}}. Сервисы с приватной опцией (AniList, Kitsu, MangaBaka) получат их как приватные; другие службы не имеют частной опции и будут показывать их публично. Синхронизировать их? Ваш ответ запомнился; измените его в разделе «Параметры синхронизации».",
+    "@syncPrivateAsk": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncPrivateInclude": "Синхронизируйте их",
+    "syncPrivateSkip": "Пропустить их",
     "syncFetch": "Загрузить",
     "syncFetchAgain": "Загрузить заново",
     "syncAll": "Синхронизировать всё",
@@ -937,6 +1490,14 @@
     "syncService": "Синхронизировать {service} ({count})",
     "syncOnEdit": "Мгновенная синхронизация",
     "syncOnEditDesc": "Сразу отправлять каждое изменение прогресса и правку списка в остальные сервисы, где ты вошёл",
+    "syncRemoved": "Удалено из {services}",
+    "@syncRemoved": {
+        "placeholders": {
+            "services": {
+                "type": "String"
+            }
+        }
+    },
     "syncPushed": "Синхронизировано: {services}",
     "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "Превышен лимит запросов, попробуй чуть позже",
@@ -990,7 +1551,7 @@
     "commentsTagTooHigh": "Метка не может быть больше общего числа ({total})",
     "commentsNoTag": "Без метки",
     "commentsSpoiler": "Спойлер",
-    "commentsGif": "GIF",
+    "commentsGif": "гифка",
     "commentsGifSearch": "Поиск GIF",
     "commentsGifEmpty": "GIF не найдены",
     "commentsEmptyText": "Комментарий не может быть пустым",
@@ -1213,6 +1774,12 @@
     "watchSearchAgain": "Искать снова",
     "watchSearchSource": "Поиск: {source}",
     "watchSource": "Источник",
+    "sourceTags": "Теги",
+    "sourceTagsHint": "Отметьте, для чего нужен этот источник. В заголовке сначала перечисляются источники, отмеченные для него, а затем непомеченные. Источники 18+ показывают только фильмы для взрослых.",
+    "sourceTagAnime": "Аниме",
+    "sourceTagMovies": "Фильмы и сериалы",
+    "sourceTagAdult": "18+",
+    "sourceHiddenByTags": "Скрыто тегами",
     "watchOptions": "Параметры",
     "watchReverse": "Обратный порядок",
     "watchScanlators": "Группы",
@@ -1247,6 +1814,44 @@
     "watchProbeFailed": "Сайт недоступен",
     "watchClearCookies": "Очистить cookies этого сайта",
     "watchCookiesCleared": "Cookies очищены",
+    "watchFailTimeout": "Проверка не завершилась вовремя",
+    "watchFailBlocked": "Сайт заблокировал это устройство (доступ запрещен). проверка не поможет",
+    "watchFailTurnstile": "Для этой проверки требуется нажатие, которое не может выполнить фоновый решатель.",
+    "watchFailLoad": "Страница не загрузилась. Проверьте соединение и адрес сайта",
+    "watchFailRejected": "Сайт отклонил только что полученное разрешение. Попробуйте еще раз или очистите файлы cookie.",
+    "watchFailDismissed": "Проверка была закрыта до завершения",
+    "watchFailCooldown": "Вы закрыли чек минуту назад. Нажмите «Решить», чтобы повторить попытку.",
+    "watchFailQuiet": "Проверка нужна вам, а приложение работало само по себе",
+    "watchFailWebView": "Не удалось запустить фоновое веб-представление.",
+    "watchFailUnavailable": "Нет экрана для отображения чека.",
+    "watchStatusReady": "Готово",
+    "watchStatusChallenge": "Требуется проверка Cloudflare",
+    "watchStatusBlocked": "Заблокировано сайтом",
+    "watchStatusOffline": "Не могу зайти на сайт",
+    "watchStatusUntested": "Еще не проверено",
+    "watchStatusTesting": "Проверка соединения…",
+    "watchStatusSolving": "Прохождение проверки Cloudflare…",
+    "watchSolvedBackground": "Проверка Cloudflare пройдена в фоновом режиме ({seconds} с)",
+    "@watchSolvedBackground": {
+        "placeholders": {
+            "seconds": {
+                "type": "int"
+            }
+        }
+    },
+    "watchSolvedByUser": "Проверка Cloudflare пройдена",
+    "watchClearanceIssued": "заработал {time}",
+    "@watchClearanceIssued": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "watchClearanceStale": "Разрешение было получено с помощью другого пользовательского агента, поэтому оно не отправляется. Проверьте соединение, чтобы получить новое",
+    "watchSectionConnection": "Подключение",
+    "watchSectionSession": "Сессия",
+    "watchSectionTools": "Инструменты",
     "watchMetaSource": "Детали серий из",
     "watchMetaAuto": "Автоматически",
     "watchMetaOff": "Выкл.",
@@ -1257,8 +1862,12 @@
     "playerSectionSubtitles": "Субтитры",
     "playerSectionShaders": "Шейдеры",
     "playerSectionEngine": "Движок",
-    "playerSectionMpv": "mpv",
+    "playerSectionMpv": "минивэн",
     "playerSpeed": "Скорость воспроизведения",
+    "localSource": "Локальные файлы",
+    "localMissing": "Этот файл или папка больше не находится в вашей локальной папке.",
+    "playerStickyStage": "Прикрепленное видео",
+    "playerStickyStageDesc": "Держите видео вверху, пока прокручиваете эпизоды и комментарии ниже.",
     "playerCursedSpeed": "Дополнительные скорости",
     "playerCursedSpeedDesc": "Добавить в список скорости до 10x",
     "playerResize": "Режим масштабирования",
@@ -1281,6 +1890,8 @@
     "playerAutoSkipEnding": "Пропускать эндинги",
     "playerAutoSkipRecap": "Пропускать рекапы",
     "playerAutoSkipDesc": "Перескакивать сразу, как начнётся, по данным AniSkip и меткам стрима",
+    "playerDisableSkips": "Отключить пропуски",
+    "playerDisableSkipsDesc": "В плеере нет AniSkip или временных меток трансляции, отметок глав и пропуска материалов.",
     "playerSkipOnce": "Пропускать только один раз",
     "playerSkipOnceDesc": "Не пропускать ту же часть снова, если перемотаешь назад",
     "playerAdjustBrightness": "Жест яркости",
@@ -1301,6 +1912,9 @@
     "playerSubtitleColor": "Цвет субтитров",
     "playerSubtitleBackground": "Фон субтитров",
     "playerSubtitleOutline": "Контур субтитров",
+    "playerSubtitleOutlineWidth": "Ширина контура субтитров",
+    "playerSubtitlePreview": "Предварительный просмотр субтитров",
+    "playerSubtitlePreviewText": "Текст предварительного просмотра субтитров",
     "playerLibass": "Использовать libass",
     "playerLibassDesc": "Отрисовывать стилизованные субтитры .ass. Размер, цвет и шрифт выше тогда не действуют",
     "playerShaders": "Шейдеры",
@@ -1310,6 +1924,13 @@
     "playerShadersMissing": "Anime4K не установлен",
     "playerShadersMissingDesc": "Скачай набор шейдеров Anime4K (около 0,8 МБ), чтобы пользоваться встроенными режимами.",
     "playerShadersDownload": "Скачать Anime4K",
+    "playerPictureSave": "Сохраните этот кадр",
+    "playerPictureOriginal": "Оригинал",
+    "playerPictureOriginalDesc": "Кадр в том виде, в котором он есть на видео, без шейдеров и цветов.",
+    "playerPictureProcessed": "С шейдерами и цветами",
+    "playerPictureProcessedDesc": "Рамка, какой вы ее видите сейчас",
+    "playerPictureSaved": "Кадр сохранен.",
+    "playerPictureSaveFailed": "Не удалось сохранить кадр",
     "playerShadersPreview": "Посмотреть на этом кадре",
     "playerShadersUse": "Использовать",
     "playerPicture": "Картинка",
@@ -1332,6 +1953,9 @@
     "playerColorAdjust": "Настроить",
     "playerShadersOriginal": "Оригинал",
     "playerShadersPreviewFailed": "Не удалось взять кадр для превью",
+    "playerShadersSoftware": "Шейдерам нужен аппаратный рендеринг, а плеер использует программный рендеринг. Отключите программный рендеринг в настройках проигрывателя.",
+    "playerSoftwareRender": "Программный рендеринг",
+    "playerSoftwareRenderDesc": "Только для черного видео. Шейдеры с ним не работают. Применяется при следующем открытии плеера",
     "playerShadersCustomFiles": "Твои шейдеры",
     "playerShadersCustom": "Свои шейдеры",
     "playerShadersImport": "Импорт .glsl",
@@ -1371,7 +1995,7 @@
     "playerCacheSeconds": "Кэш (секунды)",
     "playerReadahead": "Упреждающее чтение (секунды)",
     "playerThreads": "Потоки декодера",
-    "playerDeband": "Deband",
+    "playerDeband": "Дебанд",
     "playerDebandDesc": "Убирает полосы цвета на градиентах",
     "playerDebandIterations": "Итерации deband",
     "playerDebandThreshold": "Порог deband",
@@ -1401,7 +2025,22 @@
     "playerResetConfirm": "Сбросить все настройки плеера?",
     "playerResetDone": "Настройки плеера сброшены",
     "playerQuality": "Качество",
+    "streamGroupSub": "Саб",
+    "streamGroupHardSub": "Хард Саб",
+    "streamGroupSoftSub": "Мягкий сабвуфер",
+    "streamGroupDub": "Дублировать",
+    "streamGroupRaw": "сырой",
+    "streamGroupOther": "Другое",
+    "streamsCount": "{count, plural, =1{1 поток} other{{count} потоки}}",
+    "@streamsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "playerStreams": "Потоки",
+    "playerStreamFailedNext": "Этот поток не воспроизводится, попробую следующий.",
     "playerAutoSelect": "Выбирать поток автоматически",
     "playerAutoSelectDesc": "Выбирать поток, максимально похожий на твой прошлый выбор для этого тайтла",
     "playerLoadingStreams": "Ищу потоки…",
@@ -1422,6 +2061,8 @@
     "readerFirstChapter": "Это первая глава",
     "readerLastChapter": "Ты всё прочитал",
     "readerFailed": "Не удалось открыть эту главу",
+    "readerOpenBook": "Открыть книгу",
+    "readerOpenBookDesc": "Читайте epub (читатель романов) или PDF (читатель манги) из своих файлов.",
     "readerNoText": "В этой главе нет текста",
     "readerPerTitle": "Только для этого тайтла",
     "readerPerTitleDesc": "Оставить эти настройки читалки только для этого тайтла",
@@ -1430,6 +2071,7 @@
     "readerSectionDisplay": "Экран",
     "readerSectionNovel": "Новелла",
     "readerMode": "Режим чтения",
+    "readerModeAuto": "Авто (по типу серии)",
     "readerModeRtl": "Справа налево",
     "readerModeLtr": "Слева направо",
     "readerModeVertical": "Вертикальные страницы",
@@ -1473,6 +2115,12 @@
     "readerFilterGrayscale": "Оттенки серого",
     "readerFilterInvert": "Инверсия",
     "readerFilterSepia": "Сепия",
+    "readerFilterQuality": "Качество фильтра изображений",
+    "readerFilterQualityNone": "Нет (ближайший сосед)",
+    "readerFilterQualityLow": "Низкий (Билинейный)",
+    "readerFilterQualityMedium": "Средний (Трилинейный)",
+    "readerFilterQualityHigh": "Высокий (бикубический)",
+    "readerFilterQualityLanczos": "Ланчос (Ржавчина высокого качества)",
     "readerDim": "Затемнение",
     "readerDimDesc": "Затемнять страницы",
     "readerPageNumber": "Номер страницы",
@@ -1481,6 +2129,8 @@
     "readerFullscreenDesc": "Скрывать системные панели",
     "readerCropBorders": "Обрезать поля",
     "readerCropBordersDesc": "Обрезать пустые белые или чёрные поля у страниц",
+    "readerLongPressSave": "Удерживайте страницу, чтобы сохранить ее",
+    "readerLongPressSaveDesc": "Нажмите и удерживайте страницу, чтобы открыть параметры сохранения, публикации и копирования.",
     "readerVolumeKeys": "Листать кнопками громкости",
     "readerVolumeKeysDesc": "Громкость вниз — вперёд, громкость вверх — назад",
     "readerBookmarks": "Закладки",
@@ -1502,6 +2152,7 @@
     "readerSaveProgressDesc": "Запоминать страницу и отмечать главы прочитанными",
     "readerReset": "Сбросить настройки читалки",
     "readerResetDesc": "Вернуть значения по умолчанию",
+    "readerResetConfirm": "Сбросить все настройки читалки по умолчанию?",
     "novelSize": "Размер текста",
     "novelFont": "Шрифт",
     "novelLineHeight": "Высота строки",
@@ -1518,6 +2169,78 @@
     "trackProgressTitle": "Сохранять прогресс?",
     "trackProgressAnime": "Отмечать {name} в твоём списке по ходу просмотра? Выбери «Только на устройстве», чтобы оставить это локально, или «Нет», чтобы ничего не сохранять.",
     "trackProgressManga": "Отмечать {name} в твоём списке, когда дочитаешь главу? Выбери «Только на устройстве», чтобы оставить это локально, или «Нет», чтобы ничего не сохранять.",
+    "trackProgressAnimeLocal": "Сохранить прогресс на {name} в свой список на этом устройстве во время просмотра?",
+    "@trackProgressAnimeLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressMangaLocal": "Сохранить прогресс на {name} в своем списке на этом устройстве, когда закончите главу?",
+    "@trackProgressMangaLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadClearQueue": "Очистить очередь",
+    "downloadClearQueueConfirm": "Отменить все загрузки {count} в очереди? То, что уже было скачано, удаляется.",
+    "@downloadClearQueueConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectedCount": "{count} выбрано",
+    "@downloadSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectAll": "Выбрать все",
+    "downloadDeleteSelected": "Удалить выбранное",
+    "downloadDeleteSelectedConfirm": "Удалить загрузки {count}? Их файлы удаляются с устройства.",
+    "@downloadDeleteSelectedConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "castTitle": "Трансляция на устройство",
+    "castSearching": "Поиск устройств в вашей сети…",
+    "castNoDevices": "Устройства не найдены. Убедитесь, что телевизор или Chromecast подключены к той же сети Wi-Fi, а затем повторите поиск.",
+    "castRefresh": "Искать еще раз",
+    "castFailed": "Не удалось начать трансляцию",
+    "castStop": "Прекратить трансляцию",
+    "castNowCasting": "Приведение к {name}",
+    "@castNowCasting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "castProtocolChromecast": "Хромкаст",
+    "castProtocolDlna": "DLNA/Смарт ТВ",
+    "castProtocolRoku": "Року",
+    "castRokuNote": "Roku не может сообщить или изменить позицию",
+    "castControls": "Элементы управления",
+    "castVolume": "громкость телевизора",
+    "castSkipPart": "Пропустить {name}",
+    "@castSkipPart": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressRememberSeries": "Помните об этой серии",
     "trackProgressYes": "Сохранять",
     "trackProgressReset": "Вопрос о сохранении прогресса для этого типа сброшен, он появится снова",
     "trackProgressNo": "Нет",
@@ -1543,6 +2266,7 @@
     "dantotsuMal": "Вход в MyAnimeList",
     "dantotsuDiscord": "Токен Discord Rich Presence",
     "dantotsuTheme": "Тема",
+    "themePickerTitle": "Тема",
     "dantotsuReposAnime": "Репозитории расширений для аниме",
     "dantotsuReposManga": "Репозитории расширений для манги",
     "dantotsuReposNovel": "Репозитории расширений для новелл",
@@ -1561,6 +2285,15 @@
     "kitsuGraphqlDetailDesc": "Загружать тайтл вместе с персонажами, командой и твоей записью одним запросом",
     "togetherTitle": "Смотреть вместе",
     "togetherIntro": "Вставь ссылку на комнату, которую прислал друг. Ты сразу подключишься, а плеер откроется, когда он начнёт смотреть.",
+    "togetherLinkConfirm": "Присоединяйтесь к комнате {room}? Ведущий выбирает, что воспроизводится, и плеер открывается сам, когда они начинают просмотр.",
+    "@togetherLinkConfirm": {
+        "placeholders": {
+            "room": {
+                "type": "String"
+            }
+        }
+    },
+    "togetherJoin": "Присоединяйтесь",
     "togetherName": "Твоё имя",
     "togetherConnecting": "Подключаюсь…",
     "togetherLeave": "Выйти из комнаты",
@@ -1568,6 +2301,15 @@
     "togetherNoChat": "Сообщений пока нет",
     "togetherChatHint": "Сообщение",
     "togetherCopyInvite": "Скопировать приглашение",
+    "togetherShareInvite": "Поделиться приглашением",
+    "togetherShareText": "Смотрите вместе со мной на Дартоцу: {link}",
+    "@togetherShareText": {
+        "placeholders": {
+            "link": {
+                "type": "String"
+            }
+        }
+    },
     "togetherInviteCopied": "Сервер и комната скопированы",
     "togetherConnectionLost": "Соединение потеряно",
     "togetherConnectedTo": "Подключено к {room}",
@@ -1610,6 +2352,41 @@
     "novelSpeakNext": "Следующая строка",
     "novelTapPaging": "Тап по краям — перелистнуть",
     "novelTapPagingDesc": "Тап слева или справа прокручивает страницу, середина показывает управление",
+    "novelPaged": "Перелистывание страниц",
+    "novelPagedDesc": "Разделите главу на страницы и проведите пальцем по экрану или коснитесь, чтобы перевернуть их вместо прокрутки.",
+    "novelPageOf": "Страница {current} из {total}",
+    "@novelPageOf": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "novelPaginating": "Разметка страниц",
+    "novelTools": "Содержание, поиск и основные моменты",
+    "novelContents": "Содержание",
+    "novelContentsEmpty": "В этой главе нет заголовков",
+    "novelSearch": "Поиск",
+    "novelSearchHint": "Искать в этой главе",
+    "novelSearchNone": "Нет совпадений",
+    "novelSearchCount": "{count, plural, =1{1 матч} other{{count} совпадений}}",
+    "@novelSearchCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "novelHighlights": "Основные моменты",
+    "novelHighlightsEmpty": "Выделите текст и нажмите «Выделить», чтобы сохранить его здесь.",
+    "novelHighlight": "Выделить",
+    "novelHighlightNote": "Примечание",
+    "novelHighlightNoteHint": "Добавить заметку",
+    "novelHighlightRemove": "Удалить выделение",
+    "novelHighlightFailed": "Не удалось сопоставить это выделение с текстом.",
     "novelMinutesLeft": "Осталось {count} мин",
     "novelBold": "Жирный текст",
     "novelBoldDesc": "Использовать более плотное начертание",
@@ -1628,6 +2405,23 @@
     "playerAddSubtitle": "Добавить файл субтитров",
     "playerAddAudio": "Добавить аудиофайл",
     "playerChapters": "Главы",
+    "playerSkipSubmit": "Отправьте время пропуска",
+    "playerSkipSubmitDesc": "Отметьте, где начинается и заканчивается начало, окончание или краткое содержание этого эпизода, и поделитесь этим с AniSkip, чтобы каждый получил кнопку пропуска.",
+    "playerSkipStart": "Начинать",
+    "playerSkipEnd": "Конец",
+    "playerSkipUseNow": "Использовать текущую позицию",
+    "playerSkipSend": "Отправить в AniSkip",
+    "playerSkipSent": "Время пропуска отправлено в AniSkip, спасибо.",
+    "playerSkipFailed": "AniSkip отказался от пропуска времени: {error}",
+    "@playerSkipFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "playerUnsupported": "Видеоплеер не работает на этом устройстве (его версия Android слишком старая для встроенной библиотеки плеера). Нажмите, чтобы скопировать детали.",
+    "playerSkipNoMal": "У этого заголовка нет идентификатора MyAnimeList, AniSkip не может его принять.",
     "playerNoChapters": "Глав нет",
     "playerTimestamp": "Метка времени",
     "playerAutoPlayDelay": "Обратный отсчёт до следующей серии",
@@ -1641,11 +2435,25 @@
     "playerPip": "Картинка в картинке",
     "playerAutoPip": "Картинка в картинке при выходе",
     "playerAutoPipDesc": "Продолжать воспроизведение в маленьком окне, когда ты выходишь из приложения",
+    "playerPipPlay": "Играть",
+    "playerPipPause": "Пауза",
+    "playerPipBack": "Перемотка назад",
+    "playerPipForward": "Вперед",
+    "playerPipRestore": "Вернуться к плееру",
+    "playerPipActive": "Игра в маленьком окне",
+    "listDateAdded": "Добавлено в список",
+    "listDateLastWatched": "Последний просмотр",
     "playerAutoPlaying": "Дальше: {title}…",
     "playerShadersFailed": "Не удалось установить шейдеры: {error}",
     "playerChapter": "Глава {number}",
     "playerPerTitle": "Только для этого тайтла",
     "playerPerTitleDesc": "Оставить эти параметры для этого тайтла, не трогая твои стандартные",
+    "playerSwapGestures": "Поменять стороны свайпов",
+    "playerSwapGesturesDesc": "Яркость слева, громкость справа",
+    "playerOpenBig": "Открывать в большом режиме",
+    "playerOpenBigDesc": "Запускать плеер на весь экран, без списка серий",
+    "playerPauseOnBlur": "Пауза при потере фокуса",
+    "playerPauseOnBlurDesc": "Ставить на паузу, когда приложение закрыто, например шторкой уведомлений, и продолжать при возврате",
     "playerAudioOutput": "Вывод звука",
     "fontAppDefault": "Шрифт приложения",
     "fontImport": "Импорт шрифта",
@@ -1668,8 +2476,74 @@
     "settingsDownloads": "Загрузки",
     "settingsDownloadsDesc": "Офлайн-серии, очередь и офлайн-режим",
     "downloadsTitle": "Загрузки",
+    "widgetContinue": "Продолжить",
+    "widgetReleases": "Скоро выйдет",
+    "widgetMore": "Также в процессе",
+    "widgetNothing": "Продолжать пока нечего",
+    "downloadStorageTitle": "Хранение",
+    "downloadStorageSummary": "{count, plural, =1{1 загрузка} other{{count} загрузок}} ",
+    "@downloadStorageSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadStorageWatched": "{size} уже смотрел или читал",
+    "@downloadStorageWatched": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreeUp": "Освободите место",
+    "downloadFreeUpConfirm": "Удалить {count, plural, =1{1 просмотрено скачать} other{{count} просмотрел загрузки}} и бесплатный {size}?",
+    "@downloadFreeUpConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreed": "Освобожден {size}",
+    "@downloadFreed": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadDeleteWatched": "Удалить просмотренное",
+    "downloadDeleteAll": "Удалить все",
+    "downloadDeleteAllConfirm": "Удалить каждую загрузку {title}?",
+    "@downloadDeleteAllConfirm": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadNothingWatched": "Ничего из того, что вы закончили, не загружается",
+    "downloadStorageEmpty": "Ни одна загрузка не занимает место",
     "downloadsOpenDesc": "Очередь и всё, что сохранено на этом устройстве",
     "downloadTitle": "Скачать",
+    "downloadMetaOnly": "Только метаданные",
+    "downloadMetaFailed": "Не удалось создать папку с заголовком",
+    "downloadMetaSaved": "Сохранено. Поместите свои файлы в {path}.",
+    "@downloadMetaSaved": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
     "downloadAlready": "Уже скачано или в очереди",
     "downloadPickStream": "Какой поток скачать?",
     "downloadPickSubtitle": "Какие субтитры скачать?",
@@ -1679,6 +2553,8 @@
     "downloadNoSubtitle": "Без субтитров",
     "downloadHlsNeedsFfmpeg": "Этот поток — плейлист HLS. Чтобы скачать его, нужно дополнение FFmpeg.",
     "downloadSourceMissing": "Источник этой серии не установлен",
+    "downloadDashDrm": "Этот поток защищен DRM",
+    "downloadDashNoVideo": "В манифесте DASH нет видео",
     "downloadWaitingConnection": "Ждём соединения",
     "downloadSubtitles": "Субтитры",
     "downloadDownloaded": "Скачано",
@@ -1808,312 +2684,27 @@
     "onboardingFeatureSync": "Держи списки синхронными",
     "onboardingFeatureSyncDesc": "Копируй свой список между сервисами или пусть побеждает тот, где прогресс больше.",
     "onboardingServices": "Работает с",
-    "updateInstallCancelled": "Установка отменена. Если Android написал, что приложение конфликтует с установленным, значит подпись отличается: сначала удали текущую версию, потом установи обновление",
-    "updateInstallFailed": "Не удалось обновить: {error}",
-    "appLock": "Блокировка приложения",
-    "appLockDesc": "Спрашивать код при открытии приложения или возвращении в него спустя время",
-    "appLockUnlock": "Введи код",
-    "appLockWrong": "Неверный код",
-    "appLockWait": "Слишком много попыток, подожди {seconds} с",
-    "appLockNew": "Придумай код",
-    "appLockNewHint": "От 4 до 8 цифр",
-    "appLockConfirm": "Введи ещё раз",
-    "appLockMismatch": "Коды не совпадают",
-    "appLockOn": "Код установлен",
-    "appLockRemoveTitle": "Введи код, чтобы отключить блокировку",
-    "settingsNetwork": "Сеть",
-    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
-    "mangaBakaAccountOptions": "Настройки аккаунта MangaBaka",
-    "chapterExpectedIn": "Глава {chapter} выйдет примерно через {time}",
-    "anilistExcludeList": "Скрыть мой список",
-    "anilistExcludeListDesc": "Не показывать на страницах аниме и манги тайтлы, которые уже есть в твоём AniList",
-    "koreanDramas": "Корейские дорамы",
-    "chineseDramas": "Китайские дорамы",
-    "japaneseDramas": "Японские дорамы",
-    "thaiDramas": "Тайские дорамы",
-    "turkishDramas": "Турецкие сериалы",
-    "miniSeries": "Мини-сериалы",
-    "playerSwapGestures": "Поменять стороны свайпов",
-    "playerSwapGesturesDesc": "Яркость слева, громкость справа",
-    "playerOpenBig": "Открывать в большом режиме",
-    "playerOpenBigDesc": "Запускать плеер на весь экран, без списка серий",
-    "playerPauseOnBlur": "Пауза при потере фокуса",
-    "playerPauseOnBlurDesc": "Ставить на паузу, когда приложение закрыто, например шторкой уведомлений, и продолжать при возврате",
-    "notificationAired": "Episode {episode} of {title} aired",
-    "@notificationAired": {
+    "sourceNotifyOn": "Вам сообщат, когда в {source} появится что-то новое.",
+    "@sourceNotifyOn": {
         "placeholders": {
-            "episode": {
-                "type": "String"
-            },
-            "title": {
+            "source": {
                 "type": "String"
             }
         }
     },
-    "playerDownloadCopy": "Copy details",
-    "playerPipRestore": "Back to the player",
-    "dcDisplayDetails": "Details",
-    "dcLargeCover": "Cover",
-    "settingsSyncTitles": "Watch progress and titles",
-    "updateLater": "Later",
-    "dcConnectedSnack": "Discord connected",
-    "downloadDeleteSelectedConfirm": "Delete {count} downloads? Their files are removed from the device.",
-    "@downloadDeleteSelectedConfirm": {
+    "sourceNotifyOff": "Уведомления о выпуске отключены",
+    "sourceNotifyNeedsSource": "Сначала выберите источник с совпадением",
+    "sourceNotifyAllOut": "Все ({count}) уже вышло, ждать нечего",
+    "@sourceNotifyAllOut": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "dcMethodToken": "Account token",
-    "shortcutPlayerFrameBack": "Previous frame",
-    "stacks": "Stacks",
-    "addonInstalled": "Installed",
-    "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
-    "@streamsCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncCode": "Enter {code} on GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "alphabetical": "Alphabetical",
-    "settingsMangaDesc": "Reader mode, controls, display and chapter tracking",
-    "sourceWhyNewest": "Newest at the source",
-    "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.",
-    "simklTitleLanguage": "Anime title language",
-    "readerModeAuto": "Auto (by series type)",
-    "settingsSyncSecretsBroken": "The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.",
-    "stackSavesCount": "{count, plural, =1{1 save} other{{count} saves}}",
-    "@stackSavesCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "stepWillUpdate": "Will be updated",
-    "trayUpdating": "Updating the app",
-    "updatePreparing": "Preparing…",
-    "syncWillRemove": "{count} will be deleted from {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "popularShows": "Popular Shows",
-    "playerPipActive": "Playing in a small window",
-    "dcDisplayName": "Name",
-    "playerDownloadFailedBody": "Check your connection and try again. The download picks up where it stopped.",
-    "settingsSyncServerInfo": "{count} settings, uploaded {time} from {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
-    "updateSkipVersion": "Skip this version",
-    "dcConnected": "Connected",
-    "dcStatusTextDesc": "What the member list shows next to your name",
-    "followsNotMutual": "Not mutual",
-    "castProtocolDlna": "DLNA / Smart TV",
-    "layoutDropInto": "Drop in: {zone}",
-    "@layoutDropInto": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "dcButtonCustom": "Custom button",
-    "dcSmallAuto": "Logo",
-    "backupProtectedSkipped": "This backup has no password, so its account data was skipped",
-    "settingsSyncPartPictureColorsDesc": "Brightness, contrast, saturation, gamma, hue and HDR",
-    "manageServicesDesc": "Reorder the services and choose which ones show in the picker",
-    "settingsLocalPlayBooks": "Books",
-    "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
-    "sourceMute": "Mute",
-    "sourceAlertsHeader": "Release notifications",
-    "settingsSyncPausedDesc": "Nothing is uploaded or downloaded while this is off.",
-    "sourceSoon": "soon",
-    "dcPrivateHint": "Something private",
-    "dcSampleLive": "Right now",
-    "castReceiverFailed": "The Chromecast did not start its player",
-    "settingsLocalPlayVideo": "Video",
-    "widgetReleases": "Releasing soon",
-    "playerDownloadFailedTitle": "Couldn't get the player",
-    "downloadStorageTitle": "Storage",
-    "updateNotFound": "Update server couldn't find that release: {message}",
-    "@updateNotFound": {
-        "placeholders": {
-            "message": {
-                "type": "String"
-            }
-        }
-    },
-    "syncDeleteAction": "Delete",
-    "sourcePickAnother": "Pick another source",
-    "watchSectionTools": "Tools",
-    "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.",
-    "downloadDashNoVideo": "The DASH manifest has no video",
-    "missingSequel": "Missing Sequel",
-    "settingsSyncChanged": "{count, plural, =0{Nothing changed yet} =1{1 changed} other{{count} changed}}",
-    "settingsSyncSecretsStop": "Stop syncing accounts",
-    "shortcutPlayerSpeedDown": "Slower playback",
-    "dcRecommended": "Recommended",
-    "sourceNextCheck": "Next check {when}",
-    "@sourceNextCheck": {
-        "placeholders": {
-            "when": {
-                "type": "String"
-            }
-        }
-    },
-    "castSearching": "Looking for devices on your network…",
-    "watchOrderOpenSite": "Open on chiaki.site",
-    "shortcutPlayerSubtitleCycle": "Next subtitle track",
-    "loadFailedActivity": "Couldn't load activity",
-    "shortcutPlayerFrameForward": "Next frame",
-    "sourceHiddenByTags": "Hidden by tags",
-    "downloadSelectAll": "Select all",
-    "downloadDashDrm": "This stream is DRM protected",
-    "anticipatedShows": "Anticipated Shows",
-    "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.",
-    "developerRoleModerator": "Discord Moderator",
-    "trending": "Trending",
-    "stacksFeatured": "Featured",
-    "layoutCutting": "Moving {name}. Press a paste button to place it",
-    "@layoutCutting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutClearKeys": "Remove all keys",
-    "sortMostViewed": "Most viewed",
-    "sourceSkipUnseen": "Skip while you have unseen episodes",
-    "sourceWhyNever": "Not yet",
-    "shortcutPlayerPrevious": "Previous episode",
-    "shortcutPlayerSpeedReset": "Normal speed",
-    "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.",
-    "layoutZoneSecondRow": "Hidden: second row in normal view",
-    "playerStreamFailedNext": "That stream won't play, trying the next one",
-    "dcListening": "Listening",
-    "closeActionQuit": "Quit the app",
-    "playerSkipStart": "Start",
-    "shortcutPlayerSubtitleToggle": "Subtitles on or off",
-    "newsEmpty": "No news right now",
-    "settingsSyncChangedHeader": "Changed settings",
-    "settingsSectionProgress": "Progress tracking",
-    "updateAll": "Update all",
-    "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
-    "animePlanetRank": "Rank",
-    "settingsSyncSignOut": "Sign out",
-    "settingsShortcuts": "Keyboard shortcuts",
-    "sourceNoticesEmpty": "No release notices yet",
-    "settingsSyncOn": "On",
-    "department": "Department",
-    "playerSoftwareRender": "Software rendering",
-    "detailStale": "AniList could not be reached. This is saved information and may be outdated.",
-    "simklMoviesOnly": "Movies & series only",
-    "settingsSyncConnectDesc": "Sign in with GitHub to keep your settings the same on every device.",
-    "moviesCollected": "Movies Collected",
-    "readerResetConfirm": "Reset every reader setting to its default?",
-    "layoutReset": "Reset to default",
-    "sourceNotifyTooltipOn": "Stop release notifications",
-    "unreadCounter": "Unread counter",
-    "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
-    "watchStatusChallenge": "Cloudflare check needed",
-    "dcRouteNone": "Not connected",
-    "settingsSyncStatShelf": "Resume",
-    "stories": "Stories",
-    "dcUseToken": "Use a token instead",
-    "stackSpoilers": "Spoilers",
-    "playerSkipSend": "Submit to AniSkip",
-    "shortcutPlayerSeekForwardLong": "Seek forward 30 seconds",
-    "stepUpToDateWith": "Up to date · {detail}",
-    "@stepUpToDateWith": {
-        "placeholders": {
-            "detail": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeDetails": "Where episode titles, thumbnails and summaries come from",
-    "sourceChecking": "Checking…",
-    "settingsSyncCancel": "Cancel",
-    "animePlanetRefreshLists": "Refresh your lists",
-    "sourceNotifyNeedsSource": "Pick a source with a match first",
-    "mediaVideo": "Video",
-    "sourceUnreachable": "Source isn't responding",
-    "dcStatusIdle": "Idle",
-    "sourceTagAnime": "Anime",
-    "novelPaginating": "Laying out pages",
-    "stacksSignInAgain": "Sign in again",
-    "topRatedAnime": "Top Rated Anime",
-    "playerSkipEnd": "End",
-    "dcTimerAuto": "Auto",
-    "settingsSyncSwitch": "Sync on change",
-    "onHoldManga": "On hold manga",
-    "widgetMore": "Also in progress",
-    "downloadStorageEmpty": "No downloads are using space",
-    "shortcutNoCalendar": "{service} has no calendar",
-    "@shortcutNoCalendar": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
-    "sortMostFollowed": "Most followed",
-    "settingsSyncNoneChanged": "You haven't changed any of these yet, so there is nothing to sync.",
-    "watchFailRejected": "The site rejected the clearance it just gave. Try again or clear the cookies",
-    "sourceSkippedUnstarted": "Skipped: not started",
-    "shortcutReaderPreviousPage": "Previous page",
-    "closeActionAlways": "Always keep running in the tray",
-    "layoutZoneTopEnd": "Top bar, after the title",
-    "watchOrderOpenFailed": "Couldn't open that title",
-    "watchSolvedBackground": "Cloudflare check passed in the background ({seconds} s)",
-    "@watchSolvedBackground": {
-        "placeholders": {
-            "seconds": {
-                "type": "int"
-            }
-        }
-    },
-    "syncPrivateInclude": "Sync them",
-    "recommendedShows": "Recommended Shows",
-    "castPlaybackFailed": "The device could not play this stream",
-    "layoutZoneBottomEnd": "Bottom bar, right",
-    "settingsSyncServer": "On the server",
-    "listDateAdded": "Added to list",
-    "settingsSyncSignIn": "Sign in with GitHub",
-    "dcDisconnectedSnack": "Discord disconnected",
-    "dcPrivateText": "Private text",
-    "sourceFinished": "Finished",
-    "playerSubtitlePreviewText": "Subtitle preview text",
-    "trayResumeDownloads": "Resume downloads",
-    "settingsSyncFailedTitle": "Sync failed",
-    "appLockBiometricReason": "Unlock Dartotsu",
-    "settingsWatchSections": "Sections",
-    "settingsSyncPartPictureColors": "Picture colours",
-    "playerPipPause": "Pause",
-    "dcStatusOnline": "Online",
-    "sourceFoundEpisode": "Episode {number} is out on {source}",
+    "sourceNotifyTooltipOn": "Остановить уведомления о выпуске",
+    "sourceNotifyTooltipOff": "Сообщайте мне о новых выпусках",
+    "sourceFoundEpisode": "Эпизод {number} выйдет на {source}.",
     "@sourceFoundEpisode": {
         "placeholders": {
             "number": {
@@ -2124,636 +2715,7 @@
             }
         }
     },
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.",
-    "playerShadersSoftware": "Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.",
-    "castVolume": "TV volume",
-    "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
-    "@updateConflictBody": {
-        "placeholders": {
-            "names": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreed": "Freed {size}",
-    "@downloadFreed": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsLocalPlayDesc": "Play files, folders, network streams and torrents, or open a book",
-    "playerSkipSubmit": "Submit skip times",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.",
-    "simklListsMostLiked": "Most liked",
-    "dcRouteGateway": "Through your account, live",
-    "extensionSettingsTitle": "{name} settings",
-    "@extensionSettingsTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyStatus": "Status",
-    "sourceWhyNextCheck": "Next check",
-    "logDeleteDesc": "Clear the saved app logs to free up space",
-    "unfinished": "Unfinished",
-    "stackSave": "Save stack",
-    "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
-    "sourceTagMovies": "Movies & Series",
-    "dcConnect": "Connect Discord",
-    "syncPrivateSkip": "Skip them",
-    "settingsShortcutsDesc": "See, change and turn off every key",
-    "refreshFromMangaUpdates": "Refresh from MangaUpdates",
-    "sourceUnmute": "Unmute",
-    "dcNameApp": "Dartotsu",
-    "playerDisableSkipsDesc": "No AniSkip or stream timestamps, chapter marks or skip submissions in the player",
-    "settingsSyncChangedOnly": "Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.",
-    "novelHighlightNote": "Note",
-    "layoutHide": "Hide",
-    "secReaderControls": "Tap zones, volume keys and auto scroll",
-    "releases": "Releases",
-    "settingsSyncPassphraseNew": "Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.",
-    "sourceUnsubscribe": "Unsubscribe",
-    "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.",
-    "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked.",
-    "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
-    "dcStatusNeedsToken": "Needs a Discord token. Connecting the app does not set your online status.",
-    "themePickerTitle": "Theme",
-    "downloadMetaFailed": "Couldn't create the title folder",
-    "novelTools": "Contents, search and highlights",
-    "supportDeveloper": "Support the developer",
-    "anticipatedMovies": "Anticipated Movies",
-    "downloadFreeUp": "Free up space",
-    "readerFilterQualityLow": "Low (Bilinear)",
-    "stackUnsave": "Remove from saved",
-    "settingsSyncCatOther": "Watch, read and services",
-    "dcTextSection": "Text",
-    "syncPrivateModeSync": "Sync them",
-    "shortcutReaderNextChapter": "Next chapter",
-    "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
-    "installStepJre": "Java runtime",
-    "dcRouteDesktop": "Through the Discord desktop app",
-    "trendingShows": "Trending Shows",
-    "sourceInDays": "in {count}d",
-    "@sourceInDays": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "watchlist": "Watchlist",
-    "stackEmptyEntries": "This stack is empty",
-    "settingsSyncNow": "Sync now",
-    "secNotifyAbout": "Pick which kinds of activity send an alert",
-    "allCustomLists": "All custom lists",
-    "watchOrderCredit": "Watch orders by chiaki.site",
-    "settingsSyncPassphraseSet": "Set a passphrase",
-    "developerRoleLead": "Lead Developer",
-    "readerFilterQualityMedium": "Medium (Trilinear)",
-    "trailerLoading": "Loading the trailer…",
-    "shortcutAppGlass": "Toggle glass mode",
-    "settingsSyncPartPaletteDesc": "Theme, accent colour and OLED black",
-    "externalCopyUrl": "Copy stream link",
-    "generalSectionDesktop": "Desktop",
-    "updateNoAsset": "This release has no download for your device",
-    "died": "Died",
-    "castRokuNote": "Roku can't report or change the position",
-    "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
-    "@novelSearchCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "dcCustomNameHint": "Name shown after “Watching”",
-    "shortcutPlayerAudioCycle": "Next audio track",
-    "incognitoTurnedOff": "Incognito mode off",
-    "readerLongPressSave": "Hold a page to save it",
-    "dcSmallNone": "None",
-    "watchSectionConnection": "Connection",
-    "comick": "Comick",
-    "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
-    "@downloadClearQueueConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceTagsHint": "Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.",
-    "dcButtonsSection": "Buttons",
-    "shortcutPlayerFullscreen": "Fullscreen",
-    "novelSearch": "Search",
-    "shortcutAppOled": "Toggle OLED black",
-    "sequel": "Sequel",
-    "readerCloudflare": "Open in browser (Cloudflare check)",
-    "dcSampleReading": "Reading",
-    "downloadDeleteWatched": "Delete watched",
-    "animePlanetRefreshListsDesc": "Read your Anime-Planet lists again",
-    "trayPlaying": "Playing in a small window",
-    "sourceMuted": "Muted",
-    "watchFailCooldown": "You closed the check a moment ago. Press Solve it to try again",
-    "watchStatusOffline": "Can't reach the site",
-    "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
-    "@repoLinkConfirm": {
-        "placeholders": {
-            "url": {
-                "type": "String"
-            }
-        }
-    },
-    "stepFailed": "Failed",
-    "mostWatchedThisWeek": "Most Watched This Week",
-    "comickLoginFailed": "Comick login failed",
-    "shortcutPlayerSeekForward": "Seek forward",
-    "settingsSyncSecretsDelete": "Delete from GitHub",
-    "settingsSyncPassphraseField": "Passphrase",
-    "dcInUse": "In use",
-    "watchFailUnavailable": "There is no screen to show the check on",
-    "layoutZoneOverflow": "Hidden: in the more menu",
-    "year": "Year",
-    "stepChecking": "Checking…",
-    "extensionManagerTitle": "{type} manager",
-    "@extensionManagerTitle": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "readerFilterQualityNone": "None (Nearest neighbor)",
-    "shortcutPlayerSpeedUp": "Faster playback",
-    "mostFollowedAnime": "Most Followed Anime",
-    "shortcutAppIncognito": "Toggle incognito",
-    "sourceNotifyOff": "Release notifications off",
-    "novelHighlightFailed": "Couldn't match that selection to the text",
-    "titleLanguageRomaji": "Romaji",
-    "dcState": "Bottom line",
-    "togetherShareText": "Watch with me on Dartotsu: {link}",
-    "@togetherShareText": {
-        "placeholders": {
-            "link": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeList": "Filler episodes and unwatched thumbnails",
-    "sourceSkipUnstarted": "Skip titles you haven't started",
-    "showsWatched": "Shows Watched",
-    "animePlanetWontWatch": "Won't watch",
-    "animePlanetAlreadyOnList": "Already on this list",
-    "shortcutPlayerFit": "Change video fit",
-    "castTitle": "Cast to device",
-    "updatePluginTitle": "Update {name}",
-    "@updatePluginTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcNameTitle": "Title",
-    "importRepositoryFile": "Import a file",
-    "sourceAlertsSwitch": "Check subscribed titles",
-    "shortcutAppSearch": "Open search",
-    "trakt": "Trakt",
-    "playerSkipUseNow": "Use current position",
-    "notificationSomeone": "Someone",
-    "navSources": "Sources",
-    "dcDetails": "Top line",
-    "downloadDeleteAll": "Delete all",
-    "generalSectionPrivacy": "Privacy",
-    "recommendedMovies": "Recommended Movies",
-    "syncPrivateTitle": "Private entries",
-    "shortcutAppMaterialYou": "Toggle Material You",
-    "newsCouldntLoad": "Couldn't load the news",
-    "updateDownloading": "Downloading",
-    "playerSkipSent": "Skip times submitted to AniSkip, thank you",
-    "watchFailQuiet": "The check needs you, and the app was working on its own",
-    "sourceWhyLastRelease": "Last new release seen",
-    "updateOpenedBrowser": "Check your browser",
-    "syncPrivate": "Private entries",
-    "shortcutNotSet": "Not set",
-    "dcConnection": "Connection",
-    "sourceAll": "All",
-    "dcAccount": "Account",
-    "people": "People",
-    "togetherJoin": "Join",
-    "mostComments": "Most comments",
-    "localSource": "Local files",
-    "animePlanetLocalNote": "Sign in to save changes to your Anime-Planet account. Until then they stay on this device",
-    "secPlayerSkip": "Skip openings, endings and recaps automatically",
-    "settingsSyncTitlesNone": "Nothing uploaded yet",
-    "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
-    "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
-    "shortcutReaderLeft": "Page to the left",
-    "calendarExpected": "Expected",
-    "externalChooser": "Open in another app",
-    "settingsNovelDesc": "Text, page turning, translation and read aloud",
-    "importTokenRejected": "Token rejected",
-    "settingsSyncTitlesCount": "{records} titles and {resume} resume entries on the server",
-    "@settingsSyncTitlesCount": {
-        "placeholders": {
-            "records": {},
-            "resume": {}
-        }
-    },
-    "settingsSyncPartSubtitlesDesc": "Size, weight, colours and position",
-    "backupProtectedNeedsPassword": "Set a password to back up account data, or untick it",
-    "dcAccountOnly": "Needs a signed-in account",
-    "appLockUseBiometric": "Use biometrics",
-    "settingsSyncStatSettings": "Settings",
-    "secProgress": "When your watched or read progress is saved to your list",
-    "dcTemplateHint": "Empty uses the default",
-    "shortcutReaderNextPage": "Next page",
-    "syncToDelete": "To delete",
-    "syncPrivateModeAsk": "Ask",
-    "externalFailed": "Couldn't open the stream. Is the player installed?",
-    "spoilerTapToView": " Spoiler, tap to view ",
-    "playerSubtitleOutlineWidth": "Subtitle outline width",
-    "stepFailedWith": "Failed: {reason}",
-    "@stepFailedWith": {
-        "placeholders": {
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "dcActivityName": "Activity name",
-    "layoutCut": "Cut",
-    "loadFailedFavourites": "Couldn't load favourites. Retry",
-    "extensionsLoading": "Loading extensions…",
-    "gamepadNavDesc": "Move around the app and control the player with a game controller",
-    "settingsSyncSecrets": "Accounts and passwords",
-    "settingsSyncDesc": "Keep your settings the same on every device. They are stored in a private gist in your GitHub account",
-    "stackRemovedToast": "Removed from your saved stacks",
-    "togetherShareInvite": "Share invite",
-    "updateUpToDate": "You're on the latest version",
-    "dcRouteLinked": "Connected app",
-    "readerOpenBookDesc": "Read an epub (novel reader) or a PDF (manga reader) from your files",
-    "shortcutPlayerSeekBack": "Seek back",
-    "settingsSyncPassphraseExisting": "Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.",
-    "settingsSyncSecretsOnDesc": "Signing out on one device does not sign you out on the others.",
-    "downloadMetaSaved": "Saved. Put your files in {path}",
-    "@downloadMetaSaved": {
-        "placeholders": {
-            "path": {
-                "type": "String"
-            }
-        }
-    },
-    "streamGroupHardSub": "Hard Sub",
-    "settingsSync": "Sync settings",
-    "shortcutGroupApp": "App",
-    "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
-    "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
-    "@sourceNotifyAllOut": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castProtocolRoku": "Roku",
-    "dcPreview": "Preview",
-    "shortcutTaken": "Taken from {action}",
-    "@shortcutTaken": {
-        "placeholders": {
-            "action": {
-                "type": "String"
-            }
-        }
-    },
-    "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
-    "watchStatusTesting": "Testing the connection…",
-    "shortcutResetOne": "Reset to default",
-    "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
-    "mangaUpdates": "MangaUpdates",
-    "traktVipMember": "Trakt VIP Member",
-    "manageServices": "Media services",
-    "shortcutSeekPercentKeys": "0 – 9",
-    "manageServicesHint": "Drag to reorder, switch off the ones you don't use",
-    "sortLatestUpdates": "Latest updates",
-    "layoutMore": "More",
-    "calendarAll": "All",
-    "settingsSyncAccount": "GitHub account",
-    "dcSignOut": "Sign out",
-    "shortcutResetAllDesc": "Put every key back to its default",
-    "installStepCore": "Runtime core",
-    "shortcutsEnableReader": "Reader shortcuts",
-    "shortcutPlayerSkip": "Skip intro or ending",
-    "shortcutPressHint": "Each combination can only belong to one action, so taking one moves it.",
-    "layoutPaste": "Paste here",
-    "externalVlc": "Open in VLC",
-    "secNovelText": "Font, size, spacing, margins and page turning",
-    "shortcutPlayerSeekBackLong": "Seek back 30 seconds",
-    "settingsGroupAccount": "Your account",
-    "stepWillInstall": "Will be installed",
-    "shortcutPlayerPanel": "Episode list",
-    "userStacks": "Stacks by {name}",
-    "@userStacks": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "trayIdle": "Nothing running",
-    "animePlanetNewList": "New list name",
-    "settingsSyncCount": "{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}",
-    "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
-    "@downloadStorageSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "runtimePreparing": "Preparing the runtime…",
-    "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs.",
-    "dcButtonUrl": "Link",
-    "trayPauseDownloads": "Pause downloads",
-    "castNowCasting": "Casting to {name}",
-    "@castNowCasting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
-    "stacksEmpty": "No stacks here yet",
-    "settingsGroupApp": "App",
-    "secReaderReading": "Reading mode, page turning, zoom and next chapter",
-    "sourceFoundSummary": "{count} titles have something new",
-    "@sourceFoundSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncSignInFailed": "Could not sign in to GitHub",
-    "simklListsMostFollowed": "Most followed",
-    "dcSampleBrowsing": "Browsing",
-    "mangaUpdatesAnimeEnd": "Anime adaptation ends",
-    "buyMeCoffee": "Buy me a coffee",
-    "simklMoviesOnlyDesc": "Replaces the Anime tab: Movies first, then Shows with a couple of anime rows",
-    "dcSignedInAs": "Signed in as {name}",
-    "@dcSignedInAs": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncSignInDesc": "Settings are stored in a private gist in your account",
-    "logDelete": "Delete log files",
-    "settingsSyncLast": "Last synced {time}",
-    "@settingsSyncLast": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "dcSampleWatching": "Watching",
-    "notificationsOtherService": "Switch to {service} to open this",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "watchOrderCurrent": "You are here",
-    "playerPictureOriginal": "Original",
-    "updateTryAgain": "Try again",
-    "togetherLinkConfirm": "Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.",
-    "@togetherLinkConfirm": {
-        "placeholders": {
-            "room": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
-    "birthplace": "Birthplace",
-    "sourceInactive": "Inactive: {manager}",
-    "@sourceInactive": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "comickProfile": "Comick profile",
-    "traySearch": "Search",
-    "dcPrivacySection": "Privacy",
-    "shortcutAppSettings": "Open settings",
-    "dcTokenWarning": "Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.",
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
-    "shortcutSeekPercent": "Jump to a point of the video",
-    "downloadMetaOnly": "Metadata only",
-    "layoutZoneBottomStart": "Bottom bar, left",
-    "watchClearanceIssued": "earned {time}",
-    "@watchClearanceIssued": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksSignIn": "Sign in to MangaBaka to see your stacks",
-    "simklListTitles": "{count, plural, =1{1 title} other{{count} titles}}",
-    "@simklListTitles": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "firstTab": "First tab",
-    "dcDisconnect": "Disconnect",
-    "animePlanetWontRead": "Won't read",
-    "dcMethodDesktopDesc": "Used automatically when nothing else is connected. Discord has to be open on this computer.",
-    "droppedManga": "Dropped manga",
-    "syncDelete": "Delete what the main service doesn't have",
-    "secNovelTranslate": "Translate chapters while you read",
-    "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
-    "streamGroupOther": "Other",
-    "dcMemberList": "In the member list",
-    "settingsSyncServerEmpty": "Nothing uploaded yet",
-    "updateSizeOf": "{done} of {total}",
-    "@updateSizeOf": {
-        "placeholders": {
-            "done": {
-                "type": "String"
-            },
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "droppedAnime": "Dropped anime",
-    "followCoverMediaOnly": "Only for media",
-    "layoutEmptyZone": "Drop buttons here",
-    "removePlayerMessage": "Videos can't play until the player is downloaded again.",
-    "trailerFailed": "Could not play the trailer here, opening it in the browser",
-    "simklListsOfficial": "Official",
-    "settingsSyncConnect": "Not connected",
-    "extensionsUpdated": "{done} of {total} extensions updated",
-    "@extensionsUpdated": {
-        "placeholders": {
-            "done": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "syncDeleteTitle": "Delete entries?",
-    "dcVariables": "Tap to insert a value",
-    "watchStatusBlocked": "Blocked by the site",
-    "playerStickyStageDesc": "Keep the video fixed at the top while you scroll the episodes and comments below",
-    "dcCustomStatusHint": "What are you up to?",
-    "checkNowDesc": "Look for a newer version right away",
-    "shortcutPlayerMute": "Mute",
-    "novelHighlightRemove": "Remove highlight",
-    "shortcutPlayerVolumeDown": "Volume down",
-    "dcConnectFailed": "Could not connect Discord",
-    "appLockDelay": "Lock when idle",
-    "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
-    "syncPrivateModeSkip": "Skip them",
-    "playerPictureProcessedDesc": "The frame as you see it now",
-    "settingsSyncPassphraseConfirm": "Repeat the passphrase",
-    "dcDisplayState": "State",
-    "syncRemoved": "Removed from {services}",
-    "@syncRemoved": {
-        "placeholders": {
-            "services": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutReaderPreviousChapter": "Previous chapter",
-    "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
-    "@sourceCheckResult": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "secPlayerEngine": "Decoder, video and audio output, buffering. Only change these if playback has problems",
-    "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
-    "settingsSyncWhat": "What to sync",
-    "filterAny": "Any",
-    "updateInvalidResponse": "Invalid update response",
-    "settingsSyncRetry": "Retry",
-    "layoutTitle": "Layout",
-    "streamGroupSub": "Sub",
-    "extensionsOfType": "{type} extensions",
-    "@extensionsOfType": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "playerDownloadRetry": "Try again",
-    "autoUpdateRuntimes": "Update extension runtimes automatically",
-    "dcButtonMedia": "Link to the title",
-    "syncServiceOn": "Sync with {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "widgetNothing": "Nothing to continue yet",
-    "streamGroupSoftSub": "Soft Sub",
-    "statusAuto": "Auto",
-    "novelHighlights": "Highlights",
-    "downloadDeleteAllConfirm": "Delete every download of {title}?",
-    "@downloadDeleteAllConfirm": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
-    "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
-    "shortcutsEnableDesc": "Turn every key in this group on or off",
-    "dcTimerStyle": "Timer style",
-    "secReaderDisplay": "Background, brightness, fullscreen and page number",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.",
-    "sourceLatest": "Latest: {number}",
-    "@sourceLatest": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartPalette": "Theme colours",
-    "watchSectionSession": "Session",
-    "listsYours": "Yours",
-    "settingsSyncNever": "Not synced yet",
-    "notInList": "Not In List",
-    "closeActionWhenBusy": "Keep running in the tray while something is running",
-    "stepWillUpdateTo": "Will be updated to {version}",
-    "@stepWillUpdateTo": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadNothingWatched": "Nothing you have finished is downloaded",
-    "comickClientIdDesc": "Custom client ID registered on comick.dev",
-    "mostFollowed": "Most Followed",
-    "dcLargeImage": "Large image",
-    "shortcutPlayerPlayPause": "Play or pause",
-    "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
-    "@trackProgressMangaLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
-    "@downloadFreeUpConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "calendarAnime": "Anime",
-    "externalPlayerTitle": "Open stream elsewhere",
-    "commentsConnectFailed": "Failed to connect",
-    "sourceWaiting": "Waiting for the next release",
-    "calendarManga": "Manga",
-    "novelContentsEmpty": "This chapter has no headings",
-    "settingsSyncThisDevice": "this device",
-    "syncDeletedNote": "Will be deleted",
-    "trendingAnime": "Trending Anime",
-    "settingsSyncPartSubtitles": "Subtitle size and colours",
-    "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
+    "sourceFoundEpisodes": "Эпизоды {from}–{to} выйдут на {source}.",
     "@sourceFoundEpisodes": {
         "placeholders": {
             "from": {
@@ -2767,10 +2729,7 @@
             }
         }
     },
-    "voiceActors": "Voice actors",
-    "tagline": "Tagline",
-    "gamepadNav": "Gamepad navigation",
-    "sourceFoundChapter": "Chapter {number} is out on {source}",
+    "sourceFoundChapter": "Глава {number} вышла на {source}.",
     "@sourceFoundChapter": {
         "placeholders": {
             "number": {
@@ -2781,379 +2740,7 @@
             }
         }
     },
-    "extensionNoSettings": "{name} doesn't provide any settings.",
-    "@extensionNoSettings": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailDismissed": "The check was closed before it finished",
-    "castFailed": "Could not start casting",
-    "novelHighlight": "Highlight",
-    "notificationAdded": "{title} was added to AniList",
-    "@notificationAdded": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "dcSignIn": "Sign in with Discord",
-    "watchFailTurnstile": "This check needs a tap that the background solver can't do",
-    "stackSavedToast": "Saved to your stacks",
-    "layoutMoveTo": "Move to {zone}",
-    "@layoutMoveTo": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksCouldntLoad": "Couldn't load the stacks",
-    "installStepsProgress": "Step {current} of {total}",
-    "@installStepsProgress": {
-        "placeholders": {
-            "current": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "watchStatusUntested": "Not tested yet",
-    "prequel": "Prequel",
-    "dcStatusInvisible": "Invisible",
-    "usernameOnly": "Username",
-    "updateWhatsNew": "What's new",
-    "followsMutual": "Mutual",
-    "boxOffice": "Box Office",
-    "dcShowWatching": "Show while watching",
-    "settingsSyncFailed": "Sync failed: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
-        }
-    },
-    "loadFailedReplies": "Couldn't load replies",
-    "dcActivitySection": "Activity",
-    "widgetContinue": "Continue",
-    "weeklySchedule": "Weekly Schedule",
-    "readerFilterQualityHigh": "High (Bicubic)",
-    "novelExtensions": "Novel Extensions",
-    "secPlayerMpv": "mpv.conf, scripts and advanced tuning",
-    "generalSectionSecurity": "Security",
-    "settingsSyncStatTitles": "Titles",
-    "externalMpv": "Open in mpv",
-    "dcLargeLogo": "Logo",
-    "imageTitlePage": "Page",
-    "stacksFollowing": "Following",
-    "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
-    "dcControlStatus": "Control my status",
-    "notificationAddedDetail": "Was added to AniList",
-    "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
-    "@sourceManageDesc": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "installRuntimeNewer": "The runtime this manager runs on has an update.",
-    "watchSolvedByUser": "Cloudflare check passed",
-    "settingsSyncSecretsOn": "Accounts are synced and encrypted",
-    "dcImagesSection": "Images",
-    "anticipated": "Anticipated",
-    "watchOrderUnavailable": "No watch order was found for this title",
-    "secNovelSpeech": "Voice, speed and pitch for read aloud",
-    "updateConflictAction": "Uninstall and reinstall",
-    "dcMethodDesktop": "Discord desktop app",
-    "dcLargeAuto": "Auto",
-    "settingsSyncUploaded": "Uploaded {time} from {device}",
-    "@settingsSyncUploaded": {
-        "placeholders": {
-            "time": {},
-            "device": {}
-        }
-    },
-    "streamGroupRaw": "Raw",
-    "dcShowReading": "Show while reading",
-    "settingsGroupContent": "Content",
-    "castProtocolChromecast": "Chromecast",
-    "dcControlStatusDesc": "Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.",
-    "novelSearchHint": "Search in this chapter",
-    "backupPasswordRequired": "Password (required for account data)",
-    "settingsSyncCopyCode": "Tap the code to copy it",
-    "dcConnecting": "Connecting…",
-    "shortcutPlayerNext": "Next episode",
-    "novelHighlightNoteHint": "Add a note",
-    "settingsSectionLists": "Episode and chapter lists",
-    "playerPictureSave": "Save this frame",
-    "sourceWhyLastCheck": "Last checked",
-    "shortcutResetAll": "Reset all shortcuts",
-    "playerPipBack": "Rewind",
-    "updateInstalling": "Installing…",
-    "animePlanetMagazine": "Magazine",
-    "dcSmallImage": "Small image",
-    "externalCopied": "Stream link copied",
-    "shortcutNothingToContinue": "Nothing to continue yet",
-    "traktVip": "VIP",
-    "removeJvmTitle": "Remove the Java runtime?",
-    "playerDisableSkips": "Disable skips",
-    "secPlayerShaders": "Anime upscaling and your own shaders",
-    "notificationATitle": "a title",
-    "layoutTitleFixed": "Title",
-    "sourceManage": "Subscriptions",
-    "settingsAnimeDesc": "Player, subtitles, skipping, episode list and episode details",
-    "mangaUpdatesProfile": "MangaUpdates profile",
-    "listsLiked": "Liked",
-    "titleLanguageEnglish": "English",
-    "castStop": "Stop casting",
-    "localMissing": "This file or folder is no longer in your Local folder",
-    "dcCustomStatus": "Custom status",
-    "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
-    "settingsSyncWaiting": "Waiting for you to approve on GitHub",
-    "settingsSyncOffCategory": "Not syncing. These stay on this device and the server copy is left as it is.",
-    "settingsSyncPassphraseShort": "Use at least 6 characters",
-    "dcDisconnected": "Not connected",
-    "sourceSkippedCompleted": "Skipped: completed",
-    "shortcutAppDark": "Toggle dark mode",
-    "dcButtonApp": "Link to Dartotsu",
-    "stackBy": "by {name}",
-    "@stackBy": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailBlocked": "The site blocked this device (access denied). A check won't help",
-    "trayQuit": "Quit",
-    "newsTitle": "News",
-    "sourceTagAdult": "18+",
-    "sourceInHours": "in {count}h",
-    "@sourceInHours": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castSkipPart": "Skip {name}",
-    "@castSkipPart": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchStatusReady": "Ready",
-    "sourceOpenExtensions": "Open extensions",
-    "trackProgressRememberSeries": "Remember for this series",
-    "calendarChapter": "Chapter {n}",
-    "@calendarChapter": {
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
-    "downloadSelectedCount": "{count} selected",
-    "@downloadSelectedCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "loadFailedStats": "Couldn't load stats",
-    "stepInstalled": "Installed",
-    "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
-    "@appLockDelayAfter": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "showsCollected": "Shows Collected",
-    "dcTimerRemaining": "Remaining",
-    "shortcutReaderControls": "Show or hide controls",
-    "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
-    "settingsLocalPlay": "Local play",
-    "trayDownloading": "{count, plural, one{Downloading {count} item} other{Downloading {count} items}}",
-    "@trayDownloading": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "readerOpenBook": "Open a book",
-    "commentsRateLimited": "Rate limited",
-    "castRefresh": "Search again",
-    "generalSectionBasics": "Language & behaviour",
-    "removePlayerTitle": "Remove the player?",
-    "settingsSyncTokenField": "Token",
-    "searchTags": "Search tags",
-    "watchStatusSolving": "Passing the Cloudflare check…",
-    "castControls": "Controls",
-    "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
-    "listDateLastWatched": "Last watched",
-    "moviesWatched": "Movies Watched",
-    "shortcutAppDownloads": "Open downloads",
-    "settingsSyncAccountDesc": "Your data goes to a private gist in your own account.",
-    "settingsSyncSecretsDesc": "Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.",
-    "playerDownloadStarting": "Starting the download…",
-    "cantBeUndone": "This can't be undone.",
-    "watchFailLoad": "The page didn't load. Check the connection and the site address",
-    "shortcutReaderRight": "Page to the right",
-    "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
-    "@extensionUpdates": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
-    "updateReleased": "Released {date}",
-    "@updateReleased": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "comickAccountOptions": "Comick account options",
-    "playerPipForward": "Forward",
-    "installNeedsRuntime": "It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.",
-    "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
-    "streamGroupDub": "Dub",
-    "traktAttribution": "Data and artwork provided by Trakt. View on Trakt",
-    "downloadStorageWatched": "{size} already watched or read",
-    "@downloadStorageWatched": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksMine": "Yours",
-    "dcButtonLabel": "Label",
-    "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
-    "@sourceInactiveOpen": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutAppBack": "Go back",
-    "layoutZoneTopStart": "Top bar, before the title",
-    "latestUpdates": "Latest Updates",
-    "playerDownloadBody": "Dartotsu fetches its video engine once. Playback starts as soon as it is ready.",
-    "settingsSyncCustom": "Custom",
-    "trayShow": "Show Dartotsu",
-    "settingsSyncPassphraseEnter": "Enter your passphrase",
-    "notificationAiredDetail": "Episode {episode} aired",
-    "@notificationAiredDetail": {
-        "placeholders": {
-            "episode": {
-                "type": "String"
-            }
-        }
-    },
-    "playerStickyStage": "Sticky video",
-    "stacksSaved": "Saved",
-    "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.",
-    "@syncPrivateAsk": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "playerPictureSaveFailed": "Could not save the frame",
-    "sourceTags": "Tags",
-    "settingsSyncPassphraseWrong": "Wrong passphrase",
-    "shortcutPlayerVolumeUp": "Volume up",
-    "traktReadOnly": "Trakt granted read-only access",
-    "onHoldAnime": "On hold anime",
-    "shortcutAddKey": "Add a key",
-    "downloadDeleteSelected": "Delete selected",
-    "sourceWhyAction": "Why no alert?",
-    "shortcutsEnableApp": "App shortcuts",
-    "updateSpeed": "{speed}/s",
-    "@updateSpeed": {
-        "placeholders": {
-            "speed": {
-                "type": "String"
-            }
-        }
-    },
-    "updateNoReleases": "No releases found",
-    "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
-    "simklListsTrending": "Trending",
-    "stepNotNeeded": "Not needed here",
-    "dnsNoRecords": "No A records returned",
-    "mangaUpdatesAnimeStart": "Anime adaptation starts",
-    "appLockDelayNever": "Never",
-    "playerPictureSaved": "Frame saved",
-    "settingsSyncRunning": "Syncing…",
-    "dcNameCustom": "Custom",
-    "unreadCounterDesc": "Show how many episodes or chapters are left on posters",
-    "settingsAboutUpdatesDesc": "App updates, version, logs, links and support",
-    "settingsSyncPaused": "Paused",
-    "onboardingLanguageBody": "Choose the language Dartotsu is shown in. You can change it later in Settings.",
-    "sourceMissingDesc": "{source} isn't installed in this extension service",
-    "@sourceMissingDesc": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartsNote": "Per device. Off keeps each device's own value, so a phone and a TV can differ.",
-    "stepWaiting": "Waiting",
-    "readerFilterQuality": "Image filter quality",
-    "comickClientId": "Comick Client ID",
-    "settingsSyncTitlesNote": "Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.",
-    "hideNsfwSourcesDesc": "Hide sources marked 18+ from the feeds and the source picker. They stay installed.",
-    "sourceWhyFailures": "Failed checks in a row",
-    "dcStatusDnd": "Do not disturb",
-    "shortcutAppShortcuts": "Show keyboard shortcuts",
-    "shortcutAppFullscreen": "Toggle fullscreen",
-    "appLockDelayAlways": "Always",
-    "stacksAll": "All",
-    "watchFailTimeout": "The check didn't finish in time",
-    "shortcutPlayerStreamCycle": "Next stream",
-    "settingsSyncUpToDate": "Up to date",
-    "dcCompeting": "Competing",
-    "rising": "Rising",
-    "sourceNotifyOn": "You'll be told when {source} has something new",
-    "@sourceNotifyOn": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.",
-    "upiId": "UPI ID",
-    "updateConflictTitle": "Update not installed",
-    "sourceNotifyTooltipOff": "Notify me about new releases",
-    "sourceCheckNow": "Check now",
-    "shortcutPress": "Press the key or combination you want",
-    "sourceWhyVerdictMuted": "This subscription is muted.",
-    "sourceWhyProgress": "Your progress",
-    "translationStatusLabel": "Translation",
-    "traktProfile": "Trakt profile",
-    "playerDownloadTitle": "Downloading the player",
-    "watchFailWebView": "The background web view couldn't start",
-    "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
+    "sourceFoundChapters": "Главы {from}–{to} вышли на {source}.",
     "@sourceFoundChapters": {
         "placeholders": {
             "from": {
@@ -3167,37 +2754,358 @@
             }
         }
     },
-    "settingsNotificationsDesc": "Alerts for your lists, new episodes and chapters, and comment replies",
-    "traySyncing": "Syncing your lists",
-    "upiCopied": "UPI ID copied",
-    "settingsSyncTokenDesc": "Create one at github.com/settings/tokens with only the gist permission",
-    "settingsSyncPassphraseMismatch": "The passphrases do not match",
-    "shortcutAppNotifications": "Open notifications",
-    "logDeleted": "Deleted {size} of logs",
-    "@logDeleted": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "appLockBiometric": "Unlock with biometrics",
-    "dcStatusText": "Status text",
-    "dcStatusSection": "Status",
-    "shortcutGroupPlayer": "Video player",
-    "sourceWhyListStatus": "List status",
-    "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
-    "@stackSeriesCount": {
+    "sourceFoundSummary": "В заголовках {count} есть что-то новое",
+    "@sourceFoundSummary": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "settingsSyncToken": "Use a personal access token",
-    "incognitoTurnedOn": "Incognito mode on",
-    "novelPageOf": "Page {current} of {total}",
-    "@novelPageOf": {
+    "navSources": "Источники",
+    "sourceInactiveOpen": "Этот источник принадлежит {manager}, который не является активной службой расширения.",
+    "@sourceInactiveOpen": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceAlertsHeader": "Уведомления о выпуске",
+    "sourceAlertsSwitch": "Проверьте подписанные названия",
+    "sourceAlertsSwitchDesc": "Один раз при каждом открытии приложения для заголовков вы включили колокольчик",
+    "sourceSkipUnstarted": "Пропускайте заголовки, которые вы еще не начали",
+    "sourceSkipUnstartedDesc": "Ещё ничего не смотрел и не читал, но серии уже есть",
+    "sourceSkipUnseen": "Пропускайте, пока у вас есть непросмотренные серии",
+    "sourceSkipUnseenDesc": "У вас еще есть выпущенные серии, чтобы наверстать упущенное",
+    "sourceManage": "Подписки",
+    "sourceManageDesc": "{count, plural, =0{Нет названий} =1{1 титул} other{{count} названия}}",
+    "@sourceManageDesc": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceCheckNow": "Проверьте сейчас",
+    "sourceCheckNowDesc": "Игнорирует расписание и правила пропуска.",
+    "sourceChecking": "Проверка…",
+    "sourceCheckResult": "{count, plural, =0{Ничего нового} =1{В 1 названии есть что-то новое} other{В заголовках {count} есть что-то новое}}",
+    "@sourceCheckResult": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceEmpty": "Подписок пока нет",
+    "sourceEmptyMessage": "Нажмите на колокольчик над эпизодом, чтобы узнавать о новых.",
+    "sourceAll": "Все",
+    "sourceInactive": "Неактивно: {manager}",
+    "@sourceInactive": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMissingDesc": "{source} не установлен в этой службе расширения.",
+    "@sourceMissingDesc": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceUnreachable": "Источник не отвечает",
+    "sourceFinished": "Закончено",
+    "sourceSkippedCompleted": "Пропущено: завершено",
+    "sourceSkippedUnstarted": "Пропущено: не началось",
+    "sourceSkippedUnseen": "Пропущено: непросмотренные серии",
+    "sourceWaiting": "Ждем следующего выпуска",
+    "sourceNextCheck": "Следующая проверка {when}",
+    "@sourceNextCheck": {
+        "placeholders": {
+            "when": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceSoon": "скоро",
+    "sourceInHours": "в {count}h",
+    "@sourceInHours": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceInDays": "в {count}d",
+    "@sourceInDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceLatest": "Последнее: {number}",
+    "@sourceLatest": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMute": "Отключить звук",
+    "sourceUnmute": "Включить звук",
+    "sourceMuted": "Без звука",
+    "sourceUnsubscribe": "Отписаться",
+    "sourcePickAnother": "Выберите другой источник",
+    "sourceOpenExtensions": "Открытые расширения",
+    "sourceNoticesEmpty": "Уведомлений о выпуске пока нет",
+    "sourceNoticesEmptyMessage": "Здесь появляются новые эпизоды и главы из книг, на которые вы подписались.",
+    "sourceOpenTitle": "Открыть заголовок",
+    "extensionsLoading": "Загрузка расширений…",
+    "updateWhatsNew": "Что нового",
+    "updateLater": "Позже",
+    "updateSkipVersion": "Пропустить эту версию",
+    "updatePreparing": "Подготовка…",
+    "updateDownloading": "Загрузка",
+    "updateInstalling": "Установка…",
+    "updateSizeOf": "{done} из {total}",
+    "@updateSizeOf": {
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "updateSpeed": "{speed}/с",
+    "@updateSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            }
+        }
+    },
+    "updateReleased": "Выпущен {date}",
+    "@updateReleased": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNoAsset": "Этот выпуск нельзя загрузить для вашего устройства.",
+    "updateUpToDate": "Вы используете последнюю версию",
+    "updateIosHint": "Сборок iOS нет в App Store. Возьмите .ipa со страницы выпуска и загрузите его с помощью AltStore или SideStore.",
+    "updateOpenedBrowser": "Проверьте свой браузер",
+    "updateTryAgain": "Попробуйте еще раз",
+    "settingsNotifications": "Уведомления",
+    "settingsNotificationsDesc": "Оповещения о ваших списках, новых эпизодах и главах, а также ответы на комментарии.",
+    "settingsAboutUpdates": "О компании и обновлениях",
+    "settingsAboutUpdatesDesc": "Обновления приложений, версия, журналы, ссылки и поддержка",
+    "settingsGroupAccount": "Ваш аккаунт",
+    "settingsGroupContent": "Содержание",
+    "settingsGroupApp": "Приложение",
+    "settingsAnimeDesc": "Плеер, субтитры, пропуск, список серий и подробности серий",
+    "settingsMangaDesc": "Режим чтения, элементы управления, отображение и отслеживание глав",
+    "settingsNovelDesc": "Текст, перелистывание страниц, перевод и чтение вслух",
+    "settingsLocalPlay": "Локальная игра",
+    "settingsLocalPlayDesc": "Воспроизведение файлов, папок, сетевых потоков и торрентов или открытие книги",
+    "settingsLocalPlayVideo": "Видео",
+    "settingsLocalPlayBooks": "Книги",
+    "settingsWatchSections": "Разделы",
+    "settingsSectionLists": "Списки эпизодов и глав",
+    "settingsSectionProgress": "Отслеживание прогресса",
+    "updateChannelDesc": "Стабильная версия — это протестированная версия. Предварительная версия и альфа-версия получат новые функции раньше, но могут выйти из строя",
+    "checkNowDesc": "Ищите новую версию прямо сейчас",
+    "generalSectionBasics": "Язык и поведение",
+    "generalSectionSecurity": "Безопасность",
+    "generalSectionPrivacy": "Конфиденциальность",
+    "notificationsOtherService": "Переключитесь на {service}, чтобы открыть это.",
+    "@notificationsOtherService": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
+    "secPlayerPlayback": "Скорость по умолчанию, автоматическое воспроизведение, подгонка видео, ориентация и картинка в картинке",
+    "secPlayerSkip": "Автоматически пропускать начало, окончание и резюме",
+    "secPlayerControls": "Проведите, удерживайте и коснитесь жестов и найдите предварительный просмотр",
+    "secPlayerSubtitles": "Языки, внешний вид и рендеринг субтитров",
+    "secPlayerShaders": "Апскейлинг аниме и собственные шейдеры",
+    "secPlayerEngine": "Декодер, вывод видео и звука, буферизация. Меняйте их только в том случае, если при воспроизведении возникают проблемы.",
+    "secPlayerMpv": "mpv.conf, скрипты и расширенная настройка",
+    "secAnimeList": "Дополнительные эпизоды и непросмотренные миниатюры",
+    "secProgress": "Когда ваш прогресс просмотра или чтения сохраняется в вашем списке",
+    "secAnimeDetails": "Откуда берутся названия, миниатюры и краткое содержание эпизодов",
+    "secReaderReading": "Режим чтения, перелистывание страниц, масштабирование и переход к следующей главе.",
+    "secReaderControls": "Зоны касания, клавиши громкости и автоматическая прокрутка",
+    "secReaderDisplay": "Фон, яркость, полноэкранный режим и номер страницы",
+    "secNovelText": "Шрифт, размер, интервал, поля и переворот страниц.",
+    "secNovelTranslate": "Переводите главы во время чтения",
+    "secNovelSpeech": "Голос, скорость и высота звука для чтения вслух",
+    "secNotifyAbout": "Выберите, при каких видах деятельности будет отправляться оповещение",
+    "layoutTitle": "Макет",
+    "layoutDesc": "Выбирайте, перемещайте и скрывайте кнопки на панелях",
+    "layoutHint": "Перетащите кнопку, чтобы переместить ее (сначала удерживайте ее на сенсорном экране). Нажмите один, чтобы вырезать, переместить или скрыть его.",
+    "layoutDropInto": "Загляните: {zone}",
+    "@layoutDropInto": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutCutting": "Перемещение {name}. Нажмите кнопку вставки, чтобы разместить его.",
+    "@layoutCutting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutTitleFixed": "Название",
+    "layoutZoneTopStart": "Верхняя полоса перед заголовком",
+    "layoutZoneTopEnd": "Верхняя полоса после заголовка",
+    "layoutZoneBottomStart": "Нижняя полоса слева",
+    "layoutZoneBottomEnd": "Нижняя полоса справа",
+    "layoutZoneSecondRow": "Скрыто: второй ряд в обычном режиме.",
+    "layoutZoneOverflow": "Скрыто: в меню «Дополнительно».",
+    "layoutEmptyZone": "Скиньте сюда кнопки",
+    "layoutCut": "Вырезать",
+    "layoutPaste": "Вставить сюда",
+    "layoutHide": "Скрыть",
+    "layoutMoveTo": "Перейти к {zone}",
+    "@layoutMoveTo": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutReset": "Сбросить настройки по умолчанию",
+    "layoutMore": "Подробнее",
+    "sourceWhyAction": "Почему нет оповещения?",
+    "sourceWhyStatus": "Статус",
+    "sourceWhyLastCheck": "Последняя проверка",
+    "sourceWhyNever": "Еще нет",
+    "sourceWhyNextCheck": "Следующая проверка",
+    "sourceWhyNewest": "Новейшее в источнике",
+    "sourceWhyProgress": "Ваш прогресс",
+    "sourceWhyListStatus": "Статус списка",
+    "sourceWhyFailures": "Неудачные проверки подряд",
+    "sourceWhyLastRelease": "Последний просмотренный новый выпуск",
+    "sourceWhyVerdictNew": "Новый выпуск появится здесь, как только источник укажет его и запустит следующую проверку.",
+    "sourceWhyVerdictAhead": "Исходник уже опережает ваш прогресс, поэтому вам о нем сказали один раз. Прочтите или посмотрите его, чтобы получить следующее оповещение.",
+    "sourceWhyVerdictSkipped": "Этот заголовок пропускается приведенными выше правилами. Измените их в настройках уведомлений или используйте «Проверить сейчас», чтобы запустить их в любом случае.",
+    "sourceWhyVerdictBroken": "Источник недоступен или удален, поэтому ничего не проверяется.",
+    "sourceWhyVerdictMuted": "Эта подписка отключена.",
+    "externalPlayerTitle": "Открыть трансляцию в другом месте",
+    "externalCopyUrl": "Скопировать ссылку на трансляцию",
+    "externalCopied": "Ссылка на трансляцию скопирована.",
+    "externalChooser": "Открыть в другом приложении",
+    "externalVlc": "Открыть в VLC",
+    "externalMpv": "Открыть в формате MPV",
+    "externalWebVideoCast": "Веб-видеотрансляция",
+    "castViaAppHint": "Отправьте поток в приложение Web Video Cast.",
+    "externalFailed": "Не удалось открыть трансляцию. Плеер установлен?",
+    "addonInstalled": "Установлено",
+    "loadFailedActivity": "Не удалось загрузить активность",
+    "loadFailedFavourites": "Не удалось загрузить избранное. Повторить попытку",
+    "loadFailedStats": "Не удалось загрузить статистику",
+    "loadFailedReplies": "Не удалось загрузить ответы",
+    "cantBeUndone": "Это невозможно отменить.",
+    "searchTags": "Поиск по тегам",
+    "spoilerTapToView": "Спойлер, нажмите, чтобы посмотреть",
+    "mediaVideo": "Видео",
+    "notificationSomeone": "Кто-то",
+    "notificationATitle": "титул",
+    "notificationAddedDetail": "Был добавлен в AniList",
+    "updateNoReleases": "Релизов не найдено",
+    "updateInvalidResponse": "Неверный ответ на обновление",
+    "commentsRateLimited": "Скорость ограничена",
+    "commentsConnectFailed": "Не удалось подключиться",
+    "dnsNoRecords": "Ни одна запись A не возвращена",
+    "importTokenRejected": "Токен отклонен",
+    "developerRoleLead": "Ведущий разработчик",
+    "developerRoleModerator": "Модератор Дискорда",
+    "extensionManagerTitle": "{type} менеджер",
+    "@extensionManagerTitle": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionsOfType": "Расширения {type}",
+    "@extensionsOfType": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionSettingsTitle": "{name} настройки",
+    "@extensionSettingsTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionNoSettings": "{name} не предоставляет никаких настроек.",
+    "@extensionNoSettings": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAired": "Эпизод {episode} из {title} вышел в эфир",
+    "@notificationAired": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            },
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAiredDetail": "Эпизод {episode} вышел в эфир",
+    "@notificationAiredDetail": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAdded": "{title} добавлен в AniList",
+    "@notificationAdded": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNotFound": "Сервер обновлений не смог найти этот выпуск: {message}",
+    "@updateNotFound": {
+        "placeholders": {
+            "message": {
+                "type": "String"
+            }
+        }
+    },
+    "installStepJre": "среда выполнения Java",
+    "installStepCore": "Ядро выполнения",
+    "installStepsProgress": "Шаг {current} из {total}",
+    "@installStepsProgress": {
         "placeholders": {
             "current": {
                 "type": "int"
@@ -3207,68 +3115,160 @@
             }
         }
     },
-    "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
-    "watchOrder": "Watch order",
-    "settingsNotifications": "Notifications",
-    "syncDeleteConfirm": "{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.",
-    "@syncDeleteConfirm": {
+    "stepWaiting": "Ожидание",
+    "stepChecking": "Проверка…",
+    "stepUpToDate": "Актуально",
+    "stepUpToDateWith": "Актуально · {detail}",
+    "@stepUpToDateWith": {
+        "placeholders": {
+            "detail": {
+                "type": "String"
+            }
+        }
+    },
+    "stepWillInstall": "Будет установлен",
+    "stepWillUpdate": "Будет обновляться",
+    "stepWillUpdateTo": "Будет обновлено до {version}",
+    "@stepWillUpdateTo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "stepInstalled": "Установлено",
+    "stepNotNeeded": "Здесь не нужен",
+    "stepFailed": "Не удалось",
+    "stepFailedWith": "Не удалось: {reason}",
+    "@stepFailedWith": {
+        "placeholders": {
+            "reason": {
+                "type": "String"
+            }
+        }
+    },
+    "installNeedsRuntime": "Он работает в среде выполнения Java и в общем ядре среды выполнения. Они устанавливаются первыми и обновляются, если они изменились.",
+    "installRuntimeNewer": "Среда выполнения, в которой работает этот менеджер, обновлена.",
+    "removeJvmTitle": "Удалить среду выполнения Java?",
+    "removeJvmMessage": "Менеджеры расширений рабочего стола перестают работать, пока они не будут установлены снова. Он будет загружен снова при следующей установке или открытии.",
+    "runtimePreparing": "Подготовка среды выполнения…",
+    "calendarAll": "Все",
+    "calendarAnime": "Аниме",
+    "calendarManga": "Манга",
+    "readerCloudflare": "Открыть в браузере (проверка Cloudflare)",
+    "badgeBoardHint": "Перетащите значок в угол первой карты или перетащите значок, уже находящийся на ней, чтобы переместить его. Значки меняются местами, поэтому ни один из них никогда не пересекается. Коснитесь значка ниже, чтобы включить или выключить его.",
+    "statusAuto": "Авто",
+    "unreadCounter": "Непрочитанный счетчик",
+    "unreadCounterDesc": "Покажите, сколько серий или глав осталось на постерах",
+    "settingsShortcuts": "Сочетания клавиш",
+    "settingsShortcutsDesc": "Смотри, меняй и выключай каждую клавишу",
+    "shortcutGroupApp": "Приложение",
+    "shortcutGroupPlayer": "Видеоплеер",
+    "shortcutGroupReader": "Читатель",
+    "shortcutsEnableApp": "Ярлыки приложений",
+    "shortcutsEnablePlayer": "Ярлыки проигрывателя",
+    "shortcutsEnableReader": "Ярлыки для чтения",
+    "shortcutsEnableDesc": "Включите или выключите каждую клавишу в этой группе.",
+    "shortcutNotSet": "Не установлено",
+    "shortcutAddKey": "Добавить ключ",
+    "shortcutResetOne": "Сбросить настройки по умолчанию",
+    "shortcutClearKeys": "Удалить все ключи",
+    "shortcutResetAll": "Сбросить все ярлыки",
+    "shortcutResetAllDesc": "Верните все клавиши к значениям по умолчанию.",
+    "shortcutPress": "Нажмите нужную клавишу или комбинацию",
+    "shortcutPressHint": "Каждая комбинация может принадлежать только одному действию, поэтому выполнение одной комбинации перемещает ее.",
+    "shortcutSeekPercent": "Перейти к нужной точке видео",
+    "shortcutSeekPercentKeys": "0–9",
+    "shortcutAppBack": "Вернуться назад",
+    "shortcutAppFullscreen": "Переключить полноэкранный режим",
+    "shortcutAppGlass": "Переключить режим стекла",
+    "shortcutAppMaterialYou": "Переключить материал «Вы»",
+    "shortcutAppDark": "Переключить темный режим",
+    "shortcutAppOled": "Переключить черный OLED",
+    "shortcutAppSearch": "Открыть поиск",
+    "shortcutAppSettings": "Открыть настройки",
+    "shortcutAppDownloads": "Открыть загрузки",
+    "shortcutAppNotifications": "Открытые уведомления",
+    "shortcutAppIncognito": "Переключить инкогнито",
+    "shortcutAppShortcuts": "Показать сочетания клавиш",
+    "shortcutPlayerPlayPause": "Воспроизвести или поставить на паузу",
+    "shortcutPlayerSeekForward": "Ищи вперед",
+    "shortcutPlayerSeekBack": "Ищите назад",
+    "shortcutPlayerSeekForwardLong": "Перейти вперед на 30 секунд",
+    "shortcutPlayerSeekBackLong": "Вернуться назад на 30 секунд",
+    "shortcutPlayerFrameForward": "Следующий кадр",
+    "shortcutPlayerFrameBack": "Предыдущий кадр",
+    "shortcutPlayerVolumeUp": "Увеличение громкости",
+    "shortcutPlayerVolumeDown": "Уменьшить громкость",
+    "shortcutPlayerMute": "Отключить звук",
+    "shortcutPlayerFullscreen": "Полноэкранный режим",
+    "shortcutPlayerNext": "Следующий выпуск",
+    "shortcutPlayerPrevious": "Предыдущий эпизод",
+    "shortcutPlayerSkip": "Пропустить вступление или окончание",
+    "shortcutPlayerPanel": "Список серий",
+    "shortcutPlayerSpeedUp": "Более быстрое воспроизведение",
+    "shortcutPlayerSpeedDown": "Медленное воспроизведение",
+    "shortcutPlayerSpeedReset": "Нормальная скорость",
+    "shortcutPlayerSubtitleToggle": "Субтитры включены или выключены",
+    "shortcutPlayerSubtitleCycle": "Следующая дорожка с субтитрами",
+    "shortcutPlayerAudioCycle": "Следующая аудиодорожка",
+    "shortcutPlayerStreamCycle": "Следующий поток",
+    "shortcutPlayerFit": "Изменить размер видео",
+    "shortcutReaderRight": "Страница справа",
+    "shortcutReaderLeft": "Страница слева",
+    "shortcutReaderNextPage": "Следующая страница",
+    "shortcutReaderPreviousPage": "Предыдущая страница",
+    "shortcutReaderControls": "Показать или скрыть элементы управления",
+    "shortcutReaderNextChapter": "Следующая глава",
+    "shortcutReaderPreviousChapter": "Предыдущая глава",
+    "shortcutTaken": "Взято из {action}",
+    "@shortcutTaken": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "incognitoTurnedOn": "Режим инкогнито включен",
+    "incognitoTurnedOff": "Режим инкогнито выключен",
+    "onHoldAnime": "Аниме в ожидании",
+    "onHoldManga": "Манга в ожидании",
+    "droppedAnime": "Выпавшее аниме",
+    "droppedManga": "Выпавшая манга",
+    "generalSectionDesktop": "Рабочий стол",
+    "closeAction": "Когда окно закрыто",
+    "closeActionQuit": "Выйти из приложения",
+    "closeActionWhenBusy": "Продолжайте работать в трее, пока что-то работает",
+    "closeActionAlways": "Всегда продолжайте работать в трее",
+    "closeActionNoTray": "Системный трей здесь недоступен, поэтому приложение закрывается при закрытии.",
+    "gamepadNav": "Навигация по геймпаду",
+    "gamepadNavDesc": "Перемещайтесь по приложению и управляйте игроком с помощью игрового контроллера.",
+    "trayShow": "Показать Дартоцу",
+    "trayQuit": "Выйти",
+    "trayIdle": "Ничего не работает",
+    "trayDownloading": "{count, plural, one{Загрузка элемента {count}} other{Загрузка элементов {count}}}",
+    "@trayDownloading": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "secPlayerSubtitles": "Languages, appearance and subtitle rendering",
-    "settingsSyncModeGithub": "GitHub",
-    "playerSubtitlePreview": "Subtitle preview",
-    "sourceSkippedUnseen": "Skipped: unseen episodes",
-    "shortcutsEnablePlayer": "Player shortcuts",
-    "updateChannelDesc": "Stable is the tested release. Pre-release and Alpha get new features sooner but may break",
-    "shortcutGroupReader": "Reader",
-    "playerSkipFailed": "AniSkip refused the skip times: {error}",
-    "@playerSkipFailed": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "closeAction": "When the window is closed",
-    "settingsSyncSignedIn": "Signed in as {user}",
-    "@settingsSyncSignedIn": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "popularMovies": "Popular Movies",
-    "dcTimerElapsed": "Elapsed",
-    "layoutDesc": "Choose, move and hide the buttons on the bars",
-    "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
-    "refreshFromComick": "Refresh from Comick",
-    "refreshFromTrakt": "Refresh from Trakt",
-    "downloadClearQueue": "Clear queue",
-    "stepUpToDate": "Up to date",
-    "playerPictureProcessed": "With shaders and colors",
-    "novelContents": "Contents",
-    "sourceEmpty": "No subscriptions yet",
-    "settingsAboutUpdates": "About & updates",
-    "novelSearchNone": "No matches",
-    "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
-    "@trackProgressAnimeLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcRouteHeadless": "Through your account",
-    "novelPaged": "Page turning",
-    "sourceOpenTitle": "Open title",
-    "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
-    "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
-    "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
-    "playerPipPlay": "Play",
-    "castViaAppHint": "Send the stream to the Web Video Cast app",
-    "externalWebVideoCast": "Web Video Cast",
-    "trailerQuality": "Trailer quality"
+    "traySyncing": "Синхронизация ваших списков",
+    "trayUpdating": "Обновление приложения",
+    "trayPlaying": "Игра в маленьком окне",
+    "traySearch": "Поиск",
+    "trayPauseDownloads": "Приостановить загрузку",
+    "trayResumeDownloads": "Возобновить загрузку",
+    "playerDownloadTitle": "Загрузка плеера",
+    "playerDownloadBody": "Dartotsu извлекает свой видеодвижок один раз. Воспроизведение начнется, как только оно будет готово.",
+    "playerDownloadStarting": "Начинаем загрузку…",
+    "playerDownloadFailedTitle": "Не удалось получить плеер",
+    "playerDownloadFailedBody": "Проверьте подключение и повторите попытку. Загрузка возобновляется с того места, где остановилась.",
+    "playerDownloadRetry": "Попробуйте еще раз",
+    "playerDownloadCopy": "Копировать детали",
+    "removePlayerTitle": "Удалить плеер?",
+    "removePlayerMessage": "Видео невозможно воспроизвести, пока плеер не будет загружен повторно.",
+    "trailerLoading": "Загрузка трейлера…",
+    "trailerFailed": "Не удалось воспроизвести трейлер, открыв его в браузере."
 }

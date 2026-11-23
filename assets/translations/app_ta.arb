@@ -4,8 +4,11 @@
     "anilist": "AniList",
     "mal": "MyAnimeList",
     "simkl": "Simkl",
+    "trakt": "Trakt",
     "kitsu": "Kitsu",
+    "comick": "Comick",
     "mangaBaka": "MangaBaka",
+    "mangaUpdates": "MangaUpdates",
     "discord": "Discord",
     "loadMore": "இன்னும் லோட் பண்ணு",
     "login": "லாகின்",
@@ -26,12 +29,71 @@
     "install": "இன்ஸ்டால்",
     "update": "அப்டேட்",
     "uninstall": "அன்இன்ஸ்டால்",
+    "updateInstallCancelled": "இன்ஸ்டால் ரத்தானது. நிறுவப்பட்ட ஆப்புடன் முரண்படுவதாக Android சொன்னால், கையெழுத்து (signature) வேறு: முதலில் தற்போதைய வெர்ஷனை அன்இன்ஸ்டால் செய்துவிட்டு அப்டேட்டை இன்ஸ்டால் பண்ணுங்க",
+    "updateInstallFailed": "அப்டேட் ஆகலை: {error}",
+    "appLock": "ஆப் லாக்",
+    "appLockDesc": "ஆப்பைத் திறக்கும்போது அல்லது கொஞ்ச நேரம் கழித்து திரும்பி வரும்போது பாஸ்கோடு கேட்கும்",
+    "appLockBiometric": "பயோமெட்ரிக்ஸ் மூலம் திறக்கவும்",
+    "appLockBiometricDesc": "கடவுக்குறியீட்டைத் தட்டச்சு செய்வதற்குப் பதிலாக உங்கள் கைரேகை அல்லது முகத்தைப் பயன்படுத்தவும்",
+    "appLockBiometricReason": "டார்டோட்சுவைத் திறக்கவும்",
+    "appLockDelay": "சும்மா இருக்கும்போது பூட்டு",
+    "appLockDelayAlways": "எப்போதும்",
+    "appLockDelayNever": "ஒருபோதும் இல்லை",
+    "appLockDelayAfter": "பிறகு {count, plural, =1{1 நிமிடம்} other{{count} நிமிடங்கள்}}",
+    "@appLockDelayAfter": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockUseBiometric": "பயோமெட்ரிக்ஸைப் பயன்படுத்தவும்",
+    "appLockUnlock": "பாஸ்கோடை உள்ளிடுங்க",
+    "appLockWrong": "பாஸ்கோடு தவறு",
+    "appLockWait": "நிறைய முறை முயற்சி பண்ணிட்டீங்க, {seconds} வினாடி காத்திருங்க",
+    "appLockNew": "ஒரு பாஸ்கோடை தேர்ந்தெடுங்க",
+    "appLockNewHint": "4 முதல் 8 இலக்கங்கள்",
+    "appLockConfirm": "இன்னொரு முறை உள்ளிடுங்க",
+    "appLockMismatch": "பாஸ்கோடுகள் பொருந்தலை",
+    "appLockOn": "பாஸ்கோடு செட் ஆச்சு",
+    "appLockRemoveTitle": "லாக்கை அணைக்க பாஸ்கோடை உள்ளிடுங்க",
     "installFailed": "இன்ஸ்டால் ஆகல",
     "updateFailed": "அப்டேட் ஆகல",
+    "extensionUpdates": "{count, plural, =1{1 புதுப்பிப்பு உள்ளது} other{{count} புதுப்பிப்புகள் உள்ளன}}",
+    "@extensionUpdates": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updateAll": "அனைத்தையும் புதுப்பிக்கவும்",
+    "extensionsUpdated": "{total} இல் {done} நீட்டிப்புகள் புதுப்பிக்கப்பட்டன",
+    "@extensionsUpdated": {
+        "placeholders": {
+            "done": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "updateConflictTitle": "புதுப்பிப்பு நிறுவப்படவில்லை",
+    "updateConflictBody": "ஏற்கனவே உள்ள பதிப்பில் {names} ஐ நிறுவ முடியவில்லை. இது வழக்கமாக நிறுவப்பட்ட நகல் வித்தியாசமாக கையொப்பமிடப்பட்டுள்ளது என்று அர்த்தம். அதை நிறுவல் நீக்கி புதிய பதிப்பை நிறுவவா?",
+    "@updateConflictBody": {
+        "placeholders": {
+            "names": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictAction": "நிறுவல் நீக்கி மீண்டும் நிறுவவும்",
     "noSourceSettings": "இந்த சோர்ஸ்க்கு செட்டிங்ஸ் எதுவும் இல்ல",
     "addPluginRepository": "பிளகின் ரெப்போ சேர்",
     "pluginIndexUrlHint": "பிளகின் இன்டெக்ஸ் URL",
     "addRepository": "ரெப்போ சேர்",
+    "importRepositoryFile": "ஒரு கோப்பை இறக்குமதி செய்யவும்",
     "pluginRepoUpdated": "பிளகின் ரெப்போ அப்டேட் ஆயிடுச்சு",
     "pluginRepoUpdateFailed": "பிளகின் ரெப்போவை ரெஃப்ரெஷ் பண்ண முடியல",
     "ok": "சரி",
@@ -46,6 +108,9 @@
     "resolving": "ரெசால்வ் பண்றேன்…",
     "none": "எதுவும் இல்ல",
     "selectMediaService": "மீடியா சர்வீஸை தேர்ந்தெடு",
+    "manageServices": "ஊடக சேவைகள்",
+    "manageServicesDesc": "சேவைகளை மறுவரிசைப்படுத்தி, பிக்கரில் எவற்றைக் காட்ட வேண்டும் என்பதைத் தேர்ந்தெடுக்கவும்",
+    "manageServicesHint": "மறுவரிசைப்படுத்த இழுக்கவும், நீங்கள் பயன்படுத்தாதவற்றை அணைக்கவும்",
     "pickColor": "ஒரு கலரை எடு",
     "colorPickerCustom": "கஸ்டம்",
     "colorPickerTransparent": "டிரான்ஸ்பரன்ட்",
@@ -57,6 +122,8 @@
     "settingsAppearanceDesc": "தீம், கலர்ஸ், கிளாஸ் மோட்",
     "settingsGeneral": "பொதுவானது",
     "settingsGeneralDesc": "மொழி & பிகேவியர்",
+    "settingsNetwork": "நெட்வொர்க்",
+    "settingsNetworkDesc": "பயனர் முகவர், சான்றிதழ்கள், DNS மற்றும் ப்ராக்ஸி",
     "settingsAccountDesc": "டிராக்கிங் சர்வீஸ் & சைன்-இன்",
     "settingsUpdates": "அப்டேட்ஸ்",
     "amoledBlack": "AMOLED பிளாக்",
@@ -68,15 +135,235 @@
     "settingsExtensionsDesc": "சோர்ஸ் மேனேஜர்ஸ், ரெப்போஸ் & எக்ஸ்டென்ஷன் ஆப்ஷன்ஸ்",
     "settingsAddons": "ஆட்-ஆன்ஸ்",
     "customPath": "கஸ்டம் ஸ்டோரேஜ் பாத்",
+    "stories": "கதைகள்",
+    "watchOrder": "ஆர்டர் பார்க்கவும்",
+    "watchOrderOpenSite": "chiaki.site இல் திறக்கவும்",
+    "watchOrderUnavailable": "இந்த தலைப்புக்கான வாட்ச் ஆர்டர் எதுவும் கிடைக்கவில்லை",
+    "watchOrderOpenFailed": "அந்த தலைப்பை திறக்க முடியவில்லை",
+    "watchOrderCurrent": "நீங்கள் இங்கே இருக்கிறீர்கள்",
+    "watchOrderCredit": "chiaki.site மூலம் ஆர்டர்களைப் பார்க்கவும்",
     "customPathDesc": "ஆப் டேட்டா எங்க சேவ் ஆகணும். ரீசெட் பண்ண லாங் பிரஸ் பண்ணு",
     "selectDirectory": "டைரக்டரியை செலக்ட் பண்ணு",
     "differentCacheManager": "ஆல்டர்னேட்டிவ் இமேஜ் கேஷ்",
     "differentCacheManagerDesc": "இமேஜ்களுக்கு வேற கேஷ் மேனேஜர் யூஸ் பண்ணு",
+    "settingsSync": "ஒத்திசைவு அமைப்புகள்",
+    "settingsSyncDesc": "ஒவ்வொரு சாதனத்திலும் உங்கள் அமைப்புகளை ஒரே மாதிரியாக வைத்திருங்கள். அவை உங்கள் GitHub கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்",
+    "settingsSyncSwitch": "மாற்றத்தில் ஒத்திசைக்கவும்",
+    "settingsSyncModeGithub": "கிட்ஹப்",
+    "settingsSyncSignIn": "GitHub மூலம் உள்நுழையவும்",
+    "settingsSyncSignInDesc": "அமைப்புகள் உங்கள் கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்",
+    "settingsSyncToken": "தனிப்பட்ட அணுகல் டோக்கனைப் பயன்படுத்தவும்",
+    "settingsSyncTokenDesc": "github.com/settings/tokens இல் சாராம்ச அனுமதியுடன் ஒன்றை உருவாக்கவும்",
+    "settingsSyncTokenField": "டோக்கன்",
+    "settingsSyncSignedIn": "{user} ஆக உள்நுழைந்துள்ளீர்கள்",
+    "@settingsSyncSignedIn": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "settingsSyncSignOut": "வெளியேறு",
+    "settingsSyncCode": "GitHub இல் {code} ஐ உள்ளிடவும்",
+    "@settingsSyncCode": {
+        "placeholders": {
+            "code": {}
+        }
+    },
+    "settingsSyncCodeDesc": "உங்கள் உலாவியில் GitHub பக்கம் திறக்கப்பட்டது. குறியீட்டை நகலெடுக்க தட்டவும் அல்லது ரத்துசெய்ய தட்டிப் பிடிக்கவும்.",
+    "settingsSyncSignInFailed": "GitHub இல் உள்நுழைய முடியவில்லை",
+    "dcPreview": "முன்னோட்டம்",
+    "dcSampleWatching": "பார்க்கிறேன்",
+    "dcSampleReading": "படித்தல்",
+    "dcSampleBrowsing": "உலாவுதல்",
+    "dcSampleLive": "இப்போதே",
+    "dcLiveNothing": "இப்போது எதுவும் காட்டப்படவில்லை. தலைப்பைத் திறக்கவும், ஒரு அத்தியாயம் அல்லது அத்தியாயத்தைத் தொடங்கவும், அது இங்கே தோன்றும்.",
+    "dcMemberList": "உறுப்பினர் பட்டியலில்",
+    "dcAccount": "கணக்கு",
+    "dcSignIn": "டிஸ்கார்ட் மூலம் உள்நுழையவும்",
+    "dcSignOut": "வெளியேறு",
+    "dcDesktopHint": "இணைக்காமல், டெஸ்க்டாப் பயன்பாட்டின் மூலம் டிஸ்கார்ட் “டார்டோட்சுவைப் பார்ப்பது” என்பதைக் காட்டுகிறது. மொபைல் உட்பட, உங்கள் தலைப்பின் பெயரைச் செயல்படுத்த டிஸ்கார்டை இணைக்கவும்.",
+    "dcMobileHint": "நீங்கள் எதைப் பார்க்கிறீர்கள் அல்லது படிக்கிறீர்கள் என்பதைக் காட்ட டிஸ்கார்டை இணைக்கவும். இது டிஸ்கார்டின் அங்கீகரிக்கப்பட்ட பக்கத்தைப் பயன்படுத்துகிறது, உங்கள் கணக்கு டோக்கனை அல்ல.",
+    "dcConnect": "டிஸ்கார்டை இணைக்கவும்",
+    "dcConnectDesc": "டிஸ்கார்டின் அங்கீகரிக்கப்பட்ட பக்கத்தைத் திறந்து, அங்கீகரிக்கப்பட்ட பயன்பாடுகளின் கீழ் டார்டோட்சுவைச் சேர்க்கிறது. உங்கள் இருப்பைப் புதுப்பிக்க டிஸ்கார்ட் கேட்கிறது. புதுப்பிப்பு டோக்கன் மட்டுமே சேமிக்கப்படும், உங்கள் கணக்கு டோக்கன் அல்ல.",
+    "dcConnectFailed": "டிஸ்கார்டை இணைக்க முடியவில்லை",
+    "dcConnectedSnack": "முரண்பாடு இணைக்கப்பட்டுள்ளது",
+    "dcDisconnect": "துண்டிக்கவும்",
+    "dcDisconnectedSnack": "முரண்பாடு துண்டிக்கப்பட்டது",
+    "dcUseToken": "அதற்கு பதிலாக டோக்கனைப் பயன்படுத்தவும்",
+    "dcRouteDesktop": "டிஸ்கார்ட் டெஸ்க்டாப் பயன்பாட்டின் மூலம்",
+    "dcRouteHeadless": "உங்கள் கணக்கு மூலம்",
+    "dcRouteGateway": "உங்கள் கணக்கு மூலம், நேரலை",
+    "dcRouteLinked": "இணைக்கப்பட்ட பயன்பாடு",
+    "dcRouteNone": "இணைக்கப்படவில்லை",
+    "dcStatusNeedsToken": "டிஸ்கார்ட் டோக்கன் தேவை. பயன்பாட்டை இணைப்பது உங்கள் ஆன்லைன் நிலையை அமைக்காது.",
+    "dcAccountOnly": "உள்நுழைந்த கணக்கு தேவை",
+    "dcStatusSection": "நிலை",
+    "dcControlStatus": "என் நிலையைக் கட்டுப்படுத்து",
+    "dcControlStatusDesc": "ரிச் பிரசன்ஸ் இயக்கத்தில் இருக்கும்போது டிஸ்கார்டுடன் நேரடி இணைப்பை வைத்திருக்கும், எனவே டார்டோட்சு உங்கள் நிலையை அமைக்க முடியும்.",
+    "dcStatusOnline": "ஆன்லைன்",
+    "dcStatusIdle": "சும்மா",
+    "dcStatusDnd": "தொந்தரவு செய்யாதே",
+    "dcStatusInvisible": "கண்ணுக்கு தெரியாத",
+    "dcCustomStatus": "விருப்ப நிலை",
+    "dcCustomStatusHint": "நீங்கள் என்ன செய்கிறீர்கள்?",
+    "dcActivitySection": "செயல்பாடு",
+    "dcShowWatching": "பார்க்கும் போது காட்டு",
+    "dcShowReading": "படிக்கும் போது காட்டு",
+    "dcListening": "கேட்பது",
+    "dcCompeting": "போட்டியிடுகிறது",
+    "dcActivityName": "செயல்பாட்டின் பெயர்",
+    "dcNameApp": "Dartotsu",
+    "dcNameTitle": "தலைப்பு",
+    "dcNameCustom": "தனிப்பயன்",
+    "dcCustomNameHint": "“பார்த்ததற்கு” பிறகு காட்டப்படும் பெயர்",
+    "dcStatusText": "நிலை உரை",
+    "dcStatusTextDesc": "உறுப்பினர் பட்டியல் உங்கள் பெயருக்கு அடுத்து என்ன காட்டுகிறது",
+    "dcDisplayName": "பெயர்",
+    "dcDisplayState": "மாநிலம்",
+    "dcDisplayDetails": "விவரங்கள்",
+    "dcTextSection": "உரை",
+    "dcDetails": "மேல் வரி",
+    "dcState": "கீழ் வரி",
+    "dcTemplateHint": "காலியானது இயல்புநிலையைப் பயன்படுத்துகிறது",
+    "dcVariables": "மதிப்பைச் செருக தட்டவும்",
+    "dcImagesSection": "படங்கள்",
+    "dcLargeImage": "பெரிய படம்",
+    "dcLargeAuto": "ஆட்டோ",
+    "dcLargeCover": "கவர்",
+    "dcLargeLogo": "சின்னம்",
+    "dcSmallImage": "சிறிய படம்",
+    "dcSmallAuto": "சின்னம்",
+    "dcSmallNone": "இல்லை",
+    "dcTimerStyle": "டைமர் பாணி",
+    "dcTimerAuto": "ஆட்டோ",
+    "dcTimerElapsed": "கழிந்தது",
+    "dcTimerRemaining": "மீதமுள்ளவை",
+    "dcButtonsSection": "பொத்தான்கள்",
+    "dcButtonMedia": "தலைப்புக்கான இணைப்பு",
+    "dcButtonApp": "டார்டோட்சுக்கான இணைப்பு",
+    "dcButtonCustom": "தனிப்பயன் பொத்தான்",
+    "dcButtonLabel": "லேபிள்",
+    "dcButtonUrl": "இணைப்பு",
+    "dcPrivacySection": "தனியுரிமை",
+    "dcPrivateText": "தனிப்பட்ட உரை",
+    "dcPrivateHint": "தனிப்பட்ட ஒன்று",
+    "dcTokenWarning": "உள்நுழைவது உங்கள் கணக்கு டோக்கனைப் பயன்படுத்துகிறது. டிஸ்கார்டின் விதிகள் இதை ஊக்கப்படுத்துகின்றன, எனவே உங்கள் சொந்த ஆபத்தில் இதைப் பயன்படுத்தவும்.",
+    "dcConnected": "இணைக்கப்பட்டது",
+    "dcConnection": "இணைப்பு",
+    "dcMethodDesktop": "டிஸ்கார்ட் டெஸ்க்டாப் பயன்பாடு",
+    "dcMethodDesktopDesc": "வேறு எதுவும் இணைக்கப்படாதபோது தானாகவே பயன்படுத்தப்படும். இந்த கணினியில் டிஸ்கார்ட் திறக்கப்பட வேண்டும்.",
+    "dcMethodToken": "கணக்கு டோக்கன்",
+    "dcInUse": "பயன்பாட்டில் உள்ளது",
+    "dcRecommended": "பரிந்துரைக்கப்படுகிறது",
+    "dcConnecting": "இணைக்கிறது…",
+    "dcDisconnected": "இணைக்கப்படவில்லை",
+    "dcSignedInAs": "{name} ஆக உள்நுழைந்துள்ளீர்கள்",
+    "@dcSignedInAs": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsSyncOn": "அன்று",
+    "settingsSyncCustom": "தனிப்பயன்",
+    "settingsSyncChangedHeader": "அமைப்புகளை மாற்றியது",
+    "settingsSyncNoneChanged": "நீங்கள் இன்னும் இவற்றில் எதையும் மாற்றவில்லை, எனவே ஒத்திசைக்க எதுவும் இல்லை.",
+    "settingsSyncChangedOnly": "நீங்கள் மாற்றிய அமைப்புகள் மட்டுமே சேமிக்கப்படும். மற்ற அனைத்தும் ஒவ்வொரு சாதனத்திலும் அதன் இயல்புநிலையைப் பயன்படுத்துகின்றன. கிளவுட் ஐகான் ஏற்கனவே சர்வரில் உள்ளதைக் காட்டுகிறது.",
+    "settingsSyncOffCategory": "ஒத்திசைக்கவில்லை. இவை இந்தச் சாதனத்தில் இருக்கும் மற்றும் சர்வர் நகல் அப்படியே இருக்கும்.",
+    "settingsSyncPartsNote": "ஒரு சாதனத்திற்கு. ஆஃப் ஆனது ஒவ்வொரு சாதனத்தின் சொந்த மதிப்பை வைத்திருக்கிறது, எனவே ஃபோனும் டிவியும் வேறுபடலாம்.",
+    "settingsSyncPartSubtitles": "வசன அளவு மற்றும் வண்ணங்கள்",
+    "settingsSyncPartSubtitlesDesc": "அளவு, எடை, நிறங்கள் மற்றும் நிலை",
+    "settingsSyncPartPictureColors": "பட வண்ணங்கள்",
+    "settingsSyncPartPictureColorsDesc": "பிரகாசம், மாறுபாடு, செறிவு, காமா, சாயல் மற்றும் HDR",
+    "settingsSyncPartPalette": "தீம் வண்ணங்கள்",
+    "settingsSyncPartPaletteDesc": "தீம், உச்சரிப்பு நிறம் மற்றும் OLED கருப்பு",
+    "settingsSyncCatOther": "பார்க்க, படிக்க மற்றும் சேவைகள்",
+    "settingsSyncTitles": "முன்னேற்றம் மற்றும் தலைப்புகளைப் பார்க்கவும்",
+    "settingsSyncTitlesCount": "சர்வரில் {records} தலைப்புகள் மற்றும் {resume} ரெஸ்யூம் உள்ளீடுகள்",
+    "@settingsSyncTitlesCount": {
+        "placeholders": {
+            "records": {},
+            "resume": {}
+        }
+    },
+    "settingsSyncTitlesNone": "இன்னும் எதுவும் பதிவேற்றப்படவில்லை",
+    "settingsSyncTitlesNote": "நிலைகள், ரெஸ்யூம் ஷெல்ஃப், உங்கள் உள்ளூர் பட்டியல்கள், புக்மார்க்குகள், சிறப்பம்சங்கள் மற்றும் தலைப்புக்கான விருப்பங்களைப் பார்க்கவும் படிக்கவும். மூலப் பொருத்தங்களும் ஸ்ட்ரீம்களும் உங்கள் நீட்டிப்புகளைச் சார்ந்து இருப்பதால் ஒவ்வொரு சாதனத்திலும் இருக்கும். ஒவ்வொரு 45 வினாடிகளுக்கும் தலைப்புகள் பதிவேற்றப்படும்.",
+    "settingsSyncConnect": "இணைக்கப்படவில்லை",
+    "settingsSyncConnectDesc": "ஒவ்வொரு சாதனத்திலும் உங்கள் அமைப்புகளை ஒரே மாதிரியாக வைத்திருக்க, GitHub உடன் உள்நுழையவும்.",
+    "settingsSyncFailedTitle": "ஒத்திசைவு தோல்வியடைந்தது",
+    "settingsSyncPaused": "இடைநிறுத்தப்பட்டது",
+    "settingsSyncPausedDesc": "இது முடக்கத்தில் இருக்கும் போது எதுவும் பதிவேற்றம் செய்யப்படவில்லை அல்லது பதிவிறக்கம் செய்யப்படவில்லை.",
+    "settingsSyncUpToDate": "இன்றுவரை",
+    "settingsSyncRetry": "மீண்டும் முயற்சிக்கவும்",
+    "settingsSyncAccount": "GitHub கணக்கு",
+    "settingsSyncAccountDesc": "உங்கள் தரவு உங்கள் கணக்கில் உள்ள தனிப்பட்ட சாராம்சத்திற்கு செல்கிறது.",
+    "settingsSyncWaiting": "நீங்கள் GitHub இல் அனுமதி பெற காத்திருக்கிறோம்",
+    "settingsSyncCopyCode": "அதை நகலெடுக்க குறியீட்டைத் தட்டவும்",
+    "settingsSyncCancel": "ரத்து செய்",
+    "settingsSyncStatSettings": "அமைப்புகள்",
+    "settingsSyncStatTitles": "தலைப்புகள்",
+    "settingsSyncStatShelf": "ரெஸ்யூம்",
+    "settingsSyncUploaded": "{device} இலிருந்து {time} பதிவேற்றப்பட்டது",
+    "@settingsSyncUploaded": {
+        "placeholders": {
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncChanged": "{count, plural, =0{இன்னும் எதுவும் மாறவில்லை} =1{1 மாற்றப்பட்டது} other{{count} மாற்றப்பட்டது}}",
+    "settingsSyncSecrets": "கணக்குகள் மற்றும் கடவுச்சொற்கள்",
+    "settingsSyncSecretsDesc": "உங்கள் உள்நுழைவுகளை (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API விசைகள் மற்றும் உங்கள் சாதனங்களுக்கு இடையில் பயன்பாட்டு பூட்டு ஆகியவற்றை ஒத்திசைக்கவும். அவை உங்கள் சாதனங்களில் இருக்கும் கடவுச்சொற்றொடருடன் குறியாக்கம் செய்யப்பட்டுள்ளன, எனவே GitHub அவற்றைப் பார்க்காது.",
+    "settingsSyncSecretsOn": "கணக்குகள் ஒத்திசைக்கப்பட்டு குறியாக்கம் செய்யப்பட்டுள்ளன",
+    "settingsSyncSecretsOnDesc": "ஒரு சாதனத்தில் வெளியேறுவது மற்ற சாதனங்களில் வெளியேறாது.",
+    "settingsSyncSecretsBroken": "சேவையகத்தில் உள்ள கடவுச்சொற்றொடருடன் இனி பொருந்தாது. கணக்குகளை ஒத்திசைக்க, அதை மீண்டும் உள்ளிடவும்.",
+    "settingsSyncPassphraseSet": "கடவுச்சொற்றொடரை அமைக்கவும்",
+    "settingsSyncPassphraseEnter": "உங்கள் கடவுச்சொற்றொடரை உள்ளிடவும்",
+    "settingsSyncPassphraseField": "கடவுச்சொற்றொடர்",
+    "settingsSyncPassphraseConfirm": "கடவுச்சொற்றொடரை மீண்டும் செய்யவும்",
+    "settingsSyncPassphraseNew": "குறைந்தது 6 எழுத்துகள் கொண்ட கடவுச்சொற்றொடரைத் தேர்ந்தெடுக்கவும். இது எங்கும் சேமிக்கப்படவில்லை ஆனால் உங்கள் சாதனங்கள் மற்றும் மீட்டெடுக்க முடியாது. நீங்கள் அதை மறந்துவிட்டால், சர்வர் நகலை நீக்கிவிட்டு மீண்டும் தொடங்கவும்.",
+    "settingsSyncPassphraseExisting": "உங்கள் மற்ற சாதனத்தில் நீங்கள் தேர்ந்தெடுத்த கடவுச்சொற்றொடரை உள்ளிடவும். இந்தச் சாதனத்தில் உள்ள கணக்குகள் ஒத்திசைக்கப்பட்ட கணக்குகளால் மாற்றப்படும்.",
+    "settingsSyncPassphraseWrong": "தவறான கடவுச்சொற்றொடர்",
+    "settingsSyncPassphraseMismatch": "கடவுச்சொற்கள் பொருந்தவில்லை",
+    "settingsSyncPassphraseShort": "குறைந்தது 6 எழுத்துகளைப் பயன்படுத்தவும்",
+    "settingsSyncSecretsStop": "கணக்குகளை ஒத்திசைப்பதை நிறுத்துங்கள்",
+    "settingsSyncSecretsDelete": "GitHub இலிருந்து நீக்கு",
+    "settingsSyncSecretsDeleteMessage": "இது மறைகுறியாக்கப்பட்ட கணக்குக் கோப்பை உங்கள் சுருக்கத்திலிருந்து நீக்குகிறது. பிற சாதனங்கள் தங்கள் உள்நுழைவுகளை வைத்து புதிய கடவுச்சொற்றொடரை அமைக்கலாம்.",
+    "settingsSyncWhat": "எதை ஒத்திசைக்க வேண்டும்",
+    "settingsSyncServer": "சர்வரில்",
+    "settingsSyncServerEmpty": "இன்னும் எதுவும் பதிவேற்றப்படவில்லை",
+    "settingsSyncServerInfo": "{count} அமைப்புகள், {device} இலிருந்து {time} பதிவேற்றப்பட்டது",
+    "@settingsSyncServerInfo": {
+        "placeholders": {
+            "count": {},
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncThisDevice": "இந்த சாதனம்",
+    "settingsSyncCount": "{count, plural, =0{சர்வரில் எதுவும் இல்லை} =1{சேவையகத்தில் 1 அமைப்பு} other{சேவையகத்தில் {count} அமைப்புகள்}}",
+    "settingsSyncNow": "இப்போது ஒத்திசைக்கவும்",
+    "settingsSyncRunning": "ஒத்திசைக்கிறது...",
+    "settingsSyncNever": "இன்னும் ஒத்திசைக்கப்படவில்லை",
+    "settingsSyncLast": "கடைசியாக ஒத்திசைத்தது {time}",
+    "@settingsSyncLast": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "settingsSyncFailed": "ஒத்திசைவு தோல்வியடைந்தது: {error}",
+    "@settingsSyncFailed": {
+        "placeholders": {
+            "error": {}
+        }
+    },
+    "settingsSyncScope": "எல்லா இடங்களிலும் ஒரே மாதிரியாக செயல்படும் அமைப்புகள் மட்டுமே ஒத்திசைக்கப்படும். கணக்குகள், டோக்கன்கள், கோப்புறைகள், நீட்டிப்புகள், அறிவிப்புகள், டிஸ்கார்ட், புதுப்பிப்புகள் மற்றும் சாளர அளவு ஆகியவை ஒவ்வொரு சாதனத்திலும் இருக்கும்.",
     "backupAndRestore": "பேக்கப் & ரெஸ்டோர்",
     "backupAndRestoreDesc": "உன் பிரிஃபரன்ஸ்ஸை சேவ் பண்ணு இல்லன்னா லோட் பண்ணு",
     "backup": "பேக்கப்",
     "restore": "ரெஸ்டோர்",
     "loadExtensionsIcon": "எக்ஸ்டென்ஷன் ஐகான்ஸ் லோட் பண்ணு",
+    "autoUpdateRuntimes": "நீட்டிப்பு இயக்க நேரங்களை தானாக புதுப்பிக்கவும்",
+    "autoUpdateRuntimesDesc": "புதிய Aniyomi, CloudStream மற்றும் பிற இயக்க நேர பதிப்புகளை பின்னணியில் பதிவிறக்கவும். ஆஃப், மேனேஜருக்குப் பதிலாக புதுப்பிப்பு ஐகான் தோன்றும்.",
     "loadExtensionsIconDesc": "எக்ஸ்டென்ஷன் லிஸ்ட்ல சோர்ஸ் ஐகான்ஸ் காட்டு",
     "sectionStorage": "ஸ்டோரேஜ்",
     "sectionManagers": "மேனேஜர்ஸ்",
@@ -89,6 +376,9 @@
     "backupSelectAll": "எல்லாத்தையும் தேர்ந்தெடு",
     "backupClearAll": "கிளியர்",
     "backupKeys": "{count} செட்டிங்ஸ்",
+    "backupPasswordRequired": "கடவுச்சொல் (கணக்கு தரவு தேவை)",
+    "backupProtectedNeedsPassword": "கணக்குத் தரவைக் காப்புப் பிரதி எடுக்க கடவுச்சொல்லை அமைக்கவும் அல்லது அதைத் தேர்வுநீக்கவும்",
+    "backupProtectedSkipped": "இந்தக் காப்புப் பிரதியில் கடவுச்சொல் இல்லை, எனவே அதன் கணக்குத் தரவு தவிர்க்கப்பட்டது",
     "backupPassword": "பாஸ்வேர்டு (ஆப்ஷனல்)",
     "backupPasswordHint": "டீஃபால்ட் யூஸ் பண்ண காலியா விடு",
     "backupSensitive": "லாகின் டோக்கன்ஸ் இதுல இருக்கு. இந்த ஃபைலை பிரைவேட்டா வச்சுக்கோ",
@@ -125,6 +415,70 @@
     "backupCatOtherDesc": "ஃபீட் லேஅவுட்ஸ், லிஸ்ட்ஸ் & சர்வீஸ் ஆப்ஷன்ஸ்",
     "logFile": "லாக் ஃபைல்",
     "logFileDesc": "ஆப் லாக்கை ஷேர் பண்ணு, இல்லன்னா Linux-ல அதோட பாத்தை காப்பி பண்ணு",
+    "logDelete": "பதிவு கோப்புகளை நீக்கவும்",
+    "logDeleteDesc": "இடத்தைக் காலியாக்க, சேமித்த பயன்பாட்டுப் பதிவுகளை அழிக்கவும்",
+    "logDeleted": "{size} பதிவுகள் நீக்கப்பட்டன",
+    "@logDeleted": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "missingSequel": "தொடர்ச்சியை காணவில்லை",
+    "rising": "உயர்கிறது",
+    "stacks": "அடுக்குகள்",
+    "stacksAll": "அனைத்து",
+    "stacksFeatured": "இடம்பெற்றது",
+    "stacksMine": "உங்களுடையது",
+    "stacksSaved": "சேமிக்கப்பட்டது",
+    "stacksFollowing": "தொடர்ந்து",
+    "stacksEmpty": "இங்கு இன்னும் அடுக்குகள் இல்லை",
+    "stacksSignIn": "உங்கள் அடுக்குகளைக் காண MangaBaka இல் உள்நுழையவும்",
+    "stacksScopeNeeded": "உங்கள் அடுக்குகளுக்கு புதிய அனுமதி தேவை. அதை அனுமதிக்க மீண்டும் MangaBaka இல் உள்நுழையவும்.",
+    "stacksSignInAgain": "மீண்டும் உள்நுழையவும்",
+    "stacksCouldntLoad": "அடுக்குகளை ஏற்ற முடியவில்லை",
+    "stackSeriesCount": "{count, plural, =1{1 தொடர்} other{{count} தொடர்}}",
+    "@stackSeriesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackSavesCount": "{count, plural, =1{1 சேமிக்கவும்} other{{count} சேமிக்கிறது}}",
+    "@stackSavesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackBy": "மூலம் {name}",
+    "@stackBy": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "stackSpoilers": "ஸ்பாய்லர்கள்",
+    "stackEmptyEntries": "இந்த அடுக்கு காலியாக உள்ளது",
+    "stackSave": "அடுக்கைச் சேமிக்கவும்",
+    "stackUnsave": "சேமித்ததிலிருந்து அகற்று",
+    "stackSavedToast": "உங்கள் அடுக்குகளில் சேமிக்கப்பட்டது",
+    "stackRemovedToast": "உங்கள் சேமித்த அடுக்குகளிலிருந்து அகற்றப்பட்டது",
+    "userStacks": "{name} மூலம் அடுக்குகள்",
+    "@userStacks": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "newsTitle": "செய்தி",
+    "newsEmpty": "இப்போதைக்கு செய்தி இல்லை",
+    "newsCouldntLoad": "செய்தியை ஏற்ற முடியவில்லை",
     "logFileCopied": "லாக் பாத் காப்பி ஆயிடுச்சு",
     "donateSheetTitle": "Dartotsu பிடிச்சிருக்கா?",
     "donateSheetMessage": "Dartotsu-வை ஒருத்தர் மட்டும் தான் உருவாக்கி பராமரிக்கிறார். உனக்கு யூஸ்ஃபுல்லா இருந்தா, டெவலப்மெண்ட்டை சப்போர்ட் பண்ணு.",
@@ -134,6 +488,8 @@
     "glassBackgroundHint": "இமேஜ் லிங்க் (உன் பேனருக்கு காலியா விடு)",
     "followCover": "கவரை ஃபாலோ பண்ணு",
     "followCoverDesc": "கலர்ஸ் பேக்ரவுண்டை ஃபாலோ பண்ணும், டிடெயில் பேஜ்ல கவரை",
+    "followCoverMediaOnly": "ஊடகங்களுக்கு மட்டும்",
+    "followCoverMediaOnlyDesc": "மீடியா பக்கங்களில் அட்டையை மட்டும் பின்தொடரவும், மற்ற எல்லா இடங்களிலும் இயல்பான வண்ணங்கள் இருக்கும்",
     "cardStyle": "கார்டு ஸ்டைல்",
     "cardStyleDesc": "டைட்டில் பிளேஸ்மெண்ட், சைஸ், புரோகிரஸ் & பேட்ஜஸ்",
     "customFont": "ஃபாண்ட்",
@@ -145,7 +501,7 @@
     "browseGoogleFonts": "Google Fonts-ல பிரவுஸ் பண்ணு…",
     "searchGoogleFonts": "Google Fonts தேடு",
     "defaultFont": "டீஃபால்ட்",
-    "materialYou": "Material You",
+    "materialYou": "பொருள் நீங்கள்",
     "materialYouDesc": "சிஸ்டத்துல இருந்து டைனமிக் கலர்",
     "jsonTheme": "கஸ்டம் தீம் ஃபைல்",
     "jsonThemeDesc": "~/.config/dartotsu/theme.json-ல இருந்து லைவ் கலர்ஸ் (கஸ்டம் ஸ்கிரிப்ட், இல்லன்னா உன் சொந்த எடிட்ஸ்)",
@@ -164,10 +520,10 @@
     "preRelease": "ப்ரீ-ரிலீஸ்",
     "alpha": "ஆல்ஃபா",
     "checkNow": "இப்போ செக் பண்ணு",
-    "userAgent": "User-Agent",
+    "userAgent": "பயனர் முகவர்",
     "settingDefault": "டீஃபால்ட்",
     "currentlyUsing": "இப்போ: {value}",
-    "dnsOverHttps": "DNS-over-HTTPS",
+    "dnsOverHttps": "DNS-க்கு மேல்-HTTPS",
     "dnsDefault": "டீஃபால்ட் (Cloudflare)",
     "proxy": "ப்ராக்ஸி",
     "proxyProtocol": "டைப்",
@@ -188,20 +544,25 @@
     "imageSavedTo": "{path}-ல சேவ் ஆயிடுச்சு",
     "imageActionFailed": "இமேஜை டவுன்லோட் பண்ண முடியல",
     "imageTitleCover": "கவர்",
+    "imageTitlePage": "பக்கம்",
     "imageTitleBanner": "பேனர்",
     "imageTitleAvatar": "ப்ரொஃபைல் பிக்சர்",
     "verifyTls": "சர்டிபிகேட்ஸ் வெரிஃபை பண்ணு",
     "verifyTlsDesc": "இன்வேலிட் HTTPS சர்டிபிகேட் இருக்க சர்வர்களை ரிஜெக்ட் பண்ணு. செல்ஃப்-சைன்டு யூஸ் பண்ற சோர்ஸ்க்கு மட்டும் ஆஃப் பண்ணு",
     "clearCookiesConfirm": "சேவ் பண்ண எல்லா குக்கீஸையும் நீக்கவா? இதனால சில சோர்ஸ்ல இருந்து சைன் அவுட் ஆகலாம்.",
     "version": "வெர்ஷன்",
-    "gitHub": "GitHub",
+    "gitHub": "கிட்ஹப்",
     "gitHubDesc": "சோர்ஸ், இஷ்யூஸ் & ரிலீஸஸ்",
     "discordDesc": "கம்யூனிட்டி & சப்போர்ட்",
+    "supportDeveloper": "டெவலப்பரை ஆதரிக்கவும்",
+    "buyMeCoffee": "எனக்கு ஒரு காபி வாங்கு",
+    "upiId": "UPI ஐடி",
+    "upiCopied": "UPI ஐடி நகலெடுக்கப்பட்டது",
     "donateDesc": "டெவலப்மெண்ட்டை சப்போர்ட் பண்ணு",
     "contributors": "கான்ட்ரிபியூட்டர்ஸ்",
     "contributorsDesc": "Dartotsu-வை உருவாக்கினவங்க",
     "contributorsLoadFailed": "கான்ட்ரிபியூட்டர்ஸை லோட் பண்ண முடியல",
-    "forks": "Forks",
+    "forks": "ஃபோர்க்ஸ்",
     "forksDesc": "Dartotsu மேல உருவாக்கின ப்ராஜெக்ட்ஸ்",
     "forksEmpty": "ஃபோர்க்ஸ் எதுவும் கிடைக்கல",
     "sectionColors": "கலர்ஸ்",
@@ -214,6 +575,7 @@
     "onboardingBack": "பேக்",
     "onboardingNext": "நெக்ஸ்ட்",
     "onboardingSkip": "ஸ்கிப்",
+    "onboardingLanguageBody": "டார்டோட்சு காட்டப்படும் மொழியைத் தேர்வுசெய்யவும். நீங்கள் அதை அமைப்புகளில் பின்னர் மாற்றலாம்.",
     "onboardingPaletteTitle": "உன்னோடதா மாத்திக்கோ",
     "onboardingPaletteBody": "ஒரு பேலட்டை எடு. கார்டு முதல் பிளேயர் வரை எல்லா ஆக்சென்ட்டும் அதையே ஃபாலோ பண்ணும்.",
     "themeModeAuto": "ஆட்டோ",
@@ -245,13 +607,33 @@
     "calendarToday": "இன்னைக்கு",
     "calendarEmpty": "இன்னைக்கு எதுவும் ஏர் ஆகல",
     "calendarFailed": "ஷெட்யூலை லோட் பண்ண முடியல",
+    "calendarChapter": "அத்தியாயம் {n}",
+    "@calendarChapter": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarExpected": "எதிர்பார்க்கப்படுகிறது",
+    "castReceiverFailed": "Chromecast அதன் பிளேயரைத் தொடங்கவில்லை",
+    "castPlaybackFailed": "சாதனத்தால் இந்த ஸ்ட்ரீமை இயக்க முடியவில்லை",
+    "shortcutNothingToContinue": "இன்னும் தொடர எதுவும் இல்லை",
+    "shortcutNoCalendar": "{service} இல் காலெண்டர் இல்லை",
+    "@shortcutNoCalendar": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
     "calendarEpisode": "எபிசோட் {n}",
     "shareAnalytics": "அனானிமஸ் யூசேஜ் டேட்டாவை ஷேர் பண்ணு",
     "shareAnalyticsDesc": "அனானிமஸ் யூசர் கவுண்ட் & கிராஷ் ரிப்போர்ட்ஸ். அக்கவுண்ட் அல்லது பெர்சனல் டேட்டா இல்ல",
     "linkOpenAnilist": "AniList லிங்க்ஸை Dartotsu-ல திற",
     "linkOpenAnilistDesc": "anilist.co லிங்க்ஸ் ஆப்பை திறக்க லிங்க் ஹேண்ட்லிங் ஆன் பண்ணு",
     "linkSettingsFailed": "சிஸ்டம் செட்டிங்ஸை திறக்க முடியல",
-    "discordRichPresence": "Rich Presence",
+    "discordRichPresence": "பணக்கார இருப்பு",
     "discordRichPresenceTokenDesc": "நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. உன் Discord டோக்கன் வேணும்.",
     "discordRichPresenceDesktopDesc": "நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. Discord டெஸ்க்டாப் ஆப் ஓடிட்டு இருக்கணும்.",
     "discordBrowsing": "பிரவுசிங் ஆக்டிவிட்டியை காட்டு",
@@ -259,8 +641,8 @@
     "discordLookHeader": "பிரசென்ஸ் லுக்",
     "discordActivityType": "ஆக்டிவிட்டி டைப்",
     "discordActivityTypeDesc": "Discord அதை எப்படி எழுதும்னு: \"Watching …\" அல்லது \"Playing …\". ஆட்டோ அனிமேக்கு Watching, மத்ததுக்கு Playing யூஸ் பண்ணும்.",
-    "discordWatching": "Watching",
-    "discordPlaying": "Playing",
+    "discordWatching": "பார்க்கிறேன்",
+    "discordPlaying": "விளையாடுகிறது",
     "discordCovers": "கவர்ஸ் காட்டு",
     "discordCoversDesc": "கார்டுல கவர் ஆர்ட் & Dartotsu ஐகான்.",
     "discordTimer": "டைமர் காட்டு",
@@ -293,7 +675,7 @@
     "discordTokenNotSet": "செட் பண்ணல. சேர்க்க டேப் பண்ணு.",
     "discordTokenSavedSnack": "Discord டோக்கன் சேவ் ஆயிடுச்சு",
     "discordTokenRemovedSnack": "Discord டோக்கன் நீக்கப்பட்டுச்சு",
-    "discordRichPresenceRow": "Discord Rich Presence",
+    "discordRichPresenceRow": "டிஸ்கார்ட் ரிச் பிரசன்ஸ்",
     "discordRichPresenceRowOn": "ஆன் · எப்படி தெரியணும்னு மாத்த டேப் பண்ணு",
     "discordRichPresenceRowOff": "நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு",
     "loginCancelled": "லாகின் கேன்சல் ஆயிடுச்சு",
@@ -306,8 +688,41 @@
     "password": "பாஸ்வேர்டு",
     "kitsuProfile": "Kitsu ப்ரொஃபைல்",
     "mangaBakaLoginFailed": "MangaBaka லாகின் ஃபெயில் ஆயிடுச்சு",
+    "comickLoginFailed": "காமிக் உள்நுழைவு தோல்வியடைந்தது",
+    "tagline": "கோஷம்",
+    "trending": "டிரெண்டிங்",
+    "anticipated": "எதிர்பார்க்கப்பட்டது",
+    "watchlist": "கண்காணிப்பு பட்டியல்",
+    "recommendedShows": "பரிந்துரைக்கப்பட்ட நிகழ்ச்சிகள்",
+    "recommendedMovies": "பரிந்துரைக்கப்பட்ட திரைப்படங்கள்",
+    "boxOffice": "பாக்ஸ் ஆபிஸ்",
+    "popularMovies": "பிரபலமான திரைப்படங்கள்",
+    "popularShows": "பிரபலமான நிகழ்ச்சிகள்",
+    "anticipatedMovies": "எதிர்பார்க்கப்பட்ட திரைப்படங்கள்",
+    "anticipatedShows": "எதிர்பார்க்கப்பட்ட நிகழ்ச்சிகள்",
+    "trendingShows": "பிரபல நிகழ்ச்சிகள்",
+    "mostWatchedThisWeek": "இந்த வாரம் அதிகம் பார்க்கப்பட்டது",
+    "sortMostViewed": "அதிகம் பார்க்கப்பட்டது",
+    "sortMostFollowed": "பெரும்பாலானோர் பின்பற்றினர்",
+    "sortLatestUpdates": "சமீபத்திய புதுப்பிப்புகள்",
+    "translationStatusLabel": "மொழிபெயர்ப்பு",
+    "weeklySchedule": "வாராந்திர அட்டவணை",
+    "mostFollowed": "அதிகம் பின்தொடரப்பட்டது",
+    "latestUpdates": "சமீபத்திய புதுப்பிப்புகள்",
+    "trendingAnime": "பிரபலமான அனிம்",
+    "topRatedAnime": "சிறந்த தரமதிப்பீடு அனிம்",
+    "mostFollowedAnime": "அதிகம் பின்தொடரும் அனிமே",
+    "comickProfile": "நகைச்சுவை சுயவிவரம்",
+    "refreshFromComick": "காமிக்கில் இருந்து புதுப்பிக்கவும்",
     "mangaBakaProfile": "MangaBaka ப்ரொஃபைல்",
     "refreshFromMangaBaka": "MangaBaka-ல இருந்து ரெஃப்ரெஷ் பண்ணு",
+    "mangaUpdatesLoginTitle": "MangaUpdates இல் உள்நுழையவும்",
+    "mangaUpdatesProfile": "MangaUpdates சுயவிவரம்",
+    "mangaUpdatesAnimeStart": "அனிம் தழுவல் தொடங்குகிறது",
+    "mangaUpdatesAnimeEnd": "அனிம் தழுவல் முடிவடைகிறது",
+    "refreshFromMangaUpdates": "MangaUpdates இலிருந்து புதுப்பிக்கவும்",
+    "usernameOnly": "பயனர் பெயர்",
+    "releases": "வெளியிடுகிறது",
     "artistsLabel": "ஆர்டிஸ்ட்ஸ்",
     "authorsLabel": "ஆதர்ஸ்",
     "publishersLabel": "பப்ளிஷர்ஸ்",
@@ -317,8 +732,13 @@
     "noLabel": "இல்ல",
     "ratingSteps": "ரேட்டிங் ஸ்டெப்ஸ்",
     "hideNsfw": "NSFW மறை",
+    "hideNsfwSourcesDesc": "ஊட்டங்கள் மற்றும் சோர்ஸ் பிக்கரில் இருந்து 18+ எனக் குறிக்கப்பட்ட ஆதாரங்களை மறைக்கவும். அவை நிறுவப்பட்டிருக்கும்.",
     "hideNsfwDesc": "அடல்ட் டைட்டில்ஸை ஃபீட் & சர்ச்ல இருந்து விலக்கி, உன் சொந்த அடல்ட் என்ட்ரிகளை Hidden Media-ல லிஸ்ட் பண்ணு.",
     "kitsuAccountOptions": "Kitsu அக்கவுண்ட் ஆப்ஷன்ஸ்",
+    "mangaBakaAccountOptions": "MangaBaka அக்கவுண்ட் விருப்பங்கள்",
+    "comickAccountOptions": "காமிக் கணக்கு விருப்பங்கள்",
+    "comickClientId": "காமிக் கிளையண்ட் ஐடி",
+    "comickClientIdDesc": "comick.dev இல் பதிவுசெய்யப்பட்ட தனிப்பயன் கிளையன்ட் ஐடி",
     "couldNotUpdateKitsuSettings": "உன் Kitsu செட்டிங்ஸை அப்டேட் பண்ண முடியல",
     "titleCanonical": "கேனானிக்கல்",
     "titleRomanized": "ரோமனைஸ்டு",
@@ -341,12 +761,15 @@
     "accountDetails": "அக்கவுண்ட் டிடெயில்ஸ்",
     "refreshFromKitsu": "Kitsu-ல இருந்து ரெஃப்ரெஷ் பண்ணு",
     "simklReadOnly": "Simkl-க்கு ரீட்-ஒன்லி அக்சஸ் கிடைச்சிருக்கு",
+    "traktReadOnly": "டிராக்ட்டுக்கு படிக்க மட்டும் அணுகல் வழங்கப்பட்டது",
     "incognitoEditsBlocked": "இன்காக்னிட்டோ: லிஸ்ட் எடிட்ஸ் பிளாக் ஆகுது",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "இன்காக்னிட்டோ: புரோகிரஸ் சேவ் ஆகல",
     "progressSet": "புரோகிரஸ் {progress}-னு செட் ஆயிடுச்சு",
     "removedFromList": "{title} உன் லிஸ்ட்ல இருந்து நீக்கப்பட்டுச்சு",
     "following": "ஃபாலோயிங்",
+    "followsMutual": "பரஸ்பரம்",
+    "followsNotMutual": "பரஸ்பரம் இல்லை",
     "homeSections": "ஹோம் செக்ஷன்ஸ்",
     "homeSectionsHint": "ரீஆர்டர் பண்ண டிராக் பண்ணு. ஹிட்டன் செக்ஷன்ஸ் எப்பவும் ஃபெட்ச் ஆகாது.",
     "customListDeleteFailed": "கஸ்டம் லிஸ்ட்டை டெலீட் பண்ண முடியல",
@@ -354,6 +777,7 @@
     "customListsSaved": "கஸ்டம் லிஸ்ட்ஸ் சேவ் ஆயிடுச்சு",
     "listName": "லிஸ்ட் பேரு",
     "addList": "லிஸ்ட் சேர்",
+    "voiceActors": "குரல் நடிகர்கள்",
     "voiceActorsIn": "வாய்ஸ் ஆக்டர்ஸ் · {name}",
     "animeAppearances": "அனிமே அப்பியரன்ஸஸ்",
     "mangaAppearances": "மங்கா அப்பியரன்ஸஸ்",
@@ -363,6 +787,8 @@
     "mainProductions": "மெயின் புரொடக்ஷன்ஸ்",
     "otherWorks": "மத்த வொர்க்ஸ்",
     "prequelSequel": "ப்ரீக்வல் & சீக்வல்",
+    "prequel": "முன்னுரை",
+    "sequel": "தொடர்ச்சி",
     "previousSeason": "முந்தின சீசன்",
     "thisSeason": "இந்த சீசன்",
     "nextSeason": "அடுத்த சீசன்",
@@ -374,11 +800,18 @@
     "repullProfileCounts": "உன் ப்ரொஃபைல் & கவுண்ட்ஸை மறுபடி இழு",
     "refreshed": "ரெஃப்ரெஷ் ஆயிடுச்சு",
     "simklProfile": "Simkl ப்ரொஃபைல்",
+    "traktProfile": "டிராக்ட் சுயவிவரம்",
     "refreshFromSimkl": "Simkl-ல இருந்து ரெஃப்ரெஷ் பண்ணு",
+    "refreshFromTrakt": "Trakt இலிருந்து புதுப்பிக்கவும்",
     "repullProfileLibrary": "உன் ப்ரொஃபைல் & லைப்ரரியை மறுபடி இழு",
     "simklSignInToSearch": "தேட Simkl-ல சைன் இன் பண்ணு",
     "dropRate": "டிராப் ரேட்",
     "simklAttribution": "டேட்டா & ஆர்ட்வொர்க் Simkl தந்தது. Simkl-ல பாரு",
+    "traktAttribution": "டிராக்ட் வழங்கிய தரவு மற்றும் கலைப்படைப்பு. டிராக்டில் பார்க்கவும்",
+    "listsLiked": "பிடித்திருந்தது",
+    "listsYours": "உங்களுடையது",
+    "traktVip": "விஐபி",
+    "traktVipMember": "டிராக்ட் விஐபி உறுப்பினர்",
     "onHold": "ஆன் ஹோல்ட்",
     "scoredBy": "ஸ்கோர் பண்ணவங்க",
     "planToWatch": "பாக்க ப்ளான்",
@@ -387,6 +820,8 @@
     "timesReread": "மறுபடி படிச்ச தடவை",
     "comments": "கமெண்ட்ஸ்",
     "moviesAndSeries": "மூவிஸ் & சீரிஸ்",
+    "simklMoviesOnly": "திரைப்படங்கள் & தொடர்கள் மட்டுமே",
+    "simklMoviesOnlyDesc": "அனிம் தாவலை மாற்றுகிறது: முதலில் திரைப்படங்கள், பின்னர் இரண்டு அனிம் வரிசைகளுடன் காண்பிக்கப்படும்",
     "trackingOnly": "டிராக்கிங் மட்டும்",
     "signedIn": "சைன் இன் ஆயிருக்கு",
     "searchLanguage": "சர்ச் மொழி",
@@ -397,19 +832,41 @@
     "details": "டிடெயில்ஸ்",
     "addToList": "லிஸ்ட்ல சேர்",
     "trailer": "டிரெய்லர்",
+    "trailerQuality": "டிரெய்லர் தரம்",
     "titleCopied": "டைட்டில் காப்பி ஆயிடுச்சு",
     "linkCopied": "லிங்க் காப்பி ஆயிடுச்சு",
     "watchTrailer": "டிரெய்லர் பாரு",
     "copyTitle": "டைட்டிலை காப்பி பண்ணு",
+    "detailStale": "அனிலிஸ்ட்டை அடைய முடியவில்லை. இது சேமிக்கப்பட்ட தகவல் மற்றும் காலாவதியானதாக இருக்கலாம்.",
     "copyLink": "லிங்க்கை காப்பி பண்ணு",
     "openInBrowser": "பிரவுசர்ல திற",
     "viewOnSource": "{source}-ல பாரு",
     "episodeAirsIn": "எபிசோட் {ep} {time}-ல ஏர் ஆகும்",
     "nextEpisodeIn": "அடுத்த எபிசோட் {time}-ல",
+    "chapterExpectedIn": "அத்தியாயம் {chapter} சுமார் {time}-ல் வரும்",
     "logPathCopied": "லாக் ஃபைல் பாத் கிளிப்போர்டுக்கு காப்பி ஆயிடுச்சு",
     "animeSource": "அனிமே சோர்ஸ்",
     "mangaSource": "மங்கா சோர்ஸ்",
     "popular": "பாப்புலர்",
+    "allCustomLists": "அனைத்து தனிப்பயன் பட்டியல்கள்",
+    "simklTitleLanguage": "அனிமே தலைப்பு மொழி",
+    "titleLanguageEnglish": "ஆங்கிலம்",
+    "titleLanguageRomaji": "ரோமாஜி",
+    "simklListsTrending": "டிரெண்டிங்",
+    "simklListsMostLiked": "மிகவும் பிடித்தது",
+    "simklListsMostFollowed": "பெரும்பாலானோர் பின்பற்றினர்",
+    "simklListsOfficial": "அதிகாரி",
+    "simklListTitles": "{count, plural, =1{1 தலைப்பு} other{{count} தலைப்புகள்}}",
+    "@simklListTitles": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "people": "மக்கள்",
+    "mostComments": "பெரும்பாலான கருத்துகள்",
+    "alphabetical": "அகரவரிசைப்படி",
     "latest": "லேட்டஸ்ட்",
     "saved": "சேவ்டு",
     "nothingMatched": "எதுவும் மேட்ச் ஆகல",
@@ -440,6 +897,7 @@
     "nothingNew": "புதுசா எதுவும் இல்ல",
     "thisWeek": "இந்த வாரம்",
     "listOnly": "லிஸ்ட் மட்டும்",
+    "notInList": "பட்டியலில் இல்லை",
     "filter": "ஃபில்டர்",
     "searchResults": "சர்ச் ரிசல்ட்ஸ்",
     "recentSearches": "சமீபத்திய சர்ச்ஸ்",
@@ -478,6 +936,11 @@
     "done": "முடிஞ்சது",
     "searchOrEnterUrl": "தேடு இல்லன்னா URL போடு",
     "refresh": "ரெஃப்ரெஷ்",
+    "animePlanetRank": "தரவரிசை",
+    "animePlanetMagazine": "இதழ்",
+    "animePlanetRefreshLists": "உங்கள் பட்டியல்களைப் புதுப்பிக்கவும்",
+    "animePlanetRefreshListsDesc": "உங்கள் Anime-Planet பட்டியல்களை மீண்டும் படிக்கவும்",
+    "animePlanetLocalNote": "உங்கள் Anime-Planet கணக்கில் மாற்றங்களைச் சேமிக்க உள்நுழையவும். அதுவரை இந்தச் சாதனத்தில் இருப்பார்கள்",
     "share": "ஷேர்",
     "characters": "கேரக்டர்ஸ்",
     "staff": "ஸ்டாஃப்",
@@ -599,6 +1062,8 @@
     "sectionPrivacy": "பிரைவசி",
     "hidePrivateEntries": "பிரைவேட் என்ட்ரிஸை மறை",
     "hidePrivateEntriesDesc": "AniList-ல பிரைவேட்னு மார்க் பண்ண என்ட்ரிஸை ஃபீட்ல இருந்து விலக்கு",
+    "anilistExcludeList": "உங்க லிஸ்ட்டை விலக்கு",
+    "anilistExcludeListDesc": "உங்க AniList-ல் ஏற்கனவே இருக்கும் தலைப்புகளை அனிமே, மாங்கா பக்கங்களில் காட்டாது",
     "anilistProfile": "AniList ப்ரொஃபைல்",
     "refreshFromAnilist": "AniList-ல இருந்து ரெஃப்ரெஷ் பண்ணு",
     "couldNotUpdateAnilistSettings": "AniList செட்டிங்ஸை அப்டேட் பண்ண முடியல",
@@ -634,6 +1099,9 @@
     "sectionBrowse": "பிரவுஸ்",
     "readingTab": "ரீடிங் டேப்",
     "readingTabDesc": "மூணாவது டேப் எந்த எக்ஸ்டென்ஷன்ஸை காட்டணும்",
+    "firstTab": "முதல் தாவல்",
+    "firstTabDesc": "முதல் தாவல் எந்த நீட்டிப்புகளைக் காட்டுகிறது. பட்டியில் இருந்து அனிமேஷைக் கைவிட, இங்கே மங்காவைத் தேர்ந்தெடுத்து, வாசிப்புத் தாவலில் நாவலை எடுக்கவும்",
+    "novelExtensions": "நாவல் நீட்டிப்புகள்",
     "defaultFeed": "டீஃபால்ட் ஃபீட்",
     "defaultFeedDesc": "சோர்ஸ் எந்த லிஸ்ட்டோட ஓபன் ஆகணும்",
     "noServiceSupports": "{type}-ஐ எந்த சர்வீசும் சப்போர்ட் பண்ணல",
@@ -701,6 +1169,8 @@
     "studio": "ஸ்டுடியோ",
     "serialization": "சீரியலைசேஷன்",
     "season": "சீசன்",
+    "year": "ஆண்டு",
+    "filterAny": "ஏதேனும்",
     "broadcast": "பிராட்காஸ்ட்",
     "aired": "ஏர் ஆனது",
     "published": "பப்ளிஷ் ஆனது",
@@ -709,6 +1179,7 @@
     "watching": "பாத்துட்டு இருக்கவங்க",
     "reading": "படிச்சிட்டு இருக்கவங்க",
     "dropped": "டிராப் பண்ணவங்க",
+    "unfinished": "முடிக்கப்படாதது",
     "planned": "ப்ளான் பண்ணவங்க",
     "trailers": "டிரெய்லர்ஸ்",
     "ratings": "ரேட்டிங்ஸ்",
@@ -727,6 +1198,9 @@
     "tags": "டேக்ஸ்",
     "author": "ஆதர்",
     "born": "பிறந்தது",
+    "died": "இறந்தார்",
+    "birthplace": "பிறந்த இடம்",
+    "department": "துறை",
     "website": "வெப்சைட்",
     "established": "தொடங்கியது",
     "manhwa": "மன்ஹ்வா",
@@ -735,6 +1209,10 @@
     "thisMonth": "இந்த மாசம்",
     "movies": "மூவிஸ்",
     "shows": "ஷோஸ்",
+    "moviesWatched": "பார்த்த திரைப்படங்கள்",
+    "showsWatched": "பார்த்த நிகழ்ச்சிகள்",
+    "moviesCollected": "திரைப்படங்கள் சேகரிக்கப்பட்டன",
+    "showsCollected": "நிகழ்ச்சிகள் சேகரிக்கப்பட்டன",
     "rewatching": "மறுபடி பாக்கறேன்",
     "rereading": "மறுபடி படிக்கிறேன்",
     "watchedStatus": "பாத்தது",
@@ -823,6 +1301,14 @@
     "trendingThisWeek": "இந்த வாரம் ட்ரெண்டிங்",
     "mostWatchedThisMonth": "இந்த மாசம் அதிகம் பாத்தது",
     "repoLinksAdded": "ரெப்போ லிங்க்ஸ் சக்சஸ்ஃபுல்லா சேர்ந்துடுச்சு!",
+    "repoLinkConfirm": "இந்தக் களஞ்சியத்தைச் சேர்க்கவா?\n\n{url}\n\nநீங்கள் நம்பும் மூலங்களிலிருந்து மட்டுமே களஞ்சியங்களைச் சேர்க்கவும்.",
+    "@repoLinkConfirm": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
     "errorGettingAnilistData": "AniList-ல இருந்து டேட்டா எடுக்க எரர்.",
     "navInfo": "இன்ஃபோ",
     "navComments": "கமெண்ட்ஸ்",
@@ -884,6 +1370,14 @@
     "installPluginTitle": "{name}-ஐ இன்ஸ்டால் பண்ணு",
     "sizeLabel": "சைஸ்: {size}",
     "installedState": "இன்ஸ்டால் ஆனது",
+    "updatePluginTitle": "புதுப்பி {name}",
+    "@updatePluginTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "errorLabel": "எரர்:",
     "stackTraceDetails": "டிடெயில்ஸ் (ஸ்டாக் ட்ரேஸ்)",
     "shareLogFile": "லாக் ஃபைலை ஷேர் பண்ணு",
@@ -894,6 +1388,12 @@
     "alreadyThere": " · {count} ஏற்கனவே இருக்கு",
     "airingNow": "இப்போ ஏர் ஆகுது",
     "topRatedMovies": "டாப் ரேட்டட் மூவிஸ்",
+    "koreanDramas": "கொரியன் டிராமாக்கள்",
+    "chineseDramas": "சீன டிராமாக்கள்",
+    "japaneseDramas": "ஜப்பானிய டிராமாக்கள்",
+    "thaiDramas": "தாய் டிராமாக்கள்",
+    "turkishDramas": "துருக்கிய டிராமாக்கள்",
+    "miniSeries": "மினி சீரிஸ்",
     "topRatedShows": "டாப் ரேட்டட் ஷோஸ்",
     "recommendedSection": "ரெகமெண்டட்",
     "syncRow": "லிஸ்ட்ஸ் சிங்க்",
@@ -905,8 +1405,61 @@
     "syncAutoDesc": "ஆப் திறக்கும்போதும் ஒவ்வொரு 30 நிமிஷத்துக்கும் பேக்ரவுண்ட்ல ஃபெட்ச் & சிங்க் பண்ணு",
     "syncAddMissing": "விடுபட்ட என்ட்ரிஸை சேர்",
     "syncAddMissingDesc": "மத்த சர்வீஸ்ல இல்லாத என்ட்ரிஸையும் சேர்",
+    "syncServiceOn": "{name} உடன் ஒத்திசை",
+    "@syncServiceOn": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "syncDelete": "பிரதான சேவையில் இல்லாததை நீக்கவும்",
+    "syncDeleteDesc": "முக்கிய பட்டியலில் இல்லாத பிற சேவைகளிலிருந்து உள்ளீடுகளை அகற்றவும். தலைப்புடன் பொருந்தக்கூடிய உள்ளீடுகள் மட்டுமே அகற்றப்படும், எனவே Simkl திரைப்படங்கள் மற்றும் தொடர்கள் போன்றவை அப்படியே இருக்கும்",
+    "syncDeleteTitle": "உள்ளீடுகளை நீக்கவா?",
+    "syncDeleteConfirm": "{count, plural, =1{1 நுழைவு} other{{count} உள்ளீடுகள்}} உங்கள் பிரதான பட்டியலில் இல்லாதவை மற்ற சேவைகளிலிருந்து நீக்கப்படும். இதை செயல்தவிர்க்க முடியாது.",
+    "@syncDeleteConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncDeleteAction": "நீக்கு",
+    "syncToDelete": "நீக்குவதற்கு",
+    "syncDeletedNote": "நீக்கப்படும்",
+    "syncWillRemove": "{name} இலிருந்து {count} நீக்கப்படும்",
+    "@syncWillRemove": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "syncOnlyForward": "முன்னாடி இருக்க புரோகிரஸை வச்சுக்கோ",
     "syncOnlyForwardDesc": "ஏற்கனவே முன்னாடி இருக்க சர்வீஸோட புரோகிரஸை குறைக்காத",
+    "animePlanetWontWatch": "பார்க்க மாட்டேன்",
+    "animePlanetWontRead": "படிக்க மாட்டேன்",
+    "animePlanetAlreadyOnList": "ஏற்கனவே இந்த பட்டியலில் உள்ளது",
+    "animePlanetNewList": "புதிய பட்டியல் பெயர்",
+    "syncPrivate": "தனிப்பட்ட உள்ளீடுகள்",
+    "syncPrivateDesc": "நீங்கள் தனிப்பட்ட முறையில் வைத்திருக்கும் உள்ளீடுகளை என்ன செய்வது. ஒரு தனிப்பட்ட விருப்பத்துடன் ஒரு சேவை அவர்களை தனிப்பட்டதாக பெறுகிறது; மற்றவர்கள் அவற்றை பொதுவில் காட்டுவார்கள்",
+    "syncPrivateModeAsk": "கேள்",
+    "syncPrivateModeSync": "அவற்றை ஒத்திசைக்கவும்",
+    "syncPrivateModeSkip": "அவற்றைத் தவிர்க்கவும்",
+    "syncPrivateTitle": "தனிப்பட்ட உள்ளீடுகள்",
+    "syncPrivateAsk": "{count, plural, =1{1 நுழைவு தனிப்பட்டது} other{{count} உள்ளீடுகள் தனிப்பட்டவை}}. தனிப்பட்ட விருப்பத்துடன் (AniList, Kitsu, MangaBaka) சேவைகள் அவற்றை தனிப்பட்டதாகப் பெறும்; மற்ற சேவைகளுக்கு தனிப்பட்ட விருப்பம் இல்லை மற்றும் அவற்றை பொதுவில் காண்பிக்கும். அவற்றை ஒத்திசைக்கவா? உங்கள் பதில் நினைவில் உள்ளது; ஒத்திசைவு விருப்பங்களின் கீழ் அதை மாற்றவும்.",
+    "@syncPrivateAsk": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncPrivateInclude": "அவற்றை ஒத்திசைக்கவும்",
+    "syncPrivateSkip": "அவற்றைத் தவிர்க்கவும்",
     "syncFetch": "ஃபெட்ச்",
     "syncFetchAgain": "மறுபடி ஃபெட்ச் பண்ணு",
     "syncAll": "எல்லாத்தையும் சிங்க் பண்ணு",
@@ -937,6 +1490,14 @@
     "syncService": "{service} சிங்க் ({count})",
     "syncOnEdit": "மாற்றங்களை உடனே சிங்க் பண்ணு",
     "syncOnEditDesc": "ஒவ்வொரு புரோகிரஸ் அப்டேட் & லிஸ்ட் எடிட்டையும் சைன் இன் ஆன உன் மத்த சர்வீசஸுக்கு உடனே அனுப்பு",
+    "syncRemoved": "{services} இலிருந்து அகற்றப்பட்டது",
+    "@syncRemoved": {
+        "placeholders": {
+            "services": {
+                "type": "String"
+            }
+        }
+    },
     "syncPushed": "{services}-க்கு சிங்க் ஆயிடுச்சு",
     "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "ரேட் லிமிட் ஆயிடுச்சு, கொஞ்ச நேரம் கழிச்சு ட்ரை பண்ணு",
@@ -1036,7 +1597,7 @@
     "barcodeTooltip": "பார்கோடை வச்சு மங்கா அல்லது நாவலை கண்டுபிடி",
     "barcodeIntro": "வால்யூம் பின்னாடி இருக்க பார்கோடு மேல கேமராவை காட்டு, இல்லன்னா அதோட ISBN-ஐ டைப் பண்ணு.",
     "barcodeIntroManual": "வால்யூம் பின்னாடி பார்கோடு மேல பிரிண்ட் ஆன ISBN-ஐ டைப் பண்ணு.",
-    "barcodeIsbnHint": "ISBN",
+    "barcodeIsbnHint": "ஐஎஸ்பிஎன்",
     "barcodeInvalid": "இது சரியான ISBN இல்ல",
     "barcodeNotFound": "{isbn}-க்கு புக் கிடைக்கல",
     "barcodeCameraDenied": "கேமரா கிடைக்கல. கேமரா அக்சஸ் குடு இல்லன்னா ISBN-ஐ டைப் பண்ணு.",
@@ -1213,6 +1774,12 @@
     "watchSearchAgain": "மறுபடி தேடு",
     "watchSearchSource": "{source} தேடு",
     "watchSource": "சோர்ஸ்",
+    "sourceTags": "குறிச்சொற்கள்",
+    "sourceTagsHint": "இந்த ஆதாரம் எதற்காக என்று டேக் செய்யவும். ஒரு தலைப்பு முதலில் குறியிடப்பட்ட மூலங்களை பட்டியலிடுகிறது, பின்னர் குறியிடப்படாதவை. 18+ ஆதாரங்கள் வயதுவந்த தலைப்புகளுக்கு மட்டுமே காட்டப்படும்.",
+    "sourceTagAnime": "அசையும்",
+    "sourceTagMovies": "திரைப்படங்கள் & தொடர்கள்",
+    "sourceTagAdult": "18+",
+    "sourceHiddenByTags": "குறிச்சொற்களால் மறைக்கப்பட்டது",
     "watchOptions": "ஆப்ஷன்ஸ்",
     "watchReverse": "ஆர்டரை ரிவர்ஸ் பண்ணு",
     "watchScanlators": "குரூப்ஸ்",
@@ -1247,6 +1814,44 @@
     "watchProbeFailed": "சைட்டை ரீச் பண்ண முடியல",
     "watchClearCookies": "இந்த சைட்டோட குக்கீஸை கிளியர் பண்ணு",
     "watchCookiesCleared": "குக்கீஸ் கிளியர் ஆயிடுச்சு",
+    "watchFailTimeout": "சரியான நேரத்தில் சோதனை முடிவடையவில்லை",
+    "watchFailBlocked": "தளம் இந்தச் சாதனத்தைத் தடுத்தது (அணுகல் மறுக்கப்பட்டது). ஒரு காசோலை உதவாது",
+    "watchFailTurnstile": "இந்தச் சரிபார்ப்பிற்கு, பின்புலத் தீர்வியால் செய்ய முடியாத தட்டுதல் தேவை",
+    "watchFailLoad": "பக்கம் ஏற்றப்படவில்லை. இணைப்பு மற்றும் தள முகவரியைச் சரிபார்க்கவும்",
+    "watchFailRejected": "தளம் தான் வழங்கிய அனுமதியை நிராகரித்தது. மீண்டும் முயற்சிக்கவும் அல்லது குக்கீகளை அழிக்கவும்",
+    "watchFailDismissed": "காசோலை முடிவதற்குள் மூடப்பட்டது",
+    "watchFailCooldown": "நீங்கள் ஒரு கணம் முன்பு காசோலையை மூடிவிட்டீர்கள். மீண்டும் முயற்சிக்க, அதைத் தீர்க்கவும் என்பதை அழுத்தவும்",
+    "watchFailQuiet": "காசோலைக்கு நீங்கள் தேவை, மேலும் பயன்பாடு தானாகவே இயங்குகிறது",
+    "watchFailWebView": "பின்னணி இணையக் காட்சியைத் தொடங்க முடியவில்லை",
+    "watchFailUnavailable": "காசோலையை காட்ட திரை இல்லை",
+    "watchStatusReady": "தயார்",
+    "watchStatusChallenge": "Cloudflare சோதனை தேவை",
+    "watchStatusBlocked": "தளத்தால் தடுக்கப்பட்டது",
+    "watchStatusOffline": "தளத்தை அடைய முடியவில்லை",
+    "watchStatusUntested": "இன்னும் சோதிக்கப்படவில்லை",
+    "watchStatusTesting": "இணைப்பைச் சோதிக்கிறது…",
+    "watchStatusSolving": "Cloudflare காசோலையை கடந்து செல்கிறது…",
+    "watchSolvedBackground": "கிளவுட்ஃப்ளேர் சோதனை பின்னணியில் கடந்து சென்றது ({seconds} வி)",
+    "@watchSolvedBackground": {
+        "placeholders": {
+            "seconds": {
+                "type": "int"
+            }
+        }
+    },
+    "watchSolvedByUser": "கிளவுட்ஃப்ளேர் சோதனை முடிந்தது",
+    "watchClearanceIssued": "சம்பாதித்தது {time}",
+    "@watchClearanceIssued": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "watchClearanceStale": "மற்றொரு பயனர் முகவர் மூலம் அனுமதி பெறப்பட்டது, எனவே அது அனுப்பப்படவில்லை. புதிய ஒன்றைப் பெற இணைப்பைச் சோதிக்கவும்",
+    "watchSectionConnection": "இணைப்பு",
+    "watchSectionSession": "அமர்வு",
+    "watchSectionTools": "கருவிகள்",
     "watchMetaSource": "எபிசோட் டிடெயில்ஸ் எங்க இருந்து",
     "watchMetaAuto": "ஆட்டோமேட்டிக்",
     "watchMetaOff": "ஆஃப்",
@@ -1257,8 +1862,12 @@
     "playerSectionSubtitles": "சப்டைட்டில்ஸ்",
     "playerSectionShaders": "ஷேடர்ஸ்",
     "playerSectionEngine": "என்ஜின்",
-    "playerSectionMpv": "mpv",
+    "playerSectionMpv": "எம்பிவி",
     "playerSpeed": "ப்ளேபேக் ஸ்பீட்",
+    "localSource": "உள்ளூர் கோப்புகள்",
+    "localMissing": "இந்தக் கோப்பு அல்லது கோப்புறை உங்கள் உள்ளூர் கோப்புறையில் இருக்காது",
+    "playerStickyStage": "ஒட்டும் வீடியோ",
+    "playerStickyStageDesc": "கீழே உள்ள எபிசோடுகள் மற்றும் கருத்துகளை நீங்கள் ஸ்க்ரோல் செய்யும் போது வீடியோவை மேலே நிலையாக வைத்திருங்கள்",
     "playerCursedSpeed": "எக்ஸ்ட்ரா ஸ்பீட்ஸ்",
     "playerCursedSpeedDesc": "10x வரை ஸ்பீட்ஸை லிஸ்ட்ல சேர்",
     "playerResize": "ரீசைஸ் மோட்",
@@ -1281,6 +1890,8 @@
     "playerAutoSkipEnding": "எண்டிங்ஸை ஸ்கிப் பண்ணு",
     "playerAutoSkipRecap": "ரீகேப்ஸை ஸ்கிப் பண்ணு",
     "playerAutoSkipDesc": "AniSkip & ஸ்ட்ரீம் டைம்ஸ்டாம்ப்ஸை வச்சு, ஆரம்பிச்சதும் தாண்டிடு",
+    "playerDisableSkips": "ஸ்கிப்களை முடக்கு",
+    "playerDisableSkipsDesc": "பிளேயரில் அனிஸ்கிப் அல்லது ஸ்ட்ரீம் நேர முத்திரைகள், அத்தியாய மதிப்பெண்கள் அல்லது சமர்ப்பிப்புகளைத் தவிர்க்கவும்",
     "playerSkipOnce": "ஒரு தடவை மட்டும் ஸ்கிப் பண்ணு",
     "playerSkipOnceDesc": "நீ திரும்ப சீக் பண்ணா அதே பார்ட்டை மறுபடி ஸ்கிப் பண்ணாத",
     "playerAdjustBrightness": "ப்ரைட்னெஸ் ஜெஸ்ச்சர்",
@@ -1301,6 +1912,9 @@
     "playerSubtitleColor": "சப்டைட்டில் கலர்",
     "playerSubtitleBackground": "சப்டைட்டில் பேக்ரவுண்ட்",
     "playerSubtitleOutline": "சப்டைட்டில் அவுட்லைன்",
+    "playerSubtitleOutlineWidth": "வசன அவுட்லைன் அகலம்",
+    "playerSubtitlePreview": "வசன முன்னோட்டம்",
+    "playerSubtitlePreviewText": "வசன முன்னோட்ட உரை",
     "playerLibass": "libass யூஸ் பண்ணு",
     "playerLibassDesc": "ஸ்டைல் பண்ண .ass சப்டைட்டில்ஸை ரெண்டர் பண்ணு. மேல இருக்க சைஸ், கலர் & ஃபாண்ட் அப்புறம் அப்ளை ஆகாது",
     "playerShaders": "ஷேடர்ஸ்",
@@ -1310,6 +1924,13 @@
     "playerShadersMissing": "Anime4K இன்ஸ்டால் ஆகல",
     "playerShadersMissingDesc": "பில்ட்-இன் மோட்ஸ் யூஸ் பண்ண Anime4K ஷேடர் பேக்கை (சுமார் 0.8 MB) டவுன்லோட் பண்ணு.",
     "playerShadersDownload": "Anime4K டவுன்லோட் பண்ணு",
+    "playerPictureSave": "இந்த சட்டத்தை சேமிக்கவும்",
+    "playerPictureOriginal": "அசல்",
+    "playerPictureOriginalDesc": "ஷேடர்கள் அல்லது வண்ணங்கள் இல்லாமல் வீடியோவில் உள்ள சட்டகம்",
+    "playerPictureProcessed": "ஷேடர்கள் மற்றும் வண்ணங்களுடன்",
+    "playerPictureProcessedDesc": "நீங்கள் இப்போது பார்க்கும் சட்டகம்",
+    "playerPictureSaved": "சட்டகம் சேமிக்கப்பட்டது",
+    "playerPictureSaveFailed": "சட்டத்தை சேமிக்க முடியவில்லை",
     "playerShadersPreview": "இந்த ஃப்ரேம்ல ப்ரிவியூ பாரு",
     "playerShadersUse": "இதை யூஸ் பண்ணு",
     "playerPicture": "பிக்சர்",
@@ -1332,6 +1953,9 @@
     "playerColorAdjust": "அட்ஜஸ்ட்",
     "playerShadersOriginal": "ஒரிஜினல்",
     "playerShadersPreviewFailed": "ப்ரிவியூ பண்ண ஃப்ரேம் எடுக்க முடியல",
+    "playerShadersSoftware": "ஷேடர்களுக்கு வன்பொருள் ரெண்டரிங் தேவை, மேலும் பிளேயர் மென்பொருள் ரெண்டரிங்கைப் பயன்படுத்துகிறார். பிளேயர் அமைப்புகளில் மென்பொருள் ரெண்டரிங்கை முடக்கவும்.",
+    "playerSoftwareRender": "மென்பொருள் ரெண்டரிங்",
+    "playerSoftwareRenderDesc": "கருப்பு வீடியோவிற்கு மட்டும். ஷேடர்கள் அதனுடன் வேலை செய்யாது. அடுத்த முறை பிளேயர் திறக்கும் போது பொருந்தும்",
     "playerShadersCustomFiles": "உன் ஷேடர்ஸ்",
     "playerShadersCustom": "கஸ்டம் ஷேடர்ஸ்",
     "playerShadersImport": ".glsl இம்போர்ட் பண்ணு",
@@ -1401,7 +2025,22 @@
     "playerResetConfirm": "எல்லா பிளேயர் செட்டிங்ஸையும் ரீசெட் பண்ணவா?",
     "playerResetDone": "பிளேயர் செட்டிங்ஸ் ரீசெட் ஆயிடுச்சு",
     "playerQuality": "குவாலிட்டி",
+    "streamGroupSub": "துணை",
+    "streamGroupHardSub": "கடினமான துணை",
+    "streamGroupSoftSub": "மென்மையான துணை",
+    "streamGroupDub": "டப்",
+    "streamGroupRaw": "மூல",
+    "streamGroupOther": "மற்றவை",
+    "streamsCount": "{count, plural, =1{1 ஸ்ட்ரீம்} other{{count} ஸ்ட்ரீம்கள்}}",
+    "@streamsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "playerStreams": "ஸ்ட்ரீம்ஸ்",
+    "playerStreamFailedNext": "அந்த ஸ்ட்ரீம் இயங்காது, அடுத்ததை முயற்சிக்கவும்",
     "playerAutoSelect": "ஸ்ட்ரீமை தானா செலக்ட் பண்ணு",
     "playerAutoSelectDesc": "இந்த டைட்டிலுக்கு உன் கடைசி தேர்வு மாதிரியே இருக்க ஸ்ட்ரீமை எடு",
     "playerLoadingStreams": "ஸ்ட்ரீம்ஸை தேடுறேன்…",
@@ -1422,6 +2061,8 @@
     "readerFirstChapter": "இதுதான் முதல் சாப்டர்",
     "readerLastChapter": "எல்லாத்தையும் படிச்சு முடிச்சிட்ட",
     "readerFailed": "இந்த சாப்டரை திறக்க முடியல",
+    "readerOpenBook": "ஒரு புத்தகத்தைத் திறக்கவும்",
+    "readerOpenBookDesc": "உங்கள் கோப்புகளில் இருந்து எபப் (நாவல் ரீடர்) அல்லது PDF (மங்கா ரீடர்) படிக்கவும்",
     "readerNoText": "இந்த சாப்டர்ல டெக்ஸ்ட் இல்ல",
     "readerPerTitle": "இந்த டைட்டிலுக்கு மட்டும்",
     "readerPerTitleDesc": "இந்த ரீடர் செட்டிங்ஸை இந்த டைட்டிலுக்கு மட்டும் வச்சுக்கோ",
@@ -1430,6 +2071,7 @@
     "readerSectionDisplay": "டிஸ்ப்ளே",
     "readerSectionNovel": "நாவல்",
     "readerMode": "ரீடிங் மோட்",
+    "readerModeAuto": "தானியங்கு (தொடர் வகை மூலம்)",
     "readerModeRtl": "வலமிருந்து இடம்",
     "readerModeLtr": "இடமிருந்து வலம்",
     "readerModeVertical": "வெர்டிகல் பேஜஸ்",
@@ -1473,6 +2115,12 @@
     "readerFilterGrayscale": "கிரேஸ்கேல்",
     "readerFilterInvert": "இன்வெர்ட்",
     "readerFilterSepia": "செபியா",
+    "readerFilterQuality": "பட வடிகட்டி தரம்",
+    "readerFilterQualityNone": "எதுவுமில்லை (அருகிலுள்ள அண்டை)",
+    "readerFilterQualityLow": "குறைந்த (பைலினியர்)",
+    "readerFilterQualityMedium": "நடுத்தர (முக்கோண)",
+    "readerFilterQualityHigh": "உயர் (Bicubic)",
+    "readerFilterQualityLanczos": "லான்சோஸ் (துரு உயர் தரம்)",
     "readerDim": "டிம்",
     "readerDimDesc": "பேஜஸை டார்க் பண்ணு",
     "readerPageNumber": "பேஜ் நம்பர்",
@@ -1481,6 +2129,8 @@
     "readerFullscreenDesc": "சிஸ்டம் பார்ஸை மறை",
     "readerCropBorders": "கிராப் பார்டர்ஸ்",
     "readerCropBordersDesc": "பேஜ்ல இருக்க காலி வெள்ளை அல்லது கருப்பு மார்ஜின்ஸை வெட்டு",
+    "readerLongPressSave": "அதைச் சேமிக்க ஒரு பக்கத்தைப் பிடிக்கவும்",
+    "readerLongPressSaveDesc": "சேமி, பகிர் மற்றும் நகலெடுக்கும் விருப்பங்களைத் திறக்க பக்கத்தை நீண்ட நேரம் அழுத்தவும்",
     "readerVolumeKeys": "வால்யூம் கீஸ் பேஜ் திருப்பும்",
     "readerVolumeKeysDesc": "வால்யூம் டவுன் முன்னாடி போகும், வால்யூம் அப் பின்னாடி போகும்",
     "readerBookmarks": "புக்மார்க்ஸ்",
@@ -1502,6 +2152,7 @@
     "readerSaveProgressDesc": "உன் பேஜை நினைவுல வச்சு சாப்டர்ஸை படிச்சதா மார்க் பண்ணு",
     "readerReset": "ரீடர் செட்டிங்ஸை ரீசெட் பண்ணு",
     "readerResetDesc": "டீஃபால்ட்ஸ்க்கு திரும்பு",
+    "readerResetConfirm": "ஒவ்வொரு வாசகர் அமைப்பையும் அதன் இயல்புநிலைக்கு மீட்டமைக்கவா?",
     "novelSize": "டெக்ஸ்ட் சைஸ்",
     "novelFont": "ஃபாண்ட்",
     "novelLineHeight": "லைன் ஹைட்",
@@ -1518,6 +2169,78 @@
     "trackProgressTitle": "புரோகிரஸை சேவ் பண்ணவா?",
     "trackProgressAnime": "நீ பாக்கும்போது உன் லிஸ்ட்ல {name}-ஐ டிராக் பண்ணவா? லோக்கலா வச்சுக்க \"இந்த டிவைஸ் மட்டும்\"-ஐ எடு, இல்லன்னா எதுவும் சேவ் பண்ண வேணாம்னா இல்ல-ன்னு சொல்லு.",
     "trackProgressManga": "நீ ஒரு சாப்டர் முடிக்கும்போது உன் லிஸ்ட்ல {name}-ஐ டிராக் பண்ணவா? லோக்கலா வச்சுக்க \"இந்த டிவைஸ் மட்டும்\"-ஐ எடு, இல்லன்னா எதுவும் சேவ் பண்ண வேணாம்னா இல்ல-ன்னு சொல்லு.",
+    "trackProgressAnimeLocal": "நீங்கள் பார்க்கும் போது {name} இல் உங்கள் முன்னேற்றத்தை இந்தச் சாதனத்தில் உள்ள உங்கள் பட்டியலில் சேமிக்கவா?",
+    "@trackProgressAnimeLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressMangaLocal": "ஒரு அத்தியாயத்தை முடிக்கும்போது {name} இல் உங்கள் முன்னேற்றத்தை இந்தச் சாதனத்தில் உள்ள உங்கள் பட்டியலில் சேமிக்கவா?",
+    "@trackProgressMangaLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadClearQueue": "தெளிவான வரிசை",
+    "downloadClearQueueConfirm": "வரிசையில் உள்ள அனைத்து {count} பதிவிறக்கங்களையும் ரத்துசெய்யவா? ஏற்கனவே பதிவிறக்கம் செய்யப்பட்டது நீக்கப்பட்டது.",
+    "@downloadClearQueueConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectedCount": "{count} தேர்ந்தெடுக்கப்பட்டது",
+    "@downloadSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectAll": "அனைத்தையும் தேர்ந்தெடுக்கவும்",
+    "downloadDeleteSelected": "தேர்ந்தெடுக்கப்பட்டதை நீக்கு",
+    "downloadDeleteSelectedConfirm": "{count} பதிவிறக்கங்களை நீக்கவா? அவற்றின் கோப்புகள் சாதனத்திலிருந்து அகற்றப்படும்.",
+    "@downloadDeleteSelectedConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "castTitle": "சாதனத்திற்கு அனுப்பவும்",
+    "castSearching": "உங்கள் நெட்வொர்க்கில் சாதனங்களைத் தேடுகிறது…",
+    "castNoDevices": "சாதனங்கள் எதுவும் இல்லை. டிவி அல்லது Chromecast ஒரே வைஃபையில் இருப்பதை உறுதிசெய்து, மீண்டும் தேடவும்.",
+    "castRefresh": "மீண்டும் தேடுங்கள்",
+    "castFailed": "நடிப்பைத் தொடங்க முடியவில்லை",
+    "castStop": "நடிப்பதை நிறுத்து",
+    "castNowCasting": "{name}க்கு அனுப்புதல்",
+    "@castNowCasting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "castProtocolChromecast": "Chromecast",
+    "castProtocolDlna": "டிஎல்என்ஏ / ஸ்மார்ட் டிவி",
+    "castProtocolRoku": "ரோகு",
+    "castRokuNote": "Rokuவால் புகாரளிக்கவோ அல்லது நிலையை மாற்றவோ முடியாது",
+    "castControls": "கட்டுப்பாடுகள்",
+    "castVolume": "டிவி தொகுதி",
+    "castSkipPart": "{name} தவிர்க்கவும்",
+    "@castSkipPart": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressRememberSeries": "இந்தத் தொடரை நினைவில் கொள்ளுங்கள்",
     "trackProgressYes": "சேமி",
     "trackProgressReset": "இந்த டைப்புக்கு சேவ் புரோகிரஸ் ப்ராம்ப்ட் ரீசெட் ஆயிடுச்சு, மறுபடி கேக்கும்",
     "trackProgressNo": "இல்ல",
@@ -1543,6 +2266,7 @@
     "dantotsuMal": "MyAnimeList லாகின்",
     "dantotsuDiscord": "Discord Rich Presence டோக்கன்",
     "dantotsuTheme": "தீம்",
+    "themePickerTitle": "தீம்",
     "dantotsuReposAnime": "அனிமே எக்ஸ்டென்ஷன் ரெப்போசிட்டரீஸ்",
     "dantotsuReposManga": "மங்கா எக்ஸ்டென்ஷன் ரெப்போசிட்டரீஸ்",
     "dantotsuReposNovel": "நாவல் எக்ஸ்டென்ஷன் ரெப்போசிட்டரீஸ்",
@@ -1561,6 +2285,15 @@
     "kitsuGraphqlDetailDesc": "ஒரு டைட்டிலை அதோட கேரக்டர்ஸ், ஸ்டாஃப் & உன் என்ட்ரியோட ஒரே ரெக்வெஸ்ட்ல லோட் பண்ணு",
     "togetherTitle": "சேர்ந்து பாரு",
     "togetherIntro": "உன் ஃப்ரெண்ட் அனுப்பின ரூம் லிங்கை பேஸ்ட் பண்ணு. உடனே ஜாயின் ஆயிடுவ, அவங்க பாக்க ஆரம்பிச்சதும் பிளேயர் ஓபன் ஆகும்.",
+    "togetherLinkConfirm": "{room} அறையில் சேரவா? ஹோஸ்ட் என்ன விளையாடுகிறது என்பதைத் தேர்வுசெய்து, பிளேயர் பார்க்கத் தொடங்கும் போது தானாகவே திறக்கும்.",
+    "@togetherLinkConfirm": {
+        "placeholders": {
+            "room": {
+                "type": "String"
+            }
+        }
+    },
+    "togetherJoin": "சேருங்கள்",
     "togetherName": "உன் பேரு",
     "togetherConnecting": "கனெக்ட் ஆகுது…",
     "togetherLeave": "ரூம்ல இருந்து வெளியேறு",
@@ -1568,6 +2301,15 @@
     "togetherNoChat": "இன்னும் மெசேஜ் இல்ல",
     "togetherChatHint": "மெசேஜ்",
     "togetherCopyInvite": "இன்வைட் காப்பி பண்ணு",
+    "togetherShareInvite": "அழைப்பைப் பகிரவும்",
+    "togetherShareText": "டார்டோட்சுவில் என்னுடன் பார்க்கவும்: {link}",
+    "@togetherShareText": {
+        "placeholders": {
+            "link": {
+                "type": "String"
+            }
+        }
+    },
     "togetherInviteCopied": "சர்வர் & ரூம் காப்பி ஆயிடுச்சு",
     "togetherConnectionLost": "கனெக்ஷன் போயிடுச்சு",
     "togetherConnectedTo": "{room}-ல கனெக்ட் ஆயிடுச்சு",
@@ -1610,6 +2352,41 @@
     "novelSpeakNext": "அடுத்த லைன்",
     "novelTapPaging": "பேஜ் திருப்ப எட்ஜஸை டேப் பண்ணு",
     "novelTapPagingDesc": "ஒரு பேஜ் ஸ்க்ரோல் பண்ண இடது அல்லது வலது பக்கத்தை டேப் பண்ணு, நடுவுல கன்ட்ரோல்ஸ் வரும்",
+    "novelPaged": "பக்கம் திருப்புகிறது",
+    "novelPagedDesc": "அத்தியாயத்தை பக்கங்களாகப் பிரித்து, ஸ்க்ரோலிங் செய்வதற்குப் பதிலாக ஸ்வைப் செய்யவும் அல்லது தட்டவும்",
+    "novelPageOf": "பக்கம் {total} இல் {current}",
+    "@novelPageOf": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "novelPaginating": "பக்கங்களை இடுதல்",
+    "novelTools": "உள்ளடக்கம், தேடல் மற்றும் சிறப்பம்சங்கள்",
+    "novelContents": "உள்ளடக்கம்",
+    "novelContentsEmpty": "இந்த அத்தியாயத்திற்கு தலைப்புகள் இல்லை",
+    "novelSearch": "தேடு",
+    "novelSearchHint": "இந்த அத்தியாயத்தில் தேடுங்கள்",
+    "novelSearchNone": "பொருத்தங்கள் இல்லை",
+    "novelSearchCount": "{count, plural, =1{1 போட்டி} other{{count} பொருத்தங்கள்}}",
+    "@novelSearchCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "novelHighlights": "சிறப்பம்சங்கள்",
+    "novelHighlightsEmpty": "சில உரையைத் தேர்ந்தெடுத்து, அதை இங்கே வைக்க ஹைலைட் என்பதைத் தட்டவும்",
+    "novelHighlight": "முன்னிலைப்படுத்தவும்",
+    "novelHighlightNote": "குறிப்பு",
+    "novelHighlightNoteHint": "குறிப்பைச் சேர்க்கவும்",
+    "novelHighlightRemove": "சிறப்பம்சத்தை அகற்று",
+    "novelHighlightFailed": "அந்தத் தேர்வை உரையுடன் பொருத்த முடியவில்லை",
     "novelMinutesLeft": "{count} நிமிஷம் மீதி",
     "novelBold": "போல்டு டெக்ஸ்ட்",
     "novelBoldDesc": "கனமான வெயிட்டை யூஸ் பண்ணு",
@@ -1628,6 +2405,23 @@
     "playerAddSubtitle": "சப்டைட்டில் ஃபைல் சேர்",
     "playerAddAudio": "ஆடியோ ஃபைல் சேர்",
     "playerChapters": "சாப்டர்ஸ்",
+    "playerSkipSubmit": "தவிர்க்கும் நேரங்களைச் சமர்ப்பிக்கவும்",
+    "playerSkipSubmitDesc": "இந்த எபிசோடில் திறப்பு, முடிவு அல்லது மறுபரிசீலனை எங்கிருந்து தொடங்குகிறது மற்றும் முடிவடைகிறது என்பதைக் குறிக்கவும், அதை AniSkip உடன் பகிரவும், எனவே அனைவரும் தவிர் பொத்தானைப் பெறுவார்கள்.",
+    "playerSkipStart": "தொடங்கு",
+    "playerSkipEnd": "முடிவு",
+    "playerSkipUseNow": "தற்போதைய நிலையைப் பயன்படுத்தவும்",
+    "playerSkipSend": "AniSkip க்கு சமர்ப்பிக்கவும்",
+    "playerSkipSent": "AniSkip இல் சமர்ப்பிக்கப்பட்ட நேரங்களைத் தவிர், நன்றி",
+    "playerSkipFailed": "அனிஸ்கிப் தவிர்க்கும் நேரங்களை மறுத்தது: {error}",
+    "@playerSkipFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "playerUnsupported": "இந்தச் சாதனத்தில் வீடியோ பிளேயரை இயக்க முடியாது (இதன் Android பதிப்பு தொகுக்கப்பட்ட பிளேயர் லைப்ரரிக்கு மிகவும் பழமையானது). விவரங்களை நகலெடுக்க தட்டவும்.",
+    "playerSkipNoMal": "இந்த தலைப்பில் MyAnimeList ஐடி இல்லை, AniSkip அதை எடுக்க முடியாது",
     "playerNoChapters": "சாப்டர்ஸ் இல்ல",
     "playerTimestamp": "டைம்ஸ்டாம்ப்",
     "playerAutoPlayDelay": "அடுத்த எபிசோட் கவுண்ட்டவுன்",
@@ -1641,15 +2435,29 @@
     "playerPip": "பிக்சர் இன் பிக்சர்",
     "playerAutoPip": "வெளியேறும்போது பிக்சர் இன் பிக்சர்",
     "playerAutoPipDesc": "ஆப்பை விட்டு வெளியேறும்போது சின்ன விண்டோவுல தொடர்ந்து ப்ளே ஆகட்டும்",
+    "playerPipPlay": "விளையாடு",
+    "playerPipPause": "இடைநிறுத்தம்",
+    "playerPipBack": "ரீவைண்ட்",
+    "playerPipForward": "முன்னோக்கி",
+    "playerPipRestore": "வீரருக்குத் திரும்பு",
+    "playerPipActive": "ஒரு சிறிய சாளரத்தில் விளையாடுகிறது",
+    "listDateAdded": "பட்டியலில் சேர்க்கப்பட்டது",
+    "listDateLastWatched": "கடைசியாகப் பார்த்தது",
     "playerAutoPlaying": "அடுத்து {title} ப்ளே ஆகுது…",
     "playerShadersFailed": "ஷேடர்ஸை இன்ஸ்டால் பண்ண முடியல: {error}",
     "playerChapter": "சாப்டர் {number}",
     "playerPerTitle": "இந்த டைட்டிலுக்கு மட்டும்",
     "playerPerTitleDesc": "இந்த ஆப்ஷன்ஸை இந்த டைட்டிலுக்கு வச்சுக்கோ, உன் டீஃபால்ட்ஸை தொடாத",
+    "playerSwapGestures": "ஸ்வைப் பக்கங்களை மாற்று",
+    "playerSwapGesturesDesc": "இடதுபுறம் பிரைட்னஸ், வலதுபுறம் வால்யூம்",
+    "playerOpenBig": "பெரிய வியூவில் திற",
+    "playerOpenBigDesc": "எபிசோட் லிஸ்ட் இல்லாமல் பிளேயரை நேரடியாக ஃபுல்ஸ்கிரீனில் தொடங்கும்",
+    "playerPauseOnBlur": "ஃபோகஸ் போனால் பாஸ்",
+    "playerPauseOnBlurDesc": "நோட்டிபிகேஷன் பேனல் போல ஆப்பை மறைத்தால் பாஸ் ஆகும், திரும்பி வந்ததும் தொடரும்",
     "playerAudioOutput": "ஆடியோ அவுட்புட்",
     "fontAppDefault": "ஆப் ஃபாண்ட்",
     "fontImport": "ஃபாண்ட் இம்போர்ட் பண்ணு",
-    "fontSample": "The quick brown fox jumps over the lazy dog",
+    "fontSample": "விரைவான பழுப்பு நரி சோம்பேறி நாய் மீது குதிக்கிறது",
     "playerSubtitleDelay": "சப்டைட்டில் டிலே",
     "playerAudioDelay": "ஆடியோ டிலே",
     "playerDelayReset": "ரீசெட்",
@@ -1668,8 +2476,74 @@
     "settingsDownloads": "டவுன்லோட்ஸ்",
     "settingsDownloadsDesc": "ஆஃப்லைன் எபிசோட்ஸ், க்யூ & ஆஃப்லைன் மோட்",
     "downloadsTitle": "டவுன்லோட்ஸ்",
+    "widgetContinue": "தொடரவும்",
+    "widgetReleases": "விரைவில் வெளியாகிறது",
+    "widgetMore": "மேலும் செயல்பாட்டில் உள்ளது",
+    "widgetNothing": "இன்னும் தொடர எதுவும் இல்லை",
+    "downloadStorageTitle": "சேமிப்பு",
+    "downloadStorageSummary": "{count, plural, =1{1 பதிவிறக்கம்} other{{count} பதிவிறக்கங்கள்}} · {size}",
+    "@downloadStorageSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadStorageWatched": "{size} ஏற்கனவே பார்த்தது அல்லது படித்தது",
+    "@downloadStorageWatched": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreeUp": "இடத்தை விடுவிக்கவும்",
+    "downloadFreeUpConfirm": "நீக்கு {count, plural, =1{1 பதிவிறக்கம் பார்க்கப்பட்டது} other{{count} பதிவிறக்கங்களைப் பார்த்தது}} மற்றும் இலவச {size}?",
+    "@downloadFreeUpConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreed": "விடுவிக்கப்பட்டது {size}",
+    "@downloadFreed": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadDeleteWatched": "நீக்கி பார்த்தேன்",
+    "downloadDeleteAll": "அனைத்தையும் நீக்கு",
+    "downloadDeleteAllConfirm": "{title} இன் ஒவ்வொரு பதிவிறக்கத்தையும் நீக்கவா?",
+    "@downloadDeleteAllConfirm": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadNothingWatched": "நீங்கள் முடித்த எதுவும் பதிவிறக்கம் செய்யப்படவில்லை",
+    "downloadStorageEmpty": "எந்த பதிவிறக்கங்களும் இடத்தைப் பயன்படுத்தவில்லை",
     "downloadsOpenDesc": "க்யூவையும் இந்த டிவைஸ்ல சேவ் ஆன எல்லாத்தையும் பாரு",
     "downloadTitle": "டவுன்லோட்",
+    "downloadMetaOnly": "மெட்டாடேட்டா மட்டும்",
+    "downloadMetaFailed": "தலைப்பு கோப்புறையை உருவாக்க முடியவில்லை",
+    "downloadMetaSaved": "சேமிக்கப்பட்டது. உங்கள் கோப்புகளை {path} இல் வைக்கவும்",
+    "@downloadMetaSaved": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
     "downloadAlready": "ஏற்கனவே டவுன்லோட் ஆயிடுச்சு இல்லன்னா க்யூல இருக்கு",
     "downloadPickStream": "எந்த ஸ்ட்ரீமை டவுன்லோட் பண்ணணும்?",
     "downloadPickSubtitle": "எந்த சப்டைட்டிலை டவுன்லோட் பண்ணணும்?",
@@ -1679,6 +2553,8 @@
     "downloadNoSubtitle": "சப்டைட்டில் இல்ல",
     "downloadHlsNeedsFfmpeg": "இந்த ஸ்ட்ரீம் ஒரு HLS பிளேலிஸ்ட். இதை டவுன்லோட் பண்ண FFmpeg ஆட்-ஆன் வேணும்.",
     "downloadSourceMissing": "இந்த எபிசோடோட சோர்ஸ் இன்ஸ்டால் ஆகல",
+    "downloadDashDrm": "இந்த ஸ்ட்ரீம் DRM பாதுகாக்கப்பட்டுள்ளது",
+    "downloadDashNoVideo": "DASH மேனிஃபெஸ்டில் வீடியோ இல்லை",
     "downloadWaitingConnection": "கனெக்ஷனுக்காக வெயிட் பண்றோம்",
     "downloadSubtitles": "சப்டைட்டில்ஸ்",
     "downloadDownloaded": "டவுன்லோட் ஆனது",
@@ -1808,312 +2684,27 @@
     "onboardingFeatureSync": "லிஸ்ட்ஸை சிங்க்ல வச்சுக்கோ",
     "onboardingFeatureSyncDesc": "உன் லிஸ்ட்டை சர்வீசஸ் முழுக்க மிரர் பண்ணு, இல்லன்னா எது முன்னாடி இருக்கோ அது ஜெயிக்கட்டும்.",
     "onboardingServices": "இவற்றோட வேலை செய்யும்",
-    "updateInstallCancelled": "இன்ஸ்டால் ரத்தானது. நிறுவப்பட்ட ஆப்புடன் முரண்படுவதாக Android சொன்னால், கையெழுத்து (signature) வேறு: முதலில் தற்போதைய வெர்ஷனை அன்இன்ஸ்டால் செய்துவிட்டு அப்டேட்டை இன்ஸ்டால் பண்ணுங்க",
-    "updateInstallFailed": "அப்டேட் ஆகலை: {error}",
-    "appLock": "ஆப் லாக்",
-    "appLockDesc": "ஆப்பைத் திறக்கும்போது அல்லது கொஞ்ச நேரம் கழித்து திரும்பி வரும்போது பாஸ்கோடு கேட்கும்",
-    "appLockUnlock": "பாஸ்கோடை உள்ளிடுங்க",
-    "appLockWrong": "பாஸ்கோடு தவறு",
-    "appLockWait": "நிறைய முறை முயற்சி பண்ணிட்டீங்க, {seconds} வினாடி காத்திருங்க",
-    "appLockNew": "ஒரு பாஸ்கோடை தேர்ந்தெடுங்க",
-    "appLockNewHint": "4 முதல் 8 இலக்கங்கள்",
-    "appLockConfirm": "இன்னொரு முறை உள்ளிடுங்க",
-    "appLockMismatch": "பாஸ்கோடுகள் பொருந்தலை",
-    "appLockOn": "பாஸ்கோடு செட் ஆச்சு",
-    "appLockRemoveTitle": "லாக்கை அணைக்க பாஸ்கோடை உள்ளிடுங்க",
-    "settingsNetwork": "நெட்வொர்க்",
-    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
-    "mangaBakaAccountOptions": "MangaBaka அக்கவுண்ட் விருப்பங்கள்",
-    "chapterExpectedIn": "அத்தியாயம் {chapter} சுமார் {time}-ல் வரும்",
-    "anilistExcludeList": "உங்க லிஸ்ட்டை விலக்கு",
-    "anilistExcludeListDesc": "உங்க AniList-ல் ஏற்கனவே இருக்கும் தலைப்புகளை அனிமே, மாங்கா பக்கங்களில் காட்டாது",
-    "koreanDramas": "கொரியன் டிராமாக்கள்",
-    "chineseDramas": "சீன டிராமாக்கள்",
-    "japaneseDramas": "ஜப்பானிய டிராமாக்கள்",
-    "thaiDramas": "தாய் டிராமாக்கள்",
-    "turkishDramas": "துருக்கிய டிராமாக்கள்",
-    "miniSeries": "மினி சீரிஸ்",
-    "playerSwapGestures": "ஸ்வைப் பக்கங்களை மாற்று",
-    "playerSwapGesturesDesc": "இடதுபுறம் பிரைட்னஸ், வலதுபுறம் வால்யூம்",
-    "playerOpenBig": "பெரிய வியூவில் திற",
-    "playerOpenBigDesc": "எபிசோட் லிஸ்ட் இல்லாமல் பிளேயரை நேரடியாக ஃபுல்ஸ்கிரீனில் தொடங்கும்",
-    "playerPauseOnBlur": "ஃபோகஸ் போனால் பாஸ்",
-    "playerPauseOnBlurDesc": "நோட்டிபிகேஷன் பேனல் போல ஆப்பை மறைத்தால் பாஸ் ஆகும், திரும்பி வந்ததும் தொடரும்",
-    "notificationAired": "Episode {episode} of {title} aired",
-    "@notificationAired": {
+    "sourceNotifyOn": "{source}க்கு புதிதாக ஏதாவது இருந்தால் உங்களுக்குத் தெரிவிக்கப்படும்",
+    "@sourceNotifyOn": {
         "placeholders": {
-            "episode": {
-                "type": "String"
-            },
-            "title": {
+            "source": {
                 "type": "String"
             }
         }
     },
-    "playerDownloadCopy": "Copy details",
-    "playerPipRestore": "Back to the player",
-    "dcDisplayDetails": "Details",
-    "dcLargeCover": "Cover",
-    "settingsSyncTitles": "Watch progress and titles",
-    "updateLater": "Later",
-    "dcConnectedSnack": "Discord connected",
-    "downloadDeleteSelectedConfirm": "Delete {count} downloads? Their files are removed from the device.",
-    "@downloadDeleteSelectedConfirm": {
+    "sourceNotifyOff": "அறிவிப்புகளை வெளியிடுவது முடக்கப்பட்டுள்ளது",
+    "sourceNotifyNeedsSource": "முதலில் பொருத்தத்துடன் ஒரு மூலத்தைத் தேர்ந்தெடுக்கவும்",
+    "sourceNotifyAllOut": "எல்லாம் ({count}) ஏற்கனவே முடிந்துவிட்டது, காத்திருக்க எதுவும் இல்லை",
+    "@sourceNotifyAllOut": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "dcMethodToken": "Account token",
-    "shortcutPlayerFrameBack": "Previous frame",
-    "stacks": "Stacks",
-    "addonInstalled": "Installed",
-    "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
-    "@streamsCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncCode": "Enter {code} on GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "alphabetical": "Alphabetical",
-    "settingsMangaDesc": "Reader mode, controls, display and chapter tracking",
-    "sourceWhyNewest": "Newest at the source",
-    "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.",
-    "simklTitleLanguage": "Anime title language",
-    "readerModeAuto": "Auto (by series type)",
-    "settingsSyncSecretsBroken": "The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.",
-    "stackSavesCount": "{count, plural, =1{1 save} other{{count} saves}}",
-    "@stackSavesCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "stepWillUpdate": "Will be updated",
-    "trayUpdating": "Updating the app",
-    "updatePreparing": "Preparing…",
-    "syncWillRemove": "{count} will be deleted from {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "popularShows": "Popular Shows",
-    "playerPipActive": "Playing in a small window",
-    "dcDisplayName": "Name",
-    "playerDownloadFailedBody": "Check your connection and try again. The download picks up where it stopped.",
-    "settingsSyncServerInfo": "{count} settings, uploaded {time} from {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
-    "updateSkipVersion": "Skip this version",
-    "dcConnected": "Connected",
-    "dcStatusTextDesc": "What the member list shows next to your name",
-    "followsNotMutual": "Not mutual",
-    "castProtocolDlna": "DLNA / Smart TV",
-    "layoutDropInto": "Drop in: {zone}",
-    "@layoutDropInto": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "dcButtonCustom": "Custom button",
-    "dcSmallAuto": "Logo",
-    "backupProtectedSkipped": "This backup has no password, so its account data was skipped",
-    "settingsSyncPartPictureColorsDesc": "Brightness, contrast, saturation, gamma, hue and HDR",
-    "manageServicesDesc": "Reorder the services and choose which ones show in the picker",
-    "settingsLocalPlayBooks": "Books",
-    "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
-    "sourceMute": "Mute",
-    "sourceAlertsHeader": "Release notifications",
-    "settingsSyncPausedDesc": "Nothing is uploaded or downloaded while this is off.",
-    "sourceSoon": "soon",
-    "dcPrivateHint": "Something private",
-    "dcSampleLive": "Right now",
-    "castReceiverFailed": "The Chromecast did not start its player",
-    "settingsLocalPlayVideo": "Video",
-    "widgetReleases": "Releasing soon",
-    "playerDownloadFailedTitle": "Couldn't get the player",
-    "downloadStorageTitle": "Storage",
-    "updateNotFound": "Update server couldn't find that release: {message}",
-    "@updateNotFound": {
-        "placeholders": {
-            "message": {
-                "type": "String"
-            }
-        }
-    },
-    "syncDeleteAction": "Delete",
-    "sourcePickAnother": "Pick another source",
-    "watchSectionTools": "Tools",
-    "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.",
-    "downloadDashNoVideo": "The DASH manifest has no video",
-    "missingSequel": "Missing Sequel",
-    "settingsSyncChanged": "{count, plural, =0{Nothing changed yet} =1{1 changed} other{{count} changed}}",
-    "settingsSyncSecretsStop": "Stop syncing accounts",
-    "shortcutPlayerSpeedDown": "Slower playback",
-    "dcRecommended": "Recommended",
-    "sourceNextCheck": "Next check {when}",
-    "@sourceNextCheck": {
-        "placeholders": {
-            "when": {
-                "type": "String"
-            }
-        }
-    },
-    "castSearching": "Looking for devices on your network…",
-    "watchOrderOpenSite": "Open on chiaki.site",
-    "shortcutPlayerSubtitleCycle": "Next subtitle track",
-    "loadFailedActivity": "Couldn't load activity",
-    "shortcutPlayerFrameForward": "Next frame",
-    "sourceHiddenByTags": "Hidden by tags",
-    "downloadSelectAll": "Select all",
-    "downloadDashDrm": "This stream is DRM protected",
-    "anticipatedShows": "Anticipated Shows",
-    "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.",
-    "developerRoleModerator": "Discord Moderator",
-    "trending": "Trending",
-    "stacksFeatured": "Featured",
-    "layoutCutting": "Moving {name}. Press a paste button to place it",
-    "@layoutCutting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutClearKeys": "Remove all keys",
-    "sortMostViewed": "Most viewed",
-    "sourceSkipUnseen": "Skip while you have unseen episodes",
-    "sourceWhyNever": "Not yet",
-    "shortcutPlayerPrevious": "Previous episode",
-    "shortcutPlayerSpeedReset": "Normal speed",
-    "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.",
-    "layoutZoneSecondRow": "Hidden: second row in normal view",
-    "playerStreamFailedNext": "That stream won't play, trying the next one",
-    "dcListening": "Listening",
-    "closeActionQuit": "Quit the app",
-    "playerSkipStart": "Start",
-    "shortcutPlayerSubtitleToggle": "Subtitles on or off",
-    "newsEmpty": "No news right now",
-    "settingsSyncChangedHeader": "Changed settings",
-    "settingsSectionProgress": "Progress tracking",
-    "updateAll": "Update all",
-    "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
-    "animePlanetRank": "Rank",
-    "settingsSyncSignOut": "Sign out",
-    "settingsShortcuts": "Keyboard shortcuts",
-    "sourceNoticesEmpty": "No release notices yet",
-    "settingsSyncOn": "On",
-    "department": "Department",
-    "playerSoftwareRender": "Software rendering",
-    "detailStale": "AniList could not be reached. This is saved information and may be outdated.",
-    "simklMoviesOnly": "Movies & series only",
-    "settingsSyncConnectDesc": "Sign in with GitHub to keep your settings the same on every device.",
-    "moviesCollected": "Movies Collected",
-    "readerResetConfirm": "Reset every reader setting to its default?",
-    "layoutReset": "Reset to default",
-    "sourceNotifyTooltipOn": "Stop release notifications",
-    "unreadCounter": "Unread counter",
-    "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
-    "watchStatusChallenge": "Cloudflare check needed",
-    "dcRouteNone": "Not connected",
-    "settingsSyncStatShelf": "Resume",
-    "stories": "Stories",
-    "dcUseToken": "Use a token instead",
-    "stackSpoilers": "Spoilers",
-    "playerSkipSend": "Submit to AniSkip",
-    "shortcutPlayerSeekForwardLong": "Seek forward 30 seconds",
-    "stepUpToDateWith": "Up to date · {detail}",
-    "@stepUpToDateWith": {
-        "placeholders": {
-            "detail": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeDetails": "Where episode titles, thumbnails and summaries come from",
-    "sourceChecking": "Checking…",
-    "settingsSyncCancel": "Cancel",
-    "animePlanetRefreshLists": "Refresh your lists",
-    "sourceNotifyNeedsSource": "Pick a source with a match first",
-    "mediaVideo": "Video",
-    "sourceUnreachable": "Source isn't responding",
-    "dcStatusIdle": "Idle",
-    "sourceTagAnime": "Anime",
-    "novelPaginating": "Laying out pages",
-    "stacksSignInAgain": "Sign in again",
-    "topRatedAnime": "Top Rated Anime",
-    "playerSkipEnd": "End",
-    "dcTimerAuto": "Auto",
-    "settingsSyncSwitch": "Sync on change",
-    "onHoldManga": "On hold manga",
-    "widgetMore": "Also in progress",
-    "downloadStorageEmpty": "No downloads are using space",
-    "shortcutNoCalendar": "{service} has no calendar",
-    "@shortcutNoCalendar": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
-    "sortMostFollowed": "Most followed",
-    "settingsSyncNoneChanged": "You haven't changed any of these yet, so there is nothing to sync.",
-    "watchFailRejected": "The site rejected the clearance it just gave. Try again or clear the cookies",
-    "sourceSkippedUnstarted": "Skipped: not started",
-    "shortcutReaderPreviousPage": "Previous page",
-    "closeActionAlways": "Always keep running in the tray",
-    "layoutZoneTopEnd": "Top bar, after the title",
-    "watchOrderOpenFailed": "Couldn't open that title",
-    "watchSolvedBackground": "Cloudflare check passed in the background ({seconds} s)",
-    "@watchSolvedBackground": {
-        "placeholders": {
-            "seconds": {
-                "type": "int"
-            }
-        }
-    },
-    "syncPrivateInclude": "Sync them",
-    "recommendedShows": "Recommended Shows",
-    "castPlaybackFailed": "The device could not play this stream",
-    "layoutZoneBottomEnd": "Bottom bar, right",
-    "settingsSyncServer": "On the server",
-    "listDateAdded": "Added to list",
-    "settingsSyncSignIn": "Sign in with GitHub",
-    "dcDisconnectedSnack": "Discord disconnected",
-    "dcPrivateText": "Private text",
-    "sourceFinished": "Finished",
-    "playerSubtitlePreviewText": "Subtitle preview text",
-    "trayResumeDownloads": "Resume downloads",
-    "settingsSyncFailedTitle": "Sync failed",
-    "appLockBiometricReason": "Unlock Dartotsu",
-    "settingsWatchSections": "Sections",
-    "settingsSyncPartPictureColors": "Picture colours",
-    "playerPipPause": "Pause",
-    "dcStatusOnline": "Online",
-    "sourceFoundEpisode": "Episode {number} is out on {source}",
+    "sourceNotifyTooltipOn": "அறிவிப்புகளை வெளியிடுவதை நிறுத்து",
+    "sourceNotifyTooltipOff": "புதிய வெளியீடுகளைப் பற்றி எனக்குத் தெரிவி",
+    "sourceFoundEpisode": "எபிசோட் {number} {source} இல் வெளியாகிறது",
     "@sourceFoundEpisode": {
         "placeholders": {
             "number": {
@@ -2124,636 +2715,7 @@
             }
         }
     },
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.",
-    "playerShadersSoftware": "Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.",
-    "castVolume": "TV volume",
-    "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
-    "@updateConflictBody": {
-        "placeholders": {
-            "names": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreed": "Freed {size}",
-    "@downloadFreed": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsLocalPlayDesc": "Play files, folders, network streams and torrents, or open a book",
-    "playerSkipSubmit": "Submit skip times",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.",
-    "simklListsMostLiked": "Most liked",
-    "dcRouteGateway": "Through your account, live",
-    "extensionSettingsTitle": "{name} settings",
-    "@extensionSettingsTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyStatus": "Status",
-    "sourceWhyNextCheck": "Next check",
-    "logDeleteDesc": "Clear the saved app logs to free up space",
-    "unfinished": "Unfinished",
-    "stackSave": "Save stack",
-    "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
-    "sourceTagMovies": "Movies & Series",
-    "dcConnect": "Connect Discord",
-    "syncPrivateSkip": "Skip them",
-    "settingsShortcutsDesc": "See, change and turn off every key",
-    "refreshFromMangaUpdates": "Refresh from MangaUpdates",
-    "sourceUnmute": "Unmute",
-    "dcNameApp": "Dartotsu",
-    "playerDisableSkipsDesc": "No AniSkip or stream timestamps, chapter marks or skip submissions in the player",
-    "settingsSyncChangedOnly": "Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.",
-    "novelHighlightNote": "Note",
-    "layoutHide": "Hide",
-    "secReaderControls": "Tap zones, volume keys and auto scroll",
-    "releases": "Releases",
-    "settingsSyncPassphraseNew": "Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.",
-    "sourceUnsubscribe": "Unsubscribe",
-    "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.",
-    "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked.",
-    "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
-    "dcStatusNeedsToken": "Needs a Discord token. Connecting the app does not set your online status.",
-    "themePickerTitle": "Theme",
-    "downloadMetaFailed": "Couldn't create the title folder",
-    "novelTools": "Contents, search and highlights",
-    "supportDeveloper": "Support the developer",
-    "anticipatedMovies": "Anticipated Movies",
-    "downloadFreeUp": "Free up space",
-    "readerFilterQualityLow": "Low (Bilinear)",
-    "stackUnsave": "Remove from saved",
-    "settingsSyncCatOther": "Watch, read and services",
-    "dcTextSection": "Text",
-    "syncPrivateModeSync": "Sync them",
-    "shortcutReaderNextChapter": "Next chapter",
-    "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
-    "installStepJre": "Java runtime",
-    "dcRouteDesktop": "Through the Discord desktop app",
-    "trendingShows": "Trending Shows",
-    "sourceInDays": "in {count}d",
-    "@sourceInDays": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "watchlist": "Watchlist",
-    "stackEmptyEntries": "This stack is empty",
-    "settingsSyncNow": "Sync now",
-    "secNotifyAbout": "Pick which kinds of activity send an alert",
-    "allCustomLists": "All custom lists",
-    "watchOrderCredit": "Watch orders by chiaki.site",
-    "settingsSyncPassphraseSet": "Set a passphrase",
-    "developerRoleLead": "Lead Developer",
-    "readerFilterQualityMedium": "Medium (Trilinear)",
-    "trailerLoading": "Loading the trailer…",
-    "shortcutAppGlass": "Toggle glass mode",
-    "settingsSyncPartPaletteDesc": "Theme, accent colour and OLED black",
-    "externalCopyUrl": "Copy stream link",
-    "generalSectionDesktop": "Desktop",
-    "updateNoAsset": "This release has no download for your device",
-    "died": "Died",
-    "castRokuNote": "Roku can't report or change the position",
-    "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
-    "@novelSearchCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "dcCustomNameHint": "Name shown after “Watching”",
-    "shortcutPlayerAudioCycle": "Next audio track",
-    "incognitoTurnedOff": "Incognito mode off",
-    "readerLongPressSave": "Hold a page to save it",
-    "dcSmallNone": "None",
-    "watchSectionConnection": "Connection",
-    "comick": "Comick",
-    "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
-    "@downloadClearQueueConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceTagsHint": "Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.",
-    "dcButtonsSection": "Buttons",
-    "shortcutPlayerFullscreen": "Fullscreen",
-    "novelSearch": "Search",
-    "shortcutAppOled": "Toggle OLED black",
-    "sequel": "Sequel",
-    "readerCloudflare": "Open in browser (Cloudflare check)",
-    "dcSampleReading": "Reading",
-    "downloadDeleteWatched": "Delete watched",
-    "animePlanetRefreshListsDesc": "Read your Anime-Planet lists again",
-    "trayPlaying": "Playing in a small window",
-    "sourceMuted": "Muted",
-    "watchFailCooldown": "You closed the check a moment ago. Press Solve it to try again",
-    "watchStatusOffline": "Can't reach the site",
-    "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
-    "@repoLinkConfirm": {
-        "placeholders": {
-            "url": {
-                "type": "String"
-            }
-        }
-    },
-    "stepFailed": "Failed",
-    "mostWatchedThisWeek": "Most Watched This Week",
-    "comickLoginFailed": "Comick login failed",
-    "shortcutPlayerSeekForward": "Seek forward",
-    "settingsSyncSecretsDelete": "Delete from GitHub",
-    "settingsSyncPassphraseField": "Passphrase",
-    "dcInUse": "In use",
-    "watchFailUnavailable": "There is no screen to show the check on",
-    "layoutZoneOverflow": "Hidden: in the more menu",
-    "year": "Year",
-    "stepChecking": "Checking…",
-    "extensionManagerTitle": "{type} manager",
-    "@extensionManagerTitle": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "readerFilterQualityNone": "None (Nearest neighbor)",
-    "shortcutPlayerSpeedUp": "Faster playback",
-    "mostFollowedAnime": "Most Followed Anime",
-    "shortcutAppIncognito": "Toggle incognito",
-    "sourceNotifyOff": "Release notifications off",
-    "novelHighlightFailed": "Couldn't match that selection to the text",
-    "titleLanguageRomaji": "Romaji",
-    "dcState": "Bottom line",
-    "togetherShareText": "Watch with me on Dartotsu: {link}",
-    "@togetherShareText": {
-        "placeholders": {
-            "link": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeList": "Filler episodes and unwatched thumbnails",
-    "sourceSkipUnstarted": "Skip titles you haven't started",
-    "showsWatched": "Shows Watched",
-    "animePlanetWontWatch": "Won't watch",
-    "animePlanetAlreadyOnList": "Already on this list",
-    "shortcutPlayerFit": "Change video fit",
-    "castTitle": "Cast to device",
-    "updatePluginTitle": "Update {name}",
-    "@updatePluginTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcNameTitle": "Title",
-    "importRepositoryFile": "Import a file",
-    "sourceAlertsSwitch": "Check subscribed titles",
-    "shortcutAppSearch": "Open search",
-    "trakt": "Trakt",
-    "playerSkipUseNow": "Use current position",
-    "notificationSomeone": "Someone",
-    "navSources": "Sources",
-    "dcDetails": "Top line",
-    "downloadDeleteAll": "Delete all",
-    "generalSectionPrivacy": "Privacy",
-    "recommendedMovies": "Recommended Movies",
-    "syncPrivateTitle": "Private entries",
-    "shortcutAppMaterialYou": "Toggle Material You",
-    "newsCouldntLoad": "Couldn't load the news",
-    "updateDownloading": "Downloading",
-    "playerSkipSent": "Skip times submitted to AniSkip, thank you",
-    "watchFailQuiet": "The check needs you, and the app was working on its own",
-    "sourceWhyLastRelease": "Last new release seen",
-    "updateOpenedBrowser": "Check your browser",
-    "syncPrivate": "Private entries",
-    "shortcutNotSet": "Not set",
-    "dcConnection": "Connection",
-    "sourceAll": "All",
-    "dcAccount": "Account",
-    "people": "People",
-    "togetherJoin": "Join",
-    "mostComments": "Most comments",
-    "localSource": "Local files",
-    "animePlanetLocalNote": "Sign in to save changes to your Anime-Planet account. Until then they stay on this device",
-    "secPlayerSkip": "Skip openings, endings and recaps automatically",
-    "settingsSyncTitlesNone": "Nothing uploaded yet",
-    "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
-    "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
-    "shortcutReaderLeft": "Page to the left",
-    "calendarExpected": "Expected",
-    "externalChooser": "Open in another app",
-    "settingsNovelDesc": "Text, page turning, translation and read aloud",
-    "importTokenRejected": "Token rejected",
-    "settingsSyncTitlesCount": "{records} titles and {resume} resume entries on the server",
-    "@settingsSyncTitlesCount": {
-        "placeholders": {
-            "records": {},
-            "resume": {}
-        }
-    },
-    "settingsSyncPartSubtitlesDesc": "Size, weight, colours and position",
-    "backupProtectedNeedsPassword": "Set a password to back up account data, or untick it",
-    "dcAccountOnly": "Needs a signed-in account",
-    "appLockUseBiometric": "Use biometrics",
-    "settingsSyncStatSettings": "Settings",
-    "secProgress": "When your watched or read progress is saved to your list",
-    "dcTemplateHint": "Empty uses the default",
-    "shortcutReaderNextPage": "Next page",
-    "syncToDelete": "To delete",
-    "syncPrivateModeAsk": "Ask",
-    "externalFailed": "Couldn't open the stream. Is the player installed?",
-    "spoilerTapToView": " Spoiler, tap to view ",
-    "playerSubtitleOutlineWidth": "Subtitle outline width",
-    "stepFailedWith": "Failed: {reason}",
-    "@stepFailedWith": {
-        "placeholders": {
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "dcActivityName": "Activity name",
-    "layoutCut": "Cut",
-    "loadFailedFavourites": "Couldn't load favourites. Retry",
-    "extensionsLoading": "Loading extensions…",
-    "gamepadNavDesc": "Move around the app and control the player with a game controller",
-    "settingsSyncSecrets": "Accounts and passwords",
-    "settingsSyncDesc": "Keep your settings the same on every device. They are stored in a private gist in your GitHub account",
-    "stackRemovedToast": "Removed from your saved stacks",
-    "togetherShareInvite": "Share invite",
-    "updateUpToDate": "You're on the latest version",
-    "dcRouteLinked": "Connected app",
-    "readerOpenBookDesc": "Read an epub (novel reader) or a PDF (manga reader) from your files",
-    "shortcutPlayerSeekBack": "Seek back",
-    "settingsSyncPassphraseExisting": "Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.",
-    "settingsSyncSecretsOnDesc": "Signing out on one device does not sign you out on the others.",
-    "downloadMetaSaved": "Saved. Put your files in {path}",
-    "@downloadMetaSaved": {
-        "placeholders": {
-            "path": {
-                "type": "String"
-            }
-        }
-    },
-    "streamGroupHardSub": "Hard Sub",
-    "settingsSync": "Sync settings",
-    "shortcutGroupApp": "App",
-    "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
-    "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
-    "@sourceNotifyAllOut": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castProtocolRoku": "Roku",
-    "dcPreview": "Preview",
-    "shortcutTaken": "Taken from {action}",
-    "@shortcutTaken": {
-        "placeholders": {
-            "action": {
-                "type": "String"
-            }
-        }
-    },
-    "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
-    "watchStatusTesting": "Testing the connection…",
-    "shortcutResetOne": "Reset to default",
-    "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
-    "mangaUpdates": "MangaUpdates",
-    "traktVipMember": "Trakt VIP Member",
-    "manageServices": "Media services",
-    "shortcutSeekPercentKeys": "0 – 9",
-    "manageServicesHint": "Drag to reorder, switch off the ones you don't use",
-    "sortLatestUpdates": "Latest updates",
-    "layoutMore": "More",
-    "calendarAll": "All",
-    "settingsSyncAccount": "GitHub account",
-    "dcSignOut": "Sign out",
-    "shortcutResetAllDesc": "Put every key back to its default",
-    "installStepCore": "Runtime core",
-    "shortcutsEnableReader": "Reader shortcuts",
-    "shortcutPlayerSkip": "Skip intro or ending",
-    "shortcutPressHint": "Each combination can only belong to one action, so taking one moves it.",
-    "layoutPaste": "Paste here",
-    "externalVlc": "Open in VLC",
-    "secNovelText": "Font, size, spacing, margins and page turning",
-    "shortcutPlayerSeekBackLong": "Seek back 30 seconds",
-    "settingsGroupAccount": "Your account",
-    "stepWillInstall": "Will be installed",
-    "shortcutPlayerPanel": "Episode list",
-    "userStacks": "Stacks by {name}",
-    "@userStacks": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "trayIdle": "Nothing running",
-    "animePlanetNewList": "New list name",
-    "settingsSyncCount": "{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}",
-    "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
-    "@downloadStorageSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "runtimePreparing": "Preparing the runtime…",
-    "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs.",
-    "dcButtonUrl": "Link",
-    "trayPauseDownloads": "Pause downloads",
-    "castNowCasting": "Casting to {name}",
-    "@castNowCasting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
-    "stacksEmpty": "No stacks here yet",
-    "settingsGroupApp": "App",
-    "secReaderReading": "Reading mode, page turning, zoom and next chapter",
-    "sourceFoundSummary": "{count} titles have something new",
-    "@sourceFoundSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncSignInFailed": "Could not sign in to GitHub",
-    "simklListsMostFollowed": "Most followed",
-    "dcSampleBrowsing": "Browsing",
-    "mangaUpdatesAnimeEnd": "Anime adaptation ends",
-    "buyMeCoffee": "Buy me a coffee",
-    "simklMoviesOnlyDesc": "Replaces the Anime tab: Movies first, then Shows with a couple of anime rows",
-    "dcSignedInAs": "Signed in as {name}",
-    "@dcSignedInAs": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncSignInDesc": "Settings are stored in a private gist in your account",
-    "logDelete": "Delete log files",
-    "settingsSyncLast": "Last synced {time}",
-    "@settingsSyncLast": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "dcSampleWatching": "Watching",
-    "notificationsOtherService": "Switch to {service} to open this",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "watchOrderCurrent": "You are here",
-    "playerPictureOriginal": "Original",
-    "updateTryAgain": "Try again",
-    "togetherLinkConfirm": "Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.",
-    "@togetherLinkConfirm": {
-        "placeholders": {
-            "room": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
-    "birthplace": "Birthplace",
-    "sourceInactive": "Inactive: {manager}",
-    "@sourceInactive": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "comickProfile": "Comick profile",
-    "traySearch": "Search",
-    "dcPrivacySection": "Privacy",
-    "shortcutAppSettings": "Open settings",
-    "dcTokenWarning": "Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.",
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
-    "shortcutSeekPercent": "Jump to a point of the video",
-    "downloadMetaOnly": "Metadata only",
-    "layoutZoneBottomStart": "Bottom bar, left",
-    "watchClearanceIssued": "earned {time}",
-    "@watchClearanceIssued": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksSignIn": "Sign in to MangaBaka to see your stacks",
-    "simklListTitles": "{count, plural, =1{1 title} other{{count} titles}}",
-    "@simklListTitles": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "firstTab": "First tab",
-    "dcDisconnect": "Disconnect",
-    "animePlanetWontRead": "Won't read",
-    "dcMethodDesktopDesc": "Used automatically when nothing else is connected. Discord has to be open on this computer.",
-    "droppedManga": "Dropped manga",
-    "syncDelete": "Delete what the main service doesn't have",
-    "secNovelTranslate": "Translate chapters while you read",
-    "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
-    "streamGroupOther": "Other",
-    "dcMemberList": "In the member list",
-    "settingsSyncServerEmpty": "Nothing uploaded yet",
-    "updateSizeOf": "{done} of {total}",
-    "@updateSizeOf": {
-        "placeholders": {
-            "done": {
-                "type": "String"
-            },
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "droppedAnime": "Dropped anime",
-    "followCoverMediaOnly": "Only for media",
-    "layoutEmptyZone": "Drop buttons here",
-    "removePlayerMessage": "Videos can't play until the player is downloaded again.",
-    "trailerFailed": "Could not play the trailer here, opening it in the browser",
-    "simklListsOfficial": "Official",
-    "settingsSyncConnect": "Not connected",
-    "extensionsUpdated": "{done} of {total} extensions updated",
-    "@extensionsUpdated": {
-        "placeholders": {
-            "done": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "syncDeleteTitle": "Delete entries?",
-    "dcVariables": "Tap to insert a value",
-    "watchStatusBlocked": "Blocked by the site",
-    "playerStickyStageDesc": "Keep the video fixed at the top while you scroll the episodes and comments below",
-    "dcCustomStatusHint": "What are you up to?",
-    "checkNowDesc": "Look for a newer version right away",
-    "shortcutPlayerMute": "Mute",
-    "novelHighlightRemove": "Remove highlight",
-    "shortcutPlayerVolumeDown": "Volume down",
-    "dcConnectFailed": "Could not connect Discord",
-    "appLockDelay": "Lock when idle",
-    "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
-    "syncPrivateModeSkip": "Skip them",
-    "playerPictureProcessedDesc": "The frame as you see it now",
-    "settingsSyncPassphraseConfirm": "Repeat the passphrase",
-    "dcDisplayState": "State",
-    "syncRemoved": "Removed from {services}",
-    "@syncRemoved": {
-        "placeholders": {
-            "services": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutReaderPreviousChapter": "Previous chapter",
-    "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
-    "@sourceCheckResult": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "secPlayerEngine": "Decoder, video and audio output, buffering. Only change these if playback has problems",
-    "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
-    "settingsSyncWhat": "What to sync",
-    "filterAny": "Any",
-    "updateInvalidResponse": "Invalid update response",
-    "settingsSyncRetry": "Retry",
-    "layoutTitle": "Layout",
-    "streamGroupSub": "Sub",
-    "extensionsOfType": "{type} extensions",
-    "@extensionsOfType": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "playerDownloadRetry": "Try again",
-    "autoUpdateRuntimes": "Update extension runtimes automatically",
-    "dcButtonMedia": "Link to the title",
-    "syncServiceOn": "Sync with {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "widgetNothing": "Nothing to continue yet",
-    "streamGroupSoftSub": "Soft Sub",
-    "statusAuto": "Auto",
-    "novelHighlights": "Highlights",
-    "downloadDeleteAllConfirm": "Delete every download of {title}?",
-    "@downloadDeleteAllConfirm": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
-    "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
-    "shortcutsEnableDesc": "Turn every key in this group on or off",
-    "dcTimerStyle": "Timer style",
-    "secReaderDisplay": "Background, brightness, fullscreen and page number",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.",
-    "sourceLatest": "Latest: {number}",
-    "@sourceLatest": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartPalette": "Theme colours",
-    "watchSectionSession": "Session",
-    "listsYours": "Yours",
-    "settingsSyncNever": "Not synced yet",
-    "notInList": "Not In List",
-    "closeActionWhenBusy": "Keep running in the tray while something is running",
-    "stepWillUpdateTo": "Will be updated to {version}",
-    "@stepWillUpdateTo": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadNothingWatched": "Nothing you have finished is downloaded",
-    "comickClientIdDesc": "Custom client ID registered on comick.dev",
-    "mostFollowed": "Most Followed",
-    "dcLargeImage": "Large image",
-    "shortcutPlayerPlayPause": "Play or pause",
-    "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
-    "@trackProgressMangaLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
-    "@downloadFreeUpConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "calendarAnime": "Anime",
-    "externalPlayerTitle": "Open stream elsewhere",
-    "commentsConnectFailed": "Failed to connect",
-    "sourceWaiting": "Waiting for the next release",
-    "calendarManga": "Manga",
-    "novelContentsEmpty": "This chapter has no headings",
-    "settingsSyncThisDevice": "this device",
-    "syncDeletedNote": "Will be deleted",
-    "trendingAnime": "Trending Anime",
-    "settingsSyncPartSubtitles": "Subtitle size and colours",
-    "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
+    "sourceFoundEpisodes": "எபிசோடுகள் {from}–{to} {source} இல் வெளியாகின்றன",
     "@sourceFoundEpisodes": {
         "placeholders": {
             "from": {
@@ -2767,10 +2729,7 @@
             }
         }
     },
-    "voiceActors": "Voice actors",
-    "tagline": "Tagline",
-    "gamepadNav": "Gamepad navigation",
-    "sourceFoundChapter": "Chapter {number} is out on {source}",
+    "sourceFoundChapter": "அத்தியாயம் {number} {source} இல் முடிந்தது",
     "@sourceFoundChapter": {
         "placeholders": {
             "number": {
@@ -2781,379 +2740,7 @@
             }
         }
     },
-    "extensionNoSettings": "{name} doesn't provide any settings.",
-    "@extensionNoSettings": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailDismissed": "The check was closed before it finished",
-    "castFailed": "Could not start casting",
-    "novelHighlight": "Highlight",
-    "notificationAdded": "{title} was added to AniList",
-    "@notificationAdded": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "dcSignIn": "Sign in with Discord",
-    "watchFailTurnstile": "This check needs a tap that the background solver can't do",
-    "stackSavedToast": "Saved to your stacks",
-    "layoutMoveTo": "Move to {zone}",
-    "@layoutMoveTo": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksCouldntLoad": "Couldn't load the stacks",
-    "installStepsProgress": "Step {current} of {total}",
-    "@installStepsProgress": {
-        "placeholders": {
-            "current": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "watchStatusUntested": "Not tested yet",
-    "prequel": "Prequel",
-    "dcStatusInvisible": "Invisible",
-    "usernameOnly": "Username",
-    "updateWhatsNew": "What's new",
-    "followsMutual": "Mutual",
-    "boxOffice": "Box Office",
-    "dcShowWatching": "Show while watching",
-    "settingsSyncFailed": "Sync failed: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
-        }
-    },
-    "loadFailedReplies": "Couldn't load replies",
-    "dcActivitySection": "Activity",
-    "widgetContinue": "Continue",
-    "weeklySchedule": "Weekly Schedule",
-    "readerFilterQualityHigh": "High (Bicubic)",
-    "novelExtensions": "Novel Extensions",
-    "secPlayerMpv": "mpv.conf, scripts and advanced tuning",
-    "generalSectionSecurity": "Security",
-    "settingsSyncStatTitles": "Titles",
-    "externalMpv": "Open in mpv",
-    "dcLargeLogo": "Logo",
-    "imageTitlePage": "Page",
-    "stacksFollowing": "Following",
-    "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
-    "dcControlStatus": "Control my status",
-    "notificationAddedDetail": "Was added to AniList",
-    "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
-    "@sourceManageDesc": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "installRuntimeNewer": "The runtime this manager runs on has an update.",
-    "watchSolvedByUser": "Cloudflare check passed",
-    "settingsSyncSecretsOn": "Accounts are synced and encrypted",
-    "dcImagesSection": "Images",
-    "anticipated": "Anticipated",
-    "watchOrderUnavailable": "No watch order was found for this title",
-    "secNovelSpeech": "Voice, speed and pitch for read aloud",
-    "updateConflictAction": "Uninstall and reinstall",
-    "dcMethodDesktop": "Discord desktop app",
-    "dcLargeAuto": "Auto",
-    "settingsSyncUploaded": "Uploaded {time} from {device}",
-    "@settingsSyncUploaded": {
-        "placeholders": {
-            "time": {},
-            "device": {}
-        }
-    },
-    "streamGroupRaw": "Raw",
-    "dcShowReading": "Show while reading",
-    "settingsGroupContent": "Content",
-    "castProtocolChromecast": "Chromecast",
-    "dcControlStatusDesc": "Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.",
-    "novelSearchHint": "Search in this chapter",
-    "backupPasswordRequired": "Password (required for account data)",
-    "settingsSyncCopyCode": "Tap the code to copy it",
-    "dcConnecting": "Connecting…",
-    "shortcutPlayerNext": "Next episode",
-    "novelHighlightNoteHint": "Add a note",
-    "settingsSectionLists": "Episode and chapter lists",
-    "playerPictureSave": "Save this frame",
-    "sourceWhyLastCheck": "Last checked",
-    "shortcutResetAll": "Reset all shortcuts",
-    "playerPipBack": "Rewind",
-    "updateInstalling": "Installing…",
-    "animePlanetMagazine": "Magazine",
-    "dcSmallImage": "Small image",
-    "externalCopied": "Stream link copied",
-    "shortcutNothingToContinue": "Nothing to continue yet",
-    "traktVip": "VIP",
-    "removeJvmTitle": "Remove the Java runtime?",
-    "playerDisableSkips": "Disable skips",
-    "secPlayerShaders": "Anime upscaling and your own shaders",
-    "notificationATitle": "a title",
-    "layoutTitleFixed": "Title",
-    "sourceManage": "Subscriptions",
-    "settingsAnimeDesc": "Player, subtitles, skipping, episode list and episode details",
-    "mangaUpdatesProfile": "MangaUpdates profile",
-    "listsLiked": "Liked",
-    "titleLanguageEnglish": "English",
-    "castStop": "Stop casting",
-    "localMissing": "This file or folder is no longer in your Local folder",
-    "dcCustomStatus": "Custom status",
-    "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
-    "settingsSyncWaiting": "Waiting for you to approve on GitHub",
-    "settingsSyncOffCategory": "Not syncing. These stay on this device and the server copy is left as it is.",
-    "settingsSyncPassphraseShort": "Use at least 6 characters",
-    "dcDisconnected": "Not connected",
-    "sourceSkippedCompleted": "Skipped: completed",
-    "shortcutAppDark": "Toggle dark mode",
-    "dcButtonApp": "Link to Dartotsu",
-    "stackBy": "by {name}",
-    "@stackBy": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailBlocked": "The site blocked this device (access denied). A check won't help",
-    "trayQuit": "Quit",
-    "newsTitle": "News",
-    "sourceTagAdult": "18+",
-    "sourceInHours": "in {count}h",
-    "@sourceInHours": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castSkipPart": "Skip {name}",
-    "@castSkipPart": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchStatusReady": "Ready",
-    "sourceOpenExtensions": "Open extensions",
-    "trackProgressRememberSeries": "Remember for this series",
-    "calendarChapter": "Chapter {n}",
-    "@calendarChapter": {
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
-    "downloadSelectedCount": "{count} selected",
-    "@downloadSelectedCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "loadFailedStats": "Couldn't load stats",
-    "stepInstalled": "Installed",
-    "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
-    "@appLockDelayAfter": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "showsCollected": "Shows Collected",
-    "dcTimerRemaining": "Remaining",
-    "shortcutReaderControls": "Show or hide controls",
-    "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
-    "settingsLocalPlay": "Local play",
-    "trayDownloading": "{count, plural, one{Downloading {count} item} other{Downloading {count} items}}",
-    "@trayDownloading": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "readerOpenBook": "Open a book",
-    "commentsRateLimited": "Rate limited",
-    "castRefresh": "Search again",
-    "generalSectionBasics": "Language & behaviour",
-    "removePlayerTitle": "Remove the player?",
-    "settingsSyncTokenField": "Token",
-    "searchTags": "Search tags",
-    "watchStatusSolving": "Passing the Cloudflare check…",
-    "castControls": "Controls",
-    "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
-    "listDateLastWatched": "Last watched",
-    "moviesWatched": "Movies Watched",
-    "shortcutAppDownloads": "Open downloads",
-    "settingsSyncAccountDesc": "Your data goes to a private gist in your own account.",
-    "settingsSyncSecretsDesc": "Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.",
-    "playerDownloadStarting": "Starting the download…",
-    "cantBeUndone": "This can't be undone.",
-    "watchFailLoad": "The page didn't load. Check the connection and the site address",
-    "shortcutReaderRight": "Page to the right",
-    "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
-    "@extensionUpdates": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
-    "updateReleased": "Released {date}",
-    "@updateReleased": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "comickAccountOptions": "Comick account options",
-    "playerPipForward": "Forward",
-    "installNeedsRuntime": "It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.",
-    "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
-    "streamGroupDub": "Dub",
-    "traktAttribution": "Data and artwork provided by Trakt. View on Trakt",
-    "downloadStorageWatched": "{size} already watched or read",
-    "@downloadStorageWatched": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksMine": "Yours",
-    "dcButtonLabel": "Label",
-    "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
-    "@sourceInactiveOpen": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutAppBack": "Go back",
-    "layoutZoneTopStart": "Top bar, before the title",
-    "latestUpdates": "Latest Updates",
-    "playerDownloadBody": "Dartotsu fetches its video engine once. Playback starts as soon as it is ready.",
-    "settingsSyncCustom": "Custom",
-    "trayShow": "Show Dartotsu",
-    "settingsSyncPassphraseEnter": "Enter your passphrase",
-    "notificationAiredDetail": "Episode {episode} aired",
-    "@notificationAiredDetail": {
-        "placeholders": {
-            "episode": {
-                "type": "String"
-            }
-        }
-    },
-    "playerStickyStage": "Sticky video",
-    "stacksSaved": "Saved",
-    "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.",
-    "@syncPrivateAsk": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "playerPictureSaveFailed": "Could not save the frame",
-    "sourceTags": "Tags",
-    "settingsSyncPassphraseWrong": "Wrong passphrase",
-    "shortcutPlayerVolumeUp": "Volume up",
-    "traktReadOnly": "Trakt granted read-only access",
-    "onHoldAnime": "On hold anime",
-    "shortcutAddKey": "Add a key",
-    "downloadDeleteSelected": "Delete selected",
-    "sourceWhyAction": "Why no alert?",
-    "shortcutsEnableApp": "App shortcuts",
-    "updateSpeed": "{speed}/s",
-    "@updateSpeed": {
-        "placeholders": {
-            "speed": {
-                "type": "String"
-            }
-        }
-    },
-    "updateNoReleases": "No releases found",
-    "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
-    "simklListsTrending": "Trending",
-    "stepNotNeeded": "Not needed here",
-    "dnsNoRecords": "No A records returned",
-    "mangaUpdatesAnimeStart": "Anime adaptation starts",
-    "appLockDelayNever": "Never",
-    "playerPictureSaved": "Frame saved",
-    "settingsSyncRunning": "Syncing…",
-    "dcNameCustom": "Custom",
-    "unreadCounterDesc": "Show how many episodes or chapters are left on posters",
-    "settingsAboutUpdatesDesc": "App updates, version, logs, links and support",
-    "settingsSyncPaused": "Paused",
-    "onboardingLanguageBody": "Choose the language Dartotsu is shown in. You can change it later in Settings.",
-    "sourceMissingDesc": "{source} isn't installed in this extension service",
-    "@sourceMissingDesc": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartsNote": "Per device. Off keeps each device's own value, so a phone and a TV can differ.",
-    "stepWaiting": "Waiting",
-    "readerFilterQuality": "Image filter quality",
-    "comickClientId": "Comick Client ID",
-    "settingsSyncTitlesNote": "Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.",
-    "hideNsfwSourcesDesc": "Hide sources marked 18+ from the feeds and the source picker. They stay installed.",
-    "sourceWhyFailures": "Failed checks in a row",
-    "dcStatusDnd": "Do not disturb",
-    "shortcutAppShortcuts": "Show keyboard shortcuts",
-    "shortcutAppFullscreen": "Toggle fullscreen",
-    "appLockDelayAlways": "Always",
-    "stacksAll": "All",
-    "watchFailTimeout": "The check didn't finish in time",
-    "shortcutPlayerStreamCycle": "Next stream",
-    "settingsSyncUpToDate": "Up to date",
-    "dcCompeting": "Competing",
-    "rising": "Rising",
-    "sourceNotifyOn": "You'll be told when {source} has something new",
-    "@sourceNotifyOn": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.",
-    "upiId": "UPI ID",
-    "updateConflictTitle": "Update not installed",
-    "sourceNotifyTooltipOff": "Notify me about new releases",
-    "sourceCheckNow": "Check now",
-    "shortcutPress": "Press the key or combination you want",
-    "sourceWhyVerdictMuted": "This subscription is muted.",
-    "sourceWhyProgress": "Your progress",
-    "translationStatusLabel": "Translation",
-    "traktProfile": "Trakt profile",
-    "playerDownloadTitle": "Downloading the player",
-    "watchFailWebView": "The background web view couldn't start",
-    "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
+    "sourceFoundChapters": "அத்தியாயங்கள் {from}–{to} {source} இல் முடிந்தது",
     "@sourceFoundChapters": {
         "placeholders": {
             "from": {
@@ -3167,37 +2754,358 @@
             }
         }
     },
-    "settingsNotificationsDesc": "Alerts for your lists, new episodes and chapters, and comment replies",
-    "traySyncing": "Syncing your lists",
-    "upiCopied": "UPI ID copied",
-    "settingsSyncTokenDesc": "Create one at github.com/settings/tokens with only the gist permission",
-    "settingsSyncPassphraseMismatch": "The passphrases do not match",
-    "shortcutAppNotifications": "Open notifications",
-    "logDeleted": "Deleted {size} of logs",
-    "@logDeleted": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "appLockBiometric": "Unlock with biometrics",
-    "dcStatusText": "Status text",
-    "dcStatusSection": "Status",
-    "shortcutGroupPlayer": "Video player",
-    "sourceWhyListStatus": "List status",
-    "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
-    "@stackSeriesCount": {
+    "sourceFoundSummary": "{count} தலைப்புகளில் புதியது உள்ளது",
+    "@sourceFoundSummary": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "settingsSyncToken": "Use a personal access token",
-    "incognitoTurnedOn": "Incognito mode on",
-    "novelPageOf": "Page {current} of {total}",
-    "@novelPageOf": {
+    "navSources": "ஆதாரங்கள்",
+    "sourceInactiveOpen": "இந்த ஆதாரம் {manager}க்கு சொந்தமானது, இது செயலில் உள்ள நீட்டிப்பு சேவை அல்ல",
+    "@sourceInactiveOpen": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceAlertsHeader": "அறிவிப்புகளை வெளியிடவும்",
+    "sourceAlertsSwitch": "குழுசேர்ந்த தலைப்புகளைச் சரிபார்க்கவும்",
+    "sourceAlertsSwitchDesc": "ஒவ்வொரு முறையும் ஆப்ஸ் திறக்கும் போது, தலைப்புகளுக்கு நீங்கள் மணியை இயக்கினீர்கள்",
+    "sourceSkipUnstarted": "நீங்கள் தொடங்காத தலைப்புகளைத் தவிர்க்கவும்",
+    "sourceSkipUnstartedDesc": "இதுவரை எதையும் பார்க்கவில்லை அல்லது படிக்கவில்லை, ஆனால் எபிசோடுகள் ஏற்கனவே உள்ளன",
+    "sourceSkipUnseen": "நீங்கள் பார்க்காத எபிசோடுகள் இருக்கும்போது தவிர்க்கவும்",
+    "sourceSkipUnseenDesc": "நீங்கள் இன்னும் எபிசோட்களை வெளியிட்டு இருக்கிறீர்கள்",
+    "sourceManage": "சந்தாக்கள்",
+    "sourceManageDesc": "{count, plural, =0{தலைப்புகள் இல்லை} =1{1 தலைப்பு} other{{count} தலைப்புகள்}}",
+    "@sourceManageDesc": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceCheckNow": "இப்போது சரிபார்க்கவும்",
+    "sourceCheckNowDesc": "அட்டவணை மற்றும் தவிர்க்கும் விதிகளை புறக்கணிக்கிறது",
+    "sourceChecking": "சரிபார்க்கிறது…",
+    "sourceCheckResult": "{count, plural, =0{புதிதாக எதுவும் இல்லை} =1{1 தலைப்பில் புதிதாக உள்ளது} other{{count} தலைப்புகளில் புதியது உள்ளது}}",
+    "@sourceCheckResult": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceEmpty": "இதுவரை சந்தாக்கள் இல்லை",
+    "sourceEmptyMessage": "புதியவற்றைப் பற்றித் தெரிவிக்க, தலைப்பின் எபிசோட்களுக்கு மேலே உள்ள மணியைத் தட்டவும்",
+    "sourceAll": "அனைத்து",
+    "sourceInactive": "செயலற்றது: {manager}",
+    "@sourceInactive": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMissingDesc": "இந்த நீட்டிப்பு சேவையில் {source} நிறுவப்படவில்லை",
+    "@sourceMissingDesc": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceUnreachable": "ஆதாரம் பதிலளிக்கவில்லை",
+    "sourceFinished": "முடிந்தது",
+    "sourceSkippedCompleted": "தவிர்க்கப்பட்டது: முடிந்தது",
+    "sourceSkippedUnstarted": "தவிர்க்கப்பட்டது: தொடங்கப்படவில்லை",
+    "sourceSkippedUnseen": "தவிர்க்கப்பட்டது: பார்க்காத அத்தியாயங்கள்",
+    "sourceWaiting": "அடுத்த வெளியீட்டிற்காக காத்திருக்கிறேன்",
+    "sourceNextCheck": "அடுத்த சோதனை {when}",
+    "@sourceNextCheck": {
+        "placeholders": {
+            "when": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceSoon": "விரைவில்",
+    "sourceInHours": "{count}h இல்",
+    "@sourceInHours": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceInDays": "{count}d இல்",
+    "@sourceInDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceLatest": "சமீபத்தியது: {number}",
+    "@sourceLatest": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMute": "முடக்கு",
+    "sourceUnmute": "ஒலியடக்கவும்",
+    "sourceMuted": "முடக்கப்பட்டது",
+    "sourceUnsubscribe": "குழுவிலகவும்",
+    "sourcePickAnother": "மற்றொரு மூலத்தைத் தேர்ந்தெடுக்கவும்",
+    "sourceOpenExtensions": "நீட்டிப்புகளைத் திறக்கவும்",
+    "sourceNoticesEmpty": "இன்னும் வெளியீட்டு அறிவிப்புகள் இல்லை",
+    "sourceNoticesEmptyMessage": "நீங்கள் குழுசேர்ந்த தலைப்புகளின் புதிய அத்தியாயங்களும் அத்தியாயங்களும் இங்கே காட்டப்படும்",
+    "sourceOpenTitle": "திறந்த தலைப்பு",
+    "extensionsLoading": "நீட்டிப்புகளை ஏற்றுகிறது…",
+    "updateWhatsNew": "என்ன புதுசு",
+    "updateLater": "பின்னர்",
+    "updateSkipVersion": "இந்தப் பதிப்பைத் தவிர்க்கவும்",
+    "updatePreparing": "தயாராகிறது…",
+    "updateDownloading": "பதிவிறக்குகிறது",
+    "updateInstalling": "நிறுவுகிறது…",
+    "updateSizeOf": "{total} இல் {done}",
+    "@updateSizeOf": {
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "updateSpeed": "{speed}/வி",
+    "@updateSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            }
+        }
+    },
+    "updateReleased": "வெளியிடப்பட்டது {date}",
+    "@updateReleased": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNoAsset": "இந்த வெளியீட்டில் உங்கள் சாதனத்தில் பதிவிறக்கம் இல்லை",
+    "updateUpToDate": "சமீபத்திய பதிப்பில் உள்ளீர்கள்",
+    "updateIosHint": "iOS பில்ட்கள் ஆப் ஸ்டோரில் இல்லை. வெளியீட்டுப் பக்கத்திலிருந்து .ipa ஐப் பிடித்து, AltStore அல்லது SideStore உடன் அதை ஓரங்கட்டவும்",
+    "updateOpenedBrowser": "உங்கள் உலாவியைச் சரிபார்க்கவும்",
+    "updateTryAgain": "மீண்டும் முயற்சிக்கவும்",
+    "settingsNotifications": "அறிவிப்புகள்",
+    "settingsNotificationsDesc": "உங்கள் பட்டியல்கள், புதிய அத்தியாயங்கள் மற்றும் அத்தியாயங்கள் மற்றும் கருத்து பதில்களுக்கான விழிப்பூட்டல்கள்",
+    "settingsAboutUpdates": "பற்றி & புதுப்பிப்புகள்",
+    "settingsAboutUpdatesDesc": "ஆப்ஸ் புதுப்பிப்புகள், பதிப்பு, பதிவுகள், இணைப்புகள் மற்றும் ஆதரவு",
+    "settingsGroupAccount": "உங்கள் கணக்கு",
+    "settingsGroupContent": "உள்ளடக்கம்",
+    "settingsGroupApp": "ஆப்",
+    "settingsAnimeDesc": "பிளேயர், வசன வரிகள், ஸ்கிப்பிங், எபிசோட் பட்டியல் மற்றும் எபிசோட் விவரங்கள்",
+    "settingsMangaDesc": "வாசகர் முறை, கட்டுப்பாடுகள், காட்சி மற்றும் அத்தியாயம் கண்காணிப்பு",
+    "settingsNovelDesc": "உரை, பக்கத்தைத் திருப்புதல், மொழிபெயர்த்தல் மற்றும் உரக்கப் படிக்கவும்",
+    "settingsLocalPlay": "உள்ளூர் நாடகம்",
+    "settingsLocalPlayDesc": "கோப்புகள், கோப்புறைகள், நெட்வொர்க் ஸ்ட்ரீம்கள் மற்றும் டோரண்டுகளை இயக்கவும் அல்லது புத்தகத்தைத் திறக்கவும்",
+    "settingsLocalPlayVideo": "வீடியோ",
+    "settingsLocalPlayBooks": "புத்தகங்கள்",
+    "settingsWatchSections": "பிரிவுகள்",
+    "settingsSectionLists": "அத்தியாயம் மற்றும் அத்தியாயம் பட்டியல்கள்",
+    "settingsSectionProgress": "முன்னேற்றம் கண்காணிப்பு",
+    "updateChannelDesc": "நிலையானது சோதனை செய்யப்பட்ட வெளியீடு. ப்ரீ-ரிலீஸ் மற்றும் ஆல்பா விரைவில் புதிய அம்சங்களைப் பெறுகின்றன ஆனால் உடைந்து போகலாம்",
+    "checkNowDesc": "உடனே புதிய பதிப்பைத் தேடுங்கள்",
+    "generalSectionBasics": "மொழி மற்றும் நடத்தை",
+    "generalSectionSecurity": "பாதுகாப்பு",
+    "generalSectionPrivacy": "தனியுரிமை",
+    "notificationsOtherService": "இதைத் திறக்க {service}க்கு மாறவும்",
+    "@notificationsOtherService": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
+    "secPlayerPlayback": "இயல்புநிலை வேகம், ஆட்டோ ப்ளே, வீடியோ பொருத்தம், நோக்குநிலை மற்றும் படத்தில் உள்ள படம்",
+    "secPlayerSkip": "திறப்புகள், முடிவுகள் மற்றும் மறுபரிசீலனைகளைத் தானாகத் தவிர்க்கவும்",
+    "secPlayerControls": "சைகைகளை ஸ்வைப் செய்து, பிடித்து, தட்டவும், முன்னோட்டத்தைத் தேடவும்",
+    "secPlayerSubtitles": "மொழிகள், தோற்றம் மற்றும் வசனங்களை வழங்குதல்",
+    "secPlayerShaders": "அனிம் அப்ஸ்கேலிங் மற்றும் உங்கள் சொந்த ஷேடர்கள்",
+    "secPlayerEngine": "டிகோடர், வீடியோ மற்றும் ஆடியோ வெளியீடு, இடையகப்படுத்தல். பிளேபேக்கில் சிக்கல்கள் இருந்தால் மட்டுமே இவற்றை மாற்றவும்",
+    "secPlayerMpv": "mpv.conf, ஸ்கிரிப்டுகள் மற்றும் மேம்பட்ட டியூனிங்",
+    "secAnimeList": "நிரப்பு எபிசோடுகள் மற்றும் பார்க்கப்படாத சிறுபடங்கள்",
+    "secProgress": "நீங்கள் பார்த்த அல்லது படித்த முன்னேற்றம் உங்கள் பட்டியலில் சேமிக்கப்படும்",
+    "secAnimeDetails": "எபிசோட் தலைப்புகள், சிறுபடங்கள் மற்றும் சுருக்கங்கள் எங்கிருந்து வருகின்றன",
+    "secReaderReading": "வாசிப்பு முறை, பக்கத்தைத் திருப்புதல், பெரிதாக்குதல் மற்றும் அடுத்த அத்தியாயம்",
+    "secReaderControls": "மண்டலங்கள், தொகுதி விசைகள் மற்றும் தானாக உருட்டவும்",
+    "secReaderDisplay": "பின்னணி, பிரகாசம், முழுத்திரை மற்றும் பக்க எண்",
+    "secNovelText": "எழுத்துரு, அளவு, இடைவெளி, ஓரங்கள் மற்றும் பக்கத்தைத் திருப்புதல்",
+    "secNovelTranslate": "நீங்கள் படிக்கும் போது அத்தியாயங்களை மொழிபெயர்க்கவும்",
+    "secNovelSpeech": "சத்தமாக வாசிக்க குரல், வேகம் மற்றும் சுருதி",
+    "secNotifyAbout": "எந்த வகையான செயல்பாடு எச்சரிக்கையை அனுப்புகிறது என்பதைத் தேர்ந்தெடுக்கவும்",
+    "layoutTitle": "தளவமைப்பு",
+    "layoutDesc": "பார்களில் உள்ள பொத்தான்களைத் தேர்ந்தெடுத்து, நகர்த்தவும் மற்றும் மறைக்கவும்",
+    "layoutHint": "அதை நகர்த்த ஒரு பொத்தானை இழுக்கவும் (தொடு திரையில் முதலில் பிடிக்கவும்). வெட்ட, நகர்த்த அல்லது மறைக்க ஒன்றைத் தட்டவும்",
+    "layoutDropInto": "டிராப் இன்: {zone}",
+    "@layoutDropInto": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutCutting": "நகரும் {name}. அதை வைக்க பேஸ்ட் பட்டனை அழுத்தவும்",
+    "@layoutCutting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutTitleFixed": "தலைப்பு",
+    "layoutZoneTopStart": "தலைப்புக்கு முன் மேல் பட்டை",
+    "layoutZoneTopEnd": "தலைப்புக்குப் பிறகு மேல் பட்டி",
+    "layoutZoneBottomStart": "கீழே பட்டி, இடது",
+    "layoutZoneBottomEnd": "கீழ் பட்டை, வலது",
+    "layoutZoneSecondRow": "மறைக்கப்பட்டவை: சாதாரண பார்வையில் இரண்டாவது வரிசை",
+    "layoutZoneOverflow": "மறைக்கப்பட்டவை: மேலும் மெனுவில்",
+    "layoutEmptyZone": "பொத்தான்களை இங்கே விடவும்",
+    "layoutCut": "வெட்டு",
+    "layoutPaste": "இங்கே ஒட்டவும்",
+    "layoutHide": "மறை",
+    "layoutMoveTo": "{zone}க்கு நகர்த்து",
+    "@layoutMoveTo": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutReset": "இயல்புநிலைக்கு மீட்டமைக்கவும்",
+    "layoutMore": "மேலும்",
+    "sourceWhyAction": "ஏன் எச்சரிக்கை இல்லை?",
+    "sourceWhyStatus": "நிலை",
+    "sourceWhyLastCheck": "கடைசியாக சரிபார்க்கப்பட்டது",
+    "sourceWhyNever": "இன்னும் இல்லை",
+    "sourceWhyNextCheck": "அடுத்த சோதனை",
+    "sourceWhyNewest": "மூலத்தில் புதியது",
+    "sourceWhyProgress": "உங்கள் முன்னேற்றம்",
+    "sourceWhyListStatus": "பட்டியல் நிலை",
+    "sourceWhyFailures": "ஒரு வரிசையில் சோதனைகள் தோல்வியடைந்தன",
+    "sourceWhyLastRelease": "கடைசியாகப் பார்த்த புதிய வெளியீடு",
+    "sourceWhyVerdictNew": "ஆதாரம் அதை பட்டியலிட்டவுடன் ஒரு புதிய வெளியீடு இங்கே தோன்றும் மற்றும் அடுத்த சரிபார்ப்பு இயங்கும்.",
+    "sourceWhyVerdictAhead": "ஆதாரம் ஏற்கனவே உங்கள் முன்னேற்றத்திற்கு முன்னால் உள்ளது, எனவே அதைப் பற்றி உங்களுக்கு ஒருமுறை கூறப்பட்டது. அடுத்த விழிப்பூட்டலைப் பெற அதைப் படிக்கவும் அல்லது பார்க்கவும்.",
+    "sourceWhyVerdictSkipped": "இந்த தலைப்பு மேலே உள்ள விதிகளால் தவிர்க்கப்பட்டது. அறிவிப்பு அமைப்புகளில் அவற்றை மாற்றவும் அல்லது எப்படியும் அதை இயக்க இப்போது சரிபார்க்கவும்.",
+    "sourceWhyVerdictBroken": "மூலத்தை அடைய முடியவில்லை அல்லது அகற்றப்பட்டது, அதனால் எதுவும் சரிபார்க்கப்படவில்லை.",
+    "sourceWhyVerdictMuted": "இந்த சந்தா முடக்கப்பட்டுள்ளது.",
+    "externalPlayerTitle": "வேறு இடத்தில் ஸ்ட்ரீம் திறக்கவும்",
+    "externalCopyUrl": "ஸ்ட்ரீம் இணைப்பை நகலெடு",
+    "externalCopied": "ஸ்ட்ரீம் இணைப்பு நகலெடுக்கப்பட்டது",
+    "externalChooser": "மற்றொரு பயன்பாட்டில் திறக்கவும்",
+    "externalVlc": "VLC இல் திறக்கவும்",
+    "externalMpv": "எம்பிவியில் திறக்கவும்",
+    "externalWebVideoCast": "இணைய வீடியோ கேஸ்ட்",
+    "castViaAppHint": "வலை வீடியோ Cast பயன்பாட்டிற்கு ஸ்ட்ரீமை அனுப்பவும்",
+    "externalFailed": "ஸ்ட்ரீமை திறக்க முடியவில்லை. பிளேயர் நிறுவப்பட்டுள்ளதா?",
+    "addonInstalled": "நிறுவப்பட்டது",
+    "loadFailedActivity": "செயல்பாட்டை ஏற்ற முடியவில்லை",
+    "loadFailedFavourites": "பிடித்தவற்றை ஏற்ற முடியவில்லை. மீண்டும் முயற்சிக்கவும்",
+    "loadFailedStats": "புள்ளிவிவரங்களை ஏற்ற முடியவில்லை",
+    "loadFailedReplies": "பதில்களை ஏற்ற முடியவில்லை",
+    "cantBeUndone": "இதை செயல்தவிர்க்க முடியாது.",
+    "searchTags": "குறிச்சொற்களைத் தேடுங்கள்",
+    "spoilerTapToView": "ஸ்பாய்லர், பார்க்க தட்டவும்",
+    "mediaVideo": "வீடியோ",
+    "notificationSomeone": "யாரோ ஒருவர்",
+    "notificationATitle": "ஒரு தலைப்பு",
+    "notificationAddedDetail": "அனிலிஸ்டில் சேர்க்கப்பட்டது",
+    "updateNoReleases": "வெளியீடுகள் எதுவும் இல்லை",
+    "updateInvalidResponse": "தவறான புதுப்பிப்பு பதில்",
+    "commentsRateLimited": "வரையறுக்கப்பட்ட விகிதம்",
+    "commentsConnectFailed": "இணைக்க முடியவில்லை",
+    "dnsNoRecords": "ஏ பதிவுகள் எதுவும் திரும்பவில்லை",
+    "importTokenRejected": "டோக்கன் நிராகரிக்கப்பட்டது",
+    "developerRoleLead": "முன்னணி டெவலப்பர்",
+    "developerRoleModerator": "டிஸ்கார்ட் மாடரேட்டர்",
+    "extensionManagerTitle": "{type} மேலாளர்",
+    "@extensionManagerTitle": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionsOfType": "{type} நீட்டிப்புகள்",
+    "@extensionsOfType": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionSettingsTitle": "{name} அமைப்புகள்",
+    "@extensionSettingsTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionNoSettings": "{name} எந்த அமைப்புகளையும் வழங்கவில்லை.",
+    "@extensionNoSettings": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAired": "{title} இன் எபிசோட் {episode} ஒளிபரப்பப்பட்டது",
+    "@notificationAired": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            },
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAiredDetail": "எபிசோட் {episode} ஒளிபரப்பப்பட்டது",
+    "@notificationAiredDetail": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAdded": "{title} அனிலிஸ்டில் சேர்க்கப்பட்டது",
+    "@notificationAdded": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNotFound": "புதுப்பிப்பு சேவையகம் அந்த வெளியீட்டைக் கண்டுபிடிக்க முடியவில்லை: {message}",
+    "@updateNotFound": {
+        "placeholders": {
+            "message": {
+                "type": "String"
+            }
+        }
+    },
+    "installStepJre": "ஜாவா இயக்க நேரம்",
+    "installStepCore": "இயக்க நேர கோர்",
+    "installStepsProgress": "படி {total} இன் {current}",
+    "@installStepsProgress": {
         "placeholders": {
             "current": {
                 "type": "int"
@@ -3207,68 +3115,160 @@
             }
         }
     },
-    "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
-    "watchOrder": "Watch order",
-    "settingsNotifications": "Notifications",
-    "syncDeleteConfirm": "{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.",
-    "@syncDeleteConfirm": {
+    "stepWaiting": "காத்திருக்கிறது",
+    "stepChecking": "சரிபார்க்கிறது…",
+    "stepUpToDate": "இன்றுவரை",
+    "stepUpToDateWith": "புதுப்பித்த நிலையில் · {detail}",
+    "@stepUpToDateWith": {
+        "placeholders": {
+            "detail": {
+                "type": "String"
+            }
+        }
+    },
+    "stepWillInstall": "நிறுவப்படும்",
+    "stepWillUpdate": "புதுப்பிக்கப்படும்",
+    "stepWillUpdateTo": "{version} க்கு புதுப்பிக்கப்படும்",
+    "@stepWillUpdateTo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "stepInstalled": "நிறுவப்பட்டது",
+    "stepNotNeeded": "இங்கு தேவையில்லை",
+    "stepFailed": "தோல்வியடைந்தது",
+    "stepFailedWith": "தோல்வி: {reason}",
+    "@stepFailedWith": {
+        "placeholders": {
+            "reason": {
+                "type": "String"
+            }
+        }
+    },
+    "installNeedsRuntime": "இது ஜாவா இயக்க நேரம் மற்றும் பகிரப்பட்ட இயக்க நேர மையத்தில் இயங்குகிறது. அவை முதலில் நிறுவப்பட்டு, மாற்றப்பட்டால் புதுப்பிக்கப்படும்.",
+    "installRuntimeNewer": "இந்த மேலாளர் இயக்கும் இயக்க நேரம் ஒரு புதுப்பிப்பைக் கொண்டுள்ளது.",
+    "removeJvmTitle": "ஜாவா இயக்க நேரத்தை அகற்றவா?",
+    "removeJvmMessage": "டெஸ்க்டாப் நீட்டிப்பு மேலாளர்கள் அதை மீண்டும் நிறுவும் வரை வேலை செய்வதை நிறுத்துவார்கள். அடுத்த முறை நிறுவும் போது அல்லது திறக்கும் போது அது மீண்டும் பதிவிறக்கம் செய்யப்படும்.",
+    "runtimePreparing": "இயக்க நேரத்தை தயார் செய்கிறது…",
+    "calendarAll": "அனைத்து",
+    "calendarAnime": "அசையும்",
+    "calendarManga": "மங்கா",
+    "readerCloudflare": "உலாவியில் திற (Cloudflare சோதனை)",
+    "badgeBoardHint": "முதல் அட்டையின் ஒரு மூலையில் ஒரு பேட்ஜை இழுக்கவும் அல்லது அதை நகர்த்துவதற்கு ஏற்கனவே உள்ள பேட்ஜை இழுக்கவும். பேட்ஜ்கள் இடங்களை மாற்றுகின்றன, அதனால் எதுவும் ஒன்றுடன் ஒன்று சேராது. அதை ஆன் அல்லது ஆஃப் செய்ய கீழே உள்ள பேட்ஜைத் தட்டவும்.",
+    "statusAuto": "ஆட்டோ",
+    "unreadCounter": "படிக்காத கவுண்டர்",
+    "unreadCounterDesc": "போஸ்டர்களில் எத்தனை எபிசோடுகள் அல்லது அத்தியாயங்கள் மீதமுள்ளன என்பதைக் காட்டு",
+    "settingsShortcuts": "விசைப்பலகை குறுக்குவழிகள்",
+    "settingsShortcutsDesc": "ஒவ்வொரு விசையையும் பார்க்கவும், மாற்றவும் மற்றும் அணைக்கவும்",
+    "shortcutGroupApp": "ஆப்",
+    "shortcutGroupPlayer": "வீடியோ பிளேயர்",
+    "shortcutGroupReader": "வாசகர்",
+    "shortcutsEnableApp": "பயன்பாட்டு குறுக்குவழிகள்",
+    "shortcutsEnablePlayer": "பிளேயர் குறுக்குவழிகள்",
+    "shortcutsEnableReader": "வாசகர் குறுக்குவழிகள்",
+    "shortcutsEnableDesc": "இந்தக் குழுவில் உள்ள ஒவ்வொரு விசையையும் ஆன் அல்லது ஆஃப் செய்யவும்",
+    "shortcutNotSet": "அமைக்கப்படவில்லை",
+    "shortcutAddKey": "ஒரு விசையைச் சேர்க்கவும்",
+    "shortcutResetOne": "இயல்புநிலைக்கு மீட்டமைக்கவும்",
+    "shortcutClearKeys": "அனைத்து விசைகளையும் அகற்று",
+    "shortcutResetAll": "அனைத்து குறுக்குவழிகளையும் மீட்டமைக்கவும்",
+    "shortcutResetAllDesc": "ஒவ்வொரு விசையையும் அதன் இயல்புநிலைக்கு மீண்டும் வைக்கவும்",
+    "shortcutPress": "நீங்கள் விரும்பும் விசை அல்லது கலவையை அழுத்தவும்",
+    "shortcutPressHint": "ஒவ்வொரு கலவையும் ஒரு செயலுக்கு மட்டுமே சொந்தமானது, எனவே ஒன்றை எடுத்து அதை நகர்த்துகிறது.",
+    "shortcutSeekPercent": "வீடியோவின் ஒரு புள்ளிக்குச் செல்லவும்",
+    "shortcutSeekPercentKeys": "0 – 9",
+    "shortcutAppBack": "திரும்பி போ",
+    "shortcutAppFullscreen": "முழுத்திரையை நிலைமாற்று",
+    "shortcutAppGlass": "கண்ணாடி பயன்முறையை மாற்றவும்",
+    "shortcutAppMaterialYou": "மெட்டீரியல் யூ",
+    "shortcutAppDark": "இருண்ட பயன்முறையை மாற்றவும்",
+    "shortcutAppOled": "OLED கருப்பு நிறத்தை மாற்றவும்",
+    "shortcutAppSearch": "தேடலைத் திறக்கவும்",
+    "shortcutAppSettings": "அமைப்புகளைத் திறக்கவும்",
+    "shortcutAppDownloads": "பதிவிறக்கங்களைத் திறக்கவும்",
+    "shortcutAppNotifications": "அறிவிப்புகளைத் திறக்கவும்",
+    "shortcutAppIncognito": "மறைநிலையை நிலைமாற்று",
+    "shortcutAppShortcuts": "விசைப்பலகை குறுக்குவழிகளைக் காட்டு",
+    "shortcutPlayerPlayPause": "விளையாடவும் அல்லது இடைநிறுத்தவும்",
+    "shortcutPlayerSeekForward": "முன்னோக்கி தேடுங்கள்",
+    "shortcutPlayerSeekBack": "திரும்பி தேடுங்கள்",
+    "shortcutPlayerSeekForwardLong": "30 வினாடிகள் முன்னோக்கி தேடுங்கள்",
+    "shortcutPlayerSeekBackLong": "30 வினாடிகள் பின்வாங்கவும்",
+    "shortcutPlayerFrameForward": "அடுத்த சட்டகம்",
+    "shortcutPlayerFrameBack": "முந்தைய சட்டகம்",
+    "shortcutPlayerVolumeUp": "வால்யூம் அப்",
+    "shortcutPlayerVolumeDown": "வால்யூம் குறைவு",
+    "shortcutPlayerMute": "முடக்கு",
+    "shortcutPlayerFullscreen": "முழுத்திரை",
+    "shortcutPlayerNext": "அடுத்த எபிசோட்",
+    "shortcutPlayerPrevious": "முந்தைய அத்தியாயம்",
+    "shortcutPlayerSkip": "அறிமுகம் அல்லது முடிவைத் தவிர்க்கவும்",
+    "shortcutPlayerPanel": "எபிசோட் பட்டியல்",
+    "shortcutPlayerSpeedUp": "வேகமான பின்னணி",
+    "shortcutPlayerSpeedDown": "மெதுவான பின்னணி",
+    "shortcutPlayerSpeedReset": "",
+    "shortcutPlayerSubtitleToggle": "வசனங்கள் ஆன் அல்லது ஆஃப்",
+    "shortcutPlayerSubtitleCycle": "அடுத்த வசன பாடல்",
+    "shortcutPlayerAudioCycle": "அடுத்த ஆடியோ டிராக்",
+    "shortcutPlayerStreamCycle": "அடுத்த ஸ்ட்ரீம்",
+    "shortcutPlayerFit": "வீடியோ பொருத்தத்தை மாற்றவும்",
+    "shortcutReaderRight": "வலதுபுறம் பக்கம்",
+    "shortcutReaderLeft": "இடதுபுறம் பக்கம்",
+    "shortcutReaderNextPage": "அடுத்த பக்கம்",
+    "shortcutReaderPreviousPage": "முந்தைய பக்கம்",
+    "shortcutReaderControls": "கட்டுப்பாடுகளைக் காட்டு அல்லது மறை",
+    "shortcutReaderNextChapter": "அடுத்த அத்தியாயம்",
+    "shortcutReaderPreviousChapter": "முந்தைய அத்தியாயம்",
+    "shortcutTaken": "{action} இலிருந்து எடுக்கப்பட்டது",
+    "@shortcutTaken": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "incognitoTurnedOn": "மறைநிலை பயன்முறை இயக்கப்பட்டது",
+    "incognitoTurnedOff": "மறைநிலை பயன்முறை முடக்கப்பட்டுள்ளது",
+    "onHoldAnime": "அனிமேஷனில் நிறுத்திவைக்கப்பட்டுள்ளது",
+    "onHoldManga": "மங்கா",
+    "droppedAnime": "கைவிடப்பட்ட அனிம்",
+    "droppedManga": "கைவிடப்பட்டது மங்கா",
+    "generalSectionDesktop": "டெஸ்க்டாப்",
+    "closeAction": "ஜன்னல் மூடப்பட்டதும்",
+    "closeActionQuit": "பயன்பாட்டிலிருந்து வெளியேறு",
+    "closeActionWhenBusy": "ஏதாவது ஓடும்போது தட்டில் ஓடிக்கொண்டே இருங்கள்",
+    "closeActionAlways": "எப்போதும் தட்டில் ஓடிக்கொண்டே இருங்கள்",
+    "closeActionNoTray": "சிஸ்டம் ட்ரே இங்கே இல்லை, அதனால் ஆப்ஸ் மூடப்பட்டவுடன் வெளியேறும்",
+    "gamepadNav": "கேம்பேட் வழிசெலுத்தல்",
+    "gamepadNavDesc": "பயன்பாட்டைச் சுற்றி நகர்த்தி, கேம் கன்ட்ரோலர் மூலம் பிளேயரைக் கட்டுப்படுத்தவும்",
+    "trayShow": "டார்டோட்சுவைக் காட்டு",
+    "trayQuit": "வெளியேறு",
+    "trayIdle": "எதுவும் இயங்கவில்லை",
+    "trayDownloading": "{count, plural, one{{count} உருப்படியைப் பதிவிறக்குகிறது} other{{count} உருப்படிகளைப் பதிவிறக்குகிறது}}",
+    "@trayDownloading": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "secPlayerSubtitles": "Languages, appearance and subtitle rendering",
-    "settingsSyncModeGithub": "GitHub",
-    "playerSubtitlePreview": "Subtitle preview",
-    "sourceSkippedUnseen": "Skipped: unseen episodes",
-    "shortcutsEnablePlayer": "Player shortcuts",
-    "updateChannelDesc": "Stable is the tested release. Pre-release and Alpha get new features sooner but may break",
-    "shortcutGroupReader": "Reader",
-    "playerSkipFailed": "AniSkip refused the skip times: {error}",
-    "@playerSkipFailed": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "closeAction": "When the window is closed",
-    "settingsSyncSignedIn": "Signed in as {user}",
-    "@settingsSyncSignedIn": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "popularMovies": "Popular Movies",
-    "dcTimerElapsed": "Elapsed",
-    "layoutDesc": "Choose, move and hide the buttons on the bars",
-    "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
-    "refreshFromComick": "Refresh from Comick",
-    "refreshFromTrakt": "Refresh from Trakt",
-    "downloadClearQueue": "Clear queue",
-    "stepUpToDate": "Up to date",
-    "playerPictureProcessed": "With shaders and colors",
-    "novelContents": "Contents",
-    "sourceEmpty": "No subscriptions yet",
-    "settingsAboutUpdates": "About & updates",
-    "novelSearchNone": "No matches",
-    "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
-    "@trackProgressAnimeLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcRouteHeadless": "Through your account",
-    "novelPaged": "Page turning",
-    "sourceOpenTitle": "Open title",
-    "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
-    "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
-    "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
-    "playerPipPlay": "Play",
-    "castViaAppHint": "Send the stream to the Web Video Cast app",
-    "externalWebVideoCast": "Web Video Cast",
-    "trailerQuality": "Trailer quality"
+    "traySyncing": "உங்கள் பட்டியல்களை ஒத்திசைக்கிறது",
+    "trayUpdating": "பயன்பாட்டைப் புதுப்பிக்கிறது",
+    "trayPlaying": "ஒரு சிறிய சாளரத்தில் விளையாடுகிறது",
+    "traySearch": "தேடு",
+    "trayPauseDownloads": "பதிவிறக்கங்களை இடைநிறுத்து",
+    "trayResumeDownloads": "பதிவிறக்கங்களை மீண்டும் தொடங்கவும்",
+    "playerDownloadTitle": "பிளேயரைப் பதிவிறக்குகிறது",
+    "playerDownloadBody": "டார்டோட்சு அதன் வீடியோ எஞ்சினை ஒருமுறை பெறுகிறது. அது தயாரானவுடன் பிளேபேக் தொடங்கும்.",
+    "playerDownloadStarting": "பதிவிறக்கம் தொடங்குகிறது…",
+    "playerDownloadFailedTitle": "பிளேயரைப் பெற முடியவில்லை",
+    "playerDownloadFailedBody": "உங்கள் இணைப்பைச் சரிபார்த்து மீண்டும் முயலவும். பதிவிறக்கம் நிறுத்தப்பட்ட இடத்தில் தொடங்குகிறது.",
+    "playerDownloadRetry": "மீண்டும் முயற்சிக்கவும்",
+    "playerDownloadCopy": "விவரங்களை நகலெடுக்கவும்",
+    "removePlayerTitle": "பிளேயரை அகற்றவா?",
+    "removePlayerMessage": "பிளேயர் மீண்டும் பதிவிறக்கப்படும் வரை வீடியோக்களை இயக்க முடியாது.",
+    "trailerLoading": "டிரெய்லரை ஏற்றுகிறது…",
+    "trailerFailed": "டிரெய்லரை இங்கே இயக்க முடியவில்லை, அதை உலாவியில் திறக்கிறது"
 }

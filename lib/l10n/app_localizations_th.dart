@@ -127,37 +127,37 @@ class AppLocalizationsTh extends AppLocalizations {
       'ถามรหัสผ่านตอนเปิดแอปหรือกลับมาหลังจากทิ้งไว้สักพัก';
 
   @override
-  String get appLockBiometric => 'Unlock with biometrics';
+  String get appLockBiometric => 'ปลดล็อคด้วยไบโอเมตริกซ์';
 
   @override
   String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+      'ใช้ลายนิ้วมือหรือใบหน้าของคุณแทนการพิมพ์รหัสผ่าน';
 
   @override
-  String get appLockBiometricReason => 'Unlock Dartotsu';
+  String get appLockBiometricReason => 'ปลดล็อคดาร์ท็อตสึ';
 
   @override
-  String get appLockDelay => 'Lock when idle';
+  String get appLockDelay => 'ล็อคเมื่อไม่ได้ใช้งาน';
 
   @override
-  String get appLockDelayAlways => 'Always';
+  String get appLockDelayAlways => 'เสมอ';
 
   @override
-  String get appLockDelayNever => 'Never';
+  String get appLockDelayNever => 'ไม่เคย';
 
   @override
   String appLockDelayAfter(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count minutes',
-      one: '1 minute',
+      other: '$count นาที',
+      one: '1 นาที',
     );
-    return 'After $_temp0';
+    return 'หลังจาก $_temp0';
   }
 
   @override
-  String get appLockUseBiometric => 'Use biometrics';
+  String get appLockUseBiometric => 'ใช้ไบโอเมตริกซ์';
 
   @override
   String get appLockUnlock => 'ใส่รหัสผ่านของคุณ';
@@ -199,30 +199,30 @@ class AppLocalizationsTh extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count updates available',
-      one: '1 update available',
+      other: '$count มีการอัปเดต',
+      one: 'มีการอัปเดต 1 รายการ',
     );
     return '$_temp0';
   }
 
   @override
-  String get updateAll => 'Update all';
+  String get updateAll => 'อัพเดททั้งหมดครับ';
 
   @override
   String extensionsUpdated(int done, int total) {
-    return '$done of $total extensions updated';
+    return 'อัปเดตส่วนขยาย $done จาก $total แล้ว';
   }
 
   @override
-  String get updateConflictTitle => 'Update not installed';
+  String get updateConflictTitle => 'ไม่ได้ติดตั้งการอัปเดต';
 
   @override
   String updateConflictBody(String names) {
-    return '$names could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?';
+    return '$names ไม่สามารถติดตั้งทับเวอร์ชันที่มีอยู่ได้ ซึ่งมักจะหมายความว่าสำเนาที่ติดตั้งมีการลงนามแตกต่างออกไป ถอนการติดตั้งและติดตั้งเวอร์ชันใหม่หรือไม่';
   }
 
   @override
-  String get updateConflictAction => 'Uninstall and reinstall';
+  String get updateConflictAction => 'ถอนการติดตั้งและติดตั้งใหม่';
 
   @override
   String get noSourceSettings => 'ซอร์สนี้ไม่มีการตั้งค่า';
@@ -237,7 +237,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get addRepository => 'เพิ่มคลัง';
 
   @override
-  String get importRepositoryFile => 'Import a file';
+  String get importRepositoryFile => 'นำเข้าไฟล์';
 
   @override
   String get pluginRepoUpdated => 'อัปเดตคลังปลั๊กอินแล้ว';
@@ -282,15 +282,15 @@ class AppLocalizationsTh extends AppLocalizations {
   String get selectMediaService => 'เลือกบริการมีเดีย';
 
   @override
-  String get manageServices => 'Media services';
+  String get manageServices => 'บริการสื่อ';
 
   @override
   String get manageServicesDesc =>
-      'Reorder the services and choose which ones show in the picker';
+      'จัดลำดับบริการใหม่และเลือกบริการที่จะแสดงในเครื่องมือเลือก';
 
   @override
   String get manageServicesHint =>
-      'Drag to reorder, switch off the ones you don\'t use';
+      'ลากเพื่อเรียงลำดับใหม่ ปิดอันที่คุณไม่ได้ใช้';
 
   @override
   String get pickColor => 'เลือกสี';
@@ -333,7 +333,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsNetwork => 'เครือข่าย';
 
   @override
-  String get settingsNetworkDesc => 'User agent, ใบรับรอง, DNS และพร็อกซี';
+  String get settingsNetworkDesc => 'ตัวแทนผู้ใช้ ใบรับรอง DNS และพร็อกซี';
 
   @override
   String get settingsAccountDesc => 'บริการติดตามและการเข้าสู่ระบบ';
@@ -370,25 +370,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String get customPath => 'ที่เก็บข้อมูลกำหนดเอง';
 
   @override
-  String get stories => 'Stories';
+  String get stories => 'เรื่องราว';
 
   @override
-  String get watchOrder => 'Watch order';
+  String get watchOrder => 'สั่งนาฬิกา';
 
   @override
-  String get watchOrderOpenSite => 'Open on chiaki.site';
+  String get watchOrderOpenSite => 'เปิดบน chiaki.site';
 
   @override
-  String get watchOrderUnavailable => 'No watch order was found for this title';
+  String get watchOrderUnavailable => 'ไม่พบลำดับการดูสำหรับชื่อนี้';
 
   @override
-  String get watchOrderOpenFailed => 'Couldn\'t open that title';
+  String get watchOrderOpenFailed => 'ไม่สามารถเปิดชื่อนั้นได้';
 
   @override
-  String get watchOrderCurrent => 'You are here';
+  String get watchOrderCurrent => 'คุณอยู่ที่นี่';
 
   @override
-  String get watchOrderCredit => 'Watch orders by chiaki.site';
+  String get watchOrderCredit => 'ดูคำสั่งซื้อจาก chiaki.site';
 
   @override
   String get customPathDesc => 'ที่เก็บข้อมูลแอป กดค้างเพื่อรีเซ็ต';
@@ -403,441 +403,439 @@ class AppLocalizationsTh extends AppLocalizations {
   String get differentCacheManagerDesc => 'ใช้ตัวจัดการแคชอื่นสำหรับรูปภาพ';
 
   @override
-  String get settingsSync => 'Sync settings';
+  String get settingsSync => 'การตั้งค่าการซิงค์';
 
   @override
   String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+      'รักษาการตั้งค่าของคุณให้เหมือนกันในทุกอุปกรณ์ พวกมันจะถูกจัดเก็บไว้ในส่วนสำคัญส่วนตัวในบัญชี GitHub ของคุณ';
 
   @override
-  String get settingsSyncSwitch => 'Sync on change';
+  String get settingsSyncSwitch => 'ซิงค์การเปลี่ยนแปลง';
 
   @override
   String get settingsSyncModeGithub => 'GitHub';
 
   @override
-  String get settingsSyncSignIn => 'Sign in with GitHub';
+  String get settingsSyncSignIn => 'ลงชื่อเข้าใช้ด้วย GitHub';
 
   @override
   String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+      'การตั้งค่าจะถูกจัดเก็บไว้ในส่วนสำคัญส่วนตัวในบัญชีของคุณ';
 
   @override
-  String get settingsSyncToken => 'Use a personal access token';
+  String get settingsSyncToken => 'ใช้โทเค็นการเข้าถึงส่วนบุคคล';
 
   @override
   String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+      'สร้างอันหนึ่งที่ github.com/settings/tokens โดยมีสิทธิ์เฉพาะส่วนสำคัญเท่านั้น';
 
   @override
-  String get settingsSyncTokenField => 'Token';
+  String get settingsSyncTokenField => 'โทเค็น';
 
   @override
   String settingsSyncSignedIn(Object user) {
-    return 'Signed in as $user';
+    return 'ลงชื่อเข้าใช้ด้วย $user';
   }
 
   @override
-  String get settingsSyncSignOut => 'Sign out';
+  String get settingsSyncSignOut => 'ออกจากระบบ';
 
   @override
   String settingsSyncCode(Object code) {
-    return 'Enter $code on GitHub';
+    return 'ป้อน $code บน GitHub';
   }
 
   @override
   String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+      'หน้า GitHub ที่เปิดขึ้นในเบราว์เซอร์ของคุณ แตะเพื่อคัดลอกรหัส หรือแตะค้างไว้เพื่อยกเลิก';
 
   @override
-  String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+  String get settingsSyncSignInFailed => 'ไม่สามารถลงชื่อเข้าใช้ GitHub ได้';
 
   @override
-  String get dcPreview => 'Preview';
+  String get dcPreview => 'ดูตัวอย่าง';
 
   @override
-  String get dcSampleWatching => 'Watching';
+  String get dcSampleWatching => 'กำลังดู';
 
   @override
-  String get dcSampleReading => 'Reading';
+  String get dcSampleReading => 'การอ่าน';
 
   @override
-  String get dcSampleBrowsing => 'Browsing';
+  String get dcSampleBrowsing => 'การเรียกดู';
 
   @override
-  String get dcSampleLive => 'Right now';
+  String get dcSampleLive => 'ตอนนี้';
 
   @override
   String get dcLiveNothing =>
-      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+      'ไม่มีอะไรแสดงอยู่ในขณะนี้ เปิดชื่อเรื่อง เริ่มตอนหรือบท และจะปรากฏที่นี่';
 
   @override
-  String get dcMemberList => 'In the member list';
+  String get dcMemberList => 'ในรายชื่อสมาชิก';
 
   @override
-  String get dcAccount => 'Account';
+  String get dcAccount => 'บัญชี';
 
   @override
-  String get dcSignIn => 'Sign in with Discord';
+  String get dcSignIn => 'ลงชื่อเข้าใช้ด้วย Discord';
 
   @override
-  String get dcSignOut => 'Sign out';
+  String get dcSignOut => 'ออกจากระบบ';
 
   @override
   String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
+      'โดยไม่ต้องเชื่อมต่อ Discord จะแสดง \"Watching Dartotsu\" ผ่านแอปเดสก์ท็อป เชื่อมต่อ Discord เพื่อตั้งชื่อกิจกรรมตามชื่อของคุณ รวมถึงบนมือถือด้วย';
 
   @override
   String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+      'เชื่อมต่อ Discord เพื่อแสดงสิ่งที่คุณกำลังรับชมหรืออ่าน ใช้หน้าการอนุญาตของ Discord ไม่ใช่โทเค็นบัญชีของคุณ';
 
   @override
-  String get dcConnect => 'Connect Discord';
+  String get dcConnect => 'เชื่อมต่อความไม่ลงรอยกัน';
 
   @override
   String get dcConnectDesc =>
-      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+      'เปิดหน้าการอนุญาตของ Discord และเพิ่ม Dartotsu ใต้แอปที่ได้รับอนุญาต Discord ขอให้อัปเดตสถานะของคุณ บันทึกเฉพาะโทเค็นการรีเฟรชเท่านั้น ไม่ใช่โทเค็นบัญชีของคุณ';
 
   @override
-  String get dcConnectFailed => 'Could not connect Discord';
+  String get dcConnectFailed => 'ไม่สามารถเชื่อมต่อ Discord ได้';
 
   @override
-  String get dcConnectedSnack => 'Discord connected';
+  String get dcConnectedSnack => 'เชื่อมต่อ Discord แล้ว';
 
   @override
-  String get dcDisconnect => 'Disconnect';
+  String get dcDisconnect => 'ตัดการเชื่อมต่อ';
 
   @override
-  String get dcDisconnectedSnack => 'Discord disconnected';
+  String get dcDisconnectedSnack => 'Discord ถูกตัดการเชื่อมต่อ';
 
   @override
-  String get dcUseToken => 'Use a token instead';
+  String get dcUseToken => 'ใช้โทเค็นแทน';
 
   @override
-  String get dcRouteDesktop => 'Through the Discord desktop app';
+  String get dcRouteDesktop => 'ผ่านแอปเดสก์ท็อป Discord';
 
   @override
-  String get dcRouteHeadless => 'Through your account';
+  String get dcRouteHeadless => 'ผ่านบัญชีของคุณ';
 
   @override
-  String get dcRouteGateway => 'Through your account, live';
+  String get dcRouteGateway => 'ผ่านบัญชีของคุณถ่ายทอดสด';
 
   @override
-  String get dcRouteLinked => 'Connected app';
+  String get dcRouteLinked => 'แอพที่เชื่อมต่อ';
 
   @override
-  String get dcRouteNone => 'Not connected';
+  String get dcRouteNone => 'ไม่ได้เชื่อมต่อ';
 
   @override
   String get dcStatusNeedsToken =>
-      'Needs a Discord token. Connecting the app does not set your online status.';
+      'จำเป็นต้องมีโทเค็น Discord การเชื่อมต่อแอปไม่ได้กำหนดสถานะออนไลน์ของคุณ';
 
   @override
-  String get dcAccountOnly => 'Needs a signed-in account';
+  String get dcAccountOnly => 'จำเป็นต้องมีบัญชีที่ลงชื่อเข้าใช้';
 
   @override
-  String get dcStatusSection => 'Status';
+  String get dcStatusSection => 'สถานะ';
 
   @override
-  String get dcControlStatus => 'Control my status';
+  String get dcControlStatus => 'ควบคุมสถานะของฉัน';
 
   @override
   String get dcControlStatusDesc =>
-      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+      'คงการเชื่อมต่อสดกับ Discord ในขณะที่ Rich Presence เปิดอยู่ ดังนั้น Dartotsu จึงสามารถตั้งค่าสถานะของคุณได้';
 
   @override
-  String get dcStatusOnline => 'Online';
+  String get dcStatusOnline => 'ออนไลน์';
 
   @override
-  String get dcStatusIdle => 'Idle';
+  String get dcStatusIdle => 'ไม่ได้ใช้งาน';
 
   @override
-  String get dcStatusDnd => 'Do not disturb';
+  String get dcStatusDnd => 'อย่ารบกวน';
 
   @override
-  String get dcStatusInvisible => 'Invisible';
+  String get dcStatusInvisible => 'มองไม่เห็น';
 
   @override
-  String get dcCustomStatus => 'Custom status';
+  String get dcCustomStatus => 'สถานะที่กำหนดเอง';
 
   @override
-  String get dcCustomStatusHint => 'What are you up to?';
+  String get dcCustomStatusHint => 'คุณทำอะไรอยู่?';
 
   @override
-  String get dcActivitySection => 'Activity';
+  String get dcActivitySection => 'กิจกรรม';
 
   @override
-  String get dcShowWatching => 'Show while watching';
+  String get dcShowWatching => 'แสดงในขณะที่รับชม';
 
   @override
-  String get dcShowReading => 'Show while reading';
+  String get dcShowReading => 'แสดงในขณะที่อ่าน';
 
   @override
-  String get dcListening => 'Listening';
+  String get dcListening => 'การฟัง';
 
   @override
-  String get dcCompeting => 'Competing';
+  String get dcCompeting => 'กำลังแข่งขัน';
 
   @override
-  String get dcActivityName => 'Activity name';
+  String get dcActivityName => 'ชื่อกิจกรรม';
 
   @override
   String get dcNameApp => 'Dartotsu';
 
   @override
-  String get dcNameTitle => 'Title';
+  String get dcNameTitle => 'ชื่อเรื่อง';
 
   @override
-  String get dcNameCustom => 'Custom';
+  String get dcNameCustom => 'กำหนดเอง';
 
   @override
-  String get dcCustomNameHint => 'Name shown after “Watching”';
+  String get dcCustomNameHint => 'ชื่อที่แสดงหลัง “รับชม”';
 
   @override
-  String get dcStatusText => 'Status text';
+  String get dcStatusText => 'ข้อความสถานะ';
 
   @override
-  String get dcStatusTextDesc => 'What the member list shows next to your name';
+  String get dcStatusTextDesc => 'สิ่งที่รายชื่อสมาชิกแสดงถัดจากชื่อของคุณ';
 
   @override
-  String get dcDisplayName => 'Name';
+  String get dcDisplayName => 'ชื่อ';
 
   @override
-  String get dcDisplayState => 'State';
+  String get dcDisplayState => 'รัฐ';
 
   @override
-  String get dcDisplayDetails => 'Details';
+  String get dcDisplayDetails => 'รายละเอียด';
 
   @override
-  String get dcTextSection => 'Text';
+  String get dcTextSection => 'ข้อความ';
 
   @override
-  String get dcDetails => 'Top line';
+  String get dcDetails => 'สายบน';
 
   @override
-  String get dcState => 'Bottom line';
+  String get dcState => 'บรรทัดล่าง';
 
   @override
-  String get dcTemplateHint => 'Empty uses the default';
+  String get dcTemplateHint => 'ว่างใช้ค่าเริ่มต้น';
 
   @override
-  String get dcVariables => 'Tap to insert a value';
+  String get dcVariables => 'แตะเพื่อใส่ค่า';
 
   @override
-  String get dcImagesSection => 'Images';
+  String get dcImagesSection => 'รูปภาพ';
 
   @override
-  String get dcLargeImage => 'Large image';
+  String get dcLargeImage => 'ภาพใหญ่';
 
   @override
-  String get dcLargeAuto => 'Auto';
+  String get dcLargeAuto => 'อัตโนมัติ';
 
   @override
-  String get dcLargeCover => 'Cover';
+  String get dcLargeCover => 'ปก';
 
   @override
-  String get dcLargeLogo => 'Logo';
+  String get dcLargeLogo => 'โลโก้';
 
   @override
-  String get dcSmallImage => 'Small image';
+  String get dcSmallImage => 'ภาพเล็ก';
 
   @override
-  String get dcSmallAuto => 'Logo';
+  String get dcSmallAuto => 'โลโก้';
 
   @override
-  String get dcSmallNone => 'None';
+  String get dcSmallNone => 'ไม่มี';
 
   @override
-  String get dcTimerStyle => 'Timer style';
+  String get dcTimerStyle => 'สไตล์ตัวจับเวลา';
 
   @override
-  String get dcTimerAuto => 'Auto';
+  String get dcTimerAuto => 'อัตโนมัติ';
 
   @override
-  String get dcTimerElapsed => 'Elapsed';
+  String get dcTimerElapsed => 'ผ่านไปแล้ว';
 
   @override
-  String get dcTimerRemaining => 'Remaining';
+  String get dcTimerRemaining => 'ที่เหลืออยู่';
 
   @override
-  String get dcButtonsSection => 'Buttons';
+  String get dcButtonsSection => 'ปุ่ม';
 
   @override
-  String get dcButtonMedia => 'Link to the title';
+  String get dcButtonMedia => 'เชื่อมโยงไปยังชื่อเรื่อง';
 
   @override
-  String get dcButtonApp => 'Link to Dartotsu';
+  String get dcButtonApp => 'ลิงค์ไปยังดาร์ทตสึ';
 
   @override
-  String get dcButtonCustom => 'Custom button';
+  String get dcButtonCustom => 'ปุ่มกำหนดเอง';
 
   @override
-  String get dcButtonLabel => 'Label';
+  String get dcButtonLabel => 'ป้ายกำกับ';
 
   @override
-  String get dcButtonUrl => 'Link';
+  String get dcButtonUrl => 'ลิงค์';
 
   @override
-  String get dcPrivacySection => 'Privacy';
+  String get dcPrivacySection => 'ความเป็นส่วนตัว';
 
   @override
-  String get dcPrivateText => 'Private text';
+  String get dcPrivateText => 'ข้อความส่วนตัว';
 
   @override
-  String get dcPrivateHint => 'Something private';
+  String get dcPrivateHint => 'บางสิ่งบางอย่างที่เป็นส่วนตัว';
 
   @override
   String get dcTokenWarning =>
-      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+      'การลงชื่อเข้าใช้จะใช้โทเค็นบัญชีของคุณ กฎของ Discord ไม่สนับสนุนสิ่งนี้ ดังนั้นให้ใช้โดยยอมรับความเสี่ยงเอง';
 
   @override
-  String get dcConnected => 'Connected';
+  String get dcConnected => 'เชื่อมต่อแล้ว';
 
   @override
-  String get dcConnection => 'Connection';
+  String get dcConnection => 'การเชื่อมต่อ';
 
   @override
-  String get dcMethodDesktop => 'Discord desktop app';
+  String get dcMethodDesktop => 'แอพเดสก์ท็อป Discord';
 
   @override
   String get dcMethodDesktopDesc =>
-      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+      'ใช้โดยอัตโนมัติเมื่อไม่มีการเชื่อมต่อใดๆ อีก ต้องเปิด Discord ในคอมพิวเตอร์เครื่องนี้';
 
   @override
-  String get dcMethodToken => 'Account token';
+  String get dcMethodToken => 'โทเค็นบัญชี';
 
   @override
-  String get dcInUse => 'In use';
+  String get dcInUse => 'ในการใช้งาน';
 
   @override
-  String get dcRecommended => 'Recommended';
+  String get dcRecommended => 'แนะนำ';
 
   @override
-  String get dcConnecting => 'Connecting…';
+  String get dcConnecting => 'กำลังเชื่อมต่อ...';
 
   @override
-  String get dcDisconnected => 'Not connected';
+  String get dcDisconnected => 'ไม่ได้เชื่อมต่อ';
 
   @override
   String dcSignedInAs(String name) {
-    return 'Signed in as $name';
+    return 'ลงชื่อเข้าใช้ด้วย $name';
   }
 
   @override
-  String get settingsSyncOn => 'On';
+  String get settingsSyncOn => 'เปิด';
 
   @override
-  String get settingsSyncCustom => 'Custom';
+  String get settingsSyncCustom => 'กำหนดเอง';
 
   @override
-  String get settingsSyncChangedHeader => 'Changed settings';
+  String get settingsSyncChangedHeader => 'การตั้งค่าที่เปลี่ยนแปลง';
 
   @override
   String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+      'คุณยังไม่ได้เปลี่ยนแปลงสิ่งเหล่านี้ ดังนั้นจึงไม่มีอะไรจะซิงค์';
 
   @override
   String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+      'เฉพาะการตั้งค่าที่คุณเปลี่ยนแปลงเท่านั้นที่จะถูกเก็บไว้ ทุกสิ่งทุกอย่างใช้ค่าเริ่มต้นในทุกอุปกรณ์ ไอคอนคลาวด์แสดงสิ่งที่มีอยู่แล้วบนเซิร์ฟเวอร์';
 
   @override
   String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+      'ไม่ซิงค์ สิ่งเหล่านี้จะคงอยู่ในอุปกรณ์นี้และสำเนาของเซิร์ฟเวอร์จะยังคงอยู่เหมือนเดิม';
 
   @override
   String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+      'ต่ออุปกรณ์ ปิดจะคงมูลค่าของอุปกรณ์แต่ละเครื่อง ดังนั้นโทรศัพท์และทีวีอาจแตกต่างกัน';
 
   @override
-  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+  String get settingsSyncPartSubtitles => 'ขนาดและสีของคำบรรยาย';
 
   @override
-  String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+  String get settingsSyncPartSubtitlesDesc => 'ขนาด น้ำหนัก สี และตำแหน่ง';
 
   @override
-  String get settingsSyncPartPictureColors => 'Picture colours';
+  String get settingsSyncPartPictureColors => 'สีของภาพ';
 
   @override
   String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+      'ความสว่าง คอนทราสต์ ความอิ่มตัว แกมมา เฉดสี และ HDR';
 
   @override
-  String get settingsSyncPartPalette => 'Theme colours';
+  String get settingsSyncPartPalette => 'สีของธีม';
 
   @override
-  String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+  String get settingsSyncPartPaletteDesc => 'ธีม สีเน้น และ OLED สีดำ';
 
   @override
-  String get settingsSyncCatOther => 'Watch, read and services';
+  String get settingsSyncCatOther => 'ดู อ่าน และบริการ';
 
   @override
-  String get settingsSyncTitles => 'Watch progress and titles';
+  String get settingsSyncTitles => 'ดูความคืบหน้าและชื่อเรื่อง';
 
   @override
   String settingsSyncTitlesCount(Object records, Object resume) {
-    return '$records titles and $resume resume entries on the server';
+    return '$records title และ $resume รายการดำเนินการต่อบนเซิร์ฟเวอร์';
   }
 
   @override
-  String get settingsSyncTitlesNone => 'Nothing uploaded yet';
+  String get settingsSyncTitlesNone => 'ยังไม่ได้อัพโหลดอะไรเลย';
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      'ดูและอ่านตำแหน่ง ชั้นวางเรซูเม่ รายการท้องถิ่นของคุณ บุ๊กมาร์ก ไฮไลท์ และตัวเลือกต่อชื่อเรื่อง การจับคู่และสตรีมแหล่งที่มาจะอยู่บนแต่ละอุปกรณ์เนื่องจากขึ้นอยู่กับส่วนขยายของคุณ ชื่อเรื่องจะอัปโหลดได้มากที่สุดทุกๆ 45 วินาที';
 
   @override
-  String get settingsSyncConnect => 'Not connected';
+  String get settingsSyncConnect => 'ไม่ได้เชื่อมต่อ';
 
   @override
   String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+      'ลงชื่อเข้าใช้ด้วย GitHub เพื่อให้การตั้งค่าของคุณเหมือนเดิมในทุกอุปกรณ์';
 
   @override
-  String get settingsSyncFailedTitle => 'Sync failed';
+  String get settingsSyncFailedTitle => 'การซิงค์ล้มเหลว';
 
   @override
-  String get settingsSyncPaused => 'Paused';
+  String get settingsSyncPaused => 'หยุดชั่วคราว';
 
   @override
   String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+      'ไม่มีการอัปโหลดหรือดาวน์โหลดในขณะที่ปิดอยู่';
 
   @override
-  String get settingsSyncUpToDate => 'Up to date';
+  String get settingsSyncUpToDate => 'ถึงวันที่';
 
   @override
-  String get settingsSyncRetry => 'Retry';
+  String get settingsSyncRetry => 'ลองอีกครั้ง';
 
   @override
-  String get settingsSyncAccount => 'GitHub account';
+  String get settingsSyncAccount => 'บัญชี GitHub';
 
   @override
   String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+      'ข้อมูลของคุณไปที่ส่วนสำคัญส่วนตัวในบัญชีของคุณเอง';
 
   @override
-  String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
+  String get settingsSyncWaiting => 'กำลังรอให้คุณอนุมัติบน GitHub';
 
   @override
-  String get settingsSyncCopyCode => 'Tap the code to copy it';
+  String get settingsSyncCopyCode => 'แตะรหัสเพื่อคัดลอก';
 
   @override
-  String get settingsSyncCancel => 'Cancel';
+  String get settingsSyncCancel => 'ยกเลิก';
 
   @override
-  String get settingsSyncStatSettings => 'Settings';
+  String get settingsSyncStatSettings => 'การตั้งค่า';
 
   @override
-  String get settingsSyncStatTitles => 'Titles';
+  String get settingsSyncStatTitles => 'ชื่อเรื่อง';
 
   @override
-  String get settingsSyncStatShelf => 'Resume';
+  String get settingsSyncStatShelf => 'ดำเนินการต่อ';
 
   @override
   String settingsSyncUploaded(Object time, Object device) {
-    return 'Uploaded $time from $device';
+    return 'อัปโหลด $time จาก $device';
   }
 
   @override
@@ -845,121 +843,121 @@ class AppLocalizationsTh extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count changed',
-      one: '1 changed',
-      zero: 'Nothing changed yet',
+      other: '$count มีการเปลี่ยนแปลง',
+      one: 'มีการเปลี่ยนแปลง 1 รายการ',
+      zero: 'ยังไม่มีอะไรเปลี่ยนแปลง',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncSecrets => 'Accounts and passwords';
+  String get settingsSyncSecrets => 'บัญชีและรหัสผ่าน';
 
   @override
   String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+      'ซิงค์การลงชื่อเข้าใช้ของคุณ (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), คีย์ API และการล็อคแอประหว่างอุปกรณ์ของคุณ พวกมันถูกเข้ารหัสด้วยข้อความรหัสผ่านที่จะคงอยู่ในอุปกรณ์ของคุณ ดังนั้น GitHub จะไม่เห็นมันเลย';
 
   @override
-  String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
+  String get settingsSyncSecretsOn => 'บัญชีถูกซิงค์และเข้ารหัส';
 
   @override
   String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+      'การออกจากระบบบนอุปกรณ์เครื่องหนึ่งไม่ได้ทำให้คุณออกจากระบบในอุปกรณ์อื่นๆ';
 
   @override
   String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+      'ข้อความรหัสผ่านไม่ตรงกับข้อความบนเซิร์ฟเวอร์อีกต่อไป ป้อนอีกครั้งเพื่อซิงค์บัญชีต่อไป';
 
   @override
-  String get settingsSyncPassphraseSet => 'Set a passphrase';
+  String get settingsSyncPassphraseSet => 'ตั้งข้อความรหัสผ่าน';
 
   @override
-  String get settingsSyncPassphraseEnter => 'Enter your passphrase';
+  String get settingsSyncPassphraseEnter => 'ป้อนข้อความรหัสผ่านของคุณ';
 
   @override
-  String get settingsSyncPassphraseField => 'Passphrase';
+  String get settingsSyncPassphraseField => 'ข้อความรหัสผ่าน';
 
   @override
-  String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
+  String get settingsSyncPassphraseConfirm => 'ทำซ้ำข้อความรหัสผ่าน';
 
   @override
   String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+      'เลือกข้อความรหัสผ่านอย่างน้อย 6 ตัวอักษร มันไม่ได้ถูกจัดเก็บไว้ที่ใดนอกจากอุปกรณ์ของคุณและไม่สามารถกู้คืนได้ หากคุณลืม ให้ลบสำเนาเซิร์ฟเวอร์แล้วเริ่มต้นใหม่อีกครั้ง';
 
   @override
   String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+      'ป้อนข้อความรหัสผ่านที่คุณเลือกบนอุปกรณ์อื่นของคุณ บัญชีบนอุปกรณ์นี้จะถูกแทนที่ด้วยบัญชีที่ซิงค์';
 
   @override
-  String get settingsSyncPassphraseWrong => 'Wrong passphrase';
+  String get settingsSyncPassphraseWrong => 'ข้อความรหัสผ่านไม่ถูกต้อง';
 
   @override
-  String get settingsSyncPassphraseMismatch => 'The passphrases do not match';
+  String get settingsSyncPassphraseMismatch => 'ข้อความรหัสผ่านไม่ตรงกัน';
 
   @override
-  String get settingsSyncPassphraseShort => 'Use at least 6 characters';
+  String get settingsSyncPassphraseShort => 'ใช้อักขระอย่างน้อย 6 ตัว';
 
   @override
-  String get settingsSyncSecretsStop => 'Stop syncing accounts';
+  String get settingsSyncSecretsStop => 'หยุดการซิงค์บัญชี';
 
   @override
-  String get settingsSyncSecretsDelete => 'Delete from GitHub';
+  String get settingsSyncSecretsDelete => 'ลบออกจาก GitHub';
 
   @override
   String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+      'การดำเนินการนี้จะลบไฟล์บัญชีที่เข้ารหัสออกจากส่วนสำคัญของคุณ อุปกรณ์อื่นๆ จะเก็บการลงชื่อเข้าใช้ไว้และสามารถตั้งค่าข้อความรหัสผ่านใหม่ได้';
 
   @override
-  String get settingsSyncWhat => 'What to sync';
+  String get settingsSyncWhat => 'สิ่งที่ต้องซิงค์';
 
   @override
-  String get settingsSyncServer => 'On the server';
+  String get settingsSyncServer => 'บนเซิร์ฟเวอร์';
 
   @override
-  String get settingsSyncServerEmpty => 'Nothing uploaded yet';
+  String get settingsSyncServerEmpty => 'ยังไม่ได้อัพโหลดอะไรเลย';
 
   @override
   String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count settings, uploaded $time from $device';
+    return 'การตั้งค่า $count อัปโหลด $time จาก $device';
   }
 
   @override
-  String get settingsSyncThisDevice => 'this device';
+  String get settingsSyncThisDevice => 'อุปกรณ์นี้';
 
   @override
   String settingsSyncCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count settings on the server',
-      one: '1 setting on the server',
-      zero: 'Nothing on the server',
+      other: '$count การตั้งค่าบนเซิร์ฟเวอร์',
+      one: '1 การตั้งค่าบนเซิร์ฟเวอร์',
+      zero: 'ไม่มีอะไรบนเซิร์ฟเวอร์',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncNow => 'Sync now';
+  String get settingsSyncNow => 'ซิงค์เลย';
 
   @override
-  String get settingsSyncRunning => 'Syncing…';
+  String get settingsSyncRunning => 'กำลังซิงค์...';
 
   @override
-  String get settingsSyncNever => 'Not synced yet';
+  String get settingsSyncNever => 'ยังไม่ได้ซิงค์';
 
   @override
   String settingsSyncLast(Object time) {
-    return 'Last synced $time';
+    return 'ซิงค์ครั้งล่าสุด $time';
   }
 
   @override
   String settingsSyncFailed(Object error) {
-    return 'Sync failed: $error';
+    return 'การซิงค์ล้มเหลว: $error';
   }
 
   @override
   String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+      'ซิงค์เฉพาะการตั้งค่าที่ทำงานเหมือนกันทุกที่เท่านั้น บัญชี โทเค็น โฟลเดอร์ ส่วนขยาย การแจ้งเตือน Discord อัปเดต และขนาดหน้าต่างจะยังคงอยู่ในแต่ละอุปกรณ์';
 
   @override
   String get backupAndRestore => 'สำรองและกู้คืน';
@@ -977,11 +975,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get loadExtensionsIcon => 'โหลดไอคอนส่วนขยาย';
 
   @override
-  String get autoUpdateRuntimes => 'Update extension runtimes automatically';
+  String get autoUpdateRuntimes => 'อัปเดตรันไทม์ส่วนขยายโดยอัตโนมัติ';
 
   @override
   String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+      'ดาวน์โหลด Aniyomi, CloudStream และเวอร์ชันรันไทม์อื่นๆ ใหม่ในเบื้องหลัง ปิด ไอคอนอัปเดตจะปรากฏถัดจากผู้จัดการแทน';
 
   @override
   String get loadExtensionsIconDesc => 'แสดงไอคอนซอร์สในรายการส่วนขยาย';
@@ -1026,15 +1024,15 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get backupPasswordRequired => 'Password (required for account data)';
+  String get backupPasswordRequired => 'รหัสผ่าน (จำเป็นสำหรับข้อมูลบัญชี)';
 
   @override
   String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+      'ตั้งรหัสผ่านเพื่อสำรองข้อมูลบัญชีหรือยกเลิกการเลือก';
 
   @override
   String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+      'ข้อมูลสำรองนี้ไม่มีรหัสผ่าน ข้อมูลบัญชีจึงถูกข้ามไป';
 
   @override
   String get backupPassword => 'รหัสผ่าน (ไม่บังคับ)';
@@ -1155,63 +1153,63 @@ class AppLocalizationsTh extends AppLocalizations {
   String get logFileDesc => 'แชร์ล็อกของแอป หรือคัดลอกพาธบน Linux';
 
   @override
-  String get logDelete => 'Delete log files';
+  String get logDelete => 'ลบไฟล์บันทึก';
 
   @override
-  String get logDeleteDesc => 'Clear the saved app logs to free up space';
+  String get logDeleteDesc => 'ล้างบันทึกแอปที่บันทึกไว้เพื่อเพิ่มพื้นที่ว่าง';
 
   @override
   String logDeleted(String size) {
-    return 'Deleted $size of logs';
+    return 'ลบ $size ของบันทึกแล้ว';
   }
 
   @override
-  String get missingSequel => 'Missing Sequel';
+  String get missingSequel => 'ภาคต่อที่หายไป';
 
   @override
-  String get rising => 'Rising';
+  String get rising => 'เพิ่มขึ้น';
 
   @override
-  String get stacks => 'Stacks';
+  String get stacks => 'สแต็ค';
 
   @override
-  String get stacksAll => 'All';
+  String get stacksAll => 'ทั้งหมด';
 
   @override
-  String get stacksFeatured => 'Featured';
+  String get stacksFeatured => 'จุดเด่น';
 
   @override
-  String get stacksMine => 'Yours';
+  String get stacksMine => 'ของคุณ';
 
   @override
-  String get stacksSaved => 'Saved';
+  String get stacksSaved => 'บันทึกแล้ว';
 
   @override
-  String get stacksFollowing => 'Following';
+  String get stacksFollowing => 'กำลังติดตาม';
 
   @override
-  String get stacksEmpty => 'No stacks here yet';
+  String get stacksEmpty => 'ยังไม่มีสแต็คที่นี่';
 
   @override
-  String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
+  String get stacksSignIn => 'ลงชื่อเข้าใช้ MangaBaka เพื่อดูสแต็คของคุณ';
 
   @override
   String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+      'สแต็คของคุณจำเป็นต้องได้รับอนุญาตใหม่ ลงชื่อเข้าใช้ MangaBaka อีกครั้งเพื่ออนุญาต';
 
   @override
-  String get stacksSignInAgain => 'Sign in again';
+  String get stacksSignInAgain => 'ลงชื่อเข้าใช้อีกครั้ง';
 
   @override
-  String get stacksCouldntLoad => 'Couldn\'t load the stacks';
+  String get stacksCouldntLoad => 'ไม่สามารถโหลดสแต็กได้';
 
   @override
   String stackSeriesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count series',
-      one: '1 series',
+      other: '$count ซีรีส์',
+      one: '1 ชุด',
     );
     return '$_temp0';
   }
@@ -1221,48 +1219,48 @@ class AppLocalizationsTh extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count saves',
-      one: '1 save',
+      other: '$count บันทึก',
+      one: '1 บันทึก',
     );
     return '$_temp0';
   }
 
   @override
   String stackBy(String name) {
-    return 'by $name';
+    return 'โดย $name';
   }
 
   @override
-  String get stackSpoilers => 'Spoilers';
+  String get stackSpoilers => 'สปอยเลอร์';
 
   @override
-  String get stackEmptyEntries => 'This stack is empty';
+  String get stackEmptyEntries => 'กองนี้ว่างเปล่า';
 
   @override
-  String get stackSave => 'Save stack';
+  String get stackSave => 'บันทึกสแต็ค';
 
   @override
-  String get stackUnsave => 'Remove from saved';
+  String get stackUnsave => 'ลบออกจากที่บันทึกไว้';
 
   @override
-  String get stackSavedToast => 'Saved to your stacks';
+  String get stackSavedToast => 'บันทึกลงในสแต็คของคุณแล้ว';
 
   @override
-  String get stackRemovedToast => 'Removed from your saved stacks';
+  String get stackRemovedToast => 'ลบออกจากสแต็คที่คุณบันทึกไว้';
 
   @override
   String userStacks(String name) {
-    return 'Stacks by $name';
+    return 'สแต็คโดย $name';
   }
 
   @override
-  String get newsTitle => 'News';
+  String get newsTitle => 'ข่าว';
 
   @override
-  String get newsEmpty => 'No news right now';
+  String get newsEmpty => 'ไม่มีข่าวในขณะนี้';
 
   @override
-  String get newsCouldntLoad => 'Couldn\'t load the news';
+  String get newsCouldntLoad => 'ไม่สามารถโหลดข่าวได้';
 
   @override
   String get logFileCopied => 'คัดลอกพาธล็อกแล้ว';
@@ -1294,11 +1292,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get followCoverDesc => 'สีจะตามพื้นหลัง และตามปกในหน้ารายละเอียด';
 
   @override
-  String get followCoverMediaOnly => 'Only for media';
+  String get followCoverMediaOnly => 'สำหรับสื่อเท่านั้น';
 
   @override
   String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+      'ติดตามเฉพาะหน้าปกสื่อเท่านั้น ส่วนอื่นๆ คงสีปกติไว้';
 
   @override
   String get cardStyle => 'สไตล์การ์ด';
@@ -1334,7 +1332,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get defaultFont => 'ค่าเริ่มต้น';
 
   @override
-  String get materialYou => 'Material You';
+  String get materialYou => 'วัสดุคุณ';
 
   @override
   String get materialYouDesc => 'สีไดนามิกจากระบบ';
@@ -1394,7 +1392,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get checkNow => 'เช็กเลย';
 
   @override
-  String get userAgent => 'User-Agent';
+  String get userAgent => 'ผู้ใช้-ตัวแทน';
 
   @override
   String get settingDefault => 'ค่าเริ่มต้น';
@@ -1405,7 +1403,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-over-HTTPS';
+  String get dnsOverHttps => 'DNS บน HTTPS';
 
   @override
   String get dnsDefault => 'ค่าเริ่มต้น (Cloudflare)';
@@ -1474,7 +1472,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get imageTitleCover => 'ปก';
 
   @override
-  String get imageTitlePage => 'Page';
+  String get imageTitlePage => 'หน้า';
 
   @override
   String get imageTitleBanner => 'แบนเนอร์';
@@ -1506,16 +1504,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordDesc => 'ชุมชนและการช่วยเหลือ';
 
   @override
-  String get supportDeveloper => 'Support the developer';
+  String get supportDeveloper => 'สนับสนุนนักพัฒนา';
 
   @override
-  String get buyMeCoffee => 'Buy me a coffee';
+  String get buyMeCoffee => 'ซื้อกาแฟให้ฉันหน่อย';
 
   @override
-  String get upiId => 'UPI ID';
+  String get upiId => 'รหัส UPI';
 
   @override
-  String get upiCopied => 'UPI ID copied';
+  String get upiCopied => 'คัดลอกรหัส UPI แล้ว';
 
   @override
   String get donateDesc => 'สนับสนุนการพัฒนา';
@@ -1530,7 +1528,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get contributorsLoadFailed => 'โหลดรายชื่อผู้ร่วมพัฒนาไม่ได้';
 
   @override
-  String get forks => 'Forks';
+  String get forks => 'ส้อม';
 
   @override
   String get forksDesc => 'โปรเจกต์ที่สร้างต่อจาก Dartotsu';
@@ -1570,7 +1568,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get onboardingLanguageBody =>
-      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+      'เลือกภาษาที่ Dartotsu จะแสดง คุณสามารถเปลี่ยนได้ในภายหลังในการตั้งค่า';
 
   @override
   String get onboardingPaletteTitle => 'ทำให้เป็นของคุณ';
@@ -1673,24 +1671,24 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String calendarChapter(int n) {
-    return 'Chapter $n';
+    return 'บทที่ $n';
   }
 
   @override
-  String get calendarExpected => 'Expected';
+  String get calendarExpected => 'คาดว่า';
 
   @override
-  String get castReceiverFailed => 'The Chromecast did not start its player';
+  String get castReceiverFailed => 'Chromecast ไม่ได้เริ่มโปรแกรมเล่น';
 
   @override
-  String get castPlaybackFailed => 'The device could not play this stream';
+  String get castPlaybackFailed => 'อุปกรณ์ไม่สามารถเล่นสตรีมนี้ได้';
 
   @override
-  String get shortcutNothingToContinue => 'Nothing to continue yet';
+  String get shortcutNothingToContinue => 'ยังไม่มีอะไรจะดำเนินต่อไป';
 
   @override
   String shortcutNoCalendar(String service) {
-    return '$service has no calendar';
+    return '$service ไม่มีปฏิทิน';
   }
 
   @override
@@ -1716,7 +1714,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get linkSettingsFailed => 'เปิดการตั้งค่าระบบไม่ได้';
 
   @override
-  String get discordRichPresence => 'Rich Presence';
+  String get discordRichPresence => 'การแสดงตนอันอุดมสมบูรณ์';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1848,7 +1846,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordTokenRemovedSnack => 'ลบโทเคน Discord แล้ว';
 
   @override
-  String get discordRichPresenceRow => 'Discord Rich Presence';
+  String get discordRichPresenceRow => 'ไม่ลงรอยกัน Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'เปิดอยู่ · แตะเพื่อเปลี่ยนหน้าตา';
@@ -1890,82 +1888,82 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mangaBakaLoginFailed => 'เข้าสู่ระบบ MangaBaka ไม่สำเร็จ';
 
   @override
-  String get comickLoginFailed => 'Comick login failed';
+  String get comickLoginFailed => 'การเข้าสู่ระบบ Comick ล้มเหลว';
 
   @override
-  String get tagline => 'Tagline';
+  String get tagline => 'สโลแกน';
 
   @override
-  String get trending => 'Trending';
+  String get trending => 'กำลังมาแรง';
 
   @override
-  String get anticipated => 'Anticipated';
+  String get anticipated => 'คาดการณ์ไว้';
 
   @override
-  String get watchlist => 'Watchlist';
+  String get watchlist => 'รายการเฝ้าดู';
 
   @override
-  String get recommendedShows => 'Recommended Shows';
+  String get recommendedShows => 'รายการแนะนำ';
 
   @override
-  String get recommendedMovies => 'Recommended Movies';
+  String get recommendedMovies => 'หนังแนะนำ';
 
   @override
-  String get boxOffice => 'Box Office';
+  String get boxOffice => 'บ็อกซ์ออฟฟิศ';
 
   @override
-  String get popularMovies => 'Popular Movies';
+  String get popularMovies => 'ภาพยนตร์ยอดนิยม';
 
   @override
-  String get popularShows => 'Popular Shows';
+  String get popularShows => 'รายการยอดนิยม';
 
   @override
-  String get anticipatedMovies => 'Anticipated Movies';
+  String get anticipatedMovies => 'ภาพยนตร์ที่คาดหวัง';
 
   @override
-  String get anticipatedShows => 'Anticipated Shows';
+  String get anticipatedShows => 'การแสดงที่คาดหวัง';
 
   @override
-  String get trendingShows => 'Trending Shows';
+  String get trendingShows => 'รายการที่ได้รับความนิยม';
 
   @override
-  String get mostWatchedThisWeek => 'Most Watched This Week';
+  String get mostWatchedThisWeek => 'มีคนดูมากที่สุดในสัปดาห์นี้';
 
   @override
-  String get sortMostViewed => 'Most viewed';
+  String get sortMostViewed => 'มีผู้ชมมากที่สุด';
 
   @override
-  String get sortMostFollowed => 'Most followed';
+  String get sortMostFollowed => 'มีคนติดตามมากที่สุด';
 
   @override
-  String get sortLatestUpdates => 'Latest updates';
+  String get sortLatestUpdates => 'อัพเดทล่าสุด';
 
   @override
-  String get translationStatusLabel => 'Translation';
+  String get translationStatusLabel => 'การแปล';
 
   @override
-  String get weeklySchedule => 'Weekly Schedule';
+  String get weeklySchedule => 'กำหนดการรายสัปดาห์';
 
   @override
-  String get mostFollowed => 'Most Followed';
+  String get mostFollowed => 'ติดตามมากที่สุด';
 
   @override
-  String get latestUpdates => 'Latest Updates';
+  String get latestUpdates => 'อัพเดทล่าสุด';
 
   @override
-  String get trendingAnime => 'Trending Anime';
+  String get trendingAnime => 'อะนิเมะที่กำลังมาแรง';
 
   @override
-  String get topRatedAnime => 'Top Rated Anime';
+  String get topRatedAnime => 'อะนิเมะยอดนิยม';
 
   @override
-  String get mostFollowedAnime => 'Most Followed Anime';
+  String get mostFollowedAnime => 'อนิเมะที่มีคนติดตามมากที่สุด';
 
   @override
-  String get comickProfile => 'Comick profile';
+  String get comickProfile => 'โปรไฟล์การ์ตูน';
 
   @override
-  String get refreshFromComick => 'Refresh from Comick';
+  String get refreshFromComick => 'รีเฟรชจาก Comick';
 
   @override
   String get mangaBakaProfile => 'โปรไฟล์ MangaBaka';
@@ -1974,25 +1972,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String get refreshFromMangaBaka => 'รีเฟรชจาก MangaBaka';
 
   @override
-  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+  String get mangaUpdatesLoginTitle => 'ลงชื่อเข้าใช้ MangaUpdates';
 
   @override
-  String get mangaUpdatesProfile => 'MangaUpdates profile';
+  String get mangaUpdatesProfile => 'โปรไฟล์ MangaUpdates';
 
   @override
-  String get mangaUpdatesAnimeStart => 'Anime adaptation starts';
+  String get mangaUpdatesAnimeStart => 'การปรับตัวของอะนิเมะเริ่มต้นขึ้น';
 
   @override
-  String get mangaUpdatesAnimeEnd => 'Anime adaptation ends';
+  String get mangaUpdatesAnimeEnd => 'การดัดแปลงอนิเมะจบลงแล้ว';
 
   @override
-  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+  String get refreshFromMangaUpdates => 'รีเฟรชจาก MangaUpdates';
 
   @override
-  String get usernameOnly => 'Username';
+  String get usernameOnly => 'ชื่อผู้ใช้';
 
   @override
-  String get releases => 'Releases';
+  String get releases => 'ข่าวประชาสัมพันธ์';
 
   @override
   String get artistsLabel => 'ศิลปิน';
@@ -2023,7 +2021,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get hideNsfwSourcesDesc =>
-      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+      'ซ่อนแหล่งที่มาที่มีเครื่องหมาย 18+ จากฟีดและเครื่องมือเลือกแหล่งที่มา พวกเขายังคงติดตั้งอยู่';
 
   @override
   String get hideNsfwDesc =>
@@ -2036,13 +2034,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get mangaBakaAccountOptions => 'ตัวเลือกบัญชี MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Comick account options';
+  String get comickAccountOptions => 'ตัวเลือกบัญชี Comick';
 
   @override
-  String get comickClientId => 'Comick Client ID';
+  String get comickClientId => 'รหัสลูกค้าการ์ตูน';
 
   @override
-  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc =>
+      'รหัสลูกค้าแบบกำหนดเองที่ลงทะเบียนบน comick.dev';
 
   @override
   String get couldNotUpdateKitsuSettings => 'อัปเดตการตั้งค่า Kitsu ไม่ได้';
@@ -2111,7 +2110,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get simklReadOnly => 'Simkl ให้สิทธิ์อ่านอย่างเดียว';
 
   @override
-  String get traktReadOnly => 'Trakt granted read-only access';
+  String get traktReadOnly => 'Trakt ให้สิทธิ์การเข้าถึงแบบอ่านอย่างเดียว';
 
   @override
   String get incognitoEditsBlocked => 'ไม่ระบุตัวตน: ห้ามแก้ไขรายการ';
@@ -2139,10 +2138,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get following => 'กำลังติดตาม';
 
   @override
-  String get followsMutual => 'Mutual';
+  String get followsMutual => 'ร่วมกัน';
 
   @override
-  String get followsNotMutual => 'Not mutual';
+  String get followsNotMutual => 'ไม่ซึ่งกันและกัน';
 
   @override
   String get homeSections => 'หมวดหน้าหลัก';
@@ -2167,7 +2166,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get addList => 'เพิ่มรายการ';
 
   @override
-  String get voiceActors => 'Voice actors';
+  String get voiceActors => 'นักพากย์';
 
   @override
   String voiceActorsIn(String name) {
@@ -2199,10 +2198,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get prequelSequel => 'ภาคก่อนและภาคต่อ';
 
   @override
-  String get prequel => 'Prequel';
+  String get prequel => 'พรีเควล';
 
   @override
-  String get sequel => 'Sequel';
+  String get sequel => 'ภาคต่อ';
 
   @override
   String get previousSeason => 'ซีซันก่อนหน้า';
@@ -2238,13 +2237,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get simklProfile => 'โปรไฟล์ Simkl';
 
   @override
-  String get traktProfile => 'Trakt profile';
+  String get traktProfile => 'ข้อมูลส่วนตัวของ Trakt';
 
   @override
   String get refreshFromSimkl => 'รีเฟรชจาก Simkl';
 
   @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
+  String get refreshFromTrakt => 'รีเฟรชจาก Trakt';
 
   @override
   String get repullProfileLibrary => 'ดึงโปรไฟล์และคลังของคุณใหม่';
@@ -2260,19 +2259,19 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get traktAttribution =>
-      'Data and artwork provided by Trakt. View on Trakt';
+      'ข้อมูลและอาร์ตเวิร์คจัดทำโดย Trakt ดูบน Trakt';
 
   @override
-  String get listsLiked => 'Liked';
+  String get listsLiked => 'ชอบ';
 
   @override
-  String get listsYours => 'Yours';
+  String get listsYours => 'ของคุณ';
 
   @override
-  String get traktVip => 'VIP';
+  String get traktVip => 'วีไอพี';
 
   @override
-  String get traktVipMember => 'Trakt VIP Member';
+  String get traktVipMember => 'สมาชิก VIP ของตรัง';
 
   @override
   String get onHold => 'พักไว้';
@@ -2299,11 +2298,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get moviesAndSeries => 'ภาพยนตร์และซีรีส์';
 
   @override
-  String get simklMoviesOnly => 'Movies & series only';
+  String get simklMoviesOnly => 'ภาพยนตร์และซีรีส์เท่านั้น';
 
   @override
   String get simklMoviesOnlyDesc =>
-      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+      'แทนที่แท็บอนิเมะ: ภาพยนตร์ก่อน จากนั้นจึงแสดงด้วยแถวอนิเมะสองสามแถว';
 
   @override
   String get trackingOnly => 'ติดตามอย่างเดียว';
@@ -2336,7 +2335,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get trailer => 'ตัวอย่าง';
 
   @override
-  String get trailerQuality => 'Trailer quality';
+  String get trailerQuality => 'คุณภาพรถพ่วง';
 
   @override
   String get titleCopied => 'คัดลอกชื่อแล้ว';
@@ -2352,7 +2351,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get detailStale =>
-      'AniList could not be reached. This is saved information and may be outdated.';
+      'ไม่สามารถเข้าถึง AniList นี่เป็นข้อมูลที่บันทึกไว้และอาจล้าสมัย';
 
   @override
   String get copyLink => 'คัดลอกลิงก์';
@@ -2393,48 +2392,48 @@ class AppLocalizationsTh extends AppLocalizations {
   String get popular => 'ยอดนิยม';
 
   @override
-  String get allCustomLists => 'All custom lists';
+  String get allCustomLists => 'รายการที่กำหนดเองทั้งหมด';
 
   @override
-  String get simklTitleLanguage => 'Anime title language';
+  String get simklTitleLanguage => 'ภาษาของชื่ออนิเมะ';
 
   @override
-  String get titleLanguageEnglish => 'English';
+  String get titleLanguageEnglish => 'อังกฤษ';
 
   @override
-  String get titleLanguageRomaji => 'Romaji';
+  String get titleLanguageRomaji => 'โรมาจิ';
 
   @override
-  String get simklListsTrending => 'Trending';
+  String get simklListsTrending => 'กำลังมาแรง';
 
   @override
-  String get simklListsMostLiked => 'Most liked';
+  String get simklListsMostLiked => 'ชอบมากที่สุด';
 
   @override
-  String get simklListsMostFollowed => 'Most followed';
+  String get simklListsMostFollowed => 'มีคนติดตามมากที่สุด';
 
   @override
-  String get simklListsOfficial => 'Official';
+  String get simklListsOfficial => 'เป็นทางการ';
 
   @override
   String simklListTitles(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
+      other: '$count ชื่อ',
+      one: '1 ชื่อ',
     );
     return '$_temp0';
   }
 
   @override
-  String get people => 'People';
+  String get people => 'ผู้คน';
 
   @override
-  String get mostComments => 'Most comments';
+  String get mostComments => 'ความคิดเห็นมากที่สุด';
 
   @override
-  String get alphabetical => 'Alphabetical';
+  String get alphabetical => 'ตามตัวอักษร';
 
   @override
   String get latest => 'ล่าสุด';
@@ -2532,7 +2531,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get listOnly => 'เฉพาะในรายการ';
 
   @override
-  String get notInList => 'Not In List';
+  String get notInList => 'ไม่อยู่ในรายการ';
 
   @override
   String get filter => 'กรอง';
@@ -2649,21 +2648,21 @@ class AppLocalizationsTh extends AppLocalizations {
   String get refresh => 'รีเฟรช';
 
   @override
-  String get animePlanetRank => 'Rank';
+  String get animePlanetRank => 'อันดับ';
 
   @override
-  String get animePlanetMagazine => 'Magazine';
+  String get animePlanetMagazine => 'นิตยสาร';
 
   @override
-  String get animePlanetRefreshLists => 'Refresh your lists';
+  String get animePlanetRefreshLists => 'รีเฟรชรายการของคุณ';
 
   @override
   String get animePlanetRefreshListsDesc =>
-      'Read your Anime-Planet lists again';
+      'อ่านรายการ Anime-Planet ของคุณอีกครั้ง';
 
   @override
   String get animePlanetLocalNote =>
-      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
+      'ลงชื่อเข้าใช้เพื่อบันทึกการเปลี่ยนแปลงบัญชี Anime-Planet ของคุณ จนกว่าจะถึงตอนนั้นพวกเขาจะอยู่บนอุปกรณ์นี้';
 
   @override
   String get share => 'แชร์';
@@ -3173,14 +3172,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readingTabDesc => 'ส่วนขยายที่แท็บที่สามจะแสดง';
 
   @override
-  String get firstTab => 'First tab';
+  String get firstTab => 'แท็บแรก';
 
   @override
   String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+      'ส่วนขยายใดที่แท็บแรกแสดง เลือกมังงะที่นี่และนวนิยายบนแท็บการอ่านเพื่อส่งอนิเมะจากบาร์';
 
   @override
-  String get novelExtensions => 'Novel Extensions';
+  String get novelExtensions => 'ส่วนขยายนวนิยาย';
 
   @override
   String get defaultFeed => 'ฟีดเริ่มต้น';
@@ -3429,10 +3428,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get season => 'ซีซัน';
 
   @override
-  String get year => 'Year';
+  String get year => 'ปี';
 
   @override
-  String get filterAny => 'Any';
+  String get filterAny => 'อะไรก็ได้';
 
   @override
   String get broadcast => 'ออกอากาศ';
@@ -3459,7 +3458,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get dropped => 'ทิ้งกลางคัน';
 
   @override
-  String get unfinished => 'Unfinished';
+  String get unfinished => 'ยังไม่เสร็จ';
 
   @override
   String get planned => 'วางแผนไว้';
@@ -3516,13 +3515,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get born => 'วันเกิด';
 
   @override
-  String get died => 'Died';
+  String get died => 'เสียชีวิต';
 
   @override
-  String get birthplace => 'Birthplace';
+  String get birthplace => 'บ้านเกิด';
 
   @override
-  String get department => 'Department';
+  String get department => 'แผนก';
 
   @override
   String get website => 'เว็บไซต์';
@@ -3549,16 +3548,16 @@ class AppLocalizationsTh extends AppLocalizations {
   String get shows => 'รายการทีวี';
 
   @override
-  String get moviesWatched => 'Movies Watched';
+  String get moviesWatched => 'หนังที่ดู';
 
   @override
-  String get showsWatched => 'Shows Watched';
+  String get showsWatched => 'รายการที่ดู';
 
   @override
-  String get moviesCollected => 'Movies Collected';
+  String get moviesCollected => 'ภาพยนตร์ที่รวบรวมไว้';
 
   @override
-  String get showsCollected => 'Shows Collected';
+  String get showsCollected => 'การแสดงที่รวบรวมไว้';
 
   @override
   String get rewatching => 'กำลังดูซ้ำ';
@@ -3643,7 +3642,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sortNewest => 'ใหม่สุด';
 
   @override
-  String get sortAz => 'A–Z';
+  String get sortAz => 'ก-ฮ';
 
   @override
   String get sortMostFavourited => 'โปรดที่สุด';
@@ -3761,7 +3760,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get completedManga => 'มังงะที่จบแล้ว';
 
   @override
-  String get hiddenMedia => 'Hidden Media';
+  String get hiddenMedia => 'สื่อที่ซ่อนอยู่';
 
   @override
   String get recentUpdates => 'อัปเดตล่าสุด';
@@ -3861,17 +3860,17 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String repoLinkConfirm(String url) {
-    return 'Add this repository?\n\n$url\n\nOnly add repositories from sources you trust.';
+    return 'เพิ่มที่เก็บนี้หรือไม่\n\n$url\n\nเพิ่มที่เก็บข้อมูลจากแหล่งที่คุณเชื่อถือเท่านั้น';
   }
 
   @override
   String get errorGettingAnilistData => 'ดึงข้อมูลจาก AniList ผิดพลาด';
 
   @override
-  String get navInfo => 'INFO';
+  String get navInfo => 'ข้อมูล';
 
   @override
-  String get navComments => 'COMMENTS';
+  String get navComments => 'ความคิดเห็น';
 
   @override
   String get playerNotAvailable => 'เครื่องเล่นยังใช้ไม่ได้';
@@ -4113,7 +4112,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String updatePluginTitle(String name) {
-    return 'Update $name';
+    return 'อัปเดต $name';
   }
 
   @override
@@ -4206,42 +4205,42 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String syncServiceOn(String name) {
-    return 'Sync with $name';
+    return 'ซิงค์กับ $name';
   }
 
   @override
-  String get syncDelete => 'Delete what the main service doesn\'t have';
+  String get syncDelete => 'ลบสิ่งที่บริการหลักไม่มี';
 
   @override
   String get syncDeleteDesc =>
-      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+      'ลบรายการออกจากบริการอื่นที่ไม่อยู่ในรายการหลัก เฉพาะรายการที่สามารถจับคู่กับชื่อเรื่องเท่านั้นที่จะถูกลบออก ดังนั้นสิ่งต่างๆ เช่น ภาพยนตร์และซีรีส์ Simkl จะยังคงอยู่';
 
   @override
-  String get syncDeleteTitle => 'Delete entries?';
+  String get syncDeleteTitle => 'ลบรายการใช่ไหม';
 
   @override
   String syncDeleteConfirm(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries',
-      one: '1 entry',
+      other: '$count รายการ',
+      one: '1 รายการ',
     );
-    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+    return '$_temp0 ที่ไม่ได้อยู่ในรายการหลักของคุณจะถูกลบออกจากบริการอื่น ๆ สิ่งนี้ไม่สามารถยกเลิกได้';
   }
 
   @override
-  String get syncDeleteAction => 'Delete';
+  String get syncDeleteAction => 'ลบ';
 
   @override
-  String get syncToDelete => 'To delete';
+  String get syncToDelete => 'หากต้องการลบ';
 
   @override
-  String get syncDeletedNote => 'Will be deleted';
+  String get syncDeletedNote => 'จะถูกลบทิ้ง';
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count will be deleted from $name';
+    return '$count จะถูกลบออกจาก $name';
   }
 
   @override
@@ -4251,52 +4250,52 @@ class AppLocalizationsTh extends AppLocalizations {
   String get syncOnlyForwardDesc => 'ไม่ลดความคืบหน้าของบริการที่นำอยู่แล้ว';
 
   @override
-  String get animePlanetWontWatch => 'Won\'t watch';
+  String get animePlanetWontWatch => 'จะไม่ดู';
 
   @override
-  String get animePlanetWontRead => 'Won\'t read';
+  String get animePlanetWontRead => 'จะไม่อ่าน';
 
   @override
-  String get animePlanetAlreadyOnList => 'Already on this list';
+  String get animePlanetAlreadyOnList => 'อยู่ในรายการนี้แล้ว';
 
   @override
-  String get animePlanetNewList => 'New list name';
+  String get animePlanetNewList => 'ชื่อรายการใหม่';
 
   @override
-  String get syncPrivate => 'Private entries';
+  String get syncPrivate => 'รายการส่วนตัว';
 
   @override
   String get syncPrivateDesc =>
-      'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly';
+      'จะทำอย่างไรกับรายการที่คุณเก็บไว้เป็นส่วนตัว บริการที่มีตัวเลือกส่วนตัวจะทำให้เป็นส่วนตัว คนอื่นจะแสดงต่อสาธารณะ';
 
   @override
-  String get syncPrivateModeAsk => 'Ask';
+  String get syncPrivateModeAsk => 'ถาม';
 
   @override
-  String get syncPrivateModeSync => 'Sync them';
+  String get syncPrivateModeSync => 'ซิงค์พวกเขา';
 
   @override
-  String get syncPrivateModeSkip => 'Skip them';
+  String get syncPrivateModeSkip => 'ข้ามพวกเขา';
 
   @override
-  String get syncPrivateTitle => 'Private entries';
+  String get syncPrivateTitle => 'รายการส่วนตัว';
 
   @override
   String syncPrivateAsk(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries are private',
-      one: '1 entry is private',
+      other: '$count รายการเป็นแบบส่วนตัว',
+      one: '1 รายการเป็นแบบส่วนตัว',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
+    return '$_temp0. บริการที่มีตัวเลือกส่วนตัว (AniList, Kitsu, MangaBaka) จะทำให้เป็นบริการส่วนตัว บริการอื่นๆ ไม่มีตัวเลือกส่วนตัวและจะแสดงต่อสาธารณะ ซิงค์พวกเขาเหรอ? คำตอบของคุณถูกจดจำไว้ เปลี่ยนภายใต้ตัวเลือกการซิงค์';
   }
 
   @override
-  String get syncPrivateInclude => 'Sync them';
+  String get syncPrivateInclude => 'ซิงค์พวกเขา';
 
   @override
-  String get syncPrivateSkip => 'Skip them';
+  String get syncPrivateSkip => 'ข้ามพวกเขา';
 
   @override
   String get syncFetch => 'ดึงข้อมูล';
@@ -4404,7 +4403,7 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String syncRemoved(String services) {
-    return 'Removed from $services';
+    return 'ลบออกจาก $services';
   }
 
   @override
@@ -4596,7 +4595,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get commentsSpoiler => 'สปอยล์';
 
   @override
-  String get commentsGif => 'GIF';
+  String get commentsGif => 'กิฟ';
 
   @override
   String get commentsGifSearch => 'ค้นหา GIF';
@@ -4742,7 +4741,7 @@ class AppLocalizationsTh extends AppLocalizations {
       'พิมพ์ ISBN ที่อยู่เหนือบาร์โค้ดด้านหลังเล่ม';
 
   @override
-  String get barcodeIsbnHint => 'ISBN';
+  String get barcodeIsbnHint => 'ไอเอสบีเอ็น';
 
   @override
   String get barcodeInvalid => 'นี่ไม่ใช่ ISBN ที่ถูกต้อง';
@@ -5366,23 +5365,23 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchSource => 'ซอร์ส';
 
   @override
-  String get sourceTags => 'Tags';
+  String get sourceTags => 'แท็ก';
 
   @override
   String get sourceTagsHint =>
-      'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.';
+      'แท็กแหล่งที่มานี้มีไว้เพื่ออะไร ชื่อจะแสดงแหล่งที่มาที่แท็กไว้ก่อน จากนั้นจึงระบุแหล่งที่มาที่ไม่ติดแท็ก แหล่งข้อมูล 18+ รายการแสดงเฉพาะชื่อเรื่องสำหรับผู้ใหญ่เท่านั้น';
 
   @override
-  String get sourceTagAnime => 'Anime';
+  String get sourceTagAnime => 'อะนิเมะ';
 
   @override
-  String get sourceTagMovies => 'Movies & Series';
+  String get sourceTagMovies => 'ภาพยนตร์และซีรีส์';
 
   @override
   String get sourceTagAdult => '18+';
 
   @override
-  String get sourceHiddenByTags => 'Hidden by tags';
+  String get sourceHiddenByTags => 'ซ่อนไว้ด้วยแท็ก';
 
   @override
   String get watchOptions => 'ตัวเลือก';
@@ -5505,87 +5504,86 @@ class AppLocalizationsTh extends AppLocalizations {
   String get watchCookiesCleared => 'ล้างคุกกี้แล้ว';
 
   @override
-  String get watchFailTimeout => 'The check didn\'t finish in time';
+  String get watchFailTimeout => 'เช็คไม่เสร็จทันเวลา';
 
   @override
   String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+      'ไซต์บล็อกอุปกรณ์นี้ (การเข้าถึงถูกปฏิเสธ) เช็คไม่ได้ช่วยอะไร';
 
   @override
   String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+      'การตรวจสอบนี้จำเป็นต้องแตะซึ่งโปรแกรมแก้ปัญหาพื้นหลังไม่สามารถทำได้';
 
   @override
   String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+      'หน้าเว็บไม่โหลด ตรวจสอบการเชื่อมต่อและที่อยู่ไซต์';
 
   @override
   String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+      'เว็บไซต์ปฏิเสธการกวาดล้างที่เพิ่งให้ไป ลองอีกครั้งหรือล้างคุกกี้';
 
   @override
-  String get watchFailDismissed => 'The check was closed before it finished';
+  String get watchFailDismissed => 'เช็คถูกปิดก่อนที่จะเสร็จสิ้น';
 
   @override
   String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+      'คุณปิดเช็คเมื่อสักครู่นี้ กด Solve it เพื่อลองอีกครั้ง';
 
   @override
-  String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+  String get watchFailQuiet => 'เช็คต้องการคุณ และแอปก็ทำงานได้ด้วยตัวเอง';
 
   @override
-  String get watchFailWebView => 'The background web view couldn\'t start';
+  String get watchFailWebView => 'ไม่สามารถเริ่มมุมมองเว็บพื้นหลังได้';
 
   @override
-  String get watchFailUnavailable => 'There is no screen to show the check on';
+  String get watchFailUnavailable => 'ไม่มีหน้าจอให้แสดงการตรวจสอบ';
 
   @override
-  String get watchStatusReady => 'Ready';
+  String get watchStatusReady => 'พร้อม';
 
   @override
-  String get watchStatusChallenge => 'Cloudflare check needed';
+  String get watchStatusChallenge => 'จำเป็นต้องตรวจสอบ Cloudflare';
 
   @override
-  String get watchStatusBlocked => 'Blocked by the site';
+  String get watchStatusBlocked => 'ถูกบล็อกโดยไซต์';
 
   @override
-  String get watchStatusOffline => 'Can\'t reach the site';
+  String get watchStatusOffline => 'ไม่สามารถเข้าถึงไซต์ได้';
 
   @override
-  String get watchStatusUntested => 'Not tested yet';
+  String get watchStatusUntested => 'ยังไม่ได้ทดสอบ';
 
   @override
-  String get watchStatusTesting => 'Testing the connection…';
+  String get watchStatusTesting => 'กำลังทดสอบการเชื่อมต่อ...';
 
   @override
-  String get watchStatusSolving => 'Passing the Cloudflare check…';
+  String get watchStatusSolving => 'กำลังผ่านการตรวจสอบ Cloudflare...';
 
   @override
   String watchSolvedBackground(int seconds) {
-    return 'Cloudflare check passed in the background ($seconds s)';
+    return 'การตรวจสอบ Cloudflare ผ่านในพื้นหลัง ($seconds s)';
   }
 
   @override
-  String get watchSolvedByUser => 'Cloudflare check passed';
+  String get watchSolvedByUser => 'ผ่านการตรวจสอบ Cloudflare แล้ว';
 
   @override
   String watchClearanceIssued(String time) {
-    return 'earned $time';
+    return 'ได้รับ $time';
   }
 
   @override
   String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+      'ได้รับการเคลียร์จากตัวแทนผู้ใช้รายอื่น ดังนั้นจึงไม่ถูกส่ง ทดสอบการเชื่อมต่อเพื่อรับการเชื่อมต่อใหม่';
 
   @override
-  String get watchSectionConnection => 'Connection';
+  String get watchSectionConnection => 'การเชื่อมต่อ';
 
   @override
-  String get watchSectionSession => 'Session';
+  String get watchSectionSession => 'เซสชัน';
 
   @override
-  String get watchSectionTools => 'Tools';
+  String get watchSectionTools => 'เครื่องมือ';
 
   @override
   String get watchMetaSource => 'รายละเอียดตอนจาก';
@@ -5618,24 +5616,24 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSectionEngine => 'เอนจิน';
 
   @override
-  String get playerSectionMpv => 'mpv';
+  String get playerSectionMpv => 'เอ็มพีวี';
 
   @override
   String get playerSpeed => 'ความเร็วในการเล่น';
 
   @override
-  String get localSource => 'Local files';
+  String get localSource => 'ไฟล์ในเครื่อง';
 
   @override
   String get localMissing =>
-      'This file or folder is no longer in your Local folder';
+      'ไฟล์หรือโฟลเดอร์นี้ไม่ได้อยู่ในโฟลเดอร์ในเครื่องของคุณอีกต่อไป';
 
   @override
-  String get playerStickyStage => 'Sticky video';
+  String get playerStickyStage => 'วิดีโอติดหนึบ';
 
   @override
   String get playerStickyStageDesc =>
-      'Keep the video fixed at the top while you scroll the episodes and comments below';
+      'ให้วิดีโอคงที่ที่ด้านบนในขณะที่คุณเลื่อนตอนและความคิดเห็นด้านล่าง';
 
   @override
   String get playerCursedSpeed => 'ความเร็วเพิ่มเติม';
@@ -5707,11 +5705,11 @@ class AppLocalizationsTh extends AppLocalizations {
       'ข้ามทันทีที่เริ่ม โดยใช้ AniSkip และไทม์สแตมป์ของสตรีม';
 
   @override
-  String get playerDisableSkips => 'Disable skips';
+  String get playerDisableSkips => 'ปิดการใช้งานการข้าม';
 
   @override
   String get playerDisableSkipsDesc =>
-      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
+      'ไม่มีการประทับเวลา AniSkip หรือสตรีม เครื่องหมายบท หรือข้ามการส่งในโปรแกรมเล่น';
 
   @override
   String get playerSkipOnce => 'ข้ามแค่ครั้งเดียว';
@@ -5775,13 +5773,13 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSubtitleOutline => 'เส้นขอบคำบรรยาย';
 
   @override
-  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+  String get playerSubtitleOutlineWidth => 'ความกว้างโครงร่างคำบรรยาย';
 
   @override
-  String get playerSubtitlePreview => 'Subtitle preview';
+  String get playerSubtitlePreview => 'ตัวอย่างคำบรรยาย';
 
   @override
-  String get playerSubtitlePreviewText => 'Subtitle preview text';
+  String get playerSubtitlePreviewText => 'ข้อความแสดงตัวอย่างคำบรรยาย';
 
   @override
   String get playerLibass => 'ใช้ libass';
@@ -5814,26 +5812,25 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerShadersDownload => 'ดาวน์โหลด Anime4K';
 
   @override
-  String get playerPictureSave => 'Save this frame';
+  String get playerPictureSave => 'บันทึกเฟรมนี้';
 
   @override
-  String get playerPictureOriginal => 'Original';
+  String get playerPictureOriginal => 'ต้นฉบับ';
 
   @override
-  String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+  String get playerPictureOriginalDesc => 'เฟรมตามวิดีโอไม่มีเชดเดอร์หรือสี';
 
   @override
-  String get playerPictureProcessed => 'With shaders and colors';
+  String get playerPictureProcessed => 'ด้วยเฉดสีและสี';
 
   @override
-  String get playerPictureProcessedDesc => 'The frame as you see it now';
+  String get playerPictureProcessedDesc => 'กรอบอย่างที่คุณเห็นตอนนี้';
 
   @override
-  String get playerPictureSaved => 'Frame saved';
+  String get playerPictureSaved => 'บันทึกเฟรมแล้ว';
 
   @override
-  String get playerPictureSaveFailed => 'Could not save the frame';
+  String get playerPictureSaveFailed => 'ไม่สามารถบันทึกเฟรมได้';
 
   @override
   String get playerShadersPreview => 'ดูตัวอย่างบนเฟรมนี้';
@@ -5903,14 +5900,14 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+      'Shaders ต้องการการเรนเดอร์ด้วยฮาร์ดแวร์ และผู้เล่นกำลังใช้การเรนเดอร์ซอฟต์แวร์ ปิดการเรนเดอร์ซอฟต์แวร์ในการตั้งค่า Player';
 
   @override
-  String get playerSoftwareRender => 'Software rendering';
+  String get playerSoftwareRender => 'การแสดงผลซอฟต์แวร์';
 
   @override
   String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+      'สำหรับวิดีโอสีดำเท่านั้น Shader ใช้งานไม่ได้กับมัน ใช้ในครั้งถัดไปที่เครื่องเล่นเปิดขึ้น';
 
   @override
   String get playerShadersCustomFiles => 'เชเดอร์ของคุณ';
@@ -6037,7 +6034,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerThreads => 'เธรดตัวถอดรหัส';
 
   @override
-  String get playerDeband => 'Deband';
+  String get playerDeband => 'ปลดแบนด์';
 
   @override
   String get playerDebandDesc => 'ลดแถบสีในเกรเดียนต์';
@@ -6128,30 +6125,30 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerQuality => 'คุณภาพ';
 
   @override
-  String get streamGroupSub => 'Sub';
+  String get streamGroupSub => 'ย่อย';
 
   @override
-  String get streamGroupHardSub => 'Hard Sub';
+  String get streamGroupHardSub => 'ฮาร์ดย่อย';
 
   @override
-  String get streamGroupSoftSub => 'Soft Sub';
+  String get streamGroupSoftSub => 'ซอฟท์ซับ';
 
   @override
-  String get streamGroupDub => 'Dub';
+  String get streamGroupDub => 'พากย์';
 
   @override
-  String get streamGroupRaw => 'Raw';
+  String get streamGroupRaw => 'ดิบ';
 
   @override
-  String get streamGroupOther => 'Other';
+  String get streamGroupOther => 'อื่นๆ';
 
   @override
   String streamsCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count streams',
-      one: '1 stream',
+      other: '$count สตรีม',
+      one: '1 สตรีม',
     );
     return '$_temp0';
   }
@@ -6160,8 +6157,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerStreams => 'สตรีม';
 
   @override
-  String get playerStreamFailedNext =>
-      'That stream won\'t play, trying the next one';
+  String get playerStreamFailedNext => 'สตรีมนั้นไม่เล่น กำลังลองสตรีมถัดไป';
 
   @override
   String get playerAutoSelect => 'เลือกสตรีมอัตโนมัติ';
@@ -6226,11 +6222,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerFailed => 'เปิดตอนนี้ไม่ได้';
 
   @override
-  String get readerOpenBook => 'Open a book';
+  String get readerOpenBook => 'เปิดหนังสือ';
 
   @override
   String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+      'อ่าน ePub (โปรแกรมอ่านนวนิยาย) หรือ PDF (โปรแกรมอ่านมังงะ) จากไฟล์ของคุณ';
 
   @override
   String get readerNoText => 'ตอนนี้ไม่มีข้อความ';
@@ -6258,7 +6254,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerMode => 'โหมดการอ่าน';
 
   @override
-  String get readerModeAuto => 'Auto (by series type)';
+  String get readerModeAuto => 'อัตโนมัติ (ตามประเภทซีรี่ส์)';
 
   @override
   String get readerModeRtl => 'ขวาไปซ้าย';
@@ -6390,22 +6386,22 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerFilterSepia => 'ซีเปีย';
 
   @override
-  String get readerFilterQuality => 'Image filter quality';
+  String get readerFilterQuality => 'คุณภาพของฟิลเตอร์ภาพ';
 
   @override
-  String get readerFilterQualityNone => 'None (Nearest neighbor)';
+  String get readerFilterQualityNone => 'ไม่มี (เพื่อนบ้านที่ใกล้ที่สุด)';
 
   @override
-  String get readerFilterQualityLow => 'Low (Bilinear)';
+  String get readerFilterQualityLow => 'ต่ำ (ไบลิเนียร์)';
 
   @override
-  String get readerFilterQualityMedium => 'Medium (Trilinear)';
+  String get readerFilterQualityMedium => 'ปานกลาง (ไตรลิเนียร์)';
 
   @override
-  String get readerFilterQualityHigh => 'High (Bicubic)';
+  String get readerFilterQualityHigh => 'สูง (ไบคิวบิก)';
 
   @override
-  String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
+  String get readerFilterQualityLanczos => 'Lanczos (สนิมคุณภาพสูง)';
 
   @override
   String get readerDim => 'หรี่';
@@ -6432,11 +6428,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerCropBordersDesc => 'ตัดขอบว่างสีขาวหรือดำออกจากหน้า';
 
   @override
-  String get readerLongPressSave => 'Hold a page to save it';
+  String get readerLongPressSave => 'กดค้างเพจไว้เพื่อบันทึก';
 
   @override
   String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+      'กดหน้าค้างไว้เพื่อเปิดตัวเลือกบันทึก แบ่งปัน และคัดลอก';
 
   @override
   String get readerVolumeKeys => 'ปุ่มเสียงพลิกหน้า';
@@ -6505,7 +6501,8 @@ class AppLocalizationsTh extends AppLocalizations {
   String get readerResetDesc => 'กลับเป็นค่าเริ่มต้น';
 
   @override
-  String get readerResetConfirm => 'Reset every reader setting to its default?';
+  String get readerResetConfirm =>
+      'รีเซ็ตการตั้งค่าเครื่องอ่านทุกรายการเป็นค่าเริ่มต้นหรือไม่';
 
   @override
   String get novelSize => 'ขนาดตัวอักษร';
@@ -6561,87 +6558,87 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String trackProgressAnimeLocal(String name) {
-    return 'Save your progress on $name to your list on this device as you watch?';
+    return 'บันทึกความคืบหน้าของคุณใน $name ลงในรายการบนอุปกรณ์นี้ในขณะที่คุณรับชมไหม';
   }
 
   @override
   String trackProgressMangaLocal(String name) {
-    return 'Save your progress on $name to your list on this device when you finish a chapter?';
+    return 'บันทึกความคืบหน้าของคุณใน $name ลงในรายการบนอุปกรณ์นี้เมื่อคุณอ่านบทจบหรือไม่';
   }
 
   @override
-  String get downloadClearQueue => 'Clear queue';
+  String get downloadClearQueue => 'เคลียร์คิว';
 
   @override
   String downloadClearQueueConfirm(int count) {
-    return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+    return 'ยกเลิกการดาวน์โหลด $count ทั้งหมดในคิวหรือไม่ สิ่งที่ดาวน์โหลดไปแล้วจะถูกลบออก';
   }
 
   @override
   String downloadSelectedCount(int count) {
-    return '$count selected';
+    return '$count เลือกแล้ว';
   }
 
   @override
-  String get downloadSelectAll => 'Select all';
+  String get downloadSelectAll => 'เลือกทั้งหมด';
 
   @override
-  String get downloadDeleteSelected => 'Delete selected';
+  String get downloadDeleteSelected => 'ลบที่เลือกไว้';
 
   @override
   String downloadDeleteSelectedConfirm(int count) {
-    return 'Delete $count downloads? Their files are removed from the device.';
+    return 'ลบการดาวน์โหลด $count หรือไม่ ไฟล์ของพวกเขาจะถูกลบออกจากอุปกรณ์';
   }
 
   @override
-  String get castTitle => 'Cast to device';
+  String get castTitle => 'แคสต์ไปยังอุปกรณ์';
 
   @override
-  String get castSearching => 'Looking for devices on your network…';
+  String get castSearching => 'กำลังค้นหาอุปกรณ์บนเครือข่ายของคุณ...';
 
   @override
   String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+      'ไม่พบอุปกรณ์ ตรวจสอบว่าทีวีหรือ Chromecast ใช้ Wi-Fi เดียวกัน จากนั้นค้นหาอีกครั้ง';
 
   @override
-  String get castRefresh => 'Search again';
+  String get castRefresh => 'ค้นหาอีกครั้ง';
 
   @override
-  String get castFailed => 'Could not start casting';
+  String get castFailed => 'ไม่สามารถเริ่มแคสต์ได้';
 
   @override
-  String get castStop => 'Stop casting';
+  String get castStop => 'หยุดแคสต์';
 
   @override
   String castNowCasting(String name) {
-    return 'Casting to $name';
+    return 'กำลังส่งไปที่ $name';
   }
 
   @override
-  String get castProtocolChromecast => 'Chromecast';
+  String get castProtocolChromecast => 'โครมแคสต์';
 
   @override
-  String get castProtocolDlna => 'DLNA / Smart TV';
+  String get castProtocolDlna => 'ดีแอลเอ็นเอ / สมาร์ททีวี';
 
   @override
-  String get castProtocolRoku => 'Roku';
+  String get castProtocolRoku => 'โรคุ';
 
   @override
-  String get castRokuNote => 'Roku can\'t report or change the position';
+  String get castRokuNote => 'โรคุไม่สามารถรายงานหรือเปลี่ยนตำแหน่งได้';
 
   @override
-  String get castControls => 'Controls';
+  String get castControls => 'การควบคุม';
 
   @override
-  String get castVolume => 'TV volume';
+  String get castVolume => 'ระดับเสียงทีวี';
 
   @override
   String castSkipPart(String name) {
-    return 'Skip $name';
+    return 'ข้าม $name';
   }
 
   @override
-  String get trackProgressRememberSeries => 'Remember for this series';
+  String get trackProgressRememberSeries => 'จำไว้สำหรับซีรีย์นี้';
 
   @override
   String get trackProgressYes => 'บันทึก';
@@ -6723,7 +6720,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get dantotsuTheme => 'ธีม';
 
   @override
-  String get themePickerTitle => 'Theme';
+  String get themePickerTitle => 'ธีม';
 
   @override
   String get dantotsuReposAnime => 'คลังส่วนขยายอนิเมะ';
@@ -6783,11 +6780,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String togetherLinkConfirm(String room) {
-    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+    return 'เข้าร่วมห้อง $room? พิธีกรเลือกว่าจะเล่นอะไรและผู้เล่นจะเปิดเองเมื่อเริ่มดู';
   }
 
   @override
-  String get togetherJoin => 'Join';
+  String get togetherJoin => 'เข้าร่วม';
 
   @override
   String get togetherName => 'ชื่อของคุณ';
@@ -6811,11 +6808,11 @@ class AppLocalizationsTh extends AppLocalizations {
   String get togetherCopyInvite => 'คัดลอกคำเชิญ';
 
   @override
-  String get togetherShareInvite => 'Share invite';
+  String get togetherShareInvite => 'แบ่งปันคำเชิญ';
 
   @override
   String togetherShareText(String link) {
-    return 'Watch with me on Dartotsu: $link';
+    return 'ดูกับฉันบน Dartotsu: $link';
   }
 
   @override
@@ -6969,71 +6966,70 @@ class AppLocalizationsTh extends AppLocalizations {
       'แตะด้านซ้ายหรือขวาเพื่อเลื่อนหนึ่งหน้า ตรงกลางจะแสดงปุ่มควบคุม';
 
   @override
-  String get novelPaged => 'Page turning';
+  String get novelPaged => 'การเปลี่ยนหน้า';
 
   @override
   String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+      'แบ่งบทออกเป็นหน้าๆ แล้วปัดหรือแตะเพื่อเปลี่ยนแทนที่จะเลื่อน';
 
   @override
   String novelPageOf(int current, int total) {
-    return 'Page $current of $total';
+    return 'หน้า $current จาก $total';
   }
 
   @override
-  String get novelPaginating => 'Laying out pages';
+  String get novelPaginating => 'การจัดวางหน้าต่างๆ';
 
   @override
-  String get novelTools => 'Contents, search and highlights';
+  String get novelTools => 'เนื้อหา การค้นหา และไฮไลท์';
 
   @override
-  String get novelContents => 'Contents';
+  String get novelContents => 'สารบัญ';
 
   @override
-  String get novelContentsEmpty => 'This chapter has no headings';
+  String get novelContentsEmpty => 'บทนี้ไม่มีหัวข้อ';
 
   @override
-  String get novelSearch => 'Search';
+  String get novelSearch => 'ค้นหา';
 
   @override
-  String get novelSearchHint => 'Search in this chapter';
+  String get novelSearchHint => 'ค้นหาในบทนี้';
 
   @override
-  String get novelSearchNone => 'No matches';
+  String get novelSearchNone => 'ไม่มีการแข่งขัน';
 
   @override
   String novelSearchCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count matches',
-      one: '1 match',
+      other: '$count แมตช์',
+      one: '1 นัด',
     );
     return '$_temp0';
   }
 
   @override
-  String get novelHighlights => 'Highlights';
+  String get novelHighlights => 'ไฮไลท์';
 
   @override
   String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+      'เลือกข้อความแล้วแตะไฮไลต์เพื่อเก็บไว้ที่นี่';
 
   @override
-  String get novelHighlight => 'Highlight';
+  String get novelHighlight => 'ไฮไลท์';
 
   @override
-  String get novelHighlightNote => 'Note';
+  String get novelHighlightNote => 'หมายเหตุ';
 
   @override
-  String get novelHighlightNoteHint => 'Add a note';
+  String get novelHighlightNoteHint => 'เพิ่มบันทึก';
 
   @override
-  String get novelHighlightRemove => 'Remove highlight';
+  String get novelHighlightRemove => 'ลบไฮไลต์ออก';
 
   @override
-  String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+  String get novelHighlightFailed => 'ไม่สามารถจับคู่การเลือกนั้นกับข้อความได้';
 
   @override
   String novelMinutesLeft(int count) {
@@ -7098,39 +7094,39 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerChapters => 'ตอน';
 
   @override
-  String get playerSkipSubmit => 'Submit skip times';
+  String get playerSkipSubmit => 'ส่งเวลาข้าม';
 
   @override
   String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+      'ทำเครื่องหมายว่าการเปิด การสิ้นสุด หรือสรุปเริ่มต้นและสิ้นสุดในตอนนี้และแชร์กับ AniSkip เพื่อให้ทุกคนได้รับปุ่มข้าม';
 
   @override
-  String get playerSkipStart => 'Start';
+  String get playerSkipStart => 'เริ่ม';
 
   @override
-  String get playerSkipEnd => 'End';
+  String get playerSkipEnd => 'สิ้นสุด';
 
   @override
-  String get playerSkipUseNow => 'Use current position';
+  String get playerSkipUseNow => 'ใช้ตำแหน่งปัจจุบัน';
 
   @override
-  String get playerSkipSend => 'Submit to AniSkip';
+  String get playerSkipSend => 'ส่งไปที่ AniSkip';
 
   @override
-  String get playerSkipSent => 'Skip times submitted to AniSkip, thank you';
+  String get playerSkipSent => 'ข้ามเวลาที่ส่งไปที่ AniSkip ขอบคุณ';
 
   @override
   String playerSkipFailed(String error) {
-    return 'AniSkip refused the skip times: $error';
+    return 'AniSkip ปฏิเสธเวลาในการข้าม: $error';
   }
 
   @override
   String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+      'โปรแกรมเล่นวิดีโอไม่สามารถทำงานบนอุปกรณ์นี้ได้ (เวอร์ชัน Android เก่าเกินไปสำหรับไลบรารีโปรแกรมเล่นที่รวมมาให้) แตะเพื่อคัดลอกรายละเอียด';
 
   @override
   String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+      'ชื่อนี้ไม่มีรหัส MyAnimeList เนื่องจาก AniSkip ไม่สามารถรับได้';
 
   @override
   String get playerNoChapters => 'ไม่มีตอน';
@@ -7178,28 +7174,28 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerAutoPipDesc => 'เล่นต่อในหน้าต่างเล็กเมื่อออกจากแอป';
 
   @override
-  String get playerPipPlay => 'Play';
+  String get playerPipPlay => 'เล่น';
 
   @override
-  String get playerPipPause => 'Pause';
+  String get playerPipPause => 'หยุดชั่วคราว';
 
   @override
-  String get playerPipBack => 'Rewind';
+  String get playerPipBack => 'กรอกลับ';
 
   @override
-  String get playerPipForward => 'Forward';
+  String get playerPipForward => 'ไปข้างหน้า';
 
   @override
-  String get playerPipRestore => 'Back to the player';
+  String get playerPipRestore => 'กลับไปที่เครื่องเล่น';
 
   @override
-  String get playerPipActive => 'Playing in a small window';
+  String get playerPipActive => 'เล่นในหน้าต่างเล็กๆ';
 
   @override
-  String get listDateAdded => 'Added to list';
+  String get listDateAdded => 'เพิ่มเข้าในรายการแล้ว';
 
   @override
-  String get listDateLastWatched => 'Last watched';
+  String get listDateLastWatched => 'ดูครั้งสุดท้าย';
 
   @override
   String playerAutoPlaying(String title) {
@@ -7318,72 +7314,72 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadsTitle => 'ดาวน์โหลด';
 
   @override
-  String get widgetContinue => 'Continue';
+  String get widgetContinue => 'ดำเนินการต่อ';
 
   @override
-  String get widgetReleases => 'Releasing soon';
+  String get widgetReleases => 'ปล่อยเร็วๆ นี้';
 
   @override
-  String get widgetMore => 'Also in progress';
+  String get widgetMore => 'อยู่ระหว่างดำเนินการเช่นกัน';
 
   @override
-  String get widgetNothing => 'Nothing to continue yet';
+  String get widgetNothing => 'ยังไม่มีอะไรจะดำเนินต่อไป';
 
   @override
-  String get downloadStorageTitle => 'Storage';
+  String get downloadStorageTitle => 'ที่เก็บของ';
 
   @override
   String downloadStorageSummary(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count downloads',
-      one: '1 download',
+      other: '$count ดาวน์โหลด',
+      one: 'ดาวน์โหลด 1 ครั้ง',
     );
     return '$_temp0 · $size';
   }
 
   @override
   String downloadStorageWatched(String size) {
-    return '$size already watched or read';
+    return '$size ดูหรืออ่านแล้ว';
   }
 
   @override
-  String get downloadFreeUp => 'Free up space';
+  String get downloadFreeUp => 'เพิ่มพื้นที่ว่าง';
 
   @override
   String downloadFreeUpConfirm(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count watched downloads',
-      one: '1 watched download',
+      other: '$count ดูการดาวน์โหลด',
+      one: 'ดาวน์โหลดดูแล้ว 1 ครั้ง',
     );
-    return 'Delete $_temp0 and free $size?';
+    return 'ลบ $_temp0 และฟรี $size?';
   }
 
   @override
   String downloadFreed(String size) {
-    return 'Freed $size';
+    return 'อิสระ $size';
   }
 
   @override
-  String get downloadDeleteWatched => 'Delete watched';
+  String get downloadDeleteWatched => 'ลบดูแล้ว';
 
   @override
-  String get downloadDeleteAll => 'Delete all';
+  String get downloadDeleteAll => 'ลบทั้งหมด';
 
   @override
   String downloadDeleteAllConfirm(String title) {
-    return 'Delete every download of $title?';
+    return 'ลบการดาวน์โหลด $title ทุกครั้งหรือไม่';
   }
 
   @override
   String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+      'ไม่มีการดาวน์โหลดสิ่งใดที่คุณทำเสร็จแล้ว';
 
   @override
-  String get downloadStorageEmpty => 'No downloads are using space';
+  String get downloadStorageEmpty => 'ไม่มีการดาวน์โหลดที่ใช้พื้นที่';
 
   @override
   String get downloadsOpenDesc => 'ดูคิวและทุกอย่างที่บันทึกในเครื่องนี้';
@@ -7392,14 +7388,14 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadTitle => 'ดาวน์โหลด';
 
   @override
-  String get downloadMetaOnly => 'Metadata only';
+  String get downloadMetaOnly => 'ข้อมูลเมตาเท่านั้น';
 
   @override
-  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+  String get downloadMetaFailed => 'ไม่สามารถสร้างโฟลเดอร์ชื่อได้';
 
   @override
   String downloadMetaSaved(String path) {
-    return 'Saved. Put your files in $path';
+    return 'บันทึกแล้ว ใส่ไฟล์ของคุณใน $path';
   }
 
   @override
@@ -7431,10 +7427,10 @@ class AppLocalizationsTh extends AppLocalizations {
   String get downloadSourceMissing => 'ยังไม่ได้ติดตั้งซอร์สของตอนนี้';
 
   @override
-  String get downloadDashDrm => 'This stream is DRM protected';
+  String get downloadDashDrm => 'สตรีมนี้ได้รับการป้องกัน DRM';
 
   @override
-  String get downloadDashNoVideo => 'The DASH manifest has no video';
+  String get downloadDashNoVideo => 'ไฟล์ Manifest DASH ไม่มีวิดีโอ';
 
   @override
   String get downloadWaitingConnection => 'รอการเชื่อมต่อ';
@@ -7917,1038 +7913,1031 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String sourceNotifyOn(String source) {
-    return 'You\'ll be told when $source has something new';
+    return 'คุณจะได้รับแจ้งเมื่อ $source มีอะไรใหม่';
   }
 
   @override
-  String get sourceNotifyOff => 'Release notifications off';
+  String get sourceNotifyOff => 'ปิดการแจ้งเตือนการเผยแพร่';
 
   @override
-  String get sourceNotifyNeedsSource => 'Pick a source with a match first';
+  String get sourceNotifyNeedsSource => 'เลือกแหล่งที่มาที่ตรงกันก่อน';
 
   @override
   String sourceNotifyAllOut(int count) {
-    return 'Everything ($count) is already out, nothing to wait for';
+    return 'ทุกอย่าง ($count) ออกมาแล้ว ไม่มีอะไรให้รออีกต่อไป';
   }
 
   @override
-  String get sourceNotifyTooltipOn => 'Stop release notifications';
+  String get sourceNotifyTooltipOn => 'หยุดการแจ้งเตือนการเผยแพร่';
 
   @override
-  String get sourceNotifyTooltipOff => 'Notify me about new releases';
+  String get sourceNotifyTooltipOff => 'แจ้งให้ฉันทราบเกี่ยวกับการออกใหม่';
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return 'Episode $number is out on $source';
+    return 'ตอนที่ $number ฉายแล้ว $source';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return 'Episodes $from–$to are out on $source';
+    return 'ตอน $from–$to ฉายแล้วใน $source';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'Chapter $number is out on $source';
+    return 'บทที่ $number ออกเมื่อ $source';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'Chapters $from–$to are out on $source';
+    return 'บทที่ $from–$to วางจำหน่ายแล้วใน $source';
   }
 
   @override
   String sourceFoundSummary(int count) {
-    return '$count titles have something new';
+    return '$count ชื่อมีอะไรใหม่';
   }
 
   @override
-  String get navSources => 'Sources';
+  String get navSources => 'แหล่งที่มา';
 
   @override
   String sourceInactiveOpen(String manager) {
-    return 'This source belongs to $manager, which isn\'t the active extension service';
+    return 'แหล่งที่มานี้เป็นของ $manager ซึ่งไม่ใช่บริการเสริมที่ใช้งานอยู่';
   }
 
   @override
-  String get sourceAlertsHeader => 'Release notifications';
+  String get sourceAlertsHeader => 'การแจ้งเตือนการเปิดตัว';
 
   @override
-  String get sourceAlertsSwitch => 'Check subscribed titles';
+  String get sourceAlertsSwitch => 'ตรวจสอบชื่อที่สมัครรับข้อมูล';
 
   @override
   String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+      'แต่ละครั้งที่เปิดแอป สำหรับชื่อที่คุณเปิดกระดิ่ง';
 
   @override
-  String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
+  String get sourceSkipUnstarted => 'ข้ามชื่อที่คุณยังไม่ได้เริ่ม';
 
   @override
   String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+      'ยังไม่ได้ดูหรืออ่านอะไรเลย แต่มีตอนอยู่แล้ว';
 
   @override
-  String get sourceSkipUnseen => 'Skip while you have unseen episodes';
+  String get sourceSkipUnseen => 'ข้ามไปในขณะที่คุณมีตอนที่ยังไม่ได้ดู';
 
   @override
-  String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+  String get sourceSkipUnseenDesc => 'คุณยังคงมีตอนต่างๆ ที่ต้องติดตามต่อไป';
 
   @override
-  String get sourceManage => 'Subscriptions';
+  String get sourceManage => 'การสมัครรับข้อมูล';
 
   @override
   String sourceManageDesc(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
-      zero: 'No titles',
+      other: '$count ชื่อ',
+      one: '1 ชื่อ',
+      zero: 'ไม่มีชื่อเรื่อง',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceCheckNow => 'Check now';
+  String get sourceCheckNow => 'ตรวจสอบตอนนี้';
 
   @override
-  String get sourceCheckNowDesc => 'Ignores the schedule and the skip rules';
+  String get sourceCheckNowDesc => 'ละเว้นกำหนดการและกฎการข้าม';
 
   @override
-  String get sourceChecking => 'Checking…';
+  String get sourceChecking => 'กำลังตรวจสอบ...';
 
   @override
   String sourceCheckResult(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles have something new',
-      one: '1 title has something new',
-      zero: 'Nothing new',
+      other: '$count ชื่อมีอะไรใหม่',
+      one: '1 ชื่อมีอะไรใหม่',
+      zero: 'ไม่มีอะไรใหม่',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceEmpty => 'No subscriptions yet';
+  String get sourceEmpty => 'ยังไม่มีการสมัครสมาชิก';
 
   @override
   String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+      'แตะระฆังเหนือตอนของชื่อเรื่องเพื่อแจ้งเกี่ยวกับตอนใหม่';
 
   @override
-  String get sourceAll => 'All';
+  String get sourceAll => 'ทั้งหมด';
 
   @override
   String sourceInactive(String manager) {
-    return 'Inactive: $manager';
+    return 'ไม่ได้ใช้งาน: $manager';
   }
 
   @override
   String sourceMissingDesc(String source) {
-    return '$source isn\'t installed in this extension service';
+    return '$source ไม่ได้ติดตั้งในบริการส่วนขยายนี้';
   }
 
   @override
-  String get sourceUnreachable => 'Source isn\'t responding';
+  String get sourceUnreachable => 'แหล่งที่มาไม่ตอบสนอง';
 
   @override
-  String get sourceFinished => 'Finished';
+  String get sourceFinished => 'เสร็จแล้ว';
 
   @override
-  String get sourceSkippedCompleted => 'Skipped: completed';
+  String get sourceSkippedCompleted => 'ข้าม: เสร็จสมบูรณ์';
 
   @override
-  String get sourceSkippedUnstarted => 'Skipped: not started';
+  String get sourceSkippedUnstarted => 'ข้ามแล้ว: ยังไม่ได้เริ่ม';
 
   @override
-  String get sourceSkippedUnseen => 'Skipped: unseen episodes';
+  String get sourceSkippedUnseen => 'ข้าม: ตอนที่ยังไม่ได้ดู';
 
   @override
-  String get sourceWaiting => 'Waiting for the next release';
+  String get sourceWaiting => 'กำลังรอการเปิดตัวครั้งต่อไป';
 
   @override
   String sourceNextCheck(String when) {
-    return 'Next check $when';
+    return 'ตรวจสอบครั้งต่อไป $when';
   }
 
   @override
-  String get sourceSoon => 'soon';
+  String get sourceSoon => 'เร็ว ๆ นี้';
 
   @override
   String sourceInHours(int count) {
-    return 'in ${count}h';
+    return 'ใน ${count}h';
   }
 
   @override
   String sourceInDays(int count) {
-    return 'in ${count}d';
+    return 'ใน ${count}d';
   }
 
   @override
   String sourceLatest(String number) {
-    return 'Latest: $number';
+    return 'ล่าสุด: $number';
   }
 
   @override
-  String get sourceMute => 'Mute';
+  String get sourceMute => 'ปิดเสียง';
 
   @override
-  String get sourceUnmute => 'Unmute';
+  String get sourceUnmute => 'เปิดเสียง';
 
   @override
-  String get sourceMuted => 'Muted';
+  String get sourceMuted => 'ปิดเสียง';
 
   @override
-  String get sourceUnsubscribe => 'Unsubscribe';
+  String get sourceUnsubscribe => 'ยกเลิกการสมัคร';
 
   @override
-  String get sourcePickAnother => 'Pick another source';
+  String get sourcePickAnother => 'เลือกแหล่งอื่น';
 
   @override
-  String get sourceOpenExtensions => 'Open extensions';
+  String get sourceOpenExtensions => 'เปิดส่วนขยาย';
 
   @override
-  String get sourceNoticesEmpty => 'No release notices yet';
+  String get sourceNoticesEmpty => 'ยังไม่มีประกาศวางจำหน่าย';
 
   @override
   String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+      'ตอนและบทใหม่จากชื่อที่คุณสมัครรับข้อมูลจะแสดงที่นี่';
 
   @override
-  String get sourceOpenTitle => 'Open title';
+  String get sourceOpenTitle => 'เปิดชื่อ';
 
   @override
-  String get extensionsLoading => 'Loading extensions…';
+  String get extensionsLoading => 'กำลังโหลดส่วนขยาย...';
 
   @override
-  String get updateWhatsNew => 'What\'s new';
+  String get updateWhatsNew => 'มีอะไรใหม่';
 
   @override
-  String get updateLater => 'Later';
+  String get updateLater => 'ต่อมา';
 
   @override
-  String get updateSkipVersion => 'Skip this version';
+  String get updateSkipVersion => 'ข้ามเวอร์ชันนี้ไป';
 
   @override
-  String get updatePreparing => 'Preparing…';
+  String get updatePreparing => 'กำลังเตรียม...';
 
   @override
-  String get updateDownloading => 'Downloading';
+  String get updateDownloading => 'กำลังดาวน์โหลด';
 
   @override
-  String get updateInstalling => 'Installing…';
+  String get updateInstalling => 'กำลังติดตั้ง...';
 
   @override
   String updateSizeOf(String done, String total) {
-    return '$done of $total';
+    return '$done จาก $total';
   }
 
   @override
   String updateSpeed(String speed) {
-    return '$speed/s';
+    return '$speed/วิ';
   }
 
   @override
   String updateReleased(String date) {
-    return 'Released $date';
+    return 'เปิดตัว $date';
   }
 
   @override
-  String get updateNoAsset => 'This release has no download for your device';
+  String get updateNoAsset => 'รุ่นนี้ไม่มีการดาวน์โหลดสำหรับอุปกรณ์ของคุณ';
 
   @override
-  String get updateUpToDate => 'You\'re on the latest version';
+  String get updateUpToDate => 'คุณกำลังใช้เวอร์ชันล่าสุด';
 
   @override
   String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+      'iOS เวอร์ชันไม่มีอยู่ใน App Store หยิบ .ipa จากหน้าเผยแพร่และไซด์โหลดด้วย AltStore หรือ SideStore';
 
   @override
-  String get updateOpenedBrowser => 'Check your browser';
+  String get updateOpenedBrowser => 'ตรวจสอบเบราว์เซอร์ของคุณ';
 
   @override
-  String get updateTryAgain => 'Try again';
+  String get updateTryAgain => 'ลองอีกครั้ง';
 
   @override
-  String get settingsNotifications => 'Notifications';
+  String get settingsNotifications => 'การแจ้งเตือน';
 
   @override
   String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+      'การแจ้งเตือนสำหรับรายการ ตอนและบทใหม่ และการตอบกลับความคิดเห็น';
 
   @override
-  String get settingsAboutUpdates => 'About & updates';
+  String get settingsAboutUpdates => 'เกี่ยวกับ & อัปเดต';
 
   @override
   String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+      'การอัปเดตแอป เวอร์ชัน บันทึก ลิงก์ และการสนับสนุน';
 
   @override
-  String get settingsGroupAccount => 'Your account';
+  String get settingsGroupAccount => 'บัญชีของคุณ';
 
   @override
-  String get settingsGroupContent => 'Content';
+  String get settingsGroupContent => 'เนื้อหา';
 
   @override
-  String get settingsGroupApp => 'App';
+  String get settingsGroupApp => 'แอพ';
 
   @override
   String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+      'ผู้เล่น คำบรรยาย การข้าม รายการตอน และรายละเอียดตอน';
 
   @override
   String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+      'โหมดผู้อ่าน การควบคุม การแสดงผล และการติดตามบท';
 
   @override
   String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+      'ข้อความ การพลิกหน้า การแปล และการอ่านออกเสียง';
 
   @override
-  String get settingsLocalPlay => 'Local play';
+  String get settingsLocalPlay => 'การเล่นในท้องถิ่น';
 
   @override
   String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+      'เล่นไฟล์ โฟลเดอร์ สตรีมเครือข่ายและทอร์เรนต์ หรือเปิดหนังสือ';
 
   @override
-  String get settingsLocalPlayVideo => 'Video';
+  String get settingsLocalPlayVideo => 'วีดีโอ';
 
   @override
-  String get settingsLocalPlayBooks => 'Books';
+  String get settingsLocalPlayBooks => 'หนังสือ';
 
   @override
-  String get settingsWatchSections => 'Sections';
+  String get settingsWatchSections => 'ส่วนต่างๆ';
 
   @override
-  String get settingsSectionLists => 'Episode and chapter lists';
+  String get settingsSectionLists => 'รายการตอนและบท';
 
   @override
-  String get settingsSectionProgress => 'Progress tracking';
+  String get settingsSectionProgress => 'ติดตามความคืบหน้า';
 
   @override
   String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+      'เสถียรคือรุ่นทดสอบ รุ่นก่อนเผยแพร่และอัลฟ่าจะได้รับฟีเจอร์ใหม่เร็วกว่าแต่อาจใช้งานไม่ได้';
 
   @override
-  String get checkNowDesc => 'Look for a newer version right away';
+  String get checkNowDesc => 'มองหารุ่นที่ใหม่กว่าทันที';
 
   @override
-  String get generalSectionBasics => 'Language & behaviour';
+  String get generalSectionBasics => 'ภาษาและพฤติกรรม';
 
   @override
-  String get generalSectionSecurity => 'Security';
+  String get generalSectionSecurity => 'ความปลอดภัย';
 
   @override
-  String get generalSectionPrivacy => 'Privacy';
+  String get generalSectionPrivacy => 'ความเป็นส่วนตัว';
 
   @override
   String notificationsOtherService(String service) {
-    return 'Switch to $service to open this';
+    return 'สลับไปที่ $service เพื่อเปิดสิ่งนี้';
   }
 
   @override
   String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+      'ความเร็วเริ่มต้น การเล่นอัตโนมัติ การปรับวิดีโอให้พอดี การวางแนว และรูปภาพซ้อนภาพ';
 
   @override
-  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+  String get secPlayerSkip => 'ข้ามการเปิด การสิ้นสุด และการสรุปโดยอัตโนมัติ';
 
   @override
-  String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+  String get secPlayerControls => 'ปัดนิ้วค้างไว้และแตะท่าทางและดูตัวอย่าง';
 
   @override
-  String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+  String get secPlayerSubtitles => 'ภาษา ลักษณะที่ปรากฏ และการแสดงคำบรรยาย';
 
   @override
-  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+  String get secPlayerShaders => 'การลดขนาดอะนิเมะและเฉดสีของคุณเอง';
 
   @override
   String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+      'ตัวถอดรหัส เอาต์พุตวิดีโอและเสียง การบัฟเฟอร์ เปลี่ยนสิ่งเหล่านี้หากการเล่นมีปัญหาเท่านั้น';
 
   @override
-  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+  String get secPlayerMpv => 'mpv.conf สคริปต์และการปรับแต่งขั้นสูง';
 
   @override
-  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+  String get secAnimeList => 'ตอนที่เติมและภาพขนาดย่อที่ยังไม่ได้ดู';
 
   @override
   String get secProgress =>
-      'When your watched or read progress is saved to your list';
+      'เมื่อความคืบหน้าในการรับชมหรือการอ่านของคุณถูกบันทึกลงในรายการของคุณ';
 
   @override
-  String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+  String get secAnimeDetails => 'ที่มาของชื่อตอน ภาพขนาดย่อ และข้อมูลสรุป';
 
   @override
-  String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+  String get secReaderReading => 'โหมดการอ่าน การพลิกหน้า การซูม และบทถัดไป';
 
   @override
-  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+  String get secReaderControls =>
+      'แตะโซน ปุ่มปรับระดับเสียง และการเลื่อนอัตโนมัติ';
 
   @override
-  String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+  String get secReaderDisplay => 'พื้นหลัง ความสว่าง เต็มหน้าจอ และหมายเลขหน้า';
 
   @override
-  String get secNovelText => 'Font, size, spacing, margins and page turning';
+  String get secNovelText => 'แบบอักษร ขนาด ระยะห่าง ระยะขอบ และการพลิกหน้า';
 
   @override
-  String get secNovelTranslate => 'Translate chapters while you read';
+  String get secNovelTranslate => 'แปลบทในขณะที่คุณอ่าน';
 
   @override
-  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+  String get secNovelSpeech =>
+      'เสียง ความเร็ว และระดับเสียงสำหรับการอ่านออกเสียง';
 
   @override
-  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+  String get secNotifyAbout => 'เลือกประเภทกิจกรรมที่จะส่งการแจ้งเตือน';
 
   @override
-  String get layoutTitle => 'Layout';
+  String get layoutTitle => 'เค้าโครง';
 
   @override
-  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+  String get layoutDesc => 'เลือก ย้าย และซ่อนปุ่มบนแถบ';
 
   @override
   String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+      'ลากปุ่มเพื่อย้าย (กดค้างไว้บนหน้าจอสัมผัสก่อน) แตะอันใดอันหนึ่งเพื่อตัด ย้าย หรือซ่อน';
 
   @override
   String layoutDropInto(String zone) {
-    return 'Drop in: $zone';
+    return 'แวะมา: $zone';
   }
 
   @override
   String layoutCutting(String name) {
-    return 'Moving $name. Press a paste button to place it';
+    return 'ย้าย $name กดปุ่มวางเพื่อวาง';
   }
 
   @override
-  String get layoutTitleFixed => 'Title';
+  String get layoutTitleFixed => 'ชื่อเรื่อง';
 
   @override
-  String get layoutZoneTopStart => 'Top bar, before the title';
+  String get layoutZoneTopStart => 'แถบด้านบนก่อนชื่อ';
 
   @override
-  String get layoutZoneTopEnd => 'Top bar, after the title';
+  String get layoutZoneTopEnd => 'แถบด้านบนหลังชื่อ';
 
   @override
-  String get layoutZoneBottomStart => 'Bottom bar, left';
+  String get layoutZoneBottomStart => 'แถบด้านล่างซ้าย';
 
   @override
-  String get layoutZoneBottomEnd => 'Bottom bar, right';
+  String get layoutZoneBottomEnd => 'แถบล่างขวา';
 
   @override
-  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+  String get layoutZoneSecondRow => 'ซ่อน: แถวที่สองในมุมมองปกติ';
 
   @override
-  String get layoutZoneOverflow => 'Hidden: in the more menu';
+  String get layoutZoneOverflow => 'ซ่อน: ในเมนูเพิ่มเติม';
 
   @override
-  String get layoutEmptyZone => 'Drop buttons here';
+  String get layoutEmptyZone => 'วางปุ่มที่นี่';
 
   @override
-  String get layoutCut => 'Cut';
+  String get layoutCut => 'ตัด';
 
   @override
-  String get layoutPaste => 'Paste here';
+  String get layoutPaste => 'วางที่นี่';
 
   @override
-  String get layoutHide => 'Hide';
+  String get layoutHide => 'ซ่อน';
 
   @override
   String layoutMoveTo(String zone) {
-    return 'Move to $zone';
+    return 'ย้ายไป $zone';
   }
 
   @override
-  String get layoutReset => 'Reset to default';
+  String get layoutReset => 'รีเซ็ตเป็นค่าเริ่มต้น';
 
   @override
-  String get layoutMore => 'More';
+  String get layoutMore => 'เพิ่มเติม';
 
   @override
-  String get sourceWhyAction => 'Why no alert?';
+  String get sourceWhyAction => 'ทำไมไม่มีการแจ้งเตือน?';
 
   @override
-  String get sourceWhyStatus => 'Status';
+  String get sourceWhyStatus => 'สถานะ';
 
   @override
-  String get sourceWhyLastCheck => 'Last checked';
+  String get sourceWhyLastCheck => 'ตรวจสอบครั้งล่าสุด';
 
   @override
-  String get sourceWhyNever => 'Not yet';
+  String get sourceWhyNever => 'ยังไม่ได้';
 
   @override
-  String get sourceWhyNextCheck => 'Next check';
+  String get sourceWhyNextCheck => 'ตรวจสอบครั้งต่อไป';
 
   @override
-  String get sourceWhyNewest => 'Newest at the source';
+  String get sourceWhyNewest => 'ใหม่ล่าสุดที่แหล่งกำเนิด';
 
   @override
-  String get sourceWhyProgress => 'Your progress';
+  String get sourceWhyProgress => 'ความก้าวหน้าของคุณ';
 
   @override
-  String get sourceWhyListStatus => 'List status';
+  String get sourceWhyListStatus => 'สถานะรายการ';
 
   @override
-  String get sourceWhyFailures => 'Failed checks in a row';
+  String get sourceWhyFailures => 'การตรวจสอบล้มเหลวติดต่อกัน';
 
   @override
-  String get sourceWhyLastRelease => 'Last new release seen';
+  String get sourceWhyLastRelease => 'รุ่นใหม่ล่าสุดที่เห็น';
 
   @override
   String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+      'รุ่นใหม่จะปรากฏที่นี่ทันทีที่แหล่งที่มาแสดงรายการและการตรวจสอบครั้งถัดไปจะทำงาน';
 
   @override
   String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+      'แหล่งที่มาอยู่ข้างหน้าความคืบหน้าของคุณอยู่แล้ว ดังนั้นคุณจึงได้รับการแจ้งเกี่ยวกับเรื่องนี้เพียงครั้งเดียว อ่านหรือดูเพื่อรับการแจ้งเตือนครั้งต่อไป';
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+      'ชื่อนี้ถูกข้ามตามกฎข้างต้น เปลี่ยนการตั้งค่าการแจ้งเตือน หรือใช้ตรวจสอบทันทีเพื่อเรียกใช้งานต่อไป';
 
   @override
   String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+      'ไม่สามารถเข้าถึงแหล่งที่มาหรือถูกลบออกแล้ว ดังนั้นจึงไม่มีการตรวจสอบสิ่งใด';
 
   @override
-  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+  String get sourceWhyVerdictMuted => 'การสมัครรับข้อมูลนี้ถูกปิดเสียง';
 
   @override
-  String get externalPlayerTitle => 'Open stream elsewhere';
+  String get externalPlayerTitle => 'เปิดสตรีมที่อื่น';
 
   @override
-  String get externalCopyUrl => 'Copy stream link';
+  String get externalCopyUrl => 'คัดลอกลิงค์สตรีม';
 
   @override
-  String get externalCopied => 'Stream link copied';
+  String get externalCopied => 'คัดลอกลิงก์สตรีมแล้ว';
 
   @override
-  String get externalChooser => 'Open in another app';
+  String get externalChooser => 'เปิดในแอปอื่น';
 
   @override
-  String get externalVlc => 'Open in VLC';
+  String get externalVlc => 'เปิดใน VLC';
 
   @override
-  String get externalMpv => 'Open in mpv';
+  String get externalMpv => 'เปิดเป็นเอ็มพีวี';
 
   @override
-  String get externalWebVideoCast => 'Web Video Cast';
+  String get externalWebVideoCast => 'เว็บวิดีโอแคสต์';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'ส่งสตรีมไปยังแอป Web Video Cast';
 
   @override
   String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+      'ไม่สามารถเปิดสตรีมได้ ติดตั้งเครื่องเล่นแล้วหรือยัง?';
 
   @override
-  String get addonInstalled => 'Installed';
+  String get addonInstalled => 'ติดตั้งแล้ว';
 
   @override
-  String get loadFailedActivity => 'Couldn\'t load activity';
+  String get loadFailedActivity => 'ไม่สามารถโหลดกิจกรรมได้';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+  String get loadFailedFavourites => 'ไม่สามารถโหลดรายการโปรด ลองอีกครั้ง';
 
   @override
-  String get loadFailedStats => 'Couldn\'t load stats';
+  String get loadFailedStats => 'ไม่สามารถโหลดสถิติ';
 
   @override
-  String get loadFailedReplies => 'Couldn\'t load replies';
+  String get loadFailedReplies => 'ไม่สามารถโหลดการตอบกลับ';
 
   @override
-  String get cantBeUndone => 'This can\'t be undone.';
+  String get cantBeUndone => 'การดำเนินการนี้ไม่สามารถยกเลิกได้';
 
   @override
-  String get searchTags => 'Search tags';
+  String get searchTags => 'ค้นหาแท็ก';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => 'สปอยล์ แตะเพื่อดู';
 
   @override
-  String get mediaVideo => 'Video';
+  String get mediaVideo => 'วีดีโอ';
 
   @override
-  String get notificationSomeone => 'Someone';
+  String get notificationSomeone => 'ใครบางคน';
 
   @override
-  String get notificationATitle => 'a title';
+  String get notificationATitle => 'ชื่อ';
 
   @override
-  String get notificationAddedDetail => 'Was added to AniList';
+  String get notificationAddedDetail => 'ถูกเพิ่มเข้าไปใน AniList';
 
   @override
-  String get updateNoReleases => 'No releases found';
+  String get updateNoReleases => 'ไม่พบการเผยแพร่';
 
   @override
-  String get updateInvalidResponse => 'Invalid update response';
+  String get updateInvalidResponse => 'การตอบสนองการอัปเดตไม่ถูกต้อง';
 
   @override
-  String get commentsRateLimited => 'Rate limited';
+  String get commentsRateLimited => 'อัตราจำกัด';
 
   @override
-  String get commentsConnectFailed => 'Failed to connect';
+  String get commentsConnectFailed => 'ไม่สามารถเชื่อมต่อได้';
 
   @override
-  String get dnsNoRecords => 'No A records returned';
+  String get dnsNoRecords => 'ไม่มีบันทึก A ส่งกลับ';
 
   @override
-  String get importTokenRejected => 'Token rejected';
+  String get importTokenRejected => 'โทเค็นถูกปฏิเสธ';
 
   @override
-  String get developerRoleLead => 'Lead Developer';
+  String get developerRoleLead => 'นักพัฒนานำ';
 
   @override
-  String get developerRoleModerator => 'Discord Moderator';
+  String get developerRoleModerator => 'ผู้ดำเนินรายการ Discord';
 
   @override
   String extensionManagerTitle(String type) {
-    return '$type manager';
+    return '$type ผู้จัดการ';
   }
 
   @override
   String extensionsOfType(String type) {
-    return '$type extensions';
+    return 'นามสกุล $type';
   }
 
   @override
   String extensionSettingsTitle(String name) {
-    return '$name settings';
+    return '$name การตั้งค่า';
   }
 
   @override
   String extensionNoSettings(String name) {
-    return '$name doesn\'t provide any settings.';
+    return '$name ไม่มีการตั้งค่าใดๆ';
   }
 
   @override
   String notificationAired(String episode, String title) {
-    return 'Episode $episode of $title aired';
+    return 'ตอนที่ $episode ของ $title ออกอากาศแล้ว';
   }
 
   @override
   String notificationAiredDetail(String episode) {
-    return 'Episode $episode aired';
+    return 'ตอนที่ $episode ออกอากาศแล้ว';
   }
 
   @override
   String notificationAdded(String title) {
-    return '$title was added to AniList';
+    return '$title ถูกเพิ่มไปยัง AniList';
   }
 
   @override
   String updateNotFound(String message) {
-    return 'Update server couldn\'t find that release: $message';
+    return 'เซิร์ฟเวอร์อัปเดตไม่พบรุ่นนั้น: $message';
   }
 
   @override
-  String get installStepJre => 'Java runtime';
+  String get installStepJre => 'รันไทม์ของจาวา';
 
   @override
-  String get installStepCore => 'Runtime core';
+  String get installStepCore => 'แกนรันไทม์';
 
   @override
   String installStepsProgress(int current, int total) {
-    return 'Step $current of $total';
+    return 'ขั้นตอนที่ $current จาก $total';
   }
 
   @override
-  String get stepWaiting => 'Waiting';
+  String get stepWaiting => 'กำลังรอ';
 
   @override
-  String get stepChecking => 'Checking…';
+  String get stepChecking => 'กำลังตรวจสอบ...';
 
   @override
-  String get stepUpToDate => 'Up to date';
+  String get stepUpToDate => 'ถึงวันที่';
 
   @override
   String stepUpToDateWith(String detail) {
-    return 'Up to date · $detail';
+    return 'อัปเดต · $detail';
   }
 
   @override
-  String get stepWillInstall => 'Will be installed';
+  String get stepWillInstall => 'จะถูกติดตั้ง';
 
   @override
-  String get stepWillUpdate => 'Will be updated';
+  String get stepWillUpdate => 'จะได้รับการปรับปรุง';
 
   @override
   String stepWillUpdateTo(String version) {
-    return 'Will be updated to $version';
+    return 'จะได้รับการอัปเดตเป็น $version';
   }
 
   @override
-  String get stepInstalled => 'Installed';
+  String get stepInstalled => 'ติดตั้งแล้ว';
 
   @override
-  String get stepNotNeeded => 'Not needed here';
+  String get stepNotNeeded => 'ไม่จำเป็นที่นี่';
 
   @override
-  String get stepFailed => 'Failed';
+  String get stepFailed => 'ล้มเหลว';
 
   @override
   String stepFailedWith(String reason) {
-    return 'Failed: $reason';
+    return 'ล้มเหลว: $reason';
   }
 
   @override
   String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+      'มันทำงานบนรันไทม์ Java และรันไทม์คอร์ที่ใช้ร่วมกัน มีการติดตั้งก่อน และอัปเดตหากมีการเปลี่ยนแปลง';
 
   @override
-  String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+  String get installRuntimeNewer => 'รันไทม์ที่ตัวจัดการนี้ทำงานมีการอัปเดต';
 
   @override
-  String get removeJvmTitle => 'Remove the Java runtime?';
+  String get removeJvmTitle => 'ลบรันไทม์ Java หรือไม่';
 
   @override
   String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+      'ตัวจัดการส่วนขยายเดสก์ท็อปหยุดทำงานจนกว่าจะมีการติดตั้งอีกครั้ง จะมีการดาวน์โหลดอีกครั้งในครั้งถัดไปที่คุณติดตั้งหรือเปิดไฟล์ดังกล่าว';
 
   @override
-  String get runtimePreparing => 'Preparing the runtime…';
+  String get runtimePreparing => 'กำลังเตรียมรันไทม์...';
 
   @override
-  String get calendarAll => 'All';
+  String get calendarAll => 'ทั้งหมด';
 
   @override
-  String get calendarAnime => 'Anime';
+  String get calendarAnime => 'อะนิเมะ';
 
   @override
-  String get calendarManga => 'Manga';
+  String get calendarManga => 'มังงะ';
 
   @override
-  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+  String get readerCloudflare => 'เปิดในเบราว์เซอร์ (ตรวจสอบ Cloudflare)';
 
   @override
   String get badgeBoardHint =>
-      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+      'ลากตราไปที่มุมของการ์ดใบแรก หรือลากตราแล้วเพื่อย้าย ป้ายสลับสถานที่ ดังนั้นจึงไม่มีการทับซ้อนกัน แตะป้ายด้านล่างเพื่อเปิดหรือปิด';
 
   @override
-  String get statusAuto => 'Auto';
+  String get statusAuto => 'อัตโนมัติ';
 
   @override
-  String get unreadCounter => 'Unread counter';
+  String get unreadCounter => 'ตัวนับที่ยังไม่ได้อ่าน';
 
   @override
-  String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+  String get unreadCounterDesc => 'แสดงจำนวนตอนหรือบทที่เหลืออยู่ในโปสเตอร์';
 
   @override
-  String get settingsShortcuts => 'Keyboard shortcuts';
+  String get settingsShortcuts => 'แป้นพิมพ์ลัด';
 
   @override
-  String get settingsShortcutsDesc => 'See, change and turn off every key';
+  String get settingsShortcutsDesc => 'ดูเปลี่ยนและปิดทุกปุ่ม';
 
   @override
-  String get shortcutGroupApp => 'App';
+  String get shortcutGroupApp => 'แอพ';
 
   @override
-  String get shortcutGroupPlayer => 'Video player';
+  String get shortcutGroupPlayer => 'เครื่องเล่นวิดีโอ';
 
   @override
-  String get shortcutGroupReader => 'Reader';
+  String get shortcutGroupReader => 'ผู้อ่าน';
 
   @override
-  String get shortcutsEnableApp => 'App shortcuts';
+  String get shortcutsEnableApp => 'ทางลัดของแอป';
 
   @override
-  String get shortcutsEnablePlayer => 'Player shortcuts';
+  String get shortcutsEnablePlayer => 'ทางลัดของผู้เล่น';
 
   @override
-  String get shortcutsEnableReader => 'Reader shortcuts';
+  String get shortcutsEnableReader => 'ทางลัดของผู้อ่าน';
 
   @override
-  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+  String get shortcutsEnableDesc => 'เปิดหรือปิดทุกปุ่มในกลุ่มนี้';
 
   @override
-  String get shortcutNotSet => 'Not set';
+  String get shortcutNotSet => 'ไม่ได้ตั้งค่า';
 
   @override
-  String get shortcutAddKey => 'Add a key';
+  String get shortcutAddKey => 'เพิ่มรหัส';
 
   @override
-  String get shortcutResetOne => 'Reset to default';
+  String get shortcutResetOne => 'รีเซ็ตเป็นค่าเริ่มต้น';
 
   @override
-  String get shortcutClearKeys => 'Remove all keys';
+  String get shortcutClearKeys => 'ลบคีย์ทั้งหมด';
 
   @override
-  String get shortcutResetAll => 'Reset all shortcuts';
+  String get shortcutResetAll => 'รีเซ็ตทางลัดทั้งหมด';
 
   @override
-  String get shortcutResetAllDesc => 'Put every key back to its default';
+  String get shortcutResetAllDesc => 'ใส่ทุกคีย์กลับเป็นค่าเริ่มต้น';
 
   @override
-  String get shortcutPress => 'Press the key or combination you want';
+  String get shortcutPress => 'กดปุ่มหรือชุดค่าผสมที่คุณต้องการ';
 
   @override
   String get shortcutPressHint =>
-      'Each combination can only belong to one action, so taking one moves it.';
+      'แต่ละชุดสามารถเป็นของการกระทำเดียวเท่านั้น ดังนั้นให้ทำเพียงครั้งเดียว';
 
   @override
-  String get shortcutSeekPercent => 'Jump to a point of the video';
+  String get shortcutSeekPercent => 'ข้ามไปยังจุดหนึ่งของวิดีโอ';
 
   @override
   String get shortcutSeekPercentKeys => '0 – 9';
 
   @override
-  String get shortcutAppBack => 'Go back';
+  String get shortcutAppBack => 'กลับไป';
 
   @override
-  String get shortcutAppFullscreen => 'Toggle fullscreen';
+  String get shortcutAppFullscreen => 'สลับโหมดเต็มหน้าจอ';
 
   @override
-  String get shortcutAppGlass => 'Toggle glass mode';
+  String get shortcutAppGlass => 'สลับโหมดกระจก';
 
   @override
-  String get shortcutAppMaterialYou => 'Toggle Material You';
+  String get shortcutAppMaterialYou => 'สลับวัสดุคุณ';
 
   @override
-  String get shortcutAppDark => 'Toggle dark mode';
+  String get shortcutAppDark => 'สลับโหมดมืด';
 
   @override
-  String get shortcutAppOled => 'Toggle OLED black';
+  String get shortcutAppOled => 'สลับ OLED สีดำ';
 
   @override
-  String get shortcutAppSearch => 'Open search';
+  String get shortcutAppSearch => 'เปิดการค้นหา';
 
   @override
-  String get shortcutAppSettings => 'Open settings';
+  String get shortcutAppSettings => 'เปิดการตั้งค่า';
 
   @override
-  String get shortcutAppDownloads => 'Open downloads';
+  String get shortcutAppDownloads => 'เปิดการดาวน์โหลด';
 
   @override
-  String get shortcutAppNotifications => 'Open notifications';
+  String get shortcutAppNotifications => 'เปิดการแจ้งเตือน';
 
   @override
-  String get shortcutAppIncognito => 'Toggle incognito';
+  String get shortcutAppIncognito => 'สลับโหมดไม่ระบุตัวตน';
 
   @override
-  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+  String get shortcutAppShortcuts => 'แสดงแป้นพิมพ์ลัด';
 
   @override
-  String get shortcutPlayerPlayPause => 'Play or pause';
+  String get shortcutPlayerPlayPause => 'เล่นหรือหยุดชั่วคราว';
 
   @override
-  String get shortcutPlayerSeekForward => 'Seek forward';
+  String get shortcutPlayerSeekForward => 'แสวงหาไปข้างหน้า';
 
   @override
-  String get shortcutPlayerSeekBack => 'Seek back';
+  String get shortcutPlayerSeekBack => 'กลับไปหา';
 
   @override
-  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+  String get shortcutPlayerSeekForwardLong => 'ค้นหาไปข้างหน้า 30 วินาที';
 
   @override
-  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+  String get shortcutPlayerSeekBackLong => 'ย้อนกลับไป 30 วินาที';
 
   @override
-  String get shortcutPlayerFrameForward => 'Next frame';
+  String get shortcutPlayerFrameForward => 'เฟรมถัดไป';
 
   @override
-  String get shortcutPlayerFrameBack => 'Previous frame';
+  String get shortcutPlayerFrameBack => 'เฟรมก่อนหน้า';
 
   @override
-  String get shortcutPlayerVolumeUp => 'Volume up';
+  String get shortcutPlayerVolumeUp => 'เพิ่มระดับเสียง';
 
   @override
-  String get shortcutPlayerVolumeDown => 'Volume down';
+  String get shortcutPlayerVolumeDown => 'ลดระดับเสียง';
 
   @override
-  String get shortcutPlayerMute => 'Mute';
+  String get shortcutPlayerMute => 'ปิดเสียง';
 
   @override
-  String get shortcutPlayerFullscreen => 'Fullscreen';
+  String get shortcutPlayerFullscreen => 'เต็มจอ';
 
   @override
-  String get shortcutPlayerNext => 'Next episode';
+  String get shortcutPlayerNext => 'ตอนต่อไป';
 
   @override
-  String get shortcutPlayerPrevious => 'Previous episode';
+  String get shortcutPlayerPrevious => 'ตอนที่แล้ว';
 
   @override
-  String get shortcutPlayerSkip => 'Skip intro or ending';
+  String get shortcutPlayerSkip => 'ข้ามคำนำหรือสิ้นสุด';
 
   @override
-  String get shortcutPlayerPanel => 'Episode list';
+  String get shortcutPlayerPanel => 'รายการตอน';
 
   @override
-  String get shortcutPlayerSpeedUp => 'Faster playback';
+  String get shortcutPlayerSpeedUp => 'เล่นได้เร็วขึ้น';
 
   @override
-  String get shortcutPlayerSpeedDown => 'Slower playback';
+  String get shortcutPlayerSpeedDown => 'การเล่นช้าลง';
 
   @override
-  String get shortcutPlayerSpeedReset => 'Normal speed';
+  String get shortcutPlayerSpeedReset => 'ความเร็วปกติ';
 
   @override
-  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+  String get shortcutPlayerSubtitleToggle => 'เปิดหรือปิดคำบรรยาย';
 
   @override
-  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+  String get shortcutPlayerSubtitleCycle => 'แทร็กคำบรรยายถัดไป';
 
   @override
-  String get shortcutPlayerAudioCycle => 'Next audio track';
+  String get shortcutPlayerAudioCycle => 'แทร็กเสียงถัดไป';
 
   @override
-  String get shortcutPlayerStreamCycle => 'Next stream';
+  String get shortcutPlayerStreamCycle => 'สตรีมครั้งต่อไป';
 
   @override
-  String get shortcutPlayerFit => 'Change video fit';
+  String get shortcutPlayerFit => 'เปลี่ยนความพอดีของวิดีโอ';
 
   @override
-  String get shortcutReaderRight => 'Page to the right';
+  String get shortcutReaderRight => 'หน้าไปทางขวา';
 
   @override
-  String get shortcutReaderLeft => 'Page to the left';
+  String get shortcutReaderLeft => 'หน้าไปทางซ้าย';
 
   @override
-  String get shortcutReaderNextPage => 'Next page';
+  String get shortcutReaderNextPage => 'หน้าถัดไป';
 
   @override
-  String get shortcutReaderPreviousPage => 'Previous page';
+  String get shortcutReaderPreviousPage => 'หน้าก่อน';
 
   @override
-  String get shortcutReaderControls => 'Show or hide controls';
+  String get shortcutReaderControls => 'แสดงหรือซ่อนตัวควบคุม';
 
   @override
-  String get shortcutReaderNextChapter => 'Next chapter';
+  String get shortcutReaderNextChapter => 'บทต่อไป';
 
   @override
-  String get shortcutReaderPreviousChapter => 'Previous chapter';
+  String get shortcutReaderPreviousChapter => 'บทที่แล้ว';
 
   @override
   String shortcutTaken(String action) {
-    return 'Taken from $action';
+    return 'นำมาจาก $action';
   }
 
   @override
-  String get incognitoTurnedOn => 'Incognito mode on';
+  String get incognitoTurnedOn => 'โหมดไม่ระบุตัวตนเปิดอยู่';
 
   @override
-  String get incognitoTurnedOff => 'Incognito mode off';
+  String get incognitoTurnedOff => 'ปิดโหมดไม่ระบุตัวตนแล้ว';
 
   @override
-  String get onHoldAnime => 'On hold anime';
+  String get onHoldAnime => 'อนิเมะรออยู่ครับ';
 
   @override
-  String get onHoldManga => 'On hold manga';
+  String get onHoldManga => 'ระงับมังงะ';
 
   @override
-  String get droppedAnime => 'Dropped anime';
+  String get droppedAnime => 'อนิเมะที่หลุดไป';
 
   @override
-  String get droppedManga => 'Dropped manga';
+  String get droppedManga => 'ปล่อยมังงะ';
 
   @override
-  String get generalSectionDesktop => 'Desktop';
+  String get generalSectionDesktop => 'เดสก์ท็อป';
 
   @override
-  String get closeAction => 'When the window is closed';
+  String get closeAction => 'เมื่อหน้าต่างปิดลง';
 
   @override
-  String get closeActionQuit => 'Quit the app';
+  String get closeActionQuit => 'ออกจากแอป';
 
   @override
-  String get closeActionWhenBusy =>
-      'Keep running in the tray while something is running';
+  String get closeActionWhenBusy => 'วิ่งต่อไปในถาดขณะที่บางสิ่งกำลังทำงานอยู่';
 
   @override
-  String get closeActionAlways => 'Always keep running in the tray';
+  String get closeActionAlways => 'ให้วิ่งอยู่ในถาดเสมอ';
 
   @override
   String get closeActionNoTray =>
-      'The system tray is not available here, so the app quits when closed';
+      'ถาดระบบไม่พร้อมใช้งานที่นี่ แอปจึงปิดเมื่อปิด';
 
   @override
-  String get gamepadNav => 'Gamepad navigation';
+  String get gamepadNav => 'การนำทางเกมแพด';
 
   @override
   String get gamepadNavDesc =>
-      'Move around the app and control the player with a game controller';
+      'เคลื่อนที่ไปรอบๆ แอปและควบคุมผู้เล่นด้วยตัวควบคุมเกม';
 
   @override
-  String get trayShow => 'Show Dartotsu';
+  String get trayShow => 'แสดงดาร์โททสึ';
 
   @override
-  String get trayQuit => 'Quit';
+  String get trayQuit => 'เลิก';
 
   @override
-  String get trayIdle => 'Nothing running';
+  String get trayIdle => 'ไม่มีอะไรทำงาน';
 
   @override
   String trayDownloading(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Downloading $count items',
-      one: 'Downloading $count item',
+      other: 'กำลังดาวน์โหลดรายการ $count',
+      one: 'กำลังดาวน์โหลดรายการ $count',
     );
     return '$_temp0';
   }
 
   @override
-  String get traySyncing => 'Syncing your lists';
+  String get traySyncing => 'กำลังซิงค์รายการของคุณ';
 
   @override
-  String get trayUpdating => 'Updating the app';
+  String get trayUpdating => 'กำลังอัปเดตแอป';
 
   @override
-  String get trayPlaying => 'Playing in a small window';
+  String get trayPlaying => 'เล่นในหน้าต่างเล็กๆ';
 
   @override
-  String get traySearch => 'Search';
+  String get traySearch => 'ค้นหา';
 
   @override
-  String get trayPauseDownloads => 'Pause downloads';
+  String get trayPauseDownloads => 'หยุดการดาวน์โหลดชั่วคราว';
 
   @override
-  String get trayResumeDownloads => 'Resume downloads';
+  String get trayResumeDownloads => 'ทำการดาวน์โหลดต่อ';
 
   @override
-  String get playerDownloadTitle => 'Downloading the player';
+  String get playerDownloadTitle => 'กำลังดาวน์โหลดเครื่องเล่น';
 
   @override
   String get playerDownloadBody =>
-      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+      'Dartotsu ดึงข้อมูลเอ็นจิ้นวิดีโอของตนหนึ่งครั้ง การเล่นจะเริ่มทันทีที่พร้อม';
 
   @override
-  String get playerDownloadStarting => 'Starting the download…';
+  String get playerDownloadStarting => 'กำลังเริ่มการดาวน์โหลด...';
 
   @override
-  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+  String get playerDownloadFailedTitle => 'ไม่สามารถรับเครื่องเล่นได้';
 
   @override
   String get playerDownloadFailedBody =>
-      'Check your connection and try again. The download picks up where it stopped.';
+      'ตรวจสอบการเชื่อมต่อของคุณแล้วลองอีกครั้ง การดาวน์โหลดจะดำเนินต่อไปที่จุดหยุด';
 
   @override
-  String get playerDownloadRetry => 'Try again';
+  String get playerDownloadRetry => 'ลองอีกครั้ง';
 
   @override
-  String get playerDownloadCopy => 'Copy details';
+  String get playerDownloadCopy => 'คัดลอกรายละเอียด';
 
   @override
-  String get removePlayerTitle => 'Remove the player?';
+  String get removePlayerTitle => 'ลบเครื่องเล่น?';
 
   @override
   String get removePlayerMessage =>
-      'Videos can\'t play until the player is downloaded again.';
+      'วิดีโอไม่สามารถเล่นได้จนกว่าจะดาวน์โหลดเครื่องเล่นอีกครั้ง';
 
   @override
-  String get trailerLoading => 'Loading the trailer…';
+  String get trailerLoading => 'กำลังโหลดตัวอย่าง...';
 
   @override
   String get trailerFailed =>
-      'Could not play the trailer here, opening it in the browser';
+      'ไม่สามารถเล่นตัวอย่างได้ที่นี่ กำลังเปิดในเบราว์เซอร์';
 }

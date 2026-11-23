@@ -4,8 +4,11 @@
     "anilist": "AniList",
     "mal": "MyAnimeList",
     "simkl": "Simkl",
+    "trakt": "Trakt",
     "kitsu": "Kitsu",
+    "comick": "Comick",
     "mangaBaka": "MangaBaka",
+    "mangaUpdates": "MangaUpdates",
     "discord": "Discord",
     "loadMore": "Soo rar kuwo kale",
     "login": "Gal",
@@ -26,12 +29,71 @@
     "install": "Rakib",
     "update": "Cusboonaysii",
     "uninstall": "Ka saar",
+    "updateInstallCancelled": "Rakibaadda waa la joojiyay. Haddii Android ku yidhi app-kan wuu ka hor imanayaa kii hore ee la rakibay, saxiixu waa kala duwan yahay: marka hore tirtir nooca hadda jira, kadibna rakib cusboonaysiinta",
+    "updateInstallFailed": "Cusboonaysiintii waa fashilantay: {error}",
+    "appLock": "Qufulka app-ka",
+    "appLockDesc": "Weydii passcode marka app-ka la furo ama marka aad dib ugu soo noqoto ka dib mudo",
+    "appLockBiometric": "Ku fur qalabka biometrics",
+    "appLockBiometricDesc": "Isticmaal farahaaga ama wajigaaga intii aad ka qori lahayd lambarka sirta ah",
+    "appLockBiometricReason": "Fur Dartotsu",
+    "appLockDelay": "Quful marka aan shaqayn",
+    "appLockDelayAlways": "Had iyo jeer",
+    "appLockDelayNever": "Marna",
+    "appLockDelayAfter": "Kadib {count, plural, =1{1 daqiiqo} other{{count} daqiiqo}}",
+    "@appLockDelayAfter": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "appLockUseBiometric": "Isticmaal biometrics",
+    "appLockUnlock": "Geli passcode-kaaga",
+    "appLockWrong": "Passcode-ku waa khalad",
+    "appLockWait": "Isku day badan, sug {seconds}s",
+    "appLockNew": "Dooro passcode",
+    "appLockNewHint": "4 ilaa 8 lambar",
+    "appLockConfirm": "Mar kale geli",
+    "appLockMismatch": "Passcode-yadu isma waafaqaan",
+    "appLockOn": "Passcode waa la dejiyay",
+    "appLockRemoveTitle": "Geli passcode-kaaga si aad qufulka u damiso",
     "installFailed": "Rakibiddu way fashilantay",
     "updateFailed": "Cusboonaysiintu way fashilantay",
+    "extensionUpdates": "{count, plural, =1{1 update la heli karo} other{{count} wararka waa la heli karaa}}",
+    "@extensionUpdates": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "updateAll": "Cusbooneysii dhammaan",
+    "extensionsUpdated": "{done} ee {total} kordhinta waa la cusboonaysiiyay",
+    "@extensionsUpdated": {
+        "placeholders": {
+            "done": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "updateConflictTitle": "Cusboonaysiinta lama rakibin",
+    "updateConflictBody": "{names} laguma rakibi karo nooca jira. Tani waxay badanaa ka dhigan tahay nuqulka la rakibay si ka duwan ayaa loo saxiixay. Ka saar oo rakib nooca cusub?",
+    "@updateConflictBody": {
+        "placeholders": {
+            "names": {
+                "type": "String"
+            }
+        }
+    },
+    "updateConflictAction": "Ka saar oo dib u rakib",
     "noSourceSettings": "Isha dejimo ma leh",
     "addPluginRepository": "Ku dar kayd plugin",
     "pluginIndexUrlHint": "URL-ka tusaha plugin-ka",
     "addRepository": "Ku dar kayd",
+    "importRepositoryFile": "Soo deji feyl",
     "pluginRepoUpdated": "Kaydka plugin-ka waa la cusboonaysiiyay",
     "pluginRepoUpdateFailed": "Kaydka plugin-ka lama cusboonaysiin karin",
     "ok": "Haa",
@@ -46,6 +108,9 @@
     "resolving": "Waa la xallinayaa…",
     "none": "Midna",
     "selectMediaService": "Dooro adeegga warbaahinta",
+    "manageServices": "Adeegyada warbaahinta",
+    "manageServicesDesc": "Dib u habayso adeegyada oo dooro kuwa ka muuqda soo-dooriyaha",
+    "manageServicesHint": "Jiid si aad dib u dalbato, dami kuwa aadan isticmaalin",
     "pickColor": "Dooro midab",
     "colorPickerCustom": "Gaar ah",
     "colorPickerTransparent": "Hufan",
@@ -57,6 +122,8 @@
     "settingsAppearanceDesc": "Qaabka, midabada, qaabka muraayadda",
     "settingsGeneral": "Guud",
     "settingsGeneralDesc": "Luqadda iyo habdhaqanka",
+    "settingsNetwork": "Shabakadda",
+    "settingsNetworkDesc": "Wakiilka isticmaalaha, shahaadooyinka, DNS iyo wakiil",
     "settingsAccountDesc": "Adeegga la socodka iyo gelitaanka",
     "settingsUpdates": "Cusboonaysiin",
     "amoledBlack": "Madow AMOLED",
@@ -68,15 +135,235 @@
     "settingsExtensionsDesc": "Maareeyeyaasha isha, kaydka iyo ikhtiyaarrada kordhinta",
     "settingsAddons": "Kordhin dheeraad ah",
     "customPath": "Waddo kaydin gaar ah",
+    "stories": "Sheekooyin",
+    "watchOrder": "Daawo amarka",
+    "watchOrderOpenSite": "Ka fur chiaki.site",
+    "watchOrderUnavailable": "Dalab daawasho ah looma helin cinwaankan",
+    "watchOrderOpenFailed": "Ma furi karin ciwaankaas",
+    "watchOrderCurrent": "halkan ayaad joogtaa",
+    "watchOrderCredit": "Daawo amarada chiaki.site",
     "customPathDesc": "Meesha xogta app-ka la dhigo. Dheer taabo si aad dib ugu dejiso",
     "selectDirectory": "Dooro galka",
     "differentCacheManager": "Cache sawir oo kale",
     "differentCacheManagerDesc": "Isticmaal maareeye cache oo kale sawirrada",
+    "settingsSync": "Isku xidhka dejinta",
+    "settingsSyncDesc": "Dejintaada isku mid ku dhig qalab kasta. Waxay ku kaydsan yihiin xog gaar ah akoonkaaga GitHub",
+    "settingsSyncSwitch": "Isku hagaaji isbeddelka",
+    "settingsSyncModeGithub": "GitHub",
+    "settingsSyncSignIn": "Ku soo gal GitHub",
+    "settingsSyncSignInDesc": "Dejinta waxaa lagu kaydiyaa qoraal gaar ah oo ku jira akoonkaaga",
+    "settingsSyncToken": "Isticmaal calaamad gelitaanka shakhsi ahaaneed",
+    "settingsSyncTokenDesc": "Mid ka samee github.com/settings/tokens adiga oo haysta ogolaanshaha gunta oo kaliya",
+    "settingsSyncTokenField": "Token",
+    "settingsSyncSignedIn": "U soo galay sida {user}",
+    "@settingsSyncSignedIn": {
+        "placeholders": {
+            "user": {}
+        }
+    },
+    "settingsSyncSignOut": "Saxiix",
+    "settingsSyncCode": "Geli {code} GitHub",
+    "@settingsSyncCode": {
+        "placeholders": {
+            "code": {}
+        }
+    },
+    "settingsSyncCodeDesc": "Bogga GitHub ayaa ka furmay biraawsarkaaga. Taabo si aad koodhka koobiyayso, ama taabo oo hayso si aad u tirtirto.",
+    "settingsSyncSignInFailed": "Ma soo geli karo GitHub",
+    "dcPreview": "Horudhac",
+    "dcSampleWatching": "Daawashada",
+    "dcSampleReading": "Akhriska",
+    "dcSampleBrowsing": "Daalacashada",
+    "dcSampleLive": "Hadda",
+    "dcLiveNothing": "Ma jiraan wax muuqda hadda Fur ciwaan, bilow dhacdo ama cutub wayna ka muuqataa halkan.",
+    "dcMemberList": "Liiska xubnaha",
+    "dcAccount": "Xisaab",
+    "dcSignIn": "Ku soo gal Discord",
+    "dcSignOut": "Saxiix",
+    "dcDesktopHint": "Iyadoo aan la xidhin, Discord waxay ku tusinaysaa \"Daawashada Dartotsu\" iyada oo loo marayo abka miiska. Connect Discord si aad hawsha ugu magacowdo ciwaankaga, ay ku jirto mobaylka.",
+    "dcMobileHint": "Connect Discord si aad u muujiso waxaad daawanayso ama akhrinayso. Waxay adeegsataa bogga oggolaanshaha Discord, ee maaha calaamada akoonkaaga.",
+    "dcConnect": "Isku xirka Discord",
+    "dcConnectDesc": "Fura bogga oggolaanshaha Discord oo ku dara Dartotsu hoosta Apps Idman. Discord waxay ku weyddiistaa inay cusboonaysiiso joogitaankaaga. Kaliya calaamad cusub ayaa la kaydiyay, maaha calaamada akoonkaaga.",
+    "dcConnectFailed": "Lama xiriirin karo Discord",
+    "dcConnectedSnack": "Khilaaf ayaa ku xiran",
+    "dcDisconnect": "Xiriirka ka jar",
+    "dcDisconnectedSnack": "Khilaafku wuu go'ay",
+    "dcUseToken": "Isticmaal calaamad",
+    "dcRouteDesktop": "Iyadoo loo marayo barnaamijka Discord desktop",
+    "dcRouteHeadless": "Iyada oo loo marayo akoonkaaga",
+    "dcRouteGateway": "Iyada oo loo marayo akoonkaaga, ku noolow",
+    "dcRouteLinked": "Abka ku xidhan",
+    "dcRouteNone": "Ma xidhna",
+    "dcStatusNeedsToken": "Wuxuu u baahan yahay calaamad Discord. Ku xidhida abka ma dhigayso heerkaaga onlaynka ah.",
+    "dcAccountOnly": "Wuxuu u baahan yahay akoon lagu soo galay",
+    "dcStatusSection": "Xaalada",
+    "dcControlStatus": "Xakamee xaaladayda",
+    "dcControlStatusDesc": "Waxay ku haysaa xidhiidhka tooska ah ee Discord inta joogitaanka qanigu daaran yahay, markaa Dartotsu wuxuu dejin karaa heerkaaga.",
+    "dcStatusOnline": "Online",
+    "dcStatusIdle": "Iidle",
+    "dcStatusDnd": "Ha dhibin",
+    "dcStatusInvisible": "Aan la arki karin",
+    "dcCustomStatus": "Xaaladda gaarka ah",
+    "dcCustomStatusHint": "maxaad wadaa",
+    "dcActivitySection": "Dhaqdhaqaaqa",
+    "dcShowWatching": "Muuji adigoo daawanaya",
+    "dcShowReading": "Muuji inta aad wax akhrinayso",
+    "dcListening": "Dhagaysi",
+    "dcCompeting": "tartamaya",
+    "dcActivityName": "Magaca hawsha",
+    "dcNameApp": "Dartotsu",
+    "dcNameTitle": "Ciwaanka",
+    "dcNameCustom": "Caadiyan",
+    "dcCustomNameHint": "Magaca la muujiyay ka dib \"Daawashada\"",
+    "dcStatusText": "Qoraalka xaaladda",
+    "dcStatusTextDesc": "Waxa liiska xubnaha ka tusinaya magacaaga agtiisa",
+    "dcDisplayName": "Magaca",
+    "dcDisplayState": "Gobolka",
+    "dcDisplayDetails": "Faahfaahin",
+    "dcTextSection": "Qoraal",
+    "dcDetails": "Khadka sare",
+    "dcState": "Gunta hoose",
+    "dcTemplateHint": "Madhan waxay isticmaashaa sida caadiga ah",
+    "dcVariables": "Taabo si aad u geliso qiime",
+    "dcImagesSection": "Sawirada",
+    "dcLargeImage": "Sawir weyn",
+    "dcLargeAuto": "Baabuur",
+    "dcLargeCover": "Dabool",
+    "dcLargeLogo": "Logo",
+    "dcSmallImage": "Sawir yar",
+    "dcSmallAuto": "Logo",
+    "dcSmallNone": "Midna",
+    "dcTimerStyle": "Habka saacada",
+    "dcTimerAuto": "Baabuur",
+    "dcTimerElapsed": "Dhacay",
+    "dcTimerRemaining": "Haraaga",
+    "dcButtonsSection": "Badhamada",
+    "dcButtonMedia": "Xidhiidhka cinwaanka",
+    "dcButtonApp": "Isku xirka Dartotsu",
+    "dcButtonCustom": "badhanka gaarka ah",
+    "dcButtonLabel": "Summada",
+    "dcButtonUrl": "Xiriirinta",
+    "dcPrivacySection": "Qarsoodi",
+    "dcPrivateText": "Qoraal gaar ah",
+    "dcPrivateHint": "Wax gaar ah",
+    "dcTokenWarning": "Soo gelida waxay isticmaashaa calaamada akoonkaaga Xeerarka Discord ayaa tan niyadda ka dhigaya, markaa u isticmaal khatartaada.",
+    "dcConnected": "Ku xidhan",
+    "dcConnection": "Isku xirka",
+    "dcMethodDesktop": "Discord desktop app",
+    "dcMethodDesktopDesc": "Si toos ah ayaa loo istcimaalaa marka aan wax kale lagu xirin. Khilaafku waa inuu ka furnaa kombayutarkan.",
+    "dcMethodToken": "Calaamada xisaabta",
+    "dcInUse": "La isticmaalo",
+    "dcRecommended": "lagu taliyay",
+    "dcConnecting": "Isku xidhka…",
+    "dcDisconnected": "Ma xidhna",
+    "dcSignedInAs": "U soo galay sida {name}",
+    "@dcSignedInAs": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "settingsSyncOn": "Daar",
+    "settingsSyncCustom": "Caadiyan",
+    "settingsSyncChangedHeader": "Goobaha la bedelay",
+    "settingsSyncNoneChanged": "Weli ma aadan beddelin mid ka mid ah kuwan, marka ma jiraan wax la isku dhejiyo.",
+    "settingsSyncChangedOnly": "Dejinta kaliya ee aad bedeshay ayaa lagu kaydiyaa Wax kasta oo kale waxay u isticmaalaan sida caadiga ah qalab kasta. Astaanta daruurtu waxay muujinaysaa waxa horeba ugu jiray serfarka",
+    "settingsSyncOffCategory": "Iskuma toosin Kuwani waxay ku sii jiraan qalabkan oo nuqul ka mid ah server-ka ayaa loo daayaa sidiisa.",
+    "settingsSyncPartsNote": "Qalabkiiba Off waxay ilaalinaysaa qalab kasta qiimahiisa, sidaa awgeed taleefoonka iyo TV-ga way kala duwanaan karaan.",
+    "settingsSyncPartSubtitles": "cabbir hoosaadka iyo midabada",
+    "settingsSyncPartSubtitlesDesc": "Cabbirka, miisaanka, midabada iyo booska",
+    "settingsSyncPartPictureColors": "midabada sawirka",
+    "settingsSyncPartPictureColorsDesc": "Iftiin, isbarbardhig, dhereg, gamma, midab iyo HDR",
+    "settingsSyncPartPalette": "Midabada mawduuca",
+    "settingsSyncPartPaletteDesc": "Mawduuca, midabka lahjadda iyo OLED madow",
+    "settingsSyncCatOther": "Daawo, akhriso iyo adeegyo",
+    "settingsSyncTitles": "Daawo horumarka iyo ciwaanada",
+    "settingsSyncTitlesCount": "{records} ciwaanada iyo {resume} dib u bilaaba galida serfarka",
+    "@settingsSyncTitlesCount": {
+        "placeholders": {
+            "records": {},
+            "resume": {}
+        }
+    },
+    "settingsSyncTitlesNone": "Wax wali lama soo galin",
+    "settingsSyncTitlesNote": "Daawo oo akhri jagooyinka, shelf resume, liisaska deegaankaaga, bookmarks, waxyaabaha muhiimka ah iyo doorashada cinwaan kasta. Tabarbarrada isha iyo durdurrada waxay ku sii jiraan qalab kasta sababtoo ah waxay ku xidhan yihiin kordhintaada. Cinwaanadu waxay soo geliyaan ugu badnaan 45 ilbiriqsi kasta.",
+    "settingsSyncConnect": "Ma xidhna",
+    "settingsSyncConnectDesc": "Ku soo gal GitHub si aad u ilaaliso dejintaada isku mid qalab kasta.",
+    "settingsSyncFailedTitle": "Isku xidhka ayaa fashilmay",
+    "settingsSyncPaused": "Hakin",
+    "settingsSyncPausedDesc": "Ma jiraan wax la soo geliyo ama la soo dejiyo inta ay tani maqan tahay.",
+    "settingsSyncUpToDate": "Ilaa hadda",
+    "settingsSyncRetry": "Isku day",
+    "settingsSyncAccount": "Koontada GitHub",
+    "settingsSyncAccountDesc": "Xogtaadu waxay ku socotaa xog gaar ah oo ku jirta akoonkaaga.",
+    "settingsSyncWaiting": "Adigoo ku sugaya inaad ku ogolaato GitHub",
+    "settingsSyncCopyCode": "Taabo koodka si aad u koobiyeeyso",
+    "settingsSyncCancel": "Jooji",
+    "settingsSyncStatSettings": "Dejinta",
+    "settingsSyncStatTitles": "Cinwaanada",
+    "settingsSyncStatShelf": "Dib u bilaw",
+    "settingsSyncUploaded": "La soo galiyay {time} {device}",
+    "@settingsSyncUploaded": {
+        "placeholders": {
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncChanged": "{count, plural, =0{Wali waxba isma bedelin} =1{1 bedelay} other{{count} ayaa isbedelay}}",
+    "settingsSyncSecrets": "Xisaabaadka iyo furaha sirta ah",
+    "settingsSyncSecretsDesc": "Isku hagaaji geliyaashaada (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), furayaasha API iyo qufulka abka ee aaladahaaga. Waxaa lagu sir ah erayga sirta ah ee ku sii jira qalabkaaga, markaa GitHub waligiis ma arko.",
+    "settingsSyncSecretsOn": "Akoonada waa la is waafajiyay oo waa la siray",
+    "settingsSyncSecretsOnDesc": "Ka bixida hal qalab kuma saarayso kuwa kale.",
+    "settingsSyncSecretsBroken": "Erayada sirta ah kuma eka kuwa ku jira server-ka. Geli mar kale si aad u sii wadato xisaab xidhka",
+    "settingsSyncPassphraseSet": "Deji jumlad sir ah",
+    "settingsSyncPassphraseEnter": "Geli eraygaaga sirta ah",
+    "settingsSyncPassphraseField": "Sifeynta",
+    "settingsSyncPassphraseConfirm": "Ku celi erayga sirta ah",
+    "settingsSyncPassphraseNew": "Dooro jumlad sir ah oo ka kooban ugu yaraan 6 xaraf. Meelna laguma kaydiyo laakiin qalabkaaga lamana soo celin karo. Haddii aad illowdo, tirtir nuqulka serverka oo dib u bilow.",
+    "settingsSyncPassphraseExisting": "Geli erayga sirta ah ee aad ku dooratay qalabkaaga kale. Xisaabaadka qalabkan waxa lagu bedeli doonaa kuwa la isku dhejiyay.",
+    "settingsSyncPassphraseWrong": "Erayada sirta ah ee khaldan",
+    "settingsSyncPassphraseMismatch": "Erayada sirta ah kuma eka",
+    "settingsSyncPassphraseShort": "Isticmaal ugu yaraan 6 xaraf",
+    "settingsSyncSecretsStop": "Jooji xisaabinta xisaabaadka",
+    "settingsSyncSecretsDelete": "Ka tirtir GitHub",
+    "settingsSyncSecretsDeleteMessage": "Tani waxay ka saartaa faylka xisaabtaada sirta ah. Aaladaha kale waxay xafidaan soo gelitaankooda waxayna dejin karaan jumlad sir ah oo cusub.",
+    "settingsSyncWhat": "Maxaa la isku waafajiyaa",
+    "settingsSyncServer": "On server-ka",
+    "settingsSyncServerEmpty": "Wax wali lama soo galin",
+    "settingsSyncServerInfo": "{count}, laga soo raray {time} {device}",
+    "@settingsSyncServerInfo": {
+        "placeholders": {
+            "count": {},
+            "time": {},
+            "device": {}
+        }
+    },
+    "settingsSyncThisDevice": "qalabkan",
+    "settingsSyncCount": "{count, plural, =0{Ma jiraan wax ku jira server-ka} =1{1 dejinta on server-ka} other{{count} dejinta server-ka}}",
+    "settingsSyncNow": "Isku xidh hadda",
+    "settingsSyncRunning": "Isku xidhka…",
+    "settingsSyncNever": "Weli lama isku dhejin",
+    "settingsSyncLast": "Markii ugu dambeysay ee la isku dhejiyay {time}",
+    "@settingsSyncLast": {
+        "placeholders": {
+            "time": {}
+        }
+    },
+    "settingsSyncFailed": "Isku xidhka ayaa fashilmay: {error}",
+    "@settingsSyncFailed": {
+        "placeholders": {
+            "error": {}
+        }
+    },
+    "settingsSyncScope": "Keliya goobaha ku shaqeeya meel kasta waa la isku dhejiyay. Xisaabaadka, calaamadaha, faylalka, kordhinta, ogaysiisyada, Discord, cusboonaysiinta iyo cabbirka daaqada waxay ku sii sugnaan doonaan qalab kasta.",
     "backupAndRestore": "Kaydinta iyo soo celinta",
     "backupAndRestoreDesc": "Kaydi ama soo rar doorbidyadaada",
     "backup": "Kaydin",
     "restore": "Soo celi",
     "loadExtensionsIcon": "Soo rar astaamaha kordhinta",
+    "autoUpdateRuntimes": "Si otomaatig ah u cusboonaysii wakhti kordhinta",
+    "autoUpdateRuntimesDesc": "Soo deji Aniyomi, CloudStream iyo noocyo runtime kale oo gadaal ah. Demin, summada cusboonaysiinta ayaa u muuqata maamulaha agtiisa.",
     "loadExtensionsIconDesc": "Muuji astaamaha isha liisaska kordhinta",
     "sectionStorage": "Kaydinta",
     "sectionManagers": "Maareeyeyaal",
@@ -89,6 +376,9 @@
     "backupSelectAll": "Dooro dhammaan",
     "backupClearAll": "Nadiifi",
     "backupKeys": "{count} dejin",
+    "backupPasswordRequired": "Furaha (loo baahan yahay xogta xisaabta)",
+    "backupProtectedNeedsPassword": "Deji furaha sirta ah si aad u kaydiso xogta akoontada, ama ka furto",
+    "backupProtectedSkipped": "Kaydkani malaha furaha sirta ah, markaa xogta akoonkeeda waa la booday",
     "backupPassword": "Erayga sirta (ikhtiyaari)",
     "backupPasswordHint": "Madhan ka tag si aad u isticmaasho kan caadiga ah",
     "backupSensitive": "Waxa ku jira token-yada gelitaanka. Faylkan qari",
@@ -125,6 +415,70 @@
     "backupCatOtherDesc": "Qaabka feed-ka, liisaska iyo ikhtiyaarrada adeegga",
     "logFile": "Fayl log ah",
     "logFileDesc": "La wadaag log-ka app-ka, ama koobi waddadiisa Linux",
+    "logDelete": "Tirtir faylasha log",
+    "logDeleteDesc": "Nadiifi diiwaanka abka ee la keydiyay si aad meel bannaan uga soo baxdo",
+    "logDeleted": "La tirtiray {size} ee diiwaannada",
+    "@logDeleted": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "missingSequel": "Taxanaha Maqan",
+    "rising": "Kaca",
+    "stacks": "Duubista",
+    "stacksAll": "Dhammaan",
+    "stacksFeatured": "Sifaysan",
+    "stacksMine": "Adaa leh",
+    "stacksSaved": "Badbaadiyay",
+    "stacksFollowing": "Daba gal",
+    "stacksEmpty": "Weli halkan wax xidhmo ah ma jiraan",
+    "stacksSignIn": "Gal MangaBaka si aad u aragto xirmooyinkaaga",
+    "stacksScopeNeeded": "Xirmooyinkaagu waxay u baahan yihiin ogolaansho cusub. Mar kale soo gal MangaBaka si aad u ogolaato.",
+    "stacksSignInAgain": "Mar kale soo gal",
+    "stacksCouldntLoad": "Waa la rari waayay xirmooyinka",
+    "stackSeriesCount": "{count, plural, =1{1 taxane} other{{count} taxane}}",
+    "@stackSeriesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackSavesCount": "{count, plural, =1{1 badbaadin} other{{count} kaydiya}}",
+    "@stackSavesCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "stackBy": "by {name}",
+    "@stackBy": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "stackSpoilers": "Qaswadayaasha",
+    "stackEmptyEntries": "Xidhmadani waa faaruq",
+    "stackSave": "Kaydi raso",
+    "stackUnsave": "Ka saar kaydinta",
+    "stackSavedToast": "Lagu keydiyay xirmooyinkaaga",
+    "stackRemovedToast": "Laga saaray xidhmooyinkaagii kaydsanaa",
+    "userStacks": "Isku dhafka {name}",
+    "@userStacks": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "newsTitle": "Wararka",
+    "newsEmpty": "Hadda war ma jiro",
+    "newsCouldntLoad": "Ma rari karo warka",
     "logFileCopied": "Waddada log-ka waa la koobiyay",
     "donateSheetTitle": "Ma ku raaxaysanaysaa Dartotsu?",
     "donateSheetMessage": "Dartotsu waxaa dhisay oo kaydiyaa hal qof. Haddii ay kuu faa'iido leedahay, tixgeli inaad taageerto horumarinta.",
@@ -134,6 +488,8 @@
     "glassBackgroundHint": "Xiriirka sawirka (madhan ka tag si aad u isticmaasho banner-kaaga)",
     "followCover": "La raac daboolka",
     "followCoverDesc": "Midabadu waxay raacaan gadaasha, iyo daboolka boggaga faahfaahinta",
+    "followCoverMediaOnly": "Warbaahinta kaliya",
+    "followCoverMediaOnlyDesc": "Kaliya raac daboolka boggaga warbaahinta, meel kasta oo kale waxay ilaalisaa midabada caadiga ah",
     "cardStyle": "Qaabka kaarka",
     "cardStyleDesc": "Meesha ciwaanka, cabbirka, horumarka iyo calaamadaha",
     "customFont": "Far-qoraal",
@@ -145,7 +501,7 @@
     "browseGoogleFonts": "Baadh Google Fonts…",
     "searchGoogleFonts": "Raadi Google Fonts",
     "defaultFont": "Caadi",
-    "materialYou": "Material You",
+    "materialYou": "Qalabka Adiga",
     "materialYouDesc": "Midab firfircoon oo nidaamka ka yimaada",
     "jsonTheme": "Fayl qaab gaar ah",
     "jsonThemeDesc": "Midabyo toos ah oo ka yimaada ~/.config/dartotsu/theme.json (script gaar ah, ama wax-ka-beddelkaaga)",
@@ -162,16 +518,16 @@
     "channel": "Kanaalka",
     "stable": "Xasiloon",
     "preRelease": "Hore-sii-deyn",
-    "alpha": "Alpha",
+    "alpha": "Alfa",
     "checkNow": "Hadda hubi",
-    "userAgent": "User-Agent",
+    "userAgent": "Isticmaalaha-Wakiilka",
     "settingDefault": "Caadi",
     "currentlyUsing": "Hadda: {value}",
     "dnsOverHttps": "DNS-over-HTTPS",
     "dnsDefault": "Caadi (Cloudflare)",
-    "proxy": "Proxy",
+    "proxy": "Wakiil",
     "proxyProtocol": "Nooc",
-    "proxyHost": "Host",
+    "proxyHost": "Martigeliyaha",
     "proxyPort": "Deked",
     "proxyUsername": "Magaca isticmaalaha",
     "proxyPassword": "Erayga sirta",
@@ -188,7 +544,8 @@
     "imageSavedTo": "Waxaa lagu keydiyay {path}",
     "imageActionFailed": "Sawirka lama soo dejin karo",
     "imageTitleCover": "Dabool",
-    "imageTitleBanner": "Banner",
+    "imageTitlePage": "Bogga",
+    "imageTitleBanner": "Calan",
     "imageTitleAvatar": "Sawirka profile-ka",
     "verifyTls": "Xaqiiji shahaadooyinka",
     "verifyTlsDesc": "Diid server-yada leh shahaadooyin HTTPS ah oo aan sax ahayn. Dami oo keliya isha isticmaasha mid is-saxiixay",
@@ -197,11 +554,15 @@
     "gitHub": "GitHub",
     "gitHubDesc": "Koodka, dhibaatooyinka iyo sii-deyntu",
     "discordDesc": "Bulshada iyo caawimaadda",
+    "supportDeveloper": "Taageer horumariyaha",
+    "buyMeCoffee": "I soo iibso qaxwo",
+    "upiId": "Aqoonsiga UPI",
+    "upiCopied": "Aqoonsiga UPI waa la guuriyay",
     "donateDesc": "Taageer horumarinta",
     "contributors": "Gacan-ka-geystayaasha",
     "contributorsDesc": "Dadka dhisay Dartotsu",
     "contributorsLoadFailed": "Gacan-ka-geystayaasha lama soo rari karo",
-    "forks": "Forks",
+    "forks": "Fargeeto",
     "forksDesc": "Mashaariicda lagu dhisay Dartotsu",
     "forksEmpty": "Forks lama helin",
     "sectionColors": "Midabada",
@@ -214,6 +575,7 @@
     "onboardingBack": "Dib",
     "onboardingNext": "Xiga",
     "onboardingSkip": "Ka bood",
+    "onboardingLanguageBody": "Dooro luqadda Dartotsu lagu muujiyay. Waxaad ka beddeli kartaa hadhow gudaha Settings.",
     "onboardingPaletteTitle": "Ka dhig mid kaaga ah",
     "onboardingPaletteBody": "Dooro midabaysan. Midab kasta, kaararka ilaa ciyaaraha, wuu raacayaa.",
     "themeModeAuto": "Toos",
@@ -245,13 +607,33 @@
     "calendarToday": "Maanta",
     "calendarEmpty": "Maalintan waxba lama baahinayo",
     "calendarFailed": "Jadwalka lama soo rari karo",
+    "calendarChapter": "Cutubka {n}",
+    "@calendarChapter": {
+        "placeholders": {
+            "n": {
+                "type": "int"
+            }
+        }
+    },
+    "calendarExpected": "La filayo",
+    "castReceiverFailed": "Chromecast-ku ma bilaabin ciyaartoygiisa",
+    "castPlaybackFailed": "Qalabku ma daari karo qulqulkan",
+    "shortcutNothingToContinue": "Wax wali socda ma jiraan",
+    "shortcutNoCalendar": "{service} malaha jadwal",
+    "@shortcutNoCalendar": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
     "calendarEpisode": "Dhacdada {n}",
     "shareAnalytics": "La wadaag xogta isticmaalka ee aan magac lahayn",
     "shareAnalyticsDesc": "Tirada isticmaalayaasha iyo warbixinnada burburka ee aan magac lahayn. Akoon iyo xog shakhsi ah ma jiraan",
     "linkOpenAnilist": "Ku fur xiriiriyeyaasha AniList Dartotsu dhexdiisa",
     "linkOpenAnilistDesc": "Shid maamulka xiriiriyeyaasha si xiriiriyeyaasha anilist.co app-ka u furaan",
     "linkSettingsFailed": "Dejimaha nidaamka lama furi karo",
-    "discordRichPresence": "Rich Presence",
+    "discordRichPresence": "Joogitaanka qani",
     "discordRichPresenceTokenDesc": "Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay token-kaaga Discord.",
     "discordRichPresenceDesktopDesc": "Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay app-ka Discord ee kombuyuutarka oo socda.",
     "discordBrowsing": "Muuji dhaqdhaqaaqa baadhista",
@@ -259,8 +641,8 @@
     "discordLookHeader": "Muuqaalka presence-ka",
     "discordActivityType": "Nooca dhaqdhaqaaqa",
     "discordActivityTypeDesc": "Sida Discord u qorto: \"Watching …\" ama \"Playing …\". Toos waxay u isticmaashaa Watching anime iyo Playing wax kasta oo kale.",
-    "discordWatching": "Watching",
-    "discordPlaying": "Playing",
+    "discordWatching": "Daawashada",
+    "discordPlaying": "Ciyaarta",
     "discordCovers": "Muuji dabooleyaasha",
     "discordCoversDesc": "Sawirka daboolka iyo astaanta Dartotsu kaarka.",
     "discordTimer": "Muuji saacadda",
@@ -293,7 +675,7 @@
     "discordTokenNotSet": "Lama dejin. Taabo si aad ugu darto.",
     "discordTokenSavedSnack": "Token-ka Discord waa la keydiyay",
     "discordTokenRemovedSnack": "Token-ka Discord waa la saaray",
-    "discordRichPresenceRow": "Discord Rich Presence",
+    "discordRichPresenceRow": "Joogitaanka hodanka ah ee Discord",
     "discordRichPresenceRowOn": "Shidan · taabo si aad u bedesho muuqaalkiisa",
     "discordRichPresenceRowOff": "Muuji waxa aad sameyneyso profile-kaaga Discord",
     "loginCancelled": "Galitaanka waa la joojiyay",
@@ -306,8 +688,41 @@
     "password": "Erayga sirta",
     "kitsuProfile": "Profile-ka Kitsu",
     "mangaBakaLoginFailed": "Galitaanka MangaBaka wuu fashilmay",
+    "comickLoginFailed": "Soo gelida majaajilada ayaa guuldareystay",
+    "tagline": "Tagline",
+    "trending": "La daalacanayo",
+    "anticipated": "La filayo",
+    "watchlist": "Liiska daawashada",
+    "recommendedShows": "Bandhigyada lagu taliyay",
+    "recommendedMovies": "Aflaanta lagu taliyay",
+    "boxOffice": "Xafiiska sanduuqa",
+    "popularMovies": "Filimada caanka ah",
+    "popularShows": "Bandhigyada caanka ah",
+    "anticipatedMovies": "Filimada la filayo",
+    "anticipatedShows": "Bandhigyada La Filayo",
+    "trendingShows": "Bandhigyada Isbadalaya",
+    "mostWatchedThisWeek": "Inta badan la daawado todobaadkan",
+    "sortMostViewed": "Inta badan la daawado",
+    "sortMostFollowed": "Badi way raaceen",
+    "sortLatestUpdates": "Wararkii ugu dambeeyay",
+    "translationStatusLabel": "Turjumaada",
+    "weeklySchedule": "Jadwalka toddobaadlaha ah",
+    "mostFollowed": "Inta Badan La Raaco",
+    "latestUpdates": "Wararkii U Danbeeyay",
+    "trendingAnime": "Anime Trending",
+    "topRatedAnime": "Anime ee ugu Sareeya",
+    "mostFollowedAnime": "Anime inta badan la raaco",
+    "comickProfile": "Muuqaalka majaajilada",
+    "refreshFromComick": "Ka cusboonaysii Comick",
     "mangaBakaProfile": "Profile-ka MangaBaka",
     "refreshFromMangaBaka": "Ka cusboonaysii MangaBaka",
+    "mangaUpdatesLoginTitle": "Soo gal MangaUpdates",
+    "mangaUpdatesProfile": "MangaUpdates profile",
+    "mangaUpdatesAnimeStart": "La qabsiga anime ayaa bilaabmaya",
+    "mangaUpdatesAnimeEnd": "La qabsiga anime wuu dhamaanayaa",
+    "refreshFromMangaUpdates": "Ka cusboonaysii MangaUpdates",
+    "usernameOnly": "Magaca isticmaale",
+    "releases": "Siidaynta",
     "artistsLabel": "Farshaxanno",
     "authorsLabel": "Qoraayaal",
     "publishersLabel": "Daabacayaal",
@@ -317,8 +732,13 @@
     "noLabel": "Maya",
     "ratingSteps": "Tillaabooyinka qiimaynta",
     "hideNsfw": "Qari NSFW",
+    "hideNsfwSourcesDesc": "Ka qari ilaha lagu calaamadeeyay 18+ quudinta iyo cidda soo xushay. Way ku rakiban yihiin.",
     "hideNsfwDesc": "Ka ilaali ciwaannada qaangaarka ah feed-ka iyo raadinta, oo liisgareey gelitaannadaada qaangaarka ah hoos Warbaahinta La Qariyay.",
     "kitsuAccountOptions": "Ikhtiyaarrada akoonka Kitsu",
+    "mangaBakaAccountOptions": "Doorashooyinka akoonka MangaBaka",
+    "comickAccountOptions": "Ikhtiyaarada koontada Comick",
+    "comickClientId": "Aqoonsiga Macmiilka ee Comick",
+    "comickClientIdDesc": "Aqoonsiga macmiilka gaarka ah ee ka diiwaan gashan comick.dev",
     "couldNotUpdateKitsuSettings": "Dejimaha Kitsu lama cusboonaysiin karin",
     "titleCanonical": "Rasmi ah",
     "titleRomanized": "Romanized",
@@ -341,12 +761,15 @@
     "accountDetails": "Faahfaahinta akoonka",
     "refreshFromKitsu": "Ka cusboonaysii Kitsu",
     "simklReadOnly": "Simkl waxaa la siiyay gelitaan akhris-kaliya ah",
+    "traktReadOnly": "Trakt waxa la siiyay marin-akhris-kaliya",
     "incognitoEditsBlocked": "Qarsoodi: wax-ka-bedelka liiska waa la xannibay",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Qarsoodi: horumarka lama keydin",
     "progressSet": "Horumarka waxaa loo dejiyay {progress}",
     "removedFromList": "{title} waa laga saaray liiskaaga",
     "following": "La raacayo",
+    "followsMutual": "Labada dhinac",
+    "followsNotMutual": "Aan wadaagin",
     "homeSections": "Qaybaha Guriga",
     "homeSectionsHint": "Jiid si aad dib ugu habayso. Qaybaha la qariyay marna lama soo rarto.",
     "customListDeleteFailed": "Liiska gaarka ah lama tirin karo",
@@ -354,6 +777,7 @@
     "customListsSaved": "Liisaska gaarka ah waa la keydiyay",
     "listName": "Magaca liiska",
     "addList": "Ku dar liis",
+    "voiceActors": "Jilayaasha codka",
     "voiceActorsIn": "Codka jilayaasha · {name}",
     "animeAppearances": "Muuqaallada anime",
     "mangaAppearances": "Muuqaallada manga",
@@ -363,6 +787,8 @@
     "mainProductions": "Wax-soo-saarka ugu muhiimsan",
     "otherWorks": "Shaqooyin kale",
     "prequelSequel": "Hore & Xiga",
+    "prequel": "Hordhac",
+    "sequel": "Taxane",
     "previousSeason": "Xilli hore",
     "thisSeason": "Xilligan",
     "nextSeason": "Xilliga xiga",
@@ -374,11 +800,18 @@
     "repullProfileCounts": "Dib u soo qaad profile-kaaga iyo tirooyinka",
     "refreshed": "La cusboonaysiiyay",
     "simklProfile": "Profile-ka Simkl",
+    "traktProfile": "Trakt profile",
     "refreshFromSimkl": "Ka cusboonaysii Simkl",
+    "refreshFromTrakt": "Ka cusboonaysii Trakt",
     "repullProfileLibrary": "Dib u soo qaad profile-kaaga iyo maktabadda",
     "simklSignInToSearch": "Ku gal Simkl si aad u raadiso",
     "dropRate": "Heerka joojinta",
     "simklAttribution": "Xogta iyo sawirada waxaa bixiyay Simkl. Ka eeg Simkl",
+    "traktAttribution": "Xogta iyo farshaxanka uu bixiyay Trakt. Ka eeg Trakt",
+    "listsLiked": "Jeclahay",
+    "listsYours": "Adaa leh",
+    "traktVip": "VIP",
+    "traktVipMember": "Trakt VIP Xubinta",
     "onHold": "La hakiyay",
     "scoredBy": "Dhibcaha ay bixiyeen",
     "planToWatch": "Hindisay inaan daawado",
@@ -387,6 +820,8 @@
     "timesReread": "Marka dib loo akhriyay",
     "comments": "Faallooyin",
     "moviesAndSeries": "Aflaamta & Taxanayaasha",
+    "simklMoviesOnly": "Filimada & Taxanaha kaliya",
+    "simklMoviesOnlyDesc": "Wuxuu ku beddelaa tab Anime: Filimada marka hore, ka dibna wuxuu ku muujiyaa dhowr saf oo anime ah",
     "trackingOnly": "La socod oo keliya",
     "signedIn": "Waa la galay",
     "searchLanguage": "Luqadda raadinta",
@@ -397,19 +832,41 @@
     "details": "Faahfaahin",
     "addToList": "Ku dar liiska",
     "trailer": "Trailer",
+    "trailerQuality": "Tayada filimka",
     "titleCopied": "Ciwaanka waa la koobiyay",
     "linkCopied": "Xiriirka waa la koobiyay",
     "watchTrailer": "Daawo trailer-ka",
     "copyTitle": "Koobi ciwaanka",
+    "detailStale": "AniList lama heli karo Tani waa macluumaadka la keydiyay waxaana laga yaabaa inay duugowday.",
     "copyLink": "Koobi xiriirka",
     "openInBrowser": "Ku fur browser-ka",
     "viewOnSource": "Ka eeg {source}",
     "episodeAirsIn": "Dhacdada {ep} waxay baaha ka noqonaysaa {time}",
     "nextEpisodeIn": "Dhacdada xigta {time} kadib",
+    "chapterExpectedIn": "Cutubka {chapter} waxaa la filayaa ilaa {time}",
     "logPathCopied": "Waddada faylka log-ka waa la koobiyay",
     "animeSource": "Isha anime",
     "mangaSource": "Isha manga",
     "popular": "Caan ah",
+    "allCustomLists": "Dhammaan liisaska gaarka ah",
+    "simklTitleLanguage": "Luuqadda cinwaanka Anime",
+    "titleLanguageEnglish": "Ingiriis",
+    "titleLanguageRomaji": "Romaji",
+    "simklListsTrending": "La daalacanayo",
+    "simklListsMostLiked": "Inta badan la jeclaaday",
+    "simklListsMostFollowed": "Badi way raaceen",
+    "simklListsOfficial": "Rasmi ah",
+    "simklListTitles": "{count, plural, =1{1 ciwaan} other{{count} cinwaano}}",
+    "@simklListTitles": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "people": "Dadka",
+    "mostComments": "Inta badan faallooyinka",
+    "alphabetical": "Alifbeeto",
     "latest": "Ugu dambeeyay",
     "saved": "La keydiyay",
     "nothingMatched": "Waxba lama helin",
@@ -440,6 +897,7 @@
     "nothingNew": "Wax cusub ma jiraan",
     "thisWeek": "Usbuucan",
     "listOnly": "Liis kaliya",
+    "notInList": "Aan Liiska ku jirin",
     "filter": "Shaandhee",
     "searchResults": "Natiijooyinka raadinta",
     "recentSearches": "Raadinadii u dambeeyay",
@@ -478,6 +936,11 @@
     "done": "Dhammaaday",
     "searchOrEnterUrl": "Raadi ama geli URL",
     "refresh": "Cusboonaysii",
+    "animePlanetRank": "Darajo",
+    "animePlanetMagazine": "Joornaal",
+    "animePlanetRefreshLists": "Dib u cusboonaysii liiskaaga",
+    "animePlanetRefreshListsDesc": "Akhri liiskaaga Anime-Planet mar kale",
+    "animePlanetLocalNote": "Soo gal si aad u kaydiso isbeddelada koontadaada Anime-Planet Ilaa markaas waxay ku sii jirayaan qalabkan",
     "share": "La wadaag",
     "characters": "Jilayaasha",
     "staff": "Shaqaalaha",
@@ -599,6 +1062,8 @@
     "sectionPrivacy": "Asturnaanta",
     "hidePrivateEntries": "Qari gelitaannada gaarka ah",
     "hidePrivateEntriesDesc": "Ka ilaali feed-ka gelitaannada AniList lagu calaamadiyay gaar ah",
+    "anilistExcludeList": "Ka saar liiskaaga",
+    "anilistExcludeListDesc": "Ka ilaali cinwaannada hore ugu jira AniList-kaaga bogagga anime iyo manga",
     "anilistProfile": "Profile-ka AniList",
     "refreshFromAnilist": "Ka cusboonaysii AniList",
     "couldNotUpdateAnilistSettings": "Dejimaha AniList lama cusboonaysiin karin",
@@ -634,6 +1099,9 @@
     "sectionBrowse": "Baadh",
     "readingTab": "Tab-ka akhriska",
     "readingTabDesc": "Kordhinta tab-ka saddexaad muujiyo",
+    "firstTab": "Tab ugu horeysay",
+    "firstTabDesc": "Waa kuwee kordhinta tab ugu horeysay muujinaysaa. Halkan ka dooro manga iyo sheeko cusub tab akhriska si aad anime uga soo riddo baarka",
+    "novelExtensions": "Kordhinta Novel",
     "defaultFeed": "Feed caadi ah",
     "defaultFeedDesc": "Liiska isha la furo",
     "noServiceSupports": "Adeeg ma taageero {type}",
@@ -701,6 +1169,8 @@
     "studio": "Istuudiyo",
     "serialization": "Taxane",
     "season": "Xilli",
+    "year": "Sannadka",
+    "filterAny": "Mid kasta",
     "broadcast": "Baahinta",
     "aired": "La baahiyay",
     "published": "La daabacay",
@@ -709,6 +1179,7 @@
     "watching": "La daawanayo",
     "reading": "La akhrinayo",
     "dropped": "La joojiyay",
+    "unfinished": "Ma dhammayn",
     "planned": "La qorsheeyay",
     "trailers": "Trailer-yo",
     "ratings": "Qiimayn",
@@ -727,7 +1198,10 @@
     "tags": "Tag-yo",
     "author": "Qoraa",
     "born": "Dhashay",
-    "website": "Website",
+    "died": "dhintay",
+    "birthplace": "Goobta dhalashada",
+    "department": "Waaxda",
+    "website": "Mareegta",
     "established": "La aasaasay",
     "manhwa": "Manhwa",
     "manhua": "Manhua",
@@ -735,6 +1209,10 @@
     "thisMonth": "Bishan",
     "movies": "Aflaamta",
     "shows": "Bandhigyada",
+    "moviesWatched": "Filimada La Daawaday",
+    "showsWatched": "Bandhigyo La Daawaday",
+    "moviesCollected": "Filimada la ururiyay",
+    "showsCollected": "Bandhigyada la ururiyay",
     "rewatching": "Dib u daawanaya",
     "rereading": "Dib u akhriyaya",
     "watchedStatus": "La daawaday",
@@ -823,6 +1301,14 @@
     "trendingThisWeek": "Caan ah usbuucan",
     "mostWatchedThisMonth": "Ugu badan la daawaday bishan",
     "repoLinksAdded": "Xiriiriyeyaasha kaydka si guul leh ayaa loo daray!",
+    "repoLinkConfirm": "Kudar kaydkan?\n\n{url}\n\nKaliya ku dar bakhaarrada ilaha aad ku kalsoon tahay.",
+    "@repoLinkConfirm": {
+        "placeholders": {
+            "url": {
+                "type": "String"
+            }
+        }
+    },
     "errorGettingAnilistData": "Cilad ka timid helista xogta AniList.",
     "navInfo": "XOG",
     "navComments": "FAALLOOYIN",
@@ -860,7 +1346,7 @@
     "userTitle": "{name} · {title}",
     "couldntLoadProfile": "Profile-kan lama soo rari karo",
     "profile": "Profile",
-    "feed": "Feed",
+    "feed": "Quudinta",
     "stats": "Tirakoob",
     "received": "La helay",
     "sent": "La diray",
@@ -884,6 +1370,14 @@
     "installPluginTitle": "Rakib {name}",
     "sizeLabel": "Cabbirka: {size}",
     "installedState": "La rakibay",
+    "updatePluginTitle": "Cusbooneysii {name}",
+    "@updatePluginTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "errorLabel": "Cilad:",
     "stackTraceDetails": "Faahfaahin (Stack Trace)",
     "shareLogFile": "La wadaag faylka log-ka",
@@ -894,6 +1388,12 @@
     "alreadyThere": " · {count} horey u jiray",
     "airingNow": "Hadda la baahinayo",
     "topRatedMovies": "Aflaamta ugu qiimaha sarreeya",
+    "koreanDramas": "Riwaayadaha Kuuriyada",
+    "chineseDramas": "Riwaayadaha Shiinaha",
+    "japaneseDramas": "Riwaayadaha Jabaan",
+    "thaiDramas": "Riwaayadaha Thailand",
+    "turkishDramas": "Riwaayadaha Turkiga",
+    "miniSeries": "Taxane gaaban",
     "topRatedShows": "Bandhigyada ugu qiimaha sarreeya",
     "recommendedSection": "La soo jeediyay",
     "syncRow": "Isku waafaji liisaska",
@@ -905,8 +1405,61 @@
     "syncAutoDesc": "Soo qaad oo isku waafaji gadaasha marka app-ku furmo iyo 30 daqiiqo kasta",
     "syncAddMissing": "Ku dar gelitaannada maqan",
     "syncAddMissingDesc": "Ku dar sidoo kale gelitaannada adeegga kale aanu weli lahayn",
+    "syncServiceOn": "Ku xidh {name}",
+    "@syncServiceOn": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "syncDelete": "Tirtir waxa aanu lahayn adeegga ugu muhiimsan",
+    "syncDeleteDesc": "Ka saar gelinta adeegyada kale ee aan ku jirin liiska ugu muhiimsan. Keliya waxa la geliyaa ee la mid ah ciwaanka ayaa meesha laga saaray, si ay waxyaabaha ay ka midka yihiin filimada Simkl iyo taxanaha sii joogaan",
+    "syncDeleteTitle": "Tir tir gelinta?",
+    "syncDeleteConfirm": "{count, plural, =1{1 gelid} other{{count} gelida}} kuwa aan ku jirin liiskaaga ugu muhiimsan waa laga tirtiri doonaa adeegyada kale. Tan lama celin karo.",
+    "@syncDeleteConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncDeleteAction": "Tirtir",
+    "syncToDelete": "Si loo tirtiro",
+    "syncDeletedNote": "Waa la tirtiri doonaa",
+    "syncWillRemove": "{count} waa laga tirtiri doonaa {name}",
+    "@syncWillRemove": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "name": {
+                "type": "String"
+            }
+        }
+    },
     "syncOnlyForward": "Ilaali horumarka sii fog",
     "syncOnlyForwardDesc": "Ha yareynin horumarka adeeg hore u sii socda",
+    "animePlanetWontWatch": "Ma daawan doono",
+    "animePlanetWontRead": "Ma akhrin doono",
+    "animePlanetAlreadyOnList": "Durba liiskan",
+    "animePlanetNewList": "Magaca liiska cusub",
+    "syncPrivate": "Gelida gaarka ah",
+    "syncPrivateDesc": "Waxa aad ku samaynayso qoraalada aad si gaar ah u ilaaliso. Adeeg leh ikhtiyaar gaar ah ayaa ka dhigaya kuwo gaar ah; qaar kalena si cad ayay u tusi lahaayeen",
+    "syncPrivateModeAsk": "Waydii",
+    "syncPrivateModeSync": "Isku hagaaji",
+    "syncPrivateModeSkip": "Ka bood iyaga",
+    "syncPrivateTitle": "Gelida gaarka ah",
+    "syncPrivateAsk": "{count, plural, =1{1 gelitaanka waa mid gaar ah} other{{count} waxyaabaha la galiyo waa kuwo gaar ah}}. Adeegyada leh ikhtiyaar gaar ah (AniList, Kitsu, MangaBaka) waxay u heli doonaan si gaar ah; Adeegyada kale ma laha ikhtiyaar gaar ah waxayna u tusi lahaayeen si guud. Isku xidh iyaga? Jawaabtaada waa la xusuustaa; ku beddel ikhtiyaarka Sync.",
+    "@syncPrivateAsk": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "syncPrivateInclude": "Isku hagaaji",
+    "syncPrivateSkip": "Ka bood iyaga",
     "syncFetch": "Soo qaad",
     "syncFetchAgain": "Mar kale soo qaad",
     "syncAll": "Isku waafaji dhammaan",
@@ -937,6 +1490,14 @@
     "syncService": "Isku waafaji {service} ({count})",
     "syncOnEdit": "Isku waafaji isla markiiba isbeddelada",
     "syncOnEditDesc": "U dir cusboonaysiin kasta oo horumar ah iyo wax-ka-bedel liis kasta adeegyadaada kale isla markiiba",
+    "syncRemoved": "Laga saaray {services}",
+    "@syncRemoved": {
+        "placeholders": {
+            "services": {
+                "type": "String"
+            }
+        }
+    },
     "syncPushed": "Loo waafajiyay {services}",
     "syncPushFailed": "{service}: {error}",
     "syncRateLimited": "Xad ayaa laga gaadhay, mar kale isku day wax yar kadib",
@@ -1213,6 +1774,12 @@
     "watchSearchAgain": "Mar kale raadi",
     "watchSearchSource": "Raadi {source}",
     "watchSource": "Isha",
+    "sourceTags": "Tags",
+    "sourceTagsHint": "Tag waxa ishani loogu talagalay. Cinwaanku wuxuu taxayaa ilaha lagu calaamadeeyay marka hore, ka dibna kuwa aan la taaban. 18+ ilo ayaa kaliya muujinaya cinwaanada dadka waaweyn.",
+    "sourceTagAnime": "Anime",
+    "sourceTagMovies": "Filimada & Taxanaha",
+    "sourceTagAdult": "18+",
+    "sourceHiddenByTags": "Qarsoon by tags",
     "watchOptions": "Ikhtiyaarro",
     "watchReverse": "Rog hab-ka",
     "watchScanlators": "Kooxaha",
@@ -1225,8 +1792,8 @@
     "watchMarkUnwatched": "Ku calaamadee aan la daawan",
     "watchMarkRead": "Ku calaamadee la akhriyay",
     "watchMarkUnread": "Ku calaamadee aan la akhrin",
-    "watchFiller": "Filler",
-    "watchRecap": "Recap",
+    "watchFiller": "Buuxiyaha",
+    "watchRecap": "Dib u soo koobid",
     "watchNoEpisodes": "Dhacdo lama helin",
     "watchNoChapters": "Cutub lama helin",
     "watchSourceTools": "Qalabka isha",
@@ -1247,6 +1814,44 @@
     "watchProbeFailed": "Goobta lama gaari karin",
     "watchClearCookies": "Nadiifi cookies-ka goobtan",
     "watchCookiesCleared": "Cookies-ka waa la nadiifiyay",
+    "watchFailTimeout": "Jeeggu kuma dhammaanin waqtigii loogu talagalay",
+    "watchFailBlocked": "Goobtu waxay xannibtay aaladdan (gelitaanka waa la diiday). Jeeggu waxba tari maayo",
+    "watchFailTurnstile": "Jeeggani wuxuu u baahan yahay tuubo oo uusan samayn karin cidda wax xalisa",
+    "watchFailLoad": "Boggu ma shubin Hubi xidhiidhka iyo cinwaanka goobta",
+    "watchFailRejected": "Goobtu way diiday ogolaanshaha ay hadda bixisay. Isku day marlabaad ama nadiifi cookies-ka",
+    "watchFailDismissed": "Jeeggu waa la xidhay ka hor inta aanu dhammaan",
+    "watchFailCooldown": "Waxaad xidhay jeegga wax yar ka hor. Taabo xal si aad mar kale isugu daydo",
+    "watchFailQuiet": "Jeeggu adiga ayuu kuu baahan yahay, abkana iskii ayuu u shaqaynayay",
+    "watchFailWebView": "Aragtida shabakadeed ee dambe way bilaaban kartaa",
+    "watchFailUnavailable": "Ma jirto shaashad muujinaysa jeeggu",
+    "watchStatusReady": "Diyaarsan",
+    "watchStatusChallenge": "Hubinta Cloudflare ayaa loo baahan yahay",
+    "watchStatusBlocked": "Waxaa xannibay goobta",
+    "watchStatusOffline": "Ma gaadhi karo goobta",
+    "watchStatusUntested": "Weli lama tijaabin",
+    "watchStatusTesting": "Tijaabi xidhiidhka…",
+    "watchStatusSolving": "Gudbinaya hubinta Cloudflare…",
+    "watchSolvedBackground": "Jeega Cloudflare ayaa laga dhex maray gadaasha ({seconds} s)",
+    "@watchSolvedBackground": {
+        "placeholders": {
+            "seconds": {
+                "type": "int"
+            }
+        }
+    },
+    "watchSolvedByUser": "Jeega Cloudflare waa la dhaafay",
+    "watchClearanceIssued": "kasbaday {time}",
+    "@watchClearanceIssued": {
+        "placeholders": {
+            "time": {
+                "type": "String"
+            }
+        }
+    },
+    "watchClearanceStale": "Ogolaanshaha waxaa lagu kasbaday wakiilka isticmaale kale, markaa lama dirin. Tijaabi xidhiidhka si aad mid cusub u hesho",
+    "watchSectionConnection": "Isku xirka",
+    "watchSectionSession": "Casharka",
+    "watchSectionTools": "Qalabka",
     "watchMetaSource": "Faahfaahinta dhacdada ka timid",
     "watchMetaAuto": "Toos",
     "watchMetaOff": "Dami",
@@ -1259,6 +1864,10 @@
     "playerSectionEngine": "Matoor",
     "playerSectionMpv": "mpv",
     "playerSpeed": "Xawaaraha ciyaarista",
+    "localSource": "Faylasha deegaanka",
+    "localMissing": "Faylkan ama galkan hadda kuma jiro galka degaankaaga",
+    "playerStickyStage": "Muuqaal dhejis ah",
+    "playerStickyStageDesc": "Fiidiyowga ha ahaado mid meel sare ku yaal inta aad ka rogto qaybaha iyo faallooyinka hoose",
     "playerCursedSpeed": "Xawaaraha dheeraadka ah",
     "playerCursedSpeedDesc": "Ku dar xawaare ilaa 10x liiska",
     "playerResize": "Habka cabbirka",
@@ -1281,6 +1890,8 @@
     "playerAutoSkipEnding": "Ka bood dhammaystirka",
     "playerAutoSkipRecap": "Ka bood recap",
     "playerAutoSkipDesc": "Ka bood isla marka uu bilaabmo, adigoo isticmaalaya AniSkip iyo waqtiyada stream-ka",
+    "playerDisableSkips": "Dami boodboodka",
+    "playerDisableSkipsDesc": "Ma jiro AniSkip ama qulqulka timestamps, calamadaha cutubka ama ka boodi soo gudbinta ee ciyaaryahanka",
     "playerSkipOnce": "Mar keliya ka bood",
     "playerSkipOnceDesc": "Ha ka boodin qaybta isla marka aad dib ugu noqoto",
     "playerAdjustBrightness": "Dhaqdhaqaaqa iftiinka",
@@ -1301,6 +1912,9 @@
     "playerSubtitleColor": "Midabka tarjumaadaha",
     "playerSubtitleBackground": "Gadaasha tarjumaadaha",
     "playerSubtitleOutline": "Xariiqda tarjumaadaha",
+    "playerSubtitleOutlineWidth": "Balaadhka dulmar-hoosaadka",
+    "playerSubtitlePreview": "Horudhac-hoosaadka",
+    "playerSubtitlePreviewText": "Qoraal horudhac-hoosaad ah",
     "playerLibass": "Isticmaal libass",
     "playerLibassDesc": "Samee tarjumaadaha .ass ee qaabaysan. Cabbirka, midabka iyo far-qoraalka kor ku xusan markaas ma dhaqmaan",
     "playerShaders": "Shaders",
@@ -1310,6 +1924,13 @@
     "playerShadersMissing": "Anime4K lama rakibin",
     "playerShadersMissingDesc": "Soo deji xirmada shader-ka Anime4K (ku dhawaad 0.8 MB) si aad u isticmaasho qaababka dhismay.",
     "playerShadersDownload": "Soo deji Anime4K",
+    "playerPictureSave": "Keydi jirkan",
+    "playerPictureOriginal": "Asalka",
+    "playerPictureOriginalDesc": "Qaabka sida muuqaalku u leeyahay, iyada oo aan lahayn hadh ama midabyo",
+    "playerPictureProcessed": "Iyada oo hadhka iyo midabada",
+    "playerPictureProcessedDesc": "Qaabka sida aad hadda u aragto",
+    "playerPictureSaved": "Qaabka la keydiyay",
+    "playerPictureSaveFailed": "Ma kaydin karayn jir",
     "playerShadersPreview": "Ku hordhac frame-kan",
     "playerShadersUse": "Isticmaal kan",
     "playerPicture": "Sawir",
@@ -1332,6 +1953,9 @@
     "playerColorAdjust": "Hagaaji",
     "playerShadersOriginal": "Asalka",
     "playerShadersPreviewFailed": "Fiilooyin lagu hordhaco lama qabsan karin",
+    "playerShadersSoftware": "Shaders waxay u baahan yihiin samaynta qalabka, ciyaartoyguna waxa uu isticmaalayaa samaynta software. Dami soo-bandhigista Software-ka ee goobaha Ciyaartoyga.",
+    "playerSoftwareRender": "Soo saarista software",
+    "playerSoftwareRenderDesc": "Kaliya muuqaal madow. Shaders kuma shaqeeyaan. Codsada marka xigta uu ciyaaryahanku furmo",
     "playerShadersCustomFiles": "Shaders-kaaga",
     "playerShadersCustom": "Shaders gaar ah",
     "playerShadersImport": "Soo geli .glsl",
@@ -1380,7 +2004,7 @@
     "playerScale": "Kor-u-qaade",
     "playerCscale": "Chroma kor-u-qaade",
     "playerDscale": "Hoos-u-dhige",
-    "playerToneMapping": "Tone mapping",
+    "playerToneMapping": "Khariidaynta codka",
     "playerTargetPeak": "Ugu sarreeya bartilmaameedka",
     "playerOpenFiles": "Fur faylasha muuqaalka",
     "playerOpenFilesDesc": "Ciyaar faylasha qalabkan",
@@ -1401,7 +2025,22 @@
     "playerResetConfirm": "Dib u deji dhammaan dejimaha ciyaaraha?",
     "playerResetDone": "Dejimaha ciyaaraha dib ayaa loo dejiyay",
     "playerQuality": "Tayada",
+    "streamGroupSub": "Sub",
+    "streamGroupHardSub": "Sub adag",
+    "streamGroupSoftSub": "Sub jilicsan",
+    "streamGroupDub": "Dub",
+    "streamGroupRaw": "Ceyriin",
+    "streamGroupOther": "Mid kale",
+    "streamsCount": "{count, plural, =1{1 durdur} other{{count} durdurrada}}",
+    "@streamsCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
     "playerStreams": "Stream-yada",
+    "playerStreamFailedNext": "Socodkaasi ma ciyaari doono, isagoo isku dayaya kan ku xiga",
     "playerAutoSelect": "Dooro stream si toos ah",
     "playerAutoSelectDesc": "Dooro stream ugu eg doorashadaadii ugu danbaysay ee ciwaankan",
     "playerLoadingStreams": "Stream-yo ayaa la raadinayaa…",
@@ -1422,6 +2061,8 @@
     "readerFirstChapter": "Kani waa cutubka ugu horreeya",
     "readerLastChapter": "Wax walba waad dhammaysay",
     "readerFailed": "Cutubkan lama furi karo",
+    "readerOpenBook": "Buug fur",
+    "readerOpenBookDesc": "Akhri epub (akhriiyaha sheeko cusub) ama PDF (manga reader) ee faylalkaaga",
     "readerNoText": "Cutubkan qoraal ma leh",
     "readerPerTitle": "Ciwaankan oo keliya",
     "readerPerTitleDesc": "Ilaali dejimahan akhriska ciwaankan oo keliya",
@@ -1430,6 +2071,7 @@
     "readerSectionDisplay": "Bandhigga",
     "readerSectionNovel": "Novel",
     "readerMode": "Habka akhriska",
+    "readerModeAuto": "Auto (nooca taxane ah)",
     "readerModeRtl": "Midig ilaa bidix",
     "readerModeLtr": "Bidix ilaa midig",
     "readerModeVertical": "Bogag toosan",
@@ -1472,7 +2114,13 @@
     "readerFilterNone": "Midna",
     "readerFilterGrayscale": "Madow-cawl",
     "readerFilterInvert": "Rog",
-    "readerFilterSepia": "Sepia",
+    "readerFilterSepia": "Sebiya",
+    "readerFilterQuality": "Tayada filtarrada sawirka",
+    "readerFilterQualityNone": "Midna (deriska ugu dhow)",
+    "readerFilterQualityLow": "Hoose (Bilinear)",
+    "readerFilterQualityMedium": "Dhexdhexaad (Trilinear)",
+    "readerFilterQualityHigh": "Sare (Bicubic)",
+    "readerFilterQualityLanczos": "Lanczos (Tayo sare leh oo miridhku)",
     "readerDim": "Madoobee",
     "readerDimDesc": "Ka dhig boggaga mid mugdi ah",
     "readerPageNumber": "Lambarka bogga",
@@ -1481,6 +2129,8 @@
     "readerFullscreenDesc": "Qari barafyada nidaamka",
     "readerCropBorders": "Gooy cidhifyada",
     "readerCropBordersDesc": "Ka jar baaxadaha madhan ee cad ama madow boggaga",
+    "readerLongPressSave": "Qabo bog si aad u kaydiso",
+    "readerLongPressSaveDesc": "Taabo bogga si aad u furto kaydinta, wadaagto oo koobiyo doorashooyinka",
     "readerVolumeKeys": "Furayaasha codku wuxuu rogaa boggaga",
     "readerVolumeKeysDesc": "Codka hoos wuxuu horay u socdaa, codka kor wuxuu dib u noqdaa",
     "readerBookmarks": "Calaamadaha",
@@ -1502,6 +2152,7 @@
     "readerSaveProgressDesc": "Xasuuso bogga oo cutubyada ku calaamadee la akhriyay",
     "readerReset": "Dib u deji dejimaha akhriska",
     "readerResetDesc": "Ku noqo kuwa caadiga ah",
+    "readerResetConfirm": "Dib u dajin kasta oo akhriste dejintiisa u dhigma?",
     "novelSize": "Cabbirka qoraalka",
     "novelFont": "Far-qoraal",
     "novelLineHeight": "Dhererka xariiqda",
@@ -1510,7 +2161,7 @@
     "novelTheme": "Qaabka akhriska",
     "novelThemeApp": "Qaabka app-ka",
     "novelThemeLight": "Iftiin",
-    "novelThemeSepia": "Sepia",
+    "novelThemeSepia": "Sebiya",
     "novelThemeDark": "Mugdi",
     "novelThemeBlack": "Madow",
     "novelJustify": "Isu simo qoraalka",
@@ -1518,6 +2169,78 @@
     "trackProgressTitle": "Kaydi horumarka?",
     "trackProgressAnime": "La soco {name} liiskaaga markaad daawato? Dooro \"Qalabkan oo keliya\" si aad ugu hayso gudaha, ama Maya si aadan waxba u kaydin.",
     "trackProgressManga": "La soco {name} liiskaaga marka aad dhammaysato cutub? Dooro \"Qalabkan oo keliya\" si aad ugu hayso gudaha, ama Maya si aadan waxba u kaydin.",
+    "trackProgressAnimeLocal": "Ku keydi horumarkaaga {name} liiskaaga qalabkan markaad daawato?",
+    "@trackProgressAnimeLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressMangaLocal": "Ku keydi horumarkaaga {name} liiskaaga qalabkan marka aad dhammayso cutubka?",
+    "@trackProgressMangaLocal": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadClearQueue": "Safka cad",
+    "downloadClearQueueConfirm": "Jooji dhammaan {count} soo dejinta safka ku jira? Wixii horay loo soo dejiyay waa la tirtiray.",
+    "@downloadClearQueueConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectedCount": "{count} la doortay",
+    "@downloadSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadSelectAll": "Dhammaan dooro",
+    "downloadDeleteSelected": "Tirtir la doortay",
+    "downloadDeleteSelectedConfirm": "Ma tirtirtaa {count} soo dejinta? Faylalkooda waa laga saaray aaladda.",
+    "@downloadDeleteSelectedConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "castTitle": "Ku tuur qalabka",
+    "castSearching": "Raadinta aaladaha shabakadaada…",
+    "castNoDevices": "Qalab lama helin Hubi in TV-ga ama Chromecast-ku ku yaal isla Wi-Fi, ka dibna raadi mar kale.",
+    "castRefresh": "Mar labaad raadi",
+    "castFailed": "Ma bilaabi karayn jilista",
+    "castStop": "Jooji tuurista",
+    "castNowCasting": "Ku duubida {name}",
+    "@castNowCasting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "castProtocolChromecast": "Chromecast",
+    "castProtocolDlna": "DLNA / Smart TV",
+    "castProtocolRoku": "Roku",
+    "castRokuNote": "Roku ma warbixin karo mana bedeli karo booska",
+    "castControls": "Xakamaynta",
+    "castVolume": "Mugga TV-ga",
+    "castSkipPart": "Ka bood {name}",
+    "@castSkipPart": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "trackProgressRememberSeries": "Xusuusnow taxanahan",
     "trackProgressYes": "Kaydi",
     "trackProgressReset": "Su'aasha kaydinta horumarka waa la dib u dejiyay nooca kan, mar kale ayay weydiin doontaa",
     "trackProgressNo": "Maya",
@@ -1537,12 +2260,13 @@
     "dantotsuGroupAccounts": "Akoonno",
     "dantotsuGroupAppearance": "Muuqaal",
     "dantotsuGroupExtensions": "Kordhin",
-    "dantotsuGroupApp": "App",
+    "dantotsuGroupApp": "App-ka",
     "dantotsuGroupPlayer": "Ciyaaraha",
     "dantotsuAnilist": "Galitaanka AniList",
     "dantotsuMal": "Galitaanka MyAnimeList",
     "dantotsuDiscord": "Token-ka Discord Rich Presence",
     "dantotsuTheme": "Qaab",
+    "themePickerTitle": "Dulucda",
     "dantotsuReposAnime": "Kaydka kordhinta anime",
     "dantotsuReposManga": "Kaydka kordhinta manga",
     "dantotsuReposNovel": "Kaydka kordhinta novel",
@@ -1561,6 +2285,15 @@
     "kitsuGraphqlDetailDesc": "Soo rar ciwaan jilayaashiisa, shaqaalihiisa iyo gelitaankaaga hal codsi",
     "togetherTitle": "Wada daawo",
     "togetherIntro": "Ku dheji xiriirka qolka saaxiibkaa kuu soo diray. Isla markiiba ayaad ku biirtaa ciyaartoygana wuu furmaa marka ay bilaabaan daawashada.",
+    "togetherLinkConfirm": "Ku biir qolka {room}? Martigeliyaha ayaa dooranaya waxa ciyaaraya, ciyaaryahankuna iskii ayuu u furaa marka ay bilaabaan daawashada.",
+    "@togetherLinkConfirm": {
+        "placeholders": {
+            "room": {
+                "type": "String"
+            }
+        }
+    },
+    "togetherJoin": "Ku biir",
     "togetherName": "Magacaaga",
     "togetherConnecting": "Waa la xidhayaa…",
     "togetherLeave": "Ka bax qolka",
@@ -1568,6 +2301,15 @@
     "togetherNoChat": "Weli fariin ma jirto",
     "togetherChatHint": "Fariin",
     "togetherCopyInvite": "Koobi casuumaadda",
+    "togetherShareInvite": "La wadaag martiqaad",
+    "togetherShareText": "ila daawo Dartotsu: {link}",
+    "@togetherShareText": {
+        "placeholders": {
+            "link": {
+                "type": "String"
+            }
+        }
+    },
     "togetherInviteCopied": "Server-ka iyo qolka waa la koobiyay",
     "togetherConnectionLost": "Isku-xirka waa go'ay",
     "togetherConnectedTo": "Waxaa lagu xidhay {room}",
@@ -1610,6 +2352,41 @@
     "novelSpeakNext": "Xariiqda xigta",
     "novelTapPaging": "Taabo cidhifyada si aad bogga u rogto",
     "novelTapPagingDesc": "Taabo dhinaca bidix ama midig si aad bog u dhaqaajiso, dhexdu waxay muujisaa xakamaynta",
+    "novelPaged": "Bogga leexashada",
+    "novelPagedDesc": "U kala qaybi cutubka bogag oo ku dhufo ama taabo si aad u rogto halkii aad ka rogi lahayd",
+    "novelPageOf": "Bogga {current} ee {total}",
+    "@novelPageOf": {
+        "placeholders": {
+            "current": {
+                "type": "int"
+            },
+            "total": {
+                "type": "int"
+            }
+        }
+    },
+    "novelPaginating": "Dejinta bogag",
+    "novelTools": "Nuxurka, raadinta iyo waxyaabaha muhiimka ah",
+    "novelContents": "Nuxurka",
+    "novelContentsEmpty": "Cutubkani ma laha cinwaano",
+    "novelSearch": "Raadi",
+    "novelSearchHint": "Ka raadi cutubkan",
+    "novelSearchNone": "Ma jiro tabarro",
+    "novelSearchCount": "{count, plural, =1{1 ciyaar} other{{count} kulan}}",
+    "@novelSearchCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "novelHighlights": "Tilmaamaha",
+    "novelHighlightsEmpty": "Dooro qoraal oo taabo Highlight si aad halkan ugu hayso",
+    "novelHighlight": "Iftiimin",
+    "novelHighlightNote": "Ogow",
+    "novelHighlightNoteHint": "Ku dar qoraal",
+    "novelHighlightRemove": "Ka saar iftiiminta",
+    "novelHighlightFailed": "Waa la waafajin kari waayay doorashadaas qoraalka",
     "novelMinutesLeft": "{count} daqiiqo ayaa harsan",
     "novelBold": "Qoraal dufan",
     "novelBoldDesc": "Isticmaal culeys ka culus",
@@ -1628,6 +2405,23 @@
     "playerAddSubtitle": "Ku dar faylka tarjumaadda",
     "playerAddAudio": "Ku dar faylka codka",
     "playerChapters": "Cutubyo",
+    "playerSkipSubmit": "Soo gudbi waqtiyada boodada",
+    "playerSkipSubmitDesc": "Calaamadee meesha furitaanka, ku dhamaanaysa ama dib u koobista ay ka bilaabato kuna dhamaato qaybtan lana wadaag AniSkip, si qof kastaa u helo badhanka boodada.",
+    "playerSkipStart": "Bilow",
+    "playerSkipEnd": "Dhammaad",
+    "playerSkipUseNow": "Isticmaal booska hadda jira",
+    "playerSkipSend": "U gudbi AniSkip",
+    "playerSkipSent": "Waqtiyada boodboodka waxaa loo gudbiyay AniSkip, mahadsanid",
+    "playerSkipFailed": "AniSkip wuu diiday waqtiyada boodada: {error}",
+    "@playerSkipFailed": {
+        "placeholders": {
+            "error": {
+                "type": "String"
+            }
+        }
+    },
+    "playerUnsupported": "Ciyaartoyga muuqaalku kuma shaqayn karo qalabkan (nooca Android-kiisa aad buu u da'weyn yahay maktabadda ciyaartoyga ee la isku xidho). Taabo si aad u koobiyeeyso faahfaahinta",
+    "playerSkipNoMal": "Magacani malaha aqoonsiga MyAnimeList, AniSkip ma qaadan karo",
     "playerNoChapters": "Cutub ma jiro",
     "playerTimestamp": "Calaamadda waqtiga",
     "playerAutoPlayDelay": "Tirinta dhacdada xigta",
@@ -1641,15 +2435,29 @@
     "playerPip": "Sawir ku jira sawir",
     "playerAutoPip": "Sawir ku jira sawir marka aad ka baxdo",
     "playerAutoPipDesc": "Ku sii ciyaar daaqad yar marka aad app-ka ka baxdo",
+    "playerPipPlay": "Ciyaar",
+    "playerPipPause": "Jooji",
+    "playerPipBack": "Dib u celi",
+    "playerPipForward": "Horey",
+    "playerPipRestore": "Ku laabo ciyaaryahanka",
+    "playerPipActive": "Ku ciyaarista daaqad yar",
+    "listDateAdded": "Lagu daray liiska",
+    "listDateLastWatched": "Daawashada ugu dambeysay",
     "playerAutoPlaying": "Hadda xigta: {title}…",
     "playerShadersFailed": "Shaders lama rakibin karin: {error}",
     "playerChapter": "Cutubka {number}",
     "playerPerTitle": "Ciwaankan oo keliya",
     "playerPerTitleDesc": "Ilaali ikhtiyaarradan ciwaankan oo ha taaban kuwa caadiga ah",
+    "playerSwapGestures": "Beddel dhinacyada swipe-ka",
+    "playerSwapGesturesDesc": "Iftiinka bidixda iyo codka midigta",
+    "playerOpenBig": "Ku fur muuqaal weyn",
+    "playerOpenBigDesc": "Ku bilow player-ka shaashadda buuxda halkii liiska qaybaha",
+    "playerPauseOnBlur": "Jooji marka aan fooggnayn",
+    "playerPauseOnBlurDesc": "Jooji marka app-ka la dahaadho, sida guddiga ogeysiisyada, kuna sii wad marka aad soo noqoto",
     "playerAudioOutput": "Soo-saarka codka",
     "fontAppDefault": "Far-qoraalka app-ka",
     "fontImport": "Soo geli far-qoraal",
-    "fontSample": "The quick brown fox jumps over the lazy dog",
+    "fontSample": "Dawacadii degdega ahayd ee maariinka ahayd ayaa ka booday eeyga caajiska ah",
     "playerSubtitleDelay": "Daahista tarjumaadaha",
     "playerAudioDelay": "Daahista codka",
     "playerDelayReset": "Dib u deji",
@@ -1668,8 +2476,74 @@
     "settingsDownloads": "Soo dejinta",
     "settingsDownloadsDesc": "Dhacdooyinka offline, safka iyo qaabka offline",
     "downloadsTitle": "Soo dejinta",
+    "widgetContinue": "Sii wad",
+    "widgetReleases": "Soo daaya dhawaan",
+    "widgetMore": "Sidoo kale waxaa socda",
+    "widgetNothing": "Wax wali socda ma jiraan",
+    "downloadStorageTitle": "Kaydinta",
+    "downloadStorageSummary": "{count, plural, =1{1 soo dejiso} other{{count} soo dajis}} · {size}",
+    "@downloadStorageSummary": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadStorageWatched": "{size} horay u daawaday ama akhriyay",
+    "@downloadStorageWatched": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreeUp": "Meel bannaan sii",
+    "downloadFreeUpConfirm": "Tirtir {count, plural, =1{1 daawo download} other{{count} daawaday soo dejinta}} iyo bilaash {size}?",
+    "@downloadFreeUpConfirm": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            },
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadFreed": "La sii daayay {size}",
+    "@downloadFreed": {
+        "placeholders": {
+            "size": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadDeleteWatched": "Tirtir la daawaday",
+    "downloadDeleteAll": "Tirtir dhammaan",
+    "downloadDeleteAllConfirm": "Ma tirtirtaa soo dejin kasta oo {title} ah?",
+    "@downloadDeleteAllConfirm": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "downloadNothingWatched": "Wax aad dhammaysay lama soo dejiyo",
+    "downloadStorageEmpty": "Wax soo dejisasho ah ma isticmaalayaan meel bannaan",
     "downloadsOpenDesc": "Eeg safka iyo wax kasta oo qalabkan ku kaydsan",
     "downloadTitle": "Soo deji",
+    "downloadMetaOnly": "Xogta badan oo kaliya",
+    "downloadMetaFailed": "Waa la samayn kari waayay galka cinwaanka",
+    "downloadMetaSaved": "Badbaadiyay Geli faylashaada {path}",
+    "@downloadMetaSaved": {
+        "placeholders": {
+            "path": {
+                "type": "String"
+            }
+        }
+    },
     "downloadAlready": "Hore ayaa loo soo dejiyay ama safka ayuu ku jiraa",
     "downloadPickStream": "Stream kee la soo dejiyaa?",
     "downloadPickSubtitle": "Tarjumaad kee la soo dejiyaa?",
@@ -1679,10 +2553,12 @@
     "downloadNoSubtitle": "Tarjumaad ma jirto",
     "downloadHlsNeedsFfmpeg": "Stream-kani waa playlist HLS ah. Soo dejintiisu waxay u baahan tahay kordhinta FFmpeg.",
     "downloadSourceMissing": "Isha dhacdadan lama rakibin",
+    "downloadDashDrm": "Socodkan waa la ilaaliyay DRM",
+    "downloadDashNoVideo": "Muujinta DASH ma laha muuqaal",
     "downloadWaitingConnection": "Isku-xirka waa la sugayaa",
     "downloadSubtitles": "Tarjumaado hoose",
     "downloadDownloaded": "La soo dejiyay",
-    "downloadOffline": "Offline",
+    "downloadOffline": "offline",
     "downloadDelete": "Tir soo dejinta",
     "downloadCancel": "Jooji",
     "downloadPause": "Hakad",
@@ -1719,7 +2595,7 @@
     "downloadNotifyOff": "Dami",
     "downloadInfoFile": "Qor fayl macluumaad ah soo dejin kasta agteeda",
     "downloadInfoFileDesc": "Wuxuu u keydiyaa stream-ka, tayada, tarjumaadda iyo waqtiyada booditaanka sida fayl .json ah oo yar",
-    "offlineHeader": "Offline",
+    "offlineHeader": "offline",
     "offlineModeDesc": "Toos wuxuu u aadaa offline kaliya marka app-ku bilaabmo isku-xir la'aan. Mar walba wuxuu ku sii jiraa offline ilaa aad beddesho.",
     "offlineModeOff": "Dami",
     "offlineModeAlways": "Mar walba",
@@ -1732,7 +2608,7 @@
     "offlineSyncNow": "Hadda waafaji",
     "offlineDiscard": "Tuur",
     "downloadNotOffline": "Dhacdadan lama soo dejin, sidaas darteed offline lama heli karo",
-    "offlineModeChip": "Offline",
+    "offlineModeChip": "offline",
     "downloadNextChapter": "Cutubka xiga",
     "downloadNextChapters": "{count} cutub ee xiga",
     "downloadUnread": "Dhammaan aan la akhrin ({count})",
@@ -1753,7 +2629,7 @@
     "downloadConnectionsDesc": "Fayl weyn wuxuu u kala qaybiyaa qaybo isku mar la soo qaado. Server-yada qaar xad ayay saaraan.",
     "downloadPlayChoice": "Ka ciyaar",
     "downloadPlayLocalDesc": "Faylka ku kaydsan qalabkan",
-    "downloadPlayStream": "Stream online",
+    "downloadPlayStream": "Ku shub online",
     "downloadPlayStreamDesc": "Ka soo rar dhacdada isha",
     "offlineFeedTitle": "Lagu soo dejiyay qalabkan",
     "offlineFeedEmpty": "Wax soo deji marka aad online tahay halkan ayay ka muuqan doonaan",
@@ -1777,7 +2653,7 @@
     "downloadSpeedLimitDesc": "Waxay xaddidaa xawaaraha soo dejinta guud",
     "downloadUnlimited": "Aan xaddidnayn",
     "downloadMoveToTop": "U guuri kor",
-    "downloadSwarm": "{seeds} seeds · {peers} peers",
+    "downloadSwarm": "{seeds} abuur · {peers} asxaabta",
     "downloadTorrentFile": "Fayl kee?",
     "downloadTorrentAuto": "Si toos ah ugu habboonee dhacdada",
     "downloadTorrentLoading": "Torrent-ka waa la akhrinayaa…",
@@ -1808,312 +2684,27 @@
     "onboardingFeatureSync": "Ka dhig liisaska kuwo is-waafaqsan",
     "onboardingFeatureSyncDesc": "Ku koobi liiskaaga adeegyada oo dhan, ama ha guuleysto kan hore u sii socda.",
     "onboardingServices": "Wuxuu la shaqeeyaa",
-    "updateInstallCancelled": "Rakibaadda waa la joojiyay. Haddii Android ku yidhi app-kan wuu ka hor imanayaa kii hore ee la rakibay, saxiixu waa kala duwan yahay: marka hore tirtir nooca hadda jira, kadibna rakib cusboonaysiinta",
-    "updateInstallFailed": "Cusboonaysiintii waa fashilantay: {error}",
-    "appLock": "Qufulka app-ka",
-    "appLockDesc": "Weydii passcode marka app-ka la furo ama marka aad dib ugu soo noqoto ka dib mudo",
-    "appLockUnlock": "Geli passcode-kaaga",
-    "appLockWrong": "Passcode-ku waa khalad",
-    "appLockWait": "Isku day badan, sug {seconds}s",
-    "appLockNew": "Dooro passcode",
-    "appLockNewHint": "4 ilaa 8 lambar",
-    "appLockConfirm": "Mar kale geli",
-    "appLockMismatch": "Passcode-yadu isma waafaqaan",
-    "appLockOn": "Passcode waa la dejiyay",
-    "appLockRemoveTitle": "Geli passcode-kaaga si aad qufulka u damiso",
-    "settingsNetwork": "Shabakadda",
-    "settingsNetworkDesc": "User agent, certificates, DNS and proxy",
-    "mangaBakaAccountOptions": "Doorashooyinka akoonka MangaBaka",
-    "chapterExpectedIn": "Cutubka {chapter} waxaa la filayaa ilaa {time}",
-    "anilistExcludeList": "Ka saar liiskaaga",
-    "anilistExcludeListDesc": "Ka ilaali cinwaannada hore ugu jira AniList-kaaga bogagga anime iyo manga",
-    "koreanDramas": "Riwaayadaha Kuuriyada",
-    "chineseDramas": "Riwaayadaha Shiinaha",
-    "japaneseDramas": "Riwaayadaha Jabaan",
-    "thaiDramas": "Riwaayadaha Thailand",
-    "turkishDramas": "Riwaayadaha Turkiga",
-    "miniSeries": "Taxane gaaban",
-    "playerSwapGestures": "Beddel dhinacyada swipe-ka",
-    "playerSwapGesturesDesc": "Iftiinka bidixda iyo codka midigta",
-    "playerOpenBig": "Ku fur muuqaal weyn",
-    "playerOpenBigDesc": "Ku bilow player-ka shaashadda buuxda halkii liiska qaybaha",
-    "playerPauseOnBlur": "Jooji marka aan fooggnayn",
-    "playerPauseOnBlurDesc": "Jooji marka app-ka la dahaadho, sida guddiga ogeysiisyada, kuna sii wad marka aad soo noqoto",
-    "notificationAired": "Episode {episode} of {title} aired",
-    "@notificationAired": {
+    "sourceNotifyOn": "Waxaa laguu sheegi doonaa marka {source} hesho wax cusub",
+    "@sourceNotifyOn": {
         "placeholders": {
-            "episode": {
-                "type": "String"
-            },
-            "title": {
+            "source": {
                 "type": "String"
             }
         }
     },
-    "playerDownloadCopy": "Copy details",
-    "playerPipRestore": "Back to the player",
-    "dcDisplayDetails": "Details",
-    "dcLargeCover": "Cover",
-    "settingsSyncTitles": "Watch progress and titles",
-    "updateLater": "Later",
-    "dcConnectedSnack": "Discord connected",
-    "downloadDeleteSelectedConfirm": "Delete {count} downloads? Their files are removed from the device.",
-    "@downloadDeleteSelectedConfirm": {
+    "sourceNotifyOff": "Ogeysiisyada siideynta waa dansan yihiin",
+    "sourceNotifyNeedsSource": "Marka hore dooro il kabriid leh",
+    "sourceNotifyAllOut": "Wax walba ({count}) mar horeba waa maqan yihiin, ma jiraan wax la sugo",
+    "@sourceNotifyAllOut": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "dcMethodToken": "Account token",
-    "shortcutPlayerFrameBack": "Previous frame",
-    "stacks": "Stacks",
-    "addonInstalled": "Installed",
-    "streamsCount": "{count, plural, =1{1 stream} other{{count} streams}}",
-    "@streamsCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncCode": "Enter {code} on GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "alphabetical": "Alphabetical",
-    "settingsMangaDesc": "Reader mode, controls, display and chapter tracking",
-    "sourceWhyNewest": "Newest at the source",
-    "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.",
-    "simklTitleLanguage": "Anime title language",
-    "readerModeAuto": "Auto (by series type)",
-    "settingsSyncSecretsBroken": "The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.",
-    "stackSavesCount": "{count, plural, =1{1 save} other{{count} saves}}",
-    "@stackSavesCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "stepWillUpdate": "Will be updated",
-    "trayUpdating": "Updating the app",
-    "updatePreparing": "Preparing…",
-    "syncWillRemove": "{count} will be deleted from {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "popularShows": "Popular Shows",
-    "playerPipActive": "Playing in a small window",
-    "dcDisplayName": "Name",
-    "playerDownloadFailedBody": "Check your connection and try again. The download picks up where it stopped.",
-    "settingsSyncServerInfo": "{count} settings, uploaded {time} from {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
-    "updateSkipVersion": "Skip this version",
-    "dcConnected": "Connected",
-    "dcStatusTextDesc": "What the member list shows next to your name",
-    "followsNotMutual": "Not mutual",
-    "castProtocolDlna": "DLNA / Smart TV",
-    "layoutDropInto": "Drop in: {zone}",
-    "@layoutDropInto": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "dcButtonCustom": "Custom button",
-    "dcSmallAuto": "Logo",
-    "backupProtectedSkipped": "This backup has no password, so its account data was skipped",
-    "settingsSyncPartPictureColorsDesc": "Brightness, contrast, saturation, gamma, hue and HDR",
-    "manageServicesDesc": "Reorder the services and choose which ones show in the picker",
-    "settingsLocalPlayBooks": "Books",
-    "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
-    "sourceMute": "Mute",
-    "sourceAlertsHeader": "Release notifications",
-    "settingsSyncPausedDesc": "Nothing is uploaded or downloaded while this is off.",
-    "sourceSoon": "soon",
-    "dcPrivateHint": "Something private",
-    "dcSampleLive": "Right now",
-    "castReceiverFailed": "The Chromecast did not start its player",
-    "settingsLocalPlayVideo": "Video",
-    "widgetReleases": "Releasing soon",
-    "playerDownloadFailedTitle": "Couldn't get the player",
-    "downloadStorageTitle": "Storage",
-    "updateNotFound": "Update server couldn't find that release: {message}",
-    "@updateNotFound": {
-        "placeholders": {
-            "message": {
-                "type": "String"
-            }
-        }
-    },
-    "syncDeleteAction": "Delete",
-    "sourcePickAnother": "Pick another source",
-    "watchSectionTools": "Tools",
-    "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.",
-    "downloadDashNoVideo": "The DASH manifest has no video",
-    "missingSequel": "Missing Sequel",
-    "settingsSyncChanged": "{count, plural, =0{Nothing changed yet} =1{1 changed} other{{count} changed}}",
-    "settingsSyncSecretsStop": "Stop syncing accounts",
-    "shortcutPlayerSpeedDown": "Slower playback",
-    "dcRecommended": "Recommended",
-    "sourceNextCheck": "Next check {when}",
-    "@sourceNextCheck": {
-        "placeholders": {
-            "when": {
-                "type": "String"
-            }
-        }
-    },
-    "castSearching": "Looking for devices on your network…",
-    "watchOrderOpenSite": "Open on chiaki.site",
-    "shortcutPlayerSubtitleCycle": "Next subtitle track",
-    "loadFailedActivity": "Couldn't load activity",
-    "shortcutPlayerFrameForward": "Next frame",
-    "sourceHiddenByTags": "Hidden by tags",
-    "downloadSelectAll": "Select all",
-    "downloadDashDrm": "This stream is DRM protected",
-    "anticipatedShows": "Anticipated Shows",
-    "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.",
-    "developerRoleModerator": "Discord Moderator",
-    "trending": "Trending",
-    "stacksFeatured": "Featured",
-    "layoutCutting": "Moving {name}. Press a paste button to place it",
-    "@layoutCutting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutClearKeys": "Remove all keys",
-    "sortMostViewed": "Most viewed",
-    "sourceSkipUnseen": "Skip while you have unseen episodes",
-    "sourceWhyNever": "Not yet",
-    "shortcutPlayerPrevious": "Previous episode",
-    "shortcutPlayerSpeedReset": "Normal speed",
-    "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.",
-    "layoutZoneSecondRow": "Hidden: second row in normal view",
-    "playerStreamFailedNext": "That stream won't play, trying the next one",
-    "dcListening": "Listening",
-    "closeActionQuit": "Quit the app",
-    "playerSkipStart": "Start",
-    "shortcutPlayerSubtitleToggle": "Subtitles on or off",
-    "newsEmpty": "No news right now",
-    "settingsSyncChangedHeader": "Changed settings",
-    "settingsSectionProgress": "Progress tracking",
-    "updateAll": "Update all",
-    "followCoverMediaOnlyDesc": "Only follow the cover on media pages, everywhere else keeps the normal colors",
-    "animePlanetRank": "Rank",
-    "settingsSyncSignOut": "Sign out",
-    "settingsShortcuts": "Keyboard shortcuts",
-    "sourceNoticesEmpty": "No release notices yet",
-    "settingsSyncOn": "On",
-    "department": "Department",
-    "playerSoftwareRender": "Software rendering",
-    "detailStale": "AniList could not be reached. This is saved information and may be outdated.",
-    "simklMoviesOnly": "Movies & series only",
-    "settingsSyncConnectDesc": "Sign in with GitHub to keep your settings the same on every device.",
-    "moviesCollected": "Movies Collected",
-    "readerResetConfirm": "Reset every reader setting to its default?",
-    "layoutReset": "Reset to default",
-    "sourceNotifyTooltipOn": "Stop release notifications",
-    "unreadCounter": "Unread counter",
-    "playerSoftwareRenderDesc": "Only for a black video. Shaders don't work with it. Applies the next time the player opens",
-    "watchStatusChallenge": "Cloudflare check needed",
-    "dcRouteNone": "Not connected",
-    "settingsSyncStatShelf": "Resume",
-    "stories": "Stories",
-    "dcUseToken": "Use a token instead",
-    "stackSpoilers": "Spoilers",
-    "playerSkipSend": "Submit to AniSkip",
-    "shortcutPlayerSeekForwardLong": "Seek forward 30 seconds",
-    "stepUpToDateWith": "Up to date · {detail}",
-    "@stepUpToDateWith": {
-        "placeholders": {
-            "detail": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeDetails": "Where episode titles, thumbnails and summaries come from",
-    "sourceChecking": "Checking…",
-    "settingsSyncCancel": "Cancel",
-    "animePlanetRefreshLists": "Refresh your lists",
-    "sourceNotifyNeedsSource": "Pick a source with a match first",
-    "mediaVideo": "Video",
-    "sourceUnreachable": "Source isn't responding",
-    "dcStatusIdle": "Idle",
-    "sourceTagAnime": "Anime",
-    "novelPaginating": "Laying out pages",
-    "stacksSignInAgain": "Sign in again",
-    "topRatedAnime": "Top Rated Anime",
-    "playerSkipEnd": "End",
-    "dcTimerAuto": "Auto",
-    "settingsSyncSwitch": "Sync on change",
-    "onHoldManga": "On hold manga",
-    "widgetMore": "Also in progress",
-    "downloadStorageEmpty": "No downloads are using space",
-    "shortcutNoCalendar": "{service} has no calendar",
-    "@shortcutNoCalendar": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "novelHighlightsEmpty": "Select some text and tap Highlight to keep it here",
-    "sortMostFollowed": "Most followed",
-    "settingsSyncNoneChanged": "You haven't changed any of these yet, so there is nothing to sync.",
-    "watchFailRejected": "The site rejected the clearance it just gave. Try again or clear the cookies",
-    "sourceSkippedUnstarted": "Skipped: not started",
-    "shortcutReaderPreviousPage": "Previous page",
-    "closeActionAlways": "Always keep running in the tray",
-    "layoutZoneTopEnd": "Top bar, after the title",
-    "watchOrderOpenFailed": "Couldn't open that title",
-    "watchSolvedBackground": "Cloudflare check passed in the background ({seconds} s)",
-    "@watchSolvedBackground": {
-        "placeholders": {
-            "seconds": {
-                "type": "int"
-            }
-        }
-    },
-    "syncPrivateInclude": "Sync them",
-    "recommendedShows": "Recommended Shows",
-    "castPlaybackFailed": "The device could not play this stream",
-    "layoutZoneBottomEnd": "Bottom bar, right",
-    "settingsSyncServer": "On the server",
-    "listDateAdded": "Added to list",
-    "settingsSyncSignIn": "Sign in with GitHub",
-    "dcDisconnectedSnack": "Discord disconnected",
-    "dcPrivateText": "Private text",
-    "sourceFinished": "Finished",
-    "playerSubtitlePreviewText": "Subtitle preview text",
-    "trayResumeDownloads": "Resume downloads",
-    "settingsSyncFailedTitle": "Sync failed",
-    "appLockBiometricReason": "Unlock Dartotsu",
-    "settingsWatchSections": "Sections",
-    "settingsSyncPartPictureColors": "Picture colours",
-    "playerPipPause": "Pause",
-    "dcStatusOnline": "Online",
-    "sourceFoundEpisode": "Episode {number} is out on {source}",
+    "sourceNotifyTooltipOn": "Jooji ogeysiisyada sii deynta",
+    "sourceNotifyTooltipOff": "I ogeysii siideynaha cusub",
+    "sourceFoundEpisode": "Dhacdada {number} waxay soo baxaysaa {source}",
     "@sourceFoundEpisode": {
         "placeholders": {
             "number": {
@@ -2124,636 +2715,7 @@
             }
         }
     },
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.",
-    "playerShadersSoftware": "Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.",
-    "castVolume": "TV volume",
-    "updateConflictBody": "{names} could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?",
-    "@updateConflictBody": {
-        "placeholders": {
-            "names": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreed": "Freed {size}",
-    "@downloadFreed": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsLocalPlayDesc": "Play files, folders, network streams and torrents, or open a book",
-    "playerSkipSubmit": "Submit skip times",
-    "sourceWhyVerdictSkipped": "This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.",
-    "simklListsMostLiked": "Most liked",
-    "dcRouteGateway": "Through your account, live",
-    "extensionSettingsTitle": "{name} settings",
-    "@extensionSettingsTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyStatus": "Status",
-    "sourceWhyNextCheck": "Next check",
-    "logDeleteDesc": "Clear the saved app logs to free up space",
-    "unfinished": "Unfinished",
-    "stackSave": "Save stack",
-    "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
-    "sourceTagMovies": "Movies & Series",
-    "dcConnect": "Connect Discord",
-    "syncPrivateSkip": "Skip them",
-    "settingsShortcutsDesc": "See, change and turn off every key",
-    "refreshFromMangaUpdates": "Refresh from MangaUpdates",
-    "sourceUnmute": "Unmute",
-    "dcNameApp": "Dartotsu",
-    "playerDisableSkipsDesc": "No AniSkip or stream timestamps, chapter marks or skip submissions in the player",
-    "settingsSyncChangedOnly": "Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.",
-    "novelHighlightNote": "Note",
-    "layoutHide": "Hide",
-    "secReaderControls": "Tap zones, volume keys and auto scroll",
-    "releases": "Releases",
-    "settingsSyncPassphraseNew": "Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.",
-    "sourceUnsubscribe": "Unsubscribe",
-    "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.",
-    "sourceWhyVerdictBroken": "The source can't be reached or has been removed, so nothing is being checked.",
-    "updateIosHint": "iOS builds aren't on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore",
-    "dcStatusNeedsToken": "Needs a Discord token. Connecting the app does not set your online status.",
-    "themePickerTitle": "Theme",
-    "downloadMetaFailed": "Couldn't create the title folder",
-    "novelTools": "Contents, search and highlights",
-    "supportDeveloper": "Support the developer",
-    "anticipatedMovies": "Anticipated Movies",
-    "downloadFreeUp": "Free up space",
-    "readerFilterQualityLow": "Low (Bilinear)",
-    "stackUnsave": "Remove from saved",
-    "settingsSyncCatOther": "Watch, read and services",
-    "dcTextSection": "Text",
-    "syncPrivateModeSync": "Sync them",
-    "shortcutReaderNextChapter": "Next chapter",
-    "playerSkipNoMal": "This title has no MyAnimeList id, AniSkip can't take it",
-    "installStepJre": "Java runtime",
-    "dcRouteDesktop": "Through the Discord desktop app",
-    "trendingShows": "Trending Shows",
-    "sourceInDays": "in {count}d",
-    "@sourceInDays": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "watchlist": "Watchlist",
-    "stackEmptyEntries": "This stack is empty",
-    "settingsSyncNow": "Sync now",
-    "secNotifyAbout": "Pick which kinds of activity send an alert",
-    "allCustomLists": "All custom lists",
-    "watchOrderCredit": "Watch orders by chiaki.site",
-    "settingsSyncPassphraseSet": "Set a passphrase",
-    "developerRoleLead": "Lead Developer",
-    "readerFilterQualityMedium": "Medium (Trilinear)",
-    "trailerLoading": "Loading the trailer…",
-    "shortcutAppGlass": "Toggle glass mode",
-    "settingsSyncPartPaletteDesc": "Theme, accent colour and OLED black",
-    "externalCopyUrl": "Copy stream link",
-    "generalSectionDesktop": "Desktop",
-    "updateNoAsset": "This release has no download for your device",
-    "died": "Died",
-    "castRokuNote": "Roku can't report or change the position",
-    "novelSearchCount": "{count, plural, =1{1 match} other{{count} matches}}",
-    "@novelSearchCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "dcCustomNameHint": "Name shown after “Watching”",
-    "shortcutPlayerAudioCycle": "Next audio track",
-    "incognitoTurnedOff": "Incognito mode off",
-    "readerLongPressSave": "Hold a page to save it",
-    "dcSmallNone": "None",
-    "watchSectionConnection": "Connection",
-    "comick": "Comick",
-    "downloadClearQueueConfirm": "Cancel all {count} downloads in the queue? What was already downloaded is deleted.",
-    "@downloadClearQueueConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceTagsHint": "Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.",
-    "dcButtonsSection": "Buttons",
-    "shortcutPlayerFullscreen": "Fullscreen",
-    "novelSearch": "Search",
-    "shortcutAppOled": "Toggle OLED black",
-    "sequel": "Sequel",
-    "readerCloudflare": "Open in browser (Cloudflare check)",
-    "dcSampleReading": "Reading",
-    "downloadDeleteWatched": "Delete watched",
-    "animePlanetRefreshListsDesc": "Read your Anime-Planet lists again",
-    "trayPlaying": "Playing in a small window",
-    "sourceMuted": "Muted",
-    "watchFailCooldown": "You closed the check a moment ago. Press Solve it to try again",
-    "watchStatusOffline": "Can't reach the site",
-    "repoLinkConfirm": "Add this repository?\n\n{url}\n\nOnly add repositories from sources you trust.",
-    "@repoLinkConfirm": {
-        "placeholders": {
-            "url": {
-                "type": "String"
-            }
-        }
-    },
-    "stepFailed": "Failed",
-    "mostWatchedThisWeek": "Most Watched This Week",
-    "comickLoginFailed": "Comick login failed",
-    "shortcutPlayerSeekForward": "Seek forward",
-    "settingsSyncSecretsDelete": "Delete from GitHub",
-    "settingsSyncPassphraseField": "Passphrase",
-    "dcInUse": "In use",
-    "watchFailUnavailable": "There is no screen to show the check on",
-    "layoutZoneOverflow": "Hidden: in the more menu",
-    "year": "Year",
-    "stepChecking": "Checking…",
-    "extensionManagerTitle": "{type} manager",
-    "@extensionManagerTitle": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "readerFilterQualityNone": "None (Nearest neighbor)",
-    "shortcutPlayerSpeedUp": "Faster playback",
-    "mostFollowedAnime": "Most Followed Anime",
-    "shortcutAppIncognito": "Toggle incognito",
-    "sourceNotifyOff": "Release notifications off",
-    "novelHighlightFailed": "Couldn't match that selection to the text",
-    "titleLanguageRomaji": "Romaji",
-    "dcState": "Bottom line",
-    "togetherShareText": "Watch with me on Dartotsu: {link}",
-    "@togetherShareText": {
-        "placeholders": {
-            "link": {
-                "type": "String"
-            }
-        }
-    },
-    "secAnimeList": "Filler episodes and unwatched thumbnails",
-    "sourceSkipUnstarted": "Skip titles you haven't started",
-    "showsWatched": "Shows Watched",
-    "animePlanetWontWatch": "Won't watch",
-    "animePlanetAlreadyOnList": "Already on this list",
-    "shortcutPlayerFit": "Change video fit",
-    "castTitle": "Cast to device",
-    "updatePluginTitle": "Update {name}",
-    "@updatePluginTitle": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcNameTitle": "Title",
-    "importRepositoryFile": "Import a file",
-    "sourceAlertsSwitch": "Check subscribed titles",
-    "shortcutAppSearch": "Open search",
-    "trakt": "Trakt",
-    "playerSkipUseNow": "Use current position",
-    "notificationSomeone": "Someone",
-    "navSources": "Sources",
-    "dcDetails": "Top line",
-    "downloadDeleteAll": "Delete all",
-    "generalSectionPrivacy": "Privacy",
-    "recommendedMovies": "Recommended Movies",
-    "syncPrivateTitle": "Private entries",
-    "shortcutAppMaterialYou": "Toggle Material You",
-    "newsCouldntLoad": "Couldn't load the news",
-    "updateDownloading": "Downloading",
-    "playerSkipSent": "Skip times submitted to AniSkip, thank you",
-    "watchFailQuiet": "The check needs you, and the app was working on its own",
-    "sourceWhyLastRelease": "Last new release seen",
-    "updateOpenedBrowser": "Check your browser",
-    "syncPrivate": "Private entries",
-    "shortcutNotSet": "Not set",
-    "dcConnection": "Connection",
-    "sourceAll": "All",
-    "dcAccount": "Account",
-    "people": "People",
-    "togetherJoin": "Join",
-    "mostComments": "Most comments",
-    "localSource": "Local files",
-    "animePlanetLocalNote": "Sign in to save changes to your Anime-Planet account. Until then they stay on this device",
-    "secPlayerSkip": "Skip openings, endings and recaps automatically",
-    "settingsSyncTitlesNone": "Nothing uploaded yet",
-    "readerLongPressSaveDesc": "Long press a page to open save, share and copy options",
-    "sourceSkipUnseenDesc": "You still have released episodes to catch up on",
-    "shortcutReaderLeft": "Page to the left",
-    "calendarExpected": "Expected",
-    "externalChooser": "Open in another app",
-    "settingsNovelDesc": "Text, page turning, translation and read aloud",
-    "importTokenRejected": "Token rejected",
-    "settingsSyncTitlesCount": "{records} titles and {resume} resume entries on the server",
-    "@settingsSyncTitlesCount": {
-        "placeholders": {
-            "records": {},
-            "resume": {}
-        }
-    },
-    "settingsSyncPartSubtitlesDesc": "Size, weight, colours and position",
-    "backupProtectedNeedsPassword": "Set a password to back up account data, or untick it",
-    "dcAccountOnly": "Needs a signed-in account",
-    "appLockUseBiometric": "Use biometrics",
-    "settingsSyncStatSettings": "Settings",
-    "secProgress": "When your watched or read progress is saved to your list",
-    "dcTemplateHint": "Empty uses the default",
-    "shortcutReaderNextPage": "Next page",
-    "syncToDelete": "To delete",
-    "syncPrivateModeAsk": "Ask",
-    "externalFailed": "Couldn't open the stream. Is the player installed?",
-    "spoilerTapToView": " Spoiler, tap to view ",
-    "playerSubtitleOutlineWidth": "Subtitle outline width",
-    "stepFailedWith": "Failed: {reason}",
-    "@stepFailedWith": {
-        "placeholders": {
-            "reason": {
-                "type": "String"
-            }
-        }
-    },
-    "dcActivityName": "Activity name",
-    "layoutCut": "Cut",
-    "loadFailedFavourites": "Couldn't load favourites. Retry",
-    "extensionsLoading": "Loading extensions…",
-    "gamepadNavDesc": "Move around the app and control the player with a game controller",
-    "settingsSyncSecrets": "Accounts and passwords",
-    "settingsSyncDesc": "Keep your settings the same on every device. They are stored in a private gist in your GitHub account",
-    "stackRemovedToast": "Removed from your saved stacks",
-    "togetherShareInvite": "Share invite",
-    "updateUpToDate": "You're on the latest version",
-    "dcRouteLinked": "Connected app",
-    "readerOpenBookDesc": "Read an epub (novel reader) or a PDF (manga reader) from your files",
-    "shortcutPlayerSeekBack": "Seek back",
-    "settingsSyncPassphraseExisting": "Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.",
-    "settingsSyncSecretsOnDesc": "Signing out on one device does not sign you out on the others.",
-    "downloadMetaSaved": "Saved. Put your files in {path}",
-    "@downloadMetaSaved": {
-        "placeholders": {
-            "path": {
-                "type": "String"
-            }
-        }
-    },
-    "streamGroupHardSub": "Hard Sub",
-    "settingsSync": "Sync settings",
-    "shortcutGroupApp": "App",
-    "stacksScopeNeeded": "Your stacks need a new permission. Sign in to MangaBaka again to allow it.",
-    "sourceNotifyAllOut": "Everything ({count}) is already out, nothing to wait for",
-    "@sourceNotifyAllOut": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castProtocolRoku": "Roku",
-    "dcPreview": "Preview",
-    "shortcutTaken": "Taken from {action}",
-    "@shortcutTaken": {
-        "placeholders": {
-            "action": {
-                "type": "String"
-            }
-        }
-    },
-    "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
-    "watchStatusTesting": "Testing the connection…",
-    "shortcutResetOne": "Reset to default",
-    "appLockBiometricDesc": "Use your fingerprint or face instead of typing the passcode",
-    "mangaUpdates": "MangaUpdates",
-    "traktVipMember": "Trakt VIP Member",
-    "manageServices": "Media services",
-    "shortcutSeekPercentKeys": "0 – 9",
-    "manageServicesHint": "Drag to reorder, switch off the ones you don't use",
-    "sortLatestUpdates": "Latest updates",
-    "layoutMore": "More",
-    "calendarAll": "All",
-    "settingsSyncAccount": "GitHub account",
-    "dcSignOut": "Sign out",
-    "shortcutResetAllDesc": "Put every key back to its default",
-    "installStepCore": "Runtime core",
-    "shortcutsEnableReader": "Reader shortcuts",
-    "shortcutPlayerSkip": "Skip intro or ending",
-    "shortcutPressHint": "Each combination can only belong to one action, so taking one moves it.",
-    "layoutPaste": "Paste here",
-    "externalVlc": "Open in VLC",
-    "secNovelText": "Font, size, spacing, margins and page turning",
-    "shortcutPlayerSeekBackLong": "Seek back 30 seconds",
-    "settingsGroupAccount": "Your account",
-    "stepWillInstall": "Will be installed",
-    "shortcutPlayerPanel": "Episode list",
-    "userStacks": "Stacks by {name}",
-    "@userStacks": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "trayIdle": "Nothing running",
-    "animePlanetNewList": "New list name",
-    "settingsSyncCount": "{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}",
-    "downloadStorageSummary": "{count, plural, =1{1 download} other{{count} downloads}} · {size}",
-    "@downloadStorageSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "runtimePreparing": "Preparing the runtime…",
-    "sourceWhyVerdictNew": "A new release appears here as soon as the source lists it and the next check runs.",
-    "dcButtonUrl": "Link",
-    "trayPauseDownloads": "Pause downloads",
-    "castNowCasting": "Casting to {name}",
-    "@castNowCasting": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
-    "stacksEmpty": "No stacks here yet",
-    "settingsGroupApp": "App",
-    "secReaderReading": "Reading mode, page turning, zoom and next chapter",
-    "sourceFoundSummary": "{count} titles have something new",
-    "@sourceFoundSummary": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "settingsSyncSignInFailed": "Could not sign in to GitHub",
-    "simklListsMostFollowed": "Most followed",
-    "dcSampleBrowsing": "Browsing",
-    "mangaUpdatesAnimeEnd": "Anime adaptation ends",
-    "buyMeCoffee": "Buy me a coffee",
-    "simklMoviesOnlyDesc": "Replaces the Anime tab: Movies first, then Shows with a couple of anime rows",
-    "dcSignedInAs": "Signed in as {name}",
-    "@dcSignedInAs": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncSignInDesc": "Settings are stored in a private gist in your account",
-    "logDelete": "Delete log files",
-    "settingsSyncLast": "Last synced {time}",
-    "@settingsSyncLast": {
-        "placeholders": {
-            "time": {}
-        }
-    },
-    "dcSampleWatching": "Watching",
-    "notificationsOtherService": "Switch to {service} to open this",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
-    "watchOrderCurrent": "You are here",
-    "playerPictureOriginal": "Original",
-    "updateTryAgain": "Try again",
-    "togetherLinkConfirm": "Join the room {room}? The host chooses what plays and the player opens by itself when they start watching.",
-    "@togetherLinkConfirm": {
-        "placeholders": {
-            "room": {
-                "type": "String"
-            }
-        }
-    },
-    "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
-    "birthplace": "Birthplace",
-    "sourceInactive": "Inactive: {manager}",
-    "@sourceInactive": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "comickProfile": "Comick profile",
-    "traySearch": "Search",
-    "dcPrivacySection": "Privacy",
-    "shortcutAppSettings": "Open settings",
-    "dcTokenWarning": "Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.",
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
-    "shortcutSeekPercent": "Jump to a point of the video",
-    "downloadMetaOnly": "Metadata only",
-    "layoutZoneBottomStart": "Bottom bar, left",
-    "watchClearanceIssued": "earned {time}",
-    "@watchClearanceIssued": {
-        "placeholders": {
-            "time": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksSignIn": "Sign in to MangaBaka to see your stacks",
-    "simklListTitles": "{count, plural, =1{1 title} other{{count} titles}}",
-    "@simklListTitles": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "firstTab": "First tab",
-    "dcDisconnect": "Disconnect",
-    "animePlanetWontRead": "Won't read",
-    "dcMethodDesktopDesc": "Used automatically when nothing else is connected. Discord has to be open on this computer.",
-    "droppedManga": "Dropped manga",
-    "syncDelete": "Delete what the main service doesn't have",
-    "secNovelTranslate": "Translate chapters while you read",
-    "readerFilterQualityLanczos": "Lanczos (Rust high quality)",
-    "streamGroupOther": "Other",
-    "dcMemberList": "In the member list",
-    "settingsSyncServerEmpty": "Nothing uploaded yet",
-    "updateSizeOf": "{done} of {total}",
-    "@updateSizeOf": {
-        "placeholders": {
-            "done": {
-                "type": "String"
-            },
-            "total": {
-                "type": "String"
-            }
-        }
-    },
-    "droppedAnime": "Dropped anime",
-    "followCoverMediaOnly": "Only for media",
-    "layoutEmptyZone": "Drop buttons here",
-    "removePlayerMessage": "Videos can't play until the player is downloaded again.",
-    "trailerFailed": "Could not play the trailer here, opening it in the browser",
-    "simklListsOfficial": "Official",
-    "settingsSyncConnect": "Not connected",
-    "extensionsUpdated": "{done} of {total} extensions updated",
-    "@extensionsUpdated": {
-        "placeholders": {
-            "done": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "syncDeleteTitle": "Delete entries?",
-    "dcVariables": "Tap to insert a value",
-    "watchStatusBlocked": "Blocked by the site",
-    "playerStickyStageDesc": "Keep the video fixed at the top while you scroll the episodes and comments below",
-    "dcCustomStatusHint": "What are you up to?",
-    "checkNowDesc": "Look for a newer version right away",
-    "shortcutPlayerMute": "Mute",
-    "novelHighlightRemove": "Remove highlight",
-    "shortcutPlayerVolumeDown": "Volume down",
-    "dcConnectFailed": "Could not connect Discord",
-    "appLockDelay": "Lock when idle",
-    "removeJvmMessage": "Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.",
-    "syncPrivateModeSkip": "Skip them",
-    "playerPictureProcessedDesc": "The frame as you see it now",
-    "settingsSyncPassphraseConfirm": "Repeat the passphrase",
-    "dcDisplayState": "State",
-    "syncRemoved": "Removed from {services}",
-    "@syncRemoved": {
-        "placeholders": {
-            "services": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutReaderPreviousChapter": "Previous chapter",
-    "sourceCheckResult": "{count, plural, =0{Nothing new} =1{1 title has something new} other{{count} titles have something new}}",
-    "@sourceCheckResult": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "secPlayerEngine": "Decoder, video and audio output, buffering. Only change these if playback has problems",
-    "sourceCheckNowDesc": "Ignores the schedule and the skip rules",
-    "settingsSyncWhat": "What to sync",
-    "filterAny": "Any",
-    "updateInvalidResponse": "Invalid update response",
-    "settingsSyncRetry": "Retry",
-    "layoutTitle": "Layout",
-    "streamGroupSub": "Sub",
-    "extensionsOfType": "{type} extensions",
-    "@extensionsOfType": {
-        "placeholders": {
-            "type": {
-                "type": "String"
-            }
-        }
-    },
-    "playerDownloadRetry": "Try again",
-    "autoUpdateRuntimes": "Update extension runtimes automatically",
-    "dcButtonMedia": "Link to the title",
-    "syncServiceOn": "Sync with {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "widgetNothing": "Nothing to continue yet",
-    "streamGroupSoftSub": "Soft Sub",
-    "statusAuto": "Auto",
-    "novelHighlights": "Highlights",
-    "downloadDeleteAllConfirm": "Delete every download of {title}?",
-    "@downloadDeleteAllConfirm": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "playerPictureOriginalDesc": "The frame as the video has it, without shaders or colors",
-    "castNoDevices": "No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.",
-    "shortcutsEnableDesc": "Turn every key in this group on or off",
-    "dcTimerStyle": "Timer style",
-    "secReaderDisplay": "Background, brightness, fullscreen and page number",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.",
-    "sourceLatest": "Latest: {number}",
-    "@sourceLatest": {
-        "placeholders": {
-            "number": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartPalette": "Theme colours",
-    "watchSectionSession": "Session",
-    "listsYours": "Yours",
-    "settingsSyncNever": "Not synced yet",
-    "notInList": "Not In List",
-    "closeActionWhenBusy": "Keep running in the tray while something is running",
-    "stepWillUpdateTo": "Will be updated to {version}",
-    "@stepWillUpdateTo": {
-        "placeholders": {
-            "version": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadNothingWatched": "Nothing you have finished is downloaded",
-    "comickClientIdDesc": "Custom client ID registered on comick.dev",
-    "mostFollowed": "Most Followed",
-    "dcLargeImage": "Large image",
-    "shortcutPlayerPlayPause": "Play or pause",
-    "trackProgressMangaLocal": "Save your progress on {name} to your list on this device when you finish a chapter?",
-    "@trackProgressMangaLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "downloadFreeUpConfirm": "Delete {count, plural, =1{1 watched download} other{{count} watched downloads}} and free {size}?",
-    "@downloadFreeUpConfirm": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "calendarAnime": "Anime",
-    "externalPlayerTitle": "Open stream elsewhere",
-    "commentsConnectFailed": "Failed to connect",
-    "sourceWaiting": "Waiting for the next release",
-    "calendarManga": "Manga",
-    "novelContentsEmpty": "This chapter has no headings",
-    "settingsSyncThisDevice": "this device",
-    "syncDeletedNote": "Will be deleted",
-    "trendingAnime": "Trending Anime",
-    "settingsSyncPartSubtitles": "Subtitle size and colours",
-    "sourceFoundEpisodes": "Episodes {from}–{to} are out on {source}",
+    "sourceFoundEpisodes": "Qaybaha {from}-{to} waxay ka baxeen {source}",
     "@sourceFoundEpisodes": {
         "placeholders": {
             "from": {
@@ -2767,10 +2729,7 @@
             }
         }
     },
-    "voiceActors": "Voice actors",
-    "tagline": "Tagline",
-    "gamepadNav": "Gamepad navigation",
-    "sourceFoundChapter": "Chapter {number} is out on {source}",
+    "sourceFoundChapter": "Cutubka {number} wuxuu soo baxay {source}",
     "@sourceFoundChapter": {
         "placeholders": {
             "number": {
@@ -2781,379 +2740,7 @@
             }
         }
     },
-    "extensionNoSettings": "{name} doesn't provide any settings.",
-    "@extensionNoSettings": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailDismissed": "The check was closed before it finished",
-    "castFailed": "Could not start casting",
-    "novelHighlight": "Highlight",
-    "notificationAdded": "{title} was added to AniList",
-    "@notificationAdded": {
-        "placeholders": {
-            "title": {
-                "type": "String"
-            }
-        }
-    },
-    "dcSignIn": "Sign in with Discord",
-    "watchFailTurnstile": "This check needs a tap that the background solver can't do",
-    "stackSavedToast": "Saved to your stacks",
-    "layoutMoveTo": "Move to {zone}",
-    "@layoutMoveTo": {
-        "placeholders": {
-            "zone": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksCouldntLoad": "Couldn't load the stacks",
-    "installStepsProgress": "Step {current} of {total}",
-    "@installStepsProgress": {
-        "placeholders": {
-            "current": {
-                "type": "int"
-            },
-            "total": {
-                "type": "int"
-            }
-        }
-    },
-    "watchStatusUntested": "Not tested yet",
-    "prequel": "Prequel",
-    "dcStatusInvisible": "Invisible",
-    "usernameOnly": "Username",
-    "updateWhatsNew": "What's new",
-    "followsMutual": "Mutual",
-    "boxOffice": "Box Office",
-    "dcShowWatching": "Show while watching",
-    "settingsSyncFailed": "Sync failed: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
-        }
-    },
-    "loadFailedReplies": "Couldn't load replies",
-    "dcActivitySection": "Activity",
-    "widgetContinue": "Continue",
-    "weeklySchedule": "Weekly Schedule",
-    "readerFilterQualityHigh": "High (Bicubic)",
-    "novelExtensions": "Novel Extensions",
-    "secPlayerMpv": "mpv.conf, scripts and advanced tuning",
-    "generalSectionSecurity": "Security",
-    "settingsSyncStatTitles": "Titles",
-    "externalMpv": "Open in mpv",
-    "dcLargeLogo": "Logo",
-    "imageTitlePage": "Page",
-    "stacksFollowing": "Following",
-    "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
-    "dcControlStatus": "Control my status",
-    "notificationAddedDetail": "Was added to AniList",
-    "sourceManageDesc": "{count, plural, =0{No titles} =1{1 title} other{{count} titles}}",
-    "@sourceManageDesc": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "installRuntimeNewer": "The runtime this manager runs on has an update.",
-    "watchSolvedByUser": "Cloudflare check passed",
-    "settingsSyncSecretsOn": "Accounts are synced and encrypted",
-    "dcImagesSection": "Images",
-    "anticipated": "Anticipated",
-    "watchOrderUnavailable": "No watch order was found for this title",
-    "secNovelSpeech": "Voice, speed and pitch for read aloud",
-    "updateConflictAction": "Uninstall and reinstall",
-    "dcMethodDesktop": "Discord desktop app",
-    "dcLargeAuto": "Auto",
-    "settingsSyncUploaded": "Uploaded {time} from {device}",
-    "@settingsSyncUploaded": {
-        "placeholders": {
-            "time": {},
-            "device": {}
-        }
-    },
-    "streamGroupRaw": "Raw",
-    "dcShowReading": "Show while reading",
-    "settingsGroupContent": "Content",
-    "castProtocolChromecast": "Chromecast",
-    "dcControlStatusDesc": "Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.",
-    "novelSearchHint": "Search in this chapter",
-    "backupPasswordRequired": "Password (required for account data)",
-    "settingsSyncCopyCode": "Tap the code to copy it",
-    "dcConnecting": "Connecting…",
-    "shortcutPlayerNext": "Next episode",
-    "novelHighlightNoteHint": "Add a note",
-    "settingsSectionLists": "Episode and chapter lists",
-    "playerPictureSave": "Save this frame",
-    "sourceWhyLastCheck": "Last checked",
-    "shortcutResetAll": "Reset all shortcuts",
-    "playerPipBack": "Rewind",
-    "updateInstalling": "Installing…",
-    "animePlanetMagazine": "Magazine",
-    "dcSmallImage": "Small image",
-    "externalCopied": "Stream link copied",
-    "shortcutNothingToContinue": "Nothing to continue yet",
-    "traktVip": "VIP",
-    "removeJvmTitle": "Remove the Java runtime?",
-    "playerDisableSkips": "Disable skips",
-    "secPlayerShaders": "Anime upscaling and your own shaders",
-    "notificationATitle": "a title",
-    "layoutTitleFixed": "Title",
-    "sourceManage": "Subscriptions",
-    "settingsAnimeDesc": "Player, subtitles, skipping, episode list and episode details",
-    "mangaUpdatesProfile": "MangaUpdates profile",
-    "listsLiked": "Liked",
-    "titleLanguageEnglish": "English",
-    "castStop": "Stop casting",
-    "localMissing": "This file or folder is no longer in your Local folder",
-    "dcCustomStatus": "Custom status",
-    "firstTabDesc": "Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar",
-    "settingsSyncWaiting": "Waiting for you to approve on GitHub",
-    "settingsSyncOffCategory": "Not syncing. These stay on this device and the server copy is left as it is.",
-    "settingsSyncPassphraseShort": "Use at least 6 characters",
-    "dcDisconnected": "Not connected",
-    "sourceSkippedCompleted": "Skipped: completed",
-    "shortcutAppDark": "Toggle dark mode",
-    "dcButtonApp": "Link to Dartotsu",
-    "stackBy": "by {name}",
-    "@stackBy": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchFailBlocked": "The site blocked this device (access denied). A check won't help",
-    "trayQuit": "Quit",
-    "newsTitle": "News",
-    "sourceTagAdult": "18+",
-    "sourceInHours": "in {count}h",
-    "@sourceInHours": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "castSkipPart": "Skip {name}",
-    "@castSkipPart": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "watchStatusReady": "Ready",
-    "sourceOpenExtensions": "Open extensions",
-    "trackProgressRememberSeries": "Remember for this series",
-    "calendarChapter": "Chapter {n}",
-    "@calendarChapter": {
-        "placeholders": {
-            "n": {
-                "type": "int"
-            }
-        }
-    },
-    "downloadSelectedCount": "{count} selected",
-    "@downloadSelectedCount": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "loadFailedStats": "Couldn't load stats",
-    "stepInstalled": "Installed",
-    "appLockDelayAfter": "After {count, plural, =1{1 minute} other{{count} minutes}}",
-    "@appLockDelayAfter": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "showsCollected": "Shows Collected",
-    "dcTimerRemaining": "Remaining",
-    "shortcutReaderControls": "Show or hide controls",
-    "playerUnsupported": "The video player can't run on this device (its Android version is too old for the bundled player library). Tap to copy the details.",
-    "settingsLocalPlay": "Local play",
-    "trayDownloading": "{count, plural, one{Downloading {count} item} other{Downloading {count} items}}",
-    "@trayDownloading": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "readerOpenBook": "Open a book",
-    "commentsRateLimited": "Rate limited",
-    "castRefresh": "Search again",
-    "generalSectionBasics": "Language & behaviour",
-    "removePlayerTitle": "Remove the player?",
-    "settingsSyncTokenField": "Token",
-    "searchTags": "Search tags",
-    "watchStatusSolving": "Passing the Cloudflare check…",
-    "castControls": "Controls",
-    "sourceAlertsSwitchDesc": "Once each time the app opens, for titles you turned the bell on",
-    "listDateLastWatched": "Last watched",
-    "moviesWatched": "Movies Watched",
-    "shortcutAppDownloads": "Open downloads",
-    "settingsSyncAccountDesc": "Your data goes to a private gist in your own account.",
-    "settingsSyncSecretsDesc": "Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.",
-    "playerDownloadStarting": "Starting the download…",
-    "cantBeUndone": "This can't be undone.",
-    "watchFailLoad": "The page didn't load. Check the connection and the site address",
-    "shortcutReaderRight": "Page to the right",
-    "extensionUpdates": "{count, plural, =1{1 update available} other{{count} updates available}}",
-    "@extensionUpdates": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "sourceNoticesEmptyMessage": "New episodes and chapters from your subscribed titles show up here",
-    "updateReleased": "Released {date}",
-    "@updateReleased": {
-        "placeholders": {
-            "date": {
-                "type": "String"
-            }
-        }
-    },
-    "comickAccountOptions": "Comick account options",
-    "playerPipForward": "Forward",
-    "installNeedsRuntime": "It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.",
-    "autoUpdateRuntimesDesc": "Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.",
-    "streamGroupDub": "Dub",
-    "traktAttribution": "Data and artwork provided by Trakt. View on Trakt",
-    "downloadStorageWatched": "{size} already watched or read",
-    "@downloadStorageWatched": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "stacksMine": "Yours",
-    "dcButtonLabel": "Label",
-    "sourceInactiveOpen": "This source belongs to {manager}, which isn't the active extension service",
-    "@sourceInactiveOpen": {
-        "placeholders": {
-            "manager": {
-                "type": "String"
-            }
-        }
-    },
-    "shortcutAppBack": "Go back",
-    "layoutZoneTopStart": "Top bar, before the title",
-    "latestUpdates": "Latest Updates",
-    "playerDownloadBody": "Dartotsu fetches its video engine once. Playback starts as soon as it is ready.",
-    "settingsSyncCustom": "Custom",
-    "trayShow": "Show Dartotsu",
-    "settingsSyncPassphraseEnter": "Enter your passphrase",
-    "notificationAiredDetail": "Episode {episode} aired",
-    "@notificationAiredDetail": {
-        "placeholders": {
-            "episode": {
-                "type": "String"
-            }
-        }
-    },
-    "playerStickyStage": "Sticky video",
-    "stacksSaved": "Saved",
-    "syncPrivateAsk": "{count, plural, =1{1 entry is private} other{{count} entries are private}}. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.",
-    "@syncPrivateAsk": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
-    },
-    "playerPictureSaveFailed": "Could not save the frame",
-    "sourceTags": "Tags",
-    "settingsSyncPassphraseWrong": "Wrong passphrase",
-    "shortcutPlayerVolumeUp": "Volume up",
-    "traktReadOnly": "Trakt granted read-only access",
-    "onHoldAnime": "On hold anime",
-    "shortcutAddKey": "Add a key",
-    "downloadDeleteSelected": "Delete selected",
-    "sourceWhyAction": "Why no alert?",
-    "shortcutsEnableApp": "App shortcuts",
-    "updateSpeed": "{speed}/s",
-    "@updateSpeed": {
-        "placeholders": {
-            "speed": {
-                "type": "String"
-            }
-        }
-    },
-    "updateNoReleases": "No releases found",
-    "sourceEmptyMessage": "Tap the bell above a title's episodes to be told about new ones",
-    "simklListsTrending": "Trending",
-    "stepNotNeeded": "Not needed here",
-    "dnsNoRecords": "No A records returned",
-    "mangaUpdatesAnimeStart": "Anime adaptation starts",
-    "appLockDelayNever": "Never",
-    "playerPictureSaved": "Frame saved",
-    "settingsSyncRunning": "Syncing…",
-    "dcNameCustom": "Custom",
-    "unreadCounterDesc": "Show how many episodes or chapters are left on posters",
-    "settingsAboutUpdatesDesc": "App updates, version, logs, links and support",
-    "settingsSyncPaused": "Paused",
-    "onboardingLanguageBody": "Choose the language Dartotsu is shown in. You can change it later in Settings.",
-    "sourceMissingDesc": "{source} isn't installed in this extension service",
-    "@sourceMissingDesc": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "settingsSyncPartsNote": "Per device. Off keeps each device's own value, so a phone and a TV can differ.",
-    "stepWaiting": "Waiting",
-    "readerFilterQuality": "Image filter quality",
-    "comickClientId": "Comick Client ID",
-    "settingsSyncTitlesNote": "Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.",
-    "hideNsfwSourcesDesc": "Hide sources marked 18+ from the feeds and the source picker. They stay installed.",
-    "sourceWhyFailures": "Failed checks in a row",
-    "dcStatusDnd": "Do not disturb",
-    "shortcutAppShortcuts": "Show keyboard shortcuts",
-    "shortcutAppFullscreen": "Toggle fullscreen",
-    "appLockDelayAlways": "Always",
-    "stacksAll": "All",
-    "watchFailTimeout": "The check didn't finish in time",
-    "shortcutPlayerStreamCycle": "Next stream",
-    "settingsSyncUpToDate": "Up to date",
-    "dcCompeting": "Competing",
-    "rising": "Rising",
-    "sourceNotifyOn": "You'll be told when {source} has something new",
-    "@sourceNotifyOn": {
-        "placeholders": {
-            "source": {
-                "type": "String"
-            }
-        }
-    },
-    "sourceWhyVerdictAhead": "The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.",
-    "upiId": "UPI ID",
-    "updateConflictTitle": "Update not installed",
-    "sourceNotifyTooltipOff": "Notify me about new releases",
-    "sourceCheckNow": "Check now",
-    "shortcutPress": "Press the key or combination you want",
-    "sourceWhyVerdictMuted": "This subscription is muted.",
-    "sourceWhyProgress": "Your progress",
-    "translationStatusLabel": "Translation",
-    "traktProfile": "Trakt profile",
-    "playerDownloadTitle": "Downloading the player",
-    "watchFailWebView": "The background web view couldn't start",
-    "sourceFoundChapters": "Chapters {from}–{to} are out on {source}",
+    "sourceFoundChapters": "Cutubyada {from}–{to} waxay ku yaalaan {source}",
     "@sourceFoundChapters": {
         "placeholders": {
             "from": {
@@ -3167,37 +2754,358 @@
             }
         }
     },
-    "settingsNotificationsDesc": "Alerts for your lists, new episodes and chapters, and comment replies",
-    "traySyncing": "Syncing your lists",
-    "upiCopied": "UPI ID copied",
-    "settingsSyncTokenDesc": "Create one at github.com/settings/tokens with only the gist permission",
-    "settingsSyncPassphraseMismatch": "The passphrases do not match",
-    "shortcutAppNotifications": "Open notifications",
-    "logDeleted": "Deleted {size} of logs",
-    "@logDeleted": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
-    "appLockBiometric": "Unlock with biometrics",
-    "dcStatusText": "Status text",
-    "dcStatusSection": "Status",
-    "shortcutGroupPlayer": "Video player",
-    "sourceWhyListStatus": "List status",
-    "stackSeriesCount": "{count, plural, =1{1 series} other{{count} series}}",
-    "@stackSeriesCount": {
+    "sourceFoundSummary": "{count} cinwaanadu waxay leeyihiin wax cusub",
+    "@sourceFoundSummary": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "settingsSyncToken": "Use a personal access token",
-    "incognitoTurnedOn": "Incognito mode on",
-    "novelPageOf": "Page {current} of {total}",
-    "@novelPageOf": {
+    "navSources": "Ilaha",
+    "sourceInactiveOpen": "Ishan waxaa iska leh {manager}, oo aan ahayn adeegga fidinta firfircoon",
+    "@sourceInactiveOpen": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceAlertsHeader": "Ogeysiisyada sii daaya",
+    "sourceAlertsSwitch": "Hubi cinwaanada la diiwaan galiyay",
+    "sourceAlertsSwitchDesc": "Mar kasta oo appku furmo, cinwaannada waxaad shiday gambaleelka",
+    "sourceSkipUnstarted": "Ka bood cinwaanada aadan bilaabin",
+    "sourceSkipUnstartedDesc": "Weli ma jiraan wax la daawaday ama la akhriyay, laakiin qaybo hore ayaa jiray",
+    "sourceSkipUnseen": "Ka bood inta aad leedahay dhacdooyin aan la arkin",
+    "sourceSkipUnseenDesc": "Wali waxaad sii daysay qaybo si aad ula socoto",
+    "sourceManage": "Isdiiwaangelinta",
+    "sourceManageDesc": "{count, plural, =0{Magacyo ma leh} =1{1 ciwaan} other{{count} cinwaano}}",
+    "@sourceManageDesc": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceCheckNow": "Hubi hadda",
+    "sourceCheckNowDesc": "Waxay iska indha tirtay jadwalka iyo xeerarka ka boodada",
+    "sourceChecking": "Hubinta…",
+    "sourceCheckResult": "{count, plural, =0{Wax cusub ma jiraan} =1{1 cinwaan wax cusub buu leeyahay} other{{count} cinwaanadu waxay leeyihiin wax cusub}}",
+    "@sourceCheckResult": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceEmpty": "Wali ma jiro rukunsad",
+    "sourceEmptyMessage": "Taabo gambaleelka kore ee qaybaha ciwaanka si loogu sheego kuwa cusub",
+    "sourceAll": "Dhammaan",
+    "sourceInactive": "Firfircoon: {manager}",
+    "@sourceInactive": {
+        "placeholders": {
+            "manager": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMissingDesc": "{source} laguma rakibin adeegan fidinta",
+    "@sourceMissingDesc": {
+        "placeholders": {
+            "source": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceUnreachable": "Isha kama jawaabayso",
+    "sourceFinished": "Dhammaatay",
+    "sourceSkippedCompleted": "La booday: la dhameeyay",
+    "sourceSkippedUnstarted": "La booday: lama bilaabin",
+    "sourceSkippedUnseen": "La booday: dhacdooyin aan la arag",
+    "sourceWaiting": "Sugaya sii deynta soo socota",
+    "sourceNextCheck": "Jeegaga xiga {when}",
+    "@sourceNextCheck": {
+        "placeholders": {
+            "when": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceSoon": "dhawaan",
+    "sourceInHours": "gudaha {count}h",
+    "@sourceInHours": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceInDays": "gudaha {count}d",
+    "@sourceInDays": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sourceLatest": "Ugu dambeeyay: {number}",
+    "@sourceLatest": {
+        "placeholders": {
+            "number": {
+                "type": "String"
+            }
+        }
+    },
+    "sourceMute": "aamus",
+    "sourceUnmute": "Codka ka qaad",
+    "sourceMuted": "la aamusay",
+    "sourceUnsubscribe": "Is-diiwaangelinta",
+    "sourcePickAnother": "Dooro ilo kale",
+    "sourceOpenExtensions": "Kordhinta furan",
+    "sourceNoticesEmpty": "Weli wax ogeysiis ah oo la sii daayo ma jiraan",
+    "sourceNoticesEmptyMessage": "Qaybaha cusub iyo cutubyada cinwaanada aad isdiiwaangelisay ayaa halkan ka muuqda",
+    "sourceOpenTitle": "Cinwaanka furan",
+    "extensionsLoading": "Kordhinta kordhinta…",
+    "updateWhatsNew": "Maxaa cusub",
+    "updateLater": "Ka dib",
+    "updateSkipVersion": "Ka bood noocaan",
+    "updatePreparing": "Diyaarinta…",
+    "updateDownloading": "Soo dejinta",
+    "updateInstalling": "Rakibaya…",
+    "updateSizeOf": "{done} ee {total}",
+    "@updateSizeOf": {
+        "placeholders": {
+            "done": {
+                "type": "String"
+            },
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "updateSpeed": "{speed}/s",
+    "@updateSpeed": {
+        "placeholders": {
+            "speed": {
+                "type": "String"
+            }
+        }
+    },
+    "updateReleased": "La sii daayay {date}",
+    "@updateReleased": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNoAsset": "Siideyntani wax soo dejin ah uma laha qalabkaaga",
+    "updateUpToDate": "Waxaad ku jirtaa nooca ugu dambeeyay",
+    "updateIosHint": "Dhismayaasha iOS kuma jiraan App Store Ka soo qaad .ipa bogga siideynta oo ku dheji AltStore ama SideStore",
+    "updateOpenedBrowser": "Hubi browserkaaga",
+    "updateTryAgain": "Isku day mar kale",
+    "settingsNotifications": "Ogeysiisyada",
+    "settingsNotificationsDesc": "Ogeysiisyada liisaskaada, cutubyada cusub iyo cutubyada, iyo jawaabaha faallooyinka",
+    "settingsAboutUpdates": "Ku saabsan & cusbooneysiinta",
+    "settingsAboutUpdatesDesc": "Cusboonaysiinta abka, nooca, diiwaanka, xiriirinta iyo taageerada",
+    "settingsGroupAccount": "Koontadaada",
+    "settingsGroupContent": "Nuxurka",
+    "settingsGroupApp": "App-ka",
+    "settingsAnimeDesc": "Ciyaartoyga, qoraal-hoosaadyada, boodada, liiska dhacdooyinka iyo faahfaahinta dhacdada",
+    "settingsMangaDesc": "Habka akhristaha, kontaroolada, soo bandhigida iyo dabagalka cutubka",
+    "settingsNovelDesc": "Qoraal, rogid bogga, tarjumid oo kor u akhri",
+    "settingsLocalPlay": "Ciyaarta maxaliga ah",
+    "settingsLocalPlayDesc": "Daar faylalka, galalka, shabakadaha durdurrada iyo durdurrada, ama fur buug",
+    "settingsLocalPlayVideo": "Video",
+    "settingsLocalPlayBooks": "Buugaag",
+    "settingsWatchSections": "Qaybaha",
+    "settingsSectionLists": "Liiska cutubka iyo cutubka",
+    "settingsSectionProgress": "Dabagalka horumarka",
+    "updateChannelDesc": "Deggan waa siidaynta la tijaabiyay. Siideynta ka hor iyo Alpha waxay helayaan sifooyin cusub isla markiiba laakiin way jabi karaan",
+    "checkNowDesc": "Isla markiiba raadi nooc cusub",
+    "generalSectionBasics": "Luuqadda & dhaqanka",
+    "generalSectionSecurity": "Amniga",
+    "generalSectionPrivacy": "Qarsoodi",
+    "notificationsOtherService": "U beddel {service} si aad tan u furto",
+    "@notificationsOtherService": {
+        "placeholders": {
+            "service": {
+                "type": "String"
+            }
+        }
+    },
+    "secPlayerPlayback": "Xawaaraha caadiga ah, ciyaarta tooska ah, fiidyaha ku haboon, hanuuninta iyo sawirka sawirka",
+    "secPlayerSkip": "Si otomaatig ah uga bood furitaanka, dhammaadka iyo soo koobida",
+    "secPlayerControls": "Tuur, qabo oo taabo dhaqdhaqaaqyada oo raadi dulmar",
+    "secPlayerSubtitles": "Luuqadaha, muuqaalka iyo samaynta qoraal hoosaadka",
+    "secPlayerShaders": "Anime upscaling iyo hadh adiga kuu gaar ah",
+    "secPlayerEngine": "Decoder, soo saarista muuqaal iyo maqal, kaydin Kaliya beddel kuwan haddii dib-u-ciyaartu ay dhibaato leedahay",
+    "secPlayerMpv": "mpv.conf, qoraalo iyo hagaajin horumarsan",
+    "secAnimeList": "Qaybaha buuxinta iyo thumbnails aan la daawan",
+    "secProgress": "Marka horumarkaaga la daawado ama akhriyay lagu kaydiyo liiskaaga",
+    "secAnimeDetails": "Halka ciwaanada dhacdada, sawir-gacmeedka iyo koobani ay ka yimaadeen",
+    "secReaderReading": "Habka wax-akhriska, rogid bogga, soo-dhoweynta iyo cutubka xiga",
+    "secReaderControls": "Taabo aagagga, furayaasha mugga iyo is-rog-rogid otomaatig ah",
+    "secReaderDisplay": "Dhabarka dambe, dhalaalka, shaashadda buuxda iyo lambarka bogga",
+    "secNovelText": "Farta, cabbirka, kala dheeraynta, xad-dhaafka iyo bogga rogidda",
+    "secNovelTranslate": "Turjun cutubyada markaad wax akhrinayso",
+    "secNovelSpeech": "Codka, xawaaraha iyo codka kor loogu akhriyo",
+    "secNotifyAbout": "Dooro nooca nashaadaadka soo diri digniinta",
+    "layoutTitle": "Qaabka",
+    "layoutDesc": "Dooro, dhaqaaq oo qari badhamada baararka",
+    "layoutHint": "Jiid badhan si aad u dhaqaajiso (marka hore ku qabo shaashadda taabashada). Taabo mid si aad u jarto, u dhaqaaqdo ama u qariso",
+    "layoutDropInto": "Soo geli: {zone}",
+    "@layoutDropInto": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutCutting": "guuraya {name}. Riix badhanka dhejiska si aad u dhigto",
+    "@layoutCutting": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutTitleFixed": "Ciwaanka",
+    "layoutZoneTopStart": "Bar sare, ka hor cinwaanka",
+    "layoutZoneTopEnd": "Bar sare, ka dib horyaalka",
+    "layoutZoneBottomStart": "Barta hoose, bidix",
+    "layoutZoneBottomEnd": "Barta hoose, midig",
+    "layoutZoneSecondRow": "Qarsoon: safka labaad ee muuqaalka caadiga ah",
+    "layoutZoneOverflow": "Qarsoon: menu ka badan",
+    "layoutEmptyZone": "Ku rid badhamada halkan",
+    "layoutCut": "jar",
+    "layoutPaste": "Halkan ku dheji",
+    "layoutHide": "Qari",
+    "layoutMoveTo": "U dhaqaaq {zone}",
+    "@layoutMoveTo": {
+        "placeholders": {
+            "zone": {
+                "type": "String"
+            }
+        }
+    },
+    "layoutReset": "Dib u deji si aan caadi ahayn",
+    "layoutMore": "Wax badan",
+    "sourceWhyAction": "Waa maxay sababta digtoonaan la'aan?",
+    "sourceWhyStatus": "Xaalada",
+    "sourceWhyLastCheck": "Markii u dambaysay ee la hubiyay",
+    "sourceWhyNever": "Wali maaha",
+    "sourceWhyNextCheck": "Jeegaga xiga",
+    "sourceWhyNewest": "Ugu cusub isha",
+    "sourceWhyProgress": "Horumarkaaga",
+    "sourceWhyListStatus": "Heerka liiska",
+    "sourceWhyFailures": "Jeegaga fashilmay ee isku xiga",
+    "sourceWhyLastRelease": "Siidaynta cusub ee u dambaysay ee la arkay",
+    "sourceWhyVerdictNew": "Siidaynta cusub ayaa halkan ka soo baxaysa isla marka isha ay taxdo oo jeeggu socdo.",
+    "sourceWhyVerdictAhead": "Isha ayaa horuumarkaaga ka horraysa, sidaas darteed hal mar ayaa laguu sheegay. Akhri ama u fiirso si aad u hesho digniinta xigta.",
+    "sourceWhyVerdictSkipped": "Magacan waxaa ka booday xeerarka sare. Ku beddel goobaha ogeysiinta, ama isticmaal Check hadda si aad u socodsiiso si kastaba.",
+    "sourceWhyVerdictBroken": "Isha lama heli karo ama lama saari karo, markaa waxba lama hubinayo.",
+    "sourceWhyVerdictMuted": "Diiwaangelintan waa la damiyay",
+    "externalPlayerTitle": "Meel kale ka fur qulqulka",
+    "externalCopyUrl": "Nuqul ka samee isku xirka qulqulka",
+    "externalCopied": "Isku xirka qulqulka waa la guuriyay",
+    "externalChooser": "Ku fur app kale",
+    "externalVlc": "Ku fur VLC",
+    "externalMpv": "Ku fur mpv",
+    "externalWebVideoCast": "Shabakadda Fiidiyowga",
+    "castViaAppHint": "U dir qulqulka abka Webka Fiidiyowga",
+    "externalFailed": "Waa la furi waayay qulqulka Ciyaartoyga ma rakibay?",
+    "addonInstalled": "La rakibay",
+    "loadFailedActivity": "Ma rari karo hawsha",
+    "loadFailedFavourites": "Waa la rari karaaya dookhyada Isku day",
+    "loadFailedStats": "Waa la rari waayay xisaabaadka",
+    "loadFailedReplies": "Waa la rari waayay jawaabaha",
+    "cantBeUndone": "Tan lama celin karo",
+    "searchTags": "Raadi tags",
+    "spoilerTapToView": "Qaswadayaasha, taabo si aad u aragto",
+    "mediaVideo": "Video",
+    "notificationSomeone": "Qof",
+    "notificationATitle": "cinwaan",
+    "notificationAddedDetail": "Waxaa lagu daray AniList",
+    "updateNoReleases": "Wax sii dayn ah lama helin",
+    "updateInvalidResponse": "Jawaab cusboonaysiin aan sax ahayn",
+    "commentsRateLimited": "Qiimaha xaddidan",
+    "commentsConnectFailed": "Ku guuldareystay in la isku xiro",
+    "dnsNoRecords": "Ma jiro diiwaan A oo soo laabtay",
+    "importTokenRejected": "Token waa la diiday",
+    "developerRoleLead": "Horumariyaha hogaanka",
+    "developerRoleModerator": "Dhexdhexaadiyaha khilaafka",
+    "extensionManagerTitle": "{type} maamulaha",
+    "@extensionManagerTitle": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionsOfType": "{type} kordhin",
+    "@extensionsOfType": {
+        "placeholders": {
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionSettingsTitle": "{name} dejinta",
+    "@extensionSettingsTitle": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "extensionNoSettings": "{name} ma bixiso wax dejin",
+    "@extensionNoSettings": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAired": "Qeybta {episode} ee {title} ayaa la sii daayay",
+    "@notificationAired": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            },
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAiredDetail": "Dhacdada {episode} ayaa la sii daayay",
+    "@notificationAiredDetail": {
+        "placeholders": {
+            "episode": {
+                "type": "String"
+            }
+        }
+    },
+    "notificationAdded": "{title} ayaa lagu daray AniList",
+    "@notificationAdded": {
+        "placeholders": {
+            "title": {
+                "type": "String"
+            }
+        }
+    },
+    "updateNotFound": "Cusbooneysii seerfarku wuu heli waayay sii-deynta: {message}",
+    "@updateNotFound": {
+        "placeholders": {
+            "message": {
+                "type": "String"
+            }
+        }
+    },
+    "installStepJre": "Java runtime",
+    "installStepCore": "Xudunta Runtime",
+    "installStepsProgress": "Tallaabada {current} ee {total}",
+    "@installStepsProgress": {
         "placeholders": {
             "current": {
                 "type": "int"
@@ -3207,68 +3115,160 @@
             }
         }
     },
-    "novelPagedDesc": "Split the chapter into pages and swipe or tap to turn them instead of scrolling",
-    "watchOrder": "Watch order",
-    "settingsNotifications": "Notifications",
-    "syncDeleteConfirm": "{count, plural, =1{1 entry} other{{count} entries}} that are not on your main list will be deleted from the other services. This cannot be undone.",
-    "@syncDeleteConfirm": {
+    "stepWaiting": "Sugitaanka",
+    "stepChecking": "Hubinta…",
+    "stepUpToDate": "Ilaa hadda",
+    "stepUpToDateWith": "Ilaa hadda · {detail}",
+    "@stepUpToDateWith": {
+        "placeholders": {
+            "detail": {
+                "type": "String"
+            }
+        }
+    },
+    "stepWillInstall": "waa lagu rakibi doonaa",
+    "stepWillUpdate": "waa la cusbooneysiin doonaa",
+    "stepWillUpdateTo": "Waxaa loo cusboonaysiin doonaa {version}",
+    "@stepWillUpdateTo": {
+        "placeholders": {
+            "version": {
+                "type": "String"
+            }
+        }
+    },
+    "stepInstalled": "La rakibay",
+    "stepNotNeeded": "Looma baahna halkan",
+    "stepFailed": "Fashilmay",
+    "stepFailedWith": "Fashilmay: {reason}",
+    "@stepFailedWith": {
+        "placeholders": {
+            "reason": {
+                "type": "String"
+            }
+        }
+    },
+    "installNeedsRuntime": "Waxay ku shaqeysaa wakhtiga runtime Java iyo runtime-ga la wadaago. Marka hore waa la rakibaa, waana la cusboonaysiiyaa haddii ay isbeddelaan.",
+    "installRuntimeNewer": "Wakhtiga runtime ee maamulahani ku shaqeeyo ayaa leh wax cusub",
+    "removeJvmTitle": "Ka saar wakhtiga runtime Java?",
+    "removeJvmMessage": "Maareeyayaasha fidinta Desktop-ka waxay joojiyaan shaqada ilaa dib loo rakibo. Waa la soo dejisan doonaa mar kale marka xigta ee aad rakibto ama furto mid.",
+    "runtimePreparing": "Diyaarinta wakhtiga runtu…",
+    "calendarAll": "Dhammaan",
+    "calendarAnime": "Anime",
+    "calendarManga": "Manga",
+    "readerCloudflare": "Ku fur browserka (Cloudflare check)",
+    "badgeBoardHint": "Ku jiid calaamad gees ka mid ah kaadhka koowaad, ama ku jiid calaamad hore si aad u dhaqaajiso. Calaamaduhu way beddelaan meelo, si aan midna waligiis isu dulmarin. Taabo calaamada hoose si aad u damiso ama u damiso",
+    "statusAuto": "Baabuur",
+    "unreadCounter": "Miisaanka aan la akhriyin",
+    "unreadCounterDesc": "Muuji inta qaybood ama cutubyada ku hadhay boodhadhka",
+    "settingsShortcuts": "Gaabyada kiiboodhka",
+    "settingsShortcutsDesc": "Eeg, beddel oo dami fure kasta",
+    "shortcutGroupApp": "App-ka",
+    "shortcutGroupPlayer": "Ciyaartoyga fiidiyowga",
+    "shortcutGroupReader": "Akhriste",
+    "shortcutsEnableApp": "Hababka abka",
+    "shortcutsEnablePlayer": "Jidadka gaaban ee ciyaartoyga",
+    "shortcutsEnableReader": "Akhristaha gaabin",
+    "shortcutsEnableDesc": "Furaha kooxdan daar ama dami",
+    "shortcutNotSet": "Lama dejin",
+    "shortcutAddKey": "Ku dar furaha",
+    "shortcutResetOne": "Dib u deji si aan caadi ahayn",
+    "shortcutClearKeys": "Ka saar dhammaan furayaasha",
+    "shortcutResetAll": "Dib u habayn dhammaan jid-gooyooyinka",
+    "shortcutResetAllDesc": "Fure kasta dib ugu celi asligiisii",
+    "shortcutPress": "Riix furaha ama isku dhafka aad rabto",
+    "shortcutPressHint": "Isku darka kasta wuxuu ka mid noqon karaa hal fal oo kaliya, markaa qaadashada mid ayaa dhaqaaqeysa.",
+    "shortcutSeekPercent": "U bood barta muuqaalka",
+    "shortcutSeekPercentKeys": "0 – 9",
+    "shortcutAppBack": "Ku noqo",
+    "shortcutAppFullscreen": "Beddel shaashada buuxda",
+    "shortcutAppGlass": "Beddel qaabka dhalada",
+    "shortcutAppMaterialYou": "Bedel Adiga",
+    "shortcutAppDark": "Beddel qaabka mugdiga",
+    "shortcutAppOled": "Bedeli OLED madow",
+    "shortcutAppSearch": "Raadin fur",
+    "shortcutAppSettings": "Dejinta fur",
+    "shortcutAppDownloads": "Fur soo dejinta",
+    "shortcutAppNotifications": "Ogeysiisyada fur",
+    "shortcutAppIncognito": "Beddel qarsoodiga",
+    "shortcutAppShortcuts": "Muuji furayaasha kiiboodhka",
+    "shortcutPlayerPlayPause": "Ciyaar ama hakad",
+    "shortcutPlayerSeekForward": "Horay u raadi",
+    "shortcutPlayerSeekBack": "Dib u raadi",
+    "shortcutPlayerSeekForwardLong": "Horay u raadi 30 ilbiriqsi",
+    "shortcutPlayerSeekBackLong": "Dib u raadi 30 ilbiriqsi",
+    "shortcutPlayerFrameForward": "jir xiga",
+    "shortcutPlayerFrameBack": "jir hore",
+    "shortcutPlayerVolumeUp": "Kor u qaad",
+    "shortcutPlayerVolumeDown": "Hoos u dhig",
+    "shortcutPlayerMute": "aamus",
+    "shortcutPlayerFullscreen": "Shaashad buuxda",
+    "shortcutPlayerNext": "Qaybta xigta",
+    "shortcutPlayerPrevious": "Dhacdo hore",
+    "shortcutPlayerSkip": "Ka bood horudhaca ama dhammaanaya",
+    "shortcutPlayerPanel": "Liiska dhacdooyinka",
+    "shortcutPlayerSpeedUp": "Dib u soo celin degdeg ah",
+    "shortcutPlayerSpeedDown": "Dib u ciyaar si tartiib ah",
+    "shortcutPlayerSpeedReset": "Xawaaraha caadiga ah",
+    "shortcutPlayerSubtitleToggle": "Qoraal-hoosaadyada waa daaran ama dami",
+    "shortcutPlayerSubtitleCycle": "Dabaqa hoose ee xiga",
+    "shortcutPlayerAudioCycle": "track audio xiga",
+    "shortcutPlayerStreamCycle": "durdurka xiga",
+    "shortcutPlayerFit": "Beddel ku habboonaanta muuqaalka",
+    "shortcutReaderRight": "Bogga dhanka midig",
+    "shortcutReaderLeft": "Bogga bidixda",
+    "shortcutReaderNextPage": "Bogga xiga",
+    "shortcutReaderPreviousPage": "Boggii hore",
+    "shortcutReaderControls": "Muuji ama qari kontaroolada",
+    "shortcutReaderNextChapter": "Cutubka Xiga",
+    "shortcutReaderPreviousChapter": "Cutubkii hore",
+    "shortcutTaken": "Waxaa laga soo qaatay {action}",
+    "@shortcutTaken": {
+        "placeholders": {
+            "action": {
+                "type": "String"
+            }
+        }
+    },
+    "incognitoTurnedOn": "Qaabka qarsoon ayaa shiran",
+    "incognitoTurnedOff": "Qaabka qarsoon ayaa dansan",
+    "onHoldAnime": "Anime la hayo",
+    "onHoldManga": "Manga la hayo",
+    "droppedAnime": "Anime la tuuray",
+    "droppedManga": "Manga la tuuray",
+    "generalSectionDesktop": "Desktop",
+    "closeAction": "Markay daaqaddu xidhan tahay",
+    "closeActionQuit": "Jooji abka",
+    "closeActionWhenBusy": "Ku dhex orod saxaaradda inta ay wax socdaan",
+    "closeActionAlways": "Had iyo jeer ku sii ordi saxanka",
+    "closeActionNoTray": "Saxanka nidaamka halkan lagama heli karo, marka abka wuu joogsadaa marka la xidho",
+    "gamepadNav": "Gamepad navigation",
+    "gamepadNavDesc": "Ku wareeg abka oo ku maamul ciyaartoyga leh koontaroolaha ciyaarta",
+    "trayShow": "Muuji Dartotsu",
+    "trayQuit": "Jooji",
+    "trayIdle": "Wax socda ma jiraan",
+    "trayDownloading": "{count, plural, one{Soo dejinta {count} shayga} other{Soo dejinta {count} walxaha}}",
+    "@trayDownloading": {
         "placeholders": {
             "count": {
                 "type": "int"
             }
         }
     },
-    "secPlayerSubtitles": "Languages, appearance and subtitle rendering",
-    "settingsSyncModeGithub": "GitHub",
-    "playerSubtitlePreview": "Subtitle preview",
-    "sourceSkippedUnseen": "Skipped: unseen episodes",
-    "shortcutsEnablePlayer": "Player shortcuts",
-    "updateChannelDesc": "Stable is the tested release. Pre-release and Alpha get new features sooner but may break",
-    "shortcutGroupReader": "Reader",
-    "playerSkipFailed": "AniSkip refused the skip times: {error}",
-    "@playerSkipFailed": {
-        "placeholders": {
-            "error": {
-                "type": "String"
-            }
-        }
-    },
-    "closeAction": "When the window is closed",
-    "settingsSyncSignedIn": "Signed in as {user}",
-    "@settingsSyncSignedIn": {
-        "placeholders": {
-            "user": {}
-        }
-    },
-    "popularMovies": "Popular Movies",
-    "dcTimerElapsed": "Elapsed",
-    "layoutDesc": "Choose, move and hide the buttons on the bars",
-    "mangaUpdatesLoginTitle": "Sign in to MangaUpdates",
-    "refreshFromComick": "Refresh from Comick",
-    "refreshFromTrakt": "Refresh from Trakt",
-    "downloadClearQueue": "Clear queue",
-    "stepUpToDate": "Up to date",
-    "playerPictureProcessed": "With shaders and colors",
-    "novelContents": "Contents",
-    "sourceEmpty": "No subscriptions yet",
-    "settingsAboutUpdates": "About & updates",
-    "novelSearchNone": "No matches",
-    "trackProgressAnimeLocal": "Save your progress on {name} to your list on this device as you watch?",
-    "@trackProgressAnimeLocal": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
-    "dcRouteHeadless": "Through your account",
-    "novelPaged": "Page turning",
-    "sourceOpenTitle": "Open title",
-    "layoutHint": "Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it",
-    "playerSkipSubmitDesc": "Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.",
-    "sourceSkipUnstartedDesc": "Nothing watched or read yet, but episodes already exist",
-    "playerPipPlay": "Play",
-    "castViaAppHint": "Send the stream to the Web Video Cast app",
-    "externalWebVideoCast": "Web Video Cast",
-    "trailerQuality": "Trailer quality"
+    "traySyncing": "Isku-dubarid liiskaaga",
+    "trayUpdating": "Cusbooneysiinta abka",
+    "trayPlaying": "Ku ciyaarista daaqad yar",
+    "traySearch": "Raadi",
+    "trayPauseDownloads": "Jooji soo dejinta",
+    "trayResumeDownloads": "Dib u bilaw soo dajisyada",
+    "playerDownloadTitle": "Soo dejinta ciyaaryahanka",
+    "playerDownloadBody": "Dartotsu wuxuu soo qaadaa matoorka muuqaalkiisa hal mar. Dib-u-ciyaartu waxay bilaabataa isla marka ay diyaar noqoto.",
+    "playerDownloadStarting": "Bilaabida soo dejinta",
+    "playerDownloadFailedTitle": "Way heli kari wayday ciyaartoyga",
+    "playerDownloadFailedBody": "Hubi xidhiidhkaaga oo isku day mar kale. Soodejintu waxay ka qaadaysaa meeshii ay ku joogsatay.",
+    "playerDownloadRetry": "Isku day mar kale",
+    "playerDownloadCopy": "Koobi faahfaahinta",
+    "removePlayerTitle": "Ka saar ciyaaryahanka?",
+    "removePlayerMessage": "Fiidiyowyadu ma ciyaari karaan ilaa ciyaaryahanka mar kale la soo dejiyo.",
+    "trailerLoading": "Soo raraysa trailer-ka…",
+    "trailerFailed": "Ma awoodin in uu ku ciyaaro trailer-ka halkan, isaga oo ka furay browserka"
 }
