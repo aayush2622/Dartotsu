@@ -13,7 +13,7 @@ jobs:
       pull-requests: write
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Check if the PR creator is the repo owner or Weblate
       id: check_owner
@@ -49,7 +49,7 @@ jobs:
 
     - name: Send Greeting Message
       if: env.skip != 'true'
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           const prNumber = context.payload.pull_request.number;

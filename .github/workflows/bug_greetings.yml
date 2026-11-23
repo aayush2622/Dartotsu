@@ -9,7 +9,7 @@ jobs:
       issues: write
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Check if the issue is labeled as a Bug Report
       id: check_bug_label
       env:
@@ -60,7 +60,7 @@ jobs:
         fi
     - name: Send Greeting Message
       if: env.skip_label_check == 'false' && env.skip != 'true' && env.skip_first_report != 'true'
-      uses: actions/github-script@v6
+      uses: actions/github-script@v7
       with:
         script: |
           const issueNumber = context.payload.issue.number;
