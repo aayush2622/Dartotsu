@@ -10,6 +10,8 @@ import '../../../Widgets/Components/ScreenState.dart';
 import 'ActivityComposer.dart';
 
 class ActivityListState extends ScreenState {
+  final shown = <String>{};
+
   final MediaService service;
   final ActivityScope scope;
   final String? userId;

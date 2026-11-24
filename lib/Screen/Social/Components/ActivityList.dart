@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../../Utils/Extensions/ClickCursor.dart';
+
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../Core/Services/MediaService.dart';
@@ -130,22 +131,20 @@ class _ActivityListState extends State<ActivityList>
                   ),
                 )
               else
-                for (final a in visible)
+                for (final (i, a) in visible.indexed)
                   KeyedSubtree(
                     key: ValueKey('activity-${a.id}'),
-                    child:
-                        ActivityCard(
-                          service: widget.service,
-                          activity: a,
-                          onDeleted: () => state.items.remove(a),
-                          onEdited: () => state.load(reset: true),
-                        ).animateFadeUp(
-                          begin: 0.06,
-                          delay: Duration(
-                            milliseconds: 40 * visible.indexOf(a).clamp(0, 5),
-                          ),
-                          duration: 320,
-                        ),
+                    child: _FirstShowOnly(
+                      id: a.id,
+                      shown: state.shown,
+                      index: i,
+                      child: ActivityCard(
+                        service: widget.service,
+                        activity: a,
+                        onDeleted: () => state.items.remove(a),
+                        onEdited: () => state.load(reset: true),
+                      ),
+                    ),
                   ),
               if (state.loading.value && !skeleton)
                 const Padding(
@@ -224,4 +223,34 @@ class _ActivityListState extends State<ActivityList>
       ],
     ),
   );
+}
+
+class _FirstShowOnly extends StatefulWidget {
+  final String id;
+  final Set<String> shown;
+  final int index;
+  final Widget child;
+
+  const _FirstShowOnly({
+    required this.id,
+    required this.shown,
+    required this.index,
+    required this.child,
+  });
+
+  @override
+  State<_FirstShowOnly> createState() => _FirstShowOnlyState();
+}
+
+class _FirstShowOnlyState extends State<_FirstShowOnly> {
+  late final bool _animate = widget.shown.add(widget.id);
+
+  @override
+  Widget build(BuildContext context) => _animate
+      ? widget.child.animateFadeUp(
+          begin: 0.06,
+          delay: Duration(milliseconds: 40 * widget.index.clamp(0, 5)),
+          duration: 320,
+        )
+      : widget.child;
 }
