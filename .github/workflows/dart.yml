@@ -165,18 +165,43 @@ jobs:
         with:
           workflow: dart.yml
           name: last-sha
+          search_artifacts: true
         continue-on-error: true
 
       - name: Get Commits Since Last Run
         id: commit_logs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          LAST_SHA=""
           if [ -f last_sha.txt ]; then
-            LAST_SHA=$(cat last_sha.txt)
-          else
-            LAST_SHA=$(git rev-list --max-parents=0 HEAD)
+            candidate=$(tr -d '[:space:]' < last_sha.txt)
+            if [ -n "$candidate" ] && git cat-file -e "${candidate}^{commit}" 2>/dev/null; then
+              LAST_SHA="$candidate"
+            fi
           fi
+
+          if [ -z "$LAST_SHA" ]; then
+            echo "last_sha.txt not found or invalid; falling back to latest release tag on grayankit/Dartotsu-Downloader"
+            latest_tag=$(gh release list --repo grayankit/Dartotsu-Downloader --limit 1 --json tagName --jq '.[0].tagName' 2>/dev/null || true)
+            if [ -n "$latest_tag" ] && git cat-file -e "${latest_tag}^{commit}" 2>/dev/null; then
+              LAST_SHA="$latest_tag"
+            fi
+          fi
+
+          if [ -z "$LAST_SHA" ]; then
+            echo "Falling back to HEAD~1"
+            LAST_SHA=$(git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD | tail -n 1)
+          fi
+
+          echo "Determined previous build SHA: $LAST_SHA"
           echo "Commits since $LAST_SHA:"
-          COMMIT_LOGS=$(git log $LAST_SHA..HEAD --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)" --max-count=10)
+          COMMIT_LOGS=$(git log "$LAST_SHA..HEAD" --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)")
+          
+          if [ -z "$COMMIT_LOGS" ]; then
+            COMMIT_LOGS=$(git log -1 --pretty=format:"● %s ~%an [֍](https://github.com/${{ github.repository }}/commit/%H)")
+          fi
+
           COMMIT_LOGS="${COMMIT_LOGS//'%'/'%25'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\n'/'%0A'}"
           COMMIT_LOGS="${COMMIT_LOGS//$'\r'/'%0D'}"
@@ -226,9 +251,33 @@ jobs:
           fi
 
           # Android APKs
+          apk_arm64=$(find raw-artifacts -type f -name "Dartotsu_Android_arm64-v8a_*.apk" | head -n1)
+          if [ -n "$apk_arm64" ]; then
+            base_arm64=$(basename "$apk_arm64")
+            cp "$apk_arm64" "release-assets/$base_arm64"
+            echo "apk_arm64_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_arm64}" >> "$GITHUB_OUTPUT"
+          fi
+
+          apk_armv7=$(find raw-artifacts -type f -name "Dartotsu_Android_armeabi-v7a_*.apk" | head -n1)
+          if [ -n "$apk_armv7" ]; then
+            base_armv7=$(basename "$apk_armv7")
+            cp "$apk_armv7" "release-assets/$base_armv7"
+            echo "apk_armv7_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_armv7}" >> "$GITHUB_OUTPUT"
+          fi
+
+          apk_x86_64=$(find raw-artifacts -type f -name "Dartotsu_Android_x86_64_*.apk" | head -n1)
+          if [ -n "$apk_x86_64" ]; then
+            base_x86_64=$(basename "$apk_x86_64")
+            cp "$apk_x86_64" "release-assets/$base_x86_64"
+            echo "apk_x86_64_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_x86_64}" >> "$GITHUB_OUTPUT"
+          fi
+
           apk_universal=$(find raw-artifacts -type f -name "Dartotsu_Android_universal_*.apk" | head -n1)
           if [ -n "$apk_universal" ]; then
+            base_universal=$(basename "$apk_universal")
+            cp "$apk_universal" "release-assets/$base_universal"
             cp "$apk_universal" release-assets/Dartotsu_main.apk
+            echo "apk_universal_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/${base_universal}" >> "$GITHUB_OUTPUT"
             echo "apk_link=https://github.com/grayankit/Dartotsu-Downloader/releases/download/${TAG}/Dartotsu_main.apk" >> "$GITHUB_OUTPUT"
           fi
 
@@ -306,10 +355,15 @@ jobs:
       - name: Discord Notification
         if: github.event_name == 'push' || inputs.dry_run != true || inputs.ping_discord == true
         env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COMMIT_LOG: ${{ env.COMMIT_LOG }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           PING_VARIABLE: ${{ (github.event_name == 'workflow_dispatch' && inputs.ping_discord) && '<@&1434448534450606090>' || 'noPing' }}
           GITHUB_REPOSITORY: ${{ github.repository }}
+          APK_ARM64_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_arm64_link }}
+          APK_ARMV7_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_armv7_link }}
+          APK_X86_64_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_x86_64_link }}
+          APK_UNIVERSAL_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_universal_link }}
           APK_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.apk_link }}
           WINDOWS_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.win_link }}
           LINUX_DOWNLOAD_LINK: ${{ steps.prep_artifacts.outputs.linux_link }}
@@ -319,7 +373,10 @@ jobs:
         run: |
           if [ "$DRY_RUN" = "true" ]; then
             echo "[DRY RUN] Would send Discord notifications:"
-            echo "APK Link: ${APK_DOWNLOAD_LINK:-none}"
+            echo "APK arm64 Link: ${APK_ARM64_DOWNLOAD_LINK:-none}"
+            echo "APK armv7 Link: ${APK_ARMV7_DOWNLOAD_LINK:-none}"
+            echo "APK x86_64 Link: ${APK_X86_64_DOWNLOAD_LINK:-none}"
+            echo "APK Universal Link: ${APK_UNIVERSAL_DOWNLOAD_LINK:-none}"
             echo "Windows Link: ${WINDOWS_DOWNLOAD_LINK:-none}"
             echo "Linux Link: ${LINUX_DOWNLOAD_LINK:-none}"
             echo "iOS Link: ${IOS_DOWNLOAD_LINK:-none}"

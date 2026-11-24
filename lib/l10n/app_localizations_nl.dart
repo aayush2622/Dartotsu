@@ -70,7 +70,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settings => 'Instellingen';
 
   @override
-  String get account => 'Account';
+  String get account => 'Rekening';
 
   @override
   String get about => 'Over';
@@ -128,37 +128,37 @@ class AppLocalizationsNl extends AppLocalizations {
       'Vraagt om een code als je de app opent of er na een tijdje terugkomt';
 
   @override
-  String get appLockBiometric => 'Unlock with biometrics';
+  String get appLockBiometric => 'Ontgrendel met biometrie';
 
   @override
   String get appLockBiometricDesc =>
-      'Use your fingerprint or face instead of typing the passcode';
+      'Gebruik uw vingerafdruk of gezicht in plaats van de toegangscode te typen';
 
   @override
-  String get appLockBiometricReason => 'Unlock Dartotsu';
+  String get appLockBiometricReason => 'Ontgrendel Dartotsu';
 
   @override
-  String get appLockDelay => 'Lock when idle';
+  String get appLockDelay => 'Vergrendelen bij inactiviteit';
 
   @override
-  String get appLockDelayAlways => 'Always';
+  String get appLockDelayAlways => 'Altijd';
 
   @override
-  String get appLockDelayNever => 'Never';
+  String get appLockDelayNever => 'Nooit';
 
   @override
   String appLockDelayAfter(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count minutes',
-      one: '1 minute',
+      other: '$count minuten',
+      one: '1 minuut',
     );
-    return 'After $_temp0';
+    return 'Na $_temp0';
   }
 
   @override
-  String get appLockUseBiometric => 'Use biometrics';
+  String get appLockUseBiometric => 'Gebruik biometrie';
 
   @override
   String get appLockUnlock => 'Voer je code in';
@@ -201,30 +201,30 @@ class AppLocalizationsNl extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count updates available',
-      one: '1 update available',
+      other: '$count-updates beschikbaar',
+      one: '1 update beschikbaar',
     );
     return '$_temp0';
   }
 
   @override
-  String get updateAll => 'Update all';
+  String get updateAll => 'Alles bijwerken';
 
   @override
   String extensionsUpdated(int done, int total) {
-    return '$done of $total extensions updated';
+    return '$done van $total extensies bijgewerkt';
   }
 
   @override
-  String get updateConflictTitle => 'Update not installed';
+  String get updateConflictTitle => 'Update niet geïnstalleerd';
 
   @override
   String updateConflictBody(String names) {
-    return '$names could not be installed over the existing version. This usually means the installed copy was signed differently. Uninstall it and install the new version?';
+    return '$names kon niet over de bestaande versie worden geïnstalleerd. Dit betekent meestal dat de geïnstalleerde kopie anders is ondertekend. Verwijder het en installeer de nieuwe versie?';
   }
 
   @override
-  String get updateConflictAction => 'Uninstall and reinstall';
+  String get updateConflictAction => 'Verwijderen en opnieuw installeren';
 
   @override
   String get noSourceSettings => 'Deze bron heeft geen instellingen';
@@ -239,7 +239,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get addRepository => 'Repository toevoegen';
 
   @override
-  String get importRepositoryFile => 'Import a file';
+  String get importRepositoryFile => 'Importeer een bestand';
 
   @override
   String get pluginRepoUpdated => 'Pluginrepository bijgewerkt';
@@ -248,7 +248,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get pluginRepoUpdateFailed => 'Pluginrepository verversen mislukt';
 
   @override
-  String get ok => 'OK';
+  String get ok => 'Oké';
 
   @override
   String get cancel => 'Annuleren';
@@ -284,15 +284,15 @@ class AppLocalizationsNl extends AppLocalizations {
   String get selectMediaService => 'Kies een mediaservice';
 
   @override
-  String get manageServices => 'Media services';
+  String get manageServices => 'Mediadiensten';
 
   @override
   String get manageServicesDesc =>
-      'Reorder the services and choose which ones show in the picker';
+      'Herschik de services en kies welke in de kiezer worden weergegeven';
 
   @override
   String get manageServicesHint =>
-      'Drag to reorder, switch off the ones you don\'t use';
+      'Sleep om de volgorde te wijzigen, schakel degene uit die u niet gebruikt';
 
   @override
   String get pickColor => 'Kies een kleur';
@@ -335,7 +335,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsNetwork => 'Netwerk';
 
   @override
-  String get settingsNetworkDesc => 'User agent, certificaten, DNS en proxy';
+  String get settingsNetworkDesc => 'User-agent, certificaten, DNS en proxy';
 
   @override
   String get settingsAccountDesc => 'Trackingservice en inloggen';
@@ -373,25 +373,26 @@ class AppLocalizationsNl extends AppLocalizations {
   String get customPath => 'Eigen opslagpad';
 
   @override
-  String get stories => 'Stories';
+  String get stories => 'Verhalen';
 
   @override
-  String get watchOrder => 'Watch order';
+  String get watchOrder => 'Bekijk de volgorde';
 
   @override
-  String get watchOrderOpenSite => 'Open on chiaki.site';
+  String get watchOrderOpenSite => 'Open op chiaki.site';
 
   @override
-  String get watchOrderUnavailable => 'No watch order was found for this title';
+  String get watchOrderUnavailable =>
+      'Er is geen kijkvolgorde gevonden voor deze titel';
 
   @override
-  String get watchOrderOpenFailed => 'Couldn\'t open that title';
+  String get watchOrderOpenFailed => 'Kan die titel niet openen';
 
   @override
-  String get watchOrderCurrent => 'You are here';
+  String get watchOrderCurrent => 'Je bent hier';
 
   @override
-  String get watchOrderCredit => 'Watch orders by chiaki.site';
+  String get watchOrderCredit => 'Bekijk bestellingen van chiaki.site';
 
   @override
   String get customPathDesc =>
@@ -408,441 +409,440 @@ class AppLocalizationsNl extends AppLocalizations {
       'Gebruik een andere cachemanager voor afbeeldingen';
 
   @override
-  String get settingsSync => 'Sync settings';
+  String get settingsSync => 'Synchronisatie-instellingen';
 
   @override
   String get settingsSyncDesc =>
-      'Keep your settings the same on every device. They are stored in a private gist in your GitHub account';
+      'Houd uw instellingen op elk apparaat hetzelfde. Ze worden opgeslagen in een privé-gist in uw GitHub-account';
 
   @override
-  String get settingsSyncSwitch => 'Sync on change';
+  String get settingsSyncSwitch => 'Synchroniseren bij verandering';
 
   @override
   String get settingsSyncModeGithub => 'GitHub';
 
   @override
-  String get settingsSyncSignIn => 'Sign in with GitHub';
+  String get settingsSyncSignIn => 'Log in met GitHub';
 
   @override
   String get settingsSyncSignInDesc =>
-      'Settings are stored in a private gist in your account';
+      'Instellingen worden opgeslagen in een privé-gist in uw account';
 
   @override
-  String get settingsSyncToken => 'Use a personal access token';
+  String get settingsSyncToken => 'Gebruik een persoonlijk toegangstoken';
 
   @override
   String get settingsSyncTokenDesc =>
-      'Create one at github.com/settings/tokens with only the gist permission';
+      'Maak er een op github.com/settings/tokens met alleen de basisrechten';
 
   @override
   String get settingsSyncTokenField => 'Token';
 
   @override
   String settingsSyncSignedIn(Object user) {
-    return 'Signed in as $user';
+    return 'Aangemeld als $user';
   }
 
   @override
-  String get settingsSyncSignOut => 'Sign out';
+  String get settingsSyncSignOut => 'Meld u af';
 
   @override
   String settingsSyncCode(Object code) {
-    return 'Enter $code on GitHub';
+    return 'Voer $code in op GitHub';
   }
 
   @override
   String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.';
+      'De GitHub-pagina is geopend in uw browser. Tik om de code te kopiëren, of houd ingedrukt om te annuleren.';
 
   @override
-  String get settingsSyncSignInFailed => 'Could not sign in to GitHub';
+  String get settingsSyncSignInFailed => 'Kan niet inloggen bij GitHub';
 
   @override
-  String get dcPreview => 'Preview';
+  String get dcPreview => 'Voorbeeld';
 
   @override
-  String get dcSampleWatching => 'Watching';
+  String get dcSampleWatching => 'Kijken';
 
   @override
-  String get dcSampleReading => 'Reading';
+  String get dcSampleReading => 'Lezen';
 
   @override
-  String get dcSampleBrowsing => 'Browsing';
+  String get dcSampleBrowsing => 'Browsen';
 
   @override
-  String get dcSampleLive => 'Right now';
+  String get dcSampleLive => 'Op dit moment';
 
   @override
   String get dcLiveNothing =>
-      'Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.';
+      'Er is momenteel niets te zien. Open een titel, start een aflevering of een hoofdstuk en het verschijnt hier.';
 
   @override
-  String get dcMemberList => 'In the member list';
+  String get dcMemberList => 'In de ledenlijst';
 
   @override
-  String get dcAccount => 'Account';
+  String get dcAccount => 'Rekening';
 
   @override
-  String get dcSignIn => 'Sign in with Discord';
+  String get dcSignIn => 'Log in met Discord';
 
   @override
-  String get dcSignOut => 'Sign out';
+  String get dcSignOut => 'Meld u af';
 
   @override
   String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.';
+      'Zonder verbinding te maken, toont Discord “Watching Dartotsu” via de desktop-app. Verbind Discord om de activiteit naar uw titel te vernoemen, ook op mobiel.';
 
   @override
   String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.';
+      'Verbind Discord om te laten zien wat je kijkt of leest. Het gebruikt de autorisatiepagina van Discord, niet uw accounttoken.';
 
   @override
-  String get dcConnect => 'Connect Discord';
+  String get dcConnect => 'Verbind onenigheid';
 
   @override
   String get dcConnectDesc =>
-      'Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.';
+      'Opent de autorisatiepagina van Discord en voegt Dartotsu toe onder Geautoriseerde apps. Discord vraagt ​​om je aanwezigheid te updaten. Er wordt alleen een vernieuwingstoken opgeslagen, niet uw accounttoken.';
 
   @override
-  String get dcConnectFailed => 'Could not connect Discord';
+  String get dcConnectFailed => 'Kon Discord niet verbinden';
 
   @override
-  String get dcConnectedSnack => 'Discord connected';
+  String get dcConnectedSnack => 'Onenigheid verbonden';
 
   @override
-  String get dcDisconnect => 'Disconnect';
+  String get dcDisconnect => 'Verbreek de verbinding';
 
   @override
-  String get dcDisconnectedSnack => 'Discord disconnected';
+  String get dcDisconnectedSnack => 'Onenigheid verbroken';
 
   @override
-  String get dcUseToken => 'Use a token instead';
+  String get dcUseToken => 'Gebruik in plaats daarvan een token';
 
   @override
-  String get dcRouteDesktop => 'Through the Discord desktop app';
+  String get dcRouteDesktop => 'Via de Discord desktop-app';
 
   @override
-  String get dcRouteHeadless => 'Through your account';
+  String get dcRouteHeadless => 'Via uw account';
 
   @override
-  String get dcRouteGateway => 'Through your account, live';
+  String get dcRouteGateway => 'Via uw account, live';
 
   @override
-  String get dcRouteLinked => 'Connected app';
+  String get dcRouteLinked => 'Verbonden app';
 
   @override
-  String get dcRouteNone => 'Not connected';
+  String get dcRouteNone => 'Niet verbonden';
 
   @override
   String get dcStatusNeedsToken =>
-      'Needs a Discord token. Connecting the app does not set your online status.';
+      'Heeft een Discord-token nodig. Door de app te verbinden, wordt uw online status niet ingesteld.';
 
   @override
-  String get dcAccountOnly => 'Needs a signed-in account';
+  String get dcAccountOnly => 'Vereist een ingelogd account';
 
   @override
   String get dcStatusSection => 'Status';
 
   @override
-  String get dcControlStatus => 'Control my status';
+  String get dcControlStatus => 'Beheer mijn status';
 
   @override
   String get dcControlStatusDesc =>
-      'Keeps a live connection to Discord while Rich Presence is on, so Dartotsu can set your status.';
+      'Houdt een live verbinding met Discord terwijl Rich Presence is ingeschakeld, zodat Dartotsu je status kan instellen.';
 
   @override
   String get dcStatusOnline => 'Online';
 
   @override
-  String get dcStatusIdle => 'Idle';
+  String get dcStatusIdle => 'Inactief';
 
   @override
-  String get dcStatusDnd => 'Do not disturb';
+  String get dcStatusDnd => 'Niet storen';
 
   @override
-  String get dcStatusInvisible => 'Invisible';
+  String get dcStatusInvisible => 'Onzichtbaar';
 
   @override
-  String get dcCustomStatus => 'Custom status';
+  String get dcCustomStatus => 'Aangepaste status';
 
   @override
-  String get dcCustomStatusHint => 'What are you up to?';
+  String get dcCustomStatusHint => 'Wat ben je van plan?';
 
   @override
-  String get dcActivitySection => 'Activity';
+  String get dcActivitySection => 'Activiteit';
 
   @override
-  String get dcShowWatching => 'Show while watching';
+  String get dcShowWatching => 'Laat zien terwijl je kijkt';
 
   @override
-  String get dcShowReading => 'Show while reading';
+  String get dcShowReading => 'Tonen tijdens het lezen';
 
   @override
-  String get dcListening => 'Listening';
+  String get dcListening => 'Luisteren';
 
   @override
-  String get dcCompeting => 'Competing';
+  String get dcCompeting => 'Concurreren';
 
   @override
-  String get dcActivityName => 'Activity name';
+  String get dcActivityName => 'Naam van activiteit';
 
   @override
   String get dcNameApp => 'Dartotsu';
 
   @override
-  String get dcNameTitle => 'Title';
+  String get dcNameTitle => 'Titel';
 
   @override
-  String get dcNameCustom => 'Custom';
+  String get dcNameCustom => 'Aangepast';
 
   @override
-  String get dcCustomNameHint => 'Name shown after “Watching”';
+  String get dcCustomNameHint => 'Naam weergegeven na \'Kijken\'';
 
   @override
-  String get dcStatusText => 'Status text';
+  String get dcStatusText => 'Statustekst';
 
   @override
-  String get dcStatusTextDesc => 'What the member list shows next to your name';
+  String get dcStatusTextDesc => 'Wat de ledenlijst naast je naam laat zien';
 
   @override
-  String get dcDisplayName => 'Name';
+  String get dcDisplayName => 'Naam';
 
   @override
-  String get dcDisplayState => 'State';
+  String get dcDisplayState => 'Staat';
 
   @override
   String get dcDisplayDetails => 'Details';
 
   @override
-  String get dcTextSection => 'Text';
+  String get dcTextSection => 'Tekst';
 
   @override
-  String get dcDetails => 'Top line';
+  String get dcDetails => 'Bovenste regel';
 
   @override
-  String get dcState => 'Bottom line';
+  String get dcState => 'Kortom';
 
   @override
-  String get dcTemplateHint => 'Empty uses the default';
+  String get dcTemplateHint => 'Leeg gebruikt de standaardwaarde';
 
   @override
-  String get dcVariables => 'Tap to insert a value';
+  String get dcVariables => 'Tik om een waarde in te voegen';
 
   @override
-  String get dcImagesSection => 'Images';
+  String get dcImagesSection => 'Afbeeldingen';
 
   @override
-  String get dcLargeImage => 'Large image';
+  String get dcLargeImage => 'Grote afbeelding';
 
   @override
-  String get dcLargeAuto => 'Auto';
+  String get dcLargeAuto => 'Automatisch';
 
   @override
-  String get dcLargeCover => 'Cover';
+  String get dcLargeCover => 'Deksel';
 
   @override
   String get dcLargeLogo => 'Logo';
 
   @override
-  String get dcSmallImage => 'Small image';
+  String get dcSmallImage => 'Klein beeld';
 
   @override
   String get dcSmallAuto => 'Logo';
 
   @override
-  String get dcSmallNone => 'None';
+  String get dcSmallNone => 'Geen';
 
   @override
-  String get dcTimerStyle => 'Timer style';
+  String get dcTimerStyle => 'Timer-stijl';
 
   @override
-  String get dcTimerAuto => 'Auto';
+  String get dcTimerAuto => 'Automatisch';
 
   @override
-  String get dcTimerElapsed => 'Elapsed';
+  String get dcTimerElapsed => 'Verstreken';
 
   @override
-  String get dcTimerRemaining => 'Remaining';
+  String get dcTimerRemaining => 'Resterend';
 
   @override
-  String get dcButtonsSection => 'Buttons';
+  String get dcButtonsSection => 'Knoppen';
 
   @override
-  String get dcButtonMedia => 'Link to the title';
+  String get dcButtonMedia => 'Link naar de titel';
 
   @override
-  String get dcButtonApp => 'Link to Dartotsu';
+  String get dcButtonApp => 'Link naar Dartotsu';
 
   @override
-  String get dcButtonCustom => 'Custom button';
+  String get dcButtonCustom => 'Aangepaste knop';
 
   @override
-  String get dcButtonLabel => 'Label';
+  String get dcButtonLabel => 'Etiket';
 
   @override
-  String get dcButtonUrl => 'Link';
+  String get dcButtonUrl => 'Koppeling';
 
   @override
   String get dcPrivacySection => 'Privacy';
 
   @override
-  String get dcPrivateText => 'Private text';
+  String get dcPrivateText => 'Privé tekst';
 
   @override
-  String get dcPrivateHint => 'Something private';
+  String get dcPrivateHint => 'Iets privés';
 
   @override
   String get dcTokenWarning =>
-      'Signing in uses your account token. Discord’s rules discourage this, so use it at your own risk.';
+      'Bij het inloggen wordt uw accounttoken gebruikt. De regels van Discord ontmoedigen dit, dus gebruik het op eigen risico.';
 
   @override
-  String get dcConnected => 'Connected';
+  String get dcConnected => 'Verbonden';
 
   @override
-  String get dcConnection => 'Connection';
+  String get dcConnection => 'Verbinding';
 
   @override
-  String get dcMethodDesktop => 'Discord desktop app';
+  String get dcMethodDesktop => 'Discord desktop-app';
 
   @override
   String get dcMethodDesktopDesc =>
-      'Used automatically when nothing else is connected. Discord has to be open on this computer.';
+      'Wordt automatisch gebruikt als er niets anders is aangesloten. Discord moet geopend zijn op deze computer.';
 
   @override
-  String get dcMethodToken => 'Account token';
+  String get dcMethodToken => 'Accounttoken';
 
   @override
-  String get dcInUse => 'In use';
+  String get dcInUse => 'In gebruik';
 
   @override
-  String get dcRecommended => 'Recommended';
+  String get dcRecommended => 'Aanbevolen';
 
   @override
-  String get dcConnecting => 'Connecting…';
+  String get dcConnecting => 'Verbinden…';
 
   @override
-  String get dcDisconnected => 'Not connected';
+  String get dcDisconnected => 'Niet verbonden';
 
   @override
   String dcSignedInAs(String name) {
-    return 'Signed in as $name';
+    return 'Aangemeld als $name';
   }
 
   @override
-  String get settingsSyncOn => 'On';
+  String get settingsSyncOn => 'Aan';
 
   @override
-  String get settingsSyncCustom => 'Custom';
+  String get settingsSyncCustom => 'Aangepast';
 
   @override
-  String get settingsSyncChangedHeader => 'Changed settings';
+  String get settingsSyncChangedHeader => 'Gewijzigde instellingen';
 
   @override
   String get settingsSyncNoneChanged =>
-      'You haven\'t changed any of these yet, so there is nothing to sync.';
+      'Je hebt hier nog niets aan veranderd, dus er valt niets te synchroniseren.';
 
   @override
   String get settingsSyncChangedOnly =>
-      'Only settings you have changed are stored. Everything else uses its default on every device. The cloud icon shows what is already on the server.';
+      'Alleen de instellingen die u heeft gewijzigd, worden opgeslagen. Al het andere gebruikt de standaard op elk apparaat. Het cloudpictogram laat zien wat er al op de server staat.';
 
   @override
   String get settingsSyncOffCategory =>
-      'Not syncing. These stay on this device and the server copy is left as it is.';
+      'Synchroniseert niet. Deze blijven op dit apparaat staan ​​en de serverkopie blijft zoals deze is.';
 
   @override
   String get settingsSyncPartsNote =>
-      'Per device. Off keeps each device\'s own value, so a phone and a TV can differ.';
+      'Per apparaat. Uit houdt de eigen waarde van elk apparaat, dus een telefoon en een tv kunnen verschillen.';
 
   @override
-  String get settingsSyncPartSubtitles => 'Subtitle size and colours';
+  String get settingsSyncPartSubtitles => 'Grootte en kleuren van ondertitels';
 
   @override
   String get settingsSyncPartSubtitlesDesc =>
-      'Size, weight, colours and position';
+      'Grootte, gewicht, kleuren en positie';
 
   @override
-  String get settingsSyncPartPictureColors => 'Picture colours';
+  String get settingsSyncPartPictureColors => 'Kleuren van afbeeldingen';
 
   @override
   String get settingsSyncPartPictureColorsDesc =>
-      'Brightness, contrast, saturation, gamma, hue and HDR';
+      'Helderheid, contrast, verzadiging, gamma, tint en HDR';
 
   @override
-  String get settingsSyncPartPalette => 'Theme colours';
+  String get settingsSyncPartPalette => 'Thema kleuren';
 
   @override
-  String get settingsSyncPartPaletteDesc =>
-      'Theme, accent colour and OLED black';
+  String get settingsSyncPartPaletteDesc => 'Thema, accentkleur en OLED-zwart';
 
   @override
-  String get settingsSyncCatOther => 'Watch, read and services';
+  String get settingsSyncCatOther => 'Kijk, lees en diensten';
 
   @override
-  String get settingsSyncTitles => 'Watch progress and titles';
+  String get settingsSyncTitles => 'Bekijk de voortgang en titels';
 
   @override
   String settingsSyncTitlesCount(Object records, Object resume) {
-    return '$records titles and $resume resume entries on the server';
+    return '$records titels en $resume cv-items op de server';
   }
 
   @override
-  String get settingsSyncTitlesNone => 'Nothing uploaded yet';
+  String get settingsSyncTitlesNone => 'Er is nog niets geüpload';
 
   @override
   String get settingsSyncTitlesNote =>
-      'Watch and read positions, the resume shelf, your local lists, bookmarks, highlights and per-title options. Source matches and streams stay on each device because they depend on your extensions. Titles upload at most every 45 seconds.';
+      'Bekijk en lees posities, de cv-plank, uw lokale lijsten, bladwijzers, hoogtepunten en opties per titel. Bronmatches en -streams blijven op elk apparaat staan ​​omdat ze afhankelijk zijn van uw extensies. Titels worden maximaal elke 45 seconden geüpload.';
 
   @override
-  String get settingsSyncConnect => 'Not connected';
+  String get settingsSyncConnect => 'Niet verbonden';
 
   @override
   String get settingsSyncConnectDesc =>
-      'Sign in with GitHub to keep your settings the same on every device.';
+      'Log in met GitHub om uw instellingen op elk apparaat hetzelfde te houden.';
 
   @override
-  String get settingsSyncFailedTitle => 'Sync failed';
+  String get settingsSyncFailedTitle => 'Synchronisatie mislukt';
 
   @override
-  String get settingsSyncPaused => 'Paused';
+  String get settingsSyncPaused => 'Gepauzeerd';
 
   @override
   String get settingsSyncPausedDesc =>
-      'Nothing is uploaded or downloaded while this is off.';
+      'Er wordt niets geüpload of gedownload terwijl dit is uitgeschakeld.';
 
   @override
-  String get settingsSyncUpToDate => 'Up to date';
+  String get settingsSyncUpToDate => 'Up-to-date';
 
   @override
-  String get settingsSyncRetry => 'Retry';
+  String get settingsSyncRetry => 'Opnieuw proberen';
 
   @override
-  String get settingsSyncAccount => 'GitHub account';
+  String get settingsSyncAccount => 'GitHub-account';
 
   @override
   String get settingsSyncAccountDesc =>
-      'Your data goes to a private gist in your own account.';
+      'Uw gegevens gaan naar een privé-gist in uw eigen account.';
 
   @override
-  String get settingsSyncWaiting => 'Waiting for you to approve on GitHub';
+  String get settingsSyncWaiting => 'Wachten op uw goedkeuring op GitHub';
 
   @override
-  String get settingsSyncCopyCode => 'Tap the code to copy it';
+  String get settingsSyncCopyCode => 'Tik op de code om deze te kopiëren';
 
   @override
-  String get settingsSyncCancel => 'Cancel';
+  String get settingsSyncCancel => 'Annuleer';
 
   @override
-  String get settingsSyncStatSettings => 'Settings';
+  String get settingsSyncStatSettings => 'Instellingen';
 
   @override
-  String get settingsSyncStatTitles => 'Titles';
+  String get settingsSyncStatTitles => 'Titels';
 
   @override
-  String get settingsSyncStatShelf => 'Resume';
+  String get settingsSyncStatShelf => 'Hervatten';
 
   @override
   String settingsSyncUploaded(Object time, Object device) {
-    return 'Uploaded $time from $device';
+    return '$time geüpload van $device';
   }
 
   @override
@@ -850,121 +850,124 @@ class AppLocalizationsNl extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count changed',
-      one: '1 changed',
-      zero: 'Nothing changed yet',
+      other: '$count gewijzigd',
+      one: '1 veranderd',
+      zero: 'Er is nog niets veranderd',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncSecrets => 'Accounts and passwords';
+  String get settingsSyncSecrets => 'Accounts en wachtwoorden';
 
   @override
   String get settingsSyncSecretsDesc =>
-      'Sync your sign-ins (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API keys and app lock between your devices. They are encrypted with a passphrase that stays on your devices, so GitHub never sees them.';
+      'Synchroniseer uw aanmeldingen (AniList, MAL, Kitsu, Simkl, MangaBaka, MangaUpdates), API-sleutels en app-vergrendeling tussen uw apparaten. Ze zijn gecodeerd met een wachtwoordzin die op je apparaten blijft staan, zodat GitHub ze nooit ziet.';
 
   @override
-  String get settingsSyncSecretsOn => 'Accounts are synced and encrypted';
+  String get settingsSyncSecretsOn =>
+      'Accounts worden gesynchroniseerd en gecodeerd';
 
   @override
   String get settingsSyncSecretsOnDesc =>
-      'Signing out on one device does not sign you out on the others.';
+      'Als u zich afmeldt op het ene apparaat, wordt u niet afgemeld op de andere apparaten.';
 
   @override
   String get settingsSyncSecretsBroken =>
-      'The passphrase no longer matches the one on the server. Enter it again to keep syncing accounts.';
+      'De wachtwoordzin komt niet meer overeen met die op de server. Voer het opnieuw in om accounts te blijven synchroniseren.';
 
   @override
-  String get settingsSyncPassphraseSet => 'Set a passphrase';
+  String get settingsSyncPassphraseSet => 'Stel een wachtwoordzin in';
 
   @override
-  String get settingsSyncPassphraseEnter => 'Enter your passphrase';
+  String get settingsSyncPassphraseEnter => 'Voer uw wachtwoordzin in';
 
   @override
-  String get settingsSyncPassphraseField => 'Passphrase';
+  String get settingsSyncPassphraseField => 'Wachtwoordzin';
 
   @override
-  String get settingsSyncPassphraseConfirm => 'Repeat the passphrase';
+  String get settingsSyncPassphraseConfirm => 'Herhaal de wachtwoordzin';
 
   @override
   String get settingsSyncPassphraseNew =>
-      'Choose a passphrase of at least 6 characters. It is not stored anywhere but your devices and cannot be recovered. If you forget it, delete the server copy and start again.';
+      'Kies een wachtwoordzin van minimaal 6 tekens. Het wordt nergens anders opgeslagen dan op uw apparaten en kan niet worden hersteld. Als u het vergeet, verwijdert u de serverkopie en begint u opnieuw.';
 
   @override
   String get settingsSyncPassphraseExisting =>
-      'Enter the passphrase you chose on your other device. Accounts on this device will be replaced by the synced ones.';
+      'Voer de wachtwoordzin in die u op uw andere apparaat hebt gekozen. Accounts op dit apparaat worden vervangen door de gesynchroniseerde accounts.';
 
   @override
-  String get settingsSyncPassphraseWrong => 'Wrong passphrase';
+  String get settingsSyncPassphraseWrong => 'Verkeerde wachtwoordzin';
 
   @override
-  String get settingsSyncPassphraseMismatch => 'The passphrases do not match';
+  String get settingsSyncPassphraseMismatch =>
+      'De wachtwoordzinnen komen niet overeen';
 
   @override
-  String get settingsSyncPassphraseShort => 'Use at least 6 characters';
+  String get settingsSyncPassphraseShort => 'Gebruik minimaal 6 tekens';
 
   @override
-  String get settingsSyncSecretsStop => 'Stop syncing accounts';
+  String get settingsSyncSecretsStop =>
+      'Stop met het synchroniseren van accounts';
 
   @override
-  String get settingsSyncSecretsDelete => 'Delete from GitHub';
+  String get settingsSyncSecretsDelete => 'Verwijderen uit GitHub';
 
   @override
   String get settingsSyncSecretsDeleteMessage =>
-      'This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.';
+      'Hiermee wordt het gecodeerde accountbestand uit uw kern verwijderd. Andere apparaten behouden hun aanmeldingen en kunnen een nieuwe wachtwoordzin instellen.';
 
   @override
-  String get settingsSyncWhat => 'What to sync';
+  String get settingsSyncWhat => 'Wat te synchroniseren';
 
   @override
-  String get settingsSyncServer => 'On the server';
+  String get settingsSyncServer => 'Op de server';
 
   @override
-  String get settingsSyncServerEmpty => 'Nothing uploaded yet';
+  String get settingsSyncServerEmpty => 'Er is nog niets geüpload';
 
   @override
   String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count settings, uploaded $time from $device';
+    return '$count instellingen, geüpload $time van $device';
   }
 
   @override
-  String get settingsSyncThisDevice => 'this device';
+  String get settingsSyncThisDevice => 'dit apparaat';
 
   @override
   String settingsSyncCount(num count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count settings on the server',
-      one: '1 setting on the server',
-      zero: 'Nothing on the server',
+      other: '$count instellingen op de server',
+      one: '1 instelling op de server',
+      zero: 'Niets op de server',
     );
     return '$_temp0';
   }
 
   @override
-  String get settingsSyncNow => 'Sync now';
+  String get settingsSyncNow => 'Synchroniseer nu';
 
   @override
-  String get settingsSyncRunning => 'Syncing…';
+  String get settingsSyncRunning => 'Synchroniseren…';
 
   @override
-  String get settingsSyncNever => 'Not synced yet';
+  String get settingsSyncNever => 'Nog niet gesynchroniseerd';
 
   @override
   String settingsSyncLast(Object time) {
-    return 'Last synced $time';
+    return 'Laatst gesynchroniseerd $time';
   }
 
   @override
   String settingsSyncFailed(Object error) {
-    return 'Sync failed: $error';
+    return 'Synchronisatie mislukt: $error';
   }
 
   @override
   String get settingsSyncScope =>
-      'Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.';
+      'Alleen instellingen die overal hetzelfde werken, worden gesynchroniseerd. Accounts, tokens, mappen, extensies, meldingen, Discord, updates en venstergrootte blijven op elk apparaat.';
 
   @override
   String get backupAndRestore => 'Back-up en herstel';
@@ -982,11 +985,12 @@ class AppLocalizationsNl extends AppLocalizations {
   String get loadExtensionsIcon => 'Extensie-iconen laden';
 
   @override
-  String get autoUpdateRuntimes => 'Update extension runtimes automatically';
+  String get autoUpdateRuntimes =>
+      'Update de runtimes van extensies automatisch';
 
   @override
   String get autoUpdateRuntimesDesc =>
-      'Download new Aniyomi, CloudStream and other runtime versions in the background. Off, an update icon appears next to the manager instead.';
+      'Download nieuwe Aniyomi, CloudStream en andere runtimeversies op de achtergrond. Uit: er verschijnt een updatepictogram naast de manager.';
 
   @override
   String get loadExtensionsIconDesc => 'Toon bron-iconen in de extensielijsten';
@@ -1031,15 +1035,16 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get backupPasswordRequired => 'Password (required for account data)';
+  String get backupPasswordRequired =>
+      'Wachtwoord (vereist voor accountgegevens)';
 
   @override
   String get backupProtectedNeedsPassword =>
-      'Set a password to back up account data, or untick it';
+      'Stel een wachtwoord in om een back-up van accountgegevens te maken, of schakel dit uit';
 
   @override
   String get backupProtectedSkipped =>
-      'This backup has no password, so its account data was skipped';
+      'Deze back-up heeft geen wachtwoord, dus de accountgegevens zijn overgeslagen';
 
   @override
   String get backupPassword => 'Wachtwoord (optioneel)';
@@ -1083,7 +1088,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get backupDevice => 'Apparaat';
 
   @override
-  String get backupAccounts => 'Accounts';
+  String get backupAccounts => 'Rekeningen';
 
   @override
   String get backupSize => 'Grootte';
@@ -1144,7 +1149,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get backupCatReaderDesc => 'Lezervoorkeuren';
 
   @override
-  String get backupCatProtected => 'Accounts';
+  String get backupCatProtected => 'Rekeningen';
 
   @override
   String get backupCatProtectedDesc => 'Inlogtokens en inloggegevens';
@@ -1162,63 +1167,65 @@ class AppLocalizationsNl extends AppLocalizations {
   String get logFileDesc => 'Deel het applog, of kopieer het pad op Linux';
 
   @override
-  String get logDelete => 'Delete log files';
+  String get logDelete => 'Logbestanden verwijderen';
 
   @override
-  String get logDeleteDesc => 'Clear the saved app logs to free up space';
+  String get logDeleteDesc =>
+      'Wis de opgeslagen app-logboeken om ruimte vrij te maken';
 
   @override
   String logDeleted(String size) {
-    return 'Deleted $size of logs';
+    return '$size aan logboeken verwijderd';
   }
 
   @override
-  String get missingSequel => 'Missing Sequel';
+  String get missingSequel => 'Vervolg ontbreekt';
 
   @override
-  String get rising => 'Rising';
+  String get rising => 'Stijgend';
 
   @override
-  String get stacks => 'Stacks';
+  String get stacks => 'Stapels';
 
   @override
-  String get stacksAll => 'All';
+  String get stacksAll => 'Allemaal';
 
   @override
-  String get stacksFeatured => 'Featured';
+  String get stacksFeatured => 'Uitgelicht';
 
   @override
-  String get stacksMine => 'Yours';
+  String get stacksMine => 'De jouwe';
 
   @override
-  String get stacksSaved => 'Saved';
+  String get stacksSaved => 'Opgeslagen';
 
   @override
-  String get stacksFollowing => 'Following';
+  String get stacksFollowing => 'Volgende';
 
   @override
-  String get stacksEmpty => 'No stacks here yet';
+  String get stacksEmpty => 'Er zijn hier nog geen stapels';
 
   @override
-  String get stacksSignIn => 'Sign in to MangaBaka to see your stacks';
+  String get stacksSignIn =>
+      'Meld u aan bij MangaBaka om uw stapels te bekijken';
 
   @override
   String get stacksScopeNeeded =>
-      'Your stacks need a new permission. Sign in to MangaBaka again to allow it.';
+      'Je stapels hebben een nieuwe toestemming nodig. Meld u opnieuw aan bij MangaBaka om dit toe te staan.';
 
   @override
-  String get stacksSignInAgain => 'Sign in again';
+  String get stacksSignInAgain => 'Meld u opnieuw aan';
 
   @override
-  String get stacksCouldntLoad => 'Couldn\'t load the stacks';
+  String get stacksCouldntLoad => 'Kan de stapels niet laden';
 
   @override
   String stackSeriesCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count series',
-      one: '1 series',
+      other: '$count serie',
+      one: '1 serie',
     );
     return '$_temp0';
   }
@@ -1228,48 +1235,48 @@ class AppLocalizationsNl extends AppLocalizations {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count saves',
-      one: '1 save',
+      other: '',
+      one: '1 opslaan',
     );
     return '$_temp0';
   }
 
   @override
   String stackBy(String name) {
-    return 'by $name';
+    return 'door $name';
   }
 
   @override
   String get stackSpoilers => 'Spoilers';
 
   @override
-  String get stackEmptyEntries => 'This stack is empty';
+  String get stackEmptyEntries => 'Deze stapel is leeg';
 
   @override
-  String get stackSave => 'Save stack';
+  String get stackSave => 'Stapel opslaan';
 
   @override
-  String get stackUnsave => 'Remove from saved';
+  String get stackUnsave => 'Verwijderen uit opgeslagen';
 
   @override
-  String get stackSavedToast => 'Saved to your stacks';
+  String get stackSavedToast => 'Opgeslagen in uw stapels';
 
   @override
-  String get stackRemovedToast => 'Removed from your saved stacks';
+  String get stackRemovedToast => 'Verwijderd uit uw opgeslagen stapels';
 
   @override
   String userStacks(String name) {
-    return 'Stacks by $name';
+    return 'Stapels van $name';
   }
 
   @override
-  String get newsTitle => 'News';
+  String get newsTitle => 'Nieuws';
 
   @override
-  String get newsEmpty => 'No news right now';
+  String get newsEmpty => 'Er is momenteel geen nieuws';
 
   @override
-  String get newsCouldntLoad => 'Couldn\'t load the news';
+  String get newsCouldntLoad => 'Kan het nieuws niet laden';
 
   @override
   String get logFileCopied => 'Logpad gekopieerd';
@@ -1303,11 +1310,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Kleuren volgen de achtergrond, en op detailpagina\'s de cover';
 
   @override
-  String get followCoverMediaOnly => 'Only for media';
+  String get followCoverMediaOnly => 'Alleen voor media';
 
   @override
   String get followCoverMediaOnlyDesc =>
-      'Only follow the cover on media pages, everywhere else keeps the normal colors';
+      'Volg alleen de omslag op mediapagina\'s, overal blijven de normale kleuren behouden';
 
   @override
   String get cardStyle => 'Kaartstijl';
@@ -1344,7 +1351,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get defaultFont => 'Standaard';
 
   @override
-  String get materialYou => 'Material You';
+  String get materialYou => 'Materiaal jij';
 
   @override
   String get materialYouDesc => 'Dynamische kleur van het systeem';
@@ -1398,13 +1405,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get preRelease => 'Pre-release';
 
   @override
-  String get alpha => 'Alpha';
+  String get alpha => 'Alfa';
 
   @override
   String get checkNow => 'Nu controleren';
 
   @override
-  String get userAgent => 'User-Agent';
+  String get userAgent => 'Gebruiker-agent';
 
   @override
   String get settingDefault => 'Standaard';
@@ -1424,10 +1431,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get proxy => 'Proxy';
 
   @override
-  String get proxyProtocol => 'Type';
+  String get proxyProtocol => 'Typ';
 
   @override
-  String get proxyHost => 'Host';
+  String get proxyHost => 'Gastheer';
 
   @override
   String get proxyPort => 'Poort';
@@ -1482,13 +1489,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get imageActionFailed => 'Kon de afbeelding niet downloaden';
 
   @override
-  String get imageTitleCover => 'Cover';
+  String get imageTitleCover => 'Deksel';
 
   @override
-  String get imageTitlePage => 'Page';
+  String get imageTitlePage => 'Pagina';
 
   @override
-  String get imageTitleBanner => 'Banner';
+  String get imageTitleBanner => 'Banier';
 
   @override
   String get imageTitleAvatar => 'Profielfoto';
@@ -1517,16 +1524,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get discordDesc => 'Community en support';
 
   @override
-  String get supportDeveloper => 'Support the developer';
+  String get supportDeveloper => 'Ondersteun de ontwikkelaar';
 
   @override
-  String get buyMeCoffee => 'Buy me a coffee';
+  String get buyMeCoffee => 'Koop een koffie voor mij';
 
   @override
-  String get upiId => 'UPI ID';
+  String get upiId => 'UPI-ID';
 
   @override
-  String get upiCopied => 'UPI ID copied';
+  String get upiCopied => 'UPI-ID gekopieerd';
 
   @override
   String get donateDesc => 'Steun de ontwikkeling';
@@ -1541,7 +1548,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get contributorsLoadFailed => 'Kon de bijdragers niet laden';
 
   @override
-  String get forks => 'Forks';
+  String get forks => 'Vorken';
 
   @override
   String get forksDesc => 'Projecten gebouwd op Dartotsu';
@@ -1559,7 +1566,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sectionStyle => 'Stijl';
 
   @override
-  String get sectionCommunity => 'Community';
+  String get sectionCommunity => 'Gemeenschap';
 
   @override
   String get sectionAppInfo => 'App-info';
@@ -1581,7 +1588,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get onboardingLanguageBody =>
-      'Choose the language Dartotsu is shown in. You can change it later in Settings.';
+      'Kies de taal waarin Dartotsu wordt weergegeven. Je kunt dit later wijzigen in Instellingen.';
 
   @override
   String get onboardingPaletteTitle => 'Maak het van jou';
@@ -1591,7 +1598,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Kies een palet. Elk accent, van kaarten tot de speler, volgt dit.';
 
   @override
-  String get themeModeAuto => 'Auto';
+  String get themeModeAuto => 'Automatisch';
 
   @override
   String get themeModeLight => 'Licht';
@@ -1653,7 +1660,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get linkOpenInAppDesc => 'Laat AniList- en repo-links de app openen';
 
   @override
-  String get reviewsTitle => 'Reviews';
+  String get reviewsTitle => 'Recensies';
 
   @override
   String get reviewsEmpty => 'Nog geen reviews';
@@ -1686,24 +1693,24 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String calendarChapter(int n) {
-    return 'Chapter $n';
+    return 'Hoofdstuk $n';
   }
 
   @override
-  String get calendarExpected => 'Expected';
+  String get calendarExpected => 'Verwacht';
 
   @override
-  String get castReceiverFailed => 'The Chromecast did not start its player';
+  String get castReceiverFailed => 'De Chromecast startte zijn speler niet';
 
   @override
-  String get castPlaybackFailed => 'The device could not play this stream';
+  String get castPlaybackFailed => 'Het apparaat kan deze stream niet afspelen';
 
   @override
-  String get shortcutNothingToContinue => 'Nothing to continue yet';
+  String get shortcutNothingToContinue => 'Er is nog niets om verder te gaan';
 
   @override
   String shortcutNoCalendar(String service) {
-    return '$service has no calendar';
+    return '$service heeft geen kalender';
   }
 
   @override
@@ -1729,7 +1736,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get linkSettingsFailed => 'Kon de systeeminstellingen niet openen';
 
   @override
-  String get discordRichPresence => 'Rich Presence';
+  String get discordRichPresence => 'Rijke aanwezigheid';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1799,7 +1806,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get listSort => 'Sorteren';
 
   @override
-  String get listFilter => 'Filter';
+  String get listFilter => 'Filteren';
 
   @override
   String get listRandom => 'Willekeurige titel';
@@ -1863,7 +1870,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord-token verwijderd';
 
   @override
-  String get discordRichPresenceRow => 'Discord Rich Presence';
+  String get discordRichPresenceRow => 'Onenigheid Rijke aanwezigheid';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -1907,82 +1914,82 @@ class AppLocalizationsNl extends AppLocalizations {
   String get mangaBakaLoginFailed => 'Inloggen bij MangaBaka mislukt';
 
   @override
-  String get comickLoginFailed => 'Comick login failed';
+  String get comickLoginFailed => 'Comick-aanmelding mislukt';
 
   @override
-  String get tagline => 'Tagline';
+  String get tagline => 'Slogan';
 
   @override
-  String get trending => 'Trending';
+  String get trending => 'Populair';
 
   @override
-  String get anticipated => 'Anticipated';
+  String get anticipated => 'Verwacht';
 
   @override
-  String get watchlist => 'Watchlist';
+  String get watchlist => 'Volglijst';
 
   @override
-  String get recommendedShows => 'Recommended Shows';
+  String get recommendedShows => 'Aanbevolen shows';
 
   @override
-  String get recommendedMovies => 'Recommended Movies';
+  String get recommendedMovies => 'Aanbevolen films';
 
   @override
-  String get boxOffice => 'Box Office';
+  String get boxOffice => 'Kassa';
 
   @override
-  String get popularMovies => 'Popular Movies';
+  String get popularMovies => 'Populaire films';
 
   @override
-  String get popularShows => 'Popular Shows';
+  String get popularShows => 'Populaire programma\'s';
 
   @override
-  String get anticipatedMovies => 'Anticipated Movies';
+  String get anticipatedMovies => 'Verwachte films';
 
   @override
-  String get anticipatedShows => 'Anticipated Shows';
+  String get anticipatedShows => 'Verwachte shows';
 
   @override
-  String get trendingShows => 'Trending Shows';
+  String get trendingShows => 'Populaire programma\'s';
 
   @override
-  String get mostWatchedThisWeek => 'Most Watched This Week';
+  String get mostWatchedThisWeek => 'Meest bekeken deze week';
 
   @override
-  String get sortMostViewed => 'Most viewed';
+  String get sortMostViewed => 'Meest bekeken';
 
   @override
-  String get sortMostFollowed => 'Most followed';
+  String get sortMostFollowed => 'De meesten volgden';
 
   @override
-  String get sortLatestUpdates => 'Latest updates';
+  String get sortLatestUpdates => 'Laatste updates';
 
   @override
-  String get translationStatusLabel => 'Translation';
+  String get translationStatusLabel => 'Vertaling';
 
   @override
-  String get weeklySchedule => 'Weekly Schedule';
+  String get weeklySchedule => 'Wekelijks schema';
 
   @override
-  String get mostFollowed => 'Most Followed';
+  String get mostFollowed => 'Meest gevolgd';
 
   @override
-  String get latestUpdates => 'Latest Updates';
+  String get latestUpdates => 'Laatste updates';
 
   @override
-  String get trendingAnime => 'Trending Anime';
+  String get trendingAnime => 'Populaire anime';
 
   @override
-  String get topRatedAnime => 'Top Rated Anime';
+  String get topRatedAnime => 'Best beoordeelde anime';
 
   @override
-  String get mostFollowedAnime => 'Most Followed Anime';
+  String get mostFollowedAnime => 'Meest gevolgde anime';
 
   @override
-  String get comickProfile => 'Comick profile';
+  String get comickProfile => 'Comick-profiel';
 
   @override
-  String get refreshFromComick => 'Refresh from Comick';
+  String get refreshFromComick => 'Vernieuwen vanuit Comick';
 
   @override
   String get mangaBakaProfile => 'MangaBaka-profiel';
@@ -1991,22 +1998,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get refreshFromMangaBaka => 'Verversen vanuit MangaBaka';
 
   @override
-  String get mangaUpdatesLoginTitle => 'Sign in to MangaUpdates';
+  String get mangaUpdatesLoginTitle => 'Meld u aan bij MangaUpdates';
 
   @override
-  String get mangaUpdatesProfile => 'MangaUpdates profile';
+  String get mangaUpdatesProfile => 'MangaUpdates-profiel';
 
   @override
-  String get mangaUpdatesAnimeStart => 'Anime adaptation starts';
+  String get mangaUpdatesAnimeStart => 'Anime-aanpassing begint';
 
   @override
-  String get mangaUpdatesAnimeEnd => 'Anime adaptation ends';
+  String get mangaUpdatesAnimeEnd => 'De anime-aanpassing eindigt';
 
   @override
-  String get refreshFromMangaUpdates => 'Refresh from MangaUpdates';
+  String get refreshFromMangaUpdates => 'Vernieuwen vanuit MangaUpdates';
 
   @override
-  String get usernameOnly => 'Username';
+  String get usernameOnly => 'Gebruikersnaam';
 
   @override
   String get releases => 'Releases';
@@ -2040,7 +2047,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get hideNsfwSourcesDesc =>
-      'Hide sources marked 18+ from the feeds and the source picker. They stay installed.';
+      'Verberg bronnen gemarkeerd als 18+ in de feeds en de bronkiezer. Ze blijven geïnstalleerd.';
 
   @override
   String get hideNsfwDesc =>
@@ -2053,13 +2060,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka-accountopties';
 
   @override
-  String get comickAccountOptions => 'Comick account options';
+  String get comickAccountOptions => 'Comick-accountopties';
 
   @override
-  String get comickClientId => 'Comick Client ID';
+  String get comickClientId => 'Comick-client-ID';
 
   @override
-  String get comickClientIdDesc => 'Custom client ID registered on comick.dev';
+  String get comickClientIdDesc =>
+      'Aangepaste client-ID geregistreerd op comick.dev';
 
   @override
   String get traktClientId => 'Trakt Client ID';
@@ -2133,7 +2141,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get accountType => 'Accounttype';
 
   @override
-  String get accountSupporter => 'Supporter';
+  String get accountSupporter => 'Ondersteuner';
 
   @override
   String get accountFree => 'Gratis';
@@ -2148,7 +2156,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get simklReadOnly => 'Simkl heeft alleen-lezen toegang gegeven';
 
   @override
-  String get traktReadOnly => 'Trakt granted read-only access';
+  String get traktReadOnly => 'Trakt verleende alleen-lezen toegang';
 
   @override
   String get incognitoEditsBlocked =>
@@ -2177,10 +2185,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get following => 'Volgend';
 
   @override
-  String get followsMutual => 'Mutual';
+  String get followsMutual => 'Wederzijds';
 
   @override
-  String get followsNotMutual => 'Not mutual';
+  String get followsNotMutual => 'Niet wederzijds';
 
   @override
   String get homeSections => 'Homesecties';
@@ -2205,7 +2213,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get addList => 'Lijst toevoegen';
 
   @override
-  String get voiceActors => 'Voice actors';
+  String get voiceActors => 'Stemacteurs';
 
   @override
   String voiceActorsIn(String name) {
@@ -2237,10 +2245,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get prequelSequel => 'Prequel & sequel';
 
   @override
-  String get prequel => 'Prequel';
+  String get prequel => 'Voorloper';
 
   @override
-  String get sequel => 'Sequel';
+  String get sequel => 'Vervolg';
 
   @override
   String get previousSeason => 'Vorig seizoen';
@@ -2276,13 +2284,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get simklProfile => 'Simkl-profiel';
 
   @override
-  String get traktProfile => 'Trakt profile';
+  String get traktProfile => 'Trakt-profiel';
 
   @override
   String get refreshFromSimkl => 'Verversen vanuit Simkl';
 
   @override
-  String get refreshFromTrakt => 'Refresh from Trakt';
+  String get refreshFromTrakt => 'Vernieuwen vanuit Trakt';
 
   @override
   String get repullProfileLibrary =>
@@ -2299,22 +2307,22 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get traktAttribution =>
-      'Data and artwork provided by Trakt. View on Trakt';
+      'Gegevens en illustraties geleverd door Trakt. Bekijk op Trakt';
 
   @override
-  String get listsLiked => 'Liked';
+  String get listsLiked => 'Vond ik leuk';
 
   @override
-  String get listsYours => 'Yours';
+  String get listsYours => 'De jouwe';
 
   @override
   String get traktVip => 'VIP';
 
   @override
-  String get traktVipMember => 'Trakt VIP Member';
+  String get traktVipMember => 'Trakt VIP-lid';
 
   @override
-  String get onHold => 'On hold';
+  String get onHold => 'In de wacht';
 
   @override
   String get scoredBy => 'Beoordeeld door';
@@ -2338,11 +2346,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get moviesAndSeries => 'Films & series';
 
   @override
-  String get simklMoviesOnly => 'Movies & series only';
+  String get simklMoviesOnly => 'Alleen films en series';
 
   @override
   String get simklMoviesOnlyDesc =>
-      'Replaces the Anime tab: Movies first, then Shows with a couple of anime rows';
+      'Vervangt het tabblad Anime: eerst Films en vervolgens Shows met een paar anime-rijen';
 
   @override
   String get trackingOnly => 'Alleen tracken';
@@ -2372,10 +2380,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get addToList => 'Aan lijst toevoegen';
 
   @override
-  String get trailer => 'Trailer';
+  String get trailer => 'Aanhangwagen';
 
   @override
-  String get trailerQuality => 'Trailer quality';
+  String get trailerQuality => 'Trailerkwaliteit';
 
   @override
   String get titleCopied => 'Titel gekopieerd';
@@ -2391,7 +2399,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get detailStale =>
-      'AniList could not be reached. This is saved information and may be outdated.';
+      'AniList kan niet worden bereikt. Dit is opgeslagen informatie en kan verouderd zijn.';
 
   @override
   String get copyLink => 'Link kopiëren';
@@ -2432,48 +2440,48 @@ class AppLocalizationsNl extends AppLocalizations {
   String get popular => 'Populair';
 
   @override
-  String get allCustomLists => 'All custom lists';
+  String get allCustomLists => 'Alle aangepaste lijsten';
 
   @override
-  String get simklTitleLanguage => 'Anime title language';
+  String get simklTitleLanguage => 'Anime-titeltaal';
 
   @override
-  String get titleLanguageEnglish => 'English';
+  String get titleLanguageEnglish => 'Engels';
 
   @override
   String get titleLanguageRomaji => 'Romaji';
 
   @override
-  String get simklListsTrending => 'Trending';
+  String get simklListsTrending => 'Populair';
 
   @override
-  String get simklListsMostLiked => 'Most liked';
+  String get simklListsMostLiked => 'Meest geliefd';
 
   @override
-  String get simklListsMostFollowed => 'Most followed';
+  String get simklListsMostFollowed => 'De meesten volgden';
 
   @override
-  String get simklListsOfficial => 'Official';
+  String get simklListsOfficial => 'Officieel';
 
   @override
   String simklListTitles(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
+      other: '$count titels',
+      one: '1 titel',
     );
     return '$_temp0';
   }
 
   @override
-  String get people => 'People';
+  String get people => 'Mensen';
 
   @override
-  String get mostComments => 'Most comments';
+  String get mostComments => 'De meeste reacties';
 
   @override
-  String get alphabetical => 'Alphabetical';
+  String get alphabetical => 'Alfabetisch';
 
   @override
   String get latest => 'Nieuwste';
@@ -2574,10 +2582,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get listOnly => 'Alleen lijst';
 
   @override
-  String get notInList => 'Not In List';
+  String get notInList => 'Niet in lijst';
 
   @override
-  String get filter => 'Filter';
+  String get filter => 'Filteren';
 
   @override
   String get searchResults => 'Zoekresultaten';
@@ -2691,21 +2699,21 @@ class AppLocalizationsNl extends AppLocalizations {
   String get refresh => 'Verversen';
 
   @override
-  String get animePlanetRank => 'Rank';
+  String get animePlanetRank => 'Rang';
 
   @override
-  String get animePlanetMagazine => 'Magazine';
+  String get animePlanetMagazine => 'Tijdschrift';
 
   @override
-  String get animePlanetRefreshLists => 'Refresh your lists';
+  String get animePlanetRefreshLists => 'Vernieuw uw lijsten';
 
   @override
   String get animePlanetRefreshListsDesc =>
-      'Read your Anime-Planet lists again';
+      'Lees je Anime-Planet-lijsten opnieuw';
 
   @override
   String get animePlanetLocalNote =>
-      'Sign in to save changes to your Anime-Planet account. Until then they stay on this device';
+      'Meld u aan om de wijzigingen in uw Anime-Planet-account op te slaan. Tot die tijd blijven ze op dit apparaat';
 
   @override
   String get share => 'Delen';
@@ -2714,7 +2722,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get characters => 'Personages';
 
   @override
-  String get staff => 'Staff';
+  String get staff => 'Personeel';
 
   @override
   String get readMore => 'Meer lezen';
@@ -2985,7 +2993,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get status => 'Status';
 
   @override
-  String get score => 'Score';
+  String get score => 'Scoren';
 
   @override
   String get started => 'Gestart';
@@ -3167,10 +3175,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'Alleen mensen die je volgt kunnen je berichten sturen';
 
   @override
-  String get sectionServices => 'Services';
+  String get sectionServices => 'Diensten';
 
   @override
-  String get novel => 'Novel';
+  String get novel => 'Roman';
 
   @override
   String labelService(String label) {
@@ -3216,14 +3224,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get readingTabDesc => 'Welke extensies het derde tabblad toont';
 
   @override
-  String get firstTab => 'First tab';
+  String get firstTab => 'Eerste tabblad';
 
   @override
   String get firstTabDesc =>
-      'Which extensions the first tab shows. Pick manga here and novel on the reading tab to drop anime from the bar';
+      'Welke extensies het eerste tabblad toont. Kies hier manga en roman op het leestabblad om anime uit de balk te verwijderen';
 
   @override
-  String get novelExtensions => 'Novel Extensions';
+  String get novelExtensions => 'Nieuwe uitbreidingen';
 
   @override
   String get defaultFeed => 'Standaardfeed';
@@ -3417,16 +3425,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get recommendations => 'Aanbevelingen';
 
   @override
-  String get openings => 'Openings';
+  String get openings => 'Openingen';
 
   @override
-  String get endings => 'Endings';
+  String get endings => 'Einden';
 
   @override
   String get background => 'Achtergrond';
 
   @override
-  String get links => 'Links';
+  String get links => 'Koppelingen';
 
   @override
   String get rank => 'Rang';
@@ -3461,7 +3469,7 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get rating => 'Rating';
+  String get rating => 'Beoordeling';
 
   @override
   String get studio => 'Studio';
@@ -3473,10 +3481,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get season => 'Seizoen';
 
   @override
-  String get year => 'Year';
+  String get year => 'Jaar';
 
   @override
-  String get filterAny => 'Any';
+  String get filterAny => 'Elke';
 
   @override
   String get broadcast => 'Uitzending';
@@ -3491,7 +3499,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get popularity => 'Populariteit';
 
   @override
-  String get community => 'Community';
+  String get community => 'Gemeenschap';
 
   @override
   String get watching => 'Aan het kijken';
@@ -3503,13 +3511,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dropped => 'Gedropt';
 
   @override
-  String get unfinished => 'Unfinished';
+  String get unfinished => 'Onvoltooid';
 
   @override
   String get planned => 'Gepland';
 
   @override
-  String get trailers => 'Trailers';
+  String get trailers => 'Aanhangwagens';
 
   @override
   String get ratings => 'Beoordelingen';
@@ -3542,7 +3550,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get airs => 'Uitzending';
 
   @override
-  String get budget => 'Budget';
+  String get budget => 'Begroting';
 
   @override
   String get revenue => 'Opbrengst';
@@ -3551,7 +3559,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get released => 'Uitgebracht';
 
   @override
-  String get tags => 'Tags';
+  String get tags => 'Labels';
 
   @override
   String get author => 'Auteur';
@@ -3560,13 +3568,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get born => 'Geboren';
 
   @override
-  String get died => 'Died';
+  String get died => 'Overleden';
 
   @override
-  String get birthplace => 'Birthplace';
+  String get birthplace => 'Geboorteplaats';
 
   @override
-  String get department => 'Department';
+  String get department => 'Afdeling';
 
   @override
   String get website => 'Website';
@@ -3581,7 +3589,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get manhua => 'Manhua';
 
   @override
-  String get novels => 'Novels';
+  String get novels => 'Romans';
 
   @override
   String get thisMonth => 'Deze maand';
@@ -3593,16 +3601,16 @@ class AppLocalizationsNl extends AppLocalizations {
   String get shows => 'Series';
 
   @override
-  String get moviesWatched => 'Movies Watched';
+  String get moviesWatched => 'Films bekeken';
 
   @override
-  String get showsWatched => 'Shows Watched';
+  String get showsWatched => 'Programma\'s bekeken';
 
   @override
-  String get moviesCollected => 'Movies Collected';
+  String get moviesCollected => 'Films verzameld';
 
   @override
-  String get showsCollected => 'Shows Collected';
+  String get showsCollected => 'Toont verzameld';
 
   @override
   String get rewatching => 'Opnieuw aan het kijken';
@@ -3635,7 +3643,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get cancelled => 'Geannuleerd';
 
   @override
-  String get hiatus => 'Hiatus';
+  String get hiatus => 'Pauze';
 
   @override
   String get remove => 'Verwijderen';
@@ -3666,7 +3674,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Deze titel staat alleen in je lokale lijst op dit apparaat. Bewerken staat hier uit omdat het kan botsen met de lijst van je account; verwijderen kan nog wel.';
 
   @override
-  String get cardPresetPoster => 'Poster';
+  String get cardPresetPoster => 'Affiche';
 
   @override
   String get cardPresetCard => 'Kaart';
@@ -3681,13 +3689,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sortMostPopular => 'Meest populair';
 
   @override
-  String get sortTrending => 'Trending';
+  String get sortTrending => 'Populair';
 
   @override
   String get sortNewest => 'Nieuwste';
 
   @override
-  String get sortAz => 'A–Z';
+  String get sortAz => 'A-Z';
 
   @override
   String get sortMostFavourited => 'Meest favoriet';
@@ -3696,7 +3704,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get anyCountry => 'Elk land';
 
   @override
-  String get orderScore => 'Score';
+  String get orderScore => 'Scoren';
 
   @override
   String get orderTitle => 'Titel';
@@ -3851,7 +3859,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get topOna => 'Top ONA';
 
   @override
-  String get topOva => 'Top OVA';
+  String get topOva => 'Top-OVA';
 
   @override
   String get mostPopular => 'Meest populair';
@@ -3906,7 +3914,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String repoLinkConfirm(String url) {
-    return 'Add this repository?\n\n$url\n\nOnly add repositories from sources you trust.';
+    return 'Deze repository toevoegen?\n\n$url\n\nVoeg alleen opslagplaatsen toe van bronnen die u vertrouwt.';
   }
 
   @override
@@ -4072,7 +4080,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get profile => 'Profiel';
 
   @override
-  String get feed => 'Feed';
+  String get feed => 'Voer';
 
   @override
   String get stats => 'Statistieken';
@@ -4093,7 +4101,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get couldntLoadAllDetails => 'Kon niet alle details laden';
 
   @override
-  String get series => 'Series';
+  String get series => 'Serie';
 
   @override
   String get studios => 'Studio\'s';
@@ -4256,42 +4264,42 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String syncServiceOn(String name) {
-    return 'Sync with $name';
+    return 'Synchroniseren met $name';
   }
 
   @override
-  String get syncDelete => 'Delete what the main service doesn\'t have';
+  String get syncDelete => 'Verwijder wat de hoofdservice niet heeft';
 
   @override
   String get syncDeleteDesc =>
-      'Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay';
+      'Verwijder vermeldingen uit de andere services die niet op de hoofdlijst staan. Alleen vermeldingen die aan een titel kunnen worden gekoppeld, worden verwijderd, dus zaken als Simkl-films en -series blijven bestaan';
 
   @override
-  String get syncDeleteTitle => 'Delete entries?';
+  String get syncDeleteTitle => 'Invoer verwijderen?';
 
   @override
   String syncDeleteConfirm(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries',
-      one: '1 entry',
+      other: '$count vermeldingen',
+      one: '1 invoer',
     );
-    return '$_temp0 that are not on your main list will be deleted from the other services. This cannot be undone.';
+    return '$_temp0 die niet op uw hoofdlijst staan, worden uit de andere services verwijderd. Dit kan niet ongedaan worden gemaakt.';
   }
 
   @override
-  String get syncDeleteAction => 'Delete';
+  String get syncDeleteAction => 'Verwijderen';
 
   @override
-  String get syncToDelete => 'To delete';
+  String get syncToDelete => 'Om te verwijderen';
 
   @override
-  String get syncDeletedNote => 'Will be deleted';
+  String get syncDeletedNote => 'Wordt verwijderd';
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count will be deleted from $name';
+    return '$count wordt verwijderd uit $name';
   }
 
   @override
@@ -4302,52 +4310,52 @@ class AppLocalizationsNl extends AppLocalizations {
       'Verlaag de voortgang niet van een service die al verder is';
 
   @override
-  String get animePlanetWontWatch => 'Won\'t watch';
+  String get animePlanetWontWatch => 'Ik zal niet kijken';
 
   @override
-  String get animePlanetWontRead => 'Won\'t read';
+  String get animePlanetWontRead => 'Zal niet lezen';
 
   @override
-  String get animePlanetAlreadyOnList => 'Already on this list';
+  String get animePlanetAlreadyOnList => 'Staat al op deze lijst';
 
   @override
-  String get animePlanetNewList => 'New list name';
+  String get animePlanetNewList => 'Nieuwe lijstnaam';
 
   @override
-  String get syncPrivate => 'Private entries';
+  String get syncPrivate => 'Privé-inzendingen';
 
   @override
   String get syncPrivateDesc =>
-      'What to do with entries you keep private. A service with a private option gets them private; others would show them publicly';
+      'Wat u moet doen met gegevens die u privé houdt. Een dienst met een privéoptie maakt ze privé; anderen zouden ze publiekelijk laten zien';
 
   @override
-  String get syncPrivateModeAsk => 'Ask';
+  String get syncPrivateModeAsk => 'Vraag';
 
   @override
-  String get syncPrivateModeSync => 'Sync them';
+  String get syncPrivateModeSync => 'Synchroniseer ze';
 
   @override
-  String get syncPrivateModeSkip => 'Skip them';
+  String get syncPrivateModeSkip => 'Sla ze over';
 
   @override
-  String get syncPrivateTitle => 'Private entries';
+  String get syncPrivateTitle => 'Privé-inzendingen';
 
   @override
   String syncPrivateAsk(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count entries are private',
-      one: '1 entry is private',
+      other: '$count-inzendingen zijn privé',
+      one: '1 inzending is privé',
     );
-    return '$_temp0. Services with a private option (AniList, Kitsu, MangaBaka) will get them as private; the other services have no private option and would show them publicly. Sync them? Your answer is remembered; change it under Sync options.';
+    return '$_temp0. Services met een privéoptie (AniList, Kitsu, MangaBaka) krijgen ze als privé; de andere diensten hebben geen privéoptie en zouden deze openbaar tonen. Synchroniseer ze? Uw antwoord wordt onthouden; wijzig dit onder Synchronisatieopties.';
   }
 
   @override
-  String get syncPrivateInclude => 'Sync them';
+  String get syncPrivateInclude => 'Synchroniseer ze';
 
   @override
-  String get syncPrivateSkip => 'Skip them';
+  String get syncPrivateSkip => 'Sla ze over';
 
   @override
   String get syncFetch => 'Ophalen';
@@ -4457,7 +4465,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String syncRemoved(String services) {
-    return 'Removed from $services';
+    return 'Verwijderd uit $services';
   }
 
   @override
@@ -4538,7 +4546,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get syncChangeProgress => 'Voortgang';
 
   @override
-  String get syncChangeScore => 'Score';
+  String get syncChangeScore => 'Scoren';
 
   @override
   String get syncChangeDates => 'Datums';
@@ -4599,7 +4607,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get commentsFilterHint => 'Nummer';
 
   @override
-  String get commentsFilterApply => 'Filter';
+  String get commentsFilterApply => 'Filteren';
 
   @override
   String get commentsFilterClear => 'Alles tonen';
@@ -4616,7 +4624,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get commentsSend => 'Versturen';
 
   @override
-  String get commentsTagButton => 'Tag';
+  String get commentsTagButton => 'Label';
 
   @override
   String commentsTagTitle(String label) {
@@ -4803,7 +4811,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Typ de ISBN die boven de barcode achterop een deel staat.';
 
   @override
-  String get barcodeIsbnHint => 'ISBN';
+  String get barcodeIsbnHint => 'ISBN-nummer';
 
   @override
   String get barcodeInvalid => 'Dat is geen geldige ISBN';
@@ -4818,7 +4826,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'De camera is niet beschikbaar. Geef cameratoegang of typ de ISBN in.';
 
   @override
-  String get themesTitle => 'Openings & endings';
+  String get themesTitle => 'Openingen en eindes';
 
   @override
   String get themesPlayVideo => 'Video afspelen';
@@ -4912,7 +4920,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String sauceSimilarity(String percent) {
-    return '$percent% match';
+    return '$percent% overeenkomst';
   }
 
   @override
@@ -4975,7 +4983,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String imageSearchSimilarity(int percent) {
-    return '$percent% match';
+    return '$percent% overeenkomst';
   }
 
   @override
@@ -5058,7 +5066,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get groupsRules => 'Regels';
 
   @override
-  String get groupsPrivacyOpen => 'Open';
+  String get groupsPrivacyOpen => 'Openen';
 
   @override
   String get groupsPrivacyRestricted => 'Beperkt';
@@ -5070,7 +5078,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get groupsAdult => '18+';
 
   @override
-  String get groupsRoleAdmin => 'Admin';
+  String get groupsRoleAdmin => 'Beheerder';
 
   @override
   String get groupsRoleMod => 'Mod';
@@ -5129,7 +5137,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get notificationsMessages => 'Berichten';
 
   @override
-  String get notificationsLikes => 'Likes';
+  String get notificationsLikes => 'Vind ik leuk';
 
   @override
   String get notificationsFollows => 'Volgers';
@@ -5437,23 +5445,23 @@ class AppLocalizationsNl extends AppLocalizations {
   String get watchSource => 'Bron';
 
   @override
-  String get sourceTags => 'Tags';
+  String get sourceTags => 'Labels';
 
   @override
   String get sourceTagsHint =>
-      'Tag what this source is for. A title lists the sources tagged for it first, then untagged ones. 18+ sources only show for adult titles.';
+      'Tag waar deze bron voor is. Bij een titel worden eerst de bronnen vermeld die ervoor zijn getagd, en vervolgens de niet-getagde bronnen. 18+ bronnen worden alleen weergegeven voor titels voor volwassenen.';
 
   @override
   String get sourceTagAnime => 'Anime';
 
   @override
-  String get sourceTagMovies => 'Movies & Series';
+  String get sourceTagMovies => 'Films en series';
 
   @override
   String get sourceTagAdult => '18+';
 
   @override
-  String get sourceHiddenByTags => 'Hidden by tags';
+  String get sourceHiddenByTags => 'Verborgen door tags';
 
   @override
   String get watchOptions => 'Opties';
@@ -5492,10 +5500,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get watchMarkUnread => 'Markeer als ongelezen';
 
   @override
-  String get watchFiller => 'Filler';
+  String get watchFiller => 'Vuller';
 
   @override
-  String get watchRecap => 'Recap';
+  String get watchRecap => 'Samenvatting';
 
   @override
   String get watchNoEpisodes => 'Geen afleveringen gevonden';
@@ -5576,87 +5584,90 @@ class AppLocalizationsNl extends AppLocalizations {
   String get watchCookiesCleared => 'Cookies gewist';
 
   @override
-  String get watchFailTimeout => 'The check didn\'t finish in time';
+  String get watchFailTimeout => 'De cheque was niet op tijd klaar';
 
   @override
   String get watchFailBlocked =>
-      'The site blocked this device (access denied). A check won\'t help';
+      'De site heeft dit apparaat geblokkeerd (toegang geweigerd). Een cheque helpt niet';
 
   @override
   String get watchFailTurnstile =>
-      'This check needs a tap that the background solver can\'t do';
+      'Voor deze controle is een tik nodig die de achtergrondoplosser niet kan uitvoeren';
 
   @override
   String get watchFailLoad =>
-      'The page didn\'t load. Check the connection and the site address';
+      'De pagina is niet geladen. Controleer de verbinding en het locatieadres';
 
   @override
   String get watchFailRejected =>
-      'The site rejected the clearance it just gave. Try again or clear the cookies';
+      'De site heeft de zojuist gegeven toestemming afgewezen. Probeer het opnieuw of wis de cookies';
 
   @override
-  String get watchFailDismissed => 'The check was closed before it finished';
+  String get watchFailDismissed =>
+      'De cheque werd gesloten voordat deze was afgelopen';
 
   @override
   String get watchFailCooldown =>
-      'You closed the check a moment ago. Press Solve it to try again';
+      'Je hebt zojuist de cheque afgesloten. Druk op Los het op om het opnieuw te proberen';
 
   @override
   String get watchFailQuiet =>
-      'The check needs you, and the app was working on its own';
+      'De cheque heeft je nodig en de app werkte op zichzelf';
 
   @override
-  String get watchFailWebView => 'The background web view couldn\'t start';
+  String get watchFailWebView =>
+      'De webweergave op de achtergrond kan niet starten';
 
   @override
-  String get watchFailUnavailable => 'There is no screen to show the check on';
+  String get watchFailUnavailable =>
+      'Er is geen scherm waarop de cheque wordt weergegeven';
 
   @override
-  String get watchStatusReady => 'Ready';
+  String get watchStatusReady => 'Klaar';
 
   @override
-  String get watchStatusChallenge => 'Cloudflare check needed';
+  String get watchStatusChallenge => 'Cloudflare-controle nodig';
 
   @override
-  String get watchStatusBlocked => 'Blocked by the site';
+  String get watchStatusBlocked => 'Geblokkeerd door de site';
 
   @override
-  String get watchStatusOffline => 'Can\'t reach the site';
+  String get watchStatusOffline => 'Kan de site niet bereiken';
 
   @override
-  String get watchStatusUntested => 'Not tested yet';
+  String get watchStatusUntested => 'Nog niet getest';
 
   @override
-  String get watchStatusTesting => 'Testing the connection…';
+  String get watchStatusTesting => 'De verbinding testen…';
 
   @override
-  String get watchStatusSolving => 'Passing the Cloudflare check…';
+  String get watchStatusSolving => 'De Cloudflare-controle doorstaan…';
 
   @override
   String watchSolvedBackground(int seconds) {
-    return 'Cloudflare check passed in the background ($seconds s)';
+    return 'Cloudflare-controle op de achtergrond geslaagd ($seconds s)';
   }
 
   @override
-  String get watchSolvedByUser => 'Cloudflare check passed';
+  String get watchSolvedByUser => 'Cloudflare-controle geslaagd';
 
   @override
   String watchClearanceIssued(String time) {
-    return 'earned $time';
+    return 'verdiend $time';
   }
 
   @override
   String get watchClearanceStale =>
-      'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one';
+      'De goedkeuring is verdiend met een andere user-agent en wordt dus niet verzonden. Test de verbinding om een nieuwe te krijgen';
 
   @override
-  String get watchSectionConnection => 'Connection';
+  String get watchSectionConnection => 'Verbinding';
 
   @override
-  String get watchSectionSession => 'Session';
+  String get watchSectionSession => 'Sessie';
 
   @override
-  String get watchSectionTools => 'Tools';
+  String get watchSectionTools => 'Gereedschap';
 
   @override
   String get watchMetaSource => 'Afleveringsdetails van';
@@ -5683,10 +5694,10 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerSectionSubtitles => 'Ondertitels';
 
   @override
-  String get playerSectionShaders => 'Shaders';
+  String get playerSectionShaders => 'Schaduwen';
 
   @override
-  String get playerSectionEngine => 'Engine';
+  String get playerSectionEngine => 'Motor';
 
   @override
   String get playerSectionMpv => 'mpv';
@@ -5695,18 +5706,18 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerSpeed => 'Afspeelsnelheid';
 
   @override
-  String get localSource => 'Local files';
+  String get localSource => 'Lokale bestanden';
 
   @override
   String get localMissing =>
-      'This file or folder is no longer in your Local folder';
+      'Dit bestand of deze map bevindt zich niet langer in uw lokale map';
 
   @override
-  String get playerStickyStage => 'Sticky video';
+  String get playerStickyStage => 'Kleverig filmpje';
 
   @override
   String get playerStickyStageDesc =>
-      'Keep the video fixed at the top while you scroll the episodes and comments below';
+      'Houd de video bovenaan vast terwijl je door de afleveringen en reacties hieronder bladert';
 
   @override
   String get playerCursedSpeed => 'Extra snelheden';
@@ -5780,11 +5791,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Spring er meteen overheen zodra het begint, met AniSkip en stream-tijdstempels';
 
   @override
-  String get playerDisableSkips => 'Disable skips';
+  String get playerDisableSkips => 'Overslaan uitschakelen';
 
   @override
   String get playerDisableSkipsDesc =>
-      'No AniSkip or stream timestamps, chapter marks or skip submissions in the player';
+      'Geen AniSkip of stream-tijdstempels, hoofdstukmarkeringen of inzendingen overslaan in de speler';
 
   @override
   String get playerSkipOnce => 'Maar één keer overslaan';
@@ -5852,13 +5863,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerSubtitleOutline => 'Ondertitelcontour';
 
   @override
-  String get playerSubtitleOutlineWidth => 'Subtitle outline width';
+  String get playerSubtitleOutlineWidth => 'Breedte ondertiteling';
 
   @override
-  String get playerSubtitlePreview => 'Subtitle preview';
+  String get playerSubtitlePreview => 'Voorbeeld van ondertiteling';
 
   @override
-  String get playerSubtitlePreviewText => 'Subtitle preview text';
+  String get playerSubtitlePreviewText => 'Voorbeeldtekst ondertiteling';
 
   @override
   String get playerLibass => 'libass gebruiken';
@@ -5868,7 +5879,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Render opgemaakte .ass-ondertitels. De grootte, kleur en lettertype hierboven gelden dan niet meer';
 
   @override
-  String get playerShaders => 'Shaders';
+  String get playerShaders => 'Schaduwen';
 
   @override
   String get playerShadersEnable => 'Shaders inschakelen';
@@ -5891,26 +5902,26 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerShadersDownload => 'Anime4K downloaden';
 
   @override
-  String get playerPictureSave => 'Save this frame';
+  String get playerPictureSave => 'Bewaar dit kader';
 
   @override
-  String get playerPictureOriginal => 'Original';
+  String get playerPictureOriginal => 'Origineel';
 
   @override
   String get playerPictureOriginalDesc =>
-      'The frame as the video has it, without shaders or colors';
+      'Het frame zoals de video het heeft, zonder shaders of kleuren';
 
   @override
-  String get playerPictureProcessed => 'With shaders and colors';
+  String get playerPictureProcessed => 'Met shaders en kleuren';
 
   @override
-  String get playerPictureProcessedDesc => 'The frame as you see it now';
+  String get playerPictureProcessedDesc => 'Het frame zoals je het nu ziet';
 
   @override
-  String get playerPictureSaved => 'Frame saved';
+  String get playerPictureSaved => 'Kader opgeslagen';
 
   @override
-  String get playerPictureSaveFailed => 'Could not save the frame';
+  String get playerPictureSaveFailed => 'Kan het frame niet opslaan';
 
   @override
   String get playerShadersPreview => 'Voorbeeld op dit frame';
@@ -5955,7 +5966,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerColorBrightness => 'Helderheid';
 
   @override
-  String get playerColorContrast => 'Contrast';
+  String get playerColorContrast => 'Contrasterend';
 
   @override
   String get playerColorSaturation => 'Verzadiging';
@@ -5981,14 +5992,14 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get playerShadersSoftware =>
-      'Shaders need hardware rendering, and the player is using software rendering. Turn Software rendering off in Player settings.';
+      'Shaders hebben hardwarerendering nodig en de speler gebruikt softwarerendering. Schakel Softwareweergave uit in de Spelerinstellingen.';
 
   @override
-  String get playerSoftwareRender => 'Software rendering';
+  String get playerSoftwareRender => 'Softwarematige weergave';
 
   @override
   String get playerSoftwareRenderDesc =>
-      'Only for a black video. Shaders don\'t work with it. Applies the next time the player opens';
+      'Alleen voor een zwarte video. Shaders werken er niet mee. Geldt de volgende keer dat de speler wordt geopend';
 
   @override
   String get playerShadersCustomFiles => 'Jouw shaders';
@@ -6010,7 +6021,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerDecoder => 'Decoder';
 
   @override
-  String get playerDecoderAuto => 'Auto';
+  String get playerDecoderAuto => 'Automatisch';
 
   @override
   String get playerDecoderAutoSafe => 'Auto (veilig)';
@@ -6118,7 +6129,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerThreads => 'Decoder-threads';
 
   @override
-  String get playerDeband => 'Deband';
+  String get playerDeband => 'Ontbinden';
 
   @override
   String get playerDebandDesc => 'Verminder kleurbanding in verlopen';
@@ -6213,19 +6224,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get streamGroupSub => 'Sub';
 
   @override
-  String get streamGroupHardSub => 'Hard Sub';
+  String get streamGroupHardSub => 'Harde sub';
 
   @override
-  String get streamGroupSoftSub => 'Soft Sub';
+  String get streamGroupSoftSub => 'Zachte sub';
 
   @override
   String get streamGroupDub => 'Dub';
 
   @override
-  String get streamGroupRaw => 'Raw';
+  String get streamGroupRaw => 'Rauw';
 
   @override
-  String get streamGroupOther => 'Other';
+  String get streamGroupOther => 'Anders';
 
   @override
   String streamsCount(int count) {
@@ -6233,17 +6244,17 @@ class AppLocalizationsNl extends AppLocalizations {
       count,
       locale: localeName,
       other: '$count streams',
-      one: '1 stream',
+      one: '1 stroom',
     );
     return '$_temp0';
   }
 
   @override
-  String get playerStreams => 'Streams';
+  String get playerStreams => 'Stromen';
 
   @override
   String get playerStreamFailedNext =>
-      'That stream won\'t play, trying the next one';
+      'Die stream wil niet spelen. Ik probeer de volgende';
 
   @override
   String get playerAutoSelect => 'Stream automatisch kiezen';
@@ -6308,11 +6319,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get readerFailed => 'Kon dit hoofdstuk niet openen';
 
   @override
-  String get readerOpenBook => 'Open a book';
+  String get readerOpenBook => 'Open een boek';
 
   @override
   String get readerOpenBookDesc =>
-      'Read an epub (novel reader) or a PDF (manga reader) from your files';
+      'Lees een epub (romanlezer) of een pdf (mangalezer) uit uw bestanden';
 
   @override
   String get readerNoText => 'Dit hoofdstuk heeft geen tekst';
@@ -6334,13 +6345,13 @@ class AppLocalizationsNl extends AppLocalizations {
   String get readerSectionDisplay => 'Weergave';
 
   @override
-  String get readerSectionNovel => 'Novel';
+  String get readerSectionNovel => 'Roman';
 
   @override
   String get readerMode => 'Leesmodus';
 
   @override
-  String get readerModeAuto => 'Auto (by series type)';
+  String get readerModeAuto => 'Automatisch (op serietype)';
 
   @override
   String get readerModeRtl => 'Van rechts naar links';
@@ -6475,22 +6486,22 @@ class AppLocalizationsNl extends AppLocalizations {
   String get readerFilterSepia => 'Sepia';
 
   @override
-  String get readerFilterQuality => 'Image filter quality';
+  String get readerFilterQuality => 'Kwaliteit van beeldfilter';
 
   @override
-  String get readerFilterQualityNone => 'None (Nearest neighbor)';
+  String get readerFilterQualityNone => 'Geen (dichtstbijzijnde buur)';
 
   @override
-  String get readerFilterQualityLow => 'Low (Bilinear)';
+  String get readerFilterQualityLow => 'Laag (bilineair)';
 
   @override
-  String get readerFilterQualityMedium => 'Medium (Trilinear)';
+  String get readerFilterQualityMedium => 'Medium (trilineair)';
 
   @override
-  String get readerFilterQualityHigh => 'High (Bicubic)';
+  String get readerFilterQualityHigh => 'Hoog (bicubisch)';
 
   @override
-  String get readerFilterQualityLanczos => 'Lanczos (Rust high quality)';
+  String get readerFilterQualityLanczos => 'Lanczos (roest hoge kwaliteit)';
 
   @override
   String get readerDim => 'Dimmen';
@@ -6518,11 +6529,11 @@ class AppLocalizationsNl extends AppLocalizations {
       'Snijd lege witte of zwarte marges van pagina\'s af';
 
   @override
-  String get readerLongPressSave => 'Hold a page to save it';
+  String get readerLongPressSave => 'Houd een pagina vast om deze op te slaan';
 
   @override
   String get readerLongPressSaveDesc =>
-      'Long press a page to open save, share and copy options';
+      'Druk lang op een pagina om de opties voor opslaan, delen en kopiëren te openen';
 
   @override
   String get readerVolumeKeys => 'Volumetoetsen slaan pagina\'s om';
@@ -6594,7 +6605,8 @@ class AppLocalizationsNl extends AppLocalizations {
   String get readerResetDesc => 'Terug naar de standaard';
 
   @override
-  String get readerResetConfirm => 'Reset every reader setting to its default?';
+  String get readerResetConfirm =>
+      'Elke lezerinstelling resetten naar de standaardwaarde?';
 
   @override
   String get novelSize => 'Tekstgrootte';
@@ -6650,87 +6662,87 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String trackProgressAnimeLocal(String name) {
-    return 'Save your progress on $name to your list on this device as you watch?';
+    return 'Je voortgang op $name opslaan in je lijst op dit apparaat terwijl je kijkt?';
   }
 
   @override
   String trackProgressMangaLocal(String name) {
-    return 'Save your progress on $name to your list on this device when you finish a chapter?';
+    return 'Je voortgang op $name opslaan in je lijst op dit apparaat als je een hoofdstuk voltooit?';
   }
 
   @override
-  String get downloadClearQueue => 'Clear queue';
+  String get downloadClearQueue => 'Wachtrij wissen';
 
   @override
   String downloadClearQueueConfirm(int count) {
-    return 'Cancel all $count downloads in the queue? What was already downloaded is deleted.';
+    return 'Alle $count downloads in de wachtrij annuleren? Wat al is gedownload, wordt verwijderd.';
   }
 
   @override
   String downloadSelectedCount(int count) {
-    return '$count selected';
+    return '$count geselecteerd';
   }
 
   @override
-  String get downloadSelectAll => 'Select all';
+  String get downloadSelectAll => 'Selecteer alles';
 
   @override
-  String get downloadDeleteSelected => 'Delete selected';
+  String get downloadDeleteSelected => 'Geselecteerde verwijderen';
 
   @override
   String downloadDeleteSelectedConfirm(int count) {
-    return 'Delete $count downloads? Their files are removed from the device.';
+    return '$count downloads verwijderen? Hun bestanden worden van het apparaat verwijderd.';
   }
 
   @override
-  String get castTitle => 'Cast to device';
+  String get castTitle => 'Casten naar apparaat';
 
   @override
-  String get castSearching => 'Looking for devices on your network…';
+  String get castSearching => 'Zoeken naar apparaten in uw netwerk...';
 
   @override
   String get castNoDevices =>
-      'No devices found. Make sure the TV or Chromecast is on the same Wi-Fi, then search again.';
+      'Geen apparaten gevonden. Zorg ervoor dat de tv of Chromecast verbinding heeft met hetzelfde wifi-netwerk en zoek vervolgens opnieuw.';
 
   @override
-  String get castRefresh => 'Search again';
+  String get castRefresh => 'Zoek opnieuw';
 
   @override
-  String get castFailed => 'Could not start casting';
+  String get castFailed => 'Kan niet beginnen met casten';
 
   @override
-  String get castStop => 'Stop casting';
+  String get castStop => 'Stop met casten';
 
   @override
   String castNowCasting(String name) {
-    return 'Casting to $name';
+    return 'Casten naar $name';
   }
 
   @override
   String get castProtocolChromecast => 'Chromecast';
 
   @override
-  String get castProtocolDlna => 'DLNA / Smart TV';
+  String get castProtocolDlna => 'DLNA / Smart-TV';
 
   @override
   String get castProtocolRoku => 'Roku';
 
   @override
-  String get castRokuNote => 'Roku can\'t report or change the position';
+  String get castRokuNote => 'Roku kan de positie niet rapporteren of wijzigen';
 
   @override
-  String get castControls => 'Controls';
+  String get castControls => 'Controles';
 
   @override
-  String get castVolume => 'TV volume';
+  String get castVolume => 'TV-volume';
 
   @override
   String castSkipPart(String name) {
-    return 'Skip $name';
+    return 'Sla $name over';
   }
 
   @override
-  String get trackProgressRememberSeries => 'Remember for this series';
+  String get trackProgressRememberSeries => 'Onthoud voor deze serie';
 
   @override
   String get trackProgressYes => 'Opslaan';
@@ -6786,7 +6798,7 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get dantotsuGroupAccounts => 'Accounts';
+  String get dantotsuGroupAccounts => 'Rekeningen';
 
   @override
   String get dantotsuGroupAppearance => 'Uiterlijk';
@@ -6813,7 +6825,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dantotsuTheme => 'Thema';
 
   @override
-  String get themePickerTitle => 'Theme';
+  String get themePickerTitle => 'Thema';
 
   @override
   String get dantotsuReposAnime => 'Repositories voor anime-extensies';
@@ -6875,11 +6887,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String togetherLinkConfirm(String room) {
-    return 'Join the room $room? The host chooses what plays and the player opens by itself when they start watching.';
+    return 'Sluit je aan bij de kamer $room? De host kiest wat er wordt afgespeeld en de speler opent vanzelf wanneer hij begint te kijken.';
   }
 
   @override
-  String get togetherJoin => 'Join';
+  String get togetherJoin => 'Doe mee';
 
   @override
   String get togetherName => 'Jouw naam';
@@ -6903,11 +6915,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get togetherCopyInvite => 'Uitnodiging kopiëren';
 
   @override
-  String get togetherShareInvite => 'Share invite';
+  String get togetherShareInvite => 'Deel uitnodiging';
 
   @override
   String togetherShareText(String link) {
-    return 'Watch with me on Dartotsu: $link';
+    return 'Kijk met mij mee op Dartotsu: $link';
   }
 
   @override
@@ -7064,71 +7076,71 @@ class AppLocalizationsNl extends AppLocalizations {
       'Tik links of rechts om een pagina te scrollen, het midden toont de bediening';
 
   @override
-  String get novelPaged => 'Page turning';
+  String get novelPaged => 'Pagina draaien';
 
   @override
   String get novelPagedDesc =>
-      'Split the chapter into pages and swipe or tap to turn them instead of scrolling';
+      'Splits het hoofdstuk in pagina\'s en veeg of tik om ze om te slaan in plaats van te scrollen';
 
   @override
   String novelPageOf(int current, int total) {
-    return 'Page $current of $total';
+    return 'Pagina $current van $total';
   }
 
   @override
-  String get novelPaginating => 'Laying out pages';
+  String get novelPaginating => 'Pagina\'s opmaken';
 
   @override
-  String get novelTools => 'Contents, search and highlights';
+  String get novelTools => 'Inhoud, zoeken en hoogtepunten';
 
   @override
-  String get novelContents => 'Contents';
+  String get novelContents => 'Inhoud';
 
   @override
-  String get novelContentsEmpty => 'This chapter has no headings';
+  String get novelContentsEmpty => 'Dit hoofdstuk heeft geen kopjes';
 
   @override
-  String get novelSearch => 'Search';
+  String get novelSearch => 'Zoeken';
 
   @override
-  String get novelSearchHint => 'Search in this chapter';
+  String get novelSearchHint => 'Zoek in dit hoofdstuk';
 
   @override
-  String get novelSearchNone => 'No matches';
+  String get novelSearchNone => 'Geen overeenkomsten';
 
   @override
   String novelSearchCount(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count matches',
-      one: '1 match',
+      other: '$count komt overeen',
+      one: '1 wedstrijd',
     );
     return '$_temp0';
   }
 
   @override
-  String get novelHighlights => 'Highlights';
+  String get novelHighlights => 'Hoogtepunten';
 
   @override
   String get novelHighlightsEmpty =>
-      'Select some text and tap Highlight to keep it here';
+      'Selecteer wat tekst en tik op Markeren om deze hier te houden';
 
   @override
-  String get novelHighlight => 'Highlight';
+  String get novelHighlight => 'Hoogtepunt';
 
   @override
-  String get novelHighlightNote => 'Note';
+  String get novelHighlightNote => 'Let op';
 
   @override
-  String get novelHighlightNoteHint => 'Add a note';
+  String get novelHighlightNoteHint => 'Voeg een notitie toe';
 
   @override
-  String get novelHighlightRemove => 'Remove highlight';
+  String get novelHighlightRemove => 'Hoogtepunt verwijderen';
 
   @override
   String get novelHighlightFailed =>
-      'Couldn\'t match that selection to the text';
+      'Kan die selectie niet aan de tekst koppelen';
 
   @override
   String novelMinutesLeft(int count) {
@@ -7193,39 +7205,39 @@ class AppLocalizationsNl extends AppLocalizations {
   String get playerChapters => 'Hoofdstukken';
 
   @override
-  String get playerSkipSubmit => 'Submit skip times';
+  String get playerSkipSubmit => 'Overslaantijden indienen';
 
   @override
   String get playerSkipSubmitDesc =>
-      'Mark where the opening, ending or recap starts and ends in this episode and share it with AniSkip, so everyone gets the skip button.';
+      'Markeer waar de opening, het einde of de samenvatting begint en eindigt in deze aflevering en deel dit met AniSkip, zodat iedereen de knop Overslaan krijgt.';
 
   @override
-  String get playerSkipStart => 'Start';
+  String get playerSkipStart => 'Begin';
 
   @override
-  String get playerSkipEnd => 'End';
+  String get playerSkipEnd => 'Einde';
 
   @override
-  String get playerSkipUseNow => 'Use current position';
+  String get playerSkipUseNow => 'Gebruik huidige positie';
 
   @override
-  String get playerSkipSend => 'Submit to AniSkip';
+  String get playerSkipSend => 'Verzenden naar AniSkip';
 
   @override
-  String get playerSkipSent => 'Skip times submitted to AniSkip, thank you';
+  String get playerSkipSent => 'Skip-tijden ingediend bij AniSkip, bedankt';
 
   @override
   String playerSkipFailed(String error) {
-    return 'AniSkip refused the skip times: $error';
+    return 'AniSkip weigerde de skip-tijden: $error';
   }
 
   @override
   String get playerUnsupported =>
-      'The video player can\'t run on this device (its Android version is too old for the bundled player library). Tap to copy the details.';
+      'De videospeler kan niet op dit apparaat worden uitgevoerd (de Android-versie is te oud voor de gebundelde spelerbibliotheek). Tik om de details te kopiëren.';
 
   @override
   String get playerSkipNoMal =>
-      'This title has no MyAnimeList id, AniSkip can\'t take it';
+      'Deze titel heeft geen MyAnimeList-ID, AniSkip kan deze niet aan';
 
   @override
   String get playerNoChapters => 'Geen hoofdstukken';
@@ -7275,28 +7287,28 @@ class AppLocalizationsNl extends AppLocalizations {
       'Blijf afspelen in een klein venster als je de app verlaat';
 
   @override
-  String get playerPipPlay => 'Play';
+  String get playerPipPlay => 'Spelen';
 
   @override
-  String get playerPipPause => 'Pause';
+  String get playerPipPause => 'Pauze';
 
   @override
-  String get playerPipBack => 'Rewind';
+  String get playerPipBack => 'Terugspoelen';
 
   @override
-  String get playerPipForward => 'Forward';
+  String get playerPipForward => 'Vooruit';
 
   @override
-  String get playerPipRestore => 'Back to the player';
+  String get playerPipRestore => 'Terug naar de speler';
 
   @override
-  String get playerPipActive => 'Playing in a small window';
+  String get playerPipActive => 'Spelen in een klein venster';
 
   @override
-  String get listDateAdded => 'Added to list';
+  String get listDateAdded => 'Toegevoegd aan lijst';
 
   @override
-  String get listDateLastWatched => 'Last watched';
+  String get listDateLastWatched => 'Laatst bekeken';
 
   @override
   String playerAutoPlaying(String title) {
@@ -7415,19 +7427,19 @@ class AppLocalizationsNl extends AppLocalizations {
   String get downloadsTitle => 'Downloads';
 
   @override
-  String get widgetContinue => 'Continue';
+  String get widgetContinue => 'Ga door';
 
   @override
-  String get widgetReleases => 'Releasing soon';
+  String get widgetReleases => 'Binnenkort vrijgeven';
 
   @override
-  String get widgetMore => 'Also in progress';
+  String get widgetMore => 'Ook in uitvoering';
 
   @override
-  String get widgetNothing => 'Nothing to continue yet';
+  String get widgetNothing => 'Er is nog niets om verder te gaan';
 
   @override
-  String get downloadStorageTitle => 'Storage';
+  String get downloadStorageTitle => 'Opslag';
 
   @override
   String downloadStorageSummary(int count, String size) {
@@ -7435,52 +7447,53 @@ class AppLocalizationsNl extends AppLocalizations {
       count,
       locale: localeName,
       other: '$count downloads',
-      one: '1 download',
+      one: '1 downloaden',
     );
     return '$_temp0 · $size';
   }
 
   @override
   String downloadStorageWatched(String size) {
-    return '$size already watched or read';
+    return '$size al bekeken of gelezen';
   }
 
   @override
-  String get downloadFreeUp => 'Free up space';
+  String get downloadFreeUp => 'Maak ruimte vrij';
 
   @override
   String downloadFreeUpConfirm(int count, String size) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count watched downloads',
-      one: '1 watched download',
+      other: '$count heeft downloads bekeken',
+      one: '1 bekeken downloaden',
     );
-    return 'Delete $_temp0 and free $size?';
+    return 'Verwijderen $_temp0 en gratis $size?';
   }
 
   @override
   String downloadFreed(String size) {
-    return 'Freed $size';
+    return 'Bevrijd $size';
   }
 
   @override
-  String get downloadDeleteWatched => 'Delete watched';
+  String get downloadDeleteWatched => 'Bekeken verwijderen';
 
   @override
-  String get downloadDeleteAll => 'Delete all';
+  String get downloadDeleteAll => 'Alles verwijderen';
 
   @override
   String downloadDeleteAllConfirm(String title) {
-    return 'Delete every download of $title?';
+    return 'Elke download van $title verwijderen?';
   }
 
   @override
   String get downloadNothingWatched =>
-      'Nothing you have finished is downloaded';
+      'Niets dat je hebt voltooid, wordt gedownload';
 
   @override
-  String get downloadStorageEmpty => 'No downloads are using space';
+  String get downloadStorageEmpty =>
+      'Er zijn geen downloads die ruimte gebruiken';
 
   @override
   String get downloadsOpenDesc =>
@@ -7490,14 +7503,14 @@ class AppLocalizationsNl extends AppLocalizations {
   String get downloadTitle => 'Downloaden';
 
   @override
-  String get downloadMetaOnly => 'Metadata only';
+  String get downloadMetaOnly => 'Alleen metadata';
 
   @override
-  String get downloadMetaFailed => 'Couldn\'t create the title folder';
+  String get downloadMetaFailed => 'Kan de titelmap niet maken';
 
   @override
   String downloadMetaSaved(String path) {
-    return 'Saved. Put your files in $path';
+    return 'Opgeslagen. Plaats uw bestanden in $path';
   }
 
   @override
@@ -7530,10 +7543,10 @@ class AppLocalizationsNl extends AppLocalizations {
       'De bron voor deze aflevering is niet geïnstalleerd';
 
   @override
-  String get downloadDashDrm => 'This stream is DRM protected';
+  String get downloadDashDrm => 'Deze stream is DRM-beveiligd';
 
   @override
-  String get downloadDashNoVideo => 'The DASH manifest has no video';
+  String get downloadDashNoVideo => 'Het DASH-manifest bevat geen video';
 
   @override
   String get downloadWaitingConnection => 'Wachten op verbinding';
@@ -7666,7 +7679,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Live voortgang waar het systeem dat ondersteunt, anders een bericht als een download klaar is';
 
   @override
-  String get downloadNotifyLive => 'Live';
+  String get downloadNotifyLive => 'Leef';
 
   @override
   String get downloadNotifyDone => 'Als het klaar is';
@@ -7921,7 +7934,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String downloadSwarm(int seeds, int peers) {
-    return '$seeds seeds · $peers peers';
+    return '$seeds zaden · $peers soortgenoten';
   }
 
   @override
@@ -8026,164 +8039,168 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String sourceNotifyOn(String source) {
-    return 'You\'ll be told when $source has something new';
+    return 'Je krijgt bericht als $source iets nieuws heeft';
   }
 
   @override
-  String get sourceNotifyOff => 'Release notifications off';
+  String get sourceNotifyOff => 'Vrijgavemeldingen uitgeschakeld';
 
   @override
-  String get sourceNotifyNeedsSource => 'Pick a source with a match first';
+  String get sourceNotifyNeedsSource => 'Kies eerst een bron met een match';
 
   @override
   String sourceNotifyAllOut(int count) {
-    return 'Everything ($count) is already out, nothing to wait for';
+    return 'Alles ($count) is al uit, niets om op te wachten';
   }
 
   @override
-  String get sourceNotifyTooltipOn => 'Stop release notifications';
+  String get sourceNotifyTooltipOn => 'Release-meldingen stoppen';
 
   @override
-  String get sourceNotifyTooltipOff => 'Notify me about new releases';
+  String get sourceNotifyTooltipOff =>
+      'Houd mij op de hoogte van nieuwe releases';
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return 'Episode $number is out on $source';
+    return 'Aflevering $number verschijnt op $source';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return 'Episodes $from–$to are out on $source';
+    return 'Afleveringen $from–$to zijn beschikbaar op $source';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'Chapter $number is out on $source';
+    return 'Hoofdstuk $number verschijnt op $source';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'Chapters $from–$to are out on $source';
+    return 'De hoofdstukken $from–$to verschijnen op $source';
   }
 
   @override
   String sourceFoundSummary(int count) {
-    return '$count titles have something new';
+    return '$count titels hebben iets nieuws';
   }
 
   @override
-  String get navSources => 'Sources';
+  String get navSources => 'Bronnen';
 
   @override
   String sourceInactiveOpen(String manager) {
-    return 'This source belongs to $manager, which isn\'t the active extension service';
+    return 'Deze bron behoort tot $manager, wat niet de actieve extensieservice is';
   }
 
   @override
-  String get sourceAlertsHeader => 'Release notifications';
+  String get sourceAlertsHeader => 'Vrijgavemeldingen';
 
   @override
-  String get sourceAlertsSwitch => 'Check subscribed titles';
+  String get sourceAlertsSwitch => 'Controleer geabonneerde titels';
 
   @override
   String get sourceAlertsSwitchDesc =>
-      'Once each time the app opens, for titles you turned the bell on';
+      'Elke keer dat de app wordt geopend, heb je voor titels de bel aangezet';
 
   @override
-  String get sourceSkipUnstarted => 'Skip titles you haven\'t started';
+  String get sourceSkipUnstarted =>
+      'Sla titels over waar u nog niet aan bent begonnen';
 
   @override
   String get sourceSkipUnstartedDesc =>
-      'Nothing watched or read yet, but episodes already exist';
+      'Nog niets bekeken of gelezen, maar er bestaan al afleveringen';
 
   @override
-  String get sourceSkipUnseen => 'Skip while you have unseen episodes';
+  String get sourceSkipUnseen =>
+      'Sla over terwijl je ongeziene afleveringen hebt';
 
   @override
   String get sourceSkipUnseenDesc =>
-      'You still have released episodes to catch up on';
+      'Je hebt nog steeds vrijgegeven afleveringen die je moet inhalen';
 
   @override
-  String get sourceManage => 'Subscriptions';
+  String get sourceManage => 'Abonnementen';
 
   @override
   String sourceManageDesc(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles',
-      one: '1 title',
-      zero: 'No titles',
+      other: '$count titels',
+      one: '1 titel',
+      zero: 'Geen titels',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceCheckNow => 'Check now';
+  String get sourceCheckNow => 'Controleer nu';
 
   @override
-  String get sourceCheckNowDesc => 'Ignores the schedule and the skip rules';
+  String get sourceCheckNowDesc =>
+      'Negeert het schema en de regels voor overslaan';
 
   @override
-  String get sourceChecking => 'Checking…';
+  String get sourceChecking => 'Controleren…';
 
   @override
   String sourceCheckResult(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: '$count titles have something new',
-      one: '1 title has something new',
-      zero: 'Nothing new',
+      other: '$count titels hebben iets nieuws',
+      one: '1 titel heeft iets nieuws',
+      zero: 'Niets nieuws',
     );
     return '$_temp0';
   }
 
   @override
-  String get sourceEmpty => 'No subscriptions yet';
+  String get sourceEmpty => 'Nog geen abonnementen';
 
   @override
   String get sourceEmptyMessage =>
-      'Tap the bell above a title\'s episodes to be told about new ones';
+      'Tik op de bel boven de afleveringen van een titel om op de hoogte te blijven van nieuwe afleveringen';
 
   @override
-  String get sourceAll => 'All';
+  String get sourceAll => 'Allemaal';
 
   @override
   String sourceInactive(String manager) {
-    return 'Inactive: $manager';
+    return 'Inactief: $manager';
   }
 
   @override
   String sourceMissingDesc(String source) {
-    return '$source isn\'t installed in this extension service';
+    return '$source is niet geïnstalleerd in deze extensieservice';
   }
 
   @override
-  String get sourceUnreachable => 'Source isn\'t responding';
+  String get sourceUnreachable => 'Bron reageert niet';
 
   @override
-  String get sourceFinished => 'Finished';
+  String get sourceFinished => 'Klaar';
 
   @override
-  String get sourceSkippedCompleted => 'Skipped: completed';
+  String get sourceSkippedCompleted => 'Overgeslagen: voltooid';
 
   @override
-  String get sourceSkippedUnstarted => 'Skipped: not started';
+  String get sourceSkippedUnstarted => 'Overgeslagen: niet gestart';
 
   @override
-  String get sourceSkippedUnseen => 'Skipped: unseen episodes';
+  String get sourceSkippedUnseen => 'Overgeslagen: ongeziene afleveringen';
 
   @override
-  String get sourceWaiting => 'Waiting for the next release';
+  String get sourceWaiting => 'Wachten op de volgende uitgave';
 
   @override
   String sourceNextCheck(String when) {
-    return 'Next check $when';
+    return 'Volgende controle $when';
   }
 
   @override
-  String get sourceSoon => 'soon';
+  String get sourceSoon => 'binnenkort';
 
   @override
   String sourceInHours(int count) {
@@ -8197,537 +8214,543 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String sourceLatest(String number) {
-    return 'Latest: $number';
+    return 'Laatste: $number';
   }
 
   @override
-  String get sourceMute => 'Mute';
+  String get sourceMute => 'Dempen';
 
   @override
-  String get sourceUnmute => 'Unmute';
+  String get sourceUnmute => 'Dempen opheffen';
 
   @override
-  String get sourceMuted => 'Muted';
+  String get sourceMuted => 'Gedempt';
 
   @override
-  String get sourceUnsubscribe => 'Unsubscribe';
+  String get sourceUnsubscribe => 'Afmelden';
 
   @override
-  String get sourcePickAnother => 'Pick another source';
+  String get sourcePickAnother => 'Kies een andere bron';
 
   @override
-  String get sourceOpenExtensions => 'Open extensions';
+  String get sourceOpenExtensions => 'Extensies openen';
 
   @override
-  String get sourceNoticesEmpty => 'No release notices yet';
+  String get sourceNoticesEmpty => 'Nog geen release-aankondigingen';
 
   @override
   String get sourceNoticesEmptyMessage =>
-      'New episodes and chapters from your subscribed titles show up here';
+      'Nieuwe afleveringen en hoofdstukken van titels waarop je geabonneerd bent, worden hier weergegeven';
 
   @override
-  String get sourceOpenTitle => 'Open title';
+  String get sourceOpenTitle => 'Titel openen';
 
   @override
-  String get extensionsLoading => 'Loading extensions…';
+  String get extensionsLoading => 'Extensies laden…';
 
   @override
-  String get updateWhatsNew => 'What\'s new';
+  String get updateWhatsNew => 'Wat is er nieuw';
 
   @override
   String get updateLater => 'Later';
 
   @override
-  String get updateSkipVersion => 'Skip this version';
+  String get updateSkipVersion => 'Sla deze versie over';
 
   @override
-  String get updatePreparing => 'Preparing…';
+  String get updatePreparing => 'Voorbereiden…';
 
   @override
-  String get updateDownloading => 'Downloading';
+  String get updateDownloading => 'Downloaden';
 
   @override
-  String get updateInstalling => 'Installing…';
+  String get updateInstalling => 'Installeren…';
 
   @override
   String updateSizeOf(String done, String total) {
-    return '$done of $total';
+    return '$done van $total';
   }
 
   @override
   String updateSpeed(String speed) {
-    return '$speed/s';
+    return '$speed/sec';
   }
 
   @override
   String updateReleased(String date) {
-    return 'Released $date';
+    return 'Vrijgegeven $date';
   }
 
   @override
-  String get updateNoAsset => 'This release has no download for your device';
+  String get updateNoAsset =>
+      'Deze release heeft geen download voor uw apparaat';
 
   @override
-  String get updateUpToDate => 'You\'re on the latest version';
+  String get updateUpToDate => 'Je gebruikt de nieuwste versie';
 
   @override
   String get updateIosHint =>
-      'iOS builds aren\'t on the App Store. Grab the .ipa from the release page and sideload it with AltStore or SideStore';
+      'iOS-builds staan niet in de App Store. Pak de .ipa van de releasepagina en sideload deze met AltStore of SideStore';
 
   @override
-  String get updateOpenedBrowser => 'Check your browser';
+  String get updateOpenedBrowser => 'Controleer uw browser';
 
   @override
-  String get updateTryAgain => 'Try again';
+  String get updateTryAgain => 'Probeer het opnieuw';
 
   @override
-  String get settingsNotifications => 'Notifications';
+  String get settingsNotifications => 'Meldingen';
 
   @override
   String get settingsNotificationsDesc =>
-      'Alerts for your lists, new episodes and chapters, and comment replies';
+      'Waarschuwingen voor je lijsten, nieuwe afleveringen en hoofdstukken, en reacties op reacties';
 
   @override
-  String get settingsAboutUpdates => 'About & updates';
+  String get settingsAboutUpdates => 'Over & updates';
 
   @override
   String get settingsAboutUpdatesDesc =>
-      'App updates, version, logs, links and support';
+      'App-updates, versie, logs, links en ondersteuning';
 
   @override
-  String get settingsGroupAccount => 'Your account';
+  String get settingsGroupAccount => 'Jouw rekening';
 
   @override
-  String get settingsGroupContent => 'Content';
+  String get settingsGroupContent => 'Inhoud';
 
   @override
   String get settingsGroupApp => 'App';
 
   @override
   String get settingsAnimeDesc =>
-      'Player, subtitles, skipping, episode list and episode details';
+      'Speler, ondertitels, overslaan, afleveringslijst en afleveringsdetails';
 
   @override
   String get settingsMangaDesc =>
-      'Reader mode, controls, display and chapter tracking';
+      'Lezermodus, bedieningselementen, weergave en hoofdstuktracking';
 
   @override
   String get settingsNovelDesc =>
-      'Text, page turning, translation and read aloud';
+      'Teksten, pagina\'s omslaan, vertalen en voorlezen';
 
   @override
-  String get settingsLocalPlay => 'Local play';
+  String get settingsLocalPlay => 'Lokaal spelen';
 
   @override
   String get settingsLocalPlayDesc =>
-      'Play files, folders, network streams and torrents, or open a book';
+      'Speel bestanden, mappen, netwerkstreams en torrents af of open een boek';
 
   @override
   String get settingsLocalPlayVideo => 'Video';
 
   @override
-  String get settingsLocalPlayBooks => 'Books';
+  String get settingsLocalPlayBooks => 'Boeken';
 
   @override
-  String get settingsWatchSections => 'Sections';
+  String get settingsWatchSections => 'Secties';
 
   @override
-  String get settingsSectionLists => 'Episode and chapter lists';
+  String get settingsSectionLists => 'Afleverings- en hoofdstuklijsten';
 
   @override
-  String get settingsSectionProgress => 'Progress tracking';
+  String get settingsSectionProgress => 'Voortgang volgen';
 
   @override
   String get updateChannelDesc =>
-      'Stable is the tested release. Pre-release and Alpha get new features sooner but may break';
+      'Stabiel is de geteste release. Pre-release en Alpha krijgen eerder nieuwe functies, maar kunnen kapot gaan';
 
   @override
-  String get checkNowDesc => 'Look for a newer version right away';
+  String get checkNowDesc => 'Zoek meteen naar een nieuwere versie';
 
   @override
-  String get generalSectionBasics => 'Language & behaviour';
+  String get generalSectionBasics => 'Taal & gedrag';
 
   @override
-  String get generalSectionSecurity => 'Security';
+  String get generalSectionSecurity => 'Beveiliging';
 
   @override
   String get generalSectionPrivacy => 'Privacy';
 
   @override
   String notificationsOtherService(String service) {
-    return 'Switch to $service to open this';
+    return 'Schakel over naar $service om dit te openen';
   }
 
   @override
   String get secPlayerPlayback =>
-      'Default speed, auto play, video fit, orientation and picture in picture';
+      'Standaardsnelheid, automatisch afspelen, video-fit, oriëntatie en beeld-in-beeld';
 
   @override
-  String get secPlayerSkip => 'Skip openings, endings and recaps automatically';
+  String get secPlayerSkip =>
+      'Sla openingen, eindes en samenvattingen automatisch over';
 
   @override
   String get secPlayerControls =>
-      'Swipe, hold and tap gestures and seek preview';
+      'Veeg, houd vast en tik op gebaren en zoek een voorbeeld';
 
   @override
   String get secPlayerSubtitles =>
-      'Languages, appearance and subtitle rendering';
+      'Talen, uiterlijk en weergave van ondertitels';
 
   @override
-  String get secPlayerShaders => 'Anime upscaling and your own shaders';
+  String get secPlayerShaders => 'Anime-opschaling en je eigen shaders';
 
   @override
   String get secPlayerEngine =>
-      'Decoder, video and audio output, buffering. Only change these if playback has problems';
+      'Decoder, video- en audio-uitgang, buffering. Wijzig deze alleen als er problemen optreden bij het afspelen';
 
   @override
-  String get secPlayerMpv => 'mpv.conf, scripts and advanced tuning';
+  String get secPlayerMpv => 'mpv.conf, scripts en geavanceerde afstemming';
 
   @override
-  String get secAnimeList => 'Filler episodes and unwatched thumbnails';
+  String get secAnimeList => 'Filler-afleveringen en niet-bekeken thumbnails';
 
   @override
   String get secProgress =>
-      'When your watched or read progress is saved to your list';
+      'Wanneer uw bekeken of gelezen voortgang in uw lijst wordt opgeslagen';
 
   @override
   String get secAnimeDetails =>
-      'Where episode titles, thumbnails and summaries come from';
+      'Waar titels, thumbnails en samenvattingen van afleveringen vandaan komen';
 
   @override
   String get secReaderReading =>
-      'Reading mode, page turning, zoom and next chapter';
+      'Leesmodus, pagina\'s omslaan, zoomen en volgend hoofdstuk';
 
   @override
-  String get secReaderControls => 'Tap zones, volume keys and auto scroll';
+  String get secReaderControls =>
+      'Tikzones, volumetoetsen en automatisch scrollen';
 
   @override
   String get secReaderDisplay =>
-      'Background, brightness, fullscreen and page number';
+      'Achtergrond, helderheid, volledig scherm en paginanummer';
 
   @override
-  String get secNovelText => 'Font, size, spacing, margins and page turning';
+  String get secNovelText =>
+      'Lettertype, grootte, spatiëring, marges en pagina\'s omslaan';
 
   @override
-  String get secNovelTranslate => 'Translate chapters while you read';
+  String get secNovelTranslate => 'Vertaal hoofdstukken terwijl u leest';
 
   @override
-  String get secNovelSpeech => 'Voice, speed and pitch for read aloud';
+  String get secNovelSpeech => 'Stem, snelheid en toonhoogte voor voorlezen';
 
   @override
-  String get secNotifyAbout => 'Pick which kinds of activity send an alert';
+  String get secNotifyAbout =>
+      'Kies welke soorten activiteiten een waarschuwing sturen';
 
   @override
-  String get layoutTitle => 'Layout';
+  String get layoutTitle => 'Indeling';
 
   @override
-  String get layoutDesc => 'Choose, move and hide the buttons on the bars';
+  String get layoutDesc => 'Kies, verplaats en verberg de knoppen op de balken';
 
   @override
   String get layoutHint =>
-      'Drag a button to move it (hold first on a touch screen). Tap one to cut, move or hide it';
+      'Versleep een knop om deze te verplaatsen (eerst vasthouden op een aanraakscherm). Tik op één om deze te knippen, verplaatsen of verbergen';
 
   @override
   String layoutDropInto(String zone) {
-    return 'Drop in: $zone';
+    return 'Kom langs: $zone';
   }
 
   @override
   String layoutCutting(String name) {
-    return 'Moving $name. Press a paste button to place it';
+    return '$name verplaatsen. Druk op een plakknop om deze te plaatsen';
   }
 
   @override
-  String get layoutTitleFixed => 'Title';
+  String get layoutTitleFixed => 'Titel';
 
   @override
-  String get layoutZoneTopStart => 'Top bar, before the title';
+  String get layoutZoneTopStart => 'Bovenste balk, vóór de titel';
 
   @override
-  String get layoutZoneTopEnd => 'Top bar, after the title';
+  String get layoutZoneTopEnd => 'Bovenste balk, na de titel';
 
   @override
-  String get layoutZoneBottomStart => 'Bottom bar, left';
+  String get layoutZoneBottomStart => 'Onderste balk, links';
 
   @override
-  String get layoutZoneBottomEnd => 'Bottom bar, right';
+  String get layoutZoneBottomEnd => 'Onderste balk, rechts';
 
   @override
-  String get layoutZoneSecondRow => 'Hidden: second row in normal view';
+  String get layoutZoneSecondRow => 'Verborgen: tweede rij in normaal zicht';
 
   @override
-  String get layoutZoneOverflow => 'Hidden: in the more menu';
+  String get layoutZoneOverflow => 'Verborgen: in het meer-menu';
 
   @override
-  String get layoutEmptyZone => 'Drop buttons here';
+  String get layoutEmptyZone => 'Zet hier knoppen neer';
 
   @override
-  String get layoutCut => 'Cut';
+  String get layoutCut => 'Knippen';
 
   @override
-  String get layoutPaste => 'Paste here';
+  String get layoutPaste => 'Plak hier';
 
   @override
-  String get layoutHide => 'Hide';
+  String get layoutHide => 'Verbergen';
 
   @override
   String layoutMoveTo(String zone) {
-    return 'Move to $zone';
+    return 'Verplaatsen naar $zone';
   }
 
   @override
-  String get layoutReset => 'Reset to default';
+  String get layoutReset => 'Resetten naar standaard';
 
   @override
-  String get layoutMore => 'More';
+  String get layoutMore => 'Meer';
 
   @override
-  String get sourceWhyAction => 'Why no alert?';
+  String get sourceWhyAction => 'Waarom geen waarschuwing?';
 
   @override
   String get sourceWhyStatus => 'Status';
 
   @override
-  String get sourceWhyLastCheck => 'Last checked';
+  String get sourceWhyLastCheck => 'Laatst gecontroleerd';
 
   @override
-  String get sourceWhyNever => 'Not yet';
+  String get sourceWhyNever => 'Nog niet';
 
   @override
-  String get sourceWhyNextCheck => 'Next check';
+  String get sourceWhyNextCheck => 'Volgende controle';
 
   @override
-  String get sourceWhyNewest => 'Newest at the source';
+  String get sourceWhyNewest => 'Nieuwste bij de bron';
 
   @override
-  String get sourceWhyProgress => 'Your progress';
+  String get sourceWhyProgress => 'Jouw voortgang';
 
   @override
-  String get sourceWhyListStatus => 'List status';
+  String get sourceWhyListStatus => 'Lijststatus';
 
   @override
-  String get sourceWhyFailures => 'Failed checks in a row';
+  String get sourceWhyFailures => 'Mislukte controles op rij';
 
   @override
-  String get sourceWhyLastRelease => 'Last new release seen';
+  String get sourceWhyLastRelease => 'Laatst nieuwe release gezien';
 
   @override
   String get sourceWhyVerdictNew =>
-      'A new release appears here as soon as the source lists it and the next check runs.';
+      'Hier verschijnt een nieuwe release zodra de bron deze vermeldt en de volgende controle wordt uitgevoerd.';
 
   @override
   String get sourceWhyVerdictAhead =>
-      'The source is already ahead of your progress, so you were told about it once. Read or watch up to it to get the next alert.';
+      'De bron loopt al voor op jouw voortgang, dus je hebt er één keer over gehoord. Lees of kijk ernaar om de volgende melding te ontvangen.';
 
   @override
   String get sourceWhyVerdictSkipped =>
-      'This title is skipped by the rules above. Change them in notification settings, or use Check now to run it anyway.';
+      'Deze titel wordt overgeslagen door de bovenstaande regels. Wijzig ze in de meldingsinstellingen of gebruik Nu controleren om het toch uit te voeren.';
 
   @override
   String get sourceWhyVerdictBroken =>
-      'The source can\'t be reached or has been removed, so nothing is being checked.';
+      'De bron is onbereikbaar of is verwijderd, er wordt dus niets gecontroleerd.';
 
   @override
-  String get sourceWhyVerdictMuted => 'This subscription is muted.';
+  String get sourceWhyVerdictMuted => 'Dit abonnement is gedempt.';
 
   @override
-  String get externalPlayerTitle => 'Open stream elsewhere';
+  String get externalPlayerTitle => 'Open stream elders';
 
   @override
-  String get externalCopyUrl => 'Copy stream link';
+  String get externalCopyUrl => 'Kopieer de streamlink';
 
   @override
-  String get externalCopied => 'Stream link copied';
+  String get externalCopied => 'Streamlink gekopieerd';
 
   @override
-  String get externalChooser => 'Open in another app';
+  String get externalChooser => 'Openen in een andere app';
 
   @override
-  String get externalVlc => 'Open in VLC';
+  String get externalVlc => 'Openen in VLC';
 
   @override
-  String get externalMpv => 'Open in mpv';
+  String get externalMpv => 'Openen in mpv';
 
   @override
-  String get externalWebVideoCast => 'Web Video Cast';
+  String get externalWebVideoCast => 'Webvideocast';
 
   @override
-  String get castViaAppHint => 'Send the stream to the Web Video Cast app';
+  String get castViaAppHint => 'Stuur de stream naar de Web Video Cast-app';
 
   @override
   String get externalFailed =>
-      'Couldn\'t open the stream. Is the player installed?';
+      'Kan de stream niet openen. Is de speler geïnstalleerd?';
 
   @override
-  String get addonInstalled => 'Installed';
+  String get addonInstalled => 'Geïnstalleerd';
 
   @override
-  String get loadFailedActivity => 'Couldn\'t load activity';
+  String get loadFailedActivity => 'Kan activiteit niet laden';
 
   @override
-  String get loadFailedFavourites => 'Couldn\'t load favourites. Retry';
+  String get loadFailedFavourites =>
+      'Kan favorieten niet laden. Opnieuw proberen';
 
   @override
-  String get loadFailedStats => 'Couldn\'t load stats';
+  String get loadFailedStats => 'Kan statistieken niet laden';
 
   @override
-  String get loadFailedReplies => 'Couldn\'t load replies';
+  String get loadFailedReplies => 'Kan antwoorden niet laden';
 
   @override
-  String get cantBeUndone => 'This can\'t be undone.';
+  String get cantBeUndone => 'Dit kan niet ongedaan worden gemaakt.';
 
   @override
-  String get searchTags => 'Search tags';
+  String get searchTags => 'Tags zoeken';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => 'Spoiler, tik om te bekijken';
 
   @override
   String get mediaVideo => 'Video';
 
   @override
-  String get notificationSomeone => 'Someone';
+  String get notificationSomeone => 'Iemand';
 
   @override
-  String get notificationATitle => 'a title';
+  String get notificationATitle => 'een titel';
 
   @override
-  String get notificationAddedDetail => 'Was added to AniList';
+  String get notificationAddedDetail => 'Werd toegevoegd aan AniList';
 
   @override
-  String get updateNoReleases => 'No releases found';
+  String get updateNoReleases => 'Geen releases gevonden';
 
   @override
-  String get updateInvalidResponse => 'Invalid update response';
+  String get updateInvalidResponse => 'Ongeldige updatereactie';
 
   @override
-  String get commentsRateLimited => 'Rate limited';
+  String get commentsRateLimited => 'Tarief beperkt';
 
   @override
-  String get commentsConnectFailed => 'Failed to connect';
+  String get commentsConnectFailed => 'Kan geen verbinding maken';
 
   @override
-  String get dnsNoRecords => 'No A records returned';
+  String get dnsNoRecords => 'Er zijn geen A-records geretourneerd';
 
   @override
-  String get importTokenRejected => 'Token rejected';
+  String get importTokenRejected => 'Token afgewezen';
 
   @override
-  String get developerRoleLead => 'Lead Developer';
+  String get developerRoleLead => 'Hoofdontwikkelaar';
 
   @override
-  String get developerRoleModerator => 'Discord Moderator';
+  String get developerRoleModerator => 'Onenigheidsmoderator';
 
   @override
   String extensionManagerTitle(String type) {
-    return '$type manager';
+    return '';
   }
 
   @override
   String extensionsOfType(String type) {
-    return '$type extensions';
+    return '$type extensies';
   }
 
   @override
   String extensionSettingsTitle(String name) {
-    return '$name settings';
+    return '$name instellingen';
   }
 
   @override
   String extensionNoSettings(String name) {
-    return '$name doesn\'t provide any settings.';
+    return '$name biedt geen instellingen.';
   }
 
   @override
   String notificationAired(String episode, String title) {
-    return 'Episode $episode of $title aired';
+    return 'Aflevering $episode van $title uitgezonden';
   }
 
   @override
   String notificationAiredDetail(String episode) {
-    return 'Episode $episode aired';
+    return 'Aflevering $episode uitgezonden';
   }
 
   @override
   String notificationAdded(String title) {
-    return '$title was added to AniList';
+    return '$title is toegevoegd aan AniList';
   }
 
   @override
   String updateNotFound(String message) {
-    return 'Update server couldn\'t find that release: $message';
+    return 'Updateserver kan die release niet vinden: $message';
   }
 
   @override
-  String get installStepJre => 'Java runtime';
+  String get installStepJre => 'Java-runtime';
 
   @override
-  String get installStepCore => 'Runtime core';
+  String get installStepCore => 'Runtime-kern';
 
   @override
   String installStepsProgress(int current, int total) {
-    return 'Step $current of $total';
+    return 'Stap $current van $total';
   }
 
   @override
-  String get stepWaiting => 'Waiting';
+  String get stepWaiting => 'Wachten';
 
   @override
-  String get stepChecking => 'Checking…';
+  String get stepChecking => 'Controleren…';
 
   @override
-  String get stepUpToDate => 'Up to date';
+  String get stepUpToDate => 'Up-to-date';
 
   @override
   String stepUpToDateWith(String detail) {
-    return 'Up to date · $detail';
+    return 'Actueel · $detail';
   }
 
   @override
-  String get stepWillInstall => 'Will be installed';
+  String get stepWillInstall => 'Zal worden geïnstalleerd';
 
   @override
-  String get stepWillUpdate => 'Will be updated';
+  String get stepWillUpdate => 'Zal worden bijgewerkt';
 
   @override
   String stepWillUpdateTo(String version) {
-    return 'Will be updated to $version';
+    return 'Wordt bijgewerkt naar $version';
   }
 
   @override
-  String get stepInstalled => 'Installed';
+  String get stepInstalled => 'Geïnstalleerd';
 
   @override
-  String get stepNotNeeded => 'Not needed here';
+  String get stepNotNeeded => 'Niet nodig hier';
 
   @override
-  String get stepFailed => 'Failed';
+  String get stepFailed => 'Mislukt';
 
   @override
   String stepFailedWith(String reason) {
-    return 'Failed: $reason';
+    return 'Mislukt: $reason';
   }
 
   @override
   String get installNeedsRuntime =>
-      'It runs on the Java runtime and the shared runtime core. They are installed first, and updated if they changed.';
+      'Het draait op de Java-runtime en de gedeelde runtime-kern. Ze worden eerst geïnstalleerd en bijgewerkt als ze zijn gewijzigd.';
 
   @override
   String get installRuntimeNewer =>
-      'The runtime this manager runs on has an update.';
+      'De runtime waarop deze manager draait, heeft een update.';
 
   @override
-  String get removeJvmTitle => 'Remove the Java runtime?';
+  String get removeJvmTitle => 'De Java-runtime verwijderen?';
 
   @override
   String get removeJvmMessage =>
-      'Desktop extension managers stop working until it is installed again. It is downloaded again the next time you install or open one.';
+      'Desktopextensiemanagers stoppen met werken totdat deze opnieuw wordt geïnstalleerd. De volgende keer dat u er een installeert of opent, wordt het opnieuw gedownload.';
 
   @override
-  String get runtimePreparing => 'Preparing the runtime…';
+  String get runtimePreparing => 'De looptijd voorbereiden…';
 
   @override
-  String get calendarAll => 'All';
+  String get calendarAll => 'Allemaal';
 
   @override
   String get calendarAnime => 'Anime';
@@ -8736,328 +8759,331 @@ class AppLocalizationsNl extends AppLocalizations {
   String get calendarManga => 'Manga';
 
   @override
-  String get readerCloudflare => 'Open in browser (Cloudflare check)';
+  String get readerCloudflare => 'Openen in browser (Cloudflare-controle)';
 
   @override
   String get badgeBoardHint =>
-      'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.';
+      'Sleep een badge naar een hoek van de eerste kaart, of sleep een badge die er al op staat om deze te verplaatsen. Badges wisselen van plaats, zodat ze elkaar nooit overlappen. Tik hieronder op een badge om deze in of uit te schakelen.';
 
   @override
-  String get statusAuto => 'Auto';
+  String get statusAuto => 'Automatisch';
 
   @override
-  String get unreadCounter => 'Unread counter';
+  String get unreadCounter => 'Ongelezen teller';
 
   @override
   String get unreadCounterDesc =>
-      'Show how many episodes or chapters are left on posters';
+      'Laat op posters zien hoeveel afleveringen of hoofdstukken er nog over zijn';
 
   @override
-  String get settingsShortcuts => 'Keyboard shortcuts';
+  String get settingsShortcuts => 'Sneltoetsen';
 
   @override
-  String get settingsShortcutsDesc => 'See, change and turn off every key';
+  String get settingsShortcutsDesc =>
+      'Elke sleutel bekijken, wijzigen en uitschakelen';
 
   @override
   String get shortcutGroupApp => 'App';
 
   @override
-  String get shortcutGroupPlayer => 'Video player';
+  String get shortcutGroupPlayer => 'Videospeler';
 
   @override
-  String get shortcutGroupReader => 'Reader';
+  String get shortcutGroupReader => 'Lezer';
 
   @override
-  String get shortcutsEnableApp => 'App shortcuts';
+  String get shortcutsEnableApp => 'App-snelkoppelingen';
 
   @override
-  String get shortcutsEnablePlayer => 'Player shortcuts';
+  String get shortcutsEnablePlayer => 'Snelkoppelingen voor spelers';
 
   @override
-  String get shortcutsEnableReader => 'Reader shortcuts';
+  String get shortcutsEnableReader => 'Snelkoppelingen voor lezers';
 
   @override
-  String get shortcutsEnableDesc => 'Turn every key in this group on or off';
+  String get shortcutsEnableDesc =>
+      'Schakel elke toets in deze groep in of uit';
 
   @override
-  String get shortcutNotSet => 'Not set';
+  String get shortcutNotSet => 'Niet ingesteld';
 
   @override
-  String get shortcutAddKey => 'Add a key';
+  String get shortcutAddKey => 'Voeg een sleutel toe';
 
   @override
-  String get shortcutResetOne => 'Reset to default';
+  String get shortcutResetOne => 'Resetten naar standaard';
 
   @override
-  String get shortcutClearKeys => 'Remove all keys';
+  String get shortcutClearKeys => 'Verwijder alle sleutels';
 
   @override
-  String get shortcutResetAll => 'Reset all shortcuts';
+  String get shortcutResetAll => 'Reset alle snelkoppelingen';
 
   @override
-  String get shortcutResetAllDesc => 'Put every key back to its default';
+  String get shortcutResetAllDesc =>
+      'Zet elke sleutel terug naar de standaardwaarde';
 
   @override
-  String get shortcutPress => 'Press the key or combination you want';
+  String get shortcutPress => 'Druk op de gewenste toets of combinatie';
 
   @override
   String get shortcutPressHint =>
-      'Each combination can only belong to one action, so taking one moves it.';
+      'Elke combinatie kan slechts tot één actie behoren, dus als u er één neemt, wordt deze verplaatst.';
 
   @override
-  String get shortcutSeekPercent => 'Jump to a point of the video';
+  String get shortcutSeekPercent => 'Ga naar een punt in de video';
 
   @override
   String get shortcutSeekPercentKeys => '0 – 9';
 
   @override
-  String get shortcutAppBack => 'Go back';
+  String get shortcutAppBack => 'Ga terug';
 
   @override
-  String get shortcutAppFullscreen => 'Toggle fullscreen';
+  String get shortcutAppFullscreen => 'Schakel volledig scherm in';
 
   @override
-  String get shortcutAppGlass => 'Toggle glass mode';
+  String get shortcutAppGlass => 'Schakel de glasmodus in';
 
   @override
-  String get shortcutAppMaterialYou => 'Toggle Material You';
+  String get shortcutAppMaterialYou => 'Schakel materiaal jij in';
 
   @override
-  String get shortcutAppDark => 'Toggle dark mode';
+  String get shortcutAppDark => 'Schakel de donkere modus in';
 
   @override
-  String get shortcutAppOled => 'Toggle OLED black';
+  String get shortcutAppOled => 'Schakel OLED zwart in';
 
   @override
-  String get shortcutAppSearch => 'Open search';
+  String get shortcutAppSearch => 'Zoeken openen';
 
   @override
-  String get shortcutAppSettings => 'Open settings';
+  String get shortcutAppSettings => 'Instellingen openen';
 
   @override
-  String get shortcutAppDownloads => 'Open downloads';
+  String get shortcutAppDownloads => 'Downloads openen';
 
   @override
-  String get shortcutAppNotifications => 'Open notifications';
+  String get shortcutAppNotifications => 'Meldingen openen';
 
   @override
-  String get shortcutAppIncognito => 'Toggle incognito';
+  String get shortcutAppIncognito => 'Schakel incognito in';
 
   @override
-  String get shortcutAppShortcuts => 'Show keyboard shortcuts';
+  String get shortcutAppShortcuts => 'Sneltoetsen weergeven';
 
   @override
-  String get shortcutPlayerPlayPause => 'Play or pause';
+  String get shortcutPlayerPlayPause => 'Afspelen of pauzeren';
 
   @override
-  String get shortcutPlayerSeekForward => 'Seek forward';
+  String get shortcutPlayerSeekForward => 'Zoek vooruit';
 
   @override
-  String get shortcutPlayerSeekBack => 'Seek back';
+  String get shortcutPlayerSeekBack => 'Zoek terug';
 
   @override
-  String get shortcutPlayerSeekForwardLong => 'Seek forward 30 seconds';
+  String get shortcutPlayerSeekForwardLong => 'Zoek 30 seconden vooruit';
 
   @override
-  String get shortcutPlayerSeekBackLong => 'Seek back 30 seconds';
+  String get shortcutPlayerSeekBackLong => 'Zoek 30 seconden terug';
 
   @override
-  String get shortcutPlayerFrameForward => 'Next frame';
+  String get shortcutPlayerFrameForward => 'Volgende frame';
 
   @override
-  String get shortcutPlayerFrameBack => 'Previous frame';
+  String get shortcutPlayerFrameBack => 'Vorige frame';
 
   @override
-  String get shortcutPlayerVolumeUp => 'Volume up';
+  String get shortcutPlayerVolumeUp => 'Volume omhoog';
 
   @override
-  String get shortcutPlayerVolumeDown => 'Volume down';
+  String get shortcutPlayerVolumeDown => 'Volume lager';
 
   @override
-  String get shortcutPlayerMute => 'Mute';
+  String get shortcutPlayerMute => 'Dempen';
 
   @override
-  String get shortcutPlayerFullscreen => 'Fullscreen';
+  String get shortcutPlayerFullscreen => 'Volledig scherm';
 
   @override
-  String get shortcutPlayerNext => 'Next episode';
+  String get shortcutPlayerNext => 'Volgende aflevering';
 
   @override
-  String get shortcutPlayerPrevious => 'Previous episode';
+  String get shortcutPlayerPrevious => 'Vorige aflevering';
 
   @override
-  String get shortcutPlayerSkip => 'Skip intro or ending';
+  String get shortcutPlayerSkip => 'Sla de intro of het einde over';
 
   @override
-  String get shortcutPlayerPanel => 'Episode list';
+  String get shortcutPlayerPanel => 'Afleveringslijst';
 
   @override
-  String get shortcutPlayerSpeedUp => 'Faster playback';
+  String get shortcutPlayerSpeedUp => 'Sneller afspelen';
 
   @override
-  String get shortcutPlayerSpeedDown => 'Slower playback';
+  String get shortcutPlayerSpeedDown => 'Langzamer afspelen';
 
   @override
-  String get shortcutPlayerSpeedReset => 'Normal speed';
+  String get shortcutPlayerSpeedReset => 'Normale snelheid';
 
   @override
-  String get shortcutPlayerSubtitleToggle => 'Subtitles on or off';
+  String get shortcutPlayerSubtitleToggle => 'Ondertiteling aan of uit';
 
   @override
-  String get shortcutPlayerSubtitleCycle => 'Next subtitle track';
+  String get shortcutPlayerSubtitleCycle => 'Volgende ondertiteltrack';
 
   @override
-  String get shortcutPlayerAudioCycle => 'Next audio track';
+  String get shortcutPlayerAudioCycle => 'Volgende audiotrack';
 
   @override
-  String get shortcutPlayerStreamCycle => 'Next stream';
+  String get shortcutPlayerStreamCycle => 'Volgende stroom';
 
   @override
-  String get shortcutPlayerFit => 'Change video fit';
+  String get shortcutPlayerFit => 'Videopasvorm wijzigen';
 
   @override
-  String get shortcutReaderRight => 'Page to the right';
+  String get shortcutReaderRight => 'Pagina naar rechts';
 
   @override
-  String get shortcutReaderLeft => 'Page to the left';
+  String get shortcutReaderLeft => 'Pagina naar links';
 
   @override
-  String get shortcutReaderNextPage => 'Next page';
+  String get shortcutReaderNextPage => 'Volgende pagina';
 
   @override
-  String get shortcutReaderPreviousPage => 'Previous page';
+  String get shortcutReaderPreviousPage => 'Vorige pagina';
 
   @override
-  String get shortcutReaderControls => 'Show or hide controls';
+  String get shortcutReaderControls => 'Toon of verberg besturingselementen';
 
   @override
-  String get shortcutReaderNextChapter => 'Next chapter';
+  String get shortcutReaderNextChapter => 'Volgend hoofdstuk';
 
   @override
-  String get shortcutReaderPreviousChapter => 'Previous chapter';
+  String get shortcutReaderPreviousChapter => 'Vorig hoofdstuk';
 
   @override
   String shortcutTaken(String action) {
-    return 'Taken from $action';
+    return 'Overgenomen van $action';
   }
 
   @override
-  String get incognitoTurnedOn => 'Incognito mode on';
+  String get incognitoTurnedOn => 'Incognitomodus ingeschakeld';
 
   @override
-  String get incognitoTurnedOff => 'Incognito mode off';
+  String get incognitoTurnedOff => 'Incognitomodus uitgeschakeld';
 
   @override
-  String get onHoldAnime => 'On hold anime';
+  String get onHoldAnime => 'Anime in de wacht';
 
   @override
-  String get onHoldManga => 'On hold manga';
+  String get onHoldManga => 'Manga in de wacht';
 
   @override
-  String get droppedAnime => 'Dropped anime';
+  String get droppedAnime => 'Anime laten vallen';
 
   @override
-  String get droppedManga => 'Dropped manga';
+  String get droppedManga => 'Manga laten vallen';
 
   @override
-  String get generalSectionDesktop => 'Desktop';
+  String get generalSectionDesktop => 'Bureaublad';
 
   @override
-  String get closeAction => 'When the window is closed';
+  String get closeAction => 'Wanneer het raam gesloten is';
 
   @override
-  String get closeActionQuit => 'Quit the app';
+  String get closeActionQuit => 'Sluit de app';
 
   @override
   String get closeActionWhenBusy =>
-      'Keep running in the tray while something is running';
+      'Blijf in de lade rennen terwijl er iets actief is';
 
   @override
-  String get closeActionAlways => 'Always keep running in the tray';
+  String get closeActionAlways => 'Blijf altijd in de lade draaien';
 
   @override
   String get closeActionNoTray =>
-      'The system tray is not available here, so the app quits when closed';
+      'Het systeemvak is hier niet beschikbaar, dus de app wordt afgesloten wanneer deze wordt gesloten';
 
   @override
-  String get gamepadNav => 'Gamepad navigation';
+  String get gamepadNav => 'Gamepad-navigatie';
 
   @override
   String get gamepadNavDesc =>
-      'Move around the app and control the player with a game controller';
+      'Beweeg door de app en bestuur de speler met een gamecontroller';
 
   @override
-  String get trayShow => 'Show Dartotsu';
+  String get trayShow => 'Laat Dartotsu zien';
 
   @override
-  String get trayQuit => 'Quit';
+  String get trayQuit => 'Stoppen';
 
   @override
-  String get trayIdle => 'Nothing running';
+  String get trayIdle => 'Er loopt niets';
 
   @override
   String trayDownloading(int count) {
     String _temp0 = intl.Intl.pluralLogic(
       count,
       locale: localeName,
-      other: 'Downloading $count items',
-      one: 'Downloading $count item',
+      other: '$count artikelen downloaden',
+      one: '$count item downloaden',
     );
     return '$_temp0';
   }
 
   @override
-  String get traySyncing => 'Syncing your lists';
+  String get traySyncing => 'Uw lijsten synchroniseren';
 
   @override
-  String get trayUpdating => 'Updating the app';
+  String get trayUpdating => 'De app bijwerken';
 
   @override
-  String get trayPlaying => 'Playing in a small window';
+  String get trayPlaying => 'Spelen in een klein venster';
 
   @override
-  String get traySearch => 'Search';
+  String get traySearch => 'Zoeken';
 
   @override
-  String get trayPauseDownloads => 'Pause downloads';
+  String get trayPauseDownloads => 'Pauzeer downloads';
 
   @override
-  String get trayResumeDownloads => 'Resume downloads';
+  String get trayResumeDownloads => 'Hervat downloads';
 
   @override
-  String get playerDownloadTitle => 'Downloading the player';
+  String get playerDownloadTitle => 'De speler downloaden';
 
   @override
   String get playerDownloadBody =>
-      'Dartotsu fetches its video engine once. Playback starts as soon as it is ready.';
+      'Dartotsu haalt zijn video-engine één keer op. Het afspelen begint zodra het klaar is.';
 
   @override
-  String get playerDownloadStarting => 'Starting the download…';
+  String get playerDownloadStarting => 'Het downloaden starten…';
 
   @override
-  String get playerDownloadFailedTitle => 'Couldn\'t get the player';
+  String get playerDownloadFailedTitle => 'Kan de speler niet ophalen';
 
   @override
   String get playerDownloadFailedBody =>
-      'Check your connection and try again. The download picks up where it stopped.';
+      'Controleer uw verbinding en probeer het opnieuw. De download gaat verder waar hij gestopt was.';
 
   @override
-  String get playerDownloadRetry => 'Try again';
+  String get playerDownloadRetry => 'Probeer het opnieuw';
 
   @override
-  String get playerDownloadCopy => 'Copy details';
+  String get playerDownloadCopy => 'Kopieer gegevens';
 
   @override
-  String get removePlayerTitle => 'Remove the player?';
+  String get removePlayerTitle => 'De speler verwijderen?';
 
   @override
   String get removePlayerMessage =>
-      'Videos can\'t play until the player is downloaded again.';
+      'Video\'s kunnen pas worden afgespeeld nadat de speler opnieuw is gedownload.';
 
   @override
-  String get trailerLoading => 'Loading the trailer…';
+  String get trailerLoading => 'De aanhangwagen laden…';
 
   @override
   String get trailerFailed =>
-      'Could not play the trailer here, opening it in the browser';
+      'Kon de trailer hier niet afspelen, omdat deze in de browser werd geopend';
 }

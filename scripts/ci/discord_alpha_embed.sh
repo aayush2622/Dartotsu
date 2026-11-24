@@ -6,10 +6,14 @@ set -euo pipefail
 fetch_user_details() {
   local login=$1
   local url name api_login avatar_url
+  local auth_args=()
+  if [[ -n "${GH_TOKEN:-${GITHUB_TOKEN:-}}" ]]; then
+    auth_args=(-H "Authorization: Bearer ${GH_TOKEN:-${GITHUB_TOKEN:-}}")
+  fi
   # curl globs [] in URLs, so logins like github-actions[bot] need --globoff
   # and percent-encoding or the body comes back empty.
   url="https://api.github.com/users/$(jq -rn --arg login "$login" '$login | @uri')"
-  if ! user_details=$(curl -fsS --globoff "$url"); then
+  if ! user_details=$(curl -fsS "${auth_args[@]}" --globoff "$url" 2>/dev/null); then
     echo "${login}|${login}|"
     return 0
   fi
@@ -50,12 +54,17 @@ while read -r count name; do
   recent_commit_counts["$name"]=$count
 done < <(echo "$COMMIT_LOG" | sed 's/%0A/\n/g' | grep -oP '(?<=~)[^[]*' | sort | uniq -c | sort -rn || true)
 
-contributors=$(curl -L \
+auth_args=()
+if [[ -n "${GH_TOKEN:-${GITHUB_TOKEN:-}}" ]]; then
+  auth_args=(-H "Authorization: Bearer ${GH_TOKEN:-${GITHUB_TOKEN:-}}")
+fi
+
+contributors=$(curl -fsS "${auth_args[@]}" -L \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  "https://api.github.com/repos/${GITHUB_REPOSITORY}/contributors")
+  "https://api.github.com/repos/${GITHUB_REPOSITORY}/contributors" 2>/dev/null || echo "[]")
 
-sorted_contributors=$(for login in $(echo "$contributors" | jq -r '.[].login'); do
+sorted_contributors=$(for login in $(echo "$contributors" | jq -r 'if type=="array" then .[].login else empty end' 2>/dev/null); do
   user_info=$(fetch_user_details "$login")
   name=$(echo "$user_info" | cut -d'|' -f1)
   count=$(recent_count "$name")
@@ -105,6 +114,26 @@ ${developer_entry}"
     fi
   fi
 done <<< "$sorted_contributors"
+
+# Fallback: if contributors API did not populate developers, populate from recent commit counts directly
+if [ -z "$developers" ]; then
+  for author in "${!recent_commit_counts[@]}"; do
+    [[ -z "$author" ]] && continue
+    branch_count=$(git log --author="$author" --oneline 2>/dev/null | awk '!seen[$0]++' | wc -l || echo "${recent_commit_counts[$author]}")
+    extra_info="${additional_info[$author]:-}"
+    if [ -n "$extra_info" ]; then
+      extra_info=$(echo "$extra_info" | sed 's/\\n/\n- /g')
+    fi
+    developer_entry="◗ **${author}** ${extra_info}
+- Commits: ${branch_count}"
+    if [ -n "$developers" ]; then
+      developers="${developers}
+${developer_entry}"
+    else
+      developers="${developer_entry}"
+    fi
+  done
+fi
 
 if [ "$top_contributor_count" -eq 1 ]; then
   thumbnail_url="$top_contributor_avatar"
