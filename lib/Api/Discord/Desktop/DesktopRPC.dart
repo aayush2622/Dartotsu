@@ -120,6 +120,24 @@ class DesktopRPC extends AppController implements BaseDiscordRPC {
     }
   }
 
+  Future<void> shutdown() async {
+    final rpc = _rpc;
+    if (_disposed || rpc == null) return;
+    _disposed = true;
+    try {
+      await _disconnectSub?.cancel();
+      if (_connected) await rpc.clearPresence();
+    } catch (e) {
+      logger('Discord RPC clear failed: $e', logLevel: LogLevel.error);
+    }
+    _connected = false;
+    try {
+      await rpc.dispose();
+    } catch (e) {
+      logger('Discord RPC dispose failed: $e', logLevel: LogLevel.error);
+    }
+  }
+
   @override
   void onClose() {
     _disposed = true;

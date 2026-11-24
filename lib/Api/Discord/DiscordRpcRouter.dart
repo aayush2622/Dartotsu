@@ -64,7 +64,7 @@ class DiscordRpcRouter extends AppController implements BaseDiscordRPC {
 
   Future<void> shutdown() async {
     await Future.wait([
-      ?_desktopRpc?.clear(),
+      ?_desktopRpc?.shutdown(),
       ?_linkedRpc?.clear(),
       _headless.clear(),
       ?_gatewayRpc?.clear(),
