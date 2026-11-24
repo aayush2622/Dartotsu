@@ -12,6 +12,10 @@ import '../../../Utils/Function.dart';
 import '../Watch/Data/WatchPrefs.dart';
 import '../../../Widgets/Components/ScreenState.dart';
 import '../../Player/Engine/PlayerEngine.dart';
+import '../../Player/Engine/StreamProxy.dart';
+
+const _agent =
+    'com.google.ios.youtube/20.10.4 (iPhone16,2; U; CPU iOS 18_3_2 like Mac OS X;)';
 
 String? youtubeId(String url) {
   final uri = Uri.tryParse(url.trim());
@@ -43,40 +47,26 @@ class TrailerQuality {
   String get label => '${height}p';
 }
 
-int _byFormat(StreamInfo a, StreamInfo b) {
-  final mp4 =
-      (b.container.name == 'mp4' ? 1 : 0) - (a.container.name == 'mp4' ? 1 : 0);
-  return mp4 != 0 ? mp4 : b.bitrate.compareTo(a.bitrate);
-}
-
 List<TrailerQuality> trailerQualities(StreamManifest manifest) {
-  final audio = (manifest.audioOnly.toList()..sort(_byFormat)).firstOrNull;
-  final byHeight = <int, TrailerQuality>{};
-  if (audio != null) {
-    final video =
-        manifest.videoOnly
-            .where((s) => s.videoResolution.height <= 1080)
-            .toList()
-          ..sort((a, b) {
-            final h = b.videoResolution.height.compareTo(
-              a.videoResolution.height,
-            );
-            return h != 0 ? h : _byFormat(a, b);
-          });
-    for (final s in video) {
-      final h = s.videoResolution.height;
-      byHeight.putIfAbsent(
-        h,
-        () => TrailerQuality(h, s.url.toString(), audio.url.toString()),
-      );
+  final audio =
+      (manifest.hls.whereType<AudioStreamInfo>().toList()
+            ..sort((a, b) => b.bitrate.compareTo(a.bitrate)))
+          .firstOrNull;
+  final byHeight = <int, VideoStreamInfo>{};
+  for (final s in manifest.hls.whereType<VideoStreamInfo>()) {
+    final h = s.videoResolution.height;
+    final current = byHeight[h];
+    if (current == null ||
+        (!current.videoCodec.startsWith('avc1') &&
+            s.videoCodec.startsWith('avc1'))) {
+      byHeight[h] = s;
     }
   }
-  for (final s in manifest.muxed) {
-    final h = s.videoResolution.height;
-    byHeight.putIfAbsent(h, () => TrailerQuality(h, s.url.toString()));
-  }
   final heights = byHeight.keys.toList()..sort((a, b) => b.compareTo(a));
-  return [for (final h in heights) byHeight[h]!];
+  return [
+    for (final h in heights)
+      TrailerQuality(h, byHeight[h]!.url.toString(), audio?.url.toString()),
+  ];
 }
 
 class TrailerState extends ScreenState {
@@ -98,6 +88,8 @@ class TrailerState extends ScreenState {
 
   Player? player;
   VideoController? video;
+  final _proxy = StreamProxy();
+
   final _subs = <StreamSubscription<Object?>>[];
 
   String get thumbnail =>
@@ -118,8 +110,12 @@ class TrailerState extends ScreenState {
     }
     final yt = YoutubeExplode();
     try {
-      final manifest = await yt.videos.streamsClient.getManifest(videoId);
-      final found = trailerQualities(manifest);
+      final found = trailerQualities(
+        await yt.videos.streamsClient.getManifest(
+          videoId,
+          ytClients: [YoutubeApiClient.ios],
+        ),
+      );
       if (found.isEmpty) throw StateError('No playable stream');
       qualities
         ..clear()
@@ -170,9 +166,15 @@ class TrailerState extends ScreenState {
   }) async {
     final p = player;
     if (p == null) return;
-    await p.open(Media(q.url, start: start), play: false);
+    const headers = {'User-Agent': _agent};
+    await p.open(
+      Media(await _proxy.wrap(q.url, headers), start: start),
+      play: false,
+    );
     final audio = q.audio;
-    if (audio != null) await p.setAudioTrack(AudioTrack.uri(audio));
+    if (audio != null) {
+      await p.setAudioTrack(AudioTrack.uri(await _proxy.wrap(audio, headers)));
+    }
     if (play) await p.play();
   }
 
@@ -214,5 +216,6 @@ class TrailerState extends ScreenState {
       unawaited(s.cancel());
     }
     unawaited(player?.dispose());
+    unawaited(_proxy.stop());
   }
 }
