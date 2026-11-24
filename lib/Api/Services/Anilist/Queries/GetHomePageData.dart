@@ -72,10 +72,10 @@ List<String>? _homeFragments(String section, int userId) => switch (section) {
     'repeatingManga: ${_statusList(userId, 'MANGA', 'REPEATING')}',
   ],
   'Planned Anime' => [
-    'plannedAnime: ${_statusList(userId, 'ANIME', 'PLANNING', sort: 'MEDIA_POPULARITY_DESC')}',
+    'plannedAnime: ${_statusList(userId, 'ANIME', 'PLANNING')}',
   ],
   'Planned Manga' => [
-    'plannedManga: ${_statusList(userId, 'MANGA', 'PLANNING', sort: 'MEDIA_POPULARITY_DESC')}',
+    'plannedManga: ${_statusList(userId, 'MANGA', 'PLANNING')}',
   ],
   'Favourite Anime' => ['favoriteAnime: ${_favourites(userId, anime: true)}'],
   'Favourite Manga' => ['favoriteManga: ${_favourites(userId, anime: false)}'],
