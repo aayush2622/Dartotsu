@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ double? svgAspect(String svg) {
 
 class AnimatedSvg extends StatefulWidget {
   final String svg;
+  final String? url;
   final double? width;
   final Widget still;
 
@@ -48,8 +50,12 @@ class AnimatedSvg extends StatefulWidget {
     super.key,
     required this.svg,
     required this.still,
+    this.url,
     this.width,
   });
+
+  static bool get supported =>
+      Platform.isAndroid || Platform.isIOS || Platform.isMacOS;
 
   @override
   State<AnimatedSvg> createState() => _AnimatedSvgState();
@@ -67,7 +73,7 @@ class _AnimatedSvgState extends State<AnimatedSvg> {
   @override
   void initState() {
     super.initState();
-    _claimed = _live < _maxLive;
+    _claimed = AnimatedSvg.supported && _live < _maxLive;
     if (!_claimed) return;
     _live++;
     unawaited(_start());
@@ -88,15 +94,16 @@ class _AnimatedSvgState extends State<AnimatedSvg> {
       await controller.setNavigationDelegate(
         NavigationDelegate(onPageFinished: (_) => ready.value = true),
       );
-      final data = base64Encode(utf8.encode(widget.svg));
+      final source = widget.url == null
+          ? 'data:image/svg+xml;base64,${base64Encode(utf8.encode(widget.svg))}'
+          : const HtmlEscape(HtmlEscapeMode.attribute).convert(widget.url!);
       await controller.loadHtmlString(
         '<!doctype html><html><head>'
         '<meta name="viewport" content="width=device-width,initial-scale=1">'
         '<style>html,body{margin:0;padding:0;height:100%;background:transparent;'
         'overflow:hidden}object{display:block;width:100%;height:100%}'
         '</style></head><body>'
-        '<object type="image/svg+xml" data="data:image/svg+xml;base64,$data">'
-        '</object></body></html>',
+        '<object type="image/svg+xml" data="$source"></object></body></html>',
       );
       if (!mounted) return;
       view.value = controller;
@@ -113,6 +120,7 @@ class _AnimatedSvgState extends State<AnimatedSvg> {
   Widget build(BuildContext context) => Watch(() => _build(context));
 
   Widget _build(BuildContext context) {
+    if (!_claimed) return widget.still;
     final shown = ready.value;
     final controller = view.value;
     final aspect = svgAspect(widget.svg) ?? 2.0;

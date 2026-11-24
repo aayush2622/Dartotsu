@@ -1228,7 +1228,12 @@ class _RemoteSvgState extends State<_RemoteSvg> {
       final raw = _raw;
       return raw == null || !svgIsAnimated(raw)
           ? still
-          : AnimatedSvg(svg: raw, width: widget.width, still: still);
+          : AnimatedSvg(
+              svg: raw,
+              url: widget.url,
+              width: widget.width,
+              still: still,
+            );
     },
   );
 }
