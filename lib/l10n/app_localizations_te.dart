@@ -334,8 +334,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get settingsNetwork => 'నెట్‌వర్క్';
 
   @override
-  String get settingsNetworkDesc =>
-      'వినియోగదారు ఏజెంట్, ధృవపత్రాలు, DNS మరియు ప్రాక్సీ';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ట్రాకింగ్ సర్వీస్, సైన్ ఇన్';
@@ -1352,7 +1351,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get defaultFont => 'డిఫాల్ట్';
 
   @override
-  String get materialYou => 'మెటీరియల్ మీరు';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'సిస్టమ్ నుండి డైనమిక్ కలర్';
@@ -1412,7 +1411,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get checkNow => 'ఇప్పుడే చెక్ చెయ్యి';
 
   @override
-  String get userAgent => 'వినియోగదారు ఏజెంట్';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'డిఫాల్ట్';
@@ -1423,7 +1422,7 @@ class AppLocalizationsTe extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-ఓవర్-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'డిఫాల్ట్ (Cloudflare)';
@@ -1549,7 +1548,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get contributorsLoadFailed => 'కాంట్రిబ్యూటర్లు లోడ్ అవ్వలేదు';
 
   @override
-  String get forks => 'ఫోర్కులు';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu మీద తయారైన ప్రాజెక్టులు';
@@ -1740,7 +1739,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get linkSettingsFailed => 'సిస్టమ్ సెట్టింగ్స్ ఓపెన్ చేయలేకపోయాం';
 
   @override
-  String get discordRichPresence => 'రిచ్ ప్రెజెన్స్';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1874,7 +1873,7 @@ class AppLocalizationsTe extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord టోకెన్ తీసేశాం';
 
   @override
-  String get discordRichPresenceRow => 'డిస్కార్డ్ రిచ్ ప్రెజెన్స్';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'ఆన్ · లుక్ మార్చడానికి ట్యాప్ చెయ్యి';
@@ -3793,6 +3792,11 @@ class AppLocalizationsTe extends AppLocalizations {
 
   @override
   String get continueWatching => 'చూడటం కొనసాగించు';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'చదవడం కొనసాగించు';

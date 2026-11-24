@@ -333,8 +333,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get settingsNetwork => 'নেটওয়ার্ক';
 
   @override
-  String get settingsNetworkDesc =>
-      'ইউজার এজেন্ট, সার্টিফিকেট, ডিএনএস এবং প্রক্সি';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ট্র্যাকিং সার্ভিস আর সাইন-ইন';
@@ -1341,7 +1340,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get defaultFont => 'ডিফল্ট';
 
   @override
-  String get materialYou => 'উপাদান আপনি';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'সিস্টেম থেকে ডাইনামিক রঙ';
@@ -1401,7 +1400,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get checkNow => 'এখনই চেক করো';
 
   @override
-  String get userAgent => 'ব্যবহারকারী-এজেন্ট';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ডিফল্ট';
@@ -1412,7 +1411,7 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-ওভার-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'ডিফল্ট (Cloudflare)';
@@ -1505,7 +1504,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get version => 'ভার্সন';
 
   @override
-  String get gitHub => 'গিটহাব';
+  String get gitHub => 'GitHub';
 
   @override
   String get gitHubDesc => 'সোর্স, ইস্যু আর রিলিজ';
@@ -1538,7 +1537,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get contributorsLoadFailed => 'কন্ট্রিবিউটরদের লোড করা গেল না';
 
   @override
-  String get forks => 'কাঁটা';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu-র ওপর বানানো প্রজেক্ট';
@@ -1723,7 +1722,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get linkSettingsFailed => 'সিস্টেম সেটিংস খোলা গেল না';
 
   @override
-  String get discordRichPresence => 'সমৃদ্ধ উপস্থিতি';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1856,7 +1855,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord টোকেন সরানো হয়েছে';
 
   @override
-  String get discordRichPresenceRow => 'ডিসকর্ড রিচ প্রেজেন্স';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'চালু · কেমন দেখাবে বদলাতে ট্যাপ করো';
@@ -3769,6 +3768,11 @@ class AppLocalizationsBn extends AppLocalizations {
   String get continueWatching => 'দেখা চালিয়ে যাও';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'পড়া চালিয়ে যাও';
 
   @override
@@ -4630,7 +4634,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get commentsSpoiler => 'স্পয়লার';
 
   @override
-  String get commentsGif => 'জিআইএফ';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => 'GIF খোঁজো';
@@ -4778,7 +4782,7 @@ class AppLocalizationsBn extends AppLocalizations {
       'ভলিউমের পেছনে বারকোডের ওপরে ছাপা ISBN টাইপ করো।';
 
   @override
-  String get barcodeIsbnHint => 'আইএসবিএন';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'এটা সঠিক ISBN না';

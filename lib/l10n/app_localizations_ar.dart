@@ -334,7 +334,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get settingsNetwork => 'الشبكة';
 
   @override
-  String get settingsNetworkDesc => 'وكيل المستخدم والشهادات وDNS والوكيل';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'خدمة التتبّع وتسجيل الدخول';
@@ -1338,7 +1338,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get defaultFont => 'افتراضي';
 
   @override
-  String get materialYou => 'المادة أنت';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'ألوان ديناميكية من النظام';
@@ -1398,7 +1398,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get checkNow => 'افحص الآن';
 
   @override
-  String get userAgent => 'وكيل المستخدم';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'افتراضي';
@@ -1409,7 +1409,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS عبر HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'افتراضي (Cloudflare)';
@@ -1501,7 +1501,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get version => 'الإصدار';
 
   @override
-  String get gitHub => 'جيثب';
+  String get gitHub => 'GitHub';
 
   @override
   String get gitHubDesc => 'الكود المصدري والمشاكل والإصدارات';
@@ -1534,7 +1534,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get contributorsLoadFailed => 'ما قدرنا نحمّل المساهمين';
 
   @override
-  String get forks => 'شوك';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'مشاريع مبنية على Dartotsu';
@@ -1720,7 +1720,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get linkSettingsFailed => 'ما قدرنا نفتح إعدادات النظام';
 
   @override
-  String get discordRichPresence => 'حضور غني';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1853,7 +1853,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get discordTokenRemovedSnack => 'تم حذف توكن Discord';
 
   @override
-  String get discordRichPresenceRow => 'وجود الخلاف الغني';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'يعمل · اضغط لتغيير شكله';
@@ -3663,7 +3663,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get sortNewest => 'الأحدث';
 
   @override
-  String get sortAz => 'من الألف إلى الياء';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'الأكثر إضافة للمفضلة';
@@ -3764,6 +3764,11 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get continueWatching => 'تابع المشاهدة';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'تابع القراءة';
@@ -4780,7 +4785,7 @@ class AppLocalizationsAr extends AppLocalizations {
       'اكتب رقم ISBN المطبوع فوق الباركود على ظهر المجلد.';
 
   @override
-  String get barcodeIsbnHint => 'رقم ISBN';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'هذا ISBN غير صالح';

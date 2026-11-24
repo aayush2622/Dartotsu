@@ -10,6 +10,7 @@ import '../../../Core/Services/Api/LibrarySearch.dart';
 import 'Data/Browse.dart';
 import '../../../Core/Services/Api/Queries.dart';
 import '../../../Core/Services/Api/SectionJobs.dart';
+import '../../../Core/Services/SectionTitles.dart';
 import '../../../Core/Services/Model/Calendar.dart';
 import '../../../Core/Services/Model/Author.dart';
 import '../../../Core/Services/Model/Character.dart';
@@ -530,15 +531,23 @@ class SimklQueries extends Queries {
       ('On Hold', 'PAUSED'),
       ('Dropped', 'DROPPED'),
     ];
+    bool isAnime(Media m) => parseSimklMediaId(m.id)?.$1 == SimklKind.anime;
     final jobs = <(String, SectionJob)>[
-      for (final (title, status) in lists)
-        (
-          title,
-          () async {
-            final items = _byStatus((await library()).values, status);
-            return titledSection(title, items);
-          },
-        ),
+      for (final (name, status) in lists)
+        for (final (suffix, anime) in [
+          (kAnimeSuffix, true),
+          (kShowsSuffix, false),
+        ])
+          (
+            '$name$suffix',
+            () async {
+              final items = _byStatus(
+                (await library()).values.where((m) => isAnime(m) == anime),
+                status,
+              );
+              return titledSection('$name$suffix', items);
+            },
+          ),
     ];
     return [
       for (final j in applyLayout(

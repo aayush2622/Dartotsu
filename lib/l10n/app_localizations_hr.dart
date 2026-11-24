@@ -336,8 +336,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get settingsNetwork => 'Mreža';
 
   @override
-  String get settingsNetworkDesc =>
-      'Korisnički agent, certifikati, DNS i proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Servis za praćenje i prijava';
@@ -1351,7 +1350,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get defaultFont => 'Zadano';
 
   @override
-  String get materialYou => 'Materijalni Vi';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Dinamične boje iz sustava';
@@ -1411,7 +1410,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get checkNow => 'Provjeri sada';
 
   @override
-  String get userAgent => 'Korisnički agent';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Zadano';
@@ -1548,7 +1547,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get contributorsLoadFailed => 'Ne mogu učitati suradnike';
 
   @override
-  String get forks => 'Vilice';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projekti građeni na temelju Dartotsua';
@@ -1738,7 +1737,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get linkSettingsFailed => 'Ne mogu otvoriti postavke sustava';
 
   @override
-  String get discordRichPresence => 'Bogata prisutnost';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1872,7 +1871,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord token uklonjen';
 
   @override
-  String get discordRichPresenceRow => 'Discord bogata prisutnost';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3794,6 +3793,11 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get continueWatching => 'Nastavi gledati';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Nastavi čitati';
@@ -6057,7 +6061,7 @@ class AppLocalizationsHr extends AppLocalizations {
       'Primijeni opcije iz svog mpv.conf kad reprodukcija počne';
 
   @override
-  String get playerMpvConf => 'mpv.konf';
+  String get playerMpvConf => 'mpv.conf';
 
   @override
   String get playerMpvConfEdit => 'Uredi mpv konfiguraciju';
@@ -6365,7 +6369,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get readerModeVertical => 'Okomite stranice';
 
   @override
-  String get readerModeWebtoon => '';
+  String get readerModeWebtoon => 'Webtoon';
 
   @override
   String get readerModeContinuous => 'Kontinuirano pomicanje';
@@ -8565,7 +8569,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get externalMpv => 'Otvori u mpv';
 
   @override
-  String get externalWebVideoCast => '';
+  String get externalWebVideoCast => 'Web Video Cast';
 
   @override
   String get castViaAppHint => 'Pošaljite stream u aplikaciju Web Video Cast';

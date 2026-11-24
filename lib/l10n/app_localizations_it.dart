@@ -335,7 +335,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get settingsNetwork => 'Rete';
 
   @override
-  String get settingsNetworkDesc => 'Agente utente, certificati, DNS e proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Servizio di tracking e accesso';
@@ -1359,7 +1359,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get defaultFont => 'Predefinito';
 
   @override
-  String get materialYou => 'Materiale Tu';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Colori dinamici dal sistema';
@@ -1419,7 +1419,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get checkNow => 'Controlla ora';
 
   @override
-  String get userAgent => 'Agente utente';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Predefinito';
@@ -1430,7 +1430,7 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS su HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Predefinito (Cloudflare)';
@@ -1556,7 +1556,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get contributorsLoadFailed => 'Impossibile caricare i collaboratori';
 
   @override
-  String get forks => 'Forchette';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Progetti basati su Dartotsu';
@@ -1749,7 +1749,7 @@ class AppLocalizationsIt extends AppLocalizations {
       'Impossibile aprire le impostazioni di sistema';
 
   @override
-  String get discordRichPresence => 'Presenza ricca';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1882,7 +1882,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token Discord rimosso';
 
   @override
-  String get discordRichPresenceRow => 'Presenza ricca di discordia';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3711,7 +3711,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get sortNewest => 'Più recenti';
 
   @override
-  String get sortAz => 'Dalla A alla Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'Più preferiti';
@@ -3807,6 +3807,11 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get continueWatching => 'Continua a guardare';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Continua a leggere';
@@ -5718,7 +5723,7 @@ class AppLocalizationsIt extends AppLocalizations {
   String get playerSectionEngine => 'Motore';
 
   @override
-  String get playerSectionMpv => 'monovolume';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'Velocità di riproduzione';

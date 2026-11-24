@@ -3771,6 +3771,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get continueWatching => 'Continue Watching';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'Continue Reading';
 
   @override
@@ -8544,7 +8549,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get searchTags => 'Search tags';
 
   @override
-  String get spoilerTapToView => ' Spoiler, tap to view ';
+  String get spoilerTapToView => 'Spoiler, tap to view';
 
   @override
   String get mediaVideo => 'Video';

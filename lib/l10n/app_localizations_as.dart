@@ -333,8 +333,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get settingsNetwork => 'নেটৱৰ্ক';
 
   @override
-  String get settingsNetworkDesc =>
-      'ব্যৱহাৰকাৰী এজেন্ট, প্ৰমাণপত্ৰ, DNS আৰু প্ৰক্সি';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ট্ৰেকিং ছাৰ্ভিচ আৰু ছাইন-ইন';
@@ -718,7 +717,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get dcRecommended => 'পৰামৰ্শ দিয়া হৈছে';
 
   @override
-  String get dcConnecting => 'সংযোগ...';
+  String get dcConnecting => 'সংযোগ…';
 
   @override
   String get dcDisconnected => 'সংযোগ কৰা হোৱা নাই';
@@ -834,7 +833,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get settingsSyncStatSettings => 'ছেটিংছ';
 
   @override
-  String get settingsSyncStatTitles => 'শিৰোনাম';
+  String get settingsSyncStatTitles => 'শিৰোনামসমূহ';
 
   @override
   String get settingsSyncStatShelf => 'ৰিজ্যুম কৰক';
@@ -946,7 +945,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get settingsSyncNow => 'এতিয়া ছিঙ্ক কৰক';
 
   @override
-  String get settingsSyncRunning => 'ছিংকিং...';
+  String get settingsSyncRunning => 'ছিংকিং…';
 
   @override
   String get settingsSyncNever => 'এতিয়াও ছিংক কৰা হোৱা নাই';
@@ -1341,7 +1340,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get defaultFont => 'ডিফল্ট';
 
   @override
-  String get materialYou => 'সামগ্ৰী আপুনি';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'ছিষ্টেমৰ পৰা ডাইনামিক ৰং';
@@ -1401,7 +1400,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get checkNow => 'এতিয়াই পৰীক্ষা কৰা';
 
   @override
-  String get userAgent => 'ব্যৱহাৰকাৰী-এজেন্ট';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ডিফল্ট';
@@ -1412,7 +1411,7 @@ class AppLocalizationsAs extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-অভাৰ-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'ডিফল্ট (Cloudflare)';
@@ -1538,7 +1537,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get contributorsLoadFailed => 'অৱদানকাৰীসকলক লোড কৰিব পৰা নগল';
 
   @override
-  String get forks => 'কাঁটাচামুচ';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu-ৰ ওপৰত বনোৱা প্ৰকল্প';
@@ -1723,7 +1722,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get linkSettingsFailed => 'ছিষ্টেম ছেটিংছ খুলিব পৰা নগল';
 
   @override
-  String get discordRichPresence => 'ৰিচ প্ৰেজেন্স';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1856,7 +1855,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord টোকেন আতৰোৱা হৈছে';
 
   @override
-  String get discordRichPresenceRow => 'ডিচকৰ্ড ৰিচ প্ৰেজেন্স';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -2149,7 +2148,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String serviceError(String service, String error) {
-    return '__পি০__: __পি১__';
+    return '$service: $error';
   }
 
   @override
@@ -3203,7 +3202,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get readingTab => 'পঢ়াৰ টেব';
 
   @override
-  String get readingTabDesc => 'তৃতীয় টেবে কোনবোৰ এক্সটেনছন দেখুৱাব';
+  String get readingTabDesc => 'শেষৰ টেবে কোনবোৰ এক্সটেনচন দেখুৱায়';
 
   @override
   String get firstTab => 'প্ৰথম টেব';
@@ -3773,6 +3772,11 @@ class AppLocalizationsAs extends AppLocalizations {
   String get continueWatching => 'চাই থকা অব্যাহত ৰখা';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'পঢ়া অব্যাহত ৰখা';
 
   @override
@@ -3890,11 +3894,11 @@ class AppLocalizationsAs extends AppLocalizations {
   String get mostWatchedThisMonth => 'এই মাহত আটাইতকৈ বেছি চোৱা';
 
   @override
-  String get repoLinksAdded => 'ৰিপো লিংক সফলভাৱে যোগ হৈছে!';
+  String get repoLinksAdded => 'ৰেপো লিংক যোগ কৰা হৈছে';
 
   @override
   String repoLinkConfirm(String url) {
-    return 'এই ভঁৰাল যোগ কৰক?\n\n__পি০__\n\nকেৱল আপুনি বিশ্বাস কৰা উৎসৰ পৰা ভঁৰাল যোগ কৰক।';
+    return 'এই ভঁৰাল যোগ কৰক?\n\n$url\n\nকেৱল আপুনি বিশ্বাস কৰা উৎসৰ পৰা ভঁৰাল যোগ কৰক।';
   }
 
   @override
@@ -4049,7 +4053,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String userTitle(String name, String title) {
-    return '__পি০__ · __পি১__';
+    return '$name · $title';
   }
 
   @override
@@ -4275,7 +4279,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String syncWillRemove(int count, String name) {
-    return '$count $name ৰ পৰা মচি পেলোৱা হব।';
+    return '$count ৰ পৰা $name মচি পেলোৱা হব';
   }
 
   @override
@@ -4449,7 +4453,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String syncPushFailed(String service, String error) {
-    return '__পি০__: __পি১__';
+    return '$service: $error';
   }
 
   @override
@@ -4696,7 +4700,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get commentsLoadMore => 'অধিক মন্তব্য লোড কৰা';
 
   @override
-  String get commentsEmpty => 'এতিয়াও কোনো মন্তব্য নাই। প্ৰথমজন হোৱা!';
+  String get commentsEmpty => 'এতিয়াও কোনো মন্তব্য নাই';
 
   @override
   String get commentsEmptyFiltered => 'এই ফিল্টাৰৰ বাবে কোনো মন্তব্য নাই';
@@ -4781,7 +4785,7 @@ class AppLocalizationsAs extends AppLocalizations {
       'ভলিউমৰ পিছফালে বাৰ্ক’ডৰ ওপৰত ছপা ISBN টাইপ কৰা।';
 
   @override
-  String get barcodeIsbnHint => 'আই এছ বি এন';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'এইটো সঠিক ISBN নহয়';
@@ -5211,7 +5215,8 @@ class AppLocalizationsAs extends AppLocalizations {
   String get settingsWatch => 'চোৱা আৰু পঢ়া';
 
   @override
-  String get settingsWatchDesc => 'পৰ্বৰ তালিকা, উৎস মিলোৱা আৰু পৰ্বৰ বিৱৰণ';
+  String get settingsWatchDesc =>
+      'এনিমে, মাংগা আৰু উপন্যাস বিকল্প, স্থানীয় খেল আৰু অংশীদাৰী অবিকল্পিত';
 
   @override
   String get watchSettingsLayout => 'পৰ্বৰ তালিকা';
@@ -5599,10 +5604,10 @@ class AppLocalizationsAs extends AppLocalizations {
   String get watchStatusUntested => 'এতিয়াও পৰীক্ষা কৰা হোৱা নাই';
 
   @override
-  String get watchStatusTesting => 'সংযোগ পৰীক্ষণ...';
+  String get watchStatusTesting => 'সংযোগ পৰীক্ষণ…';
 
   @override
-  String get watchStatusSolving => 'ক্লাউডফ্লেয়াৰ চেক পাছ কৰি...';
+  String get watchStatusSolving => 'ক্লাউডফ্লেয়াৰ চেক পাছ কৰি…';
 
   @override
   String watchSolvedBackground(int seconds) {
@@ -6648,7 +6653,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get castTitle => 'ডিভাইচলৈ কাষ্ট কৰক';
 
   @override
-  String get castSearching => 'আপোনাৰ নেটৱৰ্কত ডিভাইচ বিচাৰিছে...';
+  String get castSearching => 'আপোনাৰ নেটৱৰ্কত ডিভাইচ বিচাৰিছে…';
 
   @override
   String get castNoDevices =>
@@ -7397,7 +7402,7 @@ class AppLocalizationsAs extends AppLocalizations {
       other: '$count ডাউনলোড হয়',
       one: '১ ডাউনলোড',
     );
-    return '$_temp0 · __পি০__';
+    return '$_temp0 $size';
   }
 
   @override
@@ -7455,7 +7460,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String downloadMetaSaved(String path) {
-    return 'সংৰক্ষণ কৰা হৈছে। আপোনাৰ ফাইলসমূহ $path ত ৰাখক।';
+    return 'সংৰক্ষণ কৰা হৈছে। আপোনাৰ ফাইলসমূহ $path ত ৰাখক';
   }
 
   @override
@@ -7465,7 +7470,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get downloadPickStream => 'কোনটো ষ্ট্ৰীম ডাউনলোড কৰিবা?';
 
   @override
-  String get downloadPickSubtitle => 'কোনটো ছাবটাইটেল ডাউনলোড কৰিবা?';
+  String get downloadPickSubtitle => 'কোনবোৰ ছাবটাইটেল ডাউনলোড কৰক?';
 
   @override
   String get downloadPickAudio => 'কোনটো অডিঅ’ ট্ৰেক ডাউনলোড কৰিবা?';
@@ -7999,22 +8004,22 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String sourceFoundEpisode(String number, String source) {
-    return '$number খণ্ডটো $source ত ওলাইছে।';
+    return '$number খণ্ডটো $source ত ওলাইছে';
   }
 
   @override
   String sourceFoundEpisodes(String from, String to, String source) {
-    return '$from–$to খণ্ডবোৰ $source ত ওলাইছে।';
+    return '$from–$to খণ্ডবোৰ $source ত ওলাইছে';
   }
 
   @override
   String sourceFoundChapter(String number, String source) {
-    return 'অধ্যায় $number $source ত ওলাইছে।';
+    return 'অধ্যায় $number $source ত ওলাইছে';
   }
 
   @override
   String sourceFoundChapters(String from, String to, String source) {
-    return 'অধ্যায় $from–$to $source ত বাহিৰত আছে।';
+    return 'অধ্যায় $from–$to $source ত বাহিৰত আছে';
   }
 
   @override
@@ -8075,7 +8080,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get sourceCheckNowDesc => 'সূচী আৰু এৰি যোৱাৰ নিয়মসমূহ আওকাণ কৰে';
 
   @override
-  String get sourceChecking => 'চেক কৰি আছে...';
+  String get sourceChecking => 'চেক কৰি আছে…';
 
   @override
   String sourceCheckResult(int count) {
@@ -8179,7 +8184,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get sourceOpenTitle => 'মুকলি শিৰোনাম';
 
   @override
-  String get extensionsLoading => 'লোডিং এক্সটেনচন...';
+  String get extensionsLoading => 'লোডিং এক্সটেনচন…';
 
   @override
   String get updateWhatsNew => 'নতুন কি';
@@ -8191,13 +8196,13 @@ class AppLocalizationsAs extends AppLocalizations {
   String get updateSkipVersion => 'এই সংস্কৰণ এৰি দিয়ক';
 
   @override
-  String get updatePreparing => 'প্ৰস্তুতি...';
+  String get updatePreparing => 'প্ৰস্তুতি…';
 
   @override
   String get updateDownloading => 'ডাউনলোড কৰা হৈছে';
 
   @override
-  String get updateInstalling => 'ইনস্টল...';
+  String get updateInstalling => 'ইনস্টল…';
 
   @override
   String updateSizeOf(String done, String total) {
@@ -8206,7 +8211,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String updateSpeed(String speed) {
-    return '__পি০__/ছ';
+    return '$speed/ছ';
   }
 
   @override
@@ -8425,7 +8430,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String layoutMoveTo(String zone) {
-    return '$zone লৈ যাওক।';
+    return '$zone লৈ যাওক';
   }
 
   @override
@@ -8627,7 +8632,7 @@ class AppLocalizationsAs extends AppLocalizations {
   String get stepWaiting => 'অপেক্ষা কৰি আছে';
 
   @override
-  String get stepChecking => 'চেক কৰি আছে...';
+  String get stepChecking => 'চেক কৰি আছে…';
 
   @override
   String get stepUpToDate => 'আপ টু ডেট';
@@ -8645,7 +8650,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String stepWillUpdateTo(String version) {
-    return '$version লৈ আপডেট কৰা হ\'ব।';
+    return '$version লৈ আপডেট কৰা হ\'ব';
   }
 
   @override
@@ -8678,7 +8683,7 @@ class AppLocalizationsAs extends AppLocalizations {
       'ডেস্কটপ সম্প্ৰসাৰণ ব্যৱস্থাপকসমূহে ইয়াক পুনৰ সংস্থাপন নকৰালৈকে কাম কৰা বন্ধ কৰে। পৰৱৰ্তী সময়ত আপুনি এটা ইনষ্টল বা খোলাৰ সময়ত ইয়াক পুনৰ ডাউনলোড কৰা হয়।';
 
   @override
-  String get runtimePreparing => 'ৰানটাইম প্ৰস্তুত কৰা হৈছে...';
+  String get runtimePreparing => 'ৰানটাইম প্ৰস্তুত কৰা হৈছে…';
 
   @override
   String get calendarAll => 'সকলো';
@@ -8893,7 +8898,7 @@ class AppLocalizationsAs extends AppLocalizations {
 
   @override
   String shortcutTaken(String action) {
-    return '$action ৰ পৰা লোৱা হৈছে।';
+    return '$action ৰ পৰা লোৱা হৈছে';
   }
 
   @override
@@ -8986,7 +8991,7 @@ class AppLocalizationsAs extends AppLocalizations {
       'ডাৰ্টটছুৱে এবাৰ নিজৰ ভিডিঅ’ ইঞ্জিন আনে। প্লেবেক ৰেডি হোৱাৰ লগে লগে আৰম্ভ হয়।';
 
   @override
-  String get playerDownloadStarting => 'ডাউনলোড আৰম্ভ...';
+  String get playerDownloadStarting => 'ডাউনলোড আৰম্ভ…';
 
   @override
   String get playerDownloadFailedTitle => 'খেলুৱৈজনক পাব পৰা নাছিল';
@@ -9009,7 +9014,7 @@ class AppLocalizationsAs extends AppLocalizations {
       'প্লেয়াৰটো পুনৰ ডাউনলোড নোহোৱালৈকে ভিডিঅ’বোৰ চলিব নোৱাৰিব।';
 
   @override
-  String get trailerLoading => 'ট্ৰেইলাৰ লোড কৰা হৈছে...';
+  String get trailerLoading => 'ট্ৰেইলাৰ লোড কৰা হৈছে…';
 
   @override
   String get trailerFailed =>

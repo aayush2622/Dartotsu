@@ -336,8 +336,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get settingsNetwork => 'Sieć';
 
   @override
-  String get settingsNetworkDesc =>
-      'Agent użytkownika, certyfikaty, DNS i proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Serwis śledzenia i logowanie';
@@ -1354,7 +1353,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get defaultFont => 'Domyślna';
 
   @override
-  String get materialYou => 'Materialny Ty';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Dynamiczny kolor z systemu';
@@ -1414,7 +1413,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get checkNow => 'Sprawdź teraz';
 
   @override
-  String get userAgent => 'Agent użytkownika';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Domyślny';
@@ -1551,7 +1550,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get contributorsLoadFailed => 'Nie udało się wczytać współtwórców';
 
   @override
-  String get forks => 'Widelce';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projekty zbudowane na bazie Dartotsu';
@@ -1743,7 +1742,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get linkSettingsFailed => 'Nie udało się otworzyć ustawień systemu';
 
   @override
-  String get discordRichPresence => 'Bogata obecność';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1877,7 +1876,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Usunięto token Discorda';
 
   @override
-  String get discordRichPresenceRow => 'Bogata obecność Discord';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3804,6 +3803,11 @@ class AppLocalizationsPl extends AppLocalizations {
   String get continueWatching => 'Kontynuuj oglądanie';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'Kontynuuj czytanie';
 
   @override
@@ -4676,7 +4680,7 @@ class AppLocalizationsPl extends AppLocalizations {
   String get commentsSpoiler => 'Spoiler';
 
   @override
-  String get commentsGif => 'GIF-y';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => 'Szukaj GIF-ów';

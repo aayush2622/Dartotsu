@@ -336,8 +336,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get settingsNetwork => 'നെറ്റ്‌വർക്ക്';
 
   @override
-  String get settingsNetworkDesc =>
-      'ഉപയോക്തൃ ഏജൻ്റ്, സർട്ടിഫിക്കറ്റുകൾ, DNS, പ്രോക്സി';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ട്രാക്കിംഗ് സർവീസും സൈൻ ഇനും';
@@ -1360,7 +1359,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get defaultFont => 'ഡിഫോൾട്ട്';
 
   @override
-  String get materialYou => 'മെറ്റീരിയൽ നിങ്ങൾ';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'സിസ്റ്റത്തിൽ നിന്നുള്ള ഡൈനാമിക് നിറം';
@@ -1420,7 +1419,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get checkNow => 'ഇപ്പോൾ പരിശോധിക്കൂ';
 
   @override
-  String get userAgent => 'ഉപയോക്തൃ-ഏജൻ്റ്';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ഡിഫോൾട്ട്';
@@ -1431,7 +1430,7 @@ class AppLocalizationsMl extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-ഓവർ-എച്ച്ടിടിപിഎസ്';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'ഡിഫോൾട്ട് (Cloudflare)';
@@ -1558,7 +1557,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get contributorsLoadFailed => 'കോൺട്രിബ്യൂട്ടർമാരെ ലോഡ് ചെയ്യാനായില്ല';
 
   @override
-  String get forks => 'ഫോർക്കുകൾ';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu-വിന്റെ മുകളിൽ ഉണ്ടാക്കിയ പ്രോജക്റ്റുകൾ';
@@ -1748,7 +1747,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get linkSettingsFailed => 'സിസ്റ്റം സെറ്റിംഗ്സ് തുറക്കാനായില്ല';
 
   @override
-  String get discordRichPresence => 'സമ്പന്നമായ സാന്നിധ്യം';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1883,7 +1882,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord ടോക്കൺ നീക്കം ചെയ്തു';
 
   @override
-  String get discordRichPresenceRow => 'ഡിസ്കോർഡ് സമ്പന്നമായ സാന്നിധ്യം';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'ഓൺ · ലുക്ക് മാറ്റാൻ ടാപ്പ് ചെയ്യൂ';
@@ -3814,6 +3813,11 @@ class AppLocalizationsMl extends AppLocalizations {
   String get continueWatching => 'കാണുന്നത് തുടരൂ';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'വായന തുടരൂ';
 
   @override
@@ -4832,7 +4836,7 @@ class AppLocalizationsMl extends AppLocalizations {
       'വോള്യത്തിന്റെ പിൻഭാഗത്ത് ബാർകോഡിന് മുകളിൽ അച്ചടിച്ച ISBN ടൈപ്പ് ചെയ്യൂ.';
 
   @override
-  String get barcodeIsbnHint => 'ഐ.എസ്.ബി.എൻ';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'അത് സാധുവായ ISBN അല്ല';
@@ -5723,7 +5727,7 @@ class AppLocalizationsMl extends AppLocalizations {
   String get playerSectionEngine => 'എൻജിൻ';
 
   @override
-  String get playerSectionMpv => 'എംപിവി';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'പ്ലേബാക്ക് വേഗത';

@@ -333,7 +333,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get settingsNetwork => 'شبکه';
 
   @override
-  String get settingsNetworkDesc => 'د کارونکي اجنټ، سندونه، DNS او پراکسي';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'د تعقیب خدمت او ننوتل';
@@ -1339,7 +1339,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get defaultFont => 'ډیفالټ';
 
   @override
-  String get materialYou => 'مواد تاسو';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'د سیستم متحرک رنګ';
@@ -1399,7 +1399,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get checkNow => 'همدا اوس وګوره';
 
   @override
-  String get userAgent => 'د کارونکي اجنټ';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ډیفالټ';
@@ -1536,7 +1536,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get contributorsLoadFailed => 'ونډه والا پورته نه شول';
 
   @override
-  String get forks => 'فورکس';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'هغه پروژې چې پر Dartotsu جوړې شوې';
@@ -1725,7 +1725,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get linkSettingsFailed => 'د سیستم تنظیمات ونه پرانیستل شول';
 
   @override
-  String get discordRichPresence => 'بډایه حضور';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1858,7 +1858,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get discordTokenRemovedSnack => 'د Discord ټوکن لرې شو';
 
   @override
-  String get discordRichPresenceRow => 'د بډایه شتون اختلاف';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'روښانه · د بڼې د بدلولو لپاره ټچ کړه';
@@ -3676,7 +3676,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get sortNewest => 'تر ټولو نوي';
 
   @override
-  String get sortAz => 'A-Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'تر ټولو خوښ شوي';
@@ -3772,6 +3772,11 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get continueWatching => 'کتل دوام ورکړه';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'لوستل دوام ورکړه';

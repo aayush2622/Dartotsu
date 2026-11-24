@@ -335,7 +335,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get settingsNetwork => 'Mtandao';
 
   @override
-  String get settingsNetworkDesc => 'Wakala wa mtumiaji, vyeti, DNS na proksi';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Huduma ya ufuatiliaji na kuingia';
@@ -1354,7 +1354,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get defaultFont => 'Chaguomsingi';
 
   @override
-  String get materialYou => 'Nyenzo Wewe';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Rangi zinazobadilika kutoka kwenye mfumo';
@@ -1414,7 +1414,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get checkNow => 'Angalia sasa';
 
   @override
-  String get userAgent => 'Mtumiaji-Wakala';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Chaguomsingi';
@@ -1425,7 +1425,7 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-juu-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Chaguomsingi (Cloudflare)';
@@ -1551,7 +1551,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get contributorsLoadFailed => 'Imeshindwa kupakia wachangiaji';
 
   @override
-  String get forks => 'Uma';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Miradi iliyojengwa juu ya Dartotsu';
@@ -1741,7 +1741,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get linkSettingsFailed => 'Imeshindwa kufungua mipangilio ya mfumo';
 
   @override
-  String get discordRichPresence => 'Uwepo Tajiri';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1875,7 +1875,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Tokeni ya Discord imeondolewa';
 
   @override
-  String get discordRichPresenceRow => 'Discord Tajiri Uwepo';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3796,6 +3796,11 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get continueWatching => 'Endelea kutazama';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Endelea kusoma';

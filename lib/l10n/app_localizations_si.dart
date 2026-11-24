@@ -334,8 +334,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get settingsNetwork => 'ජාලය';
 
   @override
-  String get settingsNetworkDesc =>
-      'පරිශීලක නියෝජිතයා, සහතික, DNS සහ ප්‍රොක්සි';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ට්‍රැකින් සර්විස් සහ සයින් ඉන්';
@@ -1349,7 +1348,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get defaultFont => 'ඩිෆෝල්ට්';
 
   @override
-  String get materialYou => 'ද්රව්ය ඔබ';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'සිස්ටම් එකෙන් ඩයිනමික් පාට';
@@ -1410,7 +1409,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get checkNow => 'දැන්ම චෙක් කරන්න';
 
   @override
-  String get userAgent => 'පරිශීලක නියෝජිතයා';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ඩිෆෝල්ට්';
@@ -1548,7 +1547,7 @@ class AppLocalizationsSi extends AppLocalizations {
       'කොන්ට්‍රිබියුටර්ස්ව ලෝඩ් කරන්න බැරි වුණා';
 
   @override
-  String get forks => 'ගෑරුප්පු';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu උඩ හදපු ප්‍රොජෙක්ට්ස්';
@@ -1739,7 +1738,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get linkSettingsFailed => 'සිස්ටම් සැකසුම් විවෘත කරන්න බැරි වුණා';
 
   @override
-  String get discordRichPresence => 'පොහොසත් පැමිණීම';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1873,7 +1872,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord ටෝකන් එක අයින් වුණා';
 
   @override
-  String get discordRichPresenceRow => 'අසමගිය පොහොසත් පැමිණීම';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'ඔන් · පෙනුම මාරු කරන්න ටැප් කරන්න';
@@ -3697,7 +3696,7 @@ class AppLocalizationsSi extends AppLocalizations {
   String get sortNewest => 'අලුත්ම';
 
   @override
-  String get sortAz => 'A-Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'වැඩියෙන්ම ෆේවරිට් කරපු';
@@ -3793,6 +3792,11 @@ class AppLocalizationsSi extends AppLocalizations {
 
   @override
   String get continueWatching => 'බලන එක දිගටම කරන්න';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'කියවන එක දිගටම කරන්න';
@@ -4807,7 +4811,7 @@ class AppLocalizationsSi extends AppLocalizations {
       'වෝල්යුම් එකක පිටිපස්සේ බාර්කෝඩ් එකට උඩින් මුද්‍රණය කරලා තියෙන ISBN එක ටයිප් කරන්න.';
 
   @override
-  String get barcodeIsbnHint => 'අයිඑස්බීඑන්';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'ඒක වලංගු ISBN එකක් නෙවෙයි';

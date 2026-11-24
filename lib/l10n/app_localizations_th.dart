@@ -333,7 +333,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get settingsNetwork => 'เครือข่าย';
 
   @override
-  String get settingsNetworkDesc => 'ตัวแทนผู้ใช้ ใบรับรอง DNS และพร็อกซี';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'บริการติดตามและการเข้าสู่ระบบ';
@@ -1332,7 +1332,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get defaultFont => 'ค่าเริ่มต้น';
 
   @override
-  String get materialYou => 'วัสดุคุณ';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'สีไดนามิกจากระบบ';
@@ -1392,7 +1392,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get checkNow => 'เช็กเลย';
 
   @override
-  String get userAgent => 'ผู้ใช้-ตัวแทน';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ค่าเริ่มต้น';
@@ -1403,7 +1403,7 @@ class AppLocalizationsTh extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS บน HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'ค่าเริ่มต้น (Cloudflare)';
@@ -1528,7 +1528,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get contributorsLoadFailed => 'โหลดรายชื่อผู้ร่วมพัฒนาไม่ได้';
 
   @override
-  String get forks => 'ส้อม';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'โปรเจกต์ที่สร้างต่อจาก Dartotsu';
@@ -1714,7 +1714,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get linkSettingsFailed => 'เปิดการตั้งค่าระบบไม่ได้';
 
   @override
-  String get discordRichPresence => 'การแสดงตนอันอุดมสมบูรณ์';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1846,7 +1846,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get discordTokenRemovedSnack => 'ลบโทเคน Discord แล้ว';
 
   @override
-  String get discordRichPresenceRow => 'ไม่ลงรอยกัน Rich Presence';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'เปิดอยู่ · แตะเพื่อเปลี่ยนหน้าตา';
@@ -3660,7 +3660,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get sortNewest => 'ใหม่สุด';
 
   @override
-  String get sortAz => 'ก-ฮ';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'โปรดที่สุด';
@@ -3755,6 +3755,11 @@ class AppLocalizationsTh extends AppLocalizations {
 
   @override
   String get continueWatching => 'ดูต่อ';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'อ่านต่อ';
@@ -4613,7 +4618,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get commentsSpoiler => 'สปอยล์';
 
   @override
-  String get commentsGif => 'กิฟ';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => 'ค้นหา GIF';
@@ -4759,7 +4764,7 @@ class AppLocalizationsTh extends AppLocalizations {
       'พิมพ์ ISBN ที่อยู่เหนือบาร์โค้ดด้านหลังเล่ม';
 
   @override
-  String get barcodeIsbnHint => 'ไอเอสบีเอ็น';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'นี่ไม่ใช่ ISBN ที่ถูกต้อง';
@@ -5634,7 +5639,7 @@ class AppLocalizationsTh extends AppLocalizations {
   String get playerSectionEngine => 'เอนจิน';
 
   @override
-  String get playerSectionMpv => 'เอ็มพีวี';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'ความเร็วในการเล่น';

@@ -333,7 +333,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get settingsNetwork => 'Jaringan';
 
   @override
-  String get settingsNetworkDesc => 'Agen pengguna, sertifikat, DNS dan proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Layanan pelacakan dan login';
@@ -1347,7 +1347,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get defaultFont => 'Bawaan';
 
   @override
-  String get materialYou => 'Materi Anda';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Warna dinamis dari sistem';
@@ -1407,7 +1407,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get checkNow => 'Cek sekarang';
 
   @override
-  String get userAgent => 'Agen-Pengguna';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Bawaan';
@@ -1418,7 +1418,7 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-melalui-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Bawaan (Cloudflare)';
@@ -1544,7 +1544,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get contributorsLoadFailed => 'Kontributor tidak bisa dimuat';
 
   @override
-  String get forks => 'Garpu';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Proyek yang dibangun di atas Dartotsu';
@@ -1734,7 +1734,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get linkSettingsFailed => 'Pengaturan sistem tidak bisa dibuka';
 
   @override
-  String get discordRichPresence => 'Kehadiran yang Kaya';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1867,7 +1867,7 @@ class AppLocalizationsId extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token Discord dihapus';
 
   @override
-  String get discordRichPresenceRow => 'Kehadiran Kaya Perselisihan';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3783,6 +3783,11 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get continueWatching => 'Lanjut menonton';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Lanjut membaca';

@@ -335,8 +335,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get settingsNetwork => 'Мережа';
 
   @override
-  String get settingsNetworkDesc =>
-      'Агент користувача, сертифікати, DNS і проксі';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Сервіс трекінгу та вхід';
@@ -1353,7 +1352,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get defaultFont => 'Типовий';
 
   @override
-  String get materialYou => 'Матеріал Ви';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Динамічні кольори з системи';
@@ -1413,7 +1412,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get checkNow => 'Перевірити зараз';
 
   @override
-  String get userAgent => 'Користувач-Агент';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Типовий';
@@ -1424,7 +1423,7 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS через HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Типовий (Cloudflare)';
@@ -1550,7 +1549,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get contributorsLoadFailed => 'Не вдалося завантажити учасників';
 
   @override
-  String get forks => 'Вилки';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Проєкти на основі Dartotsu';
@@ -1740,7 +1739,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get linkSettingsFailed => 'Не вдалося відкрити налаштування системи';
 
   @override
-  String get discordRichPresence => 'Багата присутність';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -3691,7 +3690,7 @@ class AppLocalizationsUk extends AppLocalizations {
   String get sortNewest => 'Найновіше';
 
   @override
-  String get sortAz => 'А–Я';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'Найбільш улюблене';
@@ -3793,6 +3792,11 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get continueWatching => 'Продовжити перегляд';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Продовжити читання';

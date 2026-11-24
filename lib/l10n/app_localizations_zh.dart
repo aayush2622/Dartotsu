@@ -328,7 +328,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsNetwork => '网络';
 
   @override
-  String get settingsNetworkDesc => '用户代理、证书、DNS 和代理';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => '追踪服务与登录';
@@ -1302,7 +1302,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get defaultFont => '默认';
 
   @override
-  String get materialYou => '物质的你';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => '跟随系统的动态取色';
@@ -1362,7 +1362,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get checkNow => '立即检查';
 
   @override
-  String get userAgent => '用户代理';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => '默认';
@@ -1373,7 +1373,7 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'HTTPS 上的 DNS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => '默认（Cloudflare）';
@@ -1496,7 +1496,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get contributorsLoadFailed => '无法加载贡献者';
 
   @override
-  String get forks => '叉子';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => '基于 Dartotsu 构建的项目';
@@ -1675,7 +1675,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get linkSettingsFailed => '无法打开系统设置';
 
   @override
-  String get discordRichPresence => '丰富的存在';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1805,7 +1805,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get discordTokenRemovedSnack => '已删除 Discord Token';
 
   @override
-  String get discordRichPresenceRow => '不和谐丰富的存在';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => '已开启 · 点按更改外观';
@@ -2090,7 +2090,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String serviceError(String service, String error) {
-    return '$service：$error';
+    return '$service: $error';
   }
 
   @override
@@ -3597,7 +3597,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get sortNewest => '最新';
 
   @override
-  String get sortAz => 'A-Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => '收藏最多';
@@ -3692,6 +3692,11 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get continueWatching => '继续观看';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => '继续阅读';
@@ -4364,7 +4369,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String syncPushFailed(String service, String error) {
-    return '$service：$error';
+    return '$service: $error';
   }
 
   @override
@@ -4544,7 +4549,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get commentsSpoiler => '剧透';
 
   @override
-  String get commentsGif => '动图';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => '搜索 GIF';
@@ -4686,7 +4691,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get barcodeIntroManual => '输入印在单行本背面条形码上方的 ISBN。';
 
   @override
-  String get barcodeIsbnHint => '国际标准书号';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => '这不是有效的 ISBN';
@@ -5539,7 +5544,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get playerSectionEngine => '引擎';
 
   @override
-  String get playerSectionMpv => '多用途车';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => '播放速度';
@@ -5872,7 +5877,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get playerUseMpvConfDesc => '开始播放时应用 mpv.conf 中的选项';
 
   @override
-  String get playerMpvConf => 'mpv配置文件';
+  String get playerMpvConf => 'mpv.conf';
 
   @override
   String get playerMpvConfEdit => '编辑 mpv 配置';

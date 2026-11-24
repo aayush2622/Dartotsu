@@ -334,7 +334,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get settingsNetwork => 'Netværk';
 
   @override
-  String get settingsNetworkDesc => 'Brugeragent, certifikater, DNS og proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Sporingstjeneste og login';
@@ -1344,7 +1344,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get defaultFont => 'Standard';
 
   @override
-  String get materialYou => 'Materiale dig';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Dynamisk farve fra systemet';
@@ -1404,7 +1404,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get checkNow => 'Tjek nu';
 
   @override
-  String get userAgent => 'Bruger-agent';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Standard';
@@ -1541,7 +1541,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get contributorsLoadFailed => 'Kunne ikke indlæse bidragydere';
 
   @override
-  String get forks => 'Forgafler';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projekter bygget oven på Dartotsu';
@@ -1727,7 +1727,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get linkSettingsFailed => 'Kunne ikke åbne systemindstillingerne';
 
   @override
-  String get discordRichPresence => 'Rig tilstedeværelse';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1860,7 +1860,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord-token fjernet';
 
   @override
-  String get discordRichPresenceRow => 'Discord rig tilstedeværelse';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'Til · tryk for at ændre udseendet';
@@ -3779,6 +3779,11 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get continueWatching => 'Fortsæt med at se';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Fortsæt med at læse';

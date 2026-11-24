@@ -336,8 +336,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsNetwork => 'Réseau';
 
   @override
-  String get settingsNetworkDesc =>
-      'Agent utilisateur, certificats, DNS et proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Service de suivi et connexion';
@@ -1360,7 +1359,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get defaultFont => 'Par défaut';
 
   @override
-  String get materialYou => 'Matériel Vous';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Couleurs dynamiques du système';
@@ -1421,7 +1420,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get checkNow => 'Vérifier maintenant';
 
   @override
-  String get userAgent => 'Agent utilisateur';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Par défaut';
@@ -1432,7 +1431,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS sur HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Par défaut (Cloudflare)';
@@ -1559,7 +1558,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Impossible de charger les contributeurs';
 
   @override
-  String get forks => 'Fourchettes';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projets basés sur Dartotsu';
@@ -1750,7 +1749,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get linkSettingsFailed => 'Impossible d\'ouvrir les réglages système';
 
   @override
-  String get discordRichPresence => 'Présence riche';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1883,7 +1882,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token Discord supprimé';
 
   @override
-  String get discordRichPresenceRow => 'Présence riche en discorde';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -2177,7 +2176,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String serviceError(String service, String error) {
-    return '$service : $error';
+    return '$service: $error';
   }
 
   @override
@@ -3711,7 +3710,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sortNewest => 'Les plus récents';
 
   @override
-  String get sortAz => 'A à Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'Les plus mis en favoris';
@@ -3807,6 +3806,11 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get continueWatching => 'Continuer à regarder';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Continuer à lire';
@@ -4492,7 +4496,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String syncPushFailed(String service, String error) {
-    return '$service : $error';
+    return '$service: $error';
   }
 
   @override
@@ -4567,7 +4571,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get syncChangeScore => 'Note';
 
   @override
-  String get syncChangeDates => '';
+  String get syncChangeDates => 'Dates';
 
   @override
   String get syncChangeRepeat => 'Nombre de revisionnages';
@@ -5484,7 +5488,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get sourceTagMovies => 'Films et séries';
 
   @override
-  String get sourceTagAdult => '';
+  String get sourceTagAdult => '18+';
 
   @override
   String get sourceHiddenByTags => 'Masqué par des balises';
@@ -5727,7 +5731,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get playerSectionEngine => 'Moteur';
 
   @override
-  String get playerSectionMpv => 'monospace';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'Vitesse de lecture';

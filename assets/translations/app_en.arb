@@ -876,6 +876,18 @@
     "comickAccountOptions": "Comick account options",
     "comickClientId": "Comick Client ID",
     "comickClientIdDesc": "Custom client ID registered on comick.dev",
+    "traktClientId": "Trakt Client ID",
+    "traktClientIdDesc": "Sign in with your own Trakt app instead of the built-in one",
+    "traktCreateApp": "Create a Trakt app",
+    "traktCreateAppDesc": "Opens your apps on trakt.tv",
+    "traktRedirectHelp": "On trakt.tv/oauth/applications create an app and add these Redirect URIs, one per line:\n\n{uris}\n\nThen paste its Client ID here, save and sign in again.",
+    "@traktRedirectHelp": {
+        "placeholders": {
+            "uris": {
+                "type": "String"
+            }
+        }
+    },
     "couldNotUpdateKitsuSettings": "Could not update your Kitsu settings",
     "titleCanonical": "Canonical",
     "titleRomanized": "Romanized",
@@ -1778,6 +1790,17 @@
         }
     },
     "continueWatching": "Continue Watching",
+    "splitSection": "{section} · {kind}",
+    "@splitSection": {
+        "placeholders": {
+            "section": {
+                "type": "String"
+            },
+            "kind": {
+                "type": "String"
+            }
+        }
+    },
     "continueReading": "Continue Reading",
     "favouriteAnimeSection": "Favourite Anime",
     "favouriteMangaSection": "Favourite Manga",

@@ -114,7 +114,9 @@ class MediaSection extends StatelessWidget {
     kHiddenMediaTitle,
   };
 
-  static bool _showsUnread(String? title) => _unreadSections.contains(title);
+  static bool _showsUnread(String? title) =>
+      title != null &&
+      _unreadSections.any((s) => title == s || title.startsWith('$s · '));
 
   static double? _score(Media media) {
     final raw = (media.userScore ?? 0) > 0

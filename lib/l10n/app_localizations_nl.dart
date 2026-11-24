@@ -335,7 +335,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsNetwork => 'Netwerk';
 
   @override
-  String get settingsNetworkDesc => 'User-agent, certificaten, DNS en proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Trackingservice en inloggen';
@@ -1351,7 +1351,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get defaultFont => 'Standaard';
 
   @override
-  String get materialYou => 'Materiaal jij';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Dynamische kleur van het systeem';
@@ -1411,7 +1411,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get checkNow => 'Nu controleren';
 
   @override
-  String get userAgent => 'Gebruiker-agent';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Standaard';
@@ -1548,7 +1548,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get contributorsLoadFailed => 'Kon de bijdragers niet laden';
 
   @override
-  String get forks => 'Vorken';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projecten gebouwd op Dartotsu';
@@ -1736,7 +1736,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get linkSettingsFailed => 'Kon de systeeminstellingen niet openen';
 
   @override
-  String get discordRichPresence => 'Rijke aanwezigheid';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1870,7 +1870,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord-token verwijderd';
 
   @override
-  String get discordRichPresenceRow => 'Onenigheid Rijke aanwezigheid';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3695,7 +3695,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get sortNewest => 'Nieuwste';
 
   @override
-  String get sortAz => 'A-Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'Meest favoriet';
@@ -3791,6 +3791,11 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get continueWatching => 'Verder kijken';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Verder lezen';
@@ -4811,7 +4816,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Typ de ISBN die boven de barcode achterop een deel staat.';
 
   @override
-  String get barcodeIsbnHint => 'ISBN-nummer';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'Dat is geen geldige ISBN';
@@ -8643,7 +8648,7 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String extensionManagerTitle(String type) {
-    return '';
+    return '$type manager';
   }
 
   @override

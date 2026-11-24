@@ -336,8 +336,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get settingsNetwork => 'Δίκτυο';
 
   @override
-  String get settingsNetworkDesc =>
-      'Πράκτορας χρήστη, πιστοποιητικά, DNS και διακομιστής μεσολάβησης';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Υπηρεσία παρακολούθησης και σύνδεση';
@@ -1368,7 +1367,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get defaultFont => 'Προεπιλογή';
 
   @override
-  String get materialYou => 'Υλικό Εσείς';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Δυναμικό χρώμα από το σύστημα';
@@ -1428,7 +1427,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get checkNow => 'Έλεγχος τώρα';
 
   @override
-  String get userAgent => 'Χρήστης-Πράκτορας';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Προεπιλογή';
@@ -1565,7 +1564,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get contributorsLoadFailed => 'Δεν φορτώθηκαν οι συνεισφέροντες';
 
   @override
-  String get forks => 'Πιρούνια';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Έργα που βασίζονται στο Dartotsu';
@@ -1757,7 +1756,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get linkSettingsFailed => 'Δεν άνοιξαν οι ρυθμίσεις συστήματος';
 
   @override
-  String get discordRichPresence => 'Πλούσια Παρουσία';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1891,7 +1890,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Το token Discord αφαιρέθηκε';
 
   @override
-  String get discordRichPresenceRow => 'Discord Πλούσια Παρουσία';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3723,7 +3722,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get sortNewest => 'Νεότερα';
 
   @override
-  String get sortAz => 'Α–Ζ';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'Πιο αγαπημένα';
@@ -3819,6 +3818,11 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get continueWatching => 'Συνέχισε να βλέπεις';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Συνέχισε να διαβάζεις';

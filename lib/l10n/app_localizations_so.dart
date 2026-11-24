@@ -336,8 +336,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get settingsNetwork => 'Shabakadda';
 
   @override
-  String get settingsNetworkDesc =>
-      'Wakiilka isticmaalaha, shahaadooyinka, DNS iyo wakiil';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Adeegga la socodka iyo gelitaanka';
@@ -1361,7 +1360,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get defaultFont => 'Caadi';
 
   @override
-  String get materialYou => 'Qalabka Adiga';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Midab firfircoon oo nidaamka ka yimaada';
@@ -1421,7 +1420,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get checkNow => 'Hadda hubi';
 
   @override
-  String get userAgent => 'Isticmaalaha-Wakiilka';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Caadi';
@@ -1559,7 +1558,7 @@ class AppLocalizationsSo extends AppLocalizations {
       'Gacan-ka-geystayaasha lama soo rari karo';
 
   @override
-  String get forks => 'Fargeeto';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Mashaariicda lagu dhisay Dartotsu';
@@ -1751,7 +1750,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get linkSettingsFailed => 'Dejimaha nidaamka lama furi karo';
 
   @override
-  String get discordRichPresence => 'Joogitaanka qani';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1886,7 +1885,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token-ka Discord waa la saaray';
 
   @override
-  String get discordRichPresenceRow => 'Joogitaanka hodanka ah ee Discord';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3805,6 +3804,11 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get continueWatching => 'Sii wad daawashada';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Sii wad akhriska';

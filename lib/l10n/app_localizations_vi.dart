@@ -332,8 +332,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get settingsNetwork => 'Mạng';
 
   @override
-  String get settingsNetworkDesc =>
-      'Tác nhân người dùng, chứng chỉ, DNS và proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Dịch vụ theo dõi và đăng nhập';
@@ -1348,7 +1347,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get defaultFont => 'Mặc định';
 
   @override
-  String get materialYou => 'tài liệu bạn';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Màu động từ hệ thống';
@@ -1408,7 +1407,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get checkNow => 'Kiểm tra ngay';
 
   @override
-  String get userAgent => 'Tác nhân người dùng';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Mặc định';
@@ -1419,7 +1418,7 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS qua HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Mặc định (Cloudflare)';
@@ -1546,7 +1545,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Không tải được danh sách người đóng góp';
 
   @override
-  String get forks => 'Nĩa';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Các dự án xây dựng trên Dartotsu';
@@ -1733,7 +1732,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get linkSettingsFailed => 'Không mở được cài đặt hệ thống';
 
   @override
-  String get discordRichPresence => 'Sự hiện diện phong phú';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1866,7 +1865,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Đã xóa token Discord';
 
   @override
-  String get discordRichPresenceRow => 'Sự hiện diện phong phú của Discord';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'Bật · chạm để đổi kiểu hiển thị';
@@ -3781,6 +3780,11 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get continueWatching => 'Xem tiếp';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'Đọc tiếp';

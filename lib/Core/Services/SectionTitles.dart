@@ -8,7 +8,25 @@ String sectionLabel(String title) => title.startsWith(localSectionPrefix)
       )
     : _sectionLabel(title);
 
-String _sectionLabel(String title) => switch (title) {
+const kAnimeSuffix = ' · Anime';
+const kShowsSuffix = ' · Movies & Series';
+
+String _sectionLabel(String title) {
+  for (final (suffix, kind) in [
+    (kAnimeSuffix, () => getString.anime),
+    (kShowsSuffix, () => getString.moviesAndSeries),
+  ]) {
+    if (title.endsWith(suffix)) {
+      return getString.splitSection(
+        _sectionLabel(title.substring(0, title.length - suffix.length)),
+        kind(),
+      );
+    }
+  }
+  return _named(title);
+}
+
+String _named(String title) => switch (title) {
   'Continue Watching' => getString.continueWatching,
   'Continue Reading' => getString.continueReading,
   'Favourite Anime' => getString.favouriteAnimeSection,

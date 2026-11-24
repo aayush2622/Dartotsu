@@ -1,11 +1,19 @@
 import '../../../Core/Preferences/PrefManager.dart';
 import '../../../Core/Services/LayoutPref.dart';
+import '../../../Core/Services/SectionTitles.dart';
 
-const kSimklHomeSections = <String, bool>{
-  'Continue Watching': true,
-  'Plan to Watch': true,
-  'On Hold': true,
-  'Dropped': true,
+const kSimklHomeLists = [
+  'Continue Watching',
+  'Plan to Watch',
+  'On Hold',
+  'Dropped',
+];
+
+final kSimklHomeSections = <String, bool>{
+  for (final list in kSimklHomeLists) ...{
+    '$list$kAnimeSuffix': true,
+    '$list$kShowsSuffix': true,
+  },
 };
 
 const kSimklAnimeSections = <String, bool>{
@@ -76,7 +84,14 @@ class SimklPref {
     PrefLocation.OTHER,
   );
 
-  static final homeLayout = layoutPref('simklHomeLayout', kSimklHomeSections);
+  static final homeLayout = layoutPref(
+    'simklHomeLayout',
+    kSimklHomeSections,
+    splits: {
+      for (final list in kSimklHomeLists)
+        list: ['$list$kAnimeSuffix', '$list$kShowsSuffix'],
+    },
+  );
   static final animeLayout = layoutPref(
     'simklAnimeLayout',
     kSimklAnimeSections,

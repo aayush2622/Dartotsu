@@ -6983,6 +6983,12 @@ abstract class AppLocalizations {
   /// **'Continue Watching'**
   String get continueWatching;
 
+  /// No description provided for @splitSection.
+  ///
+  /// In en, this message translates to:
+  /// **'{section} · {kind}'**
+  String splitSection(String section, String kind);
+
   /// No description provided for @continueReading.
   ///
   /// In en, this message translates to:
@@ -15212,7 +15218,7 @@ abstract class AppLocalizations {
   /// No description provided for @spoilerTapToView.
   ///
   /// In en, this message translates to:
-  /// **' Spoiler, tap to view '**
+  /// **'Spoiler, tap to view'**
   String get spoilerTapToView;
 
   /// No description provided for @mediaVideo.

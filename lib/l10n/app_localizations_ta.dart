@@ -333,8 +333,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsNetwork => 'நெட்வொர்க்';
 
   @override
-  String get settingsNetworkDesc =>
-      'பயனர் முகவர், சான்றிதழ்கள், DNS மற்றும் ப்ராக்ஸி';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'டிராக்கிங் சர்வீஸ் & சைன்-இன்';
@@ -1359,7 +1358,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get defaultFont => 'டீஃபால்ட்';
 
   @override
-  String get materialYou => 'பொருள் நீங்கள்';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'சிஸ்டத்துல இருந்து டைனமிக் கலர்';
@@ -1419,7 +1418,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get checkNow => 'இப்போ செக் பண்ணு';
 
   @override
-  String get userAgent => 'பயனர் முகவர்';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'டீஃபால்ட்';
@@ -1430,7 +1429,7 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-க்கு மேல்-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'டீஃபால்ட் (Cloudflare)';
@@ -1523,7 +1522,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get version => 'வெர்ஷன்';
 
   @override
-  String get gitHub => 'கிட்ஹப்';
+  String get gitHub => 'GitHub';
 
   @override
   String get gitHubDesc => 'சோர்ஸ், இஷ்யூஸ் & ரிலீஸஸ்';
@@ -1556,7 +1555,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get contributorsLoadFailed => 'கான்ட்ரிபியூட்டர்ஸை லோட் பண்ண முடியல';
 
   @override
-  String get forks => 'ஃபோர்க்ஸ்';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu மேல உருவாக்கின ப்ராஜெக்ட்ஸ்';
@@ -1745,7 +1744,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get linkSettingsFailed => 'சிஸ்டம் செட்டிங்ஸை திறக்க முடியல';
 
   @override
-  String get discordRichPresence => 'பணக்கார இருப்பு';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1879,7 +1878,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord டோக்கன் நீக்கப்பட்டுச்சு';
 
   @override
-  String get discordRichPresenceRow => 'டிஸ்கார்ட் ரிச் பிரசன்ஸ்';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3804,6 +3803,11 @@ class AppLocalizationsTa extends AppLocalizations {
   String get continueWatching => 'பார்த்ததை கன்டினியூ பண்ணு';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'படிச்சதை கன்டினியூ பண்ணு';
 
   @override
@@ -4817,7 +4821,7 @@ class AppLocalizationsTa extends AppLocalizations {
       'வால்யூம் பின்னாடி பார்கோடு மேல பிரிண்ட் ஆன ISBN-ஐ டைப் பண்ணு.';
 
   @override
-  String get barcodeIsbnHint => 'ஐஎஸ்பிஎன்';
+  String get barcodeIsbnHint => 'ISBN';
 
   @override
   String get barcodeInvalid => 'இது சரியான ISBN இல்ல';
@@ -5704,7 +5708,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get playerSectionEngine => 'என்ஜின்';
 
   @override
-  String get playerSectionMpv => 'எம்பிவி';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'ப்ளேபேக் ஸ்பீட்';
@@ -8946,7 +8950,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get shortcutPlayerSpeedDown => 'மெதுவான பின்னணி';
 
   @override
-  String get shortcutPlayerSpeedReset => '';
+  String get shortcutPlayerSpeedReset => 'Normal speed';
 
   @override
   String get shortcutPlayerSubtitleToggle => 'வசனங்கள் ஆன் அல்லது ஆஃப்';

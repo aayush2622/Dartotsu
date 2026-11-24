@@ -333,8 +333,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get settingsNetwork => 'नेटवर्क';
 
   @override
-  String get settingsNetworkDesc =>
-      'वापरकर्ता एजंट, प्रमाणपत्रे, DNS आणि प्रॉक्सी';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ट्रॅकिंग सर्व्हिस आणि साइन-इन';
@@ -1343,7 +1342,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get defaultFont => 'डिफॉल्ट';
 
   @override
-  String get materialYou => 'साहित्य आपण';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'सिस्टममधून डायनॅमिक रंग';
@@ -1403,7 +1402,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get checkNow => 'आत्ता तपास';
 
   @override
-  String get userAgent => 'वापरकर्ता-एजंट';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'डिफॉल्ट';
@@ -1414,7 +1413,7 @@ class AppLocalizationsMr extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-ओव्हर-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'डिफॉल्ट (Cloudflare)';
@@ -1540,7 +1539,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get contributorsLoadFailed => 'कॉन्ट्रिब्युटर्स लोड करता आले नाहीत';
 
   @override
-  String get forks => 'काटे';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu वर बनवलेले प्रोजेक्ट्स';
@@ -1729,7 +1728,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get linkSettingsFailed => 'सिस्टम सेटिंग्ज उघडता आल्या नाहीत';
 
   @override
-  String get discordRichPresence => 'समृद्ध उपस्थिती';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1862,7 +1861,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord टोकन काढला';
 
   @override
-  String get discordRichPresenceRow => 'डिसॉर्ड रिच प्रेझेन्स';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'चालू · लूक बदलायला टॅप कर';
@@ -3679,7 +3678,7 @@ class AppLocalizationsMr extends AppLocalizations {
   String get sortNewest => 'नवीन';
 
   @override
-  String get sortAz => 'A-Z';
+  String get sortAz => 'A–Z';
 
   @override
   String get sortMostFavourited => 'सर्वात जास्त आवडलेले';
@@ -3775,6 +3774,11 @@ class AppLocalizationsMr extends AppLocalizations {
 
   @override
   String get continueWatching => 'बघणं सुरू ठेव';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'वाचणं सुरू ठेव';

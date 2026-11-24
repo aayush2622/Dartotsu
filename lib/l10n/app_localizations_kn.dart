@@ -332,8 +332,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsNetwork => 'ನೆಟ್‌ವರ್ಕ್';
 
   @override
-  String get settingsNetworkDesc =>
-      'ಬಳಕೆದಾರ ಏಜೆಂಟ್, ಪ್ರಮಾಣಪತ್ರಗಳು, DNS ಮತ್ತು ಪ್ರಾಕ್ಸಿ';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'ಟ್ರ್ಯಾಕಿಂಗ್ ಸರ್ವಿಸ್ ಮತ್ತು ಸೈನ್-ಇನ್';
@@ -1354,7 +1353,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get defaultFont => 'ಡೀಫಾಲ್ಟ್';
 
   @override
-  String get materialYou => 'ವಸ್ತು ನೀವು';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'ಸಿಸ್ಟಂನ ಡೈನಾಮಿಕ್ ಬಣ್ಣ';
@@ -1414,7 +1413,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get checkNow => 'ಈಗಲೇ ಚೆಕ್ ಮಾಡು';
 
   @override
-  String get userAgent => 'ಬಳಕೆದಾರ ಏಜೆಂಟ್';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'ಡೀಫಾಲ್ಟ್';
@@ -1425,7 +1424,7 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS-ಓವರ್-HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'ಡೀಫಾಲ್ಟ್ (Cloudflare)';
@@ -1551,7 +1550,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get contributorsLoadFailed => 'ಕೊಡುಗೆದಾರರು ಲೋಡ್ ಆಗಲಿಲ್ಲ';
 
   @override
-  String get forks => 'ಫೋರ್ಕ್ಸ್';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Dartotsu ಮೇಲೆ ಕಟ್ಟಿದ ಪ್ರಾಜೆಕ್ಟ್‌ಗಳು';
@@ -1743,7 +1742,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get linkSettingsFailed => 'ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್ಸ್ ತೆರೆಯಲು ಆಗಲಿಲ್ಲ';
 
   @override
-  String get discordRichPresence => 'ಶ್ರೀಮಂತ ಉಪಸ್ಥಿತಿ';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1877,7 +1876,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Discord ಟೋಕನ್ ತೆಗೆಯಲಾಗಿದೆ';
 
   @override
-  String get discordRichPresenceRow => 'ಅಪಶ್ರುತಿ ಶ್ರೀಮಂತ ಉಪಸ್ಥಿತಿ';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn =>
@@ -3795,6 +3794,11 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get continueWatching => 'ನೋಡುವುದನ್ನು ಮುಂದುವರಿಸು';
+
+  @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
 
   @override
   String get continueReading => 'ಓದುವುದನ್ನು ಮುಂದುವರಿಸು';

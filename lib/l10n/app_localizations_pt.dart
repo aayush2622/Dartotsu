@@ -334,8 +334,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get settingsNetwork => 'Rede';
 
   @override
-  String get settingsNetworkDesc =>
-      'Agente de usuário, certificados, DNS e proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Serviço de acompanhamento e login';
@@ -1355,7 +1354,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get defaultFont => 'Padrão';
 
   @override
-  String get materialYou => 'Material você';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Cor dinâmica do sistema';
@@ -1416,7 +1415,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get checkNow => 'Verificar agora';
 
   @override
-  String get userAgent => 'Agente do usuário';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Padrão';
@@ -1427,7 +1426,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get dnsOverHttps => 'DNS sobre HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Padrão (Cloudflare)';
@@ -1553,7 +1552,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get contributorsLoadFailed => 'Não consegui carregar os colaboradores';
 
   @override
-  String get forks => 'Garfos';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projetos feitos em cima do Dartotsu';
@@ -1745,7 +1744,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'Não consegui abrir as configurações do sistema';
 
   @override
-  String get discordRichPresence => 'Presença Rica';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -1879,7 +1878,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get discordTokenRemovedSnack => 'Token do Discord removido';
 
   @override
-  String get discordRichPresenceRow => 'Presença rica em discórdia';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'Ligado · toque pra mudar o visual';
@@ -3799,6 +3798,11 @@ class AppLocalizationsPt extends AppLocalizations {
   String get continueWatching => 'Continuar assistindo';
 
   @override
+  String splitSection(String section, String kind) {
+    return '$section · $kind';
+  }
+
+  @override
   String get continueReading => 'Continuar lendo';
 
   @override
@@ -4663,7 +4667,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get commentsSpoiler => 'Spoilers';
 
   @override
-  String get commentsGif => 'GIFs';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => 'Buscar GIFs';
@@ -5703,7 +5707,7 @@ class AppLocalizationsPt extends AppLocalizations {
   String get playerSectionEngine => 'Motor';
 
   @override
-  String get playerSectionMpv => 'MPV';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'Velocidade de reprodução';
@@ -9419,8 +9423,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get settingsNetwork => 'Rede';
 
   @override
-  String get settingsNetworkDesc =>
-      'Agente de usuário, certificados, DNS e proxy';
+  String get settingsNetworkDesc => 'User agent, certificates, DNS and proxy';
 
   @override
   String get settingsAccountDesc => 'Serviço de acompanhamento e login';
@@ -10440,7 +10443,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get defaultFont => 'Padrão';
 
   @override
-  String get materialYou => 'Material você';
+  String get materialYou => 'Material You';
 
   @override
   String get materialYouDesc => 'Cor dinâmica do sistema';
@@ -10501,7 +10504,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get checkNow => 'Verificar agora';
 
   @override
-  String get userAgent => 'Agente do usuário';
+  String get userAgent => 'User-Agent';
 
   @override
   String get settingDefault => 'Padrão';
@@ -10512,7 +10515,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   }
 
   @override
-  String get dnsOverHttps => 'DNS sobre HTTPS';
+  String get dnsOverHttps => 'DNS-over-HTTPS';
 
   @override
   String get dnsDefault => 'Padrão (Cloudflare)';
@@ -10638,7 +10641,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get contributorsLoadFailed => 'Não consegui carregar os colaboradores';
 
   @override
-  String get forks => 'Garfos';
+  String get forks => 'Forks';
 
   @override
   String get forksDesc => 'Projetos feitos em cima do Dartotsu';
@@ -10830,7 +10833,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
       'Não consegui abrir as configurações do sistema';
 
   @override
-  String get discordRichPresence => 'Presença Rica';
+  String get discordRichPresence => 'Rich Presence';
 
   @override
   String get discordRichPresenceTokenDesc =>
@@ -10964,7 +10967,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get discordTokenRemovedSnack => 'Token do Discord removido';
 
   @override
-  String get discordRichPresenceRow => 'Presença rica em discórdia';
+  String get discordRichPresenceRow => 'Discord Rich Presence';
 
   @override
   String get discordRichPresenceRowOn => 'Ligado · toque pra mudar o visual';
@@ -13730,7 +13733,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get commentsSpoiler => 'Spoilers';
 
   @override
-  String get commentsGif => 'GIFs';
+  String get commentsGif => 'GIF';
 
   @override
   String get commentsGifSearch => 'Buscar GIFs';
@@ -14770,7 +14773,7 @@ class AppLocalizationsPtBr extends AppLocalizationsPt {
   String get playerSectionEngine => 'Motor';
 
   @override
-  String get playerSectionMpv => 'MPV';
+  String get playerSectionMpv => 'mpv';
 
   @override
   String get playerSpeed => 'Velocidade de reprodução';
