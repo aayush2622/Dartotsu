@@ -1,12 +1,11 @@
 import '../../../Logger.dart';
 import 'Client.dart';
 
-typedef LibraryGet =
-    Future<Map<String, dynamic>> Function(
-      String path, {
-      Map<String, String>? query,
-      Map<String, List<String>>? multi,
-    });
+typedef LibraryGet = Future<Map<String, dynamic>> Function(
+  String path, {
+  Map<String, String>? query,
+  Map<String, List<String>>? multi,
+});
 
 const _changesPath = '/v2/my/library/changes';
 const _seriesBatch = 50;
