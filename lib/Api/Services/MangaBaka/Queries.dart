@@ -197,19 +197,16 @@ class MangaBakaQueries extends Queries {
     try {
       final body = await client.get(
         '/my/series/recommendations',
-        query: {
-          'limit': '$limit',
-          'page': '1',
-          'sort_by': 'relevance_desc',
-        },
+        query: {'limit': '$limit', 'page': '1', 'sort_by': 'relevance_desc'},
         multi: _nsfwFilter,
       );
-      final results = (body['results'] as List?) ?? const [];
+      final results =
+          (body['data'] as List?) ?? (body['results'] as List?) ?? const [];
       if (results.isEmpty) return const [];
       final seen = <String>{};
       final items = [
         for (final r in results)
-          if (r is Map && seen.add('${r['id']}'))
+          if (r is Map && r['id'] != null && seen.add('${r['id']}'))
             mapMangaBakaRecommendation(r.cast<String, dynamic>()),
       ];
       return await _withList(items);

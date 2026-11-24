@@ -241,6 +241,9 @@ Media mapMangaBakaSeries(Map<String, dynamic> s) {
   return media;
 }
 
+String? _recommendationCover(Object? value) =>
+    value is String && value.isNotEmpty ? value : _cover(value);
+
 Media mapMangaBakaRecommendation(Map<String, dynamic> r) {
   final titles = (r['titles'] as List?) ?? const [];
   final main = _primary(titles);
@@ -254,14 +257,15 @@ Media mapMangaBakaRecommendation(Map<String, dynamic> r) {
     id: '$id',
     name: english,
     nameRomaji: main,
-    cover: _cover(r['cover_image'] ?? r['cover']),
-    isAdult: false,
+    cover: _recommendationCover(r['cover_image'] ?? r['cover']),
+    isAdult: isMangaBakaAdult(r),
     meanScore: score == null || score <= 0 ? null : score.round(),
     format: type.toUpperCase(),
     shareLink: (r['canonical_url'] as String?) ?? mangaBakaShareLink(id),
     startDate: publishedYear != null ? Date(year: publishedYear) : null,
   );
-  mangaBakaExtras[media] = MangaBakaExtras();
+  mangaBakaExtras[media] = MangaBakaExtras()
+    ..contentRating = r['content_rating'] as String?;
   return media;
 }
 
