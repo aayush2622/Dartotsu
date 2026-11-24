@@ -4,7 +4,7 @@ description: "An Anilist client"
 publish_to: 'none'
 
 # Application version and build number
-version: 1.2.1
+version: 1.2.2
 
 # Dart SDK constraints
 environment:
@@ -64,13 +64,13 @@ dependencies:
   intl: any
 
   # Platform Specific
-  window_manager: ^0.7.0
-  nativeapi: ^0.6.1
+  window_manager: ^0.7.1
+  nativeapi: ^0.6.2
   gamepads: ^0.1.15
-  screen_retriever: ^0.4.0
-  dbus: ^0.8.0
+  screen_retriever: ^0.4.1
+  dbus: ^0.8.1
   permission_handler: ^13.0.2
-  flutter_local_notifications: ^23.0.3
+  flutter_local_notifications: ^23.0.4
   wakelock_plus: ^1.8.2
   flutter_media_session: ^3.2.1
   volume_controller: ^3.7.1
@@ -90,11 +90,11 @@ dependencies:
   receive_sharing_intent: ^1.9.0
   device_info_plus: ^13.3.0
   package_info_plus: ^10.2.2
-  file_picker: ^13.4.0
+  file_picker: ^13.4.1
   share_plus: ^13.3.1
   url_launcher: ^6.3.3
   collection: ^1.19.1
-  webview_all: ^1.5.1
+  webview_all: ^1.5.2
   dartotsu_extension_bridge:
     #path: ../DartotsuExtensionBridge
     git:
@@ -107,7 +107,7 @@ dependencies:
   flutter_tts: ^4.2.5
   mobile_scanner: ^7.5.0
   local_auth: ^3.0.2
-  pdfrx: ^3.0.2
+  pdfrx: ^3.1.0
   youtube_explode_dart: ^3.1.0
 
 # Development dependencies
