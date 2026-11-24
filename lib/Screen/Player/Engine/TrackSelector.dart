@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 
+import 'package:dartotsu_extension_bridge/toolkit.dart' as tk;
+
 import '../../../Logger.dart';
 import 'PlayerEngine.dart';
 import 'PlayerSettings.dart';
@@ -19,7 +21,7 @@ class TrackSelector {
       await _timelineShown();
       await _tracksSettled();
       if (cancelled()) return;
-      await Future.wait([_audio(), _subtitle(video)]);
+      await Future.wait([_audio(video), _subtitle(video)]);
     } catch (e, st) {
       logError('TrackSelector', e, st);
     }
@@ -40,17 +42,45 @@ class TrackSelector {
     }
   }
 
-  Future<void> _audio() async {
+  Future<void> _audio(v.Video video) async {
     final tracks = engine.audioTracks.value;
-    if (tracks.isEmpty) return;
+    final loaded = {
+      for (final t in tracks)
+        if (t.external) (t.title ?? '').trim().toLowerCase(),
+    };
+    final all = [
+      for (final t in tracks) _Audio.track(t),
+      for (final f in externalAudioOf(video))
+        if (!loaded.contains((f.label ?? '').trim().toLowerCase()))
+          _Audio.file(f),
+    ];
+    if (all.isEmpty) return;
     final priority = languageList(settings.audioLanguage);
-    final wanted = priority.isEmpty ? null : pickTrack(tracks, priority);
-    final target =
-        wanted ?? (engine.activeAudio.value == null ? tracks.first : null);
-    if (target == null || engine.activeAudio.value == target.id) return;
-    await engine.chooseAudio(target.id);
-    await _confirm('aid', target.id, () => engine.setAudio(target.id));
+    final picked =
+        tk.pickTrack(
+          all,
+          priority,
+          language: (a) => a.language,
+          title: (a) => a.title,
+        ) ??
+        (engine.activeAudio.value == null ? all.first : null);
+    if (picked == null) return;
+    final track = picked.track;
+    if (track != null) return _useAudio(track);
+    final file = picked.file!;
+    await engine.addAudio(file.file!, file.label ?? '');
   }
+
+  Future<void> _useAudio(PlayerTrack track) async {
+    if (engine.activeAudio.value == track.id) return;
+    await engine.chooseAudio(track.id);
+    await _confirm('aid', track.id, () => engine.setAudio(track.id));
+  }
+
+  static List<v.Track> externalAudioOf(v.Video video) => [
+    for (final t in video.audios ?? const <v.Track>[])
+      if (t.file != null && t.file!.isNotEmpty) t,
+  ];
 
   Future<void> _subtitle(v.Video video) async {
     if (!settings.showSubtitle) {
@@ -120,4 +150,17 @@ class TrackSelector {
     if (cancelled()) return;
     if (await engine.currentTrack(property) != id) await apply();
   }
+}
+
+class _Audio {
+  final PlayerTrack? track;
+  final v.Track? file;
+
+  const _Audio.track(PlayerTrack this.track) : file = null;
+
+  const _Audio.file(v.Track this.file) : track = null;
+
+  String? get title => track?.title ?? file?.label;
+
+  String? get language => track?.language;
 }
