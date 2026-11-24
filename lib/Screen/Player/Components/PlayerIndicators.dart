@@ -280,3 +280,35 @@ class PlayerNextCard extends StatelessWidget {
     );
   }
 }
+
+class PlayerHint extends StatelessWidget {
+  final String? text;
+
+  const PlayerHint({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) => Positioned(
+    top: 24,
+    left: 0,
+    right: 0,
+    child: IgnorePointer(
+      child: Center(
+        child: AnimatedOpacity(
+          opacity: text == null ? 0 : 1,
+          duration: animDuration(140),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.black.withValues(alpha: 0.65),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Text(
+              text ?? '',
+              style: const TextStyle(color: Colors.white, fontSize: 14),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}

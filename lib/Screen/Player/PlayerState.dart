@@ -104,6 +104,8 @@ class PlayerState extends ScreenState {
   final volume = 0.5.live;
   final brightness = 0.5.live;
   final volumeShown = false.live;
+  final hint = Live<String?>(null);
+  Timer? _hintTimer;
   final brightnessShown = false.live;
   final seekLabelForward = 0.live;
   final seekLabelBackward = 0.live;
@@ -535,6 +537,7 @@ class PlayerState extends ScreenState {
     _castPositionSub?.dispose();
     _castEndedSub?.dispose();
     _blurTimer?.cancel();
+    _hintTimer?.cancel();
     _lifecycle?.dispose();
     together.detach(this);
     find<DownloadEngine>().sweepFinished();
@@ -1646,6 +1649,15 @@ class PlayerState extends ScreenState {
     _volumeTimer = Timer(
       const Duration(milliseconds: 700),
       () => volumeShown.value = false,
+    );
+  }
+
+  void showHint(String text) {
+    hint.value = text;
+    _hintTimer?.cancel();
+    _hintTimer = Timer(
+      const Duration(milliseconds: 1100),
+      () => hint.value = null,
     );
   }
 

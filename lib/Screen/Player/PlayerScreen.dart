@@ -21,7 +21,6 @@ import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
 import '../../Utils/Extensions/ContextExtensions.dart';
 import '../../Utils/Functions/NavigateToScreen.dart';
-import '../../Utils/Functions/SnackBar.dart';
 import '../../Utils/Nav/DpadNav.dart';
 import '../Settings/Categories/AddonSettings.dart';
 import '../Settings/SubSettingsScreen.dart';
@@ -718,6 +717,7 @@ class _PlayerPageState extends State<PlayerPage>
                 )
               : const SizedBox.shrink(),
         ),
+        Watch(() => PlayerHint(text: state.hint.value)),
         Watch(
           () => PlayerLevelIndicator(
             value: state.volume.value,
@@ -973,13 +973,13 @@ class _PlayerPageState extends State<PlayerPage>
       case 'playerSpeedDown':
         _speed(engine.rate.value - 0.25);
       case 'playerSpeedReset':
-        _speed(1);
+        _resetSpeed();
       case 'playerSubtitleToggle':
-        _toggleSubtitle();
+        unawaited(_toggleSubtitle());
       case 'playerSubtitleCycle':
-        _cycleSubtitle();
+        unawaited(_cycleSubtitle());
       case 'playerAudioCycle':
-        _cycleAudio();
+        unawaited(_cycleAudio());
       case 'playerStreamCycle':
         final count = state.videos.length;
         if (count > 1) {
@@ -990,21 +990,39 @@ class _PlayerPageState extends State<PlayerPage>
     }
   }
 
+  double? _previousSpeed;
+
   void _speed(double value) {
     final next = value.clamp(0.25, 4.0).toDouble();
     state.setSpeed(next);
-    snackString('${next}x');
+    state.showHint('${next}x');
+  }
+
+  void _resetSpeed() {
+    final current = state.engine.rate.value;
+    if ((current - 1).abs() > 0.001) {
+      _previousSpeed = current;
+      _speed(1);
+    } else if (_previousSpeed != null) {
+      _speed(_previousSpeed!);
+    }
   }
 
   Future<void> _frameStep(String command) => state.engine.frameStep(command);
 
-  void _toggleSubtitle() {
+  Future<String?> _activeTrack(String property, String? tracked) async {
+    final current = await state.engine.currentTrack(property);
+    if (current == null || current.isEmpty) return tracked;
+    return current == 'no' || current == 'auto' ? null : current;
+  }
+
+  Future<void> _toggleSubtitle() async {
     final engine = state.engine;
-    final active = engine.activeSubtitle.value;
+    final active = await _activeTrack('sid', engine.activeSubtitle.value);
     if (active != null) {
       _lastSubtitle = active;
       unawaited(engine.chooseSubtitle(null));
-      snackString(getString.off);
+      state.showHint(getString.off);
       return;
     }
     final tracks = engine.subtitleTracks.value;
@@ -1013,33 +1031,35 @@ class _PlayerPageState extends State<PlayerPage>
         ? _lastSubtitle!
         : tracks.first.id;
     unawaited(engine.chooseSubtitle(id));
-    snackString(tracks.firstWhere((t) => t.id == id).label);
+    state.showHint(tracks.firstWhere((t) => t.id == id).label);
   }
 
-  void _cycleSubtitle() {
+  Future<void> _cycleSubtitle() async {
     final engine = state.engine;
     final tracks = engine.subtitleTracks.value;
     if (tracks.isEmpty) return;
-    final at = tracks.indexWhere((t) => t.id == engine.activeSubtitle.value);
+    final active = await _activeTrack('sid', engine.activeSubtitle.value);
+    final at = tracks.indexWhere((t) => t.id == active);
     if (at == tracks.length - 1) {
-      _lastSubtitle = engine.activeSubtitle.value;
+      _lastSubtitle = active;
       unawaited(engine.chooseSubtitle(null));
-      snackString(getString.off);
+      state.showHint(getString.off);
       return;
     }
     final next = tracks[at + 1];
     unawaited(engine.chooseSubtitle(next.id));
-    snackString(next.label);
+    state.showHint(next.label);
   }
 
-  void _cycleAudio() {
+  Future<void> _cycleAudio() async {
     final engine = state.engine;
     final tracks = engine.audioTracks.value;
     if (tracks.length < 2) return;
-    final at = tracks.indexWhere((t) => t.id == engine.activeAudio.value);
+    final active = await _activeTrack('aid', engine.activeAudio.value);
+    final at = tracks.indexWhere((t) => t.id == active);
     final next = tracks[(at + 1) % tracks.length];
     unawaited(engine.chooseAudio(next.id));
-    snackString(next.label);
+    state.showHint(next.label);
   }
 }
 
