@@ -164,11 +164,13 @@ jobs:
 
       - name: Commit and push changelog
         if: startsWith(github.ref, 'refs/tags/')
+        env:
+          REF_NAME: ${{ github.ref_name }}
         run: |
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add CHANGELOG.md fastlane/metadata/android/en-US/changelogs/default.txt
-          git commit -m "Update changelog for version ${{ github.ref_name }}" || echo "No changes to commit"
+          git commit -m "Update changelog for version ${REF_NAME}" || echo "No changes to commit"
           git fetch origin main
           git push origin HEAD:main || {
             echo "Direct push failed, retrying with rebase..."
@@ -176,7 +178,7 @@ jobs:
             git pull --rebase origin main
             git stash pop || true
             git add CHANGELOG.md fastlane/metadata/android/en-US/changelogs/default.txt
-            git commit -m "Update changelog for version ${{ github.ref_name }}" || echo "No changes to commit"
+            git commit -m "Update changelog for version ${REF_NAME}" || echo "No changes to commit"
             git push origin HEAD:main
           }
 
@@ -251,9 +253,11 @@ jobs:
       - name: Fetch release asset links
         env:
           GH_TOKEN: ${{ secrets.FINE_GRAIN_TOKEN }}
+          REPO: ${{ github.repository }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
           # gh release view maps the download URL to .url. browser_download_url is null.
-          gh release view --repo "${{ github.repository }}" "${{ github.ref_name }}" \
+          gh release view --repo "${REPO}" "${REF_NAME}" \
             --json assets --jq '.assets[].url' > asset_links.txt
           cat asset_links.txt
           if ! grep -q '[^[:space:]]' asset_links.txt; then
@@ -262,9 +266,11 @@ jobs:
           fi
 
       - name: Format download message
+        env:
+          REF_NAME: ${{ github.ref_name }}
         run: |
           LINKS=$(sort asset_links.txt)
-          MESSAGE="**Dartotsu ${{ github.ref_name }} Downloads:**\n\n"
+          MESSAGE="**Dartotsu ${REF_NAME} Downloads:**\n\n"
           while IFS= read -r LINK; do
             [[ -z "$LINK" ]] && continue
             if [[ $LINK == *"arm64"* ]]; then MESSAGE+="• [Android_arm64]($LINK)\n"

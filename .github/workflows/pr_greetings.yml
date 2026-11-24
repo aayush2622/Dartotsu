@@ -3,8 +3,6 @@ name: PR Greetings
 on:
   pull_request:
     types: [opened]
-  pull_request_target:
-    types: [opened]
 
 jobs:
   greeting:
@@ -12,9 +10,6 @@ jobs:
     permissions:
       pull-requests: write
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-
     - name: Check if the PR creator is the repo owner or Weblate
       id: check_owner
       env:
