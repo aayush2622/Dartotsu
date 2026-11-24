@@ -1,88 +1,121 @@
--: feat: editable keyboard shortcuts for the app, player and reader with a settings screen and per group switches
--: feat: community lists, disable skips, hoster grouping, Simkl movies & series mode
--: feat: add Anime-Planet service, private-aware list sync and prequel/sequel cards
--: feat: finished videos move into the chosen folder and play through a file descriptor
--: feat: ask for a folder whenever something needs saving and no storage permission or folder is set
--: feat: pick a storage folder with the system picker instead of all-files access, finished downloads, backups and screenshots are copied there; content:// files open
--: feat: stream links reach the player, watch and download pickers as providers find them
--: feat: offline fallback for AniList via static media index CDN (#175)
--: feat: external players get the stream's subtitles and audio tracks
--: feat: player keyboard shortcuts follow the mouse, player or page
--: feat: DASH streams download with quality and audio choice instead of failing as HLS
--: feat: add frostnova721's contributor banner
--: feat: app version and build in the log header
--: feat: subtitle outline width setting and a live subtitle preview in player settings
--: feat: option to hide 18+ sources from the extension feeds and source picker
--: feat: download several subtitles and audio tracks per episode
--: feat: select several downloads and delete them together
--: feat: ask for the app language in onboarding, preselecting the device language
--: feat: not-in-list search filter for AniList and chapter counts on search cards
--: feat: placeholder rows for extensions that are still converting
--: feat: drag the score badge, airing dot and unread counter onto separate poster corners
--: feat: Discord settings overhaul with live preview, account sign-in on desktop, status control, text/image/button options and synced token
--: feat: Android 16 Live Update progress notification for downloads
--: feat: fade the main screen in on app open
--: feat: comment cards use the episode entrance animation
--: feat: tidier What to sync panel with grouped changed settings, colour swatches and a show-all toggle
--: feat: move gist sync from General to Account settings
--: feat: resume shelf shows the episode thumbnail, falling back to the cover, with a live player frame on close
--: feat: unread counter only on continue shelves, status corner setting and calendar button on every browse tab
--: feat: UPI pay link on the donate sheet
--: feat: auto subtitle selection with language matching and a visible selection
--: feat: resume thumbnails fall back to the cover and sync their urls
--: feat: per-device sync switches for subtitle look, picture colours and theme colours
--: feat: open the site in the web view from failed manga pages and chapters
--: feat: unread counter in the card style and the last retrieved chapter count
--: feat: add unread/unwatched counter badges and manga release calendar (#173)
+-: feat: custom download amount and bulk select in the episode and chapter list
+-: feat: animated SVGs play in a web view layer so SMIL, CSS animations and external images work
+-: feat(mangabaka): add recommended section to home layout (#193)
+-: feat: Simkl home rows split into anime and movies & series, restore the Trakt strings lost in the merge
+-: feat: own sign-in channel replaces flutter_web_auth_2 (Android Custom Tab with a callback activity, ASWebAuthenticationSession on iOS and macOS, sturdier desktop loopback)
+-: feat: Simkl list shows anime, shows and movies with type chips
+-: feat: custom Trakt client ID in settings with the redirect URIs to register
+-: feat: Web Video Cast option in the player's cast sheet and the stream menu
+-: feat: tap the episode title in the player to open its description, date, runtime and rating
+-: feat: Discord settings in plain M3 sections, preview small image clipped to a circle
+-: feat: watch order from chiaki.site on anime detail pages
+-: feat: stories switch in the AniList home sections sheet
+-: feat: tag sources as anime, movies and series or 18+ to rank them on each title
+-: feat: Mutual and Not mutual filters on follower and following lists
+-: feat: reorder and hide media services from General settings
+-: feat: sync anime between Trakt and Simkl
+-: feat: per-service sync switches in the main service picker
+-: feat: Trakt lists and followers, Comick profile and stats, shared request helpers for both services
+-: feat: swipe the home avatar up or down to switch service
+-: feat(services): add Trakt tracker integration with PKCE auth (#184)
+-: feat: add Comick media service and tracker (#183)
+-: feat: Discord connect opens the Discord app and the activity name follows the account route [build.all] [ping]
+-: feat: desktop PiP stays bound to the player page, tray shortcuts, and the player starts under non-C locales [build.all] [ping]
+-: feat: the player engine is downloaded on first use, plus a detached PiP window, hide to tray and gamepad navigation
+-: feat: gist sync shows its stored counts in the status card and explains what it syncs before sign-in
+-: feat: Discord settings show one connection card with every way of sending presence, and panels follow glass mode and d-pad focus
+-: feat: desktop picture in picture opens its own always-on-top window, placed by Hyprland when it tiles
+-: feat: faster state engine with computed values, grouped DI, refresh signals that never build controllers, and a lighter startup
+-: feat: cloud sync covers local lists and continue order, and only scans and stamps once per pass
+-: feat: local lists and the continue order sync through the settings gist, and the Aniyomi, Kotatsu and iReader desktop managers share their phone lists
+-: feat: episode metadata is merged from every provider as each one answers
+-: feat: connect Discord as an authorized app (#182)
+-: feat: native Android picture in picture with playback buttons, rebuilt track selector, shortcut fixes and MainActivity split into channels
+-: feat: sync delete category and per-service switch, metadata-only downloads, cookie and Cloudflare fixes
+-: feat: reader and novel layouts get a progress bar with button zones above it
+-: feat: local files source, offline reading from downloads, sticky player toggle
+-: feat: shared community list card for stacks and custom lists, simkl lists
+-: feat: sync can delete what the main service lacks, simkl keeps movies and completed entries right and follows title language
+-: feat: inline trailer player, list sync and service fixes, tts chunking
 ### 🛠️ Bug Fixes & Improvements
--: fix: android compiles notification plugins against sdk 37 and keeps androidx core on 1.18 elsewhere [build.apk]
--: fix: cargokit plugins stay on compile sdk 36 so their build script can read it [build.apk]
--: fix: android plugins compile against sdk 37 for androidx core 1.19
--: fix: the lock screen fits landscape and every scroll view uses the shared scroll config
--: fix: the scroll to top button hides while idle and glass page transitions are shorter
--: fix: blur and page transitions are lighter, the top bar only blurs once collapsed and settings pages skip their entrance animation
--: fix: the reply buttons wrap instead of being cut off in deep comment threads
--: fix: instant sync only looks up ids a target is missing and logs why a push was skipped
--: fix: reader pages blocked by Cloudflare retry after clearing, streams that won't open skip to the next one and the source in use is the only one that opens the challenge page
--: fix: the Windows web view keeps keyboard focus, the Anime-Planet read-only note only shows when signed out and Kotatsu repositories can import a jar file
--: fix: circular clips use the best edge smoothing
--: fix: home stat buttons are smaller and quieter and the banner header leaves less empty space
--: fix: detail followers labels are sentence case, empty scores are hidden and TV formats keep their case
--: fix: primary and secondary containers lean toward the theme primary
--: fix: navbar d-pad focus is a pill sized like the selected item
--: fix: drop colour glows and the hue gradient, lower heavy weights, snap radii to the 4px grid, trim exclamation copy
--: fix: Saikou secondary colours are purple and the selected navbar item follows the theme primary
--: fix: auto sync runs when the app resumes and instant sync updates the sync plan
--: fix: default audio and subtitle tracks are selected explicitly and shown as active
--: fix: AniList requests queue and retry on rate limits, split mode stacks two rows per request, hidden tabs reload only when shown
--: fix: resolve CodeFactor issues and move custom list filters into tabs
--: fix: chosen-folder storage logs every step and falls back to app storage when the folder is unreachable
--: fix: local files stay out of Resume
--: fix: player falls back to the first sub/audio track, studio and author open from Details, notification toggles refresh, novel images follow the book's sizing, no disk demuxer cache on mobile
--: fix: AniList stale-data flag lives on AnilistMedia instead of the shared Media
--: fix: synopsis divider, manga chapter count, copy on long press for title and synonyms
--: fix: start year filter applies to manga and novel searches
--: fix: search filter chips fade at the edge instead of clipping
--: fix: novel translation no longer throws a RangeError when pages are rebuilt
--: fix: sources without a website no longer open or probe a NONE address
--: fix: a preference write that collides with another Isar write is retried instead of lost
--: fix: extension feeds never open the Cloudflare challenge page on their own
--: fix: share card shows the app logo and placeholder sources are hidden from the source lists
--: fix: media lists remember their sort order and direction
--: fix: shelves use PosterCard.item and skip the card entrance animation when built mid-scroll
--: fix: every media card is built from the same shelf item through PosterCard.item
--: fix: saved frames, share cards, list exports and backups go to the default storage folder instead of asking for a path
--: fix: search cards use the same item mapping as the shelves
--: fix: selected navbar item follows the theme's primary colour
--: fix: build the home feed a screen and a half ahead to avoid the first-scroll hitch
--: fix: port window handling to window_manager 0.6, keep fl_pip on 3.x and give the dev shell libXi and a hook-visible pkg-config
--: fix: make the banner carousel fade fully opaque before its bottom edge
--: fix: a failing search term falls through to the next term when matching a source
--: fix: a reader page that cannot be decoded shows the failure card instead of the error screen
--: fix: the picture sheet scrolls in landscape and the preferred audio track is picked once late-listed tracks appear
--: fix: reader load sheet error state no longer overflows
--: fix: Discord preview uses the app name without an account and the member row matches Discord
--: fix: call the Android 16 promoted-notification builder methods by reflection so CI's SDK compiles
--: fix: contributors skeleton shows bones for avatar and text instead of one block
--: fix: make the glass theme cheap — blur only on floating surfaces, one-widget cards, native background decode
--: fix: report an unreachable plugin index and silence Windows noise warnings
+-: fix: Discord desktop presence is cleared and the connection closed when the app quits
+-: fix: activity cards fade in only the first time they are shown so scrolling up no longer flickers
+-: fix: trailers play HLS from the iOS client through the local proxy in every quality
+-: fix: retry streams that answer 403 over HTTP/1.1 through an HTTP/2 proxy
+-: fix: AniList sync counts every aliased mutation against the rate limit
+-: fix: double tap zoom in the webtoon and continuous reader no longer cancelled by the settle animation
+-: fix: animated SVG layer only on Android, iOS and macOS and loads by URL, desktop keeps scrolling
+-: fix: MangaBaka recommendations read data or results, skip entries without an id, flag adult ratings, accept string covers, add mapper tests
+-: fix: player shortcuts read the real subtitle and audio track, Backspace restores the previous speed, one short on-screen hint
+-: fix: AniList planned rows follow the account's list sort and title language
+-: fix: AniList planned rows sorted by last updated
+-: fix: audio is picked from the embedded and stream audio lists combined
+-: fix: auto rotation follows the sensor in all four directions and landscape flips both sides on Android
+-: fix: thin line at the bottom of image cards while scrolling, fades now overshoot the clip edge and no bright base sits under card images
+-: fix: player side panel no longer crashes when the window is narrower than 280 px
+-: fix: desktop sign-in listens on both IPv4 and IPv6 loopback so Comick's 127.0.0.1 redirect connects
+-: fix: trailer controls auto-hide, trailers play up to 1080p, trailer quality setting
+-: fix: reader page bar spaced like the layout preview
+-: fix: carousel slide paints its last rows in the fade colour so no banner strip shows
+-: fix: hidden media sections no longer multiply on the AniList home
+-: fix: reader resume and progress stay on the page, double pages meet in the middle, double-tap zoom on width/height and webtoon pages, free orientation defers to the OS
+-: fix: faster online subtitle search, subtitles in saved screenshots, Discord gateway and linked fixes
+-: fix: reader keeps its place while pages load, auto scroll pauses on touch, manhwa opens as webtoon
+-: fix: allow activity names for connected Discord apps [build.all]
+-: fix: clarify Discord connected app activity names [build.all]
+-: fix: enable Android cast multicast discovery
+-: fix: tap-to-pick filter fields, visible chips and a one-row tag list
+-: fix: trailer controls looked up fullscreen on a deactivated context
+-: fix: cast discovery no longer throws when multicast sends are refused
+-: fix: stop player audio at once when leaving the player
+-: fix: Comick tabs the right way round with the carousel first, Trakt with a single carousel
+-: fix: Comick and Trakt compile against the current service API and match the live responses
+-: fix: Android keeps the .env asset so update checks find their hash, the tray icon is round, and streams group by hoster when titles carry it [build.apk]
+-: fix: the Android build resolves the bridge whose video plugin holds MediaKitAndroidHelper [build.all] [ping]
+-: fix: the Android build resolves the bridge version whose video plugin no longer needs media_kit [build.apk]
+-: fix: Anime-Planet detail keeps your list status and progress [build.all] [ping]
+-: fix: PiP hover bar uses a directional alignment
+-: fix: splash screen scales down instead of overflowing in the first tiny window
+-: fix: small images decode at their size, setState-free widgets use Live, and animations follow the animation speed
+-: fix: notifications open for every service, mutual follows are labelled, and sync rows highlight the score difference
+-: fix: DASH downloads say why they cannot keep a folder or are protected, and download badges and local units share one task lookup
+-: fix: picture in picture offers only rewind, play and forward and no longer pauses on entry; track selection moves into PlayerEngine
+-: fix: the Android log reader stops its logcat process on detach and the Windows second instance raises the real window
+-: fix: a backup restore no longer re-enqueues the values it just wrote and reloads player and reader prefs once
+-: fix: profile tabs show the fresh result after a cached profile was painted
+-: fix: macOS release can use the file picker
+-: fix: the commit log output no longer goes through shell interpolation
+-: fix: the sync list highlights a score-only difference
+-: fix: file extension lists no longer register .ogg as video and know ogv, m2ts, mka and ac3
+-: fix: reader reset asks first and the theme picker and search filters use translated labels
+-: fix: each service's notification kinds get their own header
+-: fix: a failed list save restores the entry it had applied
+-: fix: detail pages use the service they were opened for and ignore a superseded load
+-: fix: Android opens Anime-Planet and MangaUpdates links
+-: fix: snackbars no longer remove a newer one early, card shelves recover from a failed load more and the status chip shows in every locale
+-: fix: activity and member lists honour a reset while a page is loading
+-: fix: notifications only get an AniList link on AniList
+-: fix: the reader keys chapters like the watch tab
+-: fix: the watch tab keeps a range you picked and a hand-picked title does not fall back to another source
+-: fix: comments escape html and only link http urls
+-: fix: a backup restore reloads source subscriptions and local lists, offline edits keep custom lists and card style follows synced prefs
+-: fix: settings sliders follow external changes, sync skips unresolved pairs and proxy passwords are encoded
+-: fix: search, source browse and the extension lists ignore stale responses and count sources correctly
+-: fix: downloads no longer start a second run on pause and resume, share one retry path and keep records when the storage root changes
+-: fix: failover does not overwrite the chosen stream, per-title off updates the live settings and setting changes repaint the player
+-: fix: sheets clear the navigation bar and the player sheets start at half height and expand when scrolled
+-: fix: Together asks before joining a room link, only accepts public stream urls and stops retrying on server errors
+-: fix: the app lock only submits at the PIN length so wrong guesses count toward the lockout
+-: fix: Kitsu and MAL build their social view once so feed cursors and boards are kept
+-: fix: pull to refresh on Home reloads the stories row
+-: fix: Anime-Planet sync no longer sends progress on planned titles, caps progress at the total and falls back to reading for releasing titles
+-: fix: MangaUpdates sync writes batches of 25 and only rates changed scores, and calls its dropped list Unfinished
+-: fix: Simkl list dates and episode totals, and sync deletes only titles that are provably not in the main list
+-: fix: show Simkl community score and airing dot on list items (#180)
+-: fix: no Cloudflare snackbar for ordinary 403 and 503 answers
+-: fix: consistency pass for directional layout and theme text styles
+-: fix: comment ids resolve from the local table first, layout editor hint no longer duplicates a key
+-: fix: sync pairs remembered ids, simkl completes entries and keeps english titles, mal reads adult entries
+-: fix: extension language filter ignores case so novel sources show and count
+-: fix: guests can read comments, id lookup retries and times out instead of loading forever
+-: fix: skip saved window restore on tiling compositors
