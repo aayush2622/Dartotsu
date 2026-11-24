@@ -1,13 +1,13 @@
 {
   "stable": {
-    "version": "1.2.1",
-    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.1/Dartotsu_LinuxZip_v1.2.1.zip",
-    "hash": "sha256-3oFq+xc7WCdEVvXldunGgpC5tiyMViuyWFtBQryxrCE="
+    "version": "1.2.2",
+    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.2/Dartotsu_LinuxZip_v1.2.2.zip",
+    "hash": "sha256-3UWfjKOUmg2UEhZJVLw3xIy2fsCyp1OTKPD9z5ANJiw="
   },
   "prerelease": {
-    "version": "1.2.1",
-    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.1/Dartotsu_LinuxZip_v1.2.1.zip",
-    "hash": "sha256-3oFq+xc7WCdEVvXldunGgpC5tiyMViuyWFtBQryxrCE="
+    "version": "1.2.2",
+    "url": "https://github.com/aayush2622/Dartotsu/releases/download/v1.2.2/Dartotsu_LinuxZip_v1.2.2.zip",
+    "hash": "sha256-3UWfjKOUmg2UEhZJVLw3xIy2fsCyp1OTKPD9z5ANJiw="
   },
   "alpha": {
     "version": "dc621c1",
