@@ -149,7 +149,7 @@
     "settingsSync": "सेटिंग्स सिंक करें",
     "settingsSyncDesc": "प्रत्येक डिवाइस पर अपनी सेटिंग्स समान रखें। वे आपके GitHub खाते में एक निजी सार में संग्रहीत हैं",
     "settingsSyncSwitch": "परिवर्तन पर सिंक करें",
-    "settingsSyncModeGithub": "गिटहब",
+    "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub के साथ साइन इन करें",
     "settingsSyncSignInDesc": "सेटिंग्स आपके खाते में एक निजी सार में संग्रहीत की जाती हैं",
     "settingsSyncToken": "व्यक्तिगत एक्सेस टोकन का उपयोग करें",
@@ -3270,5 +3270,48 @@
     "removePlayerTitle": "प्लेयर हटाएँ?",
     "removePlayerMessage": "Videos can't play until the player is downloaded again।",
     "trailerLoading": "ट्रेलर लोड हो रहा है...",
-    "trailerFailed": "ट्रेलर को ब्राउज़र में खोलने पर यहां उसे चलाया नहीं जा सका"
+    "trailerFailed": "ट्रेलर को ब्राउज़र में खोलने पर यहां उसे चलाया नहीं जा सका",
+    "traktClientIdDesc": "Sign in with your own Trakt app instead of the built-in one",
+    "traktClientId": "Trakt Client ID",
+    "traktCreateAppDesc": "Opens your apps on trakt.tv",
+    "traktRedirectHelp": "On trakt.tv/oauth/applications create an app and add these Redirect URIs, one per line:\n\n{uris}\n\nThen paste its Client ID here, save and sign in again।",
+    "@traktRedirectHelp": {
+        "placeholders": {
+            "uris": {
+                "type": "String"
+            }
+        }
+    },
+    "splitSection": "{section} · {kind}",
+    "@splitSection": {
+        "placeholders": {
+            "section": {
+                "type": "String"
+            },
+            "kind": {
+                "type": "String"
+            }
+        }
+    },
+    "traktCreateApp": "Create a Trakt app",
+    "downloadCustom": "Custom amount…",
+    "watchSelectedCount": "{count} selected",
+    "@watchSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "watchNoneDownloaded": "None of the selected items are downloaded",
+    "watchSelectAll": "Select all",
+    "watchSelect": "Select",
+    "downloadCustomPrompt": "How many from here? (1–{max})",
+    "@downloadCustomPrompt": {
+        "placeholders": {
+            "max": {
+                "type": "int"
+            }
+        }
+    }
 }
