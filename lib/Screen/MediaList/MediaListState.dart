@@ -1,7 +1,10 @@
 import 'dart:math';
 
+import 'package:collection/collection.dart';
+
 import '../../Logger.dart';
 import '../../Utils/Animation/WidgetAnimations.dart';
+
 import 'package:flutter/material.dart';
 
 import '../../Api/Discord/DiscordPresence.dart';
@@ -43,12 +46,14 @@ class MediaListState extends ScreenState {
   final bool anime;
   final String? userId;
   final String? userName;
+  final String? initialKind;
 
   MediaListState({
     required this.service,
     required this.anime,
     this.userId,
     this.userName,
+    this.initialKind,
   });
 
   static const loadingKey = 'Loading';
@@ -69,17 +74,31 @@ class MediaListState extends ScreenState {
   final formats = <String>{}.live;
   final statuses = <String>{}.live;
   final genres = <String>{}.live;
+  late final kind = Live<String?>(initialKind);
 
   late final searchController = TextEditingController();
 
   bool get loading => lists.value == null && !failed.value;
+
+  bool get narrowed => filtered || kind.value != null;
 
   bool get filtered =>
       formats.value.isNotEmpty ||
       statuses.value.isNotEmpty ||
       genres.value.isNotEmpty;
 
-  Iterable<Media> get _all => (lists.value ?? const {}).values.expand((e) => e);
+  List<ListKind> get kinds => service.listKinds;
+
+  bool Function(Media) get _inKind {
+    final picked = kind.value;
+    final match = picked == null
+        ? null
+        : kinds.firstWhereOrNull((k) => k.id == picked);
+    return match == null ? (_) => true : match.test;
+  }
+
+  Iterable<Media> get _all =>
+      (lists.value ?? const {}).values.expand((e) => e).where(_inKind);
 
   List<String> get formatOptions => _distinct(_all.map((m) => m.format));
 
@@ -103,12 +122,14 @@ class MediaListState extends ScreenState {
     final g = genres.value;
     final order = sort.value;
     final flip = reversed.value;
+    final inKind = _inKind;
     return {
       for (final entry in source.entries)
         entry.key: _arrange(
           [
             for (final m in entry.value)
-              if ((text.isEmpty || _matches(m, text)) &&
+              if (inKind(m) &&
+                  (text.isEmpty || _matches(m, text)) &&
                   (f.isEmpty || f.contains(m.format)) &&
                   (st.isEmpty || st.contains(m.status)) &&
                   (g.isEmpty || g.every(m.genres.contains)))
@@ -171,6 +192,7 @@ class MediaListState extends ScreenState {
     formats.value = {};
     statuses.value = {};
     genres.value = {};
+    kind.value = null;
   }
 
   Media? randomPick(List<String> keys) {

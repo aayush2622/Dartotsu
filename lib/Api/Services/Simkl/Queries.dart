@@ -560,10 +560,8 @@ class SimklQueries extends Queries {
     int? userId,
     String? sortOrder,
   }) async {
-    final all = [
-      for (final m in (await library()).values)
-        if ((parseSimklMediaId(m.id)?.$1 == SimklKind.anime) == anime) m,
-    ]..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
+    final all = [...(await library()).values]
+      ..sort((a, b) => (b.userUpdatedAt ?? 0).compareTo(a.userUpdatedAt ?? 0));
     return groupByStatus(all, {
       'CURRENT': getString.watching,
       'PLANNING': getString.planToWatch,

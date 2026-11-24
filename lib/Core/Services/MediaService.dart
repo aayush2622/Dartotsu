@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:collection/collection.dart';
 
 import 'Api/Mutations.dart';
+import 'Model/ListKind.dart';
 import 'Model/Media.dart';
 import 'Api/Queries.dart';
 import '../../Screen/Settings/Sync/Data/SyncAdapter.dart';
@@ -17,6 +18,7 @@ export 'Api/Queries.dart';
 export 'Features/NavbarProvider.dart';
 export 'Local/LocalListStore.dart';
 export 'Local/LocalMutations.dart';
+export 'Model/ListKind.dart';
 export 'ServiceAuth.dart';
 export 'ServiceNotification.dart';
 export 'Screens/ServiceScreens.dart';
@@ -65,6 +67,8 @@ abstract class MediaService {
   List<MediaType> get feedTypes => const [];
 
   String feedLabel(MediaType type) => type.label;
+
+  List<ListKind> get listKinds => const [];
 
   bool get hasVideo => feedTypes.isEmpty || feedTypes.any((t) => t.isVideo);
 

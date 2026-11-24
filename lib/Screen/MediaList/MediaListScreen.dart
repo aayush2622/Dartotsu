@@ -34,6 +34,7 @@ class MediaListScreen extends StatefulWidget {
   final bool anime;
   final String? userId;
   final String? userName;
+  final String? initialKind;
 
   const MediaListScreen({
     super.key,
@@ -41,6 +42,7 @@ class MediaListScreen extends StatefulWidget {
     required this.anime,
     this.userId,
     this.userName,
+    this.initialKind,
   });
 
   @override
@@ -57,6 +59,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     anime: widget.anime,
     userId: widget.userId,
     userName: widget.userName,
+    initialKind: widget.initialKind,
   );
 
   @override
@@ -71,9 +74,37 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
         titleWidget: state.searching.value ? _searchField(context) : null,
         actions: _actions(context),
       ),
-      body: _body(context),
+      body: state.kinds.isEmpty
+          ? _body(context)
+          : Column(
+              children: [
+                _kindChips(context),
+                Expanded(child: _body(context)),
+              ],
+            ),
     );
   }
+
+  Widget _kindChips(BuildContext context) => Padding(
+    padding: EdgeInsets.fromLTRB(
+      Dimens.pagePad,
+      Dimens.gapXs,
+      Dimens.pagePad,
+      Dimens.gapXs,
+    ),
+    child: Align(
+      alignment: AlignmentDirectional.centerStart,
+      child: AppChoiceChips<String?>(
+        value: state.kind.value,
+        onChanged: (v) => state.kind.value = v,
+        options: [
+          AppSegment<String?>(null, label: getString.all),
+          for (final k in state.kinds)
+            AppSegment<String?>(k.id, label: k.label),
+        ],
+      ),
+    ),
+  );
 
   Widget _searchField(BuildContext context) => TextField(
     controller: state.searchController,
@@ -253,7 +284,7 @@ class _MediaListScreenState extends BaseScreen<MediaListScreen>
     if (lists.isEmpty) return _empty(context);
     if (!loading &&
         lists.values.every((e) => e.isEmpty) &&
-        (state.filtered || state.query.value.isNotEmpty)) {
+        (state.narrowed || state.query.value.isNotEmpty)) {
       return EmptyState(
         icon: Icons.filter_alt_off_rounded,
         title: getString.listNoMatches,

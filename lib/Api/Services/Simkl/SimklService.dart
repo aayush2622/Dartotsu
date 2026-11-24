@@ -2,6 +2,7 @@ import 'Screens/CommunityLists.dart';
 import '../../../Core/State/State.dart';
 import '../../../Core/Services/MediaService.dart';
 import 'Auth.dart';
+import 'Data/Mapper.dart';
 import 'Prefs.dart';
 import 'Screens/Feed.dart';
 import 'Screens/Search.dart';
@@ -50,6 +51,16 @@ class SimklService extends MediaService {
   List<MediaType> get feedTypes => SimklPref.moviesOnly.rx.value
       ? const [MediaType.movie, MediaType.series]
       : const [MediaType.anime, MediaType.movie];
+
+  @override
+  List<ListKind> get listKinds => [
+    for (final (kind, label) in [
+      (SimklKind.anime, getString.anime),
+      (SimklKind.tv, getString.shows),
+      (SimklKind.movies, getString.movies),
+    ])
+      ListKind(kind.path, label, (m) => parseSimklMediaId(m.id)?.$1 == kind),
+  ];
 
   @override
   String feedLabel(MediaType type) => SimklPref.moviesOnly.rx.value
