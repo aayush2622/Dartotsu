@@ -51,7 +51,7 @@ dependencies:
   cached_network_image: ^4.0.7
   flutter_cache_manager: ^3.5.0
   precached_network_image: ^1.4.1
-  flutter_svg: ^2.4.0
+  flutter_svg: ^2.5.0
   skeletonizer: ^3.0.0
   markdown_widget: ^2.3.2+8
   dpad: ^3.3.0

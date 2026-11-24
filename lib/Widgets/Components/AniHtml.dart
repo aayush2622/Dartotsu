@@ -20,6 +20,7 @@ import 'Clickable.dart';
 import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import 'AppSpinner.dart';
+import 'AnimatedSvg.dart';
 import 'SvgPrepare.dart';
 
 typedef AniLinkCardBuilder = Widget? Function(
@@ -1182,6 +1183,7 @@ PreparedSvg _prepare(String svg) => prepareSvg(svg);
 
 class _RemoteSvgState extends State<_RemoteSvg> {
   late final Future<String?> _svg = _load();
+  String? _raw;
 
   Future<String?> _load() async {
     try {
@@ -1193,6 +1195,7 @@ class _RemoteSvgState extends State<_RemoteSvg> {
           : (res.rawBytes == null ? null : utf8.decode(res.rawBytes!));
       if (text == null || !_isSvgDocument(text)) return null;
       if (text.contains('<foreignObject')) return null;
+      _raw = text;
       if (!needsPreparing(text)) return text;
       final prepared = await compute(_prepare, text);
       await _registerFonts(prepared.fonts);
@@ -1216,12 +1219,16 @@ class _RemoteSvgState extends State<_RemoteSvg> {
       }
       final svg = snap.data;
       if (svg == null) return widget.fallback;
-      return SvgPicture.string(
+      final still = SvgPicture.string(
         svg,
         width: widget.width,
         fit: BoxFit.contain,
         errorBuilder: (context, _, _) => widget.fallback,
       );
+      final raw = _raw;
+      return raw == null || !svgIsAnimated(raw)
+          ? still
+          : AnimatedSvg(svg: raw, width: widget.width, still: still);
     },
   );
 }
