@@ -68,7 +68,7 @@ class AnilistSync extends SyncAdapter {
     } on AnilistException catch (e) {
       throw _wrap(e);
     }
-    return 1;
+    return RegExp(r'\bm\d+: SaveMediaListEntry').allMatches(query).length;
   }
 
   @override
