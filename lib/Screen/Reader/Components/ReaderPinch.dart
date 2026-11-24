@@ -49,6 +49,7 @@ class _ReaderPinchState extends State<ReaderPinch>
   Duration _tapDownAt = Duration.zero;
   Offset? _lastTap;
   Duration _lastTapAt = Duration.zero;
+  bool _secondTap = false;
   bool _multi = false;
   late final AnimationController _anim = AnimationController(vsync: this)
     ..addListener(() {
@@ -86,17 +87,16 @@ class _ReaderPinchState extends State<ReaderPinch>
     widget.onZoom?.call(true);
   }
 
-  void _tapped(PointerUpEvent e) {
-    final last = _lastTap;
-    if (last != null &&
-        e.timeStamp - _lastTapAt < const Duration(milliseconds: 300) &&
-        (e.localPosition - last).distance < 48) {
+  bool _tapped(PointerUpEvent e) {
+    if (_secondTap) {
+      _secondTap = false;
       _lastTap = null;
       _toggle(e.localPosition);
-      return;
+      return true;
     }
     _lastTap = e.localPosition;
     _lastTapAt = e.timeStamp;
+    return false;
   }
 
   (Offset, double) _pair() {
@@ -134,6 +134,11 @@ class _ReaderPinchState extends State<ReaderPinch>
       _multi = false;
       _tapDown = e.localPosition;
       _tapDownAt = e.timeStamp;
+      final last = _lastTap;
+      _secondTap =
+          last != null &&
+          e.timeStamp - _lastTapAt < const Duration(milliseconds: 400) &&
+          (e.localPosition - last).distance < 100;
     }
     if (_points.length >= 2) {
       _multi = true;
@@ -166,15 +171,21 @@ class _ReaderPinchState extends State<ReaderPinch>
         !_multi &&
         _points.length == 1 &&
         (e.localPosition - _tapDown).distance < 18 &&
-        e.timeStamp - _tapDownAt < const Duration(milliseconds: 300);
+        e.timeStamp - _tapDownAt < const Duration(milliseconds: 400);
     if (_points.remove(e.pointer) == null) return;
-    if (tap) _tapped(e);
+    var toggled = false;
+    if (tap) {
+      toggled = _tapped(e);
+    } else {
+      _lastTap = null;
+      _secondTap = false;
+    }
     if (_points.length >= 2) {
       _begin();
     } else {
       _pinching.value = false;
     }
-    if (_points.isEmpty && _scale.value < 1.02) _settle();
+    if (_points.isEmpty && _scale.value < 1.02 && !toggled) _settle();
   }
 
   @override
