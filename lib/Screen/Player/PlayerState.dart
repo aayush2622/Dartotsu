@@ -43,6 +43,7 @@ import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
 import '../../Utils/Functions/ExternalPlayer.dart';
+import '../../Utils/Functions/Orientation.dart';
 import '../../Utils/Functions/SnackBar.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import 'PlayerMediaSession.dart';
@@ -300,7 +301,7 @@ class PlayerState extends ScreenState {
     _tagEpisode(request.index);
     unawaited(setWakelock(true));
     if (isMobilePlatform) {
-      SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+      unawaited(followGravity());
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       unawaited(_initVolumeAndBrightness());
     } else {
@@ -1548,9 +1549,7 @@ class PlayerState extends ScreenState {
     commentsOpen.value = false;
     if (isMobilePlatform) {
       _hold();
-      if (rotate) {
-        await SystemChrome.setPreferredOrientations(_fullscreenOrientations());
-      }
+      if (rotate) await _lockFullscreenOrientation();
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
     } else {
       await setDesktopFullscreen(true);
@@ -1568,15 +1567,13 @@ class PlayerState extends ScreenState {
       if (rotate) _manualExit = true;
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       if (rotate && _tablet) {
-        await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
+        await followGravity();
       } else if (rotate) {
         await SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
         ]);
         await Future<void>.delayed(const Duration(milliseconds: 600));
-        if (!_closed) {
-          await SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-        }
+        if (!_closed) await followGravity();
       }
     } else {
       await setDesktopFullscreen(false);
@@ -1597,15 +1594,13 @@ class PlayerState extends ScreenState {
     }
   }
 
-  List<DeviceOrientation> _fullscreenOrientations() =>
-      switch (settings.orientation) {
-        'portrait' => [DeviceOrientation.portraitUp],
-        'auto' => DeviceOrientation.values,
-        _ => [
-          DeviceOrientation.landscapeLeft,
-          DeviceOrientation.landscapeRight,
-        ],
-      };
+  Future<void> _lockFullscreenOrientation() => switch (settings.orientation) {
+    'portrait' => SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]),
+    'auto' => followGravity(),
+    _ => lockLandscape(),
+  };
 
   Future<void> _initVolumeAndBrightness() async {
     try {

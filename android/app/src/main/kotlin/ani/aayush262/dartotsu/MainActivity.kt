@@ -12,6 +12,7 @@ import ani.aayush262.dartotsu.channels.registerExternal
 import ani.aayush262.dartotsu.channels.registerLinks
 import ani.aayush262.dartotsu.channels.registerMedia
 import ani.aayush262.dartotsu.channels.registerNetwork
+import ani.aayush262.dartotsu.channels.registerOrientation
 import ani.aayush262.dartotsu.channels.registerWidget
 import ani.aayush262.dartotsu.pip.PipChannel
 import ani.aayush262.dartotsu.pip.PipController
@@ -36,6 +37,7 @@ class MainActivity : FlutterActivity() {
         registerContent(messenger)
         registerExternal(messenger)
         registerAuth(messenger)
+        registerOrientation(messenger)
         registerLinks(messenger)
     }
 

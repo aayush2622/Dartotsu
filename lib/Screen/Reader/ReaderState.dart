@@ -24,6 +24,7 @@ import '../Detail/Watch/Data/EpisodeUnits.dart';
 import '../../Logger.dart';
 import '../../Widgets/Components/ScreenState.dart';
 import '../Detail/Watch/Components/UnitTile.dart';
+import '../../Utils/Functions/Orientation.dart';
 import '../../Utils/Functions/Wakelock.dart';
 import 'Engine/VolumeKeys.dart';
 import '../Detail/Watch/Data/TrackConfirm.dart';
@@ -242,14 +243,16 @@ class ReaderState extends ScreenState {
           ? SystemUiMode.immersiveSticky
           : SystemUiMode.edgeToEdge,
     );
-    SystemChrome.setPreferredOrientations(switch (settings.orientation) {
-      'portrait' => [DeviceOrientation.portraitUp],
-      'landscape' => [
-        DeviceOrientation.landscapeLeft,
-        DeviceOrientation.landscapeRight,
-      ],
-      _ => const <DeviceOrientation>[],
-    });
+    switch (settings.orientation) {
+      case 'portrait':
+        unawaited(
+          SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
+        );
+      case 'landscape':
+        unawaited(lockLandscape());
+      default:
+        unawaited(followGravity());
+    }
   }
 
   List<PageUrl>? _first;
