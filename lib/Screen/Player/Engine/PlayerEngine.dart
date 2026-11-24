@@ -14,6 +14,7 @@ import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
 import 'MpvFiles.dart';
 import 'PlayerSettings.dart';
+import 'StreamProxy.dart';
 import 'TorrentStream.dart';
 
 class PlayerChapter {
@@ -112,6 +113,10 @@ class PlayerEngine {
   bool _disposed = false;
   bool _closing = false;
   bool _torrent = false;
+  final _proxy = StreamProxy();
+  final _proxyHosts = <String>{};
+  ({String url, Map<String, String> headers, Duration start, bool play})? _last;
+  bool _proxied = false;
 
   static const _softwareKey = 'playerSoftwareRender';
   static const _autoKey = 'playerSoftwareAuto';
@@ -253,6 +258,7 @@ class PlayerEngine {
       }),
       s.error.listen((v) {
         logger('Player error: $v', logLevel: LogLevel.error, tag: 'PLAYER');
+        if (_retryViaProxy(v)) return;
         error.value = v;
       }),
       s.tracks.listen((tracks) {
@@ -756,15 +762,70 @@ class PlayerEngine {
       logger('mpv user-agent failed: $e', tag: 'MPV');
     }
     if (_closing) return;
-    await player.open(
-      Media(target, start: start, httpHeaders: sent.isEmpty ? null : sent),
-      play: autoplay,
-    );
+    _last = (url: target, headers: sent, start: start, play: autoplay);
+    _proxied = false;
+    final host = _remoteHost(target);
+    if (host != null && _proxyHosts.contains(host)) {
+      await _openProxied();
+    } else {
+      await player.open(
+        Media(target, start: start, httpHeaders: sent.isEmpty ? null : sent),
+        play: autoplay,
+      );
+    }
     if (_closing) {
       await silence();
       return;
     }
     _watchChapters();
+  }
+
+  String? _remoteHost(String url) {
+    final uri = Uri.tryParse(url);
+    if (uri == null || (uri.scheme != 'http' && uri.scheme != 'https')) {
+      return null;
+    }
+    final host = uri.host;
+    if (host == 'localhost' || host.endsWith('.local')) return null;
+    final ip = InternetAddress.tryParse(host);
+    if (ip != null && (ip.isLoopback || ip.isLinkLocal || ip.isMulticast)) {
+      return null;
+    }
+    if (host.startsWith('192.168.') || host.startsWith('10.')) return null;
+    return host;
+  }
+
+  Future<void> _openProxied() async {
+    final last = _last;
+    if (last == null) return;
+    _proxied = true;
+    final local = await _proxy.wrap(last.url, {
+      ...last.headers,
+      'User-Agent': previewHeaders['User-Agent'] ?? _defaultAgent,
+    });
+    if (_closing) return;
+    await player.open(Media(local, start: last.start), play: last.play);
+  }
+
+  bool _retryViaProxy(String message) {
+    final last = _last;
+    if (_proxied || last == null || _closing || _disposed) return false;
+    if (!message.startsWith('Failed to open')) return false;
+    final host = _remoteHost(last.url);
+    if (host == null || !message.contains(last.url)) return false;
+    _proxyHosts.add(host);
+    logger('Retrying $host through the HTTP/2 proxy', tag: 'PLAYER');
+    unawaited(
+      _openProxied().catchError((Object e) {
+        logger(
+          'Proxy open failed: $e',
+          logLevel: LogLevel.error,
+          tag: 'PLAYER',
+        );
+        error.value = message;
+      }),
+    );
+    return true;
   }
 
   bool _isUri(String url) {
@@ -955,6 +1016,7 @@ class PlayerEngine {
     }
     _subs.clear();
     if (_torrent) unawaited(stopTorrentStream());
+    unawaited(_proxy.stop());
     await player.dispose();
   }
 }
