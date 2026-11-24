@@ -5,11 +5,12 @@ extension on AnilistQueries {
     final id = userId();
     if (id == null) return const [];
 
+    final plannedSort = _plannedSort(listPrefs());
     final layout = AnilistPref.homeLayout.value;
     final sections = layout.entries
         .where((e) => e.value && e.key != kHiddenMediaTitle)
         .map((e) => e.key)
-        .where((s) => _homeFragments(s, id) != null)
+        .where((s) => _homeFragments(s, id, plannedSort) != null)
         .toList();
     final sequel = layout[_missingSequelTitle] == true
         ? _missingSequelJob(id)
@@ -19,7 +20,9 @@ extension on AnilistQueries {
     final hidden = <String, Media>{};
 
     SectionJob job(List<String> wanted) => () async {
-      final gql = wanted.expand((s) => _homeFragments(s, id)!).join('\n');
+      final gql = wanted
+          .expand((s) => _homeFragments(s, id, plannedSort)!)
+          .join('\n');
       final chunk = await _parseSections('{$gql}', wanted);
 
       for (final media in chunk.remove(kHiddenMediaTitle) ?? const <Media>[]) {
@@ -62,7 +65,24 @@ extension on AnilistQueries {
   });
 }
 
-List<String>? _homeFragments(String section, int userId) => switch (section) {
+String _plannedSort(({String rowOrder, String titleLanguage}) prefs) =>
+    switch (prefs.rowOrder) {
+      'title' =>
+        prefs.titleLanguage.startsWith('ROMAJI')
+            ? 'MEDIA_TITLE_ROMAJI'
+            : prefs.titleLanguage.startsWith('NATIVE')
+            ? 'MEDIA_TITLE_NATIVE'
+            : 'MEDIA_TITLE_ENGLISH',
+      'id' => 'ADDED_TIME_DESC',
+      'score' => 'SCORE_DESC',
+      _ => 'UPDATED_TIME_DESC',
+    };
+
+List<String>? _homeFragments(
+  String section,
+  int userId,
+  String plannedSort,
+) => switch (section) {
   'Continue Watching' => [
     'currentAnime: ${_statusList(userId, 'ANIME', 'CURRENT')}',
     'repeatingAnime: ${_statusList(userId, 'ANIME', 'REPEATING')}',
@@ -72,10 +92,10 @@ List<String>? _homeFragments(String section, int userId) => switch (section) {
     'repeatingManga: ${_statusList(userId, 'MANGA', 'REPEATING')}',
   ],
   'Planned Anime' => [
-    'plannedAnime: ${_statusList(userId, 'ANIME', 'PLANNING')}',
+    'plannedAnime: ${_statusList(userId, 'ANIME', 'PLANNING', sort: plannedSort)}',
   ],
   'Planned Manga' => [
-    'plannedManga: ${_statusList(userId, 'MANGA', 'PLANNING')}',
+    'plannedManga: ${_statusList(userId, 'MANGA', 'PLANNING', sort: plannedSort)}',
   ],
   'Favourite Anime' => ['favoriteAnime: ${_favourites(userId, anime: true)}'],
   'Favourite Manga' => ['favoriteManga: ${_favourites(userId, anime: false)}'],

@@ -39,6 +39,12 @@ class AnilistAuth extends AppController
   late final AnilistQueries queries = AnilistQueries(
     client,
     userId: () => user.value?.id,
+    listPrefs: () {
+      final current = user.value;
+      return current is AnilistUser
+          ? (rowOrder: current.rowOrder, titleLanguage: current.titleLanguage)
+          : (rowOrder: 'updatedAt', titleLanguage: 'ENGLISH');
+    },
     refreshUser: () async {
       await refreshUser();
       return user.value != null;

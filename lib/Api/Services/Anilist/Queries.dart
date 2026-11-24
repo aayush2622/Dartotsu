@@ -52,6 +52,7 @@ class AnilistQueries extends Queries {
   final AnilistClient client;
   final int? Function() userId;
   final Future<bool> Function() refreshUser;
+  final ({String rowOrder, String titleLanguage}) Function() listPrefs;
 
   final MediaIndexClient _mediaIndex = MediaIndexClient();
 
@@ -59,6 +60,7 @@ class AnilistQueries extends Queries {
     this.client, {
     required this.userId,
     required this.refreshUser,
+    required this.listPrefs,
   });
 
   Future<Map<String, dynamic>?> character(String id) => _character(id);
