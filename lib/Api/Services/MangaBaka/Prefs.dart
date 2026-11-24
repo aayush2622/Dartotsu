@@ -5,6 +5,7 @@ import 'Queries.dart';
 
 const kMangaBakaHomeSections = <String, bool>{
   'Continue Reading': true,
+  'Recommended': true,
   'Planned Manga': true,
   'On Hold': true,
   'Dropped': true,
