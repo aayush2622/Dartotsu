@@ -14,7 +14,6 @@ list(APPEND FLUTTER_PLUGIN_LIST
   url_launcher_linux
   volume_controller
   webview_all_linux
-  window_to_front
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

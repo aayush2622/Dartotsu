@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.view.KeyEvent
 import ani.aayush262.dartotsu.channels.VolumeKeys
+import ani.aayush262.dartotsu.channels.registerAuth
 import ani.aayush262.dartotsu.channels.registerBiometric
 import ani.aayush262.dartotsu.channels.registerContent
 import ani.aayush262.dartotsu.channels.registerDownloads
@@ -34,6 +35,7 @@ class MainActivity : FlutterActivity() {
         registerMedia(messenger)
         registerContent(messenger)
         registerExternal(messenger)
+        registerAuth(messenger)
         registerLinks(messenger)
     }
 

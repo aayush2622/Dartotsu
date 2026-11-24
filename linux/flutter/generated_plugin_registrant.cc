@@ -17,7 +17,6 @@
 #include <url_launcher_linux/url_launcher_plugin.h>
 #include <volume_controller/volume_controller_plugin.h>
 #include <webview_all_linux/webview_all_linux_plugin.h>
-#include <window_to_front/window_to_front_plugin.h>
 
 void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) app_links_linux_registrar =
@@ -53,7 +52,4 @@ void fl_register_plugins(FlPluginRegistry* registry) {
   g_autoptr(FlPluginRegistrar) webview_all_linux_registrar =
       fl_plugin_registry_get_registrar_for_plugin(registry, "WebviewAllLinuxPlugin");
   webview_all_linux_plugin_register_with_registrar(webview_all_linux_registrar);
-  g_autoptr(FlPluginRegistrar) window_to_front_registrar =
-      fl_plugin_registry_get_registrar_for_plugin(registry, "WindowToFrontPlugin");
-  window_to_front_plugin_register_with_registrar(window_to_front_registrar);
 }

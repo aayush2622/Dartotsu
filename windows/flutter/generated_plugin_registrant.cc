@@ -24,7 +24,6 @@
 #include <share_plus/share_plus_windows_plugin_c_api.h>
 #include <volume_controller/volume_controller_plugin_c_api.h>
 #include <webview_all_windows/webview_all_windows_plugin.h>
-#include <window_to_front/window_to_front_plugin.h>
 
 void RegisterPlugins(flutter::PluginRegistry* registry) {
   AppLinksPluginCApiRegisterWithRegistrar(
@@ -63,6 +62,4 @@ void RegisterPlugins(flutter::PluginRegistry* registry) {
       registry->GetRegistrarForPlugin("VolumeControllerPluginCApi"));
   WebviewAllWindowsPluginRegisterWithRegistrar(
       registry->GetRegistrarForPlugin("WebviewAllWindowsPlugin"));
-  WindowToFrontPluginRegisterWithRegistrar(
-      registry->GetRegistrarForPlugin("WindowToFrontPlugin"));
 }

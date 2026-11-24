@@ -95,12 +95,6 @@ dependencies:
   url_launcher: ^6.3.3
   collection: ^1.19.1
   webview_all: ^1.5.1
-  flutter_web_auth_2:
-    #path : ../flutter_web_auth/flutter_web_auth_2
-    git:
-      url: https://github.com/aayush2622/flutter_web_auth.git
-      ref: fix/webview-dialog-clip
-      path: flutter_web_auth_2
   dartotsu_extension_bridge:
     #path: ../DartotsuExtensionBridge
     git:

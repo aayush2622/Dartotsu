@@ -364,8 +364,11 @@
         </activity>
 
         <activity
-            android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
-            android:exported="true">
+            android:name=".channels.AuthCallbackActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
             <intent-filter android:label="Login for Dartotsu">
                 <action android:name="android.intent.action.VIEW" />
 
