@@ -44,6 +44,8 @@ class UnitTile extends StatelessWidget {
   final VoidCallback? onLongPress;
   final VoidCallback? onInfo;
   final String? downloadId;
+  final bool selecting;
+  final bool selected;
 
   const UnitTile({
     super.key,
@@ -59,14 +61,57 @@ class UnitTile extends StatelessWidget {
     this.onLongPress,
     this.onInfo,
     this.downloadId,
+    this.selecting = false,
+    this.selected = false,
   });
 
   @override
-  Widget build(BuildContext context) => switch (view) {
-    1 => _grid(context),
-    2 => _compact(context),
-    _ => _list(context),
-  };
+  Widget build(BuildContext context) {
+    final tile = switch (view) {
+      1 => _grid(context),
+      2 => _compact(context),
+      _ => _list(context),
+    };
+    if (!selecting || view == 0) return tile;
+    final scheme = context.colorScheme;
+    return Stack(
+      children: [
+        tile,
+        Positioned.fill(
+          child: IgnorePointer(
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                borderRadius: view == 2
+                    ? BorderRadius.circular(16)
+                    : Dimens.borderSm,
+                border: selected
+                    ? Border.all(color: scheme.primary, width: 2)
+                    : null,
+              ),
+            ),
+          ),
+        ),
+        PositionedDirectional(
+          start: view == 2 ? 2 : 8,
+          bottom: view == 2 ? 2 : 8,
+          child: IgnorePointer(
+            child: _tick(context, size: view == 2 ? 16 : 22),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _tick(BuildContext context, {double size = 22}) {
+    final scheme = context.colorScheme;
+    return Icon(
+      selected
+          ? Icons.check_circle_rounded
+          : Icons.radio_button_unchecked_rounded,
+      size: size,
+      color: selected ? scheme.primary : scheme.onSurfaceVariant,
+    );
+  }
 
   Widget _thumb(BuildContext context, {double? width, double? height}) {
     final scheme = context.colorScheme;
@@ -171,7 +216,9 @@ class UnitTile extends StatelessWidget {
         opacity: watched ? 0.55 : 1,
         child: ThemedContainer(
           blur: false,
-          color: next
+          color: selected
+              ? scheme.primaryContainer.withValues(alpha: 0.7)
+              : next
               ? scheme.primaryContainer.withValues(alpha: 0.5)
               : scheme.surfaceContainerLow,
           borderRadius: Dimens.borderSm,
@@ -181,6 +228,15 @@ class UnitTile extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (selecting) ...[
+                  Padding(
+                    padding: EdgeInsets.only(
+                      top: anime ? 25 : 0,
+                      right: Dimens.gapSm,
+                    ),
+                    child: _tick(context),
+                  ),
+                ],
                 if (anime) ...[
                   _thumb(context, width: 128, height: 72),
                   SizedBox(width: Dimens.gap),

@@ -5471,6 +5471,20 @@ class AppLocalizationsTe extends AppLocalizations {
   String get watchOptions => 'ఆప్షన్లు';
 
   @override
+  String get watchSelect => 'Select';
+
+  @override
+  String get watchSelectAll => 'Select all';
+
+  @override
+  String watchSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get watchNoneDownloaded => 'None of the selected items are downloaded';
+
+  @override
   String get watchReverse => 'రివర్స్ ఆర్డర్';
 
   @override
@@ -7614,6 +7628,14 @@ class AppLocalizationsTe extends AppLocalizations {
   @override
   String downloadNextN(int count) {
     return 'తర్వాతి $count ఎపిసోడ్లు';
+  }
+
+  @override
+  String get downloadCustom => 'Custom amount…';
+
+  @override
+  String downloadCustomPrompt(int max) {
+    return 'How many from here? (1–$max)';
   }
 
   @override

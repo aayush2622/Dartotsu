@@ -2865,6 +2865,17 @@
     "sourceTagAdult": "18+",
     "sourceHiddenByTags": "Hidden by tags",
     "watchOptions": "Options",
+    "watchSelect": "Select",
+    "watchSelectAll": "Select all",
+    "watchSelectedCount": "{count} selected",
+    "@watchSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "watchNoneDownloaded": "None of the selected items are downloaded",
     "watchReverse": "Reverse order",
     "watchScanlators": "Groups",
     "watchResetOptions": "Reset these options",
@@ -3900,6 +3911,15 @@
     "@downloadNextN": {
         "placeholders": {
             "count": {
+                "type": "int"
+            }
+        }
+    },
+    "downloadCustom": "Custom amount…",
+    "downloadCustomPrompt": "How many from here? (1–{max})",
+    "@downloadCustomPrompt": {
+        "placeholders": {
+            "max": {
                 "type": "int"
             }
         }

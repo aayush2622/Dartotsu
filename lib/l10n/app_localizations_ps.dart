@@ -5441,6 +5441,20 @@ class AppLocalizationsPs extends AppLocalizations {
   String get watchOptions => 'غوراوي';
 
   @override
+  String get watchSelect => 'Select';
+
+  @override
+  String get watchSelectAll => 'Select all';
+
+  @override
+  String watchSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get watchNoneDownloaded => 'None of the selected items are downloaded';
+
+  @override
   String get watchReverse => 'ترتیب بدل کړه';
 
   @override
@@ -7562,6 +7576,14 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String downloadNextN(int count) {
     return 'بلې $count برخې';
+  }
+
+  @override
+  String get downloadCustom => 'Custom amount…';
+
+  @override
+  String downloadCustomPrompt(int max) {
+    return 'How many from here? (1–$max)';
   }
 
   @override

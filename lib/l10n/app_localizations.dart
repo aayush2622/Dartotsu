@@ -9797,6 +9797,30 @@ abstract class AppLocalizations {
   /// **'Options'**
   String get watchOptions;
 
+  /// No description provided for @watchSelect.
+  ///
+  /// In en, this message translates to:
+  /// **'Select'**
+  String get watchSelect;
+
+  /// No description provided for @watchSelectAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Select all'**
+  String get watchSelectAll;
+
+  /// No description provided for @watchSelectedCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} selected'**
+  String watchSelectedCount(int count);
+
+  /// No description provided for @watchNoneDownloaded.
+  ///
+  /// In en, this message translates to:
+  /// **'None of the selected items are downloaded'**
+  String get watchNoneDownloaded;
+
   /// No description provided for @watchReverse.
   ///
   /// In en, this message translates to:
@@ -13636,6 +13660,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Next {count} episodes'**
   String downloadNextN(int count);
+
+  /// No description provided for @downloadCustom.
+  ///
+  /// In en, this message translates to:
+  /// **'Custom amount…'**
+  String get downloadCustom;
+
+  /// No description provided for @downloadCustomPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'How many from here? (1–{max})'**
+  String downloadCustomPrompt(int max);
 
   /// No description provided for @downloadUnwatched.
   ///

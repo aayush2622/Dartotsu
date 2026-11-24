@@ -5497,6 +5497,20 @@ class AppLocalizationsMl extends AppLocalizations {
   String get watchOptions => 'ഓപ്ഷനുകൾ';
 
   @override
+  String get watchSelect => 'Select';
+
+  @override
+  String get watchSelectAll => 'Select all';
+
+  @override
+  String watchSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get watchNoneDownloaded => 'None of the selected items are downloaded';
+
+  @override
   String get watchReverse => 'ക്രമം തിരിച്ചിടൂ';
 
   @override
@@ -7648,6 +7662,14 @@ class AppLocalizationsMl extends AppLocalizations {
   @override
   String downloadNextN(int count) {
     return 'അടുത്ത $count എപ്പിസോഡുകൾ';
+  }
+
+  @override
+  String get downloadCustom => 'Custom amount…';
+
+  @override
+  String downloadCustomPrompt(int max) {
+    return 'How many from here? (1–$max)';
   }
 
   @override

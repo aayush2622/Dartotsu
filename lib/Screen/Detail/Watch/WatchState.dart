@@ -94,6 +94,8 @@ class WatchState extends ScreenState {
   }
 
   final localTick = 0.live;
+  final selecting = false.live;
+  final picked = Live<Set<String>>(const {});
 
   int get serviceProgress => current.userProgress ?? 0;
 
@@ -655,6 +657,29 @@ class WatchState extends ScreenState {
       sourceName: settings.value.sourceName,
     );
     updateSettings(fresh);
+  }
+
+  void startSelecting() {
+    picked.value = const {};
+    selecting.value = true;
+  }
+
+  void stopSelecting() {
+    picked.value = const {};
+    selecting.value = false;
+  }
+
+  void togglePicked(WatchUnit unit) {
+    final next = {...picked.value};
+    if (!next.remove(unit.key)) next.add(unit.key);
+    picked.value = next;
+  }
+
+  void togglePickedAll(List<WatchUnit> shown) {
+    final keys = {for (final u in shown) u.key};
+    picked.value = keys.every(picked.value.contains)
+        ? picked.value.difference(keys)
+        : {...picked.value, ...keys};
   }
 
   Future<void> markWatched(WatchUnit unit) async {

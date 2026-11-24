@@ -29,6 +29,7 @@ import 'Components/SourcePickerSheet.dart';
 import 'Components/SourceBar.dart';
 import 'Components/SourceToolsSheet.dart';
 import '../../../Core/Downloads/DownloadEngine.dart';
+import '../../Downloads/DownloadConfirm.dart';
 import '../../Downloads/DownloadPicker.dart';
 import 'Components/StreamSheet.dart';
 import 'Components/UnitSheet.dart';
@@ -156,8 +157,74 @@ class _WatchSectionState extends State<WatchSection>
     };
   }
 
+  List<WatchUnit> get _shown {
+    final chunks = state.chunks;
+    if (chunks.isEmpty) return const [];
+    return chunks[state.chunk.value.clamp(0, chunks.length - 1)];
+  }
+
+  Widget _selectionRow(BuildContext context) {
+    final scheme = context.colorScheme;
+    final picked = state.picked.value;
+    final units = [
+      for (final u in state.units)
+        if (picked.contains(u.key)) u,
+    ];
+    final shown = _shown;
+    final all = shown.isNotEmpty && shown.every((u) => picked.contains(u.key));
+    return Row(
+      children: [
+        Expanded(
+          child: Text(
+            getString.watchSelectedCount(picked.length),
+            style: context.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: scheme.primary,
+            ),
+          ),
+        ),
+        IconButton(
+          tooltip: getString.watchSelectAll,
+          onPressed: () => state.togglePickedAll(shown),
+          icon: Icon(all ? Icons.deselect_rounded : Icons.select_all_rounded),
+        ),
+        IconButton(
+          tooltip: getString.downloadTitle,
+          onPressed: units.isEmpty
+              ? null
+              : () {
+                  state.stopSelecting();
+                  unawaited(downloadUnits(context, state, units));
+                },
+          icon: const Icon(Icons.download_rounded),
+        ),
+        IconButton(
+          tooltip: getString.downloadDeleteSelected,
+          onPressed: units.isEmpty ? null : () => _deleteDownloads(units),
+          icon: const Icon(Icons.delete_outline_rounded),
+        ),
+        IconButton(
+          tooltip: getString.cancel,
+          onPressed: state.stopSelecting,
+          icon: const Icon(Icons.close_rounded),
+        ),
+      ],
+    );
+  }
+
+  void _deleteDownloads(List<WatchUnit> units) {
+    final engine = find<DownloadEngine>();
+    final tasks = [
+      for (final u in units)
+        ?engine.taskFor(state.service.id, state.current.id, u.key),
+    ];
+    if (tasks.isEmpty) return snackString(getString.watchNoneDownloaded);
+    confirmRemoveMany(context, engine, tasks, state.stopSelecting);
+  }
+
   Widget _titleRow(BuildContext context) {
     final scheme = context.colorScheme;
+    if (state.selecting.value) return _selectionRow(context);
     final count = state.anime
         ? state.units.length
         : {for (final u in state.units) u.value.floor()}.length;
@@ -195,6 +262,12 @@ class _WatchSectionState extends State<WatchSection>
             ),
           );
         }),
+        if (state.phase.value == WatchPhase.ready)
+          IconButton(
+            tooltip: getString.watchSelect,
+            onPressed: state.startSelecting,
+            icon: const Icon(Icons.checklist_rounded),
+          ),
         IconButton(
           tooltip: getString.downloadTitle,
           onPressed: () => downloadMenu(context, state),
@@ -245,6 +318,8 @@ class _WatchSectionState extends State<WatchSection>
         : chunks[index];
     final next = state.next;
     final progress = state.progress;
+    final selecting = state.selecting.value;
+    final picked = state.picked.value;
     return [
       SliverToBoxAdapter(
         child: Column(
@@ -288,31 +363,46 @@ class _WatchSectionState extends State<WatchSection>
       UnitSliver(
         units: shown,
         view: settings.view,
-        builder: (u) => _tile(u, settings.view, progress, next),
+        builder: (u) =>
+            _tile(u, settings.view, progress, next, selecting, picked),
       ),
     ];
   }
 
-  Widget _tile(WatchUnit u, int view, int progress, WatchUnit? next) =>
-      UnitTile(
-        key: ValueKey('unit-${u.number}-${u.scanlator}'),
-        unit: u,
-        anime: state.anime,
-        view: view,
-        watched: u.isWatched(progress),
-        progress: partialFraction(state.playbackOf(u)),
-        next: identical(u, next),
-        blur: watchBlurUnwatchedPref.rx.value,
-        showDescription: watchShowDescriptionPref.rx.value,
-        downloadId: downloadIdOf(state, u),
-        onTap: () => state.anime ? _play(u) : _read(u),
-        onInfo: view == 0 ? () => _open(u) : null,
-        onLongPress: watchMarkOnLongPressPref.rx.value
-            ? () => u.isWatched(progress)
-                  ? state.markUnwatched(u)
-                  : state.markWatched(u)
-            : null,
-      );
+  Widget _tile(
+    WatchUnit u,
+    int view,
+    int progress,
+    WatchUnit? next,
+    bool selecting,
+    Set<String> picked,
+  ) {
+    return UnitTile(
+      key: ValueKey('unit-${u.number}-${u.scanlator}'),
+      unit: u,
+      anime: state.anime,
+      view: view,
+      watched: u.isWatched(progress),
+      progress: partialFraction(state.playbackOf(u)),
+      next: identical(u, next),
+      blur: watchBlurUnwatchedPref.rx.value,
+      showDescription: watchShowDescriptionPref.rx.value,
+      downloadId: downloadIdOf(state, u),
+      selecting: selecting,
+      selected: selecting && picked.contains(u.key),
+      onTap: selecting
+          ? () => state.togglePicked(u)
+          : () => state.anime ? _play(u) : _read(u),
+      onInfo: view == 0 && !selecting ? () => _open(u) : null,
+      onLongPress: selecting
+          ? () => state.togglePicked(u)
+          : watchMarkOnLongPressPref.rx.value
+          ? () => u.isWatched(progress)
+                ? state.markUnwatched(u)
+                : state.markWatched(u)
+          : null,
+    );
+  }
 
   void _open(WatchUnit unit) => showCustomBottomDialog<void>(
     context,

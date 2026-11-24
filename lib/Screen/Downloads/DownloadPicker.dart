@@ -1,8 +1,10 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:dartotsu_extension_bridge/Models/Video.dart' as v;
 import 'package:dartotsu_extension_bridge/dartotsu_extension_bridge.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../../Core/Downloads/DownloadEngine.dart';
 import '../../Core/Downloads/DownloadSnapshots.dart';
@@ -17,6 +19,7 @@ import '../../Core/State/State.dart';
 import '../../Core/ThemeManager/LanguageSwitcher.dart';
 import '../../Logger.dart';
 import '../../Utils/Functions/SnackBar.dart';
+import '../../Widgets/Components/AlertDialogBuilder.dart';
 import '../../Widgets/Components/ChoiceSheet.dart';
 import '../../Widgets/Components/CustomBottomDialog.dart';
 import '../Detail/Watch/Data/EpisodeUnits.dart';
@@ -243,6 +246,35 @@ List<DownloadUnit> _asDownloadUnits(List<WatchUnit> units) => [
 ];
 
 const _metaOnly = 'metaOnly';
+const _custom = 'custom';
+
+Future<int?> _askAmount(BuildContext context, int max) {
+  final done = Completer<int?>();
+  final field = TextEditingController();
+  AlertDialogBuilder(context)
+    ..setTitle(getString.downloadCustomPrompt(max))
+    ..setCustomView(
+      TextField(
+        controller: field,
+        autofocus: true,
+        keyboardType: TextInputType.number,
+        inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+        decoration: const InputDecoration(hintText: '10'),
+      ),
+    )
+    ..setOnDismissListener(() {
+      if (!done.isCompleted) done.complete();
+      field.dispose();
+    })
+    ..setPositiveButton(getString.ok, () {
+      final value = int.tryParse(field.text.trim());
+      if (value == null || value < 1) return;
+      if (!done.isCompleted) done.complete(min(value, max));
+    })
+    ..setNegativeButton(getString.cancel, null)
+    ..show();
+  return done.future;
+}
 
 Future<void> _saveMetadata(WatchState state) async {
   final media = state.current;
@@ -323,10 +355,26 @@ Future<void> downloadMenu(BuildContext context, WatchState state) async {
       ),
       for (final key in options.keys)
         ChoiceOption(key, label(key), icon: Icons.download_rounded),
+      if (upcoming.length > 1)
+        ChoiceOption(
+          _custom,
+          getString.downloadCustom,
+          icon: Icons.edit_rounded,
+        ),
     ],
   );
   if (picked == null) return;
   if (picked == _metaOnly) return _saveMetadata(state);
+  if (picked == _custom) {
+    if (!context.mounted) return;
+    final count = await _askAmount(context, upcoming.length);
+    if (count == null) return;
+    return downloadUnits(
+      appOverlayContext ?? appContext ?? context,
+      state,
+      upcoming.take(count).toList(),
+    );
+  }
   await downloadUnits(
     context.mounted ? context : (appOverlayContext ?? appContext)!,
     state,

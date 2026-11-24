@@ -5382,6 +5382,20 @@ class AppLocalizationsAm extends AppLocalizations {
   String get watchOptions => 'አማራጮች';
 
   @override
+  String get watchSelect => 'Select';
+
+  @override
+  String get watchSelectAll => 'Select all';
+
+  @override
+  String watchSelectedCount(int count) {
+    return '$count selected';
+  }
+
+  @override
+  String get watchNoneDownloaded => 'None of the selected items are downloaded';
+
+  @override
   String get watchReverse => 'ቅደም ተከተል ገልብጥ';
 
   @override
@@ -7480,6 +7494,14 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String downloadNextN(int count) {
     return 'ቀጣይ $count ክፍሎች';
+  }
+
+  @override
+  String get downloadCustom => 'Custom amount…';
+
+  @override
+  String downloadCustomPrompt(int max) {
+    return 'How many from here? (1–$max)';
   }
 
   @override
