@@ -3270,5 +3270,48 @@
     "removePlayerTitle": "Видалити плеєр?",
     "removePlayerMessage": "Відео не можна відтворювати, доки плеєр не буде завантажено знову.",
     "trailerLoading": "Завантаження трейлера…",
-    "trailerFailed": "Не вдалося відтворити трейлер тут, відкривши його в браузері"
+    "trailerFailed": "Не вдалося відтворити трейлер тут, відкривши його в браузері",
+    "traktClientIdDesc": "Sign in with your own Trakt app instead of the built-in one",
+    "traktClientId": "Trakt Client ID",
+    "traktCreateAppDesc": "Opens your apps on trakt.tv",
+    "traktRedirectHelp": "On trakt.tv/oauth/applications create an app and add these Redirect URIs, one per line:\n\n{uris}\n\nThen paste its Client ID here, save and sign in again.",
+    "@traktRedirectHelp": {
+        "placeholders": {
+            "uris": {
+                "type": "String"
+            }
+        }
+    },
+    "splitSection": "{section} · {kind}",
+    "@splitSection": {
+        "placeholders": {
+            "section": {
+                "type": "String"
+            },
+            "kind": {
+                "type": "String"
+            }
+        }
+    },
+    "traktCreateApp": "Create a Trakt app",
+    "downloadCustom": "Custom amount…",
+    "watchSelectedCount": "{count} selected",
+    "@watchSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "watchNoneDownloaded": "None of the selected items are downloaded",
+    "watchSelectAll": "Select all",
+    "watchSelect": "Select",
+    "downloadCustomPrompt": "How many from here? (1–{max})",
+    "@downloadCustomPrompt": {
+        "placeholders": {
+            "max": {
+                "type": "int"
+            }
+        }
+    }
 }

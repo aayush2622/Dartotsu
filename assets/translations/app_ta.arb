@@ -149,7 +149,7 @@
     "settingsSync": "ஒத்திசைவு அமைப்புகள்",
     "settingsSyncDesc": "ஒவ்வொரு சாதனத்திலும் உங்கள் அமைப்புகளை ஒரே மாதிரியாக வைத்திருங்கள். அவை உங்கள் GitHub கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்",
     "settingsSyncSwitch": "மாற்றத்தில் ஒத்திசைக்கவும்",
-    "settingsSyncModeGithub": "கிட்ஹப்",
+    "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub மூலம் உள்நுழையவும்",
     "settingsSyncSignInDesc": "அமைப்புகள் உங்கள் கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்",
     "settingsSyncToken": "தனிப்பட்ட அணுகல் டோக்கனைப் பயன்படுத்தவும்",
@@ -3270,5 +3270,48 @@
     "removePlayerTitle": "பிளேயரை அகற்றவா?",
     "removePlayerMessage": "பிளேயர் மீண்டும் பதிவிறக்கப்படும் வரை வீடியோக்களை இயக்க முடியாது.",
     "trailerLoading": "டிரெய்லரை ஏற்றுகிறது…",
-    "trailerFailed": "டிரெய்லரை இங்கே இயக்க முடியவில்லை, அதை உலாவியில் திறக்கிறது"
+    "trailerFailed": "டிரெய்லரை இங்கே இயக்க முடியவில்லை, அதை உலாவியில் திறக்கிறது",
+    "traktClientIdDesc": "Sign in with your own Trakt app instead of the built-in one",
+    "traktClientId": "Trakt Client ID",
+    "traktCreateAppDesc": "Opens your apps on trakt.tv",
+    "traktRedirectHelp": "On trakt.tv/oauth/applications create an app and add these Redirect URIs, one per line:\n\n{uris}\n\nThen paste its Client ID here, save and sign in again.",
+    "@traktRedirectHelp": {
+        "placeholders": {
+            "uris": {
+                "type": "String"
+            }
+        }
+    },
+    "splitSection": "{section} · {kind}",
+    "@splitSection": {
+        "placeholders": {
+            "section": {
+                "type": "String"
+            },
+            "kind": {
+                "type": "String"
+            }
+        }
+    },
+    "traktCreateApp": "Create a Trakt app",
+    "downloadCustom": "Custom amount…",
+    "watchSelectedCount": "{count} selected",
+    "@watchSelectedCount": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "watchNoneDownloaded": "None of the selected items are downloaded",
+    "watchSelectAll": "Select all",
+    "watchSelect": "Select",
+    "downloadCustomPrompt": "How many from here? (1–{max})",
+    "@downloadCustomPrompt": {
+        "placeholders": {
+            "max": {
+                "type": "int"
+            }
+        }
+    }
 }
