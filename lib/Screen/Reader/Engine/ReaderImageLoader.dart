@@ -221,6 +221,26 @@ class _PagedFileService extends FileService {
             continue;
           }
         }
+        if (code >= 200 &&
+            code < 300 &&
+            !challenged &&
+            !processed &&
+            readerImageTruncated(res.body)) {
+          final wait = readerRetryDelay(attempt);
+          if (attempt < readerRetryLimit) {
+            logger(
+              'Reader image truncated (${res.body.length} bytes), retry $attempt in ${wait.inMilliseconds} ms $url',
+              tag: 'READER',
+            );
+            await Future<void>.delayed(wait);
+            ensureOpen();
+            continue;
+          }
+          throw HttpException(
+            'The page arrived incomplete (${res.body.length} bytes)',
+            uri: Uri.tryParse(url),
+          );
+        }
         if (code >= 200 && code < 300 && res.body.isNotEmpty && !challenged) {
           _served(host);
           ReaderImageLoader._errors.remove(url);
@@ -265,6 +285,32 @@ class _PagedFileService extends FileService {
       ReaderImageLoader._finished(url);
     }
   }
+}
+
+bool readerImageTruncated(List<int> b) {
+  if (b.length < 16) return false;
+  final webp =
+      b[0] == 0x52 &&
+      b[1] == 0x49 &&
+      b[2] == 0x46 &&
+      b[3] == 0x46 &&
+      b[8] == 0x57 &&
+      b[9] == 0x45 &&
+      b[10] == 0x42 &&
+      b[11] == 0x50;
+  if (webp) {
+    final size = b[4] | b[5] << 8 | b[6] << 16 | b[7] << 24;
+    return b.length + 1 < size + 8;
+  }
+  final png = b[0] == 0x89 && b[1] == 0x50 && b[2] == 0x4E && b[3] == 0x47;
+  if (png) {
+    final n = b.length;
+    return !(b[n - 8] == 0x49 &&
+        b[n - 7] == 0x45 &&
+        b[n - 6] == 0x4E &&
+        b[n - 5] == 0x44);
+  }
+  return false;
 }
 
 bool _isImage(List<int> b) {
