@@ -303,7 +303,7 @@ class PlayerState extends ScreenState {
     _tagEpisode(request.index);
     unawaited(setWakelock(true));
     if (isMobilePlatform) {
-      unawaited(followGravity());
+      unawaited(_followPage());
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       unawaited(_initVolumeAndBrightness());
     } else {
@@ -1570,13 +1570,13 @@ class PlayerState extends ScreenState {
       if (rotate) _manualExit = true;
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
       if (rotate && _tablet) {
-        await followGravity();
+        await _followPage();
       } else if (rotate) {
         await SystemChrome.setPreferredOrientations([
           DeviceOrientation.portraitUp,
         ]);
         await Future<void>.delayed(const Duration(milliseconds: 600));
-        if (!_closed) await followGravity();
+        if (!_closed) await _followPage();
       }
     } else {
       await setDesktopFullscreen(false);
@@ -1584,8 +1584,12 @@ class PlayerState extends ScreenState {
     showControls();
   }
 
+  Future<void> _followPage() => settings.autoRotate
+      ? followGravity()
+      : SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   void followOrientation(Orientation orientation) {
-    if (!isMobilePlatform || _busy || _closed) return;
+    if (!isMobilePlatform || _busy || _closed || !settings.autoRotate) return;
     if (orientation == Orientation.landscape && !fullscreen.value) {
       if (_manualExit) return;
       unawaited(enterFullscreen(rotate: false));

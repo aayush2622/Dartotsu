@@ -172,6 +172,14 @@ List<Setting> playerSettingsRows(
       (v) => update((x) => x.resume = v),
     ),
     if (Platform.isAndroid || Platform.isIOS)
+      switchSetting(
+        getString.playerAutoRotate,
+        getString.playerAutoRotateDesc,
+        Icons.screen_rotation_rounded,
+        s.autoRotate,
+        (v) => update((x) => x.autoRotate = v),
+      ),
+    if (Platform.isAndroid || Platform.isIOS)
       choiceSetting<String>(
         context,
         name: getString.playerOrientation,

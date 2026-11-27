@@ -5778,6 +5778,13 @@ class AppLocalizationsSi extends AppLocalizations {
       'එපිසෝඩ් එකක් අන්තිමට හිටපු තැනින් දිගටම කරන්න';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'ඕරියන්ටේෂන්';
 
   @override

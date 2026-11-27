@@ -5756,6 +5756,13 @@ class AppLocalizationsVi extends AppLocalizations {
   String get playerResumeDesc => 'Xem tiếp một tập từ vị trí cuối cùng';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'Hướng màn hình';
 
   @override

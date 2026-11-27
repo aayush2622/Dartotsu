@@ -5618,6 +5618,13 @@ class AppLocalizationsZh extends AppLocalizations {
   String get playerResumeDesc => '从上次的位置继续播放';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => '方向';
 
   @override

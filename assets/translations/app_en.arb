@@ -3008,6 +3008,8 @@
     "playerAutoPlayDesc": "Start the next episode when this one ends",
     "playerResume": "Resume where you left off",
     "playerResumeDesc": "Continue an episode from its last position",
+    "playerAutoRotate": "Rotate to fullscreen",
+    "playerAutoRotateDesc": "Turning the phone sideways opens the fullscreen player. Off keeps the player page upright",
     "playerOrientation": "Orientation",
     "playerOrientationAuto": "Follow the device",
     "playerOrientationLandscape": "Landscape",

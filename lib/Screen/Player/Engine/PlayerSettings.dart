@@ -56,6 +56,8 @@ class PlayerSettings {
   set swapGestures(bool v) => _v['swapGestures'] = v;
   bool get openBig => _get('openBig', false);
   set openBig(bool v) => _v['openBig'] = v;
+  bool get autoRotate => _get('autoRotate', true);
+  set autoRotate(bool v) => _v['autoRotate'] = v;
   bool get pauseOnBlur => _get('pauseOnBlur', false);
   set pauseOnBlur(bool v) => _v['pauseOnBlur'] = v;
   bool get autoPlay => _get('autoPlay', true);

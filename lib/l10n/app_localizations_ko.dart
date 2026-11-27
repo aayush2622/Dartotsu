@@ -5641,6 +5641,13 @@ class AppLocalizationsKo extends AppLocalizations {
   String get playerResumeDesc => '에피소드를 마지막 위치부터 이어서 재생해요';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => '화면 방향';
 
   @override

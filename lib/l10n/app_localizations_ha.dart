@@ -5764,6 +5764,13 @@ class AppLocalizationsHa extends AppLocalizations {
   String get playerResumeDesc => 'Ci gaba da episode daga matsayinsa na ƙarshe';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'Yanayin allo';
 
   @override

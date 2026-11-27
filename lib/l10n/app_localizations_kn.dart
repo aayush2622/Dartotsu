@@ -5774,6 +5774,13 @@ class AppLocalizationsKn extends AppLocalizations {
   String get playerResumeDesc => 'ಎಪಿಸೋಡ್ ಅನ್ನು ಕೊನೆಯ ಸ್ಥಾನದಿಂದ ಮುಂದುವರಿಸು';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'ಓರಿಯೆಂಟೇಶನ್';
 
   @override

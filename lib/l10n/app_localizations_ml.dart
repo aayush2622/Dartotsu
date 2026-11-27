@@ -5806,6 +5806,13 @@ class AppLocalizationsMl extends AppLocalizations {
   String get playerResumeDesc => 'എപ്പിസോഡ് അവസാന പൊസിഷനിൽ നിന്ന് തുടരൂ';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'ഓറിയന്റേഷൻ';
 
   @override

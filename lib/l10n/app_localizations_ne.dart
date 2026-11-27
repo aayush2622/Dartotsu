@@ -5731,6 +5731,13 @@ class AppLocalizationsNe extends AppLocalizations {
   String get playerResumeDesc => 'एपिसोड पछिल्लो स्थानबाट जारी राख';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'ओरिएन्टेसन';
 
   @override

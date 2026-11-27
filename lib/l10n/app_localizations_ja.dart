@@ -5640,6 +5640,13 @@ class AppLocalizationsJa extends AppLocalizations {
   String get playerResumeDesc => 'エピソードを最後に見た位置から続ける';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => '画面の向き';
 
   @override

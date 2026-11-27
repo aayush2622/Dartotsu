@@ -10343,6 +10343,18 @@ abstract class AppLocalizations {
   /// **'Continue an episode from its last position'**
   String get playerResumeDesc;
 
+  /// No description provided for @playerAutoRotate.
+  ///
+  /// In en, this message translates to:
+  /// **'Rotate to fullscreen'**
+  String get playerAutoRotate;
+
+  /// No description provided for @playerAutoRotateDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright'**
+  String get playerAutoRotateDesc;
+
   /// No description provided for @playerOrientation.
   ///
   /// In en, this message translates to:

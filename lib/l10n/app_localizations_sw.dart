@@ -5787,6 +5787,13 @@ class AppLocalizationsSw extends AppLocalizations {
   String get playerResumeDesc => 'Endelea kipindi kutoka mahali pa mwisho';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'Mwelekeo';
 
   @override

@@ -5741,6 +5741,13 @@ class AppLocalizationsBn extends AppLocalizations {
   String get playerResumeDesc => 'পর্ব শেষ পজিশন থেকে আবার চালাও';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'ওরিয়েন্টেশন';
 
   @override

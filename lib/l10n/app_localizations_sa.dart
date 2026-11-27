@@ -5772,6 +5772,13 @@ class AppLocalizationsSa extends AppLocalizations {
   String get playerResumeDesc => 'एपिसोड् अन्तिम-स्थानात् अनुवर्तय';
 
   @override
+  String get playerAutoRotate => 'Rotate to fullscreen';
+
+  @override
+  String get playerAutoRotateDesc =>
+      'Turning the phone sideways opens the fullscreen player. Off keeps the player page upright';
+
+  @override
   String get playerOrientation => 'दिशा';
 
   @override
