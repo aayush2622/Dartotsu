@@ -441,7 +441,11 @@ class _ReaderImageState extends State<ReaderImage> {
   Widget _box(Widget child) => LayoutBuilder(
     builder: (context, box) {
       final given = widget.width;
-      final width = given != null && given.isFinite ? given : box.maxWidth;
+      final width = given != null && given.isFinite
+          ? given
+          : box.hasBoundedWidth
+          ? box.maxWidth
+          : widget.placeholderHeight;
       final aspect = widget.fit == BoxFit.fitWidth
           ? ReaderImageLoader.aspectOf(widget.page.url) ??
                 ReaderImageLoader.averageAspect
@@ -452,7 +456,7 @@ class _ReaderImageState extends State<ReaderImage> {
               ? width * aspect
               : widget.placeholderHeight);
       return SizedBox(
-        width: widget.width ?? double.infinity,
+        width: box.hasBoundedWidth ? widget.width ?? double.infinity : width,
         height: height,
         child: Center(child: child),
       );
