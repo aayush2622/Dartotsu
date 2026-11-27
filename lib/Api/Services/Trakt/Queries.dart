@@ -158,7 +158,13 @@ class TraktQueries extends Queries {
     if (previous != null && stamp == _seen) {
       return _publish(previous, persist: false);
     }
-    return _fullSync(stamp);
+    try {
+      return await _fullSync(stamp);
+    } catch (e, st) {
+      logError('Queries', e, st);
+      if (previous == null) rethrow;
+      return _publish(previous, persist: false);
+    }
   }
 
   Future<T> _safe<T>(T fallback, Future<T> Function() load) async {
@@ -173,10 +179,7 @@ class TraktQueries extends Queries {
   Future<List<Map<String, dynamic>>> _rows(
     String path, {
     Map<String, String>? query,
-  }) => _safe(
-    const [],
-    () async => jsonRows(await client.get(path, query: query)).toList(),
-  );
+  }) async => jsonRows(await client.get(path, query: query)).toList();
 
   Future<Map<String, Media>> _fullSync(String stamp) async {
     const full = {'extended': 'full'};
