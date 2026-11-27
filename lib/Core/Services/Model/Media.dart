@@ -42,6 +42,7 @@ class Media {
   bool? hiddenFromStatusLists;
   String? notes;
   int? userProgress;
+  int? userVolume;
   String? userStatus;
   int? userScore;
   int userRepeat;
@@ -114,6 +115,7 @@ class Media {
     this.isListPrivate = false,
     this.notes,
     this.userProgress,
+    this.userVolume,
     this.userStatus,
     this.userScore = 0,
     this.userRepeat = 0,

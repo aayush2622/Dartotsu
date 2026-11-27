@@ -275,6 +275,7 @@ void applyMangaBakaEntry(Media media, Map<String, dynamic> e, int scale) {
     ..userStatus = mangaBakaStateIn(e['state'] as String?)
     ..userScore = (rating * scale).round().clamp(0, 100)
     ..userProgress = (e['progress_chapter'] as num?)?.toInt() ?? 0
+    ..userVolume = (e['progress_volume'] as num?)?.toInt() ?? 0
     ..userRepeat = (e['number_of_rereads'] as num?)?.toInt() ?? 0
     ..notes = e['note'] as String?
     ..isListPrivate = e['is_private'] == true

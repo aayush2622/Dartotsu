@@ -343,6 +343,28 @@ class ListPrivateField extends StatelessWidget {
   );
 }
 
+class ListVolumeField extends StatelessWidget {
+  final ListEditorDraft draft;
+  final int? total;
+
+  const ListVolumeField({super.key, required this.draft, this.total});
+
+  @override
+  Widget build(BuildContext context) => ListEditorPad(
+    child: TextFormField(
+      initialValue: draft.volume.value.toString(),
+      keyboardType: TextInputType.number,
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+      decoration: InputDecoration(
+        labelText: getString.volumes,
+        prefixIcon: const Icon(Icons.collections_bookmark_rounded),
+        suffixText: '/ ${total ?? '??'}',
+      ),
+      onChanged: (v) => draft.volume.value = int.tryParse(v) ?? 0,
+    ),
+  );
+}
+
 class ListRepeatField extends StatelessWidget {
   final ListEditorDraft draft;
   final String? label;

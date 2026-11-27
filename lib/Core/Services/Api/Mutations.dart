@@ -30,6 +30,7 @@ void clearListEntry(Media media) {
   media.userListId = null;
   media.userStatus = null;
   media.userProgress = null;
+  media.userVolume = null;
   media.userScore = null;
   media.userRepeat = 0;
   media.userUpdatedAt = null;

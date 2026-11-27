@@ -5,6 +5,7 @@ import '../../State/State.dart';
 class ListEditorDraft {
   final status = ''.live;
   final progress = 0.live;
+  final volume = 0.live;
   final score = 0.live;
   final isPrivate = false.live;
   final hiddenFromStatusLists = false.live;
@@ -17,6 +18,7 @@ class ListEditorDraft {
   ListEditorDraft(Media media, {Map<String, bool> customLists = const {}}) {
     status.value = media.userStatus ?? 'PLANNING';
     progress.value = media.userProgress ?? 0;
+    volume.value = media.userVolume ?? 0;
     score.value = media.userScore ?? 0;
     isPrivate.value = media.isListPrivate;
     hiddenFromStatusLists.value = media.hiddenFromStatusLists ?? false;
@@ -35,6 +37,7 @@ class ListEditorDraft {
   void Function() snapshot(Media media) {
     final status = media.userStatus;
     final progress = media.userProgress;
+    final volume = media.userVolume;
     final score = media.userScore;
     final isPrivate = media.isListPrivate;
     final hidden = media.hiddenFromStatusLists;
@@ -45,6 +48,7 @@ class ListEditorDraft {
     return () => media
       ..userStatus = status
       ..userProgress = progress
+      ..userVolume = volume
       ..userScore = score
       ..isListPrivate = isPrivate
       ..hiddenFromStatusLists = hidden
@@ -58,6 +62,7 @@ class ListEditorDraft {
     media
       ..userStatus = status.value
       ..userProgress = progress.value
+      ..userVolume = volume.value
       ..userScore = score.value
       ..isListPrivate = isPrivate.value
       ..hiddenFromStatusLists = hiddenFromStatusLists.value

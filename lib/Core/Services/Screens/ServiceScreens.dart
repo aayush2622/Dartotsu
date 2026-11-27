@@ -298,6 +298,10 @@ class TrackerListEditorView extends ListEditorScreenView {
 
   bool get hasPrivate => false;
 
+  bool get hasVolumes => false;
+
+  int? volumeTotal(Media media) => null;
+
   @override
   Map<String, String> statuses({required bool anime}) => {
     'CURRENT': anime ? getString.watching : getString.reading,
@@ -319,6 +323,10 @@ class TrackerListEditorView extends ListEditorScreenView {
     ScreenWidget.extra(
       ListProgressField(draft: draft, total: media.totalUnits),
     ),
+    if (hasVolumes && !media.isAnime)
+      ScreenWidget.extra(
+        ListVolumeField(draft: draft, total: volumeTotal(media)),
+      ),
     ScreenWidget.extra(ListScoreField(draft: draft)),
     ScreenWidget.extra(ListDatesField(draft: draft)),
     ScreenWidget.extra(

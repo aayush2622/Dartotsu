@@ -37,6 +37,7 @@ class MangaBakaMutations extends Mutations {
       'state': mangaBakaStateOut(media.userStatus),
       'rating': score <= 0 ? null : (score / queries.ratingScale).round(),
       if (media.userProgress != null) 'progress_chapter': media.userProgress,
+      if (media.userVolume != null) 'progress_volume': media.userVolume,
       'number_of_rereads': media.userRepeat,
       'note': media.notes ?? '',
       'start_date': mangaBakaDateOut(media.userStartedAt),
