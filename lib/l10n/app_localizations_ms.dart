@@ -422,10 +422,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get settingsSyncSignIn => 'Log masuk dengan GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Tetapan disimpan dalam intipati peribadi dalam akaun anda';
-
-  @override
   String get settingsSyncToken => 'Gunakan token akses peribadi';
 
   @override
@@ -444,19 +440,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get settingsSyncSignOut => 'Log keluar';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Masukkan $code pada GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Halaman GitHub dibuka dalam penyemak imbas anda. Ketik untuk menyalin kod, atau ketik dan tahan untuk membatalkan.';
-
-  @override
   String get settingsSyncSignInFailed => 'Tidak dapat log masuk ke GitHub';
-
-  @override
-  String get dcPreview => 'Pratonton';
 
   @override
   String get dcSampleWatching => 'Menonton';
@@ -478,21 +462,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get dcMemberList => 'Dalam senarai ahli';
 
   @override
-  String get dcAccount => 'Akaun';
-
-  @override
-  String get dcSignIn => 'Log masuk dengan Discord';
-
-  @override
   String get dcSignOut => 'Log keluar';
-
-  @override
-  String get dcDesktopHint =>
-      'Tanpa menyambung, Discord menunjukkan \"Menonton Dartotsu\" melalui apl desktop. Sambungkan Discord untuk menamakan aktiviti selepas tajuk anda, termasuk pada mudah alih.';
-
-  @override
-  String get dcMobileHint =>
-      'Sambungkan Discord untuk menunjukkan perkara yang sedang anda tonton atau baca. Ia menggunakan halaman kebenaran Discord, bukan token akaun anda.';
 
   @override
   String get dcConnect => 'Sambungkan Discord';
@@ -717,12 +687,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get dcRecommended => 'Disyorkan';
 
   @override
-  String get dcConnecting => 'Menyambung…';
-
-  @override
-  String get dcDisconnected => 'Tidak bersambung';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Log masuk sebagai $name';
   }
@@ -918,15 +882,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get settingsSyncWhat => 'Perkara yang hendak disegerakkan';
 
   @override
-  String get settingsSyncServer => 'Pada pelayan';
-
-  @override
   String get settingsSyncServerEmpty => 'Tiada apa-apa yang dimuat naik lagi';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return 'Tetapan $count, dimuat naik $time daripada $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'peranti ini';
@@ -955,11 +911,6 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Terakhir disegerakkan $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Penyegerakan gagal: $error';
   }
 
   @override
@@ -1739,22 +1690,11 @@ class AppLocalizationsMs extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Tunjuk apa yang awak tengah buat pada profil Discord awak. Perlukan token Discord awak.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Tunjuk apa yang awak tengah buat pada profil Discord awak. Perlukan app desktop Discord sedang berjalan.';
-
-  @override
   String get discordBrowsing => 'Tunjuk aktiviti layaran';
 
   @override
   String get discordBrowsingDesc =>
       'Tunjuk juga tab, halaman atau profil yang awak tengah tengok, bukan setakat apa yang awak tonton atau baca.';
-
-  @override
-  String get discordLookHeader => 'Rupa presence';
 
   @override
   String get discordActivityType => 'Jenis aktiviti';
@@ -1794,9 +1734,6 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Gantikan nama anime dan manga (serta muka depan dan pautannya) dengan \"Something private\".';
-
-  @override
-  String get discordConnectionHeader => 'Sambungan';
 
   @override
   String get listSearchHint => 'Cari dalam senarai ni';
@@ -1854,13 +1791,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get discordToken => 'Token Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'Disimpan. Ketuk untuk ganti, tekan lama untuk buang.';
-
-  @override
-  String get discordTokenNotSet => 'Belum ditetapkan. Ketuk untuk tambah.';
 
   @override
   String get discordTokenSavedSnack => 'Token Discord disimpan';
@@ -2058,9 +1988,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Pilihan akaun MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Pilihan akaun Comick';
-
-  @override
   String get comickClientId => 'ID Pelanggan Comick';
 
   @override
@@ -2154,9 +2081,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get simklReadOnly => 'Simkl diberi akses baca sahaja';
 
   @override
-  String get traktReadOnly => 'Trakt diberikan akses baca sahaja';
-
-  @override
   String get incognitoEditsBlocked => 'Penyamaran: suntingan senarai disekat';
 
   @override
@@ -2236,9 +2160,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get otherWorks => 'Karya lain';
-
-  @override
-  String get prequelSequel => 'Prekuel & sekuel';
 
   @override
   String get prequel => 'Prakuel';
@@ -2382,16 +2303,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get trailerQuality => 'Kualiti treler';
 
   @override
-  String get titleCopied => 'Tajuk disalin';
-
-  @override
   String get linkCopied => 'Pautan disalin';
-
-  @override
-  String get watchTrailer => 'Tonton treler';
-
-  @override
-  String get copyTitle => 'Salin tajuk';
 
   @override
   String get detailStale =>
@@ -3378,9 +3290,6 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Pilih tempat simpan sandaran';
-
-  @override
   String savedPath(String path) {
     return '$path disimpan';
   }
@@ -3951,9 +3860,6 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'untuk tajuk yang sedang keluar';
-
-  @override
   String get progress => 'Kemajuan';
 
   @override
@@ -4158,11 +4064,6 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Saiz: $size';
-  }
-
-  @override
   String get installedState => 'Dipasang';
 
   @override
@@ -4262,11 +4163,6 @@ class AppLocalizationsMs extends AppLocalizations {
       'Tambah juga entri yang belum ada pada perkhidmatan lain';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Segerakkan dengan $name';
-  }
-
-  @override
   String get syncDelete =>
       'Padamkan apa yang tidak ada pada perkhidmatan utama';
 
@@ -4298,11 +4194,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get syncDeletedNote => 'Akan dipadamkan';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count akan dipadamkan daripada $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Kekalkan kemajuan lebih jauh';
 
   @override
@@ -4314,9 +4205,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'tidak akan membaca';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Sudah ada dalam senarai ini';
 
   @override
   String get animePlanetNewList => 'Nama senarai baharu';
@@ -5665,9 +5553,6 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Pelepasan telah diperoleh dengan ejen pengguna lain, jadi ia tidak dihantar. Uji sambungan untuk mendapatkan sambungan baharu';
-
-  @override
-  String get watchSectionConnection => 'Sambungan';
 
   @override
   String get watchSectionSession => 'Sesi';
@@ -7536,13 +7421,7 @@ class AppLocalizationsMs extends AppLocalizations {
   String get downloadPickAudio => 'Muat turun trek audio yang mana?';
 
   @override
-  String get downloadNoAudio => 'Tiada audio tambahan';
-
-  @override
   String get downloadAudio => 'Audio';
-
-  @override
-  String get downloadNoSubtitle => 'Tiada sari kata';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8384,11 +8263,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get generalSectionPrivacy => 'Privasi';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Tukar kepada $service untuk membuka ini';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Kelajuan lalai, main automatik, muat video, orientasi dan gambar dalam gambar';
 
@@ -8705,9 +8579,6 @@ class AppLocalizationsMs extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Menunggu';
-
-  @override
   String get stepChecking => 'Menyemak…';
 
   @override
@@ -8779,14 +8650,7 @@ class AppLocalizationsMs extends AppLocalizations {
       'Seret lencana ke sudut kad pertama atau seret lencana yang sudah ada padanya untuk mengalihkannya. Lencana bertukar tempat, jadi tiada satu pun yang bertindih. Ketik lencana di bawah untuk menghidupkan atau mematikannya.';
 
   @override
-  String get statusAuto => 'Auto';
-
-  @override
   String get unreadCounter => 'Kaunter belum dibaca';
-
-  @override
-  String get unreadCounterDesc =>
-      'Tunjukkan berapa banyak episod atau bab yang tinggal pada poster';
 
   @override
   String get settingsShortcuts => 'Pintasan papan kekunci';
@@ -8824,9 +8688,6 @@ class AppLocalizationsMs extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Tetapkan semula kepada lalai';
-
-  @override
-  String get shortcutClearKeys => 'Keluarkan semua kunci';
 
   @override
   String get shortcutResetAll => 'Tetapkan semula semua pintasan';
@@ -9014,10 +8875,6 @@ class AppLocalizationsMs extends AppLocalizations {
   String get closeActionAlways => 'Sentiasa terus berlari di dalam dulang';
 
   @override
-  String get closeActionNoTray =>
-      'Dulang sistem tidak tersedia di sini, jadi apl akan berhenti apabila ditutup';
-
-  @override
   String get gamepadNav => 'Navigasi pad permainan';
 
   @override
@@ -9091,9 +8948,6 @@ class AppLocalizationsMs extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Video tidak boleh dimainkan sehingga pemain dimuat turun semula.';
-
-  @override
-  String get trailerLoading => 'Memuatkan treler…';
 
   @override
   String get trailerFailed =>

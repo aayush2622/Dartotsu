@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Синхронизировать при изменении",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Войдите с помощью GitHub",
-    "settingsSyncSignInDesc": "Настройки хранятся в личном списке вашего аккаунта.",
     "settingsSyncToken": "Используйте токен личного доступа",
     "settingsSyncTokenDesc": "Создайте его на github.com/settings/tokens только с разрешением gist.",
     "settingsSyncTokenField": "Токен",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Выйти",
-    "settingsSyncCode": "Введите {code} на GitHub.",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Страница GitHub открылась в вашем браузере. Нажмите, чтобы скопировать код, или нажмите и удерживайте, чтобы отменить.",
     "settingsSyncSignInFailed": "Не удалось войти в GitHub",
-    "dcPreview": "Предварительный просмотр",
     "dcSampleWatching": "Смотрю",
     "dcSampleReading": "Чтение",
     "dcSampleBrowsing": "Просмотр",
     "dcSampleLive": "Прямо сейчас",
     "dcLiveNothing": "Сейчас ничего не показывает. Откройте заголовок, начните серию или главу, и она появится здесь.",
     "dcMemberList": "В списке участников",
-    "dcAccount": "Аккаунт",
-    "dcSignIn": "Войти через Дискорд",
     "dcSignOut": "Выйти",
-    "dcDesktopHint": "Без подключения Discord отображает «Смотрю Дартоцу» через настольное приложение. Подключите Discord, чтобы назвать занятие в честь своего названия, в том числе на мобильном устройстве.",
-    "dcMobileHint": "Подключите Discord, чтобы показать, что вы смотрите или читаете. Он использует страницу авторизации Discord, а не токен вашей учетной записи.",
     "dcConnect": "Подключить Дискорд",
     "dcConnectDesc": "Открывает страницу авторизации Discord и добавляет Dartotsu в раздел «Авторизованные приложения». Discord просит обновить ваше присутствие. Сохраняется только токен обновления, а не токен вашей учетной записи.",
     "dcConnectFailed": "Не удалось подключить Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Токен аккаунта",
     "dcInUse": "В использовании",
     "dcRecommended": "Рекомендуется",
-    "dcConnecting": "Подключение…",
-    "dcDisconnected": "Не подключено",
     "dcSignedInAs": "Вошёл как {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Удалить из GitHub",
     "settingsSyncSecretsDeleteMessage": "Это удалит зашифрованный файл учетных записей из вашего списка. Другие устройства сохраняют свои входы в систему и могут установить новую парольную фразу.",
     "settingsSyncWhat": "Что синхронизировать",
-    "settingsSyncServer": "На сервере",
     "settingsSyncServerEmpty": "Еще ничего не загружено",
-    "settingsSyncServerInfo": "Настройки {count}, загруженные {time} из {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "это устройство",
     "settingsSyncCount": "{count, plural, =0{На сервере ничего} =1{1 настройка на сервере} other{Настройки {count} на сервере}}",
     "settingsSyncNow": "Синхронизировать сейчас",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Синхронизация не удалась: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Синхронизируются только те настройки, которые везде работают одинаково. Учетные записи, токены, папки, расширения, уведомления, Discord, обновления и размер окна остаются на каждом устройстве.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Включи обработку ссылок, чтобы ссылки anilist.co открывались в приложении",
     "linkSettingsFailed": "Не удалось открыть настройки системы",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Показывать в профиле Discord, чем ты занят. Нужен твой токен Discord.",
-    "discordRichPresenceDesktopDesc": "Показывать в профиле Discord, чем ты занят. Нужно, чтобы был запущен десктопный Discord.",
     "discordBrowsing": "Показывать активность в приложении",
     "discordBrowsingDesc": "Показывать ещё и вкладку, страницу или профиль, которые ты смотришь, а не только что смотришь или читаешь.",
-    "discordLookHeader": "Вид статуса",
     "discordActivityType": "Тип активности",
     "discordActivityTypeDesc": "Как это пишет Discord: «Смотрит …» или «Играет в …». Авто — «Смотрит» для аниме и «Играет в» для остального.",
     "discordWatching": "Смотрит",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Кнопки «Открыть аниме / мангу» и «Открыть Dartotsu».",
     "discordHideTitles": "Скрывать названия",
     "discordHideTitlesDesc": "Заменять названия аниме и манги (и их обложку и ссылку) на «Что-то личное».",
-    "discordConnectionHeader": "Подключение",
     "listSearchHint": "Поиск по списку",
     "listSort": "Сортировка",
     "listFilter": "Фильтр",
@@ -671,8 +637,6 @@
     "listNoMatches": "В этом списке ничего не подходит",
     "discordLogin": "Войти в Discord",
     "discordToken": "Токен Discord",
-    "discordTokenSaved": "Сохранён. Нажми, чтобы заменить, удерживай, чтобы удалить.",
-    "discordTokenNotSet": "Не задан. Нажми, чтобы добавить.",
     "discordTokenSavedSnack": "Токен Discord сохранён",
     "discordTokenRemovedSnack": "Токен Discord удалён",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Убирает взрослые тайтлы из лент и поиска, а твои взрослые записи — в «Скрытое».",
     "kitsuAccountOptions": "Настройки аккаунта Kitsu",
     "mangaBakaAccountOptions": "Настройки аккаунта MangaBaka",
-    "comickAccountOptions": "Параметры аккаунта комикса",
     "comickClientId": "Идентификатор клиента комикса",
     "comickClientIdDesc": "Пользовательский идентификатор клиента, зарегистрированный на сайте comick.dev.",
     "couldNotUpdateKitsuSettings": "Не удалось обновить настройки Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Данные аккаунта",
     "refreshFromKitsu": "Обновить из Kitsu",
     "simklReadOnly": "Simkl дал доступ только на чтение",
-    "traktReadOnly": "Trakt предоставил доступ только для чтения",
     "incognitoEditsBlocked": "Инкогнито: правки списка заблокированы",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Инкогнито: прогресс не сохранён",
@@ -786,7 +748,6 @@
     "mangaCredits": "Работы в манге",
     "mainProductions": "Основные работы",
     "otherWorks": "Другие работы",
-    "prequelSequel": "Приквел и сиквел",
     "prequel": "Приквел",
     "sequel": "Продолжение",
     "previousSeason": "Прошлый сезон",
@@ -833,10 +794,7 @@
     "addToList": "Добавить в список",
     "trailer": "Трейлер",
     "trailerQuality": "Качество прицепа",
-    "titleCopied": "Название скопировано",
     "linkCopied": "Ссылка скопирована",
-    "watchTrailer": "Смотреть трейлер",
-    "copyTitle": "Копировать название",
     "detailStale": "Не удалось связаться с AniList. Это сохраненная информация и может быть устаревшей.",
     "copyLink": "Копировать ссылку",
     "openInBrowser": "Открыть в браузере",
@@ -1139,7 +1097,6 @@
     "import": "Импорт",
     "animeCount": "Аниме: {count}",
     "mangaCount": "Манга: {count}",
-    "chooseSaveLocation": "Выбери, куда сохранить бэкап",
     "savedPath": "Сохранено: {path}",
     "exportFailed": "Не удалось экспортировать: {error}",
     "nothingInLocalLists": "В твоих локальных списках пока пусто.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Ошибка при открытии ссылки: {error}",
     "linkCantBeOpened": "Не удаётся открыть эту ссылку: {link}",
     "linkOpenError": "Ошибка при открытии ссылки: {error}",
-    "forReleasingTitles": "для тайтлов, которые сейчас выходят",
     "progress": "Прогресс",
     "notes": "Заметки",
     "serviceNotFound": "Сервис «{id}» не найден",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} нет в настроенном репозитории",
     "pluginFetchFailed": "Не удалось получить данные о плагине",
     "installPluginTitle": "Установить {name}",
-    "sizeLabel": "Размер: {size}",
     "installedState": "Установлено",
     "updatePluginTitle": "Обновить {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Загружать и синхронизировать в фоне при запуске приложения и каждые 30 минут",
     "syncAddMissing": "Добавлять недостающие записи",
     "syncAddMissingDesc": "Добавлять и записи, которых в другом сервисе ещё нет",
-    "syncServiceOn": "Синхронизировать с {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Удалить то, чего нет в основном сервисе",
     "syncDeleteDesc": "Удалите записи из других сервисов, которых нет в основном списке. Удалены только записи, которые могут быть сопоставлены с заголовком, поэтому такие вещи, как фильмы и сериалы Simkl, остаются.",
     "syncDeleteTitle": "Удалить записи?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Удалить",
     "syncToDelete": "Чтобы удалить",
     "syncDeletedNote": "Будет удалено",
-    "syncWillRemove": "{count} будет удален из {name}.",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Сохранять больший прогресс",
     "syncOnlyForwardDesc": "Не уменьшать прогресс в сервисе, где он уже больше",
     "animePlanetWontWatch": "не буду смотреть",
     "animePlanetWontRead": "не буду читать",
-    "animePlanetAlreadyOnList": "Уже в этом списке",
     "animePlanetNewList": "Новое имя списка",
     "syncPrivate": "Частные записи",
     "syncPrivateDesc": "Что делать с записями, которые вы держите в секрете. Служба с приватной опцией делает их конфиденциальными; другие бы показали их публично",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Разрешение было получено с помощью другого пользовательского агента, поэтому оно не отправляется. Проверьте соединение, чтобы получить новое",
-    "watchSectionConnection": "Подключение",
     "watchSectionSession": "Сессия",
     "watchSectionTools": "Инструменты",
     "watchMetaSource": "Детали серий из",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Какой поток скачать?",
     "downloadPickSubtitle": "Какие субтитры скачать?",
     "downloadPickAudio": "Какую аудиодорожку скачать?",
-    "downloadNoAudio": "Без доп. звука",
     "downloadAudio": "Звук",
-    "downloadNoSubtitle": "Без субтитров",
     "downloadHlsNeedsFfmpeg": "Этот поток — плейлист HLS. Чтобы скачать его, нужно дополнение FFmpeg.",
     "downloadSourceMissing": "Источник этой серии не установлен",
     "downloadDashDrm": "Этот поток защищен DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Язык и поведение",
     "generalSectionSecurity": "Безопасность",
     "generalSectionPrivacy": "Конфиденциальность",
-    "notificationsOtherService": "Переключитесь на {service}, чтобы открыть это.",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Скорость по умолчанию, автоматическое воспроизведение, подгонка видео, ориентация и картинка в картинке",
     "secPlayerSkip": "Автоматически пропускать начало, окончание и резюме",
     "secPlayerControls": "Проведите, удерживайте и коснитесь жестов и найдите предварительный просмотр",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Ожидание",
     "stepChecking": "Проверка…",
     "stepUpToDate": "Актуально",
     "stepUpToDateWith": "Актуально · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Манга",
     "readerCloudflare": "Открыть в браузере (проверка Cloudflare)",
     "badgeBoardHint": "Перетащите значок в угол первой карты или перетащите значок, уже находящийся на ней, чтобы переместить его. Значки меняются местами, поэтому ни один из них никогда не пересекается. Коснитесь значка ниже, чтобы включить или выключить его.",
-    "statusAuto": "Авто",
     "unreadCounter": "Непрочитанный счетчик",
-    "unreadCounterDesc": "Покажите, сколько серий или глав осталось на постерах",
     "settingsShortcuts": "Сочетания клавиш",
     "settingsShortcutsDesc": "Смотри, меняй и выключай каждую клавишу",
     "shortcutGroupApp": "Приложение",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Не установлено",
     "shortcutAddKey": "Добавить ключ",
     "shortcutResetOne": "Сбросить настройки по умолчанию",
-    "shortcutClearKeys": "Удалить все ключи",
     "shortcutResetAll": "Сбросить все ярлыки",
     "shortcutResetAllDesc": "Верните все клавиши к значениям по умолчанию.",
     "shortcutPress": "Нажмите нужную клавишу или комбинацию",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Выйти из приложения",
     "closeActionWhenBusy": "Продолжайте работать в трее, пока что-то работает",
     "closeActionAlways": "Всегда продолжайте работать в трее",
-    "closeActionNoTray": "Системный трей здесь недоступен, поэтому приложение закрывается при закрытии.",
     "gamepadNav": "Навигация по геймпаду",
     "gamepadNavDesc": "Перемещайтесь по приложению и управляйте игроком с помощью игрового контроллера.",
     "trayShow": "Показать Дартоцу",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Копировать детали",
     "removePlayerTitle": "Удалить плеер?",
     "removePlayerMessage": "Видео невозможно воспроизвести, пока плеер не будет загружен повторно.",
-    "trailerLoading": "Загрузка трейлера…",
     "trailerFailed": "Не удалось воспроизвести трейлер, открыв его в браузере."
 }

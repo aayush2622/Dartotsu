@@ -423,10 +423,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub के साथ साइन इन करें';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'सेटिंग्स आपके खाते में एक निजी सार में संग्रहीत की जाती हैं';
-
-  @override
   String get settingsSyncToken => 'व्यक्तिगत एक्सेस टोकन का उपयोग करें';
 
   @override
@@ -445,19 +441,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsSyncSignOut => 'साइन आउट करें';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub पर $code दर्ज करें';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel।';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub में साइन इन नहीं किया जा सका';
-
-  @override
-  String get dcPreview => 'पूर्वावलोकन';
 
   @override
   String get dcSampleWatching => 'देख रहा हूँ';
@@ -479,21 +463,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dcMemberList => 'सदस्य सूची में';
 
   @override
-  String get dcAccount => 'खाता';
-
-  @override
-  String get dcSignIn => 'डिस्कोर्ड के साथ साइन इन करें';
-
-  @override
   String get dcSignOut => 'साइन आउट करें';
-
-  @override
-  String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile।';
-
-  @override
-  String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token।';
 
   @override
   String get dcConnect => 'कलह कनेक्ट करें';
@@ -717,12 +687,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get dcRecommended => 'अनुशंसित';
 
   @override
-  String get dcConnecting => 'कनेक्ट हो रहा है...';
-
-  @override
-  String get dcDisconnected => 'जुड़ा नहीं';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name के रूप में साइन इन किया गया';
   }
@@ -916,15 +880,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get settingsSyncWhat => 'क्या सिंक करना है';
 
   @override
-  String get settingsSyncServer => 'सर्वर पर';
-
-  @override
   String get settingsSyncServerEmpty => 'अभी तक कुछ भी अपलोड नहीं किया गया';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count सेटिंग्स, $time को $device से अपलोड किया गया';
-  }
 
   @override
   String get settingsSyncThisDevice => 'यह उपकरण';
@@ -953,11 +909,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'अंतिम बार समन्वयित $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'समन्वयन विफल: $error';
   }
 
   @override
@@ -1730,22 +1681,11 @@ class AppLocalizationsHi extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'अपनी Discord प्रोफ़ाइल पर दिखाओ कि तुम क्या कर रहे हो। इसके लिए तुम्हारा Discord टोकन चाहिए।';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'अपनी Discord प्रोफ़ाइल पर दिखाओ कि तुम क्या कर रहे हो। इसके लिए Discord डेस्कटॉप ऐप चलता होना चाहिए।';
-
-  @override
   String get discordBrowsing => 'ब्राउज़िंग एक्टिविटी दिखाओ';
 
   @override
   String get discordBrowsingDesc =>
       'सिर्फ़ ये नहीं कि क्या देख या पढ़ रहे हो, बल्कि कौन सा टैब, पेज या प्रोफ़ाइल देख रहे हो, वो भी दिखाओ।';
-
-  @override
-  String get discordLookHeader => 'प्रेज़ेंस का लुक';
 
   @override
   String get discordActivityType => 'एक्टिविटी टाइप';
@@ -1785,9 +1725,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'एनीमे और मंगा के नाम (और उनका कवर व लिंक) की जगह \"Something private\" दिखाओ।';
-
-  @override
-  String get discordConnectionHeader => 'कनेक्शन';
 
   @override
   String get listSearchHint => 'इस लिस्ट में खोजो';
@@ -1845,13 +1782,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord टोकन';
-
-  @override
-  String get discordTokenSaved =>
-      'सेव है। बदलने के लिए टैप करो, हटाने के लिए देर तक दबाओ।';
-
-  @override
-  String get discordTokenNotSet => 'सेट नहीं है। जोड़ने के लिए टैप करो।';
 
   @override
   String get discordTokenSavedSnack => 'Discord टोकन सेव हो गया';
@@ -2049,9 +1979,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka अकाउंट के विकल्प';
 
   @override
-  String get comickAccountOptions => 'कॉमिक खाता विकल्प';
-
-  @override
   String get comickClientId => 'कॉमिक क्लाइंट आईडी';
 
   @override
@@ -2144,9 +2071,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get simklReadOnly => 'Simkl को सिर्फ़ रीड-ओनली एक्सेस मिला';
 
   @override
-  String get traktReadOnly => 'ट्रैक्ट ने केवल पढ़ने के लिए पहुंच प्रदान की';
-
-  @override
   String get incognitoEditsBlocked => 'इन्कॉग्निटो: लिस्ट एडिट ब्लॉक हैं';
 
   @override
@@ -2226,9 +2150,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get otherWorks => 'दूसरे काम';
-
-  @override
-  String get prequelSequel => 'प्रीक्वल और सीक्वल';
 
   @override
   String get prequel => 'प्रीक्वेल';
@@ -2371,16 +2292,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get trailerQuality => 'ट्रेलर की गुणवत्ता';
 
   @override
-  String get titleCopied => 'टाइटल कॉपी हो गया';
-
-  @override
   String get linkCopied => 'लिंक कॉपी हो गया';
-
-  @override
-  String get watchTrailer => 'ट्रेलर देखो';
-
-  @override
-  String get copyTitle => 'टाइटल कॉपी करो';
 
   @override
   String get detailStale =>
@@ -3365,9 +3277,6 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'चुनो कि बैकअप कहाँ सेव करना है';
-
-  @override
   String savedPath(String path) {
     return '$path में सेव हो गया';
   }
@@ -3937,9 +3846,6 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'अभी रिलीज़ हो रहे टाइटल के लिए';
-
-  @override
   String get progress => 'प्रोग्रेस';
 
   @override
@@ -4144,11 +4050,6 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'साइज़: $size';
-  }
-
-  @override
   String get installedState => 'इंस्टॉल है';
 
   @override
@@ -4248,11 +4149,6 @@ class AppLocalizationsHi extends AppLocalizations {
       'वो एंट्री भी जोड़ो जो दूसरी सर्विस में अभी नहीं हैं';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name के साथ सिंक करें';
-  }
-
-  @override
   String get syncDelete => 'जो मुख्य सेवा में नहीं है उसे हटा दें';
 
   @override
@@ -4283,11 +4179,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get syncDeletedNote => 'हटा दिया जाएगा';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count को $name से हटा दिया जाएगा';
-  }
-
-  @override
   String get syncOnlyForward => 'आगे की प्रोग्रेस रखो';
 
   @override
@@ -4299,9 +4190,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'नहीं पढूंगा';
-
-  @override
-  String get animePlanetAlreadyOnList => 'इस सूची में पहले से ही है';
 
   @override
   String get animePlanetNewList => 'नई सूची का नाम';
@@ -5647,9 +5535,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'क्लीयरेंस किसी अन्य उपयोगकर्ता एजेंट के साथ अर्जित किया गया था, इसलिए इसे नहीं भेजा गया है। नया कनेक्शन पाने के लिए कनेक्शन का परीक्षण करें';
-
-  @override
-  String get watchSectionConnection => 'कनेक्शन';
 
   @override
   String get watchSectionSession => 'सत्र';
@@ -7511,13 +7396,7 @@ class AppLocalizationsHi extends AppLocalizations {
   String get downloadPickAudio => 'कौन सा ऑडियो ट्रैक डाउनलोड करना है?';
 
   @override
-  String get downloadNoAudio => 'कोई एक्स्ट्रा ऑडियो नहीं';
-
-  @override
   String get downloadAudio => 'ऑडियो';
-
-  @override
-  String get downloadNoSubtitle => 'कोई सबटाइटल नहीं';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8357,11 +8236,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get generalSectionPrivacy => 'गोपनीयता';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'इसे खोलने के लिए $service पर स्विच करें';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'डिफ़ॉल्ट गति, ऑटो प्ले, वीडियो फिट, ओरिएंटेशन और पिक्चर इन पिक्चर';
 
@@ -8671,9 +8545,6 @@ class AppLocalizationsHi extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'इंतज़ार कर रहा हूँ';
-
-  @override
   String get stepChecking => 'जाँच हो रही है...';
 
   @override
@@ -8744,14 +8615,7 @@ class AppLocalizationsHi extends AppLocalizations {
       'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off।';
 
   @override
-  String get statusAuto => 'ऑटो';
-
-  @override
   String get unreadCounter => 'अपठित काउंटर';
-
-  @override
-  String get unreadCounterDesc =>
-      'दिखाएँ कि पोस्टरों पर कितने एपिसोड या अध्याय बचे हैं';
 
   @override
   String get settingsShortcuts => 'कीबोर्ड शॉर्टकट';
@@ -8790,9 +8654,6 @@ class AppLocalizationsHi extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'डिफ़ॉल्ट पर रीसेट करें';
-
-  @override
-  String get shortcutClearKeys => 'सभी कुंजियाँ हटाएँ';
 
   @override
   String get shortcutResetAll => 'सभी शॉर्टकट रीसेट करें';
@@ -8979,10 +8840,6 @@ class AppLocalizationsHi extends AppLocalizations {
   String get closeActionAlways => 'ट्रे में हमेशा चलाते रहें';
 
   @override
-  String get closeActionNoTray =>
-      'सिस्टम ट्रे यहां उपलब्ध नहीं है, इसलिए ऐप बंद होने पर बंद हो जाता है';
-
-  @override
   String get gamepadNav => 'गेमपैड नेविगेशन';
 
   @override
@@ -9056,9 +8913,6 @@ class AppLocalizationsHi extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Videos can\'t play until the player is downloaded again।';
-
-  @override
-  String get trailerLoading => 'ट्रेलर लोड हो रहा है...';
 
   @override
   String get trailerFailed =>

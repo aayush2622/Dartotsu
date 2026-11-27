@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Sinkronizacija pri promjeni",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Prijavite se s GitHubom",
-    "settingsSyncSignInDesc": "Postavke su pohranjene u privatnom sadržaju na vašem računu",
     "settingsSyncToken": "Koristite osobni pristupni token",
     "settingsSyncTokenDesc": "Stvorite ga na github.com/settings/tokens samo s dozvolom za suštinu",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Odjavi se",
-    "settingsSyncCode": "Unesite {code} na GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Stranica GitHub otvorena je u vašem pregledniku. Dodirnite za kopiranje koda ili dodirnite i držite za otkazivanje.",
     "settingsSyncSignInFailed": "Nije moguće prijaviti se na GitHub",
-    "dcPreview": "Pregled",
     "dcSampleWatching": "Gledanje",
     "dcSampleReading": "čitanje",
     "dcSampleBrowsing": "Pregledavanje",
     "dcSampleLive": "Upravo sada",
     "dcLiveNothing": "Trenutno se ništa ne prikazuje. Otvorite naslov, započnite epizodu ili poglavlje i pojavit će se ovdje.",
     "dcMemberList": "U popisu članova",
-    "dcAccount": "Račun",
-    "dcSignIn": "Prijavite se s Discordom",
     "dcSignOut": "Odjavi se",
-    "dcDesktopHint": "Bez povezivanja, Discord prikazuje \"Gledanje Dartotsua\" putem aplikacije za radnu površinu. Povežite Discord kako biste aktivnost nazvali prema svom naslovu, uključujući i na mobitelu.",
-    "dcMobileHint": "Povežite Discord da pokažete što gledate ili čitate. Koristi Discordovu stranicu za autorizaciju, a ne token vašeg računa.",
     "dcConnect": "Spojite Discord",
     "dcConnectDesc": "Otvara Discordovu stranicu za autorizaciju i dodaje Dartotsu pod Autorizirane aplikacije. Discord traži ažuriranje vaše prisutnosti. Sprema se samo token za osvježavanje, a ne token vašeg računa.",
     "dcConnectFailed": "Nije moguće povezati Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Token računa",
     "dcInUse": "U upotrebi",
     "dcRecommended": "Preporučeno",
-    "dcConnecting": "Povezivanje…",
-    "dcDisconnected": "Nije povezano",
     "dcSignedInAs": "Prijavljeni kao {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Izbriši s GitHuba",
     "settingsSyncSecretsDeleteMessage": "Ovo uklanja datoteku šifriranih računa iz vaše suštine. Ostali uređaji zadržavaju svoje prijave i mogu postaviti novu šifru.",
     "settingsSyncWhat": "Što sinkronizirati",
-    "settingsSyncServer": "Na poslužitelju",
     "settingsSyncServerEmpty": "Još ništa nije preneseno",
-    "settingsSyncServerInfo": "{count} postavke, prenesene {time} iz {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ovaj uređaj",
     "settingsSyncCount": "{count, plural, =0{Ništa na poslužitelju} =1{1 postavka na poslužitelju} other{{count} postavke na poslužitelju}}",
     "settingsSyncNow": "Sinkroniziraj sada",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Sinkronizacija nije uspjela: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Sinkroniziraju se samo postavke koje posvuda rade jednako. Računi, tokeni, mape, proširenja, obavijesti, Discord, ažuriranja i veličina prozora ostaju na svakom uređaju.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Uključi obradu poveznica da se anilist.co poveznice otvaraju u aplikaciji",
     "linkSettingsFailed": "Ne mogu otvoriti postavke sustava",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Prikaži na svom Discord profilu što radiš. Treba ti Discord token.",
-    "discordRichPresenceDesktopDesc": "Prikaži na svom Discord profilu što radiš. Discord desktop aplikacija mora biti pokrenuta.",
     "discordBrowsing": "Prikaži aktivnost pregledavanja",
     "discordBrowsingDesc": "Prikaži i karticu, stranicu ili profil koji gledaš, a ne samo što gledaš ili čitaš.",
-    "discordLookHeader": "Izgled prisutnosti",
     "discordActivityType": "Vrsta aktivnosti",
     "discordActivityTypeDesc": "Kako Discord to formulira: \"Watching …\" ili \"Playing …\". Auto koristi Watching za anime, a Playing za sve ostalo.",
     "discordWatching": "Gledanje",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Gumbi \"View anime / manga\" i \"Open Dartotsu\".",
     "discordHideTitles": "Sakrij naslove",
     "discordHideTitlesDesc": "Zamijeni nazive animea i mange (te njihovu naslovnicu i poveznicu) s \"Something private\".",
-    "discordConnectionHeader": "Veza",
     "listSearchHint": "Traži u ovom popisu",
     "listSort": "Poredaj",
     "listFilter": "Filtriraj",
@@ -671,8 +637,6 @@
     "listNoMatches": "Ništa na ovom popisu ne odgovara",
     "discordLogin": "Prijavi se na Discord",
     "discordToken": "Discord token",
-    "discordTokenSaved": "Spremljeno. Dodirni za zamjenu, dugo pritisni za uklanjanje.",
-    "discordTokenNotSet": "Nije postavljen. Dodirni za dodavanje.",
     "discordTokenSavedSnack": "Discord token spremljen",
     "discordTokenRemovedSnack": "Discord token uklonjen",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Drži naslove za odrasle izvan feedova i pretrage, a svoje unose za odrasle prikaži pod Skriveni mediji.",
     "kitsuAccountOptions": "Opcije Kitsu računa",
     "mangaBakaAccountOptions": "Opcije MangaBaka računa",
-    "comickAccountOptions": "Comick opcije računa",
     "comickClientId": "Comick ID klijenta",
     "comickClientIdDesc": "Prilagođeni ID klijenta registriran na comick.dev",
     "couldNotUpdateKitsuSettings": "Ne mogu ažurirati tvoje Kitsu postavke",
@@ -761,7 +724,6 @@
     "accountDetails": "Detalji računa",
     "refreshFromKitsu": "Osvježi s Kitsua",
     "simklReadOnly": "Simkl je dobio pristup samo za čitanje",
-    "traktReadOnly": "Trakt je dobio pristup samo za čitanje",
     "incognitoEditsBlocked": "Inkognito: izmjene popisa su blokirane",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Inkognito: napredak nije spremljen",
@@ -786,7 +748,6 @@
     "mangaCredits": "Zasluge u mangi",
     "mainProductions": "Glavne produkcije",
     "otherWorks": "Ostali radovi",
-    "prequelSequel": "Prequel i sequel",
     "prequel": "Prequel",
     "sequel": "Nastavak",
     "previousSeason": "Prošla sezona",
@@ -833,10 +794,7 @@
     "addToList": "Dodaj na popis",
     "trailer": "Trailer",
     "trailerQuality": "Kvaliteta prikolice",
-    "titleCopied": "Naslov kopiran",
     "linkCopied": "Poveznica kopirana",
-    "watchTrailer": "Pogledaj trailer",
-    "copyTitle": "Kopiraj naslov",
     "detailStale": "AniList nije dostupan. Ovo su spremljene informacije i mogu biti zastarjele.",
     "copyLink": "Kopiraj poveznicu",
     "openInBrowser": "Otvori u pregledniku",
@@ -1139,7 +1097,6 @@
     "import": "Uvezi",
     "animeCount": "{count} animea",
     "mangaCount": "{count} mange",
-    "chooseSaveLocation": "Odaberi gdje spremiti kopiju",
     "savedPath": "Spremljeno: {path}",
     "exportFailed": "Izvoz nije uspio: {error}",
     "nothingInLocalLists": "Na tvojim lokalnim popisima još nema ničega.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Greška pri otvaranju poveznice: {error}",
     "linkCantBeOpened": "Ova poveznica se ne može otvoriti: {link}",
     "linkOpenError": "Greška pri otvaranju poveznice: {error}",
-    "forReleasingTitles": "za naslove koji trenutno izlaze",
     "progress": "Napredak",
     "notes": "Bilješke",
     "serviceNotFound": "Servis \"{id}\" nije pronađen",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} nije dostupan u postavljenom repozitoriju",
     "pluginFetchFailed": "Ne mogu dohvatiti info o dodatku",
     "installPluginTitle": "Instaliraj {name}",
-    "sizeLabel": "Veličina: {size}",
     "installedState": "Instalirano",
     "updatePluginTitle": "Ažuriraj {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Dohvaćaj i sinkroniziraj u pozadini kad se aplikacija otvori i svakih 30 minuta",
     "syncAddMissing": "Dodaj unose koji nedostaju",
     "syncAddMissingDesc": "Dodaj i unose koje drugi servis još nema",
-    "syncServiceOn": "Sinkronizacija s {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Izbrišite ono što glavni servis nema",
     "syncDeleteDesc": "Uklonite unose iz ostalih usluga koje nisu na glavnom popisu. Uklanjaju se samo unosi koji se mogu podudarati s naslovom, tako da stvari poput Simkl filmova i serija ostaju",
     "syncDeleteTitle": "Izbrisati unose?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Izbriši",
     "syncToDelete": "Za brisanje",
     "syncDeletedNote": "Bit će izbrisano",
-    "syncWillRemove": "{count} bit će izbrisan iz {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Zadrži veći napredak",
     "syncOnlyForwardDesc": "Ne smanjuj napredak servisa koji je već ispred",
     "animePlanetWontWatch": "Neću gledati",
     "animePlanetWontRead": "Neće čitati",
-    "animePlanetAlreadyOnList": "Već na ovom popisu",
     "animePlanetNewList": "Novi naziv popisa",
     "syncPrivate": "Privatni unosi",
     "syncPrivateDesc": "Što učiniti s unosima koje držite privatnima. Usluga s privatnom opcijom ih čini privatnima; drugi bi ih javno pokazali",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Odobrenje je zarađeno s drugim korisničkim agentom, pa se ne šalje. Testirajte vezu da dobijete novu",
-    "watchSectionConnection": "Veza",
     "watchSectionSession": "Sjednica",
     "watchSectionTools": "Alati",
     "watchMetaSource": "Detalji epizoda iz",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Koji stream preuzeti?",
     "downloadPickSubtitle": "Koji titl preuzeti?",
     "downloadPickAudio": "Koju audio traku preuzeti?",
-    "downloadNoAudio": "Bez dodatnog zvuka",
     "downloadAudio": "Zvuk",
-    "downloadNoSubtitle": "Bez titlova",
     "downloadHlsNeedsFfmpeg": "Ovaj stream je HLS popis za reprodukciju. Za preuzimanje treba FFmpeg dodatak.",
     "downloadSourceMissing": "Izvor za ovu epizodu nije instaliran",
     "downloadDashDrm": "Ovaj stream je DRM zaštićen",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Jezik i ponašanje",
     "generalSectionSecurity": "Sigurnost",
     "generalSectionPrivacy": "Privatnost",
-    "notificationsOtherService": "Prijeđi na {service} da otvoriš ovo",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Zadana brzina, automatska reprodukcija, prilagodba videozapisa, orijentacija i slika u slici",
     "secPlayerSkip": "Automatski preskočite uvode, završetke i sažetke",
     "secPlayerControls": "Pokreti prijelaza, držanja i dodirivanja i traženje pregleda",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Čekanje",
     "stepChecking": "Provjera...",
     "stepUpToDate": "Ažurno",
     "stepUpToDateWith": "Ažurirano · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Otvori u pregledniku (Cloudflare provjera)",
     "badgeBoardHint": "Povucite značku u kut prve kartice ili povucite značku koja se već nalazi na njoj da je pomaknete. Bedževi mijenjaju mjesta, tako da se nijedan nikada ne preklapa. Dodirnite značku u nastavku da biste je uključili ili isključili.",
-    "statusAuto": "Automatski",
     "unreadCounter": "Brojač nepročitanih",
-    "unreadCounterDesc": "Pokažite koliko je epizoda ili poglavlja ostalo na plakatima",
     "settingsShortcuts": "Tipkovnički prečaci",
     "settingsShortcutsDesc": "Pogledajte, promijenite i isključite svaki ključ",
     "shortcutGroupApp": "aplikacija",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Nije postavljeno",
     "shortcutAddKey": "Dodajte ključ",
     "shortcutResetOne": "Vrati na zadano",
-    "shortcutClearKeys": "Uklonite sve ključeve",
     "shortcutResetAll": "Resetiraj sve prečace",
     "shortcutResetAllDesc": "Vratite svaki ključ na zadano",
     "shortcutPress": "Pritisnite tipku ili kombinaciju koju želite",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Zatvorite aplikaciju",
     "closeActionWhenBusy": "Nastavite trčati u traci dok nešto radi",
     "closeActionAlways": "Uvijek nastavite trčati u ladici",
-    "closeActionNoTray": "Sistemska traka nije dostupna ovdje, pa se aplikacija zatvara kada se zatvori",
     "gamepadNav": "Gamepad navigacija",
     "gamepadNavDesc": "Krećite se aplikacijom i upravljajte igračem pomoću kontrolera igre",
     "trayShow": "Prikaži Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Kopiraj detalje",
     "removePlayerTitle": "Ukloniti igrača?",
     "removePlayerMessage": "Videozapisi se ne mogu reproducirati dok se player ponovno ne preuzme.",
-    "trailerLoading": "Učitavanje najave...",
     "trailerFailed": "Nije moguće reproducirati najavu ovdje, otvaram je u pregledniku"
 }

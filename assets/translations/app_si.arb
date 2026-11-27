@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "වෙනස් කිරීමේදී සමමුහුර්ත කරන්න",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub සමඟින් පුරනය වන්න",
-    "settingsSyncSignInDesc": "සැකසීම් ඔබගේ ගිණුමේ පුද්ගලික සාරාංශයක් තුළ ගබඩා කර ඇත",
     "settingsSyncToken": "පුද්ගලික ප්‍රවේශ ටෝකනයක් භාවිතා කරන්න",
     "settingsSyncTokenDesc": "github.com/settings/tokens හි සාරාංශ අවසරය පමණක් ඇතිව එකක් සාදන්න",
     "settingsSyncTokenField": "ටෝකනය",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "වරනය වන්න",
-    "settingsSyncCode": "GitHub මත {code} ඇතුලත් කරන්න",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "GitHub පිටුව ඔබගේ බ්‍රවුසරයේ විවෘත විය. කේතය පිටපත් කිරීමට තට්ටු කරන්න, නැතහොත් අවලංගු කිරීමට තට්ටු කර අල්ලාගෙන සිටින්න.",
     "settingsSyncSignInFailed": "GitHub වෙත පුරනය වීමට නොහැකි විය",
-    "dcPreview": "පෙරදසුන",
     "dcSampleWatching": "බලනවා",
     "dcSampleReading": "කියවීම",
     "dcSampleBrowsing": "බ්‍රවුස් කිරීම",
     "dcSampleLive": "දැන් හරි",
     "dcLiveNothing": "දැන් කිසිවක් පෙන්වන්නේ නැත. මාතෘකාවක් විවෘත කරන්න, කථාංගයක් හෝ පරිච්ඡේදයක් ආරම්භ කරන්න, එය මෙහි දිස්වේ.",
     "dcMemberList": "සාමාජික ලැයිස්තුවේ",
-    "dcAccount": "ගිණුම",
-    "dcSignIn": "Discord සමඟින් පුරන්න",
     "dcSignOut": "වරනය වන්න",
-    "dcDesktopHint": "සම්බන්ධ නොවී, Discord ඩෙස්ක්ටොප් යෙදුම හරහා \"Dartotsu නැරඹීම\" පෙන්වයි. ජංගම දුරකථනය ඇතුළුව ඔබේ මාතෘකාවෙන් පසුව ක්‍රියාකාරකම නම් කිරීමට Discord සම්බන්ධ කරන්න.",
-    "dcMobileHint": "ඔබ නරඹන හෝ කියවන දේ පෙන්වීමට Discord සම්බන්ධ කරන්න. එය ඔබගේ ගිණුම් ටෝකනය නොව Discord's අවසර පිටුව භාවිතා කරයි.",
     "dcConnect": "අසමගිය සම්බන්ධ කරන්න",
     "dcConnectDesc": "Discord හි අවසර පිටුව විවෘත කර බලයලත් යෙදුම් යටතේ Dartotsu එක් කරයි. Discord ඔබගේ පැමිණීම යාවත්කාලීන කිරීමට අසයි. ඔබගේ ගිණුමේ ටෝකනය නොව නැවුම් ටෝකනයක් පමණක් සුරැකේ.",
     "dcConnectFailed": "Discord සම්බන්ධ කිරීමට නොහැකි විය",
@@ -254,8 +241,6 @@
     "dcMethodToken": "ගිණුම් ටෝකනය",
     "dcInUse": "භාවිතයේ පවතී",
     "dcRecommended": "නිර්දේශ කර ඇත",
-    "dcConnecting": "සම්බන්ධ වෙමින්...",
-    "dcDisconnected": "සම්බන්ධ වී නැත",
     "dcSignedInAs": "{name} ලෙස පුරනය වී ඇත",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub වෙතින් මකන්න",
     "settingsSyncSecretsDeleteMessage": "මෙය ඔබගේ සාරාංශයෙන් සංකේතනය කළ ගිණුම් ගොනුව ඉවත් කරයි. වෙනත් උපාංග ඔවුන්ගේ පුරනයන් තබා ගන්නා අතර නව මුර-වැකිකඩක් සැකසිය හැක.",
     "settingsSyncWhat": "සමමුහුර්ත කළ යුතු දේ",
-    "settingsSyncServer": "සේවාදායකයේ",
     "settingsSyncServerEmpty": "තවම කිසිවක් උඩුගත කර නැත",
-    "settingsSyncServerInfo": "{count} සිටුවම්, {device} වෙතින් {time} උඩුගත කරන ලදී",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "මෙම උපාංගය",
     "settingsSyncCount": "{count, plural, =0{සේවාදායකයේ කිසිවක් නැත} =1{සේවාදායකයේ 1 සැකසුම} other{සේවාදායකයේ {count} සැකසුම්}}",
     "settingsSyncNow": "දැන් සමමුහුර්ත කරන්න",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "සමමුහුර්ත කිරීම අසාර්ථක විය: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "සෑම තැනකම එකම ලෙස ක්‍රියා කරන සැකසුම් පමණක් සමමුහුර්ත කර ඇත. ගිණුම්, ටෝකන, ෆෝල්ඩර, දිගු, දැනුම්දීම්, අසමගිය, යාවත්කාලීන සහ කවුළු ප්‍රමාණය එක් එක් උපාංගයේ පවතී.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co ලින්ක්ස් වලින් ඇප් එක ඕපන් වෙන්න ලින්ක් හැන්ඩ්ලින් ඔන් කරන්න",
     "linkSettingsFailed": "සිස්ටම් සැකසුම් විවෘත කරන්න බැරි වුණා",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "ඔයා කරමින් ඉන්න දේ ඔයාගේ Discord ප්‍රොෆයිල් එකේ පෙන්වන්න. ඔයාගේ Discord ටෝකන් එක ඕනේ.",
-    "discordRichPresenceDesktopDesc": "ඔයා කරමින් ඉන්න දේ ඔයාගේ Discord ප්‍රොෆයිල් එකේ පෙන්වන්න. Discord ඩෙස්ක්ටොප් ඇප් එක දුවමින් තියෙන්න ඕනේ.",
     "discordBrowsing": "බ්‍රවුසින් ඇක්ටිවිටි පෙන්වන්න",
     "discordBrowsingDesc": "ඔයා බලන/කියවන දේ විතරක් නෙවෙයි, ඔයා බලන ටැබ් එක, පේජ් එක හෝ ප්‍රොෆයිල් එකත් පෙන්වන්න.",
-    "discordLookHeader": "ප්‍රෙසන්ස් පෙනුම",
     "discordActivityType": "ඇක්ටිවිටි වර්ගය",
     "discordActivityTypeDesc": "Discord එක ලියන විදිය: \"Watching …\" හෝ \"Playing …\". ඔටෝ කියන්නේ anime වලට Watching, අනිත් හැමදේටම Playing.",
     "discordWatching": "බලනවා",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"View anime / manga\" සහ \"Open Dartotsu\" බට්න්ස්.",
     "discordHideTitles": "ටයිටල්ස් හංගන්න",
     "discordHideTitlesDesc": "anime සහ manga නම් (ඒවායේ කවර් සහ ලින්ක් එකත් එක්ක) \"Something private\" එකකින් මාරු කරන්න.",
-    "discordConnectionHeader": "සම්බන්ධතාව",
     "listSearchHint": "මේ ලිස්ට් එකේ හොයන්න",
     "listSort": "සෝට් කරන්න",
     "listFilter": "ෆිල්ටර්",
@@ -671,8 +637,6 @@
     "listNoMatches": "මේ ලිස්ට් එකේ කිසිවක් ගැලපෙන්නේ නෑ",
     "discordLogin": "Discord එකට ලොගින් වෙන්න",
     "discordToken": "Discord ටෝකන් එක",
-    "discordTokenSaved": "සේව් වුණා. මාරු කරන්න ටැප් කරන්න, අයින් කරන්න ලොංග් ප්‍රෙස් කරන්න.",
-    "discordTokenNotSet": "සෙට් කරලා නෑ. එකතු කරන්න ටැප් කරන්න.",
     "discordTokenSavedSnack": "Discord ටෝකන් එක සේව් වුණා",
     "discordTokenRemovedSnack": "Discord ටෝකන් එක අයින් වුණා",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "වැඩිහිටි ටයිටල්ස් ෆීඩ් සහ සර්ච් වලින් අයින් කරලා, ඔයාගේම වැඩිහිටි එන්ට්‍රීස් Hidden Media යට ලිස්ට් කරන්න.",
     "kitsuAccountOptions": "Kitsu ගිණුම් විකල්ප",
     "mangaBakaAccountOptions": "MangaBaka ගිණුමේ විකල්ප",
-    "comickAccountOptions": "කොමික් ගිණුම් විකල්ප",
     "comickClientId": "කොමික් සේවාලාභී ID",
     "comickClientIdDesc": "comic.dev හි ලියාපදිංචි වූ අභිරුචි සේවාලාභී ID",
     "couldNotUpdateKitsuSettings": "ඔයාගේ Kitsu සැකසුම් අප්ඩේට් කරන්න බැරි වුණා",
@@ -761,7 +724,6 @@
     "accountDetails": "ගිණුම් විස්තර",
     "refreshFromKitsu": "Kitsu එකෙන් රිෆ්‍රෙෂ් කරන්න",
     "simklReadOnly": "Simkl එකට කියවීමට පමණක් ඇක්සස් දුන්නා",
-    "traktReadOnly": "ට්‍රැක්ට කියවීමට පමණක් ප්‍රවේශය ලබා දී ඇත",
     "incognitoEditsBlocked": "ඉන්කොග්නිටෝ: ලිස්ට් වෙනස්කම් අවහිරයි",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ඉන්කොග්නිටෝ: ප්‍රගතිය සේව් වුණේ නෑ",
@@ -786,7 +748,6 @@
     "mangaCredits": "manga ක්‍රෙඩිට්ස්",
     "mainProductions": "ප්‍රධාන නිෂ්පාදන",
     "otherWorks": "වෙනත් වැඩ",
-    "prequelSequel": "ප්‍රීක්වල් සහ සීක්වල්",
     "prequel": "පූර්විකාව",
     "sequel": "අනුප්රාප්තිකය",
     "previousSeason": "කලින් සීසන් එක",
@@ -833,10 +794,7 @@
     "addToList": "ලිස්ට් එකට එකතු කරන්න",
     "trailer": "ට්‍රේලර්",
     "trailerQuality": "ට්රේලරයේ ගුණාත්මකභාවය",
-    "titleCopied": "ටයිටල් එක කොපි වුණා",
     "linkCopied": "ලින්ක් එක කොපි වුණා",
-    "watchTrailer": "ට්‍රේලර් එක බලන්න",
-    "copyTitle": "ටයිටල් එක කොපි කරන්න",
     "detailStale": "AnList වෙත ළඟා විය නොහැකි විය. මෙය සුරකින ලද තොරතුරු වන අතර එය කල් ඉකුත් විය හැක.",
     "copyLink": "ලින්ක් එක කොපි කරන්න",
     "openInBrowser": "බ්‍රවුසර් එකේ විවෘත කරන්න",
@@ -1139,7 +1097,6 @@
     "import": "ඉම්පෝර්ට්",
     "animeCount": "anime {count}",
     "mangaCount": "manga {count}",
-    "chooseSaveLocation": "බැකප් එක සේව් කරන්න ඕන තැන තෝරන්න",
     "savedPath": "{path} සේව් වුණා",
     "exportFailed": "එක්ස්පෝර්ට් කරන්න බැරි වුණා: {error}",
     "nothingInLocalLists": "ඔයාගේ ලෝකල් ලිස්ට්ස් වල තාම කිසිවක් නෑ.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "ලින්ක් එක ඕපන් කරන්න එරර් එකක්: {error}",
     "linkCantBeOpened": "මේ ලින්ක් එක ඕපන් කරන්න බෑ: {link}",
     "linkOpenError": "ලින්ක් එක ඕපන් කරන්න එරර් එකක්: {error}",
-    "forReleasingTitles": "දැන් රිලීස් වෙමින් තියෙන ටයිටල්ස් වලට",
     "progress": "ප්‍රගතිය",
     "notes": "සටහන්",
     "serviceNotFound": "\"{id}\" සර්විස් එක හම්බුණේ නෑ",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} කොන්ෆිගර් කරපු රෙපෝ එකේ නෑ",
     "pluginFetchFailed": "ප්ලගින් තොරතුරු ගන්න බැරි වුණා",
     "installPluginTitle": "{name} ඉන්ස්ටෝල් කරන්න",
-    "sizeLabel": "ප්‍රමාණය: {size}",
     "installedState": "ඉන්ස්ටෝල් කරලා",
     "updatePluginTitle": "{name} යාවත්කාලීන කරන්න",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ඇප් එක ඕපන් වෙද්දීත් හැම විනාඩි 30කටම වරක් බැක්ග්‍රවුන්ඩ් එකේ ෆෙච් කරලා සින්ක් කරන්න",
     "syncAddMissing": "නැති එන්ට්‍රීස් එකතු කරන්න",
     "syncAddMissingDesc": "අනිත් සර්විස් එකේ තාම නැති එන්ට්‍රීස් වුනත් එකතු කරන්න",
-    "syncServiceOn": "{name} සමඟ සමමුහුර්ත කරන්න",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "ප්‍රධාන සේවාවේ නැති දේ මකන්න",
     "syncDeleteDesc": "ප්‍රධාන ලැයිස්තුවේ නොමැති අනෙකුත් සේවාවන්ගෙන් ඇතුළත් කිරීම් ඉවත් කරන්න. මාතෘකාවකට ගැළපිය හැකි ඇතුළත් කිරීම් පමණක් ඉවත් කරනු ලැබේ, එබැවින් Simkl චිත්‍රපට සහ මාලාවන් වැනි දේවල් පවතී",
     "syncDeleteTitle": "ඇතුළත් කිරීම් මකන්නද?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "මකන්න",
     "syncToDelete": "මකා දැමීමට",
     "syncDeletedNote": "මකා දමනු ඇත",
-    "syncWillRemove": "{count} {name} වෙතින් මකනු ඇත",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "ඉදිරියෙන් ඉන්න ප්‍රගතිය තියාගන්න",
     "syncOnlyForwardDesc": "දැනටමත් ඉදිරියෙන් ඉන්න සර්විස් එකක ප්‍රගතිය අඩු කරන්න එපා",
     "animePlanetWontWatch": "බලන්නේ නැහැ",
     "animePlanetWontRead": "කියවන්නේ නැහැ",
-    "animePlanetAlreadyOnList": "දැනටමත් මෙම ලැයිස්තුවේ ඇත",
     "animePlanetNewList": "නව ලැයිස්තුවේ නම",
     "syncPrivate": "පුද්ගලික ඇතුළත් කිරීම්",
     "syncPrivateDesc": "ඔබ පුද්ගලිකව තබා ඇති ඇතුළත් කිරීම් සමඟ කළ යුතු දේ. පුද්ගලික විකල්පයක් සහිත සේවාවක් ඔවුන් පුද්ගලික කරයි; අනෙක් අය ඒවා ප්‍රසිද්ධියේ පෙන්වනු ඇත",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "නිෂ්කාශනය වෙනත් පරිශීලක නියෝජිතයෙකු සමඟ උපයා ඇති බැවින් එය යවනු නොලැබේ. නව එකක් ලබා ගැනීමට සම්බන්ධතාවය පරීක්ෂා කරන්න",
-    "watchSectionConnection": "සම්බන්ධතාවය",
     "watchSectionSession": "සැසිය",
     "watchSectionTools": "මෙවලම්",
     "watchMetaSource": "එපිසෝඩ් විස්තර ගන්නේ",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "ඩවුන්ලෝඩ් කරන්නේ මොන ස්ට්‍රීම් එකද?",
     "downloadPickSubtitle": "ඩවුන්ලෝඩ් කරන්නේ මොන සබ්ටයිටල් එකද?",
     "downloadPickAudio": "ඩවුන්ලෝඩ් කරන්නේ මොන ඕඩියෝ ට්‍රැක් එකද?",
-    "downloadNoAudio": "අමතර ඕඩියෝ නෑ",
     "downloadAudio": "ඕඩියෝ",
-    "downloadNoSubtitle": "සබ්ටයිටල් නෑ",
     "downloadHlsNeedsFfmpeg": "මේ ස්ට්‍රීම් එක HLS ප්ලේලිස්ට් එකක්. ඒක ඩවුන්ලෝඩ් කරන්න FFmpeg ඇඩ්-ඔන් එක ඕනේ.",
     "downloadSourceMissing": "මේ එපිසෝඩ් එකේ සෝස් එක ඉන්ස්ටෝල් කරලා නෑ",
     "downloadDashDrm": "මෙම ප්‍රවාහය DRM ආරක්ෂිතයි",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "භාෂාව සහ හැසිරීම",
     "generalSectionSecurity": "ආරක්ෂාව",
     "generalSectionPrivacy": "පෞද්ගලිකත්වය",
-    "notificationsOtherService": "මෙය විවෘත කිරීමට {service} වෙත මාරු වන්න",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "පෙරනිමි වේගය, ස්වයංක්‍රීය වාදනය, වීඩියෝ යෝග්‍යතාවය, දිශානතිය සහ පින්තූරයේ පින්තූරය",
     "secPlayerSkip": "ස්වයංක්‍රීයව විවෘත කිරීම්, අවසන් කිරීම් සහ නැවත සටහන් කිරීම මඟ හරින්න",
     "secPlayerControls": "අභිනයන් ස්වයිප් කර අල්ලාගෙන තට්ටු කර පෙරදසුන සොයන්න",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "බලාගෙන ඉන්නවා",
     "stepChecking": "පරීක්ෂා කරමින්...",
     "stepUpToDate": "යාවත්කාලීනයි",
     "stepUpToDateWith": "යාවත්කාලීන · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "මංගා",
     "readerCloudflare": "බ්‍රවුසරයේ විවෘත කරන්න (Cloudflare පරීක්ෂාව)",
     "badgeBoardHint": "පළමු කාඩ්පතේ කොනකට ලාංඡනයක් ඇදගෙන යන්න, නැතහොත් එය ගෙන යාමට දැනටමත් එහි ඇති ලාංඡනයක් ඇදගෙන යන්න. ලාංඡන ස්ථාන මාරු කරයි, එබැවින් කිසිවක් කිසි විටෙක අතිච්ඡාදනය නොවේ. එය සක්‍රිය හෝ අක්‍රිය කිරීමට පහත ලාංඡනයක් තට්ටු කරන්න.",
-    "statusAuto": "ඔටෝ",
     "unreadCounter": "නොකියවූ කවුන්ටරය",
-    "unreadCounterDesc": "පෝස්ටර්වල කථාංග හෝ පරිච්ඡේද කීයක් ඉතිරිව ඇත්දැයි පෙන්වන්න",
     "settingsShortcuts": "යතුරුපුවරු කෙටිමං",
     "settingsShortcutsDesc": "සෑම යතුරක්ම බලන්න, වෙනස් කරන්න සහ අක්රිය කරන්න",
     "shortcutGroupApp": "යෙදුම",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "සකසා නැත",
     "shortcutAddKey": "යතුරක් එකතු කරන්න",
     "shortcutResetOne": "පෙරනිමියට යළි පිහිටුවන්න",
-    "shortcutClearKeys": "සියලුම යතුරු ඉවත් කරන්න",
     "shortcutResetAll": "සියලුම කෙටිමං යළි පිහිටුවන්න",
     "shortcutResetAllDesc": "සෑම යතුරක්ම එහි පෙරනිමියට දමන්න",
     "shortcutPress": "ඔබට අවශ්‍ය යතුර හෝ සංයෝජනය ඔබන්න",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "යෙදුමෙන් ඉවත් වන්න",
     "closeActionWhenBusy": "යමක් ධාවනය වන විට තැටියේ දිගටම ධාවනය කරන්න",
     "closeActionAlways": "සෑම විටම තැටිය තුළ ධාවනය කරන්න",
-    "closeActionNoTray": "පද්ධති තැටිය මෙහි නොමැත, එබැවින් වසා දැමූ විට යෙදුම ඉවත් වේ",
     "gamepadNav": "Gamepad සංචලනය",
     "gamepadNavDesc": "යෙදුම වටා ගමන් කර ක්‍රීඩා පාලකයක් සමඟ ක්‍රීඩකයා පාලනය කරන්න",
     "trayShow": "Dartotsu පෙන්වන්න",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "විස්තර පිටපත් කරන්න",
     "removePlayerTitle": "ක්‍රීඩකයා ඉවත් කරන්නද?",
     "removePlayerMessage": "වාදකය නැවත බාගන්නා තෙක් වීඩියෝ වාදනය කළ නොහැක.",
-    "trailerLoading": "ට්‍රේලරය පූරණය වෙමින්...",
     "trailerFailed": "බ්‍රවුසරයේ එය විවෘත කරමින් මෙහි ට්‍රේලරය වාදනය කළ නොහැක"
 }

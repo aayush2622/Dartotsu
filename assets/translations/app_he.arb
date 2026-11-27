@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "סנכרון בשינוי",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "היכנס באמצעות GitHub",
-    "settingsSyncSignInDesc": "ההגדרות מאוחסנות בתמצית פרטית בחשבונך",
     "settingsSyncToken": "השתמש באסימון גישה אישי",
     "settingsSyncTokenDesc": "צור אחד ב-github.com/settings/tokens עם ההרשאה העיקרית בלבד",
     "settingsSyncTokenField": "אסימון",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "צא",
-    "settingsSyncCode": "הזן {code} ב- GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "דף GitHub נפתח בדפדפן שלך. הקש כדי להעתיק את הקוד, או הקש והחזק כדי לבטל.",
     "settingsSyncSignInFailed": "לא ניתן להיכנס ל-GitHub",
-    "dcPreview": "תצוגה מקדימה",
     "dcSampleWatching": "צופה",
     "dcSampleReading": "קריאה",
     "dcSampleBrowsing": "גלישה",
     "dcSampleLive": "ממש עכשיו",
     "dcLiveNothing": "שום דבר לא מופיע כרגע. פתח כותרת, התחל פרק או פרק והוא מופיע כאן.",
     "dcMemberList": "ברשימת החברים",
-    "dcAccount": "חשבון",
-    "dcSignIn": "היכנס באמצעות דיסקורד",
     "dcSignOut": "צא",
-    "dcDesktopHint": "בלי להתחבר, דיסקורד מציג את \"צופה בדרטוצו\" דרך אפליקציית שולחן העבודה. חבר את Discord כדי לקרוא לפעילות על שם הכותרת שלך, כולל בנייד.",
-    "dcMobileHint": "חבר את דיסקורד כדי להראות מה אתה צופה או קורא. הוא משתמש בדף ההרשאה של Discord, לא באסימון החשבון שלך.",
     "dcConnect": "חבר דיסקורד",
     "dcConnectDesc": "פותח את דף ההרשאה של Discord ומוסיף Dartotsu תחת אפליקציות מורשות. דיסקורד מבקש לעדכן את הנוכחות שלך. רק אסימון רענון נשמר, לא אסימון החשבון שלך.",
     "dcConnectFailed": "לא ניתן לחבר את דיסקורד",
@@ -254,8 +241,6 @@
     "dcMethodToken": "אסימון חשבון",
     "dcInUse": "בשימוש",
     "dcRecommended": "מומלץ",
-    "dcConnecting": "מתחבר...",
-    "dcDisconnected": "לא מחובר",
     "dcSignedInAs": "מחובר בתור {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "מחק מ-GitHub",
     "settingsSyncSecretsDeleteMessage": "זה מסיר את קובץ החשבונות המוצפנים מהעיקר שלך. מכשירים אחרים שומרים על הכניסות שלהם ויכולים להגדיר ביטוי סיסמה חדש.",
     "settingsSyncWhat": "מה לסנכרן",
-    "settingsSyncServer": "על השרת",
     "settingsSyncServerEmpty": "עדיין לא הועלה כלום",
-    "settingsSyncServerInfo": "הגדרות {count}, הועלה {time} מ{device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "המכשיר הזה",
     "settingsSyncCount": "{count, plural, =0{שום דבר בשרת} =1{הגדרה אחת בשרת} other{{count} הגדרות בשרת}}",
     "settingsSyncNow": "סנכרן עכשיו",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "סנכרון נכשל: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "רק הגדרות שעובדות אותו דבר בכל מקום מסונכרנות. חשבונות, אסימונים, תיקיות, הרחבות, התראות, Discord, עדכונים וגודל חלון נשארים בכל מכשיר.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "הפעל טיפול בקישורים כדי שקישורי anilist.co יפתחו את האפליקציה",
     "linkSettingsFailed": "אי אפשר לפתוח את הגדרות המערכת",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "הצג בפרופיל ה-Discord שלך מה אתה עושה. צריך את הטוקן של Discord.",
-    "discordRichPresenceDesktopDesc": "הצג בפרופיל ה-Discord שלך מה אתה עושה. אפליקציית Discord לדסקטופ צריכה לרוץ.",
     "discordBrowsing": "הצג פעילות גלישה",
     "discordBrowsingDesc": "הצג גם את הלשונית, הדף או הפרופיל שאתה צופה בהם, לא רק מה שאתה רואה או קורא.",
-    "discordLookHeader": "מראה הנוכחות",
     "discordActivityType": "סוג פעילות",
     "discordActivityTypeDesc": "איך Discord מנסח את זה: \"צופה ב…\" או \"משחק ב…\". אוטומטי משתמש ב\"צופה\" לאנימה וב\"משחק\" לכל השאר.",
     "discordWatching": "צופה",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "כפתורי \"צפה באנימה / במנגה\" ו\"פתח את Dartotsu\".",
     "discordHideTitles": "הסתר כותרים",
     "discordHideTitlesDesc": "מחליף שמות של אנימה ומנגה (ואת הכריכה והקישור שלהן) ב\"משהו פרטי\".",
-    "discordConnectionHeader": "חיבור",
     "listSearchHint": "חפש ברשימה הזו",
     "listSort": "מיון",
     "listFilter": "סינון",
@@ -671,8 +637,6 @@
     "listNoMatches": "שום דבר ברשימה הזו לא מתאים",
     "discordLogin": "התחברות ל-Discord",
     "discordToken": "טוקן Discord",
-    "discordTokenSaved": "נשמר. הקש להחלפה, לחיצה ארוכה להסרה.",
-    "discordTokenNotSet": "לא הוגדר. הקש להוספה.",
     "discordTokenSavedSnack": "טוקן Discord נשמר",
     "discordTokenRemovedSnack": "טוקן Discord הוסר",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "הרחק כותרים למבוגרים מהפידים והחיפוש, והצג את הערכים למבוגרים שלך תחת מדיה מוסתרת.",
     "kitsuAccountOptions": "הגדרות חשבון Kitsu",
     "mangaBakaAccountOptions": "אפשרויות חשבון MangaBaka",
-    "comickAccountOptions": "אפשרויות חשבון קומיק",
     "comickClientId": "זיהוי לקוח של קומיק",
     "comickClientIdDesc": "מזהה לקוח מותאם אישית רשום ב-comick.dev",
     "couldNotUpdateKitsuSettings": "אי אפשר לעדכן את הגדרות Kitsu שלך",
@@ -761,7 +724,6 @@
     "accountDetails": "פרטי חשבון",
     "refreshFromKitsu": "רענן מ-Kitsu",
     "simklReadOnly": "ל-Simkl ניתנה גישת קריאה בלבד",
-    "traktReadOnly": "Trakt העניקה גישת קריאה בלבד",
     "incognitoEditsBlocked": "גלישה בסתר: עריכות רשימה חסומות",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "גלישה בסתר: ההתקדמות לא נשמרה",
@@ -786,7 +748,6 @@
     "mangaCredits": "קרדיטים במנגה",
     "mainProductions": "הפקות עיקריות",
     "otherWorks": "עבודות אחרות",
-    "prequelSequel": "פריקוול וסיקוול",
     "prequel": "Prequel",
     "sequel": "המשך",
     "previousSeason": "עונה קודמת",
@@ -833,10 +794,7 @@
     "addToList": "הוסף לרשימה",
     "trailer": "טריילר",
     "trailerQuality": "איכות טריילר",
-    "titleCopied": "הכותרת הועתקה",
     "linkCopied": "הקישור הועתק",
-    "watchTrailer": "צפה בטריילר",
-    "copyTitle": "העתק כותרת",
     "detailStale": "לא ניתן היה להשיג את AniList. זהו מידע שמור ויכול להיות מיושן.",
     "copyLink": "העתק קישור",
     "openInBrowser": "פתח בדפדפן",
@@ -1139,7 +1097,6 @@
     "import": "ייבוא",
     "animeCount": "{count} אנימות",
     "mangaCount": "{count} מנגות",
-    "chooseSaveLocation": "בחר איפה לשמור את הגיבוי",
     "savedPath": "נשמר {path}",
     "exportFailed": "הייצוא נכשל: {error}",
     "nothingInLocalLists": "עדיין אין כלום ברשימות המקומיות שלך.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "שגיאה בפתיחת קישור: {error}",
     "linkCantBeOpened": "אי אפשר לפתוח את הקישור הזה: {link}",
     "linkOpenError": "שגיאה בפתיחת קישור: {error}",
-    "forReleasingTitles": "לכותרים שמשודרים כעת",
     "progress": "התקדמות",
     "notes": "הערות",
     "serviceNotFound": "השירות \"{id}\" לא נמצא",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} לא זמין במאגר שהוגדר",
     "pluginFetchFailed": "אי אפשר להביא מידע על התוסף",
     "installPluginTitle": "התקן את {name}",
-    "sizeLabel": "גודל: {size}",
     "installedState": "מותקן",
     "updatePluginTitle": "עדכון {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "הבא וסנכרן ברקע כשהאפליקציה נפתחת וכל 30 דקות",
     "syncAddMissing": "הוסף ערכים חסרים",
     "syncAddMissingDesc": "הוסף גם ערכים שעוד לא קיימים בשירות השני",
-    "syncServiceOn": "סנכרון עם {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "מחק את מה שאין בשירות הראשי",
     "syncDeleteDesc": "הסר ערכים משאר השירותים שאינם ברשימה הראשית. רק ערכים שניתן להתאים לכותר מוסרים, כך שדברים כמו סרטים וסדרות Simkl נשארים",
     "syncDeleteTitle": "למחוק ערכים?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "לִמְחוֹק",
     "syncToDelete": "כדי למחוק",
     "syncDeletedNote": "יימחק",
-    "syncWillRemove": "{count} יימחק מ{name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "שמור על התקדמות רחוקה יותר",
     "syncOnlyForwardDesc": "אל תוריד את ההתקדמות של שירות שכבר מקדים",
     "animePlanetWontWatch": "לא יצפה",
     "animePlanetWontRead": "לא יקרא",
-    "animePlanetAlreadyOnList": "כבר ברשימה הזו",
     "animePlanetNewList": "שם רשימה חדש",
     "syncPrivate": "כניסות פרטיות",
     "syncPrivateDesc": "מה לעשות עם ערכים שאתה שומר על פרטיות. שירות עם אפשרות פרטית הופך אותם לפרטיים; אחרים היו מראים אותם בפומבי",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "האישור התקבל עם סוכן משתמש אחר, ולכן הוא לא נשלח. בדוק את החיבור כדי לקבל חיבור חדש",
-    "watchSectionConnection": "חיבור",
     "watchSectionSession": "מושב",
     "watchSectionTools": "כלים",
     "watchMetaSource": "פרטי פרקים מ",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "איזה סטרים להוריד?",
     "downloadPickSubtitle": "איזו כתובית להוריד?",
     "downloadPickAudio": "איזה ערוץ אודיו להוריד?",
-    "downloadNoAudio": "בלי אודיו נוסף",
     "downloadAudio": "אודיו",
-    "downloadNoSubtitle": "בלי כתוביות",
     "downloadHlsNeedsFfmpeg": "הסטרים הזה הוא פלייליסט HLS. כדי להוריד אותו צריך את תוספת FFmpeg.",
     "downloadSourceMissing": "המקור של הפרק הזה לא מותקן",
     "downloadDashDrm": "זרם זה מוגן ב-DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "שפה והתנהגות",
     "generalSectionSecurity": "אבטחה",
     "generalSectionPrivacy": "פרטיות",
-    "notificationsOtherService": "עבור אל {service} כדי לפתוח את זה",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "מהירות ברירת מחדל, הפעלה אוטומטית, התאמה של וידאו, כיוון ותמונה בתמונה",
     "secPlayerSkip": "דלג על פתחים, סיומים וסיכום אוטומטי",
     "secPlayerControls": "החלק, החזק והקש על מחוות וחפש תצוגה מקדימה",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "מחכה",
     "stepChecking": "בודק...",
     "stepUpToDate": "מעודכן",
     "stepUpToDateWith": "מעודכן · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "מנגה",
     "readerCloudflare": "פתח בדפדפן (בדיקת Cloudflare)",
     "badgeBoardHint": "גרור תג לפינה של הקלף הראשון, או גרור תג שכבר נמצא עליו כדי להזיז אותו. תגים מחליפים מקומות, כך שאף אחד לא חופף. הקש על תג למטה כדי להפעיל או לכבות אותו.",
-    "statusAuto": "אוטומטי",
     "unreadCounter": "מונה שלא נקרא",
-    "unreadCounterDesc": "הראה כמה פרקים או פרקים נותרו בפוסטרים",
     "settingsShortcuts": "קיצורי מקלדת",
     "settingsShortcutsDesc": "לראות, לשנות ולכבות כל מפתח",
     "shortcutGroupApp": "אפליקציה",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "לא מוגדר",
     "shortcutAddKey": "הוסף מפתח",
     "shortcutResetOne": "אפס לברירת המחדל",
-    "shortcutClearKeys": "הסר את כל המפתחות",
     "shortcutResetAll": "אפס את כל קיצורי הדרך",
     "shortcutResetAllDesc": "החזר כל מפתח לברירת המחדל שלו",
     "shortcutPress": "הקש על המקש או השילוב הרצוי",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "צא מהאפליקציה",
     "closeActionWhenBusy": "המשך לרוץ במגש בזמן שמשהו פועל",
     "closeActionAlways": "תמיד המשיכו לרוץ במגש",
-    "closeActionNoTray": "מגש המערכת אינו זמין כאן, כך שהאפליקציה נסגרת כאשר היא סגורה",
     "gamepadNav": "ניווט ב-Gamepad",
     "gamepadNavDesc": "לנוע באפליקציה ולשלוט בנגן עם בקר משחק",
     "trayShow": "הצג את דארטוצו",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "העתק פרטים",
     "removePlayerTitle": "להסיר את הנגן?",
     "removePlayerMessage": "לא ניתן להפעיל סרטונים עד שהנגן יוריד שוב.",
-    "trailerLoading": "טוען את הטריילר...",
     "trailerFailed": "לא ניתן להפעיל את הטריילר כאן, פותח אותו בדפדפן"
 }

@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Sawazisha kwenye mabadiliko",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Ingia ukitumia GitHub",
-    "settingsSyncSignInDesc": "Mipangilio huhifadhiwa katika dhana ya faragha katika akaunti yako",
     "settingsSyncToken": "Tumia tokeni ya ufikiaji wa kibinafsi",
     "settingsSyncTokenDesc": "Unda moja kwenye github.com/settings/tokens kwa ruhusa ya kiini pekee",
     "settingsSyncTokenField": "Ishara",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Ondoka",
-    "settingsSyncCode": "Ingiza {code} kwenye GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Ukurasa wa GitHub ulifunguliwa kwenye kivinjari chako. Gusa ili unakili msimbo, au uguse na ushikilie ili kughairi.",
     "settingsSyncSignInFailed": "Haikuweza kuingia kwenye GitHub",
-    "dcPreview": "Hakiki",
     "dcSampleWatching": "Kuangalia",
     "dcSampleReading": "Kusoma",
     "dcSampleBrowsing": "Inavinjari",
     "dcSampleLive": "Hivi sasa",
     "dcLiveNothing": "Hakuna kinachoonyeshwa kwa sasa. Fungua kichwa, anza kipindi au sura na itaonekana hapa.",
     "dcMemberList": "Katika orodha ya wanachama",
-    "dcAccount": "Akaunti",
-    "dcSignIn": "Ingia kwa kutumia Discord",
     "dcSignOut": "Ondoka",
-    "dcDesktopHint": "Bila kuunganisha, Discord huonyesha \"Kutazama Dartotsu\" kupitia programu ya eneo-kazi. Unganisha Discord ili kutaja shughuli baada ya jina lako, ikiwa ni pamoja na kwenye simu ya mkononi.",
-    "dcMobileHint": "Unganisha Discord ili kuonyesha kile unachotazama au kusoma. Inatumia ukurasa wa kuidhinisha wa Discord, si tokeni ya akaunti yako.",
     "dcConnect": "Unganisha Discord",
     "dcConnectDesc": "Hufungua ukurasa wa kuidhinisha wa Discord na kuongeza Dartotsu chini ya Programu Zilizoidhinishwa. Discord inaomba kusasisha uwepo wako. Tokeni ya kuonyesha upya pekee ndiyo imehifadhiwa, si tokeni ya akaunti yako.",
     "dcConnectFailed": "Haikuweza kuunganisha Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Ishara ya akaunti",
     "dcInUse": "Inatumika",
     "dcRecommended": "Imependekezwa",
-    "dcConnecting": "Inaunganisha...",
-    "dcDisconnected": "Haijaunganishwa",
     "dcSignedInAs": "Umeingia kama {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Futa kutoka kwa GitHub",
     "settingsSyncSecretsDeleteMessage": "Hii huondoa faili ya akaunti iliyosimbwa kwa njia fiche kutoka kwa kiini chako. Vifaa vingine huhifadhi kuingia kwao na vinaweza kuweka kaulisiri mpya.",
     "settingsSyncWhat": "Nini cha kusawazisha",
-    "settingsSyncServer": "Kwenye seva",
     "settingsSyncServerEmpty": "Bado hakuna kilichopakiwa",
-    "settingsSyncServerInfo": "{count} mipangilio, imepakiwa {time} kutoka {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "kifaa hiki",
     "settingsSyncCount": "{count, plural, =0{Hakuna chochote kwenye seva} =1{Mpangilio 1 kwenye seva} other{{count} mipangilio kwenye seva}}",
     "settingsSyncNow": "Sawazisha sasa",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Usawazishaji haukufaulu: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Mipangilio inayofanya kazi sawa kila mahali pekee ndiyo inasawazishwa. Akaunti, tokeni, folda, viendelezi, arifa, Discord, masasisho na ukubwa wa dirisha hukaa kwenye kila kifaa.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Washa ushughulikiaji wa viungo ili viungo vya anilist.co vifungue programu",
     "linkSettingsFailed": "Imeshindwa kufungua mipangilio ya mfumo",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji tokeni yako ya Discord.",
-    "discordRichPresenceDesktopDesc": "Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji programu ya Discord ya kompyuta iwe inafanya kazi.",
     "discordBrowsing": "Onyesha shughuli za kuvinjari",
     "discordBrowsingDesc": "Onyesha pia kichupo, ukurasa au wasifu unaoutazama, si tu unachotazama au kusoma.",
-    "discordLookHeader": "Mwonekano wa presence",
     "discordActivityType": "Aina ya shughuli",
     "discordActivityTypeDesc": "Jinsi Discord inavyoandika: \"Watching …\" au \"Playing …\". Otomatiki hutumia Watching kwa anime na Playing kwa vingine vyote.",
     "discordWatching": "Kuangalia",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Vitufe vya \"View anime / manga\" na \"Open Dartotsu\".",
     "discordHideTitles": "Ficha vichwa",
     "discordHideTitlesDesc": "Badilisha majina ya anime na manga (na jalada na kiungo chake) kuwa \"Something private\".",
-    "discordConnectionHeader": "Muunganisho",
     "listSearchHint": "Tafuta kwenye orodha hii",
     "listSort": "Panga",
     "listFilter": "Chuja",
@@ -671,8 +637,6 @@
     "listNoMatches": "Hakuna kinacholingana kwenye orodha hii",
     "discordLogin": "Ingia kwenye Discord",
     "discordToken": "Tokeni ya Discord",
-    "discordTokenSaved": "Imehifadhiwa. Gusa kubadilisha, bonyeza kwa muda mrefu kuondoa.",
-    "discordTokenNotSet": "Haijawekwa. Gusa kuongeza.",
     "discordTokenSavedSnack": "Tokeni ya Discord imehifadhiwa",
     "discordTokenRemovedSnack": "Tokeni ya Discord imeondolewa",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Weka vichwa vya watu wazima nje ya milisho na utafutaji, na orodhesha vipengee vyako vya watu wazima chini ya Media Iliyofichwa.",
     "kitsuAccountOptions": "Chaguo za akaunti ya Kitsu",
     "mangaBakaAccountOptions": "Chaguo za akaunti ya MangaBaka",
-    "comickAccountOptions": "Chaguo za akaunti ya Comick",
     "comickClientId": "Kitambulisho cha Mteja wa Comick",
     "comickClientIdDesc": "Kitambulisho maalum cha mteja kilichosajiliwa kwenye comick.dev",
     "couldNotUpdateKitsuSettings": "Imeshindwa kusasisha mipangilio yako ya Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Maelezo ya akaunti",
     "refreshFromKitsu": "Onyesha upya kutoka Kitsu",
     "simklReadOnly": "Simkl imepewa ufikiaji wa kusoma tu",
-    "traktReadOnly": "Trakt ilitoa ufikiaji wa kusoma pekee",
     "incognitoEditsBlocked": "Fiche: mabadiliko ya orodha yamezuiwa",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Fiche: maendeleo hayajahifadhiwa",
@@ -786,7 +748,6 @@
     "mangaCredits": "Kazi za manga",
     "mainProductions": "Kazi kuu",
     "otherWorks": "Kazi nyingine",
-    "prequelSequel": "Awali na Mfululizo",
     "prequel": "Prequel",
     "sequel": "Mwendelezo",
     "previousSeason": "Msimu uliopita",
@@ -833,10 +794,7 @@
     "addToList": "Ongeza kwenye orodha",
     "trailer": "Trela",
     "trailerQuality": "Ubora wa trela",
-    "titleCopied": "Kichwa kimenakiliwa",
     "linkCopied": "Kiungo kimenakiliwa",
-    "watchTrailer": "Tazama trela",
-    "copyTitle": "Nakili kichwa",
     "detailStale": "AniList haikuweza kufikiwa. Haya ni maelezo yaliyohifadhiwa na huenda yamepitwa na wakati.",
     "copyLink": "Nakili kiungo",
     "openInBrowser": "Fungua kwenye kivinjari",
@@ -1139,7 +1097,6 @@
     "import": "Ingiza",
     "animeCount": "Anime {count}",
     "mangaCount": "Manga {count}",
-    "chooseSaveLocation": "Chagua mahali pa kuhifadhi nakala",
     "savedPath": "Imehifadhiwa {path}",
     "exportFailed": "Kuhamisha kumeshindwa: {error}",
     "nothingInLocalLists": "Bado hakuna kitu kwenye orodha zako za ndani.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Hitilafu ya kufungua kiungo: {error}",
     "linkCantBeOpened": "Kiungo hiki hakiwezi kufunguliwa: {link}",
     "linkOpenError": "Hitilafu ya kufungua kiungo: {error}",
-    "forReleasingTitles": "kwa vichwa vinavyotolewa sasa",
     "progress": "Maendeleo",
     "notes": "Maelezo",
     "serviceNotFound": "Huduma \"{id}\" haipatikani",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} haipatikani kwenye hazina iliyosanidiwa",
     "pluginFetchFailed": "Imeshindwa kupata taarifa za programu jalizi",
     "installPluginTitle": "Sakinisha {name}",
-    "sizeLabel": "Ukubwa: {size}",
     "installedState": "Imesakinishwa",
     "updatePluginTitle": "Sasisha {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Pakua na sawazisha chinichini programu inapofunguliwa na kila dakika 30",
     "syncAddMissing": "Ongeza vipengee vinavyokosekana",
     "syncAddMissingDesc": "Ongeza pia vipengee ambavyo huduma nyingine haina bado",
-    "syncServiceOn": "Sawazisha na {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Futa kile ambacho huduma kuu haina",
     "syncDeleteDesc": "Ondoa maingizo kutoka kwa huduma zingine ambazo haziko kwenye orodha kuu. Maingizo yanayoweza kulinganishwa na mada pekee ndiyo yanaondolewa, kwa hivyo mambo kama vile filamu na mfululizo wa Simkl husalia",
     "syncDeleteTitle": "Ungependa kufuta maingizo?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Futa",
     "syncToDelete": "Ili kufuta",
     "syncDeletedNote": "Itafutwa",
-    "syncWillRemove": "{count} itafutwa kutoka {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Weka maendeleo ya mbele zaidi",
     "syncOnlyForwardDesc": "Usipunguze maendeleo ya huduma ambayo tayari iko mbele",
     "animePlanetWontWatch": "Sitatazama",
     "animePlanetWontRead": "Sitasoma",
-    "animePlanetAlreadyOnList": "Tayari kwenye orodha hii",
     "animePlanetNewList": "Jina la orodha mpya",
     "syncPrivate": "Maingizo ya kibinafsi",
     "syncPrivateDesc": "Nini cha kufanya na maingizo unayoweka faragha. Huduma iliyo na chaguo la kibinafsi huwafanya kuwa wa faragha; wengine wangezionyesha hadharani",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Kibali kilipatikana na wakala mwingine wa mtumiaji, kwa hivyo hakijatumwa. Jaribu muunganisho ili upate mpya",
-    "watchSectionConnection": "Muunganisho",
     "watchSectionSession": "Kikao",
     "watchSectionTools": "Zana",
     "watchMetaSource": "Maelezo ya kipindi kutoka",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Pakua stream ipi?",
     "downloadPickSubtitle": "Pakua manukuu yapi?",
     "downloadPickAudio": "Pakua wimbo upi wa sauti?",
-    "downloadNoAudio": "Hakuna sauti ya ziada",
     "downloadAudio": "Sauti",
-    "downloadNoSubtitle": "Hakuna manukuu",
     "downloadHlsNeedsFfmpeg": "Stream hii ni orodha ya kucheza ya HLS. Kuipakua kunahitaji kiongezi cha FFmpeg.",
     "downloadSourceMissing": "Chanzo cha kipindi hiki hakijasakinishwa",
     "downloadDashDrm": "Mtiririko huu umelindwa na DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Lugha na tabia",
     "generalSectionSecurity": "Usalama",
     "generalSectionPrivacy": "Faragha",
-    "notificationsOtherService": "Badili hadi {service} ili ufungue hii",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Kasi chaguomsingi, uchezaji kiotomatiki, kutoshea video, mwelekeo na picha kwenye picha",
     "secPlayerSkip": "Ruka fursa, miisho na urejeshaji kiotomatiki",
     "secPlayerControls": "Telezesha kidole, shikilia na uguse ishara na utafute onyesho la kukagua",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Kusubiri",
     "stepChecking": "Inaangalia...",
     "stepUpToDate": "Imesasishwa",
     "stepUpToDateWith": "Imesasishwa · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Fungua kwenye kivinjari (angalia Cloudflare)",
     "badgeBoardHint": "Buruta beji kwenye kona ya kadi ya kwanza, au buruta beji tayari juu yake ili kuisogeza. Beji hubadilishana mahali, ili zisiwahi kupishana. Gonga beji hapa chini ili kuiwasha au kuzima.",
-    "statusAuto": "Otomatiki",
     "unreadCounter": "Kaunta ambayo haijasomwa",
-    "unreadCounterDesc": "Onyesha ni vipindi au sura ngapi zimesalia kwenye mabango",
     "settingsShortcuts": "Njia za mkato za kibodi",
     "settingsShortcutsDesc": "Tazama, badilisha na uzime kila ufunguo",
     "shortcutGroupApp": "Programu",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Haijawekwa",
     "shortcutAddKey": "Ongeza ufunguo",
     "shortcutResetOne": "Weka upya kwa chaguomsingi",
-    "shortcutClearKeys": "Ondoa funguo zote",
     "shortcutResetAll": "Weka upya njia zote za mkato",
     "shortcutResetAllDesc": "Rudisha kila ufunguo kwa msingi wake",
     "shortcutPress": "Bonyeza kitufe au mchanganyiko unaotaka",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Acha programu",
     "closeActionWhenBusy": "Endelea kukimbia kwenye trei wakati kitu kinaendelea",
     "closeActionAlways": "Daima endelea kukimbia kwenye tray",
-    "closeActionNoTray": "Trei ya mfumo haipatikani hapa, kwa hivyo programu hujizima ikifungwa",
     "gamepadNav": "Urambazaji wa gamepad",
     "gamepadNavDesc": "Sogeza karibu na programu na udhibiti mchezaji ukitumia kidhibiti cha mchezo",
     "trayShow": "Onyesha Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Nakili maelezo",
     "removePlayerTitle": "Ungependa kuondoa mchezaji?",
     "removePlayerMessage": "Video haziwezi kucheza hadi kichezaji kipakuliwe tena.",
-    "trailerLoading": "Inapakia trela...",
     "trailerFailed": "Haikuweza kucheza trela hapa, kuifungua kwenye kivinjari"
 }

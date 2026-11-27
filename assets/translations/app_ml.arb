@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "മാറ്റത്തിൽ സമന്വയിപ്പിക്കുക",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക",
-    "settingsSyncSignInDesc": "ക്രമീകരണങ്ങൾ നിങ്ങളുടെ അക്കൗണ്ടിൽ ഒരു സ്വകാര്യ സംഗ്രഹത്തിൽ സംഭരിച്ചിരിക്കുന്നു",
     "settingsSyncToken": "ഒരു വ്യക്തിഗത ആക്സസ് ടോക്കൺ ഉപയോഗിക്കുക",
     "settingsSyncTokenDesc": "github.com/settings/tokens എന്നതിൽ ഗസ്റ്റ് അനുമതിയോടെ മാത്രം ഒന്ന് സൃഷ്‌ടിക്കുക",
     "settingsSyncTokenField": "ടോക്കൺ",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "സൈൻ ഔട്ട് ചെയ്യുക",
-    "settingsSyncCode": "GitHub-ൽ {code} നൽകുക",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "നിങ്ങളുടെ ബ്രൗസറിൽ GitHub പേജ് തുറന്നു. കോഡ് പകർത്താൻ ടാപ്പ് ചെയ്യുക, അല്ലെങ്കിൽ റദ്ദാക്കാൻ ടാപ്പ് ചെയ്‌ത് പിടിക്കുക.",
     "settingsSyncSignInFailed": "GitHub-ലേക്ക് സൈൻ ഇൻ ചെയ്യാൻ കഴിഞ്ഞില്ല",
-    "dcPreview": "പ്രിവ്യൂ",
     "dcSampleWatching": "നിരീക്ഷിക്കുന്നു",
     "dcSampleReading": "വായന",
     "dcSampleBrowsing": "ബ്രൗസിംഗ്",
     "dcSampleLive": "ഇപ്പോൾ തന്നെ",
     "dcLiveNothing": "ഇപ്പോൾ ഒന്നും കാണിക്കുന്നില്ല. ഒരു ശീർഷകം തുറക്കുക, ഒരു എപ്പിസോഡ് അല്ലെങ്കിൽ ഒരു ചാപ്റ്റർ ആരംഭിക്കുക, അത് ഇവിടെ ദൃശ്യമാകും.",
     "dcMemberList": "അംഗ പട്ടികയിൽ",
-    "dcAccount": "അക്കൗണ്ട്",
-    "dcSignIn": "ഡിസ്കോർഡ് ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക",
     "dcSignOut": "സൈൻ ഔട്ട് ചെയ്യുക",
-    "dcDesktopHint": "കണക്റ്റുചെയ്യാതെ, ഡെസ്‌ക്‌ടോപ്പ് ആപ്പിലൂടെ ഡിസ്‌കോർഡ് “ഡർട്ടോറ്റ്‌സു കാണുക” കാണിക്കുന്നു. മൊബൈലിൽ ഉൾപ്പെടെ, നിങ്ങളുടെ തലക്കെട്ടിന് ശേഷം പ്രവർത്തനത്തിന് പേരിടാൻ Discord കണക്റ്റ് ചെയ്യുക.",
-    "dcMobileHint": "നിങ്ങൾ എന്താണ് കാണുന്നതെന്നോ വായിക്കുന്നതെന്നോ കാണിക്കാൻ Discord കണക്റ്റ് ചെയ്യുക. ഇത് Discord-ൻ്റെ അംഗീകൃത പേജാണ് ഉപയോഗിക്കുന്നത്, നിങ്ങളുടെ അക്കൗണ്ട് ടോക്കണല്ല.",
     "dcConnect": "ഡിസ്കോർഡ് ബന്ധിപ്പിക്കുക",
     "dcConnectDesc": "Discord-ൻ്റെ അംഗീകൃത പേജ് തുറക്കുകയും അംഗീകൃത ആപ്പുകൾക്ക് കീഴിൽ Dartotsu ചേർക്കുകയും ചെയ്യുന്നു. നിങ്ങളുടെ സാന്നിധ്യം അപ്ഡേറ്റ് ചെയ്യാൻ Discord ആവശ്യപ്പെടുന്നു. ഒരു പുതുക്കൽ ടോക്കൺ മാത്രമേ സംരക്ഷിക്കപ്പെട്ടിട്ടുള്ളൂ, നിങ്ങളുടെ അക്കൗണ്ട് ടോക്കണല്ല.",
     "dcConnectFailed": "ഡിസ്കോർഡ് ബന്ധിപ്പിക്കാൻ കഴിഞ്ഞില്ല",
@@ -254,8 +241,6 @@
     "dcMethodToken": "അക്കൗണ്ട് ടോക്കൺ",
     "dcInUse": "ഉപയോഗത്തിലുണ്ട്",
     "dcRecommended": "ശുപാർശ ചെയ്തത്",
-    "dcConnecting": "ബന്ധിപ്പിക്കുന്നു...",
-    "dcDisconnected": "ബന്ധിപ്പിച്ചിട്ടില്ല",
     "dcSignedInAs": "{name} ആയി സൈൻ ഇൻ ചെയ്‌തു",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub-ൽ നിന്ന് ഇല്ലാതാക്കുക",
     "settingsSyncSecretsDeleteMessage": "ഇത് നിങ്ങളുടെ സാരാംശത്തിൽ നിന്ന് എൻക്രിപ്റ്റ് ചെയ്ത അക്കൗണ്ട് ഫയൽ നീക്കം ചെയ്യുന്നു. മറ്റ് ഉപകരണങ്ങൾ അവരുടെ സൈൻ-ഇന്നുകൾ സൂക്ഷിക്കുകയും ഒരു പുതിയ പാസ്ഫ്രെയ്സ് സജ്ജീകരിക്കുകയും ചെയ്യാം.",
     "settingsSyncWhat": "എന്താണ് സമന്വയിപ്പിക്കേണ്ടത്",
-    "settingsSyncServer": "സെർവറിൽ",
     "settingsSyncServerEmpty": "ഇതുവരെ ഒന്നും അപ്‌ലോഡ് ചെയ്‌തിട്ടില്ല",
-    "settingsSyncServerInfo": "{count} ക്രമീകരണങ്ങൾ, {device} ൽ നിന്ന് {time} അപ്‌ലോഡ് ചെയ്‌തു",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ഈ ഉപകരണം",
     "settingsSyncCount": "{count, plural, =0{സെർവറിൽ ഒന്നുമില്ല} =1{സെർവറിൽ 1 ക്രമീകരണം} other{സെർവറിലെ {count} ക്രമീകരണങ്ങൾ}}",
     "settingsSyncNow": "ഇപ്പോൾ സമന്വയിപ്പിക്കുക",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "സമന്വയം പരാജയപ്പെട്ടു: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "എല്ലായിടത്തും ഒരേപോലെ പ്രവർത്തിക്കുന്ന ക്രമീകരണങ്ങൾ മാത്രം സമന്വയിപ്പിക്കപ്പെടുന്നു. അക്കൗണ്ടുകൾ, ടോക്കണുകൾ, ഫോൾഡറുകൾ, വിപുലീകരണങ്ങൾ, അറിയിപ്പുകൾ, ഡിസ്‌കോർഡ്, അപ്‌ഡേറ്റുകൾ, വിൻഡോ വലുപ്പം എന്നിവ ഓരോ ഉപകരണത്തിലും നിലനിൽക്കും.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co ലിങ്കുകൾ ആപ്പിൽ തുറക്കാൻ ലിങ്ക് ഹാൻഡ്ലിംഗ് ഓണാക്കൂ",
     "linkSettingsFailed": "സിസ്റ്റം സെറ്റിംഗ്സ് തുറക്കാനായില്ല",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "നീ എന്തു ചെയ്യുന്നു എന്ന് നിന്റെ Discord പ്രൊഫൈലിൽ കാണിക്കൂ. നിന്റെ Discord ടോക്കൺ വേണം.",
-    "discordRichPresenceDesktopDesc": "നീ എന്തു ചെയ്യുന്നു എന്ന് നിന്റെ Discord പ്രൊഫൈലിൽ കാണിക്കൂ. Discord ഡെസ്ക്ടോപ്പ് ആപ്പ് ഓടിക്കൊണ്ടിരിക്കണം.",
     "discordBrowsing": "ബ്രൗസിംഗ് ആക്റ്റിവിറ്റി കാണിക്കൂ",
     "discordBrowsingDesc": "നീ കാണുന്നതോ വായിക്കുന്നതോ മാത്രമല്ല, നോക്കിക്കൊണ്ടിരിക്കുന്ന ടാബ്, പേജ്, പ്രൊഫൈൽ എന്നിവയും കാണിക്കൂ.",
-    "discordLookHeader": "പ്രസൻസ് ലുക്ക്",
     "discordActivityType": "ആക്റ്റിവിറ്റി ടൈപ്പ്",
     "discordActivityTypeDesc": "Discord ഇത് എങ്ങനെ എഴുതുന്നു എന്നത്: \"Watching …\" അല്ലെങ്കിൽ \"Playing …\". ഓട്ടോ ആണെങ്കിൽ അനിമെയ്ക്ക് Watching, ബാക്കിയെല്ലാത്തിനും Playing.",
     "discordWatching": "കാണുന്നു",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"View anime / manga\", \"Open Dartotsu\" ബട്ടണുകൾ.",
     "discordHideTitles": "ടൈറ്റിലുകൾ മറയ്ക്കൂ",
     "discordHideTitlesDesc": "അനിമെ, മംഗ പേരുകൾ (കവറും ലിങ്കും സഹിതം) \"Something private\" എന്നാക്കി മാറ്റൂ.",
-    "discordConnectionHeader": "കണക്ഷൻ",
     "listSearchHint": "ഈ ലിസ്റ്റിൽ തിരയൂ",
     "listSort": "സോർട്ട്",
     "listFilter": "ഫിൽട്ടർ",
@@ -671,8 +637,6 @@
     "listNoMatches": "ഈ ലിസ്റ്റിൽ ഒന്നും ചേരുന്നില്ല",
     "discordLogin": "Discord-ലേക്ക് ലോഗിൻ ചെയ്യൂ",
     "discordToken": "Discord ടോക്കൺ",
-    "discordTokenSaved": "സേവ് ചെയ്തു. മാറ്റാൻ ടാപ്പ് ചെയ്യൂ, നീക്കാൻ ലോങ് പ്രസ് ചെയ്യൂ.",
-    "discordTokenNotSet": "സെറ്റ് ചെയ്തിട്ടില്ല. ചേർക്കാൻ ടാപ്പ് ചെയ്യൂ.",
     "discordTokenSavedSnack": "Discord ടോക്കൺ സേവ് ചെയ്തു",
     "discordTokenRemovedSnack": "Discord ടോക്കൺ നീക്കം ചെയ്തു",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "അഡൾട്ട് ടൈറ്റിലുകൾ ഫീഡുകളിലും തിരയലിലും നിന്ന് ഒഴിവാക്കൂ, നിന്റെ സ്വന്തം അഡൾട്ട് എൻട്രികൾ Hidden Media-യിൽ കാണിക്കൂ.",
     "kitsuAccountOptions": "Kitsu അക്കൗണ്ട് ഓപ്ഷനുകൾ",
     "mangaBakaAccountOptions": "MangaBaka അക്കൗണ്ട് ഓപ്ഷനുകൾ",
-    "comickAccountOptions": "കോമിക് അക്കൗണ്ട് ഓപ്ഷനുകൾ",
     "comickClientId": "കോമിക് ക്ലയൻ്റ് ഐഡി",
     "comickClientIdDesc": "comic.dev-ൽ രജിസ്റ്റർ ചെയ്ത ഇഷ്‌ടാനുസൃത ക്ലയൻ്റ് ഐഡി",
     "couldNotUpdateKitsuSettings": "നിന്റെ Kitsu സെറ്റിംഗ്സ് അപ്ഡേറ്റ് ചെയ്യാനായില്ല",
@@ -761,7 +724,6 @@
     "accountDetails": "അക്കൗണ്ട് വിശദാംശങ്ങൾ",
     "refreshFromKitsu": "Kitsu-വിൽ നിന്ന് റിഫ്രഷ് ചെയ്യൂ",
     "simklReadOnly": "Simkl റീഡ്-ഓൺലി ആക്സസ് അനുവദിച്ചു",
-    "traktReadOnly": "ട്രാക്കിന് വായന-മാത്രം പ്രവേശനം അനുവദിച്ചു",
     "incognitoEditsBlocked": "ഇൻകോഗ്നിറ്റോ: ലിസ്റ്റ് എഡിറ്റുകൾ തടഞ്ഞിരിക്കുന്നു",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ഇൻകോഗ്നിറ്റോ: പ്രോഗ്രസ് സേവ് ചെയ്തില്ല",
@@ -786,7 +748,6 @@
     "mangaCredits": "മംഗ ക്രെഡിറ്റുകൾ",
     "mainProductions": "പ്രധാന പ്രൊഡക്ഷനുകൾ",
     "otherWorks": "മറ്റ് സൃഷ്ടികൾ",
-    "prequelSequel": "പ്രീക്വലും സീക്വലും",
     "prequel": "പ്രീക്വൽ",
     "sequel": "തുടർച്ച",
     "previousSeason": "മുൻ സീസൺ",
@@ -833,10 +794,7 @@
     "addToList": "ലിസ്റ്റിൽ ചേർക്കൂ",
     "trailer": "ട്രെയിലർ",
     "trailerQuality": "ട്രെയിലർ നിലവാരം",
-    "titleCopied": "ടൈറ്റിൽ കോപ്പി ചെയ്തു",
     "linkCopied": "ലിങ്ക് കോപ്പി ചെയ്തു",
-    "watchTrailer": "ട്രെയിലർ കാണൂ",
-    "copyTitle": "ടൈറ്റിൽ കോപ്പി ചെയ്യൂ",
     "detailStale": "അനിലിസ്റ്റിൽ എത്തിച്ചേരാനായില്ല. ഇത് സംരക്ഷിച്ച വിവരമാണ്, കാലഹരണപ്പെട്ടതാകാം.",
     "copyLink": "ലിങ്ക് കോപ്പി ചെയ്യൂ",
     "openInBrowser": "ബ്രൗസറിൽ തുറക്കൂ",
@@ -1139,7 +1097,6 @@
     "import": "ഇമ്പോർട്ട്",
     "animeCount": "{count} അനിമെ",
     "mangaCount": "{count} മംഗ",
-    "chooseSaveLocation": "ബാക്കപ്പ് എവിടെ സേവ് ചെയ്യണമെന്ന് തിരഞ്ഞെടുക്കൂ",
     "savedPath": "{path} സേവ് ചെയ്തു",
     "exportFailed": "എക്സ്പോർട്ട് പരാജയപ്പെട്ടു: {error}",
     "nothingInLocalLists": "നിന്റെ ലോക്കൽ ലിസ്റ്റുകളിൽ ഇതുവരെ ഒന്നുമില്ല.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "ലിങ്ക് തുറക്കുന്നതിൽ പിശക്: {error}",
     "linkCantBeOpened": "ഈ ലിങ്ക് തുറക്കാനാവില്ല: {link}",
     "linkOpenError": "ലിങ്ക് തുറക്കുന്നതിൽ പിശക്: {error}",
-    "forReleasingTitles": "ഇപ്പോൾ റിലീസ് ആകുന്ന ടൈറ്റിലുകൾക്ക്",
     "progress": "പ്രോഗ്രസ്",
     "notes": "നോട്ടുകൾ",
     "serviceNotFound": "\"{id}\" സർവീസ് കണ്ടില്ല",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} കോൺഫിഗർ ചെയ്ത റിപ്പോയിൽ ലഭ്യമല്ല",
     "pluginFetchFailed": "പ്ലഗിൻ വിവരം എടുക്കാനായില്ല",
     "installPluginTitle": "{name} ഇൻസ്റ്റാൾ ചെയ്യൂ",
-    "sizeLabel": "വലുപ്പം: {size}",
     "installedState": "ഇൻസ്റ്റാൾ ചെയ്തത്",
     "updatePluginTitle": "{name} അപ്ഡേറ്റ് ചെയ്യുക",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ആപ്പ് തുറക്കുമ്പോഴും ഓരോ 30 മിനിറ്റിലും ബാക്ക്ഗ്രൗണ്ടിൽ ഫെച്ച് ചെയ്ത് സിങ്ക് ചെയ്യൂ",
     "syncAddMissing": "ഇല്ലാത്ത എൻട്രികൾ ചേർക്കൂ",
     "syncAddMissingDesc": "മറ്റേ സർവീസിൽ ഇതുവരെ ഇല്ലാത്ത എൻട്രികളും ചേർക്കൂ",
-    "syncServiceOn": "{name} എന്നതുമായി സമന്വയിപ്പിക്കുക",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "പ്രധാന സേവനത്തിന് ഇല്ലാത്തത് ഇല്ലാതാക്കുക",
     "syncDeleteDesc": "പ്രധാന ലിസ്റ്റിൽ ഇല്ലാത്ത മറ്റ് സേവനങ്ങളിൽ നിന്നുള്ള എൻട്രികൾ നീക്കം ചെയ്യുക. ഒരു ശീർഷകവുമായി പൊരുത്തപ്പെടുത്താൻ കഴിയുന്ന എൻട്രികൾ മാത്രമേ നീക്കം ചെയ്യപ്പെടുകയുള്ളൂ, അതിനാൽ Simkl സിനിമകളും പരമ്പരകളും പോലെയുള്ള കാര്യങ്ങൾ നിലനിൽക്കും",
     "syncDeleteTitle": "എൻട്രികൾ ഇല്ലാതാക്കണോ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "ഇല്ലാതാക്കുക",
     "syncToDelete": "ഇല്ലാതാക്കാൻ",
     "syncDeletedNote": "ഇല്ലാതാക്കും",
-    "syncWillRemove": "{name} എന്നതിൽ നിന്ന് {count} ഇല്ലാതാക്കപ്പെടും",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "കൂടുതൽ പ്രോഗ്രസ് നിലനിർത്തൂ",
     "syncOnlyForwardDesc": "മുന്നിലുള്ള സർവീസിന്റെ പ്രോഗ്രസ് കുറയ്ക്കരുത്",
     "animePlanetWontWatch": "കാണില്ല",
     "animePlanetWontRead": "വായിക്കില്ല",
-    "animePlanetAlreadyOnList": "ഇതിനകം ഈ പട്ടികയിൽ ഉണ്ട്",
     "animePlanetNewList": "പുതിയ പട്ടികയുടെ പേര്",
     "syncPrivate": "സ്വകാര്യ എൻട്രികൾ",
     "syncPrivateDesc": "നിങ്ങൾ സ്വകാര്യമായി സൂക്ഷിക്കുന്ന എൻട്രികളുമായി എന്തുചെയ്യണം. ഒരു സ്വകാര്യ ഓപ്ഷനുള്ള ഒരു സേവനം അവരെ സ്വകാര്യമാക്കുന്നു; മറ്റുള്ളവർ അത് പരസ്യമായി കാണിക്കും",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "മറ്റൊരു ഉപയോക്തൃ ഏജൻ്റിലൂടെ ക്ലിയറൻസ് നേടിയതിനാൽ അത് അയച്ചില്ല. പുതിയൊരെണ്ണം ലഭിക്കാൻ കണക്ഷൻ പരിശോധിക്കുക",
-    "watchSectionConnection": "കണക്ഷൻ",
     "watchSectionSession": "സെഷൻ",
     "watchSectionTools": "ഉപകരണങ്ങൾ",
     "watchMetaSource": "എപ്പിസോഡ് വിശദാംശങ്ങൾ എവിടെ നിന്ന്",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "ഏത് സ്ട്രീം ഡൗൺലോഡ് ചെയ്യണം?",
     "downloadPickSubtitle": "ഏത് സബ്ടൈറ്റിൽ ഡൗൺലോഡ് ചെയ്യണം?",
     "downloadPickAudio": "ഏത് ഓഡിയോ ട്രാക്ക് ഡൗൺലോഡ് ചെയ്യണം?",
-    "downloadNoAudio": "അധിക ഓഡിയോ ഇല്ല",
     "downloadAudio": "ഓഡിയോ",
-    "downloadNoSubtitle": "സബ്ടൈറ്റിൽ ഇല്ല",
     "downloadHlsNeedsFfmpeg": "ഈ സ്ട്രീം ഒരു HLS പ്ലേലിസ്റ്റ് ആണ്. ഡൗൺലോഡ് ചെയ്യാൻ FFmpeg ആഡ്-ഓൺ വേണം.",
     "downloadSourceMissing": "ഈ എപ്പിസോഡിന്റെ സോഴ്സ് ഇൻസ്റ്റാൾ ചെയ്തിട്ടില്ല",
     "downloadDashDrm": "ഈ സ്ട്രീം DRM പരിരക്ഷിതമാണ്",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ഭാഷയും പെരുമാറ്റവും",
     "generalSectionSecurity": "സുരക്ഷ",
     "generalSectionPrivacy": "സ്വകാര്യത",
-    "notificationsOtherService": "ഇത് തുറക്കാൻ {service} ലേക്ക് മാറുക",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "ഡിഫോൾട്ട് വേഗത, ഓട്ടോ പ്ലേ, വീഡിയോ ഫിറ്റ്, ഓറിയൻ്റേഷൻ, ചിത്രത്തിൽ ചിത്രം",
     "secPlayerSkip": "ഓപ്പണിംഗുകൾ, അവസാനങ്ങൾ, റീക്യാപ്പുകൾ എന്നിവ സ്വയമേവ ഒഴിവാക്കുക",
     "secPlayerControls": "ആംഗ്യങ്ങൾ സ്വൈപ്പുചെയ്‌ത് പിടിക്കുക, ടാപ്പ് ചെയ്‌ത് പ്രിവ്യൂ തേടുക",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "കാത്തിരിക്കുന്നു",
     "stepChecking": "പരിശോധിക്കുന്നു...",
     "stepUpToDate": "കാലികമായത്",
     "stepUpToDateWith": "കാലികമായത് · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "മാംഗ",
     "readerCloudflare": "ബ്രൗസറിൽ തുറക്കുക (Cloudflare പരിശോധന)",
     "badgeBoardHint": "ആദ്യത്തെ കാർഡിൻ്റെ ഒരു കോണിലേക്ക് ഒരു ബാഡ്‌ജ് വലിച്ചിടുക, അല്ലെങ്കിൽ അത് നീക്കാൻ അതിൽ ഇതിനകം ഒരു ബാഡ്ജ് വലിച്ചിടുക. ബാഡ്ജുകൾ സ്ഥലങ്ങൾ സ്വാപ്പ് ചെയ്യുന്നു, അതിനാൽ ഒന്നും ഓവർലാപ്പ് ചെയ്യില്ല. അത് ഓണാക്കാനോ ഓഫാക്കാനോ താഴെയുള്ള ഒരു ബാഡ്‌ജ് ടാപ്പ് ചെയ്യുക.",
-    "statusAuto": "ഓട്ടോ",
     "unreadCounter": "വായിക്കാത്ത കൗണ്ടർ",
-    "unreadCounterDesc": "പോസ്റ്ററുകളിൽ എത്ര എപ്പിസോഡുകളോ അധ്യായങ്ങളോ അവശേഷിക്കുന്നുവെന്ന് കാണിക്കുക",
     "settingsShortcuts": "കീബോർഡ് കുറുക്കുവഴികൾ",
     "settingsShortcutsDesc": "ഓരോ കീയും കാണുക, മാറ്റുക, ഓഫാക്കുക",
     "shortcutGroupApp": "ആപ്പ്",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "സജ്ജമാക്കിയിട്ടില്ല",
     "shortcutAddKey": "ഒരു കീ ചേർക്കുക",
     "shortcutResetOne": "സ്ഥിരസ്ഥിതിയിലേക്ക് പുനഃസജ്ജമാക്കുക",
-    "shortcutClearKeys": "എല്ലാ കീകളും നീക്കം ചെയ്യുക",
     "shortcutResetAll": "എല്ലാ കുറുക്കുവഴികളും പുനഃസജ്ജമാക്കുക",
     "shortcutResetAllDesc": "ഓരോ കീയും അതിൻ്റെ ഡിഫോൾട്ടിലേക്ക് തിരികെ വയ്ക്കുക",
     "shortcutPress": "നിങ്ങൾക്ക് ആവശ്യമുള്ള കീ അല്ലെങ്കിൽ കോമ്പിനേഷൻ അമർത്തുക",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "ആപ്പ് ഉപേക്ഷിക്കുക",
     "closeActionWhenBusy": "എന്തെങ്കിലും ഓടിക്കൊണ്ടിരിക്കുമ്പോൾ ട്രേയിൽ ഓടിക്കൊണ്ടിരിക്കുക",
     "closeActionAlways": "എപ്പോഴും ട്രേയിൽ ഓടിക്കൊണ്ടിരിക്കുക",
-    "closeActionNoTray": "സിസ്റ്റം ട്രേ ഇവിടെ ലഭ്യമല്ല, അതിനാൽ അടയ്‌ക്കുമ്പോൾ ആപ്പ് പുറത്തുകടക്കുന്നു",
     "gamepadNav": "ഗെയിംപാഡ് നാവിഗേഷൻ",
     "gamepadNavDesc": "ആപ്പിന് ചുറ്റും നീങ്ങി ഒരു ഗെയിം കൺട്രോളർ ഉപയോഗിച്ച് കളിക്കാരനെ നിയന്ത്രിക്കുക",
     "trayShow": "ഡാർട്ടോത്സു കാണിക്കുക",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "വിശദാംശങ്ങൾ പകർത്തുക",
     "removePlayerTitle": "പ്ലേയർ നീക്കം ചെയ്യണോ?",
     "removePlayerMessage": "പ്ലേയർ വീണ്ടും ഡൗൺലോഡ് ചെയ്യുന്നതുവരെ വീഡിയോകൾ പ്ലേ ചെയ്യാനാകില്ല.",
-    "trailerLoading": "ട്രെയിലർ ലോഡ് ചെയ്യുന്നു...",
     "trailerFailed": "ബ്രൗസറിൽ തുറക്കുന്ന ട്രെയിലർ ഇവിടെ പ്ലേ ചെയ്യാനായില്ല"
 }

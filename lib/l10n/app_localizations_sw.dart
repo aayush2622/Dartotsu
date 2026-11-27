@@ -425,10 +425,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get settingsSyncSignIn => 'Ingia ukitumia GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Mipangilio huhifadhiwa katika dhana ya faragha katika akaunti yako';
-
-  @override
   String get settingsSyncToken => 'Tumia tokeni ya ufikiaji wa kibinafsi';
 
   @override
@@ -447,19 +443,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get settingsSyncSignOut => 'Ondoka';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Ingiza $code kwenye GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Ukurasa wa GitHub ulifunguliwa kwenye kivinjari chako. Gusa ili unakili msimbo, au uguse na ushikilie ili kughairi.';
-
-  @override
   String get settingsSyncSignInFailed => 'Haikuweza kuingia kwenye GitHub';
-
-  @override
-  String get dcPreview => 'Hakiki';
 
   @override
   String get dcSampleWatching => 'Kuangalia';
@@ -481,21 +465,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get dcMemberList => 'Katika orodha ya wanachama';
 
   @override
-  String get dcAccount => 'Akaunti';
-
-  @override
-  String get dcSignIn => 'Ingia kwa kutumia Discord';
-
-  @override
   String get dcSignOut => 'Ondoka';
-
-  @override
-  String get dcDesktopHint =>
-      'Bila kuunganisha, Discord huonyesha \"Kutazama Dartotsu\" kupitia programu ya eneo-kazi. Unganisha Discord ili kutaja shughuli baada ya jina lako, ikiwa ni pamoja na kwenye simu ya mkononi.';
-
-  @override
-  String get dcMobileHint =>
-      'Unganisha Discord ili kuonyesha kile unachotazama au kusoma. Inatumia ukurasa wa kuidhinisha wa Discord, si tokeni ya akaunti yako.';
 
   @override
   String get dcConnect => 'Unganisha Discord';
@@ -720,12 +690,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get dcRecommended => 'Imependekezwa';
 
   @override
-  String get dcConnecting => 'Inaunganisha...';
-
-  @override
-  String get dcDisconnected => 'Haijaunganishwa';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Umeingia kama $name';
   }
@@ -920,15 +884,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get settingsSyncWhat => 'Nini cha kusawazisha';
 
   @override
-  String get settingsSyncServer => 'Kwenye seva';
-
-  @override
   String get settingsSyncServerEmpty => 'Bado hakuna kilichopakiwa';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count mipangilio, imepakiwa $time kutoka $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'kifaa hiki';
@@ -957,11 +913,6 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Ilisawazishwa mwisho $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Usawazishaji haukufaulu: $error';
   }
 
   @override
@@ -1744,22 +1695,11 @@ class AppLocalizationsSw extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji tokeni yako ya Discord.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Onyesha unachofanya kwenye wasifu wako wa Discord. Inahitaji programu ya Discord ya kompyuta iwe inafanya kazi.';
-
-  @override
   String get discordBrowsing => 'Onyesha shughuli za kuvinjari';
 
   @override
   String get discordBrowsingDesc =>
       'Onyesha pia kichupo, ukurasa au wasifu unaoutazama, si tu unachotazama au kusoma.';
-
-  @override
-  String get discordLookHeader => 'Mwonekano wa presence';
 
   @override
   String get discordActivityType => 'Aina ya shughuli';
@@ -1800,9 +1740,6 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Badilisha majina ya anime na manga (na jalada na kiungo chake) kuwa \"Something private\".';
-
-  @override
-  String get discordConnectionHeader => 'Muunganisho';
 
   @override
   String get listSearchHint => 'Tafuta kwenye orodha hii';
@@ -1860,13 +1797,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get discordToken => 'Tokeni ya Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'Imehifadhiwa. Gusa kubadilisha, bonyeza kwa muda mrefu kuondoa.';
-
-  @override
-  String get discordTokenNotSet => 'Haijawekwa. Gusa kuongeza.';
 
   @override
   String get discordTokenSavedSnack => 'Tokeni ya Discord imehifadhiwa';
@@ -2065,9 +1995,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Chaguo za akaunti ya MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Chaguo za akaunti ya Comick';
-
-  @override
   String get comickClientId => 'Kitambulisho cha Mteja wa Comick';
 
   @override
@@ -2161,9 +2088,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get simklReadOnly => 'Simkl imepewa ufikiaji wa kusoma tu';
 
   @override
-  String get traktReadOnly => 'Trakt ilitoa ufikiaji wa kusoma pekee';
-
-  @override
   String get incognitoEditsBlocked => 'Fiche: mabadiliko ya orodha yamezuiwa';
 
   @override
@@ -2243,9 +2167,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get otherWorks => 'Kazi nyingine';
-
-  @override
-  String get prequelSequel => 'Awali na Mfululizo';
 
   @override
   String get prequel => 'Prequel';
@@ -2389,16 +2310,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get trailerQuality => 'Ubora wa trela';
 
   @override
-  String get titleCopied => 'Kichwa kimenakiliwa';
-
-  @override
   String get linkCopied => 'Kiungo kimenakiliwa';
-
-  @override
-  String get watchTrailer => 'Tazama trela';
-
-  @override
-  String get copyTitle => 'Nakili kichwa';
 
   @override
   String get detailStale =>
@@ -3387,9 +3299,6 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Chagua mahali pa kuhifadhi nakala';
-
-  @override
   String savedPath(String path) {
     return 'Imehifadhiwa $path';
   }
@@ -3961,9 +3870,6 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'kwa vichwa vinavyotolewa sasa';
-
-  @override
   String get progress => 'Maendeleo';
 
   @override
@@ -4170,11 +4076,6 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Ukubwa: $size';
-  }
-
-  @override
   String get installedState => 'Imesakinishwa';
 
   @override
@@ -4274,11 +4175,6 @@ class AppLocalizationsSw extends AppLocalizations {
       'Ongeza pia vipengee ambavyo huduma nyingine haina bado';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Sawazisha na $name';
-  }
-
-  @override
   String get syncDelete => 'Futa kile ambacho huduma kuu haina';
 
   @override
@@ -4309,11 +4205,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get syncDeletedNote => 'Itafutwa';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count itafutwa kutoka $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Weka maendeleo ya mbele zaidi';
 
   @override
@@ -4325,9 +4216,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Sitasoma';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Tayari kwenye orodha hii';
 
   @override
   String get animePlanetNewList => 'Jina la orodha mpya';
@@ -5682,9 +5570,6 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Kibali kilipatikana na wakala mwingine wa mtumiaji, kwa hivyo hakijatumwa. Jaribu muunganisho ili upate mpya';
-
-  @override
-  String get watchSectionConnection => 'Muunganisho';
 
   @override
   String get watchSectionSession => 'Kikao';
@@ -7558,13 +7443,7 @@ class AppLocalizationsSw extends AppLocalizations {
   String get downloadPickAudio => 'Pakua wimbo upi wa sauti?';
 
   @override
-  String get downloadNoAudio => 'Hakuna sauti ya ziada';
-
-  @override
   String get downloadAudio => 'Sauti';
-
-  @override
-  String get downloadNoSubtitle => 'Hakuna manukuu';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8409,11 +8288,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get generalSectionPrivacy => 'Faragha';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Badili hadi $service ili ufungue hii';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Kasi chaguomsingi, uchezaji kiotomatiki, kutoshea video, mwelekeo na picha kwenye picha';
 
@@ -8728,9 +8602,6 @@ class AppLocalizationsSw extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Kusubiri';
-
-  @override
   String get stepChecking => 'Inaangalia...';
 
   @override
@@ -8801,14 +8672,7 @@ class AppLocalizationsSw extends AppLocalizations {
       'Buruta beji kwenye kona ya kadi ya kwanza, au buruta beji tayari juu yake ili kuisogeza. Beji hubadilishana mahali, ili zisiwahi kupishana. Gonga beji hapa chini ili kuiwasha au kuzima.';
 
   @override
-  String get statusAuto => 'Otomatiki';
-
-  @override
   String get unreadCounter => 'Kaunta ambayo haijasomwa';
-
-  @override
-  String get unreadCounterDesc =>
-      'Onyesha ni vipindi au sura ngapi zimesalia kwenye mabango';
 
   @override
   String get settingsShortcuts => 'Njia za mkato za kibodi';
@@ -8846,9 +8710,6 @@ class AppLocalizationsSw extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Weka upya kwa chaguomsingi';
-
-  @override
-  String get shortcutClearKeys => 'Ondoa funguo zote';
 
   @override
   String get shortcutResetAll => 'Weka upya njia zote za mkato';
@@ -9035,10 +8896,6 @@ class AppLocalizationsSw extends AppLocalizations {
   String get closeActionAlways => 'Daima endelea kukimbia kwenye tray';
 
   @override
-  String get closeActionNoTray =>
-      'Trei ya mfumo haipatikani hapa, kwa hivyo programu hujizima ikifungwa';
-
-  @override
   String get gamepadNav => 'Urambazaji wa gamepad';
 
   @override
@@ -9112,9 +8969,6 @@ class AppLocalizationsSw extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Video haziwezi kucheza hadi kichezaji kipakuliwe tena.';
-
-  @override
-  String get trailerLoading => 'Inapakia trela...';
 
   @override
   String get trailerFailed =>

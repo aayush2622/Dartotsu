@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Synchronisation lors du changement",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Connectez-vous avec GitHub",
-    "settingsSyncSignInDesc": "Les paramètres sont stockés dans un fichier privé de votre compte",
     "settingsSyncToken": "Utiliser un jeton d'accès personnel",
     "settingsSyncTokenDesc": "Créez-en un sur github.com/settings/tokens avec uniquement l'autorisation essentielle",
     "settingsSyncTokenField": "Jeton",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Se déconnecter",
-    "settingsSyncCode": "Entrez {code} sur GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "La page GitHub ouverte dans votre navigateur. Appuyez pour copier le code, ou appuyez et maintenez pour annuler.",
     "settingsSyncSignInFailed": "Impossible de se connecter à GitHub",
-    "dcPreview": "Aperçu",
     "dcSampleWatching": "Regarder",
     "dcSampleReading": "Lecture",
     "dcSampleBrowsing": "Navigation",
     "dcSampleLive": "En ce moment",
     "dcLiveNothing": "Rien ne s'affiche pour le moment. Ouvrez un titre, démarrez un épisode ou un chapitre et il apparaît ici.",
     "dcMemberList": "Dans la liste des membres",
-    "dcAccount": "Compte",
-    "dcSignIn": "Connectez-vous avec Discord",
     "dcSignOut": "Se déconnecter",
-    "dcDesktopHint": "Sans connexion, Discord affiche « Watching Dartotsu » via l'application de bureau. Connectez Discord pour nommer l'activité d'après votre titre, y compris sur mobile.",
-    "dcMobileHint": "Connectez Discord pour montrer ce que vous regardez ou lisez. Il utilise la page d'autorisation de Discord, pas le jeton de votre compte.",
     "dcConnect": "Connecter Discorde",
     "dcConnectDesc": "Ouvre la page d'autorisation de Discord et ajoute Dartotsu sous Applications autorisées. Discord demande de mettre à jour votre présence. Seul un jeton d'actualisation est enregistré, pas votre jeton de compte.",
     "dcConnectFailed": "Impossible de connecter Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Jeton de compte",
     "dcInUse": "En cours d'utilisation",
     "dcRecommended": "Recommandé",
-    "dcConnecting": "Connexion…",
-    "dcDisconnected": "Non connecté",
     "dcSignedInAs": "Connecté en tant que {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Supprimer de GitHub",
     "settingsSyncSecretsDeleteMessage": "Cela supprime le fichier de comptes cryptés de votre essence. Les autres appareils conservent leurs connexions et peuvent définir une nouvelle phrase secrète.",
     "settingsSyncWhat": "Quoi synchroniser",
-    "settingsSyncServer": "Sur le serveur",
     "settingsSyncServerEmpty": "Rien de téléchargé pour l'instant",
-    "settingsSyncServerInfo": "Paramètres {count}, téléchargés {time} à partir de {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "cet appareil",
     "settingsSyncCount": "{count, plural, =0{Rien sur le serveur} =1{1 paramètre sur le serveur} other{Paramètres {count} sur le serveur}}",
     "settingsSyncNow": "Synchronisez maintenant",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Échec de la synchronisation : {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Seuls les paramètres qui fonctionnent de la même manière partout sont synchronisés. Les comptes, jetons, dossiers, extensions, notifications, Discord, mises à jour et taille de fenêtre restent sur chaque appareil.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Active la gestion des liens pour que les liens anilist.co ouvrent l'app",
     "linkSettingsFailed": "Impossible d'ouvrir les réglages système",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Affiche ce que tu fais sur ton profil Discord. Nécessite ton token Discord.",
-    "discordRichPresenceDesktopDesc": "Affiche ce que tu fais sur ton profil Discord. Nécessite l'app de bureau Discord lancée.",
     "discordBrowsing": "Afficher l'activité de navigation",
     "discordBrowsingDesc": "Affiche aussi l'onglet, la page ou le profil que tu regardes, pas seulement ce que tu regardes ou lis.",
-    "discordLookHeader": "Apparence de la présence",
     "discordActivityType": "Type d'activité",
     "discordActivityTypeDesc": "Comment Discord l'écrit : « Regarde … » ou « Joue à … ». Auto utilise Regarde pour les animes et Joue à pour le reste.",
     "discordWatching": "Regarde",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Boutons « Voir l'anime / manga » et « Ouvrir Dartotsu ».",
     "discordHideTitles": "Masquer les titres",
     "discordHideTitlesDesc": "Remplace les noms d'animes et de mangas (et leur jaquette et lien) par « Quelque chose de privé ».",
-    "discordConnectionHeader": "Connexion",
     "listSearchHint": "Rechercher dans cette liste",
     "listSort": "Trier",
     "listFilter": "Filtrer",
@@ -671,8 +637,6 @@
     "listNoMatches": "Rien dans cette liste ne correspond",
     "discordLogin": "Se connecter à Discord",
     "discordToken": "Token Discord",
-    "discordTokenSaved": "Enregistré. Appuie pour remplacer, appui long pour supprimer.",
-    "discordTokenNotSet": "Non défini. Appuie pour ajouter.",
     "discordTokenSavedSnack": "Token Discord enregistré",
     "discordTokenRemovedSnack": "Token Discord supprimé",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Garde les titres pour adultes hors des flux et de la recherche, et range tes propres entrées adultes dans Médias masqués.",
     "kitsuAccountOptions": "Options du compte Kitsu",
     "mangaBakaAccountOptions": "Options du compte MangaBaka",
-    "comickAccountOptions": "Options du compte Comick",
     "comickClientId": "ID client Comick",
     "comickClientIdDesc": "ID client personnalisé enregistré sur comick.dev",
     "couldNotUpdateKitsuSettings": "Impossible de mettre à jour tes réglages Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Détails du compte",
     "refreshFromKitsu": "Actualiser depuis Kitsu",
     "simklReadOnly": "Simkl a un accès en lecture seule",
-    "traktReadOnly": "Trakt a obtenu un accès en lecture seule",
     "incognitoEditsBlocked": "Incognito : les modifs de liste sont bloquées",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Incognito : progression non enregistrée",
@@ -786,7 +748,6 @@
     "mangaCredits": "Crédits manga",
     "mainProductions": "Productions principales",
     "otherWorks": "Autres travaux",
-    "prequelSequel": "Préquelle & suite",
     "prequel": "Préquelle",
     "sequel": "Suite",
     "previousSeason": "Saison précédente",
@@ -833,10 +794,7 @@
     "addToList": "Ajouter à la liste",
     "trailer": "Bande-annonce",
     "trailerQuality": "Qualité de la remorque",
-    "titleCopied": "Titre copié",
     "linkCopied": "Lien copié",
-    "watchTrailer": "Voir la bande-annonce",
-    "copyTitle": "Copier le titre",
     "detailStale": "AniList n'a pas pu être atteint. Il s’agit d’informations enregistrées et peuvent être obsolètes.",
     "copyLink": "Copier le lien",
     "openInBrowser": "Ouvrir dans le navigateur",
@@ -1139,7 +1097,6 @@
     "import": "Importer",
     "animeCount": "{count} animes",
     "mangaCount": "{count} mangas",
-    "chooseSaveLocation": "Choisis où enregistrer la sauvegarde",
     "savedPath": "{path} enregistré",
     "exportFailed": "Échec de l'export : {error}",
     "nothingInLocalLists": "Rien dans tes listes locales pour l'instant.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Erreur à l'ouverture du lien : {error}",
     "linkCantBeOpened": "Ce lien ne peut pas être ouvert : {link}",
     "linkOpenError": "Erreur à l'ouverture du lien : {error}",
-    "forReleasingTitles": "pour les titres actuellement en cours de diffusion",
     "progress": "Progression",
     "notes": "Remarques",
     "serviceNotFound": "Service « {id} » introuvable",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} n'est pas disponible dans le dépôt configuré",
     "pluginFetchFailed": "Impossible de récupérer les infos du plugin",
     "installPluginTitle": "Installer {name}",
-    "sizeLabel": "Taille : {size}",
     "installedState": "Installé",
     "updatePluginTitle": "Mettre à jour {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Récupère et synchronise en arrière-plan à l'ouverture de l'app et toutes les 30 minutes",
     "syncAddMissing": "Ajouter les entrées manquantes",
     "syncAddMissingDesc": "Ajoute aussi les entrées que l'autre service n'a pas encore",
-    "syncServiceOn": "Synchroniser avec {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Supprimez ce que le service principal n'a pas",
     "syncDeleteDesc": "Supprimez les entrées des autres services qui ne figurent pas sur la liste principale. Seules les entrées pouvant être associées à un titre sont supprimées, de sorte que les éléments tels que les films et séries Simkl restent",
     "syncDeleteTitle": "Supprimer des entrées ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Supprimer",
     "syncToDelete": "Pour supprimer",
     "syncDeletedNote": "Sera supprimé",
-    "syncWillRemove": "{count} sera supprimé de {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Garder la progression avancée",
     "syncOnlyForwardDesc": "Ne baisse pas la progression d'un service déjà en avance",
     "animePlanetWontWatch": "Je ne regarderai pas",
     "animePlanetWontRead": "Je ne lirai pas",
-    "animePlanetAlreadyOnList": "Déjà sur cette liste",
     "animePlanetNewList": "Nouveau nom de liste",
     "syncPrivate": "Entrées privées",
     "syncPrivateDesc": "Que faire des entrées que vous gardez privées. Un service avec une option privée les rend privés ; d'autres les montreraient publiquement",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "L'autorisation a été obtenue auprès d'un autre agent utilisateur, elle n'est donc pas envoyée. Testez la connexion pour en obtenir une nouvelle",
-    "watchSectionConnection": "Connexion",
     "watchSectionSession": "Séance",
     "watchSectionTools": "Outils",
     "watchMetaSource": "Détails des épisodes depuis",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Télécharger quel flux ?",
     "downloadPickSubtitle": "Télécharger quels sous-titres ?",
     "downloadPickAudio": "Télécharger quelle piste audio ?",
-    "downloadNoAudio": "Pas d'audio en plus",
     "downloadAudio": "Audio",
-    "downloadNoSubtitle": "Pas de sous-titres",
     "downloadHlsNeedsFfmpeg": "Ce flux est une playlist HLS. Pour la télécharger, il faut l'addon FFmpeg.",
     "downloadSourceMissing": "La source de cet épisode n'est pas installée",
     "downloadDashDrm": "Ce flux est protégé par DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Langage et comportement",
     "generalSectionSecurity": "Sécurité",
     "generalSectionPrivacy": "Confidentialité",
-    "notificationsOtherService": "Passez à {service} pour ouvrir ceci",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Vitesse par défaut, lecture automatique, ajustement vidéo, orientation et image dans l'image",
     "secPlayerSkip": "Sauter automatiquement les ouvertures, les fins et les récapitulations",
     "secPlayerControls": "Faites glisser, maintenez et appuyez sur les gestes et recherchez un aperçu",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "En attente",
     "stepChecking": "Vérification…",
     "stepUpToDate": "À jour",
     "stepUpToDateWith": "À jour · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Mangas",
     "readerCloudflare": "Ouvrir dans le navigateur (vérification Cloudflare)",
     "badgeBoardHint": "Faites glisser un badge sur un coin de la première carte ou faites glisser un badge déjà présent pour le déplacer. Les badges échangent leurs places, donc aucun ne se chevauche. Appuyez sur un badge ci-dessous pour l'activer ou le désactiver.",
-    "statusAuto": "Automatique",
     "unreadCounter": "Compteur non lu",
-    "unreadCounterDesc": "Montrez combien d'épisodes ou de chapitres restent sur les affiches",
     "settingsShortcuts": "Raccourcis clavier",
     "settingsShortcutsDesc": "Voir, modifier et éteindre chaque clé",
     "shortcutGroupApp": "Application",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Non défini",
     "shortcutAddKey": "Ajouter une clé",
     "shortcutResetOne": "Réinitialiser aux valeurs par défaut",
-    "shortcutClearKeys": "Supprimer toutes les clés",
     "shortcutResetAll": "Réinitialiser tous les raccourcis",
     "shortcutResetAllDesc": "Remettez chaque clé à sa valeur par défaut",
     "shortcutPress": "Appuyez sur la touche ou la combinaison souhaitée",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Quittez l'application",
     "closeActionWhenBusy": "Continuez à courir dans le bac pendant que quelque chose est en cours d'exécution",
     "closeActionAlways": "Continuez toujours à courir dans le bac",
-    "closeActionNoTray": "La barre d'état système n'est pas disponible ici, donc l'application se ferme une fois fermée",
     "gamepadNav": "Navigation avec la manette de jeu",
     "gamepadNavDesc": "Déplacez-vous dans l'application et contrôlez le joueur avec un contrôleur de jeu",
     "trayShow": "Montrer le Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Copier les détails",
     "removePlayerTitle": "Supprimer le lecteur ?",
     "removePlayerMessage": "Les vidéos ne peuvent pas être lues tant que le lecteur n'est pas téléchargé à nouveau.",
-    "trailerLoading": "Chargement de la remorque…",
     "trailerFailed": "Impossible de lire la bande-annonce ici, en l'ouvrant dans le navigateur"
 }

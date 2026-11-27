@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Isku hagaaji isbeddelka",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Ku soo gal GitHub",
-    "settingsSyncSignInDesc": "Dejinta waxaa lagu kaydiyaa qoraal gaar ah oo ku jira akoonkaaga",
     "settingsSyncToken": "Isticmaal calaamad gelitaanka shakhsi ahaaneed",
     "settingsSyncTokenDesc": "Mid ka samee github.com/settings/tokens adiga oo haysta ogolaanshaha gunta oo kaliya",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Saxiix",
-    "settingsSyncCode": "Geli {code} GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Bogga GitHub ayaa ka furmay biraawsarkaaga. Taabo si aad koodhka koobiyayso, ama taabo oo hayso si aad u tirtirto.",
     "settingsSyncSignInFailed": "Ma soo geli karo GitHub",
-    "dcPreview": "Horudhac",
     "dcSampleWatching": "Daawashada",
     "dcSampleReading": "Akhriska",
     "dcSampleBrowsing": "Daalacashada",
     "dcSampleLive": "Hadda",
     "dcLiveNothing": "Ma jiraan wax muuqda hadda Fur ciwaan, bilow dhacdo ama cutub wayna ka muuqataa halkan.",
     "dcMemberList": "Liiska xubnaha",
-    "dcAccount": "Xisaab",
-    "dcSignIn": "Ku soo gal Discord",
     "dcSignOut": "Saxiix",
-    "dcDesktopHint": "Iyadoo aan la xidhin, Discord waxay ku tusinaysaa \"Daawashada Dartotsu\" iyada oo loo marayo abka miiska. Connect Discord si aad hawsha ugu magacowdo ciwaankaga, ay ku jirto mobaylka.",
-    "dcMobileHint": "Connect Discord si aad u muujiso waxaad daawanayso ama akhrinayso. Waxay adeegsataa bogga oggolaanshaha Discord, ee maaha calaamada akoonkaaga.",
     "dcConnect": "Isku xirka Discord",
     "dcConnectDesc": "Fura bogga oggolaanshaha Discord oo ku dara Dartotsu hoosta Apps Idman. Discord waxay ku weyddiistaa inay cusboonaysiiso joogitaankaaga. Kaliya calaamad cusub ayaa la kaydiyay, maaha calaamada akoonkaaga.",
     "dcConnectFailed": "Lama xiriirin karo Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Calaamada xisaabta",
     "dcInUse": "La isticmaalo",
     "dcRecommended": "lagu taliyay",
-    "dcConnecting": "Isku xidhka…",
-    "dcDisconnected": "Ma xidhna",
     "dcSignedInAs": "U soo galay sida {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Ka tirtir GitHub",
     "settingsSyncSecretsDeleteMessage": "Tani waxay ka saartaa faylka xisaabtaada sirta ah. Aaladaha kale waxay xafidaan soo gelitaankooda waxayna dejin karaan jumlad sir ah oo cusub.",
     "settingsSyncWhat": "Maxaa la isku waafajiyaa",
-    "settingsSyncServer": "On server-ka",
     "settingsSyncServerEmpty": "Wax wali lama soo galin",
-    "settingsSyncServerInfo": "{count}, laga soo raray {time} {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "qalabkan",
     "settingsSyncCount": "{count, plural, =0{Ma jiraan wax ku jira server-ka} =1{1 dejinta on server-ka} other{{count} dejinta server-ka}}",
     "settingsSyncNow": "Isku xidh hadda",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Isku xidhka ayaa fashilmay: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Keliya goobaha ku shaqeeya meel kasta waa la isku dhejiyay. Xisaabaadka, calaamadaha, faylalka, kordhinta, ogaysiisyada, Discord, cusboonaysiinta iyo cabbirka daaqada waxay ku sii sugnaan doonaan qalab kasta.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Shid maamulka xiriiriyeyaasha si xiriiriyeyaasha anilist.co app-ka u furaan",
     "linkSettingsFailed": "Dejimaha nidaamka lama furi karo",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay token-kaaga Discord.",
-    "discordRichPresenceDesktopDesc": "Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay app-ka Discord ee kombuyuutarka oo socda.",
     "discordBrowsing": "Muuji dhaqdhaqaaqa baadhista",
     "discordBrowsingDesc": "Muuji sidoo kale tab-ka, bogga ama profile-ka aad eegayso, ma aha oo kaliya waxa aad daawato ama akhrido.",
-    "discordLookHeader": "Muuqaalka presence-ka",
     "discordActivityType": "Nooca dhaqdhaqaaqa",
     "discordActivityTypeDesc": "Sida Discord u qorto: \"Watching …\" ama \"Playing …\". Toos waxay u isticmaashaa Watching anime iyo Playing wax kasta oo kale.",
     "discordWatching": "Daawashada",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Badhamada \"View anime / manga\" iyo \"Open Dartotsu\".",
     "discordHideTitles": "Qari ciwaannada",
     "discordHideTitlesDesc": "Ku beddel magacyada anime iyo manga (iyo daboolkooda iyo xiriirkooda) \"Something private\".",
-    "discordConnectionHeader": "Xiriir",
     "listSearchHint": "Raadi liiskan",
     "listSort": "Kala sooc",
     "listFilter": "Shaandhee",
@@ -671,8 +637,6 @@
     "listNoMatches": "Liiskan waxba ma ku habboona",
     "discordLogin": "Ku gal Discord",
     "discordToken": "Token-ka Discord",
-    "discordTokenSaved": "La kaydiyay. Taabo si aad u bedesho, dheer taabo si aad u saarto.",
-    "discordTokenNotSet": "Lama dejin. Taabo si aad ugu darto.",
     "discordTokenSavedSnack": "Token-ka Discord waa la keydiyay",
     "discordTokenRemovedSnack": "Token-ka Discord waa la saaray",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Ka ilaali ciwaannada qaangaarka ah feed-ka iyo raadinta, oo liisgareey gelitaannadaada qaangaarka ah hoos Warbaahinta La Qariyay.",
     "kitsuAccountOptions": "Ikhtiyaarrada akoonka Kitsu",
     "mangaBakaAccountOptions": "Doorashooyinka akoonka MangaBaka",
-    "comickAccountOptions": "Ikhtiyaarada koontada Comick",
     "comickClientId": "Aqoonsiga Macmiilka ee Comick",
     "comickClientIdDesc": "Aqoonsiga macmiilka gaarka ah ee ka diiwaan gashan comick.dev",
     "couldNotUpdateKitsuSettings": "Dejimaha Kitsu lama cusboonaysiin karin",
@@ -761,7 +724,6 @@
     "accountDetails": "Faahfaahinta akoonka",
     "refreshFromKitsu": "Ka cusboonaysii Kitsu",
     "simklReadOnly": "Simkl waxaa la siiyay gelitaan akhris-kaliya ah",
-    "traktReadOnly": "Trakt waxa la siiyay marin-akhris-kaliya",
     "incognitoEditsBlocked": "Qarsoodi: wax-ka-bedelka liiska waa la xannibay",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Qarsoodi: horumarka lama keydin",
@@ -786,7 +748,6 @@
     "mangaCredits": "Shaqooyinka manga",
     "mainProductions": "Wax-soo-saarka ugu muhiimsan",
     "otherWorks": "Shaqooyin kale",
-    "prequelSequel": "Hore & Xiga",
     "prequel": "Hordhac",
     "sequel": "Taxane",
     "previousSeason": "Xilli hore",
@@ -833,10 +794,7 @@
     "addToList": "Ku dar liiska",
     "trailer": "Trailer",
     "trailerQuality": "Tayada filimka",
-    "titleCopied": "Ciwaanka waa la koobiyay",
     "linkCopied": "Xiriirka waa la koobiyay",
-    "watchTrailer": "Daawo trailer-ka",
-    "copyTitle": "Koobi ciwaanka",
     "detailStale": "AniList lama heli karo Tani waa macluumaadka la keydiyay waxaana laga yaabaa inay duugowday.",
     "copyLink": "Koobi xiriirka",
     "openInBrowser": "Ku fur browser-ka",
@@ -1139,7 +1097,6 @@
     "import": "Soo geli",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Dooro halka kaydka lagu keydinayo",
     "savedPath": "Waxaa la keydiyay {path}",
     "exportFailed": "Dhoofintu way fashilantay: {error}",
     "nothingInLocalLists": "Liisaskaaga gudaha waxba ma jiraan.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Cilad furista xiriirka: {error}",
     "linkCantBeOpened": "Xiriirkan lama furi karo: {link}",
     "linkOpenError": "Cilad furista xiriirka: {error}",
-    "forReleasingTitles": "ciwaannada hadda la sii daynayo",
     "progress": "Horumar",
     "notes": "Qoraallo",
     "serviceNotFound": "Adeegga \"{id}\" lama helin",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} kaydka la habeeyay kuma jiro",
     "pluginFetchFailed": "Macluumaadka plugin-ka lama keeni karin",
     "installPluginTitle": "Rakib {name}",
-    "sizeLabel": "Cabbirka: {size}",
     "installedState": "La rakibay",
     "updatePluginTitle": "Cusbooneysii {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Soo qaad oo isku waafaji gadaasha marka app-ku furmo iyo 30 daqiiqo kasta",
     "syncAddMissing": "Ku dar gelitaannada maqan",
     "syncAddMissingDesc": "Ku dar sidoo kale gelitaannada adeegga kale aanu weli lahayn",
-    "syncServiceOn": "Ku xidh {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Tirtir waxa aanu lahayn adeegga ugu muhiimsan",
     "syncDeleteDesc": "Ka saar gelinta adeegyada kale ee aan ku jirin liiska ugu muhiimsan. Keliya waxa la geliyaa ee la mid ah ciwaanka ayaa meesha laga saaray, si ay waxyaabaha ay ka midka yihiin filimada Simkl iyo taxanaha sii joogaan",
     "syncDeleteTitle": "Tir tir gelinta?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Tirtir",
     "syncToDelete": "Si loo tirtiro",
     "syncDeletedNote": "Waa la tirtiri doonaa",
-    "syncWillRemove": "{count} waa laga tirtiri doonaa {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Ilaali horumarka sii fog",
     "syncOnlyForwardDesc": "Ha yareynin horumarka adeeg hore u sii socda",
     "animePlanetWontWatch": "Ma daawan doono",
     "animePlanetWontRead": "Ma akhrin doono",
-    "animePlanetAlreadyOnList": "Durba liiskan",
     "animePlanetNewList": "Magaca liiska cusub",
     "syncPrivate": "Gelida gaarka ah",
     "syncPrivateDesc": "Waxa aad ku samaynayso qoraalada aad si gaar ah u ilaaliso. Adeeg leh ikhtiyaar gaar ah ayaa ka dhigaya kuwo gaar ah; qaar kalena si cad ayay u tusi lahaayeen",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Ogolaanshaha waxaa lagu kasbaday wakiilka isticmaale kale, markaa lama dirin. Tijaabi xidhiidhka si aad mid cusub u hesho",
-    "watchSectionConnection": "Isku xirka",
     "watchSectionSession": "Casharka",
     "watchSectionTools": "Qalabka",
     "watchMetaSource": "Faahfaahinta dhacdada ka timid",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Stream kee la soo dejiyaa?",
     "downloadPickSubtitle": "Tarjumaad kee la soo dejiyaa?",
     "downloadPickAudio": "Cod kee la soo dejiyaa?",
-    "downloadNoAudio": "Cod dheeraad ah ma jiro",
     "downloadAudio": "Cod",
-    "downloadNoSubtitle": "Tarjumaad ma jirto",
     "downloadHlsNeedsFfmpeg": "Stream-kani waa playlist HLS ah. Soo dejintiisu waxay u baahan tahay kordhinta FFmpeg.",
     "downloadSourceMissing": "Isha dhacdadan lama rakibin",
     "downloadDashDrm": "Socodkan waa la ilaaliyay DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Luuqadda & dhaqanka",
     "generalSectionSecurity": "Amniga",
     "generalSectionPrivacy": "Qarsoodi",
-    "notificationsOtherService": "U beddel {service} si aad tan u furto",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Xawaaraha caadiga ah, ciyaarta tooska ah, fiidyaha ku haboon, hanuuninta iyo sawirka sawirka",
     "secPlayerSkip": "Si otomaatig ah uga bood furitaanka, dhammaadka iyo soo koobida",
     "secPlayerControls": "Tuur, qabo oo taabo dhaqdhaqaaqyada oo raadi dulmar",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Sugitaanka",
     "stepChecking": "Hubinta…",
     "stepUpToDate": "Ilaa hadda",
     "stepUpToDateWith": "Ilaa hadda · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Ku fur browserka (Cloudflare check)",
     "badgeBoardHint": "Ku jiid calaamad gees ka mid ah kaadhka koowaad, ama ku jiid calaamad hore si aad u dhaqaajiso. Calaamaduhu way beddelaan meelo, si aan midna waligiis isu dulmarin. Taabo calaamada hoose si aad u damiso ama u damiso",
-    "statusAuto": "Baabuur",
     "unreadCounter": "Miisaanka aan la akhriyin",
-    "unreadCounterDesc": "Muuji inta qaybood ama cutubyada ku hadhay boodhadhka",
     "settingsShortcuts": "Gaabyada kiiboodhka",
     "settingsShortcutsDesc": "Eeg, beddel oo dami fure kasta",
     "shortcutGroupApp": "App-ka",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Lama dejin",
     "shortcutAddKey": "Ku dar furaha",
     "shortcutResetOne": "Dib u deji si aan caadi ahayn",
-    "shortcutClearKeys": "Ka saar dhammaan furayaasha",
     "shortcutResetAll": "Dib u habayn dhammaan jid-gooyooyinka",
     "shortcutResetAllDesc": "Fure kasta dib ugu celi asligiisii",
     "shortcutPress": "Riix furaha ama isku dhafka aad rabto",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Jooji abka",
     "closeActionWhenBusy": "Ku dhex orod saxaaradda inta ay wax socdaan",
     "closeActionAlways": "Had iyo jeer ku sii ordi saxanka",
-    "closeActionNoTray": "Saxanka nidaamka halkan lagama heli karo, marka abka wuu joogsadaa marka la xidho",
     "gamepadNav": "Gamepad navigation",
     "gamepadNavDesc": "Ku wareeg abka oo ku maamul ciyaartoyga leh koontaroolaha ciyaarta",
     "trayShow": "Muuji Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Koobi faahfaahinta",
     "removePlayerTitle": "Ka saar ciyaaryahanka?",
     "removePlayerMessage": "Fiidiyowyadu ma ciyaari karaan ilaa ciyaaryahanka mar kale la soo dejiyo.",
-    "trailerLoading": "Soo raraysa trailer-ka…",
     "trailerFailed": "Ma awoodin in uu ku ciyaaro trailer-ka halkan, isaga oo ka furay browserka"
 }

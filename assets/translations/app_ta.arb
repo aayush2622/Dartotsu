@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "மாற்றத்தில் ஒத்திசைக்கவும்",
     "settingsSyncModeGithub": "கிட்ஹப்",
     "settingsSyncSignIn": "GitHub மூலம் உள்நுழையவும்",
-    "settingsSyncSignInDesc": "அமைப்புகள் உங்கள் கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்",
     "settingsSyncToken": "தனிப்பட்ட அணுகல் டோக்கனைப் பயன்படுத்தவும்",
     "settingsSyncTokenDesc": "github.com/settings/tokens இல் சாராம்ச அனுமதியுடன் ஒன்றை உருவாக்கவும்",
     "settingsSyncTokenField": "டோக்கன்",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "வெளியேறு",
-    "settingsSyncCode": "GitHub இல் {code} ஐ உள்ளிடவும்",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "உங்கள் உலாவியில் GitHub பக்கம் திறக்கப்பட்டது. குறியீட்டை நகலெடுக்க தட்டவும் அல்லது ரத்துசெய்ய தட்டிப் பிடிக்கவும்.",
     "settingsSyncSignInFailed": "GitHub இல் உள்நுழைய முடியவில்லை",
-    "dcPreview": "முன்னோட்டம்",
     "dcSampleWatching": "பார்க்கிறேன்",
     "dcSampleReading": "படித்தல்",
     "dcSampleBrowsing": "உலாவுதல்",
     "dcSampleLive": "இப்போதே",
     "dcLiveNothing": "இப்போது எதுவும் காட்டப்படவில்லை. தலைப்பைத் திறக்கவும், ஒரு அத்தியாயம் அல்லது அத்தியாயத்தைத் தொடங்கவும், அது இங்கே தோன்றும்.",
     "dcMemberList": "உறுப்பினர் பட்டியலில்",
-    "dcAccount": "கணக்கு",
-    "dcSignIn": "டிஸ்கார்ட் மூலம் உள்நுழையவும்",
     "dcSignOut": "வெளியேறு",
-    "dcDesktopHint": "இணைக்காமல், டெஸ்க்டாப் பயன்பாட்டின் மூலம் டிஸ்கார்ட் “டார்டோட்சுவைப் பார்ப்பது” என்பதைக் காட்டுகிறது. மொபைல் உட்பட, உங்கள் தலைப்பின் பெயரைச் செயல்படுத்த டிஸ்கார்டை இணைக்கவும்.",
-    "dcMobileHint": "நீங்கள் எதைப் பார்க்கிறீர்கள் அல்லது படிக்கிறீர்கள் என்பதைக் காட்ட டிஸ்கார்டை இணைக்கவும். இது டிஸ்கார்டின் அங்கீகரிக்கப்பட்ட பக்கத்தைப் பயன்படுத்துகிறது, உங்கள் கணக்கு டோக்கனை அல்ல.",
     "dcConnect": "டிஸ்கார்டை இணைக்கவும்",
     "dcConnectDesc": "டிஸ்கார்டின் அங்கீகரிக்கப்பட்ட பக்கத்தைத் திறந்து, அங்கீகரிக்கப்பட்ட பயன்பாடுகளின் கீழ் டார்டோட்சுவைச் சேர்க்கிறது. உங்கள் இருப்பைப் புதுப்பிக்க டிஸ்கார்ட் கேட்கிறது. புதுப்பிப்பு டோக்கன் மட்டுமே சேமிக்கப்படும், உங்கள் கணக்கு டோக்கன் அல்ல.",
     "dcConnectFailed": "டிஸ்கார்டை இணைக்க முடியவில்லை",
@@ -254,8 +241,6 @@
     "dcMethodToken": "கணக்கு டோக்கன்",
     "dcInUse": "பயன்பாட்டில் உள்ளது",
     "dcRecommended": "பரிந்துரைக்கப்படுகிறது",
-    "dcConnecting": "இணைக்கிறது…",
-    "dcDisconnected": "இணைக்கப்படவில்லை",
     "dcSignedInAs": "{name} ஆக உள்நுழைந்துள்ளீர்கள்",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub இலிருந்து நீக்கு",
     "settingsSyncSecretsDeleteMessage": "இது மறைகுறியாக்கப்பட்ட கணக்குக் கோப்பை உங்கள் சுருக்கத்திலிருந்து நீக்குகிறது. பிற சாதனங்கள் தங்கள் உள்நுழைவுகளை வைத்து புதிய கடவுச்சொற்றொடரை அமைக்கலாம்.",
     "settingsSyncWhat": "எதை ஒத்திசைக்க வேண்டும்",
-    "settingsSyncServer": "சர்வரில்",
     "settingsSyncServerEmpty": "இன்னும் எதுவும் பதிவேற்றப்படவில்லை",
-    "settingsSyncServerInfo": "{count} அமைப்புகள், {device} இலிருந்து {time} பதிவேற்றப்பட்டது",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "இந்த சாதனம்",
     "settingsSyncCount": "{count, plural, =0{சர்வரில் எதுவும் இல்லை} =1{சேவையகத்தில் 1 அமைப்பு} other{சேவையகத்தில் {count} அமைப்புகள்}}",
     "settingsSyncNow": "இப்போது ஒத்திசைக்கவும்",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "ஒத்திசைவு தோல்வியடைந்தது: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "எல்லா இடங்களிலும் ஒரே மாதிரியாக செயல்படும் அமைப்புகள் மட்டுமே ஒத்திசைக்கப்படும். கணக்குகள், டோக்கன்கள், கோப்புறைகள், நீட்டிப்புகள், அறிவிப்புகள், டிஸ்கார்ட், புதுப்பிப்புகள் மற்றும் சாளர அளவு ஆகியவை ஒவ்வொரு சாதனத்திலும் இருக்கும்.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co லிங்க்ஸ் ஆப்பை திறக்க லிங்க் ஹேண்ட்லிங் ஆன் பண்ணு",
     "linkSettingsFailed": "சிஸ்டம் செட்டிங்ஸை திறக்க முடியல",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. உன் Discord டோக்கன் வேணும்.",
-    "discordRichPresenceDesktopDesc": "நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. Discord டெஸ்க்டாப் ஆப் ஓடிட்டு இருக்கணும்.",
     "discordBrowsing": "பிரவுசிங் ஆக்டிவிட்டியை காட்டு",
     "discordBrowsingDesc": "நீ பாக்குற/படிக்கிறது மட்டும் இல்லாம, நீ பாக்கற டேப், பேஜ் அல்லது ப்ரொஃபைலையும் காட்டு.",
-    "discordLookHeader": "பிரசென்ஸ் லுக்",
     "discordActivityType": "ஆக்டிவிட்டி டைப்",
     "discordActivityTypeDesc": "Discord அதை எப்படி எழுதும்னு: \"Watching …\" அல்லது \"Playing …\". ஆட்டோ அனிமேக்கு Watching, மத்ததுக்கு Playing யூஸ் பண்ணும்.",
     "discordWatching": "பார்க்கிறேன்",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"View anime / manga\" & \"Open Dartotsu\" பட்டன்ஸ்.",
     "discordHideTitles": "டைட்டில்ஸை மறை",
     "discordHideTitlesDesc": "அனிமே & மங்கா பேரை (அதோட கவர் & லிங்க் உட்பட) \"Something private\"-னு மாத்து.",
-    "discordConnectionHeader": "கனெக்ஷன்",
     "listSearchHint": "இந்த லிஸ்ட்ல தேடு",
     "listSort": "சார்ட்",
     "listFilter": "ஃபில்டர்",
@@ -671,8 +637,6 @@
     "listNoMatches": "இந்த லிஸ்ட்ல எதுவும் மேட்ச் ஆகல",
     "discordLogin": "Discord-ல லாகின் பண்ணு",
     "discordToken": "Discord டோக்கன்",
-    "discordTokenSaved": "சேவ் ஆயிடுச்சு. மாத்த டேப் பண்ணு, நீக்க லாங் பிரஸ் பண்ணு.",
-    "discordTokenNotSet": "செட் பண்ணல. சேர்க்க டேப் பண்ணு.",
     "discordTokenSavedSnack": "Discord டோக்கன் சேவ் ஆயிடுச்சு",
     "discordTokenRemovedSnack": "Discord டோக்கன் நீக்கப்பட்டுச்சு",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "அடல்ட் டைட்டில்ஸை ஃபீட் & சர்ச்ல இருந்து விலக்கி, உன் சொந்த அடல்ட் என்ட்ரிகளை Hidden Media-ல லிஸ்ட் பண்ணு.",
     "kitsuAccountOptions": "Kitsu அக்கவுண்ட் ஆப்ஷன்ஸ்",
     "mangaBakaAccountOptions": "MangaBaka அக்கவுண்ட் விருப்பங்கள்",
-    "comickAccountOptions": "காமிக் கணக்கு விருப்பங்கள்",
     "comickClientId": "காமிக் கிளையண்ட் ஐடி",
     "comickClientIdDesc": "comick.dev இல் பதிவுசெய்யப்பட்ட தனிப்பயன் கிளையன்ட் ஐடி",
     "couldNotUpdateKitsuSettings": "உன் Kitsu செட்டிங்ஸை அப்டேட் பண்ண முடியல",
@@ -761,7 +724,6 @@
     "accountDetails": "அக்கவுண்ட் டிடெயில்ஸ்",
     "refreshFromKitsu": "Kitsu-ல இருந்து ரெஃப்ரெஷ் பண்ணு",
     "simklReadOnly": "Simkl-க்கு ரீட்-ஒன்லி அக்சஸ் கிடைச்சிருக்கு",
-    "traktReadOnly": "டிராக்ட்டுக்கு படிக்க மட்டும் அணுகல் வழங்கப்பட்டது",
     "incognitoEditsBlocked": "இன்காக்னிட்டோ: லிஸ்ட் எடிட்ஸ் பிளாக் ஆகுது",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "இன்காக்னிட்டோ: புரோகிரஸ் சேவ் ஆகல",
@@ -786,7 +748,6 @@
     "mangaCredits": "மங்கா கிரெடிட்ஸ்",
     "mainProductions": "மெயின் புரொடக்ஷன்ஸ்",
     "otherWorks": "மத்த வொர்க்ஸ்",
-    "prequelSequel": "ப்ரீக்வல் & சீக்வல்",
     "prequel": "முன்னுரை",
     "sequel": "தொடர்ச்சி",
     "previousSeason": "முந்தின சீசன்",
@@ -833,10 +794,7 @@
     "addToList": "லிஸ்ட்ல சேர்",
     "trailer": "டிரெய்லர்",
     "trailerQuality": "டிரெய்லர் தரம்",
-    "titleCopied": "டைட்டில் காப்பி ஆயிடுச்சு",
     "linkCopied": "லிங்க் காப்பி ஆயிடுச்சு",
-    "watchTrailer": "டிரெய்லர் பாரு",
-    "copyTitle": "டைட்டிலை காப்பி பண்ணு",
     "detailStale": "அனிலிஸ்ட்டை அடைய முடியவில்லை. இது சேமிக்கப்பட்ட தகவல் மற்றும் காலாவதியானதாக இருக்கலாம்.",
     "copyLink": "லிங்க்கை காப்பி பண்ணு",
     "openInBrowser": "பிரவுசர்ல திற",
@@ -1139,7 +1097,6 @@
     "import": "இம்போர்ட்",
     "animeCount": "{count} அனிமே",
     "mangaCount": "{count} மங்கா",
-    "chooseSaveLocation": "பேக்கப்பை எங்க சேவ் பண்ணணும்னு தேர்ந்தெடு",
     "savedPath": "{path} சேவ் ஆயிடுச்சு",
     "exportFailed": "எக்ஸ்போர்ட் ஃபெயில் ஆயிடுச்சு: {error}",
     "nothingInLocalLists": "உன் லோக்கல் லிஸ்ட்ஸ்ல இன்னும் எதுவும் இல்ல.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "லிங்க் திறக்க எரர்: {error}",
     "linkCantBeOpened": "இந்த லிங்கை திறக்க முடியல: {link}",
     "linkOpenError": "லிங்க் திறக்க எரர்: {error}",
-    "forReleasingTitles": "இப்போ ரிலீஸ் ஆகிட்டு இருக்க டைட்டில்ஸுக்கு",
     "progress": "புரோகிரஸ்",
     "notes": "நோட்ஸ்",
     "serviceNotFound": "\"{id}\" சர்வீஸ் கிடைக்கல",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} கான்ஃபிகர் பண்ண ரெப்போல கிடைக்கல",
     "pluginFetchFailed": "பிளகின் இன்ஃபோவை எடுக்க முடியல",
     "installPluginTitle": "{name}-ஐ இன்ஸ்டால் பண்ணு",
-    "sizeLabel": "சைஸ்: {size}",
     "installedState": "இன்ஸ்டால் ஆனது",
     "updatePluginTitle": "புதுப்பி {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ஆப் திறக்கும்போதும் ஒவ்வொரு 30 நிமிஷத்துக்கும் பேக்ரவுண்ட்ல ஃபெட்ச் & சிங்க் பண்ணு",
     "syncAddMissing": "விடுபட்ட என்ட்ரிஸை சேர்",
     "syncAddMissingDesc": "மத்த சர்வீஸ்ல இல்லாத என்ட்ரிஸையும் சேர்",
-    "syncServiceOn": "{name} உடன் ஒத்திசை",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "பிரதான சேவையில் இல்லாததை நீக்கவும்",
     "syncDeleteDesc": "முக்கிய பட்டியலில் இல்லாத பிற சேவைகளிலிருந்து உள்ளீடுகளை அகற்றவும். தலைப்புடன் பொருந்தக்கூடிய உள்ளீடுகள் மட்டுமே அகற்றப்படும், எனவே Simkl திரைப்படங்கள் மற்றும் தொடர்கள் போன்றவை அப்படியே இருக்கும்",
     "syncDeleteTitle": "உள்ளீடுகளை நீக்கவா?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "நீக்கு",
     "syncToDelete": "நீக்குவதற்கு",
     "syncDeletedNote": "நீக்கப்படும்",
-    "syncWillRemove": "{name} இலிருந்து {count} நீக்கப்படும்",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "முன்னாடி இருக்க புரோகிரஸை வச்சுக்கோ",
     "syncOnlyForwardDesc": "ஏற்கனவே முன்னாடி இருக்க சர்வீஸோட புரோகிரஸை குறைக்காத",
     "animePlanetWontWatch": "பார்க்க மாட்டேன்",
     "animePlanetWontRead": "படிக்க மாட்டேன்",
-    "animePlanetAlreadyOnList": "ஏற்கனவே இந்த பட்டியலில் உள்ளது",
     "animePlanetNewList": "புதிய பட்டியல் பெயர்",
     "syncPrivate": "தனிப்பட்ட உள்ளீடுகள்",
     "syncPrivateDesc": "நீங்கள் தனிப்பட்ட முறையில் வைத்திருக்கும் உள்ளீடுகளை என்ன செய்வது. ஒரு தனிப்பட்ட விருப்பத்துடன் ஒரு சேவை அவர்களை தனிப்பட்டதாக பெறுகிறது; மற்றவர்கள் அவற்றை பொதுவில் காட்டுவார்கள்",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "மற்றொரு பயனர் முகவர் மூலம் அனுமதி பெறப்பட்டது, எனவே அது அனுப்பப்படவில்லை. புதிய ஒன்றைப் பெற இணைப்பைச் சோதிக்கவும்",
-    "watchSectionConnection": "இணைப்பு",
     "watchSectionSession": "அமர்வு",
     "watchSectionTools": "கருவிகள்",
     "watchMetaSource": "எபிசோட் டிடெயில்ஸ் எங்க இருந்து",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "எந்த ஸ்ட்ரீமை டவுன்லோட் பண்ணணும்?",
     "downloadPickSubtitle": "எந்த சப்டைட்டிலை டவுன்லோட் பண்ணணும்?",
     "downloadPickAudio": "எந்த ஆடியோ டிராக்கை டவுன்லோட் பண்ணணும்?",
-    "downloadNoAudio": "எக்ஸ்ட்ரா ஆடியோ இல்ல",
     "downloadAudio": "ஆடியோ",
-    "downloadNoSubtitle": "சப்டைட்டில் இல்ல",
     "downloadHlsNeedsFfmpeg": "இந்த ஸ்ட்ரீம் ஒரு HLS பிளேலிஸ்ட். இதை டவுன்லோட் பண்ண FFmpeg ஆட்-ஆன் வேணும்.",
     "downloadSourceMissing": "இந்த எபிசோடோட சோர்ஸ் இன்ஸ்டால் ஆகல",
     "downloadDashDrm": "இந்த ஸ்ட்ரீம் DRM பாதுகாக்கப்பட்டுள்ளது",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "மொழி மற்றும் நடத்தை",
     "generalSectionSecurity": "பாதுகாப்பு",
     "generalSectionPrivacy": "தனியுரிமை",
-    "notificationsOtherService": "இதைத் திறக்க {service}க்கு மாறவும்",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "இயல்புநிலை வேகம், ஆட்டோ ப்ளே, வீடியோ பொருத்தம், நோக்குநிலை மற்றும் படத்தில் உள்ள படம்",
     "secPlayerSkip": "திறப்புகள், முடிவுகள் மற்றும் மறுபரிசீலனைகளைத் தானாகத் தவிர்க்கவும்",
     "secPlayerControls": "சைகைகளை ஸ்வைப் செய்து, பிடித்து, தட்டவும், முன்னோட்டத்தைத் தேடவும்",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "காத்திருக்கிறது",
     "stepChecking": "சரிபார்க்கிறது…",
     "stepUpToDate": "இன்றுவரை",
     "stepUpToDateWith": "புதுப்பித்த நிலையில் · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "மங்கா",
     "readerCloudflare": "உலாவியில் திற (Cloudflare சோதனை)",
     "badgeBoardHint": "முதல் அட்டையின் ஒரு மூலையில் ஒரு பேட்ஜை இழுக்கவும் அல்லது அதை நகர்த்துவதற்கு ஏற்கனவே உள்ள பேட்ஜை இழுக்கவும். பேட்ஜ்கள் இடங்களை மாற்றுகின்றன, அதனால் எதுவும் ஒன்றுடன் ஒன்று சேராது. அதை ஆன் அல்லது ஆஃப் செய்ய கீழே உள்ள பேட்ஜைத் தட்டவும்.",
-    "statusAuto": "ஆட்டோ",
     "unreadCounter": "படிக்காத கவுண்டர்",
-    "unreadCounterDesc": "போஸ்டர்களில் எத்தனை எபிசோடுகள் அல்லது அத்தியாயங்கள் மீதமுள்ளன என்பதைக் காட்டு",
     "settingsShortcuts": "விசைப்பலகை குறுக்குவழிகள்",
     "settingsShortcutsDesc": "ஒவ்வொரு விசையையும் பார்க்கவும், மாற்றவும் மற்றும் அணைக்கவும்",
     "shortcutGroupApp": "ஆப்",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "அமைக்கப்படவில்லை",
     "shortcutAddKey": "ஒரு விசையைச் சேர்க்கவும்",
     "shortcutResetOne": "இயல்புநிலைக்கு மீட்டமைக்கவும்",
-    "shortcutClearKeys": "அனைத்து விசைகளையும் அகற்று",
     "shortcutResetAll": "அனைத்து குறுக்குவழிகளையும் மீட்டமைக்கவும்",
     "shortcutResetAllDesc": "ஒவ்வொரு விசையையும் அதன் இயல்புநிலைக்கு மீண்டும் வைக்கவும்",
     "shortcutPress": "நீங்கள் விரும்பும் விசை அல்லது கலவையை அழுத்தவும்",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "பயன்பாட்டிலிருந்து வெளியேறு",
     "closeActionWhenBusy": "ஏதாவது ஓடும்போது தட்டில் ஓடிக்கொண்டே இருங்கள்",
     "closeActionAlways": "எப்போதும் தட்டில் ஓடிக்கொண்டே இருங்கள்",
-    "closeActionNoTray": "சிஸ்டம் ட்ரே இங்கே இல்லை, அதனால் ஆப்ஸ் மூடப்பட்டவுடன் வெளியேறும்",
     "gamepadNav": "கேம்பேட் வழிசெலுத்தல்",
     "gamepadNavDesc": "பயன்பாட்டைச் சுற்றி நகர்த்தி, கேம் கன்ட்ரோலர் மூலம் பிளேயரைக் கட்டுப்படுத்தவும்",
     "trayShow": "டார்டோட்சுவைக் காட்டு",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "விவரங்களை நகலெடுக்கவும்",
     "removePlayerTitle": "பிளேயரை அகற்றவா?",
     "removePlayerMessage": "பிளேயர் மீண்டும் பதிவிறக்கப்படும் வரை வீடியோக்களை இயக்க முடியாது.",
-    "trailerLoading": "டிரெய்லரை ஏற்றுகிறது…",
     "trailerFailed": "டிரெய்லரை இங்கே இயக்க முடியவில்லை, அதை உலாவியில் திறக்கிறது"
 }

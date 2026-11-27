@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Sinkronkan saat perubahan",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Masuk dengan GitHub",
-    "settingsSyncSignInDesc": "Pengaturan disimpan dalam inti pribadi di akun Anda",
     "settingsSyncToken": "Gunakan token akses pribadi",
     "settingsSyncTokenDesc": "Buat satu di github.com/settings/tokens hanya dengan izin inti",
     "settingsSyncTokenField": "Tanda",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Keluar",
-    "settingsSyncCode": "Masukkan {code} di GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Halaman GitHub terbuka di browser Anda. Ketuk untuk menyalin kode, atau ketuk dan tahan untuk membatalkan.",
     "settingsSyncSignInFailed": "Tidak dapat masuk ke GitHub",
-    "dcPreview": "Pratinjau",
     "dcSampleWatching": "Menonton",
     "dcSampleReading": "Membaca",
     "dcSampleBrowsing": "Menjelajah",
     "dcSampleLive": "Saat ini",
     "dcLiveNothing": "Tidak ada yang terlihat saat ini. Buka judul, mulai episode atau bab, dan judul itu muncul di sini.",
     "dcMemberList": "Dalam daftar anggota",
-    "dcAccount": "Akun",
-    "dcSignIn": "Masuk dengan Perselisihan",
     "dcSignOut": "Keluar",
-    "dcDesktopHint": "Tanpa terhubung, Discord menampilkan “Menonton Dartotsu” melalui aplikasi desktop. Hubungkan Discord untuk memberi nama aktivitas sesuai judul Anda, termasuk di ponsel.",
-    "dcMobileHint": "Hubungkan Discord untuk menampilkan apa yang Anda tonton atau baca. Ini menggunakan halaman otorisasi Discord, bukan token akun Anda.",
     "dcConnect": "Hubungkan Perselisihan",
     "dcConnectDesc": "Membuka halaman otorisasi Discord dan menambahkan Dartotsu di bawah Aplikasi Resmi. Discord meminta untuk memperbarui kehadiran Anda. Hanya token penyegaran yang disimpan, bukan token akun Anda.",
     "dcConnectFailed": "Tidak dapat menghubungkan Perselisihan",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Token akun",
     "dcInUse": "Sedang digunakan",
     "dcRecommended": "Direkomendasikan",
-    "dcConnecting": "Menghubungkan…",
-    "dcDisconnected": "Tidak terhubung",
     "dcSignedInAs": "Masuk sebagai {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Hapus dari GitHub",
     "settingsSyncSecretsDeleteMessage": "Ini menghapus file akun terenkripsi dari inti Anda. Perangkat lain tetap login dan dapat menyetel frasa sandi baru.",
     "settingsSyncWhat": "Apa yang harus disinkronkan",
-    "settingsSyncServer": "Di server",
     "settingsSyncServerEmpty": "Belum ada yang diunggah",
-    "settingsSyncServerInfo": "Pengaturan {count}, diunggah {time} dari {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "perangkat ini",
     "settingsSyncCount": "{count, plural, =0{Tidak ada apa pun di server} =1{1 pengaturan di server} other{Pengaturan {count} di server}}",
     "settingsSyncNow": "Sinkronkan sekarang",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Sinkronisasi gagal: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Hanya pengaturan yang berfungsi sama di semua tempat yang disinkronkan. Akun, token, folder, ekstensi, notifikasi, Discord, pembaruan, dan ukuran jendela tetap ada di setiap perangkat.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Aktifkan penanganan tautan supaya tautan anilist.co membuka aplikasi",
     "linkSettingsFailed": "Pengaturan sistem tidak bisa dibuka",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Tampilkan apa yang sedang kamu lakukan di profil Discord-mu. Butuh token Discord-mu.",
-    "discordRichPresenceDesktopDesc": "Tampilkan apa yang sedang kamu lakukan di profil Discord-mu. Butuh aplikasi desktop Discord yang sedang jalan.",
     "discordBrowsing": "Tampilkan aktivitas menjelajah",
     "discordBrowsingDesc": "Tampilkan juga tab, halaman, atau profil yang sedang kamu lihat, bukan cuma yang kamu tonton atau baca.",
-    "discordLookHeader": "Tampilan presence",
     "discordActivityType": "Jenis aktivitas",
     "discordActivityTypeDesc": "Cara Discord menuliskannya: \"Watching …\" atau \"Playing …\". Otomatis pakai Watching untuk anime dan Playing untuk yang lain.",
     "discordWatching": "Menonton",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Tombol \"View anime / manga\" dan \"Open Dartotsu\".",
     "discordHideTitles": "Sembunyikan judul",
     "discordHideTitlesDesc": "Ganti nama anime dan manga (beserta sampul dan tautannya) dengan \"Something private\".",
-    "discordConnectionHeader": "Koneksi",
     "listSearchHint": "Cari di daftar ini",
     "listSort": "Urutkan",
     "listFilter": "Menyaring",
@@ -671,8 +637,6 @@
     "listNoMatches": "Tidak ada yang cocok di daftar ini",
     "discordLogin": "Masuk ke Discord",
     "discordToken": "Token Discord",
-    "discordTokenSaved": "Tersimpan. Ketuk untuk mengganti, tekan lama untuk menghapus.",
-    "discordTokenNotSet": "Belum diatur. Ketuk untuk menambahkan.",
     "discordTokenSavedSnack": "Token Discord disimpan",
     "discordTokenRemovedSnack": "Token Discord dihapus",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Jauhkan judul dewasa dari feed dan pencarian, dan tampilkan entri dewasamu sendiri di Media Tersembunyi.",
     "kitsuAccountOptions": "Opsi akun Kitsu",
     "mangaBakaAccountOptions": "Opsi akun MangaBaka",
-    "comickAccountOptions": "Opsi akun komik",
     "comickClientId": "ID Klien Komik",
     "comickClientIdDesc": "ID klien khusus terdaftar di comick.dev",
     "couldNotUpdateKitsuSettings": "Pengaturan Kitsu-mu tidak bisa diperbarui",
@@ -761,7 +724,6 @@
     "accountDetails": "Detail akun",
     "refreshFromKitsu": "Segarkan dari Kitsu",
     "simklReadOnly": "Simkl diberi akses hanya-baca",
-    "traktReadOnly": "Trakt memberikan akses hanya baca",
     "incognitoEditsBlocked": "Penyamaran: edit daftar diblokir",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Penyamaran: progres tidak disimpan",
@@ -786,7 +748,6 @@
     "mangaCredits": "Kredit manga",
     "mainProductions": "Produksi utama",
     "otherWorks": "Karya lain",
-    "prequelSequel": "Prekuel & sekuel",
     "prequel": "Prekuel",
     "sequel": "Sekuel",
     "previousSeason": "Musim lalu",
@@ -833,10 +794,7 @@
     "addToList": "Tambah ke daftar",
     "trailer": "Cuplikan",
     "trailerQuality": "Kualitas cuplikan",
-    "titleCopied": "Judul disalin",
     "linkCopied": "Tautan disalin",
-    "watchTrailer": "Tonton trailer",
-    "copyTitle": "Salin judul",
     "detailStale": "AniList tidak dapat dihubungi. Ini adalah informasi yang disimpan dan mungkin sudah ketinggalan zaman.",
     "copyLink": "Salin tautan",
     "openInBrowser": "Buka di browser",
@@ -1139,7 +1097,6 @@
     "import": "Impor",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Pilih tempat menyimpan cadangan",
     "savedPath": "Disimpan {path}",
     "exportFailed": "Ekspor gagal: {error}",
     "nothingInLocalLists": "Belum ada apa-apa di daftar lokalmu.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Gagal membuka tautan: {error}",
     "linkCantBeOpened": "Tautan ini tidak bisa dibuka: {link}",
     "linkOpenError": "Gagal membuka tautan: {error}",
-    "forReleasingTitles": "untuk judul yang sedang tayang",
     "progress": "Progres",
     "notes": "Catatan",
     "serviceNotFound": "Layanan \"{id}\" tidak ditemukan",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} tidak tersedia di repo yang dikonfigurasi",
     "pluginFetchFailed": "Gagal mengambil info plugin",
     "installPluginTitle": "Pasang {name}",
-    "sizeLabel": "Ukuran: {size}",
     "installedState": "Terpasang",
     "updatePluginTitle": "Perbarui {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Ambil dan sinkronkan di latar belakang saat aplikasi dibuka dan tiap 30 menit",
     "syncAddMissing": "Tambah entri yang hilang",
     "syncAddMissingDesc": "Tambahkan juga entri yang belum ada di layanan lain",
-    "syncServiceOn": "Sinkronkan dengan {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Hapus apa yang tidak dimiliki layanan utama",
     "syncDeleteDesc": "Hapus entri dari layanan lain yang tidak ada dalam daftar utama. Hanya entri yang dapat dicocokkan dengan judul yang dihapus, sehingga hal-hal seperti film dan serial Simkl tetap ada",
     "syncDeleteTitle": "Hapus entri?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Hapus",
     "syncToDelete": "Untuk menghapus",
     "syncDeletedNote": "Akan dihapus",
-    "syncWillRemove": "{count} akan dihapus dari {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Pertahankan progres yang lebih jauh",
     "syncOnlyForwardDesc": "Jangan turunkan progres layanan yang sudah lebih maju",
     "animePlanetWontWatch": "Tidak akan menonton",
     "animePlanetWontRead": "Tidak akan membaca",
-    "animePlanetAlreadyOnList": "Sudah ada di daftar ini",
     "animePlanetNewList": "Nama daftar baru",
     "syncPrivate": "Entri pribadi",
     "syncPrivateDesc": "Apa yang harus dilakukan dengan entri yang Anda rahasiakan. Layanan dengan opsi pribadi menjadikannya pribadi; yang lain akan menunjukkannya kepada publik",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Izin diperoleh dengan agen pengguna lain, sehingga tidak dikirim. Uji koneksi untuk mendapatkan yang baru",
-    "watchSectionConnection": "Koneksi",
     "watchSectionSession": "Sesi",
     "watchSectionTools": "Alat",
     "watchMetaSource": "Detail episode dari",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Unduh stream yang mana?",
     "downloadPickSubtitle": "Unduh subtitle yang mana?",
     "downloadPickAudio": "Unduh trek audio yang mana?",
-    "downloadNoAudio": "Tanpa audio tambahan",
     "downloadAudio": "Audio",
-    "downloadNoSubtitle": "Tanpa subtitle",
     "downloadHlsNeedsFfmpeg": "Stream ini berupa playlist HLS. Mengunduhnya butuh addon FFmpeg.",
     "downloadSourceMissing": "Sumber episode ini belum terpasang",
     "downloadDashDrm": "Aliran ini dilindungi DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Bahasa & perilaku",
     "generalSectionSecurity": "Keamanan",
     "generalSectionPrivacy": "Privasi",
-    "notificationsOtherService": "Beralih ke {service} untuk membuka ini",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Kecepatan default, putar otomatis, kesesuaian video, orientasi, dan gambar dalam gambar",
     "secPlayerSkip": "Lewati pembukaan, akhir, dan rekap secara otomatis",
     "secPlayerControls": "Gesek, tahan dan ketuk gerakan dan cari pratinjau",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Menunggu",
     "stepChecking": "Memeriksa…",
     "stepUpToDate": "Terkini",
     "stepUpToDateWith": "Terkini · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "manga",
     "readerCloudflare": "Buka di browser (pemeriksaan Cloudflare)",
     "badgeBoardHint": "Seret lencana ke sudut kartu pertama, atau seret lencana yang sudah ada di kartu tersebut untuk memindahkannya. Lencana bertukar tempat, sehingga tidak ada yang tumpang tindih. Ketuk lencana di bawah untuk mengaktifkan atau menonaktifkannya.",
-    "statusAuto": "Otomatis",
     "unreadCounter": "Penghitung yang belum dibaca",
-    "unreadCounterDesc": "Tunjukkan berapa banyak episode atau bab yang tersisa di poster",
     "settingsShortcuts": "Pintasan keyboard",
     "settingsShortcutsDesc": "Lihat, ubah dan matikan setiap tombol",
     "shortcutGroupApp": "Aplikasi",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Tidak disetel",
     "shortcutAddKey": "Tambahkan kunci",
     "shortcutResetOne": "Atur ulang ke default",
-    "shortcutClearKeys": "Hapus semua kunci",
     "shortcutResetAll": "Setel ulang semua pintasan",
     "shortcutResetAllDesc": "Kembalikan setiap kunci ke defaultnya",
     "shortcutPress": "Tekan tombol atau kombinasi yang Anda inginkan",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Keluar dari aplikasi",
     "closeActionWhenBusy": "Terus berjalan di baki saat sesuatu sedang berjalan",
     "closeActionAlways": "Selalu terus berjalan di baki",
-    "closeActionNoTray": "Baki sistem tidak tersedia di sini, sehingga aplikasi akan berhenti ketika ditutup",
     "gamepadNav": "Navigasi papan permainan",
     "gamepadNavDesc": "Bergerak di sekitar aplikasi dan kendalikan pemain dengan pengontrol game",
     "trayShow": "Tunjukkan Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Salin detailnya",
     "removePlayerTitle": "Hapus pemutarnya?",
     "removePlayerMessage": "Video tidak dapat diputar hingga pemutar diunduh lagi.",
-    "trailerLoading": "Memuat cuplikan…",
     "trailerFailed": "Tidak dapat memutar cuplikan di sini saat membukanya di browser"
 }

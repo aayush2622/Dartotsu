@@ -423,10 +423,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub மூலம் உள்நுழையவும்';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'அமைப்புகள் உங்கள் கணக்கில் தனிப்பட்ட சாராம்சத்தில் சேமிக்கப்படும்';
-
-  @override
   String get settingsSyncToken => 'தனிப்பட்ட அணுகல் டோக்கனைப் பயன்படுத்தவும்';
 
   @override
@@ -445,19 +441,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSyncSignOut => 'வெளியேறு';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub இல் $code ஐ உள்ளிடவும்';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'உங்கள் உலாவியில் GitHub பக்கம் திறக்கப்பட்டது. குறியீட்டை நகலெடுக்க தட்டவும் அல்லது ரத்துசெய்ய தட்டிப் பிடிக்கவும்.';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub இல் உள்நுழைய முடியவில்லை';
-
-  @override
-  String get dcPreview => 'முன்னோட்டம்';
 
   @override
   String get dcSampleWatching => 'பார்க்கிறேன்';
@@ -479,21 +463,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get dcMemberList => 'உறுப்பினர் பட்டியலில்';
 
   @override
-  String get dcAccount => 'கணக்கு';
-
-  @override
-  String get dcSignIn => 'டிஸ்கார்ட் மூலம் உள்நுழையவும்';
-
-  @override
   String get dcSignOut => 'வெளியேறு';
-
-  @override
-  String get dcDesktopHint =>
-      'இணைக்காமல், டெஸ்க்டாப் பயன்பாட்டின் மூலம் டிஸ்கார்ட் “டார்டோட்சுவைப் பார்ப்பது” என்பதைக் காட்டுகிறது. மொபைல் உட்பட, உங்கள் தலைப்பின் பெயரைச் செயல்படுத்த டிஸ்கார்டை இணைக்கவும்.';
-
-  @override
-  String get dcMobileHint =>
-      'நீங்கள் எதைப் பார்க்கிறீர்கள் அல்லது படிக்கிறீர்கள் என்பதைக் காட்ட டிஸ்கார்டை இணைக்கவும். இது டிஸ்கார்டின் அங்கீகரிக்கப்பட்ட பக்கத்தைப் பயன்படுத்துகிறது, உங்கள் கணக்கு டோக்கனை அல்ல.';
 
   @override
   String get dcConnect => 'டிஸ்கார்டை இணைக்கவும்';
@@ -718,12 +688,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get dcRecommended => 'பரிந்துரைக்கப்படுகிறது';
 
   @override
-  String get dcConnecting => 'இணைக்கிறது…';
-
-  @override
-  String get dcDisconnected => 'இணைக்கப்படவில்லை';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name ஆக உள்நுழைந்துள்ளீர்கள்';
   }
@@ -923,15 +887,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get settingsSyncWhat => 'எதை ஒத்திசைக்க வேண்டும்';
 
   @override
-  String get settingsSyncServer => 'சர்வரில்';
-
-  @override
   String get settingsSyncServerEmpty => 'இன்னும் எதுவும் பதிவேற்றப்படவில்லை';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count அமைப்புகள், $device இலிருந்து $time பதிவேற்றப்பட்டது';
-  }
 
   @override
   String get settingsSyncThisDevice => 'இந்த சாதனம்';
@@ -960,11 +916,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'கடைசியாக ஒத்திசைத்தது $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'ஒத்திசைவு தோல்வியடைந்தது: $error';
   }
 
   @override
@@ -1747,22 +1698,11 @@ class AppLocalizationsTa extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. உன் Discord டோக்கன் வேணும்.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'நீ என்ன பண்ணிட்டு இருக்கன்னு உன் Discord ப்ரொஃபைல்ல காட்டு. Discord டெஸ்க்டாப் ஆப் ஓடிட்டு இருக்கணும்.';
-
-  @override
   String get discordBrowsing => 'பிரவுசிங் ஆக்டிவிட்டியை காட்டு';
 
   @override
   String get discordBrowsingDesc =>
       'நீ பாக்குற/படிக்கிறது மட்டும் இல்லாம, நீ பாக்கற டேப், பேஜ் அல்லது ப்ரொஃபைலையும் காட்டு.';
-
-  @override
-  String get discordLookHeader => 'பிரசென்ஸ் லுக்';
 
   @override
   String get discordActivityType => 'ஆக்டிவிட்டி டைப்';
@@ -1803,9 +1743,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'அனிமே & மங்கா பேரை (அதோட கவர் & லிங்க் உட்பட) \"Something private\"-னு மாத்து.';
-
-  @override
-  String get discordConnectionHeader => 'கனெக்ஷன்';
 
   @override
   String get listSearchHint => 'இந்த லிஸ்ட்ல தேடு';
@@ -1863,13 +1800,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord டோக்கன்';
-
-  @override
-  String get discordTokenSaved =>
-      'சேவ் ஆயிடுச்சு. மாத்த டேப் பண்ணு, நீக்க லாங் பிரஸ் பண்ணு.';
-
-  @override
-  String get discordTokenNotSet => 'செட் பண்ணல. சேர்க்க டேப் பண்ணு.';
 
   @override
   String get discordTokenSavedSnack => 'Discord டோக்கன் சேவ் ஆயிடுச்சு';
@@ -2069,9 +1999,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka அக்கவுண்ட் விருப்பங்கள்';
 
   @override
-  String get comickAccountOptions => 'காமிக் கணக்கு விருப்பங்கள்';
-
-  @override
   String get comickClientId => 'காமிக் கிளையண்ட் ஐடி';
 
   @override
@@ -2165,10 +2092,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get simklReadOnly => 'Simkl-க்கு ரீட்-ஒன்லி அக்சஸ் கிடைச்சிருக்கு';
 
   @override
-  String get traktReadOnly =>
-      'டிராக்ட்டுக்கு படிக்க மட்டும் அணுகல் வழங்கப்பட்டது';
-
-  @override
   String get incognitoEditsBlocked =>
       'இன்காக்னிட்டோ: லிஸ்ட் எடிட்ஸ் பிளாக் ஆகுது';
 
@@ -2249,9 +2172,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get otherWorks => 'மத்த வொர்க்ஸ்';
-
-  @override
-  String get prequelSequel => 'ப்ரீக்வல் & சீக்வல்';
 
   @override
   String get prequel => 'முன்னுரை';
@@ -2395,16 +2315,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get trailerQuality => 'டிரெய்லர் தரம்';
 
   @override
-  String get titleCopied => 'டைட்டில் காப்பி ஆயிடுச்சு';
-
-  @override
   String get linkCopied => 'லிங்க் காப்பி ஆயிடுச்சு';
-
-  @override
-  String get watchTrailer => 'டிரெய்லர் பாரு';
-
-  @override
-  String get copyTitle => 'டைட்டிலை காப்பி பண்ணு';
 
   @override
   String get detailStale =>
@@ -3392,9 +3303,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'பேக்கப்பை எங்க சேவ் பண்ணணும்னு தேர்ந்தெடு';
-
-  @override
   String savedPath(String path) {
     return '$path சேவ் ஆயிடுச்சு';
   }
@@ -3965,9 +3873,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'இப்போ ரிலீஸ் ஆகிட்டு இருக்க டைட்டில்ஸுக்கு';
-
-  @override
   String get progress => 'புரோகிரஸ்';
 
   @override
@@ -4172,11 +4077,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'சைஸ்: $size';
-  }
-
-  @override
   String get installedState => 'இன்ஸ்டால் ஆனது';
 
   @override
@@ -4275,11 +4175,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get syncAddMissingDesc => 'மத்த சர்வீஸ்ல இல்லாத என்ட்ரிஸையும் சேர்';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name உடன் ஒத்திசை';
-  }
-
-  @override
   String get syncDelete => 'பிரதான சேவையில் இல்லாததை நீக்கவும்';
 
   @override
@@ -4310,11 +4205,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get syncDeletedNote => 'நீக்கப்படும்';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$name இலிருந்து $count நீக்கப்படும்';
-  }
-
-  @override
   String get syncOnlyForward => 'முன்னாடி இருக்க புரோகிரஸை வச்சுக்கோ';
 
   @override
@@ -4326,9 +4216,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'படிக்க மாட்டேன்';
-
-  @override
-  String get animePlanetAlreadyOnList => 'ஏற்கனவே இந்த பட்டியலில் உள்ளது';
 
   @override
   String get animePlanetNewList => 'புதிய பட்டியல் பெயர்';
@@ -5681,9 +5568,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'மற்றொரு பயனர் முகவர் மூலம் அனுமதி பெறப்பட்டது, எனவே அது அனுப்பப்படவில்லை. புதிய ஒன்றைப் பெற இணைப்பைச் சோதிக்கவும்';
-
-  @override
-  String get watchSectionConnection => 'இணைப்பு';
 
   @override
   String get watchSectionSession => 'அமர்வு';
@@ -7561,13 +7445,7 @@ class AppLocalizationsTa extends AppLocalizations {
   String get downloadPickAudio => 'எந்த ஆடியோ டிராக்கை டவுன்லோட் பண்ணணும்?';
 
   @override
-  String get downloadNoAudio => 'எக்ஸ்ட்ரா ஆடியோ இல்ல';
-
-  @override
   String get downloadAudio => 'ஆடியோ';
-
-  @override
-  String get downloadNoSubtitle => 'சப்டைட்டில் இல்ல';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8418,11 +8296,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get generalSectionPrivacy => 'தனியுரிமை';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'இதைத் திறக்க $serviceக்கு மாறவும்';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'இயல்புநிலை வேகம், ஆட்டோ ப்ளே, வீடியோ பொருத்தம், நோக்குநிலை மற்றும் படத்தில் உள்ள படம்';
 
@@ -8746,9 +8619,6 @@ class AppLocalizationsTa extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'காத்திருக்கிறது';
-
-  @override
   String get stepChecking => 'சரிபார்க்கிறது…';
 
   @override
@@ -8819,14 +8689,7 @@ class AppLocalizationsTa extends AppLocalizations {
       'முதல் அட்டையின் ஒரு மூலையில் ஒரு பேட்ஜை இழுக்கவும் அல்லது அதை நகர்த்துவதற்கு ஏற்கனவே உள்ள பேட்ஜை இழுக்கவும். பேட்ஜ்கள் இடங்களை மாற்றுகின்றன, அதனால் எதுவும் ஒன்றுடன் ஒன்று சேராது. அதை ஆன் அல்லது ஆஃப் செய்ய கீழே உள்ள பேட்ஜைத் தட்டவும்.';
 
   @override
-  String get statusAuto => 'ஆட்டோ';
-
-  @override
   String get unreadCounter => 'படிக்காத கவுண்டர்';
-
-  @override
-  String get unreadCounterDesc =>
-      'போஸ்டர்களில் எத்தனை எபிசோடுகள் அல்லது அத்தியாயங்கள் மீதமுள்ளன என்பதைக் காட்டு';
 
   @override
   String get settingsShortcuts => 'விசைப்பலகை குறுக்குவழிகள்';
@@ -8865,9 +8728,6 @@ class AppLocalizationsTa extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'இயல்புநிலைக்கு மீட்டமைக்கவும்';
-
-  @override
-  String get shortcutClearKeys => 'அனைத்து விசைகளையும் அகற்று';
 
   @override
   String get shortcutResetAll => 'அனைத்து குறுக்குவழிகளையும் மீட்டமைக்கவும்';
@@ -9057,10 +8917,6 @@ class AppLocalizationsTa extends AppLocalizations {
   String get closeActionAlways => 'எப்போதும் தட்டில் ஓடிக்கொண்டே இருங்கள்';
 
   @override
-  String get closeActionNoTray =>
-      'சிஸ்டம் ட்ரே இங்கே இல்லை, அதனால் ஆப்ஸ் மூடப்பட்டவுடன் வெளியேறும்';
-
-  @override
   String get gamepadNav => 'கேம்பேட் வழிசெலுத்தல்';
 
   @override
@@ -9134,9 +8990,6 @@ class AppLocalizationsTa extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'பிளேயர் மீண்டும் பதிவிறக்கப்படும் வரை வீடியோக்களை இயக்க முடியாது.';
-
-  @override
-  String get trailerLoading => 'டிரெய்லரை ஏற்றுகிறது…';
 
   @override
   String get trailerFailed =>

@@ -424,10 +424,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get settingsSyncSignIn => 'Log ind med GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Indstillinger gemmes i en privat oversigt på din konto';
-
-  @override
   String get settingsSyncToken => 'Brug et personligt adgangstoken';
 
   @override
@@ -446,19 +442,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get settingsSyncSignOut => 'Log ud';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Indtast $code på GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'GitHub-siden åbnes i din browser. Tryk for at kopiere koden, eller tryk og hold for at annullere.';
-
-  @override
   String get settingsSyncSignInFailed => 'Kunne ikke logge ind på GitHub';
-
-  @override
-  String get dcPreview => 'Forhåndsvisning';
 
   @override
   String get dcSampleWatching => 'Ser på';
@@ -480,21 +464,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dcMemberList => 'I medlemslisten';
 
   @override
-  String get dcAccount => 'Konto';
-
-  @override
-  String get dcSignIn => 'Log ind med Discord';
-
-  @override
   String get dcSignOut => 'Log ud';
-
-  @override
-  String get dcDesktopHint =>
-      'Uden at oprette forbindelse viser Discord \"Watching Dartotsu\" gennem desktop-appen. Tilslut Discord for at navngive aktiviteten efter din titel, inklusive på mobilen.';
-
-  @override
-  String get dcMobileHint =>
-      'Tilslut Discord for at vise, hvad du ser eller læser. Den bruger Discords autorisationsside, ikke dit kontotoken.';
 
   @override
   String get dcConnect => 'Tilslut Discord';
@@ -718,12 +688,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get dcRecommended => 'Anbefales';
 
   @override
-  String get dcConnecting => 'Opretter forbindelse...';
-
-  @override
-  String get dcDisconnected => 'Ikke forbundet';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Logget ind som $name';
   }
@@ -918,15 +882,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get settingsSyncWhat => 'Hvad skal synkroniseres';
 
   @override
-  String get settingsSyncServer => 'På serveren';
-
-  @override
   String get settingsSyncServerEmpty => 'Intet uploadet endnu';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count indstillinger, uploadet $time fra $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'denne enhed';
@@ -955,11 +911,6 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Sidst synkroniseret $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Synkronisering mislykkedes: $error';
   }
 
   @override
@@ -1730,22 +1681,11 @@ class AppLocalizationsDa extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Vis på din Discord-profil, hvad du laver. Kræver dit Discord-token.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Vis på din Discord-profil, hvad du laver. Kræver, at Discord-desktopappen kører.';
-
-  @override
   String get discordBrowsing => 'Vis browsingaktivitet';
 
   @override
   String get discordBrowsingDesc =>
       'Vis også den fane, side eller profil, du kigger på, og ikke kun hvad du ser eller læser.';
-
-  @override
-  String get discordLookHeader => 'Udseende af presence';
 
   @override
   String get discordActivityType => 'Aktivitetstype';
@@ -1785,9 +1725,6 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Erstat navne på anime og manga (og deres cover og link) med \"Noget privat\".';
-
-  @override
-  String get discordConnectionHeader => 'Forbindelse';
 
   @override
   String get listSearchHint => 'Søg i denne liste';
@@ -1845,13 +1782,6 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord-token';
-
-  @override
-  String get discordTokenSaved =>
-      'Gemt. Tryk for at erstatte, tryk og hold for at fjerne.';
-
-  @override
-  String get discordTokenNotSet => 'Ikke angivet. Tryk for at tilføje.';
 
   @override
   String get discordTokenSavedSnack => 'Discord-token gemt';
@@ -2049,9 +1979,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka-kontoindstillinger';
 
   @override
-  String get comickAccountOptions => 'Comick-kontomuligheder';
-
-  @override
   String get comickClientId => 'Comick klient-id';
 
   @override
@@ -2145,9 +2072,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get simklReadOnly => 'Simkl gav kun læseadgang';
 
   @override
-  String get traktReadOnly => 'Trakt gav skrivebeskyttet adgang';
-
-  @override
   String get incognitoEditsBlocked =>
       'Inkognito: listeredigeringer er blokeret';
 
@@ -2231,9 +2155,6 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get otherWorks => 'Andre værker';
-
-  @override
-  String get prequelSequel => 'Prequel & sequel';
 
   @override
   String get prequel => 'Prequel';
@@ -2377,16 +2298,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get trailerQuality => 'Trailer kvalitet';
 
   @override
-  String get titleCopied => 'Titel kopieret';
-
-  @override
   String get linkCopied => 'Link kopieret';
-
-  @override
-  String get watchTrailer => 'Se trailer';
-
-  @override
-  String get copyTitle => 'Kopiér titel';
 
   @override
   String get detailStale =>
@@ -3371,9 +3283,6 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Vælg, hvor backuppen skal gemmes';
-
-  @override
   String savedPath(String path) {
     return 'Gemt $path';
   }
@@ -3944,9 +3853,6 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'for titler, der udkommer nu';
-
-  @override
   String get progress => 'Fremskridt';
 
   @override
@@ -4152,11 +4058,6 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Størrelse: $size';
-  }
-
-  @override
   String get installedState => 'Installeret';
 
   @override
@@ -4255,11 +4156,6 @@ class AppLocalizationsDa extends AppLocalizations {
       'Tilføj også indslag, som den anden tjeneste endnu ikke har';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Synkroniser med $name';
-  }
-
-  @override
   String get syncDelete => 'Slet hvad hovedtjenesten ikke har';
 
   @override
@@ -4290,11 +4186,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get syncDeletedNote => 'Vil blive slettet';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count vil blive slettet fra $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Behold længste fremskridt';
 
   @override
@@ -4306,9 +4197,6 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Vil ikke læse';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Allerede på denne liste';
 
   @override
   String get animePlanetNewList => 'Nyt listenavn';
@@ -5662,9 +5550,6 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Godkendelsen blev opnået med en anden brugeragent, så den sendes ikke. Test forbindelsen for at få en ny';
-
-  @override
-  String get watchSectionConnection => 'Forbindelse';
 
   @override
   String get watchSectionSession => 'Session';
@@ -7529,13 +7414,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get downloadPickAudio => 'Download hvilket lydspor?';
 
   @override
-  String get downloadNoAudio => 'Ingen ekstra lyd';
-
-  @override
   String get downloadAudio => 'Lyd';
-
-  @override
-  String get downloadNoSubtitle => 'Ingen undertekst';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8378,11 +8257,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get generalSectionPrivacy => 'Privatliv';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Skift til $service for at åbne denne';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Standardhastighed, automatisk afspilning, videotilpasning, orientering og billede i billede';
 
@@ -8698,9 +8572,6 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Venter';
-
-  @override
   String get stepChecking => 'Tjekker...';
 
   @override
@@ -8771,14 +8642,7 @@ class AppLocalizationsDa extends AppLocalizations {
       'Træk et mærke til et hjørne af det første kort, eller træk et mærke, der allerede er på det, for at flytte det. Badges bytter plads, så ingen nogensinde overlapper hinanden. Tryk på et badge nedenfor for at slå det til eller fra.';
 
   @override
-  String get statusAuto => 'Auto';
-
-  @override
   String get unreadCounter => 'Ulæst tæller';
-
-  @override
-  String get unreadCounterDesc =>
-      'Vis hvor mange episoder eller kapitler der er tilbage på plakater';
 
   @override
   String get settingsShortcuts => 'Tastaturgenveje';
@@ -8816,9 +8680,6 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Nulstil til standard';
-
-  @override
-  String get shortcutClearKeys => 'Fjern alle nøgler';
 
   @override
   String get shortcutResetAll => 'Nulstil alle genveje';
@@ -9005,10 +8866,6 @@ class AppLocalizationsDa extends AppLocalizations {
   String get closeActionAlways => 'Løb altid i bakken';
 
   @override
-  String get closeActionNoTray =>
-      'Systembakken er ikke tilgængelig her, så appen afsluttes, når den lukkes';
-
-  @override
   String get gamepadNav => 'Gamepad navigation';
 
   @override
@@ -9082,9 +8939,6 @@ class AppLocalizationsDa extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Videoer kan ikke afspilles, før afspilleren er downloadet igen.';
-
-  @override
-  String get trailerLoading => 'Indlæser traileren...';
 
   @override
   String get trailerFailed =>

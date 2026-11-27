@@ -425,10 +425,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsSyncSignIn => 'Log in met GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Instellingen worden opgeslagen in een privé-gist in uw account';
-
-  @override
   String get settingsSyncToken => 'Gebruik een persoonlijk toegangstoken';
 
   @override
@@ -447,19 +443,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsSyncSignOut => 'Meld u af';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Voer $code in op GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'De GitHub-pagina is geopend in uw browser. Tik om de code te kopiëren, of houd ingedrukt om te annuleren.';
-
-  @override
   String get settingsSyncSignInFailed => 'Kan niet inloggen bij GitHub';
-
-  @override
-  String get dcPreview => 'Voorbeeld';
 
   @override
   String get dcSampleWatching => 'Kijken';
@@ -481,21 +465,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dcMemberList => 'In de ledenlijst';
 
   @override
-  String get dcAccount => 'Rekening';
-
-  @override
-  String get dcSignIn => 'Log in met Discord';
-
-  @override
   String get dcSignOut => 'Meld u af';
-
-  @override
-  String get dcDesktopHint =>
-      'Zonder verbinding te maken, toont Discord “Watching Dartotsu” via de desktop-app. Verbind Discord om de activiteit naar uw titel te vernoemen, ook op mobiel.';
-
-  @override
-  String get dcMobileHint =>
-      'Verbind Discord om te laten zien wat je kijkt of leest. Het gebruikt de autorisatiepagina van Discord, niet uw accounttoken.';
 
   @override
   String get dcConnect => 'Verbind onenigheid';
@@ -719,12 +689,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get dcRecommended => 'Aanbevolen';
 
   @override
-  String get dcConnecting => 'Verbinden…';
-
-  @override
-  String get dcDisconnected => 'Niet verbonden';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Aangemeld als $name';
   }
@@ -921,15 +885,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get settingsSyncWhat => 'Wat te synchroniseren';
 
   @override
-  String get settingsSyncServer => 'Op de server';
-
-  @override
   String get settingsSyncServerEmpty => 'Er is nog niets geüpload';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count instellingen, geüpload $time van $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'dit apparaat';
@@ -958,11 +914,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Laatst gesynchroniseerd $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Synchronisatie mislukt: $error';
   }
 
   @override
@@ -1739,22 +1690,11 @@ class AppLocalizationsNl extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Toon wat je doet op je Discord-profiel. Hiervoor heb je je Discord-token nodig.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Toon wat je doet op je Discord-profiel. Hiervoor moet de Discord-desktopapp draaien.';
-
-  @override
   String get discordBrowsing => 'Browse-activiteit tonen';
 
   @override
   String get discordBrowsingDesc =>
       'Toon ook het tabblad, de pagina of het profiel waar je naar kijkt, niet alleen wat je kijkt of leest.';
-
-  @override
-  String get discordLookHeader => 'Uiterlijk van de presence';
 
   @override
   String get discordActivityType => 'Activiteitstype';
@@ -1795,9 +1735,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Vervang namen van anime en manga (en de cover en link) door \"Iets privés\".';
-
-  @override
-  String get discordConnectionHeader => 'Verbinding';
 
   @override
   String get listSearchHint => 'Doorzoek deze lijst';
@@ -1855,13 +1792,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord-token';
-
-  @override
-  String get discordTokenSaved =>
-      'Opgeslagen. Tik om te vervangen, lang indrukken om te verwijderen.';
-
-  @override
-  String get discordTokenNotSet => 'Niet ingesteld. Tik om toe te voegen.';
 
   @override
   String get discordTokenSavedSnack => 'Discord-token opgeslagen';
@@ -2060,9 +1990,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka-accountopties';
 
   @override
-  String get comickAccountOptions => 'Comick-accountopties';
-
-  @override
   String get comickClientId => 'Comick-client-ID';
 
   @override
@@ -2156,9 +2083,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get simklReadOnly => 'Simkl heeft alleen-lezen toegang gegeven';
 
   @override
-  String get traktReadOnly => 'Trakt verleende alleen-lezen toegang';
-
-  @override
   String get incognitoEditsBlocked =>
       'Incognito: lijstwijzigingen zijn geblokkeerd';
 
@@ -2240,9 +2164,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get otherWorks => 'Ander werk';
-
-  @override
-  String get prequelSequel => 'Prequel & sequel';
 
   @override
   String get prequel => 'Voorloper';
@@ -2386,16 +2307,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get trailerQuality => 'Trailerkwaliteit';
 
   @override
-  String get titleCopied => 'Titel gekopieerd';
-
-  @override
   String get linkCopied => 'Link gekopieerd';
-
-  @override
-  String get watchTrailer => 'Trailer kijken';
-
-  @override
-  String get copyTitle => 'Titel kopiëren';
 
   @override
   String get detailStale =>
@@ -3383,9 +3295,6 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Kies waar je de back-up opslaat';
-
-  @override
   String savedPath(String path) {
     return '$path opgeslagen';
   }
@@ -3956,9 +3865,6 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'voor titels die nu lopen';
-
-  @override
   String get progress => 'Voortgang';
 
   @override
@@ -4164,11 +4070,6 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Grootte: $size';
-  }
-
-  @override
   String get installedState => 'Geïnstalleerd';
 
   @override
@@ -4268,11 +4169,6 @@ class AppLocalizationsNl extends AppLocalizations {
       'Voeg ook items toe die de andere service nog niet heeft';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Synchroniseren met $name';
-  }
-
-  @override
   String get syncDelete => 'Verwijder wat de hoofdservice niet heeft';
 
   @override
@@ -4303,11 +4199,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get syncDeletedNote => 'Wordt verwijderd';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count wordt verwijderd uit $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Verdere voortgang behouden';
 
   @override
@@ -4319,9 +4210,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Zal niet lezen';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Staat al op deze lijst';
 
   @override
   String get animePlanetNewList => 'Nieuwe lijstnaam';
@@ -5678,9 +5566,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'De goedkeuring is verdiend met een andere user-agent en wordt dus niet verzonden. Test de verbinding om een nieuwe te krijgen';
-
-  @override
-  String get watchSectionConnection => 'Verbinding';
 
   @override
   String get watchSectionSession => 'Sessie';
@@ -7552,13 +7437,7 @@ class AppLocalizationsNl extends AppLocalizations {
   String get downloadPickAudio => 'Welk audiospoor downloaden?';
 
   @override
-  String get downloadNoAudio => 'Geen extra audio';
-
-  @override
   String get downloadAudio => 'Audio';
-
-  @override
-  String get downloadNoSubtitle => 'Geen ondertitel';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8406,11 +8285,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get generalSectionPrivacy => 'Privacy';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Schakel over naar $service om dit te openen';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Standaardsnelheid, automatisch afspelen, video-fit, oriëntatie en beeld-in-beeld';
 
@@ -8727,9 +8601,6 @@ class AppLocalizationsNl extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Wachten';
-
-  @override
   String get stepChecking => 'Controleren…';
 
   @override
@@ -8800,14 +8671,7 @@ class AppLocalizationsNl extends AppLocalizations {
       'Sleep een badge naar een hoek van de eerste kaart, of sleep een badge die er al op staat om deze te verplaatsen. Badges wisselen van plaats, zodat ze elkaar nooit overlappen. Tik hieronder op een badge om deze in of uit te schakelen.';
 
   @override
-  String get statusAuto => 'Automatisch';
-
-  @override
   String get unreadCounter => 'Ongelezen teller';
-
-  @override
-  String get unreadCounterDesc =>
-      'Laat op posters zien hoeveel afleveringen of hoofdstukken er nog over zijn';
 
   @override
   String get settingsShortcuts => 'Sneltoetsen';
@@ -8846,9 +8710,6 @@ class AppLocalizationsNl extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Resetten naar standaard';
-
-  @override
-  String get shortcutClearKeys => 'Verwijder alle sleutels';
 
   @override
   String get shortcutResetAll => 'Reset alle snelkoppelingen';
@@ -9036,10 +8897,6 @@ class AppLocalizationsNl extends AppLocalizations {
   String get closeActionAlways => 'Blijf altijd in de lade draaien';
 
   @override
-  String get closeActionNoTray =>
-      'Het systeemvak is hier niet beschikbaar, dus de app wordt afgesloten wanneer deze wordt gesloten';
-
-  @override
   String get gamepadNav => 'Gamepad-navigatie';
 
   @override
@@ -9113,9 +8970,6 @@ class AppLocalizationsNl extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Video\'s kunnen pas worden afgespeeld nadat de speler opnieuw is gedownload.';
-
-  @override
-  String get trailerLoading => 'De aanhangwagen laden…';
 
   @override
   String get trailerFailed =>

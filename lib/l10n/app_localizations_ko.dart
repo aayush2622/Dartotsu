@@ -412,9 +412,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub로 로그인';
 
   @override
-  String get settingsSyncSignInDesc => '설정은 계정의 비공개 요점에 저장됩니다.';
-
-  @override
   String get settingsSyncToken => '개인 액세스 토큰 사용';
 
   @override
@@ -433,19 +430,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsSyncSignOut => '로그아웃';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub에 $code을 입력하세요.';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      '브라우저에 GitHub 페이지가 열렸습니다. 코드를 복사하려면 탭하고, 취소하려면 길게 탭하세요.';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub에 로그인할 수 없습니다.';
-
-  @override
-  String get dcPreview => '미리보기';
 
   @override
   String get dcSampleWatching => '시청 중';
@@ -467,21 +452,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dcMemberList => '회원 목록에서';
 
   @override
-  String get dcAccount => '계정';
-
-  @override
-  String get dcSignIn => '디스코드로 로그인';
-
-  @override
   String get dcSignOut => '로그아웃';
-
-  @override
-  String get dcDesktopHint =>
-      '연결하지 않으면 Discord는 데스크톱 앱을 통해 \"Dartotsu 시청 중\"을 표시합니다. 모바일을 포함하여 제목 뒤에 활동 이름을 지정하려면 Discord를 연결하세요.';
-
-  @override
-  String get dcMobileHint =>
-      'Discord를 연결하여 보고 있는 내용이나 읽고 있는 내용을 표시해 보세요. 계정 토큰이 아닌 Discord의 승인 페이지를 사용합니다.';
 
   @override
   String get dcConnect => '디스코드 연결';
@@ -705,12 +676,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get dcRecommended => '추천';
 
   @override
-  String get dcConnecting => '연결 중…';
-
-  @override
-  String get dcDisconnected => '연결되지 않음';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name(으)로 로그인됨';
   }
@@ -900,15 +865,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get settingsSyncWhat => '동기화할 항목';
 
   @override
-  String get settingsSyncServer => '서버에서';
-
-  @override
   String get settingsSyncServerEmpty => '아직 업로드된 항목이 없습니다.';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count 설정, $device에서 $time 업로드됨';
-  }
 
   @override
   String get settingsSyncThisDevice => '이 장치';
@@ -937,11 +894,6 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return '마지막 동기화 $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return '동기화 실패: $error';
   }
 
   @override
@@ -1697,21 +1649,10 @@ class AppLocalizationsKo extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Discord 프로필에 지금 뭘 하는지 보여줘요. Discord 토큰이 필요해요.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Discord 프로필에 지금 뭘 하는지 보여줘요. Discord 데스크톱 앱이 실행 중이어야 해요.';
-
-  @override
   String get discordBrowsing => '둘러보는 활동 표시';
 
   @override
   String get discordBrowsingDesc => '보거나 읽는 작품뿐 아니라 보고 있는 탭, 페이지, 프로필도 표시해요.';
-
-  @override
-  String get discordLookHeader => '프레즌스 모양';
 
   @override
   String get discordActivityType => '활동 유형';
@@ -1749,9 +1690,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get discordHideTitlesDesc => '애니와 만화 이름(커버와 링크 포함)을 \"비공개\"로 바꿔요.';
-
-  @override
-  String get discordConnectionHeader => '연결';
 
   @override
   String get listSearchHint => '이 리스트에서 검색';
@@ -1809,12 +1747,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord 토큰';
-
-  @override
-  String get discordTokenSaved => '저장됨. 탭하면 교체, 길게 누르면 삭제해요.';
-
-  @override
-  String get discordTokenNotSet => '설정 안 됨. 탭해서 추가하세요.';
 
   @override
   String get discordTokenSavedSnack => 'Discord 토큰을 저장했어요';
@@ -2009,9 +1941,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka 계정 옵션';
 
   @override
-  String get comickAccountOptions => '코믹 계정 옵션';
-
-  @override
   String get comickClientId => '코믹 클라이언트 ID';
 
   @override
@@ -2102,9 +2031,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get simklReadOnly => 'Simkl이 읽기 전용 접근을 허용했어요';
 
   @override
-  String get traktReadOnly => 'Trakt에 읽기 전용 액세스 권한이 부여됨';
-
-  @override
   String get incognitoEditsBlocked => '시크릿 모드: 리스트 편집이 막혀 있어요';
 
   @override
@@ -2183,9 +2109,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get otherWorks => '기타 작품';
-
-  @override
-  String get prequelSequel => '프리퀄 & 시퀄';
 
   @override
   String get prequel => '전편';
@@ -2327,16 +2250,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get trailerQuality => '예고편 품질';
 
   @override
-  String get titleCopied => '제목을 복사했어요';
-
-  @override
   String get linkCopied => '링크를 복사했어요';
-
-  @override
-  String get watchTrailer => '예고편 보기';
-
-  @override
-  String get copyTitle => '제목 복사';
 
   @override
   String get detailStale => 'AniList에 연결할 수 없습니다. 이는 저장된 정보이므로 오래된 정보일 수 있습니다.';
@@ -3307,9 +3221,6 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => '백업을 저장할 위치 선택';
-
-  @override
   String savedPath(String path) {
     return '$path에 저장했어요';
   }
@@ -3875,9 +3786,6 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => '현재 연재 중인 작품용';
-
-  @override
   String get progress => '진행도';
 
   @override
@@ -4079,11 +3987,6 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return '크기: $size';
-  }
-
-  @override
   String get installedState => '설치됨';
 
   @override
@@ -4180,11 +4083,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get syncAddMissingDesc => '다른 서비스에 아직 없는 항목도 추가해요';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name과 동기화';
-  }
-
-  @override
   String get syncDelete => '주요 서비스에 없는 것을 삭제하세요.';
 
   @override
@@ -4215,11 +4113,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get syncDeletedNote => '삭제됩니다';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count이(가) $name에서 삭제됩니다.';
-  }
-
-  @override
   String get syncOnlyForward => '더 나간 진행도 유지';
 
   @override
@@ -4230,9 +4123,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => '읽지 않음';
-
-  @override
-  String get animePlanetAlreadyOnList => '이미 이 목록에 있습니다';
 
   @override
   String get animePlanetNewList => '새 목록 이름';
@@ -5540,9 +5430,6 @@ class AppLocalizationsKo extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       '다른 사용자 에이전트를 통해 허가를 얻었으므로 전송되지 않습니다. 새 연결을 얻으려면 연결을 테스트하세요.';
-
-  @override
-  String get watchSectionConnection => '연결';
 
   @override
   String get watchSectionSession => '세션';
@@ -7359,13 +7246,7 @@ class AppLocalizationsKo extends AppLocalizations {
   String get downloadPickAudio => '어떤 오디오 트랙을 다운로드할까요?';
 
   @override
-  String get downloadNoAudio => '추가 오디오 없음';
-
-  @override
   String get downloadAudio => '오디오';
-
-  @override
-  String get downloadNoSubtitle => '자막 없음';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8175,11 +8056,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get generalSectionPrivacy => '개인 정보 보호';
 
   @override
-  String notificationsOtherService(String service) {
-    return '이것을 열려면 $service로 전환하세요';
-  }
-
-  @override
   String get secPlayerPlayback => '기본 속도, 자동 재생, 비디오 맞춤, 방향 및 PIP(화면 속 화면)';
 
   @override
@@ -8482,9 +8358,6 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => '대기 중';
-
-  @override
   String get stepChecking => '확인 중…';
 
   @override
@@ -8554,13 +8427,7 @@ class AppLocalizationsKo extends AppLocalizations {
       '배지를 첫 번째 카드의 모서리로 드래그하거나 이미 있는 배지를 드래그하여 이동하세요. 배지는 장소를 바꾸므로 겹치는 부분이 없습니다. 아래 배지를 탭하여 켜거나 끄세요.';
 
   @override
-  String get statusAuto => '자동';
-
-  @override
   String get unreadCounter => '읽지 않은 카운터';
-
-  @override
-  String get unreadCounterDesc => '포스터에 남은 에피소드나 챕터 수 표시';
 
   @override
   String get settingsShortcuts => '키보드 단축키';
@@ -8597,9 +8464,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get shortcutResetOne => '기본값으로 재설정';
-
-  @override
-  String get shortcutClearKeys => '모든 키 제거';
 
   @override
   String get shortcutResetAll => '모든 단축키 재설정';
@@ -8784,9 +8648,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get closeActionAlways => '항상 트레이에서 계속 실행';
 
   @override
-  String get closeActionNoTray => '여기서는 시스템 트레이를 사용할 수 없으므로 닫으면 앱이 종료됩니다.';
-
-  @override
   String get gamepadNav => '게임패드 탐색';
 
   @override
@@ -8858,9 +8719,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get removePlayerMessage => '플레이어를 다시 다운로드할 때까지 동영상을 재생할 수 없습니다.';
-
-  @override
-  String get trailerLoading => '예고편 로드 중…';
 
   @override
   String get trailerFailed => '여기에서는 예고편을 재생할 수 없습니다. 브라우저에서 여세요.';

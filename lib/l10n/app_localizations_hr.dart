@@ -427,10 +427,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get settingsSyncSignIn => 'Prijavite se s GitHubom';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Postavke su pohranjene u privatnom sadržaju na vašem računu';
-
-  @override
   String get settingsSyncToken => 'Koristite osobni pristupni token';
 
   @override
@@ -449,19 +445,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get settingsSyncSignOut => 'Odjavi se';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Unesite $code na GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Stranica GitHub otvorena je u vašem pregledniku. Dodirnite za kopiranje koda ili dodirnite i držite za otkazivanje.';
-
-  @override
   String get settingsSyncSignInFailed => 'Nije moguće prijaviti se na GitHub';
-
-  @override
-  String get dcPreview => 'Pregled';
 
   @override
   String get dcSampleWatching => 'Gledanje';
@@ -483,21 +467,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get dcMemberList => 'U popisu članova';
 
   @override
-  String get dcAccount => 'Račun';
-
-  @override
-  String get dcSignIn => 'Prijavite se s Discordom';
-
-  @override
   String get dcSignOut => 'Odjavi se';
-
-  @override
-  String get dcDesktopHint =>
-      'Bez povezivanja, Discord prikazuje \"Gledanje Dartotsua\" putem aplikacije za radnu površinu. Povežite Discord kako biste aktivnost nazvali prema svom naslovu, uključujući i na mobitelu.';
-
-  @override
-  String get dcMobileHint =>
-      'Povežite Discord da pokažete što gledate ili čitate. Koristi Discordovu stranicu za autorizaciju, a ne token vašeg računa.';
 
   @override
   String get dcConnect => 'Spojite Discord';
@@ -722,12 +692,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get dcRecommended => 'Preporučeno';
 
   @override
-  String get dcConnecting => 'Povezivanje…';
-
-  @override
-  String get dcDisconnected => 'Nije povezano';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Prijavljeni kao $name';
   }
@@ -921,15 +885,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get settingsSyncWhat => 'Što sinkronizirati';
 
   @override
-  String get settingsSyncServer => 'Na poslužitelju';
-
-  @override
   String get settingsSyncServerEmpty => 'Još ništa nije preneseno';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count postavke, prenesene $time iz $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'ovaj uređaj';
@@ -958,11 +914,6 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Zadnja sinkronizacija $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Sinkronizacija nije uspjela: $error';
   }
 
   @override
@@ -1740,22 +1691,11 @@ class AppLocalizationsHr extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Prikaži na svom Discord profilu što radiš. Treba ti Discord token.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Prikaži na svom Discord profilu što radiš. Discord desktop aplikacija mora biti pokrenuta.';
-
-  @override
   String get discordBrowsing => 'Prikaži aktivnost pregledavanja';
 
   @override
   String get discordBrowsingDesc =>
       'Prikaži i karticu, stranicu ili profil koji gledaš, a ne samo što gledaš ili čitaš.';
-
-  @override
-  String get discordLookHeader => 'Izgled prisutnosti';
 
   @override
   String get discordActivityType => 'Vrsta aktivnosti';
@@ -1796,9 +1736,6 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Zamijeni nazive animea i mange (te njihovu naslovnicu i poveznicu) s \"Something private\".';
-
-  @override
-  String get discordConnectionHeader => 'Veza';
 
   @override
   String get listSearchHint => 'Traži u ovom popisu';
@@ -1856,13 +1793,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord token';
-
-  @override
-  String get discordTokenSaved =>
-      'Spremljeno. Dodirni za zamjenu, dugo pritisni za uklanjanje.';
-
-  @override
-  String get discordTokenNotSet => 'Nije postavljen. Dodirni za dodavanje.';
 
   @override
   String get discordTokenSavedSnack => 'Discord token spremljen';
@@ -2061,9 +1991,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Opcije MangaBaka računa';
 
   @override
-  String get comickAccountOptions => 'Comick opcije računa';
-
-  @override
   String get comickClientId => 'Comick ID klijenta';
 
   @override
@@ -2157,9 +2084,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get simklReadOnly => 'Simkl je dobio pristup samo za čitanje';
 
   @override
-  String get traktReadOnly => 'Trakt je dobio pristup samo za čitanje';
-
-  @override
   String get incognitoEditsBlocked => 'Inkognito: izmjene popisa su blokirane';
 
   @override
@@ -2241,9 +2165,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get otherWorks => 'Ostali radovi';
-
-  @override
-  String get prequelSequel => 'Prequel i sequel';
 
   @override
   String get prequel => 'Prequel';
@@ -2387,16 +2308,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get trailerQuality => 'Kvaliteta prikolice';
 
   @override
-  String get titleCopied => 'Naslov kopiran';
-
-  @override
   String get linkCopied => 'Poveznica kopirana';
-
-  @override
-  String get watchTrailer => 'Pogledaj trailer';
-
-  @override
-  String get copyTitle => 'Kopiraj naslov';
 
   @override
   String get detailStale =>
@@ -3382,9 +3294,6 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Odaberi gdje spremiti kopiju';
-
-  @override
   String savedPath(String path) {
     return 'Spremljeno: $path';
   }
@@ -3958,9 +3867,6 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'za naslove koji trenutno izlaze';
-
-  @override
   String get progress => 'Napredak';
 
   @override
@@ -4169,11 +4075,6 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Veličina: $size';
-  }
-
-  @override
   String get installedState => 'Instalirano';
 
   @override
@@ -4272,11 +4173,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get syncAddMissingDesc => 'Dodaj i unose koje drugi servis još nema';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Sinkronizacija s $name';
-  }
-
-  @override
   String get syncDelete => 'Izbrišite ono što glavni servis nema';
 
   @override
@@ -4307,11 +4203,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get syncDeletedNote => 'Bit će izbrisano';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count bit će izbrisan iz $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Zadrži veći napredak';
 
   @override
@@ -4323,9 +4214,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Neće čitati';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Već na ovom popisu';
 
   @override
   String get animePlanetNewList => 'Novi naziv popisa';
@@ -5681,9 +5569,6 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Odobrenje je zarađeno s drugim korisničkim agentom, pa se ne šalje. Testirajte vezu da dobijete novu';
-
-  @override
-  String get watchSectionConnection => 'Veza';
 
   @override
   String get watchSectionSession => 'Sjednica';
@@ -7547,13 +7432,7 @@ class AppLocalizationsHr extends AppLocalizations {
   String get downloadPickAudio => 'Koju audio traku preuzeti?';
 
   @override
-  String get downloadNoAudio => 'Bez dodatnog zvuka';
-
-  @override
   String get downloadAudio => 'Zvuk';
-
-  @override
-  String get downloadNoSubtitle => 'Bez titlova';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8400,11 +8279,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get generalSectionPrivacy => 'Privatnost';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Prijeđi na $service da otvoriš ovo';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Zadana brzina, automatska reprodukcija, prilagodba videozapisa, orijentacija i slika u slici';
 
@@ -8720,9 +8594,6 @@ class AppLocalizationsHr extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Čekanje';
-
-  @override
   String get stepChecking => 'Provjera...';
 
   @override
@@ -8793,14 +8664,7 @@ class AppLocalizationsHr extends AppLocalizations {
       'Povucite značku u kut prve kartice ili povucite značku koja se već nalazi na njoj da je pomaknete. Bedževi mijenjaju mjesta, tako da se nijedan nikada ne preklapa. Dodirnite značku u nastavku da biste je uključili ili isključili.';
 
   @override
-  String get statusAuto => 'Automatski';
-
-  @override
   String get unreadCounter => 'Brojač nepročitanih';
-
-  @override
-  String get unreadCounterDesc =>
-      'Pokažite koliko je epizoda ili poglavlja ostalo na plakatima';
 
   @override
   String get settingsShortcuts => 'Tipkovnički prečaci';
@@ -8839,9 +8703,6 @@ class AppLocalizationsHr extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Vrati na zadano';
-
-  @override
-  String get shortcutClearKeys => 'Uklonite sve ključeve';
 
   @override
   String get shortcutResetAll => 'Resetiraj sve prečace';
@@ -9027,10 +8888,6 @@ class AppLocalizationsHr extends AppLocalizations {
   String get closeActionAlways => 'Uvijek nastavite trčati u ladici';
 
   @override
-  String get closeActionNoTray =>
-      'Sistemska traka nije dostupna ovdje, pa se aplikacija zatvara kada se zatvori';
-
-  @override
   String get gamepadNav => 'Gamepad navigacija';
 
   @override
@@ -9104,9 +8961,6 @@ class AppLocalizationsHr extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Videozapisi se ne mogu reproducirati dok se player ponovno ne preuzme.';
-
-  @override
-  String get trailerLoading => 'Učitavanje najave...';
 
   @override
   String get trailerFailed =>

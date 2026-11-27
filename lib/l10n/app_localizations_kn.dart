@@ -422,10 +422,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub ನೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಖಾಸಗಿ ಸಾರಾಂಶದಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ';
-
-  @override
   String get settingsSyncToken => 'ವೈಯಕ್ತಿಕ ಪ್ರವೇಶ ಟೋಕನ್ ಬಳಸಿ';
 
   @override
@@ -444,20 +440,8 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsSyncSignOut => 'ಸೈನ್ ಔಟ್ ಮಾಡಿ';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub ನಲ್ಲಿ $code ನಮೂದಿಸಿ';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ GitHub ಪುಟವನ್ನು ತೆರೆಯಲಾಗಿದೆ. ಕೋಡ್ ನಕಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ರದ್ದುಗೊಳಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಹಿಡಿದುಕೊಳ್ಳಿ.';
-
-  @override
   String get settingsSyncSignInFailed =>
       'GitHub ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ';
-
-  @override
-  String get dcPreview => 'ಪೂರ್ವವೀಕ್ಷಣೆ';
 
   @override
   String get dcSampleWatching => 'ನೋಡುತ್ತಿದ್ದೇನೆ';
@@ -479,21 +463,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get dcMemberList => 'ಸದಸ್ಯರ ಪಟ್ಟಿಯಲ್ಲಿ';
 
   @override
-  String get dcAccount => 'ಖಾತೆ';
-
-  @override
-  String get dcSignIn => 'ಅಪಶ್ರುತಿಯೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ';
-
-  @override
   String get dcSignOut => 'ಸೈನ್ ಔಟ್ ಮಾಡಿ';
-
-  @override
-  String get dcDesktopHint =>
-      'ಸಂಪರ್ಕಿಸದೆಯೇ, ಡಿಸ್ಕಾರ್ಡ್ ಡೆಸ್ಕ್‌ಟಾಪ್ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಕ \"ಡಾರ್ಟೊಟ್ಸು ವೀಕ್ಷಿಸುವುದನ್ನು\" ತೋರಿಸುತ್ತದೆ. ಮೊಬೈಲ್ ಸೇರಿದಂತೆ ನಿಮ್ಮ ಶೀರ್ಷಿಕೆಯ ನಂತರ ಚಟುವಟಿಕೆಯನ್ನು ಹೆಸರಿಸಲು ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ.';
-
-  @override
-  String get dcMobileHint =>
-      'ನೀವು ಏನನ್ನು ವೀಕ್ಷಿಸುತ್ತಿರುವಿರಿ ಅಥವಾ ಓದುತ್ತಿರುವಿರಿ ಎಂಬುದನ್ನು ತೋರಿಸಲು ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ. ಇದು ಡಿಸ್ಕಾರ್ಡ್‌ನ ಅಧಿಕೃತ ಪುಟವನ್ನು ಬಳಸುತ್ತದೆ, ನಿಮ್ಮ ಖಾತೆಯ ಟೋಕನ್ ಅಲ್ಲ.';
 
   @override
   String get dcConnect => 'ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ';
@@ -718,12 +688,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get dcRecommended => 'ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ';
 
   @override
-  String get dcConnecting => 'ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...';
-
-  @override
-  String get dcDisconnected => 'ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name ನಂತೆ ಸೈನ್ ಇನ್ ಮಾಡಲಾಗಿದೆ';
   }
@@ -920,15 +884,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get settingsSyncWhat => 'ಏನು ಸಿಂಕ್ ಮಾಡಬೇಕು';
 
   @override
-  String get settingsSyncServer => 'ಸರ್ವರ್‌ನಲ್ಲಿ';
-
-  @override
   String get settingsSyncServerEmpty => 'ಇನ್ನೂ ಏನನ್ನೂ ಅಪ್‌ಲೋಡ್ ಮಾಡಿಲ್ಲ';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count ಸೆಟ್ಟಿಂಗ್‌ಗಳು, $device ನಿಂದ $time ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ';
-  }
 
   @override
   String get settingsSyncThisDevice => 'ಈ ಸಾಧನ';
@@ -957,11 +913,6 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'ಕೊನೆಯದಾಗಿ ಸಿಂಕ್ ಮಾಡಿದ್ದು $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'ಸಿಂಕ್ ವಿಫಲವಾಗಿದೆ: $error';
   }
 
   @override
@@ -1745,22 +1696,11 @@ class AppLocalizationsKn extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'ನೀನು ಏನು ಮಾಡ್ತಿದ್ದೀಯ ಅಂತ ನಿನ್ನ Discord ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ತೋರಿಸು. ನಿನ್ನ Discord ಟೋಕನ್ ಬೇಕು.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'ನೀನು ಏನು ಮಾಡ್ತಿದ್ದೀಯ ಅಂತ ನಿನ್ನ Discord ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ತೋರಿಸು. Discord ಡೆಸ್ಕ್‌ಟಾಪ್ ಆ್ಯಪ್ ಚಾಲನೆಯಲ್ಲಿರಬೇಕು.';
-
-  @override
   String get discordBrowsing => 'ಬ್ರೌಸಿಂಗ್ ಚಟುವಟಿಕೆ ತೋರಿಸು';
 
   @override
   String get discordBrowsingDesc =>
       'ನೀನು ನೋಡುವ ಅಥವಾ ಓದುವುದನ್ನು ಮಾತ್ರವಲ್ಲ, ನೋಡುತ್ತಿರುವ ಟ್ಯಾಬ್, ಪುಟ ಅಥವಾ ಪ್ರೊಫೈಲ್ ಅನ್ನೂ ತೋರಿಸು.';
-
-  @override
-  String get discordLookHeader => 'ಪ್ರೆಸೆನ್ಸ್ ಲುಕ್';
 
   @override
   String get discordActivityType => 'ಚಟುವಟಿಕೆಯ ವಿಧ';
@@ -1801,9 +1741,6 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'ಆನಿಮೆ ಮತ್ತು ಮಂಗಾ ಹೆಸರುಗಳನ್ನು (ಅವುಗಳ ಕವರ್ ಮತ್ತು ಲಿಂಕ್ ಸಮೇತ) \"ಖಾಸಗಿ ವಿಷಯ\" ಎಂದು ಬದಲಿಸು.';
-
-  @override
-  String get discordConnectionHeader => 'ಸಂಪರ್ಕ';
 
   @override
   String get listSearchHint => 'ಈ ಪಟ್ಟಿಯಲ್ಲಿ ಹುಡುಕು';
@@ -1861,13 +1798,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord ಟೋಕನ್';
-
-  @override
-  String get discordTokenSaved =>
-      'ಉಳಿಸಲಾಗಿದೆ. ಬದಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡು, ತೆಗೆಯಲು ಒತ್ತಿ ಹಿಡಿ.';
-
-  @override
-  String get discordTokenNotSet => 'ಹೊಂದಿಸಿಲ್ಲ. ಸೇರಿಸಲು ಟ್ಯಾಪ್ ಮಾಡು.';
 
   @override
   String get discordTokenSavedSnack => 'Discord ಟೋಕನ್ ಉಳಿಸಲಾಗಿದೆ';
@@ -2066,9 +1996,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka ಖಾತೆಯ ಆಯ್ಕೆಗಳು';
 
   @override
-  String get comickAccountOptions => 'ಕಾಮಿಕ್ ಖಾತೆ ಆಯ್ಕೆಗಳು';
-
-  @override
   String get comickClientId => 'ಕಾಮಿಕ್ ಕ್ಲೈಂಟ್ ಐಡಿ';
 
   @override
@@ -2162,9 +2089,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get simklReadOnly => 'Simkl ಓದಲು-ಮಾತ್ರ ಪ್ರವೇಶ ನೀಡಿದೆ';
 
   @override
-  String get traktReadOnly => 'ಟ್ರ್ಯಾಕ್ಟ್ ಓದಲು-ಮಾತ್ರ ಪ್ರವೇಶವನ್ನು ನೀಡಿದೆ';
-
-  @override
   String get incognitoEditsBlocked =>
       'ಇನ್‌ಕಾಗ್ನಿಟೋ: ಪಟ್ಟಿ ಎಡಿಟ್‌ಗಳು ಬ್ಲಾಕ್ ಆಗಿವೆ';
 
@@ -2245,9 +2169,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get otherWorks => 'ಇತರ ಕೃತಿಗಳು';
-
-  @override
-  String get prequelSequel => 'ಪ್ರೀಕ್ವೆಲ್ & ಸೀಕ್ವೆಲ್';
 
   @override
   String get prequel => 'ಪ್ರೀಕ್ವೆಲ್';
@@ -2393,16 +2314,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get trailerQuality => 'ಟ್ರೈಲರ್ ಗುಣಮಟ್ಟ';
 
   @override
-  String get titleCopied => 'ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಆಯ್ತು';
-
-  @override
   String get linkCopied => 'ಲಿಂಕ್ ಕಾಪಿ ಆಯ್ತು';
-
-  @override
-  String get watchTrailer => 'ಟ್ರೈಲರ್ ನೋಡು';
-
-  @override
-  String get copyTitle => 'ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಮಾಡು';
 
   @override
   String get detailStale =>
@@ -3389,9 +3301,6 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'ಬ್ಯಾಕಪ್ ಎಲ್ಲಿ ಉಳಿಸಬೇಕು ಆರಿಸು';
-
-  @override
   String savedPath(String path) {
     return '$path ಉಳಿಸಲಾಗಿದೆ';
   }
@@ -3958,9 +3867,6 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'ಈಗ ಪ್ರಸಾರವಾಗುತ್ತಿರುವ ಶೀರ್ಷಿಕೆಗಳಿಗೆ';
-
-  @override
   String get progress => 'ಪ್ರಗತಿ';
 
   @override
@@ -4162,11 +4068,6 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'ಗಾತ್ರ: $size';
-  }
-
-  @override
   String get installedState => 'ಇನ್‌ಸ್ಟಾಲ್ ಆಗಿದೆ';
 
   @override
@@ -4266,11 +4167,6 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಇನ್ನೊಂದು ಸರ್ವಿಸ್‌ನಲ್ಲಿ ಇನ್ನೂ ಇಲ್ಲದ ಎಂಟ್ರಿಗಳನ್ನೂ ಸೇರಿಸು';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name ನೊಂದಿಗೆ ಸಿಂಕ್ ಮಾಡಿ';
-  }
-
-  @override
   String get syncDelete => 'ಮುಖ್ಯ ಸೇವೆಯು ಹೊಂದಿಲ್ಲ ಎಂಬುದನ್ನು ಅಳಿಸಿ';
 
   @override
@@ -4301,11 +4197,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get syncDeletedNote => 'ಅಳಿಸಲಾಗುವುದು';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count ಅನ್ನು $name ನಿಂದ ಅಳಿಸಲಾಗುತ್ತದೆ';
-  }
-
-  @override
   String get syncOnlyForward => 'ಮುಂದಿರುವ ಪ್ರಗತಿ ಉಳಿಸು';
 
   @override
@@ -4317,9 +4208,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'ಓದುವುದಿಲ್ಲ';
-
-  @override
-  String get animePlanetAlreadyOnList => 'ಈಗಾಗಲೇ ಈ ಪಟ್ಟಿಯಲ್ಲಿದೆ';
 
   @override
   String get animePlanetNewList => 'ಹೊಸ ಪಟ್ಟಿಯ ಹೆಸರು';
@@ -5669,9 +5557,6 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'ಮತ್ತೊಂದು ಬಳಕೆದಾರ ಏಜೆಂಟ್‌ನೊಂದಿಗೆ ಕ್ಲಿಯರೆನ್ಸ್ ಗಳಿಸಲಾಗಿದೆ, ಆದ್ದರಿಂದ ಅದನ್ನು ಕಳುಹಿಸಲಾಗಿಲ್ಲ. ಹೊಸದನ್ನು ಪಡೆಯಲು ಸಂಪರ್ಕವನ್ನು ಪರೀಕ್ಷಿಸಿ';
-
-  @override
-  String get watchSectionConnection => 'ಸಂಪರ್ಕ';
 
   @override
   String get watchSectionSession => 'ಅಧಿವೇಶನ';
@@ -7545,13 +7430,7 @@ class AppLocalizationsKn extends AppLocalizations {
   String get downloadPickAudio => 'ಯಾವ ಆಡಿಯೋ ಟ್ರ್ಯಾಕ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬೇಕು?';
 
   @override
-  String get downloadNoAudio => 'ಹೆಚ್ಚುವರಿ ಆಡಿಯೋ ಇಲ್ಲ';
-
-  @override
   String get downloadAudio => 'ಆಡಿಯೋ';
-
-  @override
-  String get downloadNoSubtitle => 'ಸಬ್‌ಟೈಟಲ್ ಇಲ್ಲ';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8389,11 +8268,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get generalSectionPrivacy => 'ಗೌಪ್ಯತೆ';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'ಇದನ್ನು ತೆರೆಯಲು $service ಗೆ ಬದಲಿಸಿ';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'ಡೀಫಾಲ್ಟ್ ವೇಗ, ಸ್ವಯಂ ಪ್ಲೇ, ವೀಡಿಯೊ ಫಿಟ್, ದೃಷ್ಟಿಕೋನ ಮತ್ತು ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ';
 
@@ -8712,9 +8586,6 @@ class AppLocalizationsKn extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'ಕಾಯುತ್ತಿದೆ';
-
-  @override
   String get stepChecking => 'ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...';
 
   @override
@@ -8785,14 +8656,7 @@ class AppLocalizationsKn extends AppLocalizations {
       'ಮೊದಲ ಕಾರ್ಡ್‌ನ ಮೂಲೆಯಲ್ಲಿ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಎಳೆಯಿರಿ ಅಥವಾ ಅದನ್ನು ಸರಿಸಲು ಈಗಾಗಲೇ ಅದರ ಮೇಲೆ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಎಳೆಯಿರಿ. ಬ್ಯಾಡ್ಜ್‌ಗಳು ಸ್ಥಳಗಳನ್ನು ಬದಲಾಯಿಸುತ್ತವೆ, ಆದ್ದರಿಂದ ಯಾವುದೂ ಅತಿಕ್ರಮಿಸುವುದಿಲ್ಲ. ಅದನ್ನು ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡಲು ಕೆಳಗಿನ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ.';
 
   @override
-  String get statusAuto => 'ಆಟೋ';
-
-  @override
   String get unreadCounter => 'ಓದದ ಕೌಂಟರ್';
-
-  @override
-  String get unreadCounterDesc =>
-      'ಪೋಸ್ಟರ್‌ಗಳಲ್ಲಿ ಎಷ್ಟು ಸಂಚಿಕೆಗಳು ಅಥವಾ ಅಧ್ಯಾಯಗಳು ಉಳಿದಿವೆ ಎಂಬುದನ್ನು ತೋರಿಸಿ';
 
   @override
   String get settingsShortcuts => 'ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳು';
@@ -8831,9 +8695,6 @@ class AppLocalizationsKn extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸಿ';
-
-  @override
-  String get shortcutClearKeys => 'ಎಲ್ಲಾ ಕೀಲಿಗಳನ್ನು ತೆಗೆದುಹಾಕಿ';
 
   @override
   String get shortcutResetAll => 'ಎಲ್ಲಾ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಮರುಹೊಂದಿಸಿ';
@@ -9022,10 +8883,6 @@ class AppLocalizationsKn extends AppLocalizations {
   String get closeActionAlways => 'ಯಾವಾಗಲೂ ತಟ್ಟೆಯಲ್ಲಿ ಓಡುತ್ತಲೇ ಇರಿ';
 
   @override
-  String get closeActionNoTray =>
-      'ಸಿಸ್ಟಂ ಟ್ರೇ ಇಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ, ಆದ್ದರಿಂದ ಮುಚ್ಚಿದಾಗ ಅಪ್ಲಿಕೇಶನ್ ತೊರೆಯುತ್ತದೆ';
-
-  @override
   String get gamepadNav => 'ಗೇಮ್ಪ್ಯಾಡ್ ನ್ಯಾವಿಗೇಷನ್';
 
   @override
@@ -9099,9 +8956,6 @@ class AppLocalizationsKn extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'ಪ್ಲೇಯರ್ ಅನ್ನು ಮತ್ತೆ ಡೌನ್‌ಲೋಡ್ ಮಾಡುವವರೆಗೆ ವೀಡಿಯೊಗಳನ್ನು ಪ್ಲೇ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ.';
-
-  @override
-  String get trailerLoading => 'ಟ್ರೇಲರ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ...';
 
   @override
   String get trailerFailed =>

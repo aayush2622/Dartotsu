@@ -423,10 +423,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub\'la oturum açın';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Ayarlar, hesabınızdaki özel bir özette saklanır';
-
-  @override
   String get settingsSyncToken => 'Kişisel erişim belirteci kullanın';
 
   @override
@@ -445,19 +441,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsSyncSignOut => 'Oturumu kapat';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub\'a $code girin';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'GitHub sayfası tarayıcınızda açıldı. Kodu kopyalamak için dokunun veya iptal etmek için dokunup basılı tutun.';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub\'ta oturum açılamadı';
-
-  @override
-  String get dcPreview => 'Önizleme';
 
   @override
   String get dcSampleWatching => 'izliyorum';
@@ -479,21 +463,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dcMemberList => 'Üye listesinde';
 
   @override
-  String get dcAccount => 'Hesap';
-
-  @override
-  String get dcSignIn => 'Discord\'la oturum aç';
-
-  @override
   String get dcSignOut => 'Oturumu kapat';
-
-  @override
-  String get dcDesktopHint =>
-      'Discord, bağlanmadan masaüstü uygulaması aracılığıyla \"Dartotsu İzleniyor\" ifadesini gösteriyor. Etkinliğe başlığınızın adını vermek için (cep telefonu da dahil) Discord\'u bağlayın.';
-
-  @override
-  String get dcMobileHint =>
-      'Ne izlediğinizi veya okuduğunuzu göstermek için Discord\'u bağlayın. Hesap jetonunuzu değil Discord\'un yetkilendirme sayfasını kullanır.';
 
   @override
   String get dcConnect => 'Discord\'u Bağla';
@@ -717,12 +687,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dcRecommended => 'Önerilen';
 
   @override
-  String get dcConnecting => 'Bağlanıyor…';
-
-  @override
-  String get dcDisconnected => 'Bağlı değil';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name olarak oturum açıldı';
   }
@@ -917,15 +881,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get settingsSyncWhat => 'Ne senkronize edilmeli';
 
   @override
-  String get settingsSyncServer => 'Sunucuda';
-
-  @override
   String get settingsSyncServerEmpty => 'Henüz hiçbir şey yüklenmedi';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count ayarları, $time\'den $device\'ye yüklendi';
-  }
 
   @override
   String get settingsSyncThisDevice => 'bu cihaz';
@@ -954,11 +910,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Son senkronizasyon $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Senkronizasyon başarısız oldu: $error';
   }
 
   @override
@@ -1739,22 +1690,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Yaptığın şeyi Discord profilinde göster. Discord token\'ın gerekir.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Yaptığın şeyi Discord profilinde göster. Discord masaüstü uygulamasının çalışıyor olması gerekir.';
-
-  @override
   String get discordBrowsing => 'Gezinme etkinliğini göster';
 
   @override
   String get discordBrowsingDesc =>
       'Sadece izlediğini ya da okuduğunu değil, baktığın sekmeyi, sayfayı ya da profili de göster.';
-
-  @override
-  String get discordLookHeader => 'Durum görünümü';
 
   @override
   String get discordActivityType => 'Etkinlik türü';
@@ -1794,9 +1734,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Anime ve manga adlarını (kapak ve bağlantıyla birlikte) \"Something private\" ile değiştir.';
-
-  @override
-  String get discordConnectionHeader => 'Bağlantı';
 
   @override
   String get listSearchHint => 'Bu listede ara';
@@ -1854,13 +1791,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord token\'ı';
-
-  @override
-  String get discordTokenSaved =>
-      'Kaydedildi. Değiştirmek için dokun, silmek için uzun bas.';
-
-  @override
-  String get discordTokenNotSet => 'Ayarlanmadı. Eklemek için dokun.';
 
   @override
   String get discordTokenSavedSnack => 'Discord token\'ı kaydedildi';
@@ -2059,9 +1989,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka hesap seçenekleri';
 
   @override
-  String get comickAccountOptions => 'Komik hesap seçenekleri';
-
-  @override
   String get comickClientId => 'Komik Müşteri Kimliği';
 
   @override
@@ -2153,9 +2080,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get simklReadOnly => 'Simkl salt okunur erişim verdi';
 
   @override
-  String get traktReadOnly => 'Trakt\'a salt okunur erişim izni verildi';
-
-  @override
   String get incognitoEditsBlocked => 'Gizli mod: liste düzenlemeleri engelli';
 
   @override
@@ -2235,9 +2159,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get otherWorks => 'Diğer işler';
-
-  @override
-  String get prequelSequel => 'Öncesi ve sonrası';
 
   @override
   String get prequel => 'Ön bölüm';
@@ -2381,16 +2302,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get trailerQuality => 'Römork kalitesi';
 
   @override
-  String get titleCopied => 'Başlık kopyalandı';
-
-  @override
   String get linkCopied => 'Bağlantı kopyalandı';
-
-  @override
-  String get watchTrailer => 'Fragmanı izle';
-
-  @override
-  String get copyTitle => 'Başlığı kopyala';
 
   @override
   String get detailStale =>
@@ -3376,9 +3288,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Yedeğin nereye kaydedileceğini seç';
-
-  @override
   String savedPath(String path) {
     return '$path kaydedildi';
   }
@@ -3949,9 +3858,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'şu an yayınlanan başlıklar için';
-
-  @override
   String get progress => 'İlerleme';
 
   @override
@@ -4157,11 +4063,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Boyut: $size';
-  }
-
-  @override
   String get installedState => 'Yüklü';
 
   @override
@@ -4260,11 +4161,6 @@ class AppLocalizationsTr extends AppLocalizations {
       'Diğer serviste henüz olmayan girişleri de ekle';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name ile senkronize et';
-  }
-
-  @override
   String get syncDelete => 'Ana hizmetin sahip olmadığını silin';
 
   @override
@@ -4295,11 +4191,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get syncDeletedNote => 'Silinecek';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count, $name\'den silinecek';
-  }
-
-  @override
   String get syncOnlyForward => 'İleri durumdaki ilerlemeyi koru';
 
   @override
@@ -4311,9 +4202,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'okumayacağım';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Zaten bu listede';
 
   @override
   String get animePlanetNewList => 'Yeni liste adı';
@@ -5660,9 +5548,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'İzin başka bir kullanıcı aracısıyla kazanıldığı için gönderilmedi. Yenisini almak için bağlantıyı test edin';
-
-  @override
-  String get watchSectionConnection => 'Bağlantı';
 
   @override
   String get watchSectionSession => 'Oturum';
@@ -7527,13 +7412,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get downloadPickAudio => 'Hangi ses izi indirilsin?';
 
   @override
-  String get downloadNoAudio => 'Ekstra ses yok';
-
-  @override
   String get downloadAudio => 'Ses';
-
-  @override
-  String get downloadNoSubtitle => 'Altyazı yok';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8370,11 +8249,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get generalSectionPrivacy => 'Gizlilik';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Bunu açmak için $service\'a geçin';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Varsayılan hız, otomatik oynatma, video sığdırma, yönlendirme ve resim içinde resim';
 
@@ -8689,9 +8563,6 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Bekliyor';
-
-  @override
   String get stepChecking => 'Kontrol ediliyor…';
 
   @override
@@ -8762,14 +8633,7 @@ class AppLocalizationsTr extends AppLocalizations {
       'Bir rozeti ilk kartın köşesine sürükleyin veya üzerinde zaten bulunan bir rozeti taşımak için sürükleyin. Rozetler yer değiştiriyor, dolayısıyla hiçbiri çakışmıyor. Açmak veya kapatmak için aşağıdaki rozetlerden birine dokunun.';
 
   @override
-  String get statusAuto => 'Otomatik';
-
-  @override
   String get unreadCounter => 'Okunmamış sayaç';
-
-  @override
-  String get unreadCounterDesc =>
-      'Posterlerde kaç bölüm veya bölüm kaldığını gösterin';
 
   @override
   String get settingsShortcuts => 'Klavye kısayolları';
@@ -8806,9 +8670,6 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Varsayılana sıfırla';
-
-  @override
-  String get shortcutClearKeys => 'Tüm anahtarları kaldır';
 
   @override
   String get shortcutResetAll => 'Tüm kısayolları sıfırla';
@@ -8995,10 +8856,6 @@ class AppLocalizationsTr extends AppLocalizations {
   String get closeActionAlways => 'Daima tepside çalışmaya devam edin';
 
   @override
-  String get closeActionNoTray =>
-      'Sistem tepsisi burada mevcut olmadığından uygulama kapatıldığında sonlandırılıyor';
-
-  @override
   String get gamepadNav => 'Oyun kumandası navigasyonu';
 
   @override
@@ -9072,9 +8929,6 @@ class AppLocalizationsTr extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Oynatıcı tekrar indirilene kadar videolar oynatılamaz.';
-
-  @override
-  String get trailerLoading => 'Fragman yükleniyor…';
 
   @override
   String get trailerFailed => 'Fragman burada oynatılamadı, tarayıcıda açıldı';

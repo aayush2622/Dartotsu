@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "同步更改",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "使用 GitHub 登录",
-    "settingsSyncSignInDesc": "设置存储在您帐户的私人要点中",
     "settingsSyncToken": "使用个人访问令牌",
     "settingsSyncTokenDesc": "在 github.com/settings/tokens 创建一个，仅具有 gist 权限",
     "settingsSyncTokenField": "代币",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "退出",
-    "settingsSyncCode": "在 GitHub 上输入 {code}",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "GitHub 页面在浏览器中打开。点击以复制代码，或点击并按住以取消。",
     "settingsSyncSignInFailed": "无法登录 GitHub",
-    "dcPreview": "预览",
     "dcSampleWatching": "观看",
     "dcSampleReading": "阅读",
     "dcSampleBrowsing": "浏览",
     "dcSampleLive": "现在",
     "dcLiveNothing": "现在什么也没有显示。打开标题、开始一集或一章，它就会出现在此处。",
     "dcMemberList": "在会员名单中",
-    "dcAccount": "账户",
-    "dcSignIn": "使用 Discord 登录",
     "dcSignOut": "退出",
-    "dcDesktopHint": "在没有连接的情况下，Discord 通过桌面应用程序显示“Watching Dartotsu”。连接 Discord 以根据您的标题命名活动，包括在移动设备上。",
-    "dcMobileHint": "连接 Discord 以显示您正在观看或阅读的内容。它使用 Discord 的授权页面，而不是您的帐户令牌。",
     "dcConnect": "连接不和谐",
     "dcConnectDesc": "打开 Discord 的授权页面并在授权应用程序下添加 Dartotsu。 Discord 要求更新您的状态。仅保存刷新令牌，而不保存您的帐户令牌。",
     "dcConnectFailed": "无法连接 Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "账户令牌",
     "dcInUse": "使用中",
     "dcRecommended": "推荐",
-    "dcConnecting": "正在连接…",
-    "dcDisconnected": "未连接",
     "dcSignedInAs": "以 {name} 身份登录",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "从 GitHub 删除",
     "settingsSyncSecretsDeleteMessage": "这将从您的要点中删除加密的帐户文件。其他设备保留其登录信息并可以设置新的密码。",
     "settingsSyncWhat": "要同步什么",
-    "settingsSyncServer": "在服务器上",
     "settingsSyncServerEmpty": "尚未上传任何内容",
-    "settingsSyncServerInfo": "{count} 设置，从 {device} 上传 {time}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "这个设备",
     "settingsSyncCount": "{count, plural, =0{服务器上什么都没有} =1{1 在服务器上设置} other{服务器上的 {count} 设置}}",
     "settingsSyncNow": "立即同步",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "同步失败：{error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "仅同步在任何地方都相同的设置。帐户、令牌、文件夹、扩展、通知、Discord、更新和窗口大小保留在每台设备上。",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "开启链接处理，让 anilist.co 的链接直接打开应用",
     "linkSettingsFailed": "无法打开系统设置",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "在你的 Discord 个人资料上显示你在做什么。需要你的 Discord Token。",
-    "discordRichPresenceDesktopDesc": "在你的 Discord 个人资料上显示你在做什么。需要 Discord 桌面端正在运行。",
     "discordBrowsing": "显示浏览动态",
     "discordBrowsingDesc": "除了你在看或在读的内容，也显示你正在浏览的标签页、页面或个人资料。",
-    "discordLookHeader": "状态外观",
     "discordActivityType": "活动类型",
     "discordActivityTypeDesc": "Discord 的措辞方式：“正在观看…”或“正在玩…”。自动模式下，动画显示“正在观看”，其余显示“正在玩”。",
     "discordWatching": "正在观看",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "“查看动画 / 漫画”和“打开 Dartotsu”按钮。",
     "discordHideTitles": "隐藏标题",
     "discordHideTitlesDesc": "把动画和漫画的名称（及其封面和链接）替换成“Something private”。",
-    "discordConnectionHeader": "连接",
     "listSearchHint": "搜索此列表",
     "listSort": "排序",
     "listFilter": "筛选",
@@ -671,8 +637,6 @@
     "listNoMatches": "此列表中没有匹配的内容",
     "discordLogin": "登录 Discord",
     "discordToken": "Discord Token",
-    "discordTokenSaved": "已保存。点按可替换，长按可删除。",
-    "discordTokenNotSet": "未设置。点按添加。",
     "discordTokenSavedSnack": "已保存 Discord Token",
     "discordTokenRemovedSnack": "已删除 Discord Token",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "在信息流和搜索中隐藏成人作品，并把你自己的成人条目放进“隐藏媒体”。",
     "kitsuAccountOptions": "Kitsu 账号选项",
     "mangaBakaAccountOptions": "MangaBaka 账号选项",
-    "comickAccountOptions": "Comick 帐户选项",
     "comickClientId": "Comick 客户端 ID",
     "comickClientIdDesc": "在 Comick.dev 上注册的自定义客户端 ID",
     "couldNotUpdateKitsuSettings": "无法更新你的 Kitsu 设置",
@@ -761,7 +724,6 @@
     "accountDetails": "账号详情",
     "refreshFromKitsu": "从 Kitsu 刷新",
     "simklReadOnly": "Simkl 只授予了只读权限",
-    "traktReadOnly": "Trakt 授予只读访问权限",
     "incognitoEditsBlocked": "无痕模式：列表编辑已被禁止",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "无痕模式：进度未保存",
@@ -786,7 +748,6 @@
     "mangaCredits": "漫画参与作品",
     "mainProductions": "主要作品",
     "otherWorks": "其他作品",
-    "prequelSequel": "前传与续作",
     "prequel": "前传",
     "sequel": "续集",
     "previousSeason": "上一季",
@@ -833,10 +794,7 @@
     "addToList": "添加到列表",
     "trailer": "预告片",
     "trailerQuality": "拖车质量",
-    "titleCopied": "已复制标题",
     "linkCopied": "已复制链接",
-    "watchTrailer": "观看预告片",
-    "copyTitle": "复制标题",
     "detailStale": "无法访问 AniList。这是已保存的信息，可能已过时。",
     "copyLink": "复制链接",
     "openInBrowser": "在浏览器中打开",
@@ -1139,7 +1097,6 @@
     "import": "导入",
     "animeCount": "{count} 部动画",
     "mangaCount": "{count} 部漫画",
-    "chooseSaveLocation": "选择备份的保存位置",
     "savedPath": "已保存 {path}",
     "exportFailed": "导出失败：{error}",
     "nothingInLocalLists": "你的本地列表里还没有内容。",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "打开链接出错：{error}",
     "linkCantBeOpened": "无法打开此链接：{link}",
     "linkOpenError": "打开链接出错：{error}",
-    "forReleasingTitles": "适用于正在连载的作品",
     "progress": "进度",
     "notes": "备注",
     "serviceNotFound": "找不到服务“{id}”",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} 不在已配置的仓库中",
     "pluginFetchFailed": "获取插件信息失败",
     "installPluginTitle": "安装 {name}",
-    "sizeLabel": "大小：{size}",
     "installedState": "已安装",
     "updatePluginTitle": "更新{name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "打开应用时以及每 30 分钟，在后台获取并同步",
     "syncAddMissing": "添加缺失条目",
     "syncAddMissingDesc": "也添加另一个服务里还没有的条目",
-    "syncServiceOn": "与 {name} 同步",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "删除主服务没有的内容",
     "syncDeleteDesc": "从不在主列表上的其他服务中删除条目。仅删除可以与标题匹配的条目，因此 Simkl 电影和连续剧之类的内容会保留",
     "syncDeleteTitle": "删除条目？",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "删除",
     "syncToDelete": "删除",
     "syncDeletedNote": "将被删除",
-    "syncWillRemove": "{count} 将从 {name} 中删除",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "保留更靠前的进度",
     "syncOnlyForwardDesc": "不降低已领先服务的进度",
     "animePlanetWontWatch": "不会看",
     "animePlanetWontRead": "不会读书",
-    "animePlanetAlreadyOnList": "已经在此列表中",
     "animePlanetNewList": "新名单名称",
     "syncPrivate": "私人条目",
     "syncPrivateDesc": "如何处理您保密的条目。具有私有选项的服务可以使它们私有；其他人会公开展示它们",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "该许可是通过另一个用户代理获得的，因此不会发送。测试连接以获取新连接",
-    "watchSectionConnection": "连接方式",
     "watchSectionSession": "会议",
     "watchSectionTools": "工具",
     "watchMetaSource": "剧集详情来源",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "下载哪个视频流？",
     "downloadPickSubtitle": "下载哪个字幕？",
     "downloadPickAudio": "下载哪个音轨？",
-    "downloadNoAudio": "不要额外音频",
     "downloadAudio": "音频",
-    "downloadNoSubtitle": "无字幕",
     "downloadHlsNeedsFfmpeg": "这个视频流是 HLS 播放列表，下载需要 FFmpeg 组件。",
     "downloadSourceMissing": "这一集的源还没安装",
     "downloadDashDrm": "该流受 DRM 保护",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "语言与行为",
     "generalSectionSecurity": "安全性",
     "generalSectionPrivacy": "隐私",
-    "notificationsOtherService": "切换到 {service} 打开此",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "默认速度、自动播放、视频适合、方向和画中画",
     "secPlayerSkip": "自动跳过开头、结尾和重述",
     "secPlayerControls": "滑动、按住和点击手势并寻求预览",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "等待",
     "stepChecking": "正在检查...",
     "stepUpToDate": "最新",
     "stepUpToDateWith": "最新·{detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "漫画",
     "readerCloudflare": "在浏览器中打开（Cloudflare 检查）",
     "badgeBoardHint": "将徽章拖动到第一张卡的一角，或拖动其上已有的徽章来移动它。徽章交换位置，因此不会重叠。点按下面的徽章即可将其打开或关闭。",
-    "statusAuto": "汽车",
     "unreadCounter": "未读计数器",
-    "unreadCounterDesc": "显示海报上还剩多少集或章节",
     "settingsShortcuts": "键盘快捷键",
     "settingsShortcutsDesc": "查看、更改和关闭每个按键",
     "shortcutGroupApp": "应用程序",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "未设置",
     "shortcutAddKey": "添加密钥",
     "shortcutResetOne": "重置为默认值",
-    "shortcutClearKeys": "删除所有键",
     "shortcutResetAll": "重置所有快捷键",
     "shortcutResetAllDesc": "将每个键恢复为默认值",
     "shortcutPress": "按您想要的按键或组合",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "退出应用程序",
     "closeActionWhenBusy": "当某些东西正在运行时，继续在托盘中运行",
     "closeActionAlways": "始终保持在托盘中运行",
-    "closeActionNoTray": "系统托盘在这里不可用，因此应用程序在关闭时退出",
     "gamepadNav": "游戏手柄导航",
     "gamepadNavDesc": "在应用程序中移动并使用游戏控制器控制玩家",
     "trayShow": "显示达图津",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "复制详细信息",
     "removePlayerTitle": "删除播放器？",
     "removePlayerMessage": "重新下载播放器后，视频才能播放。",
-    "trailerLoading": "正在加载拖车...",
     "trailerFailed": "此处无法播放预告片，请在浏览器中打开"
 }

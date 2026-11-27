@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "ಬದಲಾವಣೆಯ ಮೇಲೆ ಸಿಂಕ್ ಮಾಡಿ",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub ನೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ",
-    "settingsSyncSignInDesc": "ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ಖಾಸಗಿ ಸಾರಾಂಶದಲ್ಲಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ",
     "settingsSyncToken": "ವೈಯಕ್ತಿಕ ಪ್ರವೇಶ ಟೋಕನ್ ಬಳಸಿ",
     "settingsSyncTokenDesc": "ಕೇವಲ ಸಾರಾಂಶ ಅನುಮತಿಯೊಂದಿಗೆ github.com/settings/tokens ನಲ್ಲಿ ಒಂದನ್ನು ರಚಿಸಿ",
     "settingsSyncTokenField": "ಟೋಕನ್",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "ಸೈನ್ ಔಟ್ ಮಾಡಿ",
-    "settingsSyncCode": "GitHub ನಲ್ಲಿ {code} ನಮೂದಿಸಿ",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ GitHub ಪುಟವನ್ನು ತೆರೆಯಲಾಗಿದೆ. ಕೋಡ್ ನಕಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ರದ್ದುಗೊಳಿಸಲು ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಹಿಡಿದುಕೊಳ್ಳಿ.",
     "settingsSyncSignInFailed": "GitHub ಗೆ ಸೈನ್ ಇನ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ",
-    "dcPreview": "ಪೂರ್ವವೀಕ್ಷಣೆ",
     "dcSampleWatching": "ನೋಡುತ್ತಿದ್ದೇನೆ",
     "dcSampleReading": "ಓದುವುದು",
     "dcSampleBrowsing": "ಬ್ರೌಸಿಂಗ್",
     "dcSampleLive": "ಇದೀಗ",
     "dcLiveNothing": "ಇದೀಗ ಏನನ್ನೂ ತೋರಿಸುತ್ತಿಲ್ಲ. ಶೀರ್ಷಿಕೆಯನ್ನು ತೆರೆಯಿರಿ, ಸಂಚಿಕೆ ಅಥವಾ ಅಧ್ಯಾಯವನ್ನು ಪ್ರಾರಂಭಿಸಿ ಮತ್ತು ಅದು ಇಲ್ಲಿ ಗೋಚರಿಸುತ್ತದೆ.",
     "dcMemberList": "ಸದಸ್ಯರ ಪಟ್ಟಿಯಲ್ಲಿ",
-    "dcAccount": "ಖಾತೆ",
-    "dcSignIn": "ಅಪಶ್ರುತಿಯೊಂದಿಗೆ ಸೈನ್ ಇನ್ ಮಾಡಿ",
     "dcSignOut": "ಸೈನ್ ಔಟ್ ಮಾಡಿ",
-    "dcDesktopHint": "ಸಂಪರ್ಕಿಸದೆಯೇ, ಡಿಸ್ಕಾರ್ಡ್ ಡೆಸ್ಕ್‌ಟಾಪ್ ಅಪ್ಲಿಕೇಶನ್ ಮೂಲಕ \"ಡಾರ್ಟೊಟ್ಸು ವೀಕ್ಷಿಸುವುದನ್ನು\" ತೋರಿಸುತ್ತದೆ. ಮೊಬೈಲ್ ಸೇರಿದಂತೆ ನಿಮ್ಮ ಶೀರ್ಷಿಕೆಯ ನಂತರ ಚಟುವಟಿಕೆಯನ್ನು ಹೆಸರಿಸಲು ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ.",
-    "dcMobileHint": "ನೀವು ಏನನ್ನು ವೀಕ್ಷಿಸುತ್ತಿರುವಿರಿ ಅಥವಾ ಓದುತ್ತಿರುವಿರಿ ಎಂಬುದನ್ನು ತೋರಿಸಲು ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ. ಇದು ಡಿಸ್ಕಾರ್ಡ್‌ನ ಅಧಿಕೃತ ಪುಟವನ್ನು ಬಳಸುತ್ತದೆ, ನಿಮ್ಮ ಖಾತೆಯ ಟೋಕನ್ ಅಲ್ಲ.",
     "dcConnect": "ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಿ",
     "dcConnectDesc": "ಡಿಸ್ಕಾರ್ಡ್‌ನ ಅಧಿಕೃತ ಪುಟವನ್ನು ತೆರೆಯುತ್ತದೆ ಮತ್ತು ಅಧಿಕೃತ ಅಪ್ಲಿಕೇಶನ್‌ಗಳ ಅಡಿಯಲ್ಲಿ ಡಾರ್ಟೊಟ್ಸು ಅನ್ನು ಸೇರಿಸುತ್ತದೆ. ಡಿಸ್ಕಾರ್ಡ್ ನಿಮ್ಮ ಉಪಸ್ಥಿತಿಯನ್ನು ನವೀಕರಿಸಲು ಕೇಳುತ್ತದೆ. ರಿಫ್ರೆಶ್ ಟೋಕನ್ ಅನ್ನು ಮಾತ್ರ ಉಳಿಸಲಾಗಿದೆ, ನಿಮ್ಮ ಖಾತೆಯ ಟೋಕನ್ ಅಲ್ಲ.",
     "dcConnectFailed": "ಡಿಸ್ಕಾರ್ಡ್ ಅನ್ನು ಸಂಪರ್ಕಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ",
@@ -254,8 +241,6 @@
     "dcMethodToken": "ಖಾತೆ ಟೋಕನ್",
     "dcInUse": "ಬಳಕೆಯಲ್ಲಿದೆ",
     "dcRecommended": "ಶಿಫಾರಸು ಮಾಡಲಾಗಿದೆ",
-    "dcConnecting": "ಸಂಪರ್ಕಿಸಲಾಗುತ್ತಿದೆ...",
-    "dcDisconnected": "ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ",
     "dcSignedInAs": "{name} ನಂತೆ ಸೈನ್ ಇನ್ ಮಾಡಲಾಗಿದೆ",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub ನಿಂದ ಅಳಿಸಿ",
     "settingsSyncSecretsDeleteMessage": "ಇದು ನಿಮ್ಮ ಸಾರಾಂಶದಿಂದ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಿದ ಖಾತೆಗಳ ಫೈಲ್ ಅನ್ನು ತೆಗೆದುಹಾಕುತ್ತದೆ. ಇತರ ಸಾಧನಗಳು ತಮ್ಮ ಸೈನ್-ಇನ್‌ಗಳನ್ನು ಇಟ್ಟುಕೊಳ್ಳುತ್ತವೆ ಮತ್ತು ಹೊಸ ಪಾಸ್‌ಫ್ರೇಸ್ ಅನ್ನು ಹೊಂದಿಸಬಹುದು.",
     "settingsSyncWhat": "ಏನು ಸಿಂಕ್ ಮಾಡಬೇಕು",
-    "settingsSyncServer": "ಸರ್ವರ್‌ನಲ್ಲಿ",
     "settingsSyncServerEmpty": "ಇನ್ನೂ ಏನನ್ನೂ ಅಪ್‌ಲೋಡ್ ಮಾಡಿಲ್ಲ",
-    "settingsSyncServerInfo": "{count} ಸೆಟ್ಟಿಂಗ್‌ಗಳು, {device} ನಿಂದ {time} ಅಪ್‌ಲೋಡ್ ಮಾಡಲಾಗಿದೆ",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ಈ ಸಾಧನ",
     "settingsSyncCount": "{count, plural, =0{ಸರ್ವರ್‌ನಲ್ಲಿ ಏನೂ ಇಲ್ಲ} =1{ಸರ್ವರ್‌ನಲ್ಲಿ 1 ಸೆಟ್ಟಿಂಗ್} other{ಸರ್ವರ್‌ನಲ್ಲಿ {count} ಸೆಟ್ಟಿಂಗ್‌ಗಳು}}",
     "settingsSyncNow": "ಈಗ ಸಿಂಕ್ ಮಾಡಿ",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "ಸಿಂಕ್ ವಿಫಲವಾಗಿದೆ: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "ಎಲ್ಲೆಡೆ ಒಂದೇ ರೀತಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಮಾತ್ರ ಸಿಂಕ್ ಮಾಡಲಾಗುತ್ತದೆ. ಖಾತೆಗಳು, ಟೋಕನ್‌ಗಳು, ಫೋಲ್ಡರ್‌ಗಳು, ವಿಸ್ತರಣೆಗಳು, ಅಧಿಸೂಚನೆಗಳು, ಅಪಶ್ರುತಿ, ನವೀಕರಣಗಳು ಮತ್ತು ವಿಂಡೋ ಗಾತ್ರವು ಪ್ರತಿ ಸಾಧನದಲ್ಲಿ ಉಳಿಯುತ್ತದೆ.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co ಲಿಂಕ್‌ಗಳು ಆ್ಯಪ್ ತೆರೆಯಲು ಲಿಂಕ್ ಹ್ಯಾಂಡ್ಲಿಂಗ್ ಆನ್ ಮಾಡು",
     "linkSettingsFailed": "ಸಿಸ್ಟಂ ಸೆಟ್ಟಿಂಗ್ಸ್ ತೆರೆಯಲು ಆಗಲಿಲ್ಲ",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "ನೀನು ಏನು ಮಾಡ್ತಿದ್ದೀಯ ಅಂತ ನಿನ್ನ Discord ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ತೋರಿಸು. ನಿನ್ನ Discord ಟೋಕನ್ ಬೇಕು.",
-    "discordRichPresenceDesktopDesc": "ನೀನು ಏನು ಮಾಡ್ತಿದ್ದೀಯ ಅಂತ ನಿನ್ನ Discord ಪ್ರೊಫೈಲ್‌ನಲ್ಲಿ ತೋರಿಸು. Discord ಡೆಸ್ಕ್‌ಟಾಪ್ ಆ್ಯಪ್ ಚಾಲನೆಯಲ್ಲಿರಬೇಕು.",
     "discordBrowsing": "ಬ್ರೌಸಿಂಗ್ ಚಟುವಟಿಕೆ ತೋರಿಸು",
     "discordBrowsingDesc": "ನೀನು ನೋಡುವ ಅಥವಾ ಓದುವುದನ್ನು ಮಾತ್ರವಲ್ಲ, ನೋಡುತ್ತಿರುವ ಟ್ಯಾಬ್, ಪುಟ ಅಥವಾ ಪ್ರೊಫೈಲ್ ಅನ್ನೂ ತೋರಿಸು.",
-    "discordLookHeader": "ಪ್ರೆಸೆನ್ಸ್ ಲುಕ್",
     "discordActivityType": "ಚಟುವಟಿಕೆಯ ವಿಧ",
     "discordActivityTypeDesc": "Discord ಅದನ್ನು ಹೇಗೆ ಬರೆಯುತ್ತದೆ: \"Watching …\" ಅಥವಾ \"Playing …\". ಆಟೋ ಆನಿಮೆಗೆ Watching ಮತ್ತು ಉಳಿದೆಲ್ಲದಕ್ಕೂ Playing ಬಳಸುತ್ತದೆ.",
     "discordWatching": "ನೋಡುತ್ತಿರುವುದು",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"ಆನಿಮೆ / ಮಂಗಾ ನೋಡು\" ಮತ್ತು \"Dartotsu ತೆರೆ\" ಬಟನ್‌ಗಳು.",
     "discordHideTitles": "ಶೀರ್ಷಿಕೆಗಳನ್ನು ಮರೆಮಾಡು",
     "discordHideTitlesDesc": "ಆನಿಮೆ ಮತ್ತು ಮಂಗಾ ಹೆಸರುಗಳನ್ನು (ಅವುಗಳ ಕವರ್ ಮತ್ತು ಲಿಂಕ್ ಸಮೇತ) \"ಖಾಸಗಿ ವಿಷಯ\" ಎಂದು ಬದಲಿಸು.",
-    "discordConnectionHeader": "ಸಂಪರ್ಕ",
     "listSearchHint": "ಈ ಪಟ್ಟಿಯಲ್ಲಿ ಹುಡುಕು",
     "listSort": "ಸಾರ್ಟ್",
     "listFilter": "ಫಿಲ್ಟರ್",
@@ -671,8 +637,6 @@
     "listNoMatches": "ಈ ಪಟ್ಟಿಯಲ್ಲಿ ಹೊಂದುವುದು ಏನೂ ಇಲ್ಲ",
     "discordLogin": "Discord ಗೆ ಲಾಗಿನ್",
     "discordToken": "Discord ಟೋಕನ್",
-    "discordTokenSaved": "ಉಳಿಸಲಾಗಿದೆ. ಬದಲಿಸಲು ಟ್ಯಾಪ್ ಮಾಡು, ತೆಗೆಯಲು ಒತ್ತಿ ಹಿಡಿ.",
-    "discordTokenNotSet": "ಹೊಂದಿಸಿಲ್ಲ. ಸೇರಿಸಲು ಟ್ಯಾಪ್ ಮಾಡು.",
     "discordTokenSavedSnack": "Discord ಟೋಕನ್ ಉಳಿಸಲಾಗಿದೆ",
     "discordTokenRemovedSnack": "Discord ಟೋಕನ್ ತೆಗೆಯಲಾಗಿದೆ",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "ವಯಸ್ಕರ ಶೀರ್ಷಿಕೆಗಳನ್ನು ಫೀಡ್ ಮತ್ತು ಹುಡುಕಾಟದಿಂದ ಹೊರಗಿಡು, ಮತ್ತು ನಿನ್ನ ವಯಸ್ಕರ ಎಂಟ್ರಿಗಳನ್ನು ಮರೆಮಾಡಿದ ಮೀಡಿಯಾ ಅಡಿಯಲ್ಲಿ ತೋರಿಸು.",
     "kitsuAccountOptions": "Kitsu ಖಾತೆ ಆಯ್ಕೆಗಳು",
     "mangaBakaAccountOptions": "MangaBaka ಖಾತೆಯ ಆಯ್ಕೆಗಳು",
-    "comickAccountOptions": "ಕಾಮಿಕ್ ಖಾತೆ ಆಯ್ಕೆಗಳು",
     "comickClientId": "ಕಾಮಿಕ್ ಕ್ಲೈಂಟ್ ಐಡಿ",
     "comickClientIdDesc": "ಕಸ್ಟಮ್ ಕ್ಲೈಂಟ್ ಐಡಿ ಕಾಮಿಕ್.ಡೆವ್ ನಲ್ಲಿ ನೋಂದಾಯಿಸಲಾಗಿದೆ",
     "couldNotUpdateKitsuSettings": "ನಿನ್ನ Kitsu ಸೆಟ್ಟಿಂಗ್ಸ್ ಅಪ್‌ಡೇಟ್ ಮಾಡಲು ಆಗಲಿಲ್ಲ",
@@ -761,7 +724,6 @@
     "accountDetails": "ಖಾತೆಯ ವಿವರಗಳು",
     "refreshFromKitsu": "Kitsu ನಿಂದ ರಿಫ್ರೆಶ್ ಮಾಡು",
     "simklReadOnly": "Simkl ಓದಲು-ಮಾತ್ರ ಪ್ರವೇಶ ನೀಡಿದೆ",
-    "traktReadOnly": "ಟ್ರ್ಯಾಕ್ಟ್ ಓದಲು-ಮಾತ್ರ ಪ್ರವೇಶವನ್ನು ನೀಡಿದೆ",
     "incognitoEditsBlocked": "ಇನ್‌ಕಾಗ್ನಿಟೋ: ಪಟ್ಟಿ ಎಡಿಟ್‌ಗಳು ಬ್ಲಾಕ್ ಆಗಿವೆ",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ಇನ್‌ಕಾಗ್ನಿಟೋ: ಪ್ರಗತಿ ಉಳಿಯಲಿಲ್ಲ",
@@ -786,7 +748,6 @@
     "mangaCredits": "ಮಂಗಾ ಕ್ರೆಡಿಟ್‌ಗಳು",
     "mainProductions": "ಪ್ರಮುಖ ನಿರ್ಮಾಣಗಳು",
     "otherWorks": "ಇತರ ಕೃತಿಗಳು",
-    "prequelSequel": "ಪ್ರೀಕ್ವೆಲ್ & ಸೀಕ್ವೆಲ್",
     "prequel": "ಪ್ರೀಕ್ವೆಲ್",
     "sequel": "ಉತ್ತರಭಾಗ",
     "previousSeason": "ಹಿಂದಿನ ಸೀಸನ್",
@@ -833,10 +794,7 @@
     "addToList": "ಪಟ್ಟಿಗೆ ಸೇರಿಸು",
     "trailer": "ಟ್ರೈಲರ್",
     "trailerQuality": "ಟ್ರೈಲರ್ ಗುಣಮಟ್ಟ",
-    "titleCopied": "ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಆಯ್ತು",
     "linkCopied": "ಲಿಂಕ್ ಕಾಪಿ ಆಯ್ತು",
-    "watchTrailer": "ಟ್ರೈಲರ್ ನೋಡು",
-    "copyTitle": "ಶೀರ್ಷಿಕೆ ಕಾಪಿ ಮಾಡು",
     "detailStale": "ಅನಿಲಿಸ್ಟ್ ಅನ್ನು ತಲುಪಲಾಗಲಿಲ್ಲ. ಇದು ಉಳಿಸಿದ ಮಾಹಿತಿಯಾಗಿದೆ ಮತ್ತು ಹಳೆಯದಾಗಿರಬಹುದು.",
     "copyLink": "ಲಿಂಕ್ ಕಾಪಿ ಮಾಡು",
     "openInBrowser": "ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆ",
@@ -1139,7 +1097,6 @@
     "import": "ಇಂಪೋರ್ಟ್",
     "animeCount": "{count} ಆನಿಮೆ",
     "mangaCount": "{count} ಮಂಗಾ",
-    "chooseSaveLocation": "ಬ್ಯಾಕಪ್ ಎಲ್ಲಿ ಉಳಿಸಬೇಕು ಆರಿಸು",
     "savedPath": "{path} ಉಳಿಸಲಾಗಿದೆ",
     "exportFailed": "ಎಕ್ಸ್‌ಪೋರ್ಟ್ ವಿಫಲ: {error}",
     "nothingInLocalLists": "ನಿನ್ನ ಲೋಕಲ್ ಪಟ್ಟಿಗಳಲ್ಲಿ ಇನ್ನೂ ಏನೂ ಇಲ್ಲ.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "ಲಿಂಕ್ ತೆರೆಯುವಾಗ ದೋಷ: {error}",
     "linkCantBeOpened": "ಈ ಲಿಂಕ್ ತೆರೆಯಲು ಆಗುವುದಿಲ್ಲ: {link}",
     "linkOpenError": "ಲಿಂಕ್ ತೆರೆಯುವಾಗ ದೋಷ: {error}",
-    "forReleasingTitles": "ಈಗ ಪ್ರಸಾರವಾಗುತ್ತಿರುವ ಶೀರ್ಷಿಕೆಗಳಿಗೆ",
     "progress": "ಪ್ರಗತಿ",
     "notes": "ಟಿಪ್ಪಣಿಗಳು",
     "serviceNotFound": "\"{id}\" ಸರ್ವಿಸ್ ಸಿಗಲಿಲ್ಲ",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} ಕಾನ್ಫಿಗರ್ ಮಾಡಿದ ರೆಪೊದಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ",
     "pluginFetchFailed": "ಪ್ಲಗಿನ್ ಮಾಹಿತಿ ತರಲು ಆಗಲಿಲ್ಲ",
     "installPluginTitle": "{name} ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡು",
-    "sizeLabel": "ಗಾತ್ರ: {size}",
     "installedState": "ಇನ್‌ಸ್ಟಾಲ್ ಆಗಿದೆ",
     "updatePluginTitle": "{name} ನವೀಕರಿಸಿ",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ಆ್ಯಪ್ ತೆರೆದಾಗ ಮತ್ತು ಪ್ರತಿ 30 ನಿಮಿಷಕ್ಕೆ ಬ್ಯಾಕ್‌ಗ್ರೌಂಡ್‌ನಲ್ಲಿ ತಂದು ಸಿಂಕ್ ಮಾಡು",
     "syncAddMissing": "ಕಾಣೆಯಾದ ಎಂಟ್ರಿಗಳನ್ನು ಸೇರಿಸು",
     "syncAddMissingDesc": "ಇನ್ನೊಂದು ಸರ್ವಿಸ್‌ನಲ್ಲಿ ಇನ್ನೂ ಇಲ್ಲದ ಎಂಟ್ರಿಗಳನ್ನೂ ಸೇರಿಸು",
-    "syncServiceOn": "{name} ನೊಂದಿಗೆ ಸಿಂಕ್ ಮಾಡಿ",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "ಮುಖ್ಯ ಸೇವೆಯು ಹೊಂದಿಲ್ಲ ಎಂಬುದನ್ನು ಅಳಿಸಿ",
     "syncDeleteDesc": "ಮುಖ್ಯ ಪಟ್ಟಿಯಲ್ಲಿಲ್ಲದ ಇತರ ಸೇವೆಗಳಿಂದ ನಮೂದುಗಳನ್ನು ತೆಗೆದುಹಾಕಿ. ಶೀರ್ಷಿಕೆಗೆ ಹೊಂದಿಕೆಯಾಗಬಹುದಾದ ನಮೂದುಗಳನ್ನು ಮಾತ್ರ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ, ಆದ್ದರಿಂದ Simkl ಚಲನಚಿತ್ರಗಳು ಮತ್ತು ಸರಣಿಗಳು ಉಳಿಯುತ್ತವೆ",
     "syncDeleteTitle": "ನಮೂದುಗಳನ್ನು ಅಳಿಸುವುದೇ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "ಅಳಿಸಿ",
     "syncToDelete": "ಅಳಿಸಲು",
     "syncDeletedNote": "ಅಳಿಸಲಾಗುವುದು",
-    "syncWillRemove": "{count} ಅನ್ನು {name} ನಿಂದ ಅಳಿಸಲಾಗುತ್ತದೆ",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "ಮುಂದಿರುವ ಪ್ರಗತಿ ಉಳಿಸು",
     "syncOnlyForwardDesc": "ಈಗಾಗಲೇ ಮುಂದಿರುವ ಸರ್ವಿಸ್‌ನ ಪ್ರಗತಿಯನ್ನು ಕಡಿಮೆ ಮಾಡಬೇಡ",
     "animePlanetWontWatch": "ವೀಕ್ಷಿಸುವುದಿಲ್ಲ",
     "animePlanetWontRead": "ಓದುವುದಿಲ್ಲ",
-    "animePlanetAlreadyOnList": "ಈಗಾಗಲೇ ಈ ಪಟ್ಟಿಯಲ್ಲಿದೆ",
     "animePlanetNewList": "ಹೊಸ ಪಟ್ಟಿಯ ಹೆಸರು",
     "syncPrivate": "ಖಾಸಗಿ ನಮೂದುಗಳು",
     "syncPrivateDesc": "ನೀವು ಖಾಸಗಿಯಾಗಿ ಇರಿಸಿರುವ ನಮೂದುಗಳೊಂದಿಗೆ ಏನು ಮಾಡಬೇಕು. ಖಾಸಗಿ ಆಯ್ಕೆಯನ್ನು ಹೊಂದಿರುವ ಸೇವೆಯು ಅವುಗಳನ್ನು ಖಾಸಗಿಯಾಗಿ ಪಡೆಯುತ್ತದೆ; ಇತರರು ಅವುಗಳನ್ನು ಸಾರ್ವಜನಿಕವಾಗಿ ತೋರಿಸುತ್ತಾರೆ",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "ಮತ್ತೊಂದು ಬಳಕೆದಾರ ಏಜೆಂಟ್‌ನೊಂದಿಗೆ ಕ್ಲಿಯರೆನ್ಸ್ ಗಳಿಸಲಾಗಿದೆ, ಆದ್ದರಿಂದ ಅದನ್ನು ಕಳುಹಿಸಲಾಗಿಲ್ಲ. ಹೊಸದನ್ನು ಪಡೆಯಲು ಸಂಪರ್ಕವನ್ನು ಪರೀಕ್ಷಿಸಿ",
-    "watchSectionConnection": "ಸಂಪರ್ಕ",
     "watchSectionSession": "ಅಧಿವೇಶನ",
     "watchSectionTools": "ಪರಿಕರಗಳು",
     "watchMetaSource": "ಎಪಿಸೋಡ್ ವಿವರಗಳು ಎಲ್ಲಿಂದ",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "ಯಾವ ಸ್ಟ್ರೀಮ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬೇಕು?",
     "downloadPickSubtitle": "ಯಾವ ಸಬ್‌ಟೈಟಲ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬೇಕು?",
     "downloadPickAudio": "ಯಾವ ಆಡಿಯೋ ಟ್ರ್ಯಾಕ್ ಡೌನ್‌ಲೋಡ್ ಮಾಡಬೇಕು?",
-    "downloadNoAudio": "ಹೆಚ್ಚುವರಿ ಆಡಿಯೋ ಇಲ್ಲ",
     "downloadAudio": "ಆಡಿಯೋ",
-    "downloadNoSubtitle": "ಸಬ್‌ಟೈಟಲ್ ಇಲ್ಲ",
     "downloadHlsNeedsFfmpeg": "ಈ ಸ್ಟ್ರೀಮ್ ಒಂದು HLS ಪ್ಲೇಲಿಸ್ಟ್. ಡೌನ್‌ಲೋಡ್ ಮಾಡಲು FFmpeg ಆಡ್-ಆನ್ ಬೇಕು.",
     "downloadSourceMissing": "ಈ ಎಪಿಸೋಡ್‌ನ ಸೋರ್ಸ್ ಇನ್‌ಸ್ಟಾಲ್ ಆಗಿಲ್ಲ",
     "downloadDashDrm": "ಈ ಸ್ಟ್ರೀಮ್ DRM ರಕ್ಷಿತವಾಗಿದೆ",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ಭಾಷೆ ಮತ್ತು ನಡವಳಿಕೆ",
     "generalSectionSecurity": "ಭದ್ರತೆ",
     "generalSectionPrivacy": "ಗೌಪ್ಯತೆ",
-    "notificationsOtherService": "ಇದನ್ನು ತೆರೆಯಲು {service} ಗೆ ಬದಲಿಸಿ",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "ಡೀಫಾಲ್ಟ್ ವೇಗ, ಸ್ವಯಂ ಪ್ಲೇ, ವೀಡಿಯೊ ಫಿಟ್, ದೃಷ್ಟಿಕೋನ ಮತ್ತು ಚಿತ್ರದಲ್ಲಿ ಚಿತ್ರ",
     "secPlayerSkip": "ತೆರೆಯುವಿಕೆಗಳು, ಅಂತ್ಯಗಳು ಮತ್ತು ರೀಕ್ಯಾಪ್‌ಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಬಿಟ್ಟುಬಿಡಿ",
     "secPlayerControls": "ಗೆಸ್ಚರ್‌ಗಳನ್ನು ಸ್ವೈಪ್ ಮಾಡಿ, ಹಿಡಿದುಕೊಳ್ಳಿ ಮತ್ತು ಟ್ಯಾಪ್ ಮಾಡಿ ಮತ್ತು ಪೂರ್ವವೀಕ್ಷಣೆಯನ್ನು ಹುಡುಕಿ",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "ಕಾಯುತ್ತಿದೆ",
     "stepChecking": "ಪರಿಶೀಲಿಸಲಾಗುತ್ತಿದೆ...",
     "stepUpToDate": "ನವೀಕೃತವಾಗಿದೆ",
     "stepUpToDateWith": "ನವೀಕೃತ · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "ಮಂಗಾ",
     "readerCloudflare": "ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ (ಕ್ಲೌಡ್‌ಫ್ಲೇರ್ ಚೆಕ್)",
     "badgeBoardHint": "ಮೊದಲ ಕಾರ್ಡ್‌ನ ಮೂಲೆಯಲ್ಲಿ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಎಳೆಯಿರಿ ಅಥವಾ ಅದನ್ನು ಸರಿಸಲು ಈಗಾಗಲೇ ಅದರ ಮೇಲೆ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಎಳೆಯಿರಿ. ಬ್ಯಾಡ್ಜ್‌ಗಳು ಸ್ಥಳಗಳನ್ನು ಬದಲಾಯಿಸುತ್ತವೆ, ಆದ್ದರಿಂದ ಯಾವುದೂ ಅತಿಕ್ರಮಿಸುವುದಿಲ್ಲ. ಅದನ್ನು ಆನ್ ಅಥವಾ ಆಫ್ ಮಾಡಲು ಕೆಳಗಿನ ಬ್ಯಾಡ್ಜ್ ಅನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ.",
-    "statusAuto": "ಆಟೋ",
     "unreadCounter": "ಓದದ ಕೌಂಟರ್",
-    "unreadCounterDesc": "ಪೋಸ್ಟರ್‌ಗಳಲ್ಲಿ ಎಷ್ಟು ಸಂಚಿಕೆಗಳು ಅಥವಾ ಅಧ್ಯಾಯಗಳು ಉಳಿದಿವೆ ಎಂಬುದನ್ನು ತೋರಿಸಿ",
     "settingsShortcuts": "ಕೀಬೋರ್ಡ್ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳು",
     "settingsShortcutsDesc": "ಪ್ರತಿ ಕೀಲಿಯನ್ನು ನೋಡಿ, ಬದಲಾಯಿಸಿ ಮತ್ತು ಆಫ್ ಮಾಡಿ",
     "shortcutGroupApp": "ಅಪ್ಲಿಕೇಶನ್",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "ಹೊಂದಿಸಿಲ್ಲ",
     "shortcutAddKey": "ಒಂದು ಕೀಲಿಯನ್ನು ಸೇರಿಸಿ",
     "shortcutResetOne": "ಡೀಫಾಲ್ಟ್‌ಗೆ ಮರುಹೊಂದಿಸಿ",
-    "shortcutClearKeys": "ಎಲ್ಲಾ ಕೀಲಿಗಳನ್ನು ತೆಗೆದುಹಾಕಿ",
     "shortcutResetAll": "ಎಲ್ಲಾ ಶಾರ್ಟ್‌ಕಟ್‌ಗಳನ್ನು ಮರುಹೊಂದಿಸಿ",
     "shortcutResetAllDesc": "ಪ್ರತಿ ಕೀಲಿಯನ್ನು ಅದರ ಪೂರ್ವನಿಯೋಜಿತವಾಗಿ ಇರಿಸಿ",
     "shortcutPress": "ನಿಮಗೆ ಬೇಕಾದ ಕೀ ಅಥವಾ ಸಂಯೋಜನೆಯನ್ನು ಒತ್ತಿರಿ",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "ಅಪ್ಲಿಕೇಶನ್ ತ್ಯಜಿಸಿ",
     "closeActionWhenBusy": "ಏನಾದರೂ ಓಡುತ್ತಿರುವಾಗ ಟ್ರೇನಲ್ಲಿ ಓಡುತ್ತಲೇ ಇರಿ",
     "closeActionAlways": "ಯಾವಾಗಲೂ ತಟ್ಟೆಯಲ್ಲಿ ಓಡುತ್ತಲೇ ಇರಿ",
-    "closeActionNoTray": "ಸಿಸ್ಟಂ ಟ್ರೇ ಇಲ್ಲಿ ಲಭ್ಯವಿಲ್ಲ, ಆದ್ದರಿಂದ ಮುಚ್ಚಿದಾಗ ಅಪ್ಲಿಕೇಶನ್ ತೊರೆಯುತ್ತದೆ",
     "gamepadNav": "ಗೇಮ್ಪ್ಯಾಡ್ ನ್ಯಾವಿಗೇಷನ್",
     "gamepadNavDesc": "ಅಪ್ಲಿಕೇಶನ್ ಸುತ್ತಲೂ ಸರಿಸಿ ಮತ್ತು ಆಟದ ನಿಯಂತ್ರಕದೊಂದಿಗೆ ಆಟಗಾರನನ್ನು ನಿಯಂತ್ರಿಸಿ",
     "trayShow": "ಡಾರ್ಟೊಟ್ಸು ತೋರಿಸಿ",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "ವಿವರಗಳನ್ನು ನಕಲಿಸಿ",
     "removePlayerTitle": "ಆಟಗಾರನನ್ನು ತೆಗೆದುಹಾಕುವುದೇ?",
     "removePlayerMessage": "ಪ್ಲೇಯರ್ ಅನ್ನು ಮತ್ತೆ ಡೌನ್‌ಲೋಡ್ ಮಾಡುವವರೆಗೆ ವೀಡಿಯೊಗಳನ್ನು ಪ್ಲೇ ಮಾಡಲು ಸಾಧ್ಯವಿಲ್ಲ.",
-    "trailerLoading": "ಟ್ರೇಲರ್ ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
     "trailerFailed": "ಟ್ರೇಲರ್ ಅನ್ನು ಇಲ್ಲಿ ಪ್ಲೇ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ, ಅದನ್ನು ಬ್ರೌಸರ್‌ನಲ್ಲಿ ತೆರೆಯಲಾಗುತ್ತಿದೆ"
 }

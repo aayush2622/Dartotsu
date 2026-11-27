@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "परिवर्तने समन्वयनम्",
     "settingsSyncModeGithub": "गित्हब",
     "settingsSyncSignIn": "GitHub इत्यनेन सह प्रवेशं कुर्वन्तु",
-    "settingsSyncSignInDesc": "सेटिङ्ग्स् भवतः खाते निज-सार-मध्ये संगृहीताः भवन्ति",
     "settingsSyncToken": "व्यक्तिगतप्रवेशटोकनस्य उपयोगं कुर्वन्तु",
     "settingsSyncTokenDesc": "केवलं gist अनुमतिं कृत्वा github.com/settings/tokens इत्यत्र एकं रचयन्तु",
     "settingsSyncTokenField": "टोकन",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "साइन आउट् कुर्वन्तु",
-    "settingsSyncCode": "GitHub इत्यत्र {code} इति प्रविशन्तु",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "भवतः ब्राउजरे GitHub पृष्ठं उद्घाटितम् । कोडस्य प्रतिलिपिं कर्तुं ट्याप् कुर्वन्तु, अथवा रद्दं कर्तुं ट्याप् कृत्वा धारयन्तु ।",
     "settingsSyncSignInFailed": "GitHub इत्यत्र प्रवेशं कर्तुं न शक्तवान्",
-    "dcPreview": "पूर्वावलोकनम्",
     "dcSampleWatching": "पश्यन्",
     "dcSampleReading": "पठनम्",
     "dcSampleBrowsing": "ब्राउजिंग्",
     "dcSampleLive": "अधुना एव",
     "dcLiveNothing": "इदानीं किमपि न दर्शयति। शीर्षकं उद्घाट्य, प्रकरणं वा अध्यायं वा आरभत ततः अत्र दृश्यते।",
     "dcMemberList": "सदस्यसूचौ",
-    "dcAccount": "खाता",
-    "dcSignIn": "Discord इत्यनेन सह प्रवेशं कुर्वन्तु",
     "dcSignOut": "साइन आउट् कुर्वन्तु",
-    "dcDesktopHint": "संयोजनं विना Discord इत्येतत् डेस्कटॉप् एप् मार्गेण “Watching Dartotsu” इति दर्शयति । मोबाईले सहितं स्वस्य शीर्षकस्य नामधेयेन क्रियाकलापस्य नामकरणार्थं Discord संयोजयन्तु।",
-    "dcMobileHint": "भवन्तः किं पश्यन्ति वा पठन्ति वा इति दर्शयितुं Discord इत्येतत् संयोजयन्तु। एतत् Discord’s authorize page इत्यस्य उपयोगं करोति, न तु भवतः account token इत्यस्य ।",
     "dcConnect": "विवादं संयोजयन्तु",
     "dcConnectDesc": "Discord’s authorize पृष्ठं उद्घाटयति तथा च Authorized Apps इत्यस्य अन्तर्गतं Dartotsu योजयति । Discord भवतः उपस्थितिं अद्यतनीकर्तुं पृच्छति। केवलं ताजगी-टोकनं रक्षितं भवति, न तु भवतः खातेः टोकनम् ।",
     "dcConnectFailed": "Discord सम्बद्धं कर्तुं न शक्तवान्",
@@ -254,8 +241,6 @@
     "dcMethodToken": "खाता टोकन",
     "dcInUse": "प्रयोगे",
     "dcRecommended": "अनुशंसितम्",
-    "dcConnecting": "संयोजयन्...",
-    "dcDisconnected": "न संबद्धः",
     "dcSignedInAs": "{name} इति नाम्ना प्रवेशः कृतः ।",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub तः विलोपयन्तु",
     "settingsSyncSecretsDeleteMessage": "एतेन भवतः सारतः एन्क्रिप्टेड् खातासञ्चिका निष्कासिता भवति । अन्ये यन्त्राणि स्वस्य प्रवेशं रक्षन्ति, नूतनं गुप्तवाक्यं सेट् कर्तुं शक्नुवन्ति च ।",
     "settingsSyncWhat": "किं समन्वयितव्यम्",
-    "settingsSyncServer": "सर्वरे",
     "settingsSyncServerEmpty": "अद्यापि किमपि अपलोड् न कृतम्",
-    "settingsSyncServerInfo": "{count} सेटिंग्स्, अपलोड् {time} तः {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "एतत् यन्त्रम्",
     "settingsSyncCount": "{count, plural, =0{सर्वरे किमपि नास्ति} =1{सर्वरे १ सेटिंग्} other{सर्वरे {count} सेटिंग्स्}}",
     "settingsSyncNow": "अधुना समन्वयनं कुर्वन्तु",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "समन्वयनं विफलम्: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "केवलं सर्वत्र समानरूपेण कार्यं कुर्वन्ति सेटिङ्ग्स् एव समन्वयिताः भवन्ति । खाताः, टोकनः, फोल्डर्, विस्तारः, सूचनाः, Discord, अपडेट्, विण्डो आकारः च प्रत्येकस्मिन् उपकरणे तिष्ठन्ति ।",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co लिङ्काः ऐप् उद्घाटयन्तु इति लिङ्क्-सञ्चालनं सक्रियं कुरु",
     "linkSettingsFailed": "सिस्टम्-सेटिंग्स् उद्घाटयितुं न शक्यन्ते",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "तव Discord-प्रोफाइल् मध्ये त्वं किं करोषि इति दर्शय। तव Discord-टोकन् आवश्यकम्।",
-    "discordRichPresenceDesktopDesc": "तव Discord-प्रोफाइल् मध्ये त्वं किं करोषि इति दर्शय। Discord डेस्कटॉप्-ऐप् चलनीयम्।",
     "discordBrowsing": "ब्राउज़िङ्-क्रियां दर्शय",
     "discordBrowsingDesc": "यत् पश्यसि पठसि वा तत् केवलं न, यत् टैब्, पृष्ठं प्रोफाइल् वा पश्यसि तदपि दर्शय।",
-    "discordLookHeader": "उपस्थिति-रूपम्",
     "discordActivityType": "क्रिया-प्रकारः",
     "discordActivityTypeDesc": "Discord कथं लिखति: \"Watching …\" अथवा \"Playing …\"। स्वयम् इत्यत्र अनिमे-कृते Watching, अन्येषां कृते Playing।",
     "discordWatching": "पश्यति",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"अनिमे / मांगा पश्य\" \"Dartotsu उद्घाटय\" च बटन्स्।",
     "discordHideTitles": "शीर्षकाणि गोपय",
     "discordHideTitlesDesc": "अनिमे-मांगा-नामानि (आवरणं लिङ्कं च सह) \"किञ्चित् गुप्तम्\" इत्यनेन स्थापय।",
-    "discordConnectionHeader": "संयोजनम्",
     "listSearchHint": "एतस्यां सूच्यां अन्विष्य",
     "listSort": "क्रमय",
     "listFilter": "छानय",
@@ -671,8 +637,6 @@
     "listNoMatches": "अस्यां सूच्यां किमपि न मिलति",
     "discordLogin": "Discord मध्ये लॉगिन",
     "discordToken": "Discord टोकन्",
-    "discordTokenSaved": "रक्षितम्। परिवर्तनार्थं स्पृश, अपनयनार्थं दीर्घं नुद।",
-    "discordTokenNotSet": "न स्थापितम्। योजनार्थं स्पृश।",
     "discordTokenSavedSnack": "Discord टोकन् रक्षितम्",
     "discordTokenRemovedSnack": "Discord टोकन् अपनीतम्",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "वयस्क-शीर्षकाणि फीड्स्-अन्वेषणाभ्यां दूरे स्थापय, तव वयस्क-प्रविष्टीः \"गुप्त मीडिया\" मध्ये सूचय।",
     "kitsuAccountOptions": "Kitsu खाता-विकल्पाः",
     "mangaBakaAccountOptions": "MangaBaka खाता-विकल्पाः",
-    "comickAccountOptions": "खाता विकल्पाः हास्यं कुर्वन्तु",
     "comickClientId": "Comic क्लायन्ट आईडी",
     "comickClientIdDesc": "comick.dev इत्यत्र पञ्जीकृतं कस्टम् क्लायन्ट् आईडी",
     "couldNotUpdateKitsuSettings": "तव Kitsu सेटिंग्स् अद्यतनितुं न शक्यन्ते",
@@ -761,7 +724,6 @@
     "accountDetails": "खाता-विवरणम्",
     "refreshFromKitsu": "Kitsu तः नवीकुरु",
     "simklReadOnly": "Simkl केवल-पठन-प्रवेशं दत्तवान्",
-    "traktReadOnly": "Trakt इत्यनेन केवलं पठनीयप्रवेशः अनुमोदितः",
     "incognitoEditsBlocked": "गुप्तमोडः: सूची-सम्पादनानि निरुद्धानि",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "गुप्तमोडः: प्रगतिः न रक्षिता",
@@ -786,7 +748,6 @@
     "mangaCredits": "मांगा-श्रेयः",
     "mainProductions": "मुख्य-निर्मितयः",
     "otherWorks": "अन्ये कार्यक्रमाः",
-    "prequelSequel": "पूर्वभागः उत्तरभागः च",
     "prequel": "प्रीक्वेल",
     "sequel": "उत्तरकथा",
     "previousSeason": "पूर्व-ऋतुः",
@@ -833,10 +794,7 @@
     "addToList": "सूचीयां योजय",
     "trailer": "ट्रेलर्",
     "trailerQuality": "ट्रेलर गुणवत्ता",
-    "titleCopied": "शीर्षकं प्रतिलिखितम्",
     "linkCopied": "लिङ्कः प्रतिलिखितः",
-    "watchTrailer": "ट्रेलर् पश्य",
-    "copyTitle": "शीर्षकं प्रतिलिख",
     "detailStale": "AniList प्राप्तुं न शक्यते स्म। एषा रक्षितसूचना अस्ति, जीर्णा च भवितुम् अर्हति ।",
     "copyLink": "लिङ्कं प्रतिलिख",
     "openInBrowser": "ब्राउज़र् मध्ये उद्घाटय",
@@ -1139,7 +1097,6 @@
     "import": "आनय",
     "animeCount": "{count} अनिमे",
     "mangaCount": "{count} मांगा",
-    "chooseSaveLocation": "बैकप् कुत्र रक्षितव्यम् इति चिनु",
     "savedPath": "{path} मध्ये रक्षितम्",
     "exportFailed": "निर्यातः विफलः: {error}",
     "nothingInLocalLists": "तव स्थानीय-सूचीषु अद्यापि किमपि नास्ति।",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "लिङ्कम् उद्घाटयितुं दोषः: {error}",
     "linkCantBeOpened": "इदं लिङ्कम् उद्घाटयितुं न शक्यते: {link}",
     "linkOpenError": "लिङ्कम् उद्घाटयितुं दोषः: {error}",
-    "forReleasingTitles": "इदानीं प्रसार्यमाणानां शीर्षकाणां कृते",
     "progress": "प्रगतिः",
     "notes": "टिप्पणानि",
     "serviceNotFound": "सेवा \"{id}\" न प्राप्ता",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} विन्यस्ते भण्डारे उपलब्धं नास्ति",
     "pluginFetchFailed": "प्लगिन्-सूचनां प्राप्तुं न शक्तम्",
     "installPluginTitle": "{name} स्थापय",
-    "sizeLabel": "आकारः: {size}",
     "installedState": "स्थापितम्",
     "updatePluginTitle": "अद्यतनम् {name} .",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ऐप् उद्घाटिते सति प्रत्येकं ३० मिनिट्-अन्तरे च पृष्ठभूमौ आनय समकालीनं च कुरु",
     "syncAddMissing": "अपूर्णाः प्रविष्टीः योजय",
     "syncAddMissingDesc": "अन्यसेवायाः समीपे अद्यापि याः न सन्ति ताः अपि योजय",
-    "syncServiceOn": "{name} इत्यनेन सह समन्वयनम् ।",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "मुख्यसेवायां यत् नास्ति तत् विलोपयन्तु",
     "syncDeleteDesc": "अन्येभ्यः सेवाभ्यः प्रविष्टयः निष्कासयन्तु ये मुख्यसूचौ न सन्ति । केवलं ताः प्रविष्टयः एव निष्कासिताः भवन्ति, येषां मेलनं शीर्षकेन सह कर्तुं शक्यते, अतः Simkl चलच्चित्रं, श्रृङ्खला च इत्यादीनि वस्तूनि तिष्ठन्ति",
     "syncDeleteTitle": "प्रविष्टयः विलोपयन्तु ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "विलोपयतु",
     "syncToDelete": "विलोपयितुं",
     "syncDeletedNote": "लोपः भविष्यति",
-    "syncWillRemove": "{count} {name} तः लोपः भविष्यति ।",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "अग्रिमां प्रगतिं रक्ष",
     "syncOnlyForwardDesc": "यस्याः सेवायाः प्रगतिः पूर्वमेव अग्रे अस्ति तस्याः प्रगतिं न न्यूनीकुरु",
     "animePlanetWontWatch": "न पश्यति",
     "animePlanetWontRead": "न पठिष्यति",
-    "animePlanetAlreadyOnList": "पूर्वमेव अस्मिन् सूचौ",
     "animePlanetNewList": "नवीनसूचीनाम",
     "syncPrivate": "निजी प्रविष्टियाँ",
     "syncPrivateDesc": "भवता निजरूपेण स्थापितानां प्रविष्टीनां किं कर्तव्यम्। निजीविकल्पयुक्ता सेवा तान् निजीं प्राप्नोति; अन्ये तान् सार्वजनिकरूपेण दर्शयन्ति स्म",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "अन्येन उपयोक्तृ-एजेण्टेन सह निकासी अर्जिता आसीत्, अतः न प्रेष्यते । नूतनं प्राप्तुं संयोजनस्य परीक्षणं कुर्वन्तु",
-    "watchSectionConnection": "संबन्धः",
     "watchSectionSession": "सत्रम्",
     "watchSectionTools": "साधनम्",
     "watchMetaSource": "एपिसोड्-विवरणं कुतः",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "कः स्ट्रीम् डाउनलोड् कर्तव्यः?",
     "downloadPickSubtitle": "कानि उपशीर्षकाणि डाउनलोड् कर्तव्यानि?",
     "downloadPickAudio": "कः ध्वनि-मार्गः डाउनलोड् कर्तव्यः?",
-    "downloadNoAudio": "अतिरिक्त-ध्वनिः नास्ति",
     "downloadAudio": "ध्वनिः",
-    "downloadNoSubtitle": "उपशीर्षकं नास्ति",
     "downloadHlsNeedsFfmpeg": "एषः स्ट्रीम् HLS प्लेलिस्ट् अस्ति। तं डाउनलोड् कर्तुं FFmpeg ऐड्-ऑन् आवश्यकम्।",
     "downloadSourceMissing": "अस्य एपिसोड्-स्रोतः न स्थापितः",
     "downloadDashDrm": "एषा धारा DRM संरक्षिता अस्ति",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "भाषा एवं व्यवहार",
     "generalSectionSecurity": "सुरक्षा",
     "generalSectionPrivacy": "गोपनीयता",
-    "notificationsOtherService": "एतत् उद्घाटयितुं {service} इत्यत्र स्विच कुर्वन्तु",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "डिफ़ॉल्ट् स्पीड्, ऑटो प्ले, विडियो फिट्, ओरिएण्टेशन तथा चित्रे चित्रम्",
     "secPlayerSkip": "उद्घाटनानि, अन्तानि, पुनः संक्षेपाणि च स्वयमेव त्यजन्तु",
     "secPlayerControls": "इशारान् स्वाइप्, धारयन्तु, ट्याप् च कुर्वन्तु पूर्वावलोकनं च अन्वेष्टुम्",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "प्रतीक्षमाणः",
     "stepChecking": "जाँचं कुर्वन्...",
     "stepUpToDate": "अद्यतनम्",
     "stepUpToDateWith": "अद्यतनम् · {detail} .",
@@ -3157,9 +3080,7 @@
     "calendarManga": "मङ्गः",
     "readerCloudflare": "ब्राउजर् मध्ये उद्घाटयन्तु (Cloudflare check)",
     "badgeBoardHint": "प्रथमपत्तेः कोणे एकं बिल्लां कर्षयन्तु, अथवा तत् चालयितुं तस्मिन् पूर्वमेव स्थितं बिल्लां कर्षयन्तु । बिल्लाः स्थानानि आदानप्रदानं कुर्वन्ति, अतः कदापि कोऽपि अतिव्याप्तः न भवति । अधः एकं बिल्लां ट्याप् कुर्वन्तु तत् चालू वा निष्क्रियं कर्तुं वा।",
-    "statusAuto": "ऑटो",
     "unreadCounter": "अपठित गणक",
-    "unreadCounterDesc": "पोस्टरेषु कति प्रकरणाः अध्यायाः वा अवशिष्टाः इति दर्शयतु",
     "settingsShortcuts": "कीबोर्ड शॉर्टकट्",
     "settingsShortcutsDesc": "प्रत्येकं कीलं पश्यन्तु, परिवर्तयन्तु, निष्क्रियं च कुर्वन्तु",
     "shortcutGroupApp": "अप्",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "न सेट्",
     "shortcutAddKey": "एकं कीलं योजयन्तु",
     "shortcutResetOne": "पूर्वनिर्धारितरूपेण पुनः सेट् कुर्वन्तु",
-    "shortcutClearKeys": "सर्वाणि कीलानि निष्कासयन्तु",
     "shortcutResetAll": "सर्वाणि शॉर्टकट् पुनः सेट् कुर्वन्तु",
     "shortcutResetAllDesc": "प्रत्येकं कीलं पुनः पूर्वनिर्धारितं स्थापयन्तु",
     "shortcutPress": "इच्छितं कीलं वा संयोजनं वा नुदन्तु",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "एप् त्यजन्तु",
     "closeActionWhenBusy": "किमपि प्रचलति चेत् ट्रे मध्ये धावन्तु",
     "closeActionAlways": "सर्वदा ट्रे मध्ये धावन्तु",
-    "closeActionNoTray": "अत्र सिस्टम् ट्रे उपलब्धा नास्ति, अतः एप् पिहिते सति निर्गच्छति",
     "gamepadNav": "गेमपैड नेविगेशन",
     "gamepadNavDesc": "एप् परितः गत्वा गेम नियन्त्रकेन खिलाडिनं नियन्त्रयन्तु",
     "trayShow": "दार्तोत्सु दर्शयतु",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "विवरणं प्रतिलिख्यताम्",
     "removePlayerTitle": "खिलाडीं निष्कासयन्तु ?",
     "removePlayerMessage": "यावत् प्लेयर पुनः डाउनलोड् न भवति तावत् यावत् वीडियो वादयितुं न शक्नुवन्ति।",
-    "trailerLoading": "ट्रेलरं लोड् कुर्वन्...",
     "trailerFailed": "अत्र ट्रेलरं वादयितुं न शक्तवान्, ब्राउजर् मध्ये उद्घाट्य"
 }

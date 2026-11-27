@@ -427,10 +427,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsSyncSignIn => 'Connectez-vous avec GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Les paramètres sont stockés dans un fichier privé de votre compte';
-
-  @override
   String get settingsSyncToken => 'Utiliser un jeton d\'accès personnel';
 
   @override
@@ -449,19 +445,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsSyncSignOut => 'Se déconnecter';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Entrez $code sur GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'La page GitHub ouverte dans votre navigateur. Appuyez pour copier le code, ou appuyez et maintenez pour annuler.';
-
-  @override
   String get settingsSyncSignInFailed => 'Impossible de se connecter à GitHub';
-
-  @override
-  String get dcPreview => 'Aperçu';
 
   @override
   String get dcSampleWatching => 'Regarder';
@@ -483,21 +467,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dcMemberList => 'Dans la liste des membres';
 
   @override
-  String get dcAccount => 'Compte';
-
-  @override
-  String get dcSignIn => 'Connectez-vous avec Discord';
-
-  @override
   String get dcSignOut => 'Se déconnecter';
-
-  @override
-  String get dcDesktopHint =>
-      'Sans connexion, Discord affiche « Watching Dartotsu » via l\'application de bureau. Connectez Discord pour nommer l\'activité d\'après votre titre, y compris sur mobile.';
-
-  @override
-  String get dcMobileHint =>
-      'Connectez Discord pour montrer ce que vous regardez ou lisez. Il utilise la page d\'autorisation de Discord, pas le jeton de votre compte.';
 
   @override
   String get dcConnect => 'Connecter Discorde';
@@ -722,12 +692,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get dcRecommended => 'Recommandé';
 
   @override
-  String get dcConnecting => 'Connexion…';
-
-  @override
-  String get dcDisconnected => 'Non connecté';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Connecté en tant que $name';
   }
@@ -925,15 +889,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get settingsSyncWhat => 'Quoi synchroniser';
 
   @override
-  String get settingsSyncServer => 'Sur le serveur';
-
-  @override
   String get settingsSyncServerEmpty => 'Rien de téléchargé pour l\'instant';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return 'Paramètres $count, téléchargés $time à partir de $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'cet appareil';
@@ -962,11 +918,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Dernière synchronisation $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Échec de la synchronisation : $error';
   }
 
   @override
@@ -1752,22 +1703,11 @@ class AppLocalizationsFr extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Affiche ce que tu fais sur ton profil Discord. Nécessite ton token Discord.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Affiche ce que tu fais sur ton profil Discord. Nécessite l\'app de bureau Discord lancée.';
-
-  @override
   String get discordBrowsing => 'Afficher l\'activité de navigation';
 
   @override
   String get discordBrowsingDesc =>
       'Affiche aussi l\'onglet, la page ou le profil que tu regardes, pas seulement ce que tu regardes ou lis.';
-
-  @override
-  String get discordLookHeader => 'Apparence de la présence';
 
   @override
   String get discordActivityType => 'Type d\'activité';
@@ -1807,9 +1747,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Remplace les noms d\'animes et de mangas (et leur jaquette et lien) par « Quelque chose de privé ».';
-
-  @override
-  String get discordConnectionHeader => 'Connexion';
 
   @override
   String get listSearchHint => 'Rechercher dans cette liste';
@@ -1867,13 +1804,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get discordToken => 'Token Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'Enregistré. Appuie pour remplacer, appui long pour supprimer.';
-
-  @override
-  String get discordTokenNotSet => 'Non défini. Appuie pour ajouter.';
 
   @override
   String get discordTokenSavedSnack => 'Token Discord enregistré';
@@ -2072,9 +2002,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Options du compte MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Options du compte Comick';
-
-  @override
   String get comickClientId => 'ID client Comick';
 
   @override
@@ -2168,9 +2095,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get simklReadOnly => 'Simkl a un accès en lecture seule';
 
   @override
-  String get traktReadOnly => 'Trakt a obtenu un accès en lecture seule';
-
-  @override
   String get incognitoEditsBlocked =>
       'Incognito : les modifs de liste sont bloquées';
 
@@ -2253,9 +2177,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get otherWorks => 'Autres travaux';
-
-  @override
-  String get prequelSequel => 'Préquelle & suite';
 
   @override
   String get prequel => 'Préquelle';
@@ -2399,16 +2320,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get trailerQuality => 'Qualité de la remorque';
 
   @override
-  String get titleCopied => 'Titre copié';
-
-  @override
   String get linkCopied => 'Lien copié';
-
-  @override
-  String get watchTrailer => 'Voir la bande-annonce';
-
-  @override
-  String get copyTitle => 'Copier le titre';
 
   @override
   String get detailStale =>
@@ -3397,9 +3309,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Choisis où enregistrer la sauvegarde';
-
-  @override
   String savedPath(String path) {
     return '$path enregistré';
   }
@@ -3971,10 +3880,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles =>
-      'pour les titres actuellement en cours de diffusion';
-
-  @override
   String get progress => 'Progression';
 
   @override
@@ -4180,11 +4085,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Taille : $size';
-  }
-
-  @override
   String get installedState => 'Installé';
 
   @override
@@ -4284,11 +4184,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ajoute aussi les entrées que l\'autre service n\'a pas encore';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Synchroniser avec $name';
-  }
-
-  @override
   String get syncDelete => 'Supprimez ce que le service principal n\'a pas';
 
   @override
@@ -4319,11 +4214,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get syncDeletedNote => 'Sera supprimé';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count sera supprimé de $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Garder la progression avancée';
 
   @override
@@ -4335,9 +4225,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Je ne lirai pas';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Déjà sur cette liste';
 
   @override
   String get animePlanetNewList => 'Nouveau nom de liste';
@@ -5704,9 +5591,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'L\'autorisation a été obtenue auprès d\'un autre agent utilisateur, elle n\'est donc pas envoyée. Testez la connexion pour en obtenir une nouvelle';
-
-  @override
-  String get watchSectionConnection => 'Connexion';
 
   @override
   String get watchSectionSession => 'Séance';
@@ -7585,13 +7469,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get downloadPickAudio => 'Télécharger quelle piste audio ?';
 
   @override
-  String get downloadNoAudio => 'Pas d\'audio en plus';
-
-  @override
   String get downloadAudio => 'Audio';
-
-  @override
-  String get downloadNoSubtitle => 'Pas de sous-titres';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8439,11 +8317,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get generalSectionPrivacy => 'Confidentialité';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Passez à $service pour ouvrir ceci';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Vitesse par défaut, lecture automatique, ajustement vidéo, orientation et image dans l\'image';
 
@@ -8766,9 +8639,6 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'En attente';
-
-  @override
   String get stepChecking => 'Vérification…';
 
   @override
@@ -8840,14 +8710,7 @@ class AppLocalizationsFr extends AppLocalizations {
       'Faites glisser un badge sur un coin de la première carte ou faites glisser un badge déjà présent pour le déplacer. Les badges échangent leurs places, donc aucun ne se chevauche. Appuyez sur un badge ci-dessous pour l\'activer ou le désactiver.';
 
   @override
-  String get statusAuto => 'Automatique';
-
-  @override
   String get unreadCounter => 'Compteur non lu';
-
-  @override
-  String get unreadCounterDesc =>
-      'Montrez combien d\'épisodes ou de chapitres restent sur les affiches';
 
   @override
   String get settingsShortcuts => 'Raccourcis clavier';
@@ -8885,9 +8748,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Réinitialiser aux valeurs par défaut';
-
-  @override
-  String get shortcutClearKeys => 'Supprimer toutes les clés';
 
   @override
   String get shortcutResetAll => 'Réinitialiser tous les raccourcis';
@@ -9078,10 +8938,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get closeActionAlways => 'Continuez toujours à courir dans le bac';
 
   @override
-  String get closeActionNoTray =>
-      'La barre d\'état système n\'est pas disponible ici, donc l\'application se ferme une fois fermée';
-
-  @override
   String get gamepadNav => 'Navigation avec la manette de jeu';
 
   @override
@@ -9155,9 +9011,6 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Les vidéos ne peuvent pas être lues tant que le lecteur n\'est pas téléchargé à nouveau.';
-
-  @override
-  String get trailerLoading => 'Chargement de la remorque…';
 
   @override
   String get trailerFailed =>

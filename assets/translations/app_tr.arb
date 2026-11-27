@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Değişiklik üzerine senkronizasyon",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub'la oturum açın",
-    "settingsSyncSignInDesc": "Ayarlar, hesabınızdaki özel bir özette saklanır",
     "settingsSyncToken": "Kişisel erişim belirteci kullanın",
     "settingsSyncTokenDesc": "github.com/settings/tokens adresinde yalnızca temel izinle bir tane oluşturun",
     "settingsSyncTokenField": "Jeton",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Oturumu kapat",
-    "settingsSyncCode": "GitHub'a {code} girin",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "GitHub sayfası tarayıcınızda açıldı. Kodu kopyalamak için dokunun veya iptal etmek için dokunup basılı tutun.",
     "settingsSyncSignInFailed": "GitHub'ta oturum açılamadı",
-    "dcPreview": "Önizleme",
     "dcSampleWatching": "izliyorum",
     "dcSampleReading": "Okuma",
     "dcSampleBrowsing": "Göz atılıyor",
     "dcSampleLive": "Şu anda",
     "dcLiveNothing": "Şu anda hiçbir şey görünmüyor. Bir başlık açın, bir bölüm veya bölüm başlatın; burada görünecektir.",
     "dcMemberList": "Üye listesinde",
-    "dcAccount": "Hesap",
-    "dcSignIn": "Discord'la oturum aç",
     "dcSignOut": "Oturumu kapat",
-    "dcDesktopHint": "Discord, bağlanmadan masaüstü uygulaması aracılığıyla \"Dartotsu İzleniyor\" ifadesini gösteriyor. Etkinliğe başlığınızın adını vermek için (cep telefonu da dahil) Discord'u bağlayın.",
-    "dcMobileHint": "Ne izlediğinizi veya okuduğunuzu göstermek için Discord'u bağlayın. Hesap jetonunuzu değil Discord'un yetkilendirme sayfasını kullanır.",
     "dcConnect": "Discord'u Bağla",
     "dcConnectDesc": "Discord'un yetkilendirme sayfasını açar ve Yetkili Uygulamalar altına Dartotsu'yu ekler. Discord, varlığınızı güncellemenizi ister. Hesap jetonunuz değil, yalnızca bir yenileme jetonu kaydedilir.",
     "dcConnectFailed": "Discord'a bağlanılamadı",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Hesap jetonu",
     "dcInUse": "Kullanımda",
     "dcRecommended": "Önerilen",
-    "dcConnecting": "Bağlanıyor…",
-    "dcDisconnected": "Bağlı değil",
     "dcSignedInAs": "{name} olarak oturum açıldı",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub'dan sil",
     "settingsSyncSecretsDeleteMessage": "Bu, şifrelenmiş hesaplar dosyasını özetinizden kaldırır. Diğer cihazlar oturum açma bilgilerini korur ve yeni bir parola belirleyebilir.",
     "settingsSyncWhat": "Ne senkronize edilmeli",
-    "settingsSyncServer": "Sunucuda",
     "settingsSyncServerEmpty": "Henüz hiçbir şey yüklenmedi",
-    "settingsSyncServerInfo": "{count} ayarları, {time}'den {device}'ye yüklendi",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "bu cihaz",
     "settingsSyncCount": "{count, plural, =0{Sunucuda hiçbir şey yok} =1{Sunucuda 1 ayar} other{Sunucudaki {count} ayarları}}",
     "settingsSyncNow": "Şimdi senkronize et",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Senkronizasyon başarısız oldu: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Yalnızca her yerde aynı şekilde çalışan ayarlar senkronize edilir. Hesaplar, jetonlar, klasörler, uzantılar, bildirimler, Discord, güncellemeler ve pencere boyutu her cihazda kalır.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co bağlantıları uygulamayı açsın diye bağlantı yönetimini aç",
     "linkSettingsFailed": "Sistem ayarları açılamadı",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Yaptığın şeyi Discord profilinde göster. Discord token'ın gerekir.",
-    "discordRichPresenceDesktopDesc": "Yaptığın şeyi Discord profilinde göster. Discord masaüstü uygulamasının çalışıyor olması gerekir.",
     "discordBrowsing": "Gezinme etkinliğini göster",
     "discordBrowsingDesc": "Sadece izlediğini ya da okuduğunu değil, baktığın sekmeyi, sayfayı ya da profili de göster.",
-    "discordLookHeader": "Durum görünümü",
     "discordActivityType": "Etkinlik türü",
     "discordActivityTypeDesc": "Discord'da nasıl yazılacağı: \"Watching …\" ya da \"Playing …\". Otomatik, anime için Watching, geri kalan her şey için Playing kullanır.",
     "discordWatching": "İzliyor",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"Anime / manga'yı görüntüle\" ve \"Dartotsu'yu aç\" butonları.",
     "discordHideTitles": "Başlıkları gizle",
     "discordHideTitlesDesc": "Anime ve manga adlarını (kapak ve bağlantıyla birlikte) \"Something private\" ile değiştir.",
-    "discordConnectionHeader": "Bağlantı",
     "listSearchHint": "Bu listede ara",
     "listSort": "Sırala",
     "listFilter": "Filtrele",
@@ -671,8 +637,6 @@
     "listNoMatches": "Bu listede eşleşen bir şey yok",
     "discordLogin": "Discord'a giriş yap",
     "discordToken": "Discord token'ı",
-    "discordTokenSaved": "Kaydedildi. Değiştirmek için dokun, silmek için uzun bas.",
-    "discordTokenNotSet": "Ayarlanmadı. Eklemek için dokun.",
     "discordTokenSavedSnack": "Discord token'ı kaydedildi",
     "discordTokenRemovedSnack": "Discord token'ı silindi",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Yetişkin içeriği akıştan ve aramadan çıkar, kendi yetişkin girişlerini Gizli Medya altında listele.",
     "kitsuAccountOptions": "Kitsu hesap seçenekleri",
     "mangaBakaAccountOptions": "MangaBaka hesap seçenekleri",
-    "comickAccountOptions": "Komik hesap seçenekleri",
     "comickClientId": "Komik Müşteri Kimliği",
     "comickClientIdDesc": "Comik.dev'de kayıtlı özel müşteri kimliği",
     "couldNotUpdateKitsuSettings": "Kitsu ayarların güncellenemedi",
@@ -761,7 +724,6 @@
     "accountDetails": "Hesap ayrıntıları",
     "refreshFromKitsu": "Kitsu'dan yenile",
     "simklReadOnly": "Simkl salt okunur erişim verdi",
-    "traktReadOnly": "Trakt'a salt okunur erişim izni verildi",
     "incognitoEditsBlocked": "Gizli mod: liste düzenlemeleri engelli",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Gizli mod: ilerleme kaydedilmedi",
@@ -786,7 +748,6 @@
     "mangaCredits": "Manga kredileri",
     "mainProductions": "Ana yapımlar",
     "otherWorks": "Diğer işler",
-    "prequelSequel": "Öncesi ve sonrası",
     "prequel": "Ön bölüm",
     "sequel": "Devam filmi",
     "previousSeason": "Önceki sezon",
@@ -833,10 +794,7 @@
     "addToList": "Listeye ekle",
     "trailer": "Fragman",
     "trailerQuality": "Römork kalitesi",
-    "titleCopied": "Başlık kopyalandı",
     "linkCopied": "Bağlantı kopyalandı",
-    "watchTrailer": "Fragmanı izle",
-    "copyTitle": "Başlığı kopyala",
     "detailStale": "AniList'e ulaşılamadı. Bu kayıtlı bilgidir ve güncelliğini kaybetmiş olabilir.",
     "copyLink": "Bağlantıyı kopyala",
     "openInBrowser": "Tarayıcıda aç",
@@ -1139,7 +1097,6 @@
     "import": "İçe aktar",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Yedeğin nereye kaydedileceğini seç",
     "savedPath": "{path} kaydedildi",
     "exportFailed": "Dışa aktarma başarısız: {error}",
     "nothingInLocalLists": "Yerel listelerinde henüz bir şey yok.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Bağlantı açılırken hata: {error}",
     "linkCantBeOpened": "Bu bağlantı açılamıyor: {link}",
     "linkOpenError": "Bağlantı açılırken hata: {error}",
-    "forReleasingTitles": "şu an yayınlanan başlıklar için",
     "progress": "İlerleme",
     "notes": "Notlar",
     "serviceNotFound": "\"{id}\" servisi bulunamadı",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} ayarlanan depoda yok",
     "pluginFetchFailed": "Eklenti bilgisi alınamadı",
     "installPluginTitle": "{name} yükle",
-    "sizeLabel": "Boyut: {size}",
     "installedState": "Yüklü",
     "updatePluginTitle": "{name} Güncellemesi",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Uygulama açılırken ve her 30 dakikada bir arka planda çekip senkronla",
     "syncAddMissing": "Eksik girişleri ekle",
     "syncAddMissingDesc": "Diğer serviste henüz olmayan girişleri de ekle",
-    "syncServiceOn": "{name} ile senkronize et",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Ana hizmetin sahip olmadığını silin",
     "syncDeleteDesc": "Ana listede bulunmayan diğer hizmetlerden girişleri kaldırın. Yalnızca bir başlıkla eşleştirilebilecek girişler kaldırılır, böylece Simkl filmleri ve dizileri gibi şeyler kalır",
     "syncDeleteTitle": "Girişler silinsin mi?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Sil",
     "syncToDelete": "Silmek için",
     "syncDeletedNote": "Silinecek",
-    "syncWillRemove": "{count}, {name}'den silinecek",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "İleri durumdaki ilerlemeyi koru",
     "syncOnlyForwardDesc": "Zaten önde olan bir servisin ilerlemesini düşürme",
     "animePlanetWontWatch": "İzlemeyeceğim",
     "animePlanetWontRead": "okumayacağım",
-    "animePlanetAlreadyOnList": "Zaten bu listede",
     "animePlanetNewList": "Yeni liste adı",
     "syncPrivate": "Özel girişler",
     "syncPrivateDesc": "Özel tuttuğunuz girişlerle ne yapmalısınız? Özel seçeneği olan bir hizmet onları özel kılar; diğerleri bunları halka açık bir şekilde gösterirdi",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "İzin başka bir kullanıcı aracısıyla kazanıldığı için gönderilmedi. Yenisini almak için bağlantıyı test edin",
-    "watchSectionConnection": "Bağlantı",
     "watchSectionSession": "Oturum",
     "watchSectionTools": "Araçlar",
     "watchMetaSource": "Bölüm ayrıntıları şuradan",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Hangi yayın indirilsin?",
     "downloadPickSubtitle": "Hangi altyazı indirilsin?",
     "downloadPickAudio": "Hangi ses izi indirilsin?",
-    "downloadNoAudio": "Ekstra ses yok",
     "downloadAudio": "Ses",
-    "downloadNoSubtitle": "Altyazı yok",
     "downloadHlsNeedsFfmpeg": "Bu yayın bir HLS oynatma listesi. İndirmek için FFmpeg eklentisi gerekir.",
     "downloadSourceMissing": "Bu bölümün kaynağı yüklü değil",
     "downloadDashDrm": "Bu akış DRM korumalıdır",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Dil ve davranış",
     "generalSectionSecurity": "Güvenlik",
     "generalSectionPrivacy": "Gizlilik",
-    "notificationsOtherService": "Bunu açmak için {service}'a geçin",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Varsayılan hız, otomatik oynatma, video sığdırma, yönlendirme ve resim içinde resim",
     "secPlayerSkip": "Açılışları, bitişleri ve özetleri otomatik olarak atlayın",
     "secPlayerControls": "Hareketleri kaydırın, basılı tutun ve dokunun ve önizlemeyi arayın",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Bekliyor",
     "stepChecking": "Kontrol ediliyor…",
     "stepUpToDate": "güncel",
     "stepUpToDateWith": "Güncel · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "manga",
     "readerCloudflare": "Tarayıcıda aç (Cloudflare kontrolü)",
     "badgeBoardHint": "Bir rozeti ilk kartın köşesine sürükleyin veya üzerinde zaten bulunan bir rozeti taşımak için sürükleyin. Rozetler yer değiştiriyor, dolayısıyla hiçbiri çakışmıyor. Açmak veya kapatmak için aşağıdaki rozetlerden birine dokunun.",
-    "statusAuto": "Otomatik",
     "unreadCounter": "Okunmamış sayaç",
-    "unreadCounterDesc": "Posterlerde kaç bölüm veya bölüm kaldığını gösterin",
     "settingsShortcuts": "Klavye kısayolları",
     "settingsShortcutsDesc": "Her tuşu görün, değiştirin ve kapatın",
     "shortcutGroupApp": "Uygulama",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Ayarlanmadı",
     "shortcutAddKey": "Anahtar ekle",
     "shortcutResetOne": "Varsayılana sıfırla",
-    "shortcutClearKeys": "Tüm anahtarları kaldır",
     "shortcutResetAll": "Tüm kısayolları sıfırla",
     "shortcutResetAllDesc": "Her anahtarı varsayılana geri döndürün",
     "shortcutPress": "İstediğiniz tuşa veya kombinasyona basın",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Uygulamadan çık",
     "closeActionWhenBusy": "Bir şey çalışırken tepside çalışmaya devam edin",
     "closeActionAlways": "Daima tepside çalışmaya devam edin",
-    "closeActionNoTray": "Sistem tepsisi burada mevcut olmadığından uygulama kapatıldığında sonlandırılıyor",
     "gamepadNav": "Oyun kumandası navigasyonu",
     "gamepadNavDesc": "Uygulamada dolaşın ve oynatıcıyı bir oyun kumandasıyla kontrol edin",
     "trayShow": "Dartotsu'yu göster",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Ayrıntıları kopyala",
     "removePlayerTitle": "Oynatıcı kaldırılsın mı?",
     "removePlayerMessage": "Oynatıcı tekrar indirilene kadar videolar oynatılamaz.",
-    "trailerLoading": "Fragman yükleniyor…",
     "trailerFailed": "Fragman burada oynatılamadı, tarayıcıda açıldı"
 }

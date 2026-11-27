@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "በለውጥ ላይ አስምር",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "በ GitHub ይግቡ",
-    "settingsSyncSignInDesc": "መቼቶች በመለያዎ ውስጥ ባለው የግል መረጃ ውስጥ ተከማችተዋል።",
     "settingsSyncToken": "የግል መዳረሻ ማስመሰያ ይጠቀሙ",
     "settingsSyncTokenDesc": "በ github.com/settings/tokens ላይ በግስት ፈቃድ ብቻ ይፍጠሩ",
     "settingsSyncTokenField": "ማስመሰያ",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "ዘግተህ ውጣ",
-    "settingsSyncCode": "GitHub ላይ {code} አስገባ",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "የ GitHub ገጽ በአሳሽዎ ውስጥ ተከፍቷል። ኮዱን ለመቅዳት ይንኩ ወይም ለመሰረዝ ይንኩ እና ይያዙ።",
     "settingsSyncSignInFailed": "ወደ GitHub መግባት አልተቻለም",
-    "dcPreview": "ቅድመ እይታ",
     "dcSampleWatching": "በመመልከት ላይ",
     "dcSampleReading": "ማንበብ",
     "dcSampleBrowsing": "ማሰስ",
     "dcSampleLive": "አሁን",
     "dcLiveNothing": "አሁን ምንም እየታየ አይደለም። ርዕስ ክፈት፣ ክፍል ወይም ምዕራፍ ጀምር እና እዚህ ይታያል።",
     "dcMemberList": "በአባል ዝርዝር ውስጥ",
-    "dcAccount": "መለያ",
-    "dcSignIn": "በ Discord ይግቡ",
     "dcSignOut": "ዘግተህ ውጣ",
-    "dcDesktopHint": "ሳይገናኝ፣ Discord በዴስክቶፕ መተግበሪያ በኩል \"Dartotsuን መመልከት\" ያሳያል። እንቅስቃሴውን በተንቀሳቃሽ ስልክ ላይ ጨምሮ በእርስዎ ርዕስ ስም ለመሰየም Discord ን ያገናኙ።",
-    "dcMobileHint": "የሚመለከቱትን ወይም የሚያነቡትን ለማሳየት Discord ን ያገናኙ። የመለያዎን ማስመሰያ ሳይሆን የ Discord ፍቃድ ገጽን ይጠቀማል።",
     "dcConnect": "Discord አገናኝ",
     "dcConnectDesc": "የ Discord ፍቃድ ገጽን ይከፍታል እና Dartotsu በተፈቀደላቸው መተግበሪያዎች ስር ያክላል። Discord የእርስዎን መኖር እንዲያዘምን ይጠይቃል። የማደስ ማስመሰያ ብቻ ነው የተቀመጠው፣ የመለያዎ ማስመሰያ አይደለም።",
     "dcConnectFailed": "Discord ማገናኘት አልተቻለም",
@@ -254,8 +241,6 @@
     "dcMethodToken": "መለያ ማስመሰያ",
     "dcInUse": "ጥቅም ላይ የዋለ",
     "dcRecommended": "የሚመከር",
-    "dcConnecting": "በማገናኘት ላይ…",
-    "dcDisconnected": "አልተገናኘም።",
     "dcSignedInAs": "እንደ {name} ገብቷል",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "ከ GitHub ሰርዝ",
     "settingsSyncSecretsDeleteMessage": "ይህ የተመሰጠረውን የመለያ ፋይሉን ከጅስትህ ያስወግዳል። ሌሎች መሣሪያዎች መግቢያቸውን ያስቀምጣሉ እና አዲስ የይለፍ ሐረግ ማዘጋጀት ይችላሉ።",
     "settingsSyncWhat": "ምን ማመሳሰል እንዳለበት",
-    "settingsSyncServer": "በአገልጋዩ ላይ",
     "settingsSyncServerEmpty": "እስካሁን ምንም አልተጫነም።",
-    "settingsSyncServerInfo": "{count} ቅንጅቶች፣ {time} ከ{device} ተሰቅለዋል",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ይህ መሳሪያ",
     "settingsSyncCount": "{count, plural, =0{በአገልጋዩ ላይ ምንም ነገር የለም።} =1{በአገልጋዩ ላይ 1 ቅንብር} other{በአገልጋዩ ላይ {count} ቅንጅቶች}}",
     "settingsSyncNow": "አሁን አስምር",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "ማመሳሰል አልተሳካም፦ {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "በሁሉም ቦታ ተመሳሳይ የሚሰሩ ቅንጅቶች ብቻ ናቸው የተሰመሩት። መለያዎች፣ ቶከኖች፣ አቃፊዎች፣ ቅጥያዎች፣ ማሳወቂያዎች፣ Discord፣ ዝማኔዎች እና የመስኮቶች መጠን በእያንዳንዱ መሳሪያ ላይ ይቆያሉ።",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co ሊንኮች መተግበሪያውን እንዲከፍቱ የሊንክ አያያዝን አብራ",
     "linkSettingsFailed": "የሲስተም ቅንብሮችን መክፈት አልተቻለም",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "የምታደርገውን በDiscord መገለጫህ ላይ አሳይ። የDiscord ቶከንህ ያስፈልጋል።",
-    "discordRichPresenceDesktopDesc": "የምታደርገውን በDiscord መገለጫህ ላይ አሳይ። የDiscord ዴስክቶፕ መተግበሪያ እየሰራ መሆን አለበት።",
     "discordBrowsing": "የማሰስ እንቅስቃሴ አሳይ",
     "discordBrowsingDesc": "ከምትመለከተው ወይም ከምታነበው በተጨማሪ የምትመለከተውን ታብ፣ ገጽ ወይም መገለጫም አሳይ።",
-    "discordLookHeader": "የፕረዘንስ ገጽታ",
     "discordActivityType": "የእንቅስቃሴ ዓይነት",
     "discordActivityTypeDesc": "Discord እንዴት እንደሚገልጸው፦ \"እየተመለከተ …\" ወይም \"እየተጫወተ …\"። ራስ-ሰር ለአኒሜ \"እየተመለከተ\"ን ለቀሪው ሁሉ \"እየተጫወተ\"ን ይጠቀማል።",
     "discordWatching": "እየተመለከተ",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"አኒሜ / ማንጋ ተመልከት\" እና \"Dartotsu ክፈት\" አዝራሮች።",
     "discordHideTitles": "ርዕሶችን ደብቅ",
     "discordHideTitlesDesc": "የአኒሜና ማንጋ ስሞችን (ከሽፋናቸውና ሊንካቸው ጋር) በ\"የግል ነገር\" ተካ።",
-    "discordConnectionHeader": "ግንኙነት",
     "listSearchHint": "ይህን ዝርዝር ፈልግ",
     "listSort": "ደርድር",
     "listFilter": "አጣራ",
@@ -671,8 +637,6 @@
     "listNoMatches": "በዚህ ዝርዝር ውስጥ የሚመሳሰል ምንም የለም",
     "discordLogin": "ወደ Discord ግባ",
     "discordToken": "Discord ቶከን",
-    "discordTokenSaved": "ተቀምጧል። ለመተካት ንካ፣ ለማስወገድ ተጭነህ ያዝ።",
-    "discordTokenNotSet": "አልተቀመጠም። ለመጨመር ንካ።",
     "discordTokenSavedSnack": "የDiscord ቶከን ተቀምጧል",
     "discordTokenRemovedSnack": "የDiscord ቶከን ተወግዷል",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "የአዋቂ ርዕሶችን ከፊዶችና ፍለጋ ውጭ አድርግ፣ የራስህን የአዋቂ ግቤቶች ደግሞ በ\"የተደበቁ ሚዲያዎች\" ስር ዘርዝር።",
     "kitsuAccountOptions": "የKitsu መለያ አማራጮች",
     "mangaBakaAccountOptions": "የMangaBaka መለያ አማራጮች",
-    "comickAccountOptions": "የኮሚክ መለያ አማራጮች",
     "comickClientId": "የኮሚክ ደንበኛ መታወቂያ",
     "comickClientIdDesc": "ብጁ ደንበኛ መታወቂያ በcomick.dev ላይ ተመዝግቧል",
     "couldNotUpdateKitsuSettings": "የKitsu ቅንብሮችህን ማዘመን አልተቻለም",
@@ -761,7 +724,6 @@
     "accountDetails": "የመለያ ዝርዝሮች",
     "refreshFromKitsu": "ከKitsu አድስ",
     "simklReadOnly": "Simkl የተነበበ-ብቻ መዳረሻ ሰጥቷል",
-    "traktReadOnly": "ትራክ ተነባቢ-ብቻ መዳረሻ ተሰጥቷል።",
     "incognitoEditsBlocked": "ኢንኮግኒቶ፦ የዝርዝር አርትዖቶች ታግደዋል",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ኢንኮግኒቶ፦ እድገት አልተቀመጠም",
@@ -786,7 +748,6 @@
     "mangaCredits": "የማንጋ ሥራዎች",
     "mainProductions": "ዋና ፕሮዳክሽኖች",
     "otherWorks": "ሌሎች ሥራዎች",
-    "prequelSequel": "ቀዳሚና ተከታይ",
     "prequel": "ቅድመ ሁኔታ",
     "sequel": "ተከታይ",
     "previousSeason": "ያለፈው ሲዝን",
@@ -833,10 +794,7 @@
     "addToList": "ወደ ዝርዝር ጨምር",
     "trailer": "ትሬለር",
     "trailerQuality": "የተጎታች ጥራት",
-    "titleCopied": "ርዕሱ ተቀድቷል",
     "linkCopied": "ሊንኩ ተቀድቷል",
-    "watchTrailer": "ትሬለር ተመልከት",
-    "copyTitle": "ርዕስ ቅዳ",
     "detailStale": "AniList ሊደረስበት አልቻለም። ይህ የተቀመጠ መረጃ ነው እና ጊዜ ያለፈበት ሊሆን ይችላል።",
     "copyLink": "ሊንክ ቅዳ",
     "openInBrowser": "በብራውዘር ክፈት",
@@ -1139,7 +1097,6 @@
     "import": "አስገባ",
     "animeCount": "{count} አኒሜ",
     "mangaCount": "{count} ማንጋ",
-    "chooseSaveLocation": "ምትኬውን የምታስቀምጥበት ቦታ ምረጥ",
     "savedPath": "{path} ተቀምጧል",
     "exportFailed": "መላክ አልተሳካም፦ {error}",
     "nothingInLocalLists": "በአካባቢ ዝርዝሮችህ ውስጥ እስካሁን ምንም የለም።",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "ሊንክ በመክፈት ላይ ስህተት፦ {error}",
     "linkCantBeOpened": "ይህ ሊንክ መከፈት አይችልም፦ {link}",
     "linkOpenError": "ሊንክ በመክፈት ላይ ስህተት፦ {error}",
-    "forReleasingTitles": "በአሁኑ ጊዜ ለሚለቀቁ ርዕሶች",
     "progress": "እድገት",
     "notes": "ማስታወሻዎች",
     "serviceNotFound": "አገልግሎት \"{id}\" አልተገኘም",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} በተዋቀረው ማከማቻ ውስጥ አይገኝም",
     "pluginFetchFailed": "የፕለጊን መረጃ ማምጣት አልተሳካም",
     "installPluginTitle": "{name} ጫን",
-    "sizeLabel": "መጠን፦ {size}",
     "installedState": "ተጭኗል",
     "updatePluginTitle": "አዘምን {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "መተግበሪያው ሲከፈትና በየ30 ደቂቃው በጀርባ አምጣና አመሳስል",
     "syncAddMissing": "የጎደሉ ግቤቶችን ጨምር",
     "syncAddMissingDesc": "ሌላኛው አገልግሎት እስካሁን የሌሉትን ግቤቶችም ጨምር",
-    "syncServiceOn": "ከ{name} ጋር አስምር",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "ዋናው አገልግሎት የሌለውን ሰርዝ",
     "syncDeleteDesc": "በዋናው ዝርዝር ውስጥ ከሌሉ ሌሎች አገልግሎቶች ግቤቶችን ያስወግዱ። ከርዕስ ጋር ሊመሳሰሉ የሚችሉ ግቤቶች ብቻ ይወገዳሉ፣ ስለዚህ እንደ ሲምክል ፊልሞች እና ተከታታይ ነገሮች ያሉ ነገሮች ይቆያሉ።",
     "syncDeleteTitle": "ግቤቶች ይሰረዙ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "ሰርዝ",
     "syncToDelete": "ለመሰረዝ",
     "syncDeletedNote": "ይሰረዛል",
-    "syncWillRemove": "{count} ከ{name} ይሰረዛል",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "የላቀ እድገትን አቆይ",
     "syncOnlyForwardDesc": "አስቀድሞ ወደፊት ያለ አገልግሎትን እድገት አታሳንስ",
     "animePlanetWontWatch": "አይመለከትም።",
     "animePlanetWontRead": "አያነብም።",
-    "animePlanetAlreadyOnList": "ቀድሞውኑ በዚህ ዝርዝር ውስጥ",
     "animePlanetNewList": "አዲስ ዝርዝር ስም",
     "syncPrivate": "የግል ግቤቶች",
     "syncPrivateDesc": "በሚስጥር በሚይዙት ግቤቶች ምን እንደሚደረግ። የግል አማራጭ ያለው አገልግሎት ግላዊ ያደርጋቸዋል; ሌሎች በአደባባይ ያሳዩዋቸው ነበር።",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "ማጽዳቱ የተገኘው ከሌላ ተጠቃሚ ወኪል ነው፣ ስለዚህ አልተላከም። አዲስ ለማግኘት ግንኙነቱን ይሞክሩ",
-    "watchSectionConnection": "ግንኙነት",
     "watchSectionSession": "ክፍለ ጊዜ",
     "watchSectionTools": "መሳሪያዎች",
     "watchMetaSource": "የክፍል ዝርዝሮች ከ",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "የትኛው ስትሪም ይውረድ?",
     "downloadPickSubtitle": "የትኛው ንዑስ ርዕስ ይውረድ?",
     "downloadPickAudio": "የትኛው የድምጽ ትራክ ይውረድ?",
-    "downloadNoAudio": "ተጨማሪ ድምጽ የለም",
     "downloadAudio": "ድምጽ",
-    "downloadNoSubtitle": "ንዑስ ርዕስ የለም",
     "downloadHlsNeedsFfmpeg": "ይህ ስትሪም የHLS ፕሌይሊስት ነው። ለማውረድ የFFmpeg ተጨማሪ ያስፈልጋል።",
     "downloadSourceMissing": "የዚህ ክፍል ምንጭ አልተጫነም",
     "downloadDashDrm": "ይህ ዥረት በDRM የተጠበቀ ነው።",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ቋንቋ እና ባህሪ",
     "generalSectionSecurity": "ደህንነት",
     "generalSectionPrivacy": "ግላዊነት",
-    "notificationsOtherService": "ይህንን ለመክፈት ወደ {service} ይቀይሩ",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "በሥዕሉ ላይ ያለው ነባሪ ፍጥነት፣ ራስ-አጫውት፣ የቪዲዮ ብቃት፣ አቀማመጥ እና ሥዕል",
     "secPlayerSkip": "ክፍተቶችን ፣ መጨረሻዎችን እና መግለጫዎችን በራስ-ሰር ይዝለሉ",
     "secPlayerControls": "ምልክቶችን ያንሸራትቱ ፣ ይያዙ እና ይንኩ እና ቅድመ እይታን ይፈልጉ",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "በመጠበቅ ላይ",
     "stepChecking": "በማጣራት ላይ…",
     "stepUpToDate": "የዘመነ",
     "stepUpToDateWith": "የዘመነ · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "ማንጋ",
     "readerCloudflare": "በአሳሽ ውስጥ ክፈት (Cloudflare check)",
     "badgeBoardHint": "ባጅ ወደ መጀመሪያው ካርድ ጥግ ይጎትቱት ወይም እሱን ለማንቀሳቀስ ባጅ ቀድሞውን ይጎትቱት። ባጆች ቦታዎችን ይለዋወጣሉ፣ ስለዚህ ማንም በጭራሽ አይደራረብም። እሱን ለማብራት ወይም ለማጥፋት ከታች ያለውን ባጅ ይንኩ።",
-    "statusAuto": "መኪና",
     "unreadCounter": "ያልተነበበ ቆጣሪ",
-    "unreadCounterDesc": "በፖስተሮች ላይ ስንት ክፍሎች ወይም ምዕራፎች እንደቀሩ አሳይ",
     "settingsShortcuts": "የቁልፍ ሰሌዳ አቋራጮች",
     "settingsShortcutsDesc": "እያንዳንዱን ቁልፍ ይመልከቱ፣ ይቀይሩ እና ያጥፉ",
     "shortcutGroupApp": "መተግበሪያ",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "አልተዘጋጀም።",
     "shortcutAddKey": "ቁልፍ ጨምር",
     "shortcutResetOne": "ወደ ነባሪ ዳግም አስጀምር",
-    "shortcutClearKeys": "ሁሉንም ቁልፎች አስወግድ",
     "shortcutResetAll": "ሁሉንም አቋራጮች ዳግም ያስጀምሩ",
     "shortcutResetAllDesc": "እያንዳንዱን ቁልፍ ወደ ነባሪ ይመልሱ",
     "shortcutPress": "የሚፈልጉትን ቁልፍ ወይም ጥምር ይጫኑ",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "መተግበሪያውን ያቋርጡ",
     "closeActionWhenBusy": "የሆነ ነገር እየሄደ እያለ በትሪው ውስጥ መሮጥዎን ይቀጥሉ",
     "closeActionAlways": "ሁልጊዜ በትሪ ውስጥ መሮጥዎን ይቀጥሉ",
-    "closeActionNoTray": "የስርዓት መሣቢያው እዚህ የለም፣ ስለዚህ መተግበሪያው ሲዘጋ ያቆማል",
     "gamepadNav": "የጨዋታ ሰሌዳ አሰሳ",
     "gamepadNavDesc": "በመተግበሪያው ዙሪያ ይንቀሳቀሱ እና ተጫዋቹን በጨዋታ መቆጣጠሪያ ይቆጣጠሩ",
     "trayShow": "Dartotsu አሳይ",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "ዝርዝሮችን ይቅዱ",
     "removePlayerTitle": "ተጫዋቹ ይወገድ?",
     "removePlayerMessage": "ተጫዋቹ እንደገና እስኪወርድ ድረስ ቪዲዮዎች መጫወት አይችሉም።",
-    "trailerLoading": "የፊልም ማስታወቂያውን በመጫን ላይ…",
     "trailerFailed": "ተጎታችውን እዚህ ማጫወት አልተቻለም፣ በአሳሹ ውስጥ ይከፍታል።"
 }

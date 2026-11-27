@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Đồng bộ hóa khi thay đổi",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Đăng nhập bằng GitHub",
-    "settingsSyncSignInDesc": "Cài đặt được lưu trữ trong một ý chính riêng tư trong tài khoản của bạn",
     "settingsSyncToken": "Sử dụng mã thông báo truy cập cá nhân",
     "settingsSyncTokenDesc": "Tạo một cái tại github.com/settings/tokens chỉ với quyền chính",
     "settingsSyncTokenField": "Mã thông báo",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Đăng xuất",
-    "settingsSyncCode": "Nhập {code} trên GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Trang GitHub đã mở trong trình duyệt của bạn. Nhấn để sao chép mã hoặc nhấn và giữ để hủy.",
     "settingsSyncSignInFailed": "Không thể đăng nhập vào GitHub",
-    "dcPreview": "Xem trước",
     "dcSampleWatching": "Đang xem",
     "dcSampleReading": "Đọc",
     "dcSampleBrowsing": "Đang duyệt",
     "dcSampleLive": "Ngay bây giờ",
     "dcLiveNothing": "Không có gì được hiển thị ngay bây giờ. Mở một tiêu đề, bắt đầu một tập hoặc một chương và nó sẽ xuất hiện ở đây.",
     "dcMemberList": "Trong danh sách thành viên",
-    "dcAccount": "Tài khoản",
-    "dcSignIn": "Đăng nhập bằng Discord",
     "dcSignOut": "Đăng xuất",
-    "dcDesktopHint": "Nếu không kết nối, Discord sẽ hiển thị “Đang xem Dartotsu” thông qua ứng dụng dành cho máy tính để bàn. Kết nối Discord để đặt tên hoạt động theo tiêu đề của bạn, kể cả trên thiết bị di động.",
-    "dcMobileHint": "Kết nối Discord để hiển thị những gì bạn đang xem hoặc đọc. Nó sử dụng trang ủy quyền của Discord chứ không phải mã thông báo tài khoản của bạn.",
     "dcConnect": "Kết nối bất hòa",
     "dcConnectDesc": "Mở trang ủy quyền của Discord và thêm Dartotsu trong Ứng dụng được ủy quyền. Discord yêu cầu cập nhật sự hiện diện của bạn. Chỉ có mã thông báo làm mới được lưu chứ không phải mã thông báo tài khoản của bạn.",
     "dcConnectFailed": "Không thể kết nối Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Mã thông báo tài khoản",
     "dcInUse": "Đang sử dụng",
     "dcRecommended": "Được đề xuất",
-    "dcConnecting": "Đang kết nối…",
-    "dcDisconnected": "Không được kết nối",
     "dcSignedInAs": "Đăng nhập với tên {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Xóa khỏi GitHub",
     "settingsSyncSecretsDeleteMessage": "Thao tác này sẽ xóa tệp tài khoản được mã hóa khỏi ý chính của bạn. Các thiết bị khác giữ nguyên thông tin đăng nhập và có thể đặt cụm mật khẩu mới.",
     "settingsSyncWhat": "Đồng bộ hóa những gì",
-    "settingsSyncServer": "Trên máy chủ",
     "settingsSyncServerEmpty": "Chưa có gì được tải lên",
-    "settingsSyncServerInfo": "{count} cài đặt, đã tải lên {time} từ {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "thiết bị này",
     "settingsSyncCount": "{count, plural, =0{Không có gì trên máy chủ} =1{1 cài đặt trên máy chủ} other{{count} cài đặt trên máy chủ}}",
     "settingsSyncNow": "Đồng bộ hóa ngay bây giờ",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Đồng bộ hóa không thành công: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Chỉ những cài đặt hoạt động giống nhau ở mọi nơi mới được đồng bộ hóa. Tài khoản, mã thông báo, thư mục, tiện ích mở rộng, thông báo, Discord, cập nhật và kích thước cửa sổ vẫn còn trên mỗi thiết bị.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Bật xử lý link để link anilist.co mở app",
     "linkSettingsFailed": "Không mở được cài đặt hệ thống",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Hiện bạn đang làm gì trên hồ sơ Discord. Cần token Discord của bạn.",
-    "discordRichPresenceDesktopDesc": "Hiện bạn đang làm gì trên hồ sơ Discord. Cần app Discord trên máy tính đang chạy.",
     "discordBrowsing": "Hiện hoạt động duyệt",
     "discordBrowsingDesc": "Hiện cả tab, trang hay hồ sơ bạn đang xem, không chỉ cái bạn đang xem hoặc đọc.",
-    "discordLookHeader": "Kiểu hiển thị",
     "discordActivityType": "Loại hoạt động",
     "discordActivityTypeDesc": "Cách Discord diễn đạt: \"Đang xem …\" hoặc \"Đang chơi …\". Tự động dùng Đang xem cho anime và Đang chơi cho còn lại.",
     "discordWatching": "Đang xem",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Các nút \"Xem anime / manga\" và \"Mở Dartotsu\".",
     "discordHideTitles": "Ẩn tiêu đề",
     "discordHideTitlesDesc": "Thay tên anime và manga (cùng ảnh bìa và link) bằng \"Something private\".",
-    "discordConnectionHeader": "Kết nối",
     "listSearchHint": "Tìm trong danh sách này",
     "listSort": "Sắp xếp",
     "listFilter": "Lọc",
@@ -671,8 +637,6 @@
     "listNoMatches": "Không có gì trong danh sách khớp",
     "discordLogin": "Đăng nhập Discord",
     "discordToken": "Token Discord",
-    "discordTokenSaved": "Đã lưu. Chạm để thay, nhấn giữ để xóa.",
-    "discordTokenNotSet": "Chưa đặt. Chạm để thêm.",
     "discordTokenSavedSnack": "Đã lưu token Discord",
     "discordTokenRemovedSnack": "Đã xóa token Discord",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Không hiện truyện 18+ trong bảng tin và tìm kiếm, và để các mục 18+ của bạn trong Media ẩn.",
     "kitsuAccountOptions": "Tùy chọn tài khoản Kitsu",
     "mangaBakaAccountOptions": "Tùy chọn tài khoản MangaBaka",
-    "comickAccountOptions": "Tùy chọn tài khoản Comick",
     "comickClientId": "ID khách hàng Comick",
     "comickClientIdDesc": "ID khách hàng tùy chỉnh đã đăng ký trên Comick.dev",
     "couldNotUpdateKitsuSettings": "Không cập nhật được cài đặt Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Chi tiết tài khoản",
     "refreshFromKitsu": "Làm mới từ Kitsu",
     "simklReadOnly": "Simkl chỉ cấp quyền chỉ đọc",
-    "traktReadOnly": "Trakt được cấp quyền truy cập chỉ đọc",
     "incognitoEditsBlocked": "Ẩn danh: không thể sửa danh sách",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Ẩn danh: không lưu tiến độ",
@@ -786,7 +748,6 @@
     "mangaCredits": "Tham gia manga",
     "mainProductions": "Tác phẩm chính",
     "otherWorks": "Tác phẩm khác",
-    "prequelSequel": "Phần trước & Phần sau",
     "prequel": "phần tiền truyện",
     "sequel": "Phần tiếp theo",
     "previousSeason": "Mùa trước",
@@ -833,10 +794,7 @@
     "addToList": "Thêm vào danh sách",
     "trailer": "Đoạn giới thiệu",
     "trailerQuality": "Chất lượng trailer",
-    "titleCopied": "Đã sao chép tiêu đề",
     "linkCopied": "Đã sao chép link",
-    "watchTrailer": "Xem trailer",
-    "copyTitle": "Sao chép tiêu đề",
     "detailStale": "Không thể truy cập AniList. Đây là thông tin đã lưu và có thể đã lỗi thời.",
     "copyLink": "Sao chép link",
     "openInBrowser": "Mở trong trình duyệt",
@@ -1139,7 +1097,6 @@
     "import": "Nhập",
     "animeCount": "{count} hoạt hình",
     "mangaCount": "{count} truyện tranh",
-    "chooseSaveLocation": "Chọn nơi lưu bản sao lưu",
     "savedPath": "Đã lưu {path}",
     "exportFailed": "Xuất thất bại: {error}",
     "nothingInLocalLists": "Chưa có gì trong danh sách cục bộ của bạn.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Lỗi khi mở link: {error}",
     "linkCantBeOpened": "Không mở được link này: {link}",
     "linkOpenError": "Lỗi khi mở link: {error}",
-    "forReleasingTitles": "dành cho các tựa đang phát hành",
     "progress": "Tiến độ",
     "notes": "Ghi chú",
     "serviceNotFound": "Không tìm thấy dịch vụ \"{id}\"",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} không có trong kho đã cấu hình",
     "pluginFetchFailed": "Không lấy được thông tin plugin",
     "installPluginTitle": "Cài {name}",
-    "sizeLabel": "Dung lượng: {size}",
     "installedState": "Đã cài",
     "updatePluginTitle": "Cập nhật {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Tải và đồng bộ ngầm khi mở app và mỗi 30 phút",
     "syncAddMissing": "Thêm các mục còn thiếu",
     "syncAddMissingDesc": "Thêm cả những mục mà dịch vụ kia chưa có",
-    "syncServiceOn": "Đồng bộ hóa với {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Xóa những gì dịch vụ chính không có",
     "syncDeleteDesc": "Xóa các mục khỏi các dịch vụ khác không có trong danh sách chính. Chỉ những mục có thể khớp với tiêu đề mới bị xóa, vì vậy những mục như phim và loạt phim Simkl sẽ được giữ nguyên",
     "syncDeleteTitle": "Xóa mục nhập?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Xóa",
     "syncToDelete": "Để xóa",
     "syncDeletedNote": "Sẽ bị xóa",
-    "syncWillRemove": "{count} sẽ bị xóa khỏi {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Giữ tiến độ cao hơn",
     "syncOnlyForwardDesc": "Không hạ tiến độ của dịch vụ đang đi trước",
     "animePlanetWontWatch": "Sẽ không xem",
     "animePlanetWontRead": "Sẽ không đọc",
-    "animePlanetAlreadyOnList": "Đã có trong danh sách này",
     "animePlanetNewList": "Tên danh sách mới",
     "syncPrivate": "Mục riêng tư",
     "syncPrivateDesc": "Phải làm gì với các mục bạn giữ riêng tư. Một dịch vụ có tùy chọn riêng tư sẽ giúp chúng ở chế độ riêng tư; những người khác sẽ cho họ xem một cách công khai",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Việc giải phóng mặt bằng đã đạt được thông qua một tác nhân người dùng khác nên nó không được gửi. Kiểm tra kết nối để có kết nối mới",
-    "watchSectionConnection": "Kết nối",
     "watchSectionSession": "Phiên",
     "watchSectionTools": "Công cụ",
     "watchMetaSource": "Chi tiết tập từ",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Tải luồng nào?",
     "downloadPickSubtitle": "Tải phụ đề nào?",
     "downloadPickAudio": "Tải track âm thanh nào?",
-    "downloadNoAudio": "Không có âm thanh thêm",
     "downloadAudio": "Âm thanh",
-    "downloadNoSubtitle": "Không phụ đề",
     "downloadHlsNeedsFfmpeg": "Luồng này là playlist HLS. Muốn tải cần addon FFmpeg.",
     "downloadSourceMissing": "Chưa cài nguồn của tập này",
     "downloadDashDrm": "Luồng này được bảo vệ DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Ngôn ngữ & hành vi",
     "generalSectionSecurity": "Bảo mật",
     "generalSectionPrivacy": "Quyền riêng tư",
-    "notificationsOtherService": "Chuyển sang {service} để mở cái này",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Tốc độ mặc định, tự động phát, điều chỉnh video, định hướng và hình ảnh trong ảnh",
     "secPlayerSkip": "Tự động bỏ qua phần mở đầu, kết thúc và tóm tắt",
     "secPlayerControls": "Vuốt, giữ và chạm vào các cử chỉ và tìm kiếm bản xem trước",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Đang chờ",
     "stepChecking": "Đang kiểm tra…",
     "stepUpToDate": "Cập nhật",
     "stepUpToDateWith": "Đã cập nhật · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "truyện tranh",
     "readerCloudflare": "Mở trong trình duyệt (kiểm tra Cloudflare)",
     "badgeBoardHint": "Kéo huy hiệu vào góc của thẻ đầu tiên hoặc kéo huy hiệu đã có trên đó để di chuyển huy hiệu đó. Các huy hiệu có thể hoán đổi vị trí nên không có huy hiệu nào trùng lặp. Nhấn vào một huy hiệu bên dưới để bật hoặc tắt huy hiệu đó.",
-    "statusAuto": "Tự động",
     "unreadCounter": "Bộ đếm chưa đọc",
-    "unreadCounterDesc": "Hiển thị số tập hoặc chương còn lại trên áp phích",
     "settingsShortcuts": "Phím tắt",
     "settingsShortcutsDesc": "Xem, thay đổi và tắt mọi phím",
     "shortcutGroupApp": "ứng dụng",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Chưa đặt",
     "shortcutAddKey": "Thêm một chìa khóa",
     "shortcutResetOne": "Đặt lại về mặc định",
-    "shortcutClearKeys": "Xóa tất cả các phím",
     "shortcutResetAll": "Đặt lại tất cả phím tắt",
     "shortcutResetAllDesc": "Đặt mọi phím trở về mặc định",
     "shortcutPress": "Nhấn phím hoặc tổ hợp phím bạn muốn",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Thoát khỏi ứng dụng",
     "closeActionWhenBusy": "Tiếp tục chạy trong khay trong khi có thứ gì đó đang chạy",
     "closeActionAlways": "Luôn chạy trong khay",
-    "closeActionNoTray": "Khay hệ thống không có ở đây nên ứng dụng sẽ thoát khi đóng",
     "gamepadNav": "Điều hướng trên tay cầm chơi game",
     "gamepadNavDesc": "Di chuyển xung quanh ứng dụng và điều khiển trình phát bằng bộ điều khiển trò chơi",
     "trayShow": "Hiển thị Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Sao chép chi tiết",
     "removePlayerTitle": "Xóa trình phát?",
     "removePlayerMessage": "Video không thể phát cho đến khi trình phát được tải xuống lại.",
-    "trailerLoading": "Đang tải đoạn giới thiệu…",
     "trailerFailed": "Không thể phát đoạn giới thiệu ở đây, mở nó trong trình duyệt"
 }

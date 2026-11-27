@@ -193,7 +193,6 @@
     "settingsSyncSwitch": "Sync on change",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Sign in with GitHub",
-    "settingsSyncSignInDesc": "Settings are stored in a private gist in your account",
     "settingsSyncToken": "Use a personal access token",
     "settingsSyncTokenDesc": "Create one at github.com/settings/tokens with only the gist permission",
     "settingsSyncTokenField": "Token",
@@ -204,26 +203,14 @@
         }
     },
     "settingsSyncSignOut": "Sign out",
-    "settingsSyncCode": "Enter {code} on GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.",
     "settingsSyncSignInFailed": "Could not sign in to GitHub",
-    "dcPreview": "Preview",
     "dcSampleWatching": "Watching",
     "dcSampleReading": "Reading",
     "dcSampleBrowsing": "Browsing",
     "dcSampleLive": "Right now",
     "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here.",
     "dcMemberList": "In the member list",
-    "dcAccount": "Account",
-    "dcSignIn": "Sign in with Discord",
     "dcSignOut": "Sign out",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.",
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.",
     "dcConnect": "Connect Discord",
     "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token.",
     "dcConnectFailed": "Could not connect Discord",
@@ -296,8 +283,6 @@
     "dcMethodToken": "Account token",
     "dcInUse": "In use",
     "dcRecommended": "Recommended",
-    "dcConnecting": "Connecting…",
-    "dcDisconnected": "Not connected",
     "dcSignedInAs": "Signed in as {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -371,16 +356,7 @@
     "settingsSyncSecretsDelete": "Delete from GitHub",
     "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase.",
     "settingsSyncWhat": "What to sync",
-    "settingsSyncServer": "On the server",
     "settingsSyncServerEmpty": "Nothing uploaded yet",
-    "settingsSyncServerInfo": "{count} settings, uploaded {time} from {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "this device",
     "settingsSyncCount": "{count, plural, =0{Nothing on the server} =1{1 setting on the server} other{{count} settings on the server}}",
     "settingsSyncNow": "Sync now",
@@ -390,12 +366,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Sync failed: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device.",
@@ -764,11 +734,8 @@
     "linkOpenAnilistDesc": "Turn on link handling so anilist.co links open the app",
     "linkSettingsFailed": "Could not open the system settings",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Show what you are doing on your Discord profile. Needs your Discord token.",
-    "discordRichPresenceDesktopDesc": "Show what you are doing on your Discord profile. Needs the Discord desktop app running.",
     "discordBrowsing": "Show browsing activity",
     "discordBrowsingDesc": "Also show the tab, page or profile you are looking at, not only what you watch or read.",
-    "discordLookHeader": "Presence look",
     "discordActivityType": "Activity type",
     "discordActivityTypeDesc": "How Discord words it: \"Watching …\" or \"Playing …\". Auto uses Watching for anime and Playing for everything else.",
     "discordWatching": "Watching",
@@ -781,7 +748,6 @@
     "discordButtonsDesc": "\"View anime / manga\" and \"Open Dartotsu\" buttons.",
     "discordHideTitles": "Hide titles",
     "discordHideTitlesDesc": "Replace anime and manga names (and their cover and link) with \"Something private\".",
-    "discordConnectionHeader": "Connection",
     "listSearchHint": "Search this list",
     "listSort": "Sort",
     "listFilter": "Filter",
@@ -801,8 +767,6 @@
     "listNoMatches": "Nothing in this list matches",
     "discordLogin": "Log in to Discord",
     "discordToken": "Discord token",
-    "discordTokenSaved": "Saved. Tap to replace, long press to remove.",
-    "discordTokenNotSet": "Not set. Tap to add.",
     "discordTokenSavedSnack": "Discord token saved",
     "discordTokenRemovedSnack": "Discord token removed",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -873,7 +837,6 @@
     "hideNsfwDesc": "Keep adult titles out of feeds and search, and list your own adult entries under Hidden Media.",
     "kitsuAccountOptions": "Kitsu account options",
     "mangaBakaAccountOptions": "MangaBaka account options",
-    "comickAccountOptions": "Comick account options",
     "comickClientId": "Comick Client ID",
     "comickClientIdDesc": "Custom client ID registered on comick.dev",
     "traktClientId": "Trakt Client ID",
@@ -910,7 +873,6 @@
     "accountDetails": "Account details",
     "refreshFromKitsu": "Refresh from Kitsu",
     "simklReadOnly": "Simkl granted read-only access",
-    "traktReadOnly": "Trakt granted read-only access",
     "incognitoEditsBlocked": "Incognito: list edits are blocked",
     "serviceError": "{service}: {error}",
     "@serviceError": {
@@ -966,7 +928,6 @@
     "mangaCredits": "Manga credits",
     "mainProductions": "Main productions",
     "otherWorks": "Other works",
-    "prequelSequel": "Prequel & Sequel",
     "prequel": "Prequel",
     "sequel": "Sequel",
     "previousSeason": "Previous season",
@@ -1013,10 +974,7 @@
     "addToList": "Add to List",
     "trailer": "Trailer",
     "trailerQuality": "Trailer quality",
-    "titleCopied": "Title copied",
     "linkCopied": "Link copied",
-    "watchTrailer": "Watch trailer",
-    "copyTitle": "Copy title",
     "detailStale": "AniList could not be reached. This is saved information and may be outdated.",
     "copyLink": "Copy link",
     "openInBrowser": "Open in browser",
@@ -1578,7 +1536,6 @@
             }
         }
     },
-    "chooseSaveLocation": "Choose where to save the backup",
     "savedPath": "Saved {path}",
     "@savedPath": {
         "placeholders": {
@@ -1885,7 +1842,6 @@
             }
         }
     },
-    "forReleasingTitles": "for currently releasing titles",
     "progress": "Progress",
     "notes": "Notes",
     "serviceNotFound": "Service \"{id}\" not found",
@@ -2065,14 +2021,6 @@
             }
         }
     },
-    "sizeLabel": "Size: {size}",
-    "@sizeLabel": {
-        "placeholders": {
-            "size": {
-                "type": "String"
-            }
-        }
-    },
     "installedState": "Installed",
     "updatePluginTitle": "Update {name}",
     "@updatePluginTitle": {
@@ -2133,14 +2081,6 @@
     "syncAutoDesc": "Fetch and sync in the background when the app opens and every 30 minutes",
     "syncAddMissing": "Add missing entries",
     "syncAddMissingDesc": "Also add entries the other service doesn't have yet",
-    "syncServiceOn": "Sync with {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Delete what the main service doesn't have",
     "syncDeleteDesc": "Remove entries from the other services that are not on the main list. Only entries that can be matched to a title are removed, so things like Simkl movies and series stay",
     "syncDeleteTitle": "Delete entries?",
@@ -2155,22 +2095,10 @@
     "syncDeleteAction": "Delete",
     "syncToDelete": "To delete",
     "syncDeletedNote": "Will be deleted",
-    "syncWillRemove": "{count} will be deleted from {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Keep further progress",
     "syncOnlyForwardDesc": "Don't lower the progress of a service that is already ahead",
     "animePlanetWontWatch": "Won't watch",
     "animePlanetWontRead": "Won't read",
-    "animePlanetAlreadyOnList": "Already on this list",
     "animePlanetNewList": "New list name",
     "syncPrivate": "Private entries",
     "syncPrivateDesc": "What to do with entries you keep private. A service with a private option gets them private; others would show them publicly",
@@ -2975,7 +2903,6 @@
         }
     },
     "watchClearanceStale": "The clearance was earned with another user agent, so it isn't sent. Test the connection to get a new one",
-    "watchSectionConnection": "Connection",
     "watchSectionSession": "Session",
     "watchSectionTools": "Tools",
     "watchMetaSource": "Episode details from",
@@ -3881,9 +3808,7 @@
     "downloadPickStream": "Download which stream?",
     "downloadPickSubtitle": "Download which subtitles?",
     "downloadPickAudio": "Download which audio track?",
-    "downloadNoAudio": "No extra audio",
     "downloadAudio": "Audio",
-    "downloadNoSubtitle": "No subtitle",
     "downloadHlsNeedsFfmpeg": "This stream is an HLS playlist. Downloading it needs the FFmpeg addon.",
     "downloadSourceMissing": "The source for this episode is not installed",
     "downloadDashDrm": "This stream is DRM protected",
@@ -4447,14 +4372,6 @@
     "generalSectionBasics": "Language & behaviour",
     "generalSectionSecurity": "Security",
     "generalSectionPrivacy": "Privacy",
-    "notificationsOtherService": "Switch to {service} to open this",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Default speed, auto play, video fit, orientation and picture in picture",
     "secPlayerSkip": "Skip openings, endings and recaps automatically",
     "secPlayerControls": "Swipe, hold and tap gestures and seek preview",
@@ -4636,7 +4553,6 @@
             }
         }
     },
-    "stepWaiting": "Waiting",
     "stepChecking": "Checking…",
     "stepUpToDate": "Up to date",
     "stepUpToDateWith": "Up to date · {detail}",
@@ -4678,9 +4594,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Open in browser (Cloudflare check)",
     "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.",
-    "statusAuto": "Auto",
     "unreadCounter": "Unread counter",
-    "unreadCounterDesc": "Show how many episodes or chapters are left on posters",
     "settingsShortcuts": "Keyboard shortcuts",
     "settingsShortcutsDesc": "See, change and turn off every key",
     "shortcutGroupApp": "App",
@@ -4693,7 +4607,6 @@
     "shortcutNotSet": "Not set",
     "shortcutAddKey": "Add a key",
     "shortcutResetOne": "Reset to default",
-    "shortcutClearKeys": "Remove all keys",
     "shortcutResetAll": "Reset all shortcuts",
     "shortcutResetAllDesc": "Put every key back to its default",
     "shortcutPress": "Press the key or combination you want",
@@ -4761,7 +4674,6 @@
     "closeActionQuit": "Quit the app",
     "closeActionWhenBusy": "Keep running in the tray while something is running",
     "closeActionAlways": "Always keep running in the tray",
-    "closeActionNoTray": "The system tray is not available here, so the app quits when closed",
     "gamepadNav": "Gamepad navigation",
     "gamepadNavDesc": "Move around the app and control the player with a game controller",
     "trayShow": "Show Dartotsu",
@@ -4790,6 +4702,5 @@
     "playerDownloadCopy": "Copy details",
     "removePlayerTitle": "Remove the player?",
     "removePlayerMessage": "Videos can't play until the player is downloaded again.",
-    "trailerLoading": "Loading the trailer…",
     "trailerFailed": "Could not play the trailer here, opening it in the browser"
 }

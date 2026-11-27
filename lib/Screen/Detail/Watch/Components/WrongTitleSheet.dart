@@ -1,3 +1,5 @@
+import '../../../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -56,7 +58,9 @@ class _WrongTitleSheetState extends State<WrongTitleSheet> {
       _applied = copyFilters(saved ?? list);
       _filtering.value = _signature(_applied) != _pristine;
       _filters.value = list;
-    } catch (_) {}
+    } catch (e, st) {
+      logError('WrongTitleSheet', e, st);
+    }
   }
 
   static String _signature(List<SourceFilter> list) =>

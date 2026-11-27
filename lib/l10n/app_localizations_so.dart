@@ -427,10 +427,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get settingsSyncSignIn => 'Ku soo gal GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Dejinta waxaa lagu kaydiyaa qoraal gaar ah oo ku jira akoonkaaga';
-
-  @override
   String get settingsSyncToken =>
       'Isticmaal calaamad gelitaanka shakhsi ahaaneed';
 
@@ -450,19 +446,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get settingsSyncSignOut => 'Saxiix';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Geli $code GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Bogga GitHub ayaa ka furmay biraawsarkaaga. Taabo si aad koodhka koobiyayso, ama taabo oo hayso si aad u tirtirto.';
-
-  @override
   String get settingsSyncSignInFailed => 'Ma soo geli karo GitHub';
-
-  @override
-  String get dcPreview => 'Horudhac';
 
   @override
   String get dcSampleWatching => 'Daawashada';
@@ -484,21 +468,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dcMemberList => 'Liiska xubnaha';
 
   @override
-  String get dcAccount => 'Xisaab';
-
-  @override
-  String get dcSignIn => 'Ku soo gal Discord';
-
-  @override
   String get dcSignOut => 'Saxiix';
-
-  @override
-  String get dcDesktopHint =>
-      'Iyadoo aan la xidhin, Discord waxay ku tusinaysaa \"Daawashada Dartotsu\" iyada oo loo marayo abka miiska. Connect Discord si aad hawsha ugu magacowdo ciwaankaga, ay ku jirto mobaylka.';
-
-  @override
-  String get dcMobileHint =>
-      'Connect Discord si aad u muujiso waxaad daawanayso ama akhrinayso. Waxay adeegsataa bogga oggolaanshaha Discord, ee maaha calaamada akoonkaaga.';
 
   @override
   String get dcConnect => 'Isku xirka Discord';
@@ -723,12 +693,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get dcRecommended => 'lagu taliyay';
 
   @override
-  String get dcConnecting => 'Isku xidhka…';
-
-  @override
-  String get dcDisconnected => 'Ma xidhna';
-
-  @override
   String dcSignedInAs(String name) {
     return 'U soo galay sida $name';
   }
@@ -924,15 +888,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get settingsSyncWhat => 'Maxaa la isku waafajiyaa';
 
   @override
-  String get settingsSyncServer => 'On server-ka';
-
-  @override
   String get settingsSyncServerEmpty => 'Wax wali lama soo galin';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count, laga soo raray $time $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'qalabkan';
@@ -961,11 +917,6 @@ class AppLocalizationsSo extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Markii ugu dambeysay ee la isku dhejiyay $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Isku xidhka ayaa fashilmay: $error';
   }
 
   @override
@@ -1753,22 +1704,11 @@ class AppLocalizationsSo extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay token-kaaga Discord.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Muuji waxa aad sameyneyso profile-kaaga Discord. Waxay u baahan tahay app-ka Discord ee kombuyuutarka oo socda.';
-
-  @override
   String get discordBrowsing => 'Muuji dhaqdhaqaaqa baadhista';
 
   @override
   String get discordBrowsingDesc =>
       'Muuji sidoo kale tab-ka, bogga ama profile-ka aad eegayso, ma aha oo kaliya waxa aad daawato ama akhrido.';
-
-  @override
-  String get discordLookHeader => 'Muuqaalka presence-ka';
 
   @override
   String get discordActivityType => 'Nooca dhaqdhaqaaqa';
@@ -1810,9 +1750,6 @@ class AppLocalizationsSo extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Ku beddel magacyada anime iyo manga (iyo daboolkooda iyo xiriirkooda) \"Something private\".';
-
-  @override
-  String get discordConnectionHeader => 'Xiriir';
 
   @override
   String get listSearchHint => 'Raadi liiskan';
@@ -1870,13 +1807,6 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get discordToken => 'Token-ka Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'La kaydiyay. Taabo si aad u bedesho, dheer taabo si aad u saarto.';
-
-  @override
-  String get discordTokenNotSet => 'Lama dejin. Taabo si aad ugu darto.';
 
   @override
   String get discordTokenSavedSnack => 'Token-ka Discord waa la keydiyay';
@@ -2075,9 +2005,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Doorashooyinka akoonka MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Ikhtiyaarada koontada Comick';
-
-  @override
   String get comickClientId => 'Aqoonsiga Macmiilka ee Comick';
 
   @override
@@ -2171,9 +2098,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get simklReadOnly => 'Simkl waxaa la siiyay gelitaan akhris-kaliya ah';
 
   @override
-  String get traktReadOnly => 'Trakt waxa la siiyay marin-akhris-kaliya';
-
-  @override
   String get incognitoEditsBlocked =>
       'Qarsoodi: wax-ka-bedelka liiska waa la xannibay';
 
@@ -2254,9 +2178,6 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get otherWorks => 'Shaqooyin kale';
-
-  @override
-  String get prequelSequel => 'Hore & Xiga';
 
   @override
   String get prequel => 'Hordhac';
@@ -2402,16 +2323,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get trailerQuality => 'Tayada filimka';
 
   @override
-  String get titleCopied => 'Ciwaanka waa la koobiyay';
-
-  @override
   String get linkCopied => 'Xiriirka waa la koobiyay';
-
-  @override
-  String get watchTrailer => 'Daawo trailer-ka';
-
-  @override
-  String get copyTitle => 'Koobi ciwaanka';
 
   @override
   String get detailStale =>
@@ -3397,9 +3309,6 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Dooro halka kaydka lagu keydinayo';
-
-  @override
   String savedPath(String path) {
     return 'Waxaa la keydiyay $path';
   }
@@ -3970,9 +3879,6 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'ciwaannada hadda la sii daynayo';
-
-  @override
   String get progress => 'Horumar';
 
   @override
@@ -4177,11 +4083,6 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Cabbirka: $size';
-  }
-
-  @override
   String get installedState => 'La rakibay';
 
   @override
@@ -4280,11 +4181,6 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ku dar sidoo kale gelitaannada adeegga kale aanu weli lahayn';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Ku xidh $name';
-  }
-
-  @override
   String get syncDelete => 'Tirtir waxa aanu lahayn adeegga ugu muhiimsan';
 
   @override
@@ -4315,11 +4211,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get syncDeletedNote => 'Waa la tirtiri doonaa';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count waa laga tirtiri doonaa $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Ilaali horumarka sii fog';
 
   @override
@@ -4331,9 +4222,6 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Ma akhrin doono';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Durba liiskan';
 
   @override
   String get animePlanetNewList => 'Magaca liiska cusub';
@@ -5689,9 +5577,6 @@ class AppLocalizationsSo extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Ogolaanshaha waxaa lagu kasbaday wakiilka isticmaale kale, markaa lama dirin. Tijaabi xidhiidhka si aad mid cusub u hesho';
-
-  @override
-  String get watchSectionConnection => 'Isku xirka';
 
   @override
   String get watchSectionSession => 'Casharka';
@@ -7564,13 +7449,7 @@ class AppLocalizationsSo extends AppLocalizations {
   String get downloadPickAudio => 'Cod kee la soo dejiyaa?';
 
   @override
-  String get downloadNoAudio => 'Cod dheeraad ah ma jiro';
-
-  @override
   String get downloadAudio => 'Cod';
-
-  @override
-  String get downloadNoSubtitle => 'Tarjumaad ma jirto';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8414,11 +8293,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get generalSectionPrivacy => 'Qarsoodi';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'U beddel $service si aad tan u furto';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Xawaaraha caadiga ah, ciyaarta tooska ah, fiidyaha ku haboon, hanuuninta iyo sawirka sawirka';
 
@@ -8735,9 +8609,6 @@ class AppLocalizationsSo extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Sugitaanka';
-
-  @override
   String get stepChecking => 'Hubinta…';
 
   @override
@@ -8808,14 +8679,7 @@ class AppLocalizationsSo extends AppLocalizations {
       'Ku jiid calaamad gees ka mid ah kaadhka koowaad, ama ku jiid calaamad hore si aad u dhaqaajiso. Calaamaduhu way beddelaan meelo, si aan midna waligiis isu dulmarin. Taabo calaamada hoose si aad u damiso ama u damiso';
 
   @override
-  String get statusAuto => 'Baabuur';
-
-  @override
   String get unreadCounter => 'Miisaanka aan la akhriyin';
-
-  @override
-  String get unreadCounterDesc =>
-      'Muuji inta qaybood ama cutubyada ku hadhay boodhadhka';
 
   @override
   String get settingsShortcuts => 'Gaabyada kiiboodhka';
@@ -8852,9 +8716,6 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Dib u deji si aan caadi ahayn';
-
-  @override
-  String get shortcutClearKeys => 'Ka saar dhammaan furayaasha';
 
   @override
   String get shortcutResetAll => 'Dib u habayn dhammaan jid-gooyooyinka';
@@ -9042,10 +8903,6 @@ class AppLocalizationsSo extends AppLocalizations {
   String get closeActionAlways => 'Had iyo jeer ku sii ordi saxanka';
 
   @override
-  String get closeActionNoTray =>
-      'Saxanka nidaamka halkan lagama heli karo, marka abka wuu joogsadaa marka la xidho';
-
-  @override
   String get gamepadNav => 'Gamepad navigation';
 
   @override
@@ -9119,9 +8976,6 @@ class AppLocalizationsSo extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Fiidiyowyadu ma ciyaari karaan ilaa ciyaaryahanka mar kale la soo dejiyo.';
-
-  @override
-  String get trailerLoading => 'Soo raraysa trailer-ka…';
 
   @override
   String get trailerFailed =>

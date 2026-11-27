@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "در تغییر همگام سازی کنید",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "با GitHub وارد شوید",
-    "settingsSyncSignInDesc": "تنظیمات در یک خلاصه خصوصی در حساب شما ذخیره می شود",
     "settingsSyncToken": "از یک نشانه دسترسی شخصی استفاده کنید",
     "settingsSyncTokenDesc": "در github.com/settings/tokens فقط با مجوز gist یکی ایجاد کنید",
     "settingsSyncTokenField": "رمز",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "از سیستم خارج شوید",
-    "settingsSyncCode": "{code} را در GitHub وارد کنید",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "صفحه GitHub در مرورگر شما باز شد. برای کپی کردن کد ضربه بزنید یا برای لغو ضربه بزنید و نگه دارید.",
     "settingsSyncSignInFailed": "نمی توان به GitHub وارد شد",
-    "dcPreview": "پیش نمایش",
     "dcSampleWatching": "تماشا کردن",
     "dcSampleReading": "خواندن",
     "dcSampleBrowsing": "در حال مرور",
     "dcSampleLive": "همین الان",
     "dcLiveNothing": "در حال حاضر چیزی نشان داده نمی شود. یک عنوان را باز کنید، یک قسمت یا یک فصل را شروع کنید و در اینجا ظاهر می شود.",
     "dcMemberList": "در لیست اعضا",
-    "dcAccount": "حساب",
-    "dcSignIn": "با Discord وارد شوید",
     "dcSignOut": "از سیستم خارج شوید",
-    "dcDesktopHint": "بدون اتصال، Discord \"Watching Dartotsu\" را از طریق برنامه دسکتاپ نشان می دهد. Discord را وصل کنید تا فعالیت را با عنوان خود نامگذاری کنید، از جمله در تلفن همراه.",
-    "dcMobileHint": "برای نشان دادن آنچه در حال تماشا یا خواندن هستید، Discord را وصل کنید. از صفحه مجوز Discord استفاده می کند، نه توکن حساب شما.",
     "dcConnect": "Discord را وصل کنید",
     "dcConnectDesc": "صفحه مجوز Discord را باز می کند و Dartotsu را در برنامه های مجاز اضافه می کند. Discord می‌خواهد حضور شما را به‌روزرسانی کند. فقط یک نشانه به‌روزرسانی ذخیره می‌شود، نه توکن حساب شما.",
     "dcConnectFailed": "اتصال Discord انجام نشد",
@@ -254,8 +241,6 @@
     "dcMethodToken": "رمز حساب",
     "dcInUse": "در حال استفاده",
     "dcRecommended": "توصیه می شود",
-    "dcConnecting": "در حال اتصال…",
-    "dcDisconnected": "متصل نیست",
     "dcSignedInAs": "وارد شده به عنوان {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "حذف از GitHub",
     "settingsSyncSecretsDeleteMessage": "با این کار فایل حساب های رمزگذاری شده از اصل شما حذف می شود. سایر دستگاه‌ها ورود به سیستم خود را حفظ می‌کنند و می‌توانند یک عبارت عبور جدید تنظیم کنند.",
     "settingsSyncWhat": "چه چیزی باید همگام شود",
-    "settingsSyncServer": "روی سرور",
     "settingsSyncServerEmpty": "هنوز چیزی آپلود نشده است",
-    "settingsSyncServerInfo": "تنظیمات {count}، آپلود {time} از {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "این دستگاه",
     "settingsSyncCount": "{count, plural, =0{هیچی روی سرور} =1{1 تنظیم روی سرور} other{تنظیمات {count} در سرور}}",
     "settingsSyncNow": "اکنون همگام سازی کنید",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "همگام سازی انجام نشد: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "فقط تنظیماتی که در همه جا یکسان کار می کنند همگام سازی می شوند. حساب‌ها، نشانه‌ها، پوشه‌ها، برنامه‌های افزودنی، اعلان‌ها، Discord، به‌روزرسانی‌ها و اندازه پنجره در هر دستگاه باقی می‌مانند.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "مدیریت لینک رو روشن کن تا لینک‌های anilist.co اپ رو باز کنن",
     "linkSettingsFailed": "تنظیمات سیستم باز نشد",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "نشون بده تو پروفایل Discord چیکار می‌کنی. توکن Discord لازمه.",
-    "discordRichPresenceDesktopDesc": "نشون بده تو پروفایل Discord چیکار می‌کنی. اپ دسکتاپ Discord باید باز باشه.",
     "discordBrowsing": "نمایش فعالیت گشت‌وگذار",
     "discordBrowsingDesc": "تب، صفحه یا پروفایلی که داری نگاه می‌کنی رو هم نشون بده، نه فقط چیزی که می‌بینی یا می‌خونی.",
-    "discordLookHeader": "ظاهر پرزنس",
     "discordActivityType": "نوع فعالیت",
     "discordActivityTypeDesc": "Discord چطور بنویسه: «Watching …» یا «Playing …». حالت خودکار برای انیمه Watching و برای بقیه Playing می‌ذاره.",
     "discordWatching": "تماشا کردن",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "دکمه‌های «View anime / manga» و «Open Dartotsu».",
     "discordHideTitles": "مخفی کردن عنوان‌ها",
     "discordHideTitlesDesc": "اسم انیمه و مانگا (با کاور و لینکشون) رو با «Something private» عوض کن.",
-    "discordConnectionHeader": "اتصال",
     "listSearchHint": "جستجو تو این لیست",
     "listSort": "مرتب‌سازی",
     "listFilter": "فیلتر",
@@ -671,8 +637,6 @@
     "listNoMatches": "چیزی تو این لیست جور نیست",
     "discordLogin": "ورود به Discord",
     "discordToken": "توکن Discord",
-    "discordTokenSaved": "ذخیره شد. برای جایگزینی بزن، برای حذف نگه دار.",
-    "discordTokenNotSet": "تنظیم نشده. برای افزودن بزن.",
     "discordTokenSavedSnack": "توکن Discord ذخیره شد",
     "discordTokenRemovedSnack": "توکن Discord حذف شد",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "عنوان‌های بزرگسال رو از فیدها و جستجو دور نگه دار، و ورودی‌های بزرگسال خودت رو تو Hidden Media بذار.",
     "kitsuAccountOptions": "گزینه‌های حساب Kitsu",
     "mangaBakaAccountOptions": "گزینه‌های حساب MangaBaka",
-    "comickAccountOptions": "گزینه های حساب کمیک",
     "comickClientId": "شناسه مشتری Comick",
     "comickClientIdDesc": "شناسه مشتری سفارشی ثبت شده در comick.dev",
     "couldNotUpdateKitsuSettings": "تنظیمات Kitsu به‌روز نشد",
@@ -761,7 +724,6 @@
     "accountDetails": "جزئیات حساب",
     "refreshFromKitsu": "تازه‌سازی از Kitsu",
     "simklReadOnly": "Simkl فقط دسترسی خواندن داد",
-    "traktReadOnly": "به Trakt دسترسی فقط خواندنی داده شد",
     "incognitoEditsBlocked": "ناشناس: ویرایش لیست مسدوده",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ناشناس: پیشرفت ذخیره نشد",
@@ -786,7 +748,6 @@
     "mangaCredits": "کارنامه مانگا",
     "mainProductions": "تولیدات اصلی",
     "otherWorks": "کارهای دیگه",
-    "prequelSequel": "پیش‌درآمد و دنباله",
     "prequel": "پیش درآمد",
     "sequel": "عاقبت",
     "previousSeason": "فصل قبل",
@@ -833,10 +794,7 @@
     "addToList": "افزودن به لیست",
     "trailer": "تریلر",
     "trailerQuality": "کیفیت تریلر",
-    "titleCopied": "عنوان کپی شد",
     "linkCopied": "لینک کپی شد",
-    "watchTrailer": "دیدن تریلر",
-    "copyTitle": "کپی عنوان",
     "detailStale": "AniList قابل دسترسی نیست. این اطلاعات ذخیره شده است و ممکن است قدیمی باشد.",
     "copyLink": "کپی لینک",
     "openInBrowser": "باز کردن تو مرورگر",
@@ -1139,7 +1097,6 @@
     "import": "وارد کردن",
     "animeCount": "{count} انیمه",
     "mangaCount": "{count} مانگا",
-    "chooseSaveLocation": "انتخاب کن پشتیبان کجا ذخیره بشه",
     "savedPath": "{path} ذخیره شد",
     "exportFailed": "خروجی گرفتن ناموفق بود: {error}",
     "nothingInLocalLists": "هنوز چیزی تو لیست‌های محلیت نیست.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "خطا تو باز کردن لینک: {error}",
     "linkCantBeOpened": "این لینک باز نمی‌شه: {link}",
     "linkOpenError": "خطا تو باز کردن لینک: {error}",
-    "forReleasingTitles": "برای عنوان‌هایی که الان در حال پخش‌ان",
     "progress": "پیشرفت",
     "notes": "یادداشت‌ها",
     "serviceNotFound": "سرویس «{id}» پیدا نشد",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} تو مخزن تنظیم‌شده موجود نیست",
     "pluginFetchFailed": "گرفتن اطلاعات پلاگین ناموفق بود",
     "installPluginTitle": "نصب {name}",
-    "sizeLabel": "حجم: {size}",
     "installedState": "نصب شده",
     "updatePluginTitle": "به روز رسانی {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "وقتی اپ باز می‌شه و هر ۳۰ دقیقه تو پس‌زمینه بگیر و همگام کن",
     "syncAddMissing": "افزودن ورودی‌های جامونده",
     "syncAddMissingDesc": "ورودی‌هایی که سرویس دیگه هنوز نداره رو هم اضافه کن",
-    "syncServiceOn": "همگام سازی با {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "آنچه را که سرویس اصلی ندارد حذف کنید",
     "syncDeleteDesc": "ورودی‌های سرویس‌های دیگر را که در لیست اصلی نیستند حذف کنید. فقط ورودی هایی که می توانند با عنوان مطابقت داشته باشند حذف می شوند، بنابراین مواردی مانند فیلم ها و سریال های Simkl باقی می مانند",
     "syncDeleteTitle": "ورودی ها حذف شوند؟",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "حذف کنید",
     "syncToDelete": "برای حذف",
     "syncDeletedNote": "حذف خواهد شد",
-    "syncWillRemove": "{count} از {name} حذف خواهد شد",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "حفظ پیشرفت بیشتر",
     "syncOnlyForwardDesc": "پیشرفت سرویسی که جلوتره رو کم نکن",
     "animePlanetWontWatch": "تماشا نخواهد کرد",
     "animePlanetWontRead": "نمی خواند",
-    "animePlanetAlreadyOnList": "در حال حاضر در این لیست",
     "animePlanetNewList": "نام لیست جدید",
     "syncPrivate": "ورودی های خصوصی",
     "syncPrivateDesc": "با ورودی هایی که خصوصی نگه می دارید چه باید کرد. یک سرویس با گزینه خصوصی آنها را خصوصی می کند. دیگران آنها را به صورت عمومی نشان می دهند",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "مجوز با یک عامل کاربری دیگر به دست آمده است، بنابراین ارسال نمی شود. برای دریافت اتصال جدید، اتصال را تست کنید",
-    "watchSectionConnection": "اتصال",
     "watchSectionSession": "جلسه",
     "watchSectionTools": "ابزار",
     "watchMetaSource": "جزئیات قسمت‌ها از",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "کدوم استریم دانلود بشه؟",
     "downloadPickSubtitle": "کدوم زیرنویس دانلود بشه؟",
     "downloadPickAudio": "کدوم ترک صدا دانلود بشه؟",
-    "downloadNoAudio": "بدون صدای اضافه",
     "downloadAudio": "صدا",
-    "downloadNoSubtitle": "بدون زیرنویس",
     "downloadHlsNeedsFfmpeg": "این استریم یه پلی‌لیست HLS ـه. برای دانلودش افزونه FFmpeg لازمه.",
     "downloadSourceMissing": "منبع این قسمت نصب نیست",
     "downloadDashDrm": "این جریان دارای محافظت DRM است",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "زبان و رفتار",
     "generalSectionSecurity": "امنیت",
     "generalSectionPrivacy": "حریم خصوصی",
-    "notificationsOtherService": "برای باز کردن این، به {service} بروید",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "سرعت پیش‌فرض، پخش خودکار، تناسب ویدئو، جهت‌گیری و تصویر در تصویر",
     "secPlayerSkip": "به طور خودکار از باز کردن، پایان و بازنویسی رد شوید",
     "secPlayerControls": "حرکات را تند بکشید، نگه دارید و ضربه بزنید و پیش نمایش را جستجو کنید",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "در انتظار",
     "stepChecking": "در حال بررسی…",
     "stepUpToDate": "به روز",
     "stepUpToDateWith": "به روز · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "مانگا",
     "readerCloudflare": "باز کردن در مرورگر (بررسی Cloudflare)",
     "badgeBoardHint": "یک نشان را به گوشه‌ای از کارت اول بکشید، یا نشانی را که از قبل روی آن است بکشید تا آن را جابجا کنید. نشان‌ها جای خود را عوض می‌کنند، بنابراین هیچ‌یک با هم همپوشانی ندارند. روی یک نشان زیر ضربه بزنید تا آن را روشن یا خاموش کنید.",
-    "statusAuto": "خودکار",
     "unreadCounter": "شمارنده خوانده نشده",
-    "unreadCounterDesc": "نشان دهید که چند قسمت یا فصل روی پوسترها باقی مانده است",
     "settingsShortcuts": "میانبرهای صفحه کلید",
     "settingsShortcutsDesc": "هر کلید را ببینید، تغییر دهید و خاموش کنید",
     "shortcutGroupApp": "برنامه",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "تنظیم نشده است",
     "shortcutAddKey": "یک کلید اضافه کنید",
     "shortcutResetOne": "به حالت پیش فرض بازنشانی کنید",
-    "shortcutClearKeys": "تمام کلیدها را بردارید",
     "shortcutResetAll": "همه میانبرها را بازنشانی کنید",
     "shortcutResetAllDesc": "هر کلید را به حالت پیش فرض خود برگردانید",
     "shortcutPress": "کلید یا ترکیب مورد نظر را فشار دهید",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "برنامه را ترک کنید",
     "closeActionWhenBusy": "در حالی که چیزی در حال اجراست در سینی به کار ادامه دهید",
     "closeActionAlways": "همیشه در سینی کار کنید",
-    "closeActionNoTray": "سینی سیستم در اینجا در دسترس نیست، بنابراین برنامه زمانی که بسته می‌شود خارج می‌شود",
     "gamepadNav": "ناوبری صفحه بازی",
     "gamepadNavDesc": "در اطراف برنامه حرکت کنید و بازیکن را با یک کنترلر بازی کنترل کنید",
     "trayShow": "نمایش دارتوتسو",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "کپی جزئیات",
     "removePlayerTitle": "پخش کننده حذف شود؟",
     "removePlayerMessage": "تا زمانی که پخش کننده دوباره دانلود نشود، ویدیوها نمی توانند پخش شوند.",
-    "trailerLoading": "در حال بارگیری تریلر…",
     "trailerFailed": "تریلر در اینجا پخش نشد، آن را در مرورگر باز کرد"
 }

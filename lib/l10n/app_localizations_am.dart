@@ -416,10 +416,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get settingsSyncSignIn => 'በ GitHub ይግቡ';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'መቼቶች በመለያዎ ውስጥ ባለው የግል መረጃ ውስጥ ተከማችተዋል።';
-
-  @override
   String get settingsSyncToken => 'የግል መዳረሻ ማስመሰያ ይጠቀሙ';
 
   @override
@@ -438,19 +434,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get settingsSyncSignOut => 'ዘግተህ ውጣ';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub ላይ $code አስገባ';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'የ GitHub ገጽ በአሳሽዎ ውስጥ ተከፍቷል። ኮዱን ለመቅዳት ይንኩ ወይም ለመሰረዝ ይንኩ እና ይያዙ።';
-
-  @override
   String get settingsSyncSignInFailed => 'ወደ GitHub መግባት አልተቻለም';
-
-  @override
-  String get dcPreview => 'ቅድመ እይታ';
 
   @override
   String get dcSampleWatching => 'በመመልከት ላይ';
@@ -472,21 +456,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get dcMemberList => 'በአባል ዝርዝር ውስጥ';
 
   @override
-  String get dcAccount => 'መለያ';
-
-  @override
-  String get dcSignIn => 'በ Discord ይግቡ';
-
-  @override
   String get dcSignOut => 'ዘግተህ ውጣ';
-
-  @override
-  String get dcDesktopHint =>
-      'ሳይገናኝ፣ Discord በዴስክቶፕ መተግበሪያ በኩል \"Dartotsuን መመልከት\" ያሳያል። እንቅስቃሴውን በተንቀሳቃሽ ስልክ ላይ ጨምሮ በእርስዎ ርዕስ ስም ለመሰየም Discord ን ያገናኙ።';
-
-  @override
-  String get dcMobileHint =>
-      'የሚመለከቱትን ወይም የሚያነቡትን ለማሳየት Discord ን ያገናኙ። የመለያዎን ማስመሰያ ሳይሆን የ Discord ፍቃድ ገጽን ይጠቀማል።';
 
   @override
   String get dcConnect => 'Discord አገናኝ';
@@ -710,12 +680,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get dcRecommended => 'የሚመከር';
 
   @override
-  String get dcConnecting => 'በማገናኘት ላይ…';
-
-  @override
-  String get dcDisconnected => 'አልተገናኘም።';
-
-  @override
   String dcSignedInAs(String name) {
     return 'እንደ $name ገብቷል';
   }
@@ -907,15 +871,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get settingsSyncWhat => 'ምን ማመሳሰል እንዳለበት';
 
   @override
-  String get settingsSyncServer => 'በአገልጋዩ ላይ';
-
-  @override
   String get settingsSyncServerEmpty => 'እስካሁን ምንም አልተጫነም።';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count ቅንጅቶች፣ $time ከ$device ተሰቅለዋል';
-  }
 
   @override
   String get settingsSyncThisDevice => 'ይህ መሳሪያ';
@@ -944,11 +900,6 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'ለመጨረሻ ጊዜ የተመሳሰለው $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'ማመሳሰል አልተሳካም፦ $error';
   }
 
   @override
@@ -1709,22 +1660,11 @@ class AppLocalizationsAm extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'የምታደርገውን በDiscord መገለጫህ ላይ አሳይ። የDiscord ቶከንህ ያስፈልጋል።';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'የምታደርገውን በDiscord መገለጫህ ላይ አሳይ። የDiscord ዴስክቶፕ መተግበሪያ እየሰራ መሆን አለበት።';
-
-  @override
   String get discordBrowsing => 'የማሰስ እንቅስቃሴ አሳይ';
 
   @override
   String get discordBrowsingDesc =>
       'ከምትመለከተው ወይም ከምታነበው በተጨማሪ የምትመለከተውን ታብ፣ ገጽ ወይም መገለጫም አሳይ።';
-
-  @override
-  String get discordLookHeader => 'የፕረዘንስ ገጽታ';
 
   @override
   String get discordActivityType => 'የእንቅስቃሴ ዓይነት';
@@ -1764,9 +1704,6 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'የአኒሜና ማንጋ ስሞችን (ከሽፋናቸውና ሊንካቸው ጋር) በ\"የግል ነገር\" ተካ።';
-
-  @override
-  String get discordConnectionHeader => 'ግንኙነት';
 
   @override
   String get listSearchHint => 'ይህን ዝርዝር ፈልግ';
@@ -1824,12 +1761,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord ቶከን';
-
-  @override
-  String get discordTokenSaved => 'ተቀምጧል። ለመተካት ንካ፣ ለማስወገድ ተጭነህ ያዝ።';
-
-  @override
-  String get discordTokenNotSet => 'አልተቀመጠም። ለመጨመር ንካ።';
 
   @override
   String get discordTokenSavedSnack => 'የDiscord ቶከን ተቀምጧል';
@@ -2025,9 +1956,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get mangaBakaAccountOptions => 'የMangaBaka መለያ አማራጮች';
 
   @override
-  String get comickAccountOptions => 'የኮሚክ መለያ አማራጮች';
-
-  @override
   String get comickClientId => 'የኮሚክ ደንበኛ መታወቂያ';
 
   @override
@@ -2118,9 +2046,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get simklReadOnly => 'Simkl የተነበበ-ብቻ መዳረሻ ሰጥቷል';
 
   @override
-  String get traktReadOnly => 'ትራክ ተነባቢ-ብቻ መዳረሻ ተሰጥቷል።';
-
-  @override
   String get incognitoEditsBlocked => 'ኢንኮግኒቶ፦ የዝርዝር አርትዖቶች ታግደዋል';
 
   @override
@@ -2199,9 +2124,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get otherWorks => 'ሌሎች ሥራዎች';
-
-  @override
-  String get prequelSequel => 'ቀዳሚና ተከታይ';
 
   @override
   String get prequel => 'ቅድመ ሁኔታ';
@@ -2344,16 +2266,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get trailerQuality => 'የተጎታች ጥራት';
 
   @override
-  String get titleCopied => 'ርዕሱ ተቀድቷል';
-
-  @override
   String get linkCopied => 'ሊንኩ ተቀድቷል';
-
-  @override
-  String get watchTrailer => 'ትሬለር ተመልከት';
-
-  @override
-  String get copyTitle => 'ርዕስ ቅዳ';
 
   @override
   String get detailStale =>
@@ -3328,9 +3241,6 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'ምትኬውን የምታስቀምጥበት ቦታ ምረጥ';
-
-  @override
   String savedPath(String path) {
     return '$path ተቀምጧል';
   }
@@ -3899,9 +3809,6 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'በአሁኑ ጊዜ ለሚለቀቁ ርዕሶች';
-
-  @override
   String get progress => 'እድገት';
 
   @override
@@ -4106,11 +4013,6 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'መጠን፦ $size';
-  }
-
-  @override
   String get installedState => 'ተጭኗል';
 
   @override
@@ -4207,11 +4109,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get syncAddMissingDesc => 'ሌላኛው አገልግሎት እስካሁን የሌሉትን ግቤቶችም ጨምር';
 
   @override
-  String syncServiceOn(String name) {
-    return 'ከ$name ጋር አስምር';
-  }
-
-  @override
   String get syncDelete => 'ዋናው አገልግሎት የሌለውን ሰርዝ';
 
   @override
@@ -4242,11 +4139,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get syncDeletedNote => 'ይሰረዛል';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count ከ$name ይሰረዛል';
-  }
-
-  @override
   String get syncOnlyForward => 'የላቀ እድገትን አቆይ';
 
   @override
@@ -4257,9 +4149,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'አያነብም።';
-
-  @override
-  String get animePlanetAlreadyOnList => 'ቀድሞውኑ በዚህ ዝርዝር ውስጥ';
 
   @override
   String get animePlanetNewList => 'አዲስ ዝርዝር ስም';
@@ -5582,9 +5471,6 @@ class AppLocalizationsAm extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'ማጽዳቱ የተገኘው ከሌላ ተጠቃሚ ወኪል ነው፣ ስለዚህ አልተላከም። አዲስ ለማግኘት ግንኙነቱን ይሞክሩ';
-
-  @override
-  String get watchSectionConnection => 'ግንኙነት';
 
   @override
   String get watchSectionSession => 'ክፍለ ጊዜ';
@@ -7414,13 +7300,7 @@ class AppLocalizationsAm extends AppLocalizations {
   String get downloadPickAudio => 'የትኛው የድምጽ ትራክ ይውረድ?';
 
   @override
-  String get downloadNoAudio => 'ተጨማሪ ድምጽ የለም';
-
-  @override
   String get downloadAudio => 'ድምጽ';
-
-  @override
-  String get downloadNoSubtitle => 'ንዑስ ርዕስ የለም';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8246,11 +8126,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get generalSectionPrivacy => 'ግላዊነት';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'ይህንን ለመክፈት ወደ $service ይቀይሩ';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'በሥዕሉ ላይ ያለው ነባሪ ፍጥነት፣ ራስ-አጫውት፣ የቪዲዮ ብቃት፣ አቀማመጥ እና ሥዕል';
 
@@ -8555,9 +8430,6 @@ class AppLocalizationsAm extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'በመጠበቅ ላይ';
-
-  @override
   String get stepChecking => 'በማጣራት ላይ…';
 
   @override
@@ -8627,13 +8499,7 @@ class AppLocalizationsAm extends AppLocalizations {
       'ባጅ ወደ መጀመሪያው ካርድ ጥግ ይጎትቱት ወይም እሱን ለማንቀሳቀስ ባጅ ቀድሞውን ይጎትቱት። ባጆች ቦታዎችን ይለዋወጣሉ፣ ስለዚህ ማንም በጭራሽ አይደራረብም። እሱን ለማብራት ወይም ለማጥፋት ከታች ያለውን ባጅ ይንኩ።';
 
   @override
-  String get statusAuto => 'መኪና';
-
-  @override
   String get unreadCounter => 'ያልተነበበ ቆጣሪ';
-
-  @override
-  String get unreadCounterDesc => 'በፖስተሮች ላይ ስንት ክፍሎች ወይም ምዕራፎች እንደቀሩ አሳይ';
 
   @override
   String get settingsShortcuts => 'የቁልፍ ሰሌዳ አቋራጮች';
@@ -8670,9 +8536,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'ወደ ነባሪ ዳግም አስጀምር';
-
-  @override
-  String get shortcutClearKeys => 'ሁሉንም ቁልፎች አስወግድ';
 
   @override
   String get shortcutResetAll => 'ሁሉንም አቋራጮች ዳግም ያስጀምሩ';
@@ -8858,9 +8721,6 @@ class AppLocalizationsAm extends AppLocalizations {
   String get closeActionAlways => 'ሁልጊዜ በትሪ ውስጥ መሮጥዎን ይቀጥሉ';
 
   @override
-  String get closeActionNoTray => 'የስርዓት መሣቢያው እዚህ የለም፣ ስለዚህ መተግበሪያው ሲዘጋ ያቆማል';
-
-  @override
   String get gamepadNav => 'የጨዋታ ሰሌዳ አሰሳ';
 
   @override
@@ -8932,9 +8792,6 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get removePlayerMessage => 'ተጫዋቹ እንደገና እስኪወርድ ድረስ ቪዲዮዎች መጫወት አይችሉም።';
-
-  @override
-  String get trailerLoading => 'የፊልም ማስታወቂያውን በመጫን ላይ…';
 
   @override
   String get trailerFailed => 'ተጎታችውን እዚህ ማጫወት አልተቻለም፣ በአሳሹ ውስጥ ይከፍታል።';

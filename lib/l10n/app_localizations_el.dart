@@ -429,10 +429,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get settingsSyncSignIn => 'Συνδεθείτε με το GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Οι ρυθμίσεις αποθηκεύονται σε μια ιδιωτική ουσία στο λογαριασμό σας';
-
-  @override
   String get settingsSyncToken =>
       'Χρησιμοποιήστε ένα προσωπικό διακριτικό πρόσβασης';
 
@@ -452,19 +448,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get settingsSyncSignOut => 'Αποσυνδεθείτε';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Εισαγάγετε $code στο GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Η σελίδα GitHub άνοιξε στο πρόγραμμα περιήγησής σας. Πατήστε για να αντιγράψετε τον κωδικό ή πατήστε παρατεταμένα για ακύρωση.';
-
-  @override
   String get settingsSyncSignInFailed => 'Δεν ήταν δυνατή η σύνδεση στο GitHub';
-
-  @override
-  String get dcPreview => 'Προεπισκόπηση';
 
   @override
   String get dcSampleWatching => 'Παρακολούθηση';
@@ -486,21 +470,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dcMemberList => 'Στη λίστα μελών';
 
   @override
-  String get dcAccount => 'Λογαριασμός';
-
-  @override
-  String get dcSignIn => 'Συνδεθείτε με το Discord';
-
-  @override
   String get dcSignOut => 'Αποσυνδεθείτε';
-
-  @override
-  String get dcDesktopHint =>
-      'Χωρίς σύνδεση, το Discord εμφανίζει το \"Watching Dartotsu\" μέσω της εφαρμογής επιφάνειας εργασίας. Συνδέστε το Discord για να ονομάσετε τη δραστηριότητα με τον τίτλο σας, ακόμη και στο κινητό.';
-
-  @override
-  String get dcMobileHint =>
-      'Συνδέστε το Discord για να δείξετε τι παρακολουθείτε ή διαβάζετε. Χρησιμοποιεί τη σελίδα εξουσιοδότησης του Discord, όχι το διακριτικό του λογαριασμού σας.';
 
   @override
   String get dcConnect => 'Συνδέστε το Discord';
@@ -727,12 +697,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get dcRecommended => 'Συνιστάται';
 
   @override
-  String get dcConnecting => 'Σύνδεση…';
-
-  @override
-  String get dcDisconnected => 'Δεν είναι συνδεδεμένο';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Συνδεθήκατε ως $name';
   }
@@ -931,15 +895,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get settingsSyncWhat => 'Τι να συγχρονίσετε';
 
   @override
-  String get settingsSyncServer => 'Στον διακομιστή';
-
-  @override
   String get settingsSyncServerEmpty => 'Δεν έχει ανέβει τίποτα ακόμα';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return 'Ρυθμίσεις $count, μεταφορτώθηκαν $time από $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'αυτή τη συσκευή';
@@ -968,11 +924,6 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Τελευταίος συγχρονισμός $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Ο συγχρονισμός απέτυχε: $error';
   }
 
   @override
@@ -1759,22 +1710,11 @@ class AppLocalizationsEl extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Δείξε στο προφίλ σου στο Discord τι κάνεις. Χρειάζεται το token του Discord.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Δείξε στο προφίλ σου στο Discord τι κάνεις. Χρειάζεται να τρέχει η εφαρμογή Discord για υπολογιστή.';
-
-  @override
   String get discordBrowsing => 'Εμφάνιση δραστηριότητας περιήγησης';
 
   @override
   String get discordBrowsingDesc =>
       'Δείξε και την καρτέλα, τη σελίδα ή το προφίλ που βλέπεις, όχι μόνο ό,τι παρακολουθείς ή διαβάζεις.';
-
-  @override
-  String get discordLookHeader => 'Εμφάνιση του presence';
 
   @override
   String get discordActivityType => 'Τύπος δραστηριότητας';
@@ -1815,9 +1755,6 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Αντικατάσταση ονομάτων anime και manga (και του εξωφύλλου και συνδέσμου τους) με \"Κάτι ιδιωτικό\".';
-
-  @override
-  String get discordConnectionHeader => 'Σύνδεση';
 
   @override
   String get listSearchHint => 'Αναζήτηση σε αυτή τη λίστα';
@@ -1875,13 +1812,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get discordToken => 'Token Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'Αποθηκεύτηκε. Πάτα για αντικατάσταση, παρατεταμένα για αφαίρεση.';
-
-  @override
-  String get discordTokenNotSet => 'Δεν έχει οριστεί. Πάτα για προσθήκη.';
 
   @override
   String get discordTokenSavedSnack => 'Το token Discord αποθηκεύτηκε';
@@ -2081,9 +2011,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Επιλογές λογαριασμού MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Επιλογές λογαριασμού Comick';
-
-  @override
   String get comickClientId => 'Αναγνωριστικό πελάτη Comick';
 
   @override
@@ -2177,10 +2104,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get simklReadOnly => 'Το Simkl έδωσε πρόσβαση μόνο για ανάγνωση';
 
   @override
-  String get traktReadOnly =>
-      'Παραχωρήθηκε στο Trakt πρόσβαση μόνο για ανάγνωση';
-
-  @override
   String get incognitoEditsBlocked =>
       'Ινκόγκνιτο: οι αλλαγές στις λίστες είναι μπλοκαρισμένες';
 
@@ -2264,9 +2187,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get otherWorks => 'Άλλα έργα';
-
-  @override
-  String get prequelSequel => 'Prequel & Sequel';
 
   @override
   String get prequel => 'Prequel';
@@ -2412,16 +2332,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get trailerQuality => 'Ποιότητα τρέιλερ';
 
   @override
-  String get titleCopied => 'Ο τίτλος αντιγράφηκε';
-
-  @override
   String get linkCopied => 'Ο σύνδεσμος αντιγράφηκε';
-
-  @override
-  String get watchTrailer => 'Προβολή trailer';
-
-  @override
-  String get copyTitle => 'Αντιγραφή τίτλου';
 
   @override
   String get detailStale =>
@@ -3409,9 +3320,6 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Διάλεξε πού θα αποθηκευτεί το αντίγραφο';
-
-  @override
   String savedPath(String path) {
     return 'Αποθηκεύτηκε $path';
   }
@@ -3986,9 +3894,6 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'για τίτλους που προβάλλονται τώρα';
-
-  @override
   String get progress => 'Πρόοδος';
 
   @override
@@ -4193,11 +4098,6 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Μέγεθος: $size';
-  }
-
-  @override
   String get installedState => 'Εγκατεστημένο';
 
   @override
@@ -4297,11 +4197,6 @@ class AppLocalizationsEl extends AppLocalizations {
       'Πρόσθεσε και εγγραφές που η άλλη υπηρεσία δεν έχει ακόμα';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Συγχρονισμός με $name';
-  }
-
-  @override
   String get syncDelete => 'Διαγράψτε ό,τι δεν έχει η κύρια υπηρεσία';
 
   @override
@@ -4332,11 +4227,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get syncDeletedNote => 'Θα διαγραφεί';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count θα διαγραφεί από $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Διατήρηση μεγαλύτερης προόδου';
 
   @override
@@ -4348,9 +4238,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Δεν θα διαβάσει';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Ήδη σε αυτή τη λίστα';
 
   @override
   String get animePlanetNewList => 'Νέο όνομα λίστας';
@@ -5709,9 +5596,6 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Η εκκαθάριση αποκτήθηκε με άλλον παράγοντα χρήστη, επομένως δεν αποστέλλεται. Δοκιμάστε τη σύνδεση για να αποκτήσετε μια νέα';
-
-  @override
-  String get watchSectionConnection => 'Σύνδεση';
 
   @override
   String get watchSectionSession => 'συνεδρία';
@@ -7593,13 +7477,7 @@ class AppLocalizationsEl extends AppLocalizations {
   String get downloadPickAudio => 'Ποιο κομμάτι ήχου να κατέβει;';
 
   @override
-  String get downloadNoAudio => 'Χωρίς επιπλέον ήχο';
-
-  @override
   String get downloadAudio => 'Ήχος';
-
-  @override
-  String get downloadNoSubtitle => 'Χωρίς υπότιτλο';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8445,11 +8323,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get generalSectionPrivacy => 'Απόρρητο';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Μεταβείτε στο $service για να το ανοίξετε';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Προεπιλεγμένη ταχύτητα, αυτόματη αναπαραγωγή, προσαρμογή βίντεο, προσανατολισμός και εικόνα σε εικόνα';
 
@@ -8769,9 +8642,6 @@ class AppLocalizationsEl extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Αναμονή';
-
-  @override
   String get stepChecking => 'Έλεγχος…';
 
   @override
@@ -8843,14 +8713,7 @@ class AppLocalizationsEl extends AppLocalizations {
       'Σύρετε ένα σήμα σε μια γωνία του πρώτου φύλλου ή σύρετε ένα σήμα που βρίσκεται ήδη σε αυτό για να το μετακινήσετε. Τα σήματα ανταλλάσσουν θέσεις, ώστε να μην επικαλύπτονται ποτέ κανένα. Πατήστε ένα σήμα παρακάτω για να το ενεργοποιήσετε ή να το απενεργοποιήσετε.';
 
   @override
-  String get statusAuto => 'Αυτόματο';
-
-  @override
   String get unreadCounter => 'Μη αναγνωσμένο μετρητή';
-
-  @override
-  String get unreadCounterDesc =>
-      'Δείξτε πόσα επεισόδια ή κεφάλαια έχουν απομείνει στις αφίσες';
 
   @override
   String get settingsShortcuts => 'Συντομεύσεις πληκτρολογίου';
@@ -8889,9 +8752,6 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Επαναφορά στην προεπιλογή';
-
-  @override
-  String get shortcutClearKeys => 'Αφαιρέστε όλα τα κλειδιά';
 
   @override
   String get shortcutResetAll => 'Επαναφορά όλων των συντομεύσεων';
@@ -9083,10 +8943,6 @@ class AppLocalizationsEl extends AppLocalizations {
   String get closeActionAlways => 'Να συνεχίζετε να τρέχετε πάντα στο δίσκο';
 
   @override
-  String get closeActionNoTray =>
-      'Ο δίσκος συστήματος δεν είναι διαθέσιμος εδώ, επομένως η εφαρμογή τερματίζεται όταν είναι κλειστή';
-
-  @override
   String get gamepadNav => 'Πλοήγηση στο Gamepad';
 
   @override
@@ -9160,9 +9016,6 @@ class AppLocalizationsEl extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Δεν είναι δυνατή η αναπαραγωγή των βίντεο μέχρι να γίνει ξανά λήψη του προγράμματος αναπαραγωγής.';
-
-  @override
-  String get trailerLoading => 'Φόρτωση του τρέιλερ…';
 
   @override
   String get trailerFailed =>

@@ -421,10 +421,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get settingsSyncSignIn => 'با GitHub وارد شوید';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'تنظیمات در یک خلاصه خصوصی در حساب شما ذخیره می شود';
-
-  @override
   String get settingsSyncToken => 'از یک نشانه دسترسی شخصی استفاده کنید';
 
   @override
@@ -443,19 +439,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get settingsSyncSignOut => 'از سیستم خارج شوید';
 
   @override
-  String settingsSyncCode(Object code) {
-    return '$code را در GitHub وارد کنید';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'صفحه GitHub در مرورگر شما باز شد. برای کپی کردن کد ضربه بزنید یا برای لغو ضربه بزنید و نگه دارید.';
-
-  @override
   String get settingsSyncSignInFailed => 'نمی توان به GitHub وارد شد';
-
-  @override
-  String get dcPreview => 'پیش نمایش';
 
   @override
   String get dcSampleWatching => 'تماشا کردن';
@@ -477,21 +461,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get dcMemberList => 'در لیست اعضا';
 
   @override
-  String get dcAccount => 'حساب';
-
-  @override
-  String get dcSignIn => 'با Discord وارد شوید';
-
-  @override
   String get dcSignOut => 'از سیستم خارج شوید';
-
-  @override
-  String get dcDesktopHint =>
-      'بدون اتصال، Discord \"Watching Dartotsu\" را از طریق برنامه دسکتاپ نشان می دهد. Discord را وصل کنید تا فعالیت را با عنوان خود نامگذاری کنید، از جمله در تلفن همراه.';
-
-  @override
-  String get dcMobileHint =>
-      'برای نشان دادن آنچه در حال تماشا یا خواندن هستید، Discord را وصل کنید. از صفحه مجوز Discord استفاده می کند، نه توکن حساب شما.';
 
   @override
   String get dcConnect => 'Discord را وصل کنید';
@@ -715,12 +685,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get dcRecommended => 'توصیه می شود';
 
   @override
-  String get dcConnecting => 'در حال اتصال…';
-
-  @override
-  String get dcDisconnected => 'متصل نیست';
-
-  @override
   String dcSignedInAs(String name) {
     return 'وارد شده به عنوان $name';
   }
@@ -913,15 +877,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get settingsSyncWhat => 'چه چیزی باید همگام شود';
 
   @override
-  String get settingsSyncServer => 'روی سرور';
-
-  @override
   String get settingsSyncServerEmpty => 'هنوز چیزی آپلود نشده است';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return 'تنظیمات $count، آپلود $time از $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'این دستگاه';
@@ -950,11 +906,6 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'آخرین همگام سازی $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'همگام سازی انجام نشد: $error';
   }
 
   @override
@@ -1726,22 +1677,11 @@ class AppLocalizationsFa extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'نشون بده تو پروفایل Discord چیکار می‌کنی. توکن Discord لازمه.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'نشون بده تو پروفایل Discord چیکار می‌کنی. اپ دسکتاپ Discord باید باز باشه.';
-
-  @override
   String get discordBrowsing => 'نمایش فعالیت گشت‌وگذار';
 
   @override
   String get discordBrowsingDesc =>
       'تب، صفحه یا پروفایلی که داری نگاه می‌کنی رو هم نشون بده، نه فقط چیزی که می‌بینی یا می‌خونی.';
-
-  @override
-  String get discordLookHeader => 'ظاهر پرزنس';
 
   @override
   String get discordActivityType => 'نوع فعالیت';
@@ -1781,9 +1721,6 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'اسم انیمه و مانگا (با کاور و لینکشون) رو با «Something private» عوض کن.';
-
-  @override
-  String get discordConnectionHeader => 'اتصال';
 
   @override
   String get listSearchHint => 'جستجو تو این لیست';
@@ -1841,13 +1778,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get discordToken => 'توکن Discord';
-
-  @override
-  String get discordTokenSaved =>
-      'ذخیره شد. برای جایگزینی بزن، برای حذف نگه دار.';
-
-  @override
-  String get discordTokenNotSet => 'تنظیم نشده. برای افزودن بزن.';
 
   @override
   String get discordTokenSavedSnack => 'توکن Discord ذخیره شد';
@@ -2045,9 +1975,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'گزینه‌های حساب MangaBaka';
 
   @override
-  String get comickAccountOptions => 'گزینه های حساب کمیک';
-
-  @override
   String get comickClientId => 'شناسه مشتری Comick';
 
   @override
@@ -2138,9 +2065,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get simklReadOnly => 'Simkl فقط دسترسی خواندن داد';
 
   @override
-  String get traktReadOnly => 'به Trakt دسترسی فقط خواندنی داده شد';
-
-  @override
   String get incognitoEditsBlocked => 'ناشناس: ویرایش لیست مسدوده';
 
   @override
@@ -2220,9 +2144,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get otherWorks => 'کارهای دیگه';
-
-  @override
-  String get prequelSequel => 'پیش‌درآمد و دنباله';
 
   @override
   String get prequel => 'پیش درآمد';
@@ -2365,16 +2286,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get trailerQuality => 'کیفیت تریلر';
 
   @override
-  String get titleCopied => 'عنوان کپی شد';
-
-  @override
   String get linkCopied => 'لینک کپی شد';
-
-  @override
-  String get watchTrailer => 'دیدن تریلر';
-
-  @override
-  String get copyTitle => 'کپی عنوان';
 
   @override
   String get detailStale =>
@@ -3359,9 +3271,6 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'انتخاب کن پشتیبان کجا ذخیره بشه';
-
-  @override
   String savedPath(String path) {
     return '$path ذخیره شد';
   }
@@ -3930,9 +3839,6 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'برای عنوان‌هایی که الان در حال پخش‌ان';
-
-  @override
   String get progress => 'پیشرفت';
 
   @override
@@ -4137,11 +4043,6 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'حجم: $size';
-  }
-
-  @override
   String get installedState => 'نصب شده';
 
   @override
@@ -4240,11 +4141,6 @@ class AppLocalizationsFa extends AppLocalizations {
       'ورودی‌هایی که سرویس دیگه هنوز نداره رو هم اضافه کن';
 
   @override
-  String syncServiceOn(String name) {
-    return 'همگام سازی با $name';
-  }
-
-  @override
   String get syncDelete => 'آنچه را که سرویس اصلی ندارد حذف کنید';
 
   @override
@@ -4275,11 +4171,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get syncDeletedNote => 'حذف خواهد شد';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count از $name حذف خواهد شد';
-  }
-
-  @override
   String get syncOnlyForward => 'حفظ پیشرفت بیشتر';
 
   @override
@@ -4290,9 +4181,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'نمی خواند';
-
-  @override
-  String get animePlanetAlreadyOnList => 'در حال حاضر در این لیست';
 
   @override
   String get animePlanetNewList => 'نام لیست جدید';
@@ -5631,9 +5519,6 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'مجوز با یک عامل کاربری دیگر به دست آمده است، بنابراین ارسال نمی شود. برای دریافت اتصال جدید، اتصال را تست کنید';
-
-  @override
-  String get watchSectionConnection => 'اتصال';
 
   @override
   String get watchSectionSession => 'جلسه';
@@ -7489,13 +7374,7 @@ class AppLocalizationsFa extends AppLocalizations {
   String get downloadPickAudio => 'کدوم ترک صدا دانلود بشه؟';
 
   @override
-  String get downloadNoAudio => 'بدون صدای اضافه';
-
-  @override
   String get downloadAudio => 'صدا';
-
-  @override
-  String get downloadNoSubtitle => 'بدون زیرنویس';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8334,11 +8213,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get generalSectionPrivacy => 'حریم خصوصی';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'برای باز کردن این، به $service بروید';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'سرعت پیش‌فرض، پخش خودکار، تناسب ویدئو، جهت‌گیری و تصویر در تصویر';
 
@@ -8652,9 +8526,6 @@ class AppLocalizationsFa extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'در انتظار';
-
-  @override
   String get stepChecking => 'در حال بررسی…';
 
   @override
@@ -8725,14 +8596,7 @@ class AppLocalizationsFa extends AppLocalizations {
       'یک نشان را به گوشه‌ای از کارت اول بکشید، یا نشانی را که از قبل روی آن است بکشید تا آن را جابجا کنید. نشان‌ها جای خود را عوض می‌کنند، بنابراین هیچ‌یک با هم همپوشانی ندارند. روی یک نشان زیر ضربه بزنید تا آن را روشن یا خاموش کنید.';
 
   @override
-  String get statusAuto => 'خودکار';
-
-  @override
   String get unreadCounter => 'شمارنده خوانده نشده';
-
-  @override
-  String get unreadCounterDesc =>
-      'نشان دهید که چند قسمت یا فصل روی پوسترها باقی مانده است';
 
   @override
   String get settingsShortcuts => 'میانبرهای صفحه کلید';
@@ -8771,9 +8635,6 @@ class AppLocalizationsFa extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'به حالت پیش فرض بازنشانی کنید';
-
-  @override
-  String get shortcutClearKeys => 'تمام کلیدها را بردارید';
 
   @override
   String get shortcutResetAll => 'همه میانبرها را بازنشانی کنید';
@@ -8960,10 +8821,6 @@ class AppLocalizationsFa extends AppLocalizations {
   String get closeActionAlways => 'همیشه در سینی کار کنید';
 
   @override
-  String get closeActionNoTray =>
-      'سینی سیستم در اینجا در دسترس نیست، بنابراین برنامه زمانی که بسته می‌شود خارج می‌شود';
-
-  @override
   String get gamepadNav => 'ناوبری صفحه بازی';
 
   @override
@@ -9037,9 +8894,6 @@ class AppLocalizationsFa extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'تا زمانی که پخش کننده دوباره دانلود نشود، ویدیوها نمی توانند پخش شوند.';
-
-  @override
-  String get trailerLoading => 'در حال بارگیری تریلر…';
 
   @override
   String get trailerFailed => 'تریلر در اینجا پخش نشد، آن را در مرورگر باز کرد';

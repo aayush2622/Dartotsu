@@ -412,9 +412,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsSyncSignIn => '使用 GitHub 登录';
 
   @override
-  String get settingsSyncSignInDesc => '设置存储在您帐户的私人要点中';
-
-  @override
   String get settingsSyncToken => '使用个人访问令牌';
 
   @override
@@ -433,18 +430,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsSyncSignOut => '退出';
 
   @override
-  String settingsSyncCode(Object code) {
-    return '在 GitHub 上输入 $code';
-  }
-
-  @override
-  String get settingsSyncCodeDesc => 'GitHub 页面在浏览器中打开。点击以复制代码，或点击并按住以取消。';
-
-  @override
   String get settingsSyncSignInFailed => '无法登录 GitHub';
-
-  @override
-  String get dcPreview => '预览';
 
   @override
   String get dcSampleWatching => '观看';
@@ -465,21 +451,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dcMemberList => '在会员名单中';
 
   @override
-  String get dcAccount => '账户';
-
-  @override
-  String get dcSignIn => '使用 Discord 登录';
-
-  @override
   String get dcSignOut => '退出';
-
-  @override
-  String get dcDesktopHint =>
-      '在没有连接的情况下，Discord 通过桌面应用程序显示“Watching Dartotsu”。连接 Discord 以根据您的标题命名活动，包括在移动设备上。';
-
-  @override
-  String get dcMobileHint =>
-      '连接 Discord 以显示您正在观看或阅读的内容。它使用 Discord 的授权页面，而不是您的帐户令牌。';
 
   @override
   String get dcConnect => '连接不和谐';
@@ -700,12 +672,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get dcRecommended => '推荐';
 
   @override
-  String get dcConnecting => '正在连接…';
-
-  @override
-  String get dcDisconnected => '未连接';
-
-  @override
   String dcSignedInAs(String name) {
     return '以 $name 身份登录';
   }
@@ -889,15 +855,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get settingsSyncWhat => '要同步什么';
 
   @override
-  String get settingsSyncServer => '在服务器上';
-
-  @override
   String get settingsSyncServerEmpty => '尚未上传任何内容';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count 设置，从 $device 上传 $time';
-  }
 
   @override
   String get settingsSyncThisDevice => '这个设备';
@@ -926,11 +884,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return '上次同步 $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return '同步失败：$error';
   }
 
   @override
@@ -1678,21 +1631,10 @@ class AppLocalizationsZh extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      '在你的 Discord 个人资料上显示你在做什么。需要你的 Discord Token。';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      '在你的 Discord 个人资料上显示你在做什么。需要 Discord 桌面端正在运行。';
-
-  @override
   String get discordBrowsing => '显示浏览动态';
 
   @override
   String get discordBrowsingDesc => '除了你在看或在读的内容，也显示你正在浏览的标签页、页面或个人资料。';
-
-  @override
-  String get discordLookHeader => '状态外观';
 
   @override
   String get discordActivityType => '活动类型';
@@ -1731,9 +1673,6 @@ class AppLocalizationsZh extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       '把动画和漫画的名称（及其封面和链接）替换成“Something private”。';
-
-  @override
-  String get discordConnectionHeader => '连接';
 
   @override
   String get listSearchHint => '搜索此列表';
@@ -1791,12 +1730,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord Token';
-
-  @override
-  String get discordTokenSaved => '已保存。点按可替换，长按可删除。';
-
-  @override
-  String get discordTokenNotSet => '未设置。点按添加。';
 
   @override
   String get discordTokenSavedSnack => '已保存 Discord Token';
@@ -1990,9 +1923,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka 账号选项';
 
   @override
-  String get comickAccountOptions => 'Comick 帐户选项';
-
-  @override
   String get comickClientId => 'Comick 客户端 ID';
 
   @override
@@ -2083,9 +2013,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get simklReadOnly => 'Simkl 只授予了只读权限';
 
   @override
-  String get traktReadOnly => 'Trakt 授予只读访问权限';
-
-  @override
   String get incognitoEditsBlocked => '无痕模式：列表编辑已被禁止';
 
   @override
@@ -2164,9 +2091,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get otherWorks => '其他作品';
-
-  @override
-  String get prequelSequel => '前传与续作';
 
   @override
   String get prequel => '前传';
@@ -2307,16 +2231,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get trailerQuality => '拖车质量';
 
   @override
-  String get titleCopied => '已复制标题';
-
-  @override
   String get linkCopied => '已复制链接';
-
-  @override
-  String get watchTrailer => '观看预告片';
-
-  @override
-  String get copyTitle => '复制标题';
 
   @override
   String get detailStale => '无法访问 AniList。这是已保存的信息，可能已过时。';
@@ -3285,9 +3200,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => '选择备份的保存位置';
-
-  @override
   String savedPath(String path) {
     return '已保存 $path';
   }
@@ -3856,9 +3768,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => '适用于正在连载的作品';
-
-  @override
   String get progress => '进度';
 
   @override
@@ -4063,11 +3972,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return '大小：$size';
-  }
-
-  @override
   String get installedState => '已安装';
 
   @override
@@ -4163,11 +4067,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get syncAddMissingDesc => '也添加另一个服务里还没有的条目';
 
   @override
-  String syncServiceOn(String name) {
-    return '与 $name 同步';
-  }
-
-  @override
   String get syncDelete => '删除主服务没有的内容';
 
   @override
@@ -4198,11 +4097,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get syncDeletedNote => '将被删除';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count 将从 $name 中删除';
-  }
-
-  @override
   String get syncOnlyForward => '保留更靠前的进度';
 
   @override
@@ -4213,9 +4107,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => '不会读书';
-
-  @override
-  String get animePlanetAlreadyOnList => '已经在此列表中';
 
   @override
   String get animePlanetNewList => '新名单名称';
@@ -5517,9 +5408,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get watchClearanceStale => '该许可是通过另一个用户代理获得的，因此不会发送。测试连接以获取新连接';
-
-  @override
-  String get watchSectionConnection => '连接方式';
 
   @override
   String get watchSectionSession => '会议';
@@ -7320,13 +7208,7 @@ class AppLocalizationsZh extends AppLocalizations {
   String get downloadPickAudio => '下载哪个音轨？';
 
   @override
-  String get downloadNoAudio => '不要额外音频';
-
-  @override
   String get downloadAudio => '音频';
-
-  @override
-  String get downloadNoSubtitle => '无字幕';
 
   @override
   String get downloadHlsNeedsFfmpeg => '这个视频流是 HLS 播放列表，下载需要 FFmpeg 组件。';
@@ -8131,11 +8013,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get generalSectionPrivacy => '隐私';
 
   @override
-  String notificationsOtherService(String service) {
-    return '切换到 $service 打开此';
-  }
-
-  @override
   String get secPlayerPlayback => '默认速度、自动播放、视频适合、方向和画中画';
 
   @override
@@ -8433,9 +8310,6 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => '等待';
-
-  @override
   String get stepChecking => '正在检查...';
 
   @override
@@ -8503,13 +8377,7 @@ class AppLocalizationsZh extends AppLocalizations {
       '将徽章拖动到第一张卡的一角，或拖动其上已有的徽章来移动它。徽章交换位置，因此不会重叠。点按下面的徽章即可将其打开或关闭。';
 
   @override
-  String get statusAuto => '汽车';
-
-  @override
   String get unreadCounter => '未读计数器';
-
-  @override
-  String get unreadCounterDesc => '显示海报上还剩多少集或章节';
 
   @override
   String get settingsShortcuts => '键盘快捷键';
@@ -8546,9 +8414,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get shortcutResetOne => '重置为默认值';
-
-  @override
-  String get shortcutClearKeys => '删除所有键';
 
   @override
   String get shortcutResetAll => '重置所有快捷键';
@@ -8733,9 +8598,6 @@ class AppLocalizationsZh extends AppLocalizations {
   String get closeActionAlways => '始终保持在托盘中运行';
 
   @override
-  String get closeActionNoTray => '系统托盘在这里不可用，因此应用程序在关闭时退出';
-
-  @override
   String get gamepadNav => '游戏手柄导航';
 
   @override
@@ -8805,9 +8667,6 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get removePlayerMessage => '重新下载播放器后，视频才能播放。';
-
-  @override
-  String get trailerLoading => '正在加载拖车...';
 
   @override
   String get trailerFailed => '此处无法播放预告片，请在浏览器中打开';

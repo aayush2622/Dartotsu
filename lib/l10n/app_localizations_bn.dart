@@ -423,10 +423,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub দিয়ে সাইন ইন করুন';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'সেটিংস আপনার অ্যাকাউন্টে একটি ব্যক্তিগত সারাংশে সংরক্ষণ করা হয়';
-
-  @override
   String get settingsSyncToken => 'একটি ব্যক্তিগত অ্যাক্সেস টোকেন ব্যবহার করুন';
 
   @override
@@ -445,19 +441,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get settingsSyncSignOut => 'সাইন আউট করুন';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub-এ $code লিখুন';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel।';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub এ সাইন ইন করা যায়নি';
-
-  @override
-  String get dcPreview => 'পূর্বরূপ';
 
   @override
   String get dcSampleWatching => 'দেখছি';
@@ -479,21 +463,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dcMemberList => 'সদস্য তালিকায়';
 
   @override
-  String get dcAccount => 'হিসাব';
-
-  @override
-  String get dcSignIn => 'ডিসকর্ড দিয়ে সাইন ইন করুন';
-
-  @override
   String get dcSignOut => 'সাইন আউট করুন';
-
-  @override
-  String get dcDesktopHint =>
-      'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile।';
-
-  @override
-  String get dcMobileHint =>
-      'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token।';
 
   @override
   String get dcConnect => 'কানেক্ট ডিসকর্ড';
@@ -717,12 +687,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get dcRecommended => 'প্রস্তাবিত';
 
   @override
-  String get dcConnecting => 'সংযোগ করা হচ্ছে...';
-
-  @override
-  String get dcDisconnected => 'সংযুক্ত নয়';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name হিসাবে সাইন ইন করেছেন';
   }
@@ -916,15 +880,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get settingsSyncWhat => 'কি সিঙ্ক করতে হবে';
 
   @override
-  String get settingsSyncServer => 'সার্ভারে';
-
-  @override
   String get settingsSyncServerEmpty => 'এখনও কিছু আপলোড করা হয়নি';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count সেটিংস, আপলোড করা হয়েছে $time থেকে $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'এই ডিভাইস';
@@ -953,11 +909,6 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'সর্বশেষ সিঙ্ক হয়েছে $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'সিঙ্ক ব্যর্থ হয়েছে: $error';
   }
 
   @override
@@ -1725,22 +1676,11 @@ class AppLocalizationsBn extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'তুমি কী করছ সেটা Discord প্রোফাইলে দেখাও। তোমার Discord টোকেন লাগবে।';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'তুমি কী করছ সেটা Discord প্রোফাইলে দেখাও। Discord ডেস্কটপ অ্যাপ চালু থাকতে হবে।';
-
-  @override
   String get discordBrowsing => 'ব্রাউজিং অ্যাক্টিভিটি দেখাও';
 
   @override
   String get discordBrowsingDesc =>
       'শুধু যা দেখছ বা পড়ছ তা নয়, যে ট্যাব, পেজ বা প্রোফাইলে আছ সেটাও দেখাও।';
-
-  @override
-  String get discordLookHeader => 'প্রেজেন্সের লুক';
 
   @override
   String get discordActivityType => 'অ্যাক্টিভিটির ধরন';
@@ -1780,9 +1720,6 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'অ্যানিমে আর মাঙ্গার নাম (সাথে কভার আর লিংক) \"কিছু একটা প্রাইভেট\" দিয়ে বদলে দাও।';
-
-  @override
-  String get discordConnectionHeader => 'কানেকশন';
 
   @override
   String get listSearchHint => 'এই লিস্টে খোঁজো';
@@ -1840,13 +1777,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord টোকেন';
-
-  @override
-  String get discordTokenSaved =>
-      'সেভ হয়েছে। বদলাতে ট্যাপ করো, সরাতে চেপে ধরো।';
-
-  @override
-  String get discordTokenNotSet => 'সেট করা নেই। যোগ করতে ট্যাপ করো।';
 
   @override
   String get discordTokenSavedSnack => 'Discord টোকেন সেভ হয়েছে';
@@ -2044,9 +1974,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka অ্যাকাউন্টের অপশন';
 
   @override
-  String get comickAccountOptions => 'কমিক অ্যাকাউন্ট বিকল্প';
-
-  @override
   String get comickClientId => 'কমিক ক্লায়েন্ট আইডি';
 
   @override
@@ -2140,9 +2067,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get simklReadOnly => 'Simkl শুধু পড়ার অ্যাক্সেস দিয়েছে';
 
   @override
-  String get traktReadOnly => 'Trakt শুধুমাত্র-পঠন অ্যাক্সেস মঞ্জুরিপ্রাপ্ত';
-
-  @override
   String get incognitoEditsBlocked => 'ইনকগনিটো: লিস্ট এডিট বন্ধ';
 
   @override
@@ -2222,9 +2146,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get otherWorks => 'অন্যান্য কাজ';
-
-  @override
-  String get prequelSequel => 'প্রিকুয়েল আর সিকুয়েল';
 
   @override
   String get prequel => 'প্রিক্যুয়েল';
@@ -2369,16 +2290,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get trailerQuality => 'ট্রেলারের মান';
 
   @override
-  String get titleCopied => 'টাইটেল কপি হয়েছে';
-
-  @override
   String get linkCopied => 'লিংক কপি হয়েছে';
-
-  @override
-  String get watchTrailer => 'ট্রেলার দেখো';
-
-  @override
-  String get copyTitle => 'টাইটেল কপি করো';
 
   @override
   String get detailStale =>
@@ -3359,9 +3271,6 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'ব্যাকআপ কোথায় সেভ করবে বেছে নাও';
-
-  @override
   String savedPath(String path) {
     return '$path সেভ হয়েছে';
   }
@@ -3930,9 +3839,6 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'বর্তমানে চলমান টাইটেলের জন্য';
-
-  @override
   String get progress => 'প্রগ্রেস';
 
   @override
@@ -4137,11 +4043,6 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'সাইজ: $size';
-  }
-
-  @override
   String get installedState => 'ইনস্টল করা আছে';
 
   @override
@@ -4241,11 +4142,6 @@ class AppLocalizationsBn extends AppLocalizations {
       'অন্য সার্ভিসে এখনো নেই এমন এন্ট্রিও যোগ করো';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name এর সাথে সিঙ্ক করুন';
-  }
-
-  @override
   String get syncDelete => 'মূল পরিষেবাতে যা নেই তা মুছুন';
 
   @override
@@ -4276,11 +4172,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get syncDeletedNote => 'মুছে ফেলা হবে';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$name থেকে $count মুছে ফেলা হবে';
-  }
-
-  @override
   String get syncOnlyForward => 'এগিয়ে থাকা প্রগ্রেস রাখো';
 
   @override
@@ -4292,9 +4183,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'পড়বে না';
-
-  @override
-  String get animePlanetAlreadyOnList => 'ইতিমধ্যেই এই তালিকায়';
 
   @override
   String get animePlanetNewList => 'নতুন তালিকার নাম';
@@ -5636,9 +5524,6 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'ছাড়পত্রটি অন্য ব্যবহারকারী এজেন্টের সাথে অর্জিত হয়েছিল, তাই এটি পাঠানো হয়নি। একটি নতুন পেতে সংযোগ পরীক্ষা করুন';
-
-  @override
-  String get watchSectionConnection => 'সংযোগ';
 
   @override
   String get watchSectionSession => 'অধিবেশন';
@@ -7494,13 +7379,7 @@ class AppLocalizationsBn extends AppLocalizations {
   String get downloadPickAudio => 'কোন অডিও ট্র্যাক ডাউনলোড করবে?';
 
   @override
-  String get downloadNoAudio => 'বাড়তি অডিও নেই';
-
-  @override
   String get downloadAudio => 'অডিও';
-
-  @override
-  String get downloadNoSubtitle => 'সাবটাইটেল নেই';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8337,11 +8216,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get generalSectionPrivacy => 'গোপনীয়তা';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'এটি খুলতে $service এ স্যুইচ করুন';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'ডিফল্ট গতি, অটো প্লে, ভিডিও ফিট, ওরিয়েন্টেশন এবং ছবিতে ছবি';
 
@@ -8652,9 +8526,6 @@ class AppLocalizationsBn extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'অপেক্ষা করছে';
-
-  @override
   String get stepChecking => 'পরীক্ষা করা হচ্ছে...';
 
   @override
@@ -8725,14 +8596,7 @@ class AppLocalizationsBn extends AppLocalizations {
       'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off।';
 
   @override
-  String get statusAuto => 'অটো';
-
-  @override
   String get unreadCounter => 'অপঠিত কাউন্টার';
-
-  @override
-  String get unreadCounterDesc =>
-      'পোস্টারে কতগুলো পর্ব বা অধ্যায় বাকি আছে তা দেখান';
 
   @override
   String get settingsShortcuts => 'কীবোর্ড শর্টকাট';
@@ -8770,9 +8634,6 @@ class AppLocalizationsBn extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'ডিফল্টে রিসেট করুন';
-
-  @override
-  String get shortcutClearKeys => 'সমস্ত কী সরান';
 
   @override
   String get shortcutResetAll => 'সমস্ত শর্টকাট রিসেট করুন';
@@ -8958,10 +8819,6 @@ class AppLocalizationsBn extends AppLocalizations {
   String get closeActionAlways => 'সবসময় ট্রেতে চালাতে থাকুন';
 
   @override
-  String get closeActionNoTray =>
-      'সিস্টেম ট্রে এখানে উপলব্ধ নেই, তাই অ্যাপটি বন্ধ হয়ে গেলে বন্ধ হয়ে যায়';
-
-  @override
   String get gamepadNav => 'গেমপ্যাড নেভিগেশন';
 
   @override
@@ -9035,9 +8892,6 @@ class AppLocalizationsBn extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Videos can\'t play until the player is downloaded again।';
-
-  @override
-  String get trailerLoading => 'ট্রেলার লোড হচ্ছে...';
 
   @override
   String get trailerFailed => 'এখানে ট্রেলার চালানো যায়নি, এটি ব্রাউজারে খোলা';

@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "మార్పుపై సమకాలీకరించండి",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHubతో సైన్ ఇన్ చేయండి",
-    "settingsSyncSignInDesc": "సెట్టింగ్‌లు మీ ఖాతాలోని ప్రైవేట్ సారాంశంలో నిల్వ చేయబడతాయి",
     "settingsSyncToken": "వ్యక్తిగత యాక్సెస్ టోకెన్‌ని ఉపయోగించండి",
     "settingsSyncTokenDesc": "కేవలం సారాంశం అనుమతితో github.com/settings/tokensలో ఒకదాన్ని సృష్టించండి",
     "settingsSyncTokenField": "టోకెన్",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "సైన్ అవుట్ చేయండి",
-    "settingsSyncCode": "GitHubలో {code}ని నమోదు చేయండి",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "మీ బ్రౌజర్‌లో GitHub పేజీ తెరవబడింది. కోడ్‌ని కాపీ చేయడానికి నొక్కండి లేదా రద్దు చేయడానికి నొక్కి పట్టుకోండి.",
     "settingsSyncSignInFailed": "GitHubకి సైన్ ఇన్ చేయడం సాధ్యపడలేదు",
-    "dcPreview": "ప్రివ్యూ",
     "dcSampleWatching": "చూస్తున్నారు",
     "dcSampleReading": "చదవడం",
     "dcSampleBrowsing": "బ్రౌజింగ్",
     "dcSampleLive": "ప్రస్తుతం",
     "dcLiveNothing": "ప్రస్తుతం ఏమీ కనిపించడం లేదు. శీర్షికను తెరవండి, ఎపిసోడ్ లేదా అధ్యాయాన్ని ప్రారంభించండి మరియు అది ఇక్కడ కనిపిస్తుంది.",
     "dcMemberList": "సభ్యుల జాబితాలో",
-    "dcAccount": "ఖాతా",
-    "dcSignIn": "డిస్కార్డ్‌తో సైన్ ఇన్ చేయండి",
     "dcSignOut": "సైన్ అవుట్ చేయండి",
-    "dcDesktopHint": "కనెక్ట్ చేయకుండా, డిస్కార్డ్ డెస్క్‌టాప్ యాప్ ద్వారా “వాచింగ్ డార్టోట్సు”ని చూపుతుంది. మొబైల్‌తో సహా మీ శీర్షిక తర్వాత కార్యాచరణకు పేరు పెట్టడానికి డిస్‌కార్డ్‌ని కనెక్ట్ చేయండి.",
-    "dcMobileHint": "మీరు ఏమి చూస్తున్నారో లేదా చదువుతున్నారో చూపడానికి డిస్కార్డ్‌ని కనెక్ట్ చేయండి. ఇది డిస్కార్డ్ యొక్క అధీకృత పేజీని ఉపయోగిస్తుంది, మీ ఖాతా టోకెన్ కాదు.",
     "dcConnect": "డిస్కార్డ్‌ని కనెక్ట్ చేయండి",
     "dcConnectDesc": "డిస్కార్డ్ యొక్క అధీకృత పేజీని తెరుస్తుంది మరియు అధీకృత యాప్‌ల క్రింద డార్టోట్సును జోడిస్తుంది. మీ ఉనికిని అప్‌డేట్ చేయమని డిస్కార్డ్ అడుగుతుంది. రిఫ్రెష్ టోకెన్ మాత్రమే సేవ్ చేయబడుతుంది, మీ ఖాతా టోకెన్ కాదు.",
     "dcConnectFailed": "డిస్కార్డ్‌ని కనెక్ట్ చేయడం సాధ్యపడలేదు",
@@ -254,8 +241,6 @@
     "dcMethodToken": "ఖాతా టోకెన్",
     "dcInUse": "వాడుకలో ఉంది",
     "dcRecommended": "సిఫార్సు చేయబడింది",
-    "dcConnecting": "కనెక్ట్ చేస్తోంది...",
-    "dcDisconnected": "కనెక్ట్ కాలేదు",
     "dcSignedInAs": "{name}గా సైన్ ఇన్ చేసారు",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub నుండి తొలగించండి",
     "settingsSyncSecretsDeleteMessage": "ఇది మీ సారాంశం నుండి గుప్తీకరించిన ఖాతాల ఫైల్‌ను తీసివేస్తుంది. ఇతర పరికరాలు వాటి సైన్-ఇన్‌లను ఉంచుతాయి మరియు కొత్త పాస్‌ఫ్రేజ్‌ని సెట్ చేయగలవు.",
     "settingsSyncWhat": "ఏమి సమకాలీకరించాలి",
-    "settingsSyncServer": "సర్వర్‌లో",
     "settingsSyncServerEmpty": "ఇంకా ఏదీ అప్‌లోడ్ చేయలేదు",
-    "settingsSyncServerInfo": "{count} సెట్టింగ్‌లు, {device} నుండి {time} అప్‌లోడ్ చేయబడ్డాయి",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ఈ పరికరం",
     "settingsSyncCount": "{count, plural, =0{సర్వర్‌లో ఏమీ లేదు} =1{సర్వర్‌లో 1 సెట్టింగ్} other{సర్వర్‌లో {count} సెట్టింగ్‌లు}}",
     "settingsSyncNow": "ఇప్పుడు సమకాలీకరించండి",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "సమకాలీకరణ విఫలమైంది: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "ప్రతిచోటా ఒకే విధంగా పనిచేసే సెట్టింగ్‌లు మాత్రమే సమకాలీకరించబడతాయి. ఖాతాలు, టోకెన్‌లు, ఫోల్డర్‌లు, పొడిగింపులు, నోటిఫికేషన్‌లు, డిస్కార్డ్, అప్‌డేట్‌లు మరియు విండో పరిమాణం ప్రతి పరికరంలో ఉంటాయి.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co లింకులు యాప్‌లో తెరుచుకోవడానికి లింక్ హ్యాండ్లింగ్ ఆన్ చెయ్యి",
     "linkSettingsFailed": "సిస్టమ్ సెట్టింగ్స్ ఓపెన్ చేయలేకపోయాం",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "నువ్వు ఏం చేస్తున్నావో నీ Discord ప్రొఫైల్‌లో చూపించు. నీ Discord టోకెన్ కావాలి.",
-    "discordRichPresenceDesktopDesc": "నువ్వు ఏం చేస్తున్నావో నీ Discord ప్రొఫైల్‌లో చూపించు. Discord డెస్క్‌టాప్ యాప్ రన్ అవుతూ ఉండాలి.",
     "discordBrowsing": "బ్రౌజింగ్ యాక్టివిటీ చూపించు",
     "discordBrowsingDesc": "నువ్వు చూసే లేదా చదివేది మాత్రమే కాకుండా, నువ్వు చూస్తున్న ట్యాబ్, పేజీ, ప్రొఫైల్ కూడా చూపించు.",
-    "discordLookHeader": "ప్రెజెన్స్ లుక్",
     "discordActivityType": "యాక్టివిటీ టైప్",
     "discordActivityTypeDesc": "Discord దాన్ని ఎలా రాస్తుందో: \"Watching …\" లేదా \"Playing …\". ఆటో అంటే అనిమేకి Watching, మిగతా అన్నిటికీ Playing వాడుతుంది.",
     "discordWatching": "చూస్తున్నాను",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"అనిమే / మాంగా చూడు\", \"Dartotsu ఓపెన్ చెయ్యి\" బటన్లు.",
     "discordHideTitles": "టైటిల్స్ దాచు",
     "discordHideTitlesDesc": "అనిమే, మాంగా పేర్లను (వాటి కవర్, లింక్‌తో సహా) \"Something private\"తో మార్చు.",
-    "discordConnectionHeader": "కనెక్షన్",
     "listSearchHint": "ఈ లిస్ట్‌లో వెతుకు",
     "listSort": "సార్ట్",
     "listFilter": "ఫిల్టర్",
@@ -671,8 +637,6 @@
     "listNoMatches": "ఈ లిస్ట్‌లో ఏదీ మ్యాచ్ అవ్వలేదు",
     "discordLogin": "Discordకి లాగిన్ అవ్వు",
     "discordToken": "Discord టోకెన్",
-    "discordTokenSaved": "సేవ్ అయింది. మార్చడానికి ట్యాప్ చెయ్యి, తీసేయడానికి లాంగ్ ప్రెస్ చెయ్యి.",
-    "discordTokenNotSet": "సెట్ చేయలేదు. యాడ్ చేయడానికి ట్యాప్ చెయ్యి.",
     "discordTokenSavedSnack": "Discord టోకెన్ సేవ్ అయింది",
     "discordTokenRemovedSnack": "Discord టోకెన్ తీసేశాం",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "అడల్ట్ టైటిల్స్‌ని ఫీడ్‌లు, సెర్చ్ నుండి తీసేయ్, నీ సొంత అడల్ట్ ఎంట్రీలను హిడెన్ మీడియా కింద చూపించు.",
     "kitsuAccountOptions": "Kitsu అకౌంట్ ఆప్షన్లు",
     "mangaBakaAccountOptions": "MangaBaka అకౌంట్ ఆప్షన్లు",
-    "comickAccountOptions": "కామిక్ ఖాతా ఎంపికలు",
     "comickClientId": "కామిక్ క్లయింట్ ID",
     "comickClientIdDesc": "అనుకూల క్లయింట్ ID comic.devలో నమోదు చేయబడింది",
     "couldNotUpdateKitsuSettings": "నీ Kitsu సెట్టింగ్స్ అప్‌డేట్ చేయలేకపోయాం",
@@ -761,7 +724,6 @@
     "accountDetails": "అకౌంట్ వివరాలు",
     "refreshFromKitsu": "Kitsu నుండి రిఫ్రెష్ చెయ్యి",
     "simklReadOnly": "Simkl రీడ్-ఓన్లీ యాక్సెస్ ఇచ్చింది",
-    "traktReadOnly": "Trakt చదవడానికి మాత్రమే యాక్సెస్ మంజూరు చేయబడింది",
     "incognitoEditsBlocked": "ఇన్‌కాగ్నిటో: లిస్ట్ ఎడిట్లు బ్లాక్ అయ్యాయి",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ఇన్‌కాగ్నిటో: ప్రోగ్రెస్ సేవ్ అవ్వలేదు",
@@ -786,7 +748,6 @@
     "mangaCredits": "మాంగా క్రెడిట్స్",
     "mainProductions": "మెయిన్ ప్రొడక్షన్లు",
     "otherWorks": "ఇతర వర్క్స్",
-    "prequelSequel": "ప్రీక్వెల్ & సీక్వెల్",
     "prequel": "ప్రీక్వెల్",
     "sequel": "సీక్వెల్",
     "previousSeason": "గత సీజన్",
@@ -833,10 +794,7 @@
     "addToList": "లిస్ట్‌కి యాడ్ చెయ్యి",
     "trailer": "ట్రైలర్",
     "trailerQuality": "ట్రైలర్ నాణ్యత",
-    "titleCopied": "టైటిల్ కాపీ అయింది",
     "linkCopied": "లింక్ కాపీ అయింది",
-    "watchTrailer": "ట్రైలర్ చూడు",
-    "copyTitle": "టైటిల్ కాపీ చెయ్యి",
     "detailStale": "అనిలిస్ట్ చేరుకోలేకపోయింది. ఇది సేవ్ చేయబడిన సమాచారం మరియు పాతది కావచ్చు.",
     "copyLink": "లింక్ కాపీ చెయ్యి",
     "openInBrowser": "బ్రౌజర్‌లో ఓపెన్ చెయ్యి",
@@ -1139,7 +1097,6 @@
     "import": "ఇంపోర్ట్",
     "animeCount": "{count} అనిమే",
     "mangaCount": "{count} మాంగా",
-    "chooseSaveLocation": "బ్యాకప్ ఎక్కడ సేవ్ చేయాలో ఎంచుకో",
     "savedPath": "{path}కి సేవ్ అయింది",
     "exportFailed": "ఎక్స్‌పోర్ట్ ఫెయిలైంది: {error}",
     "nothingInLocalLists": "నీ లోకల్ లిస్ట్‌లలో ఇంకా ఏమీ లేదు.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "లింక్ ఓపెన్ చేయడంలో ఎర్రర్: {error}",
     "linkCantBeOpened": "ఈ లింక్ ఓపెన్ అవ్వదు: {link}",
     "linkOpenError": "లింక్ ఓపెన్ చేయడంలో ఎర్రర్: {error}",
-    "forReleasingTitles": "ప్రస్తుతం రిలీజ్ అవుతున్న టైటిల్స్ కోసం",
     "progress": "ప్రోగ్రెస్",
     "notes": "నోట్స్",
     "serviceNotFound": "\"{id}\" సర్వీస్ దొరకలేదు",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "కాన్ఫిగర్ చేసిన రిపోలో {name} అందుబాటులో లేదు",
     "pluginFetchFailed": "ప్లగిన్ ఇన్ఫో ఫెచ్ అవ్వలేదు",
     "installPluginTitle": "{name} ఇన్‌స్టాల్ చెయ్యి",
-    "sizeLabel": "సైజ్: {size}",
     "installedState": "ఇన్‌స్టాల్ అయింది",
     "updatePluginTitle": "{name}ని నవీకరించండి",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "యాప్ ఓపెన్ చేసినప్పుడు, ప్రతి 30 నిమిషాలకు బ్యాక్‌గ్రౌండ్‌లో ఫెచ్ చేసి సింక్ చెయ్యి",
     "syncAddMissing": "మిస్సింగ్ ఎంట్రీలు యాడ్ చెయ్యి",
     "syncAddMissingDesc": "అవతలి సర్వీస్‌లో ఇంకా లేని ఎంట్రీలను కూడా యాడ్ చెయ్యి",
-    "syncServiceOn": "{name}తో సమకాలీకరించు",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "ప్రధాన సేవలో లేని వాటిని తొలగించండి",
     "syncDeleteDesc": "ప్రధాన జాబితాలో లేని ఇతర సేవల నుండి ఎంట్రీలను తీసివేయండి. టైటిల్‌కి సరిపోలే ఎంట్రీలు మాత్రమే తీసివేయబడతాయి, కాబట్టి Simkl సినిమాలు మరియు సిరీస్‌లు అలాగే ఉంటాయి",
     "syncDeleteTitle": "ఎంట్రీలను తొలగించాలా?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "తొలగించు",
     "syncToDelete": "తొలగించడానికి",
     "syncDeletedNote": "తొలగించబడుతుంది",
-    "syncWillRemove": "{count} {name} నుండి తొలగించబడుతుంది",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "ఎక్కువ ప్రోగ్రెస్ అలాగే ఉంచు",
     "syncOnlyForwardDesc": "ఇప్పటికే ముందున్న సర్వీస్ ప్రోగ్రెస్‌ని తగ్గించకు",
     "animePlanetWontWatch": "చూడరు",
     "animePlanetWontRead": "చదవరు",
-    "animePlanetAlreadyOnList": "ఇప్పటికే ఈ జాబితాలో ఉన్నారు",
     "animePlanetNewList": "కొత్త జాబితా పేరు",
     "syncPrivate": "ప్రైవేట్ ఎంట్రీలు",
     "syncPrivateDesc": "మీరు ప్రైవేట్‌గా ఉంచిన ఎంట్రీలతో ఏమి చేయాలి. ప్రైవేట్ ఎంపికతో సేవ వాటిని ప్రైవేట్‌గా పొందుతుంది; ఇతరులు వాటిని బహిరంగంగా చూపిస్తారు",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "క్లియరెన్స్ మరొక వినియోగదారు ఏజెంట్‌తో పొందబడింది, కనుక ఇది పంపబడలేదు. కొత్తదాన్ని పొందడానికి కనెక్షన్‌ని పరీక్షించండి",
-    "watchSectionConnection": "కనెక్షన్",
     "watchSectionSession": "సెషన్",
     "watchSectionTools": "ఉపకరణాలు",
     "watchMetaSource": "ఎపిసోడ్ వివరాలు ఎక్కడ నుండి",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "ఏ స్ట్రీమ్ డౌన్‌లోడ్ చేయాలి?",
     "downloadPickSubtitle": "ఏ సబ్‌టైటిల్ డౌన్‌లోడ్ చేయాలి?",
     "downloadPickAudio": "ఏ ఆడియో ట్రాక్ డౌన్‌లోడ్ చేయాలి?",
-    "downloadNoAudio": "ఎక్స్‌ట్రా ఆడియో లేదు",
     "downloadAudio": "ఆడియో",
-    "downloadNoSubtitle": "సబ్‌టైటిల్ లేదు",
     "downloadHlsNeedsFfmpeg": "ఈ స్ట్రీమ్ ఒక HLS ప్లేలిస్ట్. డౌన్‌లోడ్ చేయాలంటే FFmpeg యాడాన్ కావాలి.",
     "downloadSourceMissing": "ఈ ఎపిసోడ్ సోర్స్ ఇన్‌స్టాల్ చేయలేదు",
     "downloadDashDrm": "ఈ స్ట్రీమ్ DRM రక్షించబడింది",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "భాష & ప్రవర్తన",
     "generalSectionSecurity": "భద్రత",
     "generalSectionPrivacy": "గోప్యత",
-    "notificationsOtherService": "దీన్ని తెరవడానికి {service}కి మారండి",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "డిఫాల్ట్ స్పీడ్, ఆటో ప్లే, వీడియో ఫిట్, ఓరియంటేషన్ మరియు పిక్చర్ ఇన్ పిక్చర్",
     "secPlayerSkip": "ఓపెనింగ్‌లు, ముగింపులు మరియు రీక్యాప్‌లను స్వయంచాలకంగా దాటవేయండి",
     "secPlayerControls": "సంజ్ఞలను స్వైప్ చేయండి, పట్టుకోండి మరియు నొక్కండి మరియు ప్రివ్యూను వెతకండి",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "వేచి ఉంది",
     "stepChecking": "తనిఖీ చేస్తోంది...",
     "stepUpToDate": "తాజాగా ఉంది",
     "stepUpToDateWith": "తాజాగా · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "మాంగ",
     "readerCloudflare": "బ్రౌజర్‌లో తెరవండి (క్లౌడ్‌ఫ్లేర్ చెక్)",
     "badgeBoardHint": "బ్యాడ్జ్‌ను మొదటి కార్డ్‌లోని ఒక మూలకు లాగండి లేదా దాన్ని తరలించడానికి దానిపై ఇప్పటికే ఉన్న బ్యాడ్జ్‌ను లాగండి. బ్యాడ్జ్‌లు స్థలాలను మార్చుకుంటాయి, కాబట్టి ఏదీ ఎప్పుడూ అతివ్యాప్తి చెందదు. దీన్ని ఆన్ లేదా ఆఫ్ చేయడానికి దిగువన ఉన్న బ్యాడ్జ్‌ను నొక్కండి.",
-    "statusAuto": "ఆటో",
     "unreadCounter": "చదవని కౌంటర్",
-    "unreadCounterDesc": "పోస్టర్‌లలో ఎన్ని ఎపిసోడ్‌లు లేదా చాప్టర్‌లు మిగిలి ఉన్నాయో చూపండి",
     "settingsShortcuts": "కీబోర్డ్ సత్వరమార్గాలు",
     "settingsShortcutsDesc": "ప్రతి కీని చూడండి, మార్చండి మరియు ఆఫ్ చేయండి",
     "shortcutGroupApp": "యాప్",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "సెట్ కాలేదు",
     "shortcutAddKey": "ఒక కీని జోడించండి",
     "shortcutResetOne": "డిఫాల్ట్‌కి రీసెట్ చేయండి",
-    "shortcutClearKeys": "అన్ని కీలను తీసివేయండి",
     "shortcutResetAll": "అన్ని షార్ట్‌కట్‌లను రీసెట్ చేయండి",
     "shortcutResetAllDesc": "ప్రతి కీని దాని డిఫాల్ట్‌కి తిరిగి ఉంచండి",
     "shortcutPress": "మీకు కావలసిన కీ లేదా కలయికను నొక్కండి",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "యాప్ నుండి నిష్క్రమించండి",
     "closeActionWhenBusy": "ఏదో నడుస్తున్నప్పుడు ట్రేలో పరుగెత్తండి",
     "closeActionAlways": "ఎప్పుడూ ట్రేలో పరుగెత్తుతూనే ఉండండి",
-    "closeActionNoTray": "సిస్టమ్ ట్రే ఇక్కడ అందుబాటులో లేదు, కాబట్టి యాప్ మూసివేయబడినప్పుడు నిష్క్రమిస్తుంది",
     "gamepadNav": "గేమ్‌ప్యాడ్ నావిగేషన్",
     "gamepadNavDesc": "యాప్ చుట్టూ తిరగండి మరియు గేమ్ కంట్రోలర్‌తో ప్లేయర్‌ని నియంత్రించండి",
     "trayShow": "డార్టోట్సును చూపించు",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "వివరాలను కాపీ చేయండి",
     "removePlayerTitle": "ప్లేయర్‌ని తీసివేయాలా?",
     "removePlayerMessage": "ప్లేయర్ మళ్లీ డౌన్‌లోడ్ అయ్యే వరకు వీడియోలు ప్లే చేయబడవు.",
-    "trailerLoading": "ట్రైలర్ లోడ్ అవుతోంది…",
     "trailerFailed": "ఇక్కడ ట్రైలర్‌ను ప్లే చేయడం సాధ్యపడలేదు, బ్రౌజర్‌లో దాన్ని తెరవడం"
 }

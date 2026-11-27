@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Синхронізувати при зміні",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Увійдіть за допомогою GitHub",
-    "settingsSyncSignInDesc": "Налаштування зберігаються в приватному розділі вашого облікового запису",
     "settingsSyncToken": "Використовуйте особистий маркер доступу",
     "settingsSyncTokenDesc": "Створіть його на github.com/settings/tokens лише з дозволом на суть",
     "settingsSyncTokenField": "Токен",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Вийти",
-    "settingsSyncCode": "Введіть {code} на GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "У вашому браузері відкрилася сторінка GitHub. Натисніть, щоб скопіювати код, або натисніть і утримуйте, щоб скасувати.",
     "settingsSyncSignInFailed": "Не вдалося ввійти в GitHub",
-    "dcPreview": "Попередній перегляд",
     "dcSampleWatching": "Дивлячись",
     "dcSampleReading": "Читання",
     "dcSampleBrowsing": "Перегляд",
     "dcSampleLive": "Прямо зараз",
     "dcLiveNothing": "Зараз нічого не відображається. Відкрийте заголовок, почніть епізод або розділ, і він з’явиться тут.",
     "dcMemberList": "У списку учасників",
-    "dcAccount": "Обліковий запис",
-    "dcSignIn": "Увійдіть за допомогою Discord",
     "dcSignOut": "Вийти",
-    "dcDesktopHint": "Без підключення Discord показує «Watching Dartotsu» через настільну програму. Підключіться до Discord, щоб назвати діяльність відповідно до вашої назви, зокрема на мобільному пристрої.",
-    "dcMobileHint": "Підключіть Discord, щоб показати те, що ви дивитесь або читаєте. Він використовує сторінку авторизації Discord, а не маркер вашого облікового запису.",
     "dcConnect": "Підключіть Discord",
     "dcConnectDesc": "Відкриває сторінку авторизації Discord і додає Dartotsu у розділі Авторизовані програми. Discord просить оновити вашу присутність. Зберігається лише маркер оновлення, а не маркер вашого облікового запису.",
     "dcConnectFailed": "Не вдалося підключити Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Маркер облікового запису",
     "dcInUse": "У користуванні",
     "dcRecommended": "Рекомендовано",
-    "dcConnecting": "Підключення…",
-    "dcDisconnected": "Не підключено",
     "dcSignedInAs": "Ви ввійшли як {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Видалити з GitHub",
     "settingsSyncSecretsDeleteMessage": "Це видаляє зашифрований файл облікових записів із вашої суті. Інші пристрої зберігають свої входи та можуть встановити нову парольну фразу.",
     "settingsSyncWhat": "Що синхронізувати",
-    "settingsSyncServer": "На сервері",
     "settingsSyncServerEmpty": "Ще нічого не завантажено",
-    "settingsSyncServerInfo": "Налаштування {count}, завантажено {time} з {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "цей пристрій",
     "settingsSyncCount": "{count, plural, =0{На сервері нічого немає} =1{1 налаштування на сервері} other{Налаштування {count} на сервері}}",
     "settingsSyncNow": "Синхронізувати зараз",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Помилка синхронізації: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Синхронізуються лише ті налаштування, які скрізь однаково працюють. Облікові записи, токени, папки, розширення, сповіщення, Discord, оновлення та розмір вікна залишаються на кожному пристрої.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Увімкни обробку посилань, щоб посилання anilist.co відкривали застосунок",
     "linkSettingsFailed": "Не вдалося відкрити налаштування системи",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Показуй у профілі Discord, що ти робиш. Потрібен твій токен Discord.",
-    "discordRichPresenceDesktopDesc": "Показуй у профілі Discord, що ти робиш. Потрібен запущений десктопний Discord.",
     "discordBrowsing": "Показувати активність перегляду",
     "discordBrowsingDesc": "Показувати також вкладку, сторінку чи профіль, які ти дивишся, а не лише що читаєш чи дивишся.",
-    "discordLookHeader": "Вигляд статусу",
     "discordActivityType": "Тип активності",
     "discordActivityTypeDesc": "Як це формулює Discord: «Дивиться …» або «Грає в …». Авто — «Дивиться» для аніме й «Грає» для решти.",
     "discordWatching": "Дивиться",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Кнопки «Переглянути аніме / мангу» та «Відкрити Dartotsu».",
     "discordHideTitles": "Ховати назви",
     "discordHideTitlesDesc": "Замінити назви аніме й манги (та їхню обкладинку й посилання) на «Щось приватне».",
-    "discordConnectionHeader": "Підключення",
     "listSearchHint": "Пошук у цьому списку",
     "listSort": "Сортування",
     "listFilter": "Фільтр",
@@ -671,8 +637,6 @@
     "listNoMatches": "У цьому списку нічого не підходить",
     "discordLogin": "Увійти в Discord",
     "discordToken": "Токен Discord",
-    "discordTokenSaved": "Збережено. Натисни, щоб замінити, утримуй, щоб видалити.",
-    "discordTokenNotSet": "Не задано. Натисни, щоб додати.",
     "discordTokenSavedSnack": "Токен Discord збережено",
     "discordTokenRemovedSnack": "Токен Discord видалено",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Не показувати дорослі тайтли в стрічках і пошуку, а твої власні дорослі записи тримати в «Прихованих медіа».",
     "kitsuAccountOptions": "Опції акаунта Kitsu",
     "mangaBakaAccountOptions": "Налаштування акаунта MangaBaka",
-    "comickAccountOptions": "Параметри облікового запису Comick",
     "comickClientId": "Ідентифікатор клієнта Comick",
     "comickClientIdDesc": "Спеціальний ідентифікатор клієнта, зареєстрований на comick.dev",
     "couldNotUpdateKitsuSettings": "Не вдалося оновити налаштування Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Дані акаунта",
     "refreshFromKitsu": "Оновити з Kitsu",
     "simklReadOnly": "Simkl надав доступ лише для читання",
-    "traktReadOnly": "Trakt надано доступ лише для читання",
     "incognitoEditsBlocked": "Інкогніто: редагування списків заблоковано",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Інкогніто: прогрес не збережено",
@@ -786,7 +748,6 @@
     "mangaCredits": "Участь у манзі",
     "mainProductions": "Основні проєкти",
     "otherWorks": "Інші роботи",
-    "prequelSequel": "Приквел і сиквел",
     "prequel": "Приквел",
     "sequel": "Продовження",
     "previousSeason": "Минулий сезон",
@@ -833,10 +794,7 @@
     "addToList": "Додати до списку",
     "trailer": "Трейлер",
     "trailerQuality": "Якість трейлера",
-    "titleCopied": "Назву скопійовано",
     "linkCopied": "Посилання скопійовано",
-    "watchTrailer": "Дивитись трейлер",
-    "copyTitle": "Копіювати назву",
     "detailStale": "AniList не вдалося отримати. Це збережена інформація, яка може бути застарілою.",
     "copyLink": "Копіювати посилання",
     "openInBrowser": "Відкрити в браузері",
@@ -1139,7 +1097,6 @@
     "import": "Імпорт",
     "animeCount": "Аніме: {count}",
     "mangaCount": "Манги: {count}",
-    "chooseSaveLocation": "Обери, куди зберегти бекап",
     "savedPath": "Збережено: {path}",
     "exportFailed": "Не вдалося експортувати: {error}",
     "nothingInLocalLists": "У твоїх локальних списках поки нічого.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Помилка відкриття посилання: {error}",
     "linkCantBeOpened": "Це посилання не можна відкрити: {link}",
     "linkOpenError": "Помилка відкриття посилання: {error}",
-    "forReleasingTitles": "для тайтлів, що зараз виходять",
     "progress": "Прогрес",
     "notes": "Нотатки",
     "serviceNotFound": "Сервіс «{id}» не знайдено",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} немає в налаштованому репозиторії",
     "pluginFetchFailed": "Не вдалося отримати інформацію про плагін",
     "installPluginTitle": "Встановити {name}",
-    "sizeLabel": "Розмір: {size}",
     "installedState": "Встановлено",
     "updatePluginTitle": "Оновити {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Завантажувати й синхронізувати у фоні під час запуску застосунку та кожні 30 хвилин",
     "syncAddMissing": "Додавати відсутні записи",
     "syncAddMissingDesc": "Також додавати записи, яких ще немає в іншому сервісі",
-    "syncServiceOn": "Синхронізувати з {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Видаліть те, чого немає в основному сервісі",
     "syncDeleteDesc": "Видаліть записи з інших служб, яких немає в основному списку. Видаляються лише записи, які можна зіставити з назвою, тому такі речі, як фільми та серіали Simkl, залишаються",
     "syncDeleteTitle": "Видалити записи?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Видалити",
     "syncToDelete": "Щоб видалити",
     "syncDeletedNote": "Буде видалено",
-    "syncWillRemove": "{count} буде видалено з {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Зберігати більший прогрес",
     "syncOnlyForwardDesc": "Не зменшувати прогрес у сервісі, де він уже більший",
     "animePlanetWontWatch": "Не буде дивитися",
     "animePlanetWontRead": "Читати не буде",
-    "animePlanetAlreadyOnList": "Вже в цьому списку",
     "animePlanetNewList": "Нова назва списку",
     "syncPrivate": "Приватні записи",
     "syncPrivateDesc": "Що робити з записами, які ви залишаєте приватними. Служба з приватною опцією робить їх приватними; інші показали б їх публічно",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Дозвіл було отримано за допомогою іншого агента користувача, тому воно не надсилається. Перевірте підключення, щоб отримати нове",
-    "watchSectionConnection": "Підключення",
     "watchSectionSession": "Сесія",
     "watchSectionTools": "Інструменти",
     "watchMetaSource": "Деталі серій з",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Який потік завантажити?",
     "downloadPickSubtitle": "Які субтитри завантажити?",
     "downloadPickAudio": "Яку аудіодоріжку завантажити?",
-    "downloadNoAudio": "Без додаткового аудіо",
     "downloadAudio": "Аудіо",
-    "downloadNoSubtitle": "Без субтитрів",
     "downloadHlsNeedsFfmpeg": "Цей потік — HLS-плейлист. Для його завантаження потрібне доповнення FFmpeg.",
     "downloadSourceMissing": "Джерело цієї серії не встановлено",
     "downloadDashDrm": "Цей потік захищено DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Мова та поведінка",
     "generalSectionSecurity": "Безпека",
     "generalSectionPrivacy": "Конфіденційність",
-    "notificationsOtherService": "Перейдіть на {service}, щоб відкрити це",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Швидкість за замовчуванням, автоматичне відтворення, розмір відео, орієнтація та картинка в картинці",
     "secPlayerSkip": "Пропускати відкриття, закінчення та підсумки автоматично",
     "secPlayerControls": "Проведіть пальцем, утримуйте та торкайтеся жестів і шукайте попередній перегляд",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Очікування",
     "stepChecking": "Перевірка…",
     "stepUpToDate": "В актуальному стані",
     "stepUpToDateWith": "Актуально · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Манга",
     "readerCloudflare": "Відкрити в браузері (перевірка Cloudflare)",
     "badgeBoardHint": "Перетягніть значок у кут першої картки або перетягніть значок, який уже є на ній, щоб перемістити його. Бейджі міняються місцями, тому жоден ніколи не накладається. Торкніться значка нижче, щоб увімкнути або вимкнути його.",
-    "statusAuto": "Авто",
     "unreadCounter": "Лічильник непрочитаних",
-    "unreadCounterDesc": "Покажіть, скільки епізодів або розділів залишилося на плакатах",
     "settingsShortcuts": "Комбінації клавіш",
     "settingsShortcutsDesc": "Перегляньте, змініть і вимкніть кожен ключ",
     "shortcutGroupApp": "додаток",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Не встановлено",
     "shortcutAddKey": "Додайте ключ",
     "shortcutResetOne": "Скинути до замовчування",
-    "shortcutClearKeys": "Видаліть усі ключі",
     "shortcutResetAll": "Скинути всі ярлики",
     "shortcutResetAllDesc": "Поверніть усі ключі до стандартних значень",
     "shortcutPress": "Натисніть потрібну клавішу або комбінацію",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Закрийте програму",
     "closeActionWhenBusy": "Продовжуйте працювати в треї, поки щось працює",
     "closeActionAlways": "Завжди продовжуйте працювати в лотку",
-    "closeActionNoTray": "Системний трей тут недоступний, тому програма закривається, коли її закривають",
     "gamepadNav": "Навігація геймпада",
     "gamepadNavDesc": "Переміщайтеся по програмі та керуйте гравцем за допомогою ігрового контролера",
     "trayShow": "Показати Дартоцу",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Скопіюйте деталі",
     "removePlayerTitle": "Видалити плеєр?",
     "removePlayerMessage": "Відео не можна відтворювати, доки плеєр не буде завантажено знову.",
-    "trailerLoading": "Завантаження трейлера…",
     "trailerFailed": "Не вдалося відтворити трейлер тут, відкривши його в браузері"
 }

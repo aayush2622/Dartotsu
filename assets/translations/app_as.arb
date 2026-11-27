@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "পৰিৱৰ্তনৰ সময়ত ছিঙ্ক কৰক",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub ৰ সৈতে চাইন ইন কৰক",
-    "settingsSyncSignInDesc": "ছেটিংছ আপোনাৰ একাউণ্টত এটা ব্যক্তিগত জিষ্টত সংৰক্ষণ কৰা হয়",
     "settingsSyncToken": "ব্যক্তিগত প্ৰৱেশ টোকেন ব্যৱহাৰ কৰক",
     "settingsSyncTokenDesc": "কেৱল gist অনুমতিৰ সৈতে github.com/settings/tokens ত এটা সৃষ্টি কৰক",
     "settingsSyncTokenField": "টোকেন",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "চাইন আউট কৰক",
-    "settingsSyncCode": "GitHub ত {code} সুমুৱাওক",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "আপোনাৰ ব্ৰাউজাৰত GitHub পৃষ্ঠা খোল খালে। ক'ড কপি কৰিবলৈ টেপ কৰক, বা বাতিল কৰিবলৈ টেপ কৰক আৰু ধৰি ৰাখক।",
     "settingsSyncSignInFailed": "GitHub ত চাইন ইন কৰিব পৰা নগ'ল",
-    "dcPreview": "পূৰ্বদৰ্শন",
     "dcSampleWatching": "চাই আছে",
     "dcSampleReading": "পঢ়া",
     "dcSampleBrowsing": "ব্ৰাউজিং",
     "dcSampleLive": "এই মুহূৰ্তত",
     "dcLiveNothing": "বৰ্তমান একোৱেই দেখা পোৱা নাই। এটা শিৰোনাম খুলিব, এটা খণ্ড বা এটা অধ্যায় আৰম্ভ কৰক আৰু ইয়াত দেখা যাব।",
     "dcMemberList": "সদস্য তালিকাত",
-    "dcAccount": "একাউণ্ট",
-    "dcSignIn": "Discord ৰ সৈতে চাইন ইন কৰক",
     "dcSignOut": "চাইন আউট কৰক",
-    "dcDesktopHint": "সংযোগ নকৰাকৈয়ে ডিচকৰ্ডে ডেস্কটপ এপৰ জৰিয়তে “Watching Dartotsu” দেখুৱায়। মোবাইলকে ধৰি আপোনাৰ শিৰোনামৰ নামেৰে কাৰ্য্যকলাপটোৰ নাম দিবলৈ Discord সংযোগ কৰক।",
-    "dcMobileHint": "আপুনি কি চাইছে বা পঢ়িছে তাক দেখুৱাবলৈ Discord সংযোগ কৰক। ই আপোনাৰ একাউণ্ট টোকেন নহয়, Discord’s authorize পৃষ্ঠা ব্যৱহাৰ কৰে৷",
     "dcConnect": "ডিচকৰ্ড সংযোগ কৰক",
     "dcConnectDesc": "Discord’s authorize পৃষ্ঠা খোলে আৰু অনুমোদিত এপ্প্ সমূহৰ অন্তৰ্গত Dartotsu যোগ কৰে। Discord এ আপোনাৰ উপস্থিতি আপডেট কৰিবলৈ কয়। কেৱল এটা সতেজ টোকেন সংৰক্ষণ কৰা হয়, আপোনাৰ একাউণ্ট টোকেন নহয়।",
     "dcConnectFailed": "Discord সংযোগ কৰিব পৰা নগ'ল",
@@ -254,8 +241,6 @@
     "dcMethodToken": "একাউণ্ট টোকেন",
     "dcInUse": "ব্যৱহাৰত",
     "dcRecommended": "পৰামৰ্শ দিয়া হৈছে",
-    "dcConnecting": "সংযোগ…",
-    "dcDisconnected": "সংযোগ কৰা হোৱা নাই",
     "dcSignedInAs": "{name} হিচাপে চাইন ইন কৰা হৈছে",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub ৰ পৰা মচি পেলাওক",
     "settingsSyncSecretsDeleteMessage": "ই আপোনাৰ মূলৰ পৰা ইনক্ৰিপ্ট কৰা একাউণ্টসমূহ নথিপত্ৰ আঁতৰায়। অন্য ডিভাইচসমূহে তেওঁলোকৰ চাইন-ইনসমূহ ৰাখে আৰু এটা নতুন পাছফ্ৰেজ সংহতি কৰিব পাৰে।",
     "settingsSyncWhat": "কি ছিঙ্ক কৰিব লাগে",
-    "settingsSyncServer": "চাৰ্ভাৰত",
     "settingsSyncServerEmpty": "এতিয়াও একো আপলোড কৰা হোৱা নাই",
-    "settingsSyncServerInfo": "{count} ছেটিংছ, আপলোড কৰা হৈছে {time} {device} ৰ পৰা",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "এই ডিভাইচটো",
     "settingsSyncCount": "{count, plural, =0{চাৰ্ভাৰত একো নাই} =1{চাৰ্ভাৰত 1 ছেটিং} other{চাৰ্ভাৰত {count} সংহতিসমূহ}}",
     "settingsSyncNow": "এতিয়া ছিঙ্ক কৰক",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "সমন্বয় ব্যৰ্থ: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "কেৱল সকলোতে একে কাম কৰা ছেটিংছ ছিংক কৰা হয়। একাউণ্ট, টোকেন, ফোল্ডাৰ, এক্সটেনচন, জাননী, ডিচকৰ্ড, আপডেট আৰু উইণ্ড'ৰ আকাৰ প্ৰতিটো ডিভাইচত থাকে।",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "anilist.co লিংকে এপটো খুলিবলৈ লিংক হেণ্ডলিং চালু কৰা",
     "linkSettingsFailed": "ছিষ্টেম ছেটিংছ খুলিব পৰা নগল",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "তুমি কি কৰি আছা সেয়া Discord প্ৰফাইলত দেখুওৱা। তোমাৰ Discord টোকেন লাগিব।",
-    "discordRichPresenceDesktopDesc": "তুমি কি কৰি আছা সেয়া Discord প্ৰফাইলত দেখুওৱা। Discord ডেস্কটপ এপ চলি থাকিব লাগিব।",
     "discordBrowsing": "ব্ৰাউজিং কাৰ্যকলাপ দেখুওৱা",
     "discordBrowsingDesc": "কেৱল যিটো চাই আছা বা পঢ়ি আছা সেয়া নহয়, যিটো টেব, পেজ বা প্ৰফাইলত আছা সেয়াও দেখুওৱা।",
-    "discordLookHeader": "প্ৰেজেন্সৰ চেহেৰা",
     "discordActivityType": "কাৰ্যকলাপৰ ধৰণ",
     "discordActivityTypeDesc": "Discord-এ কেনেকৈ লিখে: \"Watching …\" বা \"Playing …\"। অটোয়ে এনিমেৰ বাবে Watching আৰু বাকী সকলোবোৰৰ বাবে Playing ব্যৱহাৰ কৰে।",
     "discordWatching": "চাই আছে",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"এনিমে / মাংগা চোৱা\" আৰু \"Dartotsu খোলা\" বুটাম।",
     "discordHideTitles": "শিৰোনাম লুকুওৱা",
     "discordHideTitlesDesc": "এনিমে আৰু মাংগাৰ নাম (লগত কভাৰ আৰু লিংক) \"কিবা এটা ব্যক্তিগত\"-ৰে সলনি কৰা।",
-    "discordConnectionHeader": "সংযোগ",
     "listSearchHint": "এই তালিকাত বিচাৰা",
     "listSort": "সজোৱা",
     "listFilter": "ফিল্টাৰ",
@@ -671,8 +637,6 @@
     "listNoMatches": "এই তালিকাত একো মিলা নাই",
     "discordLogin": "Discord-ত লগইন কৰা",
     "discordToken": "Discord টোকেন",
-    "discordTokenSaved": "সংৰক্ষণ হৈছে। সলনি কৰিবলৈ টেপ কৰা, আতৰাবলৈ হেঁচি ধৰা।",
-    "discordTokenNotSet": "ছেট কৰা নাই। যোগ কৰিবলৈ টেপ কৰা।",
     "discordTokenSavedSnack": "Discord টোকেন সংৰক্ষণ হৈছে",
     "discordTokenRemovedSnack": "Discord টোকেন আতৰোৱা হৈছে",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "প্ৰাপ্তবয়স্কৰ শিৰোনাম ফিড আৰু সন্ধানৰ পৰা আতৰাই ৰাখা, আৰু তোমাৰ নিজৰ প্ৰাপ্তবয়স্ক এণ্ট্ৰিবোৰ \"লুকাই থোৱা মিডিয়া\"-ৰ তলত দেখুওৱা।",
     "kitsuAccountOptions": "Kitsu একাউণ্ট বিকল্প",
     "mangaBakaAccountOptions": "MangaBaka একাউণ্ট বিকল্প",
-    "comickAccountOptions": "কমিক একাউণ্ট বিকল্পসমূহ",
     "comickClientId": "কমিক ক্লায়েন্ট আইডি",
     "comickClientIdDesc": "comick.dev ত পঞ্জীয়ন কৰা স্বনিৰ্বাচিত ক্লায়েন্ট আইডি",
     "couldNotUpdateKitsuSettings": "তোমাৰ Kitsu ছেটিংছ আপডেট কৰিব পৰা নগল",
@@ -761,7 +724,6 @@
     "accountDetails": "একাউণ্টৰ বিৱৰণ",
     "refreshFromKitsu": "Kitsu-ৰ পৰা ৰিফ্ৰেচ কৰা",
     "simklReadOnly": "Simkl-এ কেৱল পঢ়াৰ এক্সেছ দিছে",
-    "traktReadOnly": "Trakt এ কেৱল পঢ়িব পৰা প্ৰৱেশৰ অনুমতি দিছিল",
     "incognitoEditsBlocked": "ইনকগনিট’: তালিকা সম্পাদনা বন্ধ",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ইনকগনিট’: প্ৰগ্ৰেছ সংৰক্ষণ হোৱা নাই",
@@ -786,7 +748,6 @@
     "mangaCredits": "মাংগা ক্ৰেডিট",
     "mainProductions": "মুখ্য প্ৰডাকশ্যন",
     "otherWorks": "আন কাম",
-    "prequelSequel": "প্ৰিকুৱেল আৰু ছিকুৱেল",
     "prequel": "প্ৰিক্যুৱেল",
     "sequel": "ছিকুৱেল",
     "previousSeason": "আগৰ ছিজন",
@@ -833,10 +794,7 @@
     "addToList": "তালিকাত যোগ কৰা",
     "trailer": "ট্ৰেইলাৰ",
     "trailerQuality": "ট্ৰেইলাৰৰ মানদণ্ড",
-    "titleCopied": "শিৰোনাম কপি হৈছে",
     "linkCopied": "লিংক কপি হৈছে",
-    "watchTrailer": "ট্ৰেইলাৰ চোৱা",
-    "copyTitle": "শিৰোনাম কপি কৰা",
     "detailStale": "AniList ৰ সৈতে যোগাযোগ কৰিব পৰা নগ’ল। এইটো সংৰক্ষিত তথ্য আৰু পুৰণি হ’ব পাৰে।",
     "copyLink": "লিংক কপি কৰা",
     "openInBrowser": "ব্ৰাউজাৰত খোলা",
@@ -1139,7 +1097,6 @@
     "import": "ইমপৰ্ট",
     "animeCount": "{count}টা এনিমে",
     "mangaCount": "{count}টা মাংগা",
-    "chooseSaveLocation": "বেকআপ ক’ত সংৰক্ষণ কৰিবা বাছা",
     "savedPath": "{path} সংৰক্ষণ হৈছে",
     "exportFailed": "এক্সপৰ্ট বিফল: {error}",
     "nothingInLocalLists": "তোমাৰ স্থানীয় তালিকাত এতিয়াও একো নাই।",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "লিংক খুলোঁতে সমস্যা: {error}",
     "linkCantBeOpened": "এই লিংক খুলিব নোৱাৰি: {link}",
     "linkOpenError": "লিংক খুলোঁতে সমস্যা: {error}",
-    "forReleasingTitles": "বৰ্তমান চলি থকা শিৰোনামৰ বাবে",
     "progress": "প্ৰগ্ৰেছ",
     "notes": "টোকা",
     "serviceNotFound": "\"{id}\" ছাৰ্ভিচ পোৱা নগল",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "কনফিগাৰ কৰা ৰিপোত {name} উপলব্ধ নহয়",
     "pluginFetchFailed": "প্লাগইনৰ তথ্য অনিব পৰা নগল",
     "installPluginTitle": "{name} ইনষ্টল কৰা",
-    "sizeLabel": "আকাৰ: {size}",
     "installedState": "ইনষ্টল কৰা আছে",
     "updatePluginTitle": "আপডেট {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "এপ খুলিলে আৰু প্ৰতি ৩০ মিনিটত বেকগ্ৰাউণ্ডত ফেচ আৰু ছিংক কৰা",
     "syncAddMissing": "বাদ পৰা এণ্ট্ৰি যোগ কৰা",
     "syncAddMissingDesc": "আন ছাৰ্ভিচত এতিয়াও নথকা এণ্ট্ৰিও যোগ কৰা",
-    "syncServiceOn": "{name} ৰ সৈতে সমন্বয় কৰক",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "মূল সেৱাত যি নাই সেইখিনি মচি পেলাওক",
     "syncDeleteDesc": "মূল তালিকাত নথকা অন্য সেৱাসমূহৰ পৰা প্ৰৱেশ আঁতৰাওক। কেৱল এটা শিৰোনামৰ সৈতে মিলাব পৰা প্ৰৱেশ আঁতৰোৱা হয়, গতিকে Simkl চিনেমা আৰু ধাৰাবাহিকৰ দৰে বস্তুবোৰ থাকে",
     "syncDeleteTitle": "প্ৰৱেশ মচি পেলাওক?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "মচি পেলাওক",
     "syncToDelete": "মচি পেলাবলৈ",
     "syncDeletedNote": "ডিলিট কৰা হ'ব",
-    "syncWillRemove": "{count} ৰ পৰা {name} মচি পেলোৱা হব",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "আগবাঢ়ি থকা প্ৰগ্ৰেছ ৰাখা",
     "syncOnlyForwardDesc": "যিটো ছাৰ্ভিচ আগতেই আগবাঢ়ি আছে তাৰ প্ৰগ্ৰেছ কম নকৰিবা",
     "animePlanetWontWatch": "নাচাব",
     "animePlanetWontRead": "পঢ়িব নোৱাৰিব",
-    "animePlanetAlreadyOnList": "ইতিমধ্যে এই তালিকাত আছে",
     "animePlanetNewList": "নতুন তালিকাৰ নাম",
     "syncPrivate": "ব্যক্তিগত প্ৰৱেশ পত্ৰ",
     "syncPrivateDesc": "আপুনি ব্যক্তিগতভাৱে ৰখা প্ৰৱেশৰ সৈতে কি কৰিব। ব্যক্তিগত বিকল্প থকা এটা সেৱাই তেওঁলোকক ব্যক্তিগত কৰে; আন কিছুমানে সেইবোৰ ৰাজহুৱাভাৱে দেখুৱাব",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "ক্লিয়াৰেন্স আন এজন ইউজাৰ এজেণ্টৰ সৈতে লাভ কৰা হৈছিল, গতিকে পঠোৱা নহয়। নতুন এটা পাবলৈ সংযোগটো পৰীক্ষা কৰক",
-    "watchSectionConnection": "সংযোগ",
     "watchSectionSession": "অধিবেশন",
     "watchSectionTools": "সঁজুলি",
     "watchMetaSource": "পৰ্বৰ বিৱৰণ ক’ৰ পৰা",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "কোনটো ষ্ট্ৰীম ডাউনলোড কৰিবা?",
     "downloadPickSubtitle": "কোনবোৰ ছাবটাইটেল ডাউনলোড কৰক?",
     "downloadPickAudio": "কোনটো অডিঅ’ ট্ৰেক ডাউনলোড কৰিবা?",
-    "downloadNoAudio": "অতিৰিক্ত অডিঅ’ নাই",
     "downloadAudio": "অডিঅ’",
-    "downloadNoSubtitle": "ছাবটাইটেল নাই",
     "downloadHlsNeedsFfmpeg": "এই ষ্ট্ৰীমটো এটা HLS প্লেলিষ্ট। ডাউনলোড কৰিবলৈ FFmpeg এড-অন লাগিব।",
     "downloadSourceMissing": "এই পৰ্বৰ উৎস ইনষ্টল কৰা নাই",
     "downloadDashDrm": "এই ষ্ট্ৰিমটো DRM সুৰক্ষিত",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ভাষা আৰু আচৰণ",
     "generalSectionSecurity": "নিৰাপত্তা",
     "generalSectionPrivacy": "গোপনীয়তা",
-    "notificationsOtherService": "এইটো খোলিবলৈ {service} লৈ সলনি কৰক",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "ডিফল্ট গতি, অটো প্লে, ভিডিঅ' ফিট, অৰিয়েণ্টেচন আৰু ছবিত ছবি",
     "secPlayerSkip": "খোলা, অন্ত আৰু পুনৰাবৃত্তি স্বয়ংক্ৰিয়ভাৱে এৰি দিয়ক",
     "secPlayerControls": "ইংগিতসমূহ চুইপ, ধৰি ৰাখক আৰু টেপ কৰক আৰু পূৰ্বদৰ্শন বিচাৰক",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "অপেক্ষা কৰি আছে",
     "stepChecking": "চেক কৰি আছে…",
     "stepUpToDate": "আপ টু ডেট",
     "stepUpToDateWith": "শেহতীয়াকৈ · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "মাংগা",
     "readerCloudflare": "ব্ৰাউজাৰত খোলক (ক্লাউডফ্লেয়াৰ পৰীক্ষা)",
     "badgeBoardHint": "প্ৰথম কাৰ্ডৰ এটা চুকত এটা বেজ টানিব, বা ইয়াক লৰচৰ কৰিবলৈ ইতিমধ্যে ইয়াত থকা এটা বেজ টানিব। বেজে ঠাই সলনি কৰে, গতিকে কোনোটোৱেই কেতিয়াও ওভাৰলেপ নহয়। ইয়াক অন বা অফ কৰিবলৈ তলৰ এটা বেজ টেপ কৰক।",
-    "statusAuto": "অটো",
     "unreadCounter": "অপৰিড কাউণ্টাৰ",
-    "unreadCounterDesc": "পোষ্টাৰত কিমান খণ্ড বা অধ্যায় বাকী আছে দেখুৱাওক",
     "settingsShortcuts": "কিবৰ্ড চৰ্টকাটসমূহ",
     "settingsShortcutsDesc": "প্ৰতিটো কি চাওক, সলনি কৰক আৰু বন্ধ কৰক",
     "shortcutGroupApp": "এপ",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "ছেট কৰা হোৱা নাই",
     "shortcutAddKey": "এটা চাবি যোগ কৰক",
     "shortcutResetOne": "অবিকল্পিতলৈ পুনৰায় সেট কৰক",
-    "shortcutClearKeys": "সকলো কি' আঁতৰাওক",
     "shortcutResetAll": "সকলো চৰ্টকাট পুনৰায় সেট কৰক",
     "shortcutResetAllDesc": "প্ৰতিটো কি'ক ইয়াৰ অবিকল্পিতলৈ ঘূৰাই দিয়ক",
     "shortcutPress": "আপুনি বিচৰা কি' বা সংমিশ্ৰণ টিপক",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "এপটো এৰি দিয়ক",
     "closeActionWhenBusy": "কিবা এটা চলি থকাৰ সময়ত ট্ৰেত চলি থাকিব",
     "closeActionAlways": "সদায় ট্ৰেত চলি থাকিব",
-    "closeActionNoTray": "ইয়াত চিষ্টেম ট্ৰে উপলব্ধ নহয়, গতিকে বন্ধ হ’লে এপটো বন্ধ হৈ যায়",
     "gamepadNav": "গেমপেড নেভিগেচন",
     "gamepadNavDesc": "এপটোৰ চাৰিওফালে ঘূৰি ফুৰক আৰু গেম কন্ট্ৰ’লাৰৰ সহায়ত খেলুৱৈক নিয়ন্ত্ৰণ কৰক",
     "trayShow": "Dartotsu দেখুৱাওক",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "বিৱৰণ কপি কৰক",
     "removePlayerTitle": "খেলুৱৈক আঁতৰাই পেলাব?",
     "removePlayerMessage": "প্লেয়াৰটো পুনৰ ডাউনলোড নোহোৱালৈকে ভিডিঅ’বোৰ চলিব নোৱাৰিব।",
-    "trailerLoading": "ট্ৰেইলাৰ লোড কৰা হৈছে…",
     "trailerFailed": "ইয়াত ট্ৰেইলাৰটো বজাব পৰা নগ’ল, ব্ৰাউজাৰত খুলিলে"
 }

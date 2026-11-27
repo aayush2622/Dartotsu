@@ -412,9 +412,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub でサインインする';
 
   @override
-  String get settingsSyncSignInDesc => '設定はアカウントのプライベート Gist に保存されます';
-
-  @override
   String get settingsSyncToken => '個人用アクセス トークンを使用する';
 
   @override
@@ -433,19 +430,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsSyncSignOut => 'サインアウト';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub で $code と入力します';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'ブラウザで GitHub ページが開きました。タップしてコードをコピーするか、長押ししてキャンセルします。';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub にサインインできませんでした';
-
-  @override
-  String get dcPreview => 'プレビュー';
 
   @override
   String get dcSampleWatching => '見てる';
@@ -467,21 +452,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dcMemberList => 'メンバーリストには';
 
   @override
-  String get dcAccount => 'アカウント';
-
-  @override
-  String get dcSignIn => 'Discordでサインインする';
-
-  @override
   String get dcSignOut => 'サインアウト';
-
-  @override
-  String get dcDesktopHint =>
-      'Discordは接続しないとデスクトップアプリで「ダートツを見る」が表示されます。 Discord に接続して、モバイルを含め、タイトルに基づいてアクティビティに名前を付けます。';
-
-  @override
-  String get dcMobileHint =>
-      'Discord に接続して、見ているものや読んでいるものを表示します。アカウントトークンではなく、Discordの認証ページを使用します。';
 
   @override
   String get dcConnect => 'Discordに接続する';
@@ -704,12 +675,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get dcRecommended => 'おすすめ';
 
   @override
-  String get dcConnecting => '接続中…';
-
-  @override
-  String get dcDisconnected => '接続されていません';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name としてサインインしています';
   }
@@ -898,15 +863,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get settingsSyncWhat => '何を同期するか';
 
   @override
-  String get settingsSyncServer => 'サーバー上で';
-
-  @override
   String get settingsSyncServerEmpty => 'まだ何もアップロードされていません';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count 設定、$device から $time をアップロードしました';
-  }
 
   @override
   String get settingsSyncThisDevice => 'このデバイス';
@@ -935,11 +892,6 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return '最後に同期したのは $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return '同期に失敗しました: $error';
   }
 
   @override
@@ -1695,22 +1647,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Discordのプロフィールに今やってることを表示するよ。Discordトークンが必要。';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Discordのプロフィールに今やってることを表示するよ。Discordのデスクトップアプリを起動しておく必要があるよ。';
-
-  @override
   String get discordBrowsing => '閲覧中の画面も表示';
 
   @override
   String get discordBrowsingDesc =>
       '見たり読んだりしてる作品だけでなく、開いてるタブ、ページ、プロフィールも表示するよ。';
-
-  @override
-  String get discordLookHeader => 'プレゼンスの見た目';
 
   @override
   String get discordActivityType => 'アクティビティの種類';
@@ -1748,9 +1689,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get discordHideTitlesDesc => 'アニメやマンガの名前（とカバー、リンク）を「ひみつ」に置き換えるよ。';
-
-  @override
-  String get discordConnectionHeader => '接続';
 
   @override
   String get listSearchHint => 'このリストを検索';
@@ -1808,12 +1746,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get discordToken => 'Discordトークン';
-
-  @override
-  String get discordTokenSaved => '保存済み。タップで置き換え、長押しで削除。';
-
-  @override
-  String get discordTokenNotSet => '未設定。タップで追加。';
 
   @override
   String get discordTokenSavedSnack => 'Discordトークンを保存したよ';
@@ -2008,9 +1940,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBakaアカウントの設定';
 
   @override
-  String get comickAccountOptions => 'Comick アカウントのオプション';
-
-  @override
   String get comickClientId => 'ComickクライアントID';
 
   @override
@@ -2101,9 +2030,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get simklReadOnly => 'Simklの読み取り専用アクセスを許可したよ';
 
   @override
-  String get traktReadOnly => 'Trakt に読み取り専用アクセスが許可されました';
-
-  @override
   String get incognitoEditsBlocked => 'シークレット：リストの編集はブロック中';
 
   @override
@@ -2182,9 +2108,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get otherWorks => 'その他の作品';
-
-  @override
-  String get prequelSequel => '前日譚＆続編';
 
   @override
   String get prequel => '前編';
@@ -2325,16 +2248,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get trailerQuality => 'トレーラーの品質';
 
   @override
-  String get titleCopied => 'タイトルをコピーしたよ';
-
-  @override
   String get linkCopied => 'リンクをコピーしたよ';
-
-  @override
-  String get watchTrailer => '予告編を見る';
-
-  @override
-  String get copyTitle => 'タイトルをコピー';
 
   @override
   String get detailStale => 'AniList に到達できませんでした。これは保存された情報なので、古い可能性があります。';
@@ -3305,9 +3219,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'バックアップの保存先を選択';
-
-  @override
   String savedPath(String path) {
     return '$pathに保存したよ';
   }
@@ -3873,9 +3784,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => '現在連載中の作品向け';
-
-  @override
   String get progress => '進捗';
 
   @override
@@ -4077,11 +3985,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'サイズ：$size';
-  }
-
-  @override
   String get installedState => 'インストール済み';
 
   @override
@@ -4178,11 +4081,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get syncAddMissingDesc => 'もう一方のサービスにまだない作品も追加するよ';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name と同期する';
-  }
-
-  @override
   String get syncDelete => 'メインサービスにないものは削除する';
 
   @override
@@ -4213,11 +4111,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get syncDeletedNote => '削除されます';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count は $name から削除されます';
-  }
-
-  @override
   String get syncOnlyForward => '進んでる進捗は維持';
 
   @override
@@ -4228,9 +4121,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => '読まない';
-
-  @override
-  String get animePlanetAlreadyOnList => 'すでにこのリストに載っています';
 
   @override
   String get animePlanetNewList => '新しいリスト名';
@@ -5538,9 +5428,6 @@ class AppLocalizationsJa extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'クリアランスは別のユーザー エージェントで取得されたため、送信されません。接続をテストして新しい接続を取得します';
-
-  @override
-  String get watchSectionConnection => '接続';
 
   @override
   String get watchSectionSession => 'セッション';
@@ -7356,13 +7243,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get downloadPickAudio => 'どの音声トラックをダウンロードする？';
 
   @override
-  String get downloadNoAudio => '追加の音声なし';
-
-  @override
   String get downloadAudio => '音声';
-
-  @override
-  String get downloadNoSubtitle => '字幕なし';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8174,11 +8055,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get generalSectionPrivacy => 'プライバシー';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'これを開くには $service に切り替えてください';
-  }
-
-  @override
   String get secPlayerPlayback => 'デフォルトの速度、自動再生、ビデオフィット、向き、ピクチャーインピクチャー';
 
   @override
@@ -8481,9 +8357,6 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => '待っています';
-
-  @override
   String get stepChecking => '確認中…';
 
   @override
@@ -8553,13 +8426,7 @@ class AppLocalizationsJa extends AppLocalizations {
       'バッジを最初のカードの隅にドラッグするか、すでにカード上にあるバッジをドラッグして移動します。バッジの位置が入れ替わるので、バッジが重なることはありません。下のバッジをタップしてオンまたはオフにします。';
 
   @override
-  String get statusAuto => '自動';
-
-  @override
   String get unreadCounter => '未読カウンター';
-
-  @override
-  String get unreadCounterDesc => 'ポスターにエピソードまたはチャプターが何回残っているかを表示する';
 
   @override
   String get settingsShortcuts => 'キーボードショートカット';
@@ -8596,9 +8463,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'デフォルトにリセットする';
-
-  @override
-  String get shortcutClearKeys => 'すべてのキーを削除します';
 
   @override
   String get shortcutResetAll => 'すべてのショートカットをリセット';
@@ -8784,9 +8648,6 @@ class AppLocalizationsJa extends AppLocalizations {
   String get closeActionAlways => '常にトレイ内で実行し続ける';
 
   @override
-  String get closeActionNoTray => 'ここではシステム トレイを使用できないため、アプリを閉じると終了します';
-
-  @override
   String get gamepadNav => 'ゲームパッドナビゲーション';
 
   @override
@@ -8858,9 +8719,6 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get removePlayerMessage => 'プレーヤーを再度ダウンロードするまでビデオを再生できません。';
-
-  @override
-  String get trailerLoading => 'トレーラーを積み込んでいます…';
 
   @override
   String get trailerFailed => 'ブラウザで開いているため、ここではトレーラーを再生できませんでした';

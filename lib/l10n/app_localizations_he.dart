@@ -417,9 +417,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get settingsSyncSignIn => 'היכנס באמצעות GitHub';
 
   @override
-  String get settingsSyncSignInDesc => 'ההגדרות מאוחסנות בתמצית פרטית בחשבונך';
-
-  @override
   String get settingsSyncToken => 'השתמש באסימון גישה אישי';
 
   @override
@@ -438,19 +435,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get settingsSyncSignOut => 'צא';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'הזן $code ב- GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'דף GitHub נפתח בדפדפן שלך. הקש כדי להעתיק את הקוד, או הקש והחזק כדי לבטל.';
-
-  @override
   String get settingsSyncSignInFailed => 'לא ניתן להיכנס ל-GitHub';
-
-  @override
-  String get dcPreview => 'תצוגה מקדימה';
 
   @override
   String get dcSampleWatching => 'צופה';
@@ -472,21 +457,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dcMemberList => 'ברשימת החברים';
 
   @override
-  String get dcAccount => 'חשבון';
-
-  @override
-  String get dcSignIn => 'היכנס באמצעות דיסקורד';
-
-  @override
   String get dcSignOut => 'צא';
-
-  @override
-  String get dcDesktopHint =>
-      'בלי להתחבר, דיסקורד מציג את \"צופה בדרטוצו\" דרך אפליקציית שולחן העבודה. חבר את Discord כדי לקרוא לפעילות על שם הכותרת שלך, כולל בנייד.';
-
-  @override
-  String get dcMobileHint =>
-      'חבר את דיסקורד כדי להראות מה אתה צופה או קורא. הוא משתמש בדף ההרשאה של Discord, לא באסימון החשבון שלך.';
 
   @override
   String get dcConnect => 'חבר דיסקורד';
@@ -710,12 +681,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get dcRecommended => 'מומלץ';
 
   @override
-  String get dcConnecting => 'מתחבר...';
-
-  @override
-  String get dcDisconnected => 'לא מחובר';
-
-  @override
   String dcSignedInAs(String name) {
     return 'מחובר בתור $name';
   }
@@ -908,15 +873,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get settingsSyncWhat => 'מה לסנכרן';
 
   @override
-  String get settingsSyncServer => 'על השרת';
-
-  @override
   String get settingsSyncServerEmpty => 'עדיין לא הועלה כלום';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return 'הגדרות $count, הועלה $time מ$device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'המכשיר הזה';
@@ -945,11 +902,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'סנכרון אחרון $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'סנכרון נכשל: $error';
   }
 
   @override
@@ -1717,22 +1669,11 @@ class AppLocalizationsHe extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'הצג בפרופיל ה-Discord שלך מה אתה עושה. צריך את הטוקן של Discord.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'הצג בפרופיל ה-Discord שלך מה אתה עושה. אפליקציית Discord לדסקטופ צריכה לרוץ.';
-
-  @override
   String get discordBrowsing => 'הצג פעילות גלישה';
 
   @override
   String get discordBrowsingDesc =>
       'הצג גם את הלשונית, הדף או הפרופיל שאתה צופה בהם, לא רק מה שאתה רואה או קורא.';
-
-  @override
-  String get discordLookHeader => 'מראה הנוכחות';
 
   @override
   String get discordActivityType => 'סוג פעילות';
@@ -1772,9 +1713,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'מחליף שמות של אנימה ומנגה (ואת הכריכה והקישור שלהן) ב\"משהו פרטי\".';
-
-  @override
-  String get discordConnectionHeader => 'חיבור';
 
   @override
   String get listSearchHint => 'חפש ברשימה הזו';
@@ -1832,12 +1770,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get discordToken => 'טוקן Discord';
-
-  @override
-  String get discordTokenSaved => 'נשמר. הקש להחלפה, לחיצה ארוכה להסרה.';
-
-  @override
-  String get discordTokenNotSet => 'לא הוגדר. הקש להוספה.';
 
   @override
   String get discordTokenSavedSnack => 'טוקן Discord נשמר';
@@ -2035,9 +1967,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get mangaBakaAccountOptions => 'אפשרויות חשבון MangaBaka';
 
   @override
-  String get comickAccountOptions => 'אפשרויות חשבון קומיק';
-
-  @override
   String get comickClientId => 'זיהוי לקוח של קומיק';
 
   @override
@@ -2129,9 +2058,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get simklReadOnly => 'ל-Simkl ניתנה גישת קריאה בלבד';
 
   @override
-  String get traktReadOnly => 'Trakt העניקה גישת קריאה בלבד';
-
-  @override
   String get incognitoEditsBlocked => 'גלישה בסתר: עריכות רשימה חסומות';
 
   @override
@@ -2211,9 +2137,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get otherWorks => 'עבודות אחרות';
-
-  @override
-  String get prequelSequel => 'פריקוול וסיקוול';
 
   @override
   String get prequel => 'Prequel';
@@ -2357,16 +2280,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get trailerQuality => 'איכות טריילר';
 
   @override
-  String get titleCopied => 'הכותרת הועתקה';
-
-  @override
   String get linkCopied => 'הקישור הועתק';
-
-  @override
-  String get watchTrailer => 'צפה בטריילר';
-
-  @override
-  String get copyTitle => 'העתק כותרת';
 
   @override
   String get detailStale =>
@@ -3347,9 +3261,6 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'בחר איפה לשמור את הגיבוי';
-
-  @override
   String savedPath(String path) {
     return 'נשמר $path';
   }
@@ -3918,9 +3829,6 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'לכותרים שמשודרים כעת';
-
-  @override
   String get progress => 'התקדמות';
 
   @override
@@ -4125,11 +4033,6 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'גודל: $size';
-  }
-
-  @override
   String get installedState => 'מותקן';
 
   @override
@@ -4226,11 +4129,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get syncAddMissingDesc => 'הוסף גם ערכים שעוד לא קיימים בשירות השני';
 
   @override
-  String syncServiceOn(String name) {
-    return 'סנכרון עם $name';
-  }
-
-  @override
   String get syncDelete => 'מחק את מה שאין בשירות הראשי';
 
   @override
@@ -4261,11 +4159,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get syncDeletedNote => 'יימחק';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count יימחק מ$name';
-  }
-
-  @override
   String get syncOnlyForward => 'שמור על התקדמות רחוקה יותר';
 
   @override
@@ -4276,9 +4169,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'לא יקרא';
-
-  @override
-  String get animePlanetAlreadyOnList => 'כבר ברשימה הזו';
 
   @override
   String get animePlanetNewList => 'שם רשימה חדש';
@@ -5613,9 +5503,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'האישור התקבל עם סוכן משתמש אחר, ולכן הוא לא נשלח. בדוק את החיבור כדי לקבל חיבור חדש';
-
-  @override
-  String get watchSectionConnection => 'חיבור';
 
   @override
   String get watchSectionSession => 'מושב';
@@ -7460,13 +7347,7 @@ class AppLocalizationsHe extends AppLocalizations {
   String get downloadPickAudio => 'איזה ערוץ אודיו להוריד?';
 
   @override
-  String get downloadNoAudio => 'בלי אודיו נוסף';
-
-  @override
   String get downloadAudio => 'אודיו';
-
-  @override
-  String get downloadNoSubtitle => 'בלי כתוביות';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8292,11 +8173,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get generalSectionPrivacy => 'פרטיות';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'עבור אל $service כדי לפתוח את זה';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'מהירות ברירת מחדל, הפעלה אוטומטית, התאמה של וידאו, כיוון ותמונה בתמונה';
 
@@ -8604,9 +8480,6 @@ class AppLocalizationsHe extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'מחכה';
-
-  @override
   String get stepChecking => 'בודק...';
 
   @override
@@ -8676,13 +8549,7 @@ class AppLocalizationsHe extends AppLocalizations {
       'גרור תג לפינה של הקלף הראשון, או גרור תג שכבר נמצא עליו כדי להזיז אותו. תגים מחליפים מקומות, כך שאף אחד לא חופף. הקש על תג למטה כדי להפעיל או לכבות אותו.';
 
   @override
-  String get statusAuto => 'אוטומטי';
-
-  @override
   String get unreadCounter => 'מונה שלא נקרא';
-
-  @override
-  String get unreadCounterDesc => 'הראה כמה פרקים או פרקים נותרו בפוסטרים';
 
   @override
   String get settingsShortcuts => 'קיצורי מקלדת';
@@ -8719,9 +8586,6 @@ class AppLocalizationsHe extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'אפס לברירת המחדל';
-
-  @override
-  String get shortcutClearKeys => 'הסר את כל המפתחות';
 
   @override
   String get shortcutResetAll => 'אפס את כל קיצורי הדרך';
@@ -8907,10 +8771,6 @@ class AppLocalizationsHe extends AppLocalizations {
   String get closeActionAlways => 'תמיד המשיכו לרוץ במגש';
 
   @override
-  String get closeActionNoTray =>
-      'מגש המערכת אינו זמין כאן, כך שהאפליקציה נסגרת כאשר היא סגורה';
-
-  @override
   String get gamepadNav => 'ניווט ב-Gamepad';
 
   @override
@@ -8983,9 +8843,6 @@ class AppLocalizationsHe extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'לא ניתן להפעיל סרטונים עד שהנגן יוריד שוב.';
-
-  @override
-  String get trailerLoading => 'טוען את הטריילר...';
 
   @override
   String get trailerFailed => 'לא ניתן להפעיל את הטריילר כאן, פותח אותו בדפדפן';

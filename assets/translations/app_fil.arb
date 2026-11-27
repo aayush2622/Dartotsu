@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "I-sync sa pagbabago",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Mag-sign in gamit ang GitHub",
-    "settingsSyncSignInDesc": "Ang mga setting ay naka-imbak sa isang pribadong diwa sa iyong account",
     "settingsSyncToken": "Gumamit ng personal na access token",
     "settingsSyncTokenDesc": "Lumikha ng isa sa github.com/settings/tokens na may pahintulot lamang",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Mag-sign out",
-    "settingsSyncCode": "Ilagay ang {code} sa GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Binuksan ang pahina ng GitHub sa iyong browser. I-tap para kopyahin ang code, o i-tap at i-hold para kanselahin.",
     "settingsSyncSignInFailed": "Hindi makapag-sign in sa GitHub",
-    "dcPreview": "Silipin",
     "dcSampleWatching": "Nanonood",
     "dcSampleReading": "Nagbabasa",
     "dcSampleBrowsing": "Nagba-browse",
     "dcSampleLive": "Sa ngayon",
     "dcLiveNothing": "Walang nagpapakita sa ngayon. Magbukas ng pamagat, magsimula ng isang episode o isang kabanata at lalabas ito dito.",
     "dcMemberList": "Sa listahan ng miyembro",
-    "dcAccount": "Account",
-    "dcSignIn": "Mag-sign in gamit ang Discord",
     "dcSignOut": "Mag-sign out",
-    "dcDesktopHint": "Nang hindi kumokonekta, ipinapakita ng Discord ang \"Panonood ng Dartotsu\" sa pamamagitan ng desktop app. Ikonekta ang Discord upang pangalanan ang aktibidad pagkatapos ng iyong pamagat, kabilang ang sa mobile.",
-    "dcMobileHint": "Ikonekta ang Discord upang ipakita kung ano ang iyong pinapanood o binabasa. Ginagamit nito ang pahina ng awtorisasyon ng Discord, hindi ang token ng iyong account.",
     "dcConnect": "Ikonekta ang Discord",
     "dcConnectDesc": "Binubuksan ang pahina ng awtorisasyon ng Discord at idinagdag ang Dartotsu sa ilalim ng Awtorisadong Apps. Hinihiling ng Discord na i-update ang iyong presensya. Isang refresh token lang ang nai-save, hindi ang iyong account token.",
     "dcConnectFailed": "Hindi maikonekta ang Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Token ng account",
     "dcInUse": "Ginagamit",
     "dcRecommended": "Inirerekomenda",
-    "dcConnecting": "Kumokonekta…",
-    "dcDisconnected": "Hindi konektado",
     "dcSignedInAs": "Naka-sign in bilang {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Tanggalin mula sa GitHub",
     "settingsSyncSecretsDeleteMessage": "Inaalis nito ang naka-encrypt na file ng mga account mula sa iyong diwa. Pinapanatili ng ibang mga device ang kanilang mga pag-sign in at maaaring magtakda ng bagong passphrase.",
     "settingsSyncWhat": "Ano ang isi-sync",
-    "settingsSyncServer": "Sa server",
     "settingsSyncServerEmpty": "Wala pang na-upload",
-    "settingsSyncServerInfo": "{count} setting, na-upload {time} mula sa {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "ang device na ito",
     "settingsSyncCount": "{count, plural, =0{Wala sa server} =1{1 setting sa server} other{{count} na mga setting sa server}}",
     "settingsSyncNow": "I-sync ngayon",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Nabigo ang pag-sync: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Ang mga setting lang na gumagana sa lahat ng dako ang naka-sync. Ang mga account, token, folder, extension, notification, Discord, update at laki ng window ay nananatili sa bawat device.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "I-on ang link handling para magbukas ng app ang mga anilist.co link",
     "linkSettingsFailed": "Hindi mabuksan ang system settings",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Ipakita sa Discord profile mo ang ginagawa mo. Kailangan ang Discord token mo.",
-    "discordRichPresenceDesktopDesc": "Ipakita sa Discord profile mo ang ginagawa mo. Kailangang tumatakbo ang Discord desktop app.",
     "discordBrowsing": "Ipakita ang browsing activity",
     "discordBrowsingDesc": "Ipakita rin ang tab, page o profile na tinitingnan mo, hindi lang ang pinapanood o binabasa mo.",
-    "discordLookHeader": "Itsura ng presence",
     "discordActivityType": "Uri ng activity",
     "discordActivityTypeDesc": "Kung paano ito isinusulat ng Discord: \"Watching …\" o \"Playing …\". Ang Auto ay gumagamit ng Watching para sa anime at Playing para sa iba pa.",
     "discordWatching": "Nanonood",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Mga button na \"View anime / manga\" at \"Open Dartotsu\".",
     "discordHideTitles": "Itago ang mga title",
     "discordHideTitlesDesc": "Palitan ng \"Something private\" ang mga pangalan ng anime at manga (pati cover at link).",
-    "discordConnectionHeader": "Koneksyon",
     "listSearchHint": "Hanapin sa listahang ito",
     "listSort": "Ayusin",
     "listFilter": "I-filter",
@@ -671,8 +637,6 @@
     "listNoMatches": "Walang tumutugma sa listahang ito",
     "discordLogin": "Mag-login sa Discord",
     "discordToken": "Discord token",
-    "discordTokenSaved": "Na-save. I-tap para palitan, pindutin nang matagal para tanggalin.",
-    "discordTokenNotSet": "Wala pa. I-tap para magdagdag.",
     "discordTokenSavedSnack": "Na-save ang Discord token",
     "discordTokenRemovedSnack": "Natanggal ang Discord token",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Ilayo ang mga pang-adult na title sa mga feed at search, at ilista ang sarili mong pang-adult na entry sa Hidden Media.",
     "kitsuAccountOptions": "Mga opsyon ng Kitsu account",
     "mangaBakaAccountOptions": "Mga option ng MangaBaka account",
-    "comickAccountOptions": "Mga pagpipilian sa comick account",
     "comickClientId": "Comick Client ID",
     "comickClientIdDesc": "Custom na client ID na nakarehistro sa comick.dev",
     "couldNotUpdateKitsuSettings": "Hindi ma-update ang Kitsu settings mo",
@@ -761,7 +724,6 @@
     "accountDetails": "Mga detalye ng account",
     "refreshFromKitsu": "I-refresh mula sa Kitsu",
     "simklReadOnly": "Read-only access ang binigay ng Simkl",
-    "traktReadOnly": "Ang Trakt ay nagbigay ng read-only na access",
     "incognitoEditsBlocked": "Incognito: bawal mag-edit ng listahan",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Incognito: hindi na-save ang progress",
@@ -786,7 +748,6 @@
     "mangaCredits": "Mga credit sa manga",
     "mainProductions": "Mga pangunahing production",
     "otherWorks": "Iba pang gawa",
-    "prequelSequel": "Prequel at Sequel",
     "prequel": "Prequel",
     "sequel": "Karugtong",
     "previousSeason": "Nakaraang season",
@@ -833,10 +794,7 @@
     "addToList": "Idagdag sa listahan",
     "trailer": "Trailer",
     "trailerQuality": "Kalidad ng trailer",
-    "titleCopied": "Nakopya ang title",
     "linkCopied": "Nakopya ang link",
-    "watchTrailer": "Panoorin ang trailer",
-    "copyTitle": "Kopyahin ang title",
     "detailStale": "Hindi maabot ang AniList. Ito ay naka-save na impormasyon at maaaring luma na.",
     "copyLink": "Kopyahin ang link",
     "openInBrowser": "Buksan sa browser",
@@ -1139,7 +1097,6 @@
     "import": "I-import",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Pumili kung saan ise-save ang backup",
     "savedPath": "Na-save ang {path}",
     "exportFailed": "Pumalya ang export: {error}",
     "nothingInLocalLists": "Wala pang laman ang mga lokal na listahan mo.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "May error sa pagbukas ng link: {error}",
     "linkCantBeOpened": "Hindi mabuksan ang link na ito: {link}",
     "linkOpenError": "May error sa pagbukas ng link: {error}",
-    "forReleasingTitles": "para sa mga title na kasalukuyang umeere",
     "progress": "Pag-unlad",
     "notes": "Mga tala",
     "serviceNotFound": "Hindi nahanap ang service na \"{id}\"",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "Hindi available ang {name} sa naka-configure na repo",
     "pluginFetchFailed": "Hindi makuha ang info ng plugin",
     "installPluginTitle": "I-install ang {name}",
-    "sizeLabel": "Laki: {size}",
     "installedState": "Naka-install",
     "updatePluginTitle": "Update {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Mag-fetch at mag-sync sa background kapag binubuksan ang app at kada 30 minuto",
     "syncAddMissing": "Idagdag ang mga kulang na entry",
     "syncAddMissingDesc": "Idagdag din ang mga entry na wala pa sa kabilang service",
-    "syncServiceOn": "I-sync sa {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Tanggalin kung ano ang wala sa pangunahing serbisyo",
     "syncDeleteDesc": "Alisin ang mga entry mula sa iba pang mga serbisyo na wala sa pangunahing listahan. Ang mga entry lang na maaaring itugma sa isang pamagat ang aalisin, kaya nananatili ang mga bagay tulad ng mga pelikula at serye ng Simkl",
     "syncDeleteTitle": "Tanggalin ang mga entry?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Tanggalin",
     "syncToDelete": "Upang tanggalin",
     "syncDeletedNote": "Matatanggal",
-    "syncWillRemove": "{count} ay tatanggalin mula sa {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Panatilihin ang mas mataas na progress",
     "syncOnlyForwardDesc": "Huwag babaan ang progress ng service na mas nauuna na",
     "animePlanetWontWatch": "Hindi manonood",
     "animePlanetWontRead": "Hindi magbabasa",
-    "animePlanetAlreadyOnList": "Nasa listahan na ito",
     "animePlanetNewList": "Bagong pangalan ng listahan",
     "syncPrivate": "Mga pribadong entry",
     "syncPrivateDesc": "Ano ang gagawin sa mga entry na pinapanatili mong pribado. Ang isang serbisyo na may pribadong opsyon ay nagiging pribado sa kanila; ang iba ay magpapakita sa kanila sa publiko",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Nakuha ang clearance sa ibang user agent, kaya hindi ito naipadala. Subukan ang koneksyon upang makakuha ng bago",
-    "watchSectionConnection": "Koneksyon",
     "watchSectionSession": "Sesyon",
     "watchSectionTools": "Mga gamit",
     "watchMetaSource": "Detalye ng episode mula sa",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Aling stream ang ida-download?",
     "downloadPickSubtitle": "Aling subtitle ang ida-download?",
     "downloadPickAudio": "Aling audio track ang ida-download?",
-    "downloadNoAudio": "Walang dagdag na audio",
     "downloadAudio": "Audio",
-    "downloadNoSubtitle": "Walang subtitle",
     "downloadHlsNeedsFfmpeg": "HLS playlist ang stream na ito. Kailangan ng FFmpeg addon para ma-download ito.",
     "downloadSourceMissing": "Hindi naka-install ang source para sa episode na ito",
     "downloadDashDrm": "Ang stream na ito ay protektado ng DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Wika at pag-uugali",
     "generalSectionSecurity": "Seguridad",
     "generalSectionPrivacy": "Pagkapribado",
-    "notificationsOtherService": "Lumipat sa {service} upang buksan ito",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Default na bilis, auto play, video fit, oryentasyon at larawan sa larawan",
     "secPlayerSkip": "Awtomatikong laktawan ang mga opening, ending at recaps",
     "secPlayerControls": "Mag-swipe, hawakan at i-tap ang mga galaw at humanap ng preview",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Naghihintay",
     "stepChecking": "Sinusuri…",
     "stepUpToDate": "Napapanahon",
     "stepUpToDateWith": "Napapanahon · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Buksan sa browser (Cloudflare check)",
     "badgeBoardHint": "I-drag ang isang badge sa isang sulok ng unang card, o i-drag ang isang badge na nasa ibabaw nito upang ilipat ito. Ang mga badge ay nagpapalitan ng mga lugar, kaya walang nagsasapawan. Mag-tap ng badge sa ibaba para i-on o i-off ito.",
-    "statusAuto": "Auto",
     "unreadCounter": "Hindi pa nababasang counter",
-    "unreadCounterDesc": "Ipakita kung ilang episode o kabanata ang natitira sa mga poster",
     "settingsShortcuts": "Mga keyboard shortcut",
     "settingsShortcutsDesc": "Tingnan, baguhin at i-off ang bawat susi",
     "shortcutGroupApp": "App",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Hindi nakatakda",
     "shortcutAddKey": "Magdagdag ng susi",
     "shortcutResetOne": "I-reset sa default",
-    "shortcutClearKeys": "Alisin ang lahat ng mga susi",
     "shortcutResetAll": "I-reset ang lahat ng mga shortcut",
     "shortcutResetAllDesc": "Ibalik ang bawat key sa default nito",
     "shortcutPress": "Pindutin ang key o kumbinasyon na gusto mo",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Isara ang app",
     "closeActionWhenBusy": "Patuloy na tumakbo sa tray habang may tumatakbo",
     "closeActionAlways": "Palaging ituloy ang pagtakbo sa tray",
-    "closeActionNoTray": "Hindi available ang system tray dito, kaya huminto ang app kapag isinara",
     "gamepadNav": "Gamepad nabigasyon",
     "gamepadNavDesc": "Lumipat sa app at kontrolin ang player gamit ang isang controller ng laro",
     "trayShow": "Ipakita ang Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Kopyahin ang mga detalye",
     "removePlayerTitle": "Alisin ang player?",
     "removePlayerMessage": "Hindi mape-play ang mga video hanggang sa ma-download muli ang player.",
-    "trailerLoading": "Nilo-load ang trailer…",
     "trailerFailed": "Hindi ma-play ang trailer dito, binubuksan ito sa browser"
 }

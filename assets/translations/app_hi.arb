@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "परिवर्तन पर सिंक करें",
     "settingsSyncModeGithub": "गिटहब",
     "settingsSyncSignIn": "GitHub के साथ साइन इन करें",
-    "settingsSyncSignInDesc": "सेटिंग्स आपके खाते में एक निजी सार में संग्रहीत की जाती हैं",
     "settingsSyncToken": "व्यक्तिगत एक्सेस टोकन का उपयोग करें",
     "settingsSyncTokenDesc": "केवल सार अनुमति के साथ github.com/settings/tokens पर एक बनाएं",
     "settingsSyncTokenField": "टोकन",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "साइन आउट करें",
-    "settingsSyncCode": "GitHub पर {code} दर्ज करें",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel।",
     "settingsSyncSignInFailed": "GitHub में साइन इन नहीं किया जा सका",
-    "dcPreview": "पूर्वावलोकन",
     "dcSampleWatching": "देख रहा हूँ",
     "dcSampleReading": "पढ़ना",
     "dcSampleBrowsing": "ब्राउजिंग",
     "dcSampleLive": "अभी",
     "dcLiveNothing": "Nothing is showing right now. Open a title, start an episode or a chapter and it appears here।",
     "dcMemberList": "सदस्य सूची में",
-    "dcAccount": "खाता",
-    "dcSignIn": "डिस्कोर्ड के साथ साइन इन करें",
     "dcSignOut": "साइन आउट करें",
-    "dcDesktopHint": "Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile।",
-    "dcMobileHint": "Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token।",
     "dcConnect": "कलह कनेक्ट करें",
     "dcConnectDesc": "Opens Discord’s authorize page and adds Dartotsu under Authorized Apps. Discord asks to update your presence. Only a refresh token is saved, not your account token।",
     "dcConnectFailed": "डिस्कॉर्ड को कनेक्ट नहीं किया जा सका",
@@ -254,8 +241,6 @@
     "dcMethodToken": "खाता टोकन",
     "dcInUse": "प्रयोग में है",
     "dcRecommended": "अनुशंसित",
-    "dcConnecting": "कनेक्ट हो रहा है...",
-    "dcDisconnected": "जुड़ा नहीं",
     "dcSignedInAs": "{name} के रूप में साइन इन किया गया",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub से हटाएँ",
     "settingsSyncSecretsDeleteMessage": "This removes the encrypted accounts file from your gist. Other devices keep their sign-ins and can set a new passphrase।",
     "settingsSyncWhat": "क्या सिंक करना है",
-    "settingsSyncServer": "सर्वर पर",
     "settingsSyncServerEmpty": "अभी तक कुछ भी अपलोड नहीं किया गया",
-    "settingsSyncServerInfo": "{count} सेटिंग्स, {time} को {device} से अपलोड किया गया",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "यह उपकरण",
     "settingsSyncCount": "{count, plural, =0{सर्वर पर कुछ भी नहीं} =1{सर्वर पर 1 सेटिंग} other{सर्वर पर {count} सेटिंग्स}}",
     "settingsSyncNow": "अभी सिंक करें",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "समन्वयन विफल: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Only settings that work the same everywhere are synced. Accounts, tokens, folders, extensions, notifications, Discord, updates and window size stay on each device।",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "लिंक हैंडलिंग ऑन करो ताकि anilist.co के लिंक ऐप में खुलें",
     "linkSettingsFailed": "सिस्टम सेटिंग्स नहीं खुल पाईं",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "अपनी Discord प्रोफ़ाइल पर दिखाओ कि तुम क्या कर रहे हो। इसके लिए तुम्हारा Discord टोकन चाहिए।",
-    "discordRichPresenceDesktopDesc": "अपनी Discord प्रोफ़ाइल पर दिखाओ कि तुम क्या कर रहे हो। इसके लिए Discord डेस्कटॉप ऐप चलता होना चाहिए।",
     "discordBrowsing": "ब्राउज़िंग एक्टिविटी दिखाओ",
     "discordBrowsingDesc": "सिर्फ़ ये नहीं कि क्या देख या पढ़ रहे हो, बल्कि कौन सा टैब, पेज या प्रोफ़ाइल देख रहे हो, वो भी दिखाओ।",
-    "discordLookHeader": "प्रेज़ेंस का लुक",
     "discordActivityType": "एक्टिविटी टाइप",
     "discordActivityTypeDesc": "Discord इसे कैसे लिखे: \"Watching …\" या \"Playing …\"। ऑटो में एनीमे के लिए Watching और बाकी सब के लिए Playing आता है।",
     "discordWatching": "देख रहे",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"View anime / manga\" और \"Open Dartotsu\" बटन।",
     "discordHideTitles": "टाइटल छुपाओ",
     "discordHideTitlesDesc": "एनीमे और मंगा के नाम (और उनका कवर व लिंक) की जगह \"Something private\" दिखाओ।",
-    "discordConnectionHeader": "कनेक्शन",
     "listSearchHint": "इस लिस्ट में खोजो",
     "listSort": "सॉर्ट",
     "listFilter": "फ़िल्टर",
@@ -671,8 +637,6 @@
     "listNoMatches": "इस लिस्ट में कुछ मैच नहीं करता",
     "discordLogin": "Discord में लॉगिन करो",
     "discordToken": "Discord टोकन",
-    "discordTokenSaved": "सेव है। बदलने के लिए टैप करो, हटाने के लिए देर तक दबाओ।",
-    "discordTokenNotSet": "सेट नहीं है। जोड़ने के लिए टैप करो।",
     "discordTokenSavedSnack": "Discord टोकन सेव हो गया",
     "discordTokenRemovedSnack": "Discord टोकन हटा दिया गया",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "एडल्ट टाइटल को फ़ीड और सर्च से बाहर रखो, और अपनी एडल्ट एंट्री Hidden Media में दिखाओ।",
     "kitsuAccountOptions": "Kitsu अकाउंट ऑप्शन",
     "mangaBakaAccountOptions": "MangaBaka अकाउंट के विकल्प",
-    "comickAccountOptions": "कॉमिक खाता विकल्प",
     "comickClientId": "कॉमिक क्लाइंट आईडी",
     "comickClientIdDesc": "कस्टम क्लाइंट आईडी कॉमिक.डेव पर पंजीकृत है",
     "couldNotUpdateKitsuSettings": "तुम्हारी Kitsu सेटिंग्स अपडेट नहीं हो पाईं",
@@ -761,7 +724,6 @@
     "accountDetails": "अकाउंट डिटेल",
     "refreshFromKitsu": "Kitsu से रीफ़्रेश करो",
     "simklReadOnly": "Simkl को सिर्फ़ रीड-ओनली एक्सेस मिला",
-    "traktReadOnly": "ट्रैक्ट ने केवल पढ़ने के लिए पहुंच प्रदान की",
     "incognitoEditsBlocked": "इन्कॉग्निटो: लिस्ट एडिट ब्लॉक हैं",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "इन्कॉग्निटो: प्रोग्रेस सेव नहीं हुई",
@@ -786,7 +748,6 @@
     "mangaCredits": "मंगा क्रेडिट",
     "mainProductions": "मेन प्रोडक्शन",
     "otherWorks": "दूसरे काम",
-    "prequelSequel": "प्रीक्वल और सीक्वल",
     "prequel": "प्रीक्वेल",
     "sequel": "अगली कड़ी",
     "previousSeason": "पिछला सीज़न",
@@ -833,10 +794,7 @@
     "addToList": "लिस्ट में जोड़ो",
     "trailer": "ट्रेलर",
     "trailerQuality": "ट्रेलर की गुणवत्ता",
-    "titleCopied": "टाइटल कॉपी हो गया",
     "linkCopied": "लिंक कॉपी हो गया",
-    "watchTrailer": "ट्रेलर देखो",
-    "copyTitle": "टाइटल कॉपी करो",
     "detailStale": "AniList could not be reached. This is saved information and may be outdated।",
     "copyLink": "लिंक कॉपी करो",
     "openInBrowser": "ब्राउज़र में खोलो",
@@ -1139,7 +1097,6 @@
     "import": "इम्पोर्ट",
     "animeCount": "{count} एनीमे",
     "mangaCount": "{count} मंगा",
-    "chooseSaveLocation": "चुनो कि बैकअप कहाँ सेव करना है",
     "savedPath": "{path} में सेव हो गया",
     "exportFailed": "एक्सपोर्ट फ़ेल हो गया: {error}",
     "nothingInLocalLists": "अभी तुम्हारी लोकल लिस्ट में कुछ नहीं है।",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "लिंक खोलने में एरर: {error}",
     "linkCantBeOpened": "ये लिंक नहीं खुल सकता: {link}",
     "linkOpenError": "लिंक खोलने में एरर: {error}",
-    "forReleasingTitles": "अभी रिलीज़ हो रहे टाइटल के लिए",
     "progress": "प्रोग्रेस",
     "notes": "नोट्स",
     "serviceNotFound": "सर्विस \"{id}\" नहीं मिली",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} कॉन्फ़िगर की गई रिपॉज़िटरी में उपलब्ध नहीं है",
     "pluginFetchFailed": "प्लगइन की जानकारी नहीं ला पाए",
     "installPluginTitle": "{name} इंस्टॉल करो",
-    "sizeLabel": "साइज़: {size}",
     "installedState": "इंस्टॉल है",
     "updatePluginTitle": "अद्यतन{name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ऐप खुलने पर और हर 30 मिनट में बैकग्राउंड में फ़ेच और सिंक करो",
     "syncAddMissing": "छूटी हुई एंट्री जोड़ो",
     "syncAddMissingDesc": "वो एंट्री भी जोड़ो जो दूसरी सर्विस में अभी नहीं हैं",
-    "syncServiceOn": "{name} के साथ सिंक करें",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "जो मुख्य सेवा में नहीं है उसे हटा दें",
     "syncDeleteDesc": "अन्य सेवाओं से प्रविष्टियाँ हटाएँ जो मुख्य सूची में नहीं हैं। केवल वही प्रविष्टियाँ हटा दी जाती हैं जिनका किसी शीर्षक से मिलान किया जा सकता है, इसलिए सिमकल फिल्में और श्रृंखला जैसी चीजें बनी रहती हैं",
     "syncDeleteTitle": "प्रविष्टियाँ हटाएँ?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "हटाएँ",
     "syncToDelete": "हटाना",
     "syncDeletedNote": "हटा दिया जाएगा",
-    "syncWillRemove": "{count} को {name} से हटा दिया जाएगा",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "आगे की प्रोग्रेस रखो",
     "syncOnlyForwardDesc": "जो सर्विस पहले से आगे है उसकी प्रोग्रेस कम मत करो",
     "animePlanetWontWatch": "नहीं देखूंगा",
     "animePlanetWontRead": "नहीं पढूंगा",
-    "animePlanetAlreadyOnList": "इस सूची में पहले से ही है",
     "animePlanetNewList": "नई सूची का नाम",
     "syncPrivate": "निजी प्रविष्टियाँ",
     "syncPrivateDesc": "उन प्रविष्टियों का क्या करें जिन्हें आप निजी रखते हैं? निजी विकल्प वाली सेवा उन्हें निजी बना देती है; अन्य लोग उन्हें सार्वजनिक रूप से दिखाएंगे",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "क्लीयरेंस किसी अन्य उपयोगकर्ता एजेंट के साथ अर्जित किया गया था, इसलिए इसे नहीं भेजा गया है। नया कनेक्शन पाने के लिए कनेक्शन का परीक्षण करें",
-    "watchSectionConnection": "कनेक्शन",
     "watchSectionSession": "सत्र",
     "watchSectionTools": "उपकरण",
     "watchMetaSource": "एपिसोड डिटेल कहाँ से",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "कौन सी स्ट्रीम डाउनलोड करनी है?",
     "downloadPickSubtitle": "कौन सा सबटाइटल डाउनलोड करना है?",
     "downloadPickAudio": "कौन सा ऑडियो ट्रैक डाउनलोड करना है?",
-    "downloadNoAudio": "कोई एक्स्ट्रा ऑडियो नहीं",
     "downloadAudio": "ऑडियो",
-    "downloadNoSubtitle": "कोई सबटाइटल नहीं",
     "downloadHlsNeedsFfmpeg": "ये स्ट्रीम एक HLS प्लेलिस्ट है। इसे डाउनलोड करने के लिए FFmpeg ऐडऑन चाहिए।",
     "downloadSourceMissing": "इस एपिसोड का सोर्स इंस्टॉल नहीं है",
     "downloadDashDrm": "यह स्ट्रीम DRM संरक्षित है",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "भाषा एवं व्यवहार",
     "generalSectionSecurity": "सुरक्षा",
     "generalSectionPrivacy": "गोपनीयता",
-    "notificationsOtherService": "इसे खोलने के लिए {service} पर स्विच करें",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "डिफ़ॉल्ट गति, ऑटो प्ले, वीडियो फिट, ओरिएंटेशन और पिक्चर इन पिक्चर",
     "secPlayerSkip": "उद्घाटन, अंत और पुनर्कथन स्वचालित रूप से छोड़ें",
     "secPlayerControls": "स्वाइप करें, होल्ड करें और जेस्चर पर टैप करें और पूर्वावलोकन खोजें",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "इंतज़ार कर रहा हूँ",
     "stepChecking": "जाँच हो रही है...",
     "stepUpToDate": "अप टू डेट",
     "stepUpToDateWith": "अद्यतित · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "मंगा",
     "readerCloudflare": "ब्राउज़र में खोलें (क्लाउडफ्लेयर जांच)",
     "badgeBoardHint": "Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off।",
-    "statusAuto": "ऑटो",
     "unreadCounter": "अपठित काउंटर",
-    "unreadCounterDesc": "दिखाएँ कि पोस्टरों पर कितने एपिसोड या अध्याय बचे हैं",
     "settingsShortcuts": "कीबोर्ड शॉर्टकट",
     "settingsShortcutsDesc": "प्रत्येक कुंजी को देखें, बदलें और बंद करें",
     "shortcutGroupApp": "ऐप",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "सेट नहीं",
     "shortcutAddKey": "एक कुंजी जोड़ें",
     "shortcutResetOne": "डिफ़ॉल्ट पर रीसेट करें",
-    "shortcutClearKeys": "सभी कुंजियाँ हटाएँ",
     "shortcutResetAll": "सभी शॉर्टकट रीसेट करें",
     "shortcutResetAllDesc": "प्रत्येक कुंजी को उसके डिफ़ॉल्ट पर वापस रखें",
     "shortcutPress": "अपनी इच्छित कुंजी या संयोजन दबाएँ",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "ऐप छोड़ें",
     "closeActionWhenBusy": "जब कुछ चल रहा हो तो ट्रे में दौड़ते रहें",
     "closeActionAlways": "ट्रे में हमेशा चलाते रहें",
-    "closeActionNoTray": "सिस्टम ट्रे यहां उपलब्ध नहीं है, इसलिए ऐप बंद होने पर बंद हो जाता है",
     "gamepadNav": "गेमपैड नेविगेशन",
     "gamepadNavDesc": "ऐप के चारों ओर घूमें और गेम कंट्रोलर से प्लेयर को नियंत्रित करें",
     "trayShow": "डार्टोत्सु दिखाओ",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "विवरण कॉपी करें",
     "removePlayerTitle": "प्लेयर हटाएँ?",
     "removePlayerMessage": "Videos can't play until the player is downloaded again।",
-    "trailerLoading": "ट्रेलर लोड हो रहा है...",
     "trailerFailed": "ट्रेलर को ब्राउज़र में खोलने पर यहां उसे चलाया नहीं जा सका"
 }

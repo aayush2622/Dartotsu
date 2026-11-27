@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "المزامنة عند التغيير",
     "settingsSyncModeGithub": "جيثب",
     "settingsSyncSignIn": "قم بتسجيل الدخول باستخدام جيثب",
-    "settingsSyncSignInDesc": "يتم تخزين الإعدادات في Gist خاص في حسابك",
     "settingsSyncToken": "استخدم رمز الوصول الشخصي",
     "settingsSyncTokenDesc": "قم بإنشاء واحد على github.com/settings/tokens بإذن Gist فقط",
     "settingsSyncTokenField": "رمز مميز",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "تسجيل الخروج",
-    "settingsSyncCode": "أدخل {code} على جيثب",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "تم فتح صفحة GitHub في متصفحك. انقر لنسخ الرمز، أو انقر مع الاستمرار للإلغاء.",
     "settingsSyncSignInFailed": "تعذر تسجيل الدخول إلى GitHub",
-    "dcPreview": "معاينة",
     "dcSampleWatching": "مشاهدة",
     "dcSampleReading": "القراءة",
     "dcSampleBrowsing": "التصفح",
     "dcSampleLive": "الآن",
     "dcLiveNothing": "لا شيء يظهر الآن. افتح عنوانًا، وابدأ حلقة أو فصلًا وسيظهر هنا.",
     "dcMemberList": "في قائمة الأعضاء",
-    "dcAccount": "الحساب",
-    "dcSignIn": "قم بتسجيل الدخول باستخدام Discord",
     "dcSignOut": "تسجيل الخروج",
-    "dcDesktopHint": "بدون الاتصال، يعرض Discord \"مشاهدة Dartotsu\" من خلال تطبيق سطح المكتب. قم بتوصيل Discord لتسمية النشاط باسمك، بما في ذلك على الهاتف المحمول.",
-    "dcMobileHint": "قم بتوصيل Discord لإظهار ما تشاهده أو تقرأه. فهو يستخدم صفحة ترخيص Discord، وليس الرمز المميز لحسابك.",
     "dcConnect": "ربط الخلاف",
     "dcConnectDesc": "يفتح صفحة ترخيص Discord ويضيف Dartotsu ضمن التطبيقات المعتمدة. يطلب Discord تحديث حضورك. يتم حفظ رمز التحديث فقط، وليس الرمز المميز لحسابك.",
     "dcConnectFailed": "تعذر الاتصال بالديسكورد",
@@ -254,8 +241,6 @@
     "dcMethodToken": "رمز الحساب",
     "dcInUse": "قيد الاستخدام",
     "dcRecommended": "موصى به",
-    "dcConnecting": "جارٍ الاتصال…",
-    "dcDisconnected": "غير متصل",
     "dcSignedInAs": "تم تسجيل الدخول كـ {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "حذف من جيثب",
     "settingsSyncSecretsDeleteMessage": "يؤدي هذا إلى إزالة ملف الحسابات المشفرة من جوهرك. تحتفظ الأجهزة الأخرى بتسجيلات الدخول الخاصة بها ويمكنها تعيين عبارة مرور جديدة.",
     "settingsSyncWhat": "ما للمزامنة",
-    "settingsSyncServer": "على الخادم",
     "settingsSyncServerEmpty": "لم يتم تحميل أي شيء حتى الآن",
-    "settingsSyncServerInfo": "إعدادات {count}، تم تحميل {time} من {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "هذا الجهاز",
     "settingsSyncCount": "{count, plural, =0{لا شيء على الخادم} =1{1 الإعداد على الخادم} other{إعدادات {count} على الخادم}}",
     "settingsSyncNow": "مزامنة الآن",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "فشلت المزامنة: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "تتم مزامنة الإعدادات التي تعمل بنفس الطريقة في كل مكان فقط. تظل الحسابات والرموز المميزة والمجلدات والإضافات والإشعارات والديسكورد والتحديثات وحجم النافذة على كل جهاز.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "فعّل معالجة الروابط عشان روابط anilist.co تفتح التطبيق",
     "linkSettingsFailed": "ما قدرنا نفتح إعدادات النظام",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "اعرض اللي تفعله على ملفك في Discord. يحتاج توكن Discord الخاص بك.",
-    "discordRichPresenceDesktopDesc": "اعرض اللي تفعله على ملفك في Discord. يحتاج تطبيق Discord للكمبيوتر شغّال.",
     "discordBrowsing": "اعرض نشاط التصفّح",
     "discordBrowsingDesc": "اعرض كمان التبويب أو الصفحة أو الملف اللي تتصفحه، ليس فقط اللي تشاهده أو تقرأه.",
-    "discordLookHeader": "شكل الحالة",
     "discordActivityType": "نوع النشاط",
     "discordActivityTypeDesc": "كيف يصيغها Discord: \"يشاهد …\" أو \"يلعب …\". تلقائي يستخدم \"يشاهد\" للأنمي و\"يلعب\" لكل شيء ثاني.",
     "discordWatching": "يشاهد",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "زرّا \"عرض الأنمي / المانجا\" و\"افتح Dartotsu\".",
     "discordHideTitles": "إخفاء العناوين",
     "discordHideTitlesDesc": "استبدل أسماء الأنمي والمانجا (مع غلافها ورابطها) بـ \"شيء خاص\".",
-    "discordConnectionHeader": "الاتصال",
     "listSearchHint": "ابحث في هذه القائمة",
     "listSort": "ترتيب",
     "listFilter": "تصفية",
@@ -671,8 +637,6 @@
     "listNoMatches": "ما في شيء يطابق في هذه القائمة",
     "discordLogin": "سجّل الدخول إلى Discord",
     "discordToken": "توكن Discord",
-    "discordTokenSaved": "تم الحفظ. اضغط للاستبدال، واضغط مطولًا للحذف.",
-    "discordTokenNotSet": "غير محدد. اضغط للإضافة.",
     "discordTokenSavedSnack": "تم حفظ توكن Discord",
     "discordTokenRemovedSnack": "تم حذف توكن Discord",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "أبعد عناوين البالغين عن الخلاصات والبحث، واعرض مدخلاتك الخاصة للبالغين تحت \"الوسائط المخفية\".",
     "kitsuAccountOptions": "خيارات حساب Kitsu",
     "mangaBakaAccountOptions": "خيارات حساب MangaBaka",
-    "comickAccountOptions": "خيارات حساب كوميك",
     "comickClientId": "معرف العميل كوميك",
     "comickClientIdDesc": "معرف العميل المخصص المسجل على comick.dev",
     "couldNotUpdateKitsuSettings": "ما قدرنا نحدّث إعدادات Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "تفاصيل الحساب",
     "refreshFromKitsu": "تحديث من Kitsu",
     "simklReadOnly": "Simkl أعطى صلاحية القراءة فقط",
-    "traktReadOnly": "تم منح Trakt حق الوصول للقراءة فقط",
     "incognitoEditsBlocked": "التصفح الخفي: تعديل القوائم محظور",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "التصفح الخفي: التقدّم ما انحفظ",
@@ -786,7 +748,6 @@
     "mangaCredits": "أعمال المانجا",
     "mainProductions": "الأعمال الرئيسية",
     "otherWorks": "أعمال أخرى",
-    "prequelSequel": "الجزء السابق واللاحق",
     "prequel": "برقول",
     "sequel": "تتمة",
     "previousSeason": "الموسم السابق",
@@ -833,10 +794,7 @@
     "addToList": "أضف للقائمة",
     "trailer": "الإعلان",
     "trailerQuality": "جودة المقطورة",
-    "titleCopied": "تم نسخ العنوان",
     "linkCopied": "تم نسخ الرابط",
-    "watchTrailer": "شاهد الإعلان",
-    "copyTitle": "انسخ العنوان",
     "detailStale": "لا يمكن الوصول إلى AniList. هذه معلومات محفوظة وقد تكون قديمة.",
     "copyLink": "انسخ الرابط",
     "openInBrowser": "افتح في المتصفح",
@@ -1139,7 +1097,6 @@
     "import": "استيراد",
     "animeCount": "{count} أنمي",
     "mangaCount": "{count} مانجا",
-    "chooseSaveLocation": "اختر مكان حفظ النسخة الاحتياطية",
     "savedPath": "تم حفظ {path}",
     "exportFailed": "فشل التصدير: {error}",
     "nothingInLocalLists": "ما في شيء في قوائمك المحلية لحد الآن.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "خطأ في فتح الرابط: {error}",
     "linkCantBeOpened": "هذا الرابط ما ينفتح: {link}",
     "linkOpenError": "خطأ في فتح الرابط: {error}",
-    "forReleasingTitles": "للعناوين قيد الإصدار حاليًا",
     "progress": "التقدّم",
     "notes": "ملاحظات",
     "serviceNotFound": "الخدمة \"{id}\" غير موجودة",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} غير متوفرة في المستودع المضبوط",
     "pluginFetchFailed": "فشل جلب معلومات الإضافة",
     "installPluginTitle": "تثبيت {name}",
-    "sizeLabel": "الحجم: {size}",
     "installedState": "مثبّتة",
     "updatePluginTitle": "تحديث {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "اجلب وزامن في الخلفية عند فتح التطبيق وكل 30 دقيقة",
     "syncAddMissing": "إضافة المدخلات الناقصة",
     "syncAddMissingDesc": "أضف كمان المدخلات اللي ما عند الخدمة الثانية",
-    "syncServiceOn": "المزامنة مع {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "احذف ما لا تملكه الخدمة الرئيسية",
     "syncDeleteDesc": "قم بإزالة الإدخالات من الخدمات الأخرى غير الموجودة في القائمة الرئيسية. تتم إزالة الإدخالات التي يمكن مطابقتها للعنوان فقط، لذلك تبقى أشياء مثل أفلام ومسلسلات Simkl",
     "syncDeleteTitle": "هل تريد حذف الإدخالات؟",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "حذف",
     "syncToDelete": "للحذف",
     "syncDeletedNote": "سيتم حذفها",
-    "syncWillRemove": "سيتم حذف {count} من {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "إبقاء التقدّم الأعلى",
     "syncOnlyForwardDesc": "لا تُنزل تقدّم خدمة متقدمة أصلًا",
     "animePlanetWontWatch": "لن أشاهد",
     "animePlanetWontRead": "لن أقرأ",
-    "animePlanetAlreadyOnList": "بالفعل في هذه القائمة",
     "animePlanetNewList": "اسم القائمة الجديدة",
     "syncPrivate": "إدخالات خاصة",
     "syncPrivateDesc": "ما يجب فعله مع الإدخالات التي تحتفظ بها خاصة. الخدمة ذات الخيار الخاص تجعلهم خاصين؛ سيظهرها الآخرون علنًا",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "تم الحصول على التصريح من خلال وكيل مستخدم آخر، لذا لم يتم إرساله. اختبر الاتصال للحصول على اتصال جديد",
-    "watchSectionConnection": "اتصال",
     "watchSectionSession": "جلسة",
     "watchSectionTools": "أدوات",
     "watchMetaSource": "تفاصيل الحلقات من",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "أي بث تريد تنزيله؟",
     "downloadPickSubtitle": "أي ترجمة تريد تنزيلها؟",
     "downloadPickAudio": "أي مسار صوت تريد تنزيله؟",
-    "downloadNoAudio": "بدون صوت إضافي",
     "downloadAudio": "الصوت",
-    "downloadNoSubtitle": "بدون ترجمة",
     "downloadHlsNeedsFfmpeg": "هذا البث قائمة تشغيل HLS. تنزيله يحتاج إضافة FFmpeg.",
     "downloadSourceMissing": "مصدر هذه الحلقة غير مثبّت",
     "downloadDashDrm": "هذا الدفق محمي بموجب إدارة الحقوق الرقمية (DRM).",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "اللغة والسلوك",
     "generalSectionSecurity": "الأمن",
     "generalSectionPrivacy": "الخصوصية",
-    "notificationsOtherService": "قم بالتبديل إلى {service} لفتح هذا",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "السرعة الافتراضية والتشغيل التلقائي وملاءمة الفيديو والتوجيه والصورة في الصورة",
     "secPlayerSkip": "تخطي الافتتاحيات والنهايات والملخصات تلقائيًا",
     "secPlayerControls": "قم بالتمرير مع الاستمرار والنقر على الإيماءات والبحث عن المعاينة",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "في انتظار",
     "stepChecking": "جارٍ التحقق…",
     "stepUpToDate": "حتى الآن",
     "stepUpToDateWith": "محدث · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "مانغا",
     "readerCloudflare": "فتح في المتصفح (فحص Cloudflare)",
     "badgeBoardHint": "اسحب الشارة إلى زاوية البطاقة الأولى، أو اسحب الشارة الموجودة عليها بالفعل لتحريكها. يتم تبادل أماكن الشارات، بحيث لا يتداخل أي منها على الإطلاق. اضغط على الشارة أدناه لتشغيلها أو إيقاف تشغيلها.",
-    "statusAuto": "تلقائي",
     "unreadCounter": "عداد غير مقروء",
-    "unreadCounterDesc": "أظهر عدد الحلقات أو الفصول المتبقية على الملصقات",
     "settingsShortcuts": "اختصارات لوحة المفاتيح",
     "settingsShortcutsDesc": "رؤية وتغيير وإيقاف كل مفتاح",
     "shortcutGroupApp": "التطبيق",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "لم يتم ضبطه",
     "shortcutAddKey": "أضف مفتاحًا",
     "shortcutResetOne": "إعادة التعيين إلى الوضع الافتراضي",
-    "shortcutClearKeys": "قم بإزالة كافة المفاتيح",
     "shortcutResetAll": "إعادة ضبط كافة الاختصارات",
     "shortcutResetAllDesc": "أعد كل مفتاح إلى وضعه الافتراضي",
     "shortcutPress": "اضغط على المفتاح أو المجموعة التي تريدها",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "قم بإنهاء التطبيق",
     "closeActionWhenBusy": "استمر في الجري في الدرج أثناء تشغيل شيء ما",
     "closeActionAlways": "استمر دائمًا في الجري في الدرج",
-    "closeActionNoTray": "علبة النظام غير متوفرة هنا، لذا يتم إنهاء التطبيق عند إغلاقه",
     "gamepadNav": "التنقل في لوحة الألعاب",
     "gamepadNavDesc": "التنقل في التطبيق والتحكم في اللاعب باستخدام وحدة التحكم في الألعاب",
     "trayShow": "عرض دارتوتسو",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "نسخ التفاصيل",
     "removePlayerTitle": "إزالة اللاعب؟",
     "removePlayerMessage": "لا يمكن تشغيل مقاطع الفيديو حتى يتم تنزيل المشغل مرة أخرى.",
-    "trailerLoading": "جارٍ تحميل المقطورة…",
     "trailerFailed": "تعذر تشغيل المقطع الدعائي هنا، وتم فتحه في المتصفح"
 }

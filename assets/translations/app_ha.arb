@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Daidaita kan canji",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Shiga tare da GitHub",
-    "settingsSyncSignInDesc": "Ana adana saituna a cikin bayanan sirri a cikin asusun ku",
     "settingsSyncToken": "Yi amfani da alamar shiga ta sirri",
     "settingsSyncTokenDesc": "Ƙirƙiri ɗaya a github.com/settings/tokens tare da izinin gist kawai",
     "settingsSyncTokenField": "Alama",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Fita",
-    "settingsSyncCode": "Shigar da {code} akan GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "An buɗe shafin GitHub a cikin burauzar ku. Matsa don kwafe lambar, ko matsa ka riƙe don sokewa.",
     "settingsSyncSignInFailed": "An kasa shiga GitHub",
-    "dcPreview": "Dubawa",
     "dcSampleWatching": "Kallon",
     "dcSampleReading": "Karatu",
     "dcSampleBrowsing": "Yin lilo",
     "dcSampleLive": "A yanzu haka",
     "dcLiveNothing": "Babu wani abu da ke nunawa a yanzu. Bude take, fara wani labari ko babi kuma ya bayyana a nan.",
     "dcMemberList": "A cikin jerin membobin",
-    "dcAccount": "Asusu",
-    "dcSignIn": "Shiga tare da Discord",
     "dcSignOut": "Fita",
-    "dcDesktopHint": "Ba tare da haɗawa ba, Discord yana nuna \"Kallon Dartotsu\" ta hanyar aikace-aikacen tebur. Haɗa Discord don suna sunan aikin bayan taken ku, gami da kan wayar hannu.",
-    "dcMobileHint": "Haɗa Discord don nuna abin da kuke kallo ko karantawa. Yana amfani da shafin izini na Discord, ba alamar asusun ku ba.",
     "dcConnect": "Haɗa Discord",
     "dcConnectDesc": "Yana buɗe shafin izini na Discord kuma yana ƙara Dartotsu ƙarƙashin Izini Apps. Discord ya nemi sabunta kasancewar ku. Alamar wartsakewa kawai aka ajiye, ba alamar asusun ku ba.",
     "dcConnectFailed": "An kasa haɗa Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Alamar lissafi",
     "dcInUse": "A amfani",
     "dcRecommended": "Nasiha",
-    "dcConnecting": "Ana haɗawa…",
-    "dcDisconnected": "Ba a haɗa",
     "dcSignedInAs": "Shiga a matsayin {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Share daga GitHub",
     "settingsSyncSecretsDeleteMessage": "Wannan yana cire ɓoyayyen fayil ɗin asusun daga gist ɗin ku. Wasu na'urori suna kiyaye sa hannu kuma suna iya saita sabon kalmar wucewa.",
     "settingsSyncWhat": "Abin da za a daidaita",
-    "settingsSyncServer": "Akan uwar garken",
     "settingsSyncServerEmpty": "Babu wani abu da aka loda tukuna",
-    "settingsSyncServerInfo": "{count} saituna, an ɗora {time} daga {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "wannan na'urar",
     "settingsSyncCount": "{count, plural, =0{Babu komai akan sabar} =1{1 saitin akan uwar garken} other{Saitunan {count} akan uwar garken}}",
     "settingsSyncNow": "Daidaita yanzu",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "An gaza daidaitawa: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Saitunan da ke aiki iri ɗaya a ko'ina kawai ana daidaita su. Asusu, alamomi, manyan fayiloli, kari, sanarwa, Discord, sabuntawa da girman taga suna tsayawa akan kowace na'ura.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Kunna sarrafa hanyoyin haɗi don anilist.co ya buɗe app",
     "linkSettingsFailed": "Ba a iya buɗe saitunan system ba",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Nuna abin da kake yi a profile ɗin Discord. Yana buƙatar token ɗin Discord.",
-    "discordRichPresenceDesktopDesc": "Nuna abin da kake yi a profile ɗin Discord. Yana buƙatar Discord desktop app ya kasance a buɗe.",
     "discordBrowsing": "Nuna ayyukan bincike",
     "discordBrowsingDesc": "Nuna tab, shafi ko profile da kake kallo, ba kawai abin da kake kallo ko karantawa ba.",
-    "discordLookHeader": "Kamannin presence",
     "discordActivityType": "Nau'in aiki",
     "discordActivityTypeDesc": "Yadda Discord ke rubuta shi: \"Watching …\" ko \"Playing …\". Kai tsaye yana amfani da Watching don anime da Playing ga sauran.",
     "discordWatching": "Kallon",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Maɓallan \"View anime / manga\" da \"Open Dartotsu\".",
     "discordHideTitles": "Ɓoye take",
     "discordHideTitlesDesc": "Maye gurbin sunayen anime da manga (da cover da hanyar haɗinsu) da \"Something private\".",
-    "discordConnectionHeader": "Haɗi",
     "listSearchHint": "Bincika wannan jeri",
     "listSort": "Tsara",
     "listFilter": "Tace",
@@ -671,8 +637,6 @@
     "listNoMatches": "Babu abin da ya dace a wannan jeri",
     "discordLogin": "Shiga Discord",
     "discordToken": "Token ɗin Discord",
-    "discordTokenSaved": "An ajiye. Danna don maye gurbin, danna ka riƙe don cirewa.",
-    "discordTokenNotSet": "Ba a saita ba. Danna don ƙarawa.",
     "discordTokenSavedSnack": "An ajiye token ɗin Discord",
     "discordTokenRemovedSnack": "An cire token ɗin Discord",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Kiyaye take na manya daga feed da bincike, kuma lissafa shigarwar manya naka a Hidden Media.",
     "kitsuAccountOptions": "Zaɓuɓɓukan asusun Kitsu",
     "mangaBakaAccountOptions": "Zaɓuɓɓukan asusun MangaBaka",
-    "comickAccountOptions": "Zaɓuɓɓukan asusu na Comick",
     "comickClientId": "Comick Client ID",
     "comickClientIdDesc": "ID na abokin ciniki na al'ada yayi rijista akan comick.dev",
     "couldNotUpdateKitsuSettings": "An kasa sabunta saitunan Kitsu naka",
@@ -761,7 +724,6 @@
     "accountDetails": "Bayanan asusu",
     "refreshFromKitsu": "Sabunta daga Kitsu",
     "simklReadOnly": "Simkl ya ba da damar karantawa kawai",
-    "traktReadOnly": "Trakt ya ba da damar karantawa kawai",
     "incognitoEditsBlocked": "Incognito: an hana gyaran jeri",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Incognito: ba a ajiye ci gaba ba",
@@ -786,7 +748,6 @@
     "mangaCredits": "Ayyukan manga",
     "mainProductions": "Manyan shirye-shirye",
     "otherWorks": "Sauran ayyuka",
-    "prequelSequel": "Prequel & Mabiyi",
     "prequel": "Prequel",
     "sequel": "Mabiyi",
     "previousSeason": "Kakar da ta gabata",
@@ -833,10 +794,7 @@
     "addToList": "Ƙara a jeri",
     "trailer": "Trailer",
     "trailerQuality": "Trailer ingancin",
-    "titleCopied": "An kwafi take",
     "linkCopied": "An kwafi hanyar haɗi",
-    "watchTrailer": "Kalli trailer",
-    "copyTitle": "Kwafi take",
     "detailStale": "An kasa samun AniList. Wannan an adana bayanan kuma yana iya zama tsoho.",
     "copyLink": "Kwafi hanyar haɗi",
     "openInBrowser": "Buɗe a browser",
@@ -1139,7 +1097,6 @@
     "import": "Shigo da",
     "animeCount": "Anime {count}",
     "mangaCount": "Manga {count}",
-    "chooseSaveLocation": "Zaɓi inda za a ajiye ajiyar baya",
     "savedPath": "An ajiye {path}",
     "exportFailed": "Fitarwa ta kasa: {error}",
     "nothingInLocalLists": "Babu komai a jerin sunayenka na gida tukuna.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Kuskure wajen buɗe hanyar haɗi: {error}",
     "linkCantBeOpened": "Ba za a iya buɗe wannan hanyar haɗi ba: {link}",
     "linkOpenError": "Kuskure wajen buɗe hanyar haɗi: {error}",
-    "forReleasingTitles": "ga take da ake fitarwa yanzu",
     "progress": "Ci gaba",
     "notes": "Bayanan kula",
     "serviceNotFound": "Ba a sami sabis \"{id}\" ba",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} ba ya cikin wurin ajiyar da aka saita",
     "pluginFetchFailed": "An kasa samun bayanan plugin",
     "installPluginTitle": "Shigar da {name}",
-    "sizeLabel": "Girma: {size}",
     "installedState": "An shigar",
     "updatePluginTitle": "Sabunta {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Ɗauko da daidaita a bango lokacin da app ya buɗe da kowane minti 30",
     "syncAddMissing": "Ƙara shigarwar da suka ɓace",
     "syncAddMissingDesc": "Ƙara kuma shigarwar da ɗayan sabis ɗin ba shi da su tukuna",
-    "syncServiceOn": "Aiki tare da {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Share abin da babban sabis ɗin bashi da shi",
     "syncDeleteDesc": "Cire shigarwar daga sauran ayyukan da basa cikin babban jeri. Ana cire shigarwar da za a iya daidaitawa da take kawai, don haka abubuwa kamar fina-finai na Simkl da jerin abubuwan suna tsayawa",
     "syncDeleteTitle": "Share shigarwar?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Share",
     "syncToDelete": "Don sharewa",
     "syncDeletedNote": "Za a share",
-    "syncWillRemove": "{count} za a share daga {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Kiyaye ci gaba mafi nisa",
     "syncOnlyForwardDesc": "Kar a rage ci gaban sabis da ya riga ya wuce",
     "animePlanetWontWatch": "Ba za a kalla ba",
     "animePlanetWontRead": "Ba zai karanta ba",
-    "animePlanetAlreadyOnList": "Tuni akan wannan jerin",
     "animePlanetNewList": "Sabon jerin suna",
     "syncPrivate": "shigarwar sirri",
     "syncPrivateDesc": "Abin da za ku yi da shigarwar da kuke kiyaye sirri. Sabis tare da zaɓi na sirri yana samun masu zaman kansu; wasu za su nuna su a fili",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "An sami izini tare da wani wakilin mai amfani, don haka ba a aika shi ba. Gwada haɗin don samun sabuwa",
-    "watchSectionConnection": "Haɗin kai",
     "watchSectionSession": "Zama",
     "watchSectionTools": "Kayan aiki",
     "watchMetaSource": "Bayanan episode daga",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Wane stream za a zazzage?",
     "downloadPickSubtitle": "Wane subtitle za a zazzage?",
     "downloadPickAudio": "Wace hanyar sauti za a zazzage?",
-    "downloadNoAudio": "Babu ƙarin sauti",
     "downloadAudio": "Sauti",
-    "downloadNoSubtitle": "Babu subtitle",
     "downloadHlsNeedsFfmpeg": "Wannan stream HLS playlist ne. Zazzage shi yana buƙatar FFmpeg addon.",
     "downloadSourceMissing": "Ba a shigar da tushen wannan episode ba",
     "downloadDashDrm": "Wannan rafi yana da kariya ta DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Harshe & hali",
     "generalSectionSecurity": "Tsaro",
     "generalSectionPrivacy": "Keɓantawa",
-    "notificationsOtherService": "Canja zuwa {service} don buɗe wannan",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Tsohuwar gudun, kunna atomatik, dacewa da bidiyo, daidaitawa da hoto a hoto",
     "secPlayerSkip": "Tsallake buɗewa, ƙarewa da maimaitawa ta atomatik",
     "secPlayerControls": "Dokewa, riƙe da matsa motsi kuma nemi samfoti",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Jira",
     "stepChecking": "Ana dubawa…",
     "stepUpToDate": "Har zuwa yau",
     "stepUpToDateWith": "Na zamani · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Bude a browser (Cloudflare duba)",
     "badgeBoardHint": "Jawo lamba kan kusurwar katin farko, ko ja alama a kai don matsar da shi. Bajis suna musanyar wurare, don haka babu wanda ya taɓa haɗuwa. Matsa alamar da ke ƙasa don kunna ko kashe ta.",
-    "statusAuto": "Mota",
     "unreadCounter": "counter mara karantawa",
-    "unreadCounterDesc": "Nuna juzu'i ko surori nawa aka bari akan fosta",
     "settingsShortcuts": "Gajerun hanyoyin allo",
     "settingsShortcutsDesc": "Duba, canza kuma kashe kowane maɓalli",
     "shortcutGroupApp": "App",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Ba a saita ba",
     "shortcutAddKey": "Ƙara maɓalli",
     "shortcutResetOne": "Sake saita zuwa tsoho",
-    "shortcutClearKeys": "Cire duk maɓallan",
     "shortcutResetAll": "Sake saita duk gajerun hanyoyi",
     "shortcutResetAllDesc": "Mayar da kowane maɓalli zuwa tsohowar sa",
     "shortcutPress": "Danna maɓallin ko haɗin da kake so",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Bar app",
     "closeActionWhenBusy": "Ci gaba da gudu a cikin tire yayin da wani abu ke gudana",
     "closeActionAlways": "Koyaushe ci gaba da gudu a cikin tire",
-    "closeActionNoTray": "Ba a samun tiren tsarin anan, don haka app ɗin yana barin lokacin rufewa",
     "gamepadNav": "Gamepad kewayawa",
     "gamepadNavDesc": "Matsar da ƙa'idar kuma sarrafa mai kunnawa tare da mai sarrafa wasa",
     "trayShow": "Nuna Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Kwafi cikakkun bayanai",
     "removePlayerTitle": "Cire mai kunnawa?",
     "removePlayerMessage": "Bidiyo ba za su iya kunna ba har sai an sake sauke mai kunnawa.",
-    "trailerLoading": "Ana loda tirela…",
     "trailerFailed": "Ba za a iya kunna tirela a nan ba, buɗe shi a cikin mazugi"
 }

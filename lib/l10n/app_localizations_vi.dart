@@ -421,10 +421,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get settingsSyncSignIn => 'Đăng nhập bằng GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Cài đặt được lưu trữ trong một ý chính riêng tư trong tài khoản của bạn';
-
-  @override
   String get settingsSyncToken => 'Sử dụng mã thông báo truy cập cá nhân';
 
   @override
@@ -443,19 +439,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get settingsSyncSignOut => 'Đăng xuất';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Nhập $code trên GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Trang GitHub đã mở trong trình duyệt của bạn. Nhấn để sao chép mã hoặc nhấn và giữ để hủy.';
-
-  @override
   String get settingsSyncSignInFailed => 'Không thể đăng nhập vào GitHub';
-
-  @override
-  String get dcPreview => 'Xem trước';
 
   @override
   String get dcSampleWatching => 'Đang xem';
@@ -477,21 +461,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get dcMemberList => 'Trong danh sách thành viên';
 
   @override
-  String get dcAccount => 'Tài khoản';
-
-  @override
-  String get dcSignIn => 'Đăng nhập bằng Discord';
-
-  @override
   String get dcSignOut => 'Đăng xuất';
-
-  @override
-  String get dcDesktopHint =>
-      'Nếu không kết nối, Discord sẽ hiển thị “Đang xem Dartotsu” thông qua ứng dụng dành cho máy tính để bàn. Kết nối Discord để đặt tên hoạt động theo tiêu đề của bạn, kể cả trên thiết bị di động.';
-
-  @override
-  String get dcMobileHint =>
-      'Kết nối Discord để hiển thị những gì bạn đang xem hoặc đọc. Nó sử dụng trang ủy quyền của Discord chứ không phải mã thông báo tài khoản của bạn.';
 
   @override
   String get dcConnect => 'Kết nối bất hòa';
@@ -716,12 +686,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get dcRecommended => 'Được đề xuất';
 
   @override
-  String get dcConnecting => 'Đang kết nối…';
-
-  @override
-  String get dcDisconnected => 'Không được kết nối';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Đăng nhập với tên $name';
   }
@@ -915,15 +879,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get settingsSyncWhat => 'Đồng bộ hóa những gì';
 
   @override
-  String get settingsSyncServer => 'Trên máy chủ';
-
-  @override
   String get settingsSyncServerEmpty => 'Chưa có gì được tải lên';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count cài đặt, đã tải lên $time từ $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'thiết bị này';
@@ -952,11 +908,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Đồng bộ hóa lần cuối $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Đồng bộ hóa không thành công: $error';
   }
 
   @override
@@ -1735,22 +1686,11 @@ class AppLocalizationsVi extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Hiện bạn đang làm gì trên hồ sơ Discord. Cần token Discord của bạn.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Hiện bạn đang làm gì trên hồ sơ Discord. Cần app Discord trên máy tính đang chạy.';
-
-  @override
   String get discordBrowsing => 'Hiện hoạt động duyệt';
 
   @override
   String get discordBrowsingDesc =>
       'Hiện cả tab, trang hay hồ sơ bạn đang xem, không chỉ cái bạn đang xem hoặc đọc.';
-
-  @override
-  String get discordLookHeader => 'Kiểu hiển thị';
 
   @override
   String get discordActivityType => 'Loại hoạt động';
@@ -1791,9 +1731,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Thay tên anime và manga (cùng ảnh bìa và link) bằng \"Something private\".';
-
-  @override
-  String get discordConnectionHeader => 'Kết nối';
 
   @override
   String get listSearchHint => 'Tìm trong danh sách này';
@@ -1851,12 +1788,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get discordToken => 'Token Discord';
-
-  @override
-  String get discordTokenSaved => 'Đã lưu. Chạm để thay, nhấn giữ để xóa.';
-
-  @override
-  String get discordTokenNotSet => 'Chưa đặt. Chạm để thêm.';
 
   @override
   String get discordTokenSavedSnack => 'Đã lưu token Discord';
@@ -2054,9 +1985,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Tùy chọn tài khoản MangaBaka';
 
   @override
-  String get comickAccountOptions => 'Tùy chọn tài khoản Comick';
-
-  @override
   String get comickClientId => 'ID khách hàng Comick';
 
   @override
@@ -2149,9 +2077,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get simklReadOnly => 'Simkl chỉ cấp quyền chỉ đọc';
 
   @override
-  String get traktReadOnly => 'Trakt được cấp quyền truy cập chỉ đọc';
-
-  @override
   String get incognitoEditsBlocked => 'Ẩn danh: không thể sửa danh sách';
 
   @override
@@ -2231,9 +2156,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get otherWorks => 'Tác phẩm khác';
-
-  @override
-  String get prequelSequel => 'Phần trước & Phần sau';
 
   @override
   String get prequel => 'phần tiền truyện';
@@ -2377,16 +2299,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get trailerQuality => 'Chất lượng trailer';
 
   @override
-  String get titleCopied => 'Đã sao chép tiêu đề';
-
-  @override
   String get linkCopied => 'Đã sao chép link';
-
-  @override
-  String get watchTrailer => 'Xem trailer';
-
-  @override
-  String get copyTitle => 'Sao chép tiêu đề';
 
   @override
   String get detailStale =>
@@ -3372,9 +3285,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Chọn nơi lưu bản sao lưu';
-
-  @override
   String savedPath(String path) {
     return 'Đã lưu $path';
   }
@@ -3944,9 +3854,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'dành cho các tựa đang phát hành';
-
-  @override
   String get progress => 'Tiến độ';
 
   @override
@@ -4151,11 +4058,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Dung lượng: $size';
-  }
-
-  @override
   String get installedState => 'Đã cài';
 
   @override
@@ -4253,11 +4155,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get syncAddMissingDesc => 'Thêm cả những mục mà dịch vụ kia chưa có';
 
   @override
-  String syncServiceOn(String name) {
-    return 'Đồng bộ hóa với $name';
-  }
-
-  @override
   String get syncDelete => 'Xóa những gì dịch vụ chính không có';
 
   @override
@@ -4288,11 +4185,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get syncDeletedNote => 'Sẽ bị xóa';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count sẽ bị xóa khỏi $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Giữ tiến độ cao hơn';
 
   @override
@@ -4304,9 +4196,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Sẽ không đọc';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Đã có trong danh sách này';
 
   @override
   String get animePlanetNewList => 'Tên danh sách mới';
@@ -5650,9 +5539,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Việc giải phóng mặt bằng đã đạt được thông qua một tác nhân người dùng khác nên nó không được gửi. Kiểm tra kết nối để có kết nối mới';
-
-  @override
-  String get watchSectionConnection => 'Kết nối';
 
   @override
   String get watchSectionSession => 'Phiên';
@@ -7511,13 +7397,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get downloadPickAudio => 'Tải track âm thanh nào?';
 
   @override
-  String get downloadNoAudio => 'Không có âm thanh thêm';
-
-  @override
   String get downloadAudio => 'Âm thanh';
-
-  @override
-  String get downloadNoSubtitle => 'Không phụ đề';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8352,11 +8232,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get generalSectionPrivacy => 'Quyền riêng tư';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Chuyển sang $service để mở cái này';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Tốc độ mặc định, tự động phát, điều chỉnh video, định hướng và hình ảnh trong ảnh';
 
@@ -8669,9 +8544,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Đang chờ';
-
-  @override
   String get stepChecking => 'Đang kiểm tra…';
 
   @override
@@ -8742,14 +8614,7 @@ class AppLocalizationsVi extends AppLocalizations {
       'Kéo huy hiệu vào góc của thẻ đầu tiên hoặc kéo huy hiệu đã có trên đó để di chuyển huy hiệu đó. Các huy hiệu có thể hoán đổi vị trí nên không có huy hiệu nào trùng lặp. Nhấn vào một huy hiệu bên dưới để bật hoặc tắt huy hiệu đó.';
 
   @override
-  String get statusAuto => 'Tự động';
-
-  @override
   String get unreadCounter => 'Bộ đếm chưa đọc';
-
-  @override
-  String get unreadCounterDesc =>
-      'Hiển thị số tập hoặc chương còn lại trên áp phích';
 
   @override
   String get settingsShortcuts => 'Phím tắt';
@@ -8786,9 +8651,6 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'Đặt lại về mặc định';
-
-  @override
-  String get shortcutClearKeys => 'Xóa tất cả các phím';
 
   @override
   String get shortcutResetAll => 'Đặt lại tất cả phím tắt';
@@ -8975,10 +8837,6 @@ class AppLocalizationsVi extends AppLocalizations {
   String get closeActionAlways => 'Luôn chạy trong khay';
 
   @override
-  String get closeActionNoTray =>
-      'Khay hệ thống không có ở đây nên ứng dụng sẽ thoát khi đóng';
-
-  @override
   String get gamepadNav => 'Điều hướng trên tay cầm chơi game';
 
   @override
@@ -9052,9 +8910,6 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Video không thể phát cho đến khi trình phát được tải xuống lại.';
-
-  @override
-  String get trailerLoading => 'Đang tải đoạn giới thiệu…';
 
   @override
   String get trailerFailed =>

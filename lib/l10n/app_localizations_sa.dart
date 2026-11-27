@@ -423,10 +423,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get settingsSyncSignIn => 'GitHub इत्यनेन सह प्रवेशं कुर्वन्तु';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'सेटिङ्ग्स् भवतः खाते निज-सार-मध्ये संगृहीताः भवन्ति';
-
-  @override
   String get settingsSyncToken => 'व्यक्तिगतप्रवेशटोकनस्य उपयोगं कुर्वन्तु';
 
   @override
@@ -445,20 +441,8 @@ class AppLocalizationsSa extends AppLocalizations {
   String get settingsSyncSignOut => 'साइन आउट् कुर्वन्तु';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'GitHub इत्यत्र $code इति प्रविशन्तु';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'भवतः ब्राउजरे GitHub पृष्ठं उद्घाटितम् । कोडस्य प्रतिलिपिं कर्तुं ट्याप् कुर्वन्तु, अथवा रद्दं कर्तुं ट्याप् कृत्वा धारयन्तु ।';
-
-  @override
   String get settingsSyncSignInFailed =>
       'GitHub इत्यत्र प्रवेशं कर्तुं न शक्तवान्';
-
-  @override
-  String get dcPreview => 'पूर्वावलोकनम्';
 
   @override
   String get dcSampleWatching => 'पश्यन्';
@@ -480,21 +464,7 @@ class AppLocalizationsSa extends AppLocalizations {
   String get dcMemberList => 'सदस्यसूचौ';
 
   @override
-  String get dcAccount => 'खाता';
-
-  @override
-  String get dcSignIn => 'Discord इत्यनेन सह प्रवेशं कुर्वन्तु';
-
-  @override
   String get dcSignOut => 'साइन आउट् कुर्वन्तु';
-
-  @override
-  String get dcDesktopHint =>
-      'संयोजनं विना Discord इत्येतत् डेस्कटॉप् एप् मार्गेण “Watching Dartotsu” इति दर्शयति । मोबाईले सहितं स्वस्य शीर्षकस्य नामधेयेन क्रियाकलापस्य नामकरणार्थं Discord संयोजयन्तु।';
-
-  @override
-  String get dcMobileHint =>
-      'भवन्तः किं पश्यन्ति वा पठन्ति वा इति दर्शयितुं Discord इत्येतत् संयोजयन्तु। एतत् Discord’s authorize page इत्यस्य उपयोगं करोति, न तु भवतः account token इत्यस्य ।';
 
   @override
   String get dcConnect => 'विवादं संयोजयन्तु';
@@ -718,12 +688,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get dcRecommended => 'अनुशंसितम्';
 
   @override
-  String get dcConnecting => 'संयोजयन्...';
-
-  @override
-  String get dcDisconnected => 'न संबद्धः';
-
-  @override
   String dcSignedInAs(String name) {
     return '$name इति नाम्ना प्रवेशः कृतः ।';
   }
@@ -921,15 +885,7 @@ class AppLocalizationsSa extends AppLocalizations {
   String get settingsSyncWhat => 'किं समन्वयितव्यम्';
 
   @override
-  String get settingsSyncServer => 'सर्वरे';
-
-  @override
   String get settingsSyncServerEmpty => 'अद्यापि किमपि अपलोड् न कृतम्';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count सेटिंग्स्, अपलोड् $time तः $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'एतत् यन्त्रम्';
@@ -958,11 +914,6 @@ class AppLocalizationsSa extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'अन्तिम समन्वयित $time .';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'समन्वयनं विफलम्: $error';
   }
 
   @override
@@ -1742,22 +1693,11 @@ class AppLocalizationsSa extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'तव Discord-प्रोफाइल् मध्ये त्वं किं करोषि इति दर्शय। तव Discord-टोकन् आवश्यकम्।';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'तव Discord-प्रोफाइल् मध्ये त्वं किं करोषि इति दर्शय। Discord डेस्कटॉप्-ऐप् चलनीयम्।';
-
-  @override
   String get discordBrowsing => 'ब्राउज़िङ्-क्रियां दर्शय';
 
   @override
   String get discordBrowsingDesc =>
       'यत् पश्यसि पठसि वा तत् केवलं न, यत् टैब्, पृष्ठं प्रोफाइल् वा पश्यसि तदपि दर्शय।';
-
-  @override
-  String get discordLookHeader => 'उपस्थिति-रूपम्';
 
   @override
   String get discordActivityType => 'क्रिया-प्रकारः';
@@ -1797,9 +1737,6 @@ class AppLocalizationsSa extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'अनिमे-मांगा-नामानि (आवरणं लिङ्कं च सह) \"किञ्चित् गुप्तम्\" इत्यनेन स्थापय।';
-
-  @override
-  String get discordConnectionHeader => 'संयोजनम्';
 
   @override
   String get listSearchHint => 'एतस्यां सूच्यां अन्विष्य';
@@ -1857,13 +1794,6 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord टोकन्';
-
-  @override
-  String get discordTokenSaved =>
-      'रक्षितम्। परिवर्तनार्थं स्पृश, अपनयनार्थं दीर्घं नुद।';
-
-  @override
-  String get discordTokenNotSet => 'न स्थापितम्। योजनार्थं स्पृश।';
 
   @override
   String get discordTokenSavedSnack => 'Discord टोकन् रक्षितम्';
@@ -2061,9 +1991,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get mangaBakaAccountOptions => 'MangaBaka खाता-विकल्पाः';
 
   @override
-  String get comickAccountOptions => 'खाता विकल्पाः हास्यं कुर्वन्तु';
-
-  @override
   String get comickClientId => 'Comic क्लायन्ट आईडी';
 
   @override
@@ -2157,9 +2084,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get simklReadOnly => 'Simkl केवल-पठन-प्रवेशं दत्तवान्';
 
   @override
-  String get traktReadOnly => 'Trakt इत्यनेन केवलं पठनीयप्रवेशः अनुमोदितः';
-
-  @override
   String get incognitoEditsBlocked => 'गुप्तमोडः: सूची-सम्पादनानि निरुद्धानि';
 
   @override
@@ -2239,9 +2163,6 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get otherWorks => 'अन्ये कार्यक्रमाः';
-
-  @override
-  String get prequelSequel => 'पूर्वभागः उत्तरभागः च';
 
   @override
   String get prequel => 'प्रीक्वेल';
@@ -2385,16 +2306,7 @@ class AppLocalizationsSa extends AppLocalizations {
   String get trailerQuality => 'ट्रेलर गुणवत्ता';
 
   @override
-  String get titleCopied => 'शीर्षकं प्रतिलिखितम्';
-
-  @override
   String get linkCopied => 'लिङ्कः प्रतिलिखितः';
-
-  @override
-  String get watchTrailer => 'ट्रेलर् पश्य';
-
-  @override
-  String get copyTitle => 'शीर्षकं प्रतिलिख';
 
   @override
   String get detailStale =>
@@ -3379,9 +3291,6 @@ class AppLocalizationsSa extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'बैकप् कुत्र रक्षितव्यम् इति चिनु';
-
-  @override
   String savedPath(String path) {
     return '$path मध्ये रक्षितम्';
   }
@@ -3951,9 +3860,6 @@ class AppLocalizationsSa extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'इदानीं प्रसार्यमाणानां शीर्षकाणां कृते';
-
-  @override
   String get progress => 'प्रगतिः';
 
   @override
@@ -4159,11 +4065,6 @@ class AppLocalizationsSa extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'आकारः: $size';
-  }
-
-  @override
   String get installedState => 'स्थापितम्';
 
   @override
@@ -4263,11 +4164,6 @@ class AppLocalizationsSa extends AppLocalizations {
       'अन्यसेवायाः समीपे अद्यापि याः न सन्ति ताः अपि योजय';
 
   @override
-  String syncServiceOn(String name) {
-    return '$name इत्यनेन सह समन्वयनम् ।';
-  }
-
-  @override
   String get syncDelete => 'मुख्यसेवायां यत् नास्ति तत् विलोपयन्तु';
 
   @override
@@ -4298,11 +4194,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get syncDeletedNote => 'लोपः भविष्यति';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count $name तः लोपः भविष्यति ।';
-  }
-
-  @override
   String get syncOnlyForward => 'अग्रिमां प्रगतिं रक्ष';
 
   @override
@@ -4314,9 +4205,6 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'न पठिष्यति';
-
-  @override
-  String get animePlanetAlreadyOnList => 'पूर्वमेव अस्मिन् सूचौ';
 
   @override
   String get animePlanetNewList => 'नवीनसूचीनाम';
@@ -5667,9 +5555,6 @@ class AppLocalizationsSa extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'अन्येन उपयोक्तृ-एजेण्टेन सह निकासी अर्जिता आसीत्, अतः न प्रेष्यते । नूतनं प्राप्तुं संयोजनस्य परीक्षणं कुर्वन्तु';
-
-  @override
-  String get watchSectionConnection => 'संबन्धः';
 
   @override
   String get watchSectionSession => 'सत्रम्';
@@ -7536,13 +7421,7 @@ class AppLocalizationsSa extends AppLocalizations {
   String get downloadPickAudio => 'कः ध्वनि-मार्गः डाउनलोड् कर्तव्यः?';
 
   @override
-  String get downloadNoAudio => 'अतिरिक्त-ध्वनिः नास्ति';
-
-  @override
   String get downloadAudio => 'ध्वनिः';
-
-  @override
-  String get downloadNoSubtitle => 'उपशीर्षकं नास्ति';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8384,11 +8263,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get generalSectionPrivacy => 'गोपनीयता';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'एतत् उद्घाटयितुं $service इत्यत्र स्विच कुर्वन्तु';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'डिफ़ॉल्ट् स्पीड्, ऑटो प्ले, विडियो फिट्, ओरिएण्टेशन तथा चित्रे चित्रम्';
 
@@ -8704,9 +8578,6 @@ class AppLocalizationsSa extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'प्रतीक्षमाणः';
-
-  @override
   String get stepChecking => 'जाँचं कुर्वन्...';
 
   @override
@@ -8778,14 +8649,7 @@ class AppLocalizationsSa extends AppLocalizations {
       'प्रथमपत्तेः कोणे एकं बिल्लां कर्षयन्तु, अथवा तत् चालयितुं तस्मिन् पूर्वमेव स्थितं बिल्लां कर्षयन्तु । बिल्लाः स्थानानि आदानप्रदानं कुर्वन्ति, अतः कदापि कोऽपि अतिव्याप्तः न भवति । अधः एकं बिल्लां ट्याप् कुर्वन्तु तत् चालू वा निष्क्रियं कर्तुं वा।';
 
   @override
-  String get statusAuto => 'ऑटो';
-
-  @override
   String get unreadCounter => 'अपठित गणक';
-
-  @override
-  String get unreadCounterDesc =>
-      'पोस्टरेषु कति प्रकरणाः अध्यायाः वा अवशिष्टाः इति दर्शयतु';
 
   @override
   String get settingsShortcuts => 'कीबोर्ड शॉर्टकट्';
@@ -8824,9 +8688,6 @@ class AppLocalizationsSa extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'पूर्वनिर्धारितरूपेण पुनः सेट् कुर्वन्तु';
-
-  @override
-  String get shortcutClearKeys => 'सर्वाणि कीलानि निष्कासयन्तु';
 
   @override
   String get shortcutResetAll => 'सर्वाणि शॉर्टकट् पुनः सेट् कुर्वन्तु';
@@ -9014,10 +8875,6 @@ class AppLocalizationsSa extends AppLocalizations {
   String get closeActionAlways => 'सर्वदा ट्रे मध्ये धावन्तु';
 
   @override
-  String get closeActionNoTray =>
-      'अत्र सिस्टम् ट्रे उपलब्धा नास्ति, अतः एप् पिहिते सति निर्गच्छति';
-
-  @override
   String get gamepadNav => 'गेमपैड नेविगेशन';
 
   @override
@@ -9091,9 +8948,6 @@ class AppLocalizationsSa extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'यावत् प्लेयर पुनः डाउनलोड् न भवति तावत् यावत् वीडियो वादयितुं न शक्नुवन्ति।';
-
-  @override
-  String get trailerLoading => 'ट्रेलरं लोड् कुर्वन्...';
 
   @override
   String get trailerFailed =>

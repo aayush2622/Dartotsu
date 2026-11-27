@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "په بدلون کې همغږي",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "د GitHub سره لاسلیک وکړئ",
-    "settingsSyncSignInDesc": "تنظیمات ستاسو په اکاونټ کې په شخصي لنډیز کې زیرمه شوي",
     "settingsSyncToken": "د شخصي لاسرسي نښه وکاروئ",
     "settingsSyncTokenDesc": "یوازې د لنډې اجازې سره github.com/settings/tokens کې یو جوړ کړئ",
     "settingsSyncTokenField": "ټوکن",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "ننوتل",
-    "settingsSyncCode": "په GitHub کې {code} داخل کړئ",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "د GitHub پاڼه ستاسو په براوزر کې پرانستل شوه. د کوډ کاپي کولو لپاره ټایپ کړئ، یا د لغوه کولو لپاره ټایپ او ونیسئ.",
     "settingsSyncSignInFailed": "GitHub ته ننوتل نشو کولی",
-    "dcPreview": "مخکتنه",
     "dcSampleWatching": "کتل",
     "dcSampleReading": "لوستل",
     "dcSampleBrowsing": "لټون کول",
     "dcSampleLive": "همدا اوس",
     "dcLiveNothing": "اوس هیڅ شی نه څرګندیږي. سرلیک خلاص کړئ ، یوه برخه یا فصل پیل کړئ او دا دلته څرګندیږي.",
     "dcMemberList": "د غړو په لیست کې",
-    "dcAccount": "حساب",
-    "dcSignIn": "د Discord سره لاسلیک وکړئ",
     "dcSignOut": "ننوتل",
-    "dcDesktopHint": "پرته له وصل کیدو ، ډیسکارډ د ډیسټاپ ایپ له لارې \"دارټوټو لیدل\" ښیې. د خپل سرلیک وروسته فعالیت ته نوم ورکولو لپاره Discord وصل کړئ ، پشمول په موبایل کې.",
-    "dcMobileHint": "Discord وصل کړئ ترڅو وښیې چې تاسو څه ګورئ یا لوستل کوئ. دا د ډیسکارډ مجاز پاڼه کاروي، نه ستاسو د حساب نښه.",
     "dcConnect": "Discord وصل کړئ",
     "dcConnectDesc": "د ډیسکارډ اختیار پاڼه خلاصوي او د اختیار شوي ایپس لاندې ډارټوټو اضافه کوي. Discord ستاسو د شتون تازه کولو غوښتنه کوي. یوازې د تازه کولو نښه خوندي کیږي ، نه ستاسو د حساب نښه.",
     "dcConnectFailed": "Discord وصل نشو",
@@ -254,8 +241,6 @@
     "dcMethodToken": "د حساب نښه",
     "dcInUse": "په استعمال کې",
     "dcRecommended": "وړاندیز شوی",
-    "dcConnecting": "نښلول…",
-    "dcDisconnected": "تړلی نه دی",
     "dcSignedInAs": "د {name} په توګه لاسلیک شوی",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "د GitHub څخه حذف کړئ",
     "settingsSyncSecretsDeleteMessage": "دا ستاسو له لنډیز څخه د کوډ شوي حسابونو فایل لرې کوي. نور وسایل خپل لاسلیکونه ساتي او کولی شي یو نوی پاسفریج ترتیب کړي.",
     "settingsSyncWhat": "څه همغږي کول",
-    "settingsSyncServer": "په سرور کې",
     "settingsSyncServerEmpty": "تراوسه هیڅ شی نه دی پورته شوی",
-    "settingsSyncServerInfo": "{count} ترتیبات، پورته شوي {time} له {device} څخه",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "دا وسیله",
     "settingsSyncCount": "{count, plural, =0{په سرور کې هیڅ شی نشته} =1{په سرور کې 1 ترتیب} other{په سرور کې {count} ترتیبات}}",
     "settingsSyncNow": "همدا اوس همغږي کړئ",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "همغږي ناکامه شوه: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "یوازې هغه ترتیبات چې هرچیرې ورته کار کوي همغږي شوي. حسابونه، ټوکنونه، فولډرې، توسیعونه، خبرتیاوې، ډیسکارډ، تازه معلومات او د کړکۍ اندازه په هر وسیله کې پاتې کیږي.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "د لینکونو اداره چالان کړه چې د anilist.co لینکونه اپ پرانیزي",
     "linkSettingsFailed": "د سیستم تنظیمات ونه پرانیستل شول",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "په خپل Discord پروفایل کې وښیه چې ته څه کوې. ستا د Discord ټوکن ته اړتیا ده.",
-    "discordRichPresenceDesktopDesc": "په خپل Discord پروفایل کې وښیه چې ته څه کوې. د Discord ډیسکټاپ اپ باید روان وي.",
     "discordBrowsing": "د کتنې فعالیت وښیه",
     "discordBrowsingDesc": "نه یوازې هغه څه چې ګورې یا لولې یې، بلکې هغه ټب، پاڼه یا پروفایل هم وښیه چې ګورې یې.",
-    "discordLookHeader": "د حضور بڼه",
     "discordActivityType": "د فعالیت ډول",
     "discordActivityTypeDesc": "Discord یې څنګه لیکي: \"Watching …\" یا \"Playing …\". اتومات د انیمې لپاره Watching او د نورو ټولو لپاره Playing کاروي.",
     "discordWatching": "ګوري",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"View anime / manga\" او \"Open Dartotsu\" تڼۍ.",
     "discordHideTitles": "سرلیکونه پټ کړه",
     "discordHideTitlesDesc": "د انیمې او مانګا نومونه (او د هغوی پوښ او لینک) د \"Something private\" په نوم بدل کړه.",
-    "discordConnectionHeader": "اړیکه",
     "listSearchHint": "پدې لیست کې لټون",
     "listSort": "ترتیب",
     "listFilter": "فلټر",
@@ -671,8 +637,6 @@
     "listNoMatches": "پدې لیست کې هېڅ نه برابرېږي",
     "discordLogin": "په Discord کې ننوځه",
     "discordToken": "د Discord ټوکن",
-    "discordTokenSaved": "خوندي دی. د بدلولو لپاره ټچ کړه، د لرې کولو لپاره اوږد وساته.",
-    "discordTokenNotSet": "نه دی ټاکل شوی. د اضافه کولو لپاره ټچ کړه.",
     "discordTokenSavedSnack": "د Discord ټوکن خوندي شو",
     "discordTokenRemovedSnack": "د Discord ټوکن لرې شو",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "بالغ سرلیکونه له فیډونو او لټون څخه لرې وساته، او خپل بالغ ننوتنې د پټ میډیا لاندې وښیه.",
     "kitsuAccountOptions": "د Kitsu د حساب غوراوي",
     "mangaBakaAccountOptions": "د MangaBaka د حساب اختیارونه",
-    "comickAccountOptions": "د کامیک حساب اختیارونه",
     "comickClientId": "د کامیک پیرودونکي ID",
     "comickClientIdDesc": "د ګمرک پیرودونکي ID په comick.dev کې ثبت شوی",
     "couldNotUpdateKitsuSettings": "ستا د Kitsu تنظیمات تازه نه شول",
@@ -761,7 +724,6 @@
     "accountDetails": "د حساب جزیات",
     "refreshFromKitsu": "له Kitsu څخه تازه کړه",
     "simklReadOnly": "Simkl یوازې د لوستلو لاسرسی ورکړ",
-    "traktReadOnly": "Trakt ته یوازې د لوستلو لاسرسی ورکړل شوی",
     "incognitoEditsBlocked": "پټ حالت: د لیست سمونې بندې دي",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "پټ حالت: پرمختګ خوندي نه شو",
@@ -786,7 +748,6 @@
     "mangaCredits": "د مانګا کریډیټونه",
     "mainProductions": "اصلي تولیدات",
     "otherWorks": "نور کارونه",
-    "prequelSequel": "پریکوېل او سیکوېل",
     "prequel": "پریکویل",
     "sequel": "پرله پسې",
     "previousSeason": "تېر فصل",
@@ -833,10 +794,7 @@
     "addToList": "لیست ته اضافه کړه",
     "trailer": "تریلر",
     "trailerQuality": "د ټریلر کیفیت",
-    "titleCopied": "سرلیک کاپي شو",
     "linkCopied": "لینک کاپي شو",
-    "watchTrailer": "تریلر وګوره",
-    "copyTitle": "سرلیک کاپي کړه",
     "detailStale": "اینی لیست ته رسیدلی نه شو. دا معلومات خوندي شوي او کیدای شي زاړه وي.",
     "copyLink": "لینک کاپي کړه",
     "openInBrowser": "په براوزر کې پرانیزه",
@@ -1139,7 +1097,6 @@
     "import": "واردول",
     "animeCount": "{count} انیمې",
     "mangaCount": "{count} مانګا",
-    "chooseSaveLocation": "وټاکه چې بیک‌اپ چېرته خوندي کړې",
     "savedPath": "{path} خوندي شو",
     "exportFailed": "صادرول ناکام شول: {error}",
     "nothingInLocalLists": "ستا په ځایي لیستونو کې تر اوسه هېڅ نشته.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "د لینک په پرانیستلو کې تېروتنه: {error}",
     "linkCantBeOpened": "دا لینک نه پرانیستل کېږي: {link}",
     "linkOpenError": "د لینک په پرانیستلو کې تېروتنه: {error}",
-    "forReleasingTitles": "د اوس خپرېدونکو سرلیکونو لپاره",
     "progress": "پرمختګ",
     "notes": "یادښتونه",
     "serviceNotFound": "خدمت \"{id}\" ونه موندل شو",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} په ټاکل شوې ذخیره کې شته نه دی",
     "pluginFetchFailed": "د پلګین معلومات ونه اخیستل شول",
     "installPluginTitle": "{name} نصب کړه",
-    "sizeLabel": "اندازه: {size}",
     "installedState": "نصب شوی",
     "updatePluginTitle": "تازه کول {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "کله چې اپ پرانیستل کېږي او هر ۳۰ دقیقې وروسته په شاليد کې راوله او همغږی کړه",
     "syncAddMissing": "ورک ننوتنې اضافه کړه",
     "syncAddMissingDesc": "هغه ننوتنې هم اضافه کړه چې بل خدمت لا نلري",
-    "syncServiceOn": "د {name} سره همغږي کول",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "هغه څه حذف کړئ چې اصلي خدمت نلري",
     "syncDeleteDesc": "د نورو خدماتو څخه ننوتنې لرې کړئ چې په اصلي لیست کې ندي. یوازې هغه ننوتل چې د سرلیک سره سمون لري لرې شوي، نو د سمکل فلمونو او لړۍ په څیر شیان پاتې دي",
     "syncDeleteTitle": "ننوتل حذف کړئ؟",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "ړنګول",
     "syncToDelete": "د حذف کولو لپاره",
     "syncDeletedNote": "ړنګ به شي",
-    "syncWillRemove": "{count} به له {name} څخه حذف شي",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "نور پرمختګ وساته",
     "syncOnlyForwardDesc": "د هغه خدمت پرمختګ مه کموه چې مخکې دی",
     "animePlanetWontWatch": "نه ګوري",
     "animePlanetWontRead": "نه لوستل کیږي",
-    "animePlanetAlreadyOnList": "لا دمخه په دې لیست کې",
     "animePlanetNewList": "د نوي لیست نوم",
     "syncPrivate": "شخصي ننوتل",
     "syncPrivateDesc": "د ننوتلو سره څه وکړئ چې تاسو شخصي وساتئ. د شخصي اختیار سره یو خدمت دوی شخصي کوي؛ نور به یې په عامه توګه ښکاره کړي",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "تصفیه د بل کارونکي اجنټ سره ترلاسه شوې ، نو دا نه لیږل کیږي. د نوي ترلاسه کولو لپاره پیوستون ازموئ",
-    "watchSectionConnection": "پیوستون",
     "watchSectionSession": "غونډه",
     "watchSectionTools": "وسیلې",
     "watchMetaSource": "د برخې جزیات له",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "کوم سټرېم ډاونلوډ کړو؟",
     "downloadPickSubtitle": "کوم فرعي سرلیک ډاونلوډ کړو؟",
     "downloadPickAudio": "کوم غږیز ټراک ډاونلوډ کړو؟",
-    "downloadNoAudio": "اضافي غږ نشته",
     "downloadAudio": "غږ",
-    "downloadNoSubtitle": "فرعي سرلیک نشته",
     "downloadHlsNeedsFfmpeg": "دا سټرېم د HLS پلی‌لیست دی. د ډاونلوډ لپاره یې د FFmpeg اضافه ته اړتیا ده.",
     "downloadSourceMissing": "د دې برخې سرچینه نصب شوې نه ده",
     "downloadDashDrm": "دا جریان د DRM خوندي دی",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ژبه او چلند",
     "generalSectionSecurity": "امنیت",
     "generalSectionPrivacy": "محرمیت",
-    "notificationsOtherService": "د دې خلاصولو لپاره {service} ته لاړشئ",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "د ډیفالټ سرعت ، اتومات پلی کول ، ویډیو فټ ، سمت او په عکس کې عکس",
     "secPlayerSkip": "پرانیستې، پای او بیاکتنې په اوتومات ډول پریږدئ",
     "secPlayerControls": "اشارو ته سوائپ کړئ، ونیسئ او ټایپ کړئ او مخکتنه وغواړئ",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "انتظار",
     "stepChecking": "چک کول…",
     "stepUpToDate": "تر نیټې پورې",
     "stepUpToDateWith": "تر نیټې · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "منګا",
     "readerCloudflare": "په براوزر کې خلاص کړئ (Cloudflare چیک)",
     "badgeBoardHint": "د لومړي کارت په یوه کونج کې یو بیج کش کړئ، یا د هغې د حرکت کولو لپاره مخکې له مخکې یو بیج کش کړئ. بیجونه ځایونه بدلوي، نو هیڅ کله هم نه تیریږي. د دې د فعال یا بندولو لپاره لاندې بیج ټایپ کړئ.",
-    "statusAuto": "اتومات",
     "unreadCounter": "نه لوستل شوی کاونټر",
-    "unreadCounterDesc": "وښایاست چې په پوسټرونو کې څومره قسطونه یا فصلونه پاتې دي",
     "settingsShortcuts": "د کیبورډ شارټ کټونه",
     "settingsShortcutsDesc": "هر کلی وګورئ، بدل کړئ او بند کړئ",
     "shortcutGroupApp": "اپلیکیشن",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "ټاکل شوی نه دی",
     "shortcutAddKey": "یو کیلي اضافه کړئ",
     "shortcutResetOne": "ډیفالټ ته بیا تنظیم کړئ",
-    "shortcutClearKeys": "ټولې کیلي لرې کړئ",
     "shortcutResetAll": "ټول شارټ کټونه بیا تنظیم کړئ",
     "shortcutResetAllDesc": "هر کلی بیرته خپل ډیفالټ ته واچوئ",
     "shortcutPress": "هغه کیلي یا ترکیب فشار کړئ چې تاسو یې غواړئ",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "اپلیکیشن پریږدئ",
     "closeActionWhenBusy": "په ټری کې چلولو ته دوام ورکړئ پداسې حال کې چې یو څه روان وي",
     "closeActionAlways": "تل په ټری کې چلولو ته دوام ورکړئ",
-    "closeActionNoTray": "د سیسټم ټری دلته شتون نلري، نو اپلیکیشن بندیږي کله چې وتړل شي",
     "gamepadNav": "د لوبې پیډ نیویګیشن",
     "gamepadNavDesc": "د اپلیکیشن شاوخوا حرکت وکړئ او لوبغاړی د لوبې کنټرولر سره کنټرول کړئ",
     "trayShow": "Dartotsu ښودل",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "کاپي توضیحات",
     "removePlayerTitle": "لوبغاړی لرې کړئ؟",
     "removePlayerMessage": "ویډیو نشي پلی کولی تر هغه چې پلیر بیا ډاونلوډ شوی نه وي.",
-    "trailerLoading": "ټریلر پورته کول…",
     "trailerFailed": "دلته ټریلر نشي پلی کولی، په براوزر کې یې پرانیزئ"
 }

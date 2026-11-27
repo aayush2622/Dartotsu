@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Συγχρονισμός κατά την αλλαγή",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Συνδεθείτε με το GitHub",
-    "settingsSyncSignInDesc": "Οι ρυθμίσεις αποθηκεύονται σε μια ιδιωτική ουσία στο λογαριασμό σας",
     "settingsSyncToken": "Χρησιμοποιήστε ένα προσωπικό διακριτικό πρόσβασης",
     "settingsSyncTokenDesc": "Δημιουργήστε ένα στο github.com/settings/tokens με μόνο την άδεια ουσίας",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Αποσυνδεθείτε",
-    "settingsSyncCode": "Εισαγάγετε {code} στο GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "Η σελίδα GitHub άνοιξε στο πρόγραμμα περιήγησής σας. Πατήστε για να αντιγράψετε τον κωδικό ή πατήστε παρατεταμένα για ακύρωση.",
     "settingsSyncSignInFailed": "Δεν ήταν δυνατή η σύνδεση στο GitHub",
-    "dcPreview": "Προεπισκόπηση",
     "dcSampleWatching": "Παρακολούθηση",
     "dcSampleReading": "Διαβάζοντας",
     "dcSampleBrowsing": "Περιήγηση",
     "dcSampleLive": "Αυτή τη στιγμή",
     "dcLiveNothing": "Τίποτα δεν φαίνεται αυτή τη στιγμή. Ανοίξτε έναν τίτλο, ξεκινήστε ένα επεισόδιο ή ένα κεφάλαιο και εμφανίζεται εδώ.",
     "dcMemberList": "Στη λίστα μελών",
-    "dcAccount": "Λογαριασμός",
-    "dcSignIn": "Συνδεθείτε με το Discord",
     "dcSignOut": "Αποσυνδεθείτε",
-    "dcDesktopHint": "Χωρίς σύνδεση, το Discord εμφανίζει το \"Watching Dartotsu\" μέσω της εφαρμογής επιφάνειας εργασίας. Συνδέστε το Discord για να ονομάσετε τη δραστηριότητα με τον τίτλο σας, ακόμη και στο κινητό.",
-    "dcMobileHint": "Συνδέστε το Discord για να δείξετε τι παρακολουθείτε ή διαβάζετε. Χρησιμοποιεί τη σελίδα εξουσιοδότησης του Discord, όχι το διακριτικό του λογαριασμού σας.",
     "dcConnect": "Συνδέστε το Discord",
     "dcConnectDesc": "Ανοίγει τη σελίδα εξουσιοδότησης του Discord και προσθέτει το Dartotsu στις Εξουσιοδοτημένες εφαρμογές. Το Discord ζητά να ενημερώσει την παρουσία σας. Αποθηκεύεται μόνο ένα διακριτικό ανανέωσης, όχι το διακριτικό του λογαριασμού σας.",
     "dcConnectFailed": "Δεν ήταν δυνατή η σύνδεση του Discord",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Διακριτικό λογαριασμού",
     "dcInUse": "Σε χρήση",
     "dcRecommended": "Συνιστάται",
-    "dcConnecting": "Σύνδεση…",
-    "dcDisconnected": "Δεν είναι συνδεδεμένο",
     "dcSignedInAs": "Συνδεθήκατε ως {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Διαγραφή από το GitHub",
     "settingsSyncSecretsDeleteMessage": "Αυτό αφαιρεί το αρχείο κρυπτογραφημένων λογαριασμών από την ουσία σας. Άλλες συσκευές διατηρούν τις συνδέσεις τους και μπορούν να ορίσουν μια νέα φράση πρόσβασης.",
     "settingsSyncWhat": "Τι να συγχρονίσετε",
-    "settingsSyncServer": "Στον διακομιστή",
     "settingsSyncServerEmpty": "Δεν έχει ανέβει τίποτα ακόμα",
-    "settingsSyncServerInfo": "Ρυθμίσεις {count}, μεταφορτώθηκαν {time} από {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "αυτή τη συσκευή",
     "settingsSyncCount": "{count, plural, =0{Τίποτα στον διακομιστή} =1{1 ρύθμιση στον διακομιστή} other{ρυθμίσεις {count} στον διακομιστή}}",
     "settingsSyncNow": "Συγχρονισμός τώρα",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Ο συγχρονισμός απέτυχε: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Συγχρονίζονται μόνο οι ρυθμίσεις που λειτουργούν το ίδιο παντού. Οι λογαριασμοί, τα διακριτικά, οι φάκελοι, οι επεκτάσεις, οι ειδοποιήσεις, το Discord, οι ενημερώσεις και το μέγεθος παραθύρου παραμένουν σε κάθε συσκευή.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Ενεργοποίησε τη διαχείριση συνδέσμων ώστε οι σύνδεσμοι anilist.co να ανοίγουν την εφαρμογή",
     "linkSettingsFailed": "Δεν άνοιξαν οι ρυθμίσεις συστήματος",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Δείξε στο προφίλ σου στο Discord τι κάνεις. Χρειάζεται το token του Discord.",
-    "discordRichPresenceDesktopDesc": "Δείξε στο προφίλ σου στο Discord τι κάνεις. Χρειάζεται να τρέχει η εφαρμογή Discord για υπολογιστή.",
     "discordBrowsing": "Εμφάνιση δραστηριότητας περιήγησης",
     "discordBrowsingDesc": "Δείξε και την καρτέλα, τη σελίδα ή το προφίλ που βλέπεις, όχι μόνο ό,τι παρακολουθείς ή διαβάζεις.",
-    "discordLookHeader": "Εμφάνιση του presence",
     "discordActivityType": "Τύπος δραστηριότητας",
     "discordActivityTypeDesc": "Πώς το διατυπώνει το Discord: \"Παρακολουθεί …\" ή \"Παίζει …\". Το Αυτόματο χρησιμοποιεί Παρακολουθεί για anime και Παίζει για όλα τα υπόλοιπα.",
     "discordWatching": "Παρακολουθεί",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Κουμπιά \"Προβολή anime / manga\" και \"Άνοιγμα Dartotsu\".",
     "discordHideTitles": "Απόκρυψη τίτλων",
     "discordHideTitlesDesc": "Αντικατάσταση ονομάτων anime και manga (και του εξωφύλλου και συνδέσμου τους) με \"Κάτι ιδιωτικό\".",
-    "discordConnectionHeader": "Σύνδεση",
     "listSearchHint": "Αναζήτηση σε αυτή τη λίστα",
     "listSort": "Ταξινόμηση",
     "listFilter": "Φίλτρο",
@@ -671,8 +637,6 @@
     "listNoMatches": "Τίποτα σε αυτή τη λίστα δεν ταιριάζει",
     "discordLogin": "Σύνδεση στο Discord",
     "discordToken": "Token Discord",
-    "discordTokenSaved": "Αποθηκεύτηκε. Πάτα για αντικατάσταση, παρατεταμένα για αφαίρεση.",
-    "discordTokenNotSet": "Δεν έχει οριστεί. Πάτα για προσθήκη.",
     "discordTokenSavedSnack": "Το token Discord αποθηκεύτηκε",
     "discordTokenRemovedSnack": "Το token Discord αφαιρέθηκε",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Κράτα τους τίτλους ενηλίκων εκτός ροών και αναζήτησης και δες τις δικές σου εγγραφές ενηλίκων στα Κρυμμένα μέσα.",
     "kitsuAccountOptions": "Επιλογές λογαριασμού Kitsu",
     "mangaBakaAccountOptions": "Επιλογές λογαριασμού MangaBaka",
-    "comickAccountOptions": "Επιλογές λογαριασμού Comick",
     "comickClientId": "Αναγνωριστικό πελάτη Comick",
     "comickClientIdDesc": "Προσαρμοσμένο αναγνωριστικό πελάτη καταχωρημένο στο comick.dev",
     "couldNotUpdateKitsuSettings": "Δεν ενημερώθηκαν οι ρυθμίσεις σου στο Kitsu",
@@ -761,7 +724,6 @@
     "accountDetails": "Στοιχεία λογαριασμού",
     "refreshFromKitsu": "Ανανέωση από το Kitsu",
     "simklReadOnly": "Το Simkl έδωσε πρόσβαση μόνο για ανάγνωση",
-    "traktReadOnly": "Παραχωρήθηκε στο Trakt πρόσβαση μόνο για ανάγνωση",
     "incognitoEditsBlocked": "Ινκόγκνιτο: οι αλλαγές στις λίστες είναι μπλοκαρισμένες",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Ινκόγκνιτο: η πρόοδος δεν αποθηκεύτηκε",
@@ -786,7 +748,6 @@
     "mangaCredits": "Συμμετοχές σε manga",
     "mainProductions": "Βασικές παραγωγές",
     "otherWorks": "Άλλα έργα",
-    "prequelSequel": "Prequel & Sequel",
     "prequel": "Prequel",
     "sequel": "συνέχεια",
     "previousSeason": "Προηγούμενη σεζόν",
@@ -833,10 +794,7 @@
     "addToList": "Προσθήκη στη λίστα",
     "trailer": "Τρέιλερ",
     "trailerQuality": "Ποιότητα τρέιλερ",
-    "titleCopied": "Ο τίτλος αντιγράφηκε",
     "linkCopied": "Ο σύνδεσμος αντιγράφηκε",
-    "watchTrailer": "Προβολή trailer",
-    "copyTitle": "Αντιγραφή τίτλου",
     "detailStale": "Δεν ήταν δυνατή η πρόσβαση στο AniList. Αυτές είναι αποθηκευμένες πληροφορίες και ενδέχεται να είναι παλιές.",
     "copyLink": "Αντιγραφή συνδέσμου",
     "openInBrowser": "Άνοιγμα στο πρόγραμμα περιήγησης",
@@ -1139,7 +1097,6 @@
     "import": "Εισαγωγή",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Διάλεξε πού θα αποθηκευτεί το αντίγραφο",
     "savedPath": "Αποθηκεύτηκε {path}",
     "exportFailed": "Η εξαγωγή απέτυχε: {error}",
     "nothingInLocalLists": "Δεν υπάρχει τίποτα στις τοπικές λίστες σου ακόμα.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Σφάλμα ανοίγματος συνδέσμου: {error}",
     "linkCantBeOpened": "Αυτός ο σύνδεσμος δεν ανοίγει: {link}",
     "linkOpenError": "Σφάλμα ανοίγματος συνδέσμου: {error}",
-    "forReleasingTitles": "για τίτλους που προβάλλονται τώρα",
     "progress": "Πρόοδος",
     "notes": "Σημειώσεις",
     "serviceNotFound": "Η υπηρεσία \"{id}\" δεν βρέθηκε",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "Το {name} δεν είναι διαθέσιμο στο ρυθμισμένο αποθετήριο",
     "pluginFetchFailed": "Αποτυχία λήψης πληροφοριών plugin",
     "installPluginTitle": "Εγκατάσταση {name}",
-    "sizeLabel": "Μέγεθος: {size}",
     "installedState": "Εγκατεστημένο",
     "updatePluginTitle": "Ενημέρωση {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Λήψη και συγχρονισμός στο παρασκήνιο όταν ανοίγει η εφαρμογή και κάθε 30 λεπτά",
     "syncAddMissing": "Προσθήκη εγγραφών που λείπουν",
     "syncAddMissingDesc": "Πρόσθεσε και εγγραφές που η άλλη υπηρεσία δεν έχει ακόμα",
-    "syncServiceOn": "Συγχρονισμός με {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Διαγράψτε ό,τι δεν έχει η κύρια υπηρεσία",
     "syncDeleteDesc": "Καταργήστε καταχωρήσεις από τις άλλες υπηρεσίες που δεν βρίσκονται στην κύρια λίστα. Καταργούνται μόνο οι καταχωρίσεις που μπορούν να αντιστοιχιστούν σε έναν τίτλο, οπότε πράγματα όπως οι ταινίες και οι σειρές Simkl παραμένουν",
     "syncDeleteTitle": "Διαγραφή καταχωρήσεων;",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Διαγραφή",
     "syncToDelete": "Για διαγραφή",
     "syncDeletedNote": "Θα διαγραφεί",
-    "syncWillRemove": "{count} θα διαγραφεί από {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Διατήρηση μεγαλύτερης προόδου",
     "syncOnlyForwardDesc": "Μην μειώνεις την πρόοδο υπηρεσίας που είναι ήδη μπροστά",
     "animePlanetWontWatch": "Δεν θα παρακολουθήσει",
     "animePlanetWontRead": "Δεν θα διαβάσει",
-    "animePlanetAlreadyOnList": "Ήδη σε αυτή τη λίστα",
     "animePlanetNewList": "Νέο όνομα λίστας",
     "syncPrivate": "Ιδιωτικές καταχωρήσεις",
     "syncPrivateDesc": "Τι να κάνετε με καταχωρήσεις που κρατάτε ιδιωτικές. Μια υπηρεσία με ιδιωτική επιλογή τα καθιστά ιδιωτικά. άλλοι θα τα έδειχναν δημόσια",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Η εκκαθάριση αποκτήθηκε με άλλον παράγοντα χρήστη, επομένως δεν αποστέλλεται. Δοκιμάστε τη σύνδεση για να αποκτήσετε μια νέα",
-    "watchSectionConnection": "Σύνδεση",
     "watchSectionSession": "συνεδρία",
     "watchSectionTools": "Εργαλεία",
     "watchMetaSource": "Λεπτομέρειες επεισοδίων από",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Ποιο stream να κατέβει;",
     "downloadPickSubtitle": "Ποιος υπότιτλος να κατέβει;",
     "downloadPickAudio": "Ποιο κομμάτι ήχου να κατέβει;",
-    "downloadNoAudio": "Χωρίς επιπλέον ήχο",
     "downloadAudio": "Ήχος",
-    "downloadNoSubtitle": "Χωρίς υπότιτλο",
     "downloadHlsNeedsFfmpeg": "Αυτό το stream είναι playlist HLS. Για τη λήψη χρειάζεται το πρόσθετο FFmpeg.",
     "downloadSourceMissing": "Η πηγή για αυτό το επεισόδιο δεν είναι εγκατεστημένη",
     "downloadDashDrm": "Αυτή η ροή προστατεύεται από DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Γλώσσα & συμπεριφορά",
     "generalSectionSecurity": "Ασφάλεια",
     "generalSectionPrivacy": "Απόρρητο",
-    "notificationsOtherService": "Μεταβείτε στο {service} για να το ανοίξετε",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Προεπιλεγμένη ταχύτητα, αυτόματη αναπαραγωγή, προσαρμογή βίντεο, προσανατολισμός και εικόνα σε εικόνα",
     "secPlayerSkip": "Παράβλεψη ανοίγματος, τελειώματος και ανακεφαλαίωση αυτόματα",
     "secPlayerControls": "Σύρετε, κρατήστε πατημένο τις χειρονομίες και αναζητήστε προεπισκόπηση",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Αναμονή",
     "stepChecking": "Έλεγχος…",
     "stepUpToDate": "Επίκαιρο",
     "stepUpToDateWith": "Ενημερωμένο · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Άνοιγμα στο πρόγραμμα περιήγησης (έλεγχος Cloudflare)",
     "badgeBoardHint": "Σύρετε ένα σήμα σε μια γωνία του πρώτου φύλλου ή σύρετε ένα σήμα που βρίσκεται ήδη σε αυτό για να το μετακινήσετε. Τα σήματα ανταλλάσσουν θέσεις, ώστε να μην επικαλύπτονται ποτέ κανένα. Πατήστε ένα σήμα παρακάτω για να το ενεργοποιήσετε ή να το απενεργοποιήσετε.",
-    "statusAuto": "Αυτόματο",
     "unreadCounter": "Μη αναγνωσμένο μετρητή",
-    "unreadCounterDesc": "Δείξτε πόσα επεισόδια ή κεφάλαια έχουν απομείνει στις αφίσες",
     "settingsShortcuts": "Συντομεύσεις πληκτρολογίου",
     "settingsShortcutsDesc": "Δείτε, αλλάξτε και απενεργοποιήστε κάθε πλήκτρο",
     "shortcutGroupApp": "App",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Δεν έχει οριστεί",
     "shortcutAddKey": "Προσθέστε ένα κλειδί",
     "shortcutResetOne": "Επαναφορά στην προεπιλογή",
-    "shortcutClearKeys": "Αφαιρέστε όλα τα κλειδιά",
     "shortcutResetAll": "Επαναφορά όλων των συντομεύσεων",
     "shortcutResetAllDesc": "Επαναφέρετε κάθε κλειδί στην προεπιλογή του",
     "shortcutPress": "Πατήστε το πλήκτρο ή τον συνδυασμό που θέλετε",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Κλείστε την εφαρμογή",
     "closeActionWhenBusy": "Συνεχίστε να τρέχετε στο δίσκο όσο τρέχει κάτι",
     "closeActionAlways": "Να συνεχίζετε να τρέχετε πάντα στο δίσκο",
-    "closeActionNoTray": "Ο δίσκος συστήματος δεν είναι διαθέσιμος εδώ, επομένως η εφαρμογή τερματίζεται όταν είναι κλειστή",
     "gamepadNav": "Πλοήγηση στο Gamepad",
     "gamepadNavDesc": "Μετακινηθείτε στην εφαρμογή και ελέγξτε τον παίκτη με ένα χειριστήριο παιχνιδιών",
     "trayShow": "Εμφάνιση Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Αντιγραφή στοιχείων",
     "removePlayerTitle": "Κατάργηση της συσκευής αναπαραγωγής;",
     "removePlayerMessage": "Δεν είναι δυνατή η αναπαραγωγή των βίντεο μέχρι να γίνει ξανά λήψη του προγράμματος αναπαραγωγής.",
-    "trailerLoading": "Φόρτωση του τρέιλερ…",
     "trailerFailed": "Δεν ήταν δυνατή η αναπαραγωγή του τρέιλερ εδώ, ανοίγοντάς το στο πρόγραμμα περιήγησης"
 }

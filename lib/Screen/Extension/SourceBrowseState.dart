@@ -1,3 +1,5 @@
+import '../../Logger.dart';
+
 import 'dart:async';
 import 'dart:convert';
 
@@ -65,7 +67,9 @@ class SourceBrowseState extends ScreenState {
           jsonEncode([for (final f in _applied) f.toJson()]) != _pristine;
       filters.value = list;
       if (filtering.value) reload();
-    } catch (_) {}
+    } catch (e, st) {
+      logError('SourceBrowseState', e, st);
+    }
   }
 
   List<SourceFilter> get workingFilters => _applied;

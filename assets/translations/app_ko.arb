@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "변경 시 동기화",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "GitHub로 로그인",
-    "settingsSyncSignInDesc": "설정은 계정의 비공개 요점에 저장됩니다.",
     "settingsSyncToken": "개인 액세스 토큰 사용",
     "settingsSyncTokenDesc": "Gist 권한만으로 github.com/settings/tokens에서 토큰을 생성하세요.",
     "settingsSyncTokenField": "토큰",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "로그아웃",
-    "settingsSyncCode": "GitHub에 {code}을 입력하세요.",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "브라우저에 GitHub 페이지가 열렸습니다. 코드를 복사하려면 탭하고, 취소하려면 길게 탭하세요.",
     "settingsSyncSignInFailed": "GitHub에 로그인할 수 없습니다.",
-    "dcPreview": "미리보기",
     "dcSampleWatching": "시청 중",
     "dcSampleReading": "독서",
     "dcSampleBrowsing": "찾아보기",
     "dcSampleLive": "지금 당장",
     "dcLiveNothing": "지금은 아무것도 표시되지 않습니다. 타이틀을 열고 에피소드나 챕터를 시작하면 여기에 표시됩니다.",
     "dcMemberList": "회원 목록에서",
-    "dcAccount": "계정",
-    "dcSignIn": "디스코드로 로그인",
     "dcSignOut": "로그아웃",
-    "dcDesktopHint": "연결하지 않으면 Discord는 데스크톱 앱을 통해 \"Dartotsu 시청 중\"을 표시합니다. 모바일을 포함하여 제목 뒤에 활동 이름을 지정하려면 Discord를 연결하세요.",
-    "dcMobileHint": "Discord를 연결하여 보고 있는 내용이나 읽고 있는 내용을 표시해 보세요. 계정 토큰이 아닌 Discord의 승인 페이지를 사용합니다.",
     "dcConnect": "디스코드 연결",
     "dcConnectDesc": "Discord의 승인 페이지를 열고 승인된 앱 아래에 Dartotsu를 추가합니다. Discord에서 귀하의 현재 상태를 업데이트하라고 요청합니다. 계정 토큰이 아닌 새로 고침 토큰만 저장됩니다.",
     "dcConnectFailed": "디스코드를 연결할 수 없습니다",
@@ -254,8 +241,6 @@
     "dcMethodToken": "계정 토큰",
     "dcInUse": "사용 중",
     "dcRecommended": "추천",
-    "dcConnecting": "연결 중…",
-    "dcDisconnected": "연결되지 않음",
     "dcSignedInAs": "{name}(으)로 로그인됨",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "GitHub에서 삭제",
     "settingsSyncSecretsDeleteMessage": "그러면 요점에서 암호화된 계정 파일이 제거됩니다. 다른 장치에서는 로그인이 유지되며 새 암호를 설정할 수 있습니다.",
     "settingsSyncWhat": "동기화할 항목",
-    "settingsSyncServer": "서버에서",
     "settingsSyncServerEmpty": "아직 업로드된 항목이 없습니다.",
-    "settingsSyncServerInfo": "{count} 설정, {device}에서 {time} 업로드됨",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "이 장치",
     "settingsSyncCount": "{count, plural, =0{서버에 아무것도 없습니다} =1{서버의 설정 1개} other{{count} 서버의 설정}}",
     "settingsSyncNow": "지금 동기화",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "동기화 실패: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "어디에서나 동일하게 작동하는 설정만 동기화됩니다. 계정, 토큰, 폴더, 확장 프로그램, 알림, Discord, 업데이트 및 창 크기는 각 장치에 유지됩니다.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "링크 처리를 켜면 anilist.co 링크가 앱에서 열려요",
     "linkSettingsFailed": "시스템 설정을 열 수 없어요",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Discord 프로필에 지금 뭘 하는지 보여줘요. Discord 토큰이 필요해요.",
-    "discordRichPresenceDesktopDesc": "Discord 프로필에 지금 뭘 하는지 보여줘요. Discord 데스크톱 앱이 실행 중이어야 해요.",
     "discordBrowsing": "둘러보는 활동 표시",
     "discordBrowsingDesc": "보거나 읽는 작품뿐 아니라 보고 있는 탭, 페이지, 프로필도 표시해요.",
-    "discordLookHeader": "프레즌스 모양",
     "discordActivityType": "활동 유형",
     "discordActivityTypeDesc": "Discord에 표시되는 문구예요: \"시청 중…\" 또는 \"플레이 중…\". 자동은 애니는 시청 중, 나머지는 플레이 중으로 표시해요.",
     "discordWatching": "시청 중",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "\"애니 / 만화 보기\"와 \"Dartotsu 열기\" 버튼이에요.",
     "discordHideTitles": "제목 숨기기",
     "discordHideTitlesDesc": "애니와 만화 이름(커버와 링크 포함)을 \"비공개\"로 바꿔요.",
-    "discordConnectionHeader": "연결",
     "listSearchHint": "이 리스트에서 검색",
     "listSort": "정렬",
     "listFilter": "필터",
@@ -671,8 +637,6 @@
     "listNoMatches": "이 리스트에 일치하는 항목이 없어요",
     "discordLogin": "Discord에 로그인",
     "discordToken": "Discord 토큰",
-    "discordTokenSaved": "저장됨. 탭하면 교체, 길게 누르면 삭제해요.",
-    "discordTokenNotSet": "설정 안 됨. 탭해서 추가하세요.",
     "discordTokenSavedSnack": "Discord 토큰을 저장했어요",
     "discordTokenRemovedSnack": "Discord 토큰을 삭제했어요",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "성인 작품을 피드와 검색에서 빼고, 내 성인 작품은 숨긴 미디어에 모아둬요.",
     "kitsuAccountOptions": "Kitsu 계정 옵션",
     "mangaBakaAccountOptions": "MangaBaka 계정 옵션",
-    "comickAccountOptions": "코믹 계정 옵션",
     "comickClientId": "코믹 클라이언트 ID",
     "comickClientIdDesc": "comick.dev에 등록된 사용자 정의 클라이언트 ID",
     "couldNotUpdateKitsuSettings": "Kitsu 설정을 업데이트하지 못했어요",
@@ -761,7 +724,6 @@
     "accountDetails": "계정 상세 정보",
     "refreshFromKitsu": "Kitsu에서 새로고침",
     "simklReadOnly": "Simkl이 읽기 전용 접근을 허용했어요",
-    "traktReadOnly": "Trakt에 읽기 전용 액세스 권한이 부여됨",
     "incognitoEditsBlocked": "시크릿 모드: 리스트 편집이 막혀 있어요",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "시크릿 모드: 진행도가 저장되지 않아요",
@@ -786,7 +748,6 @@
     "mangaCredits": "만화 크레딧",
     "mainProductions": "주요 작품",
     "otherWorks": "기타 작품",
-    "prequelSequel": "프리퀄 & 시퀄",
     "prequel": "전편",
     "sequel": "속편",
     "previousSeason": "이전 시즌",
@@ -833,10 +794,7 @@
     "addToList": "리스트에 추가",
     "trailer": "예고편",
     "trailerQuality": "예고편 품질",
-    "titleCopied": "제목을 복사했어요",
     "linkCopied": "링크를 복사했어요",
-    "watchTrailer": "예고편 보기",
-    "copyTitle": "제목 복사",
     "detailStale": "AniList에 연결할 수 없습니다. 이는 저장된 정보이므로 오래된 정보일 수 있습니다.",
     "copyLink": "링크 복사",
     "openInBrowser": "브라우저에서 열기",
@@ -1139,7 +1097,6 @@
     "import": "가져오기",
     "animeCount": "애니 {count}개",
     "mangaCount": "만화 {count}개",
-    "chooseSaveLocation": "백업을 저장할 위치 선택",
     "savedPath": "{path}에 저장했어요",
     "exportFailed": "내보내기 실패: {error}",
     "nothingInLocalLists": "로컬 리스트에 아직 아무것도 없어요.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "링크를 여는 중 오류: {error}",
     "linkCantBeOpened": "이 링크는 열 수 없어요: {link}",
     "linkOpenError": "링크를 여는 중 오류: {error}",
-    "forReleasingTitles": "현재 연재 중인 작품용",
     "progress": "진행도",
     "notes": "메모",
     "serviceNotFound": "\"{id}\" 서비스를 찾을 수 없어요",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name}은(는) 설정된 저장소에 없어요",
     "pluginFetchFailed": "플러그인 정보를 가져오지 못했어요",
     "installPluginTitle": "{name} 설치",
-    "sizeLabel": "크기: {size}",
     "installedState": "설치됨",
     "updatePluginTitle": "{name} 업데이트",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "앱을 열 때와 30분마다 백그라운드에서 가져와서 동기화해요",
     "syncAddMissing": "없는 항목 추가",
     "syncAddMissingDesc": "다른 서비스에 아직 없는 항목도 추가해요",
-    "syncServiceOn": "{name}과 동기화",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "주요 서비스에 없는 것을 삭제하세요.",
     "syncDeleteDesc": "기본 목록에 없는 다른 서비스에서 항목을 제거합니다. 제목과 일치할 수 있는 항목만 제거되므로 Simkl 영화 및 시리즈와 같은 항목은 그대로 유지됩니다.",
     "syncDeleteTitle": "항목을 삭제하시겠습니까?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "삭제",
     "syncToDelete": "삭제하려면",
     "syncDeletedNote": "삭제됩니다",
-    "syncWillRemove": "{count}이(가) {name}에서 삭제됩니다.",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "더 나간 진행도 유지",
     "syncOnlyForwardDesc": "이미 더 앞서 있는 서비스의 진행도는 낮추지 않아요",
     "animePlanetWontWatch": "시청하지 않음",
     "animePlanetWontRead": "읽지 않음",
-    "animePlanetAlreadyOnList": "이미 이 목록에 있습니다",
     "animePlanetNewList": "새 목록 이름",
     "syncPrivate": "비공개 항목",
     "syncPrivateDesc": "비공개로 유지하는 항목으로 무엇을 해야 할까요? 비공개 옵션이 있는 서비스는 비공개로 설정됩니다. 다른 사람들은 공개적으로 보여줄 것입니다.",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "다른 사용자 에이전트를 통해 허가를 얻었으므로 전송되지 않습니다. 새 연결을 얻으려면 연결을 테스트하세요.",
-    "watchSectionConnection": "연결",
     "watchSectionSession": "세션",
     "watchSectionTools": "도구",
     "watchMetaSource": "에피소드 상세 정보 출처",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "어떤 스트림을 다운로드할까요?",
     "downloadPickSubtitle": "어떤 자막을 다운로드할까요?",
     "downloadPickAudio": "어떤 오디오 트랙을 다운로드할까요?",
-    "downloadNoAudio": "추가 오디오 없음",
     "downloadAudio": "오디오",
-    "downloadNoSubtitle": "자막 없음",
     "downloadHlsNeedsFfmpeg": "이 스트림은 HLS 재생목록이에요. 다운로드하려면 FFmpeg 애드온이 필요해요.",
     "downloadSourceMissing": "이 에피소드의 소스가 설치되어 있지 않아요",
     "downloadDashDrm": "This stream is DRM protected",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "언어 및 행동",
     "generalSectionSecurity": "보안",
     "generalSectionPrivacy": "개인 정보 보호",
-    "notificationsOtherService": "이것을 열려면 {service}로 전환하세요",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "기본 속도, 자동 재생, 비디오 맞춤, 방향 및 PIP(화면 속 화면)",
     "secPlayerSkip": "오프닝, 엔딩, 요약을 자동으로 건너뛰세요",
     "secPlayerControls": "스와이프, 홀드, 탭 동작을 통해 미리보기를 탐색하세요.",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "대기 중",
     "stepChecking": "확인 중…",
     "stepUpToDate": "최신",
     "stepUpToDateWith": "최신 · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "만화",
     "readerCloudflare": "브라우저에서 열기(Cloudflare 확인)",
     "badgeBoardHint": "배지를 첫 번째 카드의 모서리로 드래그하거나 이미 있는 배지를 드래그하여 이동하세요. 배지는 장소를 바꾸므로 겹치는 부분이 없습니다. 아래 배지를 탭하여 켜거나 끄세요.",
-    "statusAuto": "자동",
     "unreadCounter": "읽지 않은 카운터",
-    "unreadCounterDesc": "포스터에 남은 에피소드나 챕터 수 표시",
     "settingsShortcuts": "키보드 단축키",
     "settingsShortcutsDesc": "모든 키를 확인하고 변경하고 끄세요.",
     "shortcutGroupApp": "앱",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "설정되지 않음",
     "shortcutAddKey": "키 추가",
     "shortcutResetOne": "기본값으로 재설정",
-    "shortcutClearKeys": "모든 키 제거",
     "shortcutResetAll": "모든 단축키 재설정",
     "shortcutResetAllDesc": "모든 키를 기본값으로 되돌립니다.",
     "shortcutPress": "원하는 키나 조합을 누르세요",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "앱을 종료하세요",
     "closeActionWhenBusy": "뭔가가 실행되는 동안 트레이에서 계속 실행",
     "closeActionAlways": "항상 트레이에서 계속 실행",
-    "closeActionNoTray": "여기서는 시스템 트레이를 사용할 수 없으므로 닫으면 앱이 종료됩니다.",
     "gamepadNav": "게임패드 탐색",
     "gamepadNavDesc": "게임 컨트롤러로 앱 주위를 이동하고 플레이어를 제어하세요.",
     "trayShow": "다르토츠 보여주기",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "세부정보 복사",
     "removePlayerTitle": "플레이어를 삭제하시겠습니까?",
     "removePlayerMessage": "플레이어를 다시 다운로드할 때까지 동영상을 재생할 수 없습니다.",
-    "trailerLoading": "예고편 로드 중…",
     "trailerFailed": "여기에서는 예고편을 재생할 수 없습니다. 브라우저에서 여세요."
 }

@@ -905,12 +905,6 @@ abstract class AppLocalizations {
   /// **'Sign in with GitHub'**
   String get settingsSyncSignIn;
 
-  /// No description provided for @settingsSyncSignInDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Settings are stored in a private gist in your account'**
-  String get settingsSyncSignInDesc;
-
   /// No description provided for @settingsSyncToken.
   ///
   /// In en, this message translates to:
@@ -941,29 +935,11 @@ abstract class AppLocalizations {
   /// **'Sign out'**
   String get settingsSyncSignOut;
 
-  /// No description provided for @settingsSyncCode.
-  ///
-  /// In en, this message translates to:
-  /// **'Enter {code} on GitHub'**
-  String settingsSyncCode(Object code);
-
-  /// No description provided for @settingsSyncCodeDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'The GitHub page opened in your browser. Tap to copy the code, or tap and hold to cancel.'**
-  String get settingsSyncCodeDesc;
-
   /// No description provided for @settingsSyncSignInFailed.
   ///
   /// In en, this message translates to:
   /// **'Could not sign in to GitHub'**
   String get settingsSyncSignInFailed;
-
-  /// No description provided for @dcPreview.
-  ///
-  /// In en, this message translates to:
-  /// **'Preview'**
-  String get dcPreview;
 
   /// No description provided for @dcSampleWatching.
   ///
@@ -1001,35 +977,11 @@ abstract class AppLocalizations {
   /// **'In the member list'**
   String get dcMemberList;
 
-  /// No description provided for @dcAccount.
-  ///
-  /// In en, this message translates to:
-  /// **'Account'**
-  String get dcAccount;
-
-  /// No description provided for @dcSignIn.
-  ///
-  /// In en, this message translates to:
-  /// **'Sign in with Discord'**
-  String get dcSignIn;
-
   /// No description provided for @dcSignOut.
   ///
   /// In en, this message translates to:
   /// **'Sign out'**
   String get dcSignOut;
-
-  /// No description provided for @dcDesktopHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Without connecting, Discord shows “Watching Dartotsu” through the desktop app. Connect Discord to name the activity after your title, including on mobile.'**
-  String get dcDesktopHint;
-
-  /// No description provided for @dcMobileHint.
-  ///
-  /// In en, this message translates to:
-  /// **'Connect Discord to show what you are watching or reading. It uses Discord’s authorize page, not your account token.'**
-  String get dcMobileHint;
 
   /// No description provided for @dcConnect.
   ///
@@ -1463,18 +1415,6 @@ abstract class AppLocalizations {
   /// **'Recommended'**
   String get dcRecommended;
 
-  /// No description provided for @dcConnecting.
-  ///
-  /// In en, this message translates to:
-  /// **'Connecting…'**
-  String get dcConnecting;
-
-  /// No description provided for @dcDisconnected.
-  ///
-  /// In en, this message translates to:
-  /// **'Not connected'**
-  String get dcDisconnected;
-
   /// No description provided for @dcSignedInAs.
   ///
   /// In en, this message translates to:
@@ -1799,23 +1739,11 @@ abstract class AppLocalizations {
   /// **'What to sync'**
   String get settingsSyncWhat;
 
-  /// No description provided for @settingsSyncServer.
-  ///
-  /// In en, this message translates to:
-  /// **'On the server'**
-  String get settingsSyncServer;
-
   /// No description provided for @settingsSyncServerEmpty.
   ///
   /// In en, this message translates to:
   /// **'Nothing uploaded yet'**
   String get settingsSyncServerEmpty;
-
-  /// No description provided for @settingsSyncServerInfo.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} settings, uploaded {time} from {device}'**
-  String settingsSyncServerInfo(Object count, Object time, Object device);
 
   /// No description provided for @settingsSyncThisDevice.
   ///
@@ -1852,12 +1780,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last synced {time}'**
   String settingsSyncLast(Object time);
-
-  /// No description provided for @settingsSyncFailed.
-  ///
-  /// In en, this message translates to:
-  /// **'Sync failed: {error}'**
-  String settingsSyncFailed(Object error);
 
   /// No description provided for @settingsSyncScope.
   ///
@@ -3233,18 +3155,6 @@ abstract class AppLocalizations {
   /// **'Rich Presence'**
   String get discordRichPresence;
 
-  /// No description provided for @discordRichPresenceTokenDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show what you are doing on your Discord profile. Needs your Discord token.'**
-  String get discordRichPresenceTokenDesc;
-
-  /// No description provided for @discordRichPresenceDesktopDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show what you are doing on your Discord profile. Needs the Discord desktop app running.'**
-  String get discordRichPresenceDesktopDesc;
-
   /// No description provided for @discordBrowsing.
   ///
   /// In en, this message translates to:
@@ -3256,12 +3166,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Also show the tab, page or profile you are looking at, not only what you watch or read.'**
   String get discordBrowsingDesc;
-
-  /// No description provided for @discordLookHeader.
-  ///
-  /// In en, this message translates to:
-  /// **'Presence look'**
-  String get discordLookHeader;
 
   /// No description provided for @discordActivityType.
   ///
@@ -3334,12 +3238,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Replace anime and manga names (and their cover and link) with \"Something private\".'**
   String get discordHideTitlesDesc;
-
-  /// No description provided for @discordConnectionHeader.
-  ///
-  /// In en, this message translates to:
-  /// **'Connection'**
-  String get discordConnectionHeader;
 
   /// No description provided for @listSearchHint.
   ///
@@ -3454,18 +3352,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discord token'**
   String get discordToken;
-
-  /// No description provided for @discordTokenSaved.
-  ///
-  /// In en, this message translates to:
-  /// **'Saved. Tap to replace, long press to remove.'**
-  String get discordTokenSaved;
-
-  /// No description provided for @discordTokenNotSet.
-  ///
-  /// In en, this message translates to:
-  /// **'Not set. Tap to add.'**
-  String get discordTokenNotSet;
 
   /// No description provided for @discordTokenSavedSnack.
   ///
@@ -3845,12 +3731,6 @@ abstract class AppLocalizations {
   /// **'MangaBaka account options'**
   String get mangaBakaAccountOptions;
 
-  /// No description provided for @comickAccountOptions.
-  ///
-  /// In en, this message translates to:
-  /// **'Comick account options'**
-  String get comickAccountOptions;
-
   /// No description provided for @comickClientId.
   ///
   /// In en, this message translates to:
@@ -4025,12 +3905,6 @@ abstract class AppLocalizations {
   /// **'Simkl granted read-only access'**
   String get simklReadOnly;
 
-  /// No description provided for @traktReadOnly.
-  ///
-  /// In en, this message translates to:
-  /// **'Trakt granted read-only access'**
-  String get traktReadOnly;
-
   /// No description provided for @incognitoEditsBlocked.
   ///
   /// In en, this message translates to:
@@ -4174,12 +4048,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Other works'**
   String get otherWorks;
-
-  /// No description provided for @prequelSequel.
-  ///
-  /// In en, this message translates to:
-  /// **'Prequel & Sequel'**
-  String get prequelSequel;
 
   /// No description provided for @prequel.
   ///
@@ -4457,29 +4325,11 @@ abstract class AppLocalizations {
   /// **'Trailer quality'**
   String get trailerQuality;
 
-  /// No description provided for @titleCopied.
-  ///
-  /// In en, this message translates to:
-  /// **'Title copied'**
-  String get titleCopied;
-
   /// No description provided for @linkCopied.
   ///
   /// In en, this message translates to:
   /// **'Link copied'**
   String get linkCopied;
-
-  /// No description provided for @watchTrailer.
-  ///
-  /// In en, this message translates to:
-  /// **'Watch trailer'**
-  String get watchTrailer;
-
-  /// No description provided for @copyTitle.
-  ///
-  /// In en, this message translates to:
-  /// **'Copy title'**
-  String get copyTitle;
 
   /// No description provided for @detailStale.
   ///
@@ -6251,12 +6101,6 @@ abstract class AppLocalizations {
   /// **'{count} manga'**
   String mangaCount(int count);
 
-  /// No description provided for @chooseSaveLocation.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose where to save the backup'**
-  String get chooseSaveLocation;
-
   /// No description provided for @savedPath.
   ///
   /// In en, this message translates to:
@@ -7283,12 +7127,6 @@ abstract class AppLocalizations {
   /// **'Error opening link: {error}'**
   String linkOpenError(String error);
 
-  /// No description provided for @forReleasingTitles.
-  ///
-  /// In en, this message translates to:
-  /// **'for currently releasing titles'**
-  String get forReleasingTitles;
-
   /// No description provided for @progress.
   ///
   /// In en, this message translates to:
@@ -7589,12 +7427,6 @@ abstract class AppLocalizations {
   /// **'Install {name}'**
   String installPluginTitle(String name);
 
-  /// No description provided for @sizeLabel.
-  ///
-  /// In en, this message translates to:
-  /// **'Size: {size}'**
-  String sizeLabel(String size);
-
   /// No description provided for @installedState.
   ///
   /// In en, this message translates to:
@@ -7769,12 +7601,6 @@ abstract class AppLocalizations {
   /// **'Also add entries the other service doesn\'t have yet'**
   String get syncAddMissingDesc;
 
-  /// No description provided for @syncServiceOn.
-  ///
-  /// In en, this message translates to:
-  /// **'Sync with {name}'**
-  String syncServiceOn(String name);
-
   /// No description provided for @syncDelete.
   ///
   /// In en, this message translates to:
@@ -7817,12 +7643,6 @@ abstract class AppLocalizations {
   /// **'Will be deleted'**
   String get syncDeletedNote;
 
-  /// No description provided for @syncWillRemove.
-  ///
-  /// In en, this message translates to:
-  /// **'{count} will be deleted from {name}'**
-  String syncWillRemove(int count, String name);
-
   /// No description provided for @syncOnlyForward.
   ///
   /// In en, this message translates to:
@@ -7846,12 +7666,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Won\'t read'**
   String get animePlanetWontRead;
-
-  /// No description provided for @animePlanetAlreadyOnList.
-  ///
-  /// In en, this message translates to:
-  /// **'Already on this list'**
-  String get animePlanetAlreadyOnList;
 
   /// No description provided for @animePlanetNewList.
   ///
@@ -10144,12 +9958,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The clearance was earned with another user agent, so it isn\'t sent. Test the connection to get a new one'**
   String get watchClearanceStale;
-
-  /// No description provided for @watchSectionConnection.
-  ///
-  /// In en, this message translates to:
-  /// **'Connection'**
-  String get watchSectionConnection;
 
   /// No description provided for @watchSectionSession.
   ///
@@ -13499,23 +13307,11 @@ abstract class AppLocalizations {
   /// **'Download which audio track?'**
   String get downloadPickAudio;
 
-  /// No description provided for @downloadNoAudio.
-  ///
-  /// In en, this message translates to:
-  /// **'No extra audio'**
-  String get downloadNoAudio;
-
   /// No description provided for @downloadAudio.
   ///
   /// In en, this message translates to:
   /// **'Audio'**
   String get downloadAudio;
-
-  /// No description provided for @downloadNoSubtitle.
-  ///
-  /// In en, this message translates to:
-  /// **'No subtitle'**
-  String get downloadNoSubtitle;
 
   /// No description provided for @downloadHlsNeedsFfmpeg.
   ///
@@ -14855,12 +14651,6 @@ abstract class AppLocalizations {
   /// **'Privacy'**
   String get generalSectionPrivacy;
 
-  /// No description provided for @notificationsOtherService.
-  ///
-  /// In en, this message translates to:
-  /// **'Switch to {service} to open this'**
-  String notificationsOtherService(String service);
-
   /// No description provided for @secPlayerPlayback.
   ///
   /// In en, this message translates to:
@@ -15407,12 +15197,6 @@ abstract class AppLocalizations {
   /// **'Step {current} of {total}'**
   String installStepsProgress(int current, int total);
 
-  /// No description provided for @stepWaiting.
-  ///
-  /// In en, this message translates to:
-  /// **'Waiting'**
-  String get stepWaiting;
-
   /// No description provided for @stepChecking.
   ///
   /// In en, this message translates to:
@@ -15533,23 +15317,11 @@ abstract class AppLocalizations {
   /// **'Drag a badge onto a corner of the first card, or drag a badge already on it to move it. Badges swap places, so none ever overlap. Tap a badge below to turn it on or off.'**
   String get badgeBoardHint;
 
-  /// No description provided for @statusAuto.
-  ///
-  /// In en, this message translates to:
-  /// **'Auto'**
-  String get statusAuto;
-
   /// No description provided for @unreadCounter.
   ///
   /// In en, this message translates to:
   /// **'Unread counter'**
   String get unreadCounter;
-
-  /// No description provided for @unreadCounterDesc.
-  ///
-  /// In en, this message translates to:
-  /// **'Show how many episodes or chapters are left on posters'**
-  String get unreadCounterDesc;
 
   /// No description provided for @settingsShortcuts.
   ///
@@ -15622,12 +15394,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset to default'**
   String get shortcutResetOne;
-
-  /// No description provided for @shortcutClearKeys.
-  ///
-  /// In en, this message translates to:
-  /// **'Remove all keys'**
-  String get shortcutClearKeys;
 
   /// No description provided for @shortcutResetAll.
   ///
@@ -15989,12 +15755,6 @@ abstract class AppLocalizations {
   /// **'Always keep running in the tray'**
   String get closeActionAlways;
 
-  /// No description provided for @closeActionNoTray.
-  ///
-  /// In en, this message translates to:
-  /// **'The system tray is not available here, so the app quits when closed'**
-  String get closeActionNoTray;
-
   /// No description provided for @gamepadNav.
   ///
   /// In en, this message translates to:
@@ -16120,12 +15880,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Videos can\'t play until the player is downloaded again.'**
   String get removePlayerMessage;
-
-  /// No description provided for @trailerLoading.
-  ///
-  /// In en, this message translates to:
-  /// **'Loading the trailer…'**
-  String get trailerLoading;
 
   /// No description provided for @trailerFailed.
   ///

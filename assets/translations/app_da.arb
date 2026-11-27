@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Synkroniser ved ændring",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Log ind med GitHub",
-    "settingsSyncSignInDesc": "Indstillinger gemmes i en privat oversigt på din konto",
     "settingsSyncToken": "Brug et personligt adgangstoken",
     "settingsSyncTokenDesc": "Opret en på github.com/settings/tokens med kun den grundlæggende tilladelse",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Log ud",
-    "settingsSyncCode": "Indtast {code} på GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "GitHub-siden åbnes i din browser. Tryk for at kopiere koden, eller tryk og hold for at annullere.",
     "settingsSyncSignInFailed": "Kunne ikke logge ind på GitHub",
-    "dcPreview": "Forhåndsvisning",
     "dcSampleWatching": "Ser på",
     "dcSampleReading": "Læsning",
     "dcSampleBrowsing": "Gennemse",
     "dcSampleLive": "Lige nu",
     "dcLiveNothing": "Der vises ikke noget lige nu. Åbn en titel, start en episode eller et kapitel, og det vises her.",
     "dcMemberList": "I medlemslisten",
-    "dcAccount": "Konto",
-    "dcSignIn": "Log ind med Discord",
     "dcSignOut": "Log ud",
-    "dcDesktopHint": "Uden at oprette forbindelse viser Discord \"Watching Dartotsu\" gennem desktop-appen. Tilslut Discord for at navngive aktiviteten efter din titel, inklusive på mobilen.",
-    "dcMobileHint": "Tilslut Discord for at vise, hvad du ser eller læser. Den bruger Discords autorisationsside, ikke dit kontotoken.",
     "dcConnect": "Tilslut Discord",
     "dcConnectDesc": "Åbner Discords autorisationsside og tilføjer Dartotsu under Authorized Apps. Discord beder om at opdatere din tilstedeværelse. Kun et opdateringstoken gemmes, ikke dit kontotoken.",
     "dcConnectFailed": "Discord kunne ikke tilsluttes",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Kontotoken",
     "dcInUse": "I brug",
     "dcRecommended": "Anbefales",
-    "dcConnecting": "Opretter forbindelse...",
-    "dcDisconnected": "Ikke forbundet",
     "dcSignedInAs": "Logget ind som {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Slet fra GitHub",
     "settingsSyncSecretsDeleteMessage": "Dette fjerner den krypterede kontofil fra din kerne. Andre enheder beholder deres logins og kan indstille en ny adgangssætning.",
     "settingsSyncWhat": "Hvad skal synkroniseres",
-    "settingsSyncServer": "På serveren",
     "settingsSyncServerEmpty": "Intet uploadet endnu",
-    "settingsSyncServerInfo": "{count} indstillinger, uploadet {time} fra {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "denne enhed",
     "settingsSyncCount": "{count, plural, =0{Intet på serveren} =1{1 indstilling på serveren} other{{count} indstillinger på serveren}}",
     "settingsSyncNow": "Synkroniser nu",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Synkronisering mislykkedes: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Kun indstillinger, der fungerer ens overalt, synkroniseres. Konti, tokens, mapper, udvidelser, meddelelser, Discord, opdateringer og vinduesstørrelse forbliver på hver enhed.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Slå linkhåndtering til, så anilist.co-links åbner appen",
     "linkSettingsFailed": "Kunne ikke åbne systemindstillingerne",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Vis på din Discord-profil, hvad du laver. Kræver dit Discord-token.",
-    "discordRichPresenceDesktopDesc": "Vis på din Discord-profil, hvad du laver. Kræver, at Discord-desktopappen kører.",
     "discordBrowsing": "Vis browsingaktivitet",
     "discordBrowsingDesc": "Vis også den fane, side eller profil, du kigger på, og ikke kun hvad du ser eller læser.",
-    "discordLookHeader": "Udseende af presence",
     "discordActivityType": "Aktivitetstype",
     "discordActivityTypeDesc": "Hvordan Discord formulerer det: \"Ser …\" eller \"Spiller …\". Auto bruger Ser til anime og Spiller til alt andet.",
     "discordWatching": "Ser",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Knapperne \"Se anime / manga\" og \"Åbn Dartotsu\".",
     "discordHideTitles": "Skjul titler",
     "discordHideTitlesDesc": "Erstat navne på anime og manga (og deres cover og link) med \"Noget privat\".",
-    "discordConnectionHeader": "Forbindelse",
     "listSearchHint": "Søg i denne liste",
     "listSort": "Sortér",
     "listFilter": "Filtrér",
@@ -671,8 +637,6 @@
     "listNoMatches": "Intet på listen matcher",
     "discordLogin": "Log ind på Discord",
     "discordToken": "Discord-token",
-    "discordTokenSaved": "Gemt. Tryk for at erstatte, tryk og hold for at fjerne.",
-    "discordTokenNotSet": "Ikke angivet. Tryk for at tilføje.",
     "discordTokenSavedSnack": "Discord-token gemt",
     "discordTokenRemovedSnack": "Discord-token fjernet",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Hold voksentitler ude af feeds og søgning, og vis dine egne voksenindslag under Skjulte medier.",
     "kitsuAccountOptions": "Kitsu-kontoindstillinger",
     "mangaBakaAccountOptions": "MangaBaka-kontoindstillinger",
-    "comickAccountOptions": "Comick-kontomuligheder",
     "comickClientId": "Comick klient-id",
     "comickClientIdDesc": "Brugerdefineret klient-id registreret på comick.dev",
     "couldNotUpdateKitsuSettings": "Kunne ikke opdatere dine Kitsu-indstillinger",
@@ -761,7 +724,6 @@
     "accountDetails": "Kontooplysninger",
     "refreshFromKitsu": "Opdater fra Kitsu",
     "simklReadOnly": "Simkl gav kun læseadgang",
-    "traktReadOnly": "Trakt gav skrivebeskyttet adgang",
     "incognitoEditsBlocked": "Inkognito: listeredigeringer er blokeret",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Inkognito: fremskridt blev ikke gemt",
@@ -786,7 +748,6 @@
     "mangaCredits": "Manga-krediteringer",
     "mainProductions": "Hovedproduktioner",
     "otherWorks": "Andre værker",
-    "prequelSequel": "Prequel & sequel",
     "prequel": "Prequel",
     "sequel": "Efterfølger",
     "previousSeason": "Forrige sæson",
@@ -833,10 +794,7 @@
     "addToList": "Føj til liste",
     "trailer": "Trailer",
     "trailerQuality": "Trailer kvalitet",
-    "titleCopied": "Titel kopieret",
     "linkCopied": "Link kopieret",
-    "watchTrailer": "Se trailer",
-    "copyTitle": "Kopiér titel",
     "detailStale": "AniList kunne ikke nås. Dette er gemt information og kan være forældet.",
     "copyLink": "Kopiér link",
     "openInBrowser": "Åbn i browser",
@@ -1139,7 +1097,6 @@
     "import": "Importér",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Vælg, hvor backuppen skal gemmes",
     "savedPath": "Gemt {path}",
     "exportFailed": "Eksport mislykkedes: {error}",
     "nothingInLocalLists": "Intet på dine lokale lister endnu.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Fejl ved åbning af link: {error}",
     "linkCantBeOpened": "Dette link kan ikke åbnes: {link}",
     "linkOpenError": "Fejl ved åbning af link: {error}",
-    "forReleasingTitles": "for titler, der udkommer nu",
     "progress": "Fremskridt",
     "notes": "Noter",
     "serviceNotFound": "Tjenesten \"{id}\" blev ikke fundet",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} findes ikke i det konfigurerede repo",
     "pluginFetchFailed": "Kunne ikke hente plugin-info",
     "installPluginTitle": "Installer {name}",
-    "sizeLabel": "Størrelse: {size}",
     "installedState": "Installeret",
     "updatePluginTitle": "Opdater {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Hent og synkronisér i baggrunden, når appen åbnes og hvert 30. minut",
     "syncAddMissing": "Tilføj manglende indslag",
     "syncAddMissingDesc": "Tilføj også indslag, som den anden tjeneste endnu ikke har",
-    "syncServiceOn": "Synkroniser med {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Slet hvad hovedtjenesten ikke har",
     "syncDeleteDesc": "Fjern poster fra de andre tjenester, der ikke er på hovedlisten. Kun poster, der kan matches til en titel, fjernes, så ting som Simkl-film og serier bliver",
     "syncDeleteTitle": "Vil du slette poster?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Slet",
     "syncToDelete": "At slette",
     "syncDeletedNote": "Vil blive slettet",
-    "syncWillRemove": "{count} vil blive slettet fra {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Behold længste fremskridt",
     "syncOnlyForwardDesc": "Sæt ikke fremskridtet ned på en tjeneste, der allerede er længere fremme",
     "animePlanetWontWatch": "Vil ikke se",
     "animePlanetWontRead": "Vil ikke læse",
-    "animePlanetAlreadyOnList": "Allerede på denne liste",
     "animePlanetNewList": "Nyt listenavn",
     "syncPrivate": "Private indtastninger",
     "syncPrivateDesc": "Hvad skal du gøre med poster, du holder private. En tjeneste med en privat mulighed gør dem private; andre ville vise dem offentligt",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "Godkendelsen blev opnået med en anden brugeragent, så den sendes ikke. Test forbindelsen for at få en ny",
-    "watchSectionConnection": "Forbindelse",
     "watchSectionSession": "Session",
     "watchSectionTools": "Værktøjer",
     "watchMetaSource": "Afsnitsdetaljer fra",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Download hvilken stream?",
     "downloadPickSubtitle": "Download hvilken undertekst?",
     "downloadPickAudio": "Download hvilket lydspor?",
-    "downloadNoAudio": "Ingen ekstra lyd",
     "downloadAudio": "Lyd",
-    "downloadNoSubtitle": "Ingen undertekst",
     "downloadHlsNeedsFfmpeg": "Denne stream er en HLS-afspilningsliste. At downloade den kræver FFmpeg-tilføjelsen.",
     "downloadSourceMissing": "Kilden til dette afsnit er ikke installeret",
     "downloadDashDrm": "Denne stream er DRM-beskyttet",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Sprog & adfærd",
     "generalSectionSecurity": "Sikkerhed",
     "generalSectionPrivacy": "Privatliv",
-    "notificationsOtherService": "Skift til {service} for at åbne denne",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Standardhastighed, automatisk afspilning, videotilpasning, orientering og billede i billede",
     "secPlayerSkip": "Spring automatisk over åbninger, afslutninger og recaps",
     "secPlayerControls": "Stryg, hold og tryk på bevægelser og søg forhåndsvisning",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Venter",
     "stepChecking": "Tjekker...",
     "stepUpToDate": "Op til dato",
     "stepUpToDateWith": "Opdateret · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Åbn i browser (Cloudflare check)",
     "badgeBoardHint": "Træk et mærke til et hjørne af det første kort, eller træk et mærke, der allerede er på det, for at flytte det. Badges bytter plads, så ingen nogensinde overlapper hinanden. Tryk på et badge nedenfor for at slå det til eller fra.",
-    "statusAuto": "Auto",
     "unreadCounter": "Ulæst tæller",
-    "unreadCounterDesc": "Vis hvor mange episoder eller kapitler der er tilbage på plakater",
     "settingsShortcuts": "Tastaturgenveje",
     "settingsShortcutsDesc": "Se, skift og sluk for hver tast",
     "shortcutGroupApp": "App",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Ikke indstillet",
     "shortcutAddKey": "Tilføj en nøgle",
     "shortcutResetOne": "Nulstil til standard",
-    "shortcutClearKeys": "Fjern alle nøgler",
     "shortcutResetAll": "Nulstil alle genveje",
     "shortcutResetAllDesc": "Sæt hver tast tilbage til dens standard",
     "shortcutPress": "Tryk på den ønskede tast eller kombination",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Afslut appen",
     "closeActionWhenBusy": "Bliv ved med at løbe i bakken, mens noget kører",
     "closeActionAlways": "Løb altid i bakken",
-    "closeActionNoTray": "Systembakken er ikke tilgængelig her, så appen afsluttes, når den lukkes",
     "gamepadNav": "Gamepad navigation",
     "gamepadNavDesc": "Flyt rundt i appen og styr afspilleren med en spilcontroller",
     "trayShow": "Vis Dartotsu",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Kopier detaljer",
     "removePlayerTitle": "Vil du fjerne afspilleren?",
     "removePlayerMessage": "Videoer kan ikke afspilles, før afspilleren er downloadet igen.",
-    "trailerLoading": "Indlæser traileren...",
     "trailerFailed": "Kunne ikke afspille traileren her, åbner den i browseren"
 }

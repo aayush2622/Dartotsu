@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "ซิงค์การเปลี่ยนแปลง",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "ลงชื่อเข้าใช้ด้วย GitHub",
-    "settingsSyncSignInDesc": "การตั้งค่าจะถูกจัดเก็บไว้ในส่วนสำคัญส่วนตัวในบัญชีของคุณ",
     "settingsSyncToken": "ใช้โทเค็นการเข้าถึงส่วนบุคคล",
     "settingsSyncTokenDesc": "สร้างอันหนึ่งที่ github.com/settings/tokens โดยมีสิทธิ์เฉพาะส่วนสำคัญเท่านั้น",
     "settingsSyncTokenField": "โทเค็น",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "ออกจากระบบ",
-    "settingsSyncCode": "ป้อน {code} บน GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "หน้า GitHub ที่เปิดขึ้นในเบราว์เซอร์ของคุณ แตะเพื่อคัดลอกรหัส หรือแตะค้างไว้เพื่อยกเลิก",
     "settingsSyncSignInFailed": "ไม่สามารถลงชื่อเข้าใช้ GitHub ได้",
-    "dcPreview": "ดูตัวอย่าง",
     "dcSampleWatching": "กำลังดู",
     "dcSampleReading": "การอ่าน",
     "dcSampleBrowsing": "การเรียกดู",
     "dcSampleLive": "ตอนนี้",
     "dcLiveNothing": "ไม่มีอะไรแสดงอยู่ในขณะนี้ เปิดชื่อเรื่อง เริ่มตอนหรือบท และจะปรากฏที่นี่",
     "dcMemberList": "ในรายชื่อสมาชิก",
-    "dcAccount": "บัญชี",
-    "dcSignIn": "ลงชื่อเข้าใช้ด้วย Discord",
     "dcSignOut": "ออกจากระบบ",
-    "dcDesktopHint": "โดยไม่ต้องเชื่อมต่อ Discord จะแสดง \"Watching Dartotsu\" ผ่านแอปเดสก์ท็อป เชื่อมต่อ Discord เพื่อตั้งชื่อกิจกรรมตามชื่อของคุณ รวมถึงบนมือถือด้วย",
-    "dcMobileHint": "เชื่อมต่อ Discord เพื่อแสดงสิ่งที่คุณกำลังรับชมหรืออ่าน ใช้หน้าการอนุญาตของ Discord ไม่ใช่โทเค็นบัญชีของคุณ",
     "dcConnect": "เชื่อมต่อความไม่ลงรอยกัน",
     "dcConnectDesc": "เปิดหน้าการอนุญาตของ Discord และเพิ่ม Dartotsu ใต้แอปที่ได้รับอนุญาต Discord ขอให้อัปเดตสถานะของคุณ บันทึกเฉพาะโทเค็นการรีเฟรชเท่านั้น ไม่ใช่โทเค็นบัญชีของคุณ",
     "dcConnectFailed": "ไม่สามารถเชื่อมต่อ Discord ได้",
@@ -254,8 +241,6 @@
     "dcMethodToken": "โทเค็นบัญชี",
     "dcInUse": "ในการใช้งาน",
     "dcRecommended": "แนะนำ",
-    "dcConnecting": "กำลังเชื่อมต่อ...",
-    "dcDisconnected": "ไม่ได้เชื่อมต่อ",
     "dcSignedInAs": "ลงชื่อเข้าใช้ด้วย {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "ลบออกจาก GitHub",
     "settingsSyncSecretsDeleteMessage": "การดำเนินการนี้จะลบไฟล์บัญชีที่เข้ารหัสออกจากส่วนสำคัญของคุณ อุปกรณ์อื่นๆ จะเก็บการลงชื่อเข้าใช้ไว้และสามารถตั้งค่าข้อความรหัสผ่านใหม่ได้",
     "settingsSyncWhat": "สิ่งที่ต้องซิงค์",
-    "settingsSyncServer": "บนเซิร์ฟเวอร์",
     "settingsSyncServerEmpty": "ยังไม่ได้อัพโหลดอะไรเลย",
-    "settingsSyncServerInfo": "การตั้งค่า {count} อัปโหลด {time} จาก {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "อุปกรณ์นี้",
     "settingsSyncCount": "{count, plural, =0{ไม่มีอะไรบนเซิร์ฟเวอร์} =1{1 การตั้งค่าบนเซิร์ฟเวอร์} other{{count} การตั้งค่าบนเซิร์ฟเวอร์}}",
     "settingsSyncNow": "ซิงค์เลย",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "การซิงค์ล้มเหลว: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "ซิงค์เฉพาะการตั้งค่าที่ทำงานเหมือนกันทุกที่เท่านั้น บัญชี โทเค็น โฟลเดอร์ ส่วนขยาย การแจ้งเตือน Discord อัปเดต และขนาดหน้าต่างจะยังคงอยู่ในแต่ละอุปกรณ์",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "เปิดการจัดการลิงก์ เพื่อให้ลิงก์ anilist.co เปิดในแอป",
     "linkSettingsFailed": "เปิดการตั้งค่าระบบไม่ได้",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องใช้โทเคน Discord ของคุณ",
-    "discordRichPresenceDesktopDesc": "แสดงสิ่งที่กำลังทำบนโปรไฟล์ Discord ต้องเปิดแอป Discord บนเดสก์ท็อปไว้",
     "discordBrowsing": "แสดงกิจกรรมการเลือกดู",
     "discordBrowsingDesc": "แสดงแท็บ หน้า หรือโปรไฟล์ที่กำลังดูด้วย ไม่ใช่แค่สิ่งที่ดูหรืออ่าน",
-    "discordLookHeader": "หน้าตาสถานะ",
     "discordActivityType": "ประเภทกิจกรรม",
     "discordActivityTypeDesc": "Discord จะเขียนว่าอะไร: \"Watching …\" หรือ \"Playing …\" อัตโนมัติจะใช้ Watching กับอนิเมะ และ Playing กับอย่างอื่น",
     "discordWatching": "กำลังดู",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "ปุ่ม \"ดูอนิเมะ / มังงะ\" และ \"เปิด Dartotsu\"",
     "discordHideTitles": "ซ่อนชื่อเรื่อง",
     "discordHideTitlesDesc": "แทนชื่ออนิเมะและมังงะ (รวมถึงปกและลิงก์) ด้วย \"Something private\"",
-    "discordConnectionHeader": "การเชื่อมต่อ",
     "listSearchHint": "ค้นหาในรายการนี้",
     "listSort": "เรียงลำดับ",
     "listFilter": "กรอง",
@@ -671,8 +637,6 @@
     "listNoMatches": "ไม่มีอะไรในรายการนี้ที่ตรง",
     "discordLogin": "เข้าสู่ระบบ Discord",
     "discordToken": "โทเคน Discord",
-    "discordTokenSaved": "บันทึกแล้ว แตะเพื่อเปลี่ยน กดค้างเพื่อลบ",
-    "discordTokenNotSet": "ยังไม่ได้ตั้ง แตะเพื่อเพิ่ม",
     "discordTokenSavedSnack": "บันทึกโทเคน Discord แล้ว",
     "discordTokenRemovedSnack": "ลบโทเคน Discord แล้ว",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "ไม่ให้เรื่องผู้ใหญ่โผล่ในฟีดและการค้นหา และแยกรายการผู้ใหญ่ของคุณเองไว้ใน Hidden Media",
     "kitsuAccountOptions": "ตัวเลือกบัญชี Kitsu",
     "mangaBakaAccountOptions": "ตัวเลือกบัญชี MangaBaka",
-    "comickAccountOptions": "ตัวเลือกบัญชี Comick",
     "comickClientId": "รหัสลูกค้าการ์ตูน",
     "comickClientIdDesc": "รหัสลูกค้าแบบกำหนดเองที่ลงทะเบียนบน comick.dev",
     "couldNotUpdateKitsuSettings": "อัปเดตการตั้งค่า Kitsu ไม่ได้",
@@ -761,7 +724,6 @@
     "accountDetails": "รายละเอียดบัญชี",
     "refreshFromKitsu": "รีเฟรชจาก Kitsu",
     "simklReadOnly": "Simkl ให้สิทธิ์อ่านอย่างเดียว",
-    "traktReadOnly": "Trakt ให้สิทธิ์การเข้าถึงแบบอ่านอย่างเดียว",
     "incognitoEditsBlocked": "ไม่ระบุตัวตน: ห้ามแก้ไขรายการ",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "ไม่ระบุตัวตน: ไม่ได้บันทึกความคืบหน้า",
@@ -786,7 +748,6 @@
     "mangaCredits": "เครดิตมังงะ",
     "mainProductions": "ผลงานหลัก",
     "otherWorks": "ผลงานอื่น ๆ",
-    "prequelSequel": "ภาคก่อนและภาคต่อ",
     "prequel": "พรีเควล",
     "sequel": "ภาคต่อ",
     "previousSeason": "ซีซันก่อนหน้า",
@@ -833,10 +794,7 @@
     "addToList": "เพิ่มลงรายการ",
     "trailer": "ตัวอย่าง",
     "trailerQuality": "คุณภาพรถพ่วง",
-    "titleCopied": "คัดลอกชื่อแล้ว",
     "linkCopied": "คัดลอกลิงก์แล้ว",
-    "watchTrailer": "ดูตัวอย่าง",
-    "copyTitle": "คัดลอกชื่อ",
     "detailStale": "ไม่สามารถเข้าถึง AniList นี่เป็นข้อมูลที่บันทึกไว้และอาจล้าสมัย",
     "copyLink": "คัดลอกลิงก์",
     "openInBrowser": "เปิดในเบราว์เซอร์",
@@ -1139,7 +1097,6 @@
     "import": "นำเข้า",
     "animeCount": "อนิเมะ {count} เรื่อง",
     "mangaCount": "มังงะ {count} เรื่อง",
-    "chooseSaveLocation": "เลือกที่บันทึกข้อมูลสำรอง",
     "savedPath": "บันทึก {path} แล้ว",
     "exportFailed": "ส่งออกไม่สำเร็จ: {error}",
     "nothingInLocalLists": "ยังไม่มีอะไรในรายการในเครื่อง",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "เปิดลิงก์ผิดพลาด: {error}",
     "linkCantBeOpened": "เปิดลิงก์นี้ไม่ได้: {link}",
     "linkOpenError": "เปิดลิงก์ผิดพลาด: {error}",
-    "forReleasingTitles": "สำหรับเรื่องที่กำลังออกอากาศ",
     "progress": "ความคืบหน้า",
     "notes": "โน้ต",
     "serviceNotFound": "ไม่พบบริการ \"{id}\"",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "ไม่มี {name} ในคลังที่ตั้งไว้",
     "pluginFetchFailed": "ดึงข้อมูลปลั๊กอินไม่สำเร็จ",
     "installPluginTitle": "ติดตั้ง {name}",
-    "sizeLabel": "ขนาด: {size}",
     "installedState": "ติดตั้งแล้ว",
     "updatePluginTitle": "อัปเดต {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "ดึงและซิงก์ในพื้นหลังตอนเปิดแอปและทุก 30 นาที",
     "syncAddMissing": "เพิ่มรายการที่ขาด",
     "syncAddMissingDesc": "เพิ่มรายการที่อีกบริการยังไม่มีด้วย",
-    "syncServiceOn": "ซิงค์กับ {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "ลบสิ่งที่บริการหลักไม่มี",
     "syncDeleteDesc": "ลบรายการออกจากบริการอื่นที่ไม่อยู่ในรายการหลัก เฉพาะรายการที่สามารถจับคู่กับชื่อเรื่องเท่านั้นที่จะถูกลบออก ดังนั้นสิ่งต่างๆ เช่น ภาพยนตร์และซีรีส์ Simkl จะยังคงอยู่",
     "syncDeleteTitle": "ลบรายการใช่ไหม",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "ลบ",
     "syncToDelete": "หากต้องการลบ",
     "syncDeletedNote": "จะถูกลบทิ้ง",
-    "syncWillRemove": "{count} จะถูกลบออกจาก {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "เก็บความคืบหน้าที่ไปไกลกว่า",
     "syncOnlyForwardDesc": "ไม่ลดความคืบหน้าของบริการที่นำอยู่แล้ว",
     "animePlanetWontWatch": "จะไม่ดู",
     "animePlanetWontRead": "จะไม่อ่าน",
-    "animePlanetAlreadyOnList": "อยู่ในรายการนี้แล้ว",
     "animePlanetNewList": "ชื่อรายการใหม่",
     "syncPrivate": "รายการส่วนตัว",
     "syncPrivateDesc": "จะทำอย่างไรกับรายการที่คุณเก็บไว้เป็นส่วนตัว บริการที่มีตัวเลือกส่วนตัวจะทำให้เป็นส่วนตัว คนอื่นจะแสดงต่อสาธารณะ",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "ได้รับการเคลียร์จากตัวแทนผู้ใช้รายอื่น ดังนั้นจึงไม่ถูกส่ง ทดสอบการเชื่อมต่อเพื่อรับการเชื่อมต่อใหม่",
-    "watchSectionConnection": "การเชื่อมต่อ",
     "watchSectionSession": "เซสชัน",
     "watchSectionTools": "เครื่องมือ",
     "watchMetaSource": "รายละเอียดตอนจาก",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "ดาวน์โหลดสตรีมไหน?",
     "downloadPickSubtitle": "ดาวน์โหลดคำบรรยายไหน?",
     "downloadPickAudio": "ดาวน์โหลดแทร็กเสียงไหน?",
-    "downloadNoAudio": "ไม่มีเสียงเพิ่ม",
     "downloadAudio": "เสียง",
-    "downloadNoSubtitle": "ไม่มีคำบรรยาย",
     "downloadHlsNeedsFfmpeg": "สตรีมนี้เป็นเพลย์ลิสต์ HLS ต้องใช้แอดออน FFmpeg เพื่อดาวน์โหลด",
     "downloadSourceMissing": "ยังไม่ได้ติดตั้งซอร์สของตอนนี้",
     "downloadDashDrm": "สตรีมนี้ได้รับการป้องกัน DRM",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "ภาษาและพฤติกรรม",
     "generalSectionSecurity": "ความปลอดภัย",
     "generalSectionPrivacy": "ความเป็นส่วนตัว",
-    "notificationsOtherService": "สลับไปที่ {service} เพื่อเปิดสิ่งนี้",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "ความเร็วเริ่มต้น การเล่นอัตโนมัติ การปรับวิดีโอให้พอดี การวางแนว และรูปภาพซ้อนภาพ",
     "secPlayerSkip": "ข้ามการเปิด การสิ้นสุด และการสรุปโดยอัตโนมัติ",
     "secPlayerControls": "ปัดนิ้วค้างไว้และแตะท่าทางและดูตัวอย่าง",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "กำลังรอ",
     "stepChecking": "กำลังตรวจสอบ...",
     "stepUpToDate": "ถึงวันที่",
     "stepUpToDateWith": "อัปเดต · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "มังงะ",
     "readerCloudflare": "เปิดในเบราว์เซอร์ (ตรวจสอบ Cloudflare)",
     "badgeBoardHint": "ลากตราไปที่มุมของการ์ดใบแรก หรือลากตราแล้วเพื่อย้าย ป้ายสลับสถานที่ ดังนั้นจึงไม่มีการทับซ้อนกัน แตะป้ายด้านล่างเพื่อเปิดหรือปิด",
-    "statusAuto": "อัตโนมัติ",
     "unreadCounter": "ตัวนับที่ยังไม่ได้อ่าน",
-    "unreadCounterDesc": "แสดงจำนวนตอนหรือบทที่เหลืออยู่ในโปสเตอร์",
     "settingsShortcuts": "แป้นพิมพ์ลัด",
     "settingsShortcutsDesc": "ดูเปลี่ยนและปิดทุกปุ่ม",
     "shortcutGroupApp": "แอพ",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "ไม่ได้ตั้งค่า",
     "shortcutAddKey": "เพิ่มรหัส",
     "shortcutResetOne": "รีเซ็ตเป็นค่าเริ่มต้น",
-    "shortcutClearKeys": "ลบคีย์ทั้งหมด",
     "shortcutResetAll": "รีเซ็ตทางลัดทั้งหมด",
     "shortcutResetAllDesc": "ใส่ทุกคีย์กลับเป็นค่าเริ่มต้น",
     "shortcutPress": "กดปุ่มหรือชุดค่าผสมที่คุณต้องการ",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "ออกจากแอป",
     "closeActionWhenBusy": "วิ่งต่อไปในถาดขณะที่บางสิ่งกำลังทำงานอยู่",
     "closeActionAlways": "ให้วิ่งอยู่ในถาดเสมอ",
-    "closeActionNoTray": "ถาดระบบไม่พร้อมใช้งานที่นี่ แอปจึงปิดเมื่อปิด",
     "gamepadNav": "การนำทางเกมแพด",
     "gamepadNavDesc": "เคลื่อนที่ไปรอบๆ แอปและควบคุมผู้เล่นด้วยตัวควบคุมเกม",
     "trayShow": "แสดงดาร์โททสึ",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "คัดลอกรายละเอียด",
     "removePlayerTitle": "ลบเครื่องเล่น?",
     "removePlayerMessage": "วิดีโอไม่สามารถเล่นได้จนกว่าจะดาวน์โหลดเครื่องเล่นอีกครั้ง",
-    "trailerLoading": "กำลังโหลดตัวอย่าง...",
     "trailerFailed": "ไม่สามารถเล่นตัวอย่างได้ที่นี่ กำลังเปิดในเบราว์เซอร์"
 }

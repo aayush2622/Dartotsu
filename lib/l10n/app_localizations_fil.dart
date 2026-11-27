@@ -425,10 +425,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get settingsSyncSignIn => 'Mag-sign in gamit ang GitHub';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'Ang mga setting ay naka-imbak sa isang pribadong diwa sa iyong account';
-
-  @override
   String get settingsSyncToken => 'Gumamit ng personal na access token';
 
   @override
@@ -447,19 +443,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get settingsSyncSignOut => 'Mag-sign out';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'Ilagay ang $code sa GitHub';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'Binuksan ang pahina ng GitHub sa iyong browser. I-tap para kopyahin ang code, o i-tap at i-hold para kanselahin.';
-
-  @override
   String get settingsSyncSignInFailed => 'Hindi makapag-sign in sa GitHub';
-
-  @override
-  String get dcPreview => 'Silipin';
 
   @override
   String get dcSampleWatching => 'Nanonood';
@@ -481,21 +465,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get dcMemberList => 'Sa listahan ng miyembro';
 
   @override
-  String get dcAccount => 'Account';
-
-  @override
-  String get dcSignIn => 'Mag-sign in gamit ang Discord';
-
-  @override
   String get dcSignOut => 'Mag-sign out';
-
-  @override
-  String get dcDesktopHint =>
-      'Nang hindi kumokonekta, ipinapakita ng Discord ang \"Panonood ng Dartotsu\" sa pamamagitan ng desktop app. Ikonekta ang Discord upang pangalanan ang aktibidad pagkatapos ng iyong pamagat, kabilang ang sa mobile.';
-
-  @override
-  String get dcMobileHint =>
-      'Ikonekta ang Discord upang ipakita kung ano ang iyong pinapanood o binabasa. Ginagamit nito ang pahina ng awtorisasyon ng Discord, hindi ang token ng iyong account.';
 
   @override
   String get dcConnect => 'Ikonekta ang Discord';
@@ -721,12 +691,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get dcRecommended => 'Inirerekomenda';
 
   @override
-  String get dcConnecting => 'Kumokonekta…';
-
-  @override
-  String get dcDisconnected => 'Hindi konektado';
-
-  @override
   String dcSignedInAs(String name) {
     return 'Naka-sign in bilang $name';
   }
@@ -924,15 +888,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get settingsSyncWhat => 'Ano ang isi-sync';
 
   @override
-  String get settingsSyncServer => 'Sa server';
-
-  @override
   String get settingsSyncServerEmpty => 'Wala pang na-upload';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count setting, na-upload $time mula sa $device';
-  }
 
   @override
   String get settingsSyncThisDevice => 'ang device na ito';
@@ -961,11 +917,6 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'Huling na-sync $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'Nabigo ang pag-sync: $error';
   }
 
   @override
@@ -1750,22 +1701,11 @@ class AppLocalizationsFil extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'Ipakita sa Discord profile mo ang ginagawa mo. Kailangan ang Discord token mo.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'Ipakita sa Discord profile mo ang ginagawa mo. Kailangang tumatakbo ang Discord desktop app.';
-
-  @override
   String get discordBrowsing => 'Ipakita ang browsing activity';
 
   @override
   String get discordBrowsingDesc =>
       'Ipakita rin ang tab, page o profile na tinitingnan mo, hindi lang ang pinapanood o binabasa mo.';
-
-  @override
-  String get discordLookHeader => 'Itsura ng presence';
 
   @override
   String get discordActivityType => 'Uri ng activity';
@@ -1806,9 +1746,6 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'Palitan ng \"Something private\" ang mga pangalan ng anime at manga (pati cover at link).';
-
-  @override
-  String get discordConnectionHeader => 'Koneksyon';
 
   @override
   String get listSearchHint => 'Hanapin sa listahang ito';
@@ -1866,13 +1803,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get discordToken => 'Discord token';
-
-  @override
-  String get discordTokenSaved =>
-      'Na-save. I-tap para palitan, pindutin nang matagal para tanggalin.';
-
-  @override
-  String get discordTokenNotSet => 'Wala pa. I-tap para magdagdag.';
 
   @override
   String get discordTokenSavedSnack => 'Na-save ang Discord token';
@@ -2070,9 +2000,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get mangaBakaAccountOptions => 'Mga option ng MangaBaka account';
 
   @override
-  String get comickAccountOptions => 'Mga pagpipilian sa comick account';
-
-  @override
   String get comickClientId => 'Comick Client ID';
 
   @override
@@ -2166,9 +2093,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get simklReadOnly => 'Read-only access ang binigay ng Simkl';
 
   @override
-  String get traktReadOnly => 'Ang Trakt ay nagbigay ng read-only na access';
-
-  @override
   String get incognitoEditsBlocked => 'Incognito: bawal mag-edit ng listahan';
 
   @override
@@ -2249,9 +2173,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get otherWorks => 'Iba pang gawa';
-
-  @override
-  String get prequelSequel => 'Prequel at Sequel';
 
   @override
   String get prequel => 'Prequel';
@@ -2395,16 +2316,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get trailerQuality => 'Kalidad ng trailer';
 
   @override
-  String get titleCopied => 'Nakopya ang title';
-
-  @override
   String get linkCopied => 'Nakopya ang link';
-
-  @override
-  String get watchTrailer => 'Panoorin ang trailer';
-
-  @override
-  String get copyTitle => 'Kopyahin ang title';
 
   @override
   String get detailStale =>
@@ -3393,9 +3305,6 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'Pumili kung saan ise-save ang backup';
-
-  @override
   String savedPath(String path) {
     return 'Na-save ang $path';
   }
@@ -3968,9 +3877,6 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'para sa mga title na kasalukuyang umeere';
-
-  @override
   String get progress => 'Pag-unlad';
 
   @override
@@ -4176,11 +4082,6 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'Laki: $size';
-  }
-
-  @override
   String get installedState => 'Naka-install';
 
   @override
@@ -4280,11 +4181,6 @@ class AppLocalizationsFil extends AppLocalizations {
       'Idagdag din ang mga entry na wala pa sa kabilang service';
 
   @override
-  String syncServiceOn(String name) {
-    return 'I-sync sa $name';
-  }
-
-  @override
   String get syncDelete =>
       'Tanggalin kung ano ang wala sa pangunahing serbisyo';
 
@@ -4316,11 +4212,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get syncDeletedNote => 'Matatanggal';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count ay tatanggalin mula sa $name';
-  }
-
-  @override
   String get syncOnlyForward => 'Panatilihin ang mas mataas na progress';
 
   @override
@@ -4332,9 +4223,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'Hindi magbabasa';
-
-  @override
-  String get animePlanetAlreadyOnList => 'Nasa listahan na ito';
 
   @override
   String get animePlanetNewList => 'Bagong pangalan ng listahan';
@@ -5692,9 +5580,6 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'Nakuha ang clearance sa ibang user agent, kaya hindi ito naipadala. Subukan ang koneksyon upang makakuha ng bago';
-
-  @override
-  String get watchSectionConnection => 'Koneksyon';
 
   @override
   String get watchSectionSession => 'Sesyon';
@@ -7576,13 +7461,7 @@ class AppLocalizationsFil extends AppLocalizations {
   String get downloadPickAudio => 'Aling audio track ang ida-download?';
 
   @override
-  String get downloadNoAudio => 'Walang dagdag na audio';
-
-  @override
   String get downloadAudio => 'Audio';
-
-  @override
-  String get downloadNoSubtitle => 'Walang subtitle';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8434,11 +8313,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get generalSectionPrivacy => 'Pagkapribado';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'Lumipat sa $service upang buksan ito';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'Default na bilis, auto play, video fit, oryentasyon at larawan sa larawan';
 
@@ -8759,9 +8633,6 @@ class AppLocalizationsFil extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'Naghihintay';
-
-  @override
   String get stepChecking => 'Sinusuri…';
 
   @override
@@ -8832,14 +8703,7 @@ class AppLocalizationsFil extends AppLocalizations {
       'I-drag ang isang badge sa isang sulok ng unang card, o i-drag ang isang badge na nasa ibabaw nito upang ilipat ito. Ang mga badge ay nagpapalitan ng mga lugar, kaya walang nagsasapawan. Mag-tap ng badge sa ibaba para i-on o i-off ito.';
 
   @override
-  String get statusAuto => 'Auto';
-
-  @override
   String get unreadCounter => 'Hindi pa nababasang counter';
-
-  @override
-  String get unreadCounterDesc =>
-      'Ipakita kung ilang episode o kabanata ang natitira sa mga poster';
 
   @override
   String get settingsShortcuts => 'Mga keyboard shortcut';
@@ -8878,9 +8742,6 @@ class AppLocalizationsFil extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'I-reset sa default';
-
-  @override
-  String get shortcutClearKeys => 'Alisin ang lahat ng mga susi';
 
   @override
   String get shortcutResetAll => 'I-reset ang lahat ng mga shortcut';
@@ -9068,10 +8929,6 @@ class AppLocalizationsFil extends AppLocalizations {
   String get closeActionAlways => 'Palaging ituloy ang pagtakbo sa tray';
 
   @override
-  String get closeActionNoTray =>
-      'Hindi available ang system tray dito, kaya huminto ang app kapag isinara';
-
-  @override
   String get gamepadNav => 'Gamepad nabigasyon';
 
   @override
@@ -9145,9 +9002,6 @@ class AppLocalizationsFil extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'Hindi mape-play ang mga video hanggang sa ma-download muli ang player.';
-
-  @override
-  String get trailerLoading => 'Nilo-load ang trailer…';
 
   @override
   String get trailerFailed =>

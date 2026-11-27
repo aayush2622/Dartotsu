@@ -119,7 +119,7 @@ class CastDiscovery {
           protocol: CastProtocol.chromecast,
         ),
       );
-    }, onError: (_, __) {});
+    }, onError: (_, _) {});
   }
 
   static String? _mdnsName(String raw) {
@@ -186,7 +186,7 @@ class CastDiscovery {
           _resolving.add(location)) {
         unawaited(_renderer(location, host));
       }
-    }, onError: (_, __) {});
+    }, onError: (_, _) {});
   }
 
   Future<void> _roku(String host) async {

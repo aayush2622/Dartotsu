@@ -151,7 +151,6 @@
     "settingsSyncSwitch": "Synchroniseren bij verandering",
     "settingsSyncModeGithub": "GitHub",
     "settingsSyncSignIn": "Log in met GitHub",
-    "settingsSyncSignInDesc": "Instellingen worden opgeslagen in een privé-gist in uw account",
     "settingsSyncToken": "Gebruik een persoonlijk toegangstoken",
     "settingsSyncTokenDesc": "Maak er een op github.com/settings/tokens met alleen de basisrechten",
     "settingsSyncTokenField": "Token",
@@ -162,26 +161,14 @@
         }
     },
     "settingsSyncSignOut": "Meld u af",
-    "settingsSyncCode": "Voer {code} in op GitHub",
-    "@settingsSyncCode": {
-        "placeholders": {
-            "code": {}
-        }
-    },
-    "settingsSyncCodeDesc": "De GitHub-pagina is geopend in uw browser. Tik om de code te kopiëren, of houd ingedrukt om te annuleren.",
     "settingsSyncSignInFailed": "Kan niet inloggen bij GitHub",
-    "dcPreview": "Voorbeeld",
     "dcSampleWatching": "Kijken",
     "dcSampleReading": "Lezen",
     "dcSampleBrowsing": "Browsen",
     "dcSampleLive": "Op dit moment",
     "dcLiveNothing": "Er is momenteel niets te zien. Open een titel, start een aflevering of een hoofdstuk en het verschijnt hier.",
     "dcMemberList": "In de ledenlijst",
-    "dcAccount": "Rekening",
-    "dcSignIn": "Log in met Discord",
     "dcSignOut": "Meld u af",
-    "dcDesktopHint": "Zonder verbinding te maken, toont Discord “Watching Dartotsu” via de desktop-app. Verbind Discord om de activiteit naar uw titel te vernoemen, ook op mobiel.",
-    "dcMobileHint": "Verbind Discord om te laten zien wat je kijkt of leest. Het gebruikt de autorisatiepagina van Discord, niet uw accounttoken.",
     "dcConnect": "Verbind onenigheid",
     "dcConnectDesc": "Opent de autorisatiepagina van Discord en voegt Dartotsu toe onder Geautoriseerde apps. Discord vraagt ​​om je aanwezigheid te updaten. Er wordt alleen een vernieuwingstoken opgeslagen, niet uw accounttoken.",
     "dcConnectFailed": "Kon Discord niet verbinden",
@@ -254,8 +241,6 @@
     "dcMethodToken": "Accounttoken",
     "dcInUse": "In gebruik",
     "dcRecommended": "Aanbevolen",
-    "dcConnecting": "Verbinden…",
-    "dcDisconnected": "Niet verbonden",
     "dcSignedInAs": "Aangemeld als {name}",
     "@dcSignedInAs": {
         "placeholders": {
@@ -329,16 +314,7 @@
     "settingsSyncSecretsDelete": "Verwijderen uit GitHub",
     "settingsSyncSecretsDeleteMessage": "Hiermee wordt het gecodeerde accountbestand uit uw kern verwijderd. Andere apparaten behouden hun aanmeldingen en kunnen een nieuwe wachtwoordzin instellen.",
     "settingsSyncWhat": "Wat te synchroniseren",
-    "settingsSyncServer": "Op de server",
     "settingsSyncServerEmpty": "Er is nog niets geüpload",
-    "settingsSyncServerInfo": "{count} instellingen, geüpload {time} van {device}",
-    "@settingsSyncServerInfo": {
-        "placeholders": {
-            "count": {},
-            "time": {},
-            "device": {}
-        }
-    },
     "settingsSyncThisDevice": "dit apparaat",
     "settingsSyncCount": "{count, plural, =0{Niets op de server} =1{1 instelling op de server} other{{count} instellingen op de server}}",
     "settingsSyncNow": "Synchroniseer nu",
@@ -348,12 +324,6 @@
     "@settingsSyncLast": {
         "placeholders": {
             "time": {}
-        }
-    },
-    "settingsSyncFailed": "Synchronisatie mislukt: {error}",
-    "@settingsSyncFailed": {
-        "placeholders": {
-            "error": {}
         }
     },
     "settingsSyncScope": "Alleen instellingen die overal hetzelfde werken, worden gesynchroniseerd. Accounts, tokens, mappen, extensies, meldingen, Discord, updates en venstergrootte blijven op elk apparaat.",
@@ -634,11 +604,8 @@
     "linkOpenAnilistDesc": "Zet linkafhandeling aan zodat anilist.co-links de app openen",
     "linkSettingsFailed": "Kon de systeeminstellingen niet openen",
     "discordRichPresence": "Rich Presence",
-    "discordRichPresenceTokenDesc": "Toon wat je doet op je Discord-profiel. Hiervoor heb je je Discord-token nodig.",
-    "discordRichPresenceDesktopDesc": "Toon wat je doet op je Discord-profiel. Hiervoor moet de Discord-desktopapp draaien.",
     "discordBrowsing": "Browse-activiteit tonen",
     "discordBrowsingDesc": "Toon ook het tabblad, de pagina of het profiel waar je naar kijkt, niet alleen wat je kijkt of leest.",
-    "discordLookHeader": "Uiterlijk van de presence",
     "discordActivityType": "Activiteitstype",
     "discordActivityTypeDesc": "Hoe Discord het verwoordt: \"Kijkt naar …\" of \"Speelt …\". Auto gebruikt Kijkt voor anime en Speelt voor de rest.",
     "discordWatching": "Kijken",
@@ -651,7 +618,6 @@
     "discordButtonsDesc": "Knoppen \"Bekijk anime / manga\" en \"Open Dartotsu\".",
     "discordHideTitles": "Titels verbergen",
     "discordHideTitlesDesc": "Vervang namen van anime en manga (en de cover en link) door \"Iets privés\".",
-    "discordConnectionHeader": "Verbinding",
     "listSearchHint": "Doorzoek deze lijst",
     "listSort": "Sorteren",
     "listFilter": "Filteren",
@@ -671,8 +637,6 @@
     "listNoMatches": "Niks in deze lijst komt overeen",
     "discordLogin": "Inloggen bij Discord",
     "discordToken": "Discord-token",
-    "discordTokenSaved": "Opgeslagen. Tik om te vervangen, lang indrukken om te verwijderen.",
-    "discordTokenNotSet": "Niet ingesteld. Tik om toe te voegen.",
     "discordTokenSavedSnack": "Discord-token opgeslagen",
     "discordTokenRemovedSnack": "Discord-token verwijderd",
     "discordRichPresenceRow": "Discord Rich Presence",
@@ -736,7 +700,6 @@
     "hideNsfwDesc": "Houd 18+-titels uit feeds en zoekresultaten, en toon je eigen 18+-items onder Verborgen media.",
     "kitsuAccountOptions": "Kitsu-accountopties",
     "mangaBakaAccountOptions": "MangaBaka-accountopties",
-    "comickAccountOptions": "Comick-accountopties",
     "comickClientId": "Comick-client-ID",
     "comickClientIdDesc": "Aangepaste client-ID geregistreerd op comick.dev",
     "couldNotUpdateKitsuSettings": "Kon je Kitsu-instellingen niet bijwerken",
@@ -761,7 +724,6 @@
     "accountDetails": "Accountgegevens",
     "refreshFromKitsu": "Verversen vanuit Kitsu",
     "simklReadOnly": "Simkl heeft alleen-lezen toegang gegeven",
-    "traktReadOnly": "Trakt verleende alleen-lezen toegang",
     "incognitoEditsBlocked": "Incognito: lijstwijzigingen zijn geblokkeerd",
     "serviceError": "{service}: {error}",
     "incognitoProgressNotSaved": "Incognito: voortgang niet opgeslagen",
@@ -786,7 +748,6 @@
     "mangaCredits": "Manga-credits",
     "mainProductions": "Hoofdproducties",
     "otherWorks": "Ander werk",
-    "prequelSequel": "Prequel & sequel",
     "prequel": "Voorloper",
     "sequel": "Vervolg",
     "previousSeason": "Vorig seizoen",
@@ -833,10 +794,7 @@
     "addToList": "Aan lijst toevoegen",
     "trailer": "Aanhangwagen",
     "trailerQuality": "Trailerkwaliteit",
-    "titleCopied": "Titel gekopieerd",
     "linkCopied": "Link gekopieerd",
-    "watchTrailer": "Trailer kijken",
-    "copyTitle": "Titel kopiëren",
     "detailStale": "AniList kan niet worden bereikt. Dit is opgeslagen informatie en kan verouderd zijn.",
     "copyLink": "Link kopiëren",
     "openInBrowser": "Openen in browser",
@@ -1139,7 +1097,6 @@
     "import": "Importeren",
     "animeCount": "{count} anime",
     "mangaCount": "{count} manga",
-    "chooseSaveLocation": "Kies waar je de back-up opslaat",
     "savedPath": "{path} opgeslagen",
     "exportFailed": "Exporteren mislukt: {error}",
     "nothingInLocalLists": "Nog niks in je lokale lijsten.",
@@ -1317,7 +1274,6 @@
     "deepLinkOpenError": "Fout bij openen van link: {error}",
     "linkCantBeOpened": "Deze link kan niet worden geopend: {link}",
     "linkOpenError": "Fout bij openen van link: {error}",
-    "forReleasingTitles": "voor titels die nu lopen",
     "progress": "Voortgang",
     "notes": "Notities",
     "serviceNotFound": "Service \"{id}\" niet gevonden",
@@ -1368,7 +1324,6 @@
     "pluginNotInRepo": "{name} is niet beschikbaar in de ingestelde repo",
     "pluginFetchFailed": "Plugininfo ophalen mislukt",
     "installPluginTitle": "{name} installeren",
-    "sizeLabel": "Grootte: {size}",
     "installedState": "Geïnstalleerd",
     "updatePluginTitle": "Update {name}",
     "@updatePluginTitle": {
@@ -1405,14 +1360,6 @@
     "syncAutoDesc": "Haal op en synchroniseer op de achtergrond bij het openen van de app en elke 30 minuten",
     "syncAddMissing": "Ontbrekende items toevoegen",
     "syncAddMissingDesc": "Voeg ook items toe die de andere service nog niet heeft",
-    "syncServiceOn": "Synchroniseren met {name}",
-    "@syncServiceOn": {
-        "placeholders": {
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncDelete": "Verwijder wat de hoofdservice niet heeft",
     "syncDeleteDesc": "Verwijder vermeldingen uit de andere services die niet op de hoofdlijst staan. Alleen vermeldingen die aan een titel kunnen worden gekoppeld, worden verwijderd, dus zaken als Simkl-films en -series blijven bestaan",
     "syncDeleteTitle": "Invoer verwijderen?",
@@ -1427,22 +1374,10 @@
     "syncDeleteAction": "Verwijderen",
     "syncToDelete": "Om te verwijderen",
     "syncDeletedNote": "Wordt verwijderd",
-    "syncWillRemove": "{count} wordt verwijderd uit {name}",
-    "@syncWillRemove": {
-        "placeholders": {
-            "count": {
-                "type": "int"
-            },
-            "name": {
-                "type": "String"
-            }
-        }
-    },
     "syncOnlyForward": "Verdere voortgang behouden",
     "syncOnlyForwardDesc": "Verlaag de voortgang niet van een service die al verder is",
     "animePlanetWontWatch": "Ik zal niet kijken",
     "animePlanetWontRead": "Zal niet lezen",
-    "animePlanetAlreadyOnList": "Staat al op deze lijst",
     "animePlanetNewList": "Nieuwe lijstnaam",
     "syncPrivate": "Privé-inzendingen",
     "syncPrivateDesc": "Wat u moet doen met gegevens die u privé houdt. Een dienst met een privéoptie maakt ze privé; anderen zouden ze publiekelijk laten zien",
@@ -1849,7 +1784,6 @@
         }
     },
     "watchClearanceStale": "De goedkeuring is verdiend met een andere user-agent en wordt dus niet verzonden. Test de verbinding om een nieuwe te krijgen",
-    "watchSectionConnection": "Verbinding",
     "watchSectionSession": "Sessie",
     "watchSectionTools": "Gereedschap",
     "watchMetaSource": "Afleveringsdetails van",
@@ -2548,9 +2482,7 @@
     "downloadPickStream": "Welke stream downloaden?",
     "downloadPickSubtitle": "Welke ondertitel downloaden?",
     "downloadPickAudio": "Welk audiospoor downloaden?",
-    "downloadNoAudio": "Geen extra audio",
     "downloadAudio": "Audio",
-    "downloadNoSubtitle": "Geen ondertitel",
     "downloadHlsNeedsFfmpeg": "Deze stream is een HLS-playlist. Downloaden vereist de FFmpeg-add-on.",
     "downloadSourceMissing": "De bron voor deze aflevering is niet geïnstalleerd",
     "downloadDashDrm": "Deze stream is DRM-beveiligd",
@@ -2926,14 +2858,6 @@
     "generalSectionBasics": "Taal & gedrag",
     "generalSectionSecurity": "Beveiliging",
     "generalSectionPrivacy": "Privacy",
-    "notificationsOtherService": "Schakel over naar {service} om dit te openen",
-    "@notificationsOtherService": {
-        "placeholders": {
-            "service": {
-                "type": "String"
-            }
-        }
-    },
     "secPlayerPlayback": "Standaardsnelheid, automatisch afspelen, video-fit, oriëntatie en beeld-in-beeld",
     "secPlayerSkip": "Sla openingen, eindes en samenvattingen automatisch over",
     "secPlayerControls": "Veeg, houd vast en tik op gebaren en zoek een voorbeeld",
@@ -3115,7 +3039,6 @@
             }
         }
     },
-    "stepWaiting": "Wachten",
     "stepChecking": "Controleren…",
     "stepUpToDate": "Up-to-date",
     "stepUpToDateWith": "Actueel · {detail}",
@@ -3157,9 +3080,7 @@
     "calendarManga": "Manga",
     "readerCloudflare": "Openen in browser (Cloudflare-controle)",
     "badgeBoardHint": "Sleep een badge naar een hoek van de eerste kaart, of sleep een badge die er al op staat om deze te verplaatsen. Badges wisselen van plaats, zodat ze elkaar nooit overlappen. Tik hieronder op een badge om deze in of uit te schakelen.",
-    "statusAuto": "Automatisch",
     "unreadCounter": "Ongelezen teller",
-    "unreadCounterDesc": "Laat op posters zien hoeveel afleveringen of hoofdstukken er nog over zijn",
     "settingsShortcuts": "Sneltoetsen",
     "settingsShortcutsDesc": "Elke sleutel bekijken, wijzigen en uitschakelen",
     "shortcutGroupApp": "App",
@@ -3172,7 +3093,6 @@
     "shortcutNotSet": "Niet ingesteld",
     "shortcutAddKey": "Voeg een sleutel toe",
     "shortcutResetOne": "Resetten naar standaard",
-    "shortcutClearKeys": "Verwijder alle sleutels",
     "shortcutResetAll": "Reset alle snelkoppelingen",
     "shortcutResetAllDesc": "Zet elke sleutel terug naar de standaardwaarde",
     "shortcutPress": "Druk op de gewenste toets of combinatie",
@@ -3240,7 +3160,6 @@
     "closeActionQuit": "Sluit de app",
     "closeActionWhenBusy": "Blijf in de lade rennen terwijl er iets actief is",
     "closeActionAlways": "Blijf altijd in de lade draaien",
-    "closeActionNoTray": "Het systeemvak is hier niet beschikbaar, dus de app wordt afgesloten wanneer deze wordt gesloten",
     "gamepadNav": "Gamepad-navigatie",
     "gamepadNavDesc": "Beweeg door de app en bestuur de speler met een gamecontroller",
     "trayShow": "Laat Dartotsu zien",
@@ -3269,6 +3188,5 @@
     "playerDownloadCopy": "Kopieer gegevens",
     "removePlayerTitle": "De speler verwijderen?",
     "removePlayerMessage": "Video's kunnen pas worden afgespeeld nadat de speler opnieuw is gedownload.",
-    "trailerLoading": "De aanhangwagen laden…",
     "trailerFailed": "Kon de trailer hier niet afspelen, omdat deze in de browser werd geopend"
 }

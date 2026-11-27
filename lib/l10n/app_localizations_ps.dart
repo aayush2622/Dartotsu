@@ -422,10 +422,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get settingsSyncSignIn => 'د GitHub سره لاسلیک وکړئ';
 
   @override
-  String get settingsSyncSignInDesc =>
-      'تنظیمات ستاسو په اکاونټ کې په شخصي لنډیز کې زیرمه شوي';
-
-  @override
   String get settingsSyncToken => 'د شخصي لاسرسي نښه وکاروئ';
 
   @override
@@ -444,19 +440,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get settingsSyncSignOut => 'ننوتل';
 
   @override
-  String settingsSyncCode(Object code) {
-    return 'په GitHub کې $code داخل کړئ';
-  }
-
-  @override
-  String get settingsSyncCodeDesc =>
-      'د GitHub پاڼه ستاسو په براوزر کې پرانستل شوه. د کوډ کاپي کولو لپاره ټایپ کړئ، یا د لغوه کولو لپاره ټایپ او ونیسئ.';
-
-  @override
   String get settingsSyncSignInFailed => 'GitHub ته ننوتل نشو کولی';
-
-  @override
-  String get dcPreview => 'مخکتنه';
 
   @override
   String get dcSampleWatching => 'کتل';
@@ -478,21 +462,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get dcMemberList => 'د غړو په لیست کې';
 
   @override
-  String get dcAccount => 'حساب';
-
-  @override
-  String get dcSignIn => 'د Discord سره لاسلیک وکړئ';
-
-  @override
   String get dcSignOut => 'ننوتل';
-
-  @override
-  String get dcDesktopHint =>
-      'پرته له وصل کیدو ، ډیسکارډ د ډیسټاپ ایپ له لارې \"دارټوټو لیدل\" ښیې. د خپل سرلیک وروسته فعالیت ته نوم ورکولو لپاره Discord وصل کړئ ، پشمول په موبایل کې.';
-
-  @override
-  String get dcMobileHint =>
-      'Discord وصل کړئ ترڅو وښیې چې تاسو څه ګورئ یا لوستل کوئ. دا د ډیسکارډ مجاز پاڼه کاروي، نه ستاسو د حساب نښه.';
 
   @override
   String get dcConnect => 'Discord وصل کړئ';
@@ -716,12 +686,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get dcRecommended => 'وړاندیز شوی';
 
   @override
-  String get dcConnecting => 'نښلول…';
-
-  @override
-  String get dcDisconnected => 'تړلی نه دی';
-
-  @override
   String dcSignedInAs(String name) {
     return 'د $name په توګه لاسلیک شوی';
   }
@@ -914,15 +878,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get settingsSyncWhat => 'څه همغږي کول';
 
   @override
-  String get settingsSyncServer => 'په سرور کې';
-
-  @override
   String get settingsSyncServerEmpty => 'تراوسه هیڅ شی نه دی پورته شوی';
-
-  @override
-  String settingsSyncServerInfo(Object count, Object time, Object device) {
-    return '$count ترتیبات، پورته شوي $time له $device څخه';
-  }
 
   @override
   String get settingsSyncThisDevice => 'دا وسیله';
@@ -951,11 +907,6 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String settingsSyncLast(Object time) {
     return 'وروستی همغږي شوی $time';
-  }
-
-  @override
-  String settingsSyncFailed(Object error) {
-    return 'همغږي ناکامه شوه: $error';
   }
 
   @override
@@ -1728,22 +1679,11 @@ class AppLocalizationsPs extends AppLocalizations {
   String get discordRichPresence => 'Rich Presence';
 
   @override
-  String get discordRichPresenceTokenDesc =>
-      'په خپل Discord پروفایل کې وښیه چې ته څه کوې. ستا د Discord ټوکن ته اړتیا ده.';
-
-  @override
-  String get discordRichPresenceDesktopDesc =>
-      'په خپل Discord پروفایل کې وښیه چې ته څه کوې. د Discord ډیسکټاپ اپ باید روان وي.';
-
-  @override
   String get discordBrowsing => 'د کتنې فعالیت وښیه';
 
   @override
   String get discordBrowsingDesc =>
       'نه یوازې هغه څه چې ګورې یا لولې یې، بلکې هغه ټب، پاڼه یا پروفایل هم وښیه چې ګورې یې.';
-
-  @override
-  String get discordLookHeader => 'د حضور بڼه';
 
   @override
   String get discordActivityType => 'د فعالیت ډول';
@@ -1783,9 +1723,6 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get discordHideTitlesDesc =>
       'د انیمې او مانګا نومونه (او د هغوی پوښ او لینک) د \"Something private\" په نوم بدل کړه.';
-
-  @override
-  String get discordConnectionHeader => 'اړیکه';
 
   @override
   String get listSearchHint => 'پدې لیست کې لټون';
@@ -1843,13 +1780,6 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get discordToken => 'د Discord ټوکن';
-
-  @override
-  String get discordTokenSaved =>
-      'خوندي دی. د بدلولو لپاره ټچ کړه، د لرې کولو لپاره اوږد وساته.';
-
-  @override
-  String get discordTokenNotSet => 'نه دی ټاکل شوی. د اضافه کولو لپاره ټچ کړه.';
 
   @override
   String get discordTokenSavedSnack => 'د Discord ټوکن خوندي شو';
@@ -2047,9 +1977,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get mangaBakaAccountOptions => 'د MangaBaka د حساب اختیارونه';
 
   @override
-  String get comickAccountOptions => 'د کامیک حساب اختیارونه';
-
-  @override
   String get comickClientId => 'د کامیک پیرودونکي ID';
 
   @override
@@ -2142,9 +2069,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get simklReadOnly => 'Simkl یوازې د لوستلو لاسرسی ورکړ';
 
   @override
-  String get traktReadOnly => 'Trakt ته یوازې د لوستلو لاسرسی ورکړل شوی';
-
-  @override
   String get incognitoEditsBlocked => 'پټ حالت: د لیست سمونې بندې دي';
 
   @override
@@ -2224,9 +2148,6 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get otherWorks => 'نور کارونه';
-
-  @override
-  String get prequelSequel => 'پریکوېل او سیکوېل';
 
   @override
   String get prequel => 'پریکویل';
@@ -2370,16 +2291,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get trailerQuality => 'د ټریلر کیفیت';
 
   @override
-  String get titleCopied => 'سرلیک کاپي شو';
-
-  @override
   String get linkCopied => 'لینک کاپي شو';
-
-  @override
-  String get watchTrailer => 'تریلر وګوره';
-
-  @override
-  String get copyTitle => 'سرلیک کاپي کړه';
 
   @override
   String get detailStale =>
@@ -3364,9 +3276,6 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String get chooseSaveLocation => 'وټاکه چې بیک‌اپ چېرته خوندي کړې';
-
-  @override
   String savedPath(String path) {
     return '$path خوندي شو';
   }
@@ -3938,9 +3847,6 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String get forReleasingTitles => 'د اوس خپرېدونکو سرلیکونو لپاره';
-
-  @override
   String get progress => 'پرمختګ';
 
   @override
@@ -4145,11 +4051,6 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String sizeLabel(String size) {
-    return 'اندازه: $size';
-  }
-
-  @override
   String get installedState => 'نصب شوی';
 
   @override
@@ -4247,11 +4148,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get syncAddMissingDesc => 'هغه ننوتنې هم اضافه کړه چې بل خدمت لا نلري';
 
   @override
-  String syncServiceOn(String name) {
-    return 'د $name سره همغږي کول';
-  }
-
-  @override
   String get syncDelete => 'هغه څه حذف کړئ چې اصلي خدمت نلري';
 
   @override
@@ -4282,11 +4178,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get syncDeletedNote => 'ړنګ به شي';
 
   @override
-  String syncWillRemove(int count, String name) {
-    return '$count به له $name څخه حذف شي';
-  }
-
-  @override
   String get syncOnlyForward => 'نور پرمختګ وساته';
 
   @override
@@ -4297,9 +4188,6 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get animePlanetWontRead => 'نه لوستل کیږي';
-
-  @override
-  String get animePlanetAlreadyOnList => 'لا دمخه په دې لیست کې';
 
   @override
   String get animePlanetNewList => 'د نوي لیست نوم';
@@ -5642,9 +5530,6 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get watchClearanceStale =>
       'تصفیه د بل کارونکي اجنټ سره ترلاسه شوې ، نو دا نه لیږل کیږي. د نوي ترلاسه کولو لپاره پیوستون ازموئ';
-
-  @override
-  String get watchSectionConnection => 'پیوستون';
 
   @override
   String get watchSectionSession => 'غونډه';
@@ -7496,13 +7381,7 @@ class AppLocalizationsPs extends AppLocalizations {
   String get downloadPickAudio => 'کوم غږیز ټراک ډاونلوډ کړو؟';
 
   @override
-  String get downloadNoAudio => 'اضافي غږ نشته';
-
-  @override
   String get downloadAudio => 'غږ';
-
-  @override
-  String get downloadNoSubtitle => 'فرعي سرلیک نشته';
 
   @override
   String get downloadHlsNeedsFfmpeg =>
@@ -8339,11 +8218,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get generalSectionPrivacy => 'محرمیت';
 
   @override
-  String notificationsOtherService(String service) {
-    return 'د دې خلاصولو لپاره $service ته لاړشئ';
-  }
-
-  @override
   String get secPlayerPlayback =>
       'د ډیفالټ سرعت ، اتومات پلی کول ، ویډیو فټ ، سمت او په عکس کې عکس';
 
@@ -8653,9 +8527,6 @@ class AppLocalizationsPs extends AppLocalizations {
   }
 
   @override
-  String get stepWaiting => 'انتظار';
-
-  @override
   String get stepChecking => 'چک کول…';
 
   @override
@@ -8726,14 +8597,7 @@ class AppLocalizationsPs extends AppLocalizations {
       'د لومړي کارت په یوه کونج کې یو بیج کش کړئ، یا د هغې د حرکت کولو لپاره مخکې له مخکې یو بیج کش کړئ. بیجونه ځایونه بدلوي، نو هیڅ کله هم نه تیریږي. د دې د فعال یا بندولو لپاره لاندې بیج ټایپ کړئ.';
 
   @override
-  String get statusAuto => 'اتومات';
-
-  @override
   String get unreadCounter => 'نه لوستل شوی کاونټر';
-
-  @override
-  String get unreadCounterDesc =>
-      'وښایاست چې په پوسټرونو کې څومره قسطونه یا فصلونه پاتې دي';
 
   @override
   String get settingsShortcuts => 'د کیبورډ شارټ کټونه';
@@ -8770,9 +8634,6 @@ class AppLocalizationsPs extends AppLocalizations {
 
   @override
   String get shortcutResetOne => 'ډیفالټ ته بیا تنظیم کړئ';
-
-  @override
-  String get shortcutClearKeys => 'ټولې کیلي لرې کړئ';
 
   @override
   String get shortcutResetAll => 'ټول شارټ کټونه بیا تنظیم کړئ';
@@ -8959,10 +8820,6 @@ class AppLocalizationsPs extends AppLocalizations {
   String get closeActionAlways => 'تل په ټری کې چلولو ته دوام ورکړئ';
 
   @override
-  String get closeActionNoTray =>
-      'د سیسټم ټری دلته شتون نلري، نو اپلیکیشن بندیږي کله چې وتړل شي';
-
-  @override
   String get gamepadNav => 'د لوبې پیډ نیویګیشن';
 
   @override
@@ -9036,9 +8893,6 @@ class AppLocalizationsPs extends AppLocalizations {
   @override
   String get removePlayerMessage =>
       'ویډیو نشي پلی کولی تر هغه چې پلیر بیا ډاونلوډ شوی نه وي.';
-
-  @override
-  String get trailerLoading => 'ټریلر پورته کول…';
 
   @override
   String get trailerFailed =>
