@@ -219,6 +219,8 @@ Map<String, dynamic> _encodeLibrary(Map<String, Object> args) => {
   'lang': args['lang'],
   'facts': args['facts'] == true,
   'dates': true,
+  'full': true,
+  'counts': args['counts'],
   'items': {
     for (final e in (args['library'] as Map<String, Media>).entries)
       e.key: jsonDecode(jsonEncode(e.value.toJson())),
@@ -237,6 +239,7 @@ class SimklQueries extends Queries {
   SimklQueries(this.client, {this.onEpisodes});
 
   _Activity? _seen;
+  DateTime? _countsAt;
   bool _facts = false;
   DateTime? _factsTried;
 
@@ -252,8 +255,13 @@ class SimklQueries extends Queries {
   static const _diskKey = 'simklLibraryEn';
   static const _oldDiskKey = 'simklLibrary';
 
+  bool get _countsStale =>
+      _countsAt == null ||
+      DateTime.now().difference(_countsAt!) > const Duration(hours: 24);
+
   void clearLibrary() {
     _seen = null;
+    _countsAt = null;
     _facts = false;
     _library.clear();
     removeCustomData(_diskKey, location: PrefLocation.CACHE);
@@ -270,6 +278,10 @@ class SimklQueries extends Queries {
       final items = await compute(_decodeLibrary, raw);
       _seen = _Activity('${raw['all']}', '${raw['removed']}');
       _facts = raw['facts'] == true;
+      final counted = raw['counts'];
+      _countsAt = counted is int && counted > 0
+          ? DateTime.fromMillisecondsSinceEpoch(counted)
+          : null;
       if (raw['lang'] != SimklPref.titleLanguage.value ||
           raw['full'] != true ||
           raw['dates'] != true) {
@@ -291,6 +303,7 @@ class SimklQueries extends Queries {
         'removed': seen.removed,
         'lang': SimklPref.titleLanguage.value,
         'facts': _facts,
+        'counts': _countsAt?.millisecondsSinceEpoch ?? 0,
         'library': library,
       });
       saveCustomData<Map<String, dynamic>>(
@@ -324,7 +337,9 @@ class SimklQueries extends Queries {
     final previous = first ?? await _readDisk();
     final now = await _activity();
     final before = _seen;
-    if (previous == null || before == null) return _fullSync(now);
+    if (previous == null || before == null || _countsStale) {
+      return _fullSync(now);
+    }
     if (now.all == before.all) {
       if (_facts || !_factsDue) return _publish(previous, persist: false);
       return _publish(await _withFacts(previous));
@@ -370,6 +385,7 @@ class SimklQueries extends Queries {
     }
     _keepFacts(library, await _factsBody());
     _seen = now;
+    _countsAt = DateTime.now();
     return _publish(library);
   }
 
@@ -411,6 +427,19 @@ class SimklQueries extends Queries {
     return library;
   }
 
+  bool _adoptTotal(Map<String, Media> library, Media fresh) {
+    final total = fresh.anime?.totalEpisodes ?? 0;
+    final mine = library[fresh.id]?.anime;
+    if (total <= 0 || mine == null || mine.totalEpisodes == total) return false;
+    mine.totalEpisodes = total;
+    return true;
+  }
+
+  void _persistTotals(Map<String, Media> library) {
+    final seen = _seen;
+    if (seen != null) unawaited(_writeDisk(library, seen));
+  }
+
   Future<List<Media>> trending(SimklSection section, {int page = 1}) async {
     final files = [section.file, ...section.moreFiles];
     final datas = await Future.wait([
@@ -437,10 +466,14 @@ class SimklQueries extends Queries {
   Future<List<Media>> _withList(List<Media> items) async {
     if (!client.hasToken) return items;
     final mine = await _safeLibrary();
+    var changed = false;
     for (final m in items) {
       final entry = mine[m.id];
-      if (entry != null) m.takeListEntry(entry);
+      if (entry == null) continue;
+      m.takeListEntry(entry);
+      if (_adoptTotal(mine, m)) changed = true;
     }
+    if (changed) _persistTotals(mine);
     return items;
   }
 
@@ -464,8 +497,12 @@ class SimklQueries extends Queries {
     if (data is! Map<String, dynamic>) return null;
     final media = mapSimklDetail(data, kind);
     if (media == null) return null;
-    final mine = (results[1] as Map<String, Media>)[media.id];
-    if (mine != null) media.takeListEntry(mine);
+    final library = results[1] as Map<String, Media>;
+    final mine = library[media.id];
+    if (mine != null) {
+      media.takeListEntry(mine);
+      if (_adoptTotal(library, media)) _persistTotals(library);
+    }
     return media;
   }
 
