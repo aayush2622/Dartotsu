@@ -348,6 +348,7 @@ class PlayerEngine {
     );
     await applyAudioOutput(initial: true);
     await set('network-timeout', 60);
+    await set('demuxer-lavf-o', 'seg_max_retry=300');
     if (settings.tuning) {
       await set('video-sync', settings.videoSync);
       await set('interpolation', settings.interpolation ? 'yes' : 'no');
