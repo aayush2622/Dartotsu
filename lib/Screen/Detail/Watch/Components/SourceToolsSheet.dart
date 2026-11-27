@@ -28,12 +28,11 @@ class SourceToolsSheet extends StatefulWidget {
 enum _Tone { good, warn, bad, muted }
 
 class _Verdict {
-  final IconData icon;
   final _Tone tone;
   final String title;
   final String detail;
 
-  const _Verdict(this.icon, this.tone, this.title, this.detail);
+  const _Verdict(this.tone, this.title, this.detail);
 }
 
 class _SourceToolsSheetState extends State<SourceToolsSheet>
@@ -61,26 +60,15 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
   ) {
     switch (busy) {
       case ToolsBusy.testing:
-        return _Verdict(
-          Icons.network_check_rounded,
-          _Tone.muted,
-          getString.watchStatusTesting,
-          '',
-        );
+        return _Verdict(_Tone.muted, getString.watchStatusTesting, '');
       case ToolsBusy.solving:
-        return _Verdict(
-          Icons.shield_moon_outlined,
-          _Tone.muted,
-          getString.watchStatusSolving,
-          '',
-        );
+        return _Verdict(_Tone.muted, getString.watchStatusSolving, '');
       case ToolsBusy.idle:
         break;
     }
     if (probe == null) {
       final failure = last?.failure;
       return _Verdict(
-        failure == null ? Icons.shield_outlined : Icons.gpp_maybe_outlined,
         failure == null ? _Tone.muted : _Tone.warn,
         getString.watchStatusUntested,
         failure == null ? '' : _failure(failure),
@@ -88,7 +76,6 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
     }
     return switch (probe.result) {
       ProbeResult.ok => _Verdict(
-        Icons.verified_user_rounded,
         _Tone.good,
         getString.watchStatusReady,
         probe.passedByItself
@@ -100,7 +87,6 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
             : getString.watchProbeOk(probe.status ?? 0),
       ),
       ProbeResult.challenge => _Verdict(
-        Icons.gpp_maybe_rounded,
         _Tone.warn,
         getString.watchStatusChallenge,
         probe.failure == null
@@ -108,13 +94,11 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
             : _failure(probe.failure!),
       ),
       ProbeResult.blocked => _Verdict(
-        Icons.block_rounded,
         _Tone.bad,
         getString.watchStatusBlocked,
         getString.watchProbeBlocked(probe.status ?? 0),
       ),
       ProbeResult.failed => _Verdict(
-        Icons.cloud_off_rounded,
         _Tone.bad,
         getString.watchStatusOffline,
         probe.status == null
@@ -124,44 +108,48 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
     };
   }
 
-  (Color, Color) _colors(ColorScheme scheme, _Tone tone) => switch (tone) {
-    _Tone.good => (scheme.primaryContainer, scheme.onPrimaryContainer),
-    _Tone.warn => (scheme.tertiaryContainer, scheme.onTertiaryContainer),
-    _Tone.bad => (scheme.errorContainer, scheme.onErrorContainer),
-    _Tone.muted => (scheme.surfaceContainerHigh, scheme.onSurfaceVariant),
+  Color _toneColor(ColorScheme scheme, _Tone tone) => switch (tone) {
+    _Tone.good => scheme.primary,
+    _Tone.warn => scheme.tertiary,
+    _Tone.bad => scheme.error,
+    _Tone.muted => scheme.outline,
   };
 
-  Widget _badge(
-    BuildContext context,
-    IconData icon, {
-    _Tone tone = _Tone.good,
-    double size = 40,
-    bool spinner = false,
-  }) {
-    final (background, foreground) = _colors(context.colorScheme, tone);
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(color: background, shape: BoxShape.circle),
-      alignment: Alignment.center,
-      child: spinner
-          ? AppSpinner(size: size * 0.45, color: foreground)
-          : Icon(icon, size: size * 0.5, color: foreground),
-    );
-  }
+  Widget _dot(BuildContext context, _Tone tone) => SizedBox(
+    width: 24,
+    child: Center(
+      child: Container(
+        width: 8,
+        height: 8,
+        decoration: BoxDecoration(
+          color: _toneColor(context.colorScheme, tone),
+          shape: BoxShape.circle,
+        ),
+      ),
+    ),
+  );
+
+  Widget _icon(BuildContext context, IconData icon, {Color? color}) => SizedBox(
+    width: 24,
+    child: Icon(
+      icon,
+      size: 20,
+      color: color ?? context.colorScheme.onSurfaceVariant,
+    ),
+  );
 
   Widget _label(BuildContext context, String text) => Padding(
     padding: EdgeInsets.fromLTRB(
       Dimens.gapSm,
-      Dimens.gap,
+      Dimens.gapLg,
       Dimens.gapSm,
-      Dimens.gapXs,
+      Dimens.gapSm,
     ),
     child: Text(
       text,
       style: context.textTheme.labelLarge?.copyWith(
-        color: context.colorScheme.primary,
-        fontWeight: FontWeight.w700,
+        color: context.colorScheme.onSurfaceVariant,
+        fontWeight: FontWeight.w500,
       ),
     ),
   );
@@ -172,43 +160,38 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
     final probe = state.probe.value;
     final busy = state.busy.value;
     final verdict = _verdict(probe, busy, state.lastSolve.value);
-    final (background, foreground) = _colors(scheme, verdict.tone);
     final working = busy != ToolsBusy.idle;
     final challenge = probe?.result == ProbeResult.challenge;
     final canSolve =
         challenge && probe?.failure != CloudflareFailure.blocked ||
         h.clearanceStale;
-    return AnimatedContainer(
-      duration: animDuration(250),
-      curve: Curves.easeOutCubic,
+    return Container(
       padding: EdgeInsets.all(Dimens.gap),
       decoration: BoxDecoration(
-        color: background.withValues(
-          alpha: verdict.tone == _Tone.muted ? 1 : 0.9,
-        ),
-        borderRadius: BorderRadius.circular(28),
+        color: scheme.onSurface.withValues(alpha: 0.06),
+        borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
-              Container(
-                width: 52,
-                height: 52,
-                decoration: BoxDecoration(
-                  color: foreground.withValues(alpha: 0.12),
-                  shape: BoxShape.circle,
-                ),
-                alignment: Alignment.center,
-                child: working
-                    ? AppSpinner(size: 24, strokeWidth: 2.5, color: foreground)
-                    : Icon(verdict.icon, size: 28, color: foreground),
-              ),
+              working
+                  ? SizedBox(
+                      width: 24,
+                      child: Center(
+                        child: AppSpinner(size: 14, color: scheme.primary),
+                      ),
+                    )
+                  : _dot(context, verdict.tone),
               SizedBox(width: Dimens.gap),
               Expanded(
                 child: AnimatedSwitcher(
                   duration: animDuration(200),
+                  layoutBuilder: (current, previous) => Stack(
+                    alignment: AlignmentDirectional.centerStart,
+                    children: [...previous, ?current],
+                  ),
                   child: Column(
                     key: ValueKey('${verdict.title}|${verdict.detail}'),
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -216,8 +199,7 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
                       Text(
                         verdict.title,
                         style: theme.titleMedium?.copyWith(
-                          color: foreground,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
                       if (verdict.detail.isNotEmpty) ...[
@@ -225,7 +207,7 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
                         Text(
                           verdict.detail,
                           style: theme.bodyMedium?.copyWith(
-                            color: foreground.withValues(alpha: 0.85),
+                            color: scheme.onSurfaceVariant,
                           ),
                         ),
                       ],
@@ -233,49 +215,36 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
                   ),
                 ),
               ),
-            ],
-          ),
-          if (h.host.isNotEmpty) ...[
-            SizedBox(height: Dimens.gapSm),
-            Row(
-              children: [
-                Icon(
-                  Icons.public_rounded,
-                  size: 14,
-                  color: foreground.withValues(alpha: 0.7),
-                ),
-                SizedBox(width: Dimens.gapXs),
-                Expanded(
+              if (h.host.isNotEmpty)
+                Padding(
+                  padding: EdgeInsetsDirectional.only(start: Dimens.gapSm),
                   child: Text(
                     h.host,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: theme.labelMedium?.copyWith(
-                      color: foreground.withValues(alpha: 0.7),
+                      color: scheme.onSurfaceVariant,
                     ),
                   ),
                 ),
-              ],
-            ),
-          ],
+            ],
+          ),
           if (h.url != null) ...[
             SizedBox(height: Dimens.gap),
             Row(
               children: [
                 Expanded(
-                  child: FilledButton.tonalIcon(
+                  child: FilledButton.tonal(
                     onPressed: working ? null : state.test,
-                    icon: const Icon(Icons.network_check_rounded),
-                    label: Text(getString.watchTestConnection),
+                    child: Text(getString.watchTestConnection),
                   ),
                 ),
                 if (canSolve) ...[
                   SizedBox(width: Dimens.gapSm),
                   Expanded(
-                    child: FilledButton.icon(
+                    child: FilledButton(
                       onPressed: working ? null : state.solve,
-                      icon: const Icon(Icons.shield_moon_outlined),
-                      label: Text(getString.watchSolveChallenge),
+                      child: Text(getString.watchSolveChallenge),
                     ),
                   ),
                 ],
@@ -290,30 +259,17 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
   List<Widget> _session(BuildContext context, SourceHealth h) {
     final clearance = h.clearance;
     final issued = clearance?.issued;
-    final rows = <(IconData, _Tone, String, String?)>[
+    final rows = <(_Tone, String)>[
       (
-        Icons.cookie_outlined,
         h.cookies > 0 ? _Tone.good : _Tone.muted,
         getString.watchCookieCount(h.cookies, h.host),
-        null,
       ),
       if (clearance == null)
-        (
-          Icons.shield_outlined,
-          _Tone.muted,
-          getString.watchClearanceMissing,
-          null,
-        )
+        (_Tone.muted, getString.watchClearanceMissing)
       else if (h.clearanceStale)
-        (
-          Icons.gpp_maybe_rounded,
-          _Tone.warn,
-          getString.watchClearanceStale,
-          null,
-        )
+        (_Tone.warn, getString.watchClearanceStale)
       else
         (
-          Icons.verified_user_rounded,
           _Tone.good,
           getString.watchClearanceActive(
             issued == null
@@ -322,21 +278,18 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
                     timeAgo(issued.millisecondsSinceEpoch ~/ 1000),
                   ),
           ),
-          null,
         ),
       (
-        Icons.badge_outlined,
         h.customAgent ? _Tone.warn : _Tone.muted,
         h.customAgent ? getString.watchAgentCustom : getString.watchAgentShared,
-        null,
       ),
     ];
     return [
-      for (final (i, (icon, tone, text, _)) in rows.indexed)
+      for (final (i, (tone, text)) in rows.indexed)
         SheetTile(
           tinted: true,
           radius: groupedRadius(i, rows.length),
-          leading: _badge(context, icon, tone: tone, size: 36),
+          leading: _dot(context, tone),
           title: Text(text, style: context.textTheme.bodyMedium),
         ),
     ];
@@ -355,7 +308,7 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
       (r) => SheetTile(
         tinted: true,
         radius: r,
-        leading: _badge(context, Icons.tune_rounded),
+        leading: _icon(context, Icons.tune_rounded),
         title: Text(getString.watchSourceSettings),
         trailing: const Icon(Icons.chevron_right_rounded),
         onTap: state.openSettings,
@@ -364,7 +317,7 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
         (r) => SheetTile(
           tinted: true,
           radius: r,
-          leading: _badge(context, Icons.public_rounded),
+          leading: _icon(context, Icons.public_rounded),
           title: Text(getString.watchOpenWebView),
           subtitle: Text(getString.watchOpenWebViewDesc),
           trailing: const Icon(Icons.chevron_right_rounded),
@@ -374,7 +327,11 @@ class _SourceToolsSheetState extends State<SourceToolsSheet>
         (r) => SheetTile(
           tinted: true,
           radius: r,
-          leading: _badge(context, Icons.delete_sweep_rounded, tone: _Tone.bad),
+          leading: _icon(
+            context,
+            Icons.delete_sweep_rounded,
+            color: scheme.error,
+          ),
           title: Text(
             getString.watchClearCookies,
             style: TextStyle(color: scheme.error),
