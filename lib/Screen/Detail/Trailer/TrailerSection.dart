@@ -1,5 +1,6 @@
 import 'package:dartotsu_extension_bridge/player.dart';
 import 'package:flutter/material.dart';
+import 'package:webview_all/webview_all.dart';
 
 import '../../../Core/State/State.dart';
 import '../../../Core/ThemeManager/LanguageSwitcher.dart';
@@ -86,6 +87,10 @@ class _TrailerSectionState extends State<TrailerSection>
   Widget _stage(BuildContext context) {
     if (!state.started.value) return _preview(context);
     if (state.failed.value) return _failed(context);
+    final web = state.web;
+    if (state.embed.value && web != null) {
+      return ExcludeSemantics(child: WebViewWidget(controller: web));
+    }
     final video = state.video;
     if (state.loading.value || video == null) {
       return Stack(
@@ -97,13 +102,15 @@ class _TrailerSectionState extends State<TrailerSection>
         ],
       );
     }
-    return ColoredBox(
-      color: Colors.black,
-      child: Video(
-        controller: video,
-        fit: BoxFit.contain,
-        controls: (video) =>
-            Builder(builder: (c) => Watch(() => _controls(c, video))),
+    return ExcludeSemantics(
+      child: ColoredBox(
+        color: Colors.black,
+        child: Video(
+          controller: video,
+          fit: BoxFit.contain,
+          controls: (video) =>
+              Builder(builder: (c) => Watch(() => _controls(c, video))),
+        ),
       ),
     );
   }
