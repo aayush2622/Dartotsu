@@ -30,7 +30,8 @@ class StreamProxy {
   }
 
   String _local(HttpServer server, String url, [String extension = '']) =>
-      'http://127.0.0.1:${server.port}/p$extension?u=${Uri.encodeQueryComponent(url)}';
+      'http://127.0.0.1:${server.port}/p$extension?u=${Uri.encodeQueryComponent(url)}'
+      '${extension.isEmpty ? '' : '&e=$extension'}';
 
   Future<void> stop() async {
     final server = _server;
@@ -64,8 +65,13 @@ class StreamProxy {
       final playlist =
           type.toLowerCase().contains('mpegurl') ||
           Uri.parse(target).path.toLowerCase().endsWith('.m3u8');
-      response.statusCode = reply.statusCode;
-      if (playlist && reply.statusCode == HttpStatus.ok) {
+      final whole =
+          reply.statusCode == HttpStatus.ok ||
+          reply.statusCode == HttpStatus.partialContent;
+      response.statusCode = playlist && whole
+          ? HttpStatus.ok
+          : reply.statusCode;
+      if (playlist && whole) {
         final bytes = <int>[];
         await for (final chunk in reply.body) {
           bytes.addAll(chunk);

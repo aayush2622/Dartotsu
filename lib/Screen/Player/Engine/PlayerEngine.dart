@@ -254,6 +254,11 @@ class PlayerEngine {
             shaderProblem.value = v.text.trim();
           }
           logger('mpv ${v.level} ${v.prefix}: ${v.text.trim()}', tag: 'MPV');
+          if (v.level == 'error' &&
+              text.contains('hls:') &&
+              text.contains('server returned 403')) {
+            _retryViaProxy('Failed to open ${_last?.url}', resume: true);
+          }
         }
       }),
       s.error.listen((v) {
@@ -795,7 +800,7 @@ class PlayerEngine {
     return host;
   }
 
-  Future<void> _openProxied() async {
+  Future<void> _openProxied({Duration? at}) async {
     final last = _last;
     if (last == null) return;
     _proxied = true;
@@ -804,10 +809,10 @@ class PlayerEngine {
       'User-Agent': previewHeaders['User-Agent'] ?? _defaultAgent,
     });
     if (_closing) return;
-    await player.open(Media(local, start: last.start), play: last.play);
+    await player.open(Media(local, start: at ?? last.start), play: last.play);
   }
 
-  bool _retryViaProxy(String message) {
+  bool _retryViaProxy(String message, {bool resume = false}) {
     final last = _last;
     if (_proxied || last == null || _closing || _disposed) return false;
     if (!message.startsWith('Failed to open')) return false;
@@ -816,7 +821,7 @@ class PlayerEngine {
     _proxyHosts.add(host);
     logger('Retrying $host through the HTTP/2 proxy', tag: 'PLAYER');
     unawaited(
-      _openProxied().catchError((Object e) {
+      _openProxied(at: resume ? position.value : null).catchError((Object e) {
         logger(
           'Proxy open failed: $e',
           logLevel: LogLevel.error,
